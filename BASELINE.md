@@ -44,3 +44,10 @@ The user confirmed the V82.66 product baseline is satisfactory. Checkpoint `V82.
 ## Engineering checkpoint overlay — V82.68 CANDIDATE-POLICY-MODULE-01
 
 The locked V82.65 HTML remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. V82.68 extracts the pure candidate-policy block into a source module injected at its original position in the same classic script. No extra runtime script tag or external loading is introduced. Latest automated checks: 8/8 commands, 135 Node tests, and verifier 101/101 passed. Browser smoke rerun timed out with Playwright driver EPIPE after 11 preliminary assertions and is not considered passed. The binary ZIP and full source tree have not been published to this branch.
+
+
+## V82.69 architecture/storage/multiplayer checkpoint
+- Product baseline remains immutable V82.65 HTML, 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Storage repository script was extracted as exact bytes into `src/modules/storage_repository.htmlpart` and injected at the original document position.
+- V82.69 build output is byte-identical to baseline. 157 unit/contract assertions, 11 runner commands and 103 integrity checks passed.
+- Browser-origin persistence and full source/package publication remain incomplete; see `REMOTE_PUBLICATION_LIMITS.md`.
