@@ -20,7 +20,7 @@ Added answer-flow exact-source coverage, edge-case candidate-pool fixtures, one-
 Chromium file and localhost navigation were replaced by an organization-policy interstitial; the initial dump-dom attempt timed out. No browser smoke pass is claimed. Real audio/network playback, Firefox, IndexedDB round-trip, multiplayer multi-device/reconnect, and full manual product regression remain untested.
 
 ## GitHub
-Text tests, runner, reports, and updated candidate-pool/package-builder sources have been uploaded to branch v82.66-source-split-02. Remote readback and final branch verification are still in progress. The binary ZIP itself is not a GitHub Release asset.
+Updated text docs, answer-flow test, runner, reports, candidate-pool test, package builder, and ZIP sidecar were uploaded and read back from branch v82.66-source-split-02. The answer-flow test, runner, and package builder blob fingerprints match local files. Candidate-pool integration readback contains the expected added cases, but its Git blob SHA differs from the local file and requires exact-source reconciliation. The binary ZIP itself was not uploaded as a GitHub Release asset.
 
 ## Next
 1. Perform manual browser acceptance in an environment that permits the standalone HTML.
