@@ -1,22 +1,26 @@
 # Next task
 
-Current checkpoint: **V82.67 BROWSER-UI-SMOKE-08**. The user confirmed the V82.66 product baseline is satisfactory. No production behavior changed in checkpoint 08.
+Current checkpoint: **V82.68 CANDIDATE-POLICY-MODULE-01**. Product baseline remains immutable V82.65. Pure candidate-policy source has been separated without changing generated HTML bytes.
 
 ## Completed
-- Candidate-pool integration test local/GitHub blob SHA reconciled exactly: `c7313fe743157b5c6cde86e252983049be87ff5a`.
-- Chromium UI smoke: 19 assertions passed for home/practice/quiz navigation, question selection, answer lock before playback, unplayed skip without history, next question, and solo EMQ list handoff.
-- Automated runner: 8/8 commands passed; six Node suites 135/135; integrity verifier 98/98.
-- Standalone HTML remains byte-identical to the immutable V82.65 baseline.
+- Candidate policy moved to `src/modules/candidate_pool_policy.js`; builder inserts it into the same classic script at the original execution position.
+- Builder verifies module hash/length and rejects missing/duplicate markers.
+- Verifier checks module count/hash/marker and performs two deterministic builds.
+- `python tools/run_all_checks.py`: 8/8 commands passed; 135 Node assertions passed; integrity verifier 101/101.
+- HTML remains byte-identical to baseline: 8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Browser smoke rerun timed out with Playwright driver EPIPE after 11 preliminary assertions; not a pass.
 
-## Next engineering actions
-1. Run standalone-origin browser acceptance in an environment that permits local HTML or a trusted local server.
-2. Test localStorage reload persistence and IndexedDB save/restore/upgrade/failure using disposable synthetic data only. Never clear or overwrite real profiles, history, custom lists, or server state.
-3. Verify actual audio playback-start gating, timing, and failed-source recovery with a controlled audio fixture.
-4. Verify multiplayer room/player state, player-specific familiarity isolation, reconnect, and older-client compatibility in an isolated environment.
-5. Record pass/fail/not-run and environment details. Change production code only if a reproducible defect is found.
+## Next actions
+1. Verify policy-module consumers and exact-source test boundaries; do not duplicate policy logic.
+2. Select the next low-risk pure module after reviewing its inputs/outputs and side effects.
+3. Add golden tests before moving candidate pipeline/source adapters.
+4. Retry constrained browser smoke in a stable permitted environment.
+5. Publish and read back code/report files where possible; separately record that full source tree and binary ZIP are not remotely published.
 
 ## Commands
 ```bash
 python tools/run_all_checks.py
 python tests/browser/browser_ui_smoke_opaque_origin.py
 ```
+
+Never clear or overwrite real profiles, history, custom lists, IndexedDB or server state for tests.
