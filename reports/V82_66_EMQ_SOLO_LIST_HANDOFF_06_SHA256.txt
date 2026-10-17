@@ -1,0 +1,10 @@
+Checkpoint: V82.66 EMQ-SOLO-LIST-HANDOFF-06
+Checkpoint ZIP: AMQ_V82_66_EMQ_SOLO_LIST_HANDOFF_06.zip
+Checkpoint ZIP bytes: 8920378
+Checkpoint ZIP SHA-256: fc65426e489cef27e387cc053ddda9cff8c7a2e7054a4891e0efad35f37cf7a7
+External sidecar: AMQ_V82_66_EMQ_SOLO_LIST_HANDOFF_06.zip.sha256 (matches)
+ZIP CRC: PASS; 145 entries / 145 unique paths.
+Internal PACKAGE_SHA256SUMS.txt: 144 entries, 0 missing, 0 mismatches.
+Two consecutive package builds were byte-identical.
+Standalone HTML is delivered separately, not embedded in the source/test checkpoint ZIP.
+Verified V82.65 ZIP: 124658780 bytes; SHA-256 db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5; CRC PASS; 291 entries; internal manifest 290/290 PASS.
