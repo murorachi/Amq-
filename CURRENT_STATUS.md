@@ -33,3 +33,11 @@ Current checkpoint: **V82.69 ARCHITECTURE-STORAGE-MULTIPLAYER-01**. Product base
 - Immutable V82.65 output unchanged: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
 - Known issue: click selection leaves the suggestion list empty/closed while `aria-expanded=true`. The legacy capture-phase handler in `script_007` dispatches `input` and then clears the rebuilt list without resetting ARIA. Defer controller extraction until event ownership in `script_004`, `script_007`, and `script_008` is reconciled.
 - Browser test uses deterministic targetOptions fixtures and in-memory storage. Real-origin persistence, audio, Firefox, multiplayer and full answer submission remain untested. The remote branch is still not a reproducible source release.
+
+
+## V82.70 quiz suggestion ARIA fix — 2026-10-18
+- Fixed click-selection state mismatch in `script_007.htmlpart`: after dispatching the legacy `input` event and clearing the rebuilt list, set `#quizAnswer[aria-expanded]` to `false`.
+- New HTML `dist/amq_learning_tool_v82_70.html`: 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
+- Immutable V82.65 remains 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Full runner 14/14 commands passed; browser integration 19 assertions passed; unit/contracts 173 passed; integrity verifier 106/106; deterministic builds match.
+- Real-origin persistence, audio/network, Firefox, multiplayer multi-client and full answer submission remain untested. UI controller extraction deferred pending event ownership analysis.
