@@ -14,7 +14,7 @@ Recovered the exact V82.65 checkpoint package from the user's Library file recor
 |---|---:|---|---|
 | V82.65 standalone HTML | 8,786,930 | `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33` | PASS |
 | V82.65 multiplayer server | 88,403 | `41e79fbabcbc037aef9d2b27076450217673935ede629c16caa956d737ff1736` | PASS |
-| Catalog | 36,540,011 | `2a045731b9a478e68e88f1965f010f0d194ef44262f11c5c652` | PASS |
+| Catalog | 36,540,011 | `2a045731b9a478e68e88f1965f010f0d7512990344d1d194ef44262f11c5c652` | PASS |
 | Unavailable audio registry | 40 | `a6c6539e68f67e30ef4c0976b04280234352f1b0d61e907138af39050350023a` | PASS |
 
 Verification used Python hashlib, ZIP CRC testing, and per-entry hashing directly from the archive. No product source, catalog, user storage, or baseline file was modified.
