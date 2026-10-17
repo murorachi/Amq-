@@ -217,5 +217,20 @@ function settings(overrides = {}) {
     assert.match(collisionEnv.status.textContent, /AMQ／EMQ 作品 ID 衝突/);
     assert.equal(collisionEnv.api.getRows().length, 0);
   });
+  const missingWorkPayload = {
+    version: 1,
+    works: [{ i: 900001, t: 'Known EMQ Work', n: 'Known Alias', y: 2020 }],
+    songs: [{ i: 910009, w: 900099, k: 1, t: 'Orphan EMQ Song', a: 'Fixture Artist', y: 2020, v: ['https://audio.example/orphan.mp3'] }]
+  };
+  const missingWorkPacked = zlib.gzipSync(Buffer.from(JSON.stringify(missingWorkPayload))).toString('base64');
+  const missingWorkEnv = await makeEnv({ packed: missingWorkPacked, skipReady: true });
+  await new Promise(resolve => setTimeout(resolve, 20));
+  test('EMQ song with missing work mapping fails closed before ready', () => {
+    assert.equal(missingWorkEnv.api.ready, false);
+    assert.match(missingWorkEnv.status.textContent, /找不到對應作品 900099/);
+    assert.equal(missingWorkEnv.api.getRows().length, 0);
+    assert.equal(missingWorkEnv.context.anime.length, 1, 'failed EMQ load does not mutate AMQ anime');
+    assert.equal(missingWorkEnv.context.songs.length, 1, 'failed EMQ load does not mutate AMQ songs');
+  });
   console.log(`RESULT \${passed} passed, \${process.exitCode ? 1 : 0} failed`);
 })().catch(e => { console.error(e.stack || e); process.exitCode = 1; });
