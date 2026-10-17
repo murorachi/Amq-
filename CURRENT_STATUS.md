@@ -27,3 +27,7 @@ Tests execute exact source fragments with synthetic compressed catalogue data an
 1. Obtain the exact official V82.65 delivery ZIP and validate its SHA-256, CRC, internal manifest and payload fingerprints; do not substitute the audit ZIP.
 2. Resolve the solo EMQ custom-list contract and add an exact-source `getQuizPool` wrapper test proving argument flow and adapter order.
 3. Add a focused answer-flow test for audio eligibility, answer recording and song-ID familiarity updates before considering the first policy extraction.
+
+## GitHub checkpoint
+- Text docs, tests, test log, report and fingerprint report were uploaded to `murorachi/Amq-` branch `v82.66-source-split-02` and read back successfully.
+- Binary checkpoint ZIP remains local only; it was not uploaded. The remote text commits are not evidence of binary package upload.
