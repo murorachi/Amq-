@@ -3,10 +3,10 @@ Status: automated engineering checks PASS; overall product acceptance PARTIAL
 
 Standalone HTML: 8,786,930 bytes; SHA-256 abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33; byte-identical to locked V82.65 HTML.
 
-Source/test checkpoint ZIP: AMQ_V82_66_ANSWER_FLOW_AND_RELIABILITY_07.zip; 8,932,785 bytes; SHA-256 82d66b4e6abd42ac7c1a63d8f45602ad9f58d7daad31618675eaf9cdbd83d6ce. Sidecar exact match. ZIP CRC PASS; 152 entries/152 unique; internal manifest 151 checked, 0 missing, 0 mismatches. Two package builds byte-identical.
+Source/test checkpoint ZIP: AMQ_V82_66_ANSWER_FLOW_AND_RELIABILITY_07.zip; 8,932,849 bytes; SHA-256 9cccf4400d1b659228c74d7fa6b869ae00d67014685d2bd8fe324414c046ab04. Sidecar exact match. ZIP CRC PASS; 152 entries/152 unique; internal manifest 151 checked, 0 missing, 0 mismatches. Two package builds byte-identical.
 
 Tests: six Node suites 135 passed, 0 failed; integrity verifier 98 passed, 0 failed; one-command runner 8 commands passed, 0 failed.
 
 Browser/manual acceptance was blocked by environment policy. Real audio/network, Firefox, IndexedDB round-trip, and multiplayer multi-device remain untested.
 
-Updated text files and the ZIP checksum sidecar were uploaded and read back from GitHub branch v82.66-source-split-02. The binary ZIP itself was not uploaded; the remote sidecar records its digest but does not imply the binary is hosted there.
+Updated text files and the ZIP checksum sidecar were uploaded and read back from GitHub branch v82.66-source-split-02. Git blob fingerprints for the answer-flow test, candidate-pool integration test, runner, and package builder match local files. The binary ZIP itself was not uploaded; the remote sidecar records its digest but does not imply the binary is hosted there.
