@@ -114,3 +114,11 @@
 - The source tree and binary ZIP remain local; a docs-only remote update must not be represented as complete code publication.
 
 Next: inspect the next side-effect-free policy/adapter boundary, add golden tests, then proceed to candidate pipeline. Persistence and multiplayer integration remain later stages.
+
+
+## V82.69 execution update
+- Extracted the storage repository as an exact-byte HTML fragment module; build-time injection keeps runtime order and output hash unchanged.
+- Added storage repository, full-backup manifest/allowlist, and multiplayer session/reconnect contract tests.
+- Results: 157 assertions passed; 11 runner commands passed; 103 integrity checks passed.
+- One opaque-origin Chromium run passed 19 assertions on byte-identical output; later rerun failed with EPIPE. Direct file navigation is blocked. Full browser acceptance remains PARTIAL.
+- Complete source fragments and ZIP binary are not on this remote branch.
