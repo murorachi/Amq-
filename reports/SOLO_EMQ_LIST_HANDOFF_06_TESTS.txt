@@ -1,0 +1,5 @@
+PASS selected solo EMQ list is translated to song IDs and passed into combinePool as a Set
+PASS no selected EMQ list passes null and leaves EMQ source mode unrestricted by list membership
+PASS invalid persisted EMQ list scope passes an empty Set and fails closed for EMQ candidates
+PASS audio eligibility runs after source pool composition and before the custom-list adapter
+RESULT 4 passed, 0 failed
