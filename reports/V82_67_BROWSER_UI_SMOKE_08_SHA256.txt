@@ -2,10 +2,10 @@ Checkpoint: V82.67 BROWSER-UI-SMOKE-08
 Baseline HTML SHA-256: abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33
 Standalone HTML: AMQ_V82_67_BROWSER_UI_SMOKE_08.html
 Standalone HTML bytes: 8786930
-Source/test ZIP SHA-256: 8feb2ce71403a856294ad2b3423548aee0cbac4381e5716e803812f383282314
+Source/test ZIP SHA-256: 35e57420172b5ffbe0ea193a07987391ddedf8e1ca855b437de722ba5a0a0fb4
 Source/test ZIP: AMQ_V82_67_BROWSER_UI_SMOKE_08.zip
-Source/test ZIP bytes: 8947466
-Package archive: 158 entries, 158 unique paths; ZIP CRC passed.
+Source/test ZIP bytes: 8945314
+Package archive: 159 entries, 159 unique paths; ZIP CRC passed.
 Automated suites: 6 Node suites, 135 passed / 0 failed; integrity verifier 98 passed / 0 failed; 8/8 runner commands passed.
 Browser UI smoke: 19 assertions passed; constrained opaque-origin test only, not real-origin acceptance.
 Candidate-pool integration test local Git blob SHA and GitHub branch v82.66-source-split-02 blob SHA: c7313fe743157b5c6cde86e252983049be87ff5a (exact match).
