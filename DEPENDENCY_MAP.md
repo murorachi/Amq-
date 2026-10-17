@@ -23,3 +23,10 @@ FUNCTION_DEFINITION_INVENTORY.csv, WINDOW_EXPORT_INVENTORY.csv, DOM_ID_REFERENCE
 
 ## Unverified
 Full function-call edges, all DOM writers, listener ownership, timer cleanup, dynamic storage keys, backup allowlists, and browser runtime behavior remain unverified.
+
+
+## V82.69 update
+- `src/modules/storage_repository.htmlpart` contains the exact original `script_027` block; its marker is replaced by the module bytes at the same document position.
+- Builder/verifier now resolve module marker locations from the manifest.
+- Storage and backup tests use synthetic storage; multiplayer session/reconnect tests do not contact a server.
+- Real-origin persistence, IndexedDB, real audio/network and multi-client room acceptance remain open. Remote source tree is incomplete.
