@@ -1,0 +1,2 @@
+PASS 19 Chromium UI smoke assertions. See BROWSER_UI_SMOKE_08_REPORT.md for exact cases and limitations.
+NOT TESTED: real-origin navigation, persistence, IndexedDB, actual audio, Firefox, multiplayer.
