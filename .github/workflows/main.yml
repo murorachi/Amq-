@@ -1,0 +1,47 @@
+
+name: Verify AMQ V82.64 Package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download V82.64 release ZIP
+        env:
+          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
+          EXPECTED_SHA256: 260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7
+        run: |
+          set -euo pipefail
+          curl -fL "$ASSET_URL" -o package.zip
+          ACTUAL_SHA256="$(sha256sum package.zip | cut -d ' ' -f 1)"
+          echo "Expected SHA256: $EXPECTED_SHA256"
+          echo "Actual SHA256:   $ACTUAL_SHA256"
+          if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+            echo "::error::ZIP SHA-256 mismatch"
+            exit 1
+          fi
+          echo "ZIP_SHA256_VERIFIED=PASS" >> "$GITHUB_STEP_SUMMARY"
+          echo "ZIP_SIZE_BYTES=$(stat -c %s package.zip)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: List package contents
+        run: |
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+
+          p = Path("package.zip")
+          with zipfile.ZipFile(p) as z:
+              bad = z.testzip()
+              if bad:
+                  raise SystemExit(f"ZIP integrity failure: {bad}")
+              print("ZIP integrity: PASS")
+              print("Entries:", len(z.namelist()))
+              for name in z.namelist():
+                  info = z.getinfo(name)
+                  print(f"{info.file_size:>12} bytes  {name}")
+          PY
