@@ -102,3 +102,15 @@
 **M0-A：建立候選篩選語義矩陣與缺口交叉測試，並驗證測試聚合器 fail-closed。**
 
 這能先把模糊的 UI/資料語義轉成可測契約，避免後續把錯誤規則抽進新模組；同時把每次回歸定位到具體篩選階段，減少人工比對與重複全量測試。
+
+
+## Execution record — V82.68 CANDIDATE-POLICY-MODULE-01
+
+- Completed the first low-risk source extraction: pure candidate-policy decisions are now in `src/modules/candidate_pool_policy.js`.
+- Builder injects the exact module bytes at the original marker inside the existing classic script. It does not create a new runtime script element or asynchronous load.
+- Added module hash/length/marker assertions and a module map.
+- Latest checks: six Node suites 135/135; integrity verifier 101/101; 8/8 runner commands; output byte-identical to locked V82.65 HTML.
+- Browser smoke rerun timed out / EPIPE after 11 preliminary assertions. This is an open validation issue, not a pass.
+- The source tree and binary ZIP remain local; a docs-only remote update must not be represented as complete code publication.
+
+Next: inspect the next side-effect-free policy/adapter boundary, add golden tests, then proceed to candidate pipeline. Persistence and multiplayer integration remain later stages.
