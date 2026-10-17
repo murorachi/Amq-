@@ -7,3 +7,7 @@
 - Chromium UI smoke: one 19-assertion run passed on identical output; a later rerun failed with Playwright EPIPE. Direct file navigation is blocked by environment policy.
 - Real-origin persistence, IndexedDB round-trip/upgrade/failure, real audio/network, Firefox and multiplayer multi-client reconnect remain untested.
 - Full source tree and binary ZIP are not contained in this remote branch; this is a documentation/test checkpoint, not a reproducible source release.
+
+
+## QUIZ-SUGGESTION-TEXT-01 local source boundary
+The local engineering tree extracts the special-symbol policy, NFKC/lowercase normalization, UTF-16 source-offset mapping and highlight-range helper block from `script_004` into `src/modules/quiz_suggestion_text.js`, injected at the original execution position. A 16-assertion contract test passes; the full local runner is 13/13, with 173 total assertions and integrity verification 105/105. The complete module/script/test/manifest set is not yet published to this branch, so this note documents local status only and does not imply remote source parity.
