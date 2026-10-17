@@ -23,15 +23,13 @@ Existing `tests/unit/candidate_pool_integration.test.cjs` is the behavioral gold
 
 ## Validation status
 
-- Static production-source contract: 40 assertions passed, 0 failed.
+- Static production-source contract: passed 40 assertions, 0 failed.
 - Existing candidate-pool integration: 27 assertions passed, 0 failed.
 - Full runner: 19 commands passed, 0 failed.
 - Core Node behavior suites: 173 assertions passed; extraction contracts: 49; boundary audit contract: 15; new characterization contract: 40; constrained Chromium suggestion integration: 29. Combined reported assertions: 306 passed, 0 failed. See the full log for each suite.
+- Behavioral golden fixture: run as part of the full runner; 27 assertions passed, 0 failed.
 - Integrity verifier: 112 checks passed, 0 failed. Two independent builds match the V82.72 SHA-256 `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`.
-
-## Acceptance boundaries
-
-This is static characterization plus fixture-backed behavior testing, not full runtime acceptance. Real-origin browser acceptance, real localStorage/IndexedDB, live audio/network, Firefox and multiplayer multi-client reconnect remain unverified due previously documented environment constraints.
+- Real-origin browser acceptance, real localStorage/IndexedDB, live audio/network, Firefox and multiplayer multi-client reconnect remain unverified due previously documented environment constraints.
 
 ## Decision
 
@@ -40,7 +38,3 @@ The characterization contract passed against unchanged production source. This p
 ## Rollback
 
 Restore the V82.76 engineering ZIP or revert only the V82.77 test/docs/runner/package-script changes. Since production source and product output are unchanged, no runtime rollback is required. Preserve V82.65, V82.70 and V82.72 artifacts.
-
-## GitHub publication status
-
-This is a report-only publication on branch `v82.69-architecture-storage-multiplayer-01`. It does not constitute a complete coherent source/build/test release.
