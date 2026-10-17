@@ -61,6 +61,6 @@ This checkpoint changes engineering tools, tests and documentation only. To roll
 ## GitHub publication status
 
 - Report-only commit on `v82.69-architecture-storage-multiplayer-01`: `384e12a2580357c7f6706e1964bd565bf8310f13`.
-- Remote report blob SHA after readback: `41c25937f1c68d54dc5ddb3a8694ce1c115d608c`.
+- The report was read back after publication and after its status update; the current blob SHA is recorded in the local V82.76 checksum/status records.
 - Readback confirmed the V82.72 product fingerprint and the explicit publication-gap statement.
 - This is report-only publication. The matching source fragments, six modules, build tools, tests and manifest are not yet a complete coherent remote source release.
