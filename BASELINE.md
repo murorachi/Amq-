@@ -34,3 +34,8 @@ Do not overwrite the original package, the recovered copy, or the locked HTML ba
 ## Engineering checkpoint overlay — V82.66 checkpoint 07
 
 The immutable V82.65 HTML fingerprint above remains the build target. Checkpoint V82.66 ANSWER-FLOW-AND-RELIABILITY-07 adds exact-source tests, a one-command local verification runner, and engineering reports only; it does not change the production HTML/runtime. Test results are recorded in reports/ANSWER_FLOW_AND_RELIABILITY_07_TEST_PLAN.md. Product acceptance remains PARTIAL until browser, persistence, audio, and multiplayer checks run in a permitted test environment.
+
+
+## Engineering checkpoint overlay — V82.67 checkpoint 08
+
+The user confirmed the V82.66 product baseline is satisfactory. Checkpoint `V82.67 BROWSER-UI-SMOKE-08` adds a constrained Chromium UI smoke test and report only. Local and GitHub blob SHA for `tests/unit/candidate_pool_integration.test.cjs` is `c7313fe743157b5c6cde86e252983049be87ff5a`. The UI smoke uses page.set_content() with test-only in-memory storage because the environment blocks file:// and localhost navigation. It does not validate real browser persistence, IndexedDB, real audio, Firefox, or multiplayer. Production HTML remains byte-identical to the immutable V82.65 baseline.
