@@ -48,7 +48,7 @@ Python 房間伺服器負責房間狀態、候選 song ID、metadata 最終驗�
 - 完整 HTML + Playwright Chromium：隔離儲存並封鎖外部 HTTP／音訊的頁面測試。
 - Python unittest／資料腳本、Node 執行抽取 production JS、JS/Python metadata parity、曲庫完整性檢查。
 - `tools/rebuild_integrity_manifest.py`、`tools/build_v82_65_package.py`、`VERSION.json`、`SHA256SUMS.txt)、外部 ZIP sidecar。
-- `requirements-test.txt) 與 Windows BAT 啟動入口。
+- `requirements-test.txt` 與 Windows BAT 啟動入口。
 
 可讀回的歷史驗收紀錄為：8 批、22/22 命令 PASS，0 FAIL、0 TIMEOUT、0 彙總錯誤；完整 HTML 個人條件 5/5；EMQ-only/Mixed 2/2；metadata 固定案例覆蓋 54,778 筆曲庫。這些結果只對報告綁定的精確資產指紋有效。本次沒有重跑，因此不宣稱本次測試 PASS。
 
@@ -57,13 +57,13 @@ Python 房間伺服器負責房間狀態、候選 song ID、metadata 最終驗�
 ## 4. 文件與已完成工作
 
 已確認存在且可讀回：
-- `PROJECT_HANDOFF.md)：基準、資產指紋、測試摘要、交付 ZIP 狀態。
-- `BASELINE.md)：正式基準與候選資產指紋。
-- `CURRENT_STATUS.md)：已驗證項目、未完成項目與 PARTIAL 判定。
-- `NEXT_TASK.md)：個人篩選交叉測試、多人的權威契約及真實環境驗收清單。
-- `V82_65_RESUME_CHECKPOINT.md)：續接錨點、指紋與不可重做的有效測試。
-- `MODULARIZATION_PLAN.md)：概念性模組邊界與階段路線，本次已更新為更完整的盤點與驗收計畫。
-- `MODULARIZATION_PLAN_V82_65.md)：Library 中的歷史／交接副本，不能當成 GitHub 最新內容的唯一依據。
+- `PROJECT_HANDOFF.md`：基準、資產指紋、測試摘要、交付 ZIP 狀態。
+- `BASELINE.md`：正式基準與候選資產指紋。
+- `CURRENT_STATUS.md`：已驗證項目、未完成項目與 PARTIAL 判定。
+- `NEXT_TASK.md`：個人篩選交叉測試、多人的權威契約及真實環境驗收清單。
+- `V82_65_RESUME_CHECKPOINT.md`：續接錨點、指紋與不可重做的有效測試。
+- `MODULARIZATION_PLAN.md`：概念性模組邊界與階段路線，本次已更新為更完整的盤點與驗收計畫。
+- `MODULARIZATION_PLAN_V82_65.md`：Library 中的歷史／交接副本，不能當成 GitHub 最新內容的唯一依據。
 
 已完成的工程基礎包括：正式基準指紋、候選檢查點、資料／完整性 manifest 與打包流程、固定回歸測試及彙總、完整頁面案例、跨語言 metadata 比對、候選題池部分規則改善與可續接工程文件。
 
