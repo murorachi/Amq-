@@ -1,33 +1,22 @@
-# AMQ Learning Tool V82.67 engineering checkpoint
+# AMQ Learning Tool V82.68 engineering checkpoint
 
 ## Current checkpoint
-- `V82.67 BROWSER-UI-SMOKE-08`; user confirmed the V82.66 product baseline is satisfactory.
-- Automated engineering checks and constrained Chromium UI smoke: PASS.
-- Full end-to-end product acceptance: PARTIAL; real-origin browser navigation, persistence, real audio, and multiplayer checks remain open.
-- Standalone HTML: 8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`, byte-identical to the locked V82.65 baseline.
-- No production runtime, UI, catalog, storage schema, or generated HTML behavior changed.
+- `V82.68 CANDIDATE-POLICY-MODULE-01`, based on the V82.67 engineering checkpoint.
+- The pure candidate-policy source was extracted into a source module. Runtime remains one classic standalone HTML; no UI, data, storage schema, audio, or multiplayer behavior was intentionally changed.
+- HTML remains byte-identical to the locked V82.65 baseline: 8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Automated build/unit checks PASS. Current constrained Chromium smoke rerun TIMED OUT with Playwright driver EPIPE and is not marked PASS.
+- Full product acceptance remains PARTIAL.
 
-## Tests
-- Candidate policy: 70 passed.
-- Candidate pool integration: 27 passed.
-- EMQ API/list contract: 19 passed.
-- History/status isolation: 7 passed.
-- Solo EMQ list handoff: 4 passed.
-- Answer-flow contract: 8 passed.
+## Tests executed
+- Candidate policy 70/70; candidate pool integration 27/27; EMQ API/list 19/19; history/status isolation 7/7; solo EMQ handoff 4/4; answer-flow contract 8/8.
 - Six Node suites: 135 passed, 0 failed.
-- Integrity verifier: 98 passed, 0 failed; two deterministic builds match baseline.
-- Chromium UI smoke: 19 assertions passed; this uses page.set_content(), in-memory storage, and unavailable IndexedDB due environment policy. It is not real-origin acceptance.
-
-## Verification
-```bash
-python tools/run_all_checks.py
-python tests/browser/browser_ui_smoke_opaque_origin.py
-```
+- One-command runner: 8 commands passed, 0 failed.
+- Integrity verifier: 101 passed, 0 failed; two deterministic builds match the baseline.
+- Browser smoke rerun: timed out after 11 preliminary assertions, no final summary. Not a pass.
 
 ## Reports
-- `reports/BROWSER_UI_SMOKE_08_REPORT.md`
-- `reports/ALL_CHECKS_08_SUMMARY.md`
-- `tests/browser/browser_ui_smoke_opaque_origin.py`
-- `CURRENT_STATUS.md`, `BASELINE.md`, and `NEXT_TASK.md`
+- `reports/CANDIDATE_POLICY_MODULE_01_REPORT.md`
+- `reports/ALL_CHECKS_09_SUMMARY.md`
+- `reports/MODULE_MAP.csv`
 
-The official V82.65 checkpoint package and its fingerprints remain immutable. Real browser-origin, localStorage/IndexedDB persistence, audio/network, Firefox, multiplayer multi-device, reconnect, and full manual regression remain untested.
+The original V82.65 HTML and ZIP remain immutable. Real-origin browser acceptance, persistence, IndexedDB, actual audio/network, Firefox, multiplayer multi-device/reconnect, and full manual regression remain open. The full source tree and binary ZIP are not uploaded in this documentation-only GitHub commit.
