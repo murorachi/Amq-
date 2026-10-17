@@ -1,0 +1,7 @@
+# Quiz suggestion integration checkpoint
+
+Engineering-only follow-on to V82.69. Local Chromium integration test: 18 assertions passed; full runner: 14/14 commands; unit/contract tests: 173 passed; integrity verifier: 105 passed. Generated HTML remains byte-identical to the immutable V82.65 baseline (8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`).
+
+Known issue: clicking a suggestion leaves the list empty and closed while `#quizAnswer[aria-expanded]` remains `true`. The legacy capture-phase click handler in `script_007` dispatches `input`, which rebuilds suggestions and sets ARIA state, then clears the list without resetting ARIA. The production controller should not be extracted until event ownership in `script_004`, `script_007`, and `script_008` is reconciled.
+
+Browser test limitations: `targetOptions()` uses deterministic fixtures to isolate the production renderer and event wiring; in-memory storage, IndexedDB disabled, external network blocked. Real-origin persistence, audio, Firefox, multiplayer, and full answer submission were not tested. The remote branch remains an incomplete source release because the matching production source fragments and build inputs are not all present.
