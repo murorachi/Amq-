@@ -57,3 +57,10 @@ Create a production-source characterization contract for `getQuizPool()` before 
 ## Rollback
 
 This checkpoint changes engineering tools, tests and documentation only. To roll back the audit, remove `tools/script004_boundary_audit.cjs`, `tests/unit/script004_boundary_audit_contract.test.cjs`, the three `CORE_SCRIPT_004_*` reports, remove its runner entry and revert the V82.76 documentation overlays. The product HTML and module/source fragments remain at their prior V82.72-compatible state.
+
+## GitHub publication status
+
+- Report-only commit on `v82.69-architecture-storage-multiplayer-01`: `384e12a2580357c7f6706e1964bd565bf8310f13`.
+- Remote report blob SHA after readback: `41c25937f1c68d54dc5ddb3a8694ce1c115d608c`.
+- Readback confirmed the V82.72 product fingerprint and the explicit publication-gap statement.
+- This is report-only publication. The matching source fragments, six modules, build tools, tests and manifest are not yet a complete coherent remote source release.
