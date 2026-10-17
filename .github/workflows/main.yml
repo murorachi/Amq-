@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Download V82.64 release ZIP
         env:
-          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
+          ASSET_URL: 
+          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
           EXPECTED_SHA256: 260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7
         run: |
           set -euo pipefail
