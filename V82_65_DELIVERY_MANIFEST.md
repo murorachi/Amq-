@@ -2,9 +2,10 @@
 
 - Repository: https://github.com/murorachi/Amq-
 - Branch: v82.65-resume-checkpoint
+- 本次文件整理 commit: c6027ed54db1f44e25ea39389e86dbb8c40a852f
 - Delivered checkpoint ZIP: AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip
-- ZIP size: 124,643,894 bytes
-- ZIP SHA-256: 72c984572ec79f9d17e9ee8c84c6c8ca13d67e108f5fe7174bc529798c928a99
+- ZIP size: 124,642,752 bytes
+- ZIP SHA-256: 8f19a45f40e9dda58f74da89c0d72ee97aa37c90b9593d7b64f5cb321b4711e9
 - ZIP CRC: PASS
 - Internal file manifest: 284 / 284 entries PASS
 - UTF-8 names: PASS
