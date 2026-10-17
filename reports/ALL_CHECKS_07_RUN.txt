@@ -1,0 +1,25 @@
+=== candidate policy ===
+RESULT 70 passed, 0 failed
+EXIT 0
+=== candidate pool integration ===
+RESULT 27 passed, 0 failed
+EXIT 0
+=== EMQ API and list contract ===
+RESULT 19 passed, 0 failed
+EXIT 0
+=== history/status isolation ===
+RESULT 7 passed, 0 failed
+EXIT 0
+=== solo EMQ list handoff ===
+RESULT 4 passed, 0 failed
+EXIT 0
+=== answer-flow contract ===
+RESULT 8 passed, 0 failed
+EXIT 0
+=== standalone HTML build ===
+EXIT 0
+=== integrity and deterministic rebuild ===
+RESULT: 98 passed, 0 failed, 98 total
+EXIT 0
+=== CHECK SUMMARY ===
+commands=8 passed=8 failed=0
