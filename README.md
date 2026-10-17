@@ -11,3 +11,9 @@
 
 ## QUIZ-SUGGESTION-TEXT-01 local source boundary
 The local engineering tree extracts the special-symbol policy, NFKC/lowercase normalization, UTF-16 source-offset mapping and highlight-range helper block from `script_004` into `src/modules/quiz_suggestion_text.js`, injected at the original execution position. A 16-assertion contract test passes; the full local runner is 13/13, with 173 total assertions and integrity verification 105/105. The complete module/script/test/manifest set is not yet published to this branch, so this note documents local status only and does not imply remote source parity.
+
+
+## Current validated HTML
+- V82.70: `dist/amq_learning_tool_v82_70.html` (quiz suggestion ARIA fix).
+- SHA-256: `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
+- V82.65 remains immutable; current release fingerprint is recorded in `reports/FRAGMENT_MANIFEST.json`.
