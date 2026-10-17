@@ -30,3 +30,7 @@ Full function-call edges, all DOM writers, listener ownership, timer cleanup, dy
 - Builder/verifier now resolve module marker locations from the manifest.
 - Storage and backup tests use synthetic storage; multiplayer session/reconnect tests do not contact a server.
 - Real-origin persistence, IndexedDB, real audio/network and multi-client room acceptance remain open. Remote source tree is incomplete.
+
+
+## QUIZ-SUGGESTION-TEXT-01 local source boundary
+The local engineering tree extracts the special-symbol policy, NFKC/lowercase normalization, UTF-16 source-offset mapping and highlight-range helper block from `script_004` into `src/modules/quiz_suggestion_text.js`, injected at the original execution position. A 16-assertion contract test passes; the full local runner is 13/13, with 173 total assertions and integrity verification 105/105. The complete module/script/test/manifest set is not yet published to this branch, so this note documents local status only and does not imply remote source parity.
