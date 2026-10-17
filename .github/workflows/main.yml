@@ -15,76 +15,120 @@ jobs:
     steps:
       - name: Download V82.64 release ZIP
         env:
-          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_A8_88_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
+          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
           EXPECTED_SHA256: 260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7
         run: |
           set -euo pipefail
 
-          echo "Downloading V82.64 package..."
+          echo "Downloading AMQ V82.64 package..."
 
-          curl --fail --location --silent --show-error \
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-delay 2 \
+            --connect-timeout 30 \
+            --max-time 600 \
             "$ASSET_URL" \
             --output package.zip
+
+          if [ ! -s package.zip ]; then
+            echo "::error::Downloaded package is missing or empty"
+            exit 1
+          fi
 
           ACTUAL_SHA256="$(sha256sum package.zip | cut -d ' ' -f 1)"
           ACTUAL_SIZE="$(stat -c %s package.zip)"
 
-          echo "Expected SHA256: $EXPECTED_SHA256"
-          echo "Actual SHA256:   $ACTUAL_SHA256"
-          echo "Package size:    $ACTUAL_SIZE bytes"
+          echo "Expected SHA-256: $EXPECTED_SHA256"
+          echo "Actual SHA-256:   $ACTUAL_SHA256"
+          echo "Package size:     $ACTUAL_SIZE bytes"
 
           if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
-            echo "::error::ZIP SHA-256 mismatch"
+            echo "::error::SHA-256 mismatch. The downloaded file does not match the expected release asset."
             exit 1
           fi
 
-          echo "ZIP_SHA256_VERIFIED=PASS" >> "$GITHUB_STEP_SUMMARY"
-          echo "ZIP_SIZE_BYTES=$ACTUAL_SIZE" >> "$GITHUB_STEP_SUMMARY"
+          echo "SHA-256 verification: PASS"
 
-      - name: Check ZIP integrity and list files
+          {
+            echo "## AMQ V82.64 Package Verification"
+            echo
+            echo "- Download: PASS"
+            echo "- SHA-256: PASS"
+            echo "- File size: ${ACTUAL_SIZE} bytes"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check ZIP signature and integrity
         run: |
+          set -euo pipefail
+
           python - <<'PY'
           import zipfile
           from pathlib import Path
 
           path = Path("package.zip")
 
-          with zipfile.ZipFile(path, "r") as archive:
-              bad_file = archive.testzip()
+          if not path.is_file():
+              raise SystemExit("ZIP file does not exist")
 
-              if bad_file is not None:
-                  raise SystemExit(f"ZIP integrity failure: {bad_file}")
+          if path.stat().st_size == 0:
+              raise SystemExit("ZIP file is empty")
 
-              entries = archive.infolist()
-
-              print("ZIP integrity: PASS")
-              print(f"File count: {len(entries)}")
-              print()
-
-              for entry in entries:
-                  print(f"{entry.file_size:>12} bytes  {entry.filename}")
-
-          with open(path, "rb") as file:
+          with path.open("rb") as file:
               signature = file.read(4)
 
           if signature != b"PK\x03\x04":
-              raise SystemExit("Unexpected ZIP file signature")
+              raise SystemExit(
+                  f"Unexpected ZIP signature: {signature!r}"
+              )
+
+          print("ZIP signature: PASS")
+
+          try:
+              with zipfile.ZipFile(path, "r") as archive:
+                  entries = archive.infolist()
+
+                  if not entries:
+                      raise SystemExit("ZIP archive contains no entries")
+
+                  bad_file = archive.testzip()
+
+                  if bad_file is not None:
+                      raise SystemExit(
+                          f"ZIP integrity failure in file: {bad_file}"
+                      )
+
+                  print("ZIP integrity: PASS")
+                  print(f"File count: {len(entries)}")
+                  print()
+                  print("Files in archive:")
+
+                  for entry in entries:
+                      print(
+                          f"{entry.file_size:>12} bytes  "
+                          f"{entry.filename}"
+                      )
+
+          except zipfile.BadZipFile as exc:
+              raise SystemExit(f"Invalid ZIP archive: {exc}") from exc
 
           print()
-          print("ZIP signature: PASS")
+          print("All ZIP checks passed.")
           PY
 
-      - name: Publish verification summary
+      - name: Publish final verification summary
         if: success()
         run: |
           {
-            echo "## V82.64 Package Verification"
             echo
-            echo "- Download: PASS"
-            echo "- SHA-256: PASS"
+            echo "- ZIP signature: PASS"
             echo "- ZIP integrity: PASS"
-            echo "- Original package modified: NO"
+            echo "- Package modified: NO"
             echo
-            echo "This workflow verifies the release package only."
-            echo "It does not modify HTML or produce V82.65."
+            echo "The original release package was downloaded and verified."
+            echo "This workflow does not modify project HTML files."
+            echo "This workflow does not generate a new project version."
           } >> "$GITHUB_STEP_SUMMARY"
