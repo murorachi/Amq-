@@ -9,7 +9,7 @@ The documentation branch `v82.65-source-split-01` was created from `v82.65-resum
 The local checkpoint was built and independently verified:
 - Archive: `AMQ_V82_65_SOURCE_SPLIT_01.zip`
 - Size: 133,482,500 bytes
-- SHA-256: `71b90e02b9c9f6b938e5f4fbc413e4fcfe0f0a19d2891ab5d511254b5822a30a`
+- SHA-256: `65a46644de9d686bd3336a05ef785d0594515b8c1d187e0d459c66c3fe04158e`
 - 397 ZIP entries; ZIP CRC PASS; 396/396 internal SHA-256 entries PASS.
 - Rebuilt standalone HTML is byte-identical to the V82.65 source HTML: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
 
