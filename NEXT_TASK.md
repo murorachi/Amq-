@@ -28,3 +28,9 @@ Never clear or overwrite real profile/history/list/IndexedDB/server state during
 
 ## Integration follow-up — 2026-10-18
 The production suggestion integration test passed 18 assertions and exposed a click-selection ARIA mismatch. The legacy capture-phase handler in `script_007` dispatches `input`, which rebuilds suggestions, then clears the list without resetting `aria-expanded`. Do not extract the controller until event ownership across `script_004`, `script_007`, and `script_008` is reconciled. The product HTML remains byte-identical to immutable V82.65. Next: fix this minimal interaction contract, then rerun the browser test and full checks. The remote source release remains incomplete.
+
+
+## Next task after V82.70 ARIA fix
+1. Map event registration order and ownership in `script_004.htmlpart`, `script_007.htmlpart`, and `script_008.htmlpart`.
+2. Add regression coverage for exactly-once input dispatch, list closure, `aria-expanded=false`, focus/caret, and no accidental answer submission.
+3. Only then assess whether duplicate legacy handlers can be consolidated safely.
