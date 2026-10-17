@@ -1,0 +1,1 @@
+Latest rerun: FAILED / NOT PASSED. Playwright driver emitted Node.js EPIPE before producing a final assertion summary. A separate earlier run on the byte-identical 8,786,930-byte HTML passed 19 assertions. Direct file:// navigation returned ERR_BLOCKED_BY_ADMINISTRATOR. Do not count this rerun as a pass.
