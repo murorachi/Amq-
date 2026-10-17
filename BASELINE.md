@@ -30,3 +30,7 @@ The source archive's `VERSION.json` labels V82.65 as a PARTIAL candidate-pool/fi
 - `python tools/verify.py` reconstructs the HTML twice and verifies byte identity to this baseline.
 
 Do not overwrite the original package, the recovered copy, or the locked HTML baseline. Every checkpoint uses a unique artifact name.
+
+## Engineering checkpoint overlay — V82.66 checkpoint 07
+
+The immutable V82.65 HTML fingerprint above remains the build target. Checkpoint V82.66 ANSWER-FLOW-AND-RELIABILITY-07 adds exact-source tests, a one-command local verification runner, and engineering reports only; it does not change the production HTML/runtime. Test results are recorded in reports/ANSWER_FLOW_AND_RELIABILITY_07_TEST_PLAN.md. Product acceptance remains PARTIAL until browser, persistence, audio, and multiplayer checks run in a permitted test environment.
