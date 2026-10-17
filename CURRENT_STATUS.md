@@ -1,56 +1,37 @@
-# V82.65 目前工程狀態
+# Current status
 
-## 判定
+Current checkpoint: **V82.66 CANDIDATE-POOL-TESTS-01**. Overall status: **PARTIAL**.
 
-**PARTIAL：候選題池一致性改善檢查點，不是整體工程完成版。** 本次 2026-10-18 完成工程盤點與計畫文件更新，未修改正式 HTML、Python server 或曲庫，未重跑測試。
+## Completed
+- Preserved source split and deterministic single-file build remain unchanged.
+- Added a Node VM test executing the exact V82.65 candidate policy block from script_004.
+- Candidate policy contract tests: **70 passed, 0 failed**.
+- Static inventories added for function declarations/duplicate names, explicit window exports, DOM ID references, listeners/timers, storage and IndexedDB calls.
+- Candidate-pool pipeline semantics documented.
+- Product logic/UI/data/storage schemas were not changed.
 
-## 正式基準與候選檢查點
+## Fingerprints
+- HTML: `amq_learning_tool_v82_65_candidate_pool_cleanup.html`
+- Size: 8,786,930 bytes
+- SHA-256: `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`
+- Candidate checkpoint ZIP: 13,232,277 bytes; SHA-256 `f2241be88187a095bf3716fdff4b0e2d5ad50047dbd0c95227385a27475cef8e`.
+- ZIP CRC: PASS; 123 unique entries.
+- Official full V82.65 delivery ZIP remains unavailable, so its expected historical hash was not recomputed here.
 
-- 唯一直接基準：V82.64 Release ZIP，53,366,951 bytes，SHA-256 `260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7`。
-- V82.65 是候選版，不能視為正式 Release；保留 V82.64 原始基準。
-- 候選資產指紋：HTML 8,786,930 bytes / `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`；server 88,403 bytes / `41e79fbabcbc037aef9d2b27076450217673935ede629c16caa956d737ff1736`；catalog 36,540,011 bytes、54,778 rows / `2a045731b9a478e68e88f1965f010f0d7512990344d1d194ef44262f11c5c652`；unavailable registry 40 bytes / `a6c6539e68f67e30ef4c0976b04280234352f1b0d61e907138af39050350023a`。
-- 檢查點 ZIP：124,658,780 bytes，SHA-256 `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`；既有紀錄為 CRC PASS、291 entries、內部 290/290 SHA-256 PASS。
-- GitHub 分支：`v82.65-resume-checkpoint`。ZIP 本體尚未上傳 GitHub Release；文件與 sidecar 已提交，兩者不可混為一談。
+## Static scan counts
+- 41 script/data fragments scanned.
+- 817 detected function/arrow-style declarations.
+- 31 names with multiple detected definitions.
+- 89 explicit window assignments.
+- 391 literal DOM ID references.
 
-## 已有工程基礎
+Regex scan only; these counts do not prove duplicate behavior or runtime leaks.
 
-- V82.64 基準與資產 SHA/大小/CRC 驗證紀錄。
-- V82.65 候選檢查點、四項產品指紋、ZIP manifest 與打包工具。
-- 候選題池共享 metadata policy、AMQ 清單入口 adapter、失效範圍 fail-closed 與來源適用性處理。
-- 歷史測試紀錄：8 批／22 個命令 PASS；完整頁面個人條件 5/5；EMQ-only/Mixed 2/2；metadata 固定案例覆蓋 54,778 筆。
-- 自動化工具紀錄：`run_regression_tests.py`、`tests/aggregate_v82_65_runs.py`、`tools/rebuild_integrity_manifest.py`、`tools/build_v82_65_package.py`。
+## Tests
+- Candidate policy tests: 70/70 PASS.
+- Builder/verifier: 98 passed, 0 failed.
+- Output HTML remains 8,786,930 bytes with SHA-256 identical to baseline.
+- Firefox, real external audio/API, IndexedDB round-trip, multi-device multiplayer and full product regression: NOT RUN.
 
-以上測試數字是既有報告的結果，並非本次重跑結果。本次測試重跑：**未執行**。
-
-## 尚未完成／未驗證
-
-- 熟悉度、tag、focus、觀看狀態、VNDB／個人清單、AMQ 自訂清單、EMQ 專用清單與黑名單的全模式端到端交叉組合。
-- 多人 server-authoritative 個人狀態契約、版本化 room/player schema、隱私與向後相容規則。
-- 候選池空池時各階段機器可讀計數與排除原因。
-- 聚合器 fail-closed 的故障注入驗證。
-- 真實外網音訊/API、IndexedDB Blob 真實匯出還原、兩台裝置 LAN/WebSocket/斷線重連。
-- 正式前端模組化建置流程尚未確認；目前正式交付仍要求可雙擊的單檔 HTML。
-- 大型單檔的全域作用域、初始化順序與事件生命週期耦合是結構性風險，尚未證明每項都已造成具體故障。
-
-## 本次工程盤點文件
-
-- `ENGINEERING_AUDIT_2026-10-18.md`：基準、模組／資料流、測試、文件、風險與分階段計畫盤點。
-- `MODULARIZATION_PLAN.md`：已更新模組邊界、M0-M4 產出／驗收、已完成項目與待查疑點。
-- `NEXT_TASK.md`：下一階段具體工作與驗收門檻。
-
-不得清除真實 LocalStorage、IndexedDB、學習歷史、清單或伺服器狀態。不得重跑仍與四項產品 SHA 一致且證據有效的既有案例，除非指紋變更、證據損壞或出現可重現反證。
-
-
-## V82.66 SOURCE-SPLIT-02 update (2026-10-18)
-
-Status remains **PARTIAL**. A byte-preserving source split was created from the V82.65 HTML candidate whose actual SHA-256 was recomputed and matched.
-
-- HTML baseline: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Source split: 50 CSS blocks + 41 script/data blocks = 91 fragments.
-- Builder and verifier use Python standard library; the output is a standalone HTML and requires no runtime local JS modules.
-- Build verification: 98 passed, 0 failed; 39/39 classic JavaScript blocks passed `node --check`.
-- Output HTML is byte-identical to the V82.65 candidate.
-- Source archive: 13,136,827 bytes; SHA-256 `a6dc6977866b542749d8bb742696bc88585d45a25d98dc39eb3a2f3458b3d545`; ZIP CRC PASS; internal manifest 111/111 PASS.
-- Important limit: the full V82.65 delivery ZIP was not available to independently revalidate in this run. The recorded ZIP digest is not represented as newly recomputed.
-- The binary ZIP and HTML have not been uploaded to GitHub; only text report/status records are committed.
-- No product logic or user data format changed. Browser, external audio/API, IndexedDB round-trip, multi-device, and full product regression remain unexecuted.
+## Next
+Obtain official V82.65 ZIP; then add fixed fixtures and exact candidate-ID/order assertions for getQuizPool and EMQ/Mixed wrapper before extracting a policy module.
