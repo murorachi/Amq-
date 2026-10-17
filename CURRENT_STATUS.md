@@ -1,27 +1,30 @@
 # Current status
 
-Current checkpoint: **V82.67 BROWSER-UI-SMOKE-08**. The user confirmed the V82.66 product baseline is satisfactory. Automated engineering status: **PASS**. Full end-to-end product acceptance remains **PARTIAL** because real-origin browser navigation is blocked and persistence/audio/multiplayer checks remain unrun.
+Current engineering checkpoint: **V82.68 CANDIDATE-POLICY-MODULE-01**. Product baseline remains immutable V82.65. Candidate policy has been physically separated into a source module; the runtime remains a single classic HTML document and is byte-identical to baseline. Automated build/unit checks: **PASS**. Latest constrained browser smoke attempt: **TIMED OUT / EPIPE**, so current browser smoke revalidation is not passed. Full end-to-end product acceptance remains **PARTIAL**.
 
-## Verified baseline
-- Immutable V82.65 HTML baseline: 8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- No production runtime, UI, catalog, storage schema, or generated HTML behavior changed.
+## Locked baseline
+- HTML: 8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- The V82.65 HTML and ZIP baseline were not overwritten.
 
-## Automated checks
+## V82.68 changes
+- Added `src/modules/candidate_pool_policy.js`, inserted at its original position inside the existing classic script.
+- Builder verifies module marker, length and SHA-256; verifier checks module count/hash/marker.
+- New build target: `dist/amq_learning_tool_v82_68.html`.
+- Tests read policy from the extracted module; candidate-pool integration still executes the exact source `getQuizPool` function.
+
+## Latest tests
+- `python tools/run_all_checks.py`: 8 commands passed, 0 failed.
 - Six Node suites: 135 passed, 0 failed.
-- Integrity verifier: 98 passed, 0 failed, including two deterministic builds byte-identical to baseline.
-- One-command runner: 8 commands passed, 0 failed.
-- Chromium UI smoke: 19 assertions passed for home/practice/quiz navigation, unplayed skip without history, next question, and solo EMQ list handoff. This is an opaque-origin smoke with in-memory storage, not real-origin acceptance.
+- `tools/verify.py`: 101 passed, 0 failed; two deterministic builds match the baseline byte-for-byte.
+- HTML: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Browser smoke rerun timed out with Playwright driver EPIPE after 11 preliminary assertions; not counted as pass. Earlier V82.67 report is historical evidence only.
 
-## GitHub baseline reconciliation
-- Candidate-pool integration test local and GitHub blob SHA: `c7313fe743157b5c6cde86e252983049be87ff5a`, exact match on `v82.66-source-split-02`.
-
-## Remaining limits
-- `file://` and localhost browser navigation return `ERR_BLOCKED_BY_ADMINISTRATOR`.
-- Real localStorage persistence, IndexedDB round-trip, actual audio/network playback, Firefox, and multiplayer end-to-end checks remain untested.
-- The binary HTML and ZIP are local delivery artifacts; the ZIP binary is not hosted as a GitHub release asset. Remote checksum records do not imply binary upload.
+## Limits
+- Real-origin browser navigation, localStorage reload persistence, IndexedDB, actual external audio/network, Firefox, multiplayer multi-device/reconnect and full manual regression remain untested.
+- GitHub branch contains documentation checkpoint history but not the complete source fragments or binary ZIP; remote source tree is not independently buildable from this commit.
 
 ## Next
-1. Run standalone-origin browser acceptance in a permitted environment.
-2. Test localStorage reload persistence and IndexedDB save/restore/upgrade/failure using disposable synthetic data only.
-3. Verify actual audio-start gating and failed-source recovery with a controlled fixture.
-4. Verify multiplayer room/player isolation, reconnect, and older-client compatibility in isolation.
+1. Review consumers and exact-source tests for the extracted policy module.
+2. Choose the next pure side-effect-free module only after inventorying inputs, outputs and side effects.
+3. Add golden tests before moving source adapters or candidate pipeline code.
+4. Retry browser smoke in a stable permitted Chromium environment; do not alter product code solely to work around EPIPE.
