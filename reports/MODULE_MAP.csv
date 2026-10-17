@@ -1,2 +1,3 @@
 name,path,bytes,sha256,insertion_marker,runtime_change
 candidate_pool_policy,src/modules/candidate_pool_policy.js,7851,ea90e79617fc32a1b04dd3f8fb4878d797ce97bcd3422684e6a2ecf538b1aa74,<!-- AMQ_SPLIT_MODULE:candidate_pool_policy -->,none; same classic script and byte-identical generated HTML
+storage_repository,src/modules/storage_repository.htmlpart,8694,f97457d69f1d06d1c1fc3bd0ca41412a2c97ab3e695b68f64ca7e44af0977803,<!-- AMQ_SPLIT_MODULE:storage_repository -->,none; exact original script block restored at same document position
