@@ -28,3 +28,13 @@
 | anisong_multiplayer_unavailable_audio_v82_59.json | 40 | a6c6539e68f67e30ef4c0976b04280234352f1b0d61e907138af39050350023a |
 
 V82.61/V82.62/V82.59 備份只供追溯、比較和回滾，不得當成 V82.65 的直接基準或混入執行資產。原始 V82.64 檔案不可覆蓋。測試 PASS 僅適用於報告所列精確指紋；正式清單以 VERSION.json、SHA256SUMS.txt 及 ZIP 外部 .sha256 為準。
+
+
+## V82.66 SOURCE-SPLIT-02 source input lock
+
+The actual source HTML available in this run was rehashed and matched the recorded V82.65 candidate:
+- `amq_learning_tool_v82_65_candidate_pool_cleanup.html`
+- 8,786,930 bytes
+- SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`
+
+The expected V82.65 checkpoint ZIP fingerprint remains recorded as 124,658,780 bytes / `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`, but the ZIP binary was unavailable for independent recomputation during this checkpoint. This does not replace or downgrade the V82.64 formal baseline; no historical HTML was substituted.
