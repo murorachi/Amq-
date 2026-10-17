@@ -1,31 +1,29 @@
 # Current status
 
-Current checkpoint: **V82.66 EMQ-SOLO-LIST-HANDOFF-06**. Overall project status: **PARTIAL**.
+Current checkpoint: **V82.66 ANSWER-FLOW-AND-RELIABILITY-07**. Automated engineering checks PASS. Overall product acceptance remains **PARTIAL** because browser navigation is blocked by the execution environment and persistence/multiplayer end-to-end checks remain unrun.
 
-## Completed / verified
-- Recovered the exact V82.65 checkpoint ZIP and recomputed its outer SHA-256: `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5` (124,658,780 bytes).
-- ZIP sidecar match; CRC PASS; 291/291 unique entries; internal manifest 290/290 hashes pass; zero missing paths and zero mismatches.
-- Four current V82.65 product asset sizes and SHA-256 values match `VERSION.json`.
-- Candidate policy tests: 70 passed, 0 failed.
-- Candidate pool integration fixtures: 22 passed, 0 failed.
-- EMQ API/custom-list contract tests: 19 passed, 0 failed.
-- History/status isolation exact-source tests: 7 passed, 0 failed.
-- Solo EMQ list handoff exact-source integration: 4 passed, 0 failed.
-- Build/integrity verifier: 98 passed, 0 failed; two builds byte-identical to the preserved V82.65 HTML baseline.
-- Solo EMQ list handoff traced across the exact `getQuizPool` wrapper and script 040 API adapter: selected lists become a song-ID Set; no selection passes `null`; invalid scope passes an empty Set; audio eligibility precedes the AMQ custom-list adapter.
+## Verified baseline
+- Official V82.65 checkpoint package remains separately preserved and verified: 124,658,780 bytes; SHA-256 db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5.
+- Locked standalone HTML remains 8,786,930 bytes; SHA-256 abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33.
+- No production runtime, UI, catalog, storage schema, or generated HTML behavior changed.
 
-## Locked HTML fingerprint
-- Bytes: 8,786,930
-- SHA-256: `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`
-- No production runtime, UI, catalog, storage schema, or generated HTML changes were made in checkpoint 06.
+## Automated tests
+- Candidate policy 70/0; candidate pool integration 27/0; EMQ API/list contract 19/0; history/status isolation 7/0; solo EMQ list handoff 4/0; answer-flow contract 8/0.
+- Six Node suites: 135 passed, 0 failed.
+- Integrity verifier: 98 passed, 0 failed; two deterministic builds are byte-identical to baseline.
+- One-command runner: 8 commands passed, 0 failed.
 
-## Known limits
-Real browser/manual interaction for this checkpoint, Firefox, external audio/network, IndexedDB round-trip, multiplayer multi-device and full product regression were not run. The new handoff test stubs the underlying combiner and final AMQ custom-scope adapter; their policy behavior is covered by separate exact-source/unit suites. The answer flow is source-inspected but not yet tested end-to-end.
+## Reliability work
+Added answer-flow exact-source coverage, edge-case candidate-pool fixtures, one-command local verification, test reports, and a candidate-policy architecture decision. The pure policy block remains in its current tested location because moving it provides no demonstrated correctness benefit in this checkpoint.
+
+## Browser and product acceptance limits
+Chromium file and localhost navigation were replaced by an organization-policy interstitial; the initial dump-dom attempt timed out. No browser smoke pass is claimed. Real audio/network playback, Firefox, IndexedDB round-trip, multiplayer multi-device/reconnect, and full manual product regression remain untested.
+
+## GitHub
+Text tests, runner, reports, and updated candidate-pool/package-builder sources have been uploaded to branch v82.66-source-split-02. Remote readback and final branch verification are still in progress. The binary ZIP itself is not a GitHub Release asset.
 
 ## Next
-1. Add a focused executable answer-flow test for audio-start eligibility, answer recording, and song-ID familiarity updates using isolated synthetic state.
-2. Continue the V82.65 `NEXT_TASK.md` personal-filter/focus/EMQ-list cross-product matrix where fixtures do not yet cover all null/empty/invalid cases.
-3. Only after these boundaries are stable, consider extracting the pure candidate policy into a separate source module.
-
-## GitHub checkpoint
-Text docs, tests, reports, and checksums are uploaded/read back from `murorachi/Amq-` branch `v82.66-source-split-02`. The binary checkpoint ZIP is delivered locally; it has not been uploaded as a GitHub Release asset because the available connector does not expose binary Release asset upload.
+1. Perform manual browser acceptance in an environment that permits the standalone HTML.
+2. Test IndexedDB persistence/restore using disposable synthetic data only.
+3. Test multiplayer room/player isolation and reconnect behavior in a controlled environment.
+4. Only then decide whether product acceptance can be closed or a narrowly scoped runtime fix is needed.
