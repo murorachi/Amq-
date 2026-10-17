@@ -21,10 +21,7 @@ Locked V82.65 HTML: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71
 
 ## Package
 - `AMQ_V82_68_CANDIDATE_POLICY_MODULE_01.zip`
-- Bytes: 8,951,221
-- SHA-256: `e9834878b49a83d2a1221a1b0a000a0900d36f315388fb1144154b20f7e749ca`
-- ZIP CRC: PASS; 163 entries / 163 unique paths; internal manifest 161/161 matches.
-- The ZIP binary is local and has not been uploaded to GitHub.
+- Final outer ZIP bytes and SHA-256 are recorded in the external sidecar `reports/V82_68_CANDIDATE_POLICY_MODULE_01_SHA256.txt` (kept outside the archive to avoid a self-referential hash). The binary is local and has not been uploaded to GitHub.
 
 ## Remaining limits
 Real-origin browser acceptance, persistence, IndexedDB, actual audio/network, Firefox, multiplayer multi-device/reconnect and full manual regression remain untested. The full source tree and binary ZIP are not published on this branch, so this documentation update is not a remotely reproducible code release.
