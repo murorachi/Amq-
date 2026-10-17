@@ -59,4 +59,40 @@ test('focus mode constrains IDs and applies repeat filtering',()=>{const e=makeE
 test('empty candidate pool does not auto-broaden settings',()=>{const e=makeEnv({songs,anime,settings:{songTypes:[4],yearMin:2025,yearMax:2026}});assert.deepEqual(e.ids(),[]);assert.match(e.statusNode.textContent,/不會自動放寬範圍/)});
 test('duplicate song IDs are not silently deduplicated by base pool',()=>{const dup=[songs[0],{...songs[0],0:20}];const e=makeEnv({songs:dup,anime});assert.deepEqual(e.ids(),['101','101'])});
 test('invalid source mode helper normalizes to AMQ and does not broaden EMQ-only filtering',()=>{const e=makeEnv({songs,anime});const p=e.context.window.__aniCandidatePoolPolicyV8265;assert.equal(p.normalizeSourceMode('invalid'),'amq');assert.equal(p.sourceAllowed('invalid','emq'),false)});
+
+test('null, empty and malformed familiarity selections fail closed with exact empty candidate IDs',()=>{
+ for(const value of [null,[],[0,'not-a-status']]){
+  const e=makeEnv({songs,anime,settings:{statuses:value}});
+  assert.deepEqual(e.ids(),[],`statuses=${JSON.stringify(value)}`);
+ }
+});
+test('null, empty and malformed song-type selections fail closed with exact empty candidate IDs',()=>{
+ for(const value of [null,[],[1,'not-a-type']]){
+  const e=makeEnv({songs,anime,settings:{songTypes:value}});
+  assert.deepEqual(e.ids(),[],`songTypes=${JSON.stringify(value)}`);
+ }
+});
+test('watch-status selection uses defaults when missing and fails closed for null, empty or malformed selections',()=>{
+ for(const value of [undefined,null,[],['completed',7]]){
+  const settings={watchStatusFilterEnabled:true};
+  if(value!==undefined)settings.watchStatuses=value;
+  const e=makeEnv({songs,anime,watchStatuses:{10:'current',20:'completed',30:'paused',40:'dropped'},settings});
+  const expected=value===undefined?['101','102','201','301','401']:[];
+  assert.deepEqual(e.ids(),expected,`watchStatuses=${JSON.stringify(value)}`);
+ }
+});
+test('focus scope remains exact and is not broadened by empty personal or custom-list settings',()=>{
+ const e=makeEnv({songs,anime,settings:{statuses:[],songTypes:[],customListIds:['list-that-is-not-loaded']},scope:(rows,focus)=>focus?rows:[]});
+ e.context.activeFocusModeV72=true;
+ e.context.activeFocusSongIdsV72=[102,201,999999];
+ assert.deepEqual(e.ids(),['102','201']);
+ assert.equal(e.statusNode.textContent,'');
+});
+test('missing, null and empty custom-list selections remain unrestricted only when no invalid-scope marker exists',()=>{
+ for(const value of [undefined,null,[]]){
+  const settings={};if(value!==undefined)settings.customListIds=value;
+  const e=makeEnv({songs,anime,settings});
+  assert.deepEqual(e.ids(),['101','102','201','301','401'],`customListIds=${JSON.stringify(value)}`);
+ }
+});
 console.log(`RESULT ${passed} passed, ${process.exitCode?1:0} failed`);
