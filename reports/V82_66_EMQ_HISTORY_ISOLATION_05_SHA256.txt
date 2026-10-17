@@ -1,0 +1,13 @@
+Checkpoint: V82.66 EMQ-HISTORY-ISOLATION-05
+Official HTML: 8786930 bytes
+Official HTML SHA-256: abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33
+History test source SHA-256: 897f8c51402bf3aa29499eeaeda1be25efc28cd8e391dec7145f5ecd628cae27
+EMQ API contract test source SHA-256: 98236542150bf20ec012b79237a2a4095b11c13caff57b23293b3dda01e5f478
+Checkpoint ZIP: AMQ_V82_66_EMQ_HISTORY_ISOLATION_05.zip
+Checkpoint ZIP bytes: 13309409
+Checkpoint ZIP SHA-256: fea9fe52a8b2389b61671524a150d86db3cca80acef0f22f38650b7242b622ff
+ZIP CRC test: PASS
+ZIP entries: 144
+ZIP unique entries: 144
+Official full V82.65 delivery ZIP: NOT AVAILABLE; not verified or substituted with audit ZIP.
+Binary checkpoint ZIP: not uploaded to GitHub; repository connector supports text content writes, and no release-asset upload action was available in this session.
