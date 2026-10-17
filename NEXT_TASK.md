@@ -1,22 +1,22 @@
 # Next task
 
-Current checkpoint: **V82.66 ANSWER-FLOW-AND-RELIABILITY-07**.
+Current checkpoint: **V82.67 BROWSER-UI-SMOKE-08**. The user confirmed the V82.66 product baseline is satisfactory. No production behavior changed in checkpoint 08.
 
 ## Completed
-- Answer-flow exact-source contract: 8 passed, 0 failed.
-- Candidate-pool cross-product coverage: 27 passed, 0 failed, including null/empty/malformed familiarity and song-type selections, watch-status defaults and invalid values, focus scope, and custom-list boundaries.
-- Full local automation: 6 Node suites plus build and integrity verification; 8 commands passed, 0 failed.
-- Candidate-policy architecture review completed. Policy extraction is deferred until a concrete benefit exists and deterministic build behavior is protected.
-- Production HTML remains byte-identical to the locked V82.65 baseline.
+- Candidate-pool integration test local/GitHub blob SHA reconciled exactly: `c7313fe743157b5c6cde86e252983049be87ff5a`.
+- Chromium UI smoke: 19 assertions passed for home/practice/quiz navigation, question selection, answer lock before playback, unplayed skip without history, next question, and solo EMQ list handoff.
+- Automated runner: 8/8 commands passed; six Node suites 135/135; integrity verifier 98/98.
+- Standalone HTML remains byte-identical to the immutable V82.65 baseline.
 
-## Acceptance still open
-1. Manual browser acceptance in a permitted environment: home screen, practice entry, answer submission, skip, next question, and solo EMQ list flow.
-2. IndexedDB save/restore tests using disposable synthetic data only. Never clear or overwrite real user data.
-3. Real audio-start gating and failed-source behavior with a controlled audio fixture.
-4. Multiplayer room/player state, familiarity isolation, reconnect, and older-client compatibility in an isolated environment.
-5. Record pass/fail/not-run status and environment details. Do not treat unit tests as browser end-to-end acceptance.
+## Next engineering actions
+1. Run standalone-origin browser acceptance in an environment that permits local HTML or a trusted local server.
+2. Test localStorage reload persistence and IndexedDB save/restore/upgrade/failure using disposable synthetic data only. Never clear or overwrite real profiles, history, custom lists, or server state.
+3. Verify actual audio playback-start gating, timing, and failed-source recovery with a controlled audio fixture.
+4. Verify multiplayer room/player state, player-specific familiarity isolation, reconnect, and older-client compatibility in an isolated environment.
+5. Record pass/fail/not-run and environment details. Change production code only if a reproducible defect is found.
 
-## One-command local check
-Run: python tools/run_all_checks.py
-
-Keep the official V82.65 package and HTML fingerprint immutable. Do not start candidate-policy extraction unless it has a documented maintenance or correctness benefit and can preserve deterministic output.
+## Commands
+```bash
+python tools/run_all_checks.py
+python tests/browser/browser_ui_smoke_opaque_origin.py
+```
