@@ -39,3 +39,18 @@
 - `NEXT_TASK.md`：下一階段具體工作與驗收門檻。
 
 不得清除真實 LocalStorage、IndexedDB、學習歷史、清單或伺服器狀態。不得重跑仍與四項產品 SHA 一致且證據有效的既有案例，除非指紋變更、證據損壞或出現可重現反證。
+
+
+## V82.66 SOURCE-SPLIT-02 update (2026-10-18)
+
+Status remains **PARTIAL**. A byte-preserving source split was created from the V82.65 HTML candidate whose actual SHA-256 was recomputed and matched.
+
+- HTML baseline: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Source split: 50 CSS blocks + 41 script/data blocks = 91 fragments.
+- Builder and verifier use Python standard library; the output is a standalone HTML and requires no runtime local JS modules.
+- Build verification: 98 passed, 0 failed; 39/39 classic JavaScript blocks passed `node --check`.
+- Output HTML is byte-identical to the V82.65 candidate.
+- Source archive: 13,136,827 bytes; SHA-256 `a6dc6977866b542749d8bb742696bc88585d45a25d98dc39eb3a2f3458b3d545`; ZIP CRC PASS; internal manifest 111/111 PASS.
+- Important limit: the full V82.65 delivery ZIP was not available to independently revalidate in this run. The recorded ZIP digest is not represented as newly recomputed.
+- The binary ZIP and HTML have not been uploaded to GitHub; only text report/status records are committed.
+- No product logic or user data format changed. Browser, external audio/API, IndexedDB round-trip, multi-device, and full product regression remain unexecuted.
