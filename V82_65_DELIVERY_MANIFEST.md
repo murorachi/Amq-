@@ -4,11 +4,12 @@
 - Branch: v82.65-resume-checkpoint
 - 文件整理 commit: c6027ed54db1f44e25ea39389e86dbb8c40a852f
 - 本次交付 ZIP: AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip
-- ZIP size: 124,642,752 bytes
-- ZIP SHA-256: 8f19a45f40e9dda58f74da89c0d72ee97aa37c90b9593d7b64f5cb321b4711e9
+- ZIP size: 124,644,301 bytes
+- ZIP SHA-256: 137181402b43b4d3fa790e04565b382200d8429b794f758b3610748956d4284b
 - ZIP CRC: PASS
-- Internal file manifest: 284 / 284 entries PASS
-- UTF-8 names: PASS
+- Internal file manifest: 285 / 285 entries PASS
+- Total ZIP file entries including SHA256SUMS.txt: 286
+- UTF-8 file names: PASS
 - Candidate pool test aggregate: 7 batches, 21 / 21 commands PASS, 0 FAIL, 0 TIMEOUT
 - Supplemental full-HTML source-mode test: EMQ-only and Mixed subcases both PASS
 - Engineering state: PARTIAL, not whole-project completion
