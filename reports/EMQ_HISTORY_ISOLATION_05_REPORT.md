@@ -40,3 +40,10 @@ Continue from checkpoint `V82.66 EMQ-CUSTOM-LIST-SCOPE-04`. This stage adds exac
 ## Rollback
 
 This stage only adds test/report files and updates checkpoint documentation. To roll back this stage, remove `tests/unit/history_status_isolation.test.cjs`, revert the added orphan-work test in `tests/unit/emq_api_contract.test.cjs`, and restore the prior versions of `CURRENT_STATUS.md`, `BASELINE.md`, `NEXT_TASK.md`, and `PACKAGE_SHA256SUMS.txt`. The product HTML is unchanged and remains byte-identical to the locked baseline.
+
+## GitHub delivery verification
+
+- Repository: `murorachi/Amq-`, branch `v82.66-source-split-02`.
+- Text artifacts (README, BASELINE, CURRENT_STATUS, NEXT_TASK, EMQ API contract test, history/status test, this report, test log and fingerprint report) were uploaded and read back from the remote branch.
+- Binary checkpoint ZIP was not uploaded. The available GitHub connector exposed text-content writes but no release-asset upload operation; the local ZIP and sidecar remain the verified delivery artifact.
+- GitHub readback confirms the required files exist and their expected checkpoint markers are present. This verifies text-file existence, not remote binary upload.
