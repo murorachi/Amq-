@@ -11,17 +11,17 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_66_EMQ_SOLO_LIST_HANDOFF_06.zip'
+PACKAGE_NAME = 'AMQ_V82_66_ANSWER_FLOW_AND_RELIABILITY_07.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
 EXCLUDED_DIRS = {'dist', '.git', '__pycache__'}
 EXCLUDED_FROM_MANIFEST = {
     'PACKAGE_SHA256SUMS.txt',
-    'reports/V82_66_EMQ_SOLO_LIST_HANDOFF_06_SHA256.txt',
+    'reports/V82_66_ANSWER_FLOW_AND_RELIABILITY_07_SHA256.txt',
 }
 EXCLUDED_FROM_PACKAGE = {
-    'reports/V82_66_EMQ_SOLO_LIST_HANDOFF_06_SHA256.txt',
+    'reports/V82_66_ANSWER_FLOW_AND_RELIABILITY_07_SHA256.txt',
 }
 FIXED_TIME = (2026, 10, 18, 0, 0, 0)
 
