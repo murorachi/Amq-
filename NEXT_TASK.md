@@ -1,56 +1,29 @@
-# 下一階段工作清單
+# Next task
 
-更新日期：2026-10-18。工程盤點已完成，正式程式碼未修改。整體仍為 PARTIAL。
+Updated: 2026-10-18. Current checkpoint: V82.66 SOURCE-SPLIT-02. Overall status remains PARTIAL.
 
-## M0-A（下一個工作）：候選篩選語義矩陣與聚合器 fail-closed
+## M0: Close baseline and artifact publication gaps
+1. Obtain the exact V82.65 delivery ZIP (expected 124,658,780 bytes, SHA-256 `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`).
+2. Recompute outer SHA-256, run ZIP CRC, validate internal manifest coverage and every file hash, and compare HTML/server/catalog/registry fingerprints.
+3. Publish the source-split ZIP and final HTML through a supported binary-artifact path; download them back and verify exact hashes. The current GitHub connector commits text files only for this workflow, so binary upload remains blocked.
+4. Keep V82.65 and V82.64 originals untouched.
 
-### A. 固定基線與工作前檢查
-1. 讀取 `VERSION.json`、測試報告與四項候選資產指紋。
-2. 若四項 SHA 與既有報告一致，沿用現有 22 個命令、5 個個人條件子案例及 2 個 EMQ/Mixed 子案例，不因工作中斷而重跑。
-3. 若測試原始檔無法取得或指紋不能對上，先記錄缺失，不得把歷史 PASS 當成目前可重現證據。
+## M1: Semantic dependency mapping
+1. Classify all 41 script blocks, distinguishing classic JS from JSON and compressed/base64 data payloads.
+2. Map global declarations, same-name definitions/overrides, call sites, DOM writers/readers, event listeners, timers, and storage read/write sites.
+3. Do not infer duplicate behavior from matching names alone; record call and override evidence.
+4. Complete dynamic storage-key and backup/restore inventory.
 
-### B. 語義矩陣
-建立表格化設定契約，至少涵蓋：
-- 欄位未設定／缺失、null、空陣列、明確不限、非法值、未知年份與未知難度。
-- AMQ、EMQ-only、Mixed 三種來源模式。
-- 熟悉度、tag、focus、觀看狀態、VNDB／個人清單、AMQ 自訂清單、EMQ 專用清單、黑名單、音源健康及 no-repeat。
-- 每個案例必須固定輸入 fixture、預期 song ID 集合與順序、排除原因；不能只斷言函式回傳非空。
+## M2: Candidate-pool contract tests before refactor
+1. Build the setting semantics matrix for absent/null/empty/unlimited/invalid values and AMQ/EMQ-only/Mixed modes.
+2. Use fixed fixtures and assert exact candidate IDs, order, stage counts and exclusion reasons.
+3. Add fail-closed aggregation tests for missing batches, timeouts, nonzero exits, fingerprint mismatch and malformed reports.
+4. Only after tests are in place, extract a pure candidate-policy module and compare old/new outputs.
 
-### C. 候選池可觀測性
-1. 追蹤必要限制、來源適配、個人條件、房間條件、no-repeat、抽選等階段。
-2. 定義每階段輸入數、輸出數、排除數與機器可讀排除理由。
-3. 空池時維持 fail-closed；不可靜默放寬年份、來源、黑名單或其他 hard constraints。
-
-### D. 測試聚合器故障注入
-驗證缺批次、命令逾時、非零退出碼、指紋不一致、報告格式錯誤及彙總缺失都不能被報成 PASS。每個測試案例需記錄輸入、實際斷言、退出碼與結果。
-
-### M0-A 交付物
-- 候選篩選語義矩陣與固定 fixtures。
-- 完整頁面交叉案例測試與報告。
-- 空候選池診斷格式及案例。
-- 聚合器 fail-closed 故障注入測試與報告。
-- 更新後的 `CURRENT_STATUS.md`、`BASELINE.md`（只有基準／指紋有變才更新）及 `NEXT_TASK.md`。
-- 若正式產品檔有修改，建立唯一版本名、更新 manifest／ZIP，記錄新 SHA-256、回滾方法，並重跑受影響測試與必要回歸。
-
-### M0-A 驗收門檻
-- 固定 song ID、排序、階段計數、排除原因與語義矩陣完全符合預期。
-- 既有有效案例不回歸。
-- 逾時、缺批次、非零退出碼、指紋不一致或損壞報告全部 fail-closed。
-- 測試報告區分靜態檢查、自動化測試、真實瀏覽器／裝置驗收；未執行項目明確標示。
-- 不清除真實 LocalStorage、IndexedDB、學習歷史、清單或伺服器狀態。
-
-## 後續階段
-
-- **M0-B：多人個人狀態契約。** 定義版本化 room/player filter schema、欄位缺失與非法值規則、玩家隔離、房間與個人條件交集、EMQ 清單例外及隱私界線。使用同一 fixtures 比較前端候選、伺服器接受與最終抽選。
-- **M1：純候選政策模組。** 僅在 M0 語義穩定後抽離無副作用函式，以 golden tests 比較舊／新輸出。
-- **M2：來源 adapter 與候選 pipeline。** 每階段比對 ID、排序與排除理由。
-- **M3：持久化、音訊及真實多人驗收。** 建立舊資料 fixture、備份回滾；完成 IndexedDB Blob、外網音訊與兩裝置 LAN/WebSocket/重連驗收。
-- **M4：可重現模組化建置。** 最後才選擇必要建置器，並保持正式單檔 HTML 可雙擊使用。
-
-## 不應重做／安全限制
-
-- 不重跑與目前四項產品 SHA 一致且證據有效的 22 個命令、5 個個人條件案例及 2 個 EMQ/Mixed 子案例，除非指紋改變、證據損壞或有可重現反證。
-- 不全面重寫主程式、不為了縮短程式碼刪除函式或 CSS。
-- 不把 mock 測試當作真實網路、音訊、IndexedDB 或多裝置驗收。
-- 不清除真實使用者的 LocalStorage、IndexedDB、學習歷史、清單或伺服器狀態。
-- ZIP 本體尚未上傳 GitHub Release；不得把 sidecar 上傳誤報為 ZIP 上傳。
+## Current checkpoint evidence
+- 50 CSS + 41 script/data blocks separated as 91 byte-preserved fragments.
+- Deterministic builder output: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- Automated integrity/build checks: 98 PASS, 0 FAIL.
+- JavaScript syntax: 39/39 classic scripts PASS; 2 non-JavaScript data payloads excluded.
+- ZIP CRC and internal manifest: PASS, 112 entries / 111 verified payload entries.
+- Firefox/manual browser, external audio/API, IndexedDB round-trip and real multi-device tests: NOT RUN.
