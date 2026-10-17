@@ -23,6 +23,7 @@
 - reports/V82_65_完整測試總覽.json 彙總 6 批、20 個已完成命令：20 PASS、0 FAIL、0 TIMEOUT；每個命令有退出碼與日誌路徑，各批受測資產指紋相同。
 - 覆蓋政策邊界、合成交集／個人隔離、EMQ 清單 adapter、Chromium 完整 HTML 的單人 AMQ 清單＋年份流程、54,778 筆曲庫的 JavaScript／Python metadata ID 順序比對、曲庫完整性、備份邏輯與既有回歸。
 - python tools/rebuild_integrity_manifest.py 會驗證總覽與目前受測指紋一致後重建 VERSION.json 和 SHA256SUMS.txt。
+- 最終檢查點 ZIP：124,574,989 bytes；SHA-256 cd286ae77b894ca635f00746c3cc616f5e638ead3b38424d44aa38518760c0ce。外部 sidecar 檔名為 AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip.sha256。ZIP CRC 通過；271 個 ZIP entries；內部 manifest 270/270 通過。
 
 ## 3. 尚未完成／不得宣稱通過
 
