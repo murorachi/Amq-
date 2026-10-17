@@ -9,42 +9,82 @@ permissions:
 
 jobs:
   verify-package:
+    name: Download and verify V82.64 ZIP
     runs-on: ubuntu-latest
+
     steps:
       - name: Download V82.64 release ZIP
         env:
-          ASSET_URL: 
-          ASSET_URL: 
-          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
-
+          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_A8_88_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
           EXPECTED_SHA256: 260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7
         run: |
           set -euo pipefail
-          curl -fL "$ASSET_URL" -o package.zip
+
+          echo "Downloading V82.64 package..."
+
+          curl --fail --location --silent --show-error \
+            "$ASSET_URL" \
+            --output package.zip
+
           ACTUAL_SHA256="$(sha256sum package.zip | cut -d ' ' -f 1)"
+          ACTUAL_SIZE="$(stat -c %s package.zip)"
+
           echo "Expected SHA256: $EXPECTED_SHA256"
           echo "Actual SHA256:   $ACTUAL_SHA256"
+          echo "Package size:    $ACTUAL_SIZE bytes"
+
           if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
             echo "::error::ZIP SHA-256 mismatch"
             exit 1
           fi
-          echo "ZIP_SHA256_VERIFIED=PASS" >> "$GITHUB_STEP_SUMMARY"
-          echo "ZIP_SIZE_BYTES=$(stat -c %s package.zip)" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: List package contents
+          echo "ZIP_SHA256_VERIFIED=PASS" >> "$GITHUB_STEP_SUMMARY"
+          echo "ZIP_SIZE_BYTES=$ACTUAL_SIZE" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check ZIP integrity and list files
         run: |
           python - <<'PY'
           import zipfile
           from pathlib import Path
 
-          p = Path("package.zip")
-          with zipfile.ZipFile(p) as z:
-              bad = z.testzip()
-              if bad:
-                  raise SystemExit(f"ZIP integrity failure: {bad}")
+          path = Path("package.zip")
+
+          with zipfile.ZipFile(path, "r") as archive:
+              bad_file = archive.testzip()
+
+              if bad_file is not None:
+                  raise SystemExit(f"ZIP integrity failure: {bad_file}")
+
+              entries = archive.infolist()
+
               print("ZIP integrity: PASS")
-              print("Entries:", len(z.namelist()))
-              for name in z.namelist():
-                  info = z.getinfo(name)
-                  print(f"{info.file_size:>12} bytes  {name}")
+              print(f"File count: {len(entries)}")
+              print()
+
+              for entry in entries:
+                  print(f"{entry.file_size:>12} bytes  {entry.filename}")
+
+          with open(path, "rb") as file:
+              signature = file.read(4)
+
+          if signature != b"PK\x03\x04":
+              raise SystemExit("Unexpected ZIP file signature")
+
+          print()
+          print("ZIP signature: PASS")
           PY
+
+      - name: Publish verification summary
+        if: success()
+        run: |
+          {
+            echo "## V82.64 Package Verification"
+            echo
+            echo "- Download: PASS"
+            echo "- SHA-256: PASS"
+            echo "- ZIP integrity: PASS"
+            echo "- Original package modified: NO"
+            echo
+            echo "This workflow verifies the release package only."
+            echo "It does not modify HTML or produce V82.65."
+          } >> "$GITHUB_STEP_SUMMARY"
