@@ -1,0 +1,1 @@
+22 integration fixture cases passed, 0 failed. Exact result: RESULT 22 passed, 0 failed.
