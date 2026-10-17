@@ -1,29 +1,32 @@
 # Next task
 
-Updated: 2026-10-18. Current checkpoint: V82.66 SOURCE-SPLIT-02. Overall status remains PARTIAL.
+Current checkpoint: V82.66 CANDIDATE-POOL-TESTS-01. Overall status remains PARTIAL.
 
-## M0: Close baseline and artifact publication gaps
-1. Obtain the exact V82.65 delivery ZIP (expected 124,658,780 bytes, SHA-256 `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`).
-2. Recompute outer SHA-256, run ZIP CRC, validate internal manifest coverage and every file hash, and compare HTML/server/catalog/registry fingerprints.
-3. Publish the source-split ZIP and final HTML through a supported binary-artifact path; download them back and verify exact hashes. The current GitHub connector commits text files only for this workflow, so binary upload remains blocked.
-4. Keep V82.65 and V82.64 originals untouched.
+## M0: Close formal baseline gap
+1. Obtain the exact V82.65 delivery ZIP and sidecar.
+2. Recompute ZIP SHA-256; validate CRC, internal manifest coverage, all file hashes and HTML/server/catalog fingerprints.
+3. Keep V82.64 and V82.65 originals untouched.
 
-## M1: Semantic dependency mapping
-1. Classify all 41 script blocks, distinguishing classic JS from JSON and compressed/base64 data payloads.
-2. Map global declarations, same-name definitions/overrides, call sites, DOM writers/readers, event listeners, timers, and storage read/write sites.
-3. Do not infer duplicate behavior from matching names alone; record call and override evidence.
-4. Complete dynamic storage-key and backup/restore inventory.
+## M1: Candidate pool integration fixtures
+1. Create disposable fixtures for AMQ rows, anime metadata, tags, familiarity, blacklist, watchlist and repeat state.
+2. Assert exact candidate IDs and order at each stage: base eligibility, quick pool, status, metadata, tags, watchlist, repeat, EMQ/Mixed combine, audio health and custom-list scope.
+3. Include absent/null/empty/zero/invalid setting values, invalid source mode, empty custom scope, missing combiner/helper, duplicate source IDs, and all-audio-unhealthy cases.
+4. Keep AMQ and EMQ identity/source metadata distinct; never use live user storage for destructive tests.
 
-## M2: Candidate-pool contract tests before refactor
-1. Build the setting semantics matrix for absent/null/empty/unlimited/invalid values and AMQ/EMQ-only/Mixed modes.
-2. Use fixed fixtures and assert exact candidate IDs, order, stage counts and exclusion reasons.
-3. Add fail-closed aggregation tests for missing batches, timeouts, nonzero exits, fingerprint mismatch and malformed reports.
-4. Only after tests are in place, extract a pure candidate-policy module and compare old/new outputs.
+## M2: Dependency tracing
+1. Trace readers/writers for aniQuizSettingsV14, aniQuizCustomListScopeInvalidV8265, blacklist/history, custom-list scope and audio-health interfaces.
+2. Inspect the 31 duplicate-name groups individually, beginning with assignments/wrappers in script_004; do not delete by name alone.
+3. Trace timer/listener setup and cleanup in quiz start/pause/resume/stop/settle/next paths.
 
-## Current checkpoint evidence
-- 50 CSS + 41 script/data blocks separated as 91 byte-preserved fragments.
-- Deterministic builder output: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Automated integrity/build checks: 98 PASS, 0 FAIL.
-- JavaScript syntax: 39/39 classic scripts PASS; 2 non-JavaScript data payloads excluded.
-- ZIP CRC and internal manifest: PASS, 112 entries / 111 verified payload entries.
-- Firefox/manual browser, external audio/API, IndexedDB round-trip and real multi-device tests: NOT RUN.
+## M3: First business refactor
+Only after exact candidate fixture expectations and interface tests pass, extract the pure policy object to a dedicated source file and embed it during build. Compare outputs against the current policy for all fixtures before integrating.
+
+## Current test entry points
+```powershell
+node tests\\unit\\candidate_pool_policy.test.cjs
+python tools\\build.py
+python tools\\verify.py
+python tools\\semantic_inventory.py
+```
+
+The policy unit test executes the exact existing policy block, not full browser getQuizPool behavior. Browser/audio/network, IndexedDB round-trip, and multi-device tests remain outstanding.
