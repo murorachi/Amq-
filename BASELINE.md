@@ -68,3 +68,9 @@ The locked V82.65 HTML remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad
 - The standalone HTML remains byte-identical to immutable V82.65 (8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`).
 - The full local checkpoint ZIP is `AMQ_V82_69_QUIZ_SUGGESTION_TEXT_01.zip`, 9,084,709 bytes, SHA-256 `d74541c241c31ce6dde2159f5bdf891d97995d1f2b62b2c26e50302f37303a9b`.
 - IMPORTANT: this branch remains only partially published. The new module, updated script_004, manifest, contract test, AST tool and full binary ZIP have not been published/read back as an exact matching set. Do not treat this remote branch as the current reproducible source release.
+
+
+## Current release after immutable V82.65 baseline
+- V82.65 remains immutable: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- V82.70 `QUIZ_SUGGESTION_ARIA_FIX_01` is a distinct output: `dist/amq_learning_tool_v82_70.html`, 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
+- Builder validates the manifest release fingerprint while verifier separately validates the immutable baseline file.
