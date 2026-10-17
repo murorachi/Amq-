@@ -39,3 +39,8 @@ The immutable V82.65 HTML fingerprint above remains the build target. Checkpoint
 ## Engineering checkpoint overlay — V82.67 checkpoint 08
 
 The user confirmed the V82.66 product baseline is satisfactory. Checkpoint `V82.67 BROWSER-UI-SMOKE-08` adds a constrained Chromium UI smoke test and report only. Local and GitHub blob SHA for `tests/unit/candidate_pool_integration.test.cjs` is `c7313fe743157b5c6cde86e252983049be87ff5a`. The UI smoke uses page.set_content() with test-only in-memory storage because the environment blocks file:// and localhost navigation. It does not validate real browser persistence, IndexedDB, real audio, Firefox, or multiplayer. Production HTML remains byte-identical to the immutable V82.65 baseline.
+
+
+## Engineering checkpoint overlay — V82.68 CANDIDATE-POLICY-MODULE-01
+
+The locked V82.65 HTML remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. V82.68 extracts the pure candidate-policy block into a source module injected at its original position in the same classic script. No extra runtime script tag or external loading is introduced. Latest automated checks: 8/8 commands, 135 Node tests, and verifier 101/101 passed. Browser smoke rerun timed out with Playwright driver EPIPE after 11 preliminary assertions and is not considered passed. The binary ZIP and full source tree have not been published to this branch.
