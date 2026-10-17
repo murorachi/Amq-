@@ -17,7 +17,7 @@
 |---|---:|---|
 | `amq_learning_tool_v82_65_candidate_pool_cleanup.html` | 8,786,930 | `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33` |
 | `anisong_multiplayer_room_server_v82_65.py` | 88,403 | `41e79fbabcbc037aef9d2b27076450217673935ede629c16caa956d737ff1736` |
-| `anisong_multiplayer_catalog_server.json` | 36,540,011 | `2a045731b9a478e68e88f1965f010f0d194ef44262f11c5c652` |
+| `anisong_multiplayer_catalog_server.json` | 36,540,011 | `2a045731b9a478e68e88f1965f010f0d7512990344d1d194ef44262f11c5c652` |
 | `anisong_multiplayer_unavailable_audio_v82_59.json` | 40 | `a6c6539e68f67e30ef4c0976b04280234352f1b0d61e907138af39050350023a` |
 
 The source archive's `VERSION.json` labels V82.65 as a PARTIAL candidate-pool/filtering checkpoint, not a completed full engineering release. V82.64 Release ZIP remains the direct historical source from which V82.65 was derived.
