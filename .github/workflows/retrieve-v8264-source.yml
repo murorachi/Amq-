@@ -1,0 +1,58 @@
+name: Retrieve V82.64 source archive for engineering
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/retrieve-v8264-source.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  retrieve-baseline:
+    name: Download, verify, and export exact V82.64 baseline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and verify exact V82.64 release archive
+        env:
+          ASSET_URL: https://github.com/murorachi/Amq-/releases/download/AMQ/AMQ_V82_64__E5_80_99_E9_81_B8_E9_A1_8C_E6_B1_A0_E8_88_87_E6_AD_B7_E5_8F_B2_E8_B3_87_E6_96_99_E5_B1_A4_E6_95_B4_E9_A0_93_E6_AA_A2_E6_9F_A5_E9_BB_9E.zip
+          EXPECTED_SHA256: 260b2ab31d82b37b8af8df6e080fd547b780bb9204e15f87acaced92d153c2b7
+          EXPECTED_SIZE: "53366951"
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 "$ASSET_URL" --output V82.64.zip
+
+          ACTUAL_SIZE="$(stat -c %s V82.64.zip)"
+          ACTUAL_SHA256="$(sha256sum V82.64.zip | cut -d ' ' -f 1)"
+          printf 'Expected size: %s\nActual size:   %s\n' "$EXPECTED_SIZE" "$ACTUAL_SIZE"
+          printf 'Expected SHA-256: %s\nActual SHA-256:   %s\n' "$EXPECTED_SHA256" "$ACTUAL_SHA256"
+
+          test "$ACTUAL_SIZE" = "$EXPECTED_SIZE"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+          p = Path("V82.64.zip")
+          with zipfile.ZipFile(p) as z:
+              assert z.infolist(), "empty archive"
+              bad = z.testzip()
+              assert bad is None, f"CRC failure: {bad}"
+              print("Archive entries:", len(z.infolist()))
+              for item in z.infolist():
+                  print(f"{item.file_size:>12} bytes  {item.filename}")
+          PY
+          printf '%s  %s\n' "$ACTUAL_SHA256" "V82.64.zip" > V82.64.zip.sha256
+          echo "Exact V82.64 baseline verified; no project files modified."
+
+      - name: Upload verified source archive for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: v82-64-verified-baseline-source
+          path: |
+            V82.64.zip
+            V82.64.zip.sha256
+          if-no-files-found: error
+          retention-days: 3
