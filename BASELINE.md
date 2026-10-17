@@ -1,9 +1,32 @@
 # Baseline lock
 
-- Candidate: V82.65 `amq_learning_tool_v82_65_candidate_pool_cleanup.html`
-- Bytes: 8786930
+## Direct V82.65 checkpoint package: recovered and verified
+
+- Package: `AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip`
+- Bytes: `124658780`
+- SHA-256: `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`
+- External `.sha256` sidecar: exact filename/digest match.
+- ZIP CRC: PASS; 291 entries / 291 unique paths.
+- Internal `SHA256SUMS.txt`: 290/290 entries verified, no missing paths or mismatches.
+- Recovery copy: `/mnt/data/v82_65_baseline_recovery/AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip` (kept separate and untouched).
+- Verification report: `reports/BASELINE_PACKAGE_VERIFICATION_06.md`.
+
+## Locked current V82.65 product assets
+
+| Asset | Bytes | SHA-256 |
+|---|---:|---|
+| `amq_learning_tool_v82_65_candidate_pool_cleanup.html` | 8,786,930 | `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33` |
+| `anisong_multiplayer_room_server_v82_65.py` | 88,403 | `41e79fbabcbc037aef9d2b27076450217673935ede629c16caa956d737ff1736` |
+| `anisong_multiplayer_catalog_server.json` | 36,540,011 | `2a045731b9a478e68e88f1965f010f0d194ef44262f11c5c652` |
+| `anisong_multiplayer_unavailable_audio_v82_59.json` | 40 | `a6c6539e68f67e30ef4c0976b04280234352f1b0d61e907138af39050350023a` |
+
+The source archive's `VERSION.json` labels V82.65 as a PARTIAL candidate-pool/filtering checkpoint, not a completed full engineering release. V82.64 Release ZIP remains the direct historical source from which V82.65 was derived.
+
+## Build baseline used by the source split
+
+- Standalone HTML: `baseline/amq_learning_tool_v82_65_candidate_pool_cleanup.html`
+- Bytes: 8,786,930
 - SHA-256: `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`
-- Verified this run: local baseline bytes and exact SHA-256; build output remains byte-identical.
-- Not verified this run: the full V82.65 delivery ZIP bytes (`124658780`, expected SHA-256 `db7918affcfbb6a15b0dc3265877623d9646532c7597bf2acaa85060f5a701b5`), ZIP CRC and internal manifest, because the official delivery archive is not present in the available workspace.
-- `/mnt/data/AMQ_V82_65_AUDIT_01.zip` was inspected and contains an audit bundle (standalone baseline HTML plus inventories and reports), not the official full delivery archive. It must not be substituted for the missing delivery ZIP.
-- No fallback to V82.64 or another historical product HTML was used.
+- `python tools/verify.py` reconstructs the HTML twice and verifies byte identity to this baseline.
+
+Do not overwrite the original package, the recovered copy, or the locked HTML baseline. Every checkpoint uses a unique artifact name.
