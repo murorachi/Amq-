@@ -1,25 +1,31 @@
 # Next task
 
-Current checkpoint: V82.66 EMQ-HISTORY-ISOLATION-05. Overall status remains PARTIAL.
+Current checkpoint: **V82.66 EMQ-SOLO-LIST-HANDOFF-06**. Project status remains PARTIAL.
 
-## M0: Close formal baseline gap (first priority)
-1. Obtain the exact official V82.65 delivery ZIP and sidecar.
-2. Recompute ZIP SHA-256; validate CRC, internal manifest coverage, all file hashes and HTML/server/catalog fingerprints.
-3. Keep V82.64 and V82.65 originals untouched. Do not substitute the similarly named audit package.
+## M0: Baseline package integrity — CLOSED
+- Recovered the official V82.65 checkpoint ZIP from the Library.
+- Verified outer SHA-256 and external sidecar, ZIP CRC, 291 unique entries, 290/290 internal manifest entries, and all four product payload fingerprints.
+- Evidence: `reports/BASELINE_PACKAGE_VERIFICATION_06.md`.
 
-## M1: Resolve solo EMQ custom-list handoff
-1. Confirm whether selecting EMQ custom lists is an intended solo quiz feature or whether `selectedEmqSongIds` is an unused/future API hook.
-2. If intended, trace authoritative selected-list storage and adapter ordering, then wire only after tests cover the complete `getQuizPool` wrapper path. If not intended, document that boundary rather than adding speculative UI or behavior.
-3. Add an exact-source wrapper test that proves which arguments actually reach `combinePool` and which list-scope adapter runs after it.
-4. No dedicated V82.65 browser test report/log was found. Obtain it if available; otherwise mark historical browser evidence unavailable and do not claim it was rerun.
+## M1: Solo EMQ custom-list handoff — CLOSED, no product patch needed
+- Exact-source trace confirms the solo `getQuizPool()` wrapper calls the EMQ combiner, and script 040 decorates the API combiner to inject selected EMQ song IDs.
+- Selected list -> song-ID `Set`; no selection -> `null`; invalid persisted scope -> empty `Set` (fail closed).
+- Audio eligibility runs after source composition and before the AMQ custom-list scope adapter.
+- Four isolated exact-source integration assertions pass. Existing `emq_api_contract.test.cjs` independently covers the real combiner's selected-Set semantics and the AMQ/EMQ scope boundary.
+- Do not add a redundant wrapper patch or change runtime solely because the initial six-argument call site did not visibly pass the Set.
 
-## M2: Finish history/status isolation
-1. Add a focused executable answer-flow test for audio eligibility, history recording, and familiarity updates by song ID.
-2. Keep source-only findings clearly separated from executable coverage.
-3. Preserve isolated synthetic storage; never use or mutate live user storage in tests.
+## M2: Answer-flow contract — NEXT
+1. Extract exact source for the quiz answer/classification path and record operation, with isolated DOM/audio/history dependencies.
+2. Test that a normal answer cannot be recorded as played before audio starts; test correct/wrong/skip or timeout paths only where the source contract distinguishes them.
+3. Assert that familiarity updates use the song ID and happen only for the supported target, and that EMQ history retains EMQ source/work metadata.
+4. Keep tests isolated; never read or mutate real LocalStorage, IndexedDB, user history, or multiplayer state.
+5. Do not claim browser/audio end-to-end coverage unless actually run.
 
-## M3: First business refactor
-Only after exact candidate fixtures, real EMQ API contract, custom-list wrapper boundary and history/status boundaries are stable, extract the pure policy object to a dedicated source file and embed it during build. Compare output against current policy and API tests before integration.
+## M3: Expand policy cross-product coverage
+Follow the verified V82.65 `NEXT_TASK.md`: prioritize remaining personal-filter/focus/EMQ-list cross-product cases, including missing/null/empty/invalid settings, and assert exact candidate IDs plus exclusion reasons. Reuse existing browser cases unless a fingerprint change or reproducible contradiction requires rerunning them.
+
+## M4: First business refactor
+Only after answer-flow and personal-filter boundaries are stable, extract the pure candidate policy and compare it against existing golden fixtures. Do not change UI, storage schemas, catalogue order, or runtime behavior as part of a policy-only extraction.
 
 ## Test entry point
 ```powershell
@@ -27,6 +33,7 @@ node tests\unit\candidate_pool_policy.test.cjs
 node tests\unit\candidate_pool_integration.test.cjs
 node tests\unit\emq_api_contract.test.cjs
 node tests\unit\history_status_isolation.test.cjs
+node tests\unit\solo_emq_list_handoff.test.cjs
 python tools\build.py
 python tools\verify.py
 ```
