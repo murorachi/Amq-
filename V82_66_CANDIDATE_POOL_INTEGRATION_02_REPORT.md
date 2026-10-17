@@ -24,3 +24,7 @@ Remove `tests/unit/candidate_pool_integration.test.cjs` and revert checkpoint do
 
 ## Next
 Validate the real EMQ/Mixed combine interface and source metadata isolation, then trace settings/custom-list/audio-health/history interfaces. Do not extract a production policy module until these boundaries are tested.
+
+
+## Package delivery
+A local checkpoint ZIP and SHA-256 sidecar were generated and CRC-checked. The binary ZIP itself was not uploaded to this repository; only source/test/report text artifacts and status documentation are committed. GitHub upload status is therefore PARTIAL, not complete.
