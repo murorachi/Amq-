@@ -2,16 +2,17 @@
 
 - Repository: https://github.com/murorachi/Amq-
 - Branch: v82.65-resume-checkpoint
-- 文件整理 commit: c6027ed54db1f44e25ea39389e86dbb8c40a852f
-- 本次交付 ZIP: AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip
-- ZIP size: 124,644,301 bytes
-- ZIP SHA-256: 137181402b43b4d3fa790e04565b382200d8429b794f758b3610748956d4284b
+- Current branch head and commit history: https://github.com/murorachi/Amq-/commits/v82.65-resume-checkpoint/
+- Archive file: AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip
+- Archive size: 124,644,301 bytes
+- Archive SHA-256: 137181402b43b4d3fa790e04565b382200d8429b794f758b3610748956d4284b
+- External sidecar file in this branch: AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip.sha256
 - ZIP CRC: PASS
 - Internal file manifest: 285 / 285 entries PASS
-- Total ZIP file entries including SHA256SUMS.txt: 286
+- ZIP entries including SHA256SUMS.txt: 286
 - UTF-8 file names: PASS
-- Candidate pool test aggregate: 7 batches, 21 / 21 commands PASS, 0 FAIL, 0 TIMEOUT
+- Candidate-pool test aggregate: 7 batches, 21 / 21 commands PASS, 0 FAIL, 0 TIMEOUT, aggregation errors 0
 - Supplemental full-HTML source-mode test: EMQ-only and Mixed subcases both PASS
 - Engineering state: PARTIAL, not whole-project completion
 
-The available GitHub connector supports repository text/file-content writes but does not expose a binary GitHub Release asset upload operation. The ZIP is therefore delivered through the direct conversation download link; this document records its checksum but does not claim that the binary ZIP was uploaded to the GitHub Release.
+Important: the text manifest and checksum are committed in GitHub; the binary ZIP itself is delivered via the direct conversation download. The available GitHub connector does not expose binary Release-asset upload, so this document does not claim the ZIP is uploaded to the Release.
