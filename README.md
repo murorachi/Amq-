@@ -30,3 +30,6 @@ python tools\verify.py
 Real browser/manual interaction, Firefox, external audio/network, IndexedDB round-trip, multiplayer multi-device and full product regression were not run.
 
 Next: obtain and verify the official V82.65 package, resolve the solo EMQ custom-list contract, then add executable answer-flow coverage before any policy extraction. See `NEXT_TASK.md`.
+
+## GitHub delivery
+Text docs, test source, report and fingerprints were uploaded to branch `v82.66-source-split-02` and read back. The binary checkpoint ZIP remains a local artifact and was not uploaded.
