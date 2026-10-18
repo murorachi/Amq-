@@ -231,3 +231,8 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Added `reports/V82_85_1_REMOTE_SHA256SUMS_CORRECTED_DERIVED.json` with 345 entries by removing only the invalid `--help` entry from the historical 346-entry JSON. This is a derived correction, not a fresh hash scan of the current branch. Original historical JSON remains unchanged.
 - GitHub commits: root duplicate deletion `7aa971fe7a05cc96df8fb3c901ae859d9adf0ebf`; generator `a44ce37f0a443ebda979be96e2cb62d26de93168`; generator contract `57be6f66cbd3a1e223ed23827225e6ef8f4180ebf`; runner/matrix/corrected inventory updates followed.
 - Static remote readback and source inspection only. Python regression contract, full runner (36 commands), verifier, build, and browser acceptance remain NOT RUN in this session. Fresh inventory regeneration and comparison against a clean checkout remain OPEN.
+
+
+- Final remote readback/static verification: branch head before this status refresh was `7234753954623b85e5fb6290b2262d78b7654d72`; root `--help` is absent; `dist/amq_learning_tool_v82_82.html` remains present at 8,787,490 bytes with the original Git blob SHA-1 `306f5223eca8ccbe3be75d3aa0c8f86b7c609ff2`.
+- Remote runner registry parses as 36 command entries; the source-inventory regression contract is registered, and the runner contract expects 36 with itself last. Matrix has 16 gates (A001–A016).
+- Historical inventory remains 346 entries and unchanged; derived correction has 345 entries, excludes `--help`, and all 345 remaining records match the historical JSON exactly. New inventory generator/test and corrected artifact were read back from the target branch. These are static/remote checks only; no test command was executed.
