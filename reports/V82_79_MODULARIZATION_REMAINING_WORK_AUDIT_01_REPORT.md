@@ -9,7 +9,7 @@ Date: 2026-10-18
 
 ## Changes
 - Added `src/modules/quiz_answer_metadata.htmlpart` (950 bytes; SHA-256 `32266955ac9110b13a125cde64e5121d2c21d9e781d2ecd7cbfbea6070f490f8`), preserving the exact classic-script IIFE position of three answer metadata helpers.
-- Updated the manifest and progress inventories; module count is now 8.
+- Updated the manifest and progress inventories; module count is now 8. Source-module insertion markers target 3 of 41 script/data fragments; 38 fragments have no module insertion point, although data payloads and compatibility patches do not automatically require extraction.
 - Added a direct contract test (14 assertions), expanded the getQuizPool layered reconstruction contract (24 assertions), and added a reproducible remaining-work audit generator plus CSV inventories.
 - Remaining-work audit inventories 41 script/data fragments, 50 CSS fragments, 792 parser-inventoried function definitions remaining in script/data fragments and 25 function definitions in extracted modules (817 total). These counts are not a completion percentage.
 
