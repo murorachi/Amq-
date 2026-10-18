@@ -10,6 +10,7 @@ const amq = fs.readFileSync(path.join(root, 'src/scripts/script_025.htmlpart'), 
 const emq = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
 const emqModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_membership.htmlpart'), 'utf8');
 const amqValidationModule = fs.readFileSync(path.join(root, 'src/modules/amq_custom_list_validation.htmlpart'), 'utf8');
+const amqAnimeNormalizationModule = fs.readFileSync(path.join(root, 'src/modules/amq_valid_anime_ids.htmlpart'), 'utf8');
 const passed = [];
 function test(name, fn) {
   try { fn(); passed.push(name); console.log('PASS ' + name); }
@@ -66,11 +67,12 @@ function buildAmqContext(storage = memoryStorage()) {
     extractStatement(amq, 'const safeRead='),
     extractStatement(amq, 'const write='),
     'const notify=()=>{};',
-    'const anime=[]; const songs=[];',
+    'const anime=[[1],[2],[\'003\']]; const songs=[];',
     extractStatement(amq, 'const getAnimeById='),
     extractStatement(amqValidationModule, 'const validIdArray='),
     extractStatement(amqValidationModule, 'const validListRow='),
     extractStatement(amqValidationModule, 'const validListPayload='),
+    extractStatement(amqAnimeNormalizationModule, 'const validAnimeIds='),
     extractStatement(amq, 'const readListData='),
     'let listData=readListData(); let currentListId=""; let currentListFilter="";',
     extractStatement(amq, 'const persistLists='),
@@ -79,7 +81,7 @@ function buildAmqContext(storage = memoryStorage()) {
     extractFunction(amq, 'createList'),
     extractFunction(amq, 'mutateAnimeList'),
     'const syncListSelectors=()=>{}; const renderCustomLists=()=>{}; const renderManageModalIfOpen=()=>{};',
-    'globalThis.testHarness={createList,mutateAnimeList,customListById,readListData,get data(){return listData}};'
+    'globalThis.testHarness={createList,mutateAnimeList,customListById,readListData,validAnimeIds,get data(){return listData}};'
   ].join('\n');
   const context = {localStorage:storage,window:{},Date,Math,Set,Map,Array,String,Number,Object,JSON,RegExp,console,anime:[],songs:[],document:{querySelector:()=>null,querySelectorAll:()=>[]}};
   vm.createContext(context); vm.runInContext(code,context,{timeout:1500});
@@ -99,6 +101,9 @@ function buildEmqContext(storage = memoryStorage()) {
   vm.createContext(context);vm.runInContext(code,context,{timeout:1500});
   return {storage,api:context.testHarness};
 }
+test('AMQ anime ID normalization stringifies, deduplicates, and filters IDs against catalog',()=>{
+  const h=buildAmqContext();assert.deepEqual(Array.from(h.api.validAnimeIds([1,'1',2,'missing','003','003'])),['1','2','003']);
+});
 test('AMQ create normalizes names and persists stable identity',()=>{
   const h=buildAmqContext();assert.equal(h.api.createList('  My   AMQ List  '),true);
   assert.equal(h.api.data.lists[0].name,'My AMQ List');assert.match(h.api.data.lists[0].id,/^cpl-/);
