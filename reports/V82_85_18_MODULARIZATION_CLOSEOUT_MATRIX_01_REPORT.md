@@ -48,7 +48,9 @@ The CSV `reports/V82_85_18_MODULARIZATION_CLOSEOUT_MATRIX.csv` contains one row 
 
 ## Acceptance
 
-The matrix contract test verifies exact set equality with the manifest, unique paths, 41/50/13 counts, non-empty evidence/classification/gate fields, CSS order lock, module host links, and the locked V82.82 release fingerprint. CI result is pending at report creation; do not mark this checkpoint accepted until the new test and full workflow pass.
+Accepted in GitHub Actions run 39139529670: both `source-and-unit` and `browser-native-origin` jobs passed. Run: https://github.com/murorachi/Amq-/actions/runs/39139529670.
+
+The matrix contract passed exact set equality with the manifest, unique paths, 41/50/13 counts, non-empty evidence/classification/gate fields, CSS order lock, module host links, and the locked V82.82 release fingerprint. The first attempt exposed an incorrect assertion in the new test (it compared a module's own path to its host fragment); that test-only assertion was corrected and the subsequent full workflow passed. No product defect or product-source change was involved.
 
 ## Rollback
 

@@ -1,10 +1,10 @@
-# Current engineering checkpoint: V82.85.18 modularization closeout matrix (CI pending)
+# Current engineering checkpoint: V82.85.18 modularization closeout matrix (ACCEPTED)
 
-- Parent V82.85.17 accepted in GitHub Actions run 39138953742.
-- Reconciles the current manifest's 91 fragments (41 script/data + 50 CSS) and 13 source modules against older progress reports.
-- Adds a CSV matrix with one row per fragment/module, evidence, classification, linked module hosts and explicit remaining gates; adds a contract test that requires exact path/count equality with the manifest and locks the V82.82 release fingerprint.
+- Parent V82.85.17 package audit passed GitHub Actions run 39138953742.
+- V82.85.18 matrix and full engineering workflow passed GitHub Actions run 39139529670: source/unit and browser-native-origin both succeeded.
+- Matrix reconciles exactly with `reports/FRAGMENT_MANIFEST.json`: 91 fragments (41 script/data + 50 CSS) and 13 modules, with unique paths, classifications, evidence, remaining gates and locked V82.82 product fingerprint.
+- First matrix test attempt failed due to an assertion bug in the test's module-host comparison; the assertion was corrected, and the subsequent complete workflow passed. This was test code only, not a product failure.
 - No product source, fragment manifest, CSS, runtime code, or product HTML changed.
-- CI pending; local test execution not run.
 - Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---

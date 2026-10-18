@@ -1,11 +1,13 @@
-## V82.85.18 modularization closeout matrix (CI pending)
+## V82.85.18 modularization closeout matrix (ACCEPTED)
 
-- Inventory source of truth: `reports/FRAGMENT_MANIFEST.json`, 91 fragments (41 script/data + 50 CSS), 13 modules. Older V82.79 checklist still reflects the historical 8-module state.
-- Added a 104-row CSV matrix (91 fragments + 13 modules) and a contract test for exact inventory reconciliation, classifications/evidence, module hosts and product fingerprint.
-- This is not a modularization-complete claim; high-risk script boundaries and environment-gated CSS/audio/live multiplayer items remain open.
-- CI pending; no local test execution. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product output changed.
+- GitHub Actions run 39139529670 passed both source/unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39139529670.
+- Matrix contract passed exact inventory reconciliation: 91 fragments (41 script/data + 50 CSS), 13 modules; unique paths, classifications/evidence/remaining gates, CSS order lock, module host links and V82.82 product fingerprint all passed.
+- The initial matrix test had a faulty module-host assertion; it was corrected and the full subsequent workflow passed. No product source changed.
+- The matrix is an inventory of status and remaining gates, not a declaration that semantic modularization is complete.
+- Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 
