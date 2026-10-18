@@ -35,7 +35,7 @@ function isValidDefaultEmptySchedule(raw) {
   if (!value.settings || typeof value.settings !== 'object' || Array.isArray(value.settings)) return false;
   if (!value.cards || typeof value.cards !== 'object' || Array.isArray(value.cards)) return false;
   if (Object.keys(value.cards).length !== 0) return false;
-  if (Object.keys(value).sort().join(',') !== 'algorithm, cards, createdAt, schemaVersion, settings') return false;
+  if (Object.keys(value).sort().join(',') !== 'algorithm,cards,createdAt,schemaVersion,settings') return false;
   if (JSON.stringify(value.settings) !== JSON.stringify(DEFAULT_SETTINGS)) return false;
   return true;
 }
