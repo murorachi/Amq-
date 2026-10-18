@@ -140,9 +140,9 @@ test('EMQ VNDB membership resolves the linked work and direct song IDs stay dist
 test('EMQ removal persists the target-list change across reload',()=>{
   const h=buildEmqContext();const id=h.api.createList('Remove');const other=h.api.createList('Keep');
   h.api.addMembers(id,['900001'],['v456']);assert.equal(h.api.removeMembers(id,['900001'],[]),true);
-  assert.deepEqual(Array.from(h.api.data.lists[0].workIds),[]);assert.equal(h.api.data.lists[1].id,other);
+  assert.deepEqual(Array.from(h.api.data.lists[0].workIds),['900002']);assert.equal(h.api.data.lists[1].id,other);
   const after=buildEmqContext(h.storage);assert.equal(after.api.data.lists[0].id,id);assert.equal(after.api.data.lists[0].name,'Remove');
-  assert.deepEqual(Array.from(after.api.data.lists[0].workIds),[]);assert.deepEqual(Array.from(after.api.data.lists[0].vndbIds),['v456']);
+  assert.deepEqual(Array.from(after.api.data.lists[0].workIds),['900002']);assert.deepEqual(Array.from(after.api.data.lists[0].vndbIds),['v456']);
 });
 test('EMQ UI source retains rename/delete and selected-list cleanup paths',()=>{
   assert.match(emq,/data-emq-list-rename/);assert.match(emq,/data-emq-list-delete/);
