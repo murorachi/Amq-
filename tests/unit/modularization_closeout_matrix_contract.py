@@ -45,6 +45,11 @@ def main():
             "module links point to manifest-listed host fragments")
     require(all(r["linked_modules"] in host_paths for r in modules if r["linked_modules"]),
             "every module insertion host exists in fragment inventory")
+    for row in modules:
+        evidence = [part.strip() for part in row["verification_evidence"].split(";") if part.strip()]
+        for path in evidence:
+            if path.startswith("tests/"):
+                require((ROOT / path).is_file(), "module test evidence exists: " + path)
     release = manifest["release"]
     require(release["version"] == "V82.82" and release["bytes"] == 8787490
             and release["sha256"] == "227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b",

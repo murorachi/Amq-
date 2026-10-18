@@ -1,11 +1,10 @@
-# Current engineering checkpoint: V82.85.18 modularization closeout matrix (ACCEPTED)
+# Current engineering checkpoint: V82.85.19 AMQ valid-anime-ID module contract (CI pending)
 
-- Parent V82.85.17 package audit passed GitHub Actions run 39138953742.
-- V82.85.18 matrix and full engineering workflow passed GitHub Actions run 39139529670: source/unit and browser-native-origin both succeeded.
-- Matrix reconciles exactly with `reports/FRAGMENT_MANIFEST.json`: 91 fragments (41 script/data + 50 CSS) and 13 modules, with unique paths, classifications, evidence, remaining gates and locked V82.82 product fingerprint.
-- First matrix test attempt failed due to an assertion bug in the test's module-host comparison; the assertion was corrected, and the subsequent complete workflow passed. This was test code only, not a product failure.
-- No product source, fragment manifest, CSS, runtime code, or product HTML changed.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Parent V82.85.18 matrix accepted in GitHub Actions run 39139529670; its docs-only follow-up passed in run 39139728016.
+- Matrix review found one evidence gap: the matrix referenced `tests/unit/amq_valid_anime_ids_contract.test.cjs`, but the file was absent from the remote tree.
+- Added a direct production-source contract for `validAnimeIds`, wired it into CI, and strengthened the matrix test to require referenced module test files to exist.
+- CI pending; local test execution not run. Product source/module/manifest/CSS/HTML unchanged.
+- Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 
