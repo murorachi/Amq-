@@ -1394,8 +1394,8 @@
       "name": "amq_valid_anime_ids",
       "path": "src/modules/amq_valid_anime_ids.htmlpart",
       "marker": "<!-- AMQ_SPLIT_MODULE:amq_valid_anime_ids -->",
-      "byte_length": 88,
-      "sha256": "51ed5054afc554263da872fe38b3c9973196effe5e0ee294ef13a9b509d35b3b",
+      "byte_length": 86,
+      "sha256": "7fe052d8694d60924894d7de9358137df71d0e7dbacefa768e4cd1abc668afe7",
       "insertion_fragment": "src/scripts/script_025.htmlpart",
       "purpose": "exact-source extraction of AMQ anime-ID normalization and catalog membership filtering",
       "runtime_contract": "original helper bytes restored at original IIFE position; same stringification, deduplication, and catalog filtering; no runtime behavior change"
