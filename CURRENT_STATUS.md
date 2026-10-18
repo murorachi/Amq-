@@ -214,3 +214,9 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Added `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` with 14 traceable gates across integrity, build, source contracts, isolated browser, native browser, cross-browser, integration and publication. The new CSV was read back from the exact branch and matched the authored contents byte-for-byte.
 
 - Additional audit finding: V82.85.1 sync summary reports 345 inventoried files, but the remote checksum inventory JSON records `file_count: 346`. Treat the inventory-count discrepancy as OPEN until the included paths and counting rule are reconciled.
+
+
+## V82.86 runner contract and inventory discrepancy — 2026-10-19
+- Located canonical runner tools/run_all_checks.py (34 explicit commands at base). Added tests/unit/automatic_acceptance_runner_contract.test.py and registered it as command 35 to check command registry structure, unique labels, script existence, CLI range validation and failure propagation.
+- Not executed in this session: runner contract, full runner, verifier and product build. GitHub remote readback is required and does not replace test execution.
+- Resolved direct cause of the historical 345/346 discrepancy: checksum JSON contains 346 unique entries but one is pseudo-path --help, with the same bytes/hash as V82.82 HTML; removing it yields 345 actual paths. The generator/command that emitted this bogus path remains unidentified. Historical checksum JSON retained unchanged.
