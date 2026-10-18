@@ -1,3 +1,14 @@
+# Current engineering checkpoint: V82.85.15 pure-helper boundary audit (AUDIT ONLY)
+
+- Parent accepted checkpoint: V82.85.14 extraction commit `e9b249364a79d7da896ff731899c879d29ddfebd`.
+- Added `reports/V82_85_15_PURE_HELPER_BOUNDARY_AUDIT_01.md`, reviewing script fragments 002, 003 and 040 for low-risk pure-helper candidates.
+- Decision: no production extraction. EMQ persistence/selection helpers depend on storage, DOM, mutable state or the live EMQ API; ANN cover flow is asynchronous lifecycle logic. Dashboard `metric()`/`row()` are technically pure but too trivial to justify another module.
+- Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable; CSS remains separate.
+- No tests/build/browser checks were run in this audit-only checkpoint. No production source, manifest, build output, CSS, or product HTML changed.
+- GitHub report write commit: `72cb4c29ec335b01c028ab4bbae6d13aba91d872`. Remote readback and CI status still need confirmation.
+
+---
+
 # Current engineering checkpoint: V82.85.14 nearNumberV1 pure-helper extraction (CI pending)
 
 - Parent checkpoint: V82.85.13 at `73fa181d4f433ee8a54f170f1f1b1d7a475d93b5` on `v82.85.13-emq-selection-contract-01`.
