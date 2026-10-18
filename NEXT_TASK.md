@@ -2,21 +2,18 @@
 
 Current checkpoint: **V82.86.06 backup/restore acceptance**. Branch `v82.86.06-backup-restore-acceptance-01`.
 
-## This stage
-- Extend `tests/browser/native_storage_custom_lists_acceptance.py`.
-- Verify AMQ and EMQ custom-list backup restore followed by a real localhost document reload.
-- Assert AMQ member IDs and EMQ work/VNDB memberships remain intact.
-- Feed a JSON-valid but invalid backup envelope and assert the complete localStorage snapshot is unchanged.
-- Keep product source and generated HTML unchanged.
-- Final acceptance requires both `source-and-unit` and `browser-native-origin` jobs to pass on the final branch HEAD.
+## Verified result
+- Browser acceptance run [39163991326](https://github.com/murorachi/Amq-/actions/runs/39163991326): both `source-and-unit` and `browser-native-origin` PASS.
+- Restored AMQ/EMQ IDs and memberships survive another real localhost document reload.
+- An invalid version-10 backup manifest is rejected without changing the localStorage snapshot.
+- Existing backup manifest validation and synthetic write-failure rollback tests are now explicitly executed by CI; source/unit in run [39164060206](https://github.com/murorachi/Amq-/actions/runs/39164060206) PASS.
+- No product source or generated HTML changed. V82.82 fingerprint remains locked at 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
-## After this stage is verified
-1. Record the final GitHub Actions run and check both jobs.
-2. Continue with the bounded IndexedDB quota/corruption and rollback matrix (AMQ-TODO-011).
+## Next bounded task
+1. Continue AMQ-TODO-011: IndexedDB blocked/open/upgrade, quota/write failure, corruption, rollback and reload matrix.
+2. Keep the synthetic localStorage restore-write rollback test separate from actual IndexedDB quota/corruption; they are different failure surfaces.
 3. Keep production-origin policy, Firefox, real audio-provider playback and live multiplayer reconnect as separate gates.
-
-## Product baseline
-V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
+4. Verify final branch HEAD CI after the engineering-record updates in this stage.
 
 ## Rollback
 Revert the V82.86.06 browser test and engineering-record commits. Product rollback is not required.
