@@ -43,3 +43,5 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Run real-origin native storage and custom-list acceptance
         run: python tests/browser/native_storage_custom_lists_acceptance.py --html dist/amq_learning_tool_v82_82.html
+      - name: Run isolated custom-list invalid-scope and UI regression suite
+        run: python tests/browser/custom_lists_ui_acceptance.py --html dist/amq_learning_tool_v82_82.html
