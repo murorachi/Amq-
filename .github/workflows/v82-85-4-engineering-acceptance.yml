@@ -36,6 +36,8 @@ jobs:
           node tests/unit/backup_restore_contract.test.cjs
       - name: Audit checkpoint package completeness and reproducibility
         run: python tests/unit/package_checkpoint_contract.py
+      - name: Reconcile modularization closeout matrix with source manifest
+        run: python tests/unit/modularization_closeout_matrix_contract.py
   browser-native-origin:
     runs-on: ubuntu-latest
     steps:

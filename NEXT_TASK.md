@@ -1,18 +1,21 @@
 # Next task
 
-Current checkpoint: **V82.85.17 checkpoint package audit (ACCEPTED)**.
-Branch: `v82.85.17-checkpoint-package-audit-01`.
-Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39138953742.
+Current checkpoint: **V82.85.18 modularization closeout matrix (CI pending)**.
+Branch: `v82.85.18-modularization-closeout-matrix-01`.
 
-## Accepted gates
-- V82.85.16 source inventory completeness gate: source/unit and browser-native-origin passed.
-- V82.85.17 package audit: source/unit and browser-native-origin passed; deterministic package hash, inventory, sidecars, ZIP CRC and embedded SHA-256 checks passed.
-- Product lock remains V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+## Current acceptance gate
+- Verify `reports/V82_85_18_MODULARIZATION_CLOSEOUT_MATRIX.csv` has exactly one row for each of the 91 manifest fragments and 13 modules.
+- Verify the matrix contract test passes in CI, including the locked V82.82 product fingerprint.
+- Full engineering workflow must pass before accepting the inventory checkpoint.
 
-## Next highest-value task
-Build a modularization closeout matrix from `reports/FRAGMENT_MANIFEST.json`, dependency inventories, extraction contracts and boundary-audit reports. Categorize every script/data fragment and CSS fragment as extracted, intentionally coupled, safe extraction candidate, or blocked by missing environment coverage. Reconcile the 13 current source modules against older progress reports that still describe the earlier 8-module state. Do not claim full modularization completion until the inventory and remaining decisions are reconciled.
+## After the matrix is accepted
+Start with the highest-risk unresolved boundary: complete `script_004` dependency ownership (lexical/property calls, window/global state, DOM writes, listeners, timers, playback and answer settlement). Then choose one narrowly scoped, demonstrably safe responsibility for extraction. Do not do a broad rewrite.
 
-## Known acceptance limits
-Firefox/cascade behavior, real audio-provider playback, production-domain storage policy, and live multi-client multiplayer reconnect are not established by the current Chromium/mock lifecycle suite.
+## Environment-gated work that must remain explicit
+- Firefox and CSS cascade comparison.
+- Real audio-provider playback.
+- Live server plus two independent multiplayer clients and reconnect failures.
+- Production-domain storage policy and full IndexedDB Blob round-trip/upgrade/quota-failure coverage.
 
-Rollback: revert the V82.85.17 package audit commit or return to parent commit `e2c0fddd9d144cafbb5cb4691b00bc6c1e6ea149`.
+Product lock: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+Rollback: return to parent commit `3c4dc6e52d960b5e545b0e9b30a994b18b9d3249`.

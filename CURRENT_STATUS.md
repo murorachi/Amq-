@@ -1,11 +1,11 @@
-# Current engineering checkpoint: V82.85.17 checkpoint package audit (ACCEPTED)
+# Current engineering checkpoint: V82.85.18 modularization closeout matrix (CI pending)
 
-- Parent V82.85.16 source inventory gate passed GitHub Actions run 39137967441.
-- V82.85.17 acceptance passed GitHub Actions run 39138953742: both `source-and-unit` and `browser-native-origin` jobs succeeded.
-- Package test verified all required source/build/test/status paths and manifest-listed fragments/modules are included; generated `dist/` output is excluded; two package builds are byte-identical; sidecar hashes, ZIP CRC, unique/exact entries, and every embedded manifest digest pass.
-- CI ZIP result: 14,632,716 bytes, SHA-256 `fd9ab4c5d6dc53d14a9ab059890e9f1fb909137fc9181b150a7192174f38586b`, 350 unique entries. This is a CI-generated test artifact, not a published release attachment.
-- Package default name now identifies V82.85.17 rather than V82.84.
-- Product lock unchanged: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable. No product HTML, CSS, runtime fragment, or fragment manifest changed.
+- Parent V82.85.17 accepted in GitHub Actions run 39138953742.
+- Reconciles the current manifest's 91 fragments (41 script/data + 50 CSS) and 13 source modules against older progress reports.
+- Adds a CSV matrix with one row per fragment/module, evidence, classification, linked module hosts and explicit remaining gates; adds a contract test that requires exact path/count equality with the manifest and locks the V82.82 release fingerprint.
+- No product source, fragment manifest, CSS, runtime code, or product HTML changed.
+- CI pending; local test execution not run.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 

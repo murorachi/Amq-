@@ -1,12 +1,12 @@
-## V82.85.17 checkpoint package audit (ACCEPTED)
+## V82.85.18 modularization closeout matrix (CI pending)
 
-- GitHub Actions run 39138953742 passed both source/unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39138953742.
-- Package acceptance passed required file inventory, all manifest source paths, exclusion of generated `dist/`, deterministic two-build SHA-256, external sidecars, ZIP CRC, unique/exact entries, and embedded manifest digest checks.
-- Two package builds: 14,632,716 bytes, SHA-256 `fd9ab4c5d6dc53d14a9ab059890e9f1fb909137fc9181b150a7192174f38586b`, 350 unique entries. This hash is for CI test output, not a published release asset.
-- Package default filename corrected to `AMQ_V82_85_17_SOURCE_PACKAGE_AUDIT_01.zip`.
-- Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product output changed.
+- Inventory source of truth: `reports/FRAGMENT_MANIFEST.json`, 91 fragments (41 script/data + 50 CSS), 13 modules. Older V82.79 checklist still reflects the historical 8-module state.
+- Added a 104-row CSV matrix (91 fragments + 13 modules) and a contract test for exact inventory reconciliation, classifications/evidence, module hosts and product fingerprint.
+- This is not a modularization-complete claim; high-risk script boundaries and environment-gated CSS/audio/live multiplayer items remain open.
+- CI pending; no local test execution. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product output changed.
 
 ---
+
 
 
 
