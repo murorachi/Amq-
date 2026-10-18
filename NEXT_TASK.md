@@ -1,23 +1,19 @@
 # Next task
 
-Current checkpoint: **V82.86.05 custom-list ID lifecycle matrix**. Branch `v82.86.05-custom-list-id-lifecycle-matrix-01`.
+Current checkpoint: **V82.86.06 custom-list backup/restore acceptance**. Branch `v82.86.06-custom-list-backup-restore-acceptance-01`.
 
-## Scope completed and verified
-- Final verified test commit: `41bec9560a419693bff2a2f3edb829112588ca24`; following commit only reconciles the report and status records.
-- Extended exact-source CRUD/reload tests with AMQ and EMQ failed-write assertions.
-- Added EMQ direct song ID normalization/reload coverage.
-- Added EMQ corrupt JSON fallback assertion.
-- Wrote an explicit matrix identifying existing versus new tests and uncovered backup/restore paths.
-- No product source or generated HTML changed.
-- CI run [39162546062](https://github.com/murorachi/Amq-/actions/runs/39162546062) passed both jobs.
-- New/expanded custom-list CRUD/reload tests: 15 passed, 0 failed.
-- Deterministic V82.82 output remains 8,787,490 bytes with SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+## Current scope
+- Extend the real-localhost Chromium acceptance around the actual export/import UI.
+- Verify malformed JSON is rejected before any localStorage mutation.
+- Verify a valid backup restores deleted AMQ/EMQ lists and those IDs/names plus EMQ work/VNDB memberships survive a fresh document reload.
+- Product source and generated V82.82 HTML remain unchanged.
+- Latest branch CI: pending; verify both jobs before claiming completion.
 
-## Next bounded task
-1. Locate the actual backup export/import path for AMQ and EMQ custom-list keys.
-2. Add browser-level backup → restore → reload assertions on real origin.
-3. Cover corrupt backup rejection before mutation and rollback behavior.
-4. Keep IndexedDB quota/corruption and real audio-provider tests as separate external gates.
+## Next bounded task after CI
+1. Check the final CI run and verify the branch head and remote artifacts.
+2. Reproduce a storage write/quota failure during multi-key import.
+3. Assert whether any earlier keys were already mutated. If partial application is reproducible, document it as a confirmed defect and prepare a separate minimal product-fix stage with explicit product-version/fingerprint handling.
+4. Keep Firefox, production-origin storage policy, IndexedDB corruption/quota, real audio provider and live multiplayer gates separate.
 
 ## Rollback
-Revert the test/report/status changes in V82.86.05. Product rollback is not required.
+Revert the V82.86.06 browser test and engineering-record commits. Product rollback is not required because no product source or HTML was changed.
