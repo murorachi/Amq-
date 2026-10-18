@@ -184,7 +184,7 @@ def main():
                 after_failed_restore = page.evaluate("() => Object.fromEntries(Array.from({length:localStorage.length},(_,i)=>{const k=localStorage.key(i);return [k,localStorage.getItem(k)]}))")
                 check(page.evaluate("window.__restoreFailureProbe()"), "one-shot native storage write failure was injected")
                 check(after_failed_restore == before_failed_restore, "failed full restore rolls all origin localStorage keys/values back exactly")
-                page.evaluate("Storage.prototype.setItem = Storage.prototype.setItem.__original")
+                page.evaluate("() => { Storage.prototype.setItem = Storage.prototype.setItem.__original; return true; }")
 
                 # Test a successful real full restore after changing one allowlisted marker.
                 page.evaluate("""(key) => localStorage.setItem(key, JSON.stringify({version:1,lists:[]}))""", AMQ_KEY)
