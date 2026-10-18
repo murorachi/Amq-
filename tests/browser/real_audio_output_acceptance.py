@@ -9,6 +9,7 @@ the application's actual fallback code.
 import argparse
 import array
 import io
+import json
 import math
 import shutil
 import struct
