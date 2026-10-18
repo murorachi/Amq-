@@ -1,3 +1,14 @@
+# Current engineering checkpoint: V82.85.21 script_004 extraction decision (CI pending)
+
+- Parent V82.85.20 accepted in GitHub Actions run 39141098175: source-and-unit and browser-native-origin both passed.
+- The matrix-driven runner executed all 16 unique Node contracts referenced by the 13 module rows; all passed. Package reproducibility and 91-fragment/13-module matrix reconciliation passed.
+- Re-reviewed the remaining `script_004` candidates against the AST boundary report. Auto-next functions depend on shared mutable state, DOM and timer lifecycle; practice metadata getter is trivial; alias tooltip depends on current quiz identity and live APIs. No additional production extraction justified.
+- This checkpoint is audit/documentation only. No production source, manifest, CSS or product HTML changed.
+- Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Full semantic modularization is not complete: many of the 91 fragments remain physical source splits with semantic ownership/dependency audit outstanding. Next task is a truthful closeout disposition of remaining matrix rows.
+
+---
+
 # Current engineering checkpoint: V82.85.20 module contract CI coverage (ACCEPTED)
 
 - GitHub Actions run 39141098175 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39141098175.

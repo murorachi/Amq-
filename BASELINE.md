@@ -1,3 +1,13 @@
+## V82.85.21 script_004 extraction decision (CI pending)
+
+- Rechecked the current AST boundary report against candidate timer, practice-metadata and answer-alias helper bodies.
+- No additional production extraction is justified: apparent candidates either close over shared state/DOM/timers, call live APIs, or are too trivial to warrant a module.
+- Parent acceptance: run 39141098175 passed both source/unit and browser-native-origin; 16/16 matrix-driven module contracts, package reproducibility and matrix reconciliation passed.
+- This is an audit/documentation-only checkpoint. Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Important distinction: 91 fragments are physically split and 13 source modules are extracted, but semantic modularization of all remaining legacy fragments is not complete.
+
+---
+
 ## V82.85.20 module contract CI coverage (ACCEPTED)
 
 - GitHub Actions run 39141098175 passed source/unit and browser-native-origin jobs.
