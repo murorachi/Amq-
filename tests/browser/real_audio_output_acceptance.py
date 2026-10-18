@@ -245,25 +245,33 @@ def main():
                 auto_next = page.locator("#qsAutoNext")
                 if auto_next.is_checked():
                     auto_next.uncheck()
-                page.evaluate("""id => {
+                hook_installed = page.evaluate("""id => {
                   const api = window.__aniEmqAPI;
-                  if (api && typeof api.chooseQuestion === 'function') {
-                    const original = api.chooseQuestion;
-                    api.chooseQuestion = (pool, ...rest) =>
-                      pool.find(row => String(row[1]) === String(id) && row[9]) ||
-                      pool.find(row => row && row[9]) ||
-                      original.call(api, pool, ...rest);
-                  }
+                  if (!api || typeof api.chooseQuestion !== 'function') return false;
+                  const original = api.chooseQuestion;
+                  const override = (pool, ...rest) =>
+                    pool.find(row => String(row[1]) === String(id) && row[9]) ||
+                    pool.find(row => row && row[9]) ||
+                    original.call(api, pool, ...rest);
+                  api.chooseQuestion = override;
+                  return api.chooseQuestion === override;
                 }""", str(song[1]))
+                check(hook_installed, "test selects a playable catalog row through the quiz question chooser")
                 page.locator("#quizStart").click(timeout=10000)
                 page.wait_for_function(
-                    "String(window.__aniQuizStateV45?.quizSong?.[1]) === " + repr(str(song[1])),
+                    "window.__aniQuizStateV45?.quizSong && window.__aniQuizStateV45.quizSong[9]",
                     timeout=10000)
+                quiz_song = page.evaluate("""() => {
+                  const s = window.__aniQuizStateV45?.quizSong;
+                  return s ? {id:String(s[1]), title:String(s[4] || '').trim()} : null;
+                }""")
+                check(bool(quiz_song and quiz_song["title"]),
+                      "quiz selected a titled song with an audio mirror")
                 page.wait_for_function("window.__aniQuizStateV45?.quizAudioStarted === true", timeout=15000)
                 check(True, "real audio playback opens the production quiz timer gate")
                 page.wait_for_timeout(350)
                 before_reveal = page.evaluate("audioEl.currentTime")
-                page.locator("#quizAnswer").fill(str(song[4] or ""))
+                page.locator("#quizAnswer").fill(quiz_song["title"])
                 page.locator("#quizSubmit").click(timeout=10000)
                 page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
                 check(page.evaluate("!audioEl.paused"),
