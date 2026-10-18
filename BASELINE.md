@@ -1,4 +1,17 @@
-## V82.85.22 closeout disposition matrix (CI pending)
+# Baseline lock and current engineering inventory
+
+## Current engineering baseline: V82.86.01 structural issue inventory
+
+- Parent engineering checkpoint: `v82.85.22-closeout-disposition-matrix-01`, commit `b42ddee31db8becae02b9822dd44bdcb0c4f9cee`.
+- Parent acceptance run 39141992306 passed both source/unit and browser-native-origin jobs.
+- Current branch `v82.86.01-structural-issue-inventory-01` adds an evidence-led initial issue register only. It does not replace the product baseline.
+- Inventory report: `reports/V82_86_01_STRUCTURAL_ISSUE_INVENTORY_01.md`; row tracker: `reports/STRUCTURAL_ISSUE_INVENTORY.csv`.
+- Product output remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
+- The register contains documented structural risks, audit-required items, external acceptance gates and maintainability candidates. It is not a claim that all 91 fragments have received a fresh line-by-line manual audit.
+
+---
+
+## V82.85.22 closeout disposition matrix (ACCEPTED)
 
 - Added deterministic `tools/modularization_closeout_disposition.py` and generated `reports/MODULARIZATION_CLOSEOUT_DISPOSITION.csv` covering all 104 rows: 91 fragments and 13 modules.
 - Added `tests/unit/modularization_closeout_disposition_contract.py` to validate inventory coverage, evidence links, disposition counts and byte-identical regeneration.
