@@ -202,3 +202,11 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Remote clean-checkout SHA-256 inventory: PASS (345 files).
 - Clean-checkout build and verifier: PASS; BUILD PASS: 8787490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; tools/verify.py exit 0.
 - This records source publication only; native-origin Storage acceptance and Firefox/audio/multiplayer gates remain separate.
+
+
+## V82.86 automatic acceptance inventory — 2026-10-19
+- Created engineering-only branch `v82.86-auto-acceptance-inventory-01` from `v82.84-source-sync-acceptance-gate-01`.
+- Inspected existing `reports/FRAGMENT_MANIFEST.json`, `tools/build.py`, `tools/verify.py`, unit/browser contracts, and validation/audit reports. Existing coverage already includes exact fingerprints, source reconstruction, deterministic build, candidate pool contracts, AMQ/EMQ custom-list behavior, isolated Chromium UI and responsive checks.
+- Key limitation: current session did not execute the runner or verifier; historical 34/34 and 116/116 results remain historical evidence only. Native-origin storage, Firefox, real audio, and two-client multiplayer remain not verified in the recorded environment.
+- Inventory and next implementation step: `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
+- No product/runtime files changed. Automated tests and build: NOT RUN in this inventory-only step.
