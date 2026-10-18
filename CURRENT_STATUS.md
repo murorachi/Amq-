@@ -15,12 +15,12 @@
 
 ---
 
-# Current engineering checkpoint: V82.85.11 FIREFOX RESPONSIVE UI ACCEPTANCE (PENDING CI)
+# Historical checkpoint: V82.85.11 Firefox responsive UI acceptance (Firefox passed; full suite exposed a multiplayer leave race)
 
 - Base: `v82.85.10-quiz-lifecycle-edge-acceptance-01`, commit `c4d72db3cacaf8dcbf14328d8e02fbb42c799014`.
 - Added `tests/browser/firefox_responsive_smoke_acceptance.py` and a dedicated Firefox job in `.github/workflows/v82-85-4-engineering-acceptance.yml`.
 - Scope: Firefox app initialization, navigation, quiz controls, and horizontal-overflow/layout checks at 390x844, 768x1024, and 1440x1200. Uses isolated in-memory storage and blocks external network.
-- CI status: pending verification. Do not call Firefox acceptance passed until the new workflow run completes and its log is checked.
+- Firefox job passed 17 UI assertions with no page errors. The full workflow was not accepted because the Chromium multiplayer lifecycle test timed out after leave; the stale-poll race was fixed and revalidated in V82.85.12.
 - Existing V82.85.10 quiz lifecycle acceptance is already verified: workflow run 39118364295 passed both existing jobs; quiz lifecycle test produced 33 PASS assertions, 0 FAIL assertions, and no uncaught page errors. Source verifier reported 122/122 checks and byte-identical V82.82 output.
 - Locked product: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. No product HTML or runtime source was changed in this stage.
 - Limitations: this Firefox smoke test is not a pixel-perfect screenshot comparison and does not test native persistence, production-domain storage policy, real audio, or real multi-client multiplayer.
