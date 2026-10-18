@@ -2,6 +2,20 @@
 
 - Branch: `v82.85.4-native-storage-custom-lists-modularization-01`; parent engineering checkpoint: `v82.85.3-native-storage-reload-assertion-fix-01`.
 - Product baseline remains V82.82 (`dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`). Immutable V82.65 remains unchanged; no product HTML was regenerated.
+- Added tracked real-origin harness `tests/browser/native_storage_custom_lists_acceptance.py`: native Chromium localStorage, strict reload snapshot policy, AMQ/EMQ create/member/rename, real reload and full-backup export/restore.
+- Reload policy: all pre-existing keys and raw values remain identical. Only a valid default-empty `aniSrsScheduleV1` may be initialized; other additions, removals or value changes fail.
+- Low-risk extraction: `listWorkIds`, `listSongIds`, `listSongCount` moved byte-for-byte into `src/modules/emq_list_membership.htmlpart` at the original marker. No answer submission, playback, multiplayer lifecycle or CSS cascade code was moved.
+- Final verified workflow: [run 39110833508](https://github.com/murorachi/Amq-/actions/runs/39110833508), all jobs passed. Source/build verifier 118/118; snapshot contract 7/7; custom-list Node contracts 10/10; backup/restore 6/6; native-origin Chromium acceptance passed; isolated custom-list UI regression 19 assertions, 0 page errors.
+- Deterministic build matched V82.82 byte-for-byte at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Still unverified: Firefox/cascade comparison, real audio playback, production-domain storage policies and multiplayer multi-client reconnect.
+- Report: `reports/V82_85_4_NATIVE_STORAGE_CUSTOM_LISTS_MODULARIZATION_01_REPORT.md`.
+
+---
+
+# Current engineering checkpoint: V82.85.4 NATIVE STORAGE + CUSTOM LISTS + LOW-RISK MODULE EXTRACTION
+
+- Branch: `v82.85.4-native-storage-custom-lists-modularization-01`; parent engineering checkpoint: `v82.85.3-native-storage-reload-assertion-fix-01`.
+- Product baseline remains V82.82 (`dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`). Immutable V82.65 remains unchanged; no product HTML was regenerated.
 - Added tracked native-origin harness `tests/browser/native_storage_custom_lists_acceptance.py`. It uses real Chromium localStorage on localhost, enforces the corrected reload contract, tests AMQ/EMQ list CRUD and ID mapping, reload persistence, and full-backup export/delete/restore.
 - Reload policy: all pre-existing keys and raw values remain unchanged; only a valid default-empty `aniSrsScheduleV1` may be newly initialized. All other new keys, deletions, and changes fail.
 - Added Node contract `tests/unit/custom_list_crud_reload_contract.test.cjs`; retained the seven-case native storage snapshot contract and backup manifest contract.
