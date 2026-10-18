@@ -212,3 +212,5 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - No product/runtime files changed. Automated tests and build: NOT RUN in this inventory-only step.
 
 - Added `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` with 14 traceable gates across integrity, build, source contracts, isolated browser, native browser, cross-browser, integration and publication. The new CSV was read back from the exact branch and matched the authored contents byte-for-byte.
+
+- Additional audit finding: V82.85.1 sync summary reports 345 inventoried files, but the remote checksum inventory JSON records `file_count: 346`. Treat the inventory-count discrepancy as OPEN until the included paths and counting rule are reconciled.
