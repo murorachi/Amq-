@@ -74,3 +74,8 @@ The locked V82.65 HTML remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad
 - V82.65 remains immutable: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
 - V82.70 `QUIZ_SUGGESTION_ARIA_FIX_01` is a distinct output: `dist/amq_learning_tool_v82_70.html`, 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
 - Builder validates the manifest release fingerprint while verifier separately validates the immutable baseline file.
+
+
+## V82.84 source sync and acceptance gate audit
+
+V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`); immutable V82.65 remains unchanged. Fresh validation passed (runner 34/34, verifier 116/116). GitHub tree audit confirms the V82.83 branch remains an overlay with 125 entries and missing source fragments/template/build tools/tests/visual PNGs. Boundary-audit tool fingerprint mismatch is fixed, but complete sync and remote clean build remain open. Native-origin Storage remains blocked by managed Chromium policy; Firefox, real audio and two-client multiplayer are not verified. No production runtime/CSS changes. See `reports/V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT.md`.
