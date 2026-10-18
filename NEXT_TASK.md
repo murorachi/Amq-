@@ -6,14 +6,14 @@ Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39140087926.
 
 ## Accepted gates
 - Source inventory completeness and deterministic V82.82 build pass.
-- Checkpoint package inventory/reproducibility test passes.
+- Package inventory/reproducibility test passes.
 - Closeout matrix reconciles all 91 fragments and 13 modules against the manifest.
 - Every module test path referenced by the matrix exists.
 - `validAnimeIds` direct source contract passes 11 assertions.
 - Full browser-native-origin suite passes.
 
 ## Next highest-value task
-Wire the existing module-specific contract tests into the main engineering CI workflow so that the 13-module inventory is not merely documented or tested only in historical checkpoint runs. Include candidate policy/integration, storage repository, database initializer, quiz suggestion helpers/renderer/controller, getQuizPool, answer metadata, EMQ membership, AMQ validation/ID normalization, EMQ normalization and numeric tolerance. Keep each test's output visible and fail-fast.
+Wire the existing module-specific contract tests into the main engineering CI workflow so all 13 modules are continuously regression-tested, not merely documented or tested only in historical checkpoint runs. Derive the unique `tests/unit/*.test.cjs` paths from the matrix, validate they exist, execute them fail-fast, and leave browser integration tests to the browser job.
 
 After that, continue the remaining `script_004` dependency ownership audit before further production extraction.
 

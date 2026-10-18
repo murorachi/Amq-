@@ -1,10 +1,9 @@
 # Current engineering checkpoint: V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)
 
-- Parent V82.85.18 modularization closeout matrix passed run 39139529670.
-- V82.85.19 passed GitHub Actions run 39140087926: source/unit and browser-native-origin both succeeded.
-- Added direct contract test for `src/modules/amq_valid_anime_ids.htmlpart`: 11 assertions cover manifest registration, byte length/SHA-256, host marker, stringification, deduplication, catalog filtering, ordering, empty arrays and invalid input.
-- Strengthened the matrix test so all module test references must exist in the repository.
-- The module source and product output are unchanged. Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- V82.85.19 acceptance run 39140087926 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39140087926.
+- Direct `validAnimeIds` contract: 11 assertions passed for module registration/fingerprint/marker, stringification, deduplication, catalog filtering, ordering, empty input and invalid input.
+- Matrix contract now verifies all referenced module test files exist.
+- No product source, module source, manifest, CSS or HTML changed. Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 
