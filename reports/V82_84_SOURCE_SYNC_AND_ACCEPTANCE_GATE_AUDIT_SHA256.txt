@@ -1,0 +1,18 @@
+V82.84 SOURCE SYNC AND ACCEPTANCE GATE AUDIT 01
+
+Engineering package: AMQ_V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT_01.zip
+Bytes: 14518272
+SHA-256: 1364c968723dedad2c9c75887b78e2633c7c4b3ecc08719fa2c463ab06be1b11
+ZIP entries: 298 unique / CRC PASS
+Internal SHA-256 manifest: 297/297 verified; missing=0; mismatched=0.
+
+Product HTML (unchanged V82.82): amq_learning_tool_v82_82.html
+Bytes: 8787490
+SHA-256: 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b
+
+Immutable V82.65 baseline: 8786930 bytes / SHA-256 abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33
+Preserved V82.80 product: 8787422 bytes / SHA-256 f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+
+Fresh local validation: runner 34/34 passed across four bounded invocations; integrity verifier 116/116 passed; AMQ/EMQ isolated UI 19/19; backup round-trip contract 4/4; responsive Chromium 3 viewport sizes x 2 views passed.
+
+Open gates: GitHub complete source sync and clean remote checkout build; native-origin localStorage/IndexedDB and browser-level backup/rollback; native-origin custom-list persistence; Firefox; real audio; two-client multiplayer/reconnect.
