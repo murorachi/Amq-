@@ -28,13 +28,10 @@ jobs:
           set -euo pipefail
           node tests/unit/native_storage_reload_snapshot_contract.test.cjs
           node tests/unit/custom_list_crud_reload_contract.test.cjs
-          node tests/unit/amq_custom_list_validation.test.cjs
           node tests/unit/custom_list_normalization_contract.test.cjs
-          node tests/unit/emq_list_normalization_contract.test.cjs
           node tests/unit/emq_selection_contract.test.cjs
-          node tests/unit/near_number_v1_contract.test.cjs
-          node tests/unit/backup_restore_contract.test.cjs
-          node tests/unit/amq_valid_anime_ids_contract.test.cjs
+      - name: Run all module contracts referenced by closeout matrix
+        run: python tests/unit/run_module_contracts.py
       - name: Audit checkpoint package completeness and reproducibility
         run: python tests/unit/package_checkpoint_contract.py
       - name: Reconcile modularization closeout matrix with source manifest

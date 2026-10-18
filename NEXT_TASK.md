@@ -1,23 +1,16 @@
 # Next task
 
-Current checkpoint: **V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)**.
-Branch: `v82.85.19-amq-valid-anime-ids-contract-01`.
-Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39140087926.
+Current checkpoint: **V82.85.20 module contract CI coverage (CI pending)**.
+Branch: `v82.85.20-module-contracts-ci-coverage-01`.
 
-## Accepted gates
-- Source inventory completeness and deterministic V82.82 build pass.
-- Package inventory/reproducibility test passes.
-- Closeout matrix reconciles all 91 fragments and 13 modules against the manifest.
-- Every module test path referenced by the matrix exists.
-- `validAnimeIds` direct source contract passes 11 assertions.
-- Full browser-native-origin suite passes.
+## Acceptance gate
+- Confirm the matrix-driven runner finds all 13 module rows, resolves every unit-test path, and executes all unique Node contracts.
+- Inspect each test's actual output; any failure must be fixed or documented before acceptance.
+- Confirm source/build verification and the full browser-native-origin job pass.
 
-## Next highest-value task
-Wire the existing module-specific contract tests into the main engineering CI workflow so all 13 modules are continuously regression-tested, not merely documented or tested only in historical checkpoint runs. Derive the unique `tests/unit/*.test.cjs` paths from the matrix, validate they exist, execute them fail-fast, and leave browser integration tests to the browser job.
-
-After that, continue the remaining `script_004` dependency ownership audit before further production extraction.
+## Next after acceptance
+Review the `script_004` dependency ownership report for any safe, meaningful remaining extraction candidate. The report already documents shared closure state, API/DOM calls, listener registrations and timers; do not repeat that inventory without identifying a concrete evidence gap.
 
 Known external acceptance limits remain Firefox/CSS cascade, real audio-provider playback, live two-client multiplayer reconnect, and production-domain storage policy/full IndexedDB failure cases.
 
 Product lock: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
-Rollback: return to parent commit `56809fd619c99eca7073db88a4aba6493e5d0dfd`.

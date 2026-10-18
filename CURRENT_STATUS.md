@@ -1,9 +1,11 @@
-# Current engineering checkpoint: V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)
+# Current engineering checkpoint: V82.85.20 module contract CI coverage (CI pending)
 
-- V82.85.19 acceptance run 39140087926 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39140087926.
-- Direct `validAnimeIds` contract: 11 assertions passed for module registration/fingerprint/marker, stringification, deduplication, catalog filtering, ordering, empty input and invalid input.
-- Matrix contract now verifies all referenced module test files exist.
-- No product source, module source, manifest, CSS or HTML changed. Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Parent V82.85.19 AMQ valid-anime-ID contract passed GitHub Actions run 39140087926; docs-only follow-up run is in progress.
+- The closeout matrix lists contract tests for all 13 modules, but the main workflow previously executed only a subset of those test files.
+- Added a runner that derives unique Node test paths from the matrix, verifies every module has existing unit evidence, and executes each test fail-fast. Browser evidence paths remain handled by the browser job.
+- Reorganized the unit-test workflow to avoid explicitly duplicating the module tests now run by the matrix-driven runner.
+- CI pending; local execution not run. Product source, manifest, CSS and HTML unchanged.
+- Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 
