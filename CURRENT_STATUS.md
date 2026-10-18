@@ -1,3 +1,12 @@
+# Current engineering checkpoint: V82.85.8 QUIZ ANSWER + PLAYBACK LIFECYCLE CONTRACT (ACCEPTED)
+
+- Parent V82.85.7 browser-coverage checkpoint passed CI: https://github.com/murorachi/Amq-/actions/runs/39115364605.
+- Added `tests/browser/quiz_answer_playback_lifecycle.py` and wired it into the engineering workflow. Accepted CI run: https://github.com/murorachi/Amq-/actions/runs/39116682422; source/unit and browser jobs passed.
+- Browser lifecycle assertions cover successful media-playing gate, correct answer settlement, emitted events, history recording, continued audio through reveal, teardown on exit, rejected submission before audio starts, unplayed skip, and no history/familiarity mutation for unplayed audio. Browser log: 96 PASS lines, 0 FAIL/exception lines.
+- No production source changes in V82.85.7 or V82.85.8. Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+
+---
+
 # Current engineering checkpoint: V82.85.7 QUIZ BROWSER ACCEPTANCE COVERAGE (ACCEPTED)
 
 - Parent V82.85.6 accepted: https://github.com/murorachi/Amq-/actions/runs/39115085244; documentation checkpoint also passed CI at https://github.com/murorachi/Amq-/actions/runs/39115187037.
