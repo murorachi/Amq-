@@ -4,7 +4,8 @@ from pathlib import Path
 import csv
 ROOT = Path(__file__).resolve().parents[2]
 review = ROOT / 'reports' / 'CSS_SELECTOR_RESIDUAL_REVIEW_V82_83.csv'
-with review.open(encoding='utf-8-sig', newline='') as f: rows = list(csv.DictReader(f))
+with review.open(encoding='utf-8-sig', newline='') as f:
+    rows = list(csv.DictReader(f))
 assert len(rows) == 32, f'expected 32 residual rows, got {len(rows)}'
 assert [int(r['residual_index']) for r in rows] == list(range(1, 33)), 'every source occurrence, including duplicate selectors, must retain a stable row index'
 assert all(r['css_changed'] == 'NO' for r in rows), 'review must not mutate CSS'
