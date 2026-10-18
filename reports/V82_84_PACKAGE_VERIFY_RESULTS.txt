@@ -1,0 +1,11 @@
+V82.84 PACKAGE VERIFICATION
+Package: AMQ_V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT_01.zip
+Size: 14518272
+SHA-256: 1364c968723dedad2c9c75887b78e2633c7c4b3ecc08719fa2c463ab06be1b11
+ZIP CRC: PASS
+Unique entries: 298
+Internal manifest lines: 297
+Verified entries: 297
+Missing entries: 0
+Mismatched entries: 0
+Result: PASS
