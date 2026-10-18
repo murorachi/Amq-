@@ -77,7 +77,7 @@ def make_html(path, mode):
     return html[:insert_at] + STORAGE_SHIM + media + html[insert_at:]
 
 
-def open_page(browser, html, errors):
+def open_page(browser, html, errors, target="title")
     page = browser.new_page()
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     page.route("https://**/*", lambda route: route.abort())
@@ -93,7 +93,7 @@ def open_page(browser, html, errors):
     }""")
     page.evaluate("window.__aniNavigateApp?.('quiz'); window.__aniEnterQuizV82?.()")
     page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')", timeout=5000)
-    page.locator("#quizTarget").select_option("title", timeout=10000)
+    page.locator("#quizTarget").select_option(target, timeout=10000)
     return page
 
 
@@ -192,6 +192,92 @@ def main():
               familiarity:localStorage.getItem('aniCollection_v2')
             })""")
             check(after == before, "unplayed skip does not add history or mutate familiarity storage")
+            page.close()
+
+            # Incorrect answer for a title target must settle as wrong without touching
+            # anime familiarity, while still recording the answer in history.
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            song = start_question(page, True)
+            wrong = "definitely-not-a-real-anime-song-title-v828510"
+            before_status = page.evaluate("localStorage.getItem('aniCollection_v2')")
+            page.locator("#quizAnswer").fill(wrong)
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is False,
+                  "incorrect title answer settles as wrong")
+            check(events["answered"][0].get("target") == "title" and events["answered"][0].get("familiarityUpdated") is False,
+                  "title-target settlement does not claim an anime familiarity update")
+            history = page.evaluate("window.__aniHistoryAPIv51?.getHistory?.() || []")
+            row = next((x for x in reversed(history) if str(x.get("songId")) == song["id"]), None)
+            check(bool(row) and row.get("correct") is False and row.get("target") == "title" and row.get("answer") == wrong,
+                  "incorrect title answer is recorded with the submitted text")
+            check(page.evaluate("localStorage.getItem('aniCollection_v2')") == before_status,
+                  "incorrect title-target answer leaves anime familiarity unchanged")
+            page.close()
+
+            # Explicit skip after successful playback follows the ordinary answer
+            # history/familiarity path, unlike the no-audio skip tested above.
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="anime")
+            song = start_question(page, True)
+            page.locator("#quizSkip").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(not events["submitted"] and len(events["answered"]) == 1 and events["answered"][0].get("correct") is False,
+                  "explicit skip settles without inventing a submitted answer")
+            check(events["answered"][0].get("target") == "anime" and events["answered"][0].get("familiarityUpdated") is True,
+                  "anime-target skip records a familiarity update")
+            familiarity = page.evaluate("(id) => JSON.parse(localStorage.getItem('aniCollection_v2')||'{}')[id]", song["id"])
+            check(Number(familiarity) == 1, "anime-target skip sets familiarity to heard")
+            history = page.evaluate("window.__aniHistoryAPIv51?.getHistory?.() || []")
+            row = next((x for x in reversed(history) if str(x.get("songId")) == song["id"]), None)
+            check(bool(row) and row.get("correct") is False and row.get("target") == "anime" and row.get("answer") == "",
+                  "explicit skip is recorded in quiz history")
+            page.close()
+
+            # Use the real five-second clip timer rather than calling the timer bridge
+            # directly, so the actual timer-to-submit wiring is covered.
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            page.evaluate("""() => {
+              document.getElementById('qsClip').value='5';
+              document.getElementById('qsCount').value='5';
+              document.getElementById('qsAutoNext').checked=false;
+            }""")
+            song = start_question(page, True)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=8000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["submitted"]) == 1 and events["submitted"][0].get("answer") == "" and
+                  events["submitted"][0].get("forced") is False,
+                  "clip timer submits an empty non-forced answer exactly once")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is False and
+                  events["answered"][0].get("validAudio") is True,
+                  "timer expiry settles the played question as wrong rather than unplayed")
+            history = page.evaluate("window.__aniHistoryAPIv51?.getHistory?.() || []")
+            row = next((x for x in reversed(history) if str(x.get("songId")) == song["id"]), None)
+            check(bool(row) and row.get("correct") is False and row.get("target") == "title",
+                  "timer-driven settlement records the question in history")
+            page.close()
+
+            # Auto-next must start a new question only after answer reveal and its
+            # configured delay; no-repeat keeps the next song distinct.
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            page.evaluate("""() => {
+              document.getElementById('qsClip').value='20';
+              document.getElementById('qsCount').value='5';
+              document.getElementById('qsAutoNext').checked=true;
+              const delay=document.getElementById('qsAutoNextDelay');
+              if(!delay)throw new Error('auto-next delay control missing');
+              delay.value='1';
+            }""")
+            song = start_question(page, True)
+            page.locator("#quizAnswer").fill(song["title"])
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            page.wait_for_function("""id => {
+              const s=window.__aniQuizStateV45;
+              return s?.quizSong && String(s.quizSong[1])!==id && s.quizAudioStarted===true && s.quizFinished===false;
+            }""", song["id"], timeout=10000)
+            check(True, "auto-next starts a distinct playable question after the reveal delay")
             page.close()
             check(not errors, "no uncaught browser page errors during quiz lifecycle acceptance")
         finally:
