@@ -3,7 +3,9 @@
 // Conservative AST boundary inventory for script_004. Evidence generator only; never rewrites source.
 const fs = require('node:fs');
 const path = require('node:path');
-const ts = require('/opt/nvm/versions/node/v22.16.0/lib/node_modules/typescript/lib/typescript.js');
+const { execFileSync } = require('node:child_process');
+const globalNodeModules = execFileSync('npm', ['root', '-g'], { encoding: 'utf8' }).trim();
+const ts = require(path.join(globalNodeModules, 'typescript', 'lib', 'typescript.js'));
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE = path.join(ROOT, 'src/scripts/script_004.htmlpart');
 const REPORT = path.join(ROOT, 'reports/CORE_SCRIPT_004_BOUNDARY_AUDIT.md');
