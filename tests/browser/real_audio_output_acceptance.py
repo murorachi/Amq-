@@ -177,8 +177,9 @@ def main():
                 }""")
 
                 song = page.evaluate("""() => {
-                  const pool = getQuizPool();
-                  const eligible = pool.find(s => s && s[9]) || songs.find(s => s && s[9]);
+                  const health = window.__aniAudioHealthV857;
+                  const eligible = songs.find(s => s && s[9] && String(s[4] || '').trim() &&
+                    (!health || health.eligible(s)));
                   return eligible ? Array.from(eligible) : null;
                 }""")
                 check(song is not None and len(song) > 9 and bool(song[9]),
