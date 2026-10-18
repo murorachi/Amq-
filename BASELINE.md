@@ -1,5 +1,15 @@
 # Baseline lock
 
+## Verified engineering-only checkpoint: V82.85.4 native storage and custom-list acceptance
+
+- Product remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Immutable V82.65 remains untouched. No product HTML was regenerated.
+- Native-origin Chromium acceptance passed for AMQ/EMQ list create, member assignment, rename, reload persistence, full-backup export and restore. Reload policy permits only a valid default-empty `aniSrsScheduleV1` addition; all prior values remain byte-identical.
+- Node contracts: snapshot 7/7, custom-list CRUD/mapping 10/10, backup/restore 6/6. Source/build verifier 118/118; deterministic reconstruction matches V82.82 byte-for-byte.
+- Exact EMQ membership mapping helpers are isolated in `src/modules/emq_list_membership.htmlpart`; generated output is unchanged.
+- Final workflow: [run 39110833508](https://github.com/murorachi/Amq-/actions/runs/39110833508), all jobs passed. Firefox, real audio, production-domain storage policy and multiplayer reconnect remain unverified.
+- Report: `reports/V82_85_4_NATIVE_STORAGE_CUSTOM_LISTS_MODULARIZATION_01_REPORT.md`.
+
 ## Engineering-only checkpoint: V82.85.4 native storage and custom-list acceptance
 
 - Product remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
