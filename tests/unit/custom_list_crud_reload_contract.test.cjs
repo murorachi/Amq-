@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, '../..');
 const amq = fs.readFileSync(path.join(root, 'src/scripts/script_025.htmlpart'), 'utf8');
 const emq = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
 const emqModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_membership.htmlpart'), 'utf8');
+const amqValidationModule = fs.readFileSync(path.join(root, 'src/modules/amq_custom_list_validation.htmlpart'), 'utf8');
 const passed = [];
 function test(name, fn) {
   try { fn(); passed.push(name); console.log('PASS ' + name); }
@@ -67,9 +68,9 @@ function buildAmqContext(storage = memoryStorage()) {
     'const notify=()=>{};',
     'const anime=[]; const songs=[];',
     extractStatement(amq, 'const getAnimeById='),
-    extractStatement(amq, 'const validIdArray='),
-    extractStatement(amq, 'const validListRow='),
-    extractStatement(amq, 'const validListPayload='),
+    extractStatement(amqValidationModule, 'const validIdArray='),
+    extractStatement(amqValidationModule, 'const validListRow='),
+    extractStatement(amqValidationModule, 'const validListPayload='),
     extractStatement(amq, 'const readListData='),
     'let listData=readListData(); let currentListId=""; let currentListFilter="";',
     extractStatement(amq, 'const persistLists='),
