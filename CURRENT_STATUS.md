@@ -7,7 +7,7 @@
 - Updated AMQ/EMQ UI acceptance to V82.82 and added a GitHub Actions workflow running build verification, Node/Python contracts, and browser acceptance.
 - Extracted the exact pure `unique(v)` helper from `src/scripts/script_040.htmlpart` into `src/modules/emq_list_id_normalization.js` at the same execution position. `FRAGMENT_MANIFEST.json` and the source contract are updated; the deterministic builder must prove the generated product remains byte-identical.
 - Report: `reports/V82_85_4_NATIVE_STORAGE_AND_LIST_ACCEPTANCE_01_REPORT.md`.
-- Test execution status at this checkpoint: workflow has been committed, but its result has not yet been inspected. Do not call the new end-to-end browser suite passed until GitHub Actions reports success.
+- GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39107928804 completed **SUCCESS** at commit `21a390bd925e7bb919085b2c01b22e1ea8bc1d02`. Static verification: 118/118; Node/Python contract suites passed; native-origin storage/backup: 20 assertions passed; AMQ/EMQ UI CRUD: 19 assertions passed, 0 page errors; native-origin app/suggestion smoke: 15 assertions passed.
 - Separate unverified gates remain: Firefox, real audio, production-domain browser policies, and multiplayer multi-client/reconnect.
 
 ---
