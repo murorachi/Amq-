@@ -3,7 +3,7 @@
 - Branch: v82.82-emq-invalid-scope-ui-acceptance-01
 - Parent: v82.81-modularization-boundary-and-lifecycle-01
 - Product HTML SHA-256: 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b
-- Engineering package SHA-256: 5c41e0337dc5e057c6aed5b59d6c73b1ac53ecc4bcc6c02cbd0982d614639dc4
+- Engineering package SHA-256: 65640937449b9652711e993295e34dfb05db9fe4b64235f63b280c1cc406aee7
 - Patch artifact: patches/V82_82_script_040_invalid_scope_key.patch
 
 Publication is partial. This branch is still an overlay, not a complete reproducible source tree. The GitHub connector can commit text files but cannot upload the local ZIP/binary tree directly; the complete manifest, source fragments, template, modules, all tests, and visual screenshot assets have not been synchronized as a coherent tree. The remote clean-checkout build and full SHA-256 readback have not been run.
