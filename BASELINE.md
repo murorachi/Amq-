@@ -1,5 +1,15 @@
 # Baseline lock
 
+## Engineering-only checkpoint: V82.85.4 native storage and custom-list acceptance
+
+- Product remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Immutable V82.65 remains untouched. No product HTML was regenerated.
+- Added a tracked real-localhost browser acceptance harness for native storage reload, AMQ/EMQ custom-list CRUD and mapping, and full-backup export/delete/restore. The reload contract allows only a valid default-empty `aniSrsScheduleV1` addition; all prior values must remain byte-identical.
+- Extracted the exact EMQ membership mapping helper block to `src/modules/emq_list_membership.htmlpart`, with a manifest marker and fingerprint. This is intended to preserve generated V82.82 output byte-for-byte.
+- Added Node contract tests and a branch-scoped GitHub Actions acceptance workflow. The new workflow result is pending and must be checked before calling the stage passed.
+- No high-risk answer submission, playback, multiplayer or CSS boundaries were changed.
+- Report: `reports/V82_85_4_NATIVE_STORAGE_CUSTOM_LISTS_MODULARIZATION_01_REPORT.md`.
+
 ## Latest engineering-only follow-up — V82.85.3 native storage reload assertion review
 
 - Base: `v82.85.2-native-storage-backup-acceptance-01` at `3cb626c5501822c6b4ed3d13ebe5bdab3ab74809`.
