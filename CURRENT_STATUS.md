@@ -1,43 +1,9 @@
-# Current status
+# Current engineering checkpoint: V82.84 SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT (2026-10-18)
 
-Current checkpoint: **V82.69 ARCHITECTURE-STORAGE-MULTIPLAYER-01**. Product baseline remains immutable V82.65.
-
-- HTML: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Tests: 157 assertions passed, 0 failed; 11 runner commands passed; integrity verifier 103 passed, 0 failed.
-- One opaque-origin Chromium smoke passed 19 assertions on byte-identical output; later rerun failed with EPIPE. Direct file navigation is blocked.
-- Real-origin persistence, IndexedDB, real audio/network, Firefox and multiplayer multi-client reconnect remain untested.
-- GitHub docs/reports and checksum files were read back. Candidate policy source was uploaded and exact Git blob SHA verified as `60a1d1944a2ec8ba4e52644dc4af97fc40259ae8`.
-- Storage module draft was removed because it did not match the local exact blob. The full 91-fragment source tree, test source files and binary ZIP are not published. This branch is not a reproducible source release.
-- Local ZIP SHA-256 is recorded in the checksum sidecar; the binary itself remains a local artifact.
-
-
-## AST dependency inventory pass (local checkpoint AST-PASS-01, 2026-10-18)
-- First-pass TypeScript-parser inventory scanned all 41 script/data fragments: 39 executable JavaScript fragments parsed without syntax diagnostics; script_030 (AniList JSON map) and script_037 (compressed EMQ payload) were treated as data blocks.
-- Inventory: 809 named function/function-valued definitions and 2,126 direct identifier-call edge records. This is static evidence, not a complete lexical/runtime call graph.
-- script_001 is 5,078,176 bytes. Its DB initializer is 4,975,240 bytes (anime 9,516 rows; songs 38,821 rows), followed by 102,936 bytes of executable runtime code. The whole file must not be treated as a pure data module.
-- script_004 is 107,042 bytes with 70 named function/function-valued definitions. Direct-call scan: 12 unique cross-fragment matches, 9 ambiguous-name call sites, 54 external/global/unresolved call sites.
-- Product HTML/source was not changed. Local tests: 12 commands passed, 0 failed; 157 assertions passed; integrity verifier 103 passed, 0 failed; standalone HTML remains byte-identical to immutable V82.65.
-- Browser-origin persistence, IndexedDB, real audio/network and multi-client multiplayer remain untested. This is a partial engineering update, not a full source release; the AST tool, full CSV inventories and ZIP are not yet published to this branch.
-
-
-## QUIZ-SUGGESTION-TEXT-01 (local follow-on, 2026-10-18)
-- Local source tree extracts the existing symbol normalization, Unicode source-offset mapping and highlight-range helpers from script_004 into `src/modules/quiz_suggestion_text.js`, injected at the original execution position with no new runtime script tag.
-- Contract test: 16/16 assertions passed. Full local runner: 13 commands passed, 0 failed; 173 total assertions passed; integrity verifier 105 passed, 0 failed.
-- The standalone HTML remains byte-identical to immutable V82.65 (8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`).
-- The full local checkpoint ZIP is `AMQ_V82_69_QUIZ_SUGGESTION_TEXT_01.zip`, 9,085,900 bytes, SHA-256 `c8303d8a0bc1a24cea52a2a3cc1dc7c7d35e933768dc0e3a630ddf56a7f4784c`.
-- IMPORTANT: this branch remains only partially published. The new module, updated script_004, manifest, contract test, AST tool and full binary ZIP have not been published/read back as an exact matching set. Do not treat this remote branch as the current reproducible source release.
-
-
-## Quiz suggestion UI integration — 2026-10-18
-- Chromium integration: 18 assertions passed; full runner 14/14 commands; 173 unit/contract assertions passed; integrity verifier 105/105.
-- Immutable V82.65 output unchanged: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Known issue: click selection leaves the suggestion list empty/closed while `aria-expanded=true`. The legacy capture-phase handler in `script_007` dispatches `input` and then clears the rebuilt list without resetting ARIA. Defer controller extraction until event ownership in `script_004`, `script_007`, and `script_008` is reconciled.
-- Browser test uses deterministic targetOptions fixtures and in-memory storage. Real-origin persistence, audio, Firefox, multiplayer and full answer submission remain untested. The remote branch is still not a reproducible source release.
-
-
-## V82.70 quiz suggestion ARIA fix — 2026-10-18
-- Fixed click-selection state mismatch in `script_007.htmlpart`: after dispatching the legacy `input` event and clearing the rebuilt list, set `#quizAnswer[aria-expanded]` to `false`.
-- New HTML `dist/amq_learning_tool_v82_70.html`: 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
-- Immutable V82.65 remains 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Full runner 14/14 commands passed; browser integration 19 assertions passed; unit/contracts 173 passed; integrity verifier 106/106; deterministic builds match.
-- Real-origin persistence, audio/network, Firefox, multiplayer multi-client and full answer submission remain untested. UI controller extraction deferred pending event ownership analysis.
+- Product remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable; V82.80 remains separately preserved.
+- Fresh validation after rebuilding expected dist outputs: runner commands 1-17 = 17/17; 18-26 = 9/9; command 27 Chromium CSS baseline passed separately; 28-34 = 7/7. Aggregate 34/34. `tools/verify.py`: 116/116.
+- AMQ/EMQ isolated production UI harness 19/19; backup export/import/rollback in-memory contract 4/4; responsive Chromium baseline 3 viewport sizes x home/quiz passed. Initial browser command failures before build were caused by absent dist outputs in the source package; after building and restoring V82.80 at its correct path, the entire suite passed.
+- GitHub recursive tree audit of `v82.83-css-selector-residual-review-01`: 125 entries; key source files (Manifest, source fragments, template, build/test tools and PNG baselines) are absent. The `tools/modularization_boundary_audit.py` blob mismatch is fixed: local/remote Git blob SHA-1 both `ae6690750077445dc85c22a740f4ab5497d9e737`. Full source sync and clean remote build remain OPEN.
+- Local `git ls-remote` fails DNS resolution for `github.com`; no `gh` executable or local credentials are available. The connected GitHub API tool supports text/Git-object writes but no binary/release-asset transfer from this workspace. Complete local-to-GitHub source/binary sync cannot be performed through the currently available transport. Do not claim it is complete.
+- Native-origin test was retried and blocked before app navigation by Chromium `ERR_BLOCKED_BY_ADMINISTRATOR` (global managed URL blocklist). Native Storage, real reload, browser-level backup import/export and rollback remain NOT VERIFIED. Firefox is unavailable; real audio and two-client multiplayer/reconnect are NOT RUN. No CSS moved and no lifecycle extraction performed.
+- Details: `reports/V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT.md`, `reports/V82_84_VALIDATION_RESULTS.txt`, `reports/V82_84_REAL_ORIGIN_RESULTS.txt`, `reports/V82_84_GITHUB_REQUIRED_PATH_AUDIT.csv`.
