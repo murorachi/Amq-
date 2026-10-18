@@ -71,3 +71,10 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 - Full test runner: NOT RUN in this session.
 - Integrity verifier/build: NOT RUN in this session.
 - Native-origin Storage, Firefox, real audio and multiplayer remain NOT VERIFIED / NOT RUN as previously recorded.
+
+
+## Remote readback verification — 2026-10-19
+- PASS (static remote inspection): exact branch readback confirms 35 command entries, 35 parseable label/script pairs, unique labels, and the new runner-contract check is last.
+- PASS (static remote inspection): all 34 pre-existing command script paths appear in the previously published source inventory; the newly added contract path is present as a committed file on this branch.
+- PASS (source inspection): the contract contains checks for command count 35, unique labels, script existence, non-zero failure propagation, and invalid range rejection.
+- NOT RUN: Python contract execution, full runner execution, verifier, build, browser acceptance. Remote readback/static inspection is not a substitute for running these tests.
