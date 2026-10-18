@@ -28,7 +28,7 @@ Result: 4/4 assertions passed. Existing storage repository contract remains 9/9;
 - Native localhost acceptance was attempted again against V82.82. Chromium blocks navigation before the application loads with `net::ERR_BLOCKED_BY_ADMINISTRATOR`; the managed browser policy includes a URL blocklist. No native localStorage/IndexedDB, real reload, browser download/import UI, or actual backup rollback acceptance was executed.
 - Firefox is not installed in the environment. Responsive Chromium baselines remain 390x844, 768x1024, and 1440x1200; no Firefox comparison is claimed.
 - GitHub full-source sync is still incomplete. The branch is an overlay and lacks the coherent full source tree, including the manifest/source fragments/template/build tools/tests and screenshot binaries. No clean remote checkout build or full remote SHA-256 audit was run.
-- `tools/modularization_boundary_audit.py` remote/local Git blob mismatch remains unresolved. It must not be described as fixed.
+- Resolved in V82.83: `tools/modularization_boundary_audit.py` remote and local Git blob SHA-1 now match at `ae6690750077445dc85c22a740f4ab5497d9e737`. This fixes the tool fingerprint mismatch only; the complete source tree and clean remote checkout build remain open.
 - Real audio, two-client multiplayer, and reconnect acceptance remain unexecuted. No lifecycle extraction was performed.
 
 ## Validation gates
