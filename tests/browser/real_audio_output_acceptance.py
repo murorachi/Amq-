@@ -217,8 +217,36 @@ def main():
                 page.wait_for_function("audioEl.readyState >= 2", timeout=10000)
                 check(True, "fallback WAV reaches native decoded-ready state")
 
+                # Keep native play() behavior while recording its actual outcome.
+                page.evaluate("""() => {
+                  const nativePlay = HTMLMediaElement.prototype.play;
+                  window.__nativePlayOutcomes = [];
+                  HTMLMediaElement.prototype.play = function(...args) {
+                    const result = nativePlay.apply(this, args);
+                    if (this === audioEl && result && typeof result.then === 'function') {
+                      result.then(() => window.__nativePlayOutcomes.push({ok:true}),
+                        error => window.__nativePlayOutcomes.push({ok:false,name:error?.name,message:error?.message}));
+                    }
+                    return result;
+                  };
+                }""")
                 page.locator("#playPauseBtn").click(timeout=10000)
-                page.wait_for_function("!audioEl.paused && audioEl.readyState >= 2", timeout=10000)
+                try:
+                    page.wait_for_function("!audioEl.paused && audioEl.readyState >= 2", timeout=10000)
+                except Exception:
+                    diagnostic = page.evaluate("""() => ({
+                      paused: audioEl.paused, readyState: audioEl.readyState,
+                      networkState: audioEl.networkState, currentTime: audioEl.currentTime,
+                      currentSrc: audioEl.currentSrc, error: audioEl.error ? {
+                        code: audioEl.error.code, message: audioEl.error.message
+                      } : null, events: window.__realAudioEvents,
+                      nativePlayOutcomes: window.__nativePlayOutcomes,
+                      dockStatus: document.getElementById('dockStatus')?.textContent,
+                      videoDisplay: videoEl.style.display,
+                      buttonVisible: !!document.getElementById('playPauseBtn')?.getClientRects().length
+                    })""")
+                    print("NATIVE_AUDIO_PLAY_DIAGNOSTIC", json.dumps(diagnostic, ensure_ascii=False))
+                    raise
                 page.wait_for_function("window.__realAudioEvents.playing > 0", timeout=10000)
                 check(True, "user-initiated retry reaches the native playing event")
                 page.wait_for_timeout(450)
