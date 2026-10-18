@@ -1,5 +1,16 @@
 # Next task
 
+Current checkpoint: **V82.85.6 AMQ anime-ID normalization module, pending CI**.
+
+1. Require source/unit and real-browser CI success plus byte-identical V82.82 build.
+2. Keep the new ID normalization contract alongside existing native-storage, custom-list CRUD/mapping, reload, and backup/restore tests.
+3. After acceptance, inspect the next pure AMQ list data helper. Do not combine with answer submission, playback, multiplayer lifecycle, or CSS.
+
+Rollback to `v82.85.5-amq-custom-list-validation-module-01`; product baseline remains V82.82.
+
+---
+
+
 Current checkpoint: **V82.85.5 AMQ custom-list validation module, pending CI**.
 
 1. Check V82.85.5 Actions; require deterministic V82.82 byte-identical build and focused tests to pass.
