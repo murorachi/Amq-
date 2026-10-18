@@ -1,3 +1,12 @@
+# Current engineering checkpoint: V82.85.13 EMQ selection contract (awaiting CI)
+
+- Parent accepted checkpoint: V82.85.12 at `0d1ec323bb927c03538f20672b8f17cce8b2fa6c`; product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
+- Audited EMQ persistence and selection helpers. `loadDb()` and `saveDb()` depend on storage and mutable DB/UI state; `getSelectedIds()` depends on DOM or storage plus mutable `db.lists`; `listWorkIds()`, `listSongIds()`, and `listSongCount()` depend on the live EMQ API. No existing pure helper boundary was safe to extract without changing runtime contracts.
+- Added `tests/unit/emq_selection_contract.test.cjs` with eight exact-source behavior cases for DOM/storage precedence, duplicate removal, stale IDs, malformed/non-array payloads, and storage failure. Added to engineering CI.
+- Test-only checkpoint. No production source, manifest, CSS, or product HTML changes. CI and deterministic build pending.
+
+---
+
 # Current engineering checkpoint: V82.85.12 EMQ list normalization (ACCEPTED)
 
 - Parent baseline: V82.85.11 commit `8de8ab357f985542981e974e1c113731cf5bd537`; source/test commit `ff790bc38f6662b0a0c38d8c9a9231b9aa3dc660`; CI: https://github.com/murorachi/Amq-/actions/runs/39131137249; product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.

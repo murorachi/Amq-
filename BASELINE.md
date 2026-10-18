@@ -1,5 +1,14 @@
 # Baseline lock
 
+## V82.85.13 EMQ selection contract (CI pending)
+
+- Parent accepted commit: `0d1ec323bb927c03538f20672b8f17cce8b2fa6c` on `v82.85.12-emq-list-normalization-01`.
+- Product output remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Audit found no safe pure extraction boundary in EMQ persistence/selection helpers: they use browser storage, mutable database state, DOM selection, or live EMQ API data. No production refactor was forced.
+- Added eight behavior contracts for exact production `getSelectedIds()`; CI and deterministic build pending.
+
+---
+
 ## V82.85.12 EMQ list normalization checkpoint (accepted)
 
 - Starting commit: `8de8ab357f985542981e974e1c113731cf5bd537` on `v82.85.11-amq-list-normalization-01`; new branch: `v82.85.12-emq-list-normalization-01`.
