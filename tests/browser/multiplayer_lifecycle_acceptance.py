@@ -133,7 +133,7 @@ def main():
     parser.add_argument("--chromium",default="/usr/bin/chromium")
     args=parser.parse_args()
     html_path=args.html.resolve()
-    check(html_path.is_file(),"V82.82 standalone HTML exists")
+    check(html_path.is_file(),"versioned standalone HTML candidate exists")
     errors=[]
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,executable_path=args.chromium,args=["--no-sandbox","--disable-dev-shm-usage"])
