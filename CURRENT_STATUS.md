@@ -222,3 +222,12 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Resolved direct cause of the historical 345/346 discrepancy: checksum JSON contains 346 unique entries but one is pseudo-path --help, with the same bytes/hash as V82.82 HTML; removing it yields 345 actual paths. The generator/command that emitted this bogus path remains unidentified. Historical checksum JSON retained unchanged.
 
 - Remote readback/static checks PASS: exact branch contains 35 registered command entries with unique labels; all 34 existing command script paths are present in the prior source inventory; new contract file is present. This is static inspection only. Python test, full runner, verifier/build, and browser tests remain NOT RUN in this session.
+
+
+## V82.86 source inventory producer repair — 2026-10-19
+- Confirmed the root path `--help` is a real tracked Git tree entry, not merely a JSON typo. Its Git blob SHA-1 and 8,787,490-byte size match `dist/amq_learning_tool_v82_82.html`; the duplicate root entry has been deleted from engineering branch `v82.86-auto-acceptance-inventory-01`. Product HTML and its fingerprint are unchanged.
+- Added `tools/generate_source_inventory.py`: deterministic SHA-256 records sourced only from `git ls-files -z`; the output path is excluded to avoid self-reference; paths outside the repository, missing/non-regular paths, symlinks, and option-like root paths are rejected.
+- Added `tests/unit/source_inventory_generator_contract.test.py` covering CLI `--help`, accidental `--help` path rejection, tracked-file count/bytes, output self-exclusion, deterministic regeneration, and outside-root output rejection. Registered as runner command 35; runner contract is command 36.
+- Added `reports/V82_85_1_REMOTE_SHA256SUMS_CORRECTED_DERIVED.json` with 345 entries by removing only the invalid `--help` entry from the historical 346-entry JSON. This is a derived correction, not a fresh hash scan of the current branch. Original historical JSON remains unchanged.
+- GitHub commits: root duplicate deletion `7aa971fe7a05cc96df8fb3c901ae859d9adf0ebf`; generator `a44ce37f0a443ebda979be96e2cb62d26de93168`; generator contract `57be6f66cbd3a1e223ed23827225e6ef8f4180ebf`; runner/matrix/corrected inventory updates followed.
+- Static remote readback and source inspection only. Python regression contract, full runner (36 commands), verifier, build, and browser acceptance remain NOT RUN in this session. Fresh inventory regeneration and comparison against a clean checkout remain OPEN.
