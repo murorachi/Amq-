@@ -777,8 +777,8 @@
       "path": "src/scripts/script_025.htmlpart",
       "start_byte": 5441981,
       "end_byte": 5495761,
-      "byte_length": 53780,
-      "sha256": "f05efbd01c344e13a749ebd55ee14ca3e1e9834d1c5b0c0cfe94e1e9b7f8fb5f",
+      "byte_length": 53311,
+      "sha256": "fcdb3fe6857e5c683b8eaa386ac12e60def61f1e9160c2aca7d4929a083e4c9d",
       "opening_tag": "<script id=\"v82-25-custom-lists-and-practice-hub\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1379,9 +1379,19 @@
       "insertion_fragment": "src/scripts/script_040.htmlpart",
       "purpose": "exact-source extraction of EMQ work/VNDB/song membership mapping helpers; preserves ID domains and original IIFE scope",
       "runtime_contract": "exact original helper bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
+    },
+    {
+      "name": "amq_custom_list_validation",
+      "path": "src/modules/amq_custom_list_validation.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:amq_custom_list_validation -->",
+      "byte_length": 523,
+      "sha256": "5a2a6103fae8b8cd0073442cc33600fdf418bc4b09ce6ba8f014c6d393125838",
+      "insertion_fragment": "src/scripts/script_025.htmlpart",
+      "purpose": "exact-source extraction of pure AMQ custom-list ID/row/payload validation",
+      "runtime_contract": "exact original helper bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
     }
   ],
-  "module_count": 9,
+  "module_count": 10,
   "release": {
     "version": "V82.82",
     "bytes": 8787490,
