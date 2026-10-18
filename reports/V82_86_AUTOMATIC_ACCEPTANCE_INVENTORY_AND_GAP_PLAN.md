@@ -52,3 +52,8 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 
 ## Follow-up artifact
 - Added `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` with 14 traceable acceptance gates. Exact-branch readback matched the authored CSV contents byte-for-byte.
+
+
+
+## Additional consistency risk discovered during read-only review
+- The V82.85.1 source-sync result says the remote inventory covered 345 files, while the committed `reports/V82_85_1_REMOTE_SHA256SUMS.json` diff changes `file_count` to 346 and includes the built product entry. This may be a stale summary or a counting-scope difference; it is not safe to assume which. Reconcile the exact inventory definition, actual included paths and reported count before treating the inventory as authoritative. No files were altered to hide or guess away this discrepancy.
