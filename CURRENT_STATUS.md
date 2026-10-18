@@ -202,3 +202,12 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Remote clean-checkout SHA-256 inventory: PASS (345 files).
 - Clean-checkout build and verifier: PASS; BUILD PASS: 8787490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; tools/verify.py exit 0.
 - This records source publication only; native-origin Storage acceptance and Firefox/audio/multiplayer gates remain separate.
+
+
+## V82.85.2 native Storage and full-backup acceptance harness (2026-10-18)
+
+- Stage 1 GitHub source sync is accepted at commit `14936c9247c58833ce8492702c75c1bd51589451` on `v82.84-source-sync-acceptance-gate-01`: 346 remote files checked, 0 SHA-256 mismatches; clean checkout build matches V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; `tools/verify.py` exit 0.
+- Stage 2 harness created as local artifact `V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01.py`, 14,163 bytes / SHA-256 `359275c2bb424aed739ba5967e6eb5c4b5037e1a9a5db436ca05b2c511630de2`. Runbook and report are published in this branch under `reports/V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01_RUN.txt` and `reports/V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01_REPORT.md`.
+- Static/local checks passed: Python syntax and CLI smoke; storage repository contract 9/9; backup restore contract 6/6; full backup round-trip contract 4/4; integrity verifier 116/116; deterministic product fingerprint unchanged.
+- Native-origin acceptance is BLOCKED / NOT RUN in this environment: Chromium returns `ERR_BLOCKED_BY_ADMINISTRATOR` before localhost page initialization. No claim is made for native-origin persistence, real UI import/export or browser-level rollback. The acceptance script must be run in a Windows/browser environment that permits localhost.
+- No production runtime/CSS or product HTML changed. V82.65 remains immutable; V82.82 remains the product baseline. Answer/playback and multiplayer lifecycle extraction stays blocked until native acceptance and later audio/multiplayer gates are completed.
