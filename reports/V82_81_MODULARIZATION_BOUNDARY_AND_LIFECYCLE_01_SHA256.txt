@@ -1,0 +1,21 @@
+V82.81 MODULARIZATION BOUNDARY AND LIFECYCLE CHECKPOINT
+
+Archive: AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip
+Bytes: 13921786
+SHA-256: a6c4dadf494654729cc60416401733710028c85b8428f53bea32717fd098c9af
+
+GitHub overlay branch: v82.81-modularization-boundary-and-lifecycle-01
+Full-source sync: OPEN; remote fresh-checkout build: NOT RUN
+
+a6c4dadf494654729cc60416401733710028c85b8428f53bea32717fd098c9af  AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip (13921786 bytes)
+f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe  amq_learning_tool_v82_80.html (8787422 bytes)
+f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe  dist/amq_learning_tool_v82_80.html (8787422 bytes)
+f833894b76eb457f225ae80ba35101cf1c907b2442c67db52831c507aa271c54  tests/unit/custom_list_source_contract.test.cjs (7620 bytes)
+a032fcfce68dfddcd8165570b06bd6e9565e43dfa5c78236c1b63bc7c97a03bd  tests/unit/lifecycle_boundary_contract.test.cjs (2667 bytes)
+4d7c986539cdd0139fa1efcff40f907574f002e68406cf3097f5c335a803bc80  tests/browser/css_visual_baseline.py (6209 bytes)
+3ef4dc8c4ea8c09ab248951d7b59b484828d7fb0deeafa268222a1e84df29bda  reports/visual-baselines/v82_81_home.png (144398 bytes)
+6c97e5c1d2b5e457f2d39e0bea09125f4e01b768cc4df7197f9d8e4c4e910ff7  reports/visual-baselines/v82_81_quiz.png (94349 bytes)
+b9af7862c8a1036304c70a6192b881be08166de1ce0e562e195b8b0b981a14ba  reports/visual-baselines/V82_81_VISUAL_BASELINE.json (4085 bytes)
+37f2fe20f183d51c5ddd50e07f44f8a0e80cdb42b84041d9f2c15b9702b00313  reports/CSS_SELECTOR_COMPONENT_MAP_V82_81.csv (366142 bytes)
+
+Immutable baseline V82.65 remains unchanged. Product remains V82.80.
