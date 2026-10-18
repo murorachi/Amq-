@@ -1,10 +1,11 @@
 # Next task
 
-Current checkpoint: **V82.85.6 AMQ anime-ID normalization module, pending CI**.
+Current checkpoint: **V82.85.6 AMQ anime-ID normalization module, accepted**. CI: https://github.com/murorachi/Amq-/actions/runs/39115085244
 
-1. Require source/unit and real-browser CI success plus byte-identical V82.82 build.
-2. Keep the new ID normalization contract alongside existing native-storage, custom-list CRUD/mapping, reload, and backup/restore tests.
-3. After acceptance, inspect the next pure AMQ list data helper. Do not combine with answer submission, playback, multiplayer lifecycle, or CSS.
+1. Preserve V82.85.6's ID-normalization contract alongside native-storage, custom-list CRUD/mapping, reload, and backup/restore tests.
+2. Before extracting answer submission, playback, or multiplayer lifecycle code, map the existing ownership boundaries and identify missing real-browser acceptance coverage. Do not alter these subsystems until their tests are adequate.
+3. Keep CSS as a separate future workstream; do not combine it with lifecycle extraction.
+4. Inspect `readListData` normalization carefully before any extraction: it mixes safe storage reads, schema validation, legacy payload migration, and timestamp defaults, so it is not a pure helper and needs a dedicated contract if later extracted.
 
 Rollback to `v82.85.5-amq-custom-list-validation-module-01`; product baseline remains V82.82.
 
