@@ -108,12 +108,31 @@ def main():
                     )
             actual_elements = result['pages'][name]['elements']
             expected_elements = expected['pages'][name]['elements']
-            if actual_elements != expected_elements:
-                raise AssertionError(
-                    f'{name} elements differ from baseline; inspect screenshots and update deliberately if intended; '
-                    f'actual={json.dumps(actual_elements, ensure_ascii=False, sort_keys=True)} '
-                    f'expected={json.dumps(expected_elements, ensure_ascii=False, sort_keys=True)}'
-                )
+            if set(actual_elements) != set(expected_elements):
+                raise AssertionError(f'{name} element selector set differs from baseline')
+            # Keep visibility/state exact; allow <=1.5 CSS px for Chromium subpixel/font rounding.
+            for selector, actual_element in actual_elements.items():
+                expected_element = expected_elements[selector]
+                if actual_element is None or expected_element is None:
+                    if actual_element != expected_element:
+                        raise AssertionError(
+                            f'{name} {selector} presence differs; '
+                            f'actual={actual_element!r} expected={expected_element!r}'
+                        )
+                    continue
+                for field in ['display', 'visibility']:
+                    if actual_element[field] != expected_element[field]:
+                        raise AssertionError(
+                            f'{name} {selector} {field} differs; '
+                            f'actual={actual_element[field]!r} expected={expected_element[field]!r}'
+                        )
+                for field in ['x', 'y', 'width', 'height']:
+                    delta = abs(actual_element[field] - expected_element[field])
+                    if delta > 1.5:
+                        raise AssertionError(
+                            f'{name} {selector} {field} differs by {delta:.2f}px (>1.5px); '
+                            f'actual={actual_element[field]!r} expected={expected_element[field]!r}'
+                        )
         print('PASS geometry baseline matches home and quiz')
     print('PASS production HTML initializes; home and quiz screenshots captured; no horizontal overflow; no uncaught page errors')
     for name, data in result['pages'].items(): print(f"{name}: {data['screenshot']['bytes']} bytes sha256={data['screenshot']['sha256']}")
