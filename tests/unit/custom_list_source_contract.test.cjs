@@ -7,6 +7,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const root = path.resolve(__dirname, '../..');
 const emqListSource = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
+const emqNormalizationSource = fs.readFileSync(path.join(root, 'src/modules/emq_list_id_normalization.js'), 'utf8');
 const emqApiSource = fs.readFileSync(path.join(root, 'src/scripts/script_038.htmlpart'), 'utf8');
 const backupSource = fs.readFileSync(path.join(root, 'src/scripts/script_023.htmlpart'), 'utf8');
 
@@ -65,7 +66,7 @@ const listContext = {
 vm.createContext(listContext);
 vm.runInContext([
   "const KEY='aniEmqWorkListsV8254';",
-  extractFunction(emqListSource,'unique'),
+  extractFunction(emqNormalizationSource,'unique'),
   extractFunction(emqListSource,'loadDb'),
   extractFunction(emqListSource,'api'),
   extractFunction(emqListSource,'listWorkIds'),
