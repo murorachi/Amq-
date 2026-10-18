@@ -238,9 +238,19 @@ def main():
             page.close()
 
             page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
-            page.locator("#qsAutoNextDelay").fill("1")
-            page.locator("#qsAutoNextDelay").dispatch_event("change")
-            page.locator("#quizAutoNext").check()
+            # These controls live in the collapsed quiz-settings panel in the
+            # production UI. Set them through DOM events so the contract tests the
+            # real preference handlers without depending on opening unrelated UI.
+            page.evaluate("""() => {
+              const delay = document.getElementById('qsAutoNextDelay');
+              const enabled = document.getElementById('quizAutoNext');
+              if (!delay || !enabled) throw new Error('auto-next settings controls missing');
+              delay.value = '1';
+              delay.dispatchEvent(new Event('input', {bubbles:true}));
+              delay.dispatchEvent(new Event('change', {bubbles:true}));
+              enabled.checked = true;
+              enabled.dispatchEvent(new Event('change', {bubbles:true}));
+            }""")
             song = start_question(page, True)
             page.locator("#quizAnswer").fill(song["title"])
             page.locator("#quizManualSubmitV42").click(timeout=5000)
