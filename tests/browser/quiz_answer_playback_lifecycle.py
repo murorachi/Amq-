@@ -28,6 +28,23 @@ STORAGE_SHIM = r"""<script>(() => {
 MEDIA_SHIM = r"""<script>(() => {
   const probe = {mode: __QUIZ_MEDIA_MODE__, playCalls: 0, pauseCalls: 0};
   window.__quizMediaProbe = probe;
+  // Prevent the real media loader from racing this deterministic playback stub.
+  Object.defineProperty(HTMLMediaElement.prototype, 'src', {
+    configurable:true,
+    get(){return this.__quizTestSrc || '';},
+    set(value){this.__quizTestSrc = String(value || '');}
+  });
+  const nativeSetAttribute = Element.prototype.setAttribute;
+  Element.prototype.setAttribute = function(name, value) {
+    if (this instanceof HTMLMediaElement && String(name).toLowerCase() === 'src') { this.src = value; return; }
+    return nativeSetAttribute.call(this, name, value);
+  };
+  const nativeRemoveAttribute = Element.prototype.removeAttribute;
+  Element.prototype.removeAttribute = function(name) {
+    if (this instanceof HTMLMediaElement && String(name).toLowerCase() === 'src') { this.src = ''; return; }
+    return nativeRemoveAttribute.call(this, name);
+  };
+  HTMLMediaElement.prototype.load = function() {};
   HTMLMediaElement.prototype.play = function() {
     probe.playCalls++;
     if (probe.mode === 'playing') {
