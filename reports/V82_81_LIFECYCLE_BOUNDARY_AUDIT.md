@@ -14,7 +14,7 @@ This is a dependency and acceptance-gate map, not a claim that these areas are a
 
 ## Current environment acceptance
 
-- Full deterministic runner: 27/27 commands passed.
+- Full deterministic runner: see `reports/V82_81_VALIDATION_RESULTS.txt`.
 - Native localhost acceptance was attempted against V82.80, but Chromium navigation returned `net::ERR_BLOCKED_BY_ADMINISTRATOR` before the page loaded. No production-origin storage claim is made.
-- CSS reference screenshots are local package artifacts: `reports/visual-baselines/v82_81_home.png` and `reports/visual-baselines/v82_81_quiz.png`. Geometry baseline is `reports/visual-baselines/V82_81_VISUAL_BASELINE.json`.
+- CSS reference screenshots are `reports/visual-baselines/v82_81_home.png` and `reports/visual-baselines/v82_81_quiz.png`. Geometry baseline is in `reports/visual-baselines/V82_81_VISUAL_BASELINE.json`.
 - This map is based on source inspection and existing tests; external audio/network and multi-client acceptance remain open.
