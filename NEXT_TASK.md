@@ -62,3 +62,5 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 - In a clean checkout/environment, execute the new runner contract first, then the complete runner in bounded batches after building the expected dist files. Record exact command counts, exits and output.
 - Fix the inventory producer so option tokens such as --help cannot be recorded as file paths; regenerate a separate corrected inventory artifact and compare the 345 actual paths against the exact branch. Do not rewrite the historical V82.85.1 evidence in place.
 - Native-origin Storage, Firefox, real audio and two-client multiplayer remain separate blocked/not-run acceptance gates.
+
+- Static remote review confirms the 35-command registry and required source paths. The next meaningful gate is executable validation in a clean checkout: run the new Python contract, then runner in bounded batches with dist artifacts built first, then verifier and deterministic build. Capture exact outputs rather than infer PASS from GitHub file readback.
