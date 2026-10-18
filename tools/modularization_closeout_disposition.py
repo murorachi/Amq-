@@ -18,7 +18,7 @@ AUDITED_KEEP = {
 def disposition(row):
     path, kind, classification = row["path"], row["kind"], row["classification"]
     if row["record_type"] == "module":
-        return "MODULE_CONTRACTS_IN_CI_NOT_FULLY_DECOUPLED", "reports/V82_85_20_MODULE_CONTRACT_CI_COVERAGE_01.md"
+        return "MODULE_CONTRACTS_IN_CI_NOT_FULLY_DECOUPLED", "; ".join(["reports/V82_85_20_MODULE_CONTRACT_CI_COVERAGE_01.md"] + [part.strip() for part in row["verification_evidence"].split(";") if part.strip().startswith(("tests/unit/", "tests/browser/"))])
     if path in AUDITED_KEEP:
         return "AUDITED_RETAIN_COUPLED", AUDITED_KEEP[path]
     if classification == "CSS_ORDER_LOCKED_ENVIRONMENT_GATE":
