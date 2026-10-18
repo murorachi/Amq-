@@ -1,5 +1,32 @@
 # Next task
 
+Current engineering checkpoint: **V82.85.3 NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01**. Product remains **V82.82**; immutable baseline remains V82.65.
+
+## Just completed: native storage reload assertion review
+
+- Inspected the actual SRS source `src/scripts/script_020.htmlpart`. When `aniSrsScheduleV1` is absent, `loadStore()` creates an in-memory default; the `pagehide` handler writes that default to native localStorage. This explains the one-key diff seen after reload.
+- Revised the acceptance contract narrowly: all existing keys and values must remain byte-identical; only a valid default-empty `aniSrsScheduleV1` may be newly created. Unrelated additions, deletions, changed values, malformed schedules, and non-empty schedules still fail.
+- Added `tests/unit/native_storage_reload_snapshot_contract.test.cjs`; 7/7 test cases passed in an executed Node run.
+- User manually confirmed the V82.82 standalone HTML opens and the learning feature works.
+- Report: `reports/V82_85_3_NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01_REPORT.md`.
+- Limitation: the full Playwright native-origin harness was not rerun after this assertion correction, and its local-only script is not tracked. Treat the captured native-origin run plus corrected snapshot-contract test as reviewed evidence, not a fresh end-to-end rerun.
+- Production HTML remains unchanged at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+## Next highest-value task
+
+1. Make the native-origin acceptance harness reproducible inside the repository and integrate the corrected reload snapshot contract. This removes dependence on a local-only script and prevents the same false-positive from recurring.
+2. Use that same isolated native-origin harness for AMQ/EMQ custom-list CRUD, reload persistence, invalid IDs, work/VNDB/song ID mapping, and backup round-trip.
+3. Continue modularization only along low-risk boundaries whose dependencies are already mapped. Keep answer submission/playback and multiplayer lifecycle extraction gated on their applicable real-browser acceptance.
+4. Firefox responsive/cascade comparison, real audio, and two-client multiplayer/reconnect remain separate gates. Do not mark them passed without evidence.
+
+## Rollback and limits
+
+- Engineering-only changes can be discarded by returning to base branch `v82.85.2-native-storage-backup-acceptance-01` at `3cb626c5501822c6b4ed3d13ebe5bdab3ab74809`.
+- Product fallback remains V82.82. Immutable V82.65 remains untouched.
+- The new snapshot contract test passed 7/7; full Playwright rerun after the policy change, Firefox, real audio, and multiplayer remain NOT RUN/NOT VERIFIED.
+
+---
+
 Current engineering checkpoint: **V82.84 SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT**. Product remains **V82.82**; immutable baseline remains V82.65.
 
 ## Verified in V82.84
