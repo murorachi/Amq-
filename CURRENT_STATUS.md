@@ -1,15 +1,12 @@
-# Current engineering checkpoint: V82.86.05 custom-list ID lifecycle matrix
+# Current engineering checkpoint: V82.86.06 custom-list backup/restore acceptance
 
-- Branch: `v82.86.05-custom-list-id-lifecycle-matrix-01`.
-- Parent baseline: `v82.86.04-critical-cross-fragment-ownership-01`, commit `3916761ddcb98bbc90f5e09570f78c4ff446db57`.
-- Verified test commit: `41bec9560a419693bff2a2f3edb829112588ca24` (the subsequent commit only updates engineering records).
-- Report: `reports/V82_86_05_CUSTOM_LIST_ID_LIFECYCLE_MATRIX_01.md`.
-- Test extension: `tests/unit/custom_list_crud_reload_contract.test.cjs`.
-- Scope: AMQ/EMQ ID lifecycle and failed-persistence matrix; no product source or generated HTML changes.
-- Added cases: AMQ failed write no in-memory mutation; EMQ direct song ID survives normalization/reload; EMQ failed write no in-memory mutation; EMQ corrupt JSON falls back to empty list data.
-- Unit output: custom-list CRUD/reload contract 15 passed, 0 failed. Full run `39162546062` passed both `source-and-unit` and `browser-native-origin` jobs.
-- Deterministic V82.82 build gate: 128 passed, 0 failed; 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- AMQ-TODO-010 remains In Progress: full backup/restore matrix remains open.
-- V82.65 remains immutable.
-- Next: locate the actual backup export/import path for AMQ/EMQ custom-list keys and add browser-level backup → restore → reload assertions.
-- CI: https://github.com/murorachi/Amq-/actions/runs/39162546062
+- Branch: `v82.86.06-custom-list-backup-restore-acceptance-01`.
+- Parent baseline: `v82.86.05-custom-list-id-lifecycle-matrix-01`, commit `1b9b9a6e2e95bb2414968fe6aef1e119bd6ee8dc`.
+- New report: `reports/V82_86_06_CUSTOM_LIST_BACKUP_RESTORE_ACCEPTANCE_01.md`.
+- Browser test extended: `tests/browser/native_storage_custom_lists_acceptance.py`.
+- Scope: malformed backup must not mutate storage; valid AMQ/EMQ backup restore must survive fresh document reload with IDs and EMQ work/VNDB membership preserved.
+- Product source/HTML: unchanged; no JS/CSS/fragments/manifest edits.
+- CI for latest branch commit: pending at checkpoint update; do not treat test assertions as passed until the latest run is green.
+- Product lock remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
+- Risk boundary: malformed JSON is rejected before mutation; multi-key storage quota/write failure and transaction-like rollback are not tested or claimed.
+- Next: verify the final branch CI, then separately reproduce import-time write failure and determine whether a product fix is required.
