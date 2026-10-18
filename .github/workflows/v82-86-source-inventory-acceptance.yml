@@ -1,4 +1,4 @@
-name: V82.86 Source Inventory and Acceptance
+name: V82.86 Source Inventory and Acceptance (V82.82 locked baseline)
 
 on:
   push:
