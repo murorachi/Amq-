@@ -2,6 +2,30 @@
 
 Current engineering checkpoint: **V82.85.4 native storage + custom-list acceptance + low-risk module extraction**. Product remains **V82.82**; immutable baseline remains V82.65.
 
+## Verified in V82.85.4
+- Tracked native-origin Chromium harness uses real browser localStorage on a localhost HTTP origin and the corrected reload snapshot policy.
+- AMQ/EMQ custom-list create, membership, rename, reload persistence, work/VNDB/song ID mapping and full-backup export/restore passed.
+- Stale EMQ selected-list IDs remain fail-closed; isolated custom-list UI regression passed 19 assertions with zero page errors.
+- Node contracts: reload snapshot 7/7, custom-list CRUD/mapping 10/10, backup/restore 6/6.
+- `tools/verify.py`: 118/118. Two deterministic builds are byte-identical to V82.82 (8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`).
+- Exact EMQ work/VNDB/song mapping helpers are isolated in `src/modules/emq_list_membership.htmlpart`; generated output is unchanged.
+- Final workflow: [run 39110833508](https://github.com/murorachi/Amq-/actions/runs/39110833508).
+
+## Next highest-value work
+1. Inspect the dependency map for the next low-risk, pure AMQ custom-list validation helpers and add focused tests before extracting them.
+2. Keep AMQ/EMQ CRUD persistence and backup acceptance in CI for each later extraction.
+3. Do not extract answer submission, playback, multiplayer lifecycle or CSS cascade until their specific real-browser gates pass.
+
+## Still unverified
+Firefox/cascade comparison, real audio playback, production-domain storage policy and multiplayer multi-client reconnect. The original local-only script was not accessible in this repository session; the tracked harness is a reproducible equivalent, not a verbatim copy.
+
+## Rollback
+Return to `v82.85.3-native-storage-reload-assertion-fix-01` to discard this engineering-only checkpoint. Product fallback remains V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. Immutable V82.65 remains untouched.
+
+---
+
+Current engineering checkpoint: **V82.85.4 native storage + custom-list acceptance + low-risk module extraction**. Product remains **V82.82**; immutable baseline remains V82.65.
+
 ## Work added in this checkpoint
 1. Tracked native-origin Chromium harness for the corrected reload snapshot contract, AMQ/EMQ custom-list create/member/rename/reload, and full-backup export/delete/restore.
 2. Node source-contract tests for custom-list persistence and work/VNDB/song ID mapping; the seven-case native-storage snapshot contract and backup manifest tests remain in place.
