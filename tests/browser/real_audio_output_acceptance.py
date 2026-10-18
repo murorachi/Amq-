@@ -212,26 +212,17 @@ def main():
                     "audioEl.currentSrc.includes('naedist.animemusicquiz.com')", timeout=15000)
                 check(mirror_requests["first"] >= 1 and mirror_requests["fallback"] >= 1,
                       "failed first mirror advances through the real fallback handler")
-                page.evaluate("window.__restoreNativeMediaPlay?.()")
-                # Wait for actual WAV decode before the manual gesture; currentSrc
-                # changes as soon as src is assigned, which is earlier than canplay.
+                # Keep the deterministic autoplay policy shim installed until the
+                # trusted button click. Restoring native play() before this point lets
+                # the app's own canplay/retry path consume audio without a user gesture.
+                # Wait for actual WAV decode; currentSrc changes before canplay.
                 page.wait_for_function("audioEl.readyState >= 2", timeout=10000)
                 check(True, "fallback WAV reaches native decoded-ready state")
 
-                # Keep native play() behavior while recording its actual outcome.
-                page.evaluate("""() => {
-                  const nativePlay = HTMLMediaElement.prototype.play;
-                  window.__nativePlayOutcomes = [];
-                  HTMLMediaElement.prototype.play = function(...args) {
-                    const result = nativePlay.apply(this, args);
-                    if (this === audioEl && result && typeof result.then === 'function') {
-                      result.then(() => window.__nativePlayOutcomes.push({ok:true}),
-                        error => window.__nativePlayOutcomes.push({ok:false,name:error?.name,message:error?.message}));
-                    }
-                    return result;
-                  };
-                }""")
                 page.locator("#playPauseBtn").click(timeout=10000)
+                # The click handler has now called play() with transient user activation;
+                # restore the native method for the rest of the lifecycle checks.
+                page.evaluate("window.__restoreNativeMediaPlay?.()")
                 try:
                     page.wait_for_function("!audioEl.paused && audioEl.readyState >= 2", timeout=10000)
                 except Exception:
