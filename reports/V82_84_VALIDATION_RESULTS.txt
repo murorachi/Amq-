@@ -24,4 +24,4 @@ Environment-dependent results:
 - Two-client multiplayer/reconnect: NOT RUN.
 - GitHub full-source sync and clean remote checkout build: NOT COMPLETE.
 
-Setup note: the first run started before dist outputs were built and failed the two browser commands because the source archive intentionally excludes dist/. After building the expected V82.82 HTML and restoring V82.80 at its correct path, the full command set was rerun and passed.
+Setup note: the first run started before dist outputs were built and failed the two browser commands because the source archive intentionally excludes dist/. After building the expected V82.82 HTML and restoring the preserved V82.80 HTML at its own path, the full command set was rerun and passed.
