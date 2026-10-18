@@ -57,3 +57,17 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 
 ## Additional consistency risk discovered during read-only review
 - The V82.85.1 source-sync result says the remote inventory covered 345 files, while the committed `reports/V82_85_1_REMOTE_SHA256SUMS.json` diff changes `file_count` to 346 and includes the built product entry. This may be a stale summary or a counting-scope difference; it is not safe to assume which. Reconcile the exact inventory definition, actual included paths and reported count before treating the inventory as authoritative. No files were altered to hide or guess away this discrepancy.
+
+
+## Next-step findings and changes — 2026-10-19
+- Canonical runner located: tools/run_all_checks.py. It explicitly declares 34 commands in the inspected base. Its current failure propagation records each non-zero child exit and returns exit 1 if any failed.
+- Added tests/unit/automatic_acceptance_runner_contract.test.py, a Python standard-library static contract. It audits the explicit registry, unique labels, script-path existence, range validation and non-zero failure propagation.
+- Registered the new contract as command 35 in tools/run_all_checks.py. The resulting registry should contain 35 commands, but this assertion has NOT been executed in a local checkout during this session.
+- Inventory discrepancy confirmed: reports/V82_85_1_REMOTE_SHA256SUMS.json has 346 entries and 346 unique strings, but the first path is the pseudo-path --help; its byte count/hash equals the V82.82 product HTML. Removing this non-file record leaves 345 entries, matching reports/V82_85_1_GITHUB_SOURCE_SYNC_RESULT.md. This explains the count difference. The exact upstream command or generator bug that introduced --help is still not identified.
+- The historical V82.85.1 checksum JSON is retained as evidence; it was not silently rewritten. The anomaly is recorded for future regeneration/fix of the inventory producer.
+
+## Test status after runner contract registration
+- Static runner contract: NOT RUN in this session.
+- Full test runner: NOT RUN in this session.
+- Integrity verifier/build: NOT RUN in this session.
+- Native-origin Storage, Firefox, real audio and multiplayer remain NOT VERIFIED / NOT RUN as previously recorded.
