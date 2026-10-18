@@ -46,6 +46,8 @@ jobs:
         run: python tests/unit/structural_issue_inventory_contract.py
       - name: Validate full engineering backlog
         run: python tests/unit/engineering_backlog_contract.py
+      - name: Validate critical cross-fragment dependency ownership
+        run: python tests/unit/critical_cross_fragment_dependency_contract.py
   browser-native-origin:
     runs-on: ubuntu-latest
     steps:
