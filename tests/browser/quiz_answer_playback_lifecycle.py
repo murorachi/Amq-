@@ -74,7 +74,8 @@ def open_page(browser, html, errors):
       document.addEventListener('quiz-v35-answered', e => window.__quizLifecycleEvents.answered.push(e.detail || {}));
       document.addEventListener('ani-quiz-unplayed', e => window.__quizLifecycleEvents.unplayed.push(e.detail || {}));
     }""")
-    page.evaluate("window.__aniNavigateApp?.('quiz')")
+    page.evaluate("window.__aniNavigateApp?.('quiz'); window.__aniEnterQuizV82?.()")
+    page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')", timeout=5000)
     page.locator("#quizTarget").select_option("title", timeout=10000)
     return page
 
