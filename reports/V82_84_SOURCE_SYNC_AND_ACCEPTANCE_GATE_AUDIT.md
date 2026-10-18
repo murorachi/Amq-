@@ -17,6 +17,7 @@ Date: 2026-10-18
 - Full runner commands 28-34: 7/7 passed.
 - Aggregate: 34/34 runner commands passed across four invocations (the visual command was isolated to keep the browser process bounded).
 - Integrity verifier: 116/116 passed.
+- Clean package-extraction rebuild: extracted the V82.84 ZIP into a new empty directory, rebuilt V82.82 to 8,787,490 bytes with the expected SHA-256, and ran the verifier again: 116/116 passed. This is a clean local package rebuild, not a clean remote GitHub checkout build.
 - AMQ/EMQ isolated production-HTML UI acceptance: 19/19 assertions passed.
 - Backup export/import/rollback in-memory contract: 4/4 passed.
 - Responsive Chromium baseline: 3 viewport sizes x home/quiz passed; no horizontal overflow or page errors.
