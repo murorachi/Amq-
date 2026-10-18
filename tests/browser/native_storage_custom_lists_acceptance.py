@@ -120,7 +120,7 @@ def main():
 
                 # Assert restored data survives a fresh document load, not just the current JS heap.
                 page.reload(wait_until="domcontentloaded",timeout=60000); page.wait_for_timeout(900)
-                restored_amq=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\\\"lists\\\':[]}'"))
+                restored_amq=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'[]'"))
                 restored_amq=restored_amq.get("lists",restored_amq) if isinstance(restored_amq,dict) else restored_amq
                 restored_emq=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{}'"))
                 restored_amq_row=next((x for x in restored_amq if x.get("id")==amq_row["id"]),None)
