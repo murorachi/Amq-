@@ -1,19 +1,11 @@
-# Next task
+## Current stage: V82.86.06 backup/restore acceptance
 
-Current checkpoint: **V82.86.06 backup/restore acceptance**. Branch `v82.86.06-backup-restore-acceptance-01`.
+Branch: v82.86.06-backup-restore-acceptance-01
 
-## Verified result
-- Browser acceptance run [39163991326](https://github.com/murorachi/Amq-/actions/runs/39163991326): both `source-and-unit` and `browser-native-origin` PASS.
-- Restored AMQ/EMQ IDs and memberships survive another real localhost document reload.
-- An invalid version-10 backup manifest is rejected without changing the localStorage snapshot.
-- Existing backup manifest validation and synthetic write-failure rollback tests are now explicitly executed by CI; source/unit in run [39164060206](https://github.com/murorachi/Amq-/actions/runs/39164060206) PASS.
-- No product source or generated HTML changed. V82.82 fingerprint remains locked at 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-
-## Next bounded task
-1. Continue AMQ-TODO-011: IndexedDB blocked/open/upgrade, quota/write failure, corruption, rollback and reload matrix.
-2. Keep the synthetic localStorage restore-write rollback test separate from actual IndexedDB quota/corruption; they are different failure surfaces.
-3. Keep production-origin policy, Firefox, real audio-provider playback and live multiplayer reconnect as separate gates.
-4. Verify final branch HEAD CI after the engineering-record updates in this stage.
+1. Verify final branch-head GitHub Actions, including native-origin browser acceptance and deterministic V82.82 product fingerprint.
+2. If CI passes, record run ID, job outcomes, test assertions and SHA-256; if it fails, fix the test or investigate product behavior without weakening assertions.
+3. Keep production-origin policy, Firefox, IndexedDB quota/corruption, real audio-provider playback and live multiplayer reconnect as separate external gates.
+4. Next bounded task after acceptance: inspect IndexedDB quota/corruption failure handling and define rollback assertions. Do not change product behavior without a reproduced defect.
 
 ## Rollback
-Revert the V82.86.06 browser test and engineering-record commits. Product rollback is not required.
+Revert the V82.86.06 browser-test and engineering-document commits. Product rollback is not required.
