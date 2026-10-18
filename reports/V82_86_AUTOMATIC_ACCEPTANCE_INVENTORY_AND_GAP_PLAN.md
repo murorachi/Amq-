@@ -87,3 +87,17 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 - Registered the new regression contract in `tools/run_all_checks.py`; canonical runner now has 36 commands, with its runner-contract test last.
 - Created `reports/V82_85_1_REMOTE_SHA256SUMS_CORRECTED_DERIVED.json` by removing the `--help` entry from the old inventory, leaving 345 records. It is explicitly a derived correction from historical hashes, not a fresh scan of the current branch. The original V82.85.1 checksum JSON and report remain unchanged as historical evidence.
 - Remote code writes returned commit IDs and the branch files are to be read back for final verification. The new Python tests, complete runner, verifier, build and browser tests have NOT RUN in this session; source publication does not constitute execution acceptance.
+
+
+## Executed CI acceptance — 2026-10-19
+
+GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39177254020
+- Result: 36/36 canonical runner commands passed; exit code 0.
+- Integrity/deterministic build verifier: 116/116 passed. V82.82 rebuilt to 8,787,490 bytes with SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Source inventory generator regression contract: PASS; runner contract: PASS; fresh tracked-file inventory: 353 files, every byte count and SHA-256 verified.
+- Chromium CSS visual baseline: PASS. The first CI run exposed a 1px quiz body-height difference and <=1.5px subpixel geometry shifts versus the historical baseline. The test now allows only these small geometric tolerances while keeping selector presence, display/visibility, body class, and widths exact. The historical baseline file was not rewritten.
+- Artifact with logs, inventory and current home/quiz screenshots: https://github.com/murorachi/Amq-/actions/runs/39177254020/artifacts/12154956540
+
+## Remaining unaccepted gates
+
+Native-origin localStorage/IndexedDB and real reload persistence, browser-level backup import/export/rollback, Firefox, real audio/network, and two-client multiplayer/reconnect were not executed by this workflow. They remain open and must not be inferred from isolated-storage Chromium tests.

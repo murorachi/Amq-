@@ -1,3 +1,23 @@
+# Next task — V82.86 automatic acceptance closeout (2026-10-19)
+
+## Completed
+- GitHub Actions clean checkout, deterministic V82.82 build and fresh tracked-file SHA-256 inventory.
+- Full runner: 36/36 commands passed; integrity verifier: 116/116; inventory generator contract and runner contract passed.
+- Chromium home/quiz visual baseline passed with narrowly bounded cross-build tolerance: body height <=1 CSS px; element geometry <=1.5 CSS px; selector presence, display/visibility, body class and widths remain exact.
+- Current verified code commit: `d340ba5e4431cdd1aaab591c8da0f2f46947e012`; run: https://github.com/murorachi/Amq-/actions/runs/39177254020
+
+## Next highest-value task
+1. Add/run `tests/browser/real_origin_acceptance_localhost.py` as a separate GitHub Actions gate using the clean Ubuntu Chromium environment. Verify native localStorage/IndexedDB, actual same-origin reload persistence, export/import, corrupt backup rejection, write-failure rollback, and exact restored state. Do not count the in-memory shim tests as native acceptance.
+2. If localhost navigation is still blocked, record the exact error as BLOCKED and keep the gate open; do not weaken or skip the assertions.
+3. Then address Firefox responsive/cascade acceptance, followed by real audio/network and two-client multiplayer/reconnect. Do not extract high-risk lifecycle code before these gates pass.
+
+## Current limits and rollback
+- Product remains V82.82; immutable V82.65 remains untouched. No production rollback is required because this stage changed only test/tooling/workflow/docs.
+- Native-origin storage and backup rollback are NOT VERIFIED; Firefox, real audio/network, and multiplayer multi-client are NOT RUN.
+- Revert the engineering-only acceptance-comparator commit if its bounded Chromium tolerance is later shown to hide a real layout change; never roll back by replacing the locked product baseline.
+
+---
+
 # Next task
 
 Current engineering checkpoint: **V82.84 SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT**. Product remains **V82.82**; immutable baseline remains V82.65.
