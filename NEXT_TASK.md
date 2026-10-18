@@ -12,7 +12,7 @@ Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39141098175.
 - Full browser-native-origin acceptance passes.
 
 ## Next highest-value task
-Review the existing `script_004` boundary evidence and close the remaining dependency-map gap only where it affects a concrete extraction decision. Existing reports already list shared closure state, recognized browser/API calls, direct window exports, listeners and timers. Do not repeat the inventory blindly. Determine whether one bounded pure helper remains worth extracting; if not, document why the remaining core must stay coupled.
+Refresh and enforce the existing `script_004` dependency-boundary audit in CI, then decide from evidence whether any meaningful safe helper remains to extract. Existing reports already list shared closure state, recognized browser/API calls, direct window exports, listeners and timers; do not repeat that inventory blindly.
 
 ## External acceptance limits still open
 Firefox/CSS cascade comparison, real audio-provider playback, live server plus two independent multiplayer clients/reconnect failures, and production-domain storage policy/full IndexedDB Blob failure cases.

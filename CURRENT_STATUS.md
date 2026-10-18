@@ -1,10 +1,10 @@
 # Current engineering checkpoint: V82.85.20 module contract CI coverage (ACCEPTED)
 
-- GitHub Actions run 39141098175 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39141098175.
-- Matrix-driven runner found 13 module rows, executed 16 unique Node module contract tests, and passed all 16. The quiz suggestion browser integration evidence also passed in the browser job.
-- The broader suite exposed and fixed two stale extraction contracts: the anime/song database test now restores the extracted near-number helper before byte comparison; the EMQ handoff test now reads list helpers from their extracted modules.
-- Three TypeScript consumers now use a portable loader, and CI installs pinned TypeScript 5.8.3 instead of relying on an obsolete absolute Node path.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product source, module source, manifest, CSS or HTML changed.
+- GitHub Actions run 39141098175 passed source-and-unit and browser-native-origin; docs-only follow-up 39141296313 also passed.
+- Matrix-driven runner executed all 16 unique Node module contract tests referenced by the 13 module rows; all 16 passed. The browser integration evidence also passed.
+- Broader CI exposed and fixed stale test assumptions around the later `near_number_v1` and `emq_list_membership` extractions.
+- Three TypeScript consumers now use a portable loader; CI installs pinned TypeScript 5.8.3 instead of relying on an obsolete absolute Node path.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product source, manifest, CSS or HTML changed.
 
 ---
 
