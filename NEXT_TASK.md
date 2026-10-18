@@ -3,6 +3,7 @@
 Current checkpoint: **V82.86.05 custom-list ID lifecycle matrix**. Branch `v82.86.05-custom-list-id-lifecycle-matrix-01`.
 
 ## Scope completed and verified
+- Final verified test commit: `41bec9560a419693bff2a2f3edb829112588ca24`; following commit only reconciles the report and status records.
 - Extended exact-source CRUD/reload tests with AMQ and EMQ failed-write assertions.
 - Added EMQ direct song ID normalization/reload coverage.
 - Added EMQ corrupt JSON fallback assertion.

@@ -2,7 +2,7 @@
 
 - Branch: `v82.86.05-custom-list-id-lifecycle-matrix-01`.
 - Parent baseline: `v82.86.04-critical-cross-fragment-ownership-01`, commit `3916761ddcb98bbc90f5e09570f78c4ff446db57`.
-- Latest commit: `41bec9560a419693bff2a2f3edb829112588ca24`.
+- Verified test commit: `41bec9560a419693bff2a2f3edb829112588ca24` (the subsequent commit only updates engineering records).
 - Report: `reports/V82_86_05_CUSTOM_LIST_ID_LIFECYCLE_MATRIX_01.md`.
 - Test extension: `tests/unit/custom_list_crud_reload_contract.test.cjs`.
 - Scope: AMQ/EMQ ID lifecycle and failed-persistence matrix; no product source or generated HTML changes.

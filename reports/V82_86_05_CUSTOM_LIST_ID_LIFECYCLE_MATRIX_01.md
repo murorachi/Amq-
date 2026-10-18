@@ -25,7 +25,7 @@
 | EMQ-ID-05 | 儲存失敗 | 新增清單回傳空 ID，記憶體及原儲存值不變 | 新增測試 |
 | EMQ-ID-06 | 損毀 JSON | loadDb 回傳空清單，不產生虛構 ID | 新增測試 |
 | EMQ-ID-07 | UI 刪除／選取範圍清理 | 保留刪除控制、已刪除選取清理與 invalid-scope 清理接線 | 既有來源契約 |
-| STORE-ID-01 | 真實瀏覽器 reload／原生儲存 | 由既有 real-origin acceptance 覆蓋部分路徑 | 既有 CI 案例；本階段尚未重跑確認 |
+| STORE-ID-01 | 真實瀏覽器 reload／原生儲存 | 由既有 real-origin acceptance 覆蓋部分路徑 | 本階段 CI run 39162546062 通過 |
 | BACKUP-ID-01 | 自訂清單備份／還原往返 | 尚無本階段專屬的完整 AMQ／EMQ backup→restore→reload 端到端矩陣 | 未完成，保留外部驗收門檻 |
 | SCOPE-ID-01 | 無效 scope fail-closed | 既有獨立瀏覽器測試涵蓋部分行為 | 既有 CI 案例；本階段尚未重跑確認 |
 
