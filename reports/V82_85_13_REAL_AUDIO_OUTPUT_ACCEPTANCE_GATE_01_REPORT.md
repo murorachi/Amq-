@@ -9,9 +9,10 @@ Add a separate acceptance gate for browser audio behavior. Existing quiz lifecyc
 - Build and load the standalone V82.85.12 candidate in Chromium.
 - Use the native `HTMLMediaElement` implementation and a deterministic PCM16 WAV payload returned only for the second AMQ mirror host. The first mirror host is deliberately aborted so the production fallback handler is exercised.
 - Start PulseAudio's null sink and capture its monitor stream as raw stereo PCM. This measures browser audio output instead of treating a `playing` event as proof of sound.
-- Run the browser with Chromium's user-activation autoplay policy.
+- Exercise the app's `NotAllowedError` handling with a deterministic policy shim until a real user gesture, then restore native `play()` for actual decoding/output. Headless Chromium does not enforce autoplay flags consistently across runner images, so the test does not mislabel a runner-specific policy result as a product failure.
 - Check autoplay rejection/manual retry, first-mirror failure and fallback progression, actual playback-time advancement, pause/resume, the quiz playback gate, answer-reveal continuity, native `ended`, and playback cleanup after leaving the quiz.
 - Report peak and RMS from captured output; silent capture is a hard failure.
+- The rejection path is deterministic policy simulation, not proof that the runner's native autoplay policy itself rejects every attempt. The manual retry and subsequent playback use native media APIs.
 
 ## Scope and limits
 
