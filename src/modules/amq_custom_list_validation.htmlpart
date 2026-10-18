@@ -1,0 +1,3 @@
+ const validIdArray=v=>Array.isArray(v)&&v.every(x=>(typeof x==='string'&&x.trim()!=='')||(typeof x==='number'&&Number.isFinite(x)));
+ const validListRow=v=>!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.animeIds)&&validIdArray(v.animeIds)&&(v.id==null||typeof v.id==='string'||typeof v.id==='number')&&(v.name==null||typeof v.name==='string');
+ const validListPayload=v=>Array.isArray(v)?v.every(validListRow):!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.lists)&&v.lists.every(validListRow);
