@@ -91,8 +91,14 @@ def main():
         expected = json.loads(baseline.read_text(encoding='utf-8'))
         for name in ['home','quiz']:
             for key in ['body','elements']:
-                if result['pages'][name][key] != expected['pages'][name][key]:
-                    raise AssertionError(f'{name} {key} differs from baseline; inspect screenshots and update deliberately if intended')
+                actual_value = result['pages'][name][key]
+                expected_value = expected['pages'][name][key]
+                if actual_value != expected_value:
+                    raise AssertionError(
+                        f'{name} {key} differs from baseline; inspect screenshots and update deliberately if intended; '
+                        f'actual={json.dumps(actual_value, ensure_ascii=False, sort_keys=True)} '
+                        f'expected={json.dumps(expected_value, ensure_ascii=False, sort_keys=True)}'
+                    )
         print('PASS geometry baseline matches home and quiz')
     print('PASS production HTML initializes; home and quiz screenshots captured; no horizontal overflow; no uncaught page errors')
     for name, data in result['pages'].items(): print(f"{name}: {data['screenshot']['bytes']} bytes sha256={data['screenshot']['sha256']}")
