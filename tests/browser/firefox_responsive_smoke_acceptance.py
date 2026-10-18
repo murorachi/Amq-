@@ -66,7 +66,7 @@ def main():
     parser.add_argument("--html", type=Path, default=ROOT / "dist" / "amq_learning_tool_v82_82.html")
     args = parser.parse_args()
     html_path = args.html.resolve()
-    check(html_path.is_file(), "V82.82 standalone HTML exists")
+    check(html_path.is_file(), "standalone HTML candidate exists")
     html = html_path.read_text(encoding="utf-8")
     marker = html.lower().find("<head>")
     check(marker >= 0, "standalone HTML has a head element for isolated test shim")
