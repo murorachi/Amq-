@@ -1,3 +1,13 @@
+## V82.85.15 pure-helper boundary audit (audit only)
+
+- Parent accepted checkpoint: V82.85.14, commit `e9b249364a79d7da896ff731899c879d29ddfebd`.
+- Added report `reports/V82_85_15_PURE_HELPER_BOUNDARY_AUDIT_01.md`; reviewed navigation/watchlist, ANN cover/dashboard and EMQ custom-list source boundaries.
+- No production extraction was justified: remaining candidates depend on storage, DOM, mutable state, external API/cache or async lifecycle; dashboard formatting wrappers are too trivial to warrant a new module.
+- Tests/build/browser checks not run. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
+- Audit report write commit: `72cb4c29ec335b01c028ab4bbae6d13aba91d872`; remote readback/CI pending.
+
+---
+
 ## V82.85.14 nearNumberV1 pure-helper extraction (CI pending)
 
 - Parent accepted checkpoint: V82.85.13 commit `73fa181d4f433ee8a54f170f1f1b1d7a475d93b5`.
