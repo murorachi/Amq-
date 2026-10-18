@@ -132,8 +132,10 @@ def main():
 
             # Valid JSON with an invalid envelope must not alter any saved state.
             before_corrupt=snapshot(page)
-            corrupt_payload={"status":[],"storage":{"aniCustomPracticeListsV1":"CORRUPT_SENTINEL",
-                             "aniEmqWorkListsV8254":"CORRUPT_SENTINEL"},"storageManifest":{"schemaVersion":-1}}
+            corrupt_payload={"format":"ani-collection-workspace","version":10,
+                             "storage":{"aniCustomPracticeListsV1":"CORRUPT_SENTINEL",
+                             "aniEmqWorkListsV8254":"CORRUPT_SENTINEL"},
+                             "storageManifest":{"schemaVersion":1,"keyCount":2,"keys":["aniEmqWorkListsV8254"]}}
             with tempfile.TemporaryDirectory() as td:
                 corrupt_path=Path(td)/"invalid-workspace-backup.json"
                 corrupt_path.write_text(json.dumps(corrupt_payload),encoding="utf-8")
