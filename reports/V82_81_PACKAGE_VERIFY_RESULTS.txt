@@ -1,0 +1,11 @@
+V82.81 PACKAGE VERIFICATION
+archive=AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip
+bytes=13921786
+sha256=a6c4dadf494654729cc60416401733710028c85b8428f53bea32717fd098c9af
+sidecar_match=PASS
+zip_crc=PASS
+entries=270
+unique_entries=270
+internal_checksum_manifest=269/269 PASS
+missing_files=0
+sha256_mismatches=0
