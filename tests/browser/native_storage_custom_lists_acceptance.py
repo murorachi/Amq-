@@ -102,6 +102,13 @@ def main():
                 backup_path=Path(td)/"backup.json"; dl.value.save_as(str(backup_path))
                 backup=json.loads(backup_path.read_text(encoding="utf-8")); storage=backup.get("storage",{})
                 check("aniCustomPracticeListsV1" in storage and "aniEmqWorkListsV8254" in storage and isinstance(backup.get("storageManifest"),dict),"full backup contains both custom lists and a storage manifest")
+                # Malformed JSON must be rejected before any localStorage mutation.
+                before_corrupt=snapshot(page)
+                corrupt_path=Path(td)/"corrupt-backup.json"
+                corrupt_path.write_text('{"format": "ani-collection-workspace", broken',encoding="utf-8")
+                page.locator("#importFile").set_input_files(str(corrupt_path)); page.wait_for_timeout(350)
+                check(snapshot(page)==before_corrupt,"corrupt backup is rejected before mutating existing storage")
+
                 page.locator(f'[data-emq-list-delete="{erow["id"]}"]').click(); page.wait_for_timeout(120)
                 page.locator("#customModeTab").click(); page.locator(f'[data-cl-delete="{amq_row["id"]}"]').click(); page.wait_for_timeout(120)
                 page.locator("#importFile").set_input_files(str(backup_path)); page.wait_for_timeout(1000)
@@ -110,6 +117,17 @@ def main():
                 re=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\"lists\":[]}'"))
                 check(any(x.get("id")==amq_row["id"] and x.get("name")=="Native AMQ renamed" for x in ra),"backup restore recovers AMQ list")
                 check(any(x.get("id")==erow["id"] and x.get("name")=="Native EMQ renamed" for x in re.get("lists",[])),"backup restore recovers EMQ list and ID mapping")
+
+                # Assert restored data survives a fresh document load, not just the current JS heap.
+                page.reload(wait_until="domcontentloaded",timeout=60000); page.wait_for_timeout(900)
+                restored_amq=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\\\"lists\\\':[]}'"))
+                restored_amq=restored_amq.get("lists",restored_amq) if isinstance(restored_amq,dict) else restored_amq
+                restored_emq=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{}'"))
+                restored_amq_row=next((x for x in restored_amq if x.get("id")==amq_row["id"]),None)
+                restored_emq_row=next((x for x in restored_emq.get("lists",[]) if x.get("id")==erow["id"]),None)
+                check(bool(restored_amq_row) and restored_amq_row.get("name")=="Native AMQ renamed","AMQ backup identity survives restore and fresh reload")
+                check(bool(restored_emq_row) and restored_emq_row.get("name")=="Native EMQ renamed","EMQ backup identity survives restore and fresh reload")
+                check(str(wid) in restored_emq_row.get("workIds",[]) and str(vnid) in restored_emq_row.get("vndbIds",[]),"EMQ work/VNDB memberships survive restore and fresh reload")
             check(not errors,"no uncaught browser errors during native storage acceptance")
             ctx.close(); browser.close()
     finally:
