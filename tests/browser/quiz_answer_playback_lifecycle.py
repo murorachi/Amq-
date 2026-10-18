@@ -140,12 +140,10 @@ def main():
             page.evaluate("window.__quizMediaProbe.pauseCalls = 0")
             page.locator("#quizAnswer").fill(song["title"])
             button_state = page.evaluate("""() => { const e=document.getElementById("quizManualSubmitV42"),r=e?.getBoundingClientRect(),s=e?getComputedStyle(e):null; return {exists:!!e,disabled:!!e?.disabled,hidden:!!e?.hidden,display:s?.display,visibility:s?.visibility,rect:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,viewClass:document.getElementById("quizView")?.className,bodyClass:document.body.className,parentClass:e?.parentElement?.className}; }""")
-            print("DIAGNOSTIC quiz submit " + json.dumps(button_state), flush=True)
             check(button_state["exists"] and not button_state["disabled"], "quiz submit control is enabled after successful playback")
             page.locator("#quizManualSubmitV42").click(timeout=5000)
             page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
             events = page.evaluate("window.__quizLifecycleEvents")
-            print("DIAGNOSTIC events " + json.dumps({"song":song,"events":events}), flush=True)
             check(len(events["submitted"]) == 1 and events["submitted"][0].get("answer") == song["title"],
                   "submit event preserves the exact submitted answer exactly once")
             check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is True,
@@ -276,7 +274,7 @@ def main():
             page.wait_for_function("""id => {
               const s=window.__aniQuizStateV45;
               return s?.quizSong && String(s.quizSong[1])!==id && s.quizAudioStarted===true && s.quizFinished===false;
-            }""", song["id"], timeout=10000)
+            }""", arg=song["id"], timeout=10000)
             check(True, "auto-next starts a distinct playable question after the reveal delay")
             page.close()
             check(not errors, "no uncaught browser page errors during quiz lifecycle acceptance")
