@@ -1,3 +1,12 @@
+# Current engineering checkpoint: V82.85.5 AMQ CUSTOM-LIST VALIDATION MODULE (pending CI)
+
+- Parent: `v82.85.4-native-storage-custom-lists-modularization-01`.
+- Extracted `validIdArray`, `validListRow`, and `validListPayload` byte-for-byte into `src/modules/amq_custom_list_validation.htmlpart` at their original IIFE position.
+- Added 12 focused validation cases and wired them into the V82.85.5 workflow. CI and deterministic build are pending; do not call accepted until workflow passes.
+- Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+
+---
+
 # Current engineering checkpoint: V82.85.4 NATIVE STORAGE + CUSTOM LISTS + LOW-RISK MODULE EXTRACTION
 
 - Branch: `v82.85.4-native-storage-custom-lists-modularization-01`; parent engineering checkpoint: `v82.85.3-native-storage-reload-assertion-fix-01`.
