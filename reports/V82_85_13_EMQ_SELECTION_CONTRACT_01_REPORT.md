@@ -27,7 +27,7 @@ Audit EMQ persistence and selection boundaries; characterize the existing select
 - Deterministic V82.82 reconstruction matched exactly: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 ## Risks and limitations
-These tests characterize selection logic; they do not replace real browser persistence checks in the existing browser suite. The acceptance workflow passed; the branch head is being verified after the checkpoint-document update.
+These tests characterize selection logic; they do not replace real browser persistence checks in the existing browser suite. The source/test commit passed run 39133558958. The final documentation commit and branch HEAD were verified by successful run 39133805195.
 
 ## Rollback
 Return to v82.85.12-emq-list-normalization-01 at 0d1ec323bb927c03538f20672b8f17cce8b2fa6c.
