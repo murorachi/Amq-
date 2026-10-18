@@ -44,14 +44,14 @@ def capture(page, name, output_dir):
             raise AssertionError('quiz view is not laid out')
         if not data['elements']['#quizAnswer'] or data['elements']['#quizAnswer']['width'] <= 0:
             raise AssertionError('quiz answer input is not laid out')
-    shot = output_dir / f'v82_81_{name}.png'
+    shot = output_dir / f'v82_82_{name}.png'
     page.screenshot(path=str(shot), full_page=False, animations='disabled')
     data['screenshot'] = {'path': str(shot.relative_to(ROOT)), 'bytes': shot.stat().st_size, 'sha256': hashlib.sha256(shot.read_bytes()).hexdigest()}
     return data
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--html', type=Path, default=ROOT/'dist'/'amq_learning_tool_v82_80.html')
+    parser.add_argument('--html', type=Path, default=ROOT/'dist'/'amq_learning_tool_v82_82.html')
     parser.add_argument('--chromium', default='/usr/bin/chromium')
     parser.add_argument('--update-baseline', action='store_true')
     args = parser.parse_args()
@@ -81,7 +81,7 @@ def main():
         quiz = capture(page, 'quiz', out)
         context.close(); browser.close()
     if errors: raise AssertionError('uncaught page errors: ' + ' | '.join(errors[:5]))
-    result = {'schemaVersion':1,'product':'V82.80','browser':'Chromium headless','viewport':{'width':1440,'height':1200,'deviceScaleFactor':1,'colorScheme':'dark','reducedMotion':'reduce'},'storage':'isolated in-memory shim; no user data','network':'external HTTP/HTTPS blocked','pages':{'home':home,'quiz':quiz},'pageErrors':errors}
+    result = {'schemaVersion':1,'product':'V82.82','browser':'Chromium headless','viewport':{'width':1440,'height':1200,'deviceScaleFactor':1,'colorScheme':'dark','reducedMotion':'reduce'},'storage':'isolated in-memory shim; no user data','network':'external HTTP/HTTPS blocked','pages':{'home':home,'quiz':quiz},'pageErrors':errors}
     baseline = out/'V82_81_VISUAL_BASELINE.json'
     if args.update_baseline:
         baseline.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
