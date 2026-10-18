@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Localhost-origin acceptance for V82.72 browser storage and suggestion flow.
+"""Localhost-origin acceptance for V82.82 browser storage and suggestion flow.
 
 Uses a fresh isolated Chromium context and a temporary localhost origin. The app's
 own localStorage and IndexedDB are not shimmed. External requests are blocked, and
@@ -26,19 +26,19 @@ class QuietHandler(SimpleHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--html", type=Path, default=Path(__file__).resolve().parents[2] / "dist" / "amq_learning_tool_v82_72.html")
+    parser.add_argument("--html", type=Path, default=Path(__file__).resolve().parents[2] / "dist" / "amq_learning_tool_v82_82.html")
     parser.add_argument("--chromium", default="/usr/bin/chromium")
     args = parser.parse_args()
     html_path = args.html.resolve()
-    check(html_path.is_file(), "V82.72 standalone HTML exists")
+    check(html_path.is_file(), "V82.82 standalone HTML exists")
 
     handler = lambda *a, **kw: QuietHandler(*a, directory=str(html_path.parent), **kw)
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     origin = f"http://127.0.0.1:{server.server_port}"
-    db_name = "amq_v8272_acceptance_isolated"
-    storage_key = "__amq_v8272_acceptance_isolated__"
+    db_name = "amq_v8282_acceptance_isolated"
+    storage_key = "__amq_v8282_acceptance_isolated__"
     storage_value = "roundtrip-verified"
 
     try:
