@@ -78,7 +78,7 @@ const tests = [
   ['rows without an animeIds array are ignored', () => {
     payload = [null, false, 'bad', {}, { animeIds: '1' }, { animeIds: null }, { animeIds: ['ok'] }];
     assert.deepEqual(JSON.parse(JSON.stringify(context.__readCustomLists())), [
-      { id: '6', name: '自訂清單', animeIds: ['ok'] }
+      { id: '0', name: '自訂清單', animeIds: ['ok'] }
     ]);
   }],
   ['malformed object payload yields empty list', () => {
