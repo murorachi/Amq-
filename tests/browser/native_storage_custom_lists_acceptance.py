@@ -143,9 +143,9 @@ def main():
                 page.wait_for_timeout(1200)
                 restored=snapshot(page)
                 check("aniCustomPracticeListsV1" in restored and "aniEmqWorkListsV8254" in restored,"valid full backup restores both AMQ and EMQ stores")
-                ra=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\\"lists\\":[]}'"))
+                ra=json.loads(page.evaluate("() => JSON.stringify(JSON.parse(localStorage.getItem('aniCustomPracticeListsV1') || JSON.stringify({lists:[]})))"))
                 ra=ra.get("lists",ra) if isinstance(ra,dict) else ra
-                re=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\\"lists\\":[]}'"))
+                re=json.loads(page.evaluate("() => JSON.stringify(JSON.parse(localStorage.getItem('aniEmqWorkListsV8254') || JSON.stringify({lists:[]})))"))
                 check(any(x.get("id")==amq_row["id"] and x.get("name")=="Native AMQ renamed" for x in ra),"backup restore recovers AMQ list identity and name")
                 check(any(x.get("id")==erow["id"] and x.get("name")=="Native EMQ renamed" for x in re.get("lists",[])),"backup restore recovers EMQ list identity and name")
                 page.reload(wait_until="domcontentloaded",timeout=60000)
