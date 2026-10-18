@@ -1,10 +1,19 @@
-# Current engineering checkpoint: V82.85.22 closeout disposition matrix (CI pending)
+# Current engineering checkpoint: V82.86.01 structural issue inventory (audit-only)
+
+- Engineering baseline: parent branch `v82.85.22-closeout-disposition-matrix-01`, commit `b42ddee31db8becae02b9822dd44bdcb0c4f9cee`.
+- Parent acceptance: GitHub Actions run 39141992306 passed both `source-and-unit` and `browser-native-origin`.
+- Added an evidence-led 20-item initial structural issue register in `reports/V82_86_01_STRUCTURAL_ISSUE_INVENTORY_01.md` and `reports/STRUCTURAL_ISSUE_INVENTORY.csv`.
+- The register distinguishes documented structural risks, audit-required items, external acceptance gates, and maintainability candidates. It does not claim unproven items are confirmed defects or claim a complete line-by-line source audit.
+- Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- No production source, module, manifest, CSS or product HTML changed in this checkpoint.
+
+---
 
 - Parent V82.85.20 acceptance run 39141098175 passed both source-and-unit and browser-native-origin; V82.85.21 is an audit-only decision with no production changes.
 - Added a deterministic, evidence-linked disposition for all 104 rows in the existing closeout matrix: 91 fragments and 13 modules.
 - Explicitly separates accepted keep-coupled decisions, semantic audit still pending, external CSS/IndexedDB/multiplayer gates, data payload preservation, partial extraction review, and modules whose contracts run in CI but are not fully decoupled.
 - Added a contract that compares the disposition inventory against the source manifest, enforces expected counts, checks audit/test evidence paths, and regenerates the CSV to prove reproducibility.
-- CI pending. No production source, module source, manifest, CSS or product HTML changed.
+- Acceptance confirmed: GitHub Actions run 39141992306 completed successfully; both source-and-unit and browser-native-origin passed. No production source, module source, manifest, CSS or product HTML changed.
 - Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
