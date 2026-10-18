@@ -1,23 +1,22 @@
 # Next task
 
-Current checkpoint: **V82.86.05 custom-list ID lifecycle matrix**. Branch `v82.86.05-custom-list-id-lifecycle-matrix-01`.
+Current checkpoint: **V82.86.06 backup/restore acceptance**. Branch `v82.86.06-backup-restore-acceptance-01`.
 
-## Scope completed and verified
-- Final verified test commit: `41bec9560a419693bff2a2f3edb829112588ca24`; following commit only reconciles the report and status records.
-- Extended exact-source CRUD/reload tests with AMQ and EMQ failed-write assertions.
-- Added EMQ direct song ID normalization/reload coverage.
-- Added EMQ corrupt JSON fallback assertion.
-- Wrote an explicit matrix identifying existing versus new tests and uncovered backup/restore paths.
-- No product source or generated HTML changed.
-- CI run [39162546062](https://github.com/murorachi/Amq-/actions/runs/39162546062) passed both jobs.
-- New/expanded custom-list CRUD/reload tests: 15 passed, 0 failed.
-- Deterministic V82.82 output remains 8,787,490 bytes with SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+## This stage
+- Extend `tests/browser/native_storage_custom_lists_acceptance.py`.
+- Verify AMQ and EMQ custom-list backup restore followed by a real localhost document reload.
+- Assert AMQ member IDs and EMQ work/VNDB memberships remain intact.
+- Feed a JSON-valid but invalid backup envelope and assert the complete localStorage snapshot is unchanged.
+- Keep product source and generated HTML unchanged.
+- Final acceptance requires both `source-and-unit` and `browser-native-origin` jobs to pass on the final branch HEAD.
 
-## Next bounded task
-1. Locate the actual backup export/import path for AMQ and EMQ custom-list keys.
-2. Add browser-level backup → restore → reload assertions on real origin.
-3. Cover corrupt backup rejection before mutation and rollback behavior.
-4. Keep IndexedDB quota/corruption and real audio-provider tests as separate external gates.
+## After this stage is verified
+1. Record the final GitHub Actions run and check both jobs.
+2. Continue with the bounded IndexedDB quota/corruption and rollback matrix (AMQ-TODO-011).
+3. Keep production-origin policy, Firefox, real audio-provider playback and live multiplayer reconnect as separate gates.
+
+## Product baseline
+V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
 
 ## Rollback
-Revert the test/report/status changes in V82.86.05. Product rollback is not required.
+Revert the V82.86.06 browser test and engineering-record commits. Product rollback is not required.
