@@ -170,10 +170,12 @@ def main():
                 page.evaluate("""(key) => {
                   const original = Storage.prototype.setItem;
                   let fired = false;
-                  Storage.prototype.setItem = function(k,v) {
+                  const wrapped = function(k,v) {
                     if (!fired && String(k) === key) { fired=true; throw new Error('synthetic one-shot storage write failure'); }
                     return original.call(this,k,v);
                   };
+                  wrapped.__original = original;
+                  Storage.prototype.setItem = wrapped;
                   window.__restoreFailureProbe = () => fired;
                 }""", EMQ_KEY)
                 before_failed_restore = page.evaluate("() => Object.fromEntries(Array.from({length:localStorage.length},(_,i)=>{const k=localStorage.key(i);return [k,localStorage.getItem(k)]}))")
@@ -182,15 +184,7 @@ def main():
                 after_failed_restore = page.evaluate("() => Object.fromEntries(Array.from({length:localStorage.length},(_,i)=>{const k=localStorage.key(i);return [k,localStorage.getItem(k)]}))")
                 check(page.evaluate("window.__restoreFailureProbe()"), "one-shot native storage write failure was injected")
                 check(after_failed_restore == before_failed_restore, "failed full restore rolls all origin localStorage keys/values back exactly")
-                page.evaluate("Storage.prototype.setItem = Storage.prototype.setItem.__original || Storage.prototype.setItem")
-                # Replace the test override cleanly using a saved native method from a new realm is not possible;
-                # restore from the wrapper's captured original.
-                page.evaluate("""() => {
-                  const current = Storage.prototype.setItem;
-                  if (current && current.toString().includes('fired')) {
-                    // The wrapped function has a closure; the original was captured above on the function object.
-                  }
-                }""")
+                page.evaluate("Storage.prototype.setItem = Storage.prototype.setItem.__original")
 
                 # Test a successful real full restore after changing one allowlisted marker.
                 page.evaluate("""(key) => localStorage.setItem(key, JSON.stringify({version:1,lists:[]}))""", AMQ_KEY)
