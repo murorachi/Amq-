@@ -1,12 +1,11 @@
-# Current engineering checkpoint: V82.85.16 source inventory completeness gate (CI pending)
+# Current engineering checkpoint: V82.85.17 checkpoint package audit (CI pending)
 
-- Parent checkpoint: V82.85.15 audit-only checkpoint, commit `0c5596603bbeafd90e104e928faa263a0bae5be6`.
-- Added reverse inventory checks to `tools/verify.py`: all style/script fragments on disk must be listed in the fragment manifest; all files directly under `src/modules/` must be listed in the module manifest.
-- Reason: previously the verifier checked listed entries but could miss an extra source file silently omitted from the build.
-- Change commit: `97a13a75b4e935a44d5b32b379c077336d16a751`; report: `reports/V82_85_16_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md`.
-- GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39137967441. Status pending at documentation update.
-- No product code, manifest, HTML, CSS or runtime behavior changed. Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
-- Local tests not run. Static review only until CI completes.
+- Parent checkpoint: V82.85.16 source inventory completeness gate, latest parent commit `e2c0fddd9d144cafbb5cb4691b00bc6c1e6ea149`.
+- V82.85.16 GitHub Actions run 39137967441 completed successfully: both `source-and-unit` and `browser-native-origin` passed.
+- V82.85.17 updates the stale default package filename, exposes the exact ZIP payload inventory for assertions, and adds package completeness/reproducibility acceptance.
+- Package acceptance checks required source/build/test/status files, all manifest-listed fragments/modules, no generated `dist/` output, two-build SHA-256 equality, sidecar digests, ZIP CRC/unique entries, exact entry inventory, and every embedded manifest digest.
+- CI for V82.85.17 is pending. No local test execution was performed.
+- Product lock unchanged: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable. No product HTML, CSS, runtime fragment, or fragment manifest change is intended.
 
 ---
 

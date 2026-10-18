@@ -11,7 +11,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT_01.zip'
+PACKAGE_NAME = 'AMQ_V82_85_17_SOURCE_PACKAGE_AUDIT_01.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
@@ -99,15 +99,19 @@ def included_files():
         files.append((rel, p))
     return sorted(files)
 
+def package_files():
+    """Return the exact sorted file inventory embedded in the checkpoint ZIP."""
+    payload_files = sorted([(p.relative_to(ROOT).as_posix(), p) for p in ROOT.rglob('*') if p.is_file()])
+    return [(rel, p) for rel, p in payload_files
+        if not any(part in EXCLUDED_DIRS for part in Path(rel).parts)
+        and rel not in EXCLUDED_FROM_PACKAGE
+        and not rel.endswith('.pyc') and not rel.endswith('.zip') and not rel.endswith('.zip.sha256')]
+
 def main():
     files = included_files()
     lines = [f'{digest(p.read_bytes())}  ./{rel}' for rel, p in files]
     MANIFEST.write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
-    payload_files = sorted([(p.relative_to(ROOT).as_posix(), p) for p in ROOT.rglob('*') if p.is_file()])
-    payload_files = [(rel, p) for rel, p in payload_files
-        if not any(part in EXCLUDED_DIRS for part in Path(rel).parts)
-        and rel not in EXCLUDED_FROM_PACKAGE
-        and not rel.endswith('.pyc') and not rel.endswith('.zip') and not rel.endswith('.zip.sha256')]
+    payload_files = package_files()
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(OUTPUT, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9, strict_timestamps=True) as zf:
         for rel, p in payload_files:

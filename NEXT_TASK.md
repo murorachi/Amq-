@@ -1,17 +1,21 @@
 # Next task
 
-Current checkpoint: **V82.85.16 source inventory completeness gate (CI pending)**.
-Branch: `v82.85.16-source-inventory-gate-01`.
-Change commit: `97a13a75b4e935a44d5b32b379c077336d16a751`.
+Current checkpoint: **V82.85.17 checkpoint package audit (CI pending)**.
+Branch: `v82.85.17-checkpoint-package-audit-01`.
 
-Product lock: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. CSS remains separate.
+## Completed immediately before this task
+- V82.85.16 source inventory gate: CI run https://github.com/murorachi/Amq-/actions/runs/39137967441 passed both source/unit and browser-native-origin jobs.
 
-## Next highest-value task
-After CI passes, audit checkpoint packaging for completeness and reproducibility: verify that required build/test/status files are included, and remove stale V82.84 hard-coded package naming where it creates confusing artifacts. Do not alter product HTML.
+## Current acceptance gate
+- Validate package completeness and reproducibility in CI.
+- Verify required source, module, build, test, workflow and status files are present in the ZIP.
+- Verify two package builds have identical SHA-256, sidecars match, ZIP CRC passes, entries are unique/exact, and embedded manifest digests match packed files.
+- Product lock: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
-## Acceptance gates
-- Confirm run https://github.com/murorachi/Amq-/actions/runs/39137967441 reaches a final result.
-- Verify source-and-unit and browser-native-origin jobs separately.
-- Native storage/backup, Firefox, real audio and multiplayer multi-client acceptance remain separate limitations; do not infer they passed from source inventory checks.
+## Next highest-value task after package acceptance
+Build a modularization closeout matrix from `reports/FRAGMENT_MANIFEST.json`, dependency inventories, extraction contracts and boundary-audit reports. Categorize each remaining fragment as extracted, intentionally coupled, safe extraction candidate, or blocked by environment coverage. Reconcile every manifest entry before deciding whether modularization can be closed.
 
-Rollback: revert `97a13a75b4e935a44d5b32b379c077336d16a751` or return to parent commit `0c5596603bbeafd90e104e928faa263a0bae5be6`.
+## Known acceptance limits
+Firefox/cascade behavior, real audio-provider playback, production-domain storage policy, and live multi-client multiplayer reconnect are not established by the current Chromium/mock lifecycle suite.
+
+Rollback: revert the V82.85.17 package audit commit or return to parent commit `e2c0fddd9d144cafbb5cb4691b00bc6c1e6ea149`.

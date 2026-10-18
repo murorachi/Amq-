@@ -1,12 +1,13 @@
-## V82.85.16 source inventory completeness gate (CI pending)
+## V82.85.17 checkpoint package audit (CI pending)
 
-- Added reverse inventory checks in `tools/verify.py` to detect unmanifested or stale fragment/module paths.
-- Change commit: `97a13a75b4e935a44d5b32b379c077336d16a751`.
-- No product source, manifest, build output, CSS or HTML changed.
-- GitHub Actions run pending: https://github.com/murorachi/Amq-/actions/runs/39137967441.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Parent V82.85.16 acceptance passed in GitHub Actions run 39137967441: source/unit and browser-native-origin jobs both succeeded.
+- Package audit adds a contract test for required source/build/test/status inventory, manifest-listed fragment/module inclusion, deterministic two-build ZIP hash, external sidecars, ZIP CRC/unique entries, and embedded manifest digests.
+- Package naming corrected from stale V82.84 to `AMQ_V82_85_17_SOURCE_PACKAGE_AUDIT_01.zip`.
+- CI for this package audit is pending; local execution was not run.
+- Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product output changed.
 
 ---
+
 
 ## V82.85.15 pure-helper boundary audit (audit only)
 
