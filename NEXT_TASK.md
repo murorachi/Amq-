@@ -1,3 +1,26 @@
+# Next task — V82.85.4 acceptance
+
+## Current state
+
+- Current branch: `v82.85.4-native-storage-and-list-acceptance-01`.
+- V82.82 product and immutable V82.65 baseline remain unchanged.
+- Native-origin acceptance harness and workflow are committed. The harness permits only the expected valid empty `aniSrsScheduleV1` addition after reload, and otherwise requires exact preservation of existing storage values.
+- AMQ/EMQ CRUD browser acceptance targets V82.82; its isolated UI shim checks create, membership add, rename, fresh-document initialization, and delete. Native-origin backup suite checks the actual export/import file-input flow and custom-list storage round-trip.
+- A low-risk exact-source module extraction moved only the pure EMQ ID normalization helper. Await deterministic build and browser CI evidence before considering this checkpoint accepted.
+
+## Next actions, in order
+
+1. Inspect the GitHub Actions run for `.github/workflows/v82-85-acceptance.yml`; fix only evidenced failures and rerun the failed gates.
+2. If deterministic build passes and native-origin/browser suites pass, mark V82.85.4 acceptance complete without changing the V82.82 product.
+3. Continue the next source extraction only after the current custom-list/storage gates pass. Keep higher-risk event lifecycle, answer/playback, and multiplayer code intact until dedicated browser tests exist.
+4. Maintain separate gates for Firefox/responsive cascade, real audio, production-domain policy, and multiplayer reconnect.
+
+## Rollback
+
+Return to base branch `v82.85.3-native-storage-reload-assertion-fix-01`; the product HTML and V82.65 immutable baseline are unchanged.
+
+---
+
 # Next task
 
 Current engineering checkpoint: **V82.85.3 NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01**. Product remains **V82.82**; immutable baseline remains V82.65.
