@@ -1,5 +1,14 @@
 # Baseline lock
 
+## Latest engineering-only follow-up — V82.85.3 native storage reload assertion review
+
+- Base: `v82.85.2-native-storage-backup-acceptance-01` at `3cb626c5501822c6b4ed3d13ebe5bdab3ab74809`.
+- Product remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Immutable V82.65 remains unchanged. No production HTML, CSS, or runtime source changed.
+- The reload snapshot contract now permits only one narrowly validated addition: a default-empty `aniSrsScheduleV1` schedule created by the existing pagehide persistence handler. Existing keys/values must remain byte-identical; all other changes fail.
+- Regression test `tests/unit/native_storage_reload_snapshot_contract.test.cjs`: 7/7 cases passed in the executed Node test run.
+- The full native-origin Playwright harness was not rerun after this assertion-policy correction. See `reports/V82_85_3_NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01_REPORT.md` for evidence and limits.
+
 ## Latest distinct product release: V82.82
 
 - Product HTML: `dist/amq_learning_tool_v82_82.html`
