@@ -1,1 +1,1 @@
- const validAnimeIds=ids=>[...new Set(ids.map(String))].filter(id=>!!getAnimeById(id));
+const validAnimeIds=ids=>[...new Set(ids.map(String))].filter(id=>!!getAnimeById(id));
