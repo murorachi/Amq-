@@ -8,6 +8,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '../..');
 const amq = fs.readFileSync(path.join(root, 'src/scripts/script_025.htmlpart'), 'utf8');
 const emq = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
+const emqModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_membership.htmlpart'), 'utf8');
 const passed = [];
 function test(name, fn) {
   try { fn(); passed.push(name); console.log('PASS ' + name); }
@@ -63,7 +64,7 @@ function buildAmqContext(storage = memoryStorage()) {
     extractStatement(amq, 'const blockedWrites='),
     extractStatement(amq, 'const safeRead='),
     extractStatement(amq, 'const write='),
-    extractStatement(amq, 'const notify='),
+    'const notify=()=>{};',
     'const anime=[]; const songs=[];',
     extractStatement(amq, 'const getAnimeById='),
     extractStatement(amq, 'const validIdArray='),
@@ -91,7 +92,7 @@ function buildEmqContext(storage = memoryStorage()) {
   const context={localStorage:storage,window:{__aniEmqAPI:{ready:true,getRows:()=>rows,getMeta:id=>meta.get(String(id))||null,getWork:id=>works.get(String(id))||null,getWorkByVndbId:id=>byVn.get(String(id))||null}},Date,Math,Set,Map,Array,String,Number,Object,JSON,RegExp,console,alert:()=>{},renderManager:()=>{},refreshBatchSelectors:()=>{},renderQuizPicker:()=>{}};
   const code=[
     "const KEY='aniEmqWorkListsV8254';",extractFunction(emq,'unique'),extractFunction(emq,'loadDb'),extractFunction(emq,'saveDb'),extractFunction(emq,'api'),
-    'let db=loadDb(); let managerListId="";',extractFunction(emq,'makeId'),extractFunction(emq,'createList'),extractFunction(emq,'addMembers'),extractFunction(emq,'removeMembers'),extractFunction(emq,'listWorkIds'),extractFunction(emq,'listSongIds'),
+    'let db=loadDb(); let managerListId="";',extractFunction(emq,'makeId'),extractFunction(emq,'createList'),extractFunction(emq,'addMembers'),extractFunction(emq,'removeMembers'),extractFunction(emqModule,'listWorkIds'),extractFunction(emqModule,'listSongIds'),
     'globalThis.api={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,get data(){return db}};'
   ].join('\n');
   vm.createContext(context);vm.runInContext(code,context,{timeout:1500});
