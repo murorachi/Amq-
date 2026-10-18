@@ -176,3 +176,11 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - Confirmed the 345/346 report discrepancy is caused by one pseudo-path --help in the checksum JSON, whose fingerprint matches the product HTML but is not a repository path. The historical JSON is retained unchanged; upstream inventory-generator root cause remains open.
 
 - Remote readback/static inspection after registration: 35 command entries parsed; labels unique; all 34 pre-existing command script paths found in the recorded source inventory; new contract file exists on the branch. The Python contract itself remains NOT RUN.
+
+
+## V82.86 inventory producer correction — 2026-10-19
+- Engineering-only branch `v82.86-auto-acceptance-inventory-01` removes the accidentally tracked root `--help` duplicate. The removed blob was byte-identical to `dist/amq_learning_tool_v82_82.html`; product artifact was not modified.
+- New deterministic producer: `tools/generate_source_inventory.py`. It reads tracked paths from Git, excludes its own output, computes SHA-256/byte sizes, and rejects suspicious option-like root paths.
+- Regression contract: `tests/unit/source_inventory_generator_contract.test.py`. The historical 346-entry JSON is preserved; `reports/V82_85_1_REMOTE_SHA256SUMS_CORRECTED_DERIVED.json` contains the 345-entry derived correction, not a fresh inventory of the current branch.
+- Product baseline unchanged: V82.82 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; immutable V82.65 unchanged.
+- New code/tests and 36-command runner are NOT EXECUTED in this session. Clean-checkout regeneration, full runner, verifier, build and browser acceptance remain NOT RUN.
