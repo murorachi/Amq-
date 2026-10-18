@@ -1,3 +1,17 @@
+# Current checkpoint: V82.85.4 NATIVE_STORAGE_AND_LIST_ACCEPTANCE_01 (2026-10-18)
+
+- Branch: `v82.85.4-native-storage-and-list-acceptance-01`.
+- Base branch: `v82.85.3-native-storage-reload-assertion-fix-01`.
+- Product baseline remains V82.82: 8,787,490 bytes; SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable baseline unchanged.
+- Added reproducible real-origin Chromium acceptance: `tests/browser/native_storage_backup_acceptance_v82_82.py`. It tests the narrow reload snapshot rule, native IndexedDB, real full-backup export, manifest, malformed import non-mutation, one-shot write failure rollback, successful file-input restore, and preservation of unrelated origin storage.
+- Updated AMQ/EMQ UI acceptance to V82.82 and added a GitHub Actions workflow running build verification, Node/Python contracts, and browser acceptance.
+- Extracted the exact pure `unique(v)` helper from `src/scripts/script_040.htmlpart` into `src/modules/emq_list_id_normalization.js` at the same execution position. `FRAGMENT_MANIFEST.json` and the source contract are updated; the deterministic builder must prove the generated product remains byte-identical.
+- Report: `reports/V82_85_4_NATIVE_STORAGE_AND_LIST_ACCEPTANCE_01_REPORT.md`.
+- Test execution status at this checkpoint: workflow has been committed, but its result has not yet been inspected. Do not call the new end-to-end browser suite passed until GitHub Actions reports success.
+- Separate unverified gates remain: Firefox, real audio, production-domain browser policies, and multiplayer multi-client/reconnect.
+
+---
+
 # Current engineering checkpoint: V82.85.3 NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01 (2026-10-18)
 
 - Follow-up branch: `v82.85.3-native-storage-reload-assertion-fix-01`; base V82.85.2 commit: `3cb626c5501822c6b4ed3d13ebe5bdab3ab74809`.
