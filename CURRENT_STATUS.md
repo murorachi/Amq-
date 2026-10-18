@@ -6,6 +6,6 @@
 - Added source-level lifecycle contract and Chromium exit/countdown/re-entry acceptance.
 - Product remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 - No product JS/CSS, manifest or generated HTML changed.
-- This is not heap-based listener-leak proof or real-provider audio validation.
-- New CI must pass before backlog items are closed.
-- Next: reconcile AMQ-TODO-001..004 status with evidence, then audit high-risk cross-fragment dependencies.
+- First CI: source/unit PASS; browser exit/cancellation assertions PASS, but re-entry timed out because the expected round-feedback modal was not dismissed.
+- Test now verifies and dismisses the modal before re-entry; rerun pending.
+- Next: reconcile AMQ-TODO-001..004 with verified evidence, then audit high-risk cross-fragment dependencies.

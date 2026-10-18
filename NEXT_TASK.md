@@ -5,11 +5,11 @@ Current checkpoint: **V82.86.03 quiz lifecycle ownership audit**. Branch `v82.86
 ## Deliverables
 - `reports/V82_86_03_QUIZ_LIFECYCLE_OWNERSHIP_01.md`: state, DOM, timers/listeners and limits.
 - `tests/unit/quiz_lifecycle_ownership_contract.test.cjs`: source-level lifecycle invariants.
-- `tests/browser/quiz_answer_playback_lifecycle.py`: exit-during-countdown, stale callback and re-entry checks.
+- `tests/browser/quiz_answer_playback_lifecycle.py`: exit-during-countdown, stale callback, feedback modal dismissal and re-entry checks.
 - Engineering workflow runs the new contract and browser suites.
 
 ## Acceptance gate
-Wait for source/unit and browser-native-origin jobs. If either fails, record the actual assertion and fix before closing tasks.
+First CI source/unit PASS. Browser exit/cancellation assertions PASS, but re-entry timed out because the expected round-feedback modal was not dismissed. Test now asserts and dismisses the modal before re-entry; rerun required.
 
 ## Next bounded work
 1. After CI passes, update AMQ-TODO-001, 002 and 004 based on evidence.

@@ -293,6 +293,11 @@ def main():
                 window.__aniQuizStateV45?.quizActive === false &&
                 window.__aniQuizAutoNextV30?.getState?.().scheduled === false"""),
                   "leaving quiz prevents a stale auto-next callback")
+            check(page.locator("#amqRoundFeedback").is_visible(),
+                  "round feedback modal is shown after leaving an answered round")
+            page.locator("#amqRoundFeedbackClose").click(timeout=5000)
+            check(not page.locator("#amqRoundFeedback").is_visible(),
+                  "round feedback can be dismissed before re-entry")
             page.evaluate("window.__aniNavigateApp?.('quiz'); window.__aniEnterQuizV82?.()")
             page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')", timeout=5000)
             fresh_song = start_question(page, True)

@@ -10,7 +10,7 @@
 - Product lock: V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - V82.65 remains immutable.
 - Engineering-only; no product JS/CSS, manifest or generated HTML changes.
-- CI pending; do not mark new tests PASS before completion.
+- First CI source/unit PASS; browser failed at re-entry because the expected round-feedback modal was not dismissed. Test fix is pending CI confirmation.
 
 ## Scope rules
 1. Shared state evidence is not automatically a confirmed defect.

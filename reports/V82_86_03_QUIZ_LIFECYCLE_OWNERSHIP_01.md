@@ -54,6 +54,10 @@
 - browser case 使用隔離 storage/media shim，不代表真實音訊 provider 驗收。
 - 本報告建立時新測試尚待 CI，未提前標 PASS。
 
+## 新測試第一次失敗的處置
+
+第一次新 browser run 的 exit/countdown assertions 全部通過，但重新開始新題時 Playwright 回報開始按鈕被 `#amqRoundFeedback` 攔截。追查 `src/scripts/script_026.htmlpart` 確認這是預期的「本輪練習已結束」modal：停止事件會顯示它，使用者需按「繼續」或點擊遮罩才能關閉。這不是已確認的產品缺陷；測試前置條件不完整。測試已改成驗證 modal 出現、按「繼續」可關閉，再測重新進入。修正版仍需重新跑 CI。
+
 ## 結果、限制與回滾
 確認的是共享狀態與 teardown 結構，沒有在本階段宣稱已確認產品 bug。真實音訊 provider、Firefox、正式網域 storage、live multiplayer 仍是外部門檻。產品 HTML 未修改，仍須 CI build verifier 確認指紋。
 
