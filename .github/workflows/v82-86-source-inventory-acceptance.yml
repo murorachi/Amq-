@@ -1,0 +1,105 @@
+name: V82.86 Source Inventory and Acceptance
+
+on:
+  push:
+    branches:
+      - v82.86-auto-acceptance-inventory-01
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-source-and-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v4
+        with:
+          ref: v82.86-auto-acceptance-inventory-01
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright and Chromium
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+          CHROMIUM="$(find "$HOME/.cache/ms-playwright" -type f -path '*/chrome-linux/chrome' -print -quit)"
+          if [ -z "$CHROMIUM" ]; then
+            CHROMIUM="$(find "$HOME/.cache/ms-playwright" -type f -path '*/chrome-linux64/chrome' -print -quit)"
+          fi
+          test -n "$CHROMIUM"
+          sudo ln -sf "$CHROMIUM" /usr/bin/chromium
+          /usr/bin/chromium --version
+
+      - name: Run source inventory generator regression contract
+        run: python tests/unit/source_inventory_generator_contract.test.py
+
+      - name: Run acceptance runner contract
+        run: python tests/unit/automatic_acceptance_runner_contract.test.py
+
+      - name: Build the expected V82.82 artifact
+        run: python tools/build.py dist/amq_learning_tool_v82_82.html
+
+      - name: Run integrity and deterministic build verifier
+        run: python tools/verify.py
+
+      - name: Generate fresh tracked-file inventory
+        run: |
+          python tools/generate_source_inventory.py --output reports/V82_86_REMOTE_SHA256SUMS.json
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.')
+          inventory_path = root / 'reports/V82_86_REMOTE_SHA256SUMS.json'
+          inventory = json.loads(inventory_path.read_text(encoding='utf-8'))
+          assert inventory['file_count'] == len(inventory['files']), 'file_count does not match entries'
+          paths = [item['path'] for item in inventory['files']]
+          assert len(paths) == len(set(paths)), 'duplicate inventory paths'
+          assert all(not p.startswith('-') for p in paths), 'option-like path detected'
+          for item in inventory['files']:
+              path = root / item['path']
+              data = path.read_bytes()
+              assert len(data) == item['bytes'], f"byte count mismatch: {item['path']}"
+              assert hashlib.sha256(data).hexdigest() == item['sha256'], f"SHA-256 mismatch: {item['path']}"
+          print(f"FRESH INVENTORY PASS: {len(paths)} files; every byte count and SHA-256 verified")
+          PY
+
+      - name: Run all 36 canonical acceptance commands
+        id: full_runner
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python tools/run_all_checks.py 2>&1 | tee reports/V82_86_FULL_RUNNER_LOG.txt
+          result=${PIPESTATUS[0]}
+          echo "$result" > reports/V82_86_FULL_RUNNER_EXIT_CODE.txt
+          exit "$result"
+
+      - name: Save acceptance logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v82-86-acceptance-results
+          path: |
+            reports/V82_86_FULL_RUNNER_LOG.txt
+            reports/V82_86_FULL_RUNNER_EXIT_CODE.txt
+            reports/V82_86_REMOTE_SHA256SUMS.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Fail job if any acceptance command failed
+        if: steps.full_runner.outcome == 'failure'
+        run: |
+          echo "::error::The full runner had one or more failed commands. Inspect the saved log artifact."
+          exit 1
