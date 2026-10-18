@@ -15,6 +15,19 @@ def main():
  check('immutable baseline fingerprint',len(baseline_bytes)==base['bytes'] and sha(baseline_bytes)==base['sha256'])
  check('template fingerprint',len(template)==m['template']['bytes'] and sha(template)==m['template']['sha256'])
  check('fragment counts',len(m['fragments'])==m['fragment_count'] and sum(x['kind']=='style' for x in m['fragments'])==m['style_count'] and sum(x['kind']=='script' for x in m['fragments'])==m['script_count'])
+ # Prevent new or renamed source fragments from silently escaping the manifest/build.
+ manifest_fragments=sorted(row['path'] for row in m['fragments'])
+ disk_fragments=sorted(p.relative_to(ROOT).as_posix() for folder in (ROOT/'src/styles',ROOT/'src/scripts') for p in folder.glob('*.htmlpart'))
+ missing_fragments=sorted(set(disk_fragments)-set(manifest_fragments))
+ stale_fragments=sorted(set(manifest_fragments)-set(disk_fragments))
+ check('fragment source inventory completeness',disk_fragments==manifest_fragments,
+       f'missing from manifest={missing_fragments}; absent on disk={stale_fragments}')
+ manifest_modules=sorted(row['path'] for row in m.get('modules', []))
+ disk_modules=sorted(p.relative_to(ROOT).as_posix() for p in (ROOT/'src/modules').iterdir() if p.is_file())
+ missing_modules=sorted(set(disk_modules)-set(manifest_modules))
+ stale_modules=sorted(set(manifest_modules)-set(disk_modules))
+ check('module source inventory completeness',disk_modules==manifest_modules,
+       f'missing from manifest={missing_modules}; absent on disk={stale_modules}')
  for row in m['fragments']:
   p=ROOT/row['path']; b=p.read_bytes() if p.is_file() else b''
   check('fragment '+row['path'],p.is_file() and len(b)==row['byte_length'] and sha(b)==row['sha256'])
