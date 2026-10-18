@@ -1,31 +1,23 @@
 # Next task
 
-Current engineering checkpoint: **V82.86.01 structural issue inventory (audit-only)**.  
-Branch: `v82.86.01-structural-issue-inventory-01`.  
-Parent: `v82.85.22-closeout-disposition-matrix-01` at `b42ddee31db8becae02b9822dd44bdcb0c4f9cee`.
+Current checkpoint: **V82.86.02 full engineering backlog**. Branch `v82.86.02-engineering-backlog-01`. Parent `7bbbd8eb883db6b97822fac5e32a2a2ff903bde9`.
 
-## Confirmed baseline
-- This checkpoint passed GitHub Actions run [39143009433](https://github.com/murorachi/Amq-/actions/runs/39143009433): both source-and-unit and browser-native-origin jobs succeeded. The inventory contract validated all 20 rows and Markdown ID parity.
-- Parent CI run [39141992306](https://github.com/murorachi/Amq-/actions/runs/39141992306) passed both `source-and-unit` and `browser-native-origin`.
-- Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- V82.65 remains immutable.
-- This checkpoint does not modify product source or generated HTML.
+## Deliverables
+- `reports/ENGINEERING_BACKLOG.csv`: 34 task rows with evidence, dependencies, action, acceptance and automation.
+- `reports/V82_86_02_ENGINEERING_BACKLOG_01.md`: scope, evidence, order, constraints and task index.
+- `tests/unit/engineering_backlog_contract.py`: schema, ID, dependency and report parity checks.
+- Main engineering workflow runs the new contract.
 
-## Issue inventory
-- Report: `reports/V82_86_01_STRUCTURAL_ISSUE_INVENTORY_01.md`.
-- Row tracker: `reports/STRUCTURAL_ISSUE_INVENTORY.csv`.
-- Initial register has 20 items covering shared quiz state, DOM ownership, listener/timer lifecycle, mixed data/runtime, cross-fragment and unresolved calls, overlapping suggestion handlers, storage, multiplayer, audio, CSS cascade, override layers, module decoupling, payload preservation, test gaps, dead-code evidence, readability and performance.
-- Risk findings are not automatically confirmed defects. No code deletion or performance claim is permitted without evidence and appropriate regression tests.
+## Next bounded work
+AMQ-TODO-001 through AMQ-TODO-004:
+1. Trace shared quiz state reads/writes and transitions.
+2. Map key DOM mutation owners.
+3. Pair event/timer/animation registrations with cleanup and repeated entry/exit.
+4. Revalidate suggestion click/keyboard/IME/focus/ARIA behavior against current source.
+5. Add missing tests before production refactor.
 
-## Next execution step
-Audit AMQ-STR-001 through AMQ-STR-003 as one bounded quiz-lifecycle ownership pass:
-1. Trace reads/writes of `quizSettings`, `quizSong`, `quizFinished`, `quizActive`, and `quizAudioStarted`.
-2. Inventory listener/timer/animation registration and teardown sites, including repeated quiz entry/exit.
-3. Compare each transition against existing browser lifecycle contracts and record uncovered assertions.
-4. Add missing tests before any production refactor. Do not change `script_004` merely to reduce line count or increase module count.
-
-## External gates still open
-Firefox/CSS cascade comparison; real audio-provider playback; production-domain storage policy and full IndexedDB failure modes; live two-client multiplayer reconnect.
+## External gates
+Firefox/CSS cascade; real audio provider/network; live two-client multiplayer/reconnect; expanded IndexedDB and production-origin policy/failure acceptance.
 
 ## Rollback
-Return to parent commit `b42ddee31db8becae02b9822dd44bdcb0c4f9cee` or revert the documentation-only checkpoint. Product rollback is not required.
+Return to parent commit `7bbbd8eb883db6b97822fac5e32a2a2ff903bde9` or revert this documentation/contract checkpoint. Product rollback is not required.
