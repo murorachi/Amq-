@@ -1,3 +1,16 @@
+# Engineering overlay: V82.85.13 real audio output acceptance gate (pending)
+
+- Parent accepted engineering baseline: `v82.85.12-multiplayer-leave-poll-race-fix-01`.
+- This is an engineering/test-only change. Production runtime fragments, CSS, and generated standalone product HTML are unchanged.
+- Candidate product fingerprint remains V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Added a native Chromium audio decode/output gate with PulseAudio monitor capture and wired it into the existing engineering workflow. The first mirror host is intentionally failed; the fallback host returns deterministic PCM16 WAV bytes.
+- Acceptance is **pending** until CI demonstrates all browser assertions and non-silent captured output. This does not establish live production audio availability or production-domain storage policy.
+- Report: `reports/V82_85_13_REAL_AUDIO_OUTPUT_ACCEPTANCE_GATE_01_REPORT.md`.
+- Rollback: `v82.85.12-multiplayer-leave-poll-race-fix-01`.
+
+---
+
 ## V82.85.12 multiplayer stale-poll lifecycle fix (ACCEPTED)
 
 - Base: V82.85.11 branch commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
