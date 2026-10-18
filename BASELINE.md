@@ -1,11 +1,11 @@
-## V82.85.20 module contract CI coverage (ACCEPTED)
+## V82.85.21 script_004 boundary decision (CI pending)
 
-- GitHub Actions run 39141098175 and docs-only follow-up 39141296313 passed source/unit and browser-native-origin jobs.
-- The matrix-driven runner executed all 16 unique Node module contract tests referenced by the 13 module rows; all passed.
-- Stale extraction contracts were updated to reconstruct source from the current modules, and TypeScript loading is now portable with pinned TypeScript 5.8.3.
-- No product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Decision: no additional script_004 extraction in this checkpoint. Remaining lifecycle/settings/playback/history/UI families share state, DOM, storage, APIs, listeners or timers; trivial local normalization helpers are not worthwhile modules.
+- Existing AST boundary contract added to recurring CI using portable pinned TypeScript.
+- CI pending; no product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 

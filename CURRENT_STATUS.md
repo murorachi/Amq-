@@ -1,10 +1,10 @@
-# Current engineering checkpoint: V82.85.20 module contract CI coverage (ACCEPTED)
+# Current engineering checkpoint: V82.85.21 script_004 boundary decision (CI pending)
 
-- GitHub Actions run 39141098175 passed source-and-unit and browser-native-origin; docs-only follow-up 39141296313 also passed.
-- Matrix-driven runner executed all 16 unique Node module contract tests referenced by the 13 module rows; all 16 passed. The browser integration evidence also passed.
-- Broader CI exposed and fixed stale test assumptions around the later `near_number_v1` and `emq_list_membership` extractions.
-- Three TypeScript consumers now use a portable loader; CI installs pinned TypeScript 5.8.3 instead of relying on an obsolete absolute Node path.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product source, manifest, CSS or HTML changed.
+- Parent V82.85.20 module contract CI gate passed run 39141098175; docs-only follow-up run is pending.
+- Reviewed the existing script_004 shared-state/API/DOM/listener/timer evidence. No further non-trivial pure helper was justified for extraction; remaining lifecycle/settings/playback/history/UI families are intentionally held pending stronger adapters.
+- Added `script004_boundary_audit_contract.test.cjs` to the recurring CI workflow using the portable pinned TypeScript loader.
+- CI pending; no product source/module/manifest/CSS/HTML changes.
+- Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 
