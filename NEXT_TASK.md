@@ -42,3 +42,6 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 ## Remaining acceptance limits
 - No verified real-origin persistence, audio/network, Firefox or multiplayer multi-client acceptance.
 - Product remains V82.72; preserve V82.65, V82.70 and V82.72 artifacts. Do not overwrite the immutable baseline.
+
+## V82.85.1 GitHub source sync publication
+- Next stage: execute native-origin Storage and backup rollback acceptance; do not extract answer/playback or multiplayer lifecycle before its gate.

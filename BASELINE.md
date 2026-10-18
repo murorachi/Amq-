@@ -154,3 +154,9 @@ V82.81 adds source contracts, boundary maps, and Chromium home/quiz geometry scr
 ## V82.84 source sync and acceptance gate audit
 
 V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`); immutable V82.65 remains unchanged. A fresh build and verification passed (runner 34/34, verifier 116/116). GitHub tree audit confirms the V82.83 branch remains an overlay with 125 entries and missing source fragments/template/build tools/tests/visual PNGs. Boundary-audit tool fingerprint mismatch is fixed, but complete sync and remote clean build remain open. Native-origin Storage remains blocked by managed Chromium policy; Firefox, real audio and two-client multiplayer are not verified. No production runtime/CSS changes. See `reports/V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT.md`.
+
+## V82.85.1 GitHub source sync publication
+- Source package SHA-256: `69f5902e60502efe5f9267c2737c84e055a3a9c3be19c010fb961a6fe24d446a`.
+- Remote clean-checkout SHA-256 inventory: PASS (345 files).
+- Clean-checkout build and verifier: PASS; BUILD PASS: 8787490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; tools/verify.py exit 0.
+- This records source publication only; native-origin Storage acceptance and Firefox/audio/multiplayer gates remain separate.

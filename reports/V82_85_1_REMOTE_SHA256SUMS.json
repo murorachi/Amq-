@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "algorithm": "sha256",
-  "file_count": 345,
+  "file_count": 346,
   "files": [
     {
       "path": "--help",
@@ -65,18 +65,23 @@
     },
     {
       "path": "BASELINE.md",
-      "sha256": "d356de52980ad922a0a7d2b2958d37058a290497fdcfb527d03ffb444f853cf1",
-      "bytes": 17449
+      "sha256": "b9ea228916ebdafbea07eb3809f88ddfa114cd6de4ee4473f3e9422f54d3b318",
+      "bytes": 17943
     },
     {
       "path": "CURRENT_STATUS.md",
-      "sha256": "c238b0131eb2d2d6a1ad0bc719441bb9f25b70e3409bfd9686d06a5e545ce60b",
-      "bytes": 31800
+      "sha256": "361df7fab53581a93ceef0fc6d4d9a1e2d29128dcdf4d6bf024a3807eb0ceb65",
+      "bytes": 32294
     },
     {
       "path": "DEPENDENCY_MAP.md",
       "sha256": "09c93d9b103c8b57d15d778fe7954a442f0357971d431083a054727a9e85f4eb",
       "bytes": 6699
+    },
+    {
+      "path": "dist/amq_learning_tool_v82_82.html",
+      "sha256": "227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b",
+      "bytes": 8787490
     },
     {
       "path": "ENGINEERING_AUDIT_2026-10-18.md",
@@ -90,8 +95,8 @@
     },
     {
       "path": "NEXT_TASK.md",
-      "sha256": "c770d6e95a065a9597a7092a116e409e900373548dc8919c51d4d94eece1b73a",
-      "bytes": 4447
+      "sha256": "bcad7fefc60bc03487ba0bd3e7810a30737ea1cb8ab6ef3a27731064b9731e87",
+      "bytes": 4640
     },
     {
       "path": "PACKAGE_SHA256SUMS.txt",
@@ -905,8 +910,8 @@
     },
     {
       "path": "reports/V82_85_1_GITHUB_SOURCE_SYNC_RESULT.md",
-      "sha256": "93f3e02df92a077d570329525b4158421bfb7ea71db0dc2901cac073b40bb12d",
-      "bytes": 388
+      "sha256": "adafe8f19298279a56159c316b448145b55b451d4f052af1236a28f94456adb7",
+      "bytes": 667
     },
     {
       "path": "reports/V82_85_GITHUB_SOURCE_SYNC_RESULT.md",

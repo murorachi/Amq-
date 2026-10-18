@@ -196,3 +196,9 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Verification completed: full runner 15 commands passed, 0 failed; unit/contracts 192 assertions passed; browser suggestion integration 29 assertions passed; integrity verifier 108 checks passed; two independent builds match the unchanged V82.72 SHA-256. Package CRC and sidecar SHA-256 verification passed (207 unique entries). Real-origin acceptance remains blocked in the current browser environment; complete GitHub source publication remains outstanding.
 
 - V82.74 report-only GitHub update verified: commit `4493b99beaf7193f052eb16cff051fbc140b896b`; remote report blob SHA `6ccb9b9c035989e26194a0e2fd959a5a30d0d173`. Full source release is still incomplete.
+
+## V82.85.1 GitHub source sync publication
+- Source package SHA-256: `69f5902e60502efe5f9267c2737c84e055a3a9c3be19c010fb961a6fe24d446a`.
+- Remote clean-checkout SHA-256 inventory: PASS (345 files).
+- Clean-checkout build and verifier: PASS; BUILD PASS: 8787490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; tools/verify.py exit 0.
+- This records source publication only; native-origin Storage acceptance and Firefox/audio/multiplayer gates remain separate.
