@@ -31,6 +31,8 @@ jobs:
           set -euo pipefail
           node tests/unit/native_storage_reload_snapshot_contract.test.cjs
           node tests/unit/custom_list_crud_reload_contract.test.cjs
+          node tests/unit/backup_restore_contract.test.cjs
+          node tests/unit/full_backup_restore_roundtrip_contract_v82_83.test.cjs
           node tests/unit/custom_list_normalization_contract.test.cjs
           node tests/unit/emq_selection_contract.test.cjs
           node --test tests/unit/quiz_lifecycle_ownership_contract.test.cjs
