@@ -210,3 +210,5 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Key limitation: current session did not execute the runner or verifier; historical 34/34 and 116/116 results remain historical evidence only. Native-origin storage, Firefox, real audio, and two-client multiplayer remain not verified in the recorded environment.
 - Inventory and next implementation step: `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
 - No product/runtime files changed. Automated tests and build: NOT RUN in this inventory-only step.
+
+- Added `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` with 14 traceable gates across integrity, build, source contracts, isolated browser, native browser, cross-browser, integration and publication. The new CSV was read back from the exact branch and matched the authored contents byte-for-byte.
