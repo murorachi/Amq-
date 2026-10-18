@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real application UI exercise for AMQ/EMQ custom lists under isolated storage.
 
-The application HTML and event handlers are production-built V82.80. This harness uses
+The application HTML and event handlers are production-built V82.82. This harness uses
 page.set_content because this runtime blocks file:// and localhost navigation with
 ERR_BLOCKED_BY_ADMINISTRATOR. Storage is an in-memory shim; reload persistence is checked
 by reinitializing the document from a captured storage snapshot, not by claiming native
@@ -47,7 +47,7 @@ def html_with_seed(source, seed):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--html', type=Path, default=Path(__file__).resolve().parents[2] / 'dist' / 'amq_learning_tool_v82_80.html')
+    parser.add_argument('--html', type=Path, default=Path(__file__).resolve().parents[2] / 'dist' / 'amq_learning_tool_v82_82.html')
     parser.add_argument('--chromium', default='/usr/bin/chromium')
     args = parser.parse_args()
     source = args.html.resolve().read_text(encoding='utf-8')
