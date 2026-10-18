@@ -1384,8 +1384,8 @@
       "name": "amq_custom_list_validation",
       "path": "src/modules/amq_custom_list_validation.htmlpart",
       "marker": "<!-- AMQ_SPLIT_MODULE:amq_custom_list_validation -->",
-      "byte_length": 523,
-      "sha256": "5a2a6103fae8b8cd0073442cc33600fdf418bc4b09ce6ba8f014c6d393125838",
+      "byte_length": 522,
+      "sha256": "1bb149f011ebfad806c8f066534666ba64bb9c384fe7e46292582d7a53a68522",
       "insertion_fragment": "src/scripts/script_025.htmlpart",
       "purpose": "exact-source extraction of pure AMQ custom-list ID/row/payload validation",
       "runtime_contract": "exact original helper bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
