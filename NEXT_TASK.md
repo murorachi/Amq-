@@ -1,20 +1,18 @@
 # Next task
 
-Current checkpoint: **V82.86.03 quiz lifecycle ownership audit**. Branch `v82.86.03-quiz-lifecycle-ownership-01`. Parent `5ed5249c7f6f3865a2ab518c87a55d8ffb4ff793`.
+Current checkpoint: **V82.86.03 quiz lifecycle ownership audit**. Branch `v82.86.03-quiz-lifecycle-ownership-01`.
 
-## Deliverables
-- `reports/V82_86_03_QUIZ_LIFECYCLE_OWNERSHIP_01.md`: state, DOM, timers/listeners and limits.
-- `tests/unit/quiz_lifecycle_ownership_contract.test.cjs`: source-level lifecycle invariants.
-- `tests/browser/quiz_answer_playback_lifecycle.py`: exit-during-countdown, stale callback, feedback modal dismissal and re-entry checks.
-- Engineering workflow runs the new contract and browser suites.
+## Verified result
+GitHub Actions run 39155616680: both `source-and-unit` and `browser-native-origin` PASS. Product fingerprint remained unchanged at V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
-## Acceptance gate
-First CI source/unit PASS. Browser exit/cancellation assertions PASS, but re-entry timed out because the expected round-feedback modal was not dismissed. Test now asserts and dismisses the modal before re-entry; rerun required.
+## Backlog status
+- AMQ-TODO-001 Done: shared quiz state owner map and transition tests documented.
+- AMQ-TODO-002 Done: key DOM mutation and teardown owners documented.
+- AMQ-TODO-003 In Progress: known timers/exit cleanup pass, but dynamic listener ownership and heap leak audit remain incomplete.
+- AMQ-TODO-004 Done: current suggestion click/keyboard/IME guard/input/focus/caret/ARIA behavior passes Chromium integration tests. OS-level IME and Firefox remain outside coverage.
 
 ## Next bounded work
-1. After CI passes, update AMQ-TODO-001, 002 and 004 based on evidence.
-2. Close AMQ-TODO-003 only if exit/countdown/re-entry passes.
-3. Then resolve high-risk cross-fragment dependency owners. No broad cleanup/refactor yet.
+Resolve high-risk cross-fragment dependencies, starting with the answer/playback/storage/custom-list paths. Classify ambiguous AST edges before any source movement. Do not delete compatibility code or broadly refactor.
 
 ## Rollback
-Revert this report, test, workflow and documentation commit. Product rollback is not required.
+Revert the V82.86.03 audit/status commits. Product rollback is not required.

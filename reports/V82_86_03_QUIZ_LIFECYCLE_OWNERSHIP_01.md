@@ -58,6 +58,10 @@
 
 第一次新 browser run 的 exit/countdown assertions 全部通過，但重新開始新題時 Playwright 回報開始按鈕被 `#amqRoundFeedback` 攔截。追查 `src/scripts/script_026.htmlpart` 確認這是預期的「本輪練習已結束」modal：停止事件會顯示它，使用者需按「繼續」或點擊遮罩才能關閉。這不是已確認的產品缺陷；測試前置條件不完整。測試已改成驗證 modal 出現、按「繼續」可關閉，再測重新進入。修正版仍需重新跑 CI。
 
+## CI 結果與測試處置
+
+修正後的 GitHub Actions run **39155616680** 已通過 `source-and-unit` 與 `browser-native-origin`。新 lifecycle contract 通過；瀏覽器新增的倒數中離開、取消 auto-next、等待原倒數到期不抽新題、顯示並關閉預期 round-feedback modal、重新進入後成功開始新題，均通過。第一次失敗是測試漏掉應由使用者關閉的 modal，修正後不需要產品程式變更。
+
 ## 結果、限制與回滾
 確認的是共享狀態與 teardown 結構，沒有在本階段宣稱已確認產品 bug。真實音訊 provider、Firefox、正式網域 storage、live multiplayer 仍是外部門檻。產品 HTML 未修改，仍須 CI build verifier 確認指紋。
 

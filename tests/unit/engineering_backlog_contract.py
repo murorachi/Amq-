@@ -20,7 +20,12 @@ def main():
     assert all(re.fullmatch(r"AMQ-TODO-\d{3}", x) for x in ids), "invalid ID format"
     assert set(r["priority"] for r in rows) <= ALLOWED_PRIORITIES
     assert set(r["classification"] for r in rows) <= ALLOWED_CLASSIFICATIONS
-    assert all(r["status"] == "Open" for r in rows), "new backlog rows must start Open"
+    assert set(r["status"] for r in rows) <= {"Open", "In Progress", "Done"}, "invalid task status"
+    status_by_id = {r["id"]: r["status"] for r in rows}
+    assert status_by_id["AMQ-TODO-001"] == "Done"
+    assert status_by_id["AMQ-TODO-002"] == "Done"
+    assert status_by_id["AMQ-TODO-003"] == "In Progress"
+    assert status_by_id["AMQ-TODO-004"] == "Done"
     required = ("workstream", "title", "evidence", "action", "acceptance", "automation", "risk_if_skipped")
     for r in rows:
         assert all(r[k].strip() for k in required), f"missing required field: {r['id']}"
