@@ -100,6 +100,8 @@ jobs:
             reports/V82_86_FULL_RUNNER_LOG.txt
             reports/V82_86_FULL_RUNNER_EXIT_CODE.txt
             reports/V82_86_REMOTE_SHA256SUMS.json
+            reports/visual-baselines/v82_82_home.png
+            reports/visual-baselines/v82_82_quiz.png
           if-no-files-found: warn
           retention-days: 30
 
