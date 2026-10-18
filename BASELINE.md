@@ -241,3 +241,12 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - The multiplayer browser harness remains included in the same workflow and passed its mocked room/phase/team-draft/reconnect lifecycle checks.
 - Production output remains exactly V82.82: 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. No production HTML/CSS/runtime source changed in this checkpoint.
 - Scope limitation: deterministic mocks verify lifecycle contracts, not real audio-provider playback, Firefox compatibility, or a live multi-client multiplayer server.
+
+
+## V82.85.11 custom-list normalization contract checkpoint
+
+- CI run `39123012625` passed both source/unit and browser-native-origin jobs.
+- New exact-source contract test: `tests/unit/custom_list_normalization_contract.test.cjs`, 8/8 assertions passed.
+- Existing custom-list CRUD 11/11, AMQ list validation 12/12, and backup/restore 6/6 also passed in the same run; the native-storage and full browser acceptance suite passed.
+- No production changes. V82.82 remains byte-identical at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Boundary decision: `readCustomLists()` combines storage access and normalization. Creating a separate pure helper would change the generated output, while moving the whole reader would not isolate pure normalization. Defer extraction rather than weakening the byte-identity gate.
