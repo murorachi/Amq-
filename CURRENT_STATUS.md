@@ -300,3 +300,15 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - The first auto-next attempt exposed a test-harness issue: it referenced the removed `quizAutoNext` control and treated a collapsed settings input as visible. The harness now sets `qsAutoNext` and dispatches the production preference events directly. The final full workflow passed.
 - No production HTML, runtime source, or CSS changes. V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; immutable V82.65 remains unchanged.
 - Browser scope: quiz playback is stubbed for deterministic lifecycle checks; multiplayer uses controlled mock API/WebSocket/media. This does not claim real audio, Firefox, or live multi-client server acceptance.
+
+
+## V82.85.11 AMQ custom-list normalization contract audit — ACCEPTED
+
+- CI: https://github.com/murorachi/Amq-/actions/runs/39123012625
+- Branch: `v82.85.11-amq-list-normalization-01`.
+- Both `source-and-unit` and `browser-native-origin` passed.
+- Added `tests/unit/custom_list_normalization_contract.test.cjs` with 8 exact-source assertions for legacy array payloads, object payloads, missing IDs/names, numeric-to-string conversion, duplicate anime ID removal, invalid rows, malformed payloads, and the existing empty fallback.
+- Added the new test to `.github/workflows/v82-85-4-engineering-acceptance.yml`.
+- Existing unit results in the same CI: custom-list CRUD 11/11, AMQ list validation 12/12, backup/restore 6/6; new normalization contract 8/8. Native-storage and full browser regression job passed.
+- Audit finding: `readCustomLists()` currently combines `readJson()` storage access with inline normalization in one function. There is no independently declared pure normalization function to move byte-for-byte. Extracting a new helper/call would change generated HTML bytes; moving the whole reader would not meet the requested pure-helper boundary. Therefore no production helper extraction was made.
+- Product HTML remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. No production source or CSS changed.
