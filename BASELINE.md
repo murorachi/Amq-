@@ -1,5 +1,14 @@
 # Baseline lock
 
+## V82.85.9 accepted test-only checkpoint
+
+- Added deterministic mock-API/WebSocket browser acceptance in tests/browser/multiplayer_lifecycle_acceptance.py; no production source changed.
+- CI run 39117608560 passed both jobs. Browser log: 119 PASS lines, 0 FAIL/exception lines.
+- Coverage: room creation, waiting/preparing/running/paused/reveal/finished transitions, team draft sync, audio deck behavior, leave/rejoin and WebSocket teardown.
+- Product lock unchanged: V82.82, 8,787,490 bytes, SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
+
+
+
 ## V82.85.8 accepted test-only checkpoint
 
 - Added deterministic browser contract `tests/browser/quiz_answer_playback_lifecycle.py`; no production source changed.

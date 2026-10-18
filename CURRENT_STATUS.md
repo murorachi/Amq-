@@ -1,3 +1,13 @@
+# Current engineering checkpoint: V82.85.9 MULTIPLAYER LIFECYCLE BROWSER CONTRACT (ACCEPTED)
+
+- Parent V82.85.8 quiz answer/playback contract passed CI: https://github.com/murorachi/Amq-/actions/runs/39116682422.
+- Added tests/browser/multiplayer_lifecycle_acceptance.py, using a controlled mock REST API, WebSocket, and media deck. Accepted CI run: https://github.com/murorachi/Amq-/actions/runs/39117608560; source/unit and browser jobs passed.
+- Browser assertions cover room creation and candidate pool, waiting → preparing → running → paused → running → reveal → finished, team WebSocket auth and draft round-trip, audio pause/reveal continuity, leave cleanup, reconnect, socket replacement, and final teardown. Combined browser log: 119 PASS lines, 0 FAIL/exception lines.
+- Architecture audit: quiz settlement and playback share round state, history/familiarity updates, events, media timers, and DOM controls; multiplayer polling, rendering, REST actions, WebSocket drafts, and dual media decks share one mutable session state. Do not extract these lifecycle blocks wholesale.
+- No production source changes. Product remains V82.82, 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; V82.65 immutable.
+
+---
+
 # Current engineering checkpoint: V82.85.8 QUIZ ANSWER + PLAYBACK LIFECYCLE CONTRACT (ACCEPTED)
 
 - Parent V82.85.7 browser-coverage checkpoint passed CI: https://github.com/murorachi/Amq-/actions/runs/39115364605.
