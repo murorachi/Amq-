@@ -122,10 +122,10 @@ def main():
                   "quiz timer/audio gate opens only after the media playing event")
             page.evaluate("window.__quizMediaProbe.pauseCalls = 0")
             page.locator("#quizAnswer").fill(song["title"])
-            button_state = page.evaluate("""() => { const e=document.getElementById("quizSubmit"),r=e?.getBoundingClientRect(),s=e?getComputedStyle(e):null; return {exists:!!e,disabled:!!e?.disabled,hidden:!!e?.hidden,display:s?.display,visibility:s?.visibility,rect:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,viewClass:document.getElementById("quizView")?.className,bodyClass:document.body.className,parentClass:e?.parentElement?.className}; }""")
+            button_state = page.evaluate("""() => { const e=document.getElementById("quizManualSubmitV42"),r=e?.getBoundingClientRect(),s=e?getComputedStyle(e):null; return {exists:!!e,disabled:!!e?.disabled,hidden:!!e?.hidden,display:s?.display,visibility:s?.visibility,rect:r?{x:r.x,y:r.y,width:r.width,height:r.height}:null,viewClass:document.getElementById("quizView")?.className,bodyClass:document.body.className,parentClass:e?.parentElement?.className}; }""")
             print("DIAGNOSTIC quiz submit " + json.dumps(button_state), flush=True)
             check(button_state["exists"] and not button_state["disabled"], "quiz submit control is enabled after successful playback")
-            page.evaluate("document.getElementById('quizSubmit').click()")
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
             page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
             events = page.evaluate("window.__quizLifecycleEvents")
             check(len(events["submitted"]) == 1 and events["submitted"][0].get("answer") == song["title"],
