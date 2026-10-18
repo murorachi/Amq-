@@ -1,5 +1,17 @@
 # Next task
 
+Current checkpoint: **V82.85.7 quiz browser acceptance coverage, pending CI**.
+
+1. Run the two newly wired browser suites and resolve any environment-specific failures without altering product behavior.
+2. Add a dedicated real-browser quiz submit/classify/skip and playback lifecycle contract, with deterministic audio/network stubs and assertions for history, familiarity, events, timers, and teardown.
+3. Add a separate multiplayer lifecycle acceptance harness using a controlled mock API/WebSocket for waiting → preparing → running → paused → reveal → finished → leave/reconnect; only then assess extraction boundaries.
+4. Keep CSS isolated from lifecycle refactors.
+
+Rollback: `v82.85.6-amq-anime-id-normalization-module-01`; product baseline remains V82.82.
+
+---
+
+
 Current checkpoint: **V82.85.6 AMQ anime-ID normalization module, accepted**. CI: https://github.com/murorachi/Amq-/actions/runs/39115085244
 
 1. Preserve V82.85.6's ID-normalization contract alongside native-storage, custom-list CRUD/mapping, reload, and backup/restore tests.
