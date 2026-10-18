@@ -1,46 +1,40 @@
 
-name: Retrieve V82.76 source archive for engineering
+name: Retrieve V82.76 Source Archive
 
 on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "GitHub Release tag containing V82.76"
+        description: "GitHub Release tag containing the V82.76 archive"
         required: true
         default: "AMQ1"
         type: string
       expected_sha256:
-        description: "Expected ZIP SHA-256 (optional, recommended)"
+        description: "Trusted expected SHA-256 hash (optional)"
         required: false
         default: ""
         type: string
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/retrieve-v8276-source.yml"
 
 permissions:
   contents: read
 
 jobs:
   retrieve-baseline:
-    name: Download, verify, and export V82.76 source
+    name: Download and Verify V82.76
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      - name: Download and verify V82.76 release archive
+      - name: Validate inputs and locate release asset
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: murorachi/Amq-
-          RELEASE_TAG: ${{ inputs.release_tag || 'AMQ1' }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
           EXPECTED_SHA256: ${{ inputs.expected_sha256 }}
         shell: bash
         run: |
           set -euo pipefail
 
-          # Validate inputs before using them.
           if [[ ! "$RELEASE_TAG" =~ ^[A-Za-z0-9._-]+$ ]]; then
             echo "::error::Invalid release tag."
             exit 1
@@ -48,16 +42,14 @@ jobs:
 
           if [[ -n "$EXPECTED_SHA256" ]] &&
              [[ ! "$EXPECTED_SHA256" =~ ^[a-fA-F0-9]{64}$ ]]; then
-            echo "::error::Expected SHA-256 must contain 64 hex characters."
+            echo "::error::SHA-256 must contain exactly 64 hexadecimal characters."
             exit 1
           fi
 
-          # Read the specified release metadata.
           gh api \
             "repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}" \
             > release.json
 
-          # Find exactly one ZIP whose filename identifies V82.76.
           python - <<'PY'
           import json
           import re
@@ -66,44 +58,60 @@ jobs:
           with open("release.json", encoding="utf-8") as f:
               release = json.load(f)
 
-          pattern = re.compile(r"v82[._-]?76.*\.zip$", re.I)
+          pattern = re.compile(
+              r"(?<![A-Za-z0-9])v?82[._-]?76(?![0-9]).*\.zip$",
+              re.IGNORECASE
+          )
+
+          assets = release.get("assets", [])
           matches = [
-              a for a in release.get("assets", [])
-              if pattern.search(a.get("name", ""))
+              asset for asset in assets
+              if pattern.search(asset.get("name", ""))
           ]
 
           if len(matches) != 1:
               print(
-                  "Expected exactly one V82.76 ZIP asset; "
-                  f"found {len(matches)}."
+                  f"Expected exactly one V82.76 ZIP, found {len(matches)}."
               )
-              print("Release assets:")
-              for asset in release.get("assets", []):
+              print("Available release assets:")
+              for asset in assets:
                   print(" -", asset.get("name", "(unnamed)"))
               sys.exit(1)
 
           asset = matches[0]
-          print("Selected asset:", asset["name"])
-          print("Asset size:", asset["size"])
-          print("Download URL:", asset["browser_download_url"])
+          url = asset.get("browser_download_url", "")
+          size = asset.get("size")
+
+          if not isinstance(size, int) or size <= 0:
+              print("Invalid asset size in release metadata.")
+              sys.exit(1)
+
+          expected_prefix = (
+              "https://github.com/murorachi/Amq-/releases/download/"
+          )
+
+          if not url.startswith(expected_prefix):
+              print("Unexpected release asset download URL.")
+              sys.exit(1)
 
           with open("asset.env", "w", encoding="utf-8") as f:
-              f.write("ASSET_NAME=" + asset["name"] + "\n")
-              f.write("ASSET_URL=" + asset["browser_download_url"] + "\n")
-              f.write("ASSET_SIZE=" + str(asset["size"]) + "\n")
+              f.write("ASSET_NAME=" + json.dumps(asset["name"]) + "\n")
+              f.write("ASSET_URL=" + json.dumps(url) + "\n")
+              f.write("ASSET_SIZE=" + str(size) + "\n")
+
+          print("Release:", release.get("tag_name", "unknown"))
+          print("Selected asset:", asset["name"])
+          print("Expected size:", size, "bytes")
           PY
 
-          source asset.env
+      - name: Download and verify archive
+        env:
+          EXPECTED_SHA256: ${{ inputs.expected_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
 
-          # Only download from the expected repository release domain.
-          case "$ASSET_URL" in
-            "https://github.com/${REPOSITORY}/releases/download/"*)
-              ;;
-            *)
-              echo "::error::Unexpected release asset URL."
-              exit 1
-              ;;
-          esac
+          eval "$(cat asset.env)"
 
           curl \
             --fail \
@@ -120,52 +128,58 @@ jobs:
           ACTUAL_SIZE="$(stat -c %s V82.76.zip)"
           ACTUAL_SHA256="$(sha256sum V82.76.zip | cut -d ' ' -f 1)"
 
-          printf 'Release tag:       %s\n' "$RELEASE_TAG"
-          printf 'Asset name:        %s\n' "$ASSET_NAME"
-          printf 'Release size:      %s\n' "$ASSET_SIZE"
-          printf 'Downloaded size:   %s\n' "$ACTUAL_SIZE"
-          printf 'Actual SHA-256:    %s\n' "$ACTUAL_SHA256"
+          echo "Asset: $ASSET_NAME"
+          echo "Expected size: $ASSET_SIZE bytes"
+          echo "Downloaded size: $ACTUAL_SIZE bytes"
+          echo "SHA-256: $ACTUAL_SHA256"
 
-          # Confirm the download matches GitHub's reported asset size.
-          test "$ACTUAL_SIZE" = "$ASSET_SIZE"
+          if [[ "$ACTUAL_SIZE" != "$ASSET_SIZE" ]]; then
+            echo "::error::Downloaded size does not match release metadata."
+            exit 1
+          fi
 
-          # Verify the expected hash when the operator provides one.
           if [[ -n "$EXPECTED_SHA256" ]]; then
             if [[ "${ACTUAL_SHA256,,}" != "${EXPECTED_SHA256,,}" ]]; then
               echo "::error::SHA-256 mismatch."
               exit 1
             fi
-            echo "Expected SHA-256 verified."
+            echo "Trusted SHA-256 comparison passed."
           else
-            echo "::warning::No expected SHA-256 supplied. Integrity is not independently authenticated."
+            echo "::warning::No trusted SHA-256 supplied; authenticity is not independently verified."
           fi
 
-          # Validate ZIP structure and CRC for every entry.
           python - <<'PY'
           import zipfile
           from pathlib import Path
 
           path = Path("V82.76.zip")
 
+          if not zipfile.is_zipfile(path):
+              raise SystemExit("Downloaded file is not a valid ZIP archive.")
+
           with zipfile.ZipFile(path) as archive:
               entries = archive.infolist()
-              assert entries, "Archive is empty"
 
-              bad = archive.testzip()
-              assert bad is None, f"ZIP CRC failure: {bad}"
+              if not entries:
+                  raise SystemExit("ZIP archive is empty.")
 
-              print("Archive entries:", len(entries))
+              bad_entry = archive.testzip()
+              if bad_entry is not None:
+                  raise SystemExit(f"ZIP CRC validation failed: {bad_entry}")
+
+              print(f"ZIP validation passed. Entries: {len(entries)}")
               for item in entries:
                   print(f"{item.file_size:>12} bytes  {item.filename}")
 
-          print("ZIP structure and CRC validation passed.")
+          print("ZIP structure and CRC checks passed.")
           PY
 
-          printf '%s  %s\n' "$ACTUAL_SHA256" "V82.76.zip" \
+          printf '%s  %s\n' \
+            "$ACTUAL_SHA256" "V82.76.zip" \
             > V82.76.zip.sha256
 
           {
-            echo "## V82.76 source archive"
+            echo "## V82.76 Archive Verification"
             echo
             echo "- Release tag: \`$RELEASE_TAG\`"
             echo "- Asset: \`$ASSET_NAME\`"
@@ -173,13 +187,13 @@ jobs:
             echo "- SHA-256: \`$ACTUAL_SHA256\`"
             echo "- ZIP structure and CRC: passed"
             if [[ -n "$EXPECTED_SHA256" ]]; then
-              echo "- Expected SHA-256 comparison: passed"
+              echo "- Trusted SHA-256 comparison: passed"
             else
-              echo "- Expected SHA-256 comparison: not performed"
+              echo "- Trusted SHA-256 comparison: not performed"
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Export verified archive for download
+      - name: Upload archive as downloadable artifact
         uses: actions/upload-artifact@v4
         with:
           name: v82-76-source-archive
@@ -188,39 +202,3 @@ jobs:
             V82.76.zip.sha256
           if-no-files-found: error
           retention-days: 7
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
