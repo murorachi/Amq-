@@ -1225,8 +1225,8 @@
       "path": "src/scripts/script_040.htmlpart",
       "start_byte": 8735844,
       "end_byte": 8768700,
-      "byte_length": 32350,
-      "sha256": "6fb52a62ecf9bcba0d721f406b2cc10d1212ef99fbaf7093c12611ed8bf37f9e",
+      "byte_length": 32289,
+      "sha256": "9c15d5e2b6b4060e9a0cc985ecaa2dadadf2520bf80f94122537b2323abd322c",
       "opening_tag": "<script id=\"v82-54-emq-audio-lists-batch\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1399,9 +1399,19 @@
       "insertion_fragment": "src/scripts/script_025.htmlpart",
       "purpose": "exact-source extraction of AMQ anime-ID normalization and catalog membership filtering",
       "runtime_contract": "original helper bytes restored at original IIFE position; same stringification, deduplication, and catalog filtering; no runtime behavior change"
+    },
+    {
+      "name": "emq_list_normalization",
+      "path": "src/modules/emq_list_normalization.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:emq_list_normalization -->",
+      "insertion_fragment": "src/scripts/script_040.htmlpart",
+      "byte_length": 109,
+      "sha256": "d1dc2e3045137d2cb7895b4f1592b4feaf8fcec9f8bdb404d0e502f70fdfeed9",
+      "purpose": "exact-source extraction of pure EMQ list-member normalization helper; trims, stringifies, removes blanks and duplicates preserving first occurrence",
+      "runtime_contract": "exact original helper bytes restored at original position in the same classic-script IIFE; no runtime script tag or behavior change"
     }
   ],
-  "module_count": 11,
+  "module_count": 12,
   "release": {
     "version": "V82.82",
     "bytes": 8787490,

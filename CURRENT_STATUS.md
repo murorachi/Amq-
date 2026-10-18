@@ -1,4 +1,13 @@
-# Current engineering checkpoint: V82.85.8 QUIZ ANSWER + PLAYBACK LIFECYCLE CONTRACT (ACCEPTED)
+# Current engineering checkpoint: V82.85.12 EMQ list normalization (awaiting CI)
+
+- Parent baseline: V82.85.11 commit `8de8ab357f985542981e974e1c113731cf5bd537`; product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
+- Audited `readEmqLists()`: it combines `readJson()` storage access and inline payload normalization, so it is not a pure extraction boundary. Kept it in place and added nine exact-source contract cases.
+- Extracted only the existing pure `unique(v)` helper from `src/scripts/script_040.htmlpart` into `src/modules/emq_list_normalization.htmlpart`, at the same source position through the manifest marker. Original helper bytes are asserted by the new contract test.
+- Added `tests/unit/emq_list_normalization_contract.test.cjs` with nine EMQ reader cases and five pure-helper cases, and wired it into engineering CI. CI and deterministic build are pending; do not call this checkpoint accepted until the workflow passes.
+- No intended product behavior, storage schema, UI, CSS, audio, quiz lifecycle, or multiplayer lifecycle changes. Builder fingerprint gate remains mandatory.
+
+---
+
 
 - Parent V82.85.7 browser-coverage checkpoint passed CI: https://github.com/murorachi/Amq-/actions/runs/39115364605.
 - Added `tests/browser/quiz_answer_playback_lifecycle.py` and wired it into the engineering workflow. Accepted CI run: https://github.com/murorachi/Amq-/actions/runs/39116682422; source/unit and browser jobs passed.
