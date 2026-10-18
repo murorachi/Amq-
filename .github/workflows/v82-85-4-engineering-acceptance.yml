@@ -1,4 +1,4 @@
-name: V82.85.4 engineering acceptance
+name: V82.85.13 real audio acceptance gate
 
 on:
   push:
@@ -62,6 +62,12 @@ jobs:
         run: python tests/browser/quiz_suggestions_integration.py --html dist/amq_learning_tool_v82_85_12.html
       - name: Run quiz answer and playback lifecycle acceptance
         run: python tests/browser/quiz_answer_playback_lifecycle.py --html dist/amq_learning_tool_v82_85_12.html
+      - name: Install PulseAudio output-capture tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio pulseaudio-utils
+      - name: Run real browser audio decode and output acceptance
+        run: python tests/browser/real_audio_output_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
       - name: Run multiplayer room, phase, live-draft and reconnect acceptance
         run: python tests/browser/multiplayer_lifecycle_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
   browser-firefox-responsive:
