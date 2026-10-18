@@ -1225,8 +1225,8 @@
       "path": "src/scripts/script_040.htmlpart",
       "start_byte": 8735844,
       "end_byte": 8768700,
-      "byte_length": 32924,
-      "sha256": "d64d1d64e29a33c970730c6cc5282a0ca0fe787750d2d8876162d5c921bb4c21",
+      "byte_length": 32351,
+      "sha256": "26a3cb9a3b26c34e7ae3dce73b5743d6bf35467ebf8ca71740adeafb9769cc50",
       "opening_tag": "<script id=\"v82-54-emq-audio-lists-batch\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1369,9 +1369,19 @@
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of answer metadata helpers for alias deduplication, anime/work name bundles and song role labels",
       "runtime_contract": "exact original source bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
+    },
+    {
+      "name": "emq_list_membership",
+      "path": "src/modules/emq_list_membership.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:emq_list_membership -->",
+      "byte_length": 619,
+      "sha256": "7a3a5125dc78bf7ece7ac8bdc9605b3c7a43daefa35945a89da04a238c446428",
+      "insertion_fragment": "src/scripts/script_040.htmlpart",
+      "purpose": "exact-source extraction of EMQ work/VNDB/song membership mapping helpers; preserves ID domains and original IIFE scope",
+      "runtime_contract": "exact original helper bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
     }
   ],
-  "module_count": 8,
+  "module_count": 9,
   "release": {
     "version": "V82.82",
     "bytes": 8787490,
