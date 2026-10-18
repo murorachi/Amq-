@@ -97,7 +97,7 @@ function buildEmqContext(storage = memoryStorage()) {
   const code=[
     "const KEY='aniEmqWorkListsV8254';",extractFunction(emqNormalizationModule,'unique'),extractFunction(emq,'loadDb'),extractFunction(emq,'saveDb'),extractFunction(emq,'api'),
     'let db=loadDb(); let managerListId="";',extractFunction(emq,'makeId'),extractFunction(emq,'createList'),extractFunction(emq,'addMembers'),extractFunction(emq,'removeMembers'),extractFunction(emqModule,'listWorkIds'),extractFunction(emqModule,'listSongIds'),
-    'globalThis.testHarness={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,get data(){return db}};'
+    'globalThis.testHarness={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,saveDb,get data(){return db}};'
   ].join('\n');
   vm.createContext(context);vm.runInContext(code,context,{timeout:1500});
   return {storage,api:context.testHarness};
@@ -156,4 +156,37 @@ test('EMQ UI source retains rename/delete and selected-list cleanup paths',()=>{
   assert.match(emq,/localStorage\.setItem\(SELECTED_KEY,JSON\.stringify\(getSelectedIds\(\)\.filter\(x=>x!==l\.id\)\)\)/);
   assert.match(emq,/localStorage\.removeItem\(INVALID_SCOPE_KEY_V8265\)/);
 });
-console.log('RESULT '+passed.length+' passed, '+(process.exitCode?'failed':'0 failed'));
+
+test('AMQ failed persistence does not mutate in-memory list state',()=>{
+  const h=buildAmqContext();const before=h.storage.getItem('aniCustomPracticeListsV1');
+  h.storage.setItem=()=>{throw new Error('quota exceeded')};
+  assert.equal(h.api.createList('Must not appear'),false);
+  assert.equal(h.api.data.lists.length,0);
+  assert.equal(h.storage.getItem('aniCustomPracticeListsV1'),before);
+});
+test('EMQ direct song IDs remain distinct and survive reload',()=>{
+  const h=buildEmqContext();const id=h.api.createList('Direct songs');
+  assert.ok(id);
+  const row={...h.api.data.lists[0],workIds:[],vndbIds:[],songIds:['910003','910003']};
+  assert.equal(h.api.saveDb({version:1,lists:[row]}),true);
+  assert.deepEqual(Array.from(h.api.data.lists[0].songIds),['910003']);
+  const after=buildEmqContext(h.storage);
+  assert.equal(after.api.data.lists[0].id,id);
+  assert.deepEqual(Array.from(after.api.data.lists[0].workIds),[]);
+  assert.deepEqual(Array.from(after.api.data.lists[0].vndbIds),[]);
+  assert.deepEqual(Array.from(after.api.data.lists[0].songIds),['910003']);
+  assert.deepEqual(Array.from(after.api.listSongIds(after.api.data.lists[0])),['910003']);
+});
+test('EMQ failed persistence does not publish a new in-memory list',()=>{
+  const h=buildEmqContext();const before=h.storage.getItem('aniEmqWorkListsV8254');
+  h.storage.setItem=()=>{throw new Error('quota exceeded')};
+  assert.equal(h.api.createList('Must not appear'),'');
+  assert.equal(h.api.data.lists.length,0);
+  assert.equal(h.storage.getItem('aniEmqWorkListsV8254'),before);
+});
+test('EMQ corrupt stored JSON falls back to empty list data without inventing IDs',()=>{
+  const storage=memoryStorage({'aniEmqWorkListsV8254':'{broken'});
+  const h=buildEmqContext(storage);
+  assert.deepEqual(Array.from(h.api.data.lists),[]);
+});
+\nconsole.log('RESULT '+passed.length+' passed, '+(process.exitCode?'failed':'0 failed'));
