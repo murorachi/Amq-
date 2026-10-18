@@ -1,0 +1,18 @@
+V82.83 CSS SELECTOR RESIDUAL REVIEW 01
+
+Engineering ZIP: AMQ_V82_83_CSS_SELECTOR_RESIDUAL_REVIEW_01.zip
+Bytes: 14511401
+SHA-256: ef324f6a8418f60158cbd8e9fe2474da20a163c0e308bf6b16f0fcad355c9d32
+ZIP entries: 294 unique / CRC PASS
+Internal manifest: 293/293 verified, 0 missing, 0 mismatched.
+
+Product HTML (unchanged V82.82): amq_learning_tool_v82_82.html
+Bytes: 8787490
+SHA-256: 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b
+
+Baseline V82.65 remains unchanged: 8786930 bytes / SHA-256 abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33
+Preserved V82.80 product remains unchanged: 8787422 bytes / SHA-256 f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+
+Validation: runner commands 1-17 PASS; 18-27 PASS; 28-34 PASS (34/34 aggregate); integrity verifier 116/116; backup export/import/rollback contract 4/4; CSS residual review 32/32 dispositioned, 0 unresolved, no CSS changes.
+
+Open: GitHub full source sync/clean remote build; native-origin Storage/backup acceptance; Firefox; real audio; two-client multiplayer/reconnect. Boundary-audit tool fingerprint mismatch is resolved with matching local/remote Git blob SHA-1 ae6690750077445dc85c22a740f4ab5497d9e737.
