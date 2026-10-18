@@ -1,4 +1,4 @@
-path,local_exists,local_bytes,local_sha256,remote_exists_on_v82_83_overlay,notes
+﻿path,local_exists,local_bytes,local_sha256,remote_exists_on_v82_83_overlay,notes
 reports/FRAGMENT_MANIFEST.json,YES,47164,fa6a831277308be64aa98658248e53e50de477b9b488b5c701c8a4959d4a9db7,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
 src/scripts/script_001.htmlpart,YES,102981,07e91622000ebfe9b7a03928fb4db948b787358ee19e61cfc9dcf94f428736a0,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
 src/scripts/script_004.htmlpart,YES,95160,8f9d41977463d0e1c211948f9c615f116309ec96c556013954c29f5f0222ec9e,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
