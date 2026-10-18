@@ -1,13 +1,14 @@
 V82.81 MODULARIZATION BOUNDARY AND LIFECYCLE CHECKPOINT
 
 Archive: AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip
-Bytes: 13921786
-SHA-256: a6c4dadf494654729cc60416401733710028c85b8428f53bea32717fd098c9af
+Bytes: 13921900
+SHA-256: f1f6a50d64b7606b2749ba84b8579ef42fed34a1fa9e23b6c4824dfb4e4c719c
 
 GitHub overlay branch: v82.81-modularization-boundary-and-lifecycle-01
 Full-source sync: OPEN; remote fresh-checkout build: NOT RUN
+Boundary-audit generator remote/local blob mismatch: OPEN
 
-a6c4dadf494654729cc60416401733710028c85b8428f53bea32717fd098c9af  AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip (13921786 bytes)
+f1f6a50d64b7606b2749ba84b8579ef42fed34a1fa9e23b6c4824dfb4e4c719c  AMQ_V82_81_MODULARIZATION_BOUNDARY_AND_LIFECYCLE_01.zip (13921900 bytes)
 f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe  amq_learning_tool_v82_80.html (8787422 bytes)
 f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe  dist/amq_learning_tool_v82_80.html (8787422 bytes)
 f833894b76eb457f225ae80ba35101cf1c907b2442c67db52831c507aa271c54  tests/unit/custom_list_source_contract.test.cjs (7620 bytes)
