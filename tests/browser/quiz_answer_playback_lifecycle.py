@@ -228,7 +228,7 @@ def main():
             check(events["answered"][0].get("target") == "anime" and events["answered"][0].get("familiarityUpdated") is True,
                   "anime-target skip records a familiarity update")
             familiarity = page.evaluate("(id) => JSON.parse(localStorage.getItem('aniCollection_v2')||'{}')[id]", song["id"])
-            check(Number(familiarity) == 1, "anime-target skip sets familiarity to heard")
+            check(float(familiarity or 0) == 1, "anime-target skip sets familiarity to heard")
             history = page.evaluate("window.__aniHistoryAPIv51?.getHistory?.() || []")
             row = next((x for x in reversed(history) if str(x.get("songId")) == song["id"]), None)
             check(bool(row) and row.get("correct") is False and row.get("target") == "anime" and row.get("answer") == "",
