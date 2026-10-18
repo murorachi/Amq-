@@ -64,3 +64,11 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 - Native-origin Storage, Firefox, real audio and two-client multiplayer remain separate blocked/not-run acceptance gates.
 
 - Static remote review confirms the 35-command registry and required source paths. The next meaningful gate is executable validation in a clean checkout: run the new Python contract, then runner in bounded batches with dist artifacts built first, then verifier and deterministic build. Capture exact outputs rather than infer PASS from GitHub file readback.
+
+
+## V82.86 next task — execute inventory regression and regenerate from clean checkout
+1. In a clean checkout of `v82.86-auto-acceptance-inventory-01`, run `python tests/unit/source_inventory_generator_contract.test.py` and `python tests/unit/automatic_acceptance_runner_contract.test.py`; capture exact exit codes and output.
+2. Run `python tools/generate_source_inventory.py --output reports/V82_86_REMOTE_SHA256SUMS.json`, inspect `file_count`, assert no path begins with `-`, and compare each generated path/hash/size with the checkout. Do not replace the derived V82.85.1 artifact or historical evidence.
+3. Build expected `dist/` artifacts, run all 36 canonical runner commands in bounded batches, then run `tools/verify.py` and a second deterministic build. Record actual output, not source-inspection assumptions.
+4. Confirm GitHub branch tree no longer contains root `--help`; read back generator, tests, runner, matrix, status files and corrected inventory. Product baseline must remain V82.82 at its existing SHA-256; V82.65 remains immutable.
+5. Native-origin Storage, Firefox, real audio and two-client multiplayer remain separate gates and must not be marked passed by this source-inventory work.
