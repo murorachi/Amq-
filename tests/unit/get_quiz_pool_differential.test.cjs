@@ -36,3 +36,4 @@ for(const [name,fixture] of scenarios){
  console.log(`PASS ${name}: ids and diagnostic equivalent`);
 }
 console.log(`RESULT ${assertions} differential assertions passed across ${scenarios.length} scenarios`);
+
