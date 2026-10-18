@@ -6,7 +6,7 @@ const INVALID_SCOPE_KEY_V8265='aniQuizCustomListScopeInvalidV8265';
 const $=id=>document.getElementById(id), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let db=loadDb(),selectedWorks=new Set(),selectedVns=new Set(),managerListId='',mounted=false,apiPatched=false,originalCombine=null;
 function loadDb(){try{const d=JSON.parse(localStorage.getItem(KEY)||'{"version":1,"lists":[]}');if(!d||!Array.isArray(d.lists))throw 0;return {version:1,lists:d.lists.filter(x=>x&&typeof x==='object').map((x,i)=>({id:String(x.id||`emq-${i}`),name:String(x.name||'未命名清單').trim().slice(0,80)||'未命名清單',workIds:unique(x.workIds),vndbIds:unique(x.vndbIds),songIds:unique(x.songIds),createdAt:x.createdAt||new Date().toISOString(),updatedAt:x.updatedAt||new Date().toISOString()}))}}catch{return {version:1,lists:[]}}}
-function unique(v){return [...new Set((Array.isArray(v)?v:[]).map(x=>String(x??'').trim()).filter(Boolean))]}
+<!-- AMQ_SPLIT_MODULE:emq_list_id_normalization -->
 function saveDb(next){const clean={version:1,lists:next.lists.map(l=>({...l,workIds:unique(l.workIds),vndbIds:unique(l.vndbIds),songIds:unique(l.songIds)}))};try{localStorage.setItem(KEY,JSON.stringify(clean));db=clean;renderManager();refreshBatchSelectors();renderQuizPicker();return true}catch(e){alert('無法儲存 EMQ 清單，可能是瀏覽器儲存空間不足。原本資料未確認有變更。');return false}}
 function api(){return window.__aniEmqAPI}
 function emqReady(){return !!api()?.ready}
