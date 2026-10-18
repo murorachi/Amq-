@@ -36,6 +36,8 @@ jobs:
         run: python tests/unit/run_module_contracts.py
       - name: Verify script_004 dependency boundary audit
         run: node tests/unit/script004_boundary_audit_contract.test.cjs
+      - name: Verify SRS schedule validation contract
+        run: node tests/unit/srs_schedule_validation_contract.test.cjs
       - name: Audit checkpoint package completeness and reproducibility
         run: python tests/unit/package_checkpoint_contract.py
       - name: Reconcile modularization closeout matrix with source manifest

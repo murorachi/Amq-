@@ -1,10 +1,11 @@
-# Current engineering checkpoint: V82.85.21 script_004 boundary decision (ACCEPTED)
+# Current engineering checkpoint: V82.85.22 history/SRS boundary audit (CI pending)
 
-- GitHub Actions run 39141674475 passed source/unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39141674475.
-- The script_004 dependency-boundary contract now runs in recurring CI and passed with the portable pinned TypeScript loader.
-- Decision: no additional non-trivial pure helper was justified for extraction from script_004; remaining functions are coupled to shared quiz state, DOM, storage, APIs, listeners or timer/playback lifecycle.
-- All 16 unique module contracts, package/matrix tests, deterministic V82.82 build and browser-native-origin tests passed.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product source/module/manifest/CSS/HTML changed.
+- Parent V82.85.21 script_004 boundary decision passed GitHub Actions run 39141674475.
+- Audited current history/SRS evidence for `script_020` and `script_023`.
+- Identified `isValidSchedule(x)` in script_020 as a meaningful pure validation candidate; added a direct test-first contract and wired it into CI. No production extraction yet.
+- Storage recovery/quarantine, FSRS state transitions, history/backup restore and dashboard lifecycle remain coupled pending stronger contracts.
+- CI pending; no product source/module/manifest/CSS/HTML changed.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 
