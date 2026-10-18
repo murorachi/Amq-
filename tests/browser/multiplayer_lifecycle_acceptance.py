@@ -189,6 +189,7 @@ def main():
             check(page.evaluate("(before) => window.__mpMock.state.phase === 'paused' && window.__mpMock.pauseCalls > before",pause_before),"pause transition pauses active media decks")
             page.locator("#mpResume").click(timeout=10000)
             page.wait_for_function("window.__mpMock.state.phase === 'running'",timeout=10000)
+            page.wait_for_selector("#mpAnswer_title",state="visible",timeout=10000)
             check(page.locator("#mpAnswer_title").is_visible(),"resume returns to the same running question")
 
             pause_before_reveal=page.evaluate("window.__mpMock.pauseCalls")
