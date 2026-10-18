@@ -50,3 +50,5 @@ jobs:
         run: python tests/browser/real_origin_acceptance_localhost.py --html dist/amq_learning_tool_v82_82.html
       - name: Run quiz suggestion and input integration acceptance
         run: python tests/browser/quiz_suggestions_integration.py --html dist/amq_learning_tool_v82_82.html
+      - name: Run quiz answer and playback lifecycle acceptance
+        run: python tests/browser/quiz_answer_playback_lifecycle.py --html dist/amq_learning_tool_v82_82.html
