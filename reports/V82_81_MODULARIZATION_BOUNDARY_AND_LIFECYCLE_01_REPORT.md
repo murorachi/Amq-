@@ -28,6 +28,7 @@ Date: 2026-10-18
 - Real audio/network, Firefox, and multiplayer two-client acceptance remain unexecuted.
 
 ## GitHub publication
+- Created overlay branch `v82.81-modularization-boundary-and-lifecycle-01` from the V82.80 overlay. Seven new text artifacts were read back from GitHub and their Git blob SHA-1 values match local bytes: this report, lifecycle CSV/report, visual geometry JSON, custom-list contract, lifecycle contract, and Chromium visual test script. The screenshot PNGs remain in the local package only.
 - The repository default branch contains the V82.76 archive and workflow files; V82.80 and later engineering branches are overlays. The available connector does not expose a direct local ZIP/tree upload operation. Full-source remote publication and clean-checkout rebuild remain open.
 
 ## Rollback
