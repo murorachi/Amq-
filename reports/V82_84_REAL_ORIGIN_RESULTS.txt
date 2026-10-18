@@ -5,4 +5,4 @@ Error: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:34969/amq_learning_
 First assertion reached: standalone HTML exists.
 Assertions not reached: app-origin localStorage/IndexedDB write/read, reload persistence, browser backup export/import, corrupt backup, write failure, native rollback and custom-list persistence.
 
-The managed Chromium policy directory contains 001_base_url_blocklist.json with URLBlocklist: ["*"]. No policy was altered or bypassed. Classification: ENVIRONMENT BLOCKED / NOT VERIFIED. In-memory tests are reported separately and are not substituted for native-origin acceptance.
+The managed Chromium policy directory contains `001_base_url_blocklist.json` with `URLBlocklist: ["*"]`. No policy was altered or bypassed. Classification: ENVIRONMENT BLOCKED / NOT VERIFIED. In-memory tests are reported separately and are not substituted for native-origin acceptance.
