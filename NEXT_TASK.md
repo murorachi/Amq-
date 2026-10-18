@@ -53,3 +53,5 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 - Do not change product/runtime files. Do not treat historical results as a current test run. Native-origin Storage remains blocked by recorded Chromium policy; Firefox/audio/multiplayer remain NOT VERIFIED/NOT RUN.
 
 - Acceptance matrix now exists at `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` (14 gates). Continue by locating the canonical runner definition; do not invent its path or duplicate the existing verifier.
+
+- Before calling publication acceptance complete, reconcile the V82.85.1 report's 345-file count against `reports/V82_85_1_REMOTE_SHA256SUMS.json`'s 346-file count and confirm the canonical runner's 34 commands.
