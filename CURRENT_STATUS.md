@@ -1,10 +1,10 @@
-# Current engineering checkpoint: V82.85.19 AMQ valid-anime-ID module contract (CI pending)
+# Current engineering checkpoint: V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)
 
-- Parent V82.85.18 matrix accepted in GitHub Actions run 39139529670; its docs-only follow-up passed in run 39139728016.
-- Matrix review found one evidence gap: the matrix referenced `tests/unit/amq_valid_anime_ids_contract.test.cjs`, but the file was absent from the remote tree.
-- Added a direct production-source contract for `validAnimeIds`, wired it into CI, and strengthened the matrix test to require referenced module test files to exist.
-- CI pending; local test execution not run. Product source/module/manifest/CSS/HTML unchanged.
-- Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Parent V82.85.18 modularization closeout matrix passed run 39139529670.
+- V82.85.19 passed GitHub Actions run 39140087926: source/unit and browser-native-origin both succeeded.
+- Added direct contract test for `src/modules/amq_valid_anime_ids.htmlpart`: 11 assertions cover manifest registration, byte length/SHA-256, host marker, stringification, deduplication, catalog filtering, ordering, empty arrays and invalid input.
+- Strengthened the matrix test so all module test references must exist in the repository.
+- The module source and product output are unchanged. Product lock remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
 

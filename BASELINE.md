@@ -1,11 +1,12 @@
-## V82.85.19 AMQ valid-anime-ID module contract (CI pending)
+## V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)
 
-- Closeout matrix review found a missing test file referenced for `src/modules/amq_valid_anime_ids.htmlpart`.
-- Added direct behavior/source-fingerprint tests and matrix enforcement that module test evidence paths exist.
-- CI pending; no product code changed.
+- GitHub Actions run 39140087926 passed source/unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39140087926.
+- Direct `validAnimeIds` module contract: 11 assertions passed. Matrix contract now verifies all referenced module test paths exist.
+- No product source, module source, manifest, CSS or HTML changed.
 - Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 

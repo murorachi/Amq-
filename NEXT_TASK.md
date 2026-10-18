@@ -1,15 +1,21 @@
 # Next task
 
-Current checkpoint: **V82.85.19 AMQ valid-anime-ID module contract (CI pending)**.
+Current checkpoint: **V82.85.19 AMQ valid-anime-ID module contract (ACCEPTED)**.
 Branch: `v82.85.19-amq-valid-anime-ids-contract-01`.
+Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39140087926.
 
-## Acceptance gate
-- Run the new `validAnimeIds` source contract in the main engineering workflow.
-- Ensure the closeout matrix test rejects missing referenced test files.
-- Confirm both source/unit and browser-native-origin jobs pass.
+## Accepted gates
+- Source inventory completeness and deterministic V82.82 build pass.
+- Checkpoint package inventory/reproducibility test passes.
+- Closeout matrix reconciles all 91 fragments and 13 modules against the manifest.
+- Every module test path referenced by the matrix exists.
+- `validAnimeIds` direct source contract passes 11 assertions.
+- Full browser-native-origin suite passes.
 
-## Next after acceptance
-Continue module-by-module test evidence reconciliation, then review `script_004` remaining lifecycle/global/DOM dependencies. Do not extract more core quiz code until the dependency boundary and tests are strong enough.
+## Next highest-value task
+Wire the existing module-specific contract tests into the main engineering CI workflow so that the 13-module inventory is not merely documented or tested only in historical checkpoint runs. Include candidate policy/integration, storage repository, database initializer, quiz suggestion helpers/renderer/controller, getQuizPool, answer metadata, EMQ membership, AMQ validation/ID normalization, EMQ normalization and numeric tolerance. Keep each test's output visible and fail-fast.
+
+After that, continue the remaining `script_004` dependency ownership audit before further production extraction.
 
 Known external acceptance limits remain Firefox/CSS cascade, real audio-provider playback, live two-client multiplayer reconnect, and production-domain storage policy/full IndexedDB failure cases.
 

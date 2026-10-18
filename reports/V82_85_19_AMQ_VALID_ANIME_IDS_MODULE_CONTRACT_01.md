@@ -15,10 +15,12 @@ The V82.85.18 closeout matrix referenced `tests/unit/amq_valid_anime_ids_contrac
 - Added the test to the V82.85.4 engineering acceptance workflow.
 - Strengthened `tests/unit/modularization_closeout_matrix_contract.py` so every module evidence reference beginning with `tests/` must resolve to an existing file. This prevents a future matrix from claiming a nonexistent test.
 
-## Validation
+## Validation (ACCEPTED)
 
-- GitHub Actions: pending at report creation.
-- Local execution: not run in this environment.
+- GitHub Actions run 39140087926 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39140087926.
+- The direct module contract passed 11 assertions covering registration/fingerprint/marker plus normalization, deduplication, catalog filtering, ordering and invalid-input behavior.
+- The strengthened closeout matrix contract confirmed every referenced module test path exists.
+- Local execution: not run in this environment; the tests ran in GitHub Actions.
 - Expected behavior remains byte-identical; the module implementation is not changed.
 - Product lock: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
