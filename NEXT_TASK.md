@@ -6,7 +6,7 @@
 - V82.82 product and immutable V82.65 baseline remain unchanged.
 - Native-origin acceptance harness and workflow are committed. The harness permits only the expected valid empty `aniSrsScheduleV1` addition after reload, and otherwise requires exact preservation of existing storage values.
 - AMQ/EMQ CRUD browser acceptance targets V82.82; its isolated UI shim checks create, membership add, rename, fresh-document initialization, and delete. Native-origin backup suite checks the actual export/import file-input flow and custom-list storage round-trip.
-- A low-risk exact-source module extraction moved only the pure EMQ ID normalization helper. Await deterministic build and browser CI evidence before considering this checkpoint accepted.
+- A low-risk exact-source module extraction moved only the pure EMQ ID normalization helper. Deterministic build and browser CI passed in https://github.com/murorachi/Amq-/actions/runs/39107928804 (commit `21a390bd925e7bb919085b2c01b22e1ea8bc1d02`): verifier 118/118, all Node/Python contracts, native storage/backup 20 assertions, AMQ/EMQ UI 19 assertions, native-origin smoke 15 assertions.
 
 ## Next actions, in order
 
