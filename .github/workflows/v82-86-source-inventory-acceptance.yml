@@ -13,6 +13,11 @@ on:
       - 'baseline/**'
       - 'reports/FRAGMENT_MANIFEST.json'
       - 'reports/visual-baselines/**'
+      - 'CURRENT_STATUS.md'
+      - 'BASELINE.md'
+      - 'NEXT_TASK.md'
+      - 'reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv'
+      - 'reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md'
   workflow_dispatch:
 
 permissions:
