@@ -1,0 +1,10 @@
+V82.82 NATIVE-ORIGIN ACCEPTANCE ATTEMPT
+
+Target: dist/amq_learning_tool_v82_82.html
+Harness: tests/browser/real_origin_acceptance_localhost.py
+Result: BLOCKED before page navigation
+Error: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:<ephemeral-port>/amq_learning_tool_v82_82.html
+
+Assertions reached: only standalone HTML file existence. The app did not load over localhost, so no native localStorage writes/reloads, IndexedDB transactions, backup export/import, restore rollback, or app-origin UI assertions executed.
+
+Classification: environment-blocked / NOT VERIFIED, not a passing test. Direct file:// navigation is blocked by the same browser policy. The in-memory UI harness is a separate, limited test and must not be substituted for this acceptance.
