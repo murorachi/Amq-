@@ -11,7 +11,7 @@ Prerequisites
 - Git
 - Playwright Python package and its Chromium browser
 
-PowerShell steps (run from the clean checkout of branch v82.84-source-sync-acceptance-gate-01)
+PowerShell steps (run from the clean checkout of branch v82.85.2-native-storage-backup-acceptance-01)
 
 1. Install Playwright if needed:
    python -m pip install playwright
