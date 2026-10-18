@@ -45,3 +45,26 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 
 ## V82.85.1 GitHub source sync publication
 - Next stage: execute native-origin Storage and backup rollback acceptance; do not extract answer/playback or multiplayer lifecycle before its gate.
+# Next task
+
+Current engineering checkpoint: **V82.85.2 NATIVE_STORAGE_BACKUP_ACCEPTANCE_01**. Product remains **V82.82**; immutable baseline remains V82.65.
+
+## Completed stage 1: GitHub source sync
+- Accepted commit: `14936c9247c58833ce8492702c75c1bd51589451` on `v82.84-source-sync-acceptance-gate-01`.
+- Remote SHA-256 inventory: 346 files, 0 mismatches.
+- Clean checkout deterministic build: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; `tools/verify.py` exit 0.
+
+## Current stage 2: native Storage and full backup
+- Harness: `V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01.py` (14,163 bytes; SHA-256 `359275c2bb424aed739ba5967e6eb5c4b5037e1a9a5db436ca05b2c511630de2`). The local downloadable artifact is not yet included as a repository file; runbook/report are published under `reports/V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01_*`.
+- Static/unit gates passed: storage repository 9/9, backup restore 6/6, full backup round-trip 4/4, verifier 116/116, deterministic product hash unchanged.
+- Native browser gate is BLOCKED / NOT RUN in the current managed Chromium environment (`ERR_BLOCKED_BY_ADMINISTRATOR` before localhost page initialization). Run the harness on a Windows/browser environment that permits localhost and retain its full log. Exit code 0 is required to close this gate; exit code 2 is an environment block, not a product pass/fail.
+
+## Strict next order
+1. Run native-origin acceptance on Windows using the exact V82.82 HTML fingerprint. Verify localStorage and IndexedDB reload persistence, actual full-backup export, malformed import no-mutation, valid import, injected write-failure exact rollback and post-reload persistence.
+2. If stage 2 passes, perform AMQ/EMQ custom-list CRUD + real reload + backup round-trip acceptance in the same native-origin browser context.
+3. Obtain Firefox responsive/cascade comparison before any CSS movement.
+4. Run real audio and two-client multiplayer/reconnect acceptance. Only after these gates pass may high-risk answer/playback or multiplayer lifecycle extraction begin.
+
+## Rollback and constraints
+- No production runtime/CSS/HTML changes in V82.85.2. Roll back engineering-only changes by returning to the V82.84 source-sync branch/commit. Product fallback remains V82.82; V82.65 remains immutable.
+- Do not label native-origin storage, Firefox, audio, or multiplayer as passed until the corresponding test evidence exists.
