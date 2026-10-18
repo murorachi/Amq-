@@ -110,6 +110,45 @@ def main():
                 re=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\"lists\":[]}'"))
                 check(any(x.get("id")==amq_row["id"] and x.get("name")=="Native AMQ renamed" for x in ra),"backup restore recovers AMQ list")
                 check(any(x.get("id")==erow["id"] and x.get("name")=="Native EMQ renamed" for x in re.get("lists",[])),"backup restore recovers EMQ list and ID mapping")
+
+            # Verify the restored state survives the import-triggered document reload.
+            page.reload(wait_until="domcontentloaded",timeout=60000); page.wait_for_timeout(900)
+            page.evaluate("window.__aniNavigateApp?.('watchlist')"); page.wait_for_timeout(100)
+            page.locator("#customModeTab").click()
+            check(page.locator(".customListCard h3").filter(has_text="Native AMQ renamed").count()==1,
+                  "restored AMQ list remains visible after a second real document reload")
+            restored_amq=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')"))
+            restored_amq_rows=restored_amq.get("lists",restored_amq) if isinstance(restored_amq,dict) else restored_amq
+            restored_amq_row=next(x for x in restored_amq_rows if x.get("id")==amq_row["id"])
+            check(any(str(x)==str(aid) for x in restored_amq_row.get("animeIds",[])),
+                  "restored AMQ list retains its original member ID after reload")
+            page.locator("#emqListsModeTabV8254").click()
+            check(page.locator("#emqListGridV8254 .emqListCardV8254 h3").filter(has_text="Native EMQ renamed").count()==1,
+                  "restored EMQ list remains visible after a second real document reload")
+            restored_emq=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')"))
+            restored_emq_row=next(x for x in restored_emq["lists"] if x.get("id")==erow["id"])
+            check(str(wid) in restored_emq_row.get("workIds",[]) and str(vnid) in restored_emq_row.get("vndbIds",[]),
+                  "restored EMQ list retains original ID and distinct work/VNDB memberships after reload")
+
+            # Valid JSON with an invalid envelope must not alter any saved state.
+            before_corrupt=snapshot(page)
+            corrupt_payload={"status":[],"storage":{"aniCustomPracticeListsV1":"CORRUPT_SENTINEL",
+                             "aniEmqWorkListsV8254":"CORRUPT_SENTINEL"},"storageManifest":{"schemaVersion":-1}}
+            with tempfile.TemporaryDirectory() as td:
+                corrupt_path=Path(td)/"invalid-workspace-backup.json"
+                corrupt_path.write_text(json.dumps(corrupt_payload),encoding="utf-8")
+                page.locator("#importFile").set_input_files(str(corrupt_path))
+                page.wait_for_timeout(350)
+            after_corrupt=snapshot(page)
+            check(after_corrupt==before_corrupt,
+                  "invalid backup envelope is rejected before any localStorage mutation")
+            page.evaluate("window.__aniNavigateApp?.('watchlist')"); page.wait_for_timeout(100)
+            page.locator("#customModeTab").click()
+            check(page.locator(".customListCard h3").filter(has_text="Native AMQ renamed").count()==1,
+                  "failed invalid-backup import preserves the restored AMQ list")
+            page.locator("#emqListsModeTabV8254").click()
+            check(page.locator("#emqListGridV8254 .emqListCardV8254 h3").filter(has_text="Native EMQ renamed").count()==1,
+                  "failed invalid-backup import preserves the restored EMQ list")
             check(not errors,"no uncaught browser errors during native storage acceptance")
             ctx.close(); browser.close()
     finally:
