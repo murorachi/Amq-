@@ -1,3 +1,16 @@
+# Current engineering checkpoint: V82.85.3 NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01 (2026-10-18)
+
+- Follow-up branch: `v82.85.3-native-storage-reload-assertion-fix-01`; base V82.85.2 commit: `3cb626c5501822c6b4ed3d13ebe5bdab3ab74809`.
+- Product remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable. No product HTML or runtime source was changed.
+- Native-origin diagnostic result reviewed: all backup/export/import/rollback assertions passed. The only reported failure was strict equality of the complete localStorage key set after reload. The recorded diff adds only a valid default-empty `aniSrsScheduleV1`; all prior keys/values are unchanged.
+- Source cause confirmed in `src/scripts/script_020.htmlpart`: `loadStore()` creates an in-memory default when the SRS key is absent, and the `pagehide` handler persists it. The assertion was too strict, not evidence of prior storage data loss.
+- Added `tests/unit/native_storage_reload_snapshot_contract.test.cjs`: 7/7 cases passed in an executed Node run. It allows only the exact default-empty SRS key; any changed/deleted prior value, malformed/non-empty SRS schedule, or unrelated new key still fails.
+- Manual user acceptance: V82.82 HTML opens normally and the learning feature works.
+- Limitation: the original Playwright native-origin harness was not rerun with the corrected policy, and the local-only harness itself is not tracked in this repository. The corrected snapshot contract passed against fixtures and matches the recorded diff, but do not describe this as a fresh end-to-end rerun.
+- Report: `reports/V82_85_3_NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01_REPORT.md`. No claim is made that static verifier 116/116 was rerun during this follow-up; its prior result and product fingerprint remain unchanged.
+
+---
+
 # Current engineering checkpoint: V82.84 SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT (2026-10-18)
 
 - Product remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable; V82.80 remains separately preserved.
