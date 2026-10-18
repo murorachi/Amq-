@@ -43,7 +43,7 @@ Result: 4/4 assertions passed. Existing storage repository contract remains 9/9;
 - To return to the prior engineering state, restore V82.82 `CURRENT_STATUS.md`, `NEXT_TASK.md`, `README.md`, runner, and package tool from the V82.82 checkpoint archive. V82.82 standalone HTML remains unchanged.
 
 ## Next highest-value work
-1. Publish the exact boundary-audit tool bytes and verify remote blob SHA-1; then complete a true full-source transfer using a permitted binary/tree upload path and run a clean remote checkout build.
+1. Complete a true full-source transfer using a permitted binary/tree upload path, then run a clean remote checkout build and verify every required path/hash. The boundary-audit tool fingerprint mismatch is now resolved.
 2. Run native-origin storage and backup acceptance in a browser environment whose policy permits the test origin; include real reload, import/export, corrupt backup and write-failure rollback.
 3. Install/use Firefox in an approved environment and compare responsive baselines before any CSS movement.
 4. Run real audio and two-client multiplayer/reconnect acceptance before considering lifecycle extraction.
