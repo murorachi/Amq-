@@ -24,7 +24,7 @@ ENVIRONMENT BLOCKERS / NOT EXECUTED
 - Native localhost acceptance: BLOCKED before app navigation by Chromium ERR_BLOCKED_BY_ADMINISTRATOR. Native localStorage/IndexedDB persistence, actual reload, browser-level backup download/import, and native-origin rollback were not executed.
 - Firefox is not installed; no Firefox responsive comparison was run.
 - Real audio/network, two-client multiplayer and reconnect acceptance were not executed.
-- GitHub complete source-tree synchronization, remote SHA-256 audit and clean remote checkout build remain incomplete. The remote boundary-audit tool blob mismatch remains open.
+- GitHub complete source-tree synchronization, remote SHA-256 audit and clean remote checkout build remain incomplete. The boundary-audit tool blob mismatch was resolved by readback: remote and local Git blob SHA-1 both equal ae6690750077445dc85c22a740f4ab5497d9e737; full source-tree sync remains incomplete.
 
 CSS DECISION
 - All 32 residual inventory rows now have a disposition. Eight are keyframe/style-tag parser artifacts, not component selectors; the other 24 are categorized by selector semantics and source context.
