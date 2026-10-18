@@ -160,3 +160,10 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - Remote clean-checkout SHA-256 inventory: PASS (345 files).
 - Clean-checkout build and verifier: PASS; BUILD PASS: 8787490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b; tools/verify.py exit 0.
 - This records source publication only; native-origin Storage acceptance and Firefox/audio/multiplayer gates remain separate.
+
+
+## V82.86 automatic acceptance inventory — 2026-10-19
+- Engineering-only inventory branch: `v82.86-auto-acceptance-inventory-01`, based on `v82.84-source-sync-acceptance-gate-01`.
+- Product remains V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; immutable V82.65 remains unchanged.
+- Existing manifest/build/verifier/unit/browser coverage and known native-origin/Firefox/audio/multiplayer gaps were inspected and recorded in `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
+- No product HTML, runtime JS/CSS, source fragments, manifest, or build configuration changed. Tests were not executed in this inventory-only step.
