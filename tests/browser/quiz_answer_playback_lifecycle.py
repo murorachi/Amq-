@@ -237,6 +237,24 @@ def main():
                   "explicit skip after successful playback is not misclassified as unplayed audio")
             page.close()
 
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            page.locator("#qsAutoNextDelay").fill("1")
+            page.locator("#qsAutoNextDelay").dispatch_event("change")
+            page.locator("#quizAutoNext").check()
+            song = start_question(page, True)
+            page.locator("#quizAnswer").fill(song["title"])
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
+            page.wait_for_function(
+                "(oldId) => { const s=window.__aniQuizStateV45?.quizSong; return !!s && String(s[1]) !== oldId && window.__aniQuizStateV45?.quizFinished === false; }",
+                arg=song["id"], timeout=10000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is True,
+                  "auto-next settles the current correct answer exactly once before advancing")
+            next_song = page.evaluate("String(window.__aniQuizStateV45.quizSong[1])")
+            check(next_song != song["id"],
+                  "auto-next advances to a different song after the configured delay")
+            page.close()
+
             check(not errors, "no uncaught browser page errors during quiz lifecycle acceptance")
         finally:
             browser.close()
