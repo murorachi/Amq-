@@ -1,0 +1,45 @@
+name: V82.85.4 engineering acceptance
+
+on:
+  push:
+    branches:
+      - "v82.85.4-*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify source fingerprints and deterministic V82.82 build
+        run: python tools/verify.py
+      - name: Run native-storage, custom-list and backup contract tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/unit/native_storage_reload_snapshot_contract.test.cjs
+          node tests/unit/custom_list_crud_reload_contract.test.cjs
+          node tests/unit/backup_restore_contract.test.cjs
+  browser-native-origin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Playwright
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Run real-origin native storage and custom-list acceptance
+        run: python tests/browser/native_storage_custom_lists_acceptance.py --html dist/amq_learning_tool_v82_82.html
