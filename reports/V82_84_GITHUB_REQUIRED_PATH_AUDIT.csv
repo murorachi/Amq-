@@ -1,0 +1,19 @@
+path,local_exists,local_bytes,local_sha256,remote_exists_on_v82_83_overlay,notes
+reports/FRAGMENT_MANIFEST.json,YES,47164,fa6a831277308be64aa98658248e53e50de477b9b488b5c701c8a4959d4a9db7,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/scripts/script_001.htmlpart,YES,102981,07e91622000ebfe9b7a03928fb4db948b787358ee19e61cfc9dcf94f428736a0,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/scripts/script_004.htmlpart,YES,95160,8f9d41977463d0e1c211948f9c615f116309ec96c556013954c29f5f0222ec9e,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/scripts/script_040.htmlpart,YES,32924,d64d1d64e29a33c970730c6cc5282a0ca0fe787750d2d8876162d5c921bb4c21,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/styles/style_001.htmlpart,YES,27128,281256a268fba93b02bd5dd74524bb6455efa124845e8ba4143ce05984e99fdf,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/styles/style_050.htmlpart,YES,1831,9b927e6c1d436bfca2268df20898a95a35bda6fd10e5869933b26030cba73697,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+src/template.html.in,YES,23660,bbb0e57dfff2aa2673663460da191c265bd5a57fb5889c559df37e45034bc009,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tools/build.py,YES,2814,18f635d83da90c597f99de537407d90e23f1be3b82603b6fd0abe74b20caf9f8,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tools/verify.py,YES,2887,071741648f1225e920d3970768cf55283f4005ac423fe3a49aae79ffb3fe49f3,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tools/run_all_checks.py,YES,5456,14e9e1bbebe3202e60b1880e569ba524b7c58f8a1c35a6ac39e1b4c0af600129,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tests/unit/full_backup_restore_roundtrip_contract_v82_83.test.cjs,YES,7247,98354d9490471d043862395cf5f4582bc97fdb6a786259804b118d7b4969ac0f,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tests/browser/custom_lists_ui_acceptance.py,YES,12047,95bdb2dd6b6f1b5f3ba76e4a51038485c8b936603511f3a4a4ca95298c8a9724,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tests/browser/real_origin_acceptance_localhost.py,YES,7862,62d5b1419b4fa6ed066cbf637e113158ae8793a873d08397be1a7959f127a9a4,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+tests/browser/responsive_visual_baseline.py,YES,5163,2494128fc38ebb97f7c7fdea76762c9d7679524789d306a11faabb8d561a95b5,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+reports/V82_82_RESPONSIVE_VISUAL_BASELINE.json,YES,12043,abbf51a44800168a64cfcfca6dfb1eb935c3a3f59a6b98248f46252bca1b9c90,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+reports/visual-baselines/v82_81_home.png,YES,144398,3ef4dc8c4ea8c09ab248951d7b59b484828d7fb0deeafa268222a1e84df29bda,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+reports/visual-baselines/v82_81_quiz.png,YES,94349,6c97e5c1d2b5e457f2d39e0bea09125f4e01b768cc4df7197f9d8e4c4e910ff7,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
+reports/visual-baselines/v82_82_responsive/v82_82_mobile_home.png,YES,82319,999da62a714155ccf648f95fe849c249ede3be03fc9a7b23cfcf082a69283cf5,NO,remote existence checked against recursive tree of v82.83 overlay; full source path absent
