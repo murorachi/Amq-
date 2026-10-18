@@ -28,6 +28,7 @@ jobs:
           set -euo pipefail
           node tests/unit/native_storage_reload_snapshot_contract.test.cjs
           node tests/unit/custom_list_crud_reload_contract.test.cjs
+          node tests/unit/amq_custom_list_validation.test.cjs
           node tests/unit/backup_restore_contract.test.cjs
   browser-native-origin:
     runs-on: ubuntu-latest
