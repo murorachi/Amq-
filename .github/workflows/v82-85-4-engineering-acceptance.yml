@@ -38,6 +38,8 @@ jobs:
         run: python tests/unit/package_checkpoint_contract.py
       - name: Reconcile modularization closeout matrix with source manifest
         run: python tests/unit/modularization_closeout_matrix_contract.py
+      - name: Validate row-by-row modularization closeout disposition
+        run: python tests/unit/modularization_closeout_disposition_contract.py
   browser-native-origin:
     runs-on: ubuntu-latest
     steps:

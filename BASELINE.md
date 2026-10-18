@@ -1,3 +1,12 @@
+## V82.85.22 closeout disposition matrix (CI pending)
+
+- Added deterministic `tools/modularization_closeout_disposition.py` and generated `reports/MODULARIZATION_CLOSEOUT_DISPOSITION.csv` covering all 104 rows: 91 fragments and 13 modules.
+- Added `tests/unit/modularization_closeout_disposition_contract.py` to validate inventory coverage, evidence links, disposition counts and byte-identical regeneration.
+- Wired the contract into engineering CI. No production source or product HTML changes.
+- Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+
+---
+
 ## V82.85.21 script_004 extraction decision (CI pending)
 
 - Rechecked the current AST boundary report against candidate timer, practice-metadata and answer-alias helper bodies.
