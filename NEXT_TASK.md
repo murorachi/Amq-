@@ -4,7 +4,7 @@
 - GitHub Actions clean checkout, deterministic V82.82 build and fresh tracked-file SHA-256 inventory.
 - Full runner: 36/36 commands passed; integrity verifier: 116/116; inventory generator contract and runner contract passed.
 - Chromium home/quiz visual baseline passed with narrowly bounded cross-build tolerance: body height <=1 CSS px; element geometry <=1.5 CSS px; selector presence, display/visibility, body class and widths remain exact.
-- Current verified code commit: `d340ba5e4431cdd1aaab591c8da0f2f46947e012`; run: https://github.com/murorachi/Amq-/actions/runs/39177254020
+- Latest CI-verified branch HEAD: `f41a0ef8465f43e9a73935eafae540731fdae6d3`; acceptance code commit: `d340ba5e4431cdd1aaab591c8da0f2f46947e012`; run: https://github.com/murorachi/Amq-/actions/runs/39177551001
 
 ## Next highest-value task
 1. Add/run `tests/browser/real_origin_acceptance_localhost.py` as a separate GitHub Actions gate using the clean Ubuntu Chromium environment. Verify native localStorage/IndexedDB, actual same-origin reload persistence, export/import, corrupt backup rejection, write-failure rollback, and exact restored state. Do not count the in-memory shim tests as native acceptance.

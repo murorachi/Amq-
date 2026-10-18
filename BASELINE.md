@@ -4,10 +4,10 @@
 
 - Product release remains V82.82, unchanged at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Immutable V82.65 remains unchanged at 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- GitHub Actions run 39177254020 passed all 36 acceptance commands and all 116 verifier checks. The V82.82 output rebuilt byte-identically; the clean branch inventory contained 353 tracked files with verified byte counts and SHA-256.
+- GitHub Actions run 39177551001 passed all 36 acceptance commands and all 116 verifier checks. The V82.82 output rebuilt byte-identically; the clean branch inventory contained 353 tracked files with verified byte counts and SHA-256.
 - This is engineering/test-harness work only. No production HTML, runtime JavaScript/CSS, source fragments, or build manifest was modified.
 - Browser scope is still limited to isolated-storage Chromium. Native-origin persistence/backup rollback, Firefox, real audio/network, and two-client multiplayer remain unverified/not run.
-- Run record: https://github.com/murorachi/Amq-/actions/runs/39177254020
+- Run record: https://github.com/murorachi/Amq-/actions/runs/39177551001
 
 ## Latest distinct product release: V82.82
 

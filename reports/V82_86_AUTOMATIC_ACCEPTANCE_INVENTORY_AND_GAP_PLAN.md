@@ -91,12 +91,12 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 
 ## Executed CI acceptance — 2026-10-19
 
-GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39177254020
+GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39177551001
 - Result: 36/36 canonical runner commands passed; exit code 0.
 - Integrity/deterministic build verifier: 116/116 passed. V82.82 rebuilt to 8,787,490 bytes with SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Source inventory generator regression contract: PASS; runner contract: PASS; fresh tracked-file inventory: 353 files, every byte count and SHA-256 verified.
 - Chromium CSS visual baseline: PASS. The first CI run exposed a 1px quiz body-height difference and <=1.5px subpixel geometry shifts versus the historical baseline. The test now allows only these small geometric tolerances while keeping selector presence, display/visibility, body class, and widths exact. The historical baseline file was not rewritten.
-- Artifact with logs, inventory and current home/quiz screenshots: https://github.com/murorachi/Amq-/actions/runs/39177254020/artifacts/12154956540
+- Artifact with logs, inventory and current home/quiz screenshots: https://github.com/murorachi/Amq-/actions/runs/39177551001/artifacts/12155061611
 
 ## Remaining unaccepted gates
 
