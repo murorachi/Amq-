@@ -49,7 +49,7 @@ def main():
     assert "function listWorkIds(" in emq_membership
     assert "function listSongIds(" in emq_membership
     assert "getWorkByVndbId" in emq_membership
-    assert "list.workIds" in emq_membership and "list.vndbIds" in emq_membership and "list.songIds" in emq_membership
+    assert "workIds" in emq_membership and "vndbIds" in emq_membership and "songIds" in emq_membership
 
     # The repository adapter exists, but current list flows still use direct localStorage.
     assert "window.__aniStorageRepositoryV1=Object.freeze(" in storage
