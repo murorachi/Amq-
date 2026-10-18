@@ -1,5 +1,16 @@
 # Next task
 
+Current checkpoint: **V82.85.5 AMQ custom-list validation module, pending CI**.
+
+1. Check V82.85.5 Actions; require deterministic V82.82 byte-identical build and focused tests to pass.
+2. If accepted, inspect pure AMQ list normalization helpers next. Do not extract DOM/storage mutation logic without a separate contract.
+3. Keep native-origin list/backup tests in CI; answer submission, playback, multiplayer lifecycle and CSS remain gated.
+
+Rollback: return to `v82.85.4-native-storage-custom-lists-modularization-01`; product baseline remains V82.82.
+
+---
+
+
 Current engineering checkpoint: **V82.85.4 native storage + custom-list acceptance + low-risk module extraction**. Product remains **V82.82**; immutable baseline remains V82.65.
 
 ## Verified in V82.85.4
