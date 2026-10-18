@@ -2,6 +2,7 @@
 
 - Product baseline: V82.82, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Engineering checkpoint: V82.83 CSS selector residual review; no production HTML/CSS/runtime changed.
+- Local package: `AMQ_V82_83_CSS_SELECTOR_RESIDUAL_REVIEW_01.zip`, 14,511,401 bytes, SHA-256 `ef324f6a8418f60158cbd8e9fe2474da20a163c0e308bf6b16f0fcad355c9d32`. The ZIP itself is not uploaded to GitHub.
 - Branch: `v82.83-css-selector-residual-review-01` (overlay branch).
 - New local artifacts: residual review script/contract, backup export/import/rollback contract, validation report, residual CSV and native-origin blocker report.
 
