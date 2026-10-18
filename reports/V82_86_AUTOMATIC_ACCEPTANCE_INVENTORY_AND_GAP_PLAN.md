@@ -47,3 +47,8 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 - Integrity verifier: NOT RUN in this session.
 - Browser interaction/native-origin tests: NOT RUN in this session.
 - Product build: NOT RUN in this session.
+
+
+
+## Follow-up artifact
+- Added `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` with 14 traceable acceptance gates. Exact-branch readback matched the authored CSV contents byte-for-byte.
