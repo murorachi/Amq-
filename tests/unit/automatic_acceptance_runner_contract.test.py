@@ -47,7 +47,7 @@ for entry in commands_node.elts:
             "registered command script path is a literal")
     script_paths.append(script_node.value)
 
-require(len(labels) == 35, "runner has exactly 35 registered commands including this contract")
+require(len(labels) == 36, "runner has exactly 36 registered commands including this contract")
 require(len(labels) == len(set(labels)), "runner command labels are unique")
 require(labels[-1] == "automatic acceptance runner contract", "runner contract is registered as the final command")
 require(script_paths[-1] == SELF, "final command points to this contract file")
