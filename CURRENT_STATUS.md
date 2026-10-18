@@ -289,3 +289,14 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Static/local checks passed: Python syntax and CLI smoke; storage repository contract 9/9; backup restore contract 6/6; full backup round-trip contract 4/4; integrity verifier 116/116; deterministic product fingerprint unchanged.
 - Native-origin acceptance is BLOCKED / NOT RUN in this environment: Chromium returns `ERR_BLOCKED_BY_ADMINISTRATOR` before localhost page initialization. No claim is made for native-origin persistence, real UI import/export or browser-level rollback. The acceptance script must be run in a Windows/browser environment that permits localhost.
 - No production runtime/CSS or product HTML changed. V82.65 remains immutable; V82.82 remains the product baseline. Answer/playback and multiplayer lifecycle extraction stays blocked until native acceptance and later audio/multiplayer gates are completed.
+
+
+## V82.85.10 quiz settlement browser contract — ACCEPTED
+
+- CI: https://github.com/murorachi/Amq-/actions/runs/39118213634
+- Accepted commit before this documentation update: `b4d5d52a36c88f4ac1d17e41e04bab10b9249fdc`.
+- Both `source-and-unit` and `browser-native-origin` jobs passed. The source/unit job verified the deterministic V82.82 build and ran native-storage, custom-list and backup contract tests.
+- Extended `tests/browser/quiz_answer_playback_lifecycle.py` to cover incorrect anime-target answers and familiarity updates, timer-driven settlement, explicit skip, and configured auto-next. The existing successful-playback, history, reveal audio continuity, teardown, no-audio rejection and unplayed-skip assertions remain active.
+- The first auto-next attempt exposed a test-harness issue: it referenced the removed `quizAutoNext` control and treated a collapsed settings input as visible. The harness now sets `qsAutoNext` and dispatches the production preference events directly. The final full workflow passed.
+- No production HTML, runtime source, or CSS changes. V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; immutable V82.65 remains unchanged.
+- Browser scope: quiz playback is stubbed for deterministic lifecycle checks; multiplayer uses controlled mock API/WebSocket/media. This does not claim real audio, Firefox, or live multi-client server acceptance.
