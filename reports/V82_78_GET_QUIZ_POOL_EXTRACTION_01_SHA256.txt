@@ -1,9 +1,16 @@
-V82.78 GET_QUIZ_POOL_EXTRACTION_01
+Checkpoint: V82.78 GET_QUIZ_POOL_EXTRACTION_01
+Source package: AMQ_V82_78_GET_QUIZ_POOL_EXTRACTION_01.zip
+Source package SHA-256: 581f70f701fd962f28ae69890bbef4312ef79f0c77f041f060fb942b60177350
+Source package bytes: 13568617
+ZIP entries: 229
+ZIP CRC: PASS
+
+Module: src/modules/get_quiz_pool.htmlpart
 Module bytes: 2824
 Module SHA-256: 2f1508935bb6c6c8622baf015a156334b4a2bff3572d8f1f5adab6f6637b11bf
-Product V82.72 bytes: 8787018
-Product V82.72 SHA-256: fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
-Full source ZIP bytes: 13568623
-Full source ZIP SHA-256: a5b2b44ab734823b2d5c0b7a99b6787a711183074f2a63be94b44cadb68e33c1
-ZIP entries: 229; unique: 229; CRC: PASS
-Validation: 19/19 commands; 114/114 integrity checks; deterministic builds match.
+
+Product output: dist/amq_learning_tool_v82_72.html
+Product bytes: 8787018
+Product SHA-256: fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
+
+Validation: run_all_checks.py 19/19 commands passed; verify.py 114/114 checks passed; two independent builds byte-identical.
