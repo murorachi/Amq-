@@ -78,3 +78,12 @@ Locate the canonical full-runner entry point and its 34 registered commands; ver
 - PASS (static remote inspection): all 34 pre-existing command script paths appear in the previously published source inventory; the newly added contract path is present as a committed file on this branch.
 - PASS (source inspection): the contract contains checks for command count 35, unique labels, script existence, non-zero failure propagation, and invalid range rejection.
 - NOT RUN: Python contract execution, full runner execution, verifier, build, browser acceptance. Remote readback/static inspection is not a substitute for running these tests.
+
+
+## V82.86 source inventory producer correction — 2026-10-19
+- Git recursive-tree readback confirmed root `--help` was a tracked blob of 8,787,490 bytes and shared the same Git blob SHA-1 as `dist/amq_learning_tool_v82_82.html`. It was deleted from the engineering branch; the product path was untouched.
+- Added `tools/generate_source_inventory.py`, which obtains the file list from `git ls-files -z`, sorts paths, computes SHA-256 and byte counts from file bytes, excludes the requested output path, and rejects option-like root paths, missing/non-regular files, symlinks, and output paths outside the repository.
+- Added `tests/unit/source_inventory_generator_contract.test.py` with temporary-Git-repository scenarios for CLI option parsing, pseudo-path rejection, file count and bytes, self-exclusion, deterministic regeneration, and outside-root rejection.
+- Registered the new regression contract in `tools/run_all_checks.py`; canonical runner now has 36 commands, with its runner-contract test last.
+- Created `reports/V82_85_1_REMOTE_SHA256SUMS_CORRECTED_DERIVED.json` by removing the `--help` entry from the old inventory, leaving 345 records. It is explicitly a derived correction from historical hashes, not a fresh scan of the current branch. The original V82.85.1 checksum JSON and report remain unchanged as historical evidence.
+- Remote code writes returned commit IDs and the branch files are to be read back for final verification. The new Python tests, complete runner, verifier, build and browser tests have NOT RUN in this session; source publication does not constitute execution acceptance.
