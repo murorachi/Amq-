@@ -90,15 +90,30 @@ def main():
         if not baseline.is_file(): raise SystemExit('Baseline missing; run once with --update-baseline')
         expected = json.loads(baseline.read_text(encoding='utf-8'))
         for name in ['home','quiz']:
-            for key in ['body','elements']:
-                actual_value = result['pages'][name][key]
-                expected_value = expected['pages'][name][key]
-                if actual_value != expected_value:
+            actual_body = result['pages'][name]['body']
+            expected_body = expected['pages'][name]['body']
+            # Permit only a one-CSS-pixel height rounding difference across Chromium builds.
+            # Class, width and all measured element geometry remain exact.
+            for field in ['className', 'scrollWidth', 'clientWidth']:
+                if actual_body[field] != expected_body[field]:
                     raise AssertionError(
-                        f'{name} {key} differs from baseline; inspect screenshots and update deliberately if intended; '
-                        f'actual={json.dumps(actual_value, ensure_ascii=False, sort_keys=True)} '
-                        f'expected={json.dumps(expected_value, ensure_ascii=False, sort_keys=True)}'
+                        f'{name} body {field} differs from baseline; '
+                        f'actual={actual_body[field]!r} expected={expected_body[field]!r}'
                     )
+            for field in ['scrollHeight', 'clientHeight']:
+                if abs(actual_body[field] - expected_body[field]) > 1:
+                    raise AssertionError(
+                        f'{name} body {field} differs by more than 1 CSS pixel; '
+                        f'actual={actual_body[field]!r} expected={expected_body[field]!r}'
+                    )
+            actual_elements = result['pages'][name]['elements']
+            expected_elements = expected['pages'][name]['elements']
+            if actual_elements != expected_elements:
+                raise AssertionError(
+                    f'{name} elements differ from baseline; inspect screenshots and update deliberately if intended; '
+                    f'actual={json.dumps(actual_elements, ensure_ascii=False, sort_keys=True)} '
+                    f'expected={json.dumps(expected_elements, ensure_ascii=False, sort_keys=True)}'
+                )
         print('PASS geometry baseline matches home and quiz')
     print('PASS production HTML initializes; home and quiz screenshots captured; no horizontal overflow; no uncaught page errors')
     for name, data in result['pages'].items(): print(f"{name}: {data['screenshot']['bytes']} bytes sha256={data['screenshot']['sha256']}")
