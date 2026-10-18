@@ -9,9 +9,6 @@
 - Browser scope is still limited to isolated-storage Chromium. Native-origin persistence/backup rollback, Firefox, real audio/network, and two-client multiplayer remain unverified/not run.
 - Run record: https://github.com/murorachi/Amq-/actions/runs/39177254020
 
-## Baseline lock
-
-
 ## Latest distinct product release: V82.82
 
 - Product HTML: `dist/amq_learning_tool_v82_82.html`

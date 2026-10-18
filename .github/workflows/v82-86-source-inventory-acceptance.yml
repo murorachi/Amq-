@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - v82.86-auto-acceptance-inventory-01
+    paths:
+      - '.github/workflows/v82-86-source-inventory-acceptance.yml'
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - 'dist/**'
+      - 'baseline/**'
+      - 'reports/FRAGMENT_MANIFEST.json'
+      - 'reports/visual-baselines/**'
   workflow_dispatch:
 
 permissions:
