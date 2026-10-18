@@ -191,12 +191,21 @@ def main():
                 # NotAllowedError until a real user gesture, then restore native play().
                 page.evaluate("""() => {
                   const nativePlay = HTMLMediaElement.prototype.play;
+                  window.__acceptanceTrustedPlayGesture = false;
+                  // Playwright/browser activation state can vary by runner. Model the
+                  // policy at the actual trusted control click instead of relying on
+                  // transient/sticky navigator.userActivation timing.
+                  document.addEventListener('click', event => {
+                    if (event.isTrusted && event.target?.closest?.('#playPauseBtn')) {
+                      window.__acceptanceTrustedPlayGesture = true;
+                    }
+                  }, true);
                   window.__restoreNativeMediaPlay = () => {
                     HTMLMediaElement.prototype.play = nativePlay;
                     delete window.__restoreNativeMediaPlay;
                   };
                   HTMLMediaElement.prototype.play = function(...args) {
-                    if (this === audioEl && !navigator.userActivation?.isActive) {
+                    if (this === audioEl && !window.__acceptanceTrustedPlayGesture) {
                       return Promise.reject(new DOMException(
                         'Autoplay blocked by deterministic acceptance policy', 'NotAllowedError'));
                     }
