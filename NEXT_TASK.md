@@ -1,5 +1,28 @@
 # Next task
 
+Current engineering checkpoint: **V82.85.4 native storage + custom-list acceptance + low-risk module extraction**. Product remains **V82.82**; immutable baseline remains V82.65.
+
+## Work added in this checkpoint
+1. Tracked native-origin Chromium harness for the corrected reload snapshot contract, AMQ/EMQ custom-list create/member/rename/reload, and full-backup export/delete/restore.
+2. Node source-contract tests for custom-list persistence and work/VNDB/song ID mapping; the seven-case native-storage snapshot contract and backup manifest tests remain in place.
+3. Extracted only the EMQ list membership mapping helpers into `src/modules/emq_list_membership.htmlpart`; exact original bytes remain at the original build insertion point.
+4. Added a branch-scoped GitHub Actions workflow for source verification, focused unit tests and browser acceptance.
+
+## Immediate next action
+- Inspect the first GitHub Actions run for this branch. Fix actual failures before treating this checkpoint as accepted. Confirm deterministic build still matches V82.82 byte-for-byte.
+- If the native-origin harness passes, retain the source-only EMQ helper extraction. If it fails, keep the production HTML unchanged and fix the test assumptions or root cause based on captured evidence.
+- Then select the next low-risk extraction only after its dependencies and tests are mapped. Do not extract answer submission, audio playback, multiplayer lifecycle or CSS cascade until their real-browser acceptance gates are satisfied.
+
+## Known unverified gates
+- Firefox/cascade comparison, real audio playback, production-domain storage policies, multiplayer multi-client reconnect.
+- The original local-only test file was not available in this repository session; the new tracked harness is a reproducible equivalent, not a verbatim copy.
+
+## Rollback
+- Return to `v82.85.3-native-storage-reload-assertion-fix-01` to discard the entire V82.85.4 engineering-only checkpoint.
+- Product fallback remains V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. Immutable V82.65 remains untouched.
+
+---
+
 Current engineering checkpoint: **V82.85.3 NATIVE_STORAGE_RELOAD_ASSERTION_FIX_01**. Product remains **V82.82**; immutable baseline remains V82.65.
 
 ## Just completed: native storage reload assertion review
