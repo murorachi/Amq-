@@ -1,0 +1,54 @@
+AMQ V82.85.2 Native Storage + Full Backup Acceptance
+
+Purpose
+- Run real localhost HTTP origin acceptance using the exact V82.82 product HTML.
+- Exercise native localStorage and IndexedDB, a real document reload, actual UI backup export, malformed-import no-mutation behavior, successful full restore, and exact rollback after a one-shot injected storage write failure.
+- This is an isolated temporary Playwright browser context. It does not use a localStorage/IndexedDB shim and does not touch the user's normal browser profile.
+
+Prerequisites
+- Python 3.10+ recommended
+- Node.js (for build and existing contract tests)
+- Git
+- Playwright Python package and its Chromium browser
+
+PowerShell steps (run from the clean checkout of branch v82.84-source-sync-acceptance-gate-01)
+
+1. Install Playwright if needed:
+   python -m pip install playwright
+   python -m playwright install chromium
+
+2. Build and verify the known product:
+   python tools/build.py dist/amq_learning_tool_v82_82.html
+   python tools/verify.py
+
+   Expected product: 8,787,490 bytes
+   Expected SHA-256: 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b
+
+3. Copy V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01.py to the parent folder of the checkout, then run from the checkout root:
+   & python ..\V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01.py --html .\dist\amq_learning_tool_v82_82.html 2>&1 | Tee-Object .\V82_85_2_NATIVE_STORAGE_BACKUP_ACCEPTANCE_01_LOG.txt
+   $testExit = $LASTEXITCODE
+   Write-Host "Acceptance exit code: $testExit"
+
+4. Interpret the exit code:
+   0 = all native-origin assertions passed
+   1 = a test assertion or unexpected runtime failure; retain the full log
+   2 = browser policy blocked localhost before app initialization; this is BLOCKED/NOT RUN, not a product pass or fail
+
+Assertions included
+- Exact V82.82 product size precondition
+- App loads on real localhost HTTP origin with no injected storage shim
+- Native localStorage and IndexedDB APIs are present
+- Dedicated IndexedDB transaction commits and survives a real reload
+- Actual UI full-backup export creates a versioned backup with a consistent sorted manifest
+- Malformed JSON import leaves every origin localStorage key/value unchanged
+- Valid full backup import uses the real file input and restores an allowlisted marker while preserving unrelated origin storage
+- One-shot Storage.prototype.setItem fault causes full restore to fail, then checks exact localStorage rollback
+- All localStorage values survive a subsequent real document reload
+- No uncaught page errors during the exercised flow
+
+Safety and scope
+- Tests run in a new temporary browser context, not the user's everyday browser profile.
+- The only injected fault is one-shot and exists solely to force the restore rollback branch. Native storage remains the backing store.
+- The test uses a dedicated IndexedDB database and a uniquely named unrelated localStorage marker; both are removed at the end when possible, and the temporary context is closed regardless.
+- Do not use real user data or a normal persistent browser profile for this test.
+- This does not cover Firefox, production-domain policies, real audio/network, multiplayer, or AMQ/EMQ list CRUD. Those remain separate gates.
