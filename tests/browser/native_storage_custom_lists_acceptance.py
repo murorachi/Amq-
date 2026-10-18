@@ -99,17 +99,66 @@ def main():
             with page.expect_download(timeout=30000) as dl:
                 page.locator("#exportBtn").click()
             with tempfile.TemporaryDirectory() as td:
-                backup_path=Path(td)/"backup.json"; dl.value.save_as(str(backup_path))
-                backup=json.loads(backup_path.read_text(encoding="utf-8")); storage=backup.get("storage",{})
+                backup_path=Path(td)/"backup.json"
+                dl.value.save_as(str(backup_path))
+                backup=json.loads(backup_path.read_text(encoding="utf-8"))
+                storage=backup.get("storage",{})
                 check("aniCustomPracticeListsV1" in storage and "aniEmqWorkListsV8254" in storage and isinstance(backup.get("storageManifest"),dict),"full backup contains both custom lists and a storage manifest")
-                page.locator(f'[data-emq-list-delete="{erow["id"]}"]').click(); page.wait_for_timeout(120)
-                page.locator("#customModeTab").click(); page.locator(f'[data-cl-delete="{amq_row["id"]}"]').click(); page.wait_for_timeout(120)
-                page.locator("#importFile").set_input_files(str(backup_path)); page.wait_for_timeout(1000)
-                ra=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\"lists\":[]}'"))
+
+                # A corrupt manifest must be rejected before confirmation or mutation.
+                corrupt=dict(backup)
+                corrupt["storageManifest"]=dict(backup["storageManifest"])
+                corrupt["storageManifest"]["keys"]=list(corrupt["storageManifest"]["keys"])+["aniEmqWorkListsV8254"]
+                corrupt_path=Path(td)/"corrupt-backup.json"
+                corrupt_path.write_text(json.dumps(corrupt,ensure_ascii=False),encoding="utf-8")
+                before_corrupt=snapshot(page)
+                page.locator("#importFile").set_input_files(str(corrupt_path))
+                page.wait_for_timeout(350)
+                check(snapshot(page)==before_corrupt,"corrupt backup manifest is rejected before any storage mutation")
+
+                # Remove both test lists, then fail one write during restore and require exact rollback.
+                page.locator(f'[data-emq-list-delete="{erow["id"]}"]').click()
+                page.wait_for_timeout(120)
+                page.locator("#customModeTab").click()
+                page.locator(f'[data-cl-delete="{amq_row["id"]}"]').click()
+                page.wait_for_timeout(120)
+                before_failed_restore=snapshot(page)
+                page.evaluate("""() => {
+                  const original=Storage.prototype.setItem;
+                  window.__amqRestoreFault={armed:true};
+                  Storage.prototype.setItem=function(key,value){
+                    if(window.__amqRestoreFault?.armed && String(key)==="aniEmqWorkListsV8254"){
+                      window.__amqRestoreFault.armed=false;
+                      throw new DOMException("synthetic restore write failure","QuotaExceededError");
+                    }
+                    return original.call(this,key,value);
+                  };
+                }""")
+                page.locator("#importFile").set_input_files(str(backup_path))
+                page.wait_for_timeout(600)
+                check(snapshot(page)==before_failed_restore,"restore write failure rolls all application storage back to exact prior snapshot")
+
+                # A clean retry must restore both stores and survive a real document reload.
+                page.locator("#importFile").set_input_files(str(backup_path))
+                page.wait_for_timeout(1200)
+                restored=snapshot(page)
+                check("aniCustomPracticeListsV1" in restored and "aniEmqWorkListsV8254" in restored,"valid full backup restores both AMQ and EMQ stores")
+                ra=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\\"lists\\":[]}'"))
                 ra=ra.get("lists",ra) if isinstance(ra,dict) else ra
-                re=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\"lists\":[]}'"))
-                check(any(x.get("id")==amq_row["id"] and x.get("name")=="Native AMQ renamed" for x in ra),"backup restore recovers AMQ list")
-                check(any(x.get("id")==erow["id"] and x.get("name")=="Native EMQ renamed" for x in re.get("lists",[])),"backup restore recovers EMQ list and ID mapping")
+                re=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\\"lists\\":[]}'"))
+                check(any(x.get("id")==amq_row["id"] and x.get("name")=="Native AMQ renamed" for x in ra),"backup restore recovers AMQ list identity and name")
+                check(any(x.get("id")==erow["id"] and x.get("name")=="Native EMQ renamed" for x in re.get("lists",[])),"backup restore recovers EMQ list identity and name")
+                page.reload(wait_until="domcontentloaded",timeout=60000)
+                page.wait_for_timeout(900)
+                after_restore_reload=snapshot(page)
+                check(after_restore_reload.get("aniCustomPracticeListsV1")==restored.get("aniCustomPracticeListsV1"),"AMQ custom-list payload survives reload after restore")
+                check(after_restore_reload.get("aniEmqWorkListsV8254")==restored.get("aniEmqWorkListsV8254"),"EMQ custom-list payload survives reload after restore")
+                page.evaluate("window.__aniNavigateApp?.('watchlist')")
+                page.wait_for_timeout(100)
+                page.locator("#customModeTab").click()
+                check(page.locator(".customListCard h3").filter(has_text="Native AMQ renamed").count()==1,"restored AMQ list renders after reload")
+                page.locator("#emqListsModeTabV8254").click()
+                check(page.locator("#emqListGridV8254 .emqListCardV8254 h3").filter(has_text="Native EMQ renamed").count()==1,"restored EMQ list renders after reload")
             check(not errors,"no uncaught browser errors during native storage acceptance")
             ctx.close(); browser.close()
     finally:
