@@ -16,9 +16,7 @@
  let songIndexSource=null, songIndexById=new Map();
  const getSongFast=id=>{if(songIndexSource!==songs){songIndexSource=songs;songIndexById=new Map((Array.isArray(songs)?songs:[]).map(s=>[String(s[1]),s]))}return songIndexById.get(String(id))||null};
  const songListForAnime=ids=>Array.isArray(songs)?songs.filter(s=>ids.has(String(s[0]))&&String(s[4]||'').trim()):[];
- const validIdArray=v=>Array.isArray(v)&&v.every(x=>(typeof x==='string'&&x.trim()!=='')||(typeof x==='number'&&Number.isFinite(x)));
- const validListRow=v=>!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.animeIds)&&validIdArray(v.animeIds)&&(v.id==null||typeof v.id==='string'||typeof v.id==='number')&&(v.name==null||typeof v.name==='string');
- const validListPayload=v=>Array.isArray(v)?v.every(validListRow):!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.lists)&&v.lists.every(validListRow);
+ <!-- AMQ_SPLIT_MODULE:amq_custom_list_validation -->
  const readListData=()=>{
   const raw=safeRead(KEYS.lists,{version:1,lists:[]},validListPayload);
   if(Array.isArray(raw))return {version:1,lists:raw.filter(x=>x&&typeof x==='object').map((x,i)=>({id:String(x.id||('legacy-'+i)),name:String(x.name||'未命名清單').slice(0,80),animeIds:[...new Set((Array.isArray(x.animeIds)?x.animeIds:[]).map(String))],createdAt:x.createdAt||new Date().toISOString(),updatedAt:x.updatedAt||new Date().toISOString()}))};
