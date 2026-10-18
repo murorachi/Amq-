@@ -41,6 +41,7 @@ COMMANDS = [
     ("script_004 boundary audit contract", ["node", "tests/unit/script004_boundary_audit_contract.test.cjs"]),
     ("standalone HTML build", [sys.executable, "tools/build.py", "dist/amq_learning_tool_v82_82.html"]),
     ("integrity and deterministic rebuild", [sys.executable, "tools/verify.py"]),
+    ("automatic acceptance runner contract", [sys.executable, "tests/unit/automatic_acceptance_runner_contract.test.py"]),
 ]
 
 def main():
