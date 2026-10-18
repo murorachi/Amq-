@@ -1,4 +1,13 @@
-# Current engineering checkpoint: V82.85.5 AMQ CUSTOM-LIST VALIDATION MODULE (pending CI)
+# Current engineering checkpoint: V82.85.6 AMQ ANIME-ID NORMALIZATION MODULE (pending CI)
+
+- Parent V82.85.5 acceptance passed at https://github.com/murorachi/Amq-/actions/runs/39114740898 (source/unit and browser jobs successful).
+- Extracted `validAnimeIds` byte-for-byte into `src/modules/amq_valid_anime_ids.htmlpart`; helper stringifies IDs, deduplicates them, and filters against the current anime catalog.
+- Added a contract test for numeric/string identity, duplicate removal, and missing-catalog IDs. Full V82.82 byte-identical build and browser regression are pending.
+- Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+
+---
+
+# Current engineering checkpoint: V82.85.5 AMQ CUSTOM-LIST VALIDATION MODULE (accepted)
 
 - Parent: `v82.85.4-native-storage-custom-lists-modularization-01`.
 - Extracted `validIdArray`, `validListRow`, and `validListPayload` byte-for-byte into `src/modules/amq_custom_list_validation.htmlpart` at their original IIFE position.
