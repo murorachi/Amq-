@@ -243,7 +243,7 @@ def main():
             # real preference handlers without depending on opening unrelated UI.
             page.evaluate("""() => {
               const delay = document.getElementById('qsAutoNextDelay');
-              const enabled = document.getElementById('quizAutoNext');
+              const enabled = document.getElementById('qsAutoNext');
               if (!delay || !enabled) throw new Error('auto-next settings controls missing');
               delay.value = '1';
               delay.dispatchEvent(new Event('input', {bubbles:true}));
