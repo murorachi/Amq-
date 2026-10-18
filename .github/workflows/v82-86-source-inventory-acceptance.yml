@@ -81,7 +81,7 @@ jobs:
           print(f"FRESH INVENTORY PASS: {len(paths)} files; every byte count and SHA-256 verified")
           PY
 
-      - name: Run all 36 canonical acceptance commands
+      - name: Run all 36 canonical acceptance commands against V82.82
         id: full_runner
         continue-on-error: true
         run: |
