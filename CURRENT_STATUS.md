@@ -1,3 +1,16 @@
+# Current engineering checkpoint: V82.85.13 REAL AUDIO OUTPUT ACCEPTANCE GATE (CI PENDING)
+
+- Parent accepted checkpoint: `v82.85.12-multiplayer-leave-poll-race-fix-01`; no production runtime fragment or generated product HTML was changed.
+- Added `tests/browser/real_audio_output_acceptance.py`: native Chromium media decode with a deterministic PCM16 WAV served through the application's actual AMQ mirror fallback path. The first mirror is deliberately aborted; the second returns valid media bytes.
+- The test starts a PulseAudio null sink and captures monitor PCM. Assertions cover autoplay rejection/manual retry, fallback progression, native playback/time advancement, pause/resume, the quiz playback gate, reveal continuity, `ended`, and cleanup after leaving quiz. Peak/RMS thresholds make silent output a failure.
+- Wired the test into `.github/workflows/v82-85-4-engineering-acceptance.yml` after installing PulseAudio tools. Added `reports/V82_85_13_REAL_AUDIO_OUTPUT_ACCEPTANCE_GATE_01_REPORT.md`.
+- The branch was pushed by GitHub API commits. Full CI execution is pending; do not describe the new audio test as passed until its job log and the final workflow result are inspected.
+- Scope limit: deterministic fixture audio proves the browser decode/output path and production fallback controller, not live AniSongDB/AMQ source availability, licensing, or physical-speaker output. Production-domain storage policy remains open.
+- Product remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.85.12 candidate remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Rollback: `v82.85.12-multiplayer-leave-poll-race-fix-01`.
+
+---
+
 # Current engineering checkpoint: V82.85.12 MULTIPLAYER LEAVE / STALE-POLL RACE FIX (ACCEPTED)
 
 - Base: `v82.85.11-firefox-responsive-acceptance-01`, commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
