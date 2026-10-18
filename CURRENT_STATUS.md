@@ -1,12 +1,11 @@
-# Current engineering checkpoint: V82.86.02 full engineering backlog
+# Current engineering checkpoint: V82.86.03 quiz lifecycle ownership audit
 
-- Branch: `v82.86.02-engineering-backlog-01`.
-- Parent: `v82.86.01-structural-issue-inventory-01`, commit `7bbbd8eb883db6b97822fac5e32a2a2ff903bde9`.
-- Master tracker: `reports/ENGINEERING_BACKLOG.csv`, 34 items.
-- Report: `reports/V82_86_02_ENGINEERING_BACKLOG_01.md`.
-- Added `tests/unit/engineering_backlog_contract.py` and wired it into source/unit CI.
+- Branch: `v82.86.03-quiz-lifecycle-ownership-01`.
+- Parent: `v82.86.02-engineering-backlog-01`, commit `5ed5249c7f6f3865a2ab518c87a55d8ffb4ff793`.
+- Report: `reports/V82_86_03_QUIZ_LIFECYCLE_OWNERSHIP_01.md`.
+- Added source-level lifecycle contract and Chromium exit/countdown/re-entry acceptance.
 - Product remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
-- Engineering-only scope: no product source, CSS, manifest or generated HTML changes.
-- This is evidence-led triage, not a claim that every source line has been manually audited.
-- External gates remain separate: Firefox/CSS cascade, real audio, live two-client multiplayer, and expanded IndexedDB/production-origin failure cases.
-- Next bounded work: AMQ-TODO-001 through AMQ-TODO-004, quiz lifecycle ownership and test-gap review.
+- No product JS/CSS, manifest or generated HTML changed.
+- This is not heap-based listener-leak proof or real-provider audio validation.
+- New CI must pass before backlog items are closed.
+- Next: reconcile AMQ-TODO-001..004 status with evidence, then audit high-risk cross-fragment dependencies.

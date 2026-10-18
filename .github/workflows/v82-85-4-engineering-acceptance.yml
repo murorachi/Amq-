@@ -33,6 +33,7 @@ jobs:
           node tests/unit/custom_list_crud_reload_contract.test.cjs
           node tests/unit/custom_list_normalization_contract.test.cjs
           node tests/unit/emq_selection_contract.test.cjs
+          node --test tests/unit/quiz_lifecycle_ownership_contract.test.cjs
       - name: Run all module contracts referenced by closeout matrix
         run: python tests/unit/run_module_contracts.py
       - name: Audit checkpoint package completeness and reproducibility

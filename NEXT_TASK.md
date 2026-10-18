@@ -1,23 +1,20 @@
 # Next task
 
-Current checkpoint: **V82.86.02 full engineering backlog**. Branch `v82.86.02-engineering-backlog-01`. Parent `7bbbd8eb883db6b97822fac5e32a2a2ff903bde9`.
+Current checkpoint: **V82.86.03 quiz lifecycle ownership audit**. Branch `v82.86.03-quiz-lifecycle-ownership-01`. Parent `5ed5249c7f6f3865a2ab518c87a55d8ffb4ff793`.
 
 ## Deliverables
-- `reports/ENGINEERING_BACKLOG.csv`: 34 task rows with evidence, dependencies, action, acceptance and automation.
-- `reports/V82_86_02_ENGINEERING_BACKLOG_01.md`: scope, evidence, order, constraints and task index.
-- `tests/unit/engineering_backlog_contract.py`: schema, ID, dependency and report parity checks.
-- Main engineering workflow runs the new contract.
+- `reports/V82_86_03_QUIZ_LIFECYCLE_OWNERSHIP_01.md`: state, DOM, timers/listeners and limits.
+- `tests/unit/quiz_lifecycle_ownership_contract.test.cjs`: source-level lifecycle invariants.
+- `tests/browser/quiz_answer_playback_lifecycle.py`: exit-during-countdown, stale callback and re-entry checks.
+- Engineering workflow runs the new contract and browser suites.
+
+## Acceptance gate
+Wait for source/unit and browser-native-origin jobs. If either fails, record the actual assertion and fix before closing tasks.
 
 ## Next bounded work
-AMQ-TODO-001 through AMQ-TODO-004:
-1. Trace shared quiz state reads/writes and transitions.
-2. Map key DOM mutation owners.
-3. Pair event/timer/animation registrations with cleanup and repeated entry/exit.
-4. Revalidate suggestion click/keyboard/IME/focus/ARIA behavior against current source.
-5. Add missing tests before production refactor.
-
-## External gates
-Firefox/CSS cascade; real audio provider/network; live two-client multiplayer/reconnect; expanded IndexedDB and production-origin policy/failure acceptance.
+1. After CI passes, update AMQ-TODO-001, 002 and 004 based on evidence.
+2. Close AMQ-TODO-003 only if exit/countdown/re-entry passes.
+3. Then resolve high-risk cross-fragment dependency owners. No broad cleanup/refactor yet.
 
 ## Rollback
-Return to parent commit `7bbbd8eb883db6b97822fac5e32a2a2ff903bde9` or revert this documentation/contract checkpoint. Product rollback is not required.
+Revert this report, test, workflow and documentation commit. Product rollback is not required.

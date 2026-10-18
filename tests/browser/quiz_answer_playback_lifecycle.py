@@ -265,6 +265,45 @@ def main():
                   "auto-next advances to a different song after the configured delay")
             page.close()
 
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            # Exit during auto-next countdown must cancel it; re-entry must work.
+            page.evaluate("""() => {
+              const delay = document.getElementById('qsAutoNextDelay');
+              const enabled = document.getElementById('qsAutoNext');
+              delay.value = '2';
+              delay.dispatchEvent(new Event('input', {bubbles:true}));
+              delay.dispatchEvent(new Event('change', {bubbles:true}));
+              enabled.checked = true;
+              enabled.dispatchEvent(new Event('change', {bubbles:true}));
+            }""")
+            song = start_question(page, True)
+            page.locator("#quizAnswer").fill(song["title"])
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            check(page.evaluate("window.__aniQuizAutoNextV30?.getState?.().scheduled === true"),
+                  "auto-next countdown is scheduled after answer reveal")
+            page.locator("#quizExit").click(timeout=5000)
+            page.wait_for_function(
+                "window.__aniQuizStateV45?.quizSong === null && window.__aniQuizStateV45?.quizActive === false",
+                timeout=5000)
+            check(page.evaluate("window.__aniQuizAutoNextV30?.getState?.().scheduled === false"),
+                  "exit cancels pending auto-next before timeout")
+            page.wait_for_timeout(2300)
+            check(page.evaluate("""() => window.__aniQuizStateV45?.quizSong === null &&
+                window.__aniQuizStateV45?.quizActive === false &&
+                window.__aniQuizAutoNextV30?.getState?.().scheduled === false"""),
+                  "leaving quiz prevents a stale auto-next callback")
+            page.evaluate("window.__aniNavigateApp?.('quiz'); window.__aniEnterQuizV82?.()")
+            page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')", timeout=5000)
+            fresh_song = start_question(page, True)
+            check(page.evaluate("""(id) => window.__aniQuizStateV45?.quizActive === true &&
+                String(window.__aniQuizStateV45?.quizSong?.[1]) === id &&
+                window.__aniQuizStateV45?.quizAudioStarted === true""", fresh_song["id"]),
+                  "re-entry starts a fresh question")
+            page.locator("#quizExit").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizSong === null", timeout=5000)
+            page.close()
+
             check(not errors, "no uncaught browser page errors during quiz lifecycle acceptance")
         finally:
             browser.close()
