@@ -1,0 +1,3 @@
+function listWorkIds(list){const out=new Set(list?.workIds||[]);for(const vid of list?.vndbIds||[]){const w=api()?.getWorkByVndbId?.(vid);if(w?.i!=null)out.add(String(w.i))}return out}
+function listSongIds(list){const rows=api()?.getRows?.()||[],workIds=listWorkIds(list),vnids=new Set(list?.vndbIds||[]),direct=new Set(list?.songIds||[]),out=new Set();for(const row of rows){const id=String(row?.[1]??''),wid=String(row?.[0]??''),m=api()?.getMeta?.(id)||{};if(direct.has(id)||workIds.has(wid)||(m.vndbId&&vnids.has(String(m.vndbId))))out.add(id)}return out}
+function listSongCount(list){return listSongIds(list).size}
