@@ -174,3 +174,5 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - This is engineering/test tooling only; product remains V82.82 at 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b. Immutable V82.65 remains unchanged.
 - The new contract and modified runner have not yet been executed in a clean checkout; do not treat registration or remote readback as a test pass.
 - Confirmed the 345/346 report discrepancy is caused by one pseudo-path --help in the checksum JSON, whose fingerprint matches the product HTML but is not a repository path. The historical JSON is retained unchanged; upstream inventory-generator root cause remains open.
+
+- Remote readback/static inspection after registration: 35 command entries parsed; labels unique; all 34 pre-existing command script paths found in the recorded source inventory; new contract file exists on the branch. The Python contract itself remains NOT RUN.
