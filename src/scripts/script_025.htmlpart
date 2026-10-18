@@ -28,7 +28,7 @@
  const persistLists=next=>{const clean={version:1,lists:next.lists.map(l=>({...l,animeIds:[...new Set(l.animeIds.map(String))]}))};if(!write(KEYS.lists,clean))return false;listData=clean;syncListSelectors();return true};
  const persistSet=(key,set,kind)=>{if(!write(key,[...set].map(String)))return false;if(kind==='weak')manualWeak=set;else blockedAnime=set;return true};
  const customListById=id=>listData.lists.find(x=>x.id===String(id));
- const validAnimeIds=ids=>[...new Set(ids.map(String))].filter(id=>!!getAnimeById(id));
+ <!-- AMQ_SPLIT_MODULE:amq_valid_anime_ids -->
  const animeSongs=ids=>songListForAnime(new Set(validAnimeIds(ids)));
  const getBlockedSongIds=()=>new Set(animeSongs([...blockedAnime]).map(s=>String(s[1])));
  window.__aniIsAnimeWorkBlacklistedV825=id=>{const s=getSongFast(id);return !!s&&blockedAnime.has(String(s[0]))};
