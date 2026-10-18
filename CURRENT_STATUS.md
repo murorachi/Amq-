@@ -1,3 +1,15 @@
+# Current engineering checkpoint: V82.85.16 source inventory completeness gate (CI pending)
+
+- Parent checkpoint: V82.85.15 audit-only checkpoint, commit `0c5596603bbeafd90e104e928faa263a0bae5be6`.
+- Added reverse inventory checks to `tools/verify.py`: all style/script fragments on disk must be listed in the fragment manifest; all files directly under `src/modules/` must be listed in the module manifest.
+- Reason: previously the verifier checked listed entries but could miss an extra source file silently omitted from the build.
+- Change commit: `97a13a75b4e935a44d5b32b379c077336d16a751`; report: `reports/V82_85_16_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md`.
+- GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39137967441. Status pending at documentation update.
+- No product code, manifest, HTML, CSS or runtime behavior changed. Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
+- Local tests not run. Static review only until CI completes.
+
+---
+
 # Current engineering checkpoint: V82.85.15 pure-helper boundary audit (AUDIT ONLY)
 
 - Parent accepted checkpoint: V82.85.14 extraction commit `e9b249364a79d7da896ff731899c879d29ddfebd`.
