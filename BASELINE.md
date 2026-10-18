@@ -1,3 +1,12 @@
+## V82.85.14 nearNumberV1 pure-helper extraction (CI pending)
+
+- Parent accepted checkpoint: V82.85.13 commit `73fa181d4f433ee8a54f170f1f1b1d7a475d93b5`.
+- Extracted existing pure helper `nearNumberV1(a,b)` byte-for-byte into `src/modules/near_number_v1.htmlpart` at its original script execution position.
+- Added exact-source and nine behavior contracts; deterministic V82.82 fingerprint gate remains required.
+- Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. CI pending.
+
+---
+
 # Baseline lock
 
 ## V82.85.13 EMQ selection contract (accepted)

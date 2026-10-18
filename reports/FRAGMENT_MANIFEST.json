@@ -91,8 +91,8 @@
       "path": "src/scripts/script_001.htmlpart",
       "start_byte": 52575,
       "end_byte": 5130751,
-      "byte_length": 102981,
-      "sha256": "07e91622000ebfe9b7a03928fb4db948b787358ee19e61cfc9dcf94f428736a0",
+      "byte_length": 102860,
+      "sha256": "24ff604b456e74a69619d4022437385a8c225f938e0e38fb1bc0b1adad0b56c7",
       "opening_tag": "<script>",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1409,9 +1409,19 @@
       "sha256": "d1dc2e3045137d2cb7895b4f1592b4feaf8fcec9f8bdb404d0e502f70fdfeed9",
       "purpose": "exact-source extraction of pure EMQ list-member normalization helper; trims, stringifies, removes blanks and duplicates preserving first occurrence",
       "runtime_contract": "exact original helper bytes restored at original position in the same classic-script IIFE; no runtime script tag or behavior change"
+    },
+    {
+      "name": "near_number_v1",
+      "path": "src/modules/near_number_v1.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:near_number_v1 -->",
+      "byte_length": 161,
+      "sha256": "6bf2a4cba65475d53d965461b1d54605d26d69874aa0377c51d41ea0ac4bff14",
+      "purpose": "exact-source extraction of the pure numeric-tolerance comparator used by quiz-history summary validation",
+      "insertion_fragment": "src/scripts/script_001.htmlpart",
+      "runtime_contract": "original helper bytes restored at the same classic-script execution position; no runtime script tag or behavior change"
     }
   ],
-  "module_count": 12,
+  "module_count": 13,
   "release": {
     "version": "V82.82",
     "bytes": 8787490,

@@ -19,7 +19,7 @@ const QUIZ_HISTORY_SUMMARY_SAVE_BATCH_V1=20;
 let quizHistorySummaryV1=null,quizHistorySummaryPendingV1=0,quizHistorySummarySaveTimerV1=null,quizHistorySummarySaveFailedV1=false,quizHistorySummarySaveWarningShownV1=false;
 let quizHistorySummaryRecoveryRawV1=null,quizHistorySummaryPersistenceBlockedV1=false;
 let quizHistoryProcessedIdsV1=new Set();
-function nearNumberV1(a,b){return Number.isFinite(Number(a))&&Number.isFinite(Number(b))&&Math.abs(Number(a)-Number(b))<=Math.max(1e-7,Math.abs(Number(b))*1e-9)}
+<!-- AMQ_SPLIT_MODULE:near_number_v1 -->
 function validCountV1(n){return Number.isInteger(n)&&n>=0}
 function isValidQuizHistorySummaryV1(x){
  if(!x||typeof x!=='object'||x.schemaVersion!==1||!validCountV1(x.total)||!validCountV1(x.correct)||!validCountV1(x.wrong)||x.total!==x.correct+x.wrong||!validCountV1(x.elapsedCount)||x.elapsedCount>x.total||!Number.isFinite(x.elapsedSum)||x.elapsedSum<0||(x.elapsedCount===0&&x.elapsedSum!==0))return false;

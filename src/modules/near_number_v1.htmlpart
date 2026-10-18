@@ -1,0 +1,1 @@
+function nearNumberV1(a,b){return Number.isFinite(Number(a))&&Number.isFinite(Number(b))&&Math.abs(Number(a)-Number(b))<=Math.max(1e-7,Math.abs(Number(b))*1e-9)}

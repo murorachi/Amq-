@@ -32,6 +32,7 @@ jobs:
           node tests/unit/custom_list_normalization_contract.test.cjs
           node tests/unit/emq_list_normalization_contract.test.cjs
           node tests/unit/emq_selection_contract.test.cjs
+          node tests/unit/near_number_v1_contract.test.cjs
           node tests/unit/backup_restore_contract.test.cjs
   browser-native-origin:
     runs-on: ubuntu-latest

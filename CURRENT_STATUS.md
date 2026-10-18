@@ -1,3 +1,13 @@
+# Current engineering checkpoint: V82.85.14 nearNumberV1 pure-helper extraction (CI pending)
+
+- Parent checkpoint: V82.85.13 at `73fa181d4f433ee8a54f170f1f1b1d7a475d93b5` on `v82.85.13-emq-selection-contract-01`.
+- Extracted `nearNumberV1(a,b)` byte-for-byte to `src/modules/near_number_v1.htmlpart`, retaining its original classic-script execution position through a manifest marker.
+- Added nine focused behavior assertions plus exact-source identity test in `tests/unit/near_number_v1_contract.test.cjs`; wired into engineering acceptance.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable; CSS separate.
+- CI and final remote SHA verification pending.
+
+---
+
 # Current engineering checkpoint: V82.85.13 EMQ selection contract (ACCEPTED)
 
 - Parent accepted checkpoint: V82.85.12 at `0d1ec323bb927c03538f20672b8f17cce8b2fa6c`; V82.85.13 accepted commit `0894408db4df40a569dafb7e14cc6e5407d25145`; CI: https://github.com/murorachi/Amq-/actions/runs/39133558958; product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
