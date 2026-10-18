@@ -1,16 +1,10 @@
 # Next task
 
-Current checkpoint: V82.85.9 multiplayer lifecycle browser contract, accepted.
-CI: https://github.com/murorachi/Amq-/actions/runs/39117608560
+Current checkpoint: V82.85.11 Firefox responsive UI acceptance, pending CI.
 
-Architecture decision:
-- Do not extract submitQuiz/classifyQuiz wholesale yet. They couple answer normalization, audio-validity gates, history, familiarity, events, timer settlement, and reveal UI.
-- Do not extract the multiplayer room/session lifecycle wholesale. Polling, state rendering, REST actions, WebSocket team drafts, and dual audio decks share one mutable state object.
-- CSS remains a separate workstream.
+1. Check the newest GitHub Actions run on `v82.85.11-firefox-responsive-acceptance-01`; verify source/build, Chromium browser, and Firefox jobs independently.
+2. Confirm the built HTML remains 8,787,490 bytes with SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+3. If Firefox passes, define the next test plan for real audio and production-origin storage behavior. The existing audio stub is contract coverage only.
+4. Do not add another module merely to increase the module count. Any new extraction must reduce dependencies and preserve deterministic V82.82 output byte-for-byte.
 
-Next stage:
-1. Extend the quiz browser contract for incorrect answers, anime-target familiarity updates, timer-driven settlement, explicit skip, and auto-next. Preserve the existing successful-answer, no-audio, history, reveal-continuity, and teardown assertions.
-2. Run all source/unit and browser gates. Product HTML must remain byte-identical to V82.82.
-3. After those branches are covered, choose one narrow helper boundary for extraction; do not combine answer settlement, playback timers, and multiplayer state into one change.
-
-Rollback: v82.85.8-quiz-answer-playback-lifecycle-test-01; product baseline remains V82.82.
+Rollback: `v82.85.10-quiz-lifecycle-edge-acceptance-01` at `c4d72db3cacaf8dcbf14328d8e02fbb42c799014`.
