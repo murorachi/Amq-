@@ -1,10 +1,10 @@
 # Baseline lock
 
-## V82.85.6 proposed engineering checkpoint (pending CI)
+## V82.85.6 accepted engineering checkpoint
 
 - Parent V82.85.5 passed source/unit and real-browser acceptance in GitHub Actions run `39114740898`.
 - `validAnimeIds` extracted to `src/modules/amq_valid_anime_ids.htmlpart` with the exact original helper bytes and same insertion position.
-- Acceptance pending: manifest fingerprint check, deterministic two-build hash, focused AMQ ID normalization contract, full custom-list/storage/backup tests, and browser regressions.
+- Acceptance passed in GitHub Actions run `39115085244`: source/unit and browser jobs successful. Deterministic build matches V82.82 exactly; 122/122 integrity/build checks, AMQ contracts 11/11, validator contracts 12/12, storage/backup contracts 6/6, and browser UI 19 assertions with 0 page errors.
 - Product must remain byte-identical to V82.82: 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 
