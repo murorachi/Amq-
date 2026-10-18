@@ -8,6 +8,7 @@
 - Inventory report: `reports/V82_86_01_STRUCTURAL_ISSUE_INVENTORY_01.md`; row tracker: `reports/STRUCTURAL_ISSUE_INVENTORY.csv`.
 - Product output remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
 - The register contains documented structural risks, audit-required items, external acceptance gates and maintainability candidates. It is not a claim that all 91 fragments have received a fresh line-by-line manual audit.
+- Acceptance: [GitHub Actions run 39143009433](https://github.com/murorachi/Amq-/actions/runs/39143009433), both source-and-unit and browser-native-origin passed; the new inventory contract passed.
 
 ---
 

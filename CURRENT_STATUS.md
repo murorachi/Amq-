@@ -2,6 +2,7 @@
 
 - Engineering baseline: parent branch `v82.85.22-closeout-disposition-matrix-01`, commit `b42ddee31db8becae02b9822dd44bdcb0c4f9cee`.
 - Parent acceptance: GitHub Actions run 39141992306 passed both `source-and-unit` and `browser-native-origin`.
+- This checkpoint acceptance: GitHub Actions run 39143009433 passed both jobs; the new structural issue inventory contract passed (20 rows, unique IDs, required fields, classifications, and Markdown ID parity).
 - Added an evidence-led 20-item initial structural issue register in `reports/V82_86_01_STRUCTURAL_ISSUE_INVENTORY_01.md` and `reports/STRUCTURAL_ISSUE_INVENTORY.csv`.
 - The register distinguishes documented structural risks, audit-required items, external acceptance gates, and maintainability candidates. It does not claim unproven items are confirmed defects or claim a complete line-by-line source audit.
 - Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.

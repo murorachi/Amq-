@@ -5,6 +5,7 @@ Branch: `v82.86.01-structural-issue-inventory-01`.
 Parent: `v82.85.22-closeout-disposition-matrix-01` at `b42ddee31db8becae02b9822dd44bdcb0c4f9cee`.
 
 ## Confirmed baseline
+- This checkpoint passed GitHub Actions run [39143009433](https://github.com/murorachi/Amq-/actions/runs/39143009433): both source-and-unit and browser-native-origin jobs succeeded. The inventory contract validated all 20 rows and Markdown ID parity.
 - Parent CI run [39141992306](https://github.com/murorachi/Amq-/actions/runs/39141992306) passed both `source-and-unit` and `browser-native-origin`.
 - Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - V82.65 remains immutable.
