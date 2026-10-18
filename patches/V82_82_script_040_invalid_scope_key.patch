@@ -1,0 +1,5 @@
+--- a/src/scripts/script_040.htmlpart
++++ b/src/scripts/script_040.htmlpart
+@@
+ const KEY='aniEmqWorkListsV8254',SELECTED_KEY='aniEmqWorkListsSelectedV8254',OVERRIDES_KEY='aniEmqAudioOverridesV8254',SETTINGS_KEY='aniQuizSettingsV14';
++const INVALID_SCOPE_KEY_V8265='aniQuizCustomListScopeInvalidV8265';
