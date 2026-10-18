@@ -1,0 +1,47 @@
+<style id="v82-61-multiplayer-answer-layout-fix">
+/* Main multiplayer answer fields only. Keep player-card compact answers untouched.
+   Hidden visual labels are out of grid flow, so explicitly use a shorter row with a useful width. */
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField{
+  display:block!important;
+}
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpAnswerRow{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpAnswerRow .mpInputSuggestWrap{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpAnswerRow .mpInput{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  height:54px!important;
+  min-height:54px!important;
+  font-size:17px!important;
+  padding:12px 16px!important;
+  border-radius:11px!important;
+}
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpSubmittedField{
+  display:block!important;
+  max-width:100%!important;
+  margin-top:6px!important;
+  overflow-wrap:anywhere;
+}
+@media(max-width:560px){
+  #multiplayerView .mpPlayPane .mpAnswerFields{padding-left:2.5%!important;padding-right:2.5%!important;}
+  #multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpAnswerRow{width:100%!important;margin:0!important;}
+  #multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpAnswerRow .mpInput{
+    height:48px!important;
+    min-height:48px!important;
+    font-size:16px!important;
+    padding:10px 12px!important;
+  }
+  #multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerField .mpSubmittedField{max-width:100%!important;margin-top:6px!important;}
+}
+</style>

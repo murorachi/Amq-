@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!-- V82.46: icon-first osu!-inspired home navigation, one My List entry and Learning Center submenu. Built from V82.45; original kept unchanged. -->
+<!-- V82.30: built from V82.29; pause-safe auto-next deadline and opt-in user-scoped storage repository contract. -->
+<!-- AMQ學習工具 V82.29：快速管理對話框焦點修正與學習指標／回歸契約整合。基準 V82.28、V82.27 保留不覆蓋。 -->
+
+<html lang="zh-Hant">
+<!-- V82.37 Chinese title layer; based only on V82.36 host focus handoff. Original anime/song IDs and existing game flows preserved. --><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#FAF8FB" name="theme-color"/><meta name="description" content="AMQ學習工具：探索動畫歌曲、辨認練習、弱點補強與間隔複習。"/><title>AMQ學習工具</title>
+<!-- AMQ_SPLIT_FRAGMENT:style:001 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:002 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:003 -->
+
+<!-- Maintainability baseline v76: safe duplicate declaration cleanup and regression QA support. -->
+<!-- V82.24: optional Unicode-symbol matching and design-token search highlighting; preserves V82.23 ranking and answer validation. -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2VlNzJhYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzgwNjZjZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjMwIiBmaWxsPSJ1cmwoI2cpIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik0xNyA0MVYyMGwxOC00djIyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGVsbGlwc2UgY3g9IjEzLjUiIGN5PSI0MyIgcng9IjUuNiIgcnk9IjQuMiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoLTIyIDEzLjUgNDMpIi8+PGVsbGlwc2UgY3g9IjMwLjUiIGN5PSI0MCIgcng9IjUuNiIgcnk9IjQuMiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoLTIyIDMwLjUgNDApIi8+PHRleHQgeD0iNDUiIHk9IjQ3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIyOSIgZmlsbD0iI2ZmZiI+PzwvdGV4dD48L3N2Zz4="/><meta name="application-name" content="AMQ學習工具"/>
+<!-- AMQ_SPLIT_FRAGMENT:style:004 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:005 -->
+</head><body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo"><svg class="amqBrandSvg" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="amq-brand-grad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ee72ac"/><stop offset="1" stop-color="#8066ce"/></linearGradient></defs><circle cx="32" cy="32" r="30" fill="url(#amq-brand-grad)" stroke="white" stroke-width="2"/><path d="M17 41V20l18-4v22" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="13.5" cy="43" rx="5.6" ry="4.2" fill="white" transform="rotate(-22 13.5 43)"/><ellipse cx="30.5" cy="40" rx="5.6" ry="4.2" fill="white" transform="rotate(-22 30.5 40)"/><text x="45" y="47" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="29" fill="white">?</text></svg></div><div><small>ANISONG · LEARNING TOOL</small><h1>AMQ學習工具</h1></div></div><div class="actions"><button aria-expanded="false" class="btn ui-home-settings" id="uiHomeSettings" title="顯示設定與資料管理" type="button">設定</button><button class="btn ui-back-home" id="uiBackHome" type="button">回首頁</button><button class="btn" id="themeToggle" title="切換暗色／亮色介面" type="button">☾ 暗色模式</button><button class="btn" id="sceneBackgroundOpen" type="button" title="為首頁、圖鑑、猜歌等場景分別設定背景圖片">▧ 場景背景</button><button class="btn" id="updateBtn">↻ 更新資料庫</button><button class="btn" id="exportBtn" title="匯出包含進度、清單、設定與複習排程的完整備份">匯出完整備份</button><button class="btn" id="importBtn" title="舊格式會合併；完整備份會取代目前本機資料">匯入／還原備份</button><input accept="application/json" class="hidden" id="importFile" type="file"/><input accept="application/json" class="hidden" id="catalogFile" type="file"/></div></header>
+<section aria-label="主選單" class="home-menu" id="homeMenu">
+<div aria-hidden="true" class="home-orbit"><span></span><i></i><b></b></div>
+<nav aria-label="主要功能" class="home-menu-list">
+<button class="home-menu-card home-menu-quiz" data-home-action="quiz" type="button"><span class="home-card-copy"><b>猜歌練習</b><small>自選範圍與練習設定</small></span><i aria-hidden="true"></i></button>
+<button class="home-menu-card home-menu-explore" data-home-action="practiceExplore" type="button"><span class="home-card-copy"><b>探索新歌</b><small>從尚未測試的歌曲開始</small></span><i aria-hidden="true"></i></button>
+<button class="home-menu-card home-menu-weak" data-home-action="practiceWeak" type="button"><span class="home-card-copy"><b>弱點補強</b><small>手動指定或依紀錄找弱點</small></span><i aria-hidden="true"></i></button>
+<button class="home-menu-card home-menu-catalog" data-home-action="catalog" type="button"><span class="home-card-copy"><b>動畫圖鑑</b><small>搜尋、單筆管理與批量操作</small></span><i aria-hidden="true"></i></button>
+<button class="home-menu-card home-menu-watchlist" data-home-action="watchlist" type="button"><span class="home-card-copy"><b>我的清單</b><small>觀看狀態與自訂練習清單</small></span><i aria-hidden="true"></i></button>
+<button class="home-menu-card home-menu-dashboard" data-home-action="dashboard" type="button"><span class="home-card-copy"><b>統計儀表板</b><small>追蹤進度與發現弱點</small></span><i aria-hidden="true"></i></button></nav>
+</section>
+<section class="hero view-home"><aside class="heroSide heroDashboard"><div><div class="sectionLabel">MY COLLECTION ✿ 收藏進度</div><div class="bigNum" id="collected">0 <small>/ 38,821 首</small></div><div class="bar"><span id="mainProgress"></span></div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:7px"><span id="percent">0% 已認識</span><span id="animeCollected">0 部作品</span></div></div><div class="stats"><div class="stat"><b id="heardCount">0</b><span>聽過了 ♡</span></div><div class="stat"><b id="knownCount">0</b><span>認得旋律 ✧</span></div><div class="stat"><b id="seriesCount">0</b><span>作品全收集 ☆</span></div></div></aside></section>
+<section class="discover view-home"><div class="discoverTop"><div><h3>歌曲探索</h3></div><label class="sourceModeControlV857">來源 <select id="discoverSourceModeV857" aria-label="歌曲探索來源"><option value="amq">只聽 AMQ</option><option value="mixed">混合</option><option value="emq">只聽 EMQ</option></select></label><button class="btn" id="nextDiscover">換一首 ↻</button></div><div class="discoverCard" id="discoverCard"><div class="discArt">♫</div><div><div class="discName">準備好探索了嗎？</div><div class="discMeta">先抽取一首低難度、尚未探索的歌曲。</div></div><button class="btn primary" id="discoverListen">播放歌曲 ↗</button></div></section>
+<section class="quicktools view-catalog" id="quicktools">
+<div class="quicktoolsHead"><b>🧺 清單與批次整理</b><p class="batchScopeSummaryV844" id="batchScopeSummaryV844" role="status" aria-live="polite">尚未選取作品。選取後會顯示影響的動畫數與歌曲數。</p></div>
+<div class="toolrow">
+<button class="btn" id="syncOpenBtn">AniList / MAL 匯入</button>
+<button class="btn" id="selectModeBtn">□ 批次選取</button>
+<button class="btn" id="selectVisibleBtn">選取目前顯示</button><button class="btn" id="selectFilteredBtn">選取全部篩選結果</button>
+<button class="btn" id="clearSelectionBtn">清除選取</button>
+<select aria-label="批次動畫狀態" id="bulkWatchStatus"><option value="completed">看過</option><option value="current">正在看</option><option value="planning">想看</option><option value="paused">暫停</option><option value="dropped">棄番</option><option value="none">清除看番狀態</option></select>
+<button class="btn primary" id="applyBulkWatchBtn">套用作品狀態</button>
+<select aria-label="批次歌曲熟悉度" id="bulkSongStatus"><option value="1">歌曲標成「聽過」</option><option value="2">歌曲標成「有印象」</option><option value="3">歌曲標成「秒答」</option><option value="0">重設歌曲熟悉度</option></select>
+<button class="btn" id="applyBulkSongBtn">套用歌曲狀態</button>
+<button class="btn" id="queueSelectedBtn">選取作品加入待聽</button>
+</div>
+<div class="toolrow practiceBulkRow" id="practiceBulkRow">
+<label class="bulkField">自訂清單 <select id="bulkCustomList"><option value="">先建立或選擇清單</option></select></label>
+<label class="bulkField">管理動作 <select id="bulkPracticeAction"><option value="list-add">加入自訂清單</option><option value="list-remove">移出自訂清單</option><option value="weak-add">加入手動補強</option><option value="weak-remove">移出手動補強</option><option value="blacklist-add">排除所選作品的所有歌曲</option><option value="blacklist-remove">解除作品排除</option><option value="srs-add">加入間隔複習</option></select></label>
+<button class="btn primary" id="applyBulkPracticeAction">套用批量學習管理</button>
+<button class="btn" id="createListFromCatalog">＋ 建立自訂清單</button>
+</div>
+<div class="toolhint" id="selectionHint">尚未選取作品</div>
+</section>
+<div class="toolbar view-catalog"><div class="search"><input autocomplete="off" id="search" placeholder="搜尋動畫、日文名、歌曲、歌手……"/></div><select id="decade"><option value="all">所有年代</option><option value="pre">1979 年以前</option><option value="1980">1980 年代</option><option value="1990">1990 年代</option><option value="2000">2000 年代</option><option value="2010">2010 年代</option><option value="2020">2020 年代</option></select><select id="type"><option value="all">所有作品類型</option><option>TV</option><option>Movie</option><option>OVA</option><option>ONA</option><option>Special</option></select><select id="sort"><option value="year">年代排序</option><option value="name">名稱排序</option><option value="songs">歌曲數量</option><option value="progress">收藏進度</option><option value="random">隨機探索</option></select></div>
+<nav class="tabs view-catalog"><button class="tab active" data-tab="all">🌸 全部圖鑑</button><button class="tab" data-tab="progress">✧ 已探索作品</button><button class="tab" data-tab="unexplored">✧ 未探索</button><button class="tab" data-tab="artists">🎤 歌手圖鑑</button></nav>
+<div class="head view-catalog"><div><h3 id="sectionTitle">動畫圖鑑</h3><p id="sectionDesc"></p></div><div class="catalogHeadTools"><div class="result" id="resultCount"></div><div aria-label="瀏覽模式" class="viewModes" role="group"><button class="btn viewMode active" data-mode="grid" title="封面網格" type="button">▦ 網格</button><button class="btn viewMode" data-mode="list" title="精簡列表" type="button">☷ 列表</button></div></div></div><section aria-label="統計儀表板" class="v10Panel hidden" id="dashboardPanel"></section><div class="grid view-catalog" id="grid"></div><div class="loadMoreWrap view-catalog" id="loadMoreWrap"><button class="btn" id="loadMoreBtn">再顯示 180 部作品</button><div class="gridCounter" id="gridCounter"></div></div><div class="empty hidden view-catalog" id="empty">這裡還沒有找到作品。試試其他關鍵字吧 ✿</div>
+<div class="footnote view-catalog">資料來源：AniSongDB catalog dump（AMQ 動畫曲庫） · EMQ 使用隨版本附帶的曲庫快照。歌曲進度、看番狀態與標籤儲存在目前瀏覽器<br/>「更新資料庫」只會更新 AMQ；EMQ 目前沒有已驗證的線上更新端點，更新需使用新版整合包或未來提供的專用匯入流程。</div>
+<section class="watchlistView hidden" id="watchlistView">
+<nav class="mylistModeTabs" aria-label="我的清單分類"><button class="btn active" type="button" id="watchModeTab">看番狀態</button><button class="btn" type="button" id="customModeTab">自訂練習清單</button></nav>
+<div id="watchlistWork">
+<div class="watchlistHead"><h2>看番狀態</h2><div class="watchHeadActionsV8240"><button class="btn" type="button" id="clearWatchlistCurrentV8240" title="清除這個瀏覽器內所有作品的看番狀態；不影響自訂練習清單與學習紀錄">清除所有看番狀態</button><div class="watchSummary" id="watchSummary"></div></div></div>
+<div class="watchToolbar"><input autocomplete="off" id="watchSearch" placeholder="搜尋清單中的動畫…" type="search"/><select id="watchSort"><option value="name">名稱排序</option><option value="year">年代排序</option><option value="status">狀態排序</option></select></div>
+<nav class="watchTabs" id="watchTabs">
+<button class="watchTab active" data-watch="all">全部</button><button class="watchTab" data-watch="current">觀看中</button><button class="watchTab" data-watch="completed">已看完</button><button class="watchTab" data-watch="paused">暫停</button><button class="watchTab" data-watch="dropped">已棄番</button><button class="watchTab" data-watch="planning">計畫觀看</button><button class="watchTab" data-watch="repeating">重看中</button>
+</nav>
+<div class="watchGrid" id="watchGrid"></div><div class="empty hidden" id="watchEmpty">這個分類還沒有作品。</div>
+</div>
+<div id="customListsWork" class="hidden"></div>
+</section>
+</div>
+<div class="modalShade" id="syncModal"><div class="modalCard">
+<div style="display:flex;align-items:start;justify-content:space-between;gap:12px"><div><div class="detailEyebrow">LIST SYNC ✦ COLLECTION TOOLS</div><h3>匯入看番清單</h3></div><button class="btn" id="syncCloseBtn">關閉</button></div>
+<div class="syncProviderHeading">AniList</div>
+<label for="aniListUsername">AniList 使用者 ID／名稱</label><input id="aniListUsername" placeholder="輸入 AniList 使用者 ID 或名稱" type="text"/>
+<label for="aniListClientId">Client ID（只有需要授權時才使用）</label><input id="aniListClientId" placeholder="Client ID" type="text"/>
+<label for="aniListToken">Access token（選填）</label><input id="aniListToken" placeholder="Access token" type="password"/>
+<div class="modalActions" style="justify-content:flex-start"><button class="btn primary" id="aniListImportBtn">偵測並匯入 AniList</button><button class="btn" id="aniListAuthorizeBtn">開啟授權</button><a class="btn" href="https://anilist.co/settings/developer" rel="noopener" target="_blank">開發者設定</a></div>
+<hr style="border:0;border-top:1px solid #eadbea;margin:18px 0"/>
+<div class="syncProviderHeading">MyAnimeList</div>
+<label for="malUsername">MyAnimeList 帳號名稱</label>
+<input autocomplete="off" id="malUsername" placeholder="輸入 MAL 帳號名稱" type="text"/>
+<div class="modalActions" style="justify-content:flex-start"><button class="btn primary" id="malUsernameImportBtn">偵測並匯入 MyAnimeList</button></div>
+<p class="toolhint">請輸入 MyAnimeList 帳號名稱。清單必須公開；此功能透過外部資料服務讀取，AniList 原本的匯入流程保留。</p>
+<div class="modalStatus" id="syncStatus"></div>
+</div></div>
+<div class="audioDock" id="audioDock"><img alt="目前歌曲的動畫封面" class="dockCoverV33" hidden="" id="dockCoverV33"/><div class="dockMeta" id="dockMeta"><b id="dockTitle">動畫歌播放器已準備好</b><span id="dockSubtitle">選擇歌曲即可在本頁播放</span><div class="dockStatus" id="dockStatus">音訊來源待載入</div></div><audio controls="" id="audioPlayer" preload="none"></audio><video controls="" id="videoPlayer" playsinline="" preload="none" style="display:none;width:100%;max-height:120px;border-radius:10px;background:#241b2b"></video><div class="dockBtns"><label class="dockModeLabelV57" for="dockPlaybackModeV57">播放模式</label><select aria-label="播放器播放模式" id="dockPlaybackModeV57"><option value="home-random">主頁隨機</option><option value="unheard">只播沒聽過</option><option value="today-wrong">只播今天猜歌錯題</option><option value="queue">待聽佇列</option><option value="tagged">只播有自訂標籤</option></select><label class="dockSourceModeLabelV857" for="dockRandomSourceModeV857">隨機來源</label><select aria-label="播放器隨機歌曲來源" id="dockRandomSourceModeV857"><option value="amq">只聽 AMQ</option><option value="mixed">混合</option><option value="emq">只聽 EMQ</option></select><button class="btn" id="prevSongBtn" title="播放佇列中的上一首歌曲" aria-label="上一首歌曲">⏮</button><button class="btn primary" id="playPauseBtn" title="播放或暫停目前歌曲" aria-label="播放或暫停目前歌曲">▶</button><button class="btn" id="nextSongBtn" title="播放佇列中的下一首歌曲" aria-label="下一首歌曲">⏭</button><button class="btn" id="queueBtn" title="開啟或關閉待聽佇列" aria-label="待聽佇列">☷</button><button aria-expanded="true" class="btn" id="dockInfoToggleV33" title="隱藏歌曲資訊" aria-label="隱藏歌曲資訊" type="button">隱藏歌曲資訊</button><button class="statusbtn" data-dock-status="1" title="標記聽過">聽過</button><button class="statusbtn" data-dock-status="2" title="標記有印象">有印象</button><button class="statusbtn" data-dock-status="3" title="標記秒答">秒答</button></div></div>
+<div class="modalShade" id="queueModal"><div class="modalCard"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h3>待聽佇列</h3><button class="btn" id="queueCloseBtn">關閉</button></div><div id="queueList"></div><div class="modalActions"><button class="btn" id="clearQueueBtn">清空佇列</button><button class="btn primary" id="playQueueBtn">從佇列第一首播放</button></div></div></div>
+<div class="overlay" id="overlay"><div class="drawer"><div class="drawerhead"><button class="close" id="close">✕ 關閉</button><div class="detailEyebrow">ANIME SONG COLLECTION ✦</div><div class="detailHero"><img alt="" class="detailCover" id="detailCover" loading="lazy"/><div class="detailHeroText"><h2 id="detailTitle"></h2><p id="detailSub"></p><div class="drawerstats" id="detailStats"></div></div></div></div><div class="playerbar"><div class="playerDisc">♫</div><div class="playerInfo"><b id="playerTitle">選一首歌開始探索</b><span id="playerSub">選擇歌曲即可在本頁播放</span></div><div class="playerButtons"><button class="btn primary" id="listenNext">聽下一首 ⏭</button><button class="btn" id="listenRandom">隨機播放 ↻</button></div></div><div class="songlist" id="songlist"></div></div></div><div class="toast" id="toast"></div>
+<!-- AMQ_SPLIT_FRAGMENT:script:001 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:002 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:003 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:004 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:006 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:007 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:008 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:005 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:009 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:006 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:010 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:007 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:011 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:008 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:012 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:009 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:013 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:014 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:010 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:011 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:015 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:012 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:013 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:016 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:014 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:017 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:015 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:016 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:018 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:019 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:020 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:017 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:021 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:018 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:019 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:022 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:020 -->
+<!-- V64: answer and buffer share the same UI; keep the anime cover visible in the existing artwork area. -->
+<!-- AMQ_SPLIT_FRAGMENT:style:023 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:024 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:025 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:021 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:026 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:027 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:028 -->
+<!-- V65: fix answer glow targeting; v63 accidentally keyed the card glow to V26 while the active cover is V30. -->
+<!-- AMQ_SPLIT_FRAGMENT:style:029 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:022 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:030 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:023 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:024 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:025 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:026 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:031 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:027 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:script:028 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:032 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:029 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:script:030 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:033 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:031 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:034 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:035 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:032 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:036 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:033 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:037 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:038 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:039 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:040 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:script:034 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:041 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:035 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:042 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:036 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:043 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:044 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:037 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:038 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:045 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:039 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:046 -->
+<!-- AMQ_SPLIT_FRAGMENT:style:047 -->
+<!-- AMQ_SPLIT_FRAGMENT:script:040 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:style:048 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:049 -->
+
+<!-- AMQ_SPLIT_FRAGMENT:script:041 -->
+
+
+<!-- AMQ_SPLIT_FRAGMENT:style:050 -->
+
+</body>
+<!-- V82.39: persisted catalog snapshots, storage-independent Chinese answer suggestions, answer metadata, hover aliases, floating details, in-frame video, solo layout. -->
+<!-- V82.42: team answer consensus, custom-list priority and multi-list workbench, continuous reveal playback, compact answer labels. -->
+<!-- V82.54: EMQ WebM sibling fallback, editable EMQ audio overrides, EMQ/VN batch custom lists and EMQ-aware answer suggestions. -->
+<!-- V82.59: Multiplayer filters mirrored from solo settings; VNDB personal list import; EMQ Chinese title cache with VNDB and Bangumi. -->
+<!-- V82.60: Fix active answer row placement; answer inputs are wider but shorter. Player-card inputs unchanged. -->
+<!-- V82.55: Prefer the EMQ Asia CDN hostname for selfhoststorage/userup audio, then retain original URLs and WebM sibling fallbacks. -->
+</html>

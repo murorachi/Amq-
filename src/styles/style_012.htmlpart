@@ -1,0 +1,8 @@
+<style id="v38-clean-quiz-ui">
+#quizView .quizVisualizerV30{display:none!important}
+#quizView .quizMystery{position:relative!important}
+#quizView .quizCountdownV30, #quizView #quizRemainingV30{text-align:center!important}
+#quizView .v36-amq-player{margin:18px auto 12px!important;transform:translateX(-28px)!important}
+#quizView .quizStage>.quizControls #quizNext{display:none!important}
+#quizView #quizStatus, #quizView #quizAudioState, #quizView .quizPlaybackLabelsV30 #quizPlaybackStateV30{display:none!important}
+</style>

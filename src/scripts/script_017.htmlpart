@@ -1,0 +1,21 @@
+<script id="v61-buffer-answer-feedback">
+(()=>{
+ const root=document.getElementById('quizView');
+ if(!root)return;
+ const getMystery=()=>root.querySelector('.quizMystery');
+ const clearFeedback=()=>{const card=getMystery();card?.querySelector('.quizAnswerFeedbackV61')?.remove();};
+ document.addEventListener('ani-quiz-answer-submitted',e=>{
+   const card=getMystery();if(!card)return;
+   card.querySelector('.quizAnswerFeedbackV61')?.remove();
+   const correct=e.detail?.correct===true;
+   const overlay=document.createElement('div');
+   overlay.className='quizAnswerFeedbackV61 '+(correct?'correct':'wrong');
+   overlay.setAttribute('aria-label',correct?'答對':'答錯或跳過');
+   const label=document.createElement('span');
+   label.textContent=correct?'✓ 答對':'✕ 答錯／跳過';
+   overlay.appendChild(label);
+   card.appendChild(overlay);
+ });
+ document.addEventListener('ani-quiz-new-question',clearFeedback);
+})();
+</script>

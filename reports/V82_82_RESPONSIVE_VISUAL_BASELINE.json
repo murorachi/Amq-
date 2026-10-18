@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "product": "V82.82",
+  "browser": "Chromium headless",
+  "storage": "isolated in-memory shim",
+  "network": "external HTTP/HTTPS blocked",
+  "viewports": {
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "pages": {
+        "home": {
+          "viewport": {
+            "width": 390,
+            "height": 844,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 390,
+            "clientWidth": 390,
+            "scrollHeight": 1082,
+            "clientHeight": 1082
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_mobile_home.png",
+            "bytes": 82319,
+            "sha256": "999da62a714155ccf648f95fe849c249ede3be03fc9a7b23cfcf082a69283cf5"
+          }
+        },
+        "quiz": {
+          "viewport": {
+            "width": 390,
+            "height": 844,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 390,
+            "clientWidth": 390,
+            "scrollHeight": 1903,
+            "clientHeight": 1903
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 12,
+              "y": 112,
+              "width": 366,
+              "height": 1521.31,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 90,
+              "y": 1176.83,
+              "width": 175,
+              "height": 50.8,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 37,
+              "y": 585.02,
+              "width": 316,
+              "height": 38,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_mobile_quiz.png",
+            "bytes": 62129,
+            "sha256": "b1ed957af1fe1404fa4769578ba7b11b00f263c1712c5216e581ca10e778b5d4"
+          }
+        }
+      }
+    },
+    "tablet": {
+      "width": 768,
+      "height": 1024,
+      "pages": {
+        "home": {
+          "viewport": {
+            "width": 768,
+            "height": 1024,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 768,
+            "clientWidth": 768,
+            "scrollHeight": 1272,
+            "clientHeight": 1272
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_tablet_home.png",
+            "bytes": 100848,
+            "sha256": "bb79307dcba185f89aa8395ec662a2d73736a09efb1c7a2fa05cb0dabe3c284c"
+          }
+        },
+        "quiz": {
+          "viewport": {
+            "width": 768,
+            "height": 1024,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 768,
+            "clientWidth": 768,
+            "scrollHeight": 1646,
+            "clientHeight": 1646
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 16.89,
+              "y": 82,
+              "width": 734.22,
+              "height": 1294.16,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 125,
+              "y": 820.2,
+              "width": 464,
+              "height": 49.25,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 484.61,
+              "y": 242.42,
+              "width": 97.61,
+              "height": 38,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_tablet_quiz.png",
+            "bytes": 82780,
+            "sha256": "b4d51e79b89813a6c0e421c6d3102ecf1bf8eacae5a2a749e4137a637719e33b"
+          }
+        }
+      }
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 1200,
+      "pages": {
+        "home": {
+          "viewport": {
+            "width": 1440,
+            "height": 1200,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "scrollHeight": 1448,
+            "clientHeight": 1448
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_desktop_home.png",
+            "bytes": 143181,
+            "sha256": "a985d1bc38441585d78bd36bc5799d3d8d6636414e47dc0c7bec83bec9f4793e"
+          }
+        },
+        "quiz": {
+          "viewport": {
+            "width": 1440,
+            "height": 1200,
+            "devicePixelRatio": 1
+          },
+          "body": {
+            "scrollWidth": 1440,
+            "clientWidth": 1440,
+            "scrollHeight": 1498,
+            "clientHeight": 1498
+          },
+          "elements": {
+            "#homeView": null,
+            "#quizView": {
+              "x": 28,
+              "y": 82,
+              "width": 1384,
+              "height": 1146.48,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizAnswer": {
+              "x": 238.44,
+              "y": 925.23,
+              "width": 464,
+              "height": 49.25,
+              "display": "block",
+              "visibility": "visible"
+            },
+            "#quizSuggestions": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStatus": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            },
+            "#quizStart": {
+              "x": 1134.39,
+              "y": 204,
+              "width": 97.61,
+              "height": 38,
+              "display": "flex",
+              "visibility": "visible"
+            },
+            "#watchlistView": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "display": "none",
+              "visibility": "visible"
+            }
+          },
+          "screenshot": {
+            "path": "reports/visual-baselines/v82_82_responsive/v82_82_desktop_quiz.png",
+            "bytes": 93320,
+            "sha256": "db7f1c4610bb9eb4d2f4080a5be01e268460dbb630520b5221419559084f5ae3"
+          }
+        }
+      }
+    }
+  },
+  "pageErrors": []
+}

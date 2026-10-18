@@ -1,0 +1,26 @@
+<script id="v34-quiz-fixes">
+(()=>{
+ const root=document.getElementById('quizView'),answer=document.getElementById('quizAnswer'),audio=document.getElementById('audioPlayer');
+ if(!root||!answer||!audio)return;
+ const resetTimerDisplay=()=>{const d=document.getElementById('quizTimerDisplay');if(d)d.textContent='--'};
+ // The elapsed-time display is updated by the quiz elapsed-time controller; this listener only resets it after leaving quiz mode.
+ audio.addEventListener('pause',()=>{if(!document.body.classList.contains('quiz-mode'))resetTimerDisplay()});
+ // Audio source seeking has one owner: script 06 handles fixed Sample positions, while V42 handles random Sample positions.
+ const setQuizAudioMode=()=>{
+   const on=document.body.classList.contains('quiz-mode');
+   audio.controls=!on;
+   if(on)audio.style.display='none';else audio.style.display='';
+ };
+ setQuizAudioMode();
+ document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view!=='quiz'){resetTimerDisplay();setQuizAudioMode()}});
+ const sample=document.getElementById('qsSamplePosition'),sampleLabel=document.getElementById('qsSamplePositionValue');
+ if(sample&&sampleLabel){
+   sample.value=String(window.__aniQuizStateV45?.quizSettings.samplePosition||0);sampleLabel.textContent=sample.value+'%';
+   sample.addEventListener('input',()=>sampleLabel.textContent=sample.value+'%');
+   sample.addEventListener('change',()=>{
+     window.__aniQuizStateV45.quizSettings.samplePosition=Number(sample.value)||0;
+     try{localStorage.setItem('aniQuizSettingsV14',JSON.stringify(window.__aniQuizStateV45?.quizSettings))}catch(e){}
+   });
+ }
+})();
+</script>

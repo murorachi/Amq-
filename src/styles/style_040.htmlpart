@@ -1,0 +1,40 @@
+<style id="v8243-player-detail-watchlist-style">
+/* Compact player toggle: the collapse button remains the persistent reopen affordance. */
+#audioDock{position:fixed}
+#audioDockCollapseToggleV843{position:absolute;top:-13px;right:14px;z-index:3;min-width:36px;height:28px;padding:2px 9px;border:1px solid var(--border);border-bottom:0;border-radius:10px 10px 0 0;background:var(--surface);color:var(--text-primary);box-shadow:var(--shadow-card);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1}
+#audioDockCollapseToggleV843:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.audioDock.dock-collapsed-v843{display:flex!important;position:fixed!important;left:auto!important;right:14px!important;bottom:14px!important;width:48px!important;min-width:48px!important;max-width:48px!important;height:48px!important;min-height:48px!important;padding:0!important;gap:0!important;grid-template-columns:1fr!important;align-items:center!important;justify-content:center!important;overflow:visible!important;border-radius:50%!important;background:var(--surface)!important;border:1px solid var(--border)!important;box-shadow:var(--shadow-dialog)!important;backdrop-filter:blur(12px)!important}
+.audioDock.dock-collapsed-v843>:not(#audioDockCollapseToggleV843){display:none!important}
+.audioDock.dock-collapsed-v843 #audioDockCollapseToggleV843{position:static;top:auto;right:auto;width:100%;height:100%;min-width:0;padding:0;border:0;border-radius:50%;background:var(--surface);color:var(--text-primary);box-shadow:none;font-size:21px}
+body.ui-home-menu #audioDockCollapseToggleV843,body.quiz-mode #audioDockCollapseToggleV843{display:none!important}
+@media(max-width:420px){.audioDock.dock-collapsed-v843{bottom:80px!important;right:10px!important}}
+@media(prefers-reduced-motion:reduce){#audioDockCollapseToggleV843{transition:none!important}}
+
+/* Every anime/artist detail uses the same bounded panel height; long song lists scroll inside. */
+#overlay{align-items:center!important;padding:14px!important}
+#overlay>.drawer{display:flex;flex-direction:column;width:min(1040px,100%);height:min(88dvh,900px);max-height:min(88dvh,900px);min-height:0;overflow:hidden;border-radius:var(--radius-xl);margin:auto}
+#overlay>.drawer>.drawerhead,#overlay>.drawer>.playerbar{flex:0 0 auto;min-height:0}
+#overlay>.drawer>.songlist{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:22px}
+.drawerhead{padding:18px 22px!important}
+#detailWatchTools{align-items:center;gap:8px;margin-top:10px}
+.detailWatchSelectV843{min-width:140px;max-width:100%;min-height:36px;padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-muted);color:var(--text-primary);font:inherit;font-size:12px;box-shadow:none;appearance:auto}
+.detailWatchSelectV843:hover{border-color:var(--primary)}
+.detailWatchSelectV843:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+body.dark-theme .detailWatchSelectV843{background:var(--surface-muted)!important;color:var(--text-primary)!important;border-color:var(--border)!important;box-shadow:none!important}
+@media(max-width:600px){#overlay{align-items:center!important;padding:8px!important}#overlay>.drawer{width:100%;height:calc(100vh - 16px);height:calc(100dvh - 16px);max-height:none;border-radius:var(--radius-lg)}.drawerhead{padding:14px 12px!important}}
+
+/* Reuse the existing catalog batch manager on the Watch List page. */
+#watchlistWork #quicktools{display:block;margin:12px 0 16px;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
+#watchlistWork #quicktools .quicktoolsHead{margin-bottom:10px}
+#watchlistWork #quicktools .quicktoolsHead b{font-size:15px;color:var(--text-primary)}
+#watchlistWork #quicktools .toolrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#watchlistWork #quicktools .toolrow .btn,#watchlistWork #quicktools .toolrow select{font-size:12px;min-height:34px}
+#watchlistWork #quicktools .toolhint{font-size:12px;color:var(--text-secondary);margin-top:8px}
+.myListBatchPickV843{display:none;align-items:center;gap:8px;margin:6px 0;padding:7px 9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-muted);color:var(--text-secondary);font-size:12px;cursor:pointer}
+.myListBatchPickV843 input{width:16px;height:16px;accent-color:var(--primary)}
+body.v825-bulk-mode #watchGrid .myListBatchPickV843{display:flex}
+#watchGrid .watchCard.batch-selected-v843{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
+body.dark-theme #watchlistWork #quicktools{background:var(--surface)!important;color:var(--text-primary)!important;border-color:var(--border)!important;box-shadow:var(--shadow-card)!important}
+body.dark-theme .myListBatchPickV843{background:var(--surface-muted);color:var(--text-secondary);border-color:var(--border)}
+@media(max-width:600px){#watchlistWork #quicktools{padding:10px}#watchlistWork #quicktools .toolrow .btn,#watchlistWork #quicktools .toolrow select{flex:1 1 140px;min-width:0;white-space:normal}}
+</style>

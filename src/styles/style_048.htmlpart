@@ -1,0 +1,33 @@
+<style id="v82-57-stability-ui-overrides">
+/* Compact source selectors; hide them only on the six-button home menu. */
+.sourceModeControlV857{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:11px;white-space:nowrap}
+.sourceModeControlV857 select,#audioDock #dockRandomSourceModeV857{border:1px solid var(--line);border-radius:9px;background:var(--field,var(--panel));color:var(--ink);padding:7px 8px;min-width:0;max-width:150px;font:inherit}
+#audioDock .dockSourceModeLabelV857{display:inline-flex;align-items:center;font-size:11px;color:var(--muted);white-space:nowrap}
+body.ui-home-menu #audioDock .dockSourceModeLabelV857,body.ui-home-menu #audioDock #dockRandomSourceModeV857{display:inline-flex!important}
+#quizView .v36-person-row{min-height:158px!important;height:158px!important;gap:0!important}
+#quizView .v40-avatar-wrapV8240{flex-basis:126px!important;width:126px!important;height:148px!important;min-height:148px!important}
+#quizView .v40-avatar-wrapV8240 #v36Avatar{width:126px!important;height:148px!important;object-fit:cover!important}
+#quizView .v40-avatar-wrapV8240 #v36Count{left:0!important;bottom:0!important;z-index:4!important;min-width:26px!important;min-height:22px!important;font-size:13px!important}
+#quizView .v40-avatar-wrapV8240 #quizTimerDisplay{right:0!important;bottom:0!important;width:auto!important;min-width:0!important;min-height:22px!important;padding:1px 5px!important;font-size:12px!important;font-variant-numeric:tabular-nums!important;letter-spacing:.01em!important}
+#quizView .quizMystery{min-height:clamp(280px,35vw,430px)!important}
+#quizView .quizMystery .quizAnimeCoverV30{max-width:min(340px,55%)!important;max-height:calc(clamp(280px,35vw,430px) - 24px)!important;object-fit:contain!important}
+#quizView .quizAllAnswersV857{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+#quizView .quizAllAnswersV857.hidden{display:none!important}
+#quizView .quizAllAnswersV857 label{display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--muted);min-width:0}
+#quizView .quizAllAnswersV857 input{width:100%;min-width:0;box-sizing:border-box;font-size:14px}
+#quizView.is-revealed .quizAllAnswersV857{display:none!important}
+#emqAudioToolPanelV8254{display:none!important}
+#audioDock .dockCoverV33{object-fit:cover}
+@media(max-width:760px){
+ .sourceModeControlV857{flex:1 1 115px;justify-content:flex-end}
+ .sourceModeControlV857 select{max-width:125px}
+ #quizView .v36-person-row{min-height:132px!important;height:132px!important}
+ #quizView .v40-avatar-wrapV8240{flex-basis:104px!important;width:104px!important;height:122px!important;min-height:122px!important}
+ #quizView .v40-avatar-wrapV8240 #v36Avatar{width:104px!important;height:122px!important}
+ #quizView .v40-avatar-wrapV8240 #v36Count{min-width:22px!important;min-height:20px!important;font-size:11px!important}
+ #quizView .v40-avatar-wrapV8240 #quizTimerDisplay{min-height:20px!important;font-size:11px!important;padding:1px 4px!important}
+ #quizView .quizMystery{min-height:280px!important}
+ #quizView .quizMystery .quizAnimeCoverV30{max-width:min(270px,68%)!important;max-height:256px!important}
+ #quizView .quizAllAnswersV857{grid-template-columns:minmax(0,1fr)}
+}
+</style>

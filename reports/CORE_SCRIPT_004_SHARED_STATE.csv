@@ -1,0 +1,91 @@
+symbol,kind,declaration_line,read_refs,write_refs,distinct_function_owners,read_owners,write_owners
+quizSettings,variable,40,125,4,32,<anonymous@125>; <anonymous@127>; <anonymous@2>; <anonymous@30>; <anonymous@312>; <anonymous@341>; <anonymous@343>; <anonymous@346>; <anonymous@45>; <anonymous@602>; <anonymous@615>; <anonymous@624>; <anonymous@92>; <anonymous@93>; answerField; applyQuizDisplaySettingsV30; bindTitleToggleV30; calculateQuizPoolCandidatesV8280; classifyQuiz; evaluateQuizTargetAnswerV857; getQuizPool; loadQuizSettings; nextQuiz; playQuizAudio; readQuizSettingsUI; showQuizRevealInfoV30; startQuizPlaybackTickerV30; submitQuiz; targetOptions; updateQuizCounts; updateQuizPlaybackV30,<anonymous@344>; loadQuizSettings; readQuizSettingsUI
+quizSong,variable,29,113,6,30,<anonymous@231>; <anonymous@254>; <anonymous@306>; <anonymous@30>; <anonymous@330>; <anonymous@334>; <anonymous@346>; <anonymous@506>; <anonymous@555>; <anonymous@556>; <anonymous@583>; <anonymous@592>; answerField; applyQuizDisplaySettingsV30; classifyQuiz; enterSpecial; evaluateQuizTargetAnswerV857; nextQuiz; openQuizFloatingDetailV8239; playQuizAudio; quizAnswerAliasTooltipTextV8239; revealAnswer; showQuizRevealInfoV30; skipUnplayedQuizQuestionV80; startQuizPlaybackTickerV30; submitQuiz; submitQuizAllV857; wireQuizInfoDetailActionsV8239,<anonymous@312>; <anonymous@334>; <anonymous@346>; <anonymous@602>; nextQuiz
+quizFinished,variable,29,15,9,19,<anonymous@302>; <anonymous@306>; <anonymous@30>; <anonymous@330>; <anonymous@334>; <anonymous@583>; <anonymous@592>; answerField; buildSuggestions; classifyQuiz; skipUnplayedQuizQuestionV80; startQuizPlaybackTickerV30; submitQuiz; submitQuizAllV857,<anonymous@312>; <anonymous@334>; <anonymous@346>; <anonymous@602>; classifyQuiz; hideAnswer; nextQuiz; skipUnplayedQuizQuestionV80
+quizActive,variable,29,9,5,14,<anonymous@130>; <anonymous@306>; <anonymous@30>; <anonymous@330>; <anonymous@336>; <anonymous@417>; <anonymous@583>; <anonymous@592>; startQuizPlaybackTickerV30,<anonymous@312>; deactivateQuizModeV82; enterSpecial; nextQuiz; playQuizAudio
+lastQuestionId,variable,29,7,5,11,<anonymous@111>; <anonymous@125>; <anonymous@88>; <anonymous@93>; calculateQuizPoolCandidatesV8280; getQuizPool,<anonymous@312>; <anonymous@334>; <anonymous@346>; <anonymous@602>; nextQuiz
+quizAudioStarted,variable,29,6,6,10,<anonymous@302>; <anonymous@30>; <anonymous@437>; classifyQuiz; submitQuiz; submitQuizAllV857,<anonymous@312>; <anonymous@330>; hideAnswer; nextQuiz
+quizStartedAt,variable,29,8,7,9,<anonymous@30>; <anonymous@330>; <anonymous@437>; <anonymous@443>; classifyQuiz; submitQuizAllV857,<anonymous@312>; <anonymous@330>; <anonymous@443>; hideAnswer; nextQuiz
+readQuizSettingsUI,function,41,9,0,9,<anonymous@334>; <anonymous@343>; <anonymous@344>; <anonymous@345>; <anonymous@346>; <anonymous@598>; <anonymous@602>; <anonymous@615>; nextQuiz,
+activeFocusSongIdsV72,variable,40,7,5,8,<anonymous@125>; <anonymous@625>; <anonymous@626>; classifyQuiz; getQuizPool; skipUnplayedQuizQuestionV80,<anonymous@602>; <anonymous@615>; <anonymous@626>; classifyQuiz; skipUnplayedQuizQuestionV80
+currentQuestionTarget,variable,29,9,4,8,<anonymous@30>; answerField; classifyQuiz; nextQuiz; revealAnswer; skipUnplayedQuizQuestionV80; submitQuizAllV857,<anonymous@312>; nextQuiz; submitQuizAllV857
+nextQuiz,function,129,11,1,8,<anonymous@2>; <anonymous@306>; <anonymous@311>; <anonymous@334>; <anonymous@343>; <anonymous@346>; <anonymous@417>; <anonymous@572>,<anonymous@2>
+quizRoundSeen,variable,40,9,0,8,<anonymous@125>; <anonymous@312>; <anonymous@334>; <anonymous@343>; <anonymous@346>; <anonymous@602>; getQuizPool; nextQuiz,
+quizRound,variable,40,9,7,7,classifyQuiz; nextQuiz,<anonymous@312>; <anonymous@334>; <anonymous@343>; <anonymous@346>; <anonymous@602>; classifyQuiz; nextQuiz
+quizAutoNextPausedV30,variable,360,6,4,7,<anonymous@431>; pauseQuizAutoNextV30; renderQuizAutoNextV30; resumeQuizAutoNextV30,<anonymous@417>; clearQuizAutoNextV30; pauseQuizAutoNextV30; startQuizAutoNextV30
+quizAutoNextRemainingMsV30,variable,360,4,4,7,<anonymous@431>; renderQuizAutoNextV30; resumeQuizAutoNextV30,<anonymous@417>; clearQuizAutoNextV30; pauseQuizAutoNextV30; startQuizAutoNextV30
+activeFocusModeV72,variable,40,7,2,7,<anonymous@125>; classifyQuiz; getQuizPool; nextQuiz; skipUnplayedQuizQuestionV80,<anonymous@602>; <anonymous@615>
+clearQuizAutoNextV30,function,412,9,0,7,<anonymous@312>; <anonymous@431>; <anonymous@567>; <anonymous@569>; nextQuiz; resetQuizRevealInfoV30; showQuizRevealInfoV30,
+clearQuizPlaybackV30,function,432,13,0,7,<anonymous@312>; <anonymous@569>; <anonymous@583>; classifyQuiz; nextQuiz; skipUnplayedQuizQuestionV80; startQuizPlaybackTickerV30,
+quizRootV30,variable,350,11,0,7,<anonymous@2>; <anonymous@417>; <anonymous@593>; applyQuizDisplaySettingsV30; resetQuizRevealInfoV30; showQuizRevealInfoV30; updateQuizPlaybackV30,
+updateQuizPlaybackV30,function,433,9,0,7,<anonymous@443>; <anonymous@569>; <anonymous@583>; <anonymous@593>; resetQuizRevealInfoV30; showQuizRevealInfoV30; startQuizPlaybackTickerV30,
+quizAnswerStopAt,variable,40,5,5,6,classifyQuiz; submitQuiz; submitQuizAllV857,<anonymous@312>; hideAnswer; nextQuiz; submitQuiz; submitQuizAllV857
+quizAutoNextDeadlineV30,variable,360,7,4,6,<anonymous@431>; pauseQuizAutoNextV30; renderQuizAutoNextV30,<anonymous@417>; clearQuizAutoNextV30; pauseQuizAutoNextV30; startQuizAutoNextV30
+quizRoundTarget,variable,40,1,6,5,nextQuiz,<anonymous@312>; <anonymous@343>; <anonymous@346>; <anonymous@602>; nextQuiz
+quizClipDeadlineV30,variable,359,8,3,5,<anonymous@443>; <anonymous@583>; startQuizPlaybackTickerV30; updateQuizPlaybackV30,<anonymous@443>; clearQuizPlaybackV30; startQuizPlaybackTickerV30
+quizPracticeMetaV8239,variable,462,4,1,5,<anonymous@469>; <anonymous@475>; getQuizPracticeMetaV8239; saveQuizPracticeMetaV8239,<anonymous@2>
+countdownV30,variable,399,14,0,5,<anonymous@2>; <anonymous@417>; clearQuizAutoNextV30; renderQuizAutoNextV30; showQuizRevealInfoV30,
+updateQuizCounts,function,126,5,0,5,<anonymous@127>; <anonymous@2>; <anonymous@599>; classifyQuiz; nextQuiz,
+optionCache,variable,134,2,3,4,buildSuggestions,<anonymous@134>; <anonymous@334>; <anonymous@374>
+quizPauseClockStartedAtV82,variable,434,5,3,4,<anonymous@437>; <anonymous@443>; <anonymous@455>,<anonymous@437>; <anonymous@443>; <anonymous@456>
+quizPausedElapsedV82,variable,434,3,3,4,<anonymous@437>; <anonymous@455>,<anonymous@437>; <anonymous@443>; <anonymous@456>
+quizClipTimer,variable,40,8,1,4,<anonymous@312>; classifyQuiz; nextQuiz; skipUnplayedQuizQuestionV80,<anonymous@312>
+submitQuiz,function,261,7,1,4,<anonymous@2>; <anonymous@309>; <anonymous@334>; <anonymous@583>,<anonymous@2>
+classifyQuiz,function,237,4,0,4,<anonymous@310>; <anonymous@334>; submitQuiz; submitQuizAllV857,
+clearQuizAutoNextTimersV30,function,404,4,0,4,<anonymous@417>; clearQuizAutoNextV30; pauseQuizAutoNextV30; startQuizAutoNextV30,
+closeQuizSuggestions,function,135,4,0,4,<anonymous@334>; <anonymous@374>; hideAnswer; selectQuizSuggestionV8272,
+getQuizPracticeMetaV8239,function,465,4,0,4,<anonymous@2>; <anonymous@469>; <anonymous@475>; showQuizRevealInfoV30,
+loadQuizSettings,function,42,4,0,4,<anonymous@2>; <anonymous@344>; <anonymous@602>; <anonymous@615>,
+quizMysteryV30,variable,352,7,0,4,<anonymous@2>; applyQuizDisplaySettingsV30; resetQuizRevealInfoV30; showQuizRevealInfoV30,
+quizSettingsToggleV30,variable,356,6,0,4,<anonymous@2>; <anonymous@375>; <anonymous@376>; <anonymous@377>,
+quizSideV30,variable,353,4,0,4,<anonymous@2>; <anonymous@394>; resetQuizRevealInfoV30; showQuizRevealInfoV30,
+settingsOverlayV30,variable,366,8,0,4,<anonymous@2>; <anonymous@375>; <anonymous@376>; <anonymous@377>,
+skipUnplayedQuizQuestionV80,function,228,4,0,4,<anonymous@306>; classifyQuiz; submitQuiz; submitQuizAllV857,
+updateQuizAllAnswersV857,function,302,4,0,4,<anonymous@2>; <anonymous@330>; <anonymous@334>; hideAnswer,
+quizOptionFocus,variable,40,12,4,3,<anonymous@334>,<anonymous@334>; buildSuggestions; closeQuizSuggestions
+chineseSuggestionStateV8239,variable,132,4,2,3,<anonymous@2>; <anonymous@374>; chineseAnswerSuggestionsEnabledV8239,<anonymous@2>; <anonymous@374>
+quizComposing,variable,334,5,2,3,<anonymous@334>; buildSuggestions; selectQuizSuggestionV8272,<anonymous@334>
+quizFloatingDragV8239,variable,510,5,2,3,<anonymous@518>; <anonymous@519>,<anonymous@517>; <anonymous@519>
+animeTitleV30,variable,388,7,1,3,<anonymous@2>; resetQuizRevealInfoV30; showQuizRevealInfoV30,<anonymous@2>
+revealAnswer,function,227,3,1,3,<anonymous@2>; classifyQuiz; skipUnplayedQuizQuestionV80,<anonymous@2>
+answerField,function,131,3,0,3,buildSuggestions; submitQuiz; targetOptions,
+applyQuizDisplaySettingsV30,function,595,3,0,3,<anonymous@2>; <anonymous@598>; readQuizSettingsUI,
+buildSuggestions,function,186,4,0,3,<anonymous@134>; <anonymous@2>; <anonymous@334>,
+make,variable,5,9,0,3,<anonymous@2>; buildSuggestions; showQuizRevealInfoV30,
+openQuizFloatingDetailV8239,function,523,5,0,3,<anonymous@547>; <anonymous@555>; <anonymous@556>,
+quizDefaults,variable,39,12,0,3,<anonymous@2>; <anonymous@344>; loadQuizSettings,
+visualizerV30,variable,385,3,0,3,<anonymous@2>; resetQuizRevealInfoV30; showQuizRevealInfoV30,
+activeFocusOriginalSettingsV72,variable,40,3,3,2,<anonymous@602>; <anonymous@615>,<anonymous@602>; <anonymous@615>
+activeFocusOriginalPoolV72,variable,40,2,2,2,<anonymous@615>,<anonymous@602>; <anonymous@615>
+quizAutoNextTickV30,variable,359,2,2,2,clearQuizAutoNextTimersV30,clearQuizAutoNextTimersV30; startQuizAutoNextV30
+quizAutoNextTimerV30,variable,359,2,2,2,clearQuizAutoNextTimersV30,clearQuizAutoNextTimersV30; startQuizAutoNextV30
+quizPlaybackTickerV30,variable,359,3,2,2,clearQuizPlaybackV30; startQuizPlaybackTickerV30,clearQuizPlaybackV30; startQuizPlaybackTickerV30
+getQuizPool,function,114,2,1,2,<anonymous@2>; nextQuiz,<anonymous@2>
+hideAnswer,function,128,2,1,2,<anonymous@2>; nextQuiz,<anonymous@2>
+quizAliasTooltipV8239,variable,502,15,1,2,<anonymous@506>; <anonymous@507>,<anonymous@506>
+quizFloatingDetailV8239,variable,510,6,1,2,<anonymous@520>; createQuizFloatingDetailV8239,createQuizFloatingDetailV8239
+quizQuestionTokenV8239,variable,466,2,1,2,<anonymous@469>,<anonymous@467>
+applyTheme,function,338,3,0,2,<anonymous@2>; <anonymous@339>,
+chineseSuggestionToggleV8239,variable,373,4,0,2,<anonymous@2>; <anonymous@374>,
+chooseQuizSuggestion,function,136,2,0,2,<anonymous@223>; <anonymous@334>,
+deactivateQuizModeV82,function,36,2,0,2,<anonymous@2>; exitSpecial,
+getQuizAnimeNameBundleV8239,function,481,3,0,2,openQuizFloatingDetailV8239; quizAnswerAliasTooltipTextV8239,
+infoToggleV30,variable,394,3,0,2,<anonymous@2>; <anonymous@394>,
+norm,variable,33,2,0,2,<anonymous@543>; openQuizFloatingDetailV8239,
+normalizeQuizSuggestionTextV824,function,138,2,0,2,buildSuggestions; mapQuizSuggestionTextV824,
+PRACTICE_META_KEY_V8239,variable,461,2,0,2,<anonymous@2>; saveQuizPracticeMetaV8239,
+QUIZ_SUGGESTION_SPECIAL_SPACE_CHARS_V824,variable,137,2,0,2,<anonymous@139>; <anonymous@155>,
+quizAnswerInput,variable,334,12,0,2,<anonymous@2>; <anonymous@334>,
+renderQuizAutoNextV30,function,405,3,0,2,pauseQuizAutoNextV30; startQuizAutoNextV30,
+resetQuizRevealInfoV30,function,459,2,0,2,<anonymous@2>; <anonymous@567>,
+samplePositionInput,variable,341,6,0,2,<anonymous@2>; <anonymous@341>,
+samplePositionValue,variable,341,3,0,2,<anonymous@2>; <anonymous@341>,
+saveQuizPracticeMetaV8239,function,464,2,0,2,<anonymous@469>; <anonymous@475>,
+selectQuizSuggestionV8272,function,136,2,0,2,<anonymous@2>; chooseQuizSuggestion,
+showQuizRevealInfoV30,function,559,2,0,2,<anonymous@568>; applyQuizDisplaySettingsV30,
+startQuizAutoNextV30,function,413,2,0,2,resumeQuizAutoNextV30; showQuizRevealInfoV30,
+uniqueQuizNamesV8239,function,480,3,0,2,getQuizAnimeNameBundleV8239; quizAnswerAliasTooltipTextV8239,
+wrap,variable,3,6,0,2,<anonymous@2>; updateQuizAllAnswersV857,
+initialDark,variable,339,1,1,1,<anonymous@2>,<anonymous@2>
+quizPlayedTokenV8239,variable,466,1,1,1,<anonymous@469>,<anonymous@469>
+quizStopTimerV30,variable,359,2,1,1,clearQuizPlaybackV30,clearQuizPlaybackV30

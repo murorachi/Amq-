@@ -1,0 +1,19 @@
+<style id="v64-same-ui-buffer">
+/* The buffer must not collapse into the separate reveal layout. Keep the question-stage geometry and controls. */
+#quizView.is-revealed .quizMystery{background:var(--panel, #10141b)!important}
+#quizView.is-revealed .quizVisualizerV30{display:none!important}
+#quizView.is-revealed .quizPlaybackMetaV30{display:flex!important}
+#quizView.is-revealed .quizSkipControls{display:none!important}
+#quizView.is-revealed .quizSuggest{display:block!important}
+#quizView.is-revealed #quizSubmit{display:none!important}
+#quizView.is-revealed #quizTimerDisplay{display:initial!important}
+#quizView.is-revealed .quizAnswerInput{display:block!important}
+#quizView.is-revealed .quizAnimeAnswerLabel.hidden{display:none!important}
+/* Reuse the original artwork viewport; the image itself remains the top visual layer. */
+#quizView.is-revealed .quizMystery{position:relative!important;min-height:clamp(220px,30vw,390px)!important}
+#quizView.is-revealed .quizMystery .quizAnimeCoverV30{position:absolute!important;inset:8px!important;width:calc(100% - 16px)!important;height:calc(100% - 16px)!important;max-width:none!important;max-height:none!important;object-fit:contain!important;margin:0!important;z-index:3!important}
+#quizView.is-revealed .quizMystery .quizAnimeCoverV30[hidden]{display:none!important}
+/* Soft glow is attached to the actual V30 cover, not a full-card overlay. */
+#quizView .quizMystery.quiz-answer-correct-v57:has(.quizAnimeCoverV30:not([hidden])) .quizAnimeCoverV30{filter:drop-shadow(0 0 5px rgba(75,235,142,.42))!important}
+#quizView .quizMystery.quiz-answer-wrong-v57:has(.quizAnimeCoverV30:not([hidden])) .quizAnimeCoverV30{filter:drop-shadow(0 0 5px rgba(255,88,99,.40))!important}
+</style>

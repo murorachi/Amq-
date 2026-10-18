@@ -1,0 +1,124 @@
+<script id="emq-toggle-v8248-script">
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const PACKED_ID='emqLibraryGzipBase64V8248';
+const SOURCE_KEY='aniQuizSettingsV14';
+let ready=false, rows=[], works=[], rowById=new Map(), metaById=new Map(), aliasesById=new Map(), workRows=new Map(), workById=new Map(), workByVndbId=new Map();
+const asId=v=>String(v??'');
+const unique=a=>[...new Set((Array.isArray(a)?a:[]).map(x=>String(x??'').trim()).filter(Boolean))];
+function setStatus(message,isError=false){const el=$('emqSourceStatusV8248');if(el){el.textContent=message;el.classList.toggle('error',!!isError)}}
+function readSavedToggle(){try{return JSON.parse(localStorage.getItem(SOURCE_KEY)||'{}').includeEmq===true}catch{return false}}
+function writeSavedToggle(enabled){try{const v=JSON.parse(localStorage.getItem(SOURCE_KEY)||'{}');v.includeEmq=!!enabled;localStorage.setItem(SOURCE_KEY,JSON.stringify(v))}catch(e){setStatus('EMQ 開關未能儲存設定，請確認瀏覽器儲存空間。',true)}}
+function makeWorkRow(w){return [Number(w.i),String(w.t||'未知作品'),String(w.n||w.t||'未知作品'),'','Other',Number(w.y)||0,null,String(w.vndbId||'')]}
+// Compatibility no-op: EMQ works must never be inserted into the AMQ anime index.
+function registerWorks(_map){return false}
+function getWorkSummary(id){const w=getWork(id);return w?makeWorkRow(w):null}
+function getSourceForQuestion(songOrId){return isSong(songOrId)?'emq':'amq'}
+function isSong(songOrId){const id=Array.isArray(songOrId)?songOrId[1]:songOrId;return rowById.has(asId(id))}
+function getRow(id){return rowById.get(asId(id))||null}
+function getRows(){return ready?rows:[]}
+function getAudioUrls(id){const m=metaById.get(asId(id));if(!m)return [];const out=[];for(const raw of m.v||[]){const u=String(raw||'').trim();if(!u)continue;const cat=u.match(/^https?:\/\/[^/]+\/selfhoststorage\/catbox\/([^/?#]+)/i);if(cat)out.push('https://files.catbox.moe/'+cat[1]);out.push(u)}return [...new Set(out)]}
+function getAliases(id){return aliasesById.get(asId(id))||{work:[],title:[],artist:[]}}
+function getWorks(){return ready?works:[]}
+function getWork(id){const key=asId(id);return workById.get(key)||workByVndbId.get(key.replace(/^https?:\/\/(?:www\.)?vndb\.org\//i,''))||null}
+function getMeta(id){const m=metaById.get(asId(id));return m?{...m,v:m.v.slice()}:null}
+function getSongsForWork(id){const key=asId(id);const work=getWork(key);const wid=work?asId(work.i):key;return ready?rows.filter(s=>asId(s[0])===wid):[]}
+function getSongsByArtist(name){const key=String(name||'').trim().toLocaleLowerCase();if(!key)return [];return ready?rows.filter(s=>{const a=aliasesById.get(asId(s[1]))?.artist||[s[5]];return a.some(v=>String(v||'').trim().toLocaleLowerCase()===key)}):[]}
+function getWorkByVndbId(id){return workByVndbId.get(String(id||'').replace(/^https?:\/\/(?:www\.)?vndb\.org\//i,''))||null}
+function getMultiplayerManifest(ids){const wanted=new Set((Array.isArray(ids)?ids:[]).map(asId));return rows.filter(s=>wanted.has(asId(s[1]))).map(s=>{const m=metaById.get(asId(s[1]))||{},a=aliasesById.get(asId(s[1]))||{},w=workById.get(asId(s[0]))||{};return {id:asId(s[1]),workId:asId(s[0]),title:s[4],artist:s[5],songType:Number(s[2])||5,year:Number(m.year)||0,workTitle:String(m.workTitle||w.t||''),workAlt:String(m.workAlt||w.n||''),vndbId:String(m.vndbId||w.vndbId||''),audioCandidates:getAudioUrls(s[1]),workAliases:(a.work||[]).slice(0,8),titleAliases:(a.title||[]).slice(0,8),artistAliases:(a.artist||[]).slice(0,8)}})}
+function storedStatus(id){try{const raw=window.__aniHistoryAPIv51?.getStatus?.(id)??JSON.parse(localStorage.getItem('aniCollection_v2')||'{}')[asId(id)]??0,n=window.__aniCandidatePoolPolicyV8265.candidateNumber(raw);return n!==null&&Number.isInteger(n)&&n>=0&&n<=3?n:null}catch{return null}}
+function storedTag(id){try{return String(window.__aniHistoryAPIv51?.getSongTag?.(id)||JSON.parse(localStorage.getItem('aniSongTags_v1')||'{}')[asId(id)]||'')}catch{return ''}}
+function isAmqSpecificRestriction(settings,chosen){return window.__aniCandidatePoolPolicyV8265.hasAmqSpecificRestriction(settings,chosen)}
+function combinePool(base,settings,focusMode,roundSeen,lastId,focusIds,selectedEmqSongIds){
+ const mode=['amq','mixed','emq'].includes(settings?.emqMode)?settings.emqMode:(settings?.includeEmq?'mixed':'amq');
+ if(!ready)return base;
+ const baseRows=Array.isArray(base)?base:[];
+ const onlyEmq=mode==='emq',chosen=String($('quizPool')?.value||'all');
+ const idsInFocus=focusMode?new Set((Array.isArray(focusIds)?focusIds:[]).map(asId)):null;
+ const selectedList=selectedEmqSongIds instanceof Set;
+ // A focus session is an explicit cross-source set from the planner/SRS engine; it overrides the ordinary source mode and ordinary filters.
+ if(focusMode){
+   const focused=rows.filter(s=>idsInFocus?.has(asId(s[1]))&&String(s[4]||'').trim()&&String(s[5]||'').trim()&&getAudioUrls(s[1]).length&&window.__aniCandidatePoolPolicyV8265.blacklistAllowed(!!window.__aniHistoryAPIv51?.isBlacklisted?.(s[1]))&&!(settings?.noRepeat&&(roundSeen?.has?.(asId(s[1]))||asId(lastId)===asId(s[1]))));
+   const amqFocused=baseRows;
+   const out=[...amqFocused,...focused],seen=new Set();
+   return out.filter(s=>{const id=asId(s?.[1]);if(!id||seen.has(id))return false;seen.add(id);return true});
+ }
+ if(mode==='amq')return baseRows;
+ const hardScope=!selectedList&&isAmqSpecificRestriction(settings,chosen);
+ if(hardScope&&!onlyEmq){
+   setStatus('本輪啟用了動畫專屬範圍（觀看狀態、季節、作品類型或動畫難度）；為了不把不適用的 EMQ 歌曲混入，本輪只從符合條件的 AMQ 候選出題。',false);
+   return baseRows;
+ }
+ if(hardScope&&onlyEmq)setStatus('目前是 EMQ 專用模式；動畫觀看狀態、季節、作品類型與 AMQ 難度不適用於本輪 EMQ，未清除已保存設定。',false);
+ const statuses=settings?.statuses;
+ const types=settings?.songTypes===undefined?[1,2,3,4,5]:settings.songTypes;
+ const policy=window.__aniCandidatePoolPolicyV8265;
+ const yearA=policy.rangeBound(settings?.yearMin,1900),yearB=policy.rangeBound(settings?.yearMax,2100);
+ if(yearA===null||yearB===null||yearA<1900||yearA>2100||yearB<1900||yearB>2100||yearA>yearB)return [];
+ const minYear=yearA,maxYear=yearB;
+ const emq=rows.filter(s=>{
+   const id=asId(s[1]),m=metaById.get(id);if(!m||!String(s[4]||'').trim()||!String(s[5]||'').trim()||!getAudioUrls(id).length)return false;
+   if(selectedList&&!selectedEmqSongIds.has(id))return false;
+   if(!window.__aniCandidatePoolPolicyV8265.blacklistAllowed(!!window.__aniHistoryAPIv51?.isBlacklisted?.(id)))return false;
+   if(settings?.noRepeat&&(roundSeen?.has?.(id)||asId(lastId)===id))return false;
+   if(selectedList)return true; // selected EMQ lists are dedicated scope and intentionally override ordinary filters.
+   const level=storedStatus(id),tag=storedTag(id);if(!policy.statusAllowed(level,statuses))return false;
+   // AMQ difficulty has no verified EMQ equivalent: hard is neutral for EMQ in EMQ-only mode; Mixed mode suppresses EMQ when hard is an AMQ-only restriction.
+   if(!policy.quickPoolAllowed(level,tag,undefined,chosen,'emq'))return false;
+   if(!policy.tagAllowed(tag,settings?.tagsOnly===true,settings?.tagText))return false;
+   if(!window.__aniCandidatePoolPolicyV8265.metadataAllowed({source:'emq',year:m.year,songType:s[2]},{...settings,yearMin:minYear,yearMax:maxYear,songTypes:types}))return false;
+   return true;
+ });
+ if(onlyEmq){if(!emq.length)setStatus(selectedList?'所選 EMQ 自訂清單目前沒有可出題歌曲，或歌曲均遭到黑名單／不重複規則排除。':'目前篩選條件沒有符合的 EMQ 歌曲。可調整年代、歌曲類型、熟悉度或標籤條件。');return emq;}
+ if(selectedList&&!emq.length)setStatus('所選 EMQ 自訂清單目前沒有可出題歌曲；混合模式仍會使用符合條件的 AMQ 候選。');
+ return dedupeRows(baseRows.concat(emq));
+}
+function dedupeRows(input){const seen=new Set();return input.filter(s=>{const id=asId(s?.[1]);if(!id||seen.has(id))return false;seen.add(id);return true})}
+function chooseQuestion(pool,settings,focusMode){
+ const list=Array.isArray(pool)?pool:[];if(!list.length)return null;
+ if(focusMode){return list[Math.floor(Math.random()*list.length)]||null}
+ const mode=['amq','mixed','emq'].includes(settings?.emqMode)?settings.emqMode:(settings?.includeEmq?'mixed':'amq');
+ const emq=list.filter(s=>isSong(s)),amq=list.filter(s=>!isSong(s));
+ if(mode==='amq')return amq[Math.floor(Math.random()*amq.length)]||null;
+ if(mode==='emq')return emq[Math.floor(Math.random()*emq.length)]||null;
+ if(!amq.length)return emq[Math.floor(Math.random()*emq.length)]||null;
+ if(!emq.length)return amq[Math.floor(Math.random()*amq.length)]||null;
+ const source=Math.random()<2/3?amq:emq,chosen=source[Math.floor(Math.random()*source.length)];return chosen||list[Math.floor(Math.random()*list.length)]||null;
+}
+window.__aniEmqAPI={
+ version:'v82.56',get ready(){return ready},get count(){return rows.length},get workCount(){return works.length},getRows,isSong,getRow,getAudioUrls,getAliases,getWorks,getWork,getMeta,getWorkSummary,getSourceForQuestion,getSongsForWork,getSongsByArtist,getWorkByVndbId,getMultiplayerManifest,registerWorks,combinePool,chooseQuestion,
+ setEnabled(enabled){const box=$('qsEmqEnabled');if(box)box.checked=!!enabled;writeSavedToggle(enabled);window.__aniEmqToggleChangedV1?.(!!enabled);syncToggleLabel()},
+};
+function syncToggleLabel(){const box=$('qsEmqEnabled'),label=$('qsEmqToggleLabelV8248'),option=$('quizTarget')?.querySelector('option[value="anime"]');if(!box)return;const on=box.checked;if(label)label.title=on?'出題時將混入 EMQ 遊戲／視覺小說歌曲。':'關閉時只抽取原有 AMQ 曲庫。';if(option)option.textContent=on?'作品名稱（動畫／遊戲）':'動畫作品';const inputLabel=label?.querySelector('.emqToggleTextV8248');if(inputLabel)inputLabel.textContent=on?`EMQ 曲庫 已開啟（${rows.length.toLocaleString()} 首）`:`EMQ 曲庫（${rows.length.toLocaleString()} 首可用記錄）`;}
+function mountToggle(){const quick=$('quizPool')?.closest('label');if(!quick||$('qsEmqEnabled'))return;const label=document.createElement('label');label.id='qsEmqToggleLabelV8248';label.className='emqSourceToggleV8248';label.innerHTML='<input id="qsEmqEnabled" type="checkbox" disabled><span class="emqToggleTextV8248">EMQ 曲庫載入中…</span>';
+ quick.insertAdjacentElement('afterend',label);const status=document.createElement('div');status.id='emqSourceStatusV8248';status.className='emqSourceStatusV8248';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.textContent='EMQ 曲庫尚未載入。關閉時 AMQ 出題流程不變。';label.insertAdjacentElement('afterend',status);
+ const box=$('qsEmqEnabled');box.checked=readSavedToggle();box.addEventListener('change',()=>{if(!ready){box.checked=false;return}writeSavedToggle(box.checked);window.__aniEmqToggleChangedV1?.(box.checked);syncToggleLabel();if(box.checked)setStatus(`EMQ 已開啟。混合候選曲目會依目前題數、熟悉度、年代及歌曲類型設定篩選。`);else setStatus('EMQ 已關閉；題目只來自原有 AMQ 曲庫。');});
+ syncToggleLabel();}
+async function loadData(){try{
+ const node=$(PACKED_ID);if(!node)throw new Error('找不到內嵌的 EMQ 曲庫資料。');
+ if(typeof DecompressionStream!=='function')throw new Error('此瀏覽器不支援內嵌曲庫解壓縮，請使用較新的 Firefox、Chrome 或 Edge。');
+ const b64=node.textContent.trim();const bin=atob(b64);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+ const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+ const data=JSON.parse(await new Response(stream).text());if(data.version!==1||!Array.isArray(data.songs)||!Array.isArray(data.works))throw new Error('EMQ 曲庫版本或資料格式不正確。');
+ works=data.works;
+ const sourceWorkIds=new Set(),sourceSongIds=new Set(),amqWorkIds=new Set((Array.isArray(anime)?anime:[]).map(a=>asId(a?.[0]))),amqSongIds=new Set((Array.isArray(songs)?songs:[]).map(a=>asId(a?.[1])));
+ for(const w of works){const id=Number(w?.i);if(!Number.isSafeInteger(id)||id<=0||sourceWorkIds.has(asId(id)))throw new Error('EMQ 作品 ID 缺失、無效或重複；已停止載入以保護學習資料。');if(amqWorkIds.has(asId(id)))throw new Error(`AMQ／EMQ 作品 ID 衝突：${id}。已停止載入以避免作品資訊與記錄污染。`);sourceWorkIds.add(asId(id));}
+ for(const x of data.songs){const id=Number(x?.i),wid=Number(x?.w);if(!Number.isSafeInteger(id)||id<=0||sourceSongIds.has(asId(id)))throw new Error('EMQ 歌曲 ID 缺失、無效或重複；已停止載入以保護學習資料。');if(amqSongIds.has(asId(id)))throw new Error(`AMQ／EMQ 歌曲 ID 衝突：${id}。已停止載入以避免學習紀錄污染。`);if(!sourceWorkIds.has(asId(wid)))throw new Error(`EMQ 歌曲 ${id} 找不到對應作品 ${wid}；已停止載入以避免答案誤判。`);sourceSongIds.add(asId(id));}
+ workById=new Map(works.map(w=>[asId(w.i),w]));workByVndbId=new Map(works.filter(w=>w.vndbId).map(w=>[String(w.vndbId),w]));workRows=new Map(works.map(w=>[asId(w.i),makeWorkRow(w)]));
+ for(const x of data.songs){
+   if(!Array.isArray(x.v)||!x.v.length||!x.v.every(u=>/^https:\/\//i.test(u)))continue;
+   const id=Number(x.i),workId=Number(x.w);if(!Number.isSafeInteger(id)||!Number.isSafeInteger(workId))continue;
+   const title=String(x.t||'').trim(),artist=String(x.a||'').trim();if(!title||!artist)continue;
+   const row=[workId,id,Number(x.k)||5,0,title,artist,null,Number(x.d)||0,Number(x.o)||0,x.v[0]||'','','',String(x.n||''),String((x.ta||[]).find(t=>t!==title)||''),'EMQ'];
+   const aliases={work:unique(x.wa).concat([x.wt,x.wn]),title:unique(x.ta).concat([x.t,x.n]),artist:unique(x.aa).concat([x.a])};
+   const workMeta=workById.get(asId(workId))||{};const meta={id,originalId:Number(x.o)||0,workId,workTitle:String(x.wt||workMeta.t||''),workAlt:String(x.wn||workMeta.n||''),vndbId:String(workMeta.vndbId||''),sourceType:Number(x.st)||0,year:Number(x.y)||Number(workMeta.y)||0,kind:Number(x.k)||5,duration:Number(x.d)||0,v:unique(x.v)};
+   rows.push(row);rowById.set(asId(id),row);metaById.set(asId(id),meta);aliasesById.set(asId(id),{work:unique(aliases.work),title:unique(aliases.title),artist:unique(aliases.artist)});
+ }
+ ready=true;mountToggle();const box=$('qsEmqEnabled');if(box){box.disabled=false;box.checked=readSavedToggle();window.__aniEmqToggleChangedV1?.(box.checked)}syncToggleLabel();
+ setStatus(`已載入 EMQ 曲庫：${rows.length.toLocaleString()} 首歌曲、${works.length.toLocaleString()} 個作品。音訊使用 EMQ 原始連結，不會下載或重新託管音檔；少數連結仍可能失效。`);
+ document.dispatchEvent(new CustomEvent('ani-emq-library-ready-v8248',{detail:{songs:rows.length,works:works.length}}));
+ }catch(err){console.error('[EMQ v82.48] load failed',err);mountToggle();const box=$('qsEmqEnabled');if(box){box.checked=false;box.disabled=true;box.title=String(err?.message||err)}setStatus(`EMQ 曲庫載入失敗：${String(err?.message||err)}。AMQ 原有曲庫仍可正常使用。`,true)} }
+mountToggle();loadData();
+})();
+</script>

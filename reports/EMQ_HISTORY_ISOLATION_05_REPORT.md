@@ -33,7 +33,7 @@ Continue from checkpoint `V82.66 EMQ-CUSTOM-LIST-SCOPE-04`. This stage adds exac
 
 - Browser/manual interaction, Firefox, audio/network playback, IndexedDB round-trip, multiplayer multi-device, and full product regression were not run.
 - The answer flow was inspected in source but not executed as an end-to-end quiz test.
-- `AMQ_V82_65_AUDIT_01.zip` is an audit package containing the standalone baseline and inventory/report files, not the official full V82.65 delivery ZIP. The official delivery archive is still unavailable, so its expected outer SHA-256, CRC, internal manifest and all embedded payload fingerprints remain unverified.
+- `/mnt/data/AMQ_V82_65_AUDIT_01.zip` is an audit package containing the standalone baseline and inventory/report files, not the official full V82.65 delivery ZIP. The official delivery archive is still unavailable, so its expected outer SHA-256, CRC, internal manifest and all embedded payload fingerprints remain unverified.
 - The solo custom-list adapter seam remains unresolved: `getQuizPool` does not pass `selectedEmqSongIds` into `combinePool`. No speculative behavior was added.
 - GitHub upload/readback status is recorded separately after attempting the checkpoint push.
 
@@ -45,5 +45,6 @@ This stage only adds test/report files and updates checkpoint documentation. To 
 
 - Repository: `murorachi/Amq-`, branch `v82.66-source-split-02`.
 - Text artifacts (README, BASELINE, CURRENT_STATUS, NEXT_TASK, EMQ API contract test, history/status test, this report, test log and fingerprint report) were uploaded and read back from the remote branch.
+- Latest branch head after text updates: `5644d11dc0945ff9cc18e2cb39ab1d4ceb292a8b`.
 - Binary checkpoint ZIP was not uploaded. The available GitHub connector exposed text-content writes but no release-asset upload operation; the local ZIP and sidecar remain the verified delivery artifact.
 - GitHub readback confirms the required files exist and their expected checkpoint markers are present. This verifies text-file existence, not remote binary upload.

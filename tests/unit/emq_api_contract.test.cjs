@@ -10,10 +10,8 @@ const root = path.resolve(__dirname, '../..');
 const script4 = fs.readFileSync(path.join(root, 'src/scripts/script_004.htmlpart'), 'utf8');
 const script38 = fs.readFileSync(path.join(root, 'src/scripts/script_038.htmlpart'), 'utf8');
 const script25 = fs.readFileSync(path.join(root, 'src/scripts/script_025.htmlpart'), 'utf8');
-const p0 = script4.indexOf('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */');
-const p1 = script4.indexOf('/* V82.65_POOL_POLICY_END */', p0);
-assert.ok(p0 >= 0 && p1 > p0, 'candidate policy sentinels exist');
-const policySource = script4.slice(p0, p1 + '/* V82.65_POOL_POLICY_END */'.length);
+const policySource = fs.readFileSync(path.join(root, 'src/modules/candidate_pool_policy.js'), 'utf8');
+assert.ok(policySource.includes('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */') && policySource.includes('/* V82.65_POOL_POLICY_END */'), 'candidate policy module sentinels exist');
 const emqSource = script38.slice(script38.indexOf('<script id="emq-toggle-v8248-script">') + '<script id="emq-toggle-v8248-script">'.length, script38.lastIndexOf('</script>'));
 assert.ok(emqSource.includes('function combinePool(') && emqSource.includes('window.__aniEmqAPI='), 'real EMQ API contract exists');
 const scopeStart = script25.indexOf('window.__aniApplyQuizCustomListScopeV8265=function(basePool,isFocusMode=false){');
@@ -41,6 +39,12 @@ const payload = {
   ]
 };
 const packed = zlib.gzipSync(Buffer.from(JSON.stringify(payload))).toString('base64');
+
+async function waitFor(predicate, timeoutMs = 2000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) { if (predicate()) return; await new Promise(resolve => setTimeout(resolve, 5)); }
+  throw new Error('Timed out waiting for async EMQ fixture to settle');
+}
 
 async function makeEnv(overrides = {}) {
   const listeners = new Map();
@@ -211,12 +215,13 @@ function settings(overrides = {}) {
   const collisionPayload = { version: 1, works: [{ i: 10, t: 'collision', n: 'collision', y: 2020 }], songs: [] };
   const collisionPacked = zlib.gzipSync(Buffer.from(JSON.stringify(collisionPayload))).toString('base64');
   const collisionEnv = await makeEnv({ packed: collisionPacked, skipReady: true });
-  await new Promise(resolve => setTimeout(resolve, 20));
+  await waitFor(() => collisionEnv.status.textContent.length > 0);
   test('AMQ/EMQ work ID collision fails closed before ready', () => {
     assert.equal(collisionEnv.api.ready, false);
     assert.match(collisionEnv.status.textContent, /AMQ／EMQ 作品 ID 衝突/);
     assert.equal(collisionEnv.api.getRows().length, 0);
   });
+
   const missingWorkPayload = {
     version: 1,
     works: [{ i: 900001, t: 'Known EMQ Work', n: 'Known Alias', y: 2020 }],
@@ -224,7 +229,7 @@ function settings(overrides = {}) {
   };
   const missingWorkPacked = zlib.gzipSync(Buffer.from(JSON.stringify(missingWorkPayload))).toString('base64');
   const missingWorkEnv = await makeEnv({ packed: missingWorkPacked, skipReady: true });
-  await new Promise(resolve => setTimeout(resolve, 20));
+  await waitFor(() => missingWorkEnv.status.textContent.length > 0);
   test('EMQ song with missing work mapping fails closed before ready', () => {
     assert.equal(missingWorkEnv.api.ready, false);
     assert.match(missingWorkEnv.status.textContent, /找不到對應作品 900099/);
@@ -232,5 +237,5 @@ function settings(overrides = {}) {
     assert.equal(missingWorkEnv.context.anime.length, 1, 'failed EMQ load does not mutate AMQ anime');
     assert.equal(missingWorkEnv.context.songs.length, 1, 'failed EMQ load does not mutate AMQ songs');
   });
-  console.log(`RESULT \${passed} passed, \${process.exitCode ? 1 : 0} failed`);
+  console.log(`RESULT ${passed} passed, ${process.exitCode ? 1 : 0} failed`);
 })().catch(e => { console.error(e.stack || e); process.exitCode = 1; });

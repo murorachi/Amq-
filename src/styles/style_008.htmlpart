@@ -1,0 +1,14 @@
+<style id="v33-player-cover-and-view-isolation">
+#audioDock{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dockCoverV33{width:58px;height:58px;object-fit:cover;border-radius:10px;border:1px solid var(--line);flex:0 0 58px;background:var(--panel2)}
+.dockCoverV33[hidden]{display:none!important}
+#audioDock .dockMeta{min-width:120px;flex:1}
+#audioDock .dockBtns{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+#audioDock .dockBtns .statusbtn{font-size:11px;padding:8px 9px}
+#audioDock .dockBtns .statusbtn:disabled{opacity:.4;cursor:not-allowed}
+#audioDock.dock-info-hidden #dockMeta{display:none!important}
+body:not(.quiz-mode) #quizView{display:none!important}
+body.quiz-mode #quizView{display:block!important}
+body.quiz-mode #dockCoverV33{display:none!important}
+@media(max-width:760px){.dockCoverV33{width:46px;height:46px;flex-basis:46px}#audioDock .dockBtns{width:100%}#audioDock .dockBtns .btn,#audioDock .dockBtns .statusbtn{padding:7px 8px;font-size:10px}}
+</style>

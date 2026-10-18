@@ -1,0 +1,9 @@
+<style id="aniChineseTitleStyleV8237">
+#aniChineseTitleStatusV8237{display:block;margin-top:5px;font-size:11px;line-height:1.45;color:var(--muted,#786f80);font-weight:500}
+#aniChineseTitleRetryV8237{display:none;margin-left:8px;padding:2px 7px;font-size:11px;line-height:1.5}
+#aniChineseTitleStatusV8237[data-state="error"]{color:#a94d45}
+#aniChineseTitleStatusV8237[data-state="ready"]{color:#2d8054}
+#aniChineseTitleStatusV8237[data-state="partial"]{color:#9b7424}
+#multiplayerView #mpChineseTitleHintV8237{font-size:11px;color:var(--muted,#786f80);margin:5px 0 0;line-height:1.45}
+body.dark-theme #aniChineseTitleStatusV8237[data-state="ready"]{color:#7ed5a2}
+</style>

@@ -1,0 +1,32 @@
+PASS standalone HTML exists
+PASS production application initializes
+PASS quiz answer input and suggestion list mount
+PASS matching list is bounded to exactly 25 results for a broad query
+PASS non-empty matching query opens list and updates aria-expanded
+PASS rendered suggestions have non-empty labels
+PASS top-25 results are deterministically ordered by production comparator contract
+PASS IME composition guard leaves existing list untouched while composing
+PASS input event rebuilds bounded results after composition guard clears
+PASS shared suggestion selection contract is installed
+PASS shared selection contract refuses to replace input during IME composition
+PASS IME-guarded selection dispatches no input event
+PASS ArrowDown moves focus to one suggestion
+PASS Enter selects the focused suggestion
+PASS keyboard selection dispatches exactly one bubbling input event
+PASS keyboard selection updates answer mirror through input event
+PASS keyboard selection clears list and resets aria-expanded
+PASS keyboard selection preserves input focus
+PASS keyboard selection caret moves to end of inserted label
+PASS keyboard selection does not submit or settle an answer
+PASS suggestion pointerdown prevents input blur before selection
+PASS click handler copies selected suggestion into answer input
+PASS click selection updates answer mirror through input event
+PASS click selection clears suggestion list
+PASS click selection resets aria-expanded after the legacy input handler rebuilds then clears the list
+PASS click selection dispatches exactly one bubbling input event
+PASS click selection restores focus to the answer input
+PASS click selection caret moves to end of inserted label
+PASS click selection does not submit or settle an answer
+PASS empty normalized query clears list and closes suggestions
+LIMITATION: Chromium about:blank with in-memory storage, IndexedDB disabled, external network blocked; targetOptions data enumeration is fixture-backed to isolate the production suggestion renderer/controller.
+NOT TESTED: real-origin persistence, audio, Firefox, multiplayer, or full answer submission.

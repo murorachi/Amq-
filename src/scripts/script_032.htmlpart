@@ -1,0 +1,11 @@
+<script id="v82-39-quiz-ui-polish-script">
+(()=>{
+ const root=document.getElementById('quizView');if(!root||root.dataset.v8239Layout==='1')return;root.dataset.v8239Layout='1';
+ const panel=root.querySelector('.v36-amq-player'),stage=root.querySelector('.quizStage'),inputWrap=root.querySelector('.quizSuggest'),avatar=panel?.querySelector('#v36Avatar'),count=panel?.querySelector('#v36Count'),answerMirror=panel?.querySelector('#v36Answer'),remaining=document.getElementById('quizRemainingV30');
+ if(panel&&stage&&inputWrap&&avatar){
+  const mystery=stage.querySelector('.quizMystery');if(mystery&&panel.parentElement!==stage)mystery.insertAdjacentElement('afterend',panel);
+  let slot=panel.querySelector('.v36-input-slot');if(!slot){slot=document.createElement('div');slot.className='v36-input-slot';if(answerMirror)answerMirror.insertAdjacentElement('afterend',slot);else panel.prepend(slot)}if(inputWrap.parentElement!==slot)slot.appendChild(inputWrap);
+  let row=panel.querySelector('.v36-person-row');if(!row){row=document.createElement('div');row.className='v36-person-row';panel.appendChild(row)}if(avatar.parentElement!==row)row.appendChild(avatar);if(remaining&&remaining.parentElement!==row)row.appendChild(remaining);if(count&&count.parentElement!==row)row.appendChild(count);
+ }
+})();
+</script>

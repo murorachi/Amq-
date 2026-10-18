@@ -1,0 +1,6 @@
+<style id="v39-final-layout">
+#quizView .quizVisualizerV30{display:none!important}
+#quizView .v36-amq-player{transform:none!important;margin:12px auto!important;align-self:center!important}
+#quizView #quizCountdownV30, #quizView #quizRemainingV30{text-align:center!important}
+#quizView .quizMystery{background:var(--panel2)!important}
+</style>

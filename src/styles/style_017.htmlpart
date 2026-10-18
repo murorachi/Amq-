@@ -1,0 +1,20 @@
+<style id="v51-history-blacklist-styles">
+.quizTop .quizHistoryButtonV51{white-space:nowrap}
+.historyOverlayV51{position:fixed;inset:0;z-index:10080;background:rgba(12,12,18,.62);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:16px}
+.historyOverlayV51.open{display:flex}
+.historyDialogV51{width:min(1120px,100%);max-height:min(88vh,900px);display:flex;flex-direction:column;background:var(--panel,#fff);color:var(--ink,#25222a);border:1px solid var(--line,#ddd);border-radius:16px;box-shadow:0 24px 80px #0004;overflow:hidden}
+.historyHeadV51{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line,#ddd);background:var(--panel2,#f7f5f8)}
+.historyHeadV51 h2{margin:3px 0;font-size:22px}.historyHeadV51 p{margin:0;color:var(--muted,#777);font-size:12px}
+.historyBodyV51{padding:14px;overflow:auto;overscroll-behavior:contain}
+.historyRoundV51{margin:0 0 18px}.historyRoundHeadV51{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px;font-size:13px;font-weight:900;color:var(--muted,#777)}
+.historyRowV51{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid transparent;border-radius:11px;margin:6px 0}
+.historyRowV51.correctV51{background:rgba(74,181,112,.16);border-color:rgba(61,155,91,.22)}.historyRowV51.wrongV51{background:rgba(221,73,83,.15);border-color:rgba(192,55,65,.22)}
+.historySongMainV51{min-width:0}.historyAnimeV51{font-size:11px;color:var(--muted,#777);margin-bottom:4px;overflow-wrap:anywhere}.historySongTitleV51{font-size:14px;font-weight:850;overflow-wrap:anywhere}.historyArtistV51{font-size:12px;color:var(--muted,#777);margin-top:3px;overflow-wrap:anywhere}
+.historyResultV51{font-size:12px;font-weight:900}.correctV51 .historyResultV51{color:#247a42}.wrongV51 .historyResultV51{color:#b32f3c}
+.historyStatusV51{display:flex;flex-wrap:wrap;gap:6px}.historyStatusV51 label{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:5px 7px;border:1px solid var(--line,#ddd);border-radius:7px;background:rgba(255,255,255,.48);cursor:pointer;white-space:nowrap}.historyStatusV51 input{margin:0;accent-color:#b84e85}
+.historyRowActionsV51{display:flex;align-items:center;gap:6px;justify-content:flex-end;flex-wrap:wrap}.historyCountV51{font-size:11px;color:var(--muted,#777);white-space:nowrap}.historyBlacklistV51{font-size:11px!important;padding:7px 9px!important;white-space:nowrap}.historyBlacklistV51:disabled{opacity:.72;cursor:default}
+.blacklistSongBtnV51.on{background:rgba(204,65,78,.14)!important;border-color:rgba(204,65,78,.35)!important;color:#b32f3c!important}
+.historyEmptyV51{padding:36px 16px;text-align:center;color:var(--muted,#777);font-size:13px}
+body.dark-theme .historyRowV51.correctV51{background:rgba(63,175,104,.19);border-color:rgba(90,200,130,.2)}body.dark-theme .historyRowV51.wrongV51{background:rgba(220,70,82,.19);border-color:rgba(235,95,105,.22)}body.dark-theme .historyStatusV51 label{background:rgba(20,20,25,.38)}body.dark-theme .correctV51 .historyResultV51{color:#8ce0a7}body.dark-theme .wrongV51 .historyResultV51{color:#ff9ba3}
+@media(max-width:760px){.historyOverlayV51{padding:7px}.historyDialogV51{max-height:94vh;border-radius:12px}.historyHeadV51{padding:12px}.historyHeadV51 h2{font-size:19px}.historyBodyV51{padding:8px}.historyRowV51{grid-template-columns:minmax(0,1fr);gap:8px;padding:11px}.historyRowActionsV51{justify-content:space-between}.historyStatusV51 label{font-size:11px}.historyRoundHeadV51{padding:0 4px}}
+</style>

@@ -1,0 +1,20 @@
+PASS real API reaches ready state and exposes expected contract
+PASS EMQ song and work IDs remain isolated from AMQ IDs
+PASS Mixed mode appends valid EMQ rows and deduplicates by song ID
+PASS EMQ-only mode excludes AMQ rows and keeps EMQ song order
+PASS AMQ mode leaves base pool unchanged and does not append EMQ
+PASS EMQ metadata resolves from EMQ work map, not AMQ anime map
+PASS song aliases and audio URL candidates stay attached to the EMQ ID
+PASS AMQ-only hard restrictions suppress EMQ in Mixed mode
+PASS focus scope combines explicit AMQ and EMQ focus IDs without duplicate song IDs
+PASS question chooser respects EMQ-only source mode
+PASS selected EMQ song Set is an explicit dedicated scope and still honors blacklist/repeat
+PASS selected EMQ song Set with no matching IDs never broadens the EMQ pool
+PASS malformed EMQ year bounds fail closed instead of widening the candidate pool
+PASS custom-list adapter scopes AMQ rows but preserves independently filtered EMQ rows
+PASS empty custom-list settings are unrestricted and focus mode bypasses list scope
+PASS malformed plural customListIds fails closed for AMQ while retaining EMQ rows
+PASS stale persistent custom-list invalid flag cannot silently restore AMQ candidates
+PASS AMQ/EMQ work ID collision fails closed before ready
+PASS EMQ song with missing work mapping fails closed before ready
+RESULT 19 passed, 0 failed

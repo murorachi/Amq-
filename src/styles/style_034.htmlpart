@@ -1,0 +1,11 @@
+<style id="v82-38-team-collaboration-fix">
+/* V82.38: live collaboration updates must not remount the answer form; reveal text is slightly larger. */
+#multiplayerView .mpRevealPane .mpAltTitle{font-size:13px;line-height:1.6}
+#multiplayerView .mpRevealPane .mpSongInfo{font-size:13px;line-height:1.75}
+#multiplayerView .mpRevealPane .mpRelatedAnime summary{font-size:13px;line-height:1.6}
+#multiplayerView .mpRevealPane .mpRelatedAnime li,#multiplayerView .mpRevealPane .mpRelatedAnime .mpSmall{font-size:12px;line-height:1.65}
+#multiplayerView .mpRevealPane .mpResults{font-size:12px}
+#multiplayerView .mpRevealPane .mpResults th{font-size:11px}
+#multiplayerView .mpRevealPane .mpResults small{font-size:11px;line-height:1.5}
+#multiplayerView .mpRevealPane .mpHistoryDetails summary{font-size:13px}
+</style>

@@ -18,3 +18,27 @@ Current engineering checkpoint: **V82.84 SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT**
 ## Rollback and limits
 - V82.84 is engineering-only; no production runtime or CSS changed. Rollback to V82.82 product/package if needed; V82.65 remains immutable.
 - Native Storage, Firefox, real audio, multiplayer and clean remote checkout build remain NOT VERIFIED/NOT RUN.
+
+--- Historical V82.79 notes follow for traceability.
+
+# Next task
+
+Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01**. Current standalone product remains **V82.72**; immutable baseline remains V82.65.
+
+## Latest completed task
+- Audited the existing V82.78 source archive and current test/build state before changing files.
+- Extracted the exact 950-byte answer-metadata helper block (`uniqueQuizNamesV8239`, `getQuizAnimeNameBundleV8239`, `quizSongRoleLabelV8239`) into `src/modules/quiz_answer_metadata.htmlpart`, preserving its exact classic-script IIFE location.
+- Added 14 direct contract assertions and layered source reconstruction checks; module count is now 8.
+- Added `reports/MODULARIZATION_REMAINING_WORK_AUDIT_V82_79.md` and its machine-readable inventories. This report distinguishes physical splitting from semantic decoupling and does not invent a percentage from module count.
+- Product remains byte-identical to V82.72.
+
+## Next highest-value task
+1. Finish the current V82.79 full test run, deterministic rebuild, package integrity and checksum verification.
+2. Close the GitHub publication gap: the existing overlay branch is not a coherent full source tree; publish the full source/build/test tree only through a workflow that can transfer every file and verify remote paths/hashes. Do not claim completion based on the overlay.
+2. For `getQuizPool()`, map each closure dependency and separate pure candidate selection from DOM diagnostics only when differential behavior can be proven.
+3. Next semantic boundaries should be selected from the remaining dependency audit, not by splitting large functions arbitrarily. Answer submission/playback, SRS, playlist, multiplayer, and IndexedDB require dedicated contracts and browser/service acceptance.
+4. CSS work remains separate: build selector-to-view mapping and visual regression coverage before reordering, merging or deleting cascade layers.
+
+## Remaining acceptance limits
+- No verified real-origin persistence, audio/network, Firefox or multiplayer multi-client acceptance.
+- Product remains V82.72; preserve V82.65, V82.70 and V82.72 artifacts. Do not overwrite the immutable baseline.

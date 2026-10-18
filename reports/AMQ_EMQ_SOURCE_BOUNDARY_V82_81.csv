@@ -1,0 +1,24 @@
+﻿fragment,bytes,api_refs,emq_terms,source_mode_scope_refs,boundary_class,notes
+script_001.htmlpart,102981,26,76,38,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_004.htmlpart,95160,62,95,69,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_006.htmlpart,1628,3,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_007.htmlpart,4491,2,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_008.htmlpart,5458,16,5,2,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_011.htmlpart,311,1,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_012.htmlpart,7942,18,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_014.htmlpart,2740,2,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_015.htmlpart,6872,2,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_016.htmlpart,10541,12,9,9,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_020.htmlpart,39032,9,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_023.htmlpart,44496,6,4,5,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_024.htmlpart,3889,5,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_025.htmlpart,53780,18,8,20,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_026.htmlpart,33347,2,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_028.htmlpart,140145,35,199,132,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_029.htmlpart,8373,3,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_031.htmlpart,13812,1,0,0,AMQ/shared quiz API,Lexical reference counts only; does not prove runtime call reachability.
+script_037.htmlpart,2684318,0,84,0,EMQ-specific,Lexical reference counts only; does not prove runtime call reachability.
+script_038.htmlpart,15277,14,88,12,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_039.htmlpart,33287,4,55,18,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_040.htmlpart,32924,9,246,8,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.
+script_041.htmlpart,9745,3,13,4,AMQ/EMQ shared adapter,Lexical reference counts only; does not prove runtime call reachability.

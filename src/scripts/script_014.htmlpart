@@ -1,0 +1,41 @@
+<script id="v44-submit-pipeline-and-volume">
+(()=>{
+ const $=id=>document.getElementById(id);
+ const root=$('quizView'); if(!root)return;
+ // Put a volume slider in the quiz page settings/top controls, scoped to quiz mode only.
+ if(!$('v44VolumeControl')){
+   const wrap=document.createElement('div');wrap.id='v44VolumeControl';wrap.className='v44-volume';
+   wrap.innerHTML='<label for="v44Volume">音量</label><input id="v44Volume" type="range" min="0" max="100" step="1" value="70"><output id="v44VolumeValue">70%</output>';
+   const anchor=$('quizSettingsToggle')?.parentElement || root.querySelector('.quizTop') || root;
+   anchor.insertAdjacentElement('afterbegin',wrap);
+   let volume=70;try{const n=Number(localStorage.getItem('aniQuizVolume'));if(Number.isFinite(n))volume=Math.max(0,Math.min(100,n))}catch{}
+   $('v44Volume').value=String(volume);$('v44VolumeValue').textContent=volume+'%';
+   const apply=()=>{
+     const v=Number($('v44Volume').value)/100;$('v44VolumeValue').textContent=Math.round(v*100)+'%';
+     try{localStorage.setItem('aniQuizVolume',String(Math.round(v*100)))}catch{}
+     // The actual quiz audio may be audioEl, videoEl, or the hidden audio/video element used by the dock.
+     const player=$('audioPlayer');if(player){try{player.volume=v;player.muted=v===0}catch{}}
+   };
+   $('v44Volume').addEventListener('input',apply);apply();
+ }
+ // Keep the slider applied to newly created/replaced media elements as well.
+ const observer=new MutationObserver(()=>{
+   const slider=$('v44Volume');if(!slider)return;const v=Number(slider.value)/100;
+   const player=$('audioPlayer');if(player){try{player.volume=v;player.muted=v===0}catch{}}
+ });
+ observer.observe(document.documentElement,{childList:true,subtree:true});
+ // Wrap submission without referencing lexical variables from the main script scope.
+ // The original function closes over window.__aniQuizStateV45?.quizSong/window.__aniQuizStateV45?.quizFinished; this wrapper deliberately does not.
+ const originalSubmit=window.submitQuiz;
+ if(typeof originalSubmit==='function'&&!window.__v45SubmitWrapped){
+   window.__v45SubmitWrapped=true;
+   window.submitQuiz=function(fromTimer=false,options={}){
+     const raw=Object.prototype.hasOwnProperty.call(options||{},'rawAnswer')?String(options.rawAnswer??''):String($('quizAnswer')?.value??'');
+     // Reveal/buffer must not interrupt the current song; nextQuiz pauses at the next-question boundary.
+     return originalSubmit.apply(this,[fromTimer,{...options,force:!!options?.force||!raw.trim(),rawAnswer:raw}]);
+   };
+ }
+ // Manual submission has one owner: V42's guarded submitManual click handler.
+ // Do not attach a second capture listener here; it would shadow the V42 listener.
+})();
+</script>

@@ -1,0 +1,65 @@
+kind,api,call_count,distinct_function_owners,owners,first_line,sample
+call,console.debug,1,1,submitQuiz,295,"console.debug('[Quiz answer check]',{type,input,aliases,normalizedInput:candidate,correct,songId:quizSong[1],forced:force})"
+call,console.error,8,6,<anonymous@125>; <anonymous@346>; classifyQuiz; deactivateQuizModeV82; submitQuiz; submitQuizAllV857,36,"console.error('Quiz leave cleanup failed',err)"
+call,console.warn,1,1,saveQuizPracticeMetaV8239,464,"console.warn('Song practice metadata could not be saved.',e)"
+call,document.addEventListener,10,2,<anonymous@2>; createQuizFloatingDetailV8239,134,"document.addEventListener('ani-emq-chinese-titles-ready',()=>{optionCache={};const input=document.getElementById('quizAnswer');if(input&&input.value.trim())buil"
+call,document.body.appendChild,3,3,<anonymous@2>; <anonymous@506>; createQuizFloatingDetailV8239,369,document.body.appendChild(settingsOverlayV30)
+call,document.body.classList.add,1,1,enterSpecial,35,document.body.classList.add('quiz-mode')
+call,document.body.classList.contains,15,14,<anonymous@302>; <anonymous@306>; <anonymous@330>; <anonymous@334>; <anonymous@339>; <anonymous@346>; <anonymous@417>; <anonymous@469>; <anonymous@583>; classifyQuiz; nextQuiz; playQuizAudio; submitQuiz; submitQuizAllV857,129,document.body.classList.contains('quiz-round-paused')
+call,document.body.classList.remove,3,3,<anonymous@312>; deactivateQuizModeV82; enterSpecial,35,"document.body.classList.remove('ui-home-menu','ui-explore-open','ui-settings-open','relations-mode')"
+call,document.body.classList.toggle,1,1,applyTheme,338,"document.body.classList.toggle('dark-theme',!!dark)"
+call,document.createElement,19,8,<anonymous@2>; <anonymous@506>; <anonymous@525>; <anonymous@527>; <anonymous@5>; createQuizFloatingDetailV8239; openQuizFloatingDetailV8239; renderQuizSuggestionLabelV824,5,document.createElement(tag)
+call,document.createTextNode,2,1,renderQuizSuggestionLabelV824,181,"document.createTextNode(item.label.slice(offset,range.start))"
+call,document.dispatchEvent,5,5,<anonymous@312>; classifyQuiz; nextQuiz; skipUnplayedQuizQuestionV80; submitQuiz,129,"document.dispatchEvent(new CustomEvent('ani-quiz-new-question',{detail:{songId:quizSong[1],target:currentQuestionTarget}}))"
+call,document.getElementById,205,43,<anonymous@125>; <anonymous@128>; <anonymous@134>; <anonymous@2>; <anonymous@304>; <anonymous@305>; <anonymous@312>; <anonymous@320>; <anonymous@330>; <anonymous@334>; <anonymous@341>; <anonymous@342>; <anonymous@343>; <anonymous@346>; <anonymous@374>; <anonymous@41>; <anonymous@45>; <anonymous@561>; <anonymous@602>; <anonymous@615>; answerField; applyQuizDisplaySettingsV30; applyTheme; buildSuggestions; classifyQuiz; closeQuizSuggestions; enterSpecial; getQuizPool; hideAnswer; nextQuiz; openQuizFloatingDetailV8239; playQuizAudio; resetQuizRevealInfoV30; revealAnswer; selectQuizSuggestionV8272; showQuizRevealInfoV30; skipUnplayedQuizQuestionV80; submitQuiz; submitQuizAllV857; updateQuizAllAnswersV857; updateQuizCounts; updateQuizPlaybackV30; wireQuizInfoDetailActionsV8239,35,document.getElementById('quizView')
+call,document.getElementById('dockMeta')?.removeAttribute,1,1,enterSpecial,35,document.getElementById('dockMeta')?.removeAttribute('style')
+call,document.getElementById('qsTitleLanguage')?.closest,1,1,<anonymous@2>,371,document.getElementById('qsTitleLanguage')?.closest('.settingRow')
+call,document.getElementById('quizAllAnswersV857')?.classList.add,1,1,nextQuiz,129,document.getElementById('quizAllAnswersV857')?.classList.add('hidden')
+call,document.getElementById('quizAnswer').addEventListener,1,1,<anonymous@2>,334,"document.getElementById('quizAnswer').addEventListener('input',buildSuggestions)"
+call,document.getElementById('quizInfoContentV30')?.classList.remove,1,1,showQuizRevealInfoV30,564,document.getElementById('quizInfoContentV30')?.classList.remove('hidden')
+call,document.getElementById('quizInfoEmpty')?.classList.add,1,1,showQuizRevealInfoV30,564,document.getElementById('quizInfoEmpty')?.classList.add('hidden')
+call,document.getElementById('quizNext')?.removeAttribute,2,2,classifyQuiz; skipUnplayedQuizQuestionV80,234,document.getElementById('quizNext')?.removeAttribute('disabled')
+call,document.getElementById('quizResult').classList.add,1,1,hideAnswer,128,document.getElementById('quizResult').classList.add('hidden')
+call,document.getElementById('quizSettingsCloseV30')?.focus,1,1,<anonymous@342>,342,document.getElementById('quizSettingsCloseV30')?.focus({preventScroll:true})
+call,document.getElementById('quizSettingsOverlayV30')?.classList.add,1,1,<anonymous@343>,343,document.getElementById('quizSettingsOverlayV30')?.classList.add('hidden')
+call,document.getElementById('quizSuggestions').classList.remove,3,3,<anonymous@334>; hideAnswer; revealAnswer,128,document.getElementById('quizSuggestions').classList.remove('open')
+call,document.getElementById('quizThemeToggle')?.addEventListener,1,1,<anonymous@2>,339,"document.getElementById('quizThemeToggle')?.addEventListener('click',()=>applyTheme(!document.body.classList.contains('dark-theme')))"
+call,document.getElementById('quizView')?.classList.contains,1,1,<anonymous@330>,330,document.getElementById('quizView')?.classList.contains('is-revealed')
+call,document.getElementById('quizView').classList.remove,1,1,enterSpecial,35,document.getElementById('quizView').classList.remove('hidden')
+call,document.getElementById('themeToggle')?.addEventListener,1,1,<anonymous@2>,339,"document.getElementById('themeToggle')?.addEventListener('click',()=>applyTheme(!document.body.classList.contains('dark-theme')))"
+call,document.getElementById(id)?.addEventListener,1,1,<anonymous@2>,598,"document.getElementById(id)?.addEventListener('change',()=>{readQuizSettingsUI();applyQuizDisplaySettingsV30()})"
+call,document.querySelector,2,2,<anonymous@2>; applyTheme,3,document.querySelector('.wrap')
+call,document.querySelectorAll,6,2,loadQuizSettings; readQuizSettingsUI,41,document.querySelectorAll('[name=qsWatchStatus]:checked')
+call,document.querySelectorAll(`[name=${name}]`).forEach,1,1,loadQuizSettings,45,document.querySelectorAll(`[name=${name}]`).forEach(el=>el.checked=(quizSettings[key]||[]).map(String).includes(String(el.value)))
+call,localStorage.getItem,12,6,<anonymous@125>; <anonymous@2>; <anonymous@341>; <anonymous@602>; <anonymous@615>; loadQuizSettings,42,localStorage.getItem(storageKey)
+call,localStorage.removeItem,2,2,<anonymous@344>; <anonymous@615>,344,localStorage.removeItem('aniQuizSettingsV14')
+call,localStorage.setItem,14,9,<anonymous@127>; <anonymous@341>; <anonymous@374>; <anonymous@602>; <anonymous@615>; applyTheme; loadQuizSettings; readQuizSettingsUI; saveQuizPracticeMetaV8239,41,"localStorage.setItem('aniQuizSettingsV14',JSON.stringify(quizSettings))"
+call,performance.now,12,10,<anonymous@330>; <anonymous@431>; <anonymous@437>; <anonymous@443>; classifyQuiz; pauseQuizAutoNextV30; renderQuizAutoNextV30; startQuizAutoNextV30; submitQuiz; submitQuizAllV857,244,performance.now()
+call,window.__aniCandidatePoolPolicyV8265.settingNumber,4,1,readQuizSettingsUI,41,"window.__aniCandidatePoolPolicyV8265.settingNumber(g('qsYearMin').value,1924)"
+call,window.__aniChineseTitleAPIv8237?.getAliases,6,4,evaluateQuizTargetAnswerV857; getQuizAnimeNameBundleV8239; submitQuiz; targetOptions,133,window.__aniChineseTitleAPIv8237?.getAliases(a[0])
+call,window.__aniChineseTitleAPIv8237?.getTitle,2,2,getQuizAnimeNameBundleV8239; showQuizRevealInfoV30,481,window.__aniChineseTitleAPIv8237?.getTitle(animeId)
+call,window.__aniClearCustomListPickerV825,1,1,<anonymous@344>,344,window.__aniClearCustomListPickerV825?.()
+call,window.__aniEmqAPI?.chooseQuestion,1,1,nextQuiz,129,"window.__aniEmqAPI?.chooseQuestion?.(pool,quizSettings,activeFocusModeV72)"
+call,window.__aniEmqAPI?.combinePool,1,1,<anonymous@125>,125,"window.__aniEmqAPI?.combinePool?.(base,quizSettings,activeFocusModeV72,quizRoundSeen,lastQuestionId,activeFocusSongIdsV72)"
+call,window.__aniEmqAPI?.getAliases,3,3,evaluateQuizTargetAnswerV857; quizAnswerAliasTooltipTextV8239; submitQuiz,279,window.__aniEmqAPI?.getAliases?.(quizSong[1])
+call,window.__aniEmqAPI?.getMeta,1,1,evaluateQuizTargetAnswerV857,303,window.__aniEmqAPI?.getMeta?.(quizSong[1])
+call,window.__aniEmqAPI?.getRows,2,2,openQuizFloatingDetailV8239; updateQuizCounts,126,window.__aniEmqAPI?.getRows?.()
+call,window.__aniEmqAPI?.getWorkSummary,8,7,<anonymous@34>; evaluateQuizTargetAnswerV857; openQuizFloatingDetailV8239; quizAnswerAliasTooltipTextV8239; revealAnswer; showQuizRevealInfoV30; submitQuiz,34,window.__aniEmqAPI?.getWorkSummary?.(s?.[0])
+call,window.__aniEmqAPI?.isSong,9,8,classifyQuiz; evaluateQuizTargetAnswerV857; openQuizFloatingDetailV8239; quizAnswerAliasTooltipTextV8239; revealAnswer; showQuizRevealInfoV30; submitQuiz; wireQuizInfoDetailActionsV8239,227,window.__aniEmqAPI?.isSong?.(quizSong[1])
+call,window.__aniEmqChineseTitleAPIv8259?.getAliases,2,2,evaluateQuizTargetAnswerV857; targetOptions,133,window.__aniEmqChineseTitleAPIv8259?.getAliases?.(m.workId)
+call,window.__aniEmqChineseTitleAPIv8259?.getTitle,1,1,evaluateQuizTargetAnswerV857,303,window.__aniEmqChineseTitleAPIv8259?.getTitle?.(emqWorkId)
+call,window.__aniHistoryAPIv51?.beginRound,2,2,<anonymous@334>; <anonymous@346>,334,window.__aniHistoryAPIv51?.beginRound()
+call,window.__aniHistoryAPIv51?.isBlacklisted,1,1,<anonymous@120>,120,window.__aniHistoryAPIv51?.isBlacklisted(id)
+call,window.__aniHistoryAPIv51?.record,2,2,classifyQuiz; submitQuizAllV857,253,"window.__aniHistoryAPIv51?.record(quizSong,!!correct,submittedAnswer,elapsed,label,target)"
+call,window.__aniNavigateApp,2,2,<anonymous@332>; exitSpecial,38,window.__aniNavigateApp?.('home')
+call,window.__aniQuizPauseClockV82?.reset,2,2,<anonymous@312>; nextQuiz,129,window.__aniQuizPauseClockV82?.reset?.()
+call,window.__aniQuizPlanV1?.clearFocus,2,2,<anonymous@332>; <anonymous@333>,332,window.__aniQuizPlanV1?.clearFocus()
+call,window.__aniQuizPlanV1?.removeFocusSong,1,1,skipUnplayedQuizQuestionV80,232,window.__aniQuizPlanV1?.removeFocusSong?.(quizSong[1])
+call,window.__aniQuizStopStateV82,1,1,deactivateQuizModeV82,36,window.__aniQuizStopStateV82()
+call,window.__aniSelectedCustomListIdsV825,3,1,readQuizSettingsUI,41,window.__aniSelectedCustomListIdsV825()
+call,window.__aniSRSAPI?.end,1,1,<anonymous@332>,332,window.__aniSRSAPI?.end?.('已離開間隔複習；未評分的歌曲保留原排程。')
+call,window.__aniSRSAPI?.isAwaitingRating,1,1,<anonymous@334>,334,window.__aniSRSAPI?.isAwaitingRating?.()
+call,window.__aniVnCoverAPIv857?.getCoverUrl,1,1,showQuizRevealInfoV30,560,window.__aniVnCoverAPIv857?.getCoverUrl?.(quizSong[0])
+call,window.byAnime.get,1,1,<anonymous@34>,34,window.byAnime.get(s?.[0])
+call,window.matchMedia,3,3,<anonymous@458>; <anonymous@508>; showQuizRevealInfoV30,458,window.matchMedia('(hover: hover) and (pointer: fine)')
+call,window.scrollTo,1,1,enterSpecial,35,"window.scrollTo({top:0,behavior:'instant'})"

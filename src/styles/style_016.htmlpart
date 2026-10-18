@@ -1,0 +1,9 @@
+<style id="v44-volume-style">
+#quizView .v44-volume{display:flex;align-items:center;gap:8px;max-width:240px;margin:6px 0 10px;padding:7px 10px;border:1px solid var(--line,#ddd);border-radius:12px;background:var(--card,#fff)}
+#quizView .v44-volume label{font-size:12px;white-space:nowrap;font-weight:700}
+#quizView .v44-volume input{width:120px;accent-color:var(--accent,#8b6ca8)}
+#quizView .v44-volume output{font-size:11px;min-width:34px;text-align:right;color:var(--text,var(--text-color,#222))}
+body.dark-theme #quizView .v44-volume, body[data-theme=dark] #quizView .v44-volume, #quizView.dark-theme .v44-volume{background:var(--panel,#24252b);border-color:var(--line,#454751);color:var(--text,#ececf2)}
+body.dark-theme #quizView .v44-volume input, body[data-theme=dark] #quizView .v44-volume input, #quizView.dark-theme .v44-volume input{color-scheme:dark;accent-color:var(--accent,#b99ad8)}
+body:not(.dark-theme) #quizView .v44-volume input{color-scheme:light}
+</style>

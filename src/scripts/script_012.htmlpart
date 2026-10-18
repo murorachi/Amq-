@@ -1,0 +1,133 @@
+<script id="v42-quiz-controls-and-random-sample">
+(()=>{
+ const $=id=>document.getElementById(id);
+ const root=$('quizView'), answer=$('quizAnswer');
+ if(!root||!answer)return;
+
+ const submitManual=()=>{
+   if(typeof window.__aniQuizStateV45?.quizFinished!=='undefined'&&window.__aniQuizStateV45?.quizFinished)return;
+   if(typeof window.__aniQuizStateV45?.quizSong==='undefined'||!window.__aniQuizStateV45?.quizSong)return;
+   const raw=answer.value;
+   try{
+     if(typeof window.__aniQuizSubmitV47==='function'){window.__aniQuizSubmitV47(false,{force:!raw.trim(),rawAnswer:raw});return;}
+     throw new Error('Quiz submit bridge unavailable');
+   }catch(err){console.error('[V42] manual submit failed',err)}
+ };
+ const oldSubmit=$('quizSubmit');
+ const manual=document.createElement('button');
+ manual.type='button';manual.id='quizManualSubmitV42';manual.className=oldSubmit?.className||'btn';
+ manual.textContent='提交答案';
+ manual.addEventListener('click',submitManual);
+
+ const row=document.createElement('div');row.className='quizAnswerRowV42';
+ answer.parentNode.insertBefore(row,answer);row.appendChild(answer);row.appendChild(manual);
+
+ // V82.61: retire the legacy opt-in checkbox; Enter always submits after deliberate suggestion selection.
+ $('qsEnterSubmitV42')?.closest('.settingRow')?.remove();
+ try{const saved=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');delete saved.enterSubmitEnabled;saved.noRepeat=true;localStorage.setItem('aniQuizSettingsV14',JSON.stringify(saved))}catch{}
+
+ // 3) Real pause/resume and stop-round controls.
+ const controls=document.createElement('div');controls.className='quizRoundControlsV42';
+ controls.innerHTML='<button type="button" id="quizPauseV42">暫停</button><button type="button" id="quizStopV42">停止本輪</button><span id="quizRoundStateV42" aria-live="polite"></span>';
+ const start=$('startQuiz')||root.querySelector('#quizStart')||root.querySelector('button');
+ (start?.parentElement||root).appendChild(controls);
+ let paused=false, pausedAt=0, timerIds=new Set(), rafIds=new Set(), pausedControlStates=null;
+ const setState=s=>{const el=$('quizRoundStateV42');if(el)el.textContent=s||''};
+ const mediaEls=()=>[...document.querySelectorAll('audio,video')];
+ const pauseMedia=()=>mediaEls().forEach(m=>{try{m.pause()}catch{}});
+ $('quizPauseV42').addEventListener('click',()=>{
+   const quizState=window.__aniQuizStateV45;if(!quizState?.quizActive||!quizState?.quizSong){setState('本輪已結束');return}
+   paused=!paused;
+   if(paused){pausedAt=performance.now();const ids=['quizAnswer','quizAnswerArtistV857','quizAnswerTitleV857','quizSubmit','quizSkip'];pausedControlStates=new Map(ids.map(id=>{const el=$(id);return[id,el?!!el.disabled:null]}));ids.forEach(id=>{const el=$(id);if(el)el.disabled=true});try{window.__aniQuizPauseClockV82?.pause?.(pausedAt)}catch(err){console.error('Quiz pause clock bridge failed',err)}pauseMedia();$('quizPauseV42').textContent='繼續';$('quizPauseV42').classList.add('is-paused');document.body.classList.add('quiz-round-paused');try{window.__aniQuizAutoNextV30?.pause?.()}catch(err){console.error('Quiz auto-next pause failed',err)}setState('已暫停')}
+   else{
+     const resumedAt=performance.now();
+     // Restore the quiz clocks and any post-reveal next-question countdown from their saved remaining time.
+     try{window.__aniQuizPauseClockV82?.resume?.(resumedAt)}catch(err){console.error('Quiz resume clock bridge failed',err)}
+     if(pausedControlStates){for(const [id,wasDisabled] of pausedControlStates){const el=$(id);if(el&&typeof wasDisabled==='boolean')el.disabled=wasDisabled}pausedControlStates=null}
+     $('quizPauseV42').textContent='暫停';$('quizPauseV42').classList.remove('is-paused');document.body.classList.remove('quiz-round-paused');try{window.__aniQuizAutoNextV30?.resume?.()}catch(err){console.error('Quiz auto-next resume failed',err)}setState('');
+     const a=$('audioPlayer');if(a&&a.src) a.play().catch(()=>{});
+   }
+ });
+ document.addEventListener('ani-quiz-round-stopped-v82',()=>{
+   paused=false;pausedAt=0;pausedControlStates=null;
+   const b=$('quizPauseV42');if(b){b.textContent='暫停';b.classList.remove('is-paused')}
+   document.body.classList.remove('quiz-round-paused');setState('');
+ });
+ document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view!=='quiz'){
+   paused=false;pausedAt=0;pausedControlStates=null;
+   const b=$('quizPauseV42');if(b){b.textContent='暫停';b.classList.remove('is-paused')}
+   document.body.classList.remove('quiz-round-paused');setState('');
+ }});
+ $('quizStopV42').addEventListener('click',()=>{
+   pauseMedia();
+   let stoppedByCore=false;
+   try{
+     if(typeof window.__aniQuizStopStateV82==='function'){
+       window.__aniQuizStopStateV82();
+       stoppedByCore=true;
+     }
+   }catch(err){console.error('[V82.3] Core stop-state cleanup failed',err)}
+     if(!stoppedByCore){
+     try{if(typeof clearQuizPlaybackV30==='function')clearQuizPlaybackV30()}catch{}
+     try{if(typeof clearQuizAutoNextV30==='function')clearQuizAutoNextV30()}catch{}
+     try{window.__aniQuizPauseClockV82?.reset?.()}catch{}
+     document.body.classList.remove('quiz-mode','quiz-round-paused');
+     root.classList.add('hidden');
+   }
+   paused=false;pausedAt=0;
+   const pauseButton=$('quizPauseV42');
+   if(pauseButton){pauseButton.textContent='暫停';pauseButton.classList.remove('is-paused')}
+   document.body.classList.remove('quiz-mode','quiz-round-paused');
+   root.classList.add('hidden');
+   const startButton=$('startQuiz')||$('quizStart');if(startButton)startButton.disabled=false;
+   setState('本輪已停止');
+ });
+
+ const dock=$('audioDock');
+ const dockOriginalDisplay=dock?dock.style.display:'';
+ const syncDockVisibility=()=>{
+   if(!dock)return;
+   if(document.body.classList.contains('quiz-mode'))dock.style.display='none';
+   else dock.style.display=dockOriginalDisplay;
+ };
+ new MutationObserver(syncDockVisibility).observe(document.body,{attributes:true,attributeFilter:['class']});
+ syncDockVisibility();
+ document.addEventListener('click',()=>setTimeout(syncDockVisibility,0),true);
+
+ let seekToken=0, randomSampleQuestionEpoch=0;
+ document.addEventListener('ani-quiz-new-question',()=>{randomSampleQuestionEpoch++;seekToken++});
+ const isRandomSampleEnabled=()=>{
+   const button=$('qsRandomSample');
+   if(button)return button.getAttribute('aria-pressed')==='true';
+   try{return JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}').randomSample===true}catch{return false}
+ };
+ const applyRandomSeek=media=>{
+   const token=++seekToken;
+   const seek=()=>{
+     if(token!==seekToken||!media.duration||!Number.isFinite(media.duration))return;
+     let clip=20;
+     try{if(typeof window.__aniQuizStateV45?.quizSettings!=='undefined'&&Number(window.__aniQuizStateV45?.quizSettings.clip)>0)clip=Number(window.__aniQuizStateV45?.quizSettings.clip)}catch{}
+     const max=Math.max(0,media.duration-clip);
+     if(max<=0)return;
+     const pos=Math.random()*max;
+     try{media.currentTime=pos}catch{}
+   };
+   if(media.readyState>=1)seek();
+   else media.addEventListener('loadedmetadata',seek,{once:true});
+ };
+ const bindRandomSample=media=>{
+   if(!media||media.dataset.v42RandomSampleBound)return;
+   media.dataset.v42RandomSampleBound='1';
+   media.addEventListener('play',()=>{
+     if(!document.body.classList.contains('quiz-mode')||!isRandomSampleEnabled())return;
+     const songId=String(window.__aniQuizStateV45?.quizSong?.[1]??'');
+     const questionKey=`${randomSampleQuestionEpoch}:${songId}`;
+     if(media.dataset.v42RandomSampleQuestionKey===questionKey)return;
+     media.dataset.v42RandomSampleQuestionKey=questionKey;
+     applyRandomSeek(media);
+   });
+ };
+ mediaEls().forEach(bindRandomSample);
+ const style=document.createElement('style');style.textContent='body.quiz-round-paused #quizView *{animation-play-state:paused!important}';document.head.appendChild(style);
+})();
+</script>

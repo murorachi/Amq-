@@ -1,0 +1,16 @@
+<style id="v65-answer-glow-fix">
+#quizView .quizMystery.quiz-answer-correct-v57{
+  border-color:rgba(86,220,143,.65)!important;
+  box-shadow:0 0 8px 2px rgba(68,225,135,.25),0 0 18px 4px rgba(68,225,135,.14)!important;
+}
+#quizView .quizMystery.quiz-answer-wrong-v57{
+  border-color:rgba(245,95,105,.65)!important;
+  box-shadow:0 0 8px 2px rgba(245,83,94,.25),0 0 18px 4px rgba(245,83,94,.14)!important;
+}
+#quizView .quizMystery.quiz-answer-correct-v57 .quizAnimeCoverV30:not([hidden]), #quizView .quizMystery.quiz-answer-correct-v57 .quizAnimeCoverV26:not([hidden]){
+  filter:drop-shadow(0 0 5px rgba(75,235,142,.45))!important;
+}
+#quizView .quizMystery.quiz-answer-wrong-v57 .quizAnimeCoverV30:not([hidden]), #quizView .quizMystery.quiz-answer-wrong-v57 .quizAnimeCoverV26:not([hidden]){
+  filter:drop-shadow(0 0 5px rgba(255,88,99,.42))!important;
+}
+</style>

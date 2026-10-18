@@ -6,12 +6,14 @@ const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const path=require('node:path');
 const src=fs.readFileSync(path.resolve(__dirname,'../../src/scripts/script_004.htmlpart'),'utf8');
-const p0=src.indexOf('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */');
-const p1=src.indexOf('/* V82.65_POOL_POLICY_END */',p0);
-const f0=src.indexOf('function getQuizPool(){',p1);
+const policy=fs.readFileSync(path.resolve(__dirname,'../../src/modules/candidate_pool_policy.js'),'utf8');
+const p0=policy.indexOf('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */');
+const p1=policy.indexOf('/* V82.65_POOL_POLICY_END */',p0);
+const pool=fs.readFileSync(path.resolve(__dirname,'../../src/modules/get_quiz_pool.htmlpart'),'utf8');
+const f0=src.indexOf('const __aniEmqGetQuizPoolBaseV8248=getQuizPool;');
 const f1=src.indexOf('\nfunction updateQuizCounts()',f0);
-assert.ok(p0>=0&&p1>p0&&f0>p1&&f1>f0,'policy and exact candidate pool function/wrapper found');
-const executable=src.slice(p0,p1+'/* V82.65_POOL_POLICY_END */'.length)+ '\n'+src.slice(f0,f1);
+assert.ok(p0>=0&&p1>p0&&pool.startsWith('function calculateQuizPoolCandidatesV8280(ctx){') && pool.includes('function getQuizPool(){')&&f0>=0&&f1>f0,'policy module and exact candidate pool module/wrapper found');
+const executable=policy.slice(p0,p1+'/* V82.65_POOL_POLICY_END */'.length)+ '\n'+pool+'\n'+src.slice(f0,f1);
 let passed=0;
 function test(name,fn){try{fn();passed++;console.log('PASS '+name)}catch(e){console.error('FAIL '+name+'\n'+e.stack);process.exitCode=1}}
 function makeEnv(overrides={}){

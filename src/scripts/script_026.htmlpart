@@ -1,0 +1,195 @@
+<script id="amq-v826-home-profile-pp-mobile">
+(()=>{
+ 'use strict';
+ const PROFILE_KEY='aniAmqProfileV1',PP_KEY='aniAmqPPRecordsV1',PROFILE_RECOVERY='aniAmqProfileRecoveryV1',PP_RECOVERY='aniAmqPPRecordsRecoveryV1';
+ const $=(selector,root=document)=>root.querySelector(selector);
+ const TARGETS=['anime','title','artist'],TARGET_CODE={anime:0,title:1,artist:2},CODE_TARGET=['anime','title','artist'];
+ const daySeconds=86400,yearSeconds=365.25*daySeconds;
+ let profile={schemaVersion:1,displayName:'Player',avatarData:''},ppRows=new Map(),ppPersistAllowed=true,profilePersistAllowed=true,ppSaveWarned=false,profileSaveWarned=false;
+ let activeRound=null,roundSerial=0,profileRoot=null,feedbackRoot=null,answerRecoveryBound=false,compositionWasFocused=false,compositionBlurred=false;
+ const notify=message=>{try{if(typeof window.toast==='function')window.toast(message);else if(typeof window.showToast==='function')window.showToast(message);else console.info('[AMQ學習工具]',message)}catch{console.info('[AMQ學習工具]',message)}};
+ const secondsNow=()=>Math.floor(Date.now()/1000);
+ const validProfile=x=>!!x&&typeof x==='object'&&!Array.isArray(x)&&x.schemaVersion===1&&typeof x.displayName==='string'&&x.displayName.length<=32&&typeof x.avatarData==='string'&&x.avatarData.length<=180000&&(x.avatarData===''||/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(x.avatarData));
+ const validPpData=x=>{if(!x||typeof x!=='object'||Array.isArray(x)||x.schemaVersion!==1||!Array.isArray(x.records)||x.records.length>150000)return false;const seen=new Set();for(const r of x.records){if(!Array.isArray(r)||r.length!==4||!Number.isSafeInteger(Number(r[0]))||Number(r[0])<=0||![0,1,2].includes(Number(r[1]))||![1,2,3].includes(Number(r[2]))||!Number.isSafeInteger(Number(r[3]))||Number(r[3])<0)return false;const k=String(Number(r[0]))+':'+Number(r[1]);if(seen.has(k))return false;seen.add(k)}return true};
+ const quarantineRaw=(key,recoveryKey,raw)=>{try{const saved=localStorage.getItem(recoveryKey);if(saved!==null&&saved!==raw)return false;if(saved===null)localStorage.setItem(recoveryKey,raw);if(localStorage.getItem(recoveryKey)!==raw)return false;localStorage.removeItem(key);return true}catch(e){console.error('AMQ data quarantine failed:',e);return false}};
+ function loadProfile(){
+  let raw=null;try{raw=localStorage.getItem(PROFILE_KEY)}catch{}
+  if(raw===null){profile={schemaVersion:1,displayName:'Player',avatarData:''};try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile))}catch{profilePersistAllowed=false}return}
+  try{const parsed=JSON.parse(raw);if(!validProfile(parsed))throw new Error('invalid profile schema');profile={schemaVersion:1,displayName:parsed.displayName.trim().slice(0,32)||'Player',avatarData:parsed.avatarData||''}}
+  catch(e){console.warn('AMQ profile data is invalid:',e);profilePersistAllowed=quarantineRaw(PROFILE_KEY,PROFILE_RECOVERY,raw);profile={schemaVersion:1,displayName:'Player',avatarData:''};if(profilePersistAllowed){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile))}catch{profilePersistAllowed=false}}else notify('個人卡片資料異常且無法安全隔離；已暫用預設資料，本次不會覆寫原始異常資料。')}
+ }
+ function writeProfile(next){const old=profile;profile={schemaVersion:1,displayName:String(next.displayName||'Player').trim().replace(/[\r\n\t]/g,' ').slice(0,32)||'Player',avatarData:typeof next.avatarData==='string'?next.avatarData:''};if(!validProfile(profile)){profile=old;notify('個人資料格式不正確，沒有套用修改。');return false}if(!profilePersistAllowed){notify('個人資料目前無法安全保存；原始異常資料仍保留。');profile=old;return false}try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));renderProfile();return true}catch(e){profile=old;notify('個人資料儲存失敗，既有資料未主動覆蓋。請檢查瀏覽器儲存空間。');if(!profileSaveWarned){console.warn('AMQ profile storage failed:',e);profileSaveWarned=true}renderProfile();return false}}
+ function parseHistory(){try{return window.__aniHistoryAPIv51?.getHistory?.()||[]}catch{return []}}
+ function getTargetSummary(){try{return window.__aniHistoryAPIv51?.getTargetHistorySummary?.()||null}catch{return null}}
+ function getSongDifficulty(){const map=new Map();try{for(const s of (typeof songs!=='undefined'?songs:[]))map.set(String(s[1]),Number(s[6]))}catch{}return map}
+ let difficultyBySong=getSongDifficulty(),ppCache=null;
+ function updateDifficulties(){difficultyBySong=getSongDifficulty();ppCache=null}
+ function tryPromote(rows,songId,targetCode,at){
+  const key=String(songId)+':'+targetCode;let row=rows.get(key);
+  if(!row){row=[Number(songId),targetCode,1,at];rows.set(key,row);return {from:0,to:1,changed:true}}
+  if(row[2]===1&&at-row[3]>=daySeconds){row[2]=2;row[3]=at;return {from:1,to:2,changed:true}}
+  if(row[2]===2&&at-row[3]>=7*daySeconds){row[2]=3;row[3]=0;return {from:2,to:3,changed:true}}
+  return {from:row[2],to:row[2],changed:false};
+ }
+  function historyBaseline(){
+  const rows=new Map();
+  const historic=parseHistory().filter(h=>h&&h.songId!=null&&h.target==='anime'&&h.correct===true&&h.validAudio!==false&&Number.isFinite(Date.parse(h.at||''))).slice().sort((a,b)=>Date.parse(a.at)-Date.parse(b.at));
+  for(const h of historic){const at=Math.floor(Date.parse(h.at)/1000);tryPromote(rows,h.songId,TARGET_CODE.anime,at)}
+  const summary=getTargetSummary();const bySong=summary?.bySongTarget;
+  if(bySong&&typeof bySong==='object')for(const [songId,targets] of Object.entries(bySong)){const row=targets?.anime;if(!Array.isArray(row)||Number(row[1])<=0)continue;const key=String(songId)+':'+TARGET_CODE.anime;if(!rows.has(key))rows.set(key,[Number(songId),TARGET_CODE.anime,1,secondsNow()])}
+  return rows;
+ }
+ function loadPpRows(){
+  let raw=null;try{raw=localStorage.getItem(PP_KEY)}catch{}
+  if(raw===null){ppRows=historyBaseline();try{localStorage.setItem(PP_KEY,JSON.stringify({schemaVersion:1,records:[...ppRows.values()]}))}catch(e){ppPersistAllowed=false;console.warn('Initial AMQ PP baseline could not be saved:',e)}return}
+  try{const parsed=JSON.parse(raw);if(!validPpData(parsed))throw new Error('invalid PP records schema');ppRows=new Map(parsed.records.map(r=>[String(Number(r[0]))+':'+Number(r[1]),[Number(r[0]),Number(r[1]),Number(r[2]),Number(r[3])]]))}
+  catch(e){console.warn('AMQ PP data is invalid:',e);ppPersistAllowed=quarantineRaw(PP_KEY,PP_RECOVERY,raw);ppRows=historyBaseline();if(ppPersistAllowed){try{localStorage.setItem(PP_KEY,JSON.stringify({schemaVersion:1,records:[...ppRows.values()]}))}catch{ppPersistAllowed=false}}else notify('PP 紀錄異常且無法安全隔離；已保留原始資料，本次暫用可重建的紀錄。')}
+ }
+ function savePpRows(){if(window.__aniSuppressPersistenceForRestoreV828||!ppPersistAllowed)return false;try{const data={schemaVersion:1,records:[...ppRows.values()]};if(data.records.length>150000)throw new Error('PP record safety limit exceeded');localStorage.setItem(PP_KEY,JSON.stringify(data));return true}catch(e){ppPersistAllowed=false;if(!ppSaveWarned){notify('PP 紀錄無法保存，可能是瀏覽器儲存空間不足。猜歌紀錄不受影響，請先備份資料。');console.warn('AMQ PP records storage failed:',e);ppSaveWarned=true}return false}}
+  function currentCounters(){
+  const summary=getTargetSummary(),by=summary?.byTarget;let total=0,allTargetCorrect=0,animeTotal=0,animeCorrect=0;
+  if(by&&typeof by==='object'){
+   for(const target of ['anime','title','artist','unknown']){const row=by[target];if(Array.isArray(row)){total+=Math.max(0,Number(row[0])||0);allTargetCorrect+=Math.max(0,Number(row[1])||0)}}
+   // Target migration cannot classify answer targets for older rows which were already removed from detail history.
+   // Count these toward cumulative activity, but never pretend they were animation-recognition attempts.
+   total+=Math.max(0,Number(summary?.baseline?.legacyTargetUnknownCount)||0);
+   const animeRow=by.anime;if(Array.isArray(animeRow)){animeTotal=Math.max(0,Number(animeRow[0])||0);animeCorrect=Math.max(0,Number(animeRow[1])||0)}
+  }else{
+   const entries=parseHistory().filter(h=>h&&h.songId!=null&&(h.correct===true||h.correct===false||h.correct===1||h.correct===0)&&h.validAudio!==false);
+   total=entries.length;allTargetCorrect=entries.filter(h=>h.correct===true||h.correct===1).length;const anime=entries.filter(h=>h.target==='anime');animeTotal=anime.length;animeCorrect=anime.filter(h=>h.correct===true||h.correct===1).length;
+  }
+  // `accuracy` is lifetime animation-recognition accuracy only. The historical total and backward-compatible `correct`
+  // remain cross-target activity counters; clients should use `allTargetCorrect` for that explicitly.
+  return {total,correct:allTargetCorrect,allTargetCorrect,accuracy:animeTotal?animeCorrect/animeTotal:null,animeTotal,animeCorrect,legacyUnclassified:Math.max(0,Number(summary?.baseline?.legacyTargetUnknownCount)||0)};
+ }
+ function difficultyMultiplier(songId){const d=difficultyBySong.get(String(songId));if(!Number.isFinite(d)||d<=0)return 1;if(d<=10)return 1.25;if(d<=25)return 1.18;if(d<=50)return 1.10;if(d<=75)return 1.04;return 1;}
+  function computePp(){
+  if(ppCache!==null)return ppCache;
+  const songSet=new Set(),contributions=[];
+  // Main PP intentionally measures one stable skill: recognizing the anime from the song audio.
+  // Historical title/artist rows may remain in storage for compatibility, but are not part of this total.
+  for(const row of ppRows.values()){
+   if(!Array.isArray(row)||row.length!==4)continue;
+   const sid=String(row[0]),targetCode=Number(row[1]),stage=Number(row[2]);
+   if(targetCode!==TARGET_CODE.anime||![1,2,3].includes(stage))continue;
+   songSet.add(sid);const base=stage===1?8:stage===2?12:18;contributions.push(base*difficultyMultiplier(sid));
+  }
+  contributions.sort((a,b)=>b-a);let performance=0,weight=1;const decay=.985,limit=Math.min(contributions.length,5000);
+  for(let i=0;i<limit;i++){performance+=contributions[i]*weight;weight*=decay;if(weight<.00001)break}
+  const breadth=Math.min(500,8*Math.sqrt(songSet.size));
+  ppCache=Math.max(0,Math.round(performance+breadth));return ppCache;
+ }
+  function updatePpFromAnswer(detail){
+  // PP is the long-term achievement score for anime recognition only.
+  // Other answer targets are still recorded in the quiz history, but do not alter this main score.
+  if(!detail||detail.target!=='anime'||detail.correct!==true||detail.validAudio!==true||detail.songId==null)return {changed:false,from:0,to:0,reason:'not-eligible'};
+  const id=Number(detail.songId);if(!Number.isSafeInteger(id)||id<=0)return {changed:false,from:0,to:0,reason:'invalid-song'};
+  const at=Number.isFinite(Date.parse(detail.at||''))?Math.floor(Date.parse(detail.at)/1000):secondsNow();
+  const key=String(id)+':'+TARGET_CODE.anime;const before=ppRows.get(key),previous=before?before.slice():null,oldStage=previous?previous[2]:0;
+  const result=tryPromote(ppRows,id,TARGET_CODE.anime,at);
+  if(result.changed){ppCache=null;if(!savePpRows()){if(previous)ppRows.set(key,previous);else ppRows.delete(key);ppCache=null;return {changed:false,from:oldStage,to:oldStage,persistenceFailed:true}}}
+  return {changed:result.changed,from:oldStage,to:result.to};
+ }
+ function renderProfile(){
+  if(!profileRoot)return;
+  const name=$('#amqProfileName',profileRoot),avatar=$('#amqAvatarImg',profileRoot),placeholder=$('#amqAvatarPlaceholder',profileRoot);
+  if(name)name.textContent=profile.displayName||'Player';
+  if(avatar){if(profile.avatarData){avatar.src=profile.avatarData;avatar.hidden=false;if(placeholder)placeholder.hidden=true}else{avatar.removeAttribute('src');avatar.hidden=true;if(placeholder)placeholder.hidden=false}}
+  const pp=$('#amqPpValue',profileRoot);if(pp)pp.textContent=computePp().toLocaleString();
+  const c=currentCounters();const play=$('#amqPlayCount',profileRoot),acc=$('#amqAccuracy',profileRoot);
+  if(play)play.textContent=c.total.toLocaleString();if(acc)acc.textContent=c.accuracy===null?'—':(c.accuracy*100).toFixed(1)+'%';
+ }
+ function updateProfileAfterHistory(){renderProfile()}
+ const markSvg=`<svg viewBox="0 0 128 128" role="img" aria-label="音符與問號"><defs><linearGradient id="amq-main-grad-v826" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f47eb6"/><stop offset=".52" stop-color="#c08bdf"/><stop offset="1" stop-color="#7567cf"/></linearGradient><filter id="amq-mark-shadow-v826" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#4c2a65" flood-opacity=".22"/></filter></defs><circle cx="64" cy="64" r="60" fill="url(#amq-main-grad-v826)" stroke="white" stroke-width="3" filter="url(#amq-mark-shadow-v826)"/><circle cx="64" cy="64" r="51" fill="none" stroke="#ffffff75" stroke-width="1.5"/><path d="M31 77V38l35-7v40" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="24" cy="80" rx="8.5" ry="6.5" fill="white" transform="rotate(-22 24 80)"/><ellipse cx="58" cy="73" rx="8.5" ry="6.5" fill="white" transform="rotate(-22 58 73)"/><text x="87" y="85" text-anchor="middle" font-family="Arial,sans-serif" font-size="49" font-weight="850" fill="white">?</text></svg>`;
+ const MODAL_FOCUSABLE='a[href],button:not([disabled]),input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+ function elementVisibleForFocus(el){if(!el||!el.isConnected)return false;for(let n=el;n&&n.nodeType===1;n=n.parentElement){if(n.hidden||n.classList?.contains('hidden')||n.getAttribute?.('aria-hidden')==='true')return false;const st=getComputedStyle(n);if(st.display==='none'||st.visibility==='hidden')return false}return el.getClientRects().length>0}
+ function activeModalForFocus(){const list=[...document.querySelectorAll('[role="dialog"][aria-modal="true"]')].filter(elementVisibleForFocus);if(!list.length)return null;return list.map((el,i)=>({el,i,z:Number.parseInt(getComputedStyle(el).zIndex,10)||0})).sort((a,b)=>a.z-b.z||a.i-b.i).at(-1).el}
+ function modalFocusableItems(modal){return [...modal.querySelectorAll(MODAL_FOCUSABLE)].filter(el=>elementVisibleForFocus(el)&&!el.closest('[inert]'))}
+ function focusModalStart(modal){if(!modal)return;const items=modalFocusableItems(modal);const target=items[0]||modal;if(!items.length&&!modal.hasAttribute('tabindex'))modal.setAttribute('tabindex','-1');try{target.focus({preventScroll:true})}catch{target.focus()}}
+ function installModalFocusTrap(){if(document.documentElement.dataset.amqModalFocusV828==='1')return;document.documentElement.dataset.amqModalFocusV828='1';
+  document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const modal=activeModalForFocus();if(!modal)return;const items=modalFocusableItems(modal);if(!items.length){e.preventDefault();focusModalStart(modal);return}const first=items[0],last=items[items.length-1],active=document.activeElement;if(!modal.contains(active)){e.preventDefault();(e.shiftKey?last:first).focus();return}if(e.shiftKey&&active===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&active===last){e.preventDefault();first.focus()}},true);
+  document.addEventListener('focusin',e=>{const modal=activeModalForFocus();if(!modal||modal.contains(e.target))return;focusModalStart(modal)},true);
+ }
+ function setupHome(){
+  const home=$('#homeMenu'),dock=$('#audioDock'),wrap=$('.wrap');if(!home||!dock||!wrap)return;
+  const oldTitle=document.title;document.title='AMQ學習工具';
+  let anchor=$('#amqAudioDockHomeAnchor');if(!anchor){anchor=document.createElement('span');anchor.id='amqAudioDockHomeAnchor';anchor.hidden=true;dock.parentNode.insertBefore(anchor,dock)}
+  const markSvg=`<svg viewBox="0 0 128 128" role="img" aria-label="音符與問號"><defs><linearGradient id="amq-main-grad-v846" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f47eb6"/><stop offset=".52" stop-color="#c08bdf"/><stop offset="1" stop-color="#7567cf"/></linearGradient><filter id="amq-mark-shadow-v846" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#4c2a65" flood-opacity=".22"/></filter></defs><circle cx="64" cy="64" r="60" fill="url(#amq-main-grad-v846)" stroke="white" stroke-width="3" filter="url(#amq-mark-shadow-v846)"/><circle cx="64" cy="64" r="51" fill="none" stroke="#ffffff75" stroke-width="1.5"/><path d="M31 77V38l35-7v40" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="24" cy="80" rx="8.5" ry="6.5" fill="white" transform="rotate(-22 24 80)"/><ellipse cx="58" cy="73" rx="8.5" ry="6.5" fill="white" transform="rotate(-22 58 73)"/><text x="87" y="85" text-anchor="middle" font-family="Arial,sans-serif" font-size="49" font-weight="850" fill="white">?</text></svg>`;
+  home.innerHTML=`<div class="amqHomeTopFrame" id="amqHomeTopFrame"><section class="amqProfileCard" id="amqProfileCard" aria-label="個人學習卡片"><button type="button" class="amqAvatarButton" id="amqAvatarButton" title="點擊更換個人照片" aria-label="點擊更換個人照片"><svg id="amqAvatarPlaceholder" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="23" r="12" fill="currentColor" opacity=".6"/><path d="M9 57c1-13 10-20 23-20s22 7 23 20" fill="currentColor" opacity=".6"/></svg><img id="amqAvatarImg" alt="個人照片" hidden></button><input id="amqAvatarFile" type="file" accept="image/*" hidden><div class="amqProfileInfo"><button type="button" class="amqProfileName" id="amqProfileName" title="點擊修改個人 ID">Player</button><div class="amqProfileLine ppLine" title="PP 是動畫辨認的長期表現成就：只計算有效播放後答對、有限難度加成與跨日成功回憶。歌曲名稱／歌手答題不影響此主 PP；答錯不扣分，重複答對不會無限刷分。PP 保存歷史成果，不代表目前能力。"><span>PP</span><strong id="amqPpValue">0</strong><span>動畫辨認長期成就</span></div><div class="amqProfileLine" title="所有已記錄答題目標的累積題次；舊紀錄即使沒有目標分類，也只計題次，不會放入正確率分母。"><span>累積答題</span><strong id="amqPlayCount">0</strong></div><div class="amqProfileLine" title="歷史累積動畫辨認正確率：只計明確記錄為動畫辨認的有效答題。歌曲名稱、歌手及未分類舊紀錄不列入分母；這不是近期能力指標。"><span>動畫辨認正確率</span><strong id="amqAccuracy">—</strong></div><div class="amqProfileHint">PP 是歷史成就指標，不代表近期表現。</div></div></section><section class="amqPlayerFrame" aria-label="主頁音樂播放欄"><p class="amqPlayerCaption">NOW PLAYING · MUSIC BAR</p><div class="amqHomePlayerSlot" id="amqHomePlayerSlot"></div></section></div><div class="amqHomeStage" id="amqHomeStage"><button type="button" class="amqMainIcon" id="amqMainIcon" aria-label="開啟主要功能選單" aria-controls="amqHomeOverlay" aria-expanded="false">${markSvg}</button><section class="amqHomeOverlay" id="amqHomeOverlay" hidden aria-label="主要功能選單"><div class="amqHomeDialog"><nav aria-label="主要功能" class="home-menu-list amqHomePrimaryGrid" id="amqHomePrimaryNav"><button class="home-menu-card home-menu-quiz" data-home-action="quiz" type="button"><span class="home-card-copy"><b>一般猜歌</b></span><i aria-hidden="true"></i></button><button class="home-menu-card home-menu-catalog" data-home-action="catalog" type="button"><span class="home-card-copy"><b>動畫圖鑑</b></span><i aria-hidden="true"></i></button><button class="home-menu-card home-menu-learning-center" data-home-action="learningCenter" type="button" aria-haspopup="true" aria-expanded="false"><span class="home-card-copy"><b>學習中心</b></span><i aria-hidden="true"></i></button><button class="home-menu-card home-menu-watchlist" data-home-action="watchlist" type="button"><span class="home-card-copy"><b>我的清單</b></span><i aria-hidden="true"></i></button></nav><section class="amqLearningCenterSubmenu" id="amqLearningCenterSubmenu" hidden aria-label="學習中心子項目"><div class="amqHomeSubmenuHead"><button type="button" class="amqSubmenuBack" data-home-action="learningCenterBack" aria-label="返回主要功能">‹ 返回</button><strong>學習中心</strong></div><nav aria-label="學習中心功能" class="home-menu-list amqHomePrimaryGrid"><button class="home-menu-card home-menu-learning-plan" data-home-action="learningPlan" type="button"><span class="home-card-copy"><b>學習計畫</b></span><i aria-hidden="true"></i></button><button class="home-menu-card home-menu-dashboard" data-home-action="dashboard" type="button"><span class="home-card-copy"><b>統計儀表板</b></span><i aria-hidden="true"></i></button></nav></section></div></section></div>`;
+  profileRoot=$('#amqProfileCard');
+  $('#amqHomePlayerSlot')?.appendChild(dock);dock.classList.add('amqHomeDock');
+  const setLearningCenterMenu=open=>{const primary=$('#amqHomePrimaryNav'),submenu=$('#amqLearningCenterSubmenu'),entry=$('#amqHomePrimaryNav [data-home-action="learningCenter"]');if(!primary||!submenu)return;primary.hidden=!!open;submenu.hidden=!open;entry?.setAttribute('aria-expanded',String(!!open));if(open)submenu.querySelector('[data-home-action="learningPlan"]')?.focus({preventScroll:true});else entry?.focus({preventScroll:true})};
+  window.__aniSetLearningCenterMenuV846=setLearningCenterMenu;
+  const setMenuOpen=open=>{const overlay=$('#amqHomeOverlay'),stage=$('#amqHomeStage'),icon=$('#amqMainIcon');if(!overlay||!stage)return;if(open)setLearningCenterMenu(false);else setLearningCenterMenu(false);overlay.hidden=!open;stage.classList.toggle('is-open',!!open);icon?.setAttribute('aria-expanded',String(!!open));if(open)$('#amqHomePrimaryNav [data-home-action="quiz"]')?.focus({preventScroll:true});else if((window.__aniGetActiveViewV82?.()||'home')==='home'&&icon?.isConnected)icon.focus({preventScroll:true})};
+  window.__aniSetHomeMenuOpenV846=setMenuOpen;
+  $('#amqMainIcon')?.addEventListener('click',()=>setMenuOpen($('#amqHomeOverlay')?.hidden));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#amqHomeOverlay')?.hidden){setMenuOpen(false);$('#amqMainIcon')?.focus({preventScroll:true})}});
+  $('#amqHomeOverlay')?.addEventListener('click',e=>{if(e.target===$('#amqHomeOverlay'))setMenuOpen(false)});
+  $('#amqProfileName')?.addEventListener('click',()=>{const next=prompt('設定你的個人 ID（最多 32 個字元）',profile.displayName||'Player');if(next===null)return;writeProfile({...profile,displayName:next})});
+  const avatarButton=$('#amqAvatarButton'),avatarInput=$('#amqAvatarFile');avatarButton?.addEventListener('click',()=>avatarInput?.click());
+  avatarInput?.addEventListener('change',()=>{const file=avatarInput.files?.[0];avatarInput.value='';if(!file)return;if(!file.type.startsWith('image/')){notify('請選擇圖片檔案。');return}if(file.size>15*1024*1024){notify('圖片超過 15 MB；請先縮小圖片再上傳。');return}const reader=new FileReader();reader.onerror=()=>notify('圖片讀取失敗，個人照片沒有更換。');reader.onload=()=>{const image=new Image();image.onerror=()=>notify('無法解讀這張圖片，個人照片沒有更換。');image.onload=()=>{try{const canvas=document.createElement('canvas'),max=256,scale=Math.min(1,max/Math.max(image.naturalWidth,image.naturalHeight));canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas unavailable');ctx.drawImage(image,0,0,canvas.width,canvas.height);let data=canvas.toDataURL('image/jpeg',.82);if(data.length>170000)data=canvas.toDataURL('image/jpeg',.62);if(data.length>180000)throw new Error('compressed avatar too large');if(!writeProfile({...profile,avatarData:data}))return;notify('個人照片已更新並保存。')}catch(e){console.warn('Avatar conversion failed:',e);notify('照片無法安全保存；請換一張較小的圖片。');}};image.src=String(reader.result||'')};reader.readAsDataURL(file)});
+  feedbackRoot=document.createElement('div');feedbackRoot.id='amqRoundFeedback';feedbackRoot.className='amqRoundFeedback';feedbackRoot.hidden=true;feedbackRoot.innerHTML='<section class="amqRoundFeedbackCard" role="dialog" aria-modal="true" aria-labelledby="amqRoundFeedbackTitle"><h2 id="amqRoundFeedbackTitle">本輪練習完成</h2><p id="amqRoundFeedbackCopy"></p><div class="amqRoundFeedbackStats"><div class="amqRoundFeedbackStat"><b id="amqRoundFeedbackAnswers">0</b><span>有效答題</span></div><div class="amqRoundFeedbackStat"><b id="amqRoundFeedbackAccuracy">—</b><span>本輪正確率</span></div><div class="amqRoundFeedbackStat"><b id="amqRoundFeedbackPP">+0</b><span>PP 變化（動畫辨認）</span></div><div class="amqRoundFeedbackStat"><b id="amqRoundFeedbackCorrect">0</b><span>本輪答對</span></div></div><div class="amqRoundFeedbackReasons" id="amqRoundFeedbackReasons"></div><div class="amqRoundFeedbackActions"><button class="btn primary" type="button" id="amqRoundFeedbackClose">繼續</button></div></section>';
+  document.body.appendChild(feedbackRoot);const closeFeedback=()=>{feedbackRoot.hidden=true;const candidates=['#quizNext','#quizStart','#quizStopV42','#quizAnswer','#quizHistoryOpenV51'];const target=candidates.map(s=>$(s)).find(el=>el&&elementVisibleForFocus(el)&&!el.disabled);if(target){try{target.focus({preventScroll:true})}catch{target.focus()}}};$('#amqRoundFeedbackClose')?.addEventListener('click',closeFeedback);feedbackRoot.addEventListener('click',e=>{if(e.target===feedbackRoot)closeFeedback()});
+  renderProfile();
+ }
+ function positionDock(view){const dock=$('#audioDock'),slot=$('#amqHomePlayerSlot'),anchor=$('#amqAudioDockHomeAnchor');if(!dock||!anchor)return;if(view==='home'&&slot){slot.appendChild(dock);dock.classList.add('amqHomeDock')}else if(anchor.parentNode){anchor.parentNode.insertBefore(dock,anchor.nextSibling);dock.classList.remove('amqHomeDock')}}
+ function showRoundFeedback(reason='complete'){
+  if(!activeRound||activeRound.shown||activeRound.answers===0||!feedbackRoot)return;activeRound.shown=true;
+  const c=currentCounters(),nowPP=computePp(),gain=nowPP-activeRound.startPP;
+  $('#amqRoundFeedbackTitle').textContent=reason==='stop'?'本輪練習已結束':'本輪練習完成';
+  $('#amqRoundFeedbackCopy').textContent=activeRound.target!=='anime'?`本輪練習的是${({title:'歌曲名稱',artist:'歌手'})[activeRound.target]||'其他'}辨認。答題與統計紀錄照常保存，但不會改變主 PP（動畫辨認長期成就）。`:reason==='stop'?'這輪已記錄的有效答題會保留。主 PP 只計動畫辨認，錯答不會扣回既有 PP。':'本輪紀錄已保存。主 PP 只計動畫辨認的長期表現；重複答對不會無限刷分。';
+  $('#amqRoundFeedbackAnswers').textContent=activeRound.answers.toLocaleString();$('#amqRoundFeedbackCorrect').textContent=activeRound.correct.toLocaleString();$('#amqRoundFeedbackAccuracy').textContent=(activeRound.answers?((activeRound.correct/activeRound.answers)*100).toFixed(1)+'%':'—');$('#amqRoundFeedbackPP').textContent=(gain>=0?'+':'')+gain.toLocaleString();
+  const reasons=[];if(activeRound.firsts)reasons.push(`<span>首次有效辨認 +${activeRound.firsts}</span>`);if(activeRound.retained)reasons.push(`<span>跨日記憶確認 +${activeRound.retained}</span>`);if(activeRound.mastered)reasons.push(`<span>長期記憶確認 +${activeRound.mastered}</span>`);if(!reasons.length)reasons.push('<span>已保存本輪練習紀錄</span>');$('#amqRoundFeedbackReasons').innerHTML=reasons.join('');
+  feedbackRoot.hidden=false;setTimeout(()=>$('#amqRoundFeedbackClose')?.focus({preventScroll:true}),0);renderProfile();
+ }
+ function bindQuizFeedback(){
+  if(answerRecoveryBound)return;answerRecoveryBound=true;
+  document.addEventListener('click',e=>{if(e.target.closest?.('#quizStart')){roundSerial++;activeRound={serial:roundSerial,startAt:Date.now(),startPP:computePp(),answers:0,correct:0,firsts:0,retained:0,mastered:0,shown:false}}},true);
+  document.addEventListener('quiz-v35-answered',e=>{const d=e.detail||{};const promoted=updatePpFromAnswer(d);if(activeRound&&!activeRound.shown){activeRound.answers++;if(d.correct===true)activeRound.correct++;if(promoted.changed){if(promoted.to===1)activeRound.firsts++;else if(promoted.to===2)activeRound.retained++;else if(promoted.to===3)activeRound.mastered++}}renderProfile()});
+  const quizRoot=$('#quizView');if(quizRoot){const observer=new MutationObserver(()=>{const label=$('#quizRoundLabel');const txt=label?.textContent||'';if(/回合完成|本回合完成/.test(txt))showRoundFeedback('complete')});const label=$('#quizRoundLabel');if(label)observer.observe(label,{childList:true,subtree:true,characterData:true})}
+  document.addEventListener('ani-quiz-round-stopped-v82',()=>showRoundFeedback('stop'));
+  document.addEventListener('ani-quiz-history-updated-v51',updateProfileAfterHistory);
+ }
+  function bindMobileAnswerRecovery(){
+  const input=$('#quizAnswer');if(!input)return;
+  input.setAttribute('lang','en');input.setAttribute('autocapitalize','off');input.setAttribute('autocorrect','off');input.setAttribute('spellcheck','false');input.setAttribute('inputmode','text');input.setAttribute('enterkeyhint','go');
+  let composing=false,submittedForQuestion=false,questionEpoch=0,lastPagePointerAt=0,lastMeaningfulInputAt=0,recoveryTimer=null;
+  const activeQuestion=()=>document.body.classList.contains('quiz-mode')&&!input.disabled&&input.isConnected&&!submittedForQuestion;
+  const clearRecovery=()=>{if(recoveryTimer!==null){clearTimeout(recoveryTimer);recoveryTimer=null}};
+  document.addEventListener('pointerdown',e=>{lastPagePointerAt=performance.now();if(!input.contains(e.target)&&e.target?.closest?.('button,a,select,textarea,input,[contenteditable="true"]'))clearRecovery()},true);
+  input.addEventListener('input',()=>{lastMeaningfulInputAt=performance.now()},true);
+  input.addEventListener('keydown',e=>{if(e.key.length===1||e.key==='Backspace'||e.key==='Delete')lastMeaningfulInputAt=performance.now()},true);
+  input.addEventListener('compositionstart',()=>{composing=true;lastMeaningfulInputAt=performance.now()},true);
+  input.addEventListener('compositionend',()=>{composing=false;lastMeaningfulInputAt=performance.now()},true);
+  document.addEventListener('ani-quiz-new-question',()=>{questionEpoch++;submittedForQuestion=false;clearRecovery()},true);
+  document.addEventListener('ani-quiz-answer-submitted',()=>{submittedForQuestion=true;clearRecovery()},true);
+  document.addEventListener('quiz-v35-answered',()=>{submittedForQuestion=true;clearRecovery()},true);
+  input.addEventListener('blur',()=>{
+   const epoch=questionEpoch,blurAt=performance.now(),hadRecentInput=(blurAt-lastMeaningfulInputAt)<4000;
+   clearRecovery();
+   // Mobile OS keyboards can drop DOM focus while switching IME language. Only recover when focus fell to the document itself,
+   // no page control was clicked, and the current question is still awaiting an answer. Never steal focus from a real control.
+   recoveryTimer=setTimeout(()=>{
+    recoveryTimer=null;const active=document.activeElement,quietDocumentFocus=active===document.body||active===document.documentElement||active===null;
+    const recentPagePointer=(performance.now()-lastPagePointerAt)<850;
+    const eligible=activeQuestion()&&epoch===questionEpoch&&quietDocumentFocus&&!recentPagePointer;
+    if(eligible&&(composing||hadRecentInput||active===document.body||active===document.documentElement||active===null)){
+     try{input.focus({preventScroll:true})}catch{input.focus()}
+    }
+   },140);
+  },true);
+  // Read-only status helps verify focus recovery without exposing editable state.
+  window.__aniMobileAnswerV828={getStatus:()=>({lang:input.lang,inputmode:input.getAttribute('inputmode'),focused:document.activeElement===input,composing,submittedForQuestion,questionEpoch})};
+ }
+ function init(){
+  loadProfile();loadPpRows();updateDifficulties();setupHome();installModalFocusTrap();bindQuizFeedback();bindMobileAnswerRecovery();
+  const currentView=window.__aniGetActiveViewV82?.()||'home';positionDock(currentView);renderProfile();
+  document.addEventListener('ani-app-navigation',e=>{const view=e.detail?.view||window.__aniGetActiveViewV82?.()||'home';positionDock(view);if(view==='home'){renderProfile();const overlay=$('#amqHomeOverlay'),stage=$('#amqHomeStage');if(overlay)overlay.hidden=true;stage?.classList.remove('is-open');window.__aniSetLearningCenterMenuV846?.(false);$('#amqMainIcon')?.setAttribute('aria-expanded','false')} });
+  window.addEventListener('pagehide',()=>{if(!window.__aniSuppressPersistenceForRestoreV828&&ppPersistAllowed)savePpRows()});
+  document.addEventListener('visibilitychange',()=>{if(!window.__aniSuppressPersistenceForRestoreV828&&document.visibilityState==='hidden'&&ppPersistAllowed)savePpRows()});
+  window.__aniAMQProfileV828={getPp:computePp,getCounters:currentCounters,getRecords:()=>ppRows.size,getPpRows:()=>[...ppRows.values()].map(r=>r.slice()),refresh:renderProfile};
+  window.__aniAMQProfileV826=window.__aniAMQProfileV828;
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>

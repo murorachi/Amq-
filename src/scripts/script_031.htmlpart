@@ -1,0 +1,104 @@
+<script id="ani-chinese-title-system-v8237">
+(()=>{
+ 'use strict';
+ const VERSION='v8237-anilist-763fcd7e-bangumi-bae940f6';
+ const CACHE_DB='aniChineseTitleMapV8237',CACHE_STORE='maps',CACHE_KEY='merged-map';
+ const URLS={
+  anilist:'https://cdn.jsdelivr.net/gh/soruly/anilist-chinese@763fcd7e368f36bab437b18806b548ca42176892/anilist-chinese.json',
+  bangumi:'https://cdn.jsdelivr.net/gh/bangumi-data/bangumi-data@bae940f6116ae4b93c73a711827056faaf23957a/dist/data.json',
+  opencc:'https://cdn.jsdelivr.net/npm/opencc-js@1.4.2/dist/umd/full.js'
+ };
+ const $=id=>document.getElementById(id), HAN=/[\u3400-\u4dbf\u4e00-\u9fff]/u, KANA=/[\u3040-\u30ff\uff65-\uff9f]/u;
+ const api={version:VERSION,status:'loading',ready:false,sourceStatus:{},records:Object.create(null),
+  getTitle(id){return this.records[String(id)]?.titleZhTW||''},
+  getAliases(id){return this.records[String(id)]?.aliases||[]},
+  getSources(id){return this.records[String(id)]?.sources||[]},
+  getServerAliasMap(){const out={};for(const [id,r] of Object.entries(this.records)){const vals=[r.titleZhTW,...(r.aliases||[])].filter(Boolean);const seen=new Set();const unique=[];for(const v of vals){const s=String(v).trim();if(!s||!HAN.test(s)||KANA.test(s)||seen.has(s))continue;seen.add(s);unique.push(s);if(unique.length>=8)break}if(unique.length)out[id]=unique}return out}
+ };
+ window.__aniChineseTitleAPIv8237=api;
+ document.addEventListener('ani-chinese-title-map-ready',()=>{try{if($('search')?.value.trim()&&typeof render==='function')render()}catch(e){console.warn('[Chinese titles] catalog search refresh failed:',e)}});
+ function setStatus(text,state='loading'){const status=$('aniChineseTitleStatusV8237');if(status){status.textContent=text;status.dataset.state=state;status.title='資料來源：bangumi-data（CC BY 4.0）與 Anilist-Chinese（MIT）；資料來源與授權說明請見套件 README。'}api.status=state}
+ function fireReady(source,message='',state='ready'){api.ready=true;api.status=state;setStatus(message||`中文標題已載入：${Object.keys(api.records).length.toLocaleString()} 部作品（可接受繁體與來源別名）。`,state);const retry=$('aniChineseTitleRetryV8237');if(retry)retry.style.display=state==='partial'?'inline-block':'none';try{document.dispatchEvent(new CustomEvent('ani-chinese-title-map-ready',{detail:{version:VERSION,count:Object.keys(api.records).length,sourceStatus:api.sourceStatus,source}}))}catch{}try{window.__aniRefreshChineseSuggestionsV8237?.()}catch{}try{if(typeof optionCache==='object'&&optionCache)delete optionCache.anime;const input=$('quizAnswer');if(input&&input.value.trim()&&typeof buildSuggestions==='function')buildSuggestions()}catch{} }
+ function openccConverter(){return window.OpenCC&&typeof window.OpenCC.Converter==='function'?window.OpenCC.Converter({from:'cn',to:'tw'}):null}
+ function loadOpenCC(){return new Promise(resolve=>{let done=false,timer=null;const finish=x=>{if(done)return;done=true;if(timer)clearTimeout(timer);resolve(x)};try{const c=openccConverter();if(c){finish(c);return}}catch{}const s=document.createElement('script');s.src=URLS.opencc;s.async=true;s.onload=()=>{try{finish(openccConverter())}catch{finish(null)}};s.onerror=()=>finish(null);timer=setTimeout(()=>finish(null),15000);(document.head||document.documentElement).appendChild(s)})}
+ function fetchJSON(url,label){const controller=typeof AbortController==='function'?new AbortController():null;const timer=setTimeout(()=>controller?.abort(),20000);return fetch(url,{method:'GET',mode:'cors',cache:'force-cache',credentials:'omit',...(controller?{signal:controller.signal}:{})}).then(r=>{if(!r.ok)throw new Error(label+' HTTP '+r.status);return r.json()}).finally(()=>clearTimeout(timer))}
+ function idbRequest(mode,op){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return}let req;try{req=indexedDB.open(CACHE_DB,1)}catch(e){reject(e);return}req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(CACHE_STORE))db.createObjectStore(CACHE_STORE)};req.onerror=()=>reject(req.error||new Error('IndexedDB open failed'));req.onsuccess=()=>{const db=req.result;let tx;try{tx=db.transaction(CACHE_STORE,mode);const store=tx.objectStore(CACHE_STORE);const q=op(store);if(q&&typeof q.onsuccess!=='undefined'){q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error||new Error('IndexedDB request failed'))}else{tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error||new Error('IndexedDB transaction failed'))}}catch(e){reject(e)}finally{tx?.addEventListener?.('complete',()=>db.close(),{once:true});tx?.addEventListener?.('abort',()=>db.close(),{once:true})}}})}
+ async function readCache(){try{const item=await idbRequest('readonly',s=>s.get(CACHE_KEY));if(item&&item.version===VERSION&&item.records&&typeof item.records==='object')return item.records}catch{}return null}
+ async function writeCache(records){try{await idbRequest('readwrite',s=>s.put({version:VERSION,records},CACHE_KEY));return true}catch{return false}}
+ function normal(s){return String(s||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}\p{C}]+/gu,'')}
+ function asList(v){if(Array.isArray(v))return v.filter(x=>typeof x==='string');if(typeof v==='string')return [v];return []}
+ function noJapaneseKana(s){return HAN.test(String(s||''))&&!KANA.test(String(s||''))}
+ function firstHanTitle(list){for(const x of list){if(typeof x==='string'&&noJapaneseKana(x.trim()))return x.trim()}return ''}
+ function sourceCandidates(animeRows,anilistBridge){
+  const byMal=new Map(),byAL=new Map(),nativeByAL=new Map();
+  const put=(map,key,id)=>{if(key==null||key===''||!id)return;const k=String(key);if(!map.has(k))map.set(k,[]);map.get(k).push(String(id))};
+  for(const a of animeRows){const id=String(a?.[0]??'');if(!id)continue;put(byMal,a?.[6],id);put(byAL,anilistBridge[id],id)}
+  // Japanese native titles are indexed from bangumi-data items while the data is being merged.
+  function resolve(malId,alId){const ms=malId!=null&&malId!==''?(byMal.get(String(malId))||[]):[],als=alId!=null&&alId!==''?(byAL.get(String(alId))||[]):[];const mu=[...new Set(ms)],au=[...new Set(als)];if(au.length===1){const aid=au[0];if(!mu.length||mu.includes(aid))return aid;return null}if(au.length>1&&mu.length===1&&au.includes(mu[0]))return mu[0];if(!au.length&&mu.length===1)return mu[0];return null}
+  return {byMal,byAL,resolve,nativeByAL};
+ }
+ function makeRecords(){return Object.create(null)}
+ function ensureRecord(records,id){if(!records[id])records[id]={titleZhTW:'',aliases:[],sources:[],_aliasSet:new Set(),_sourceSet:new Set(),_priority:-1};return records[id]}
+ function addCandidate(records,id,raw,source,priority,lang,converter,nativeTitle=''){
+  if(id==null)return;const value=String(raw||'').trim();if(!noJapaneseKana(value))return;
+  const converted=lang==='zh-Hant'?value:(converter?String(converter(value)||'').trim():'');
+  if(nativeTitle&&(normal(value)===normal(nativeTitle)||(converted&&normal(converted)===normal(nativeTitle))))return;
+  const r=ensureRecord(records,String(id));
+  const aliasValues=[value,converted];
+  for(const a of aliasValues){if(!noJapaneseKana(a)||r._aliasSet.has(a))continue;r._aliasSet.add(a);r.aliases.push(a)}
+  if(!r._sourceSet.has(source)){r._sourceSet.add(source);r.sources.push(source)}
+  if(converted&&noJapaneseKana(converted)&&priority>r._priority){r.titleZhTW=converted;r._priority=priority}
+ }
+ async function buildMap(converter){
+  if(!Array.isArray(anime))throw new Error('曲庫動畫清單不存在');
+  let bridge={};try{bridge=JSON.parse($('aniAnilistIdMapV8237')?.textContent||'{}')}catch{}
+  const idx=sourceCandidates(anime,bridge);
+  const [anilistRes,bangumiRes]=await Promise.allSettled([fetchJSON(URLS.anilist,'AniList 中文資料'),fetchJSON(URLS.bangumi,'bangumi-data')]);
+  api.sourceStatus={anilist:anilistRes.status,bangumi:bangumiRes.status};
+  const records=makeRecords();let addedAni=0,addedBgm=0;
+  if(bangumiRes.status==='fulfilled'){
+   const items=Array.isArray(bangumiRes.value?.items)?bangumiRes.value.items:[];
+   for(const item of items){
+    if(!item||typeof item!=='object')continue;const sites=Array.isArray(item.sites)?item.sites:[];let mal='',al='';
+    for(const s of sites){const site=String(s?.site||'').toLowerCase();if(site==='mal'||site==='myanimelist')mal=s.id;if(site==='anilist')al=s.id}
+    if(al&&item.title)idx.nativeByAL.set(String(al),String(item.title));
+    const id=idx.resolve(mal,al);if(!id)continue;
+    const tt=item.titleTranslate&&typeof item.titleTranslate==='object'?item.titleTranslate:{};
+    const zhHant=firstHanTitle(asList(tt['zh-Hant']));const zhHans=firstHanTitle(asList(tt['zh-Hans']));
+    const oldCount=records[id]?.aliases?.length||0;
+    const nativeTitle=String(item.title||'');
+    if(zhHant)addCandidate(records,id,zhHant,'bangumi-data:zh-Hant',120,'zh-Hant',converter,nativeTitle);
+    if(zhHans)addCandidate(records,id,zhHans,'bangumi-data:zh-Hans',105,'zh-Hans',converter,nativeTitle);
+    if((records[id]?.aliases?.length||0)>oldCount)addedBgm++;
+   }
+  }
+  if(anilistRes.status==='fulfilled'&&Array.isArray(anilistRes.value)){
+   for(const item of anilistRes.value){const al=String(item?.id??'');const ids=idx.byAL.get(al)||[];const unique=[...new Set(ids)];if(unique.length!==1)continue;const id=unique[0];const native=idx.nativeByAL.get(al)||'';
+    const before=records[id]?.aliases?.length||0;
+    const title=String(item?.title||'').trim();if(title)addCandidate(records,id,title,'anilist-chinese:title',85,'source',converter,native);
+    for(const alias of asList(item?.synonyms)){addCandidate(records,id,alias,'anilist-chinese:synonym',65,'source',converter,native);if((records[id]?.aliases?.length||0)>=24)break}
+    if((records[id]?.aliases?.length||0)>before)addedAni++;
+   }
+  }
+  const compact=makeRecords();
+  for(const [id,rec] of Object.entries(records)){
+   const aliases=[rec.titleZhTW,...rec.aliases].filter(Boolean);const seen=new Set();const list=[];
+   for(const name of aliases){const v=String(name).trim();if(!v||!noJapaneseKana(v)||seen.has(v))continue;seen.add(v);list.push(v);if(list.length>=20)break}
+   if(!list.length&&!rec.titleZhTW)continue;
+   compact[id]={titleZhTW:rec.titleZhTW||'',aliases:list,sources:rec.sources.slice(0,5)};
+  }
+  return {records:compact,stats:{animeCount:Object.keys(compact).length,anilistRows:anilistRes.status==='fulfilled'?anilistRes.value.length:0,bangumiRows:bangumiRes.status==='fulfilled'?(bangumiRes.value.items||[]).length:0,anilistAdded:addedAni,bangumiAdded:addedBgm,anilistOk:anilistRes.status==='fulfilled',bangumiOk:bangumiRes.status==='fulfilled',converter:!!converter}};
+ }
+ function applyRecords(records){api.records=records&&typeof records==='object'?records:Object.create(null)}
+ function attachStatus(){const select=$('qsTitleLanguage');if(select&&!$('aniChineseTitleStatusV8237')){const wrap=document.createElement('span');wrap.id='aniChineseTitleStatusWrapV8237';const s=document.createElement('small');s.id='aniChineseTitleStatusV8237';s.textContent='中文標題尚未載入。';s.dataset.state='loading';const b=document.createElement('button');b.type='button';b.id='aniChineseTitleRetryV8237';b.className='btn';b.textContent='重試';b.style.display='none';b.addEventListener('click',()=>loadTitles(true));wrap.append(s,b);select.closest('label')?.appendChild(wrap)}
+  const lang=$('mpNameLanguage');if(lang&&!lang.querySelector('option[value="chinese"]')){const opt=document.createElement('option');opt.value='chinese';opt.textContent='繁體中文（台灣）';lang.appendChild(opt);const label=lang.closest('.mpFormRow');if(label&&!$('mpChineseTitleHintV8237')){const h=document.createElement('small');h.id='mpChineseTitleHintV8237';h.textContent='中文資料由資料來源下載並快取於此瀏覽器；載入失敗時仍可用英文／羅馬字。';label.appendChild(h)}}
+ }
+ let loadingPromise=null;
+ async function loadTitles(force=false){if(loadingPromise)return loadingPromise;loadingPromise=(async()=>{attachStatus();const cached=!force?await readCache():null;if(cached){api.sourceStatus={anilistOk:true,bangumiOk:true,converter:true,fromCache:true};applyRecords(cached);fireReady('indexeddb-cache');return}setStatus('正在取得中文標題資料（背景載入，不會阻擋猜歌）…','loading');let converter=null;try{converter=await loadOpenCC()}catch{}try{const built=await buildMap(converter);applyRecords(built.records);api.sourceStatus={...api.sourceStatus,...built.stats};const enough=Object.keys(api.records).length>0; if(enough){const complete=!!(built.stats.anilistOk&&built.stats.bangumiOk&&built.stats.converter);if(complete)await writeCache(api.records);const msg=complete?`中文標題已載入：${built.stats.animeCount.toLocaleString()} 部作品（可接受繁體與來源別名）。`:`中文候選已載入 ${built.stats.animeCount.toLocaleString()} 部，但部分資料來源或繁簡轉換工具未載入；缺漏作品會退回英文／羅馬字。`;fireReady('downloaded',msg,complete?'ready':'partial');}else{api.ready=false;setStatus('中文資料來源暫時無法讀取；原有英文／羅馬字功能不受影響。','error');const retry=$('aniChineseTitleRetryV8237');if(retry)retry.style.display='inline-block'} }
+   catch(e){api.ready=false;setStatus('中文資料載入失敗；英文／羅馬字及原有答題功能不受影響。','error');const retry=$('aniChineseTitleRetryV8237');if(retry)retry.style.display='inline-block';console.warn('[Chinese titles] load failed:',e)}
+  })().finally(()=>{loadingPromise=null});return loadingPromise}
+ api.ensureLoaded=()=>loadTitles(false);
+ // If the online sources are unavailable, leave the established app paths untouched and allow retry.
+ attachStatus();loadTitles(false);
+})();
+</script>

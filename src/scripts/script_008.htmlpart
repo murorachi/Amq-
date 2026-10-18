@@ -1,0 +1,81 @@
+<script id="v37-answer-and-layout-fixes">
+(()=>{
+ const root=document.getElementById('quizView'); if(!root)return;
+ const $=id=>document.getElementById(id);
+ const input=$('quizAnswer'), box=$('quizSuggestions');
+ const answerMirror=$('v36Answer'), count=$('v36Count');
+ // Mirror the live input exactly; keep the final submitted value through reveal.
+ input?.addEventListener('input',()=>{if(answerMirror)answerMirror.textContent=input.value;});
+ const clean=s=>String(s??'').normalize('NFKC').toLocaleLowerCase().replace(/\s/gu,'');
+ const aliasesForCurrent=()=>{
+   if(!window.__aniQuizStateV45?.quizSong)return [];
+   const type=$('quizTarget')?.value;
+   if(type==='anime'||type==='all'){
+     const song=window.__aniQuizStateV45?.quizSong;
+     const a=window.__aniEmqAPI?.getWorkSummary?.(song?.[0])||byAnime.get(song?.[0]);
+     const extra=window.__aniChineseTitleAPIv8237?.getAliases?.(song?.[0])||[];
+     const emq=window.__aniEmqAPI?.getAliases?.(song?.[1])||{};
+     return [a?.[1],a?.[2],...(Array.isArray(extra)?extra:[]),...(Array.isArray(emq.work)?emq.work:[])].filter(Boolean).map(String);
+   }
+   if(type==='artist'){
+     return [window.__aniQuizStateV45?.quizSong[5],window.__aniQuizStateV45?.quizSong[11],window.__aniQuizStateV45?.quizSong[14]].filter(Boolean).map(String);
+   }
+   return [window.__aniQuizStateV45?.quizSong[4],window.__aniQuizStateV45?.quizSong[12],window.__aniQuizStateV45?.quizSong[13]].filter(Boolean).map(String);
+ };
+ const evaluate=raw=>{
+   const value=clean(raw); if(!value)return false;
+   const aliases=aliasesForCurrent().map(clean).filter(Boolean);
+   if(aliases.includes(value))return true;
+   // Partial acceptance is opt-in and never accepts a tiny fragment.
+   return !!window.__aniQuizStateV45?.quizSettings?.acceptPartial && value.length>=3 && aliases.some(a=>a.includes(value));
+ };
+ let localCorrect=0, submitted=false;
+ // Single authoritative Enter handler. The later V42 settings control is read at event time.
+ const enterSubmitEnabled=()=>true; // V82.61: Enter submission is always enabled.
+ document.addEventListener('keydown',e=>{
+   if(e.key!=='Enter'||e.isComposing||e.keyCode===229||e.target!==input||root.classList.contains('hidden')||!document.body.classList.contains('quiz-mode'))return;
+   e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+   const suggestions=[...(box?.querySelectorAll('.quizSuggestion')||[])];
+   if(box?.classList.contains('open')&&suggestions.length){
+     // Enter selects a suggestion only when the user explicitly navigated to one.
+     // Direct submission is separately gated by the visible Enter-submit setting.
+     const focusedIndex=suggestions.findIndex(el=>el.classList.contains('focus')||el.getAttribute('aria-selected')==='true');
+     const index=focusedIndex>=0?focusedIndex:0;
+     // If no arrow-key navigation happened, Enter chooses the first suggestion by default.
+     const value=(suggestions[index]?.textContent||'').trim();
+     if(value)window.__aniSelectQuizSuggestionV8272?.(value,'keyboard');
+     else {box.classList.remove('open');box.replaceChildren();input.setAttribute('aria-expanded','false')}
+     // Selecting a suggestion is deliberate; press Enter again to submit it.
+     return;
+   }
+   if(window.__aniQuizStateV45?.quizFinished){window.__aniQuizNextV47?.();return;}
+   // The visible setting must control submission. Suggestion selection above remains available
+   // even when direct Enter submission is disabled.
+   if(!enterSubmitEnabled())return;
+   if(submitted)return;
+   submitted=true;
+   const value=input.value.trim();
+   if(answerMirror)answerMirror.textContent=value||'未作答';
+   box?.classList.remove('open');box?.replaceChildren();input.setAttribute('aria-expanded','false');
+   try{
+     // Use the same submission pipeline as the button so skip-phase, timers and reveal state stay in sync.
+     if(typeof window.__aniQuizSubmitV47==='function')window.__aniQuizSubmitV47(false,{force:!value,rawAnswer:value});
+     else throw new Error('Quiz submit bridge unavailable');
+   }catch(err){console.error('Enter submission failed',err);submitted=false;}
+ },true);
+ // The timer should show only after answering, then freeze until the next question.
+ document.addEventListener('click',e=>{if(e.target?.closest?.('#quizStart')&&!document.body.classList.contains('quiz-round-paused')){localCorrect=0;submitted=false;if(count)count.textContent='0';if(answerMirror)answerMirror.textContent=''}},true);document.addEventListener('ani-quiz-new-question',()=>{submitted=false;if(answerMirror)answerMirror.textContent='';if(count)count.textContent=String(localCorrect);});
+ document.addEventListener('quiz-v35-answered',e=>{
+   const d=e.detail||{};
+   if(d.correct){localCorrect++;if(count)count.textContent=String(localCorrect);}
+   if(answerMirror)answerMirror.textContent=d.answer||'未作答';
+ });
+ // Hide the old "next question" control and its adjacent timer/status clutter during active answering.
+ const playback=$('quizPlaybackStateV30');if(playback)playback.hidden=true;
+ const status=$('quizStatus');if(status)status.hidden=true;
+ // V82.6: playback countdown is rendered by the core updateQuizPlaybackV30 function only.
+ // Position the answer title directly above the cover inside the reveal frame.
+ const mystery=$('quizMystery'), title=$('quizAnimeAnswerLabel');
+ if(mystery&&title&&title.parentElement!==mystery){mystery.insertBefore(title,mystery.firstChild);}
+})();
+</script>

@@ -21,7 +21,7 @@ Scope: attempt native localStorage/IndexedDB persistence and real embedded-datab
 
 ## Existing deterministic verification
 
-The existing full runner was executed after adding the test script:
+The existing full runner was executed before the localhost attempt:
 
 - 14 commands passed, 0 failed.
 - Browser integration: 29 behavior assertions passed, 0 failed, using `about:blank` and fixture-backed candidate enumeration.
@@ -33,7 +33,7 @@ These checks do not replace the blocked real-origin attempt.
 
 ## GitHub publication
 
-This report is uploaded and read back for content/blob verification. The remote branch still does not contain the complete matching source fragments, manifest, build tools and test tree as a reproducible source release. No complete release publication is claimed.
+This report will be uploaded and read back for content/blob verification. The remote branch still does not contain the complete matching source fragments, manifest, build tools and test tree as a reproducible source release. No complete release publication is claimed.
 
 ## Remaining limits and next task
 

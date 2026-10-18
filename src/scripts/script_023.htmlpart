@@ -1,0 +1,295 @@
+<script id="learning-system-v72-script">
+(()=>{
+'use strict';
+const $=(sel,root=document)=>root.querySelector(sel);
+const $$=(sel,root=document)=>[...root.querySelectorAll(sel)];
+const escLS=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n||0).toLocaleString();
+// Keep this allowlist in sync with every localStorage key introduced by the app.
+// Unknown same-origin keys must never be treated as app-owned merely because they begin with "ani".
+const APP_STORAGE_KEYS=new Set([
+ 'aniAmqProfileV1','aniAmqPPRecordsV1','aniAmqProfileRecoveryV1','aniAmqPPRecordsRecoveryV1','aniAnimeAliases_v1','aniAnimeWatch_v1','aniBlacklistedSongs_v1','aniBlacklistedAnime_v1','aniManualWeakAnimeV1','aniCustomPracticeListsV1','aniCustomPracticeListsRecoveryV825','aniManualWeakAnimeRecoveryV825','aniBlacklistedAnimeRecoveryV825','aniCatalogModeV6','aniVNWatchlistV1',
+ 'aniCollectionThemeV18','aniCollection_v2','aniDockMutedV57','aniDockVolumeV57',
+ 'aniAudioDockCollapsed_v843','aniChineseAnswerSuggestionsEnabledV8239','aniRandomSourceModeV857:discover','aniRandomSourceModeV857:dock',
+ 'aniFavorites_v1','aniLearningPlanProgressV1','aniPlayHistory_v1','aniPlayQueue_v1',
+ 'aniQuizHistorySummaryRecoveryOriginalV1','aniQuizHistorySummaryRecoveryV1','aniQuizHistorySummaryV1',
+ 'aniQuizHistory_v1','aniQuizPlanBackupSettingsV72','aniQuizSettingsV14',
+ 'aniQuizCustomListScopeInvalidV8265','aniMultiplayerAmqListScopeInvalidV8265','aniMultiplayerEmqListScopeInvalidV8265',
+ 'aniQuizTargetSummaryRecoveryOriginalV1','aniQuizTargetSummaryRecoveryV1','aniQuizTargetSummaryV1',
+ 'aniQuizVndbCharacterV36','aniQuizVolume','aniQuizRevealVideoV835','aniMultiplayerGameMediaV835','aniSongTags_v1','aniSrsScheduleV1','anisongFieldGuide_v1',
+ 'aniEmqWorkListsV8254','aniEmqWorkListsSelectedV8254','aniEmqAudioOverridesV8254','aniMultiplayerPersonalSettingsV82'
+]);
+const APP_STORAGE_KEY_PATTERNS=[
+ /^aniQuizHistorySummaryRecoveryV1_\d+_[a-z0-9]{1,4}$/,
+ /^aniQuizTargetSummaryRecoveryV1_\d+_[a-z0-9]{1,4}$/,
+ /^aniSrsScheduleRecoveryV1_\d+$/,
+ /^aniCustomPracticeListsRecoveryV825_\d+$/,
+ /^aniManualWeakAnimeRecoveryV825_\d+$/,
+ /^aniBlacklistedAnimeRecoveryV825_\d+$/
+];
+function isValidAmqProfileV826(x){return !!x&&typeof x==='object'&&!Array.isArray(x)&&x.schemaVersion===1&&typeof x.displayName==='string'&&x.displayName.length<=32&&typeof x.avatarData==='string'&&x.avatarData.length<=180000&&(x.avatarData===''||/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(x.avatarData))}
+function isValidAmqPPRecordsV826(x){if(!x||typeof x!=='object'||Array.isArray(x)||x.schemaVersion!==1||!Array.isArray(x.records)||x.records.length>150000)return false;const seen=new Set();for(const r of x.records){if(!Array.isArray(r)||r.length!==4||!Number.isSafeInteger(Number(r[0]))||Number(r[0])<=0||![0,1,2].includes(Number(r[1]))||![1,2,3].includes(Number(r[2]))||!Number.isSafeInteger(Number(r[3]))||Number(r[3])<0)return false;const k=String(Number(r[0]))+':'+Number(r[1]);if(seen.has(k))return false;seen.add(k)}return true}
+const STORAGE_EXCLUDES=new Set(['aniCoverCacheV12']);
+const getAppStorage=()=>{
+ const out={};
+ for(let i=0;i<localStorage.length;i++){
+  const k=localStorage.key(i);
+  if(k&&isAppStorageKey(k)&&k!=='aniQuizPlanBackupSettingsV72'){
+   const value=localStorage.getItem(k);
+   if(typeof value!=='string')throw new Error('Could not read application storage key: '+k);
+   out[k]=value;
+  }
+ }
+ const pending=localStorage.getItem('aniQuizPlanBackupSettingsV72');
+ if(pending)out.aniQuizSettingsV14=pending;
+ return out;
+};
+const readJSON=(key,fallback)=>{try{const x=JSON.parse(localStorage.getItem(key)||'null');return x==null?fallback:x}catch(e){return fallback}};
+const writeJSON=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){return false}};
+let toastTimerV72=null;const notify=msg=>{if(typeof window.toast==='function'){window.toast(msg);return}if(typeof window.showToast==='function'){window.showToast(msg);return}let el=document.getElementById('learningSystemToastV72');if(!el){el=document.createElement('div');el.id='learningSystemToastV72';el.setAttribute('role','status');el.style.cssText='position:fixed;z-index:999999;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(92vw,680px);padding:11px 16px;border-radius:12px;background:var(--ink,#34283c);color:var(--paper,#fff9fc);box-shadow:0 8px 30px #0004;font-size:13px;line-height:1.5;text-align:center';document.body.appendChild(el)}el.textContent=String(msg);el.style.display='block';clearTimeout(toastTimerV72);toastTimerV72=setTimeout(()=>{el.style.display='none'},4400)};
+const api=()=>window.__aniHistoryAPIv51||null;
+const getHistory=()=>{try{return (api()?.getHistory?.()||[]).filter(x=>x&&x.songId!=null)}catch(e){return []}};
+const getAnime=()=>{try{return api()?.getAnimeRecords?.()||[]}catch(e){return []}};
+const getSongs=()=>{try{return api()?.getSongRecords?.()||[]}catch(e){return []}};
+const getStatus=()=>readJSON('aniCollection_v2',readJSON('anisongFieldGuide_v1',{}))||{};
+const getBlacklisted=()=>new Set(readJSON('aniBlacklistedSongs_v1',[]).map(String));
+const getPlanMeta=()=>readJSON('aniLearningPlanProgressV1',{})||{};
+const setPlanMeta=x=>writeJSON('aniLearningPlanProgressV1',x);
+const datesort=(a,b)=>String(a||'').localeCompare(String(b||''));
+const historyDate=x=>{const n=Date.parse(x?.at||'');return Number.isFinite(n)?n:0};
+const historyDayKey=x=>{const n=Date.parse(x?.at||'');return Number.isFinite(n)?new Date(n).toISOString().slice(0,10):''};
+const utcCalendarDayWindow30=(now=Date.now())=>{const end=new Date(now);end.setUTCHours(0,0,0,0);const through=end.toISOString().slice(0,10);const start=new Date(end);start.setUTCDate(start.getUTCDate()-29);return {from:start.toISOString().slice(0,10),through}};
+const historyInUtcCalendarDayWindow=(entry,window)=>{const day=historyDayKey(entry);return !!day&&day>=window.from&&day<=window.through};
+const typeLabels={1:'OP／片頭曲',2:'ED／片尾曲',3:'插入歌',4:'其他歌曲',5:'其他／未分類'};
+const seasonOrder=['Winter','Spring','Summer','Fall','Unspecified'];
+const seasonLabels={Winter:'冬季',Spring:'春季',Summer:'夏季',Fall:'秋季',Unspecified:'未標季節'};
+const parseSeason=anime=>{
+ const v=String(anime?.vintage||'');
+ const m=v.match(/\b(Winter|Spring|Summer|Fall|Autumn)\b/i);
+ if(!m)return 'Unspecified';
+ const n=m[1].toLowerCase();return n==='autumn'?'Fall':n[0].toUpperCase()+n.slice(1);
+};
+let cachedLibrary=null;
+function library(){
+ if(cachedLibrary)return cachedLibrary;
+ const anime=getAnime(),songs=getSongs(),aMap=new Map(anime.map(a=>[String(a.id),a])),blacklist=getBlacklisted();
+ // The catalog API is populated asynchronously by the original app. Do not cache a temporary empty snapshot during startup.
+ const groups=new Map(),songById=new Map(songs.map(s=>[String(s.id),s]));
+ if(!api()||!anime.length||!songs.length)return {anime,songs,aMap,songById,groups};
+ for(const song of songs){
+  if(!String(song.title||'').trim()||blacklist.has(String(song.id)))continue;
+  const a=aMap.get(String(song.animeId));if(!a)continue;
+  const year=Number(a.year)||0,season=year?parseSeason(a):'Unspecified';
+  const key=`${year||'unknown'}|${season}`;
+  if(!groups.has(key))groups.set(key,{year,season,songs:[],animeIds:new Set()});
+  const g=groups.get(key);g.songs.push(song);g.animeIds.add(String(a.id));
+ }
+ for(const g of groups.values())g.songs.sort((x,y)=>Number(x.animeId)-Number(y.animeId)||Number(x.number)-Number(y.number)||Number(x.id)-Number(y.id));
+ cachedLibrary={anime,songs,aMap,songById,groups};return cachedLibrary;
+}
+function statsForHistory(history,songMap,animeMap,now=Date.now()){
+ const settings=readJSON('aniQuizSettingsV14',{}),instantSec=Math.max(1,Number(settings.instantSec)||5),summary=api()?.getHistorySummary?.(),targetSummary=api()?.getTargetHistorySummary?.(),window30=utcCalendarDayWindow30(now);
+ // Learning analytics only use explicit animation-recognition attempts. Legacy entries without a target stay unknown.
+ // Use the same 30 UTC calendar-day buckets as the persisted byDayTarget summary.
+ const recent=history.filter(h=>h?.target==='anime').slice().sort((a,b)=>historyDate(b)-historyDate(a)),recent100=recent.slice(0,100),recent30=recent.filter(x=>historyInUtcCalendarDayWindow(x,window30));
+ const fallbackSongAgg=new Map();
+ if(!targetSummary?.bySongTarget||!Object.keys(targetSummary.bySongTarget).length){for(const h of recent){const id=String(h.songId);if(!fallbackSongAgg.has(id))fallbackSongAgg.set(id,{songId:id,animeId:h.animeId,artist:h.artist,total:0,correct:0,wrong:0,elapsedCount:0,elapsedSum:0,slow:0,lastAt:'',lastCorrect:null});const x=fallbackSongAgg.get(id);x.total++;if(h.correct)x.correct++;else x.wrong++;if(Number.isFinite(Number(h.elapsed))&&h.elapsed!==null&&Number(h.elapsed)>=0){x.elapsedCount++;x.elapsedSum+=Number(h.elapsed);if(h.correct&&Number(h.elapsed)>instantSec)x.slow++;}if(historyDate(h)>historyDate({at:x.lastAt})){x.lastAt=h.at;x.lastCorrect=!!h.correct}}}
+ const animeTargetRows=targetSummary?.bySongTarget&&Object.keys(targetSummary.bySongTarget).length?Object.entries(targetSummary.bySongTarget).filter(([,targets])=>Number(targets?.anime?.[0])>0).map(([songId,targets])=>{const r=targets.anime,song=songMap.get(String(songId));return {songId:String(songId),animeId:song?.animeId,artist:song?.artist||'',total:Number(r?.[0])||0,correct:Number(r?.[1])||0,wrong:Number(r?.[2])||0,elapsedCount:Number(r?.[3])||0,elapsedSum:Number(r?.[4])||0,slow:Number(r?.[5])||0,lastAt:Number(r?.[6])?new Date(Number(r[6])).toISOString():'',lastCorrect:r?.[7]===null||r?.[7]===undefined?null:!!r[7]}}):[...fallbackSongAgg.values()];
+ const targetGlobal=targetSummary?.byTarget?.anime||[recent.length,recent.filter(x=>x.correct).length,recent.filter(x=>!x.correct).length,0,0];
+ const totalCount=Number(targetGlobal[0])||0,totalCorrect=Number(targetGlobal[1])||0,totalWrong=Number(targetGlobal[2])||0;
+ const unique=new Set(animeTargetRows.filter(x=>x.total>0).map(x=>String(x.songId))),wrong=recent.filter(x=>!x.correct),validElapsed=recent.filter(x=>Number.isFinite(Number(x.elapsed))&&x.elapsed!==null&&Number(x.elapsed)>=0);
+ const avg=arr=>arr.length?arr.reduce((n,x)=>n+Number(x.elapsed),0)/arr.length:null;
+ const summaryElapsedCount=Number(targetGlobal[3])||0,summaryElapsedSum=Number(targetGlobal[4])||0;
+ let latest=null;for(const row of animeTargetRows){if(row.lastAt&&(!latest||Date.parse(row.lastAt)>Date.parse(latest.at)))latest={at:row.lastAt,songId:row.songId,correct:row.lastCorrect}}
+ const last=latest?{...latest}:recent[0]?{at:recent[0].at,songId:String(recent[0].songId),correct:!!recent[0].correct}:null;
+ const groupAgg=(keyFn)=>{const map=new Map();for(const h of animeTargetRows){const k=keyFn(h);if(!k)continue;if(!map.has(k))map.set(k,{key:k,total:0,correct:0,wrong:0,elapsedCount:0,elapsedSum:0,songs:new Set(),lastAt:''});const x=map.get(k);x.total+=h.total;x.correct+=h.correct;x.wrong+=h.wrong;x.songs.add(String(h.songId));x.elapsedCount+=h.elapsedCount;x.elapsedSum+=h.elapsedSum;if(historyDate(h)>historyDate({at:x.lastAt}))x.lastAt=h.lastAt}return [...map.values()].map(x=>({...x,accuracy:x.total?x.correct/x.total:0,avgElapsed:x.elapsedCount?x.elapsedSum/x.elapsedCount:null}))};
+ const decade=groupAgg(h=>{const song=songMap.get(String(h.songId));const a=animeMap.get(String(h.animeId||song?.animeId));const y=Number(a?.year)||0;return y?`${Math.floor(y/10)*10} 年代`:''}).sort((a,b)=>a.accuracy-b.accuracy||b.total-a.total);
+ const songType=groupAgg(h=>{const song=songMap.get(String(h.songId));return song?(typeLabels[song.type]||'其他歌曲'):''}).sort((a,b)=>a.accuracy-b.accuracy||b.total-a.total);
+ const artist=groupAgg(h=>String(h.artist||songMap.get(String(h.songId))?.artist||'').trim()).filter(x=>x.key&&x.total>=2).sort((a,b)=>a.accuracy-b.accuracy||b.wrong-a.wrong||b.total-a.total);
+ const anime=groupAgg(h=>{const song=songMap.get(String(h.songId));const a=animeMap.get(String(h.animeId||song?.animeId));return a?.title||''}).filter(x=>x.key&&x.total>=2).sort((a,b)=>a.accuracy-b.accuracy||b.wrong-a.wrong||b.total-a.total);
+ const songAgg=new Map(animeTargetRows.map(x=>[String(x.songId),{songId:String(x.songId),total:x.total,wrong:x.wrong,correct:x.correct,slow:x.slow,elapsedCount:x.elapsedCount,elapsedSum:x.elapsedSum,lastAt:x.lastAt,lastCorrect:x.lastCorrect}]));
+ let recent30Count=recent30.length;if(targetSummary?.byDayTarget){recent30Count=Object.entries(targetSummary.byDayTarget).reduce((n,[day,targets])=>n+(day>=window30.from&&day<=window30.through?(Number(targets?.anime?.[0])||0):0),0)}
+ return {history:recent,recent,recent100,recent30,recent30Count,unique,wrong,validElapsed,average:summaryElapsedCount?summaryElapsedSum/summaryElapsedCount:avg(validElapsed),last,decade,songType,artist,anime,songAgg,instantSec,totalCount,totalCorrect,totalWrong,summary,targetSummary};
+}
+function weaknessEvidenceStatus(now=Date.now()){
+ const history=getHistory(),limit=Number(typeof QUIZ_HISTORY_DETAIL_LIMIT_V1!=='undefined'?QUIZ_HISTORY_DETAIL_LIMIT_V1:2000)||2000;
+ const dates=history.map(h=>Date.parse(h?.at||'')).filter(Number.isFinite),oldest=dates.length?Math.min(...dates):null;
+ const window30=utcCalendarDayWindow30(now),windowStart=Date.parse(window30.from+'T00:00:00.000Z');
+ const possiblyTruncated=history.length>=limit&&oldest!==null&&oldest>=windowStart;
+ return {detailCount:history.length,detailLimit:limit,oldestDetailAt:oldest===null?'':new Date(oldest).toISOString(),recentWindowDays:30,recentWindowMayBeIncomplete:possiblyTruncated,source:'per-song lifetime summary + most recent detailed history'};
+}
+function reviewCandidates(limit=150,now=Date.now()){
+ const lib=library(),history=getHistory(),targetSummary=api()?.getTargetHistorySummary?.(),window30=utcCalendarDayWindow30(now),stats=statsForHistory(history,lib.songById,lib.aMap,now),blacklist=getBlacklisted(),status=getStatus(),evidence=weaknessEvidenceStatus(now);
+ const recentMeta=new Map();
+ for(const h of history.filter(h=>h?.target==='anime'&&historyInUtcCalendarDayWindow(h,window30))){const id=String(h.songId);if(!recentMeta.has(id))recentMeta.set(id,{total:0,wrong:0,correct:0,slow:0,elapsedCount:0,elapsedSum:0,lastAt:'',lastCorrect:null});const r=recentMeta.get(id);r.total++;if(h.correct)r.correct++;else r.wrong++;if(Number.isFinite(Number(h.elapsed))&&h.elapsed!==null&&Number(h.elapsed)>=0){r.elapsedCount++;r.elapsedSum+=Number(h.elapsed);if(h.correct&&Number(h.elapsed)>stats.instantSec)r.slow++}if(historyDate(h)>historyDate({at:r.lastAt})){r.lastAt=h.at;r.lastCorrect=!!h.correct}}
+ const meta=new Map();
+ if(targetSummary?.bySongTarget&&Object.keys(targetSummary.bySongTarget).length){
+  for(const [id,targets] of Object.entries(targetSummary.bySongTarget)){
+   const r=targets?.anime,total=Number(r?.[0])||0;if(!total)continue;const recent=recentMeta.get(String(id));
+   meta.set(String(id),{id:String(id),total,correct:Number(r?.[1])||0,wrong:Number(r?.[2])||0,elapsedCount:Number(r?.[3])||0,elapsedSum:Number(r?.[4])||0,slow:Number(r?.[5])||0,lastAt:Number(r?.[6])?new Date(Number(r[6])).toISOString():'',lastCorrect:r?.[7]===null||r?.[7]===undefined?null:!!r[7],recent});
+  }
+ }else{
+  for(const h of history.filter(h=>h?.target==='anime')){const id=String(h.songId);if(!meta.has(id))meta.set(id,{id,total:0,correct:0,wrong:0,elapsedCount:0,elapsedSum:0,slow:0,lastAt:'',lastCorrect:null,recent:recentMeta.get(id)});const x=meta.get(id);x.total++;if(h.correct)x.correct++;else x.wrong++;if(Number.isFinite(Number(h.elapsed))&&h.elapsed!==null&&Number(h.elapsed)>=0){x.elapsedCount++;x.elapsedSum+=Number(h.elapsed);if(h.correct&&Number(h.elapsed)>stats.instantSec)x.slow++}if(historyDate(h)>historyDate({at:x.lastAt})){x.lastAt=h.at;x.lastCorrect=!!h.correct}}
+ }
+ const out=[];
+ for(const x of meta.values()){
+  if(blacklist.has(x.id))continue;const song=lib.songById.get(x.id);if(!song||!String(song.title||'').trim())continue;
+  const level=Number(status[x.id])||0,r=x.recent,reviewWrong=Number(r?.wrong)||0,reviewSlow=Number(r?.slow)||0,recentAvg=r&&r.elapsedCount?r.elapsedSum/r.elapsedCount:null,lifetimeAvg=x.elapsedCount?x.elapsedSum/x.elapsedCount:null,daysSince=x.lastAt?Math.max(0,(now-Date.parse(x.lastAt))/86400000):90;
+  const lastAtIsRecent=x.lastAt&&historyInUtcCalendarDayWindow({at:x.lastAt},window30),reviewLastCorrect=r&&r.total?r.lastCorrect:(lastAtIsRecent?x.lastCorrect:null);
+  const wrongRate=x.total?x.wrong/x.total:0,lifetimeRepeatedTrouble=x.total>=3&&wrongRate>=.4,lowFamiliarityRepeated=level<=1&&x.total>=2&&(wrongRate>=.25||reviewLastCorrect===false||reviewSlow>0);
+  const recentTrouble=reviewWrong>0||reviewSlow>0||reviewLastCorrect===false;
+  // Only label a song as a system weakness when there is actual evidence; untested or merely stale songs are not misrepresented as mistakes. Score uses error rates and bounded repeat/sample evidence so a heavily replayed song cannot dominate solely by raw counts.
+  if(!recentTrouble&&!lifetimeRepeatedTrouble&&!lowFamiliarityRepeated)continue;
+  if(level>=3&&reviewLastCorrect===true&&reviewWrong===0&&reviewSlow===0&&!lifetimeRepeatedTrouble)continue;
+  const recencyDecay=Math.max(.15,Math.exp(-daysSince/60));
+  const lifetimeEvidence=Math.min(2,wrongRate*2.5*Math.min(1,x.total/5))*recencyDecay;
+  const recentTotal=Math.max(0,Number(r?.total)||0),recentWrongRate=recentTotal?reviewWrong/recentTotal:0,recentSlowRate=recentTotal?reviewSlow/recentTotal:0;let score=recentWrongRate*8+Math.min(2,Math.log2(1+reviewWrong)*.6)+(reviewLastCorrect===false?3:0)+recentSlowRate*3+Math.min(1.6,Math.log2(1+recentTotal)*.4)+(level===0?1.5:level===1?1:level===2?.3:-2)+Math.max(-1.2,.4-(daysSince/30)*.4);
+  // Use lifetime error evidence as a bounded fallback when recent per-song detail is absent, and decay it with recency. Stale time reduces priority; it must never increase it.
+  if(!r||evidence.recentWindowMayBeIncomplete)score+=lifetimeEvidence;
+  if((r?.total||x.total)===1&&reviewLastCorrect&&level>=2)score-=1;
+  const reasons=[];
+  if(reviewWrong>0)reasons.push(`近 30 天未答對 ${reviewWrong}/${Math.max(1,Number(r?.total)||reviewWrong)} 次（${(reviewWrong/Math.max(1,Number(r?.total)||reviewWrong)*100).toFixed(0)}%）`);
+  if(reviewLastCorrect===false)reasons.push('最近一次作品辨認未答對');
+  if(reviewSlow>0)reasons.push(`近 30 天答對但超過秒答門檻 ${reviewSlow} 次`);
+  if(lifetimeRepeatedTrouble)reasons.push(`累積未答對率 ${(wrongRate*100).toFixed(0)}%（${x.wrong}/${x.total}）`);
+  if(lowFamiliarityRepeated)reasons.push(`熟悉度 ${level}，且已有 ${x.total} 次有效測試`);
+  if(daysSince>=30)reasons.push(`距上次有效答題 ${Math.floor(daysSince)} 天`);
+  out.push({...x,score,avgElapsed:recentAvg??lifetimeAvg,level,daysSince,recentWrong:reviewWrong,recentSlow:reviewSlow,reviewLastCorrect,reasons,evidenceQuality:evidence.recentWindowMayBeIncomplete?'recent-detail-window-possibly-truncated':(r?'recent-detail-available':'lifetime-summary-fallback'),evidenceStatus:evidence,song});
+ }
+ return out.sort((a,b)=>b.score-a.score||datesort(b.lastAt,a.lastAt)).slice(0,limit);
+}
+
+let quizLaunchTimerV72=null;
+function clearQuizLaunchTimerV72(){if(quizLaunchTimerV72!==null){clearTimeout(quizLaunchTimerV72);quizLaunchTimerV72=null}}
+function startQuizSettings(settings){
+ clearQuizLaunchTimerV72();
+ if(!window.__aniQuizPlanV1?.applySettings){notify('猜歌設定橋接未載入，請重新開啟收藏室後再試。');return}
+ try{window.__aniQuizPlanV1.applySettings(settings)}catch(e){console.error('Apply learning settings failed',e);notify('無法套用學習條件，原有設定未能完整更新。');return}
+ // Route directly to the quiz page, then use its existing Start button.
+ window.__aniNavigateApp?.('quiz');
+ quizLaunchTimerV72=setTimeout(()=>{quizLaunchTimerV72=null;const btn=$('#quizStart');if(btn){btn.click()}else notify('已保存出題條件，請進入猜歌遊戲後按「開始新題」。')},140);
+}
+function baseQuizSettings(focusSongIds){const current=window.__aniQuizPlanV1?.getSettings?.()||readJSON('aniQuizSettingsV14',{});return {...current,yearMin:1900,yearMax:2100,unknownYear:true,diffMin:0,diffMax:100,watchlistOnly:false,watchStatusFilterEnabled:false,tagsOnly:false,tagText:'',seasons:['Winter','Spring','Summer','Fall'],animeTypes:['TV','OVA','Movie','Special','ONA','Other'],songTypes:[1,2,3,4,5],statuses:[0,1,2,3],focusSongIds:focusSongIds.map(String),noRepeat:true};}
+function renderLearningPlan(){window.__aniRenderPracticeHubV825?.()}
+function metricCard(label,value,sub){return `<div class="lsMetric"><span>${label}</span><strong>${value}</strong><span>${sub}</span></div>`}
+function tableRows(items,formatter){if(!items.length)return '<div class="lsEmpty">目前答題紀錄不足，尚無法做出穩定的比較。先正常練習，這張表不會靠空氣生成統計。</div>';return `<div class="lsTableWrap"><table class="lsTable"><thead><tr><th>項目</th><th>答題數</th><th>答對率</th><th>答錯</th><th>平均秒數</th><th>最近答題</th></tr></thead><tbody>${items.map(x=>`<tr><td>${escLS(x.key)}</td><td>${fmt(x.total)}</td><td>${(x.accuracy*100).toFixed(1)}%</td><td>${fmt(x.wrong)}</td><td>${x.avgElapsed==null?'—':x.avgElapsed.toFixed(1)+' 秒'}</td><td>${x.lastAt?escLS(new Date(x.lastAt).toLocaleDateString()):'—'}</td></tr>`).join('')}</tbody></table></div>`}
+function renderLearningInsights(){
+ const panel=$('#dashboardPanel');if(!panel||panel.classList.contains('hidden'))return;
+ const lib=library(),history=getHistory(),now=Date.now(),stats=statsForHistory(history,lib.songById,lib.aMap,now),review=reviewCandidates(150,now),status=getStatus(),black=getBlacklisted();
+ const summary=stats.summary,correct=stats.totalCorrect,wrong=stats.totalWrong,acc=stats.totalCount?correct/stats.totalCount:0,unique=stats.unique.size;
+ const weakSongs=review.slice(0,8).map(x=>{const h=stats.history.filter(y=>String(y.songId)===x.id).slice(-1)[0],a=lib.aMap.get(String(x.song.animeId));return {title:x.song.title||'未命名歌曲',artist:x.song.artist||'歌手未標示',anime:a?.title||'未知作品',wrong:x.wrong,total:x.total,level:x.level,avg:x.avgElapsed,lastAt:x.lastAt,correct:h?.correct,reasons:x.reasons||[],evidenceQuality:x.evidenceQuality}});
+ const weakEvidence=weaknessEvidenceStatus(now);const weakEvidenceNote=weakEvidence.recentWindowMayBeIncomplete?`逐題歷史已達 ${fmt(weakEvidence.detailLimit)} 筆上限，而且最舊保留紀錄仍在最近 30 天內；個別歌曲的近期錯答／慢速次數可能不完整。系統會同時參考長期逐歌摘要，不把缺失的近期細節當成零。`:`目前保留 ${fmt(weakEvidence.detailCount)} / ${fmt(weakEvidence.detailLimit)} 筆逐題紀錄；弱點排序還會使用長期逐歌摘要。`;const weakSongHtml=weakSongs.length?`<div class="lsWeakList">${weakSongs.map(x=>`<div class="lsWeakItem"><b>${escLS(x.title)}</b><small>${escLS(x.artist)} · ${escLS(x.anime)}</small><small>累積未答對 ${fmt(x.wrong)} / ${fmt(x.total)} · 熟悉度 ${x.level} · 平均 ${x.avgElapsed==null?'—':x.avgElapsed.toFixed(1)+' 秒'}</small><small>選入原因：${escLS((x.reasons||[]).join('；')||'需補充近期資料')}</small></div>`).join('')}</div>`:'<div class="lsEmpty">目前沒有足夠證據將歌曲判定為系統弱點。已測但沒有錯答、慢速或低熟悉度證據的歌曲不會僅因為「有紀錄」就被標為弱點；新紀錄會自動更新候選。</div>';
+ const section=(title,items)=>`<section class="lsSection"><h3>${title}</h3>${tableRows(items.slice(0,8))}</section>`;
+ let prior=panel.querySelector('#learningInsightsV72');if(!prior){prior=document.createElement('section');prior.id='learningInsightsV72';prior.className='learningSystemPanel';panel.appendChild(prior)}
+ prior.innerHTML=`<div class="lsIntro"><div><div class="detailEyebrow">PRACTICE INSIGHTS</div><h2>學習弱點與答題分析</h2><p>主要指標統計作品辨認；歌曲名稱與歌手分開計算，缺少目標的舊紀錄列為未分類。</p></div><div class="lsActions"><button type="button" class="btn primary" id="lsInsightsReview">開始智慧複習（${fmt(review.length)} 首候選）</button></div></div><div class="lsMetrics">${metricCard('累積答題摘要',fmt(stats.totalCount),'自摘要建立以來的已知題次')}${metricCard('累積答對率',(acc*100).toFixed(1)+'%',`${fmt(correct)} 答對／${fmt(wrong)} 答錯或跳過`)}${metricCard('曾測歌曲',fmt(unique),'依長期摘要中的歌曲 ID 去重')}${metricCard('近 30 天作品辨認',fmt(stats.recent30Count),stats.last?`最近一次 ${new Date(stats.last.at).toLocaleDateString()}`:'尚無動畫辨認紀錄')}</div><div class="lsSection"><h3>作答目標分布</h3><div class="lsMetrics">${metricCard('作品辨認',fmt(stats.targetSummary?.byTarget?.anime?.[0]||0),`${fmt(stats.targetSummary?.byTarget?.anime?.[1]||0)} 答對`)}${metricCard('歌曲名稱',fmt(stats.targetSummary?.byTarget?.title?.[0]||0),`${fmt(stats.targetSummary?.byTarget?.title?.[1]||0)} 答對`)}${metricCard('歌手',fmt(stats.targetSummary?.byTarget?.artist?.[0]||0),`${fmt(stats.targetSummary?.byTarget?.artist?.[1]||0)} 答對`)}${metricCard('未分類（舊紀錄）',fmt(stats.targetSummary?.byTarget?.unknown?.[0]||0),`摘要可能尚有 ${fmt(stats.targetSummary?.baseline?.legacyTargetUnknownCount||0)} 題更早舊紀錄無法分類`)}</div></div><div class="lsSection"><h3>最需要複習的歌曲</h3><p class="lsMuted" style="margin-bottom:8px">依近期錯答、慢速答對、反覆錯答或低熟悉度等證據排序；這是練習優先度，不是能力評分。</p><p class="lsMuted" style="margin-bottom:10px">${escLS(weakEvidenceNote)}</p>${weakSongHtml}</div>${section('各年代正確率',stats.decade)}${section('歌曲類型正確率',stats.songType)}${section('最常卡住的作品',stats.anime)}${section('最常卡住的歌手',stats.artist)}<section class="lsSection"><h3>資料完整度</h3><p class="lsMuted">黑名單 ${fmt(black.size)} 首 · 已標記熟悉度 ${fmt(Object.values(status).filter(v=>Number(v)>0).length)} 首 · 逐題歷史最近 2,000 筆，長期摘要另計。${summary?.baseline?.mayBeTruncated?'更早舊紀錄可能無法補回。':'舊版已淘汰的逐題紀錄無法補回。'}</p></section>`;
+ prior.querySelector('#lsInsightsReview')?.addEventListener('click',()=>{const ids=reviewCandidates(150).map(x=>x.id);if(!ids.length){notify('目前沒有可用的錯題或慢速答題紀錄。先完成幾輪猜歌練習。');return}startQuizSettings(baseQuizSettings(ids))});
+}
+async function exportFullBackup(){
+ if(typeof flushQuizHistorySummaryV1==='function')flushQuizHistorySummaryV1();if(typeof flushQuizTargetSummaryV80==='function')flushQuizTargetSummaryV80();
+ let storage,sceneBackgrounds;
+ try{storage=getAppStorage();const sceneApi=window.__aniSceneBackgroundsV1;if(!sceneApi?.exportBackup)throw new Error('背景圖片資料庫尚未準備好。');sceneBackgrounds=await sceneApi.exportBackup()}catch(e){console.error('Full backup storage snapshot failed:',e);notify(`無法建立完整備份：${e?.message||'本機資料或背景圖片讀取失敗。'}；沒有下載不完整的備份。`);return}
+ try{if(typeof quizHistoryV51!=='undefined'&&Array.isArray(quizHistoryV51))storage.aniQuizHistory_v1=JSON.stringify(quizHistoryV51)}catch(e){}
+ try{if(typeof quizHistorySummaryV1!=='undefined'&&quizHistorySummaryV1)storage.aniQuizHistorySummaryV1=JSON.stringify(quizHistorySummaryV1)}catch(e){}
+ try{if(typeof quizTargetSummaryV80!=='undefined'&&quizTargetSummaryV80){storage.aniQuizTargetSummaryV1=JSON.stringify(quizTargetSummaryV80);if(typeof quizTargetSummaryRecoveryRawV80!=='undefined'&&quizTargetSummaryRecoveryRawV80!==null)storage.aniQuizTargetSummaryRecoveryOriginalV1=quizTargetSummaryRecoveryRawV80}}catch(e){}
+ try{if(typeof quizHistorySummaryRecoveryRawV1!=='undefined'&&quizHistorySummaryRecoveryRawV1!==null)storage.aniQuizHistorySummaryRecoveryOriginalV1=quizHistorySummaryRecoveryRawV1}catch(e){}
+ // Keep old top-level fields so pre-v72 versions can still import core collections if needed.
+ const parse=(key,fallback)=>{try{return JSON.parse(storage[key]??'null')??fallback}catch(e){return fallback}};
+ const storageKeys=Object.keys(storage).sort();
+ const data={format:'ani-collection-workspace',version:10,exportedAt:new Date().toISOString(),backupType:'full-user-data-and-scene-backgrounds',sceneBackgrounds,storage,storageManifest:{schemaVersion:1,keyCount:storageKeys.length,keys:storageKeys},
+  status:parse('aniCollection_v2',parse('anisongFieldGuide_v1',{})),favorites:parse('aniFavorites_v1',[]),animeWatch:parse('aniAnimeWatch_v1',{}),songTags:parse('aniSongTags_v1',{}),playHistory:parse('aniPlayHistory_v1',{}),queueIds:parse('aniPlayQueue_v1',[]),blacklistedSongs:parse('aniBlacklistedSongs_v1',[]),quizHistory:parse('aniQuizHistory_v1',[]),quizSettings:parse('aniQuizSettingsV14',{}),learningPlanProgress:parse('aniLearningPlanProgressV1',{}),intervalSchedule:parse('aniSrsScheduleV1',{}),databaseInfo:{animeCount:library().anime.length,songCount:library().songs.length}};
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`ani-collection-full-backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2500);
+ if(quizHistorySummaryRecoveryRawV1!==null&&quizHistorySummaryRecoveryRawV1!==undefined){try{localStorage.setItem(QUIZ_HISTORY_SUMMARY_KEY_V1,JSON.stringify(quizHistorySummaryV1));quizHistorySummaryPersistenceBlockedV1=false;quizHistorySummaryRecoveryRawV1=null;quizHistorySummarySaveFailedV1=false;quizHistorySummaryPendingV1=0}catch(e){console.warn('Recovered summary remains in memory; keep the exported backup safely.',e);notify('備份已匯出，但本機摘要仍無法修復。請保留備份檔並檢查瀏覽器儲存空間。');return}}
+ notify(`完整備份已匯出：包含應用程式資料、${sceneBackgrounds.scenes.length} 個介面的背景設定與圖片；不包含可重新下載的封面快取與曲庫資料。`);
+}
+function isAppStorageKey(k){if(typeof k!=='string'||STORAGE_EXCLUDES.has(k))return false;return APP_STORAGE_KEYS.has(k)||APP_STORAGE_KEY_PATTERNS.some(pattern=>pattern.test(k))}
+function validateFullBackupStorageSnapshot(data){
+ if(!data.storage||typeof data.storage!=='object'||Array.isArray(data.storage))throw new Error('Missing storage snapshot');
+ const entries=Object.entries(data.storage);
+ if(!entries.length)throw new Error('Backup storage snapshot is empty');
+ const version=Number(data.version)||0,actualKeys=entries.map(([k])=>k).sort();
+ if(version>=9){
+  const manifest=data.storageManifest;
+  if(!manifest||manifest.schemaVersion!==1||!Array.isArray(manifest.keys)||!Number.isSafeInteger(manifest.keyCount)||manifest.keyCount!==entries.length||manifest.keys.length!==entries.length)throw new Error('Backup storage manifest is missing or inconsistent');
+  if(manifest.keys.some(k=>typeof k!=='string')||new Set(manifest.keys).size!==manifest.keys.length||JSON.stringify([...manifest.keys].sort())!==JSON.stringify(actualKeys))throw new Error('Backup storage keys do not match the manifest');
+  for(const [k,v] of entries){if(!isAppStorageKey(k)||typeof v!=='string')throw new Error('Backup contains an invalid application storage entry: '+k)}
+ }
+ const valid={};
+ for(const [k,v] of entries){if(isAppStorageKey(k)&&typeof v==='string')valid[k]=v}
+ if(!Object.keys(valid).length)throw new Error('Backup contains no valid application storage entries');
+ return valid;
+}
+async function fullRestore(data){
+ const valid=validateFullBackupStorageSnapshot(data);
+ const sceneApi=window.__aniSceneBackgroundsV1;let previousSceneBackgrounds=null,preparedSceneBackgrounds=null;
+ if(data.sceneBackgrounds!==undefined){if(!sceneApi?.prepareBackupRestore||!sceneApi?.exportBackup||!sceneApi?.restoreBackup)throw new Error('目前版本無法安全還原自訂背景圖片。');preparedSceneBackgrounds=await sceneApi.prepareBackupRestore(data.sceneBackgrounds);previousSceneBackgrounds=await sceneApi.exportBackup()}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniQuizHistory_v1')){let h;try{h=JSON.parse(valid.aniQuizHistory_v1)}catch(e){throw new Error('Backup quiz history is not valid JSON')}if(!Array.isArray(h))throw new Error('Backup quiz history must be an array')}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniQuizHistorySummaryV1')){let summary;try{summary=JSON.parse(valid.aniQuizHistorySummaryV1)}catch(e){throw new Error('Backup long-term summary is not valid JSON')}if(!isValidQuizHistorySummaryV1(summary))throw new Error('Backup long-term summary is inconsistent; current data was not changed')}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniQuizTargetSummaryV1')){let summary;try{summary=JSON.parse(valid.aniQuizTargetSummaryV1)}catch(e){throw new Error('Backup target summary is not valid JSON')}if(!isValidQuizTargetSummaryV80(summary))throw new Error('Backup target summary is inconsistent; current data was not changed')}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniSrsScheduleV1')){let schedule;try{schedule=JSON.parse(valid.aniSrsScheduleV1)}catch(e){throw new Error('Backup interval-repetition schedule is not valid JSON')}const apiValidator=window.__aniSRSAPI?.validateBackupSchedule;if(typeof apiValidator==='function'){if(!apiValidator(schedule))throw new Error('Backup interval-repetition schedule is inconsistent; current data was not changed')}else{const validStates=new Set(['new','learning','review','suspended']),settings=schedule?.settings;if(!schedule||schedule.schemaVersion!==1||!schedule.cards||typeof schedule.cards!=='object'||Array.isArray(schedule.cards)||!settings||typeof settings!=='object'||!Number.isFinite(Number(settings.dailyNew))||Number(settings.dailyNew)<0||Number(settings.dailyNew)>500||!Number.isFinite(Number(settings.batchSize))||Number(settings.batchSize)<1||Number(settings.batchSize)>500||!Number.isFinite(Number(settings.desiredRetention))||Number(settings.desiredRetention)<0.7||Number(settings.desiredRetention)>0.97)throw new Error('Backup interval-repetition schedule is inconsistent; current data was not changed');for(const [id,card] of Object.entries(schedule.cards)){if(!card||String(card.songId)!==String(id)||!validStates.has(card.state)||!Number.isFinite(Number(card.dueAt))||!Number.isFinite(Number(card.reps||0))||!Number.isFinite(Number(card.lapses||0))||(card.stability!=null&&(!Number.isFinite(Number(card.stability))||Number(card.stability)<0))||(card.difficulty!=null&&(!Number.isFinite(Number(card.difficulty))||Number(card.difficulty)<0||Number(card.difficulty)>10))||(card.reviewLog!==undefined&&!Array.isArray(card.reviewLog)))throw new Error('Backup interval-repetition card is inconsistent; current data was not changed')}}}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniAmqProfileV1')){let amqProfile;try{amqProfile=JSON.parse(valid.aniAmqProfileV1)}catch(e){throw new Error('AMQ profile is not valid JSON')}if(!isValidAmqProfileV826(amqProfile))throw new Error('AMQ profile is inconsistent; current data was not changed')}
+ if(Object.prototype.hasOwnProperty.call(valid,'aniAmqPPRecordsV1')){let amqPp;try{amqPp=JSON.parse(valid.aniAmqPPRecordsV1)}catch(e){throw new Error('AMQ PP records are not valid JSON')}if(!isValidAmqPPRecordsV826(amqPp))throw new Error('AMQ PP records are inconsistent; current data was not changed')}
+ if(!confirm('這是完整備份。完整還原會取代這個瀏覽器目前的收藏進度、自訂清單、猜歌歷史、設定與間隔複習排程，且頁面將重新載入。建議先另存目前備份。\n\n確定要完整還原嗎？'))return;
+ const previous=getAppStorage();
+ window.__aniSuppressPersistenceForRestoreV828=true;
+ try{const remove=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(isAppStorageKey(k))remove.push(k)}remove.forEach(k=>localStorage.removeItem(k));for(const [k,v] of Object.entries(valid))localStorage.setItem(k,v);if(preparedSceneBackgrounds!==null)await sceneApi.restoreBackup(preparedSceneBackgrounds)}catch(e){try{const remove=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(isAppStorageKey(k))remove.push(k)}remove.forEach(k=>localStorage.removeItem(k));for(const [k,v] of Object.entries(previous))localStorage.setItem(k,v)}catch(rollbackError){console.error('Backup rollback failed:',rollbackError)}if(previousSceneBackgrounds!==null){try{const rollbackBg=await sceneApi.prepareBackupRestore(previousSceneBackgrounds);await sceneApi.restoreBackup(rollbackBg)}catch(rollbackError){console.error('Background backup rollback failed:',rollbackError)}}window.__aniSuppressPersistenceForRestoreV828=false;throw new Error('完整還原失敗：'+e.message)}
+ notify('完整資料已還原，正在重新載入。');setTimeout(()=>location.reload(),200);
+}
+function mergeLegacyBackup(data){
+ const validStatus=x=>x&&typeof x==='object'&&!Array.isArray(x)?x:{};
+ const current=readJSON('aniCollection_v2',readJSON('anisongFieldGuide_v1',{}))||{};
+ const incoming=validStatus(data.status||data),mergedStatus={...current};
+ for(const [k,v] of Object.entries(incoming)){if(['version','format','exportedAt','favorites','animeWatch','songTags','playHistory','queueIds','blacklistedSongs','quizHistory','quizSettings','storage','learningPlanProgress'].includes(k))continue;const n=Number(v);if(Number.isFinite(n)&&n>=1&&n<=3)mergedStatus[String(k)]=n}
+ const changes={'aniCollection_v2':JSON.stringify(mergedStatus)};
+ const obj=(key)=>{const x=readJSON(key,{});return x&&typeof x==='object'&&!Array.isArray(x)?x:{}};
+ const arr=(key)=>{const x=readJSON(key,[]);return Array.isArray(x)?x:[]};
+ if(Array.isArray(data.favorites))changes.aniFavorites_v1=JSON.stringify([...new Set([...arr('aniFavorites_v1'),...data.favorites].map(String))]);
+ for(const [key,field] of [['aniAnimeWatch_v1','animeWatch'],['aniSongTags_v1','songTags'],['aniPlayHistory_v1','playHistory']])if(data[field]&&typeof data[field]==='object'&&!Array.isArray(data[field]))changes[key]=JSON.stringify({...obj(key),...data[field]});
+ if(Array.isArray(data.queueIds)){const seen=new Set(),queue=[];for(const x of [...arr('aniPlayQueue_v1'),...data.queueIds]){const k=String(x);if(!seen.has(k)){seen.add(k);queue.push(x)}}changes.aniPlayQueue_v1=JSON.stringify(queue)}
+ if(Array.isArray(data.blacklistedSongs))changes.aniBlacklistedSongs_v1=JSON.stringify([...new Set([...arr('aniBlacklistedSongs_v1'),...data.blacklistedSongs].map(String))]);
+ if(Array.isArray(data.quizHistory)){const merged=new Map();for(const h of [...arr('aniQuizHistory_v1'),...data.quizHistory]){if(h&&h.songId!=null)merged.set(String(h.id||`${h.songId}|${h.at}|${h.correct}`),h)}changes.aniQuizHistory_v1=JSON.stringify([...merged.values()].sort((a,b)=>(Date.parse(a?.at||'')||0)-(Date.parse(b?.at||'')||0)).slice(-2000))}
+ if(data.quizSettings&&typeof data.quizSettings==='object'&&!Array.isArray(data.quizSettings))changes.aniQuizSettingsV14=JSON.stringify({...obj('aniQuizSettingsV14'),...data.quizSettings});
+ if(data.learningPlanProgress&&typeof data.learningPlanProgress==='object'&&!Array.isArray(data.learningPlanProgress))changes.aniLearningPlanProgressV1=JSON.stringify({...obj('aniLearningPlanProgressV1'),...data.learningPlanProgress});
+ // Commit the merge only after building all values in memory; roll back every changed key if storage quota is hit.
+ const before=new Map(Object.keys(changes).map(k=>[k,localStorage.getItem(k)]));
+ window.__aniSuppressPersistenceForRestoreV828=true;
+ try{for(const [k,v] of Object.entries(changes))localStorage.setItem(k,v)}catch(err){for(const [k,v] of before){try{if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(rollbackError){console.error('Legacy backup rollback failed:',rollbackError)}}window.__aniSuppressPersistenceForRestoreV828=false;throw err}
+ notify('舊格式備份已合併匯入；原有進度未被清除，頁面將重新載入。');setTimeout(()=>location.reload(),200);
+}
+function wireBackupControls(){
+ const exp=$('#exportBtn'),imp=$('#importBtn'),file=$('#importFile');
+ if(exp)exp.onclick=exportFullBackup;
+ if(imp)imp.onclick=()=>file?.click();
+ if(file)file.onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{if(f.size>100*1024*1024)throw new Error('File too large');const data=JSON.parse(await f.text());if(data?.format==='ani-collection-workspace'&&Number(data.version)>=6&&data.storage){await fullRestore(data)}else{if(!confirm('這是舊格式／部分備份，將與目前資料合併。相同歌曲的進度、相同作品的看番狀態，以及重複標籤或播放紀錄可能以匯入檔內容為準；收藏與待聽佇列會合併。其他本機資料不會整份清空。建議先按「匯出完整備份」保存目前資料。\n\n確定合併匯入？'))return;mergeLegacyBackup(data)}}catch(err){console.error('Backup import failed:',err);notify('備份匯入失敗：檔案格式不正確或瀏覽器儲存空間不足。原有資料未主動清除。')}finally{e.target.value=''}};
+}
+function mountPagePanels(){
+ const dash=$('#dashboardPanel');if(dash&&!$('#learningPlanPanel'))dash.insertAdjacentHTML('afterend','<section id="learningPlanPanel" aria-label="練習工作台" class="v10Panel hidden"></section>');
+ window.__aniRenderLearningPlanV82=renderLearningPlan;window.__aniRenderLearningInsightsV82=renderLearningInsights;
+ window.__aniLearningAPIv828={getSystemWeakCandidates:(limit=300)=>reviewCandidates(Math.max(1,Math.min(1000,Number(limit)||300))).map(x=>({id:String(x.id),score:Number(x.score)||0,lastAt:x.lastAt||'',wrong:Number(x.wrong)||0,total:Number(x.total)||0,avgElapsed:x.avgElapsed==null?null:Number(x.avgElapsed),reasons:[...(x.reasons||[])],evidenceQuality:x.evidenceQuality||'unknown'})),getWeakEvidenceStatus:()=>weaknessEvidenceStatus(),getHistory:()=>getHistory().map(x=>({songId:String(x.songId),animeId:String(x.animeId),target:x.target||'unknown',correct:!!x.correct,at:x.at||'',elapsed:x.elapsed==null?null:Number(x.elapsed)})),startWeakPractice:(ids,target='anime')=>startQuizSettings({...baseQuizSettings(ids.map(String)),target,customListId:''}),getQuizSettings:()=>({...window.__aniQuizPlanV1?.getSettings?.()||{}})};window.__aniLearningAPIv825=window.__aniLearningAPIv828;
+}
+let dashboardInsightsRefreshTimerV82=null;
+function scheduleDashboardInsightsRefreshV82(delay=80){
+ if(dashboardInsightsRefreshTimerV82!==null)clearTimeout(dashboardInsightsRefreshTimerV82);
+ dashboardInsightsRefreshTimerV82=setTimeout(()=>{
+  dashboardInsightsRefreshTimerV82=null;
+  if(window.__aniGetActiveViewV82?.()==='dashboard'||!$('#dashboardPanel')?.classList.contains('hidden'))renderLearningInsights();
+ },delay);
+}
+function refreshWhenDashboardVisible(){scheduleDashboardInsightsRefreshV82(80)}
+function init(){
+ mountPagePanels();wireBackupControls();
+ try{if(localStorage.getItem('aniQuizPlanBackupSettingsV72'))window.__aniQuizPlanV1?.clearFocus()}catch(e){}
+ document.addEventListener('click',e=>{
+  const target=e.target.closest?.('button,a');if(!target)return;
+  if(quizLaunchTimerV72!==null&&!target.matches('[data-home-action="quiz"],#quizExit'))clearQuizLaunchTimerV72();
+ },true);
+ document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view==='dashboard')scheduleDashboardInsightsRefreshV82(100)});
+ document.addEventListener('ani-quiz-history-updated-v51',()=>{if(!$('#learningPlanPanel')?.classList.contains('hidden'))renderLearningPlan();refreshWhenDashboardVisible()});
+ document.addEventListener('ani-familiarity-updated-v51',()=>{if(!$('#learningPlanPanel')?.classList.contains('hidden'))renderLearningPlan();refreshWhenDashboardVisible()});
+ document.addEventListener('ani-blacklist-changed-v51',()=>{cachedLibrary=null;if(!$('#learningPlanPanel')?.classList.contains('hidden'))renderLearningPlan();refreshWhenDashboardVisible()});
+ document.addEventListener('quiz-v35-answered',()=>{refreshWhenDashboardVisible();if(!$('#learningPlanPanel')?.classList.contains('hidden'))renderLearningPlan()});
+ // The initial dashboard and later interactions share one coalesced refresh timer.
+ scheduleDashboardInsightsRefreshV82(300);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>

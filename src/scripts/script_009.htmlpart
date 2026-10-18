@@ -1,0 +1,36 @@
+<script id="v39-enter-and-avatar-fix">
+(()=>{
+ const root=document.getElementById('quizView');
+ const input=document.getElementById('quizAnswer');
+ const box=document.getElementById('quizSuggestions');
+ const mirror=document.getElementById('v36Answer');
+ if(!root||!input)return;
+ const sync=()=>{if(mirror)mirror.textContent=input.value;};
+ input.addEventListener('input',sync);
+ // The old input-level handler submits on Enter even while suggestions are open.
+ // Enter handling is centralized in V37; do not register a competing capture listener.
+ // Delete the redundant elapsed-time label and align avatar center to the countdown's center.
+ const avatar=root.querySelector('.v36-amq-player');
+ const countdown=document.getElementById('quizCountdownV30')||document.getElementById('quizRemainingV30');
+ if(avatar&&countdown){
+   const stage=countdown.closest('.quizStage')||countdown.parentElement;
+   if(stage&&avatar.parentElement!==stage){
+     const anchor=document.getElementById('quizCountdownV30')||document.getElementById('quizRemainingV30');
+     anchor.insertAdjacentElement('afterend',avatar);
+   }
+   avatar.style.transform='none';
+   avatar.style.margin='12px auto 12px';
+   avatar.style.position='relative';
+ }
+ // Remove any stale elapsed node left by prior versions and ensure visualizer is actually absent.
+ root.querySelector('.v36-elapsed')?.remove();
+ root.querySelector('.quizVisualizerV30')?.remove();
+ // Keep live answer mirrored and retain the submitted answer during reveal.
+ document.addEventListener('ani-quiz-new-question',()=>{if(mirror)mirror.textContent='';sync();});
+ document.addEventListener('ani-quiz-answer-submitted',e=>{if(mirror)mirror.textContent=e.detail?.answer||'未作答';});
+ // Remove the visual-effects settings row if an older DOM version already rendered it.
+ for(const el of [...document.querySelectorAll('#quizSettingsBody label')]){
+   if(/作答前視覺效果/.test(el.textContent||''))el.closest('.settingRow')?.remove();
+ }
+})();
+</script>

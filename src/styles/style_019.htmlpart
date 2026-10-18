@@ -1,0 +1,8 @@
+<style id="v61-buffer-answer-feedback-style">
+/* A real overlay, rather than relying on a pseudo-element that can be hidden by reveal layers. */
+#quizView .quizMystery{position:relative!important;isolation:isolate!important}
+#quizView .quizAnswerFeedbackV61{position:absolute!important;inset:0!important;z-index:2!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;padding:14px!important;box-sizing:border-box!important;border:5px solid transparent!important;border-radius:inherit!important;font-size:clamp(22px,3vw,34px)!important;font-weight:900!important;letter-spacing:.04em!important;text-shadow:0 2px 5px rgba(0,0,0,.85)!important;pointer-events:none!important;opacity:1!important}
+#quizView .quizAnswerFeedbackV61.correct{background:rgba(28,170,83,.48)!important;border-color:#43e681!important;color:#fff!important}
+#quizView .quizAnswerFeedbackV61.wrong{background:rgba(220,42,55,.50)!important;border-color:#ff5965!important;color:#fff!important}
+#quizView .quizAnswerFeedbackV61 span{padding:7px 16px!important;border-radius:999px!important;background:rgba(0,0,0,.72)!important;box-shadow:0 2px 10px rgba(0,0,0,.35)!important}
+</style>

@@ -1,0 +1,19 @@
+<script id="v43-submit-and-dock-final-fix">
+(()=>{
+ const $=id=>document.getElementById(id);
+ // The V40 compatibility block has already retired the old preference.
+
+ // Reversible dock visibility: never leave a hidden inline style behind after quiz mode exits.
+ const dock=$('audioDock');
+ if(dock){
+   const original=dock.dataset.v43OriginalDisplay!==undefined?dock.dataset.v43OriginalDisplay:dock.style.display;
+   dock.dataset.v43OriginalDisplay=original;
+   const sync=()=>{
+     if(document.body.classList.contains('quiz-mode'))dock.style.display='none';
+     else dock.style.display=original;
+   };
+   new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});
+   sync();
+ }
+})();
+</script>

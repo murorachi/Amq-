@@ -1,0 +1,83 @@
+<script id="v82-known-audit-fixes">
+(()=>{
+ const $=id=>document.getElementById(id);
+ // Start/end timing is distinct from the audio-clips remaining countdown.
+ const elapsed=$('quizTimerDisplay');let frozenElapsed=null;
+ const fmt=n=>`${Math.max(0,Number(n)||0).toFixed(1)}`;
+ const showElapsed=()=>{
+   if(!elapsed)return;
+   const st=window.__aniQuizStateV45;
+   if(!st?.quizSong){elapsed.textContent='--';return;}
+   const pausedElapsed=window.__aniQuizPauseClockV82?.getPausedElapsed?.();
+   if(pausedElapsed!==null&&pausedElapsed!==undefined){elapsed.textContent=fmt(pausedElapsed);return;}
+   if(frozenElapsed!==null){elapsed.textContent=fmt(frozenElapsed);return;}
+   if(st.quizAudioStarted&&Number(st.quizStartedAt)>0&&!st.quizFinished){elapsed.textContent=fmt((performance.now()-Number(st.quizStartedAt))/1000);return;}
+   if(st.quizAudioStarted&&Number(st.quizStartedAt)>0&&st.quizFinished){elapsed.textContent=fmt((performance.now()-Number(st.quizStartedAt))/1000);return;}
+   elapsed.textContent='--';
+ };
+ let elapsedDeferredTimerV82=null;
+ let elapsedQuestionEpochV82=0;
+ const clearElapsedDeferredTimerV82=()=>{
+   if(elapsedDeferredTimerV82!==null){clearTimeout(elapsedDeferredTimerV82);elapsedDeferredTimerV82=null;}
+ };
+ const scheduleElapsedDeferredV82=callback=>{
+   clearElapsedDeferredTimerV82();
+   const timer=setTimeout(()=>{
+     if(elapsedDeferredTimerV82!==timer)return;
+     elapsedDeferredTimerV82=null;
+     callback();
+   },0);
+   elapsedDeferredTimerV82=timer;
+ };
+ document.addEventListener('ani-quiz-new-question',()=>{
+   elapsedQuestionEpochV82++;
+   clearElapsedDeferredTimerV82();
+   frozenElapsed=null;
+   if(elapsed)elapsed.textContent='--';
+   scheduleElapsedDeferredV82(showElapsed);
+ });
+ document.addEventListener('ani-quiz-answer-submitted',e=>{
+   clearElapsedDeferredTimerV82();
+   const st=window.__aniQuizStateV45,at=Number(e.detail?.at),start=Number(st?.quizStartedAt);
+   if(st?.quizAudioStarted&&at>0&&start>0)frozenElapsed=Math.max(0,(at-start)/1000);
+   showElapsed();
+ });
+ document.addEventListener('quiz-v35-answered',e=>{
+   clearElapsedDeferredTimerV82();
+   if(Number.isFinite(Number(e.detail?.elapsed)))frozenElapsed=Math.max(0,Number(e.detail.elapsed));
+   showElapsed();
+ });
+ document.addEventListener('ani-quiz-unplayed',()=>{
+   elapsedQuestionEpochV82++;
+   clearElapsedDeferredTimerV82();
+   frozenElapsed=null;
+   if(elapsed)elapsed.textContent='--';
+ });
+ document.addEventListener('ani-quiz-round-stopped-v82',()=>{
+   elapsedQuestionEpochV82++;
+   clearElapsedDeferredTimerV82();
+   frozenElapsed=null;
+   showElapsed();
+ });
+ window.setInterval(showElapsed,100);
+
+ // V42 owns the synchronous quiz-core stop/reset. This listener only ends the independent SRS/planner state.
+ // SRS endSession() already restores planner focus when a review session is active, so do not clear it twice.
+ const stop=$('quizStopV42');
+ if(stop&&!stop.dataset.v82Cleanup){stop.dataset.v82Cleanup='1';stop.addEventListener('click',()=>{
+   // V42's stop listener is registered earlier and has already synchronously stopped the quiz.
+   // Run SRS cleanup in this same click task so a deferred callback cannot terminate a newer session.
+   const srs=window.__aniSRSAPI;
+   let sessionActive=false;
+   try{const state=typeof srs?.getSessionState==='function'?srs.getSessionState():null;sessionActive=!!state?.active}
+   catch(err){console.error('SRS session state check failed',err)}
+   if(sessionActive){
+     try{srs?.end?.('本輪已停止。已評分歌曲保留新排程，未評分歌曲保留原排程。')}
+     catch(err){console.error('SRS stop cleanup failed',err);try{window.__aniQuizPlanV1?.clearFocus?.()}catch(focusErr){console.error('Quiz focus cleanup failed',focusErr)}}
+   }else{
+     try{window.__aniQuizPlanV1?.clearFocus?.()}catch(err){console.error('Quiz focus cleanup failed',err)}
+   }
+ },false)}
+
+})();
+</script>

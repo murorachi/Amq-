@@ -1,0 +1,17 @@
+<style id="learning-system-v72-style">
+  .learningSystemPanel{color:var(--ink);padding:clamp(12px,2vw,22px);border:1px solid var(--line);border-radius:18px;background:var(--panel,rgba(255,255,255,.92));box-shadow:var(--shadow);margin:14px 0 30px;min-width:0}
+  .lsIntro{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .lsIntro h2{font-size:clamp(22px,3vw,30px);margin:3px 0 7px;letter-spacing:-.03em}
+  .lsIntro p, .lsMuted{color:var(--muted);font-size:12px;line-height:1.65;margin:0}
+  .lsActions{display:flex;gap:8px;flex-wrap:wrap}
+  .lsMetrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 20px}
+  .lsMetric{border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--panel2,rgba(255,255,255,.6));min-width:0}
+  .lsMetric span{display:block;font-size:11px;color:var(--muted)}.lsMetric strong{display:block;font-size:clamp(20px,3vw,28px);line-height:1.3;margin:4px 0;overflow-wrap:anywhere}
+  .lsSection{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}.lsSection h3{font-size:16px;margin:0 0 10px}
+  .lsTableWrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+  .lsTable{border-collapse:collapse;width:100%;font-size:12px;min-width:540px}.lsTable th, .lsTable td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}.lsTable th{background:var(--panel2,#f8f4fa);font-weight:800;color:var(--muted);white-space:nowrap}.lsTable tr:last-child td{border-bottom:0}.lsTable td:first-child{font-weight:700}
+  .lsWeakList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lsWeakItem{border:1px solid var(--line);border-radius:12px;padding:11px;min-width:0}.lsWeakItem b{display:block;overflow-wrap:anywhere}.lsWeakItem small{color:var(--muted);font-size:11px;display:block;margin-top:5px}.lsEmpty{border:1px dashed var(--line);border-radius:12px;padding:16px;color:var(--muted);font-size:12px;line-height:1.7}
+  @media(max-width:760px){.lsMetrics{grid-template-columns:repeat(2,minmax(0,1fr))}.lsWeakList{grid-template-columns:1fr}.lsIntro h2{font-size:22px}.lsTable{min-width:500px}}
+  /* Home-menu layout migrated to Design System 1.0. */
+body.quiz-mode .top .actions #themeToggle{display:none!important}
+</style>

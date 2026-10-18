@@ -1,0 +1,4 @@
+<style id="v5-layout-fix">
+@media(min-width:761px){.wrap{margin:0 auto;max-width:1420px}}
+@media(max-width:760px){.wrap{margin:0 auto;max-width:1420px;padding-bottom:130px}}
+</style>

@@ -1,0 +1,119 @@
+<script id="v60-player-quiz-cleanup">
+(()=>{
+ 'use strict';
+ const $=id=>document.getElementById(id);
+ // Keep regular home song discovery; only the old blind/reveal entry is retired.
+ // Retire the old home blind/reveal controls, but keep the song-discovery panel and low-difficulty picker.
+ document.querySelector('#blindNextBtn')?.remove();
+ try{localStorage.removeItem('aniAnimeAliases_v1')}catch{}
+ // Legacy side navigation entry now simply returns to home random playback, without the old blind-guess card.
+ const modeSelect=$('dockPlaybackModeV57');
+ const modes={home:'home-random',unheard:'unheard','today-wrong':'today-wrong',queue:'queue',tagged:'tagged'};
+ let playbackModeV57='home-random';
+ let albumAnimeIdV57=null;
+ let albumSequenceV57=[];
+ let volumeV57=0.7, mutedV57=false, lastAudibleVolumeV57=0.7, applyingVolumeV57=false;
+ const audio=$('audioPlayer'),video=$('videoPlayer');
+ try{const saved=localStorage.getItem('aniDockVolumeV57');if(saved!==null&&Number.isFinite(Number(saved)))volumeV57=Math.max(0,Math.min(1,Number(saved)));else if(audio&&Number.isFinite(audio.volume))volumeV57=audio.volume;const mute=localStorage.getItem('aniDockMutedV57');if(mute!==null)mutedV57=mute==='1';else mutedV57=!!audio?.muted;}catch{}
+ if(volumeV57>0)lastAudibleVolumeV57=volumeV57;
+ function saveVolume(){try{localStorage.setItem('aniDockVolumeV57',String(volumeV57));localStorage.setItem('aniDockMutedV57',mutedV57?'1':'0')}catch{}}
+ function applyVolume(el){if(!el)return;applyingVolumeV57=true;try{el.volume=volumeV57;el.muted=mutedV57}catch{}finally{setTimeout(()=>{applyingVolumeV57=false},0)}}
+ function syncVolumeControls(){const slider=$('v44Volume'),out=$('v44VolumeValue');if(slider){slider.value=String(Math.round((mutedV57?0:volumeV57)*100));if(out)out.textContent=slider.value+'%';}}
+ function onVolumeChange(el){if(applyingVolumeV57)return;
+   // Treat native player controls as the user's explicit volume choice. Keep that choice across tracks.
+   if(el.muted){mutedV57=true;if(el.volume>0)lastAudibleVolumeV57=el.volume;}
+   else if(el.volume===0){
+     if(mutedV57){mutedV57=false;volumeV57=lastAudibleVolumeV57||0.7;applyVolume(el);}
+     else{volumeV57=0;mutedV57=false;}
+   }else{mutedV57=false;volumeV57=el.volume;lastAudibleVolumeV57=volumeV57;}
+   syncVolumeControls();saveVolume();
+ }
+ [audio,video].forEach(el=>{if(!el)return;applyVolume(el);el.addEventListener('volumechange',()=>onVolumeChange(el));});
+ // The quiz's legacy volume slider also controls the shared audio element; keep it synchronized with the dock.
+ const v44=$('v44Volume');if(v44){v44.addEventListener('input',()=>{const n=Number(v44.value)/100;volumeV57=n;if(n>0){lastAudibleVolumeV57=n;mutedV57=false}else mutedV57=true;applyVolume(audio);applyVolume(video);saveVolume();},true);}
+ // Do not observe the entire document here: syncVolumeControls() updates textContent,
+ // which triggers childList mutations and can create an infinite observer loop.
+
+ const norm=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}]/gu,'');
+ function dockRandomSourceModeV857(){let mode=$('dockRandomSourceModeV857')?.value||'amq';try{mode=localStorage.getItem('aniRandomSourceModeV857:dock')||mode}catch{}return ['amq','mixed','emq'].includes(mode)?mode:'amq'}
+ function sourcePoolForDockV857(){const mode=dockRandomSourceModeV857(),amq=(typeof songs!=='undefined'?songs:[]).filter(s=>audioEligibleV857(s)&&window.__aniCandidatePoolPolicyV8265.blacklistAllowed(!!window.__aniHistoryAPIv51?.isBlacklisted?.(s[1]))),emq=(mode==='amq'||!window.__aniEmqAPI?.ready)?[]:(window.__aniEmqAPI.getRows?.()||[]).filter(s=>audioEligibleV857(s)&&window.__aniCandidatePoolPolicyV8265.blacklistAllowed(!!window.__aniHistoryAPIv51?.isBlacklisted?.(s[1])));if(mode==='amq')return amq;if(mode==='emq')return emq;return amq.concat(emq)}
+ function eligiblePool(mode){
+   if(mode==='queue')return (queueIds||[]).map(id=>getSong(id)).filter(s=>s&&audioEligibleV857(s)&&window.__aniCandidatePoolPolicyV8265.blacklistAllowed(!!window.__aniHistoryAPIv51?.isBlacklisted?.(s[1])));
+   const all=sourcePoolForDockV857();
+   if(mode==='unheard')return all.filter(s=>st(s[1])===0);
+   if(mode==='today-wrong'){
+     const now=new Date(),today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+     const ids=new Set((window.__aniHistoryAPIv51?.getHistory?.()||[]).filter(h=>h&&!h.correct&&h.at&&(()=>{const d=new Date(h.at);return Number.isFinite(d.getTime())&&`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`===today})()).map(h=>String(h.songId)));
+     return all.filter(s=>ids.has(String(s[1])));
+   }
+   if(mode==='tagged')return all.filter(s=>String(window.__aniHistoryAPIv51?.getSongTag?.(s[1])||songTags[String(s[1])]||'').trim());
+   return all;
+ }
+ function randomFrom(list,avoidCurrent=true,weightedSource=true){if(!list?.length)return null;let pool=list;if(avoidCurrent&&list.length>1&&currentSong){const alt=list.filter(s=>String(s[1])!==String(currentSong[1]));if(alt.length)pool=alt;}if(weightedSource&&dockRandomSourceModeV857()==='mixed'){const a=pool.filter(s=>!window.__aniEmqAPI?.isSong?.(s[1])),e=pool.filter(s=>window.__aniEmqAPI?.isSong?.(s[1]));if(a.length&&e.length)pool=Math.random()<2/3?a:e;else pool=a.length?a:e;}return pool[Math.floor(Math.random()*pool.length)]||null;}
+ function syncModeSelect(){if(modeSelect)modeSelect.value=playbackModeV57;}
+ function setMode(mode,{start=true}={}){
+   playbackModeV57=mode;albumAnimeIdV57=null;albumSequenceV57=[];syncModeSelect();
+   if(!start)return;
+   if(mode==='queue'){
+     const list=eligiblePool('queue');if(!list.length){toast('待聽佇列沒有可播放歌曲，或歌曲都在黑名單中。');return;}listenSong(list[0]);return;
+   }
+   if(mode==='today-wrong'||mode==='unheard'||mode==='tagged'){
+     const list=eligiblePool(mode);if(!list.length){toast(mode==='today-wrong'?'今天還沒有猜錯的歌曲。':mode==='unheard'?'沒有未聽過且未列入黑名單的歌曲。':'沒有加上自訂標籤的可播放歌曲。');playbackModeV57='home-random';syncModeSelect();return;}
+     const s=randomFrom(list,false);if(s)listenSong(s);return;
+   }
+   const s=randomFrom(eligiblePool('home-random'),false);if(s)listenSong(s);else toast('目前所有歌曲都在黑名單中。');
+ }
+ if(modeSelect){modeSelect.addEventListener('change',()=>setMode(modeSelect.value));syncModeSelect();}
+ // Override the player's track starter only to preserve the chosen volume and mode. All original history/fallback logic stays intact.
+ const originalListenSongV57=listenSong;
+ listenSong=function(song,options={}){if(!song)return;syncVolumeControls();applyVolume(audio);applyVolume(video);originalListenSongV57(song,options);syncVolumeControls();applyVolume(audio);applyVolume(video);};
+ // Home mode is a true random shuffle over all non-blacklisted songs, independent of familiarity.
+ playNext=function(){
+   if(playbackModeV57==='album-sequence'){
+     const list=albumSequenceV57;if(!list.length)return;
+     const idx=list.findIndex(s=>String(s[1])===String(currentSong?.[1]));listenSong(list[(idx+1+list.length)%list.length]);return;
+   }
+   if(playbackModeV57==='album-random'){
+     const list=albumSequenceV57;if(!list.length)return;const s=randomFrom(list,true,false);if(s)listenSong(s);return;
+   }
+   if(playbackModeV57==='queue'){
+     const list=eligiblePool('queue');if(!list.length){toast('待聽佇列已沒有可播放歌曲。');return;}const idx=list.findIndex(s=>String(s[1])===String(currentSong?.[1]));listenSong(list[(idx+1+list.length)%list.length]);return;
+   }
+   const list=eligiblePool(playbackModeV57);if(!list.length){toast(playbackModeV57==='today-wrong'?'今天沒有可播放的猜錯歌曲。':playbackModeV57==='unheard'?'沒有未聽過的可播放歌曲。':playbackModeV57==='tagged'?'沒有帶標籤的可播放歌曲。':'目前所有歌曲都在黑名單中。');return;}
+   const next=randomFrom(list,true);if(next)listenSong(next);
+ };
+ playPrevious=function(){
+   if(playbackModeV57==='album-sequence'||playbackModeV57==='album-random'){
+     const list=albumSequenceV57;if(!list.length)return;const idx=list.findIndex(s=>String(s[1])===String(currentSong?.[1]));listenSong(list[(idx-1+list.length)%list.length]);return;
+   }
+   if(playbackModeV57==='queue'){
+     const list=eligiblePool('queue');if(!list.length)return;const idx=list.findIndex(s=>String(s[1])===String(currentSong?.[1]));listenSong(list[(idx-1+list.length)%list.length]);return;
+   }
+   playNext();
+ };
+ $('listenNext').onclick=()=>{
+   if(currentId==null){toast('請先從動畫圖鑑開啟一部作品。');return;}
+   const list=[...(songMap.get(currentId)||[])];if(!list.length){toast('這部動畫沒有收錄歌曲。');return;}
+   albumAnimeIdV57=currentId;albumSequenceV57=list;playbackModeV57='album-sequence';syncModeSelect();listenSong(list[0]);
+ };
+ $('listenRandom').onclick=()=>{
+   if(currentId==null){toast('請先從動畫圖鑑開啟一部作品。');return;}
+   const list=[...(songMap.get(currentId)||[])];if(!list.length){toast('這部動畫沒有收錄歌曲。');return;}
+   albumAnimeIdV57=currentId;albumSequenceV57=list;playbackModeV57='album-random';syncModeSelect();const s=randomFrom(list,false,false);if(s)listenSong(s);
+ };
+ $('nextSongBtn').onclick=()=>playNext();$('prevSongBtn').onclick=()=>playPrevious();
+ $('playPauseBtn').onclick=()=>{if(!currentSong){setMode(playbackModeV57);return;}const el=video.style.display!=='none'?video:audio;if(el.paused)el.play().catch(()=>{});else el.pause();};
+ // Selecting a mode changes the future playlist; opening an anime never changes the mode.
+ document.addEventListener('click',e=>{
+   const action=e.target.closest?.('[data-home-action],#uiBackHome');
+   if(!action)return;
+   if(action.id==='uiBackHome'||action.dataset.homeAction==='explore'){playbackModeV57='home-random';albumAnimeIdV57=null;albumSequenceV57=[];syncModeSelect();}
+  },true);
+ // Ensure the buffer card keeps the answer color behind its cover until the next question begins.
+ const mystery=$('quizMystery');
+ if(mystery){
+   document.addEventListener('ani-quiz-answer-submitted',e=>{mystery.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57');mystery.classList.add(e.detail?.correct?'quiz-answer-correct-v57':'quiz-answer-wrong-v57');});
+   document.addEventListener('ani-quiz-new-question',()=>mystery.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57'));
+ }
+})();
+</script>

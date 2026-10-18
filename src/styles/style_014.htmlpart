@@ -1,0 +1,16 @@
+<style id="v40-layout-and-buffer-fixes">
+/* Put the avatar directly under the remaining-time label, sharing its exact center line. */
+#quizView .quizPlaybackLabelsV30{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;min-height:24px!important}
+#quizView #quizPlaybackStateV30{display:none!important}
+#quizView #quizRemainingV30{display:block!important;position:static!important;text-align:center!important;margin:0 auto!important;width:max-content!important}
+#quizView .v36-amq-player{position:relative!important;left:auto!important;right:auto!important;transform:none!important;margin:10px auto 8px!important;width:142px!important;align-self:center!important}
+#quizView .quizStage{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+#quizView .quizPlaybackMetaV30{order:1!important}
+#quizView .quizSuggest{order:2!important}
+#quizView .quizControls{order:3!important}
+#quizView .quizResult, #quizView #quizResult{display:none!important}
+#quizView #quizStatus{display:none!important}
+#quizView #quizCountdownV30{display:none!important}
+#quizView .quizVisualizerV30{display:none!important}
+#quizView .quizMystery{min-height:0!important}
+</style>

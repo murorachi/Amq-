@@ -1,0 +1,69 @@
+<script id="v82-44-ux-intuition-cleanup-runtime">
+(()=>{
+ const $=id=>document.getElementById(id);
+ /* When a detail drawer opens, collapse the global player while preserving playback.
+    Restore its prior expanded state when the drawer closes. */
+ const installDetailDockCoordination=()=>{
+  const dock=$('audioDock'),toggle=$('audioDockCollapseToggleV843'),overlay=$('overlay');
+  if(!dock||!toggle||!overlay||overlay.dataset.v844DockObserver==='1')return;
+  overlay.dataset.v844DockObserver='1';
+  let shouldRestoreExpanded=false;
+  let wasDetailOpen=overlay.classList.contains('open');
+  const applyDetailLock=isOpen=>{
+   const locked=!!isOpen&&dock.classList.contains('dock-collapsed-v843');
+   if(locked){
+    toggle.dataset.v844DetailLock='1';
+    toggle.setAttribute('aria-disabled','true');
+    toggle.setAttribute('aria-label','詳情開啟期間播放器保持收合');
+    toggle.title='詳情開啟期間保持收合，以免遮住歌曲列表；關閉詳情後即可展開';
+    return;
+   }
+   if(toggle.dataset.v844DetailLock==='1'){
+    delete toggle.dataset.v844DetailLock;
+    toggle.removeAttribute('aria-disabled');
+    const collapsed=dock.classList.contains('dock-collapsed-v843');
+    toggle.setAttribute('aria-label',collapsed?'展開播放器':'收合播放器');
+    toggle.title=collapsed?'展開底層播放器':'收合底層播放器';
+    toggle.textContent=collapsed?'♫':'⌄';
+   }
+  };
+  // Prevent a manual re-expand from covering the detail list. The control remains visible,
+  // but announces why it is temporarily unavailable; its normal action returns on close.
+  toggle.addEventListener('click',e=>{
+   if(overlay.classList.contains('open')&&dock.classList.contains('dock-collapsed-v843')){
+    e.preventDefault();e.stopImmediatePropagation();
+   }
+  },true);
+  const sync=()=>{
+   const isOpen=overlay.classList.contains('open');
+   if(isOpen&&!wasDetailOpen){
+    shouldRestoreExpanded=!dock.classList.contains('dock-collapsed-v843');
+    if(shouldRestoreExpanded)toggle.click();
+   }else if(!isOpen&&wasDetailOpen){
+    if(shouldRestoreExpanded&&dock.classList.contains('dock-collapsed-v843'))toggle.click();
+    shouldRestoreExpanded=false;
+   }
+   wasDetailOpen=isOpen;
+   applyDetailLock(isOpen);
+  };
+  new MutationObserver(sync).observe(overlay,{attributes:true,attributeFilter:['class']});
+  sync();
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installDetailDockCoordination,{once:true});else installDetailDockCoordination();
+ /* Keep the general-quiz source hint synchronized with the selected custom-list checkboxes. */
+ const updateQuizSource=()=>{
+  const el=$('quizCustomScopeSummaryV844');if(!el)return;
+  const checked=[...document.querySelectorAll('#qsCustomListOptions [data-qs-custom-list-id]:checked')];
+  if(!checked.length){el.textContent='';el.style.display='none';return}el.style.display='block';
+  const names=checked.map(x=>x.closest('label')?.querySelector('span')?.childNodes?.[0]?.textContent?.trim()||x.value).filter(Boolean);
+  el.textContent=`來源：已選 ${checked.length} 份自訂清單（${names.join('、')}）。只從這些清單中的有效歌曲出題；一般選歌篩選不再限制清單內容，黑名單與不重複限制仍生效。`;
+ };
+ document.addEventListener('change',e=>{if(e.target?.matches?.('#qsCustomListOptions [data-qs-custom-list-id]'))updateQuizSource()});
+ document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view==='quiz')requestAnimationFrame(updateQuizSource);if(e.detail?.view==='catalog'||e.detail?.view==='watchlist')requestAnimationFrame(installDetailDockCoordination)});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateQuizSource,{once:true});else updateQuizSource();
+ /* Make labels unambiguous even when the audio elements change playback state. */
+ const audio=$('audioPlayer'),video=$('videoPlayer'),play=$('playPauseBtn');
+ const updatePlayLabel=()=>{if(!play)return;const active=video&&video.style.display!=='none'?video:audio;play.setAttribute('aria-label',active&&!active.paused?'暫停目前歌曲':'播放目前歌曲');play.title=play.getAttribute('aria-label')};
+ [audio,video].forEach(el=>{el?.addEventListener('play',updatePlayLabel);el?.addEventListener('pause',updatePlayLabel);el?.addEventListener('ended',updatePlayLabel)});updatePlayLabel();
+})();
+</script>

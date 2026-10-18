@@ -1,36 +1,59 @@
 # Dependency map: SOURCE-SPLIT-02 / CANDIDATE-POOL-TESTS-01
 
 ## Runtime composition
-The single HTML remains the runtime composition root. Its 41 inline script/data blocks execute in original order; 50 CSS blocks retain their original cascade order. See reports/FRAGMENT_MAP.csv for order and hashes. Physical separation is complete; semantic decoupling is not.
 
-## Candidate-pool path confirmed from source
-1. script_004: loadQuizSettings reads aniQuizSettingsV14 and the V82.65 selection semantics marker.
-2. script_004: window.__aniCandidatePoolPolicyV8265 provides source-mode, numeric normalization, metadata, familiarity, tags, watchlist, blacklist and repeat rules.
-3. getQuizPool builds the AMQ base pool from songs, byAnime, st(), songTags, watchStatus(), animeWatch, quizSettings, activeFocusSongIdsV72, quizRoundSeen and lastQuestionId.
-4. A later wrapper captures getQuizPool as __aniEmqGetQuizPoolBaseV8248, combines EMQ/Mixed candidates through __aniEmqAPI.combinePool, filters audio health via __aniAudioHealthV857.eligible, then applies __aniApplyQuizCustomListScopeV8265. Missing/throwing custom scope fails closed when scope is required.
-5. nextQuiz consumes the final pool; playback and settlement are outside the current unit test boundary.
+The single HTML document remains the runtime composition root. Its 41 inline script/data blocks execute in original order; 50 CSS blocks retain their original cascade order. `reports/FRAGMENT_MAP.csv` is the exact physical order and fingerprint map. Physical separation is complete; semantic decoupling is not.
 
-## High-risk coupling
-- Candidate policy uses arguments, but pool builder reads global state and DOM directly.
-- getQuizPool is intentionally reassigned by a wrapper; do not remove based on name similarity.
-- Candidate selection depends on blacklist/history, custom lists, watchlist, EMQ mode, audio health and repeat state.
-- aniQuizSettingsV14 is a shared compatibility contract.
-- aniQuizCustomListScopeInvalidV8265 is a fail-closed marker; ignoring it can broaden the candidate pool.
-- EMQ's compressed/base64 payload must remain separate from AMQ identifiers and source metadata.
+## Candidate-pool path (confirmed from source)
 
-## Static inventories
-FUNCTION_DEFINITION_INVENTORY.csv, WINDOW_EXPORT_INVENTORY.csv, DOM_ID_REFERENCE_INVENTORY.csv, LIFECYCLE_STORAGE_INVENTORY.csv and SEMANTIC_INVENTORY_SUMMARY.md are regex-based navigation aids, not a complete AST/call graph. Duplicate names are not proof of redundant logic; occurrence counts do not prove timer/listener leaks.
+1. `script_004.htmlpart`: `loadQuizSettings()` loads `aniQuizSettingsV14` and reads the V82.65 selection semantics marker.
+2. `script_004.htmlpart`: `window.__aniCandidatePoolPolicyV8265` provides shared policy helpers for source modes, numeric normalization, metadata, familiarity, tags, watchlist, blacklist and repeats.
+3. `getQuizPool()` constructs the AMQ base pool from `songs`, `byAnime`, familiarity (`st()`), `songTags`, `watchStatus()`, `animeWatch`, `quizSettings`, `activeFocusSongIdsV72`, `quizRoundSeen`, and `lastQuestionId`.
+4. A later wrapper captures the original `getQuizPool` as `__aniEmqGetQuizPoolBaseV8248`, combines EMQ/Mixed candidates through `window.__aniEmqAPI.combinePool`, filters through `window.__aniAudioHealthV857.eligible`, then applies `window.__aniApplyQuizCustomListScopeV8265` or fails closed if custom scope is required but the helper is unavailable.
+5. `nextQuiz()` consumes the final pool to choose the next song; playback and settlement behavior is outside the current unit test boundary.
 
-## Unverified
-Full function-call edges, all DOM writers, listener ownership, timer cleanup, dynamic storage keys, backup allowlists, and browser runtime behavior remain unverified.
+## High-risk coupling observations
+
+- Candidate policy reads state passed as arguments, but the pool builder itself still reads many globals and DOM values.
+- `getQuizPool` is reassigned by a wrapper. This is an intentional extension point until proven otherwise; do not remove it based only on duplicate names.
+- Candidate selection is cross-coupled to blacklist/history API, custom lists, watchlist state, EMQ mode, audio-health state and repeat tracking.
+- `aniQuizSettingsV14` is read/written in several fragments. Treat it as a shared compatibility contract; do not rename or reshape it during source extraction.
+- `aniQuizCustomListScopeInvalidV8265` is a fail-closed marker; deleting or ignoring it could broaden candidate scope.
+- EMQ uses a compressed/base64 payload (`emqLibraryGzipBase64V8248`) and is decoded by later code; it must remain separate from AMQ song IDs and source metadata.
+
+## Static inventory outputs
+
+- `reports/FUNCTION_DEFINITION_INVENTORY.csv`: regex-detected function/arrow definitions and duplicate-name counts.
+- `reports/WINDOW_EXPORT_INVENTORY.csv`: explicit `window.property = ...` exports.
+- `reports/DOM_ID_REFERENCE_INVENTORY.csv`: literal DOM ID reads/selectors.
+- `reports/LIFECYCLE_STORAGE_INVENTORY.csv`: listener/timer/storage/IndexedDB static matches and literal keys.
+- `reports/SEMANTIC_INVENTORY_SUMMARY.md`: counts and interpretation limits.
+
+These inventories are conservative regex scans, not an AST-based call graph. Duplicate names are investigation leads, not proof of redundancy. Timer/listener occurrence counts do not establish leaks. Dynamic keys and indirect storage wrappers may be missed.
+
+## Current evidence limits
+
+Full function-call edges, all DOM writers, listener ownership, timer cleanup guarantees, dynamic storage keys, complete backup allowlists, and browser runtime behavior remain unverified. Continue by tracing the highest-risk candidate-pool dependencies before refactoring its pure policy boundary.
 
 
 ## V82.69 update
-- `src/modules/storage_repository.htmlpart` contains the exact original `script_027` block; its marker is replaced by the module bytes at the same document position.
-- Builder/verifier now resolve module marker locations from the manifest.
-- Storage and backup tests use synthetic storage; multiplayer session/reconnect tests do not contact a server.
-- Real-origin persistence, IndexedDB, real audio/network and multi-client room acceptance remain open. Remote source tree is incomplete.
+- `src/modules/storage_repository.htmlpart` now contains the exact bytes formerly in `src/scripts/script_027.htmlpart`; the fragment is a build marker. This is physical separation only; runtime API and execution order are unchanged.
+- `tools/build.py` and `tools/verify.py` validate module marker placement using each module's declared `insertion_fragment`, not a hard-coded script fragment.
+- Storage repository tests use a synthetic Map-backed localStorage and exercise rollback/import safeguards. Multiplayer contract tests use synthetic sessionStorage/localStorage and do not contact a room service.
+- Remaining gap: no browser origin allowed for real IndexedDB/localStorage reload acceptance; no actual multiplayer server or second browser client is available in this run.
 
+## V82.69 parser-backed dependency pass (AST-PASS-01)
 
-## QUIZ-SUGGESTION-TEXT-01 local source boundary
-The local engineering tree extracts the special-symbol policy, NFKC/lowercase normalization, UTF-16 source-offset mapping and highlight-range helper block from `script_004` into `src/modules/quiz_suggestion_text.js`, injected at the original execution position. A 16-assertion contract test passes; the full local runner is 13/13, with 173 total assertions and integrity verification 105/105. The complete module/script/test/manifest set is not yet published to this branch, so this note documents local status only and does not imply remote source parity.
+- Tool: `tools/ast_dependency_inventory.cjs` (TypeScript parser), also part of `tools/run_all_checks.py`.
+- All 41 script/data fragments were scanned. Thirty-nine executable JS fragments parse with zero syntax diagnostics; `script_030` is JSON data and `script_037` is compressed EMQ payload, so they are deliberately excluded from JS parsing.
+- Inventory totals: 809 named function/function-valued definitions and 2,126 direct identifier-call edge records. Resolution labels are fragment-level candidates; duplicate names are marked ambiguous rather than treated as proof of duplicate behavior.
+- `script_001.htmlpart` is not purely a catalog payload: its `DB` initializer is 4,975,240 bytes, containing `anime` (9,516 rows) and `songs` (38,821 rows), followed by 102,936 bytes of executable runtime logic including status/history persistence. If extracted, only the DB initializer should move, and only after byte-order/consumer tests.
+- `script_004.htmlpart` is 107,042 bytes and has 70 named function/function-valued definitions inside one application IIFE. The first-pass direct-call scan records 12 unique cross-fragment matches, 9 ambiguous-name call sites, and 54 external/global/unresolved call sites. This does not yet cover all property calls, callbacks, DOM effects, globals, listeners, timers or runtime dispatch.
+- Full evidence: `reports/AST_DEPENDENCY_MAP.md`, `AST_DEPENDENCY_SUMMARY.csv`, `AST_FUNCTION_DEFINITIONS.csv`, `AST_DIRECT_CALL_EDGES.csv`, `AST_DECLARED_SYMBOL_REFERENCES.csv`, `AST_API_TOUCHPOINTS.csv`, `AST_PARSE_DIAGNOSTICS.csv`.
+- No product source fragment or HTML changed during this pass.
+
+## QUIZ-SUGGESTION-TEXT-01 module boundary
+
+`src/modules/quiz_suggestion_text.js` now owns the existing special-symbol-to-space policy, NFKC/lowercase normalization, normalized search text to original UTF-16 source-offset mapping, compact-key position mapping, and highlight-range generation/merging. It is injected at the exact former location in `script_004`.
+
+Contract tests cover 16 cases against the extracted production helpers and production comparator. The UI orchestration in `buildSuggestions()` remains in `script_004`: DOM creation, input/IME guards, matching modes, bounded top-25 insertion, pointer/click listeners, and opening/closing state. Do not call the full suggestion feature modularized until those integration behaviors have their own tests.

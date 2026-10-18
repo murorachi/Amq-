@@ -1,0 +1,17 @@
+<script id="v63-soft-answer-glow">
+(()=>{
+ const root=document.getElementById('quizView');
+ if(!root)return;
+ const getMystery=()=>root.querySelector('.quizMystery');
+ const clear=()=>{const card=getMystery();if(!card)return;card.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57');card.querySelector('.quizAnswerFeedbackV61')?.remove();};
+ document.addEventListener('ani-quiz-answer-submitted',e=>{
+   const card=getMystery();if(!card)return;
+   card.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57');
+   card.classList.add(e.detail?.correct===true?'quiz-answer-correct-v57':'quiz-answer-wrong-v57');
+ });
+ document.addEventListener('ani-quiz-new-question',clear);
+ // The chosen target persists as an explicit quiz setting; interval repetition itself always uses anime recognition.
+ const target=document.getElementById('quizTarget');
+ if(target){let saved='anime';try{const cfg=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');if(['anime','title','artist'].includes(cfg.target))saved=cfg.target}catch(e){}target.value=saved;target.addEventListener('change',()=>{if(target.disabled)return;try{if(typeof window.readQuizSettingsUI==='function')window.readQuizSettingsUI();else{const cfg=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');cfg.target=target.value;localStorage.setItem('aniQuizSettingsV14',JSON.stringify(cfg))}}catch(e){console.warn('Could not persist quiz target',e)}});}
+})();
+</script>

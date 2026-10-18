@@ -19,20 +19,28 @@ Product behavior change: none
 
 ## Test cases and actual results
 
-1. Exact module payload: byte length and SHA-256 match the captured initializer. Passed.
-2. Reconstruction contract: reconstructed `script_001` is 5,078,176 bytes and matches the pre-extraction SHA-256 `f838aea1ca5b263cf932edecf1345aad6c15e9578098c58b724f9e2c9e679af7`. Passed.
-3. Data shape: top-level keys are exactly `anime` and `songs`; all 9,516 anime rows have seven fields and all 38,821 song rows have twelve fields. Passed.
-4. Execution order: all `DB` consumers remain after the restored initializer in the original classic script. Passed.
-5. Manifest/build integrity: module and fragment metadata validate; two independent builds match the expected V82.72 product fingerprint. Passed.
-6. Regression suite: `python tools/run_all_checks.py` completed with 15 commands passed, 0 failed. The new extraction contract reported 19 assertions passed. Existing unit/contract suites report 173 assertions passed, so combined unit/contract assertions are 192 passed, 0 failed. Browser suggestion integration remains 29 assertions passed, 0 failed under its documented fixture-backed `about:blank` constraints. `tools/verify.py` reports 108 checks passed, 0 failed.
+1. **Exact module payload:** byte length and SHA-256 match the captured initializer. Passed.
+2. **Reconstruction contract:** replace the marker with the module bytes and verify reconstructed `script_001` equals the pre-extraction source fingerprint (`5,078,176` bytes; SHA-256 `f838aea1ca5b263cf932edecf1345aad6c15e9578098c58b724f9e2c9e679af7`). Passed.
+3. **Data shape:** top-level keys are exactly `anime` and `songs`; all 9,516 anime rows have seven fields and all 38,821 song rows have twelve fields. Passed.
+4. **Execution order:** all `DB` consumers remain after the restored initializer in the original classic script. Passed.
+5. **Manifest/build integrity:** module and fragment metadata validate; two independent builds match the expected V82.72 product fingerprint. Passed.
+6. **Regression suite:** `python tools/run_all_checks.py` completed with 15 commands passed, 0 failed. The new extraction contract reported 19 assertions passed. Existing unit/contract suites report 173 assertions passed, so combined unit/contract assertions are 192 passed, 0 failed. Browser suggestion integration remains 29 assertions passed, 0 failed under its documented fixture-backed `about:blank` constraints. `tools/verify.py` reports 108 checks passed, 0 failed.
 
 Full command output: `reports/ALL_CHECKS_V82_74_DB_INITIALIZER_EXTRACTION_01.txt`.
 
 ## Not covered / remaining risks
 
-- The local-origin test remains blocked: Chromium navigation to localhost returns `ERR_BLOCKED_BY_ADMINISTRATOR` before page navigation. This extraction does not resolve that environment limitation.
+- The local-origin test still has not been accepted: in the current environment Chromium navigation to localhost returns `ERR_BLOCKED_BY_ADMINISTRATOR`. This extraction does not resolve that environment limitation.
 - Production-origin persistence, IndexedDB, audio/network recovery, Firefox and multiplayer multi-client reconnect remain unverified.
-- GitHub does not yet contain a coherent, remotely verified source release with this exact module, all source fragments, manifest, tests and build/package tools. This report-only upload is documentation, not a complete release publication.
+- GitHub still lacks a coherent, remotely verified source release containing this exact module, all source fragments, manifest, tests and build/package tools. No full remote publication is claimed for this checkpoint.
+
+## GitHub report publication verification
+
+- Uploaded this checkpoint report to the existing branch `v82.69-architecture-storage-multiplayer-01` at `reports/V82_74_DB_INITIALIZER_EXTRACTION_01_REPORT.md`.
+- Commit: `4493b99beaf7193f052eb16cff051fbc140b896b`.
+- Remote readback confirmed the V82.72 product SHA, the `15 commands passed, 0 failed` test summary, and the explicit statement that a report-only upload is not a complete source release.
+- Remote report blob SHA: `6ccb9b9c035989e26194a0e2fd959a5a30d0d173`.
+- This is a verified report-only update. The exact source module, modified script fragment, manifest, tests and build/package tooling have **not** been fully synchronized or hash-verified remotely; no complete GitHub release is claimed.
 
 ## Rollback
 

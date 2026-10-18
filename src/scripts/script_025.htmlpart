@@ -1,0 +1,294 @@
+<script id="v82-25-custom-lists-and-practice-hub">
+(()=>{
+ 'use strict';
+ const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
+ const KEYS={lists:'aniCustomPracticeListsV1',weak:'aniManualWeakAnimeV1',black:'aniBlacklistedAnime_v1'};
+ const RECOVERY_KEYS={aniCustomPracticeListsV1:'aniCustomPracticeListsRecoveryV825',aniManualWeakAnimeV1:'aniManualWeakAnimeRecoveryV825',aniBlacklistedAnime_v1:'aniBlacklistedAnimeRecoveryV825'};
+ const blockedWrites=new Set();
+ const quarantineNewData=(key,raw)=>{const base=RECOVERY_KEYS[key];if(!base)return false;try{let recovery=base;if(localStorage.getItem(recovery)!==null)recovery=base+'_'+Date.now();localStorage.setItem(recovery,raw);localStorage.removeItem(key);notify('發現 '+key+' 的資料格式異常，原始內容已保留在復原資料中，已先使用安全空值繼續。');return true}catch(e){blockedWrites.add(key);notify('發現 '+key+' 的資料格式異常，但瀏覽器無法安全隔離原始內容。已停止覆寫這份資料，請先匯出完整備份。');return false}};
+ const safeRead=(k,d,validator=null)=>{let raw;try{raw=localStorage.getItem(k)}catch(e){if(RECOVERY_KEYS[k])blockedWrites.add(k);return d}if(raw==null)return d;try{const v=JSON.parse(raw);if(v==null)return d;if(validator&&!validator(v)){if(RECOVERY_KEYS[k])quarantineNewData(k,raw);return d}return v}catch(e){if(RECOVERY_KEYS[k])quarantineNewData(k,raw);return d}};
+ const write=(k,v)=>{if(blockedWrites.has(k)){notify('為保護原始異常資料，已停止覆寫 '+k+'。請先匯出完整備份並檢查瀏覽器儲存空間。');return false}try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){notify('本機資料儲存失敗，這次操作沒有套用。請先匯出完整備份並檢查儲存空間。');return false}};
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const num=n=>Number(n||0).toLocaleString();
+ const notify=m=>{if(typeof window.toast==='function')window.toast(m);else if(typeof window.showToast==='function')window.showToast(m);else console.info(m)};
+ const getAnimeById=id=>Array.isArray(anime)?anime.find(a=>String(a[0])===String(id)):null;
+ // Work-level blacklist checks run across the catalog; use an index and rebuild it when the app swaps databases.
+ let songIndexSource=null, songIndexById=new Map();
+ const getSongFast=id=>{if(songIndexSource!==songs){songIndexSource=songs;songIndexById=new Map((Array.isArray(songs)?songs:[]).map(s=>[String(s[1]),s]))}return songIndexById.get(String(id))||null};
+ const songListForAnime=ids=>Array.isArray(songs)?songs.filter(s=>ids.has(String(s[0]))&&String(s[4]||'').trim()):[];
+ const validIdArray=v=>Array.isArray(v)&&v.every(x=>(typeof x==='string'&&x.trim()!=='')||(typeof x==='number'&&Number.isFinite(x)));
+ const validListRow=v=>!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.animeIds)&&validIdArray(v.animeIds)&&(v.id==null||typeof v.id==='string'||typeof v.id==='number')&&(v.name==null||typeof v.name==='string');
+ const validListPayload=v=>Array.isArray(v)?v.every(validListRow):!!v&&typeof v==='object'&&!Array.isArray(v)&&Array.isArray(v.lists)&&v.lists.every(validListRow);
+ const readListData=()=>{
+  const raw=safeRead(KEYS.lists,{version:1,lists:[]},validListPayload);
+  if(Array.isArray(raw))return {version:1,lists:raw.filter(x=>x&&typeof x==='object').map((x,i)=>({id:String(x.id||('legacy-'+i)),name:String(x.name||'未命名清單').slice(0,80),animeIds:[...new Set((Array.isArray(x.animeIds)?x.animeIds:[]).map(String))],createdAt:x.createdAt||new Date().toISOString(),updatedAt:x.updatedAt||new Date().toISOString()}))};
+  const rows=Array.isArray(raw?.lists)?raw.lists:[];
+  return {version:1,lists:rows.filter(x=>x&&typeof x==='object').map((x,i)=>({id:String(x.id||('list-'+i)),name:String(x.name||'未命名清單').trim().slice(0,80)||'未命名清單',animeIds:[...new Set((Array.isArray(x.animeIds)?x.animeIds:[]).map(String))],createdAt:x.createdAt||new Date().toISOString(),updatedAt:x.updatedAt||new Date().toISOString()}))};
+ };
+ let listData=readListData(); let manualWeak=new Set(safeRead(KEYS.weak,[],validIdArray).map(String)); let blockedAnime=new Set(safeRead(KEYS.black,[],validIdArray).map(String));
+ let currentListId='', currentListFilter='', currentManagerAnimeId='', managerReturnFocus=null; let practiceMode='explore',practiceSelectedListIds=[];
+ const persistLists=next=>{const clean={version:1,lists:next.lists.map(l=>({...l,animeIds:[...new Set(l.animeIds.map(String))]}))};if(!write(KEYS.lists,clean))return false;listData=clean;syncListSelectors();return true};
+ const persistSet=(key,set,kind)=>{if(!write(key,[...set].map(String)))return false;if(kind==='weak')manualWeak=set;else blockedAnime=set;return true};
+ const customListById=id=>listData.lists.find(x=>x.id===String(id));
+ const validAnimeIds=ids=>[...new Set(ids.map(String))].filter(id=>!!getAnimeById(id));
+ const animeSongs=ids=>songListForAnime(new Set(validAnimeIds(ids)));
+ const getBlockedSongIds=()=>new Set(animeSongs([...blockedAnime]).map(s=>String(s[1])));
+ window.__aniIsAnimeWorkBlacklistedV825=id=>{const s=getSongFast(id);return !!s&&blockedAnime.has(String(s[0]))};
+ // The existing history bridge is created during async catalog startup. Refresh its predicate when it appears.
+ const patchBlacklistBridge=()=>{if(window.__aniHistoryAPIv51)window.__aniHistoryAPIv51.isBlacklisted=id=>!!(typeof isBlacklistedSongV51==='function'&&isBlacklistedSongV51(id))||!!window.__aniIsAnimeWorkBlacklistedV825(id)};
+ patchBlacklistBridge();
+ const systemHistory=()=>window.__aniLearningAPIv825?.getHistory?.()||window.__aniHistoryAPIv51?.getHistory?.()||[];
+ const attemptedForTarget=(target)=>{
+  const set=new Set(systemHistory().filter(h=>h&&h.target===target).map(h=>String(h.songId)));
+  try{const sum=window.__aniHistoryAPIv51?.getTargetHistorySummary?.();for(const [id,targets] of Object.entries(sum?.bySongTarget||{})){if(Number(targets?.[target]?.[0])>0)set.add(String(id))}}catch(e){}
+  return set;
+ };
+ const activeSrsSongIds=()=>{const snap=window.__aniSRSAPI?.snapshot?.();const out=new Set();for(const c of Object.values(snap?.cards||{}))if(c&&c.state!=='suspended')out.add(String(c.songId));return out};
+ const isSongBlacklisted=id=>!!(window.__aniHistoryAPIv51?.isBlacklisted?.(String(id)));
+ const isSongUsable=s=>!!s&&String(s[4]||'').trim()&&!isSongBlacklisted(s[1]);
+ function startSongIds(ids,opts={}){
+  const uniq=[...new Set(ids.map(String))].filter(id=>isSongUsable(getSongFast(id)));
+  if(!uniq.length){notify(opts.emptyMessage||'這個範圍目前沒有可練習的有效歌曲。請調整條件，或確認歌曲沒有被黑名單排除。');return false}
+  const max=Math.min(500,uniq.length),chosen=uniq.slice(0,max);
+  const bridge=window.__aniQuizPlanV1;if(!bridge?.applySettings){notify('猜歌設定尚未準備好，請重新開啟收藏室後再試。');return false}
+  const current=bridge.getSettings?.()||{};
+  const settings={...current,target:opts.target||current.target||'anime',yearMin:1900,yearMax:2100,unknownYear:true,diffMin:0,diffMax:100,watchlistOnly:false,watchStatusFilterEnabled:false,watchStatuses:[],tagsOnly:false,tagText:'',seasons:['Winter','Spring','Summer','Fall'],animeTypes:['TV','OVA','Movie','Special','ONA','Other'],songTypes:[1,2,3,4,5],statuses:[0,1,2,3],focusSongIds:chosen,noRepeat:true,count:chosen.length,customListId:String(current.customListId||'')};
+  try{bridge.clearFocus?.();const ok=bridge.applySettings(settings);if(ok===false){notify('無法套用這次練習的歌曲範圍，原本設定未改變。');return false}}catch(e){console.error('v82.25 practice launch failed',e);notify('啟動練習失敗，原本設定未改變。');return false}
+  window.__aniNavigateApp?.('quiz');setTimeout(()=>{const b=$('#quizStart');if(b)b.click();else notify('條件已保存，請進入猜歌頁後按「開始新題」。')},160);
+  return true;
+ }
+ const makeId=()=>`cpl-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
+ const CUSTOM_SCOPE_INVALID_KEY_V8265='aniQuizCustomListScopeInvalidV8265';
+ const customScopeInvalidV8265=()=>{try{return localStorage.getItem(CUSTOM_SCOPE_INVALID_KEY_V8265)==='1'}catch{return false}};
+ const setCustomScopeInvalidV8265=value=>{try{if(value)localStorage.setItem(CUSTOM_SCOPE_INVALID_KEY_V8265,'1');else localStorage.removeItem(CUSTOM_SCOPE_INVALID_KEY_V8265)}catch{}};
+ function createList(name){const clean=String(name||'').trim().replace(/\s+/g,' ').slice(0,80);if(!clean){notify('請先輸入自訂清單名稱。');return false}if(listData.lists.some(x=>x.name.toLocaleLowerCase()===clean.toLocaleLowerCase())){notify('已有相同名稱的自訂清單，請換一個名稱。');return false}const now=new Date().toISOString(),next={version:1,lists:[...listData.lists,{id:makeId(),name:clean,animeIds:[],createdAt:now,updatedAt:now}]};if(!persistLists(next))return false;currentListId=next.lists.at(-1).id;renderCustomLists();renderManageModalIfOpen();notify(`已建立「${clean}」。現在可以從圖鑑加入動畫。`);return true}
+ function mutateAnimeList(listId,animeId,add){const old=customListById(listId);if(!old)return false;const ids=new Set(old.animeIds.map(String));if(add)ids.add(String(animeId));else ids.delete(String(animeId));const next={version:1,lists:listData.lists.map(l=>l.id===old.id?{...l,animeIds:[...ids],updatedAt:new Date().toISOString()}:l)};return persistLists(next)}
+ function selectedListIdsFromControls(){
+  const picker=$('#qsCustomListOptions'),checkboxes=picker?$$('[data-qs-custom-list-id]',picker):[];
+  if(checkboxes.length)return [...new Set(checkboxes.filter(x=>x.checked).map(x=>String(x.value)))].filter(id=>!!customListById(id));
+  const settings=window.__aniQuizPlanV1?.getSettings?.()||safeRead('aniQuizSettingsV14',{});
+  const ids=Array.isArray(settings.customListIds)?settings.customListIds.map(String):(settings.customListId?[String(settings.customListId)]:[]);
+  return [...new Set(ids)].filter(id=>!!customListById(id));
+ }
+ window.__aniSelectedCustomListIdsV825=selectedListIdsFromControls;
+ // The quiz core owns getQuizPool inside a separate IIFE. Register an explicit adapter instead of attempting to wrap that private binding from this module.
+ window.__aniApplyQuizCustomListScopeV8265=function(basePool,isFocusMode=false){
+  const rows=Array.isArray(basePool)?basePool:[];
+  if(isFocusMode)return rows; // Explicit focus-song scope owns this session.
+  let settings={};try{settings=window.__aniQuizPlanV1?.getSettings?.()||safeRead('aniQuizSettingsV14',{})||{}}catch{}
+  const emqRow=song=>!!window.__aniEmqAPI?.isSong?.(song?.[1]);
+  // An unusable settings object or malformed plural key is invalid, not an implicit unrestricted pool.
+  if(!settings||typeof settings!=='object'||Array.isArray(settings)){
+   setCustomScopeInvalidV8265(true);
+   const status=$('#quizStatus');if(status)status.textContent='自訂清單設定格式無效；AMQ 候選範圍已鎖定為空。請重新選取清單。';
+   return rows.filter(emqRow);
+  }
+  const hasMulti=Object.prototype.hasOwnProperty.call(settings,'customListIds');
+  const malformedMulti=hasMulti&&!Array.isArray(settings.customListIds);
+  const rawIds=malformedMulti?[]:(hasMulti?settings.customListIds:(settings.customListId?[settings.customListId]:[]));
+  const ids=Array.isArray(rawIds)?[...new Set(rawIds.map(String))]:[];
+  const missingIds=ids.some(id=>!customListById(id));
+  if(malformedMulti||missingIds)setCustomScopeInvalidV8265(true);
+  const invalid=customScopeInvalidV8265();
+  // AMQ custom lists are an AMQ-specific membership scope. They do not constrain
+  // EMQ rows, whose own explicit-list and metadata rules have already run upstream.
+  // An invalid/stale AMQ scope therefore removes all AMQ rows but does not pretend
+  // that an unrelated EMQ candidate is an AMQ work.
+  if(malformedMulti||missingIds||invalid){
+   const status=$('#quizStatus');if(status)status.textContent='AMQ 自訂清單範圍失效；已排除所有 AMQ 候選，EMQ 仍依自身設定篩選。請重新選取有效清單。';
+   return rows.filter(emqRow);
+  }
+  if(!ids.length)return rows;
+  const animeIds=new Set();
+  for(const id of ids){const list=customListById(id);if(list)for(const animeId of validAnimeIds(list.animeIds))animeIds.add(String(animeId))}
+  const selected=rows.filter(song=>emqRow(song)||animeIds.has(String(song?.[0])));
+  if(!selected.length){const status=$('#quizStatus');if(status)status.textContent='所選 AMQ 自訂清單與目前篩選條件沒有交集；系統不會自動放寬候選範圍。'}
+  return selected;
+ };
+ window.__aniClearCustomListPickerV825=()=>{setCustomScopeInvalidV8265(false);$$('[data-qs-custom-list-id]').forEach(x=>{x.checked=false});updateCustomListPickerSummary()};
+ function updateCustomListPickerSummary(){
+  const ids=selectedListIdsFromControls(),summary=$('#qsCustomListSummary'),select=$('#qsCustomListId');
+  if(summary){const names=ids.map(id=>customListById(id)?.name).filter(Boolean),invalid=customScopeInvalidV8265();summary.textContent=invalid?(names.length?`清單選取包含失效項；目前僅使用：${names.join('、')}`:'清單選取失效：候選範圍已鎖定為空，請重新選取'):(!names.length?'不限制（依其他條件）':names.length===1?names[0]:`已選 ${names.length} 份清單`);summary.title=summary.textContent;}
+  if(select)select.value=ids.length===1?ids[0]:'';
+ }
+ function syncListSelectors(){
+  const settings=window.__aniQuizPlanV1?.getSettings?.()||safeRead('aniQuizSettingsV14',{});
+  const hasMultiIds=Object.prototype.hasOwnProperty.call(settings,'customListIds');
+  const invalidMultiIds=hasMultiIds&&!Array.isArray(settings.customListIds);
+  const selectedIds=invalidMultiIds?[]:[...new Set((hasMultiIds?settings.customListIds:(settings.customListId?[settings.customListId]:[])).map(String))];
+  if(invalidMultiIds||selectedIds.some(id=>!customListById(id)))setCustomScopeInvalidV8265(true);else if(selectedIds.length>0)setCustomScopeInvalidV8265(false);
+  const bulk=$('#bulkCustomList');
+  if(bulk){const current=bulk.value||'';bulk.innerHTML='<option value="">先建立或選擇清單</option>'+listData.lists.map(l=>`<option value="${esc(l.id)}">${esc(l.name)}（${l.animeIds.length}）</option>`).join('');if([...bulk.options].some(o=>o.value===current))bulk.value=current;}
+  const legacy=$('#qsCustomListId');
+  if(legacy){legacy.innerHTML='<option value="">不限制（依其他條件）</option>'+listData.lists.map(l=>`<option value="${esc(l.id)}">${esc(l.name)}（${l.animeIds.length}）</option>`).join('');legacy.value=selectedIds.length===1&&listData.lists.some(l=>l.id===selectedIds[0])?selectedIds[0]:'';}
+  const options=$('#qsCustomListOptions');
+  if(options){options.innerHTML=listData.lists.map(l=>`<label class="quizCustomListOption"><input type="checkbox" data-qs-custom-list-id value="${esc(l.id)}" ${selectedIds.includes(String(l.id))?'checked':''}><span>${esc(l.name)}<small>${num(l.animeIds.length)} 部作品</small></span></label>`).join('')||'<p class="quizCustomListEmpty">還沒有自訂清單；可以先到「我的清單」建立。</p>';}
+  updateCustomListPickerSummary();
+ }
+ function switchWatchMode(mode){const isCustom=mode==='custom';$('#watchlistWork')?.classList.toggle('hidden',isCustom);$('#customListsWork')?.classList.toggle('hidden',!isCustom);$('#watchModeTab')?.classList.toggle('active',!isCustom);$('#customModeTab')?.classList.toggle('active',isCustom);if(isCustom)renderCustomLists()}
+ function renderCustomLists(){
+  const root=$('#customListsWork');if(!root)return;syncListSelectors();
+  const cards=listData.lists.map(l=>{const n=validAnimeIds(l.animeIds).length,missing=l.animeIds.length-n,songN=animeSongs(l.animeIds).length;return `<article class="customListCard"><h3>${esc(l.name)}</h3><p>${num(n)} 部已收錄作品 · ${num(songN)} 首有效歌曲${missing?` · ${num(missing)} 部目前不在資料庫` : ''}</p><div class="customListActions"><button class="btn primary" type="button" data-cl-start="${esc(l.id)}">開始練習</button><button class="btn" type="button" data-cl-manage="${esc(l.id)}">管理內容</button><button class="btn" type="button" data-cl-rename="${esc(l.id)}">重新命名</button><button class="btn" type="button" data-cl-delete="${esc(l.id)}">刪除清單</button></div></article>`}).join('');
+  const cur=customListById(currentListId);let detail='';if(cur){const q=currentListFilter.trim().toLocaleLowerCase();const members=cur.animeIds.map(getAnimeById).filter(Boolean).filter(a=>!q||String(a[1]+' '+a[2]).toLocaleLowerCase().includes(q)).sort((a,b)=>String(a[1]).localeCompare(String(b[1])));detail=`<section class="customListDetail"><div class="customListDetailHead"><div><div class="practiceHubEyebrow">LIST CONTENTS</div><h3>${esc(cur.name)}</h3><p class="practiceMuted">管理清單內容不會改變作品觀看狀態、熟悉度或間隔複習排程。</p></div><button class="btn" type="button" id="clCloseDetail">收起內容</button></div><div class="customListCreate"><input type="search" id="clMemberSearch" class="customListSearch" placeholder="搜尋這份清單中的作品…" value="${esc(currentListFilter)}"><button class="btn primary" type="button" id="clAddFromCatalog">從動畫圖鑑加入作品</button><button class="btn" type="button" id="clPracticeCurrent">練習這份清單</button></div><div class="customListMembers">${members.map(a=>`<div class="customListMember"><div><strong>${esc(a[1])}</strong><small>${esc(a[5]||'年代未知')} · ${(songMap.get(a[0])||[]).length} 首歌曲</small></div><button class="btn" type="button" data-cl-remove="${esc(cur.id)}" data-anime-id="${esc(a[0])}">移除</button></div>`).join('')||'<p class="practiceMuted">沒有符合搜尋的作品。可以從圖鑑加入動畫。</p>'}</div></section>`}
+  root.innerHTML=`<div class="customListShell"><div class="customListHead"><div><div class="practiceHubEyebrow">PERSONAL PRACTICE POOLS</div><h2>自訂練習清單</h2><p>直接在本站建立自己的動畫練習範圍，不需要先到 AniList 或 MyAnimeList 加單。每部動畫可以同時屬於多份清單；清單只管理內容，不會改寫學習資料。</p></div><div class="customListActions"><button class="btn" type="button" id="clBackCatalog">前往動畫圖鑑</button></div></div><form id="clCreateForm" class="customListCreate"><input id="clNewName" maxlength="80" placeholder="例如：1980 年代冷門動畫" aria-label="新自訂清單名稱"><button type="submit" class="btn primary">＋ 建立清單</button></form><div class="customListGrid">${cards||'<p class="practiceMuted">目前還沒有自訂練習清單。建立一份後，就能從動畫圖鑑快速加入作品並直接開始猜歌。</p>'}</div>${detail}</div>`;
+  $('#clCreateForm',root)?.addEventListener('submit',e=>{e.preventDefault();const input=$('#clNewName',root);if(createList(input.value)){input.value=''}});
+  $('#clBackCatalog',root)?.addEventListener('click',()=>window.__aniNavigateApp?.('catalog'));
+  $$('[data-cl-start]',root).forEach(b=>b.addEventListener('click',()=>{const l=customListById(b.dataset.clStart);if(l)startSongIds(animeSongs(l.animeIds).map(s=>s[1]),{emptyMessage:'這份清單目前沒有可用歌曲。請先加入作品，或確認歌曲未被黑名單排除。'})}));
+  $$('[data-cl-manage]',root).forEach(b=>b.addEventListener('click',()=>{currentListId=b.dataset.clManage;currentListFilter='';renderCustomLists()}));
+  $$('[data-cl-rename]',root).forEach(b=>b.addEventListener('click',()=>{const l=customListById(b.dataset.clRename);if(!l)return;const name=prompt('新的清單名稱：',l.name);if(name===null)return;const clean=String(name).trim().slice(0,80);if(!clean){notify('清單名稱不能空白。');return}if(listData.lists.some(x=>x.id!==l.id&&x.name.toLocaleLowerCase()===clean.toLocaleLowerCase())){notify('已有相同名稱的自訂清單。');return}persistLists({version:1,lists:listData.lists.map(x=>x.id===l.id?{...x,name:clean,updatedAt:new Date().toISOString()}:x)});renderCustomLists()}));
+  $$('[data-cl-delete]',root).forEach(b=>b.addEventListener('click',()=>{const l=customListById(b.dataset.clDelete);if(!l)return;if(!confirm(`刪除「${l.name}」這份清單？作品本身與所有答題／學習資料都會保留。`))return;const next={version:1,lists:listData.lists.filter(x=>x.id!==l.id)};if(persistLists(next)){setCustomScopeInvalidV8265(false);if(currentListId===l.id)currentListId='';const cfg=window.__aniQuizPlanV1?.getSettings?.()||safeRead('aniQuizSettingsV14',{});const nextIds=(Array.isArray(cfg.customListIds)?cfg.customListIds.map(String):(cfg.customListId?[String(cfg.customListId)]:[])).filter(id=>id!==String(l.id));if(nextIds.length!==(Array.isArray(cfg.customListIds)?cfg.customListIds.length:(cfg.customListId?1:0))||String(cfg.customListId||'')===String(l.id)){const cleared={...cfg,customListIds:nextIds,customListId:nextIds.length===1?nextIds[0]:''};if(window.__aniQuizPlanV1?.applySettings)window.__aniQuizPlanV1.applySettings(cleared);else write('aniQuizSettingsV14',cleared);if($('#qsCustomListId'))$('#qsCustomListId').value=nextIds.length===1?nextIds[0]:''}renderCustomLists();notify('已刪除清單，作品與學習資料沒有變動。')}}));
+  $$('[data-cl-remove]',root).forEach(b=>b.addEventListener('click',()=>{if(mutateAnimeList(b.dataset.clRemove,b.dataset.animeId,false)){renderCustomLists();notify('已從這份自訂清單移除作品。')}}));
+  $('#clCloseDetail',root)?.addEventListener('click',()=>{currentListId='';currentListFilter='';renderCustomLists()});
+  $('#clMemberSearch',root)?.addEventListener('input',e=>{currentListFilter=e.target.value;const pos=e.target.selectionStart;renderCustomLists();const next=$('#clMemberSearch');next?.focus();next?.setSelectionRange(pos,pos)});
+  $('#clAddFromCatalog',root)?.addEventListener('click',()=>{window.__aniNavigateApp?.('catalog');if(currentListId)notify(`請在圖鑑搜尋作品，使用卡片右上角的管理選單加入「${customListById(currentListId)?.name||'這份清單'}」。也可以使用批量選取。`)});
+  $('#clPracticeCurrent',root)?.addEventListener('click',()=>{const l=customListById(currentListId);if(l)startSongIds(animeSongs(l.animeIds).map(s=>s[1]))});
+ }
+ function customListSongIds(listId){const l=customListById(listId);return l?animeSongs(l.animeIds).map(s=>String(s[1])):[]}
+ function openManageModal(animeId){
+  const a=getAnimeById(animeId);if(!a){notify('找不到這部作品，請重新整理圖鑑。');return}if(!$('#practiceManageBackdrop'))managerReturnFocus=document.activeElement;currentManagerAnimeId=String(animeId);$('#practiceManageBackdrop')?.remove();
+  const songIds=(songMap.get(a[0])||[]).map(s=>String(s[1])).filter(id=>{const song=typeof getSong==='function'?getSong(id):songs.find(x=>String(x[1])===id);return !!song});
+  const blocked=blockedAnime.has(String(a[0])),weak=manualWeak.has(String(a[0])),snap=window.__aniSRSAPI?.snapshot?.(),already=songIds.filter(id=>!!snap?.cards?.[id]&&snap.cards[id].state!=='suspended').length;
+  const backdrop=document.createElement('div');backdrop.id='practiceManageBackdrop';backdrop.className='practiceManageBackdrop';backdrop.innerHTML=`<section class="practiceManageDialog" role="dialog" aria-modal="true" aria-labelledby="practiceManageTitle"><button class="btn practiceManageClose" type="button" id="pmClose">關閉</button><div class="practiceHubEyebrow">QUICK MANAGEMENT</div><h2 id="practiceManageTitle">${esc(a[1])}</h2><p>${esc(a[5]||'年代未知')} · ${esc(a[4]||'作品')} · ${num(songIds.length)} 首歌曲。管理操作不會覆蓋觀看狀態或既有答題資料。</p><div class="manageActionGroup"><h3>加入自訂清單</h3><div class="manageListChecks">${listData.lists.map(l=>`<label class="manageListCheck"><input type="checkbox" data-pm-list="${esc(l.id)}" ${l.animeIds.includes(String(a[0]))?'checked':''}><span>${esc(l.name)}<small>${num(l.animeIds.length)} 部作品</small></span></label>`).join('')||'<p>尚未建立清單。你可以在「我的清單 → 自訂練習清單」建立，或使用下方按鈕立即建立。</p>'}</div><button class="btn" type="button" id="pmCreateList">＋ 建立新清單</button></div><div class="manageActionGroup"><h3>學習管理</h3><label><input type="checkbox" id="pmWeak" ${weak?'checked':''}><span>加入手動弱點補強<small>把本作品的歌曲列為你主動指定的補強範圍；不會被記成答錯。</small></span></label><label><input type="checkbox" id="pmBlack" ${blocked?'checked':''}><span>排除此作品的所有歌曲<small>全作品排除規則會同時影響一般猜歌、自動選歌與 SRS；作品仍保留在自訂清單中。</small></span></label><div class="practiceLaunchBar"><button class="btn primary" type="button" id="pmEnrollSrs">${already?'更新間隔複習（目前 '+already+'/'+songIds.length+' 首已排程）':'將作品歌曲加入間隔複習'}</button><button class="btn" type="button" id="pmPractice">直接練習這部作品</button></div></div><div class="manageDialogActions"><button class="btn primary" type="button" id="pmDone">完成</button></div></section>`;
+  document.body.appendChild(backdrop);const close=()=>{document.removeEventListener('keydown',onManagerKeydown,true);backdrop.remove();const target=managerReturnFocus;if(target&&target.isConnected&&target.getClientRects().length>0){try{target.focus({preventScroll:true})}catch{target.focus()}}};const onManagerKeydown=e=>{if(e.key==='Escape'&&backdrop.isConnected){e.preventDefault();e.stopPropagation();close()}};document.addEventListener('keydown',onManagerKeydown,true);$('#pmClose',backdrop).onclick=close;$('#pmDone',backdrop).onclick=close;backdrop.addEventListener('click',e=>{if(e.target===backdrop)close()});$('#pmClose',backdrop).focus({preventScroll:true});
+  $$('[data-pm-list]',backdrop).forEach(ch=>ch.addEventListener('change',()=>{if(mutateAnimeList(ch.dataset.pmList,a[0],ch.checked)){renderCustomLists();notify(ch.checked?'已加入自訂清單。':'已從自訂清單移除。')}else ch.checked=!ch.checked}));
+  $('#pmCreateList',backdrop).onclick=()=>{const name=prompt('新自訂清單名稱：');if(name===null)return;if(createList(name)){mutateAnimeList(currentListId,a[0],true);openManageModal(a[0])}};
+  $('#pmWeak',backdrop).onchange=e=>{const next=new Set(manualWeak);if(e.target.checked)next.add(String(a[0]));else next.delete(String(a[0]));if(!persistSet(KEYS.weak,next,'weak'))e.target.checked=!e.target.checked;else{notify(e.target.checked?'已加入手動補強範圍。':'已移出手動補強範圍。');renderPracticeHub()}};
+  $('#pmBlack',backdrop).onchange=e=>{const next=new Set(blockedAnime);if(e.target.checked)next.add(String(a[0]));else next.delete(String(a[0]));if(!persistSet(KEYS.black,next,'black'))e.target.checked=!e.target.checked;else{patchBlacklistBridge();document.dispatchEvent(new CustomEvent('ani-blacklist-changed-v51',{detail:{animeId:String(a[0]),blocked:e.target.checked,scope:'anime'}}));notify(e.target.checked?'已排除此作品的所有歌曲。':'已解除作品排除。');renderPracticeHub();if(typeof render==='function')render()}};
+  $('#pmEnrollSrs',backdrop).onclick=()=>{const ids=songIds.filter(id=>!isSongBlacklisted(id));if(!ids.length){notify('這部作品沒有可加入排程的歌曲，或歌曲已被黑名單排除。');return}if(!confirm(`將「${a[1]}」的 ${ids.length} 首可用歌曲加入間隔複習？這只會建立排程卡片，不會立刻出題；每日新歌上限仍然生效。`))return;const result=window.__aniSRSAPI?.enrollMany?.(ids);if(!result?.ok){notify(result?.storage?'排程儲存失敗，沒有套用修改。':'無法新增排程，請確認間隔複習已載入。');return}notify(`完成：新增 ${result.added} 首，原本已有 ${result.existing} 首，略過 ${result.skipped} 首。`);openManageModal(a[0])};
+  $('#pmPractice',backdrop).onclick=()=>{close();startSongIds(songIds)};
+ }
+ function renderManageModalIfOpen(){if(currentManagerAnimeId)openManageModal(currentManagerAnimeId)}
+ window.__aniOpenPracticeManagerV825=openManageModal;
+ function currentPoolAnimeIds(){const q=($('#search')?.value||'').trim().toLocaleLowerCase(),dec=$('#decade')?.value||'all',typ=$('#type')?.value||'all';return anime.filter(a=>{if(typ!=='all'&&String(a[4])!==typ)return false;if(dec==='pre'&&(!a[5]||a[5]>=1980))return false;if(dec!=='all'&&dec!=='pre'&&(!a[5]||Math.floor(a[5]/10)*10!==Number(dec)))return false;const zhNames=(window.__aniChineseTitleAPIv8237?.getAliases(a[0])||[]).join(' ');if(q&&!String(a[1]+' '+a[2]+' '+a[3]+' '+zhNames).toLocaleLowerCase().includes(q)&&!(songMap.get(a[0])||[]).some(s=>String(s[4]+' '+s[5]).toLocaleLowerCase().includes(q)))return false;return true})}
+ function applyBulkPracticeAction(){
+  const ids=[...selectedAnime].map(String);if(!ids.length){notify('請先開啟批量選取並選擇作品。');return}
+  const action=$('#bulkPracticeAction')?.value||'list-add',listId=$('#bulkCustomList')?.value||'',valid=validAnimeIds(ids);
+  if(action.startsWith('list-')){const l=customListById(listId);if(!l){notify('請先建立或選擇一份自訂清單。');return}if(valid.length>100&&!confirm(`將 ${valid.length} 部作品${action==='list-add'?'加入':'移出'}「${l.name}」？`))return;const set=new Set(l.animeIds.map(String));valid.forEach(id=>action==='list-add'?set.add(id):set.delete(id));const ok=persistLists({version:1,lists:listData.lists.map(x=>x.id===l.id?{...x,animeIds:[...set],updatedAt:new Date().toISOString()}:x)});if(!ok)return;renderCustomLists();notify(`已${action==='list-add'?'加入':'移出'} ${valid.length} 部作品。`);return}
+  if(action==='weak-add'||action==='weak-remove'){if(valid.length>100&&!confirm(`${action==='weak-add'?'將':'從'}手動補強範圍${action==='weak-add'?'加入':'移除'} ${valid.length} 部作品？`))return;const set=new Set(manualWeak);valid.forEach(id=>action==='weak-add'?set.add(id):set.delete(id));if(persistSet(KEYS.weak,set,'weak')){notify(`已${action==='weak-add'?'加入':'移出'} ${valid.length} 部作品的手動補強範圍。`);renderPracticeHub()}return}
+  if(action==='blacklist-add'||action==='blacklist-remove'){if(valid.length>50&&!confirm(`${action==='blacklist-add'?'排除':'解除排除'} ${valid.length} 部作品的所有歌曲？新增歌曲也會遵守作品級排除。`))return;const set=new Set(blockedAnime);valid.forEach(id=>action==='blacklist-add'?set.add(id):set.delete(id));if(persistSet(KEYS.black,set,'black')){patchBlacklistBridge();document.dispatchEvent(new CustomEvent('ani-blacklist-changed-v51',{detail:{animeIds:valid,blocked:action==='blacklist-add',scope:'anime'}}));if(typeof render==='function')render();notify(`已${action==='blacklist-add'?'排除':'解除排除'} ${valid.length} 部作品。`)}return}
+  if(action==='srs-add'){const songIds=animeSongs(valid).filter(s=>!isSongBlacklisted(s[1])).map(s=>String(s[1]));if(!songIds.length){notify('所選作品沒有可加入排程的有效歌曲。');return}const preview=window.__aniSRSAPI?.snapshot?.(),newN=songIds.filter(id=>!preview?.cards?.[id]).length,existing=songIds.length-newN;if(!confirm(`所選 ${valid.length} 部作品共有 ${songIds.length} 首未被排除的歌曲。\n預計新增 ${newN} 首 SRS 卡片，${existing} 首已存在。這不會立刻出題，每日新歌上限仍然生效。\n確定繼續？`))return;const res=window.__aniSRSAPI?.enrollMany?.(songIds);if(!res?.ok){notify(res?.storage?'排程儲存失敗，未套用修改。':'加入間隔複習失敗。');return}notify(`SRS 已更新：新增 ${res.added} 首，原有 ${res.existing} 首，略過 ${res.skipped} 首。`)}
+ }
+ function updatePracticeSourceSummaryV844(){
+  const el=$('#practiceSourceSummaryV844');if(!el)return;
+  const ids=[...new Set([...(document.querySelectorAll('#phCustomListOptions [data-ph-custom-list-id]:checked')||[])].map(x=>String(x.value)))].filter(id=>!!customListById(id));
+  const names=ids.map(id=>customListById(id)?.name).filter(Boolean);
+  const text={
+   explore:'來源：目前曲庫中符合所選答題目標、尚未測試的歌曲；黑名單與有效間隔複習卡會排除。',
+   weak:'來源：系統辨識的答題弱點與手動補強範圍合併去重；依所選答題目標取歌。',
+   self:ids.length?`來源：${ids.length} 份自訂清單（${names.join('、')}）。清單內容優先，合併去重後出題，不套用一般選歌條件；黑名單歌曲仍排除。`:'來源：自訂練習清單。請先勾選一份或多份清單；一般選歌條件不會取代清單內容。',
+   srs:'來源：獨立間隔複習排程中的到期歌曲；每日新卡額度與排程規則維持有效。'
+  };
+  el.textContent=text[practiceMode]||text.explore;
+ }
+ function selectedMode(mode){practiceMode=mode;$$('[data-practice-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.practiceMode===mode)));const copy={explore:['探索新歌','從指定範圍找出目前答題目標下尚未測試的歌曲。'],weak:['弱點補強','合併系統依答題紀錄找到的弱點，以及你手動指定的補強作品。'],self:['自選練習','從自訂清單或圖鑑指定的作品範圍開始練習。'],srs:['間隔複習','依獨立排程處理到期歌曲與每日額度內的新卡。']};const p=copy[mode]||copy.explore;$('#practiceModeTitle')&&($('#practiceModeTitle').textContent=p[0]);$('#practiceModeDesc')&&($('#practiceModeDesc').textContent=p[1]);updatePracticeSourceSummaryV844();}
+ function getExploreIds(target='anime'){
+  const tested=attemptedForTarget(target),srs=activeSrsSongIds();
+  const candidates=songs.filter(s=>isSongUsable(s)&&!tested.has(String(s[1]))&&!srs.has(String(s[1])));
+  // Stable spread over the data order; shuffle within the eligible range to avoid always seeing the earliest catalog IDs.
+  for(let i=candidates.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[candidates[i],candidates[j]]=[candidates[j],candidates[i]]}
+  return candidates.map(s=>String(s[1]));
+ }
+  function getWeakIds(target='anime'){
+  const srs=activeSrsSongIds(),manualSongIds=animeSongs([...manualWeak]).map(s=>String(s[1]));let system=[];
+  try{
+   if(target==='anime')system=(window.__aniLearningAPIv828?.getSystemWeakCandidates?.(400)||[]).map(x=>String(x.id));
+   else{
+    const now=Date.now(),cutoff=now-30*86400000,settings=window.__aniLearningAPIv828?.getQuizSettings?.()||{},instant=Math.max(1,Number(settings.instantSec)||5),history=systemHistory(),targetSummary=window.__aniHistoryAPIv51?.getTargetHistorySummary?.(),detailLimit=2000;
+    const recent=new Map();for(const h of history){if(!h||h.target!==target||!h.songId)continue;const at=Date.parse(h.at||'');if(!Number.isFinite(at)||at<cutoff)continue;const id=String(h.songId);if(!recent.has(id))recent.set(id,{total:0,wrong:0,slow:0,lastAt:0,lastCorrect:null});const r=recent.get(id);r.total++;if(h.correct!==true)r.wrong++;if(h.correct===true&&Number.isFinite(Number(h.elapsed))&&Number(h.elapsed)>instant)r.slow++;if(at>=r.lastAt){r.lastAt=at;r.lastCorrect=!!h.correct}}
+    const earliest=history.map(h=>Date.parse(h?.at||'')).filter(Number.isFinite).sort((a,b)=>a-b)[0],detailWindowMayBeIncomplete=history.length>=detailLimit&&Number.isFinite(earliest)&&earliest>=cutoff;
+    const meta=new Map();
+    for(const [id,targets] of Object.entries(targetSummary?.bySongTarget||{})){const row=targets?.[target];if(!Array.isArray(row)||Number(row[0])<=0)continue;meta.set(String(id),{id:String(id),total:Number(row[0])||0,correct:Number(row[1])||0,wrong:Number(row[2])||0,elapsedCount:Number(row[3])||0,elapsedSum:Number(row[4])||0,lastAt:Number(row[6])||0,lastCorrect:row[7]===null||row[7]===undefined?null:!!row[7],recent:recent.get(String(id))})}
+    if(!meta.size){for(const h of history){if(!h||h.target!==target||!h.songId)continue;const id=String(h.songId);if(!meta.has(id))meta.set(id,{id,total:0,correct:0,wrong:0,elapsedCount:0,elapsedSum:0,lastAt:0,lastCorrect:null,recent:recent.get(id)});const x=meta.get(id);x.total++;if(h.correct)x.correct++;else x.wrong++;if(Number.isFinite(Number(h.elapsed))&&h.elapsed!==null&&Number(h.elapsed)>=0){x.elapsedCount++;x.elapsedSum+=Number(h.elapsed)}const at=Date.parse(h.at||'');if(Number.isFinite(at)&&at>=x.lastAt){x.lastAt=at;x.lastCorrect=!!h.correct}}}
+    const candidates=[];for(const x of meta.values()){
+     const r=x.recent,wrongRecent=Number(r?.wrong)||0,slowRecent=Number(r?.slow)||0,lastRecent=r?.total?r.lastCorrect:(x.lastAt>=cutoff?x.lastCorrect:null),rate=x.total?x.wrong/x.total:0,repeated=x.total>=3&&rate>=.4;
+     if(!wrongRecent&&!slowRecent&&lastRecent!==false&&!repeated)continue;
+     const days=x.lastAt?Math.max(0,(now-x.lastAt)/86400000):90,decay=Math.max(.15,Math.exp(-days/60)),recentTotal=Math.max(0,Number(r?.total)||0),recentWrongRate=recentTotal?wrongRecent/recentTotal:0,recentSlowRate=recentTotal?slowRecent/recentTotal:0;let score=recentWrongRate*8+Math.min(2,Math.log2(1+wrongRecent)*.6)+(lastRecent===false?3:0)+recentSlowRate*3+Math.min(1.6,Math.log2(1+recentTotal)*.4)+Math.min(2,rate*2.5*Math.min(1,x.total/5))*decay+Math.max(-.9,.3-days/100*.3);
+     const song=getSongFast(x.id);if(!song||!isSongUsable(song))continue;candidates.push({id:x.id,score});
+    }
+    system=candidates.sort((a,b)=>b.score-a.score).slice(0,400).map(x=>String(x.id));
+    // Non-anime targets also use long-term per-song summaries. Only the recent diagnostic detail may be capped.
+    window.__aniLearningWeaknessStatusV828={target,detailCount:history.length,detailLimit,recentWindowMayBeIncomplete:detailWindowMayBeIncomplete,source:meta.size?'per-song target summary + recent detail':'recent detail fallback'};
+   }
+  }catch(e){console.warn('Weak candidate access unavailable for target '+target,e)}
+  const pool=[...new Set([...manualSongIds,...system])].filter(id=>isSongUsable(getSongFast(id))&&!srs.has(String(id)));
+  return pool;
+ }
+ function renderPracticeHub(){
+  const panel=$('#learningPlanPanel');if(!panel||panel.classList.contains('hidden')&&window.__aniGetActiveViewV82?.()!=='practice'&&window.__aniGetActiveViewV82?.()!=='learningPlan')return;
+  const srsSnap=window.__aniSRSAPI?.snapshot?.(),srsCards=Object.values(srsSnap?.cards||{}),due=srsCards.filter(c=>c.state!=='suspended'&&Number(c.dueAt)<=Date.now()&&!isSongBlacklisted(c.songId)).length,active=srsCards.filter(c=>c.state!=='suspended').length;
+  const target=(window.__aniLearningAPIv825?.getQuizSettings?.()?.target)||'anime',targetName=({anime:'動畫辨認',title:'歌曲名稱',artist:'歌手'})[target]||'動畫辨認';
+  const tested=attemptedForTarget(target),scheduledIds=activeSrsSongIds(),availableExplore=songs.filter(s=>isSongUsable(s)&&!tested.has(String(s[1]))&&!scheduledIds.has(String(s[1]))).length;
+  const weakIds=getWeakIds(target),weakUnique=weakIds.length,customCount=listData.lists.length,weakEvidence=window.__aniLearningAPIv828?.getWeakEvidenceStatus?.()||{detailCount:0,detailLimit:2000,recentWindowMayBeIncomplete:false};
+  const priorCount=$('#phCount')?.value||'25';
+  const priorListIds=$('#phCustomListOptions')?[...$('#phCustomListOptions').querySelectorAll('[data-ph-custom-list-id]:checked')].map(el=>String(el.value)):(practiceSelectedListIds.length?practiceSelectedListIds:(currentListId?[currentListId]:[]));
+  let html=`<div id="aniSrsLearningWidget"></div><div class="practiceHubShell"><div class="practiceHubHead"><div><div class="practiceHubEyebrow">PRACTICE WORKSPACE</div><h2>練習工作台</h2><p>探索新歌、弱點補強、自選練習與間隔複習是不同流程。</p></div><div class="customListActions"><button class="btn" type="button" id="phOpenLists">管理自訂清單</button><button class="btn" type="button" id="phOpenCatalog">前往動畫圖鑑</button></div></div><div class="practiceStats"><div class="practiceStat"><span>目前辨認目標</span><strong>${esc(targetName)}</strong><small>沿用猜歌設定</small></div><div class="practiceStat"><span>探索候選</span><strong>${num(availableExplore)}</strong><small>該目標尚未測試且未排入 SRS</small></div><div class="practiceStat"><span>補強候選</span><strong>${num(weakUnique)}</strong><small>手動指定與系統發現去重後</small></div><div class="practiceStat"><span>間隔複習</span><strong>${num(due)} / ${num(active)}</strong><small>到期 / 有效排程卡片</small></div></div><div class="practiceModeGrid"><button class="practiceModeCard" type="button" data-practice-mode="explore" aria-pressed="${practiceMode==='explore'}"><strong>探索新歌</strong><span>在目前辨認目標下找尚未測試的歌曲。黑名單及有效 SRS 卡片會自動排除。</span><em>${num(availableExplore)} 首可選</em></button><button class="practiceModeCard" type="button" data-practice-mode="weak" aria-pressed="${practiceMode==='weak'}"><strong>弱點補強</strong><span>合併系統分析與你親自指定的補強範圍；未測過的歌曲只會因手動指定進入。</span><em>${num(weakUnique)} 首候選</em></button><button class="practiceModeCard" type="button" data-practice-mode="self" aria-pressed="${practiceMode==='self'}"><strong>自選練習</strong><span>可同時勾選多份自訂清單；作品會合併去重後出題，也可前往圖鑑批量挑選。</span><em>${num(customCount)} 份自訂清單</em></button><button class="practiceModeCard" type="button" data-practice-mode="srs" aria-pressed="${practiceMode==='srs'}"><strong>間隔複習</strong><span>由獨立排程管理到期與新卡；加入排程不代表今天立刻把所有歌曲做完。</span><em>${num(due)} 首到期</em></button></div><div class="practiceLaunchBar"><label>答題目標 <select id="phTarget"><option value="anime">動畫作品</option><option value="title">歌曲名稱</option><option value="artist">歌手</option></select></label><label>本輪題數 <select id="phCount"><option value="10">10 首</option><option value="25" selected>25 首</option><option value="50">50 首</option><option value="100">100 首</option><option value="250">250 首</option></select></label><label id="phListLabel" class="practiceListPicker">自訂清單 <details id="phCustomListsPicker" class="practiceCustomListsPicker"><summary id="phCustomListsSummary">選擇一份或多份清單</summary><div id="phCustomListOptions" role="group" aria-label="自選練習清單">${listData.lists.map(l=>`<label class="quizCustomListOption"><input type="checkbox" data-ph-custom-list-id value="${esc(l.id)}" ${priorListIds.includes(String(l.id))?'checked':''}><span>${esc(l.name)}<small>${num(l.animeIds.length)} 部作品</small></span></label>`).join('')||'<small class="practiceMuted">尚未建立自訂清單</small>'}</div></details></label><button class="btn primary" type="button" id="phStart">開始這次練習</button><button class="btn" type="button" id="phSingleExplore">單曲探索</button></div><p class="practiceSourceSummaryV844" id="practiceSourceSummaryV844" role="status" aria-live="polite"></p><p class="practiceMuted" id="practiceModeDesc"></p><p class="practiceMuted">系統弱點依近期錯答、慢速答對、反覆錯答或低熟悉度等證據；手動補強另計。逐題明細最多保留 ${num(weakEvidence.detailLimit)} 筆，${weakEvidence.recentWindowMayBeIncomplete?'最近 30 天資料可能不完整，並參考長期逐歌摘要。':'目前保留 '+num(weakEvidence.detailCount)+' 筆，另參考長期逐歌摘要。'}</p><p class="practiceMuted">黑名單與有效 SRS 卡會從探索／自動補強排除；自選練習仍可手動加入，普通猜歌不會更新 SRS 評分。</p></div>`;
+  panel.innerHTML=html;
+  try{window.__aniSRSAPI?.refresh?.()}catch(e){console.warn('SRS widget refresh failed',e)}
+  const targetSel=$('#phTarget');targetSel.value=target;targetSel.addEventListener('change',()=>{const bridge=window.__aniQuizPlanV1;if(bridge?.applySettings)bridge.applySettings({...bridge.getSettings(),target:targetSel.value});renderPracticeHub()});
+  const countSel=$('#phCount');if([...countSel.options].some(o=>o.value===priorCount))countSel.value=priorCount;
+  const listOptions=$('#phCustomListOptions'),listPicker=$('#phCustomListsPicker'),listSummary=$('#phCustomListsSummary');
+  const updatePracticeListSummary=()=>{
+   practiceSelectedListIds=[...new Set([...(listOptions?.querySelectorAll('[data-ph-custom-list-id]:checked')||[])].map(el=>String(el.value)))].filter(id=>!!customListById(id));
+   currentListId=practiceSelectedListIds[0]||currentListId;
+   const names=practiceSelectedListIds.map(id=>customListById(id)?.name).filter(Boolean);
+   if(listSummary){listSummary.textContent=!names.length?'選擇一份或多份清單':names.length===1?names[0]:`已選 ${names.length} 份清單`;listSummary.title=names.join('、')||'未選擇清單'}updatePracticeSourceSummaryV844()
+  };
+  listOptions?.addEventListener('change',updatePracticeListSummary);
+  updatePracticeListSummary();
+  $('#phOpenLists').onclick=()=>{window.__aniNavigateApp?.('watchlist');setTimeout(()=>switchWatchMode('custom'),0)};$('#phOpenCatalog').onclick=()=>window.__aniNavigateApp?.('catalog');$('#phSingleExplore').onclick=()=>{window.__aniNavigateApp?.('explore');$('#nextDiscover')?.click()};
+  $$('[data-practice-mode]',panel).forEach(b=>b.addEventListener('click',()=>selectedMode(b.dataset.practiceMode)));
+  $('#phStart').onclick=()=>{
+   const mode=practiceMode,count=Number($('#phCount').value)||25,selectedTarget=$('#phTarget').value||'anime';
+   if(mode==='srs'){if(!window.__aniSRSAPI?.startDueSession){notify('間隔複習尚未載入。');return}window.__aniNavigateApp?.('quiz');setTimeout(()=>window.__aniSRSAPI?.startDueSession?.(),120);return}
+   if(mode==='self'){const idsPicked=[...new Set([...(document.querySelectorAll('#phCustomListOptions [data-ph-custom-list-id]:checked')||[])].map(el=>String(el.value)))].filter(id=>!!customListById(id));if(!idsPicked.length){notify('先勾選一份或多份自訂清單，或到圖鑑建立新的清單。');return}practiceSelectedListIds=idsPicked;currentListId=idsPicked[0];const animeIds=new Set();for(const id of idsPicked){const list=customListById(id);if(list)for(const animeId of list.animeIds)animeIds.add(String(animeId))}const ids=animeSongs([...animeIds]).filter(isSongUsable).map(song=>String(song[1]));startSongIds(shuffleIds(ids).slice(0,count),{target:selectedTarget,emptyMessage:'所選自訂清單沒有可用歌曲。請確認清單作品有歌曲且歌曲未被黑名單排除。'});return}
+   if(mode==='explore'){const ids=getExploreIds(selectedTarget);startSongIds(shuffleIds(ids).slice(0,count),{target:selectedTarget,emptyMessage:'這個目標目前沒有探索候選。可以改選其他答題目標，或使用自選練習。'});return}
+   const ids=getWeakIds(selectedTarget);if(!ids.length){notify('目前沒有系統弱點或手動指定的補強歌曲。可以先練幾輪累積資料，或在圖鑑選擇作品加入手動補強。');return}startSongIds(shuffleIds(ids).slice(0,count),{target:selectedTarget});
+  };
+  syncListSelectors();selectedMode(practiceMode);
+ }
+ function shuffleIds(items){const out=[...new Set(items.map(String))];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
+ window.__aniRenderPracticeHubV825=renderPracticeHub;window.__aniSetPracticeModeV825=mode=>{selectedMode(mode);if(window.__aniGetActiveViewV82?.()==='practice'||window.__aniGetActiveViewV82?.()==='learningPlan')renderPracticeHub()};
+ 
+ function renderListManagementSelector(){syncListSelectors()}
+ function installQuizCustomFilter(){
+  const select=$('#qsCustomListId'),options=$('#qsCustomListOptions');if(!select&&!options)return;syncListSelectors();
+  if(select&&select.dataset.v825Wired!=='1'){select.dataset.v825Wired='1';select.addEventListener('change',()=>{setCustomScopeInvalidV8265(false);const ids=select.value?[select.value]:[],bridge=window.__aniQuizPlanV1,current=bridge?.getSettings?.()||{};if(bridge?.applySettings)bridge.applySettings({...current,customListIds:ids,customListId:ids[0]||''});else{const settings=safeRead('aniQuizSettingsV14',{});settings.customListIds=ids;settings.customListId=ids[0]||'';write('aniQuizSettingsV14',settings)}syncListSelectors()})}
+  if(options&&options.dataset.v825Wired!=='1'){options.dataset.v825Wired='1';options.addEventListener('change',e=>{if(!e.target.matches?.('[data-qs-custom-list-id]'))return;setCustomScopeInvalidV8265(false);const ids=selectedListIdsFromControls(),bridge=window.__aniQuizPlanV1,current=bridge?.getSettings?.()||{};updateCustomListPickerSummary();if(bridge?.applySettings)bridge.applySettings({...current,customListIds:ids,customListId:ids.length===1?ids[0]:''});else{const settings=safeRead('aniQuizSettingsV14',{});settings.customListIds=ids;settings.customListId=ids.length===1?ids[0]:'';write('aniQuizSettingsV14',settings)}const label=ids.length?ids.map(id=>customListById(id)?.name).filter(Boolean).join('、'):'不限自訂清單';notify(`一般猜歌的自訂清單範圍已更新：${label}。`)})}
+ }
+ // The quiz core's getQuizPool is private to its own IIFE. Candidate-list policy is connected by the explicit window.__aniApplyQuizCustomListScopeV8265 adapter above; do not install a cross-IIFE wrapper here.
+ // Batch manager reuses the existing catalog's selection Set and existing rendering lifecycle.
+ function addBulkControls(){
+  syncListSelectors();installQuizCustomFilter();
+  $('#applyBulkPracticeAction')?.addEventListener('click',applyBulkPracticeAction);
+  $('#createListFromCatalog')?.addEventListener('click',()=>{const name=prompt('新自訂清單名稱：');if(name===null)return;if(createList(name)){$('#bulkCustomList').value=currentListId;notify('已建立清單；現在可以在圖鑑選取作品並加入它。')}});
+  const selectMode=$('#selectModeBtn');selectMode?.addEventListener('click',()=>setTimeout(()=>{document.body.classList.toggle('v825-bulk-mode',!!selectionMode)},0));
+  const blockArtistBatchSelection=e=>{if((window.__aniGetActiveViewV82?.()||'catalog')!=='watchlist'&&tab==='artists'){e.preventDefault();e.stopImmediatePropagation();notify('批量動畫管理不適用於歌手圖鑑，請切回動畫作品圖鑑再操作。')}};
+  $('#selectVisibleBtn')?.addEventListener('click',blockArtistBatchSelection,true);
+  $('#selectVisibleBtn')?.addEventListener('click',()=>setTimeout(()=>document.body.classList.add('v825-bulk-mode'),0));
+  $('#selectFilteredBtn')?.addEventListener('click',blockArtistBatchSelection,true);
+  $('#selectFilteredBtn')?.addEventListener('click',()=>{const rows=Array.isArray(visible)?visible:[];if(rows.length>300&&!confirm(`目前篩選符合 ${rows.length} 部作品。將取代目前選取，改為選取全部篩選結果，確定繼續？`))return;selectionMode=true;selectedAnime.clear();rows.forEach(a=>selectedAnime.add(Number(a[0])));render();updateSelectionHint();document.body.classList.add('v825-bulk-mode')});
+  $('#clearSelectionBtn')?.addEventListener('click',()=>setTimeout(()=>{document.body.classList.toggle('v825-bulk-mode',!!selectionMode)},0));
+ }
+ function updateWatchModes(){
+  $('#watchModeTab')?.addEventListener('click',()=>switchWatchMode('watch'));
+  $('#customModeTab')?.addEventListener('click',()=>switchWatchMode('custom'));
+  $('#watchModeTab')?.classList.add('active');
+ }
+ function startQuizCustomSelection(selectedListId){const l=customListById(selectedListId);if(!l)return;const settings=safeRead('aniQuizSettingsV14',{});settings.customListId=l.id;settings.customListIds=[l.id];write('aniQuizSettingsV14',settings);window.__aniNavigateApp?.('quiz');notify(`已選擇「${l.name}」作為一般猜歌的候選範圍；仍可搭配其他出題篩選。`)}
+ function init(){
+  // Data arrives through the original main script; the new controls only depend on its global catalog APIs.
+  syncListSelectors();addBulkControls();updateWatchModes();
+  const root=$('#watchlistView');if(root&&!$('#watchlistView .mylistModeTabs')){root.insertAdjacentHTML('afterbegin','<nav class="mylistModeTabs" aria-label="我的清單分類"><button class="btn active" type="button" id="watchModeTab">看番狀態</button><button class="btn" type="button" id="customModeTab">自訂練習清單</button></nav>');updateWatchModes()}
+  document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view==='watchlist'){switchWatchMode('watch');renderCustomLists()}if(e.detail?.view==='quiz')installQuizCustomFilter()});
+  document.addEventListener('ani-quiz-history-updated-v51',()=>{if(window.__aniGetActiveViewV82?.()==='practice'||window.__aniGetActiveViewV82?.()==='learningPlan')renderPracticeHub()});
+  document.addEventListener('ani-blacklist-changed-v51',()=>{patchBlacklistBridge();if(window.__aniGetActiveViewV82?.()==='practice')renderPracticeHub()});
+  document.addEventListener('ani-srs-updated-v77',()=>{if(window.__aniGetActiveViewV82?.()==='practice')renderPracticeHub()});
+  // Keep keyboard/native select settings synchronized without changing the answer-validation logic.
+  const stored=safeRead('aniQuizSettingsV14',{});if($('#qsCustomListId'))$('#qsCustomListId').value=String(stored.customListId||'');
+  const bulk=$('#bulkPracticeAction');if(bulk)bulk.addEventListener('change',()=>{$('#bulkCustomList').disabled=!['list-add','list-remove'].includes(bulk.value)});
+  if(document.readyState==='complete'||document.readyState==='interactive')patchBlacklistBridge();
+  if($('#learningPlanPanel')&&!$('#learningPlanPanel').classList.contains('hidden'))renderPracticeHub();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>

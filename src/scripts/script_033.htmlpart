@@ -1,0 +1,84 @@
+<script id="v82-40-watchlist-and-solo-quiz-layout-script">
+(()=>{
+ 'use strict';
+ const root=document.getElementById('quizView');
+ if(root&&root.dataset.v8240Layout!=='1'){
+  root.dataset.v8240Layout='1';
+  const $=id=>document.getElementById(id);
+  const mystery=root.querySelector('.quizMystery');
+  const panel=root.querySelector('.v36-amq-player');
+  const meta=root.querySelector('.quizPlaybackMetaV30');
+  const remaining=$('quizRemainingV30');
+  const labels=meta?.querySelector('.quizPlaybackLabelsV30');
+  if(mystery&&meta&&!mystery.contains(meta))mystery.appendChild(meta);
+  if(labels&&remaining&&remaining.parentElement!==labels)labels.appendChild(remaining);
+
+  const answer=$('quizAnswer');
+  const answerRow=answer?.closest('.quizAnswerRowV42');
+  const nav=root.querySelector('.quizSkipControls');
+  const next=$('quizNext');
+  if(answerRow&&nav){
+   nav.classList.add('v40-answer-navV8240');
+   if(nav.parentElement!==answerRow)answerRow.insertBefore(nav,answer);
+   if(next&&next.parentElement!==nav)nav.appendChild(next);
+  }
+
+  const personRow=panel?.querySelector('.v36-person-row');
+  const avatar=$('v36Avatar');
+  const count=$('v36Count');
+  const timer=$('quizTimerDisplay');
+  if(personRow&&avatar){
+   let wrap=personRow.querySelector('.v40-avatar-wrapV8240');
+   if(!wrap){wrap=document.createElement('div');wrap.className='v40-avatar-wrapV8240';personRow.insertBefore(wrap,personRow.firstChild)}
+   if(avatar.parentElement!==wrap)wrap.appendChild(avatar);
+   if(count&&count.parentElement!==wrap)wrap.appendChild(count);
+   if(timer&&timer.parentElement!==wrap)wrap.appendChild(timer);
+   // Playback remaining time belongs in the progress track, not beside the avatar.
+   if(remaining&&remaining.parentElement===personRow&&labels)labels.appendChild(remaining);
+   const alignAvatarToInput=()=>{
+    if(!panel.isConnected||!wrap.isConnected||!answer||root.classList.contains('is-revealed'))return;
+    const p=panel.getBoundingClientRect(),a=answer.getBoundingClientRect();
+    if(p.width<1||a.width<1)return;
+    const delta=(a.left+a.width/2)-(p.left+p.width/2);
+    wrap.style.setProperty('--v8240-avatar-offset',`${Math.round(delta*100)/100}px`);
+   };
+   requestAnimationFrame(alignAvatarToInput);
+   window.addEventListener('resize',alignAvatarToInput,{passive:true});
+   document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view==='quiz')requestAnimationFrame(()=>requestAnimationFrame(alignAvatarToInput))});
+   if(typeof ResizeObserver==='function'){
+    const ro=new ResizeObserver(()=>alignAvatarToInput());
+    if(panel)ro.observe(panel);if(answer)ro.observe(answer);
+   }
+   document.addEventListener('ani-quiz-new-question',()=>requestAnimationFrame(alignAvatarToInput));
+  }
+ }
+
+ const clearButton=document.getElementById('clearWatchlistCurrentV8240');
+ if(clearButton&&clearButton.dataset.wired!=='1'){
+  clearButton.dataset.wired='1';
+  const clearCurrentWatchlist=()=>{
+   let current;
+   try{current=typeof animeWatch!=='undefined'&&animeWatch&&typeof animeWatch==='object'&&!Array.isArray(animeWatch)?animeWatch:{}}catch{current={}}
+   const count=Object.keys(current).length;
+   if(!count){window.toast?.('目前沒有觀看狀態，無需清除。');return false}
+   if(!window.confirm('這會清除目前瀏覽器中所有作品的看番狀態，包括 AniList／MAL 匯入及手動標記，不只目前畫面篩選出的作品。\n\n不會刪除自訂練習清單、歌曲熟悉度、答題紀錄、收藏或間隔複習資料。\n\n確定清除所有看番狀態？'))return false;
+   try{
+    // Persist first so a storage failure never clears the in-memory list only.
+    localStorage.setItem('aniAnimeWatch_v1','{}');
+    animeWatch={};
+    window.updateStats?.();
+    window.render?.();
+    window.renderWatchlistV5?.();
+    window.toast?.(`已清除 ${count.toLocaleString()} 筆觀看狀態；自訂練習清單與學習紀錄保留。`);
+    return true;
+   }catch(error){
+    console.error('Clear current watchlist failed:',error);
+    window.toast?.('清除失敗：瀏覽器儲存不可用，原有觀看清單未被刻意移除。');
+    return false;
+   }
+  };
+  window.__aniClearCurrentWatchlistV8240=clearCurrentWatchlist;
+  clearButton.addEventListener('click',clearCurrentWatchlist);
+ }
+})();
+</script>

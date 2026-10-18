@@ -45,3 +45,4 @@ The generated standalone HTML remains V82.72: 8,787,018 bytes, SHA-256 `fb075ed4
 ## GitHub status
 
 The linked GitHub branch still lacks `reports/FRAGMENT_MANIFEST.json` and the matching source fragments/modules/tests/build tooling, so it is not a coherent reproducible source release. No claim of complete GitHub publication is made for this checkpoint. Publishing only this report would not close that gap.
+

@@ -1,0 +1,8 @@
+<style id="v42-quiz-controls">
+#quizView .quizAnswerRowV42{display:flex;gap:8px;align-items:stretch;width:100%}
+#quizView .quizAnswerRowV42 #quizAnswer{flex:1;min-width:0}
+#quizView #quizManualSubmitV42{white-space:nowrap;min-width:108px}
+#quizView .quizRoundControlsV42{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+#quizView .quizRoundControlsV42 button{cursor:pointer}
+#quizView #quizPauseV42.is-paused{outline:2px solid #d4a85a}
+</style>

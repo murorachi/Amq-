@@ -73,6 +73,10 @@ vm.runInContext([
 ].join('\n'),listContext,{timeout:1000});
 
 const listKeys = ['aniEmqWorkListsV8254','aniEmqWorkListsSelectedV8254','aniEmqAudioOverridesV8254'];
+test('EMQ invalid-selection marker is defined and uses the allowlisted fail-closed storage key', () => {
+  assert.match(emqListSource, /const INVALID_SCOPE_KEY_V8265=['\"]aniQuizCustomListScopeInvalidV8265['\"]/);
+  assert.match(emqListSource, /localStorage\.setItem\(INVALID_SCOPE_KEY_V8265,\s*['\"]1['\"]\)/);
+});
 test('EMQ list, selected-list, and audio-override keys are included in full-backup allowlist', () => {
   for (const key of listKeys) assert.equal(backupContext.isAppStorageKey(key), true, key);
   assert.equal(backupContext.isAppStorageKey('aniEmqWorkListsInjected'), false);

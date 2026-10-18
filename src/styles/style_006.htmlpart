@@ -1,0 +1,40 @@
+<style id="v19-quiz-reveal-layout-and-dark-fix">
+/* V19: fix page-wide dark surfaces, including long pages and mobile bottom areas. */
+html:has(body.dark-theme){background:#14171b!important;color-scheme:dark;min-height:100%;}
+body.dark-theme{min-height:100vh!important;background:#14171b!important;background-image:none!important;color:#e4e8ed!important;}
+body.dark-theme .wrap{min-height:100vh!important;background:transparent!important;color:#e4e8ed!important;}
+body.dark-theme .wrap::before, body.dark-theme .wrap::after, body.dark-theme main::before, body.dark-theme main::after{background:none!important;box-shadow:none!important;}
+body.dark-theme .v10Panel, body.dark-theme .watchlistView, body.dark-theme .discover, body.dark-theme .quicktools, body.dark-theme .watchGrid, body.dark-theme .watchTabs, body.dark-theme .watchToolbar, body.dark-theme .watchlistHead, body.dark-theme .head, body.dark-theme .loadMoreWrap, body.dark-theme .gridCounter, body.dark-theme .footnote, body.dark-theme .empty, body.dark-theme .dashMetric, body.dark-theme .dashSection{background-color:#1c2127!important;background-image:none!important;color:#e4e8ed!important;border-color:#303841!important;}
+body.dark-theme .audioDock, body.dark-theme .audioDock audio, body.dark-theme .audioDock video, body.dark-theme #audioDock{background:#1c2127!important;color:#e4e8ed!important;border-color:#303841!important;}
+body.dark-theme .quizView, body.dark-theme .quizStage, body.dark-theme .quizSide, body.dark-theme .quizMystery, body.dark-theme .quizSongInfo, body.dark-theme .quizSetting, body.dark-theme .quizStatus, body.dark-theme .quizResult, body.dark-theme .quizStat, body.dark-theme .quizQuickSettings{background:#1c2127!important;background-image:none!important;color:#e4e8ed!important;border-color:#303841!important;}
+body.dark-theme .quizMystery{background:#14191e!important;}
+body.dark-theme .quizSongInfo, body.dark-theme .quizInfoList{background:#181d22!important;color:#e4e8ed!important;}
+body.dark-theme .quizAnimeAnswerLabel{color:#dceaf6!important;}
+body.dark-theme .quizSongInfo dd{color:#e4e8ed!important;}
+.quizGrid{grid-template-columns:minmax(0,1fr) 285px!important;align-items:start!important;}
+.quizStage{min-width:0!important;}
+.quizMystery{position:relative;overflow:hidden;min-height:180px!important;display:grid!important;place-items:center!important;padding:12px!important;}
+.quizMystery>div{grid-area:1/1;}
+.quizAnimeAnswerLabel{font-size:13px;font-weight:700;color:var(--ink);margin:4px 0 8px;padding:0 2px;line-height:1.4;}
+.quizAnimeAnswerLabel[hidden]{display:none!important;}
+.quizSide{display:flex!important;flex-direction:column!important;gap:12px!important;position:sticky!important;top:12px!important;}
+.quizSettingsToggle{order:0!important;margin:0!important;}
+#quizSettingsBody{order:1!important;max-height:62vh;overflow:auto;overscroll-behavior:contain;padding-right:3px;}
+.quizSongInfo{order:2;border:1px solid var(--line);border-radius:7px;background:var(--panel2);padding:14px;min-width:0;}
+.quizInfoEyebrow{font-size:9px;letter-spacing:.12em;color:var(--muted);font-weight:800;margin-bottom:6px;}
+.quizSongInfo h3{font-size:14px;margin:0 0 10px!important;}
+.quizInfoEmpty{font-size:12px;line-height:1.7;color:var(--muted);margin:0;}
+.quizInfoList{display:grid;grid-template-columns:52px minmax(0,1fr);gap:7px 10px;margin:0;}
+.quizInfoList dt{font-size:10px;color:var(--muted);}
+.quizInfoList dd{font-size:12px;font-weight:650;line-height:1.5;overflow-wrap:anywhere;margin:0;color:var(--ink);}
+.quizQuickSettings #quizStart{width:auto!important;margin:0!important;}
+.quizSide .quizSource{font-size:10px;line-height:1.5;}
+@media(max-width:760px){
+ .quizGrid{grid-template-columns:minmax(0,1fr)!important;}
+ .quizSide{position:static!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;}
+ #quizSettingsBody{max-height:none!important;}
+ .quizSongInfo{order:2!important;}
+ .quizQuickSettings{align-items:flex-start!important;}
+ .quizQuickSettings #quizStart{flex:1 0 100%;}
+}
+</style>

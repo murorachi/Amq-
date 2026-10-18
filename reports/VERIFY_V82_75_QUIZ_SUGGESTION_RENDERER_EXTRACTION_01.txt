@@ -1,0 +1,115 @@
+PASS: baseline metadata format
+PASS: immutable baseline fingerprint
+PASS: template fingerprint
+PASS: fragment counts
+PASS: fragment src/styles/style_001.htmlpart
+PASS: fragment src/styles/style_002.htmlpart
+PASS: fragment src/styles/style_003.htmlpart
+PASS: fragment src/styles/style_004.htmlpart
+PASS: fragment src/styles/style_005.htmlpart
+PASS: fragment src/scripts/script_001.htmlpart
+PASS: fragment src/scripts/script_002.htmlpart
+PASS: fragment src/scripts/script_003.htmlpart
+PASS: fragment src/scripts/script_004.htmlpart
+PASS: fragment src/styles/style_006.htmlpart
+PASS: fragment src/styles/style_007.htmlpart
+PASS: fragment src/styles/style_008.htmlpart
+PASS: fragment src/scripts/script_005.htmlpart
+PASS: fragment src/styles/style_009.htmlpart
+PASS: fragment src/scripts/script_006.htmlpart
+PASS: fragment src/styles/style_010.htmlpart
+PASS: fragment src/scripts/script_007.htmlpart
+PASS: fragment src/styles/style_011.htmlpart
+PASS: fragment src/scripts/script_008.htmlpart
+PASS: fragment src/styles/style_012.htmlpart
+PASS: fragment src/scripts/script_009.htmlpart
+PASS: fragment src/styles/style_013.htmlpart
+PASS: fragment src/styles/style_014.htmlpart
+PASS: fragment src/scripts/script_010.htmlpart
+PASS: fragment src/scripts/script_011.htmlpart
+PASS: fragment src/styles/style_015.htmlpart
+PASS: fragment src/scripts/script_012.htmlpart
+PASS: fragment src/scripts/script_013.htmlpart
+PASS: fragment src/styles/style_016.htmlpart
+PASS: fragment src/scripts/script_014.htmlpart
+PASS: fragment src/styles/style_017.htmlpart
+PASS: fragment src/scripts/script_015.htmlpart
+PASS: fragment src/scripts/script_016.htmlpart
+PASS: fragment src/styles/style_018.htmlpart
+PASS: fragment src/styles/style_019.htmlpart
+PASS: fragment src/styles/style_020.htmlpart
+PASS: fragment src/scripts/script_017.htmlpart
+PASS: fragment src/styles/style_021.htmlpart
+PASS: fragment src/scripts/script_018.htmlpart
+PASS: fragment src/scripts/script_019.htmlpart
+PASS: fragment src/styles/style_022.htmlpart
+PASS: fragment src/scripts/script_020.htmlpart
+PASS: fragment src/styles/style_023.htmlpart
+PASS: fragment src/styles/style_024.htmlpart
+PASS: fragment src/styles/style_025.htmlpart
+PASS: fragment src/scripts/script_021.htmlpart
+PASS: fragment src/styles/style_026.htmlpart
+PASS: fragment src/styles/style_027.htmlpart
+PASS: fragment src/styles/style_028.htmlpart
+PASS: fragment src/styles/style_029.htmlpart
+PASS: fragment src/scripts/script_022.htmlpart
+PASS: fragment src/styles/style_030.htmlpart
+PASS: fragment src/scripts/script_023.htmlpart
+PASS: fragment src/scripts/script_024.htmlpart
+PASS: fragment src/scripts/script_025.htmlpart
+PASS: fragment src/scripts/script_026.htmlpart
+PASS: fragment src/styles/style_031.htmlpart
+PASS: fragment src/scripts/script_027.htmlpart
+PASS: fragment src/scripts/script_028.htmlpart
+PASS: fragment src/styles/style_032.htmlpart
+PASS: fragment src/scripts/script_029.htmlpart
+PASS: fragment src/scripts/script_030.htmlpart
+PASS: fragment src/styles/style_033.htmlpart
+PASS: fragment src/scripts/script_031.htmlpart
+PASS: fragment src/styles/style_034.htmlpart
+PASS: fragment src/styles/style_035.htmlpart
+PASS: fragment src/scripts/script_032.htmlpart
+PASS: fragment src/styles/style_036.htmlpart
+PASS: fragment src/scripts/script_033.htmlpart
+PASS: fragment src/styles/style_037.htmlpart
+PASS: fragment src/styles/style_038.htmlpart
+PASS: fragment src/styles/style_039.htmlpart
+PASS: fragment src/styles/style_040.htmlpart
+PASS: fragment src/scripts/script_034.htmlpart
+PASS: fragment src/styles/style_041.htmlpart
+PASS: fragment src/scripts/script_035.htmlpart
+PASS: fragment src/styles/style_042.htmlpart
+PASS: fragment src/scripts/script_036.htmlpart
+PASS: fragment src/styles/style_043.htmlpart
+PASS: fragment src/styles/style_044.htmlpart
+PASS: fragment src/scripts/script_037.htmlpart
+PASS: fragment src/scripts/script_038.htmlpart
+PASS: fragment src/styles/style_045.htmlpart
+PASS: fragment src/scripts/script_039.htmlpart
+PASS: fragment src/styles/style_046.htmlpart
+PASS: fragment src/styles/style_047.htmlpart
+PASS: fragment src/scripts/script_040.htmlpart
+PASS: fragment src/styles/style_048.htmlpart
+PASS: fragment src/styles/style_049.htmlpart
+PASS: fragment src/scripts/script_041.htmlpart
+PASS: fragment src/styles/style_050.htmlpart
+PASS: module count
+PASS: module src/modules/candidate_pool_policy.js
+PASS: module marker candidate_pool_policy
+PASS: module src/modules/storage_repository.htmlpart
+PASS: module marker storage_repository
+PASS: module src/modules/quiz_suggestion_text.js
+PASS: module marker quiz_suggestion_text
+PASS: module src/modules/anime_song_database.htmlpart
+PASS: module marker anime_song_database
+PASS: module src/modules/quiz_suggestion_renderer.js
+PASS: module marker quiz_suggestion_renderer
+PASS: module src/modules/quiz_suggestion_controller.js
+PASS: module marker quiz_suggestion_controller
+PASS: build first.html - PASS build: /tmp/amq-v8267-module-49jjzxee/first.html
+bytes=8787018 sha256=fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
+PASS: build second.html - PASS build: /tmp/amq-v8267-module-49jjzxee/second.html
+bytes=8787018 sha256=fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
+PASS: deterministic build hash - fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
+PASS: byte-identical to expected release - version=V82.72_SHARED_QUIZ_SUGGESTION_SELECTION_01 bytes=8787018 sha256=fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8
+RESULT: 112 passed, 0 failed, 112 total

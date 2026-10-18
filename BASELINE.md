@@ -1,5 +1,20 @@
 # Baseline lock
 
+## Latest distinct product release: V82.82
+
+- Product HTML: `dist/amq_learning_tool_v82_82.html`
+- Bytes: `8,787,490`
+- SHA-256: `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`
+- Scope: fix the undefined EMQ invalid-selection marker constant in `src/scripts/script_040.htmlpart`; add AMQ/EMQ UI acceptance and responsive Chromium baselines. V82.80 remains preserved. Immutable V82.65 is unchanged.
+- Acceptance is partial: native-origin storage/backup rollback, Firefox, real audio and multiplayer multi-client checks remain open.
+
+## Engineering-only checkpoint — V82.83 CSS selector residual review
+
+- Product baseline remains V82.82 and its HTML fingerprint above is unchanged.
+- The 32 residual CSS inventory rows now have explicit dispositions: eight parser artifacts are identified as keyframe/style-tag records, and 24 actual selectors have evidence-based component ownership. CSS remains unmoved until Firefox/cascade acceptance.
+- Added a four-case source contract for full backup export/import, corrupt manifest rejection and rollback after a synthetic write failure. This does not replace native-origin acceptance.
+- Native localhost, Firefox, GitHub full-source sync/clean remote build, real audio and multiplayer reconnect remain open. See `reports/V82_83_CSS_SELECTOR_RESIDUAL_REVIEW_01_REPORT.md`.
+
 ## Direct V82.65 checkpoint package: recovered and verified
 
 - Package: `AMQ_V82_65_候選題池與篩選資料流整頓檢查點.zip`
@@ -43,39 +58,99 @@ The user confirmed the V82.66 product baseline is satisfactory. Checkpoint `V82.
 
 ## Engineering checkpoint overlay — V82.68 CANDIDATE-POLICY-MODULE-01
 
-The locked V82.65 HTML remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. V82.68 extracts the pure candidate-policy block into a source module injected at its original position in the same classic script. No extra runtime script tag or external loading is introduced. Latest automated checks: 8/8 commands, 135 Node tests, and verifier 101/101 passed. Browser smoke rerun timed out with Playwright driver EPIPE after 11 preliminary assertions and is not considered passed. The binary ZIP and full source tree have not been published to this branch.
+The immutable V82.65 HTML baseline remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. V82.68 separates the pure candidate-policy source into `src/modules/candidate_pool_policy.js`, injected at the original position inside the existing classic script. It adds no runtime script tag or external loading and rebuilds byte-identically to baseline. Latest automated run: 8/8 commands passed, 135 Node tests passed, integrity verifier 101/101. Latest constrained browser smoke rerun timed out with Playwright driver EPIPE and is not considered passed; earlier V82.67 smoke evidence remains historical only.
 
 
-## V82.69 architecture/storage/multiplayer checkpoint
-- Product baseline remains immutable V82.65 HTML, 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- Storage repository script was extracted as exact bytes into `src/modules/storage_repository.htmlpart` and injected at the original document position.
-- V82.69 build output is byte-identical to baseline. 157 unit/contract assertions, 11 runner commands and 103 integrity checks passed.
-- Browser-origin persistence and full source/package publication remain incomplete; see `REMOTE_PUBLICATION_LIMITS.md`.
+## Engineering checkpoint overlay — V82.69 ARCHITECTURE-STORAGE-MULTIPLAYER-01
+
+The immutable product HTML remains V82.65: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. V82.69 extracts the existing storage repository script block into `src/modules/storage_repository.htmlpart` and injects its exact bytes at the original position in the standalone document. Candidate policy remains a source module. No product data format or storage migration changed. Build output is named `dist/amq_learning_tool_v82_69.html`. Direct file-origin acceptance is still blocked by the environment. User acceptance of checkpoint V82.69 was explicitly confirmed on 2026-10-18. This is a product checkpoint sign-off, separate from the still-partial environment-dependent browser acceptance and incomplete GitHub source publication.
+
+## V82.69 modularization inventory overlay
+
+`reports/MODULARIZATION_PROGRESS_CHECKLIST.md` and `.csv` enumerate the 41 script/data fragments, 50 CSS fragments, and two extracted source modules present at the V82.69 checkpoint. This is a progress inventory only; it does not change the immutable V82.65 baseline or claim semantic modularization is complete.
+
+## V82.69 AST dependency inventory overlay — AST-PASS-01
+
+The product baseline remains immutable V82.65. This engineering pass adds a TypeScript-parser-backed inventory tool and generated reports only. The 41 script/data fragments were scanned: 39 executable JavaScript fragments parsed without syntax diagnostics; two non-JavaScript data blocks (AniList JSON map and compressed EMQ payload) were excluded from JS parsing. The inventory reports 809 named function/function-valued definitions and 2,126 direct identifier-call edge records, with limitations documented in `reports/AST_DEPENDENCY_MAP.md`. `script_001` is a mixed data/runtime fragment, not a pure data file; `script_004` remains a mixed core application IIFE. No product source fragment or generated HTML was modified.
+
+## V82.69 quiz suggestion helper extraction overlay — QUIZ-SUGGESTION-TEXT-01
+
+`src/modules/quiz_suggestion_text.js` contains the exact existing helper source for uncommon-symbol normalization, normalized-to-original UTF-16 source-offset mapping, and highlight range merging. The module is injected at its original position inside `script_004` with no new runtime script tag. A production-source contract test covers 16 normalization, offset, highlight and comparator assertions. `tools/verify.py` reports 105/105 checks passing and reconstructs the immutable V82.65 standalone HTML byte-identically. This is a bounded helper extraction, not completion of the full quiz UI modularization.
 
 
-## AST dependency inventory pass (local checkpoint AST-PASS-01, 2026-10-18)
-- First-pass TypeScript-parser inventory scanned all 41 script/data fragments: 39 executable JavaScript fragments parsed without syntax diagnostics; script_030 (AniList JSON map) and script_037 (compressed EMQ payload) were treated as data blocks.
-- Inventory: 809 named function/function-valued definitions and 2,126 direct identifier-call edge records. This is static evidence, not a complete lexical/runtime call graph.
-- script_001 is 5,078,176 bytes. Its DB initializer is 4,975,240 bytes (anime 9,516 rows; songs 38,821 rows), followed by 102,936 bytes of executable runtime code. The whole file must not be treated as a pure data module.
-- script_004 is 107,042 bytes with 70 named function/function-valued definitions. Direct-call scan: 12 unique cross-fragment matches, 9 ambiguous-name call sites, 54 external/global/unresolved call sites.
-- Product HTML/source was not changed. Local tests: 12 commands passed, 0 failed; 157 assertions passed; integrity verifier 103 passed, 0 failed; standalone HTML remains byte-identical to immutable V82.65.
-- Browser-origin persistence, IndexedDB, real audio/network and multi-client multiplayer remain untested. This is a partial engineering update, not a full source release; the AST tool, full CSV inventories and ZIP are not yet published to this branch.
+## V82.69 quiz suggestion UI integration overlay — QUIZ-SUGGESTION-INTEGRATION-01
 
-
-## QUIZ-SUGGESTION-TEXT-01 (local follow-on, 2026-10-18)
-- Local source tree extracts the existing symbol normalization, Unicode source-offset mapping and highlight-range helpers from script_004 into `src/modules/quiz_suggestion_text.js`, injected at the original execution position with no new runtime script tag.
-- Contract test: 16/16 assertions passed. Full local runner: 13 commands passed, 0 failed; 173 total assertions passed; integrity verifier 105 passed, 0 failed.
-- The standalone HTML remains byte-identical to immutable V82.65 (8,786,930 bytes; SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`).
-- The full local checkpoint ZIP is `AMQ_V82_69_QUIZ_SUGGESTION_TEXT_01.zip`, 9,084,709 bytes, SHA-256 `d74541c241c31ce6dde2159f5bdf891d97995d1f2b62b2c26e50302f37303a9b`.
-- IMPORTANT: this branch remains only partially published. The new module, updated script_004, manifest, contract test, AST tool and full binary ZIP have not been published/read back as an exact matching set. Do not treat this remote branch as the current reproducible source release.
+Engineering-only test/documentation update. Added a Chromium integration test for the production suggestion renderer and input wiring using deterministic test suggestions; no production runtime source changed. The test passes 18 assertions and the full runner passes 14/14 commands. It identified a known `aria-expanded` mismatch in the legacy capture-phase click handler in `src/scripts/script_007.htmlpart`: after click selection, the list is empty and closed while the input still reports expanded. Do not extract the UI controller until the overlapping handlers in `script_004`, `script_007`, and `script_008` have a clear single-owner contract. The generated HTML remains byte-identical to immutable V82.65.
 
 
 ## Current release after immutable V82.65 baseline
-- V82.65 remains immutable: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
-- V82.70 `QUIZ_SUGGESTION_ARIA_FIX_01` is a distinct output: `dist/amq_learning_tool_v82_70.html`, 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
-- Builder validates the manifest release fingerprint while verifier separately validates the immutable baseline file.
+- V82.65 remains the immutable source baseline: `baseline/amq_learning_tool_v82_65_candidate_pool_cleanup.html`, 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- V82.70 `QUIZ_SUGGESTION_ARIA_FIX_01` is a distinct output release, not a new baseline: `dist/amq_learning_tool_v82_70.html`, 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`. Its expected fingerprint is recorded under `release` in `reports/FRAGMENT_MANIFEST.json`.
+- The deterministic builder validates the expected release output while `tools/verify.py` separately confirms the immutable baseline file fingerprint.
+
+
+## Engineering checkpoint overlay — V82.71 SUGGESTION-EVENT-OWNERSHIP-AUDIT-01
+
+V82.71 is an engineering/test-only checkpoint following V82.70. It documents event registration and ownership across `script_004`, `script_007`, and `script_008`, and expands the production-source Chromium regression test. The standalone product output remains V82.70 (8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`); the immutable V82.65 baseline is unchanged. No production source fragment or manifest fingerprint is changed by this checkpoint.
+
+
+## Follow-on product output V82.72 (2026-10-18)
+- V82.65 remains the immutable baseline: 8,786,930 bytes, SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- V82.70 remains retained at 8,786,974 bytes, SHA-256 `59704427cb924f2fe9f5526417152b7d743ac29f5cb6dc70c886885e6ae7dca6`.
+- New V82.72 output: `dist/amq_learning_tool_v82_72.html`, 8,787,018 bytes, SHA-256 `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`. It changes only suggestion selection ownership across scripts 004/007/008 plus matching build metadata/tests. Do not replace the immutable baseline with this release.
+
+
+## V82.73 engineering-only acceptance attempt (2026-10-18)
+- No baseline or product change. V82.65 immutable fingerprint remains 8,786,930 bytes / `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`.
+- V82.72 remains the latest product output: 8,787,018 bytes / `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`.
+- Local-origin acceptance attempt was blocked by Chromium `net::ERR_BLOCKED_BY_ADMINISTRATOR` before page navigation; no storage behavior was tested. Details in `reports/V82_73_LOCAL_ORIGIN_ACCEPTANCE_BLOCKED_01_REPORT.md`.
+
+
+## V82.74 source-only DB initializer extraction
+The DB initializer (4,975,240 bytes) has been moved byte-for-byte to `src/modules/anime_song_database.htmlpart` and reinserted at its original execution point by the existing marker-based builder. The remaining runtime code in `script_001` is unchanged and stays in place. The intended product output is byte-identical V82.72; this source-only refactor does not change the immutable V82.65 baseline or the current release fingerprint. See `reports/V82_74_DB_INITIALIZER_EXTRACTION_01_REPORT.md` for executed verification.
+
+
+## V82.75 QUIZ SUGGESTION RENDERER EXTRACTION 01
+
+- Engineering source checkpoint only; immutable product baseline remains V82.65 and current product output remains V82.72.
+- `renderQuizSuggestionLabelV824()` and `buildSuggestions()` are stored in `src/modules/quiz_suggestion_renderer.js` and reinserted at the original classic-script position.
+- Expected output: 8,787,018 bytes / SHA-256 `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`. Any change to this fingerprint is a regression unless separately authorized.
+
+
+## V82.76 SCRIPT004 BOUNDARY AUDIT 01
+
+Engineering-only static analysis checkpoint. Immutable V82.65 baseline remains `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`; current product output remains V82.72 at `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`. The audit fingerprints `src/scripts/script_004.htmlpart` at 98,849 bytes / `23dacccdc25538416c4ddba91f4e044df7c4491924d1099d8cdf0a60fb4f4bdc`. No product source or module insertion position changed.
+
+
+## Engineering checkpoint overlay — V82.77 GET_QUIZ_POOL_CHARACTERIZATION_01
+
+V82.77 continues from the verified V82.76 source archive retrieved from GitHub Actions run `39083016039` because no separate V82.77 artifact was found in the Library or repository search. It adds a nine-assertion production-source characterization contract for `getQuizPool()` and integrates it into the check runner. No production fragment or product HTML changed. The standalone product remains V82.72 at 8,787,018 bytes / SHA-256 `fb075ed4e68eca454051ecd22cc10d3e7a5def193bf2852bf91547d5465da0d8`; immutable V82.65 remains unchanged. Full runner: 19/19 commands passed; integrity verifier: 112/112. GitHub has a V82.77 overlay branch with test/report files read back, but coherent source-tree publication is still incomplete.
+
+## V82.78 GET_QUIZ_POOL_EXTRACTION_01
+
+Engineering source checkpoint only. `getQuizPool()` (2,824 bytes, SHA-256 `2f1508935bb6c6c8622baf015a156334b4a2bff3572d8f1f5adab6f6637b11bf`) is now stored in `src/modules/get_quiz_pool.htmlpart` and reinserted at its exact original position inside `script_004`'s classic-script IIFE. The source module still intentionally accesses closure state and DOM directly; this is a source organization extraction, not yet a pure/independent domain module. A reconstruction contract proves `script_004` returns to 98,849 bytes / SHA-256 `23dacccdc25538416c4ddba91f4e044df7c4491924d1099d8cdf0a60fb4f4bdc`. Product output must remain byte-identical V82.72; immutable V82.65 remains unchanged. See `reports/V82_78_GET_QUIZ_POOL_EXTRACTION_01_REPORT.md`.
+
+
+## V82.79 engineering overlay
+- Source-only extraction: `src/modules/quiz_answer_metadata.htmlpart` (950 bytes; SHA-256 `32266955ac9110b13a125cde64e5121d2c21d9e781d2ecd7cbfbea6070f490f8`).
+- Exact source position is preserved by `<!-- AMQ_SPLIT_MODULE:quiz_answer_metadata -->`; no runtime script tag or wrapper added.
+- Current source module count: 8. Product output remains the V82.72 fingerprint recorded above; V82.65 remains immutable.
+- See `reports/MODULARIZATION_REMAINING_WORK_AUDIT_V82_79.md` for remaining-work inventory and acceptance gaps.
+
+
+## V82.80 product output and modularization overlay
+- New product output: `dist/amq_learning_tool_v82_80.html`, 8,787,422 bytes, SHA-256 `f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe`. This is a distinct release; V82.72 remains preserved and V82.65 remains the immutable baseline.
+- `get_quiz_pool.htmlpart` now separates pure candidate calculation (`calculateQuizPoolCandidatesV8280(ctx)`) from the DOM status adapter (`getQuizPool()`). Differential contract: 20 scenarios / 40 assertions against the V82.79 source fixture.
+- Generated storage/history-SRS/AMQ-EMQ/CSS selector inventories and an 8-assertion audit contract. CSS source order and all 50 style fragment hashes remain unchanged.
+- Full runner 24/24 passed; verifier 116/116 passed. Real-origin storage, audio/network, Firefox and multiplayer multi-client acceptance remain unverified. GitHub full-tree publication remains open.
+- Details: `reports/V82_80_MODULARIZATION_BOUNDARY_AUDIT.md` and `reports/V82_80_MODULARIZATION_BOUNDARY_AND_PURE_POOL_01_REPORT.md`.
+
+
+## V82.81 engineering-only checkpoint — lifecycle and visual boundary audit
+
+V82.81 adds source contracts, boundary maps, and Chromium home/quiz geometry screenshots only. No runtime source fragments or CSS declarations were changed. The standalone product remains V82.80 at 8,787,422 bytes / SHA-256 `f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe`. The immutable V82.65 baseline remains 8,786,930 bytes / SHA-256 `abd202a6f96cc08e0969ad05ab8574cc71001733d655bcb5cff6b1a1a5b33a33`. Native localhost persistence remains unverified because Chromium returned `ERR_BLOCKED_BY_ADMINISTRATOR`; do not treat this as a pass.
 
 
 ## V82.84 source sync and acceptance gate audit
 
-V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`); immutable V82.65 remains unchanged. Fresh validation passed (runner 34/34, verifier 116/116). GitHub tree audit confirms the V82.83 branch remains an overlay with 125 entries and missing source fragments/template/build tools/tests/visual PNGs. Boundary-audit tool fingerprint mismatch is fixed, but complete sync and remote clean build remain open. Native-origin Storage remains blocked by managed Chromium policy; Firefox, real audio and two-client multiplayer are not verified. No production runtime/CSS changes. See `reports/V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT.md`.
+V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`); immutable V82.65 remains unchanged. A fresh build and verification passed (runner 34/34, verifier 116/116). GitHub tree audit confirms the V82.83 branch remains an overlay with 125 entries and missing source fragments/template/build tools/tests/visual PNGs. Boundary-audit tool fingerprint mismatch is fixed, but complete sync and remote clean build remain open. Native-origin Storage remains blocked by managed Chromium policy; Firefox, real audio and two-client multiplayer are not verified. No production runtime/CSS changes. See `reports/V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT.md`.

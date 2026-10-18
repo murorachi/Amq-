@@ -1,0 +1,544 @@
+
+=== candidate policy ===
+PASS unknown source mode fails closed to AMQ
+PASS mixed mode admits AMQ
+PASS mixed mode admits EMQ
+PASS AMQ mode rejects EMQ
+PASS EMQ mode rejects AMQ
+PASS unknown source rejected
+PASS numeric primitive accepted
+PASS decimal string accepted
+PASS scientific notation accepted
+PASS empty string is missing, not numeric
+PASS boolean is not numeric
+PASS array is not numeric
+PASS infinity is rejected
+PASS NaN is rejected
+PASS missing song type maps to type 5
+PASS song type zero maps to type 5
+PASS malformed song type rejected
+PASS fractional song type rejected
+PASS missing setting uses fallback
+PASS malformed setting rejected
+PASS undefined lower bound uses default
+PASS malformed lower bound rejected
+PASS missing difficulty allowed as unknown
+PASS negative difficulty rejected
+PASS zero difficulty treated as unknown/allowed
+PASS difficulty in range allowed
+PASS difficulty out of range rejected
+PASS invalid difficulty range rejected
+PASS hard difficulty upper boundary included
+PASS hard difficulty above boundary rejected
+PASS unknown year included by default
+PASS unknown year excluded when requested
+PASS year zero follows unknown policy
+PASS year boundary included
+PASS fractional year rejected
+PASS malformed year rejected
+PASS unknown season allowed by default list
+PASS season prefix parsed
+PASS season mismatch rejected
+PASS known anime type retained
+PASS unknown anime type maps to Other
+PASS invalid status rejected
+PASS status zero accepted
+PASS quick pool all accepts status zero
+PASS quick pool unmarked requires status zero
+PASS quick pool heard accepts status one
+PASS quick pool tagged requires tag
+PASS quick pool tagged rejects blank tag
+PASS hard quick pool AMQ requires unmarked and difficulty <=20
+PASS hard quick pool AMQ rejects marked song
+PASS hard quick pool EMQ does not apply AMQ status/difficulty restriction
+PASS unknown quick pool rejected
+PASS required tag rejects blank
+PASS tag query is case-insensitive
+PASS disabled watchlist filter does not constrain
+PASS enabled watchlist requires exact selected status
+PASS enabled watchlist rejects empty selection
+PASS watchlist membership only when enabled
+PASS enabled watchlist requires member
+PASS blacklist rejects blocked item
+PASS repeat filter rejects previously seen ID
+PASS repeat filter rejects immediate repeat
+PASS repeat filter accepts unseen ID
+PASS repeat filter rejects empty ID when enabled
+PASS metadata rejects arrays
+PASS metadata rejects invalid source
+PASS metadata defaults source to AMQ
+PASS EMQ metadata skips AMQ-specific difficulty/season/type checks
+PASS AMQ-specific restriction detected for hard pool
+PASS no AMQ-specific restriction for defaults
+RESULT 70 passed, 0 failed
+EXIT 0
+
+=== candidate pool integration ===
+PASS base pool preserves source order and rejects blank titles/orphan anime
+PASS quick pool unmarked is applied before metadata and preserves order
+PASS status selection removes non-selected familiarity values
+PASS metadata year, season, anime type, song type and difficulty filters compose
+PASS missing year is included only when unknownYear is enabled
+PASS blacklist, tagsOnly and tag query filter independently
+PASS watch status filter rejects unknown and unselected statuses
+PASS watchlist-only requires a non-none list membership
+PASS repeat prevention rejects seen and last-question IDs
+PASS final repeat guard removes immediate previous question when alternatives exist
+PASS mixed combiner output replaces base pool when it returns an array
+PASS non-array combiner output falls back to base pool
+PASS audio health filters candidates and all-unhealthy case reports status
+PASS custom-list scope output is applied last and preserves its order
+PASS invalid custom-list scope helper fails closed when custom scope is requested
+PASS custom-list scope throwing fails closed
+PASS custom-list scope returning non-array fails closed
+PASS empty focus scope does not broaden to general pool
+PASS focus mode constrains IDs and applies repeat filtering
+PASS empty candidate pool does not auto-broaden settings
+PASS duplicate song IDs are not silently deduplicated by base pool
+PASS invalid source mode helper normalizes to AMQ and does not broaden EMQ-only filtering
+PASS null, empty and malformed familiarity selections fail closed with exact empty candidate IDs
+PASS null, empty and malformed song-type selections fail closed with exact empty candidate IDs
+PASS watch-status selection uses defaults when missing and fails closed for null, empty or malformed selections
+PASS focus scope remains exact and is not broadened by empty personal or custom-list settings
+PASS missing, null and empty custom-list selections remain unrestricted only when no invalid-scope marker exists
+RESULT 27 passed, 0 failed
+EXIT 0
+
+=== getQuizPool production-source characterization ===
+PASS module manifest record exists
+PASS module byte length and SHA-256 match manifest
+PASS original V82.79 characterization fixture has captured fingerprint
+PASS module marker appears exactly once
+PASS metadata marker exists for layered reconstruction
+PASS restoring metadata reconstructs V82.78 fragment size
+PASS restoring metadata reconstructs V82.78 fragment fingerprint
+PASS getQuizPool insertion marker remains
+PASS fixture restores historical V82.77 fragment size
+PASS fixture restores historical V82.77 fragment fingerprint
+PASS module has one pure calculator and one wrapper
+PASS pure calculator receives explicit dependency context
+PASS pure calculator does not access DOM, window, or storage
+PASS empty focus scope returns empty candidates and diagnostic value
+PASS normal filter order remains fixed
+PASS filter pipeline order is explicitly represented
+PASS metadata mapping retains AMQ source and original tuple indices
+PASS watchlist membership checks anime ID and alternate key
+PASS empty pool diagnostic never broadens filters
+PASS DOM status writes are confined to wrapper
+PASS wrapper passes policy and shared state through explicit context
+PASS classic-script scope is preserved without imports or exports
+PASS manifest module count is consistent
+RESULT 23 assertions passed; module_bytes=3228 module_sha256=d422b629da723cc2417dbb46dbf6c3aff6c04148e1f73a575b64b47fdbf29ee1 historical_fragment_bytes=98849
+EXIT 0
+
+=== getQuizPool old/new differential ===
+PASS default pool: ids and diagnostic equivalent
+PASS blacklist: ids and diagnostic equivalent
+PASS tag filter: ids and diagnostic equivalent
+PASS status selection: ids and diagnostic equivalent
+PASS metadata filter: ids and diagnostic equivalent
+PASS watch status: ids and diagnostic equivalent
+PASS watchlist: ids and diagnostic equivalent
+PASS repeat filter: ids and diagnostic equivalent
+PASS focus mode: ids and diagnostic equivalent
+PASS empty focus fails closed: ids and diagnostic equivalent
+PASS empty pool diagnostic: ids and diagnostic equivalent
+PASS watchlist diagnostic: ids and diagnostic equivalent
+PASS duplicates preserved: ids and diagnostic equivalent
+PASS missing anime rejected: ids and diagnostic equivalent
+PASS unmarked quick pool: ids and diagnostic equivalent
+PASS malformed status selection: ids and diagnostic equivalent
+PASS malformed song type selection: ids and diagnostic equivalent
+PASS last question guard: ids and diagnostic equivalent
+PASS empty tags with required tag: ids and diagnostic equivalent
+PASS watch status malformed selection: ids and diagnostic equivalent
+RESULT 40 differential assertions passed across 20 scenarios
+EXIT 0
+
+=== quiz answer metadata extraction contract ===
+PASS module manifest record exists
+PASS module bytes and SHA-256 match manifest
+PASS marker appears exactly once
+PASS marker exists in script_004
+PASS restored script_004 equals pre-extraction V82.78 fingerprint
+PASS module contains exactly the three intended declarations
+PASS module adds no import/export or wrapper
+PASS name deduplication normalizes NFKC and case but preserves first display value
+PASS name bundle maps anime row and Chinese title
+PASS name bundle deduplicates aliases using normalized keys
+PASS unknown anime bundle remains safe and empty
+PASS opening and ending song role labels include positive track number
+PASS non-opening roles do not append track number
+PASS invalid role maps to unlabelled fallback
+RESULT 14 assertions passed; module_bytes=950 module_sha256=32266955ac9110b13a125cde64e5121d2c21d9e781d2ecd7cbfbea6070f490f8
+EXIT 0
+
+=== EMQ API and list contract ===
+PASS real API reaches ready state and exposes expected contract
+PASS EMQ song and work IDs remain isolated from AMQ IDs
+PASS Mixed mode appends valid EMQ rows and deduplicates by song ID
+PASS EMQ-only mode excludes AMQ rows and keeps EMQ song order
+PASS AMQ mode leaves base pool unchanged and does not append EMQ
+PASS EMQ metadata resolves from EMQ work map, not AMQ anime map
+PASS song aliases and audio URL candidates stay attached to the EMQ ID
+PASS AMQ-only hard restrictions suppress EMQ in Mixed mode
+PASS focus scope combines explicit AMQ and EMQ focus IDs without duplicate song IDs
+PASS question chooser respects EMQ-only source mode
+PASS selected EMQ song Set is an explicit dedicated scope and still honors blacklist/repeat
+PASS selected EMQ song Set with no matching IDs never broadens the EMQ pool
+PASS malformed EMQ year bounds fail closed instead of widening the candidate pool
+PASS custom-list adapter scopes AMQ rows but preserves independently filtered EMQ rows
+PASS empty custom-list settings are unrestricted and focus mode bypasses list scope
+PASS malformed plural customListIds fails closed for AMQ while retaining EMQ rows
+PASS stale persistent custom-list invalid flag cannot silently restore AMQ candidates
+PASS AMQ/EMQ work ID collision fails closed before ready
+PASS EMQ song with missing work mapping fails closed before ready
+RESULT 19 passed, 0 failed
+EXIT 0
+
+=== history/status isolation ===
+PASS EMQ history records resolve source and work metadata from EMQ song/work IDs
+PASS AMQ history records retain AMQ metadata and do not become EMQ records
+PASS familiarity and tags are keyed by song ID, not work ID
+PASS tag bridge rejects unknown IDs and preserves existing tag when storage fails
+PASS storedStatus uses song ID, local-storage fallback, and rejects invalid values
+PASS storedTag reads only the requested song ID and handles malformed storage safely
+PASS unified snapshots keep EMQ rows separate from AMQ source arrays
+RESULT 7 passed, 0 failed
+EXIT 0
+
+=== storage repository contract ===
+PASS namespace key encodes user ID and rejects invalid IDs/keys
+PASS user namespaces isolate identical keys
+PASS snapshot preserves raw serialized values and selected keys
+PASS transaction applies set and delete atomically on success
+PASS transaction rolls back earlier writes when adapter fails once
+PASS legacy import is allowlisted, validates first and preserves originals
+PASS legacy import refuses non-allowlisted keys and non-empty target scope
+PASS invalid legacy JSON blocks import before any namespaced write
+PASS registered adapter must implement all required methods
+RESULT 9 passed, 0 failed
+EXIT 0
+
+=== backup restore contract ===
+PASS application storage allowlist excludes arbitrary ani-prefixed keys and cover cache
+PASS valid v10 manifest accepts only known application keys with raw string values
+PASS missing or inconsistent manifest is rejected before restore
+PASS v10 rejects unknown keys and non-string storage values
+PASS empty or entirely non-application snapshots are rejected
+PASS legacy v8 snapshots retain only allowlisted string entries
+RESULT 6 passed, 0 failed
+EXIT 0
+
+=== multiplayer session contract ===
+PASS session is accepted only when room code, player ID and token exist
+PASS saving a session stores active session separately from reconnect index
+PASS clearing active session does not implicitly erase reconnect capability
+PASS removing one reconnect entry preserves other rooms and players
+PASS polling is guarded against overlap, missing sessions, hidden pages and inactive view
+PASS invalid token/room/player responses clear active session and stop polling/audio
+PASS team live channel uses WebSocket while HTTP polling remains the fallback
+RESULT 7 passed, 0 failed
+EXIT 0
+
+=== solo EMQ list handoff ===
+PASS selected list becomes a song-ID Set passed to the original combiner
+PASS no selected list passes null and leaves EMQ membership unrestricted
+PASS invalid persisted scope passes an empty Set and fails closed for EMQ rows
+PASS pool composition precedes audio eligibility and final custom-list adapter
+RESULT 4 passed, 0 failed
+EXIT 0
+
+=== answer-flow contract ===
+PASS ordinary answer before successful audio playback is not submitted or recorded
+PASS timer expiry before playback follows unplayed path without history or familiarity mutation
+PASS played, correct anime answer records once and updates familiarity by song ID
+PASS title/artist support answer records history without changing work-recognition familiarity
+PASS EMQ answer retains its song ID and EMQ target/source path in history handoff
+PASS a finished question cannot be recorded twice
+PASS played wrong answer records incorrect result and lowers familiarity to heard
+PASS manual skip after audio starts records one valid-audio incorrect/skip result
+RESULT 8 passed, 0 failed
+EXIT 0
+
+=== quiz suggestion helper contract ===
+PASS NFKC full-width Latin normalizes to lowercase ASCII
+PASS ligature normalization expansion is preserved
+PASS configured uncommon symbols normalize as optional spaces
+PASS nullish values normalize safely to empty string
+PASS mapping preserves original label and normalized search text
+PASS mapping tracks UTF-16 source offsets for NFKC expansion
+PASS mapping tracks astral Unicode source offsets in UTF-16 units
+PASS compact key removes whitespace and records search positions
+PASS title length counts Unicode code points rather than UTF-16 units
+PASS raw highlight skips normalized separators and maps original offsets
+PASS compact highlight maps back to original label positions
+PASS highlight ranges omit slash and hyphen separators
+PASS overlapping highlight ranges merge deterministically
+PASS suggestion comparator prioritizes shorter Unicode title length
+PASS suggestion comparator breaks ties by normalized raw key then label
+PASS suggestion comparator is stable for identical label records
+RESULT 16 passed, 0 failed
+EXIT 0
+
+=== quiz suggestion renderer extraction contract ===
+PASS quiz suggestion renderer extraction contract
+assertions=15 module_bytes=3338 script_004_bytes=95160
+EXIT 0
+
+=== quiz suggestion controller extraction contract ===
+PASS quiz suggestion controller extraction contract
+assertions=15 module_bytes=2790 script_004_bytes=95160
+EXIT 0
+
+=== anime/song DB initializer extraction contract ===
+PASS anime/song DB initializer extraction contract
+assertions=19 anime_rows=9516 song_rows=38821 original_script_001_bytes=5078176
+EXIT 0
+
+=== quiz suggestions browser integration ===
+PASS standalone HTML exists
+PASS production application initializes
+PASS quiz answer input and suggestion list mount
+PASS matching list is bounded to exactly 25 results for a broad query
+PASS non-empty matching query opens list and updates aria-expanded
+PASS rendered suggestions have non-empty labels
+PASS top-25 results are deterministically ordered by production comparator contract
+PASS IME composition guard leaves existing list untouched while composing
+PASS input event rebuilds bounded results after composition guard clears
+PASS shared suggestion selection contract is installed
+PASS shared selection contract refuses to replace input during IME composition
+PASS IME-guarded selection dispatches no input event
+PASS ArrowDown moves focus to one suggestion
+PASS Enter selects the focused suggestion
+PASS keyboard selection dispatches exactly one bubbling input event
+PASS keyboard selection updates answer mirror through input event
+PASS keyboard selection clears list and resets aria-expanded
+PASS keyboard selection preserves input focus
+PASS keyboard selection caret moves to end of inserted label
+PASS keyboard selection does not submit or settle an answer
+PASS suggestion pointerdown prevents input blur before selection
+PASS click handler copies selected suggestion into answer input
+PASS click selection updates answer mirror through input event
+PASS click selection clears suggestion list
+PASS click selection resets aria-expanded after the legacy input handler rebuilds then clears the list
+PASS click selection dispatches exactly one bubbling input event
+PASS click selection restores focus to the answer input
+PASS click selection caret moves to end of inserted label
+PASS click selection does not submit or settle an answer
+PASS empty normalized query clears list and closes suggestions
+LIMITATION: Chromium about:blank with in-memory storage, IndexedDB disabled, external network blocked; targetOptions data enumeration is fixture-backed to isolate the production suggestion renderer/controller.
+NOT TESTED: real-origin persistence, audio, Firefox, multiplayer, or full answer submission.
+EXIT 0
+
+=== parser-backed dependency inventory ===
+fragment,raw_bytes,parse_diagnostics,top_level_statements,function_definitions_all_scopes,large_data_initializer_bytes,status
+script_001.htmlpart,102981,102958,0,226,102,0,PARSED
+script_002.htmlpart,6038,6021,0,1,2,0,PARSED
+script_003.htmlpart,8126,8109,0,8,6,0,PARSED
+script_004.htmlpart,95160,95107,0,1,53,0,PARSED
+script_005.htmlpart,1139,1074,0,1,0,0,PARSED
+script_006.htmlpart,1628,1591,0,1,2,0,PARSED
+script_007.htmlpart,4491,4454,0,1,2,0,PARSED
+script_008.htmlpart,5458,5408,0,1,5,0,PARSED
+script_009.htmlpart,2000,1953,0,1,1,0,PARSED
+script_010.htmlpart,1985,1923,0,1,1,0,PARSED
+script_011.htmlpart,311,259,0,1,1,0,PARSED
+script_012.htmlpart,7942,7884,0,1,10,0,PARSED
+script_013.htmlpart,733,681,0,1,2,0,PARSED
+script_014.htmlpart,2740,2687,0,1,2,0,PARSED
+script_015.htmlpart,6872,6825,0,1,6,0,PARSED
+script_016.htmlpart,10541,10495,0,1,12,0,PARSED
+script_017.htmlpart,945,896,0,1,2,0,PARSED
+script_018.htmlpart,1459,1416,0,1,2,0,PARSED
+script_019.htmlpart,1665,1615,0,1,1,0,PARSED
+script_020.htmlpart,39032,38986,0,1,62,0,PARSED
+script_021.htmlpart,757,708,0,1,1,0,PARSED
+script_022.htmlpart,1367,1318,0,1,5,0,PARSED
+script_023.htmlpart,44496,44447,0,1,52,0,PARSED
+script_024.htmlpart,3889,3845,0,1,5,0,PARSED
+script_025.htmlpart,53780,53721,0,1,60,0,PARSED
+script_026.htmlpart,33347,33293,0,1,38,0,PARSED
+script_027.htmlpart,44,38,0,0,0,0,PARSED
+script_028.htmlpart,140145,140101,0,1,139,0,PARSED
+script_029.htmlpart,8373,8317,0,1,9,0,PARSED
+script_030.htmlpart,125793,125726,0,0,0,0,DATA_BLOCK
+script_031.htmlpart,13812,13759,0,1,24,0,PARSED
+script_032.htmlpart,1307,1256,0,1,0,0,PARSED
+script_033.htmlpart,4284,4217,0,1,3,0,PARSED
+script_034.htmlpart,8270,8212,0,1,7,0,PARSED
+script_035.htmlpart,4387,4329,0,1,6,0,PARSED
+script_036.htmlpart,21078,21023,0,1,31,0,PARSED
+script_037.htmlpart,2684318,2684238,0,0,0,0,DATA_BLOCK
+script_038.htmlpart,15277,15231,0,1,31,0,PARSED
+script_039.htmlpart,33287,33229,0,1,42,0,PARSED
+script_040.htmlpart,32856,32805,0,1,45,0,PARSED
+script_041.htmlpart,9745,9694,0,1,20,0,PARSED
+anime_song_database.htmlpart,4975240,4975240,0,1,0,4975240,PARSED
+candidate_pool_policy.js,7851,7851,0,1,0,0,PARSED
+get_quiz_pool.htmlpart,3228,3228,0,2,2,0,PARSED
+quiz_answer_metadata.htmlpart,950,950,0,3,3,0,PARSED
+quiz_suggestion_controller.js,2790,2790,0,11,6,0,PARSED
+quiz_suggestion_renderer.js,3338,3338,0,2,3,0,PARSED
+quiz_suggestion_text.js,2693,2693,0,4,4,0,PARSED
+storage_repository.htmlpart,8694,8643,0,1,8,0,PARSED
+
+EXIT 0
+
+=== modularization remaining-work audit ===
+PASS modularization audit: scripts=41 styles=50 modules=8 functions=818
+PASS report=reports/MODULARIZATION_REMAINING_WORK_AUDIT_V82_80.md
+PASS script_inventory=reports/MODULARIZATION_REMAINING_SCRIPT_INVENTORY_V82_80.csv rows=41
+PASS module_matrix=reports/MODULARIZATION_REMAINING_MODULE_MATRIX_V82_80.csv rows=8
+EXIT 0
+
+=== modularization boundary audit ===
+PASS boundary audit: storage_fragments=41 direct_storage=23 amq_emq_fragments=23 history_srs_fragments=14 css_selectors=2355 groups={"EMQ custom lists": 48, "SRS/learning": 4, "VNDB/EMQ catalog": 46, "cross-view / shared": 14, "discover/audio": 73, "global theme/layout": 214, "history": 41, "home/navigation": 125, "multiplayer": 342, "quiz": 416, "shared modal": 15, "shared notification": 3, "unmapped": 986, "watchlist/library": 28}
+EXIT 0
+
+=== modularization boundary inventory contract ===
+PASS storage inventory covers every script/data fragment
+PASS storage scan identifies direct accesses without claiming runtime reachability
+PASS history/SRS inventory includes history and learning keys
+PASS AMQ/EMQ boundary inventory includes both source modes
+PASS CSS selector map covers all 50 style fragments
+PASS CSS map explicitly marks heuristic mappings as unreviewed
+PASS CSS cascade order remains source-order indexed
+PASS no production style fragment hash was changed by inventory generation
+RESULT 8 assertions passed; storage_rows=41 history_srs_rows=14 source_rows=23 css_selectors=2355
+EXIT 0
+
+=== script_004 boundary audit contract ===
+PASS script_004 boundary audit contract
+assertions=15 source_bytes=95160 source_sha256=8f9d41977463d0e1c211948f9c615f116309ec96c556013954c29f5f0222ec9e
+EXIT 0
+
+=== standalone HTML build ===
+PASS build: /mnt/data/amq_v82_78_work/AMQ_V82_67_BROWSER_UI_SMOKE_08_SOURCE/dist/amq_learning_tool_v82_80.html
+bytes=8787422 sha256=f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+EXIT 0
+
+=== integrity and deterministic rebuild ===
+PASS: baseline metadata format
+PASS: immutable baseline fingerprint
+PASS: template fingerprint
+PASS: fragment counts
+PASS: fragment src/styles/style_001.htmlpart
+PASS: fragment src/styles/style_002.htmlpart
+PASS: fragment src/styles/style_003.htmlpart
+PASS: fragment src/styles/style_004.htmlpart
+PASS: fragment src/styles/style_005.htmlpart
+PASS: fragment src/scripts/script_001.htmlpart
+PASS: fragment src/scripts/script_002.htmlpart
+PASS: fragment src/scripts/script_003.htmlpart
+PASS: fragment src/scripts/script_004.htmlpart
+PASS: fragment src/styles/style_006.htmlpart
+PASS: fragment src/styles/style_007.htmlpart
+PASS: fragment src/styles/style_008.htmlpart
+PASS: fragment src/scripts/script_005.htmlpart
+PASS: fragment src/styles/style_009.htmlpart
+PASS: fragment src/scripts/script_006.htmlpart
+PASS: fragment src/styles/style_010.htmlpart
+PASS: fragment src/scripts/script_007.htmlpart
+PASS: fragment src/styles/style_011.htmlpart
+PASS: fragment src/scripts/script_008.htmlpart
+PASS: fragment src/styles/style_012.htmlpart
+PASS: fragment src/scripts/script_009.htmlpart
+PASS: fragment src/styles/style_013.htmlpart
+PASS: fragment src/styles/style_014.htmlpart
+PASS: fragment src/scripts/script_010.htmlpart
+PASS: fragment src/scripts/script_011.htmlpart
+PASS: fragment src/styles/style_015.htmlpart
+PASS: fragment src/scripts/script_012.htmlpart
+PASS: fragment src/scripts/script_013.htmlpart
+PASS: fragment src/styles/style_016.htmlpart
+PASS: fragment src/scripts/script_014.htmlpart
+PASS: fragment src/styles/style_017.htmlpart
+PASS: fragment src/scripts/script_015.htmlpart
+PASS: fragment src/scripts/script_016.htmlpart
+PASS: fragment src/styles/style_018.htmlpart
+PASS: fragment src/styles/style_019.htmlpart
+PASS: fragment src/styles/style_020.htmlpart
+PASS: fragment src/scripts/script_017.htmlpart
+PASS: fragment src/styles/style_021.htmlpart
+PASS: fragment src/scripts/script_018.htmlpart
+PASS: fragment src/scripts/script_019.htmlpart
+PASS: fragment src/styles/style_022.htmlpart
+PASS: fragment src/scripts/script_020.htmlpart
+PASS: fragment src/styles/style_023.htmlpart
+PASS: fragment src/styles/style_024.htmlpart
+PASS: fragment src/styles/style_025.htmlpart
+PASS: fragment src/scripts/script_021.htmlpart
+PASS: fragment src/styles/style_026.htmlpart
+PASS: fragment src/styles/style_027.htmlpart
+PASS: fragment src/styles/style_028.htmlpart
+PASS: fragment src/styles/style_029.htmlpart
+PASS: fragment src/scripts/script_022.htmlpart
+PASS: fragment src/styles/style_030.htmlpart
+PASS: fragment src/scripts/script_023.htmlpart
+PASS: fragment src/scripts/script_024.htmlpart
+PASS: fragment src/scripts/script_025.htmlpart
+PASS: fragment src/scripts/script_026.htmlpart
+PASS: fragment src/styles/style_031.htmlpart
+PASS: fragment src/scripts/script_027.htmlpart
+PASS: fragment src/scripts/script_028.htmlpart
+PASS: fragment src/styles/style_032.htmlpart
+PASS: fragment src/scripts/script_029.htmlpart
+PASS: fragment src/scripts/script_030.htmlpart
+PASS: fragment src/styles/style_033.htmlpart
+PASS: fragment src/scripts/script_031.htmlpart
+PASS: fragment src/styles/style_034.htmlpart
+PASS: fragment src/styles/style_035.htmlpart
+PASS: fragment src/scripts/script_032.htmlpart
+PASS: fragment src/styles/style_036.htmlpart
+PASS: fragment src/scripts/script_033.htmlpart
+PASS: fragment src/styles/style_037.htmlpart
+PASS: fragment src/styles/style_038.htmlpart
+PASS: fragment src/styles/style_039.htmlpart
+PASS: fragment src/styles/style_040.htmlpart
+PASS: fragment src/scripts/script_034.htmlpart
+PASS: fragment src/styles/style_041.htmlpart
+PASS: fragment src/scripts/script_035.htmlpart
+PASS: fragment src/styles/style_042.htmlpart
+PASS: fragment src/scripts/script_036.htmlpart
+PASS: fragment src/styles/style_043.htmlpart
+PASS: fragment src/styles/style_044.htmlpart
+PASS: fragment src/scripts/script_037.htmlpart
+PASS: fragment src/scripts/script_038.htmlpart
+PASS: fragment src/styles/style_045.htmlpart
+PASS: fragment src/scripts/script_039.htmlpart
+PASS: fragment src/styles/style_046.htmlpart
+PASS: fragment src/styles/style_047.htmlpart
+PASS: fragment src/scripts/script_040.htmlpart
+PASS: fragment src/styles/style_048.htmlpart
+PASS: fragment src/styles/style_049.htmlpart
+PASS: fragment src/scripts/script_041.htmlpart
+PASS: fragment src/styles/style_050.htmlpart
+PASS: module count
+PASS: module src/modules/candidate_pool_policy.js
+PASS: module marker candidate_pool_policy
+PASS: module src/modules/storage_repository.htmlpart
+PASS: module marker storage_repository
+PASS: module src/modules/quiz_suggestion_text.js
+PASS: module marker quiz_suggestion_text
+PASS: module src/modules/anime_song_database.htmlpart
+PASS: module marker anime_song_database
+PASS: module src/modules/quiz_suggestion_renderer.js
+PASS: module marker quiz_suggestion_renderer
+PASS: module src/modules/quiz_suggestion_controller.js
+PASS: module marker quiz_suggestion_controller
+PASS: module src/modules/get_quiz_pool.htmlpart
+PASS: module marker get_quiz_pool
+PASS: module src/modules/quiz_answer_metadata.htmlpart
+PASS: module marker quiz_answer_metadata
+PASS: build first.html - PASS build: /tmp/amq-v8267-module-k7_yrbf5/first.html
+bytes=8787422 sha256=f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+PASS: build second.html - PASS build: /tmp/amq-v8267-module-k7_yrbf5/second.html
+bytes=8787422 sha256=f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+PASS: deterministic build hash - f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+PASS: byte-identical to expected release - version=V82.80_GET_QUIZ_POOL_PURE_CALCULATION_01 bytes=8787422 sha256=f5b3eadf17300d8ad0ae53ebccc32f471b068743a7c746721401bfb7a0f0c8fe
+RESULT: 116 passed, 0 failed, 116 total
+EXIT 0
+
+=== CHECK SUMMARY ===
+commands=24 passed=24 failed=0

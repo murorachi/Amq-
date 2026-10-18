@@ -1,0 +1,39 @@
+<script id="v40-buffer-setting-and-avatar-alignment">
+(()=>{
+ const root=document.getElementById('quizView');
+ if(!root)return;
+ const $=id=>document.getElementById(id);
+ const settingsBody=$('quizSettingsBody');
+ // The old stop-on-submit preference is retired. Audio keeps playing during answer reveal/buffer.
+ try{const saved=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');if(saved.submitSkipPhase!==false){saved.submitSkipPhase=false;localStorage.setItem('aniQuizSettingsV14',JSON.stringify(saved))}}catch{}
+ // Align avatar to the countdown label by putting both in the same centered column.
+ const avatar=root.querySelector('.v36-amq-player');
+ const remaining=$('quizRemainingV30');
+ if(avatar&&remaining){
+   const track=remaining.closest('.quizPlaybackLabelsV30');
+   if(track){
+     const column=document.createElement('div');
+     column.id='v40-time-avatar-column';
+     column.style.cssText='display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:100%;';
+     track.parentElement.insertBefore(column,track);
+     column.appendChild(track);
+     column.appendChild(avatar);
+   }
+ }
+ // Remove the redundant reveal-stage detail box; metadata remains in the right-side answer details.
+ $('quizResult')?.classList.add('v40-hidden-result');
+ // Remove the legacy auto-next countdown that used to push the avatar sideways during reveal.
+ const oldReveal=window.showQuizRevealInfoV30;
+ if(typeof oldReveal==='function'){
+   window.showQuizRevealInfoV30=function(){
+     oldReveal();
+     const countdown=$('quizCountdownV30');
+     if(countdown){countdown.classList.add('hidden');countdown.textContent='';}
+     const avatarNow=root.querySelector('.v36-amq-player');
+     const column=$('v40-time-avatar-column');
+     if(avatarNow&&column&&avatarNow.parentElement!==column)column.appendChild(avatarNow);
+   };
+ }
+ // Media is intentionally not paused during reveal; nextQuiz() stops it at the next-question boundary.
+})();
+</script>

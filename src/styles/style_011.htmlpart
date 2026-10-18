@@ -1,0 +1,36 @@
+<style id="v37-layout-fixes">
+/* Keep the quiz composition spacious; center the content, not shrink the UI. */
+#quizView .quizGrid{grid-template-columns:minmax(0,1fr) 270px!important;gap:22px!important;align-items:stretch!important}
+#quizView .quizStage{display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+#quizView .quizMystery{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:clamp(220px,30vw,390px)!important;overflow:hidden!important}
+#quizView .quizVisualizerV30{display:none!important}
+#quizView .quizMystery #quizPrompt, #quizView .quizMystery #quizSubprompt{display:none!important}
+#quizView .quizCountdownV30{min-height:32px!important;text-align:center!important;font-size:16px!important;font-weight:800!important;margin:8px auto!important}
+#quizView .quizPlaybackMetaV30{margin:6px 0 12px!important}
+#quizView #quizRemainingV30{font-size:14px!important;font-weight:800!important;color:var(--ink)!important}
+#quizView .quizSide{min-width:240px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:stretch!important;padding:18px!important}
+#quizView .quizSide .quizSongInfo{flex:1;display:flex;align-items:center;justify-content:center}
+#quizView .quizInfoContentV30{width:100%}
+#quizView .quizInfoList{display:grid;grid-template-columns:1fr;align-content:center;gap:4px}
+#quizView .quizInfoList dt, #quizView .quizInfoList dd{text-align:center!important}
+#quizView .quizInfoList dd{margin-bottom:10px!important}
+#quizView .quizAnimeAnswerLabel{position:relative!important;order:-1!important;text-align:center!important;font-size:clamp(18px,2vw,26px)!important;margin:0 auto 10px!important;width:100%!important}
+#quizView .quizMystery .quizAnimeCoverV30{position:relative!important;display:block!important;width:auto!important;height:auto!important;max-width:min(280px,45%)!important;max-height:calc(clamp(220px,30vw,390px) - 24px)!important;object-fit:contain!important;margin:auto!important}
+#quizView .quizMystery .quizAnimeCoverV30[hidden]{display:none!important}
+#quizView .v36-amq-player{margin:18px auto 12px!important;transform:translateX(-28px)}
+#quizView .quizControls #quizNext{display:none!important}
+
+#quizView .quizStatus{display:none!important}
+#quizView #quizAudioState{display:none!important}
+#quizView .quizStats{display:none!important}
+#quizView #quizNext{display:none!important}
+#quizView .quizPlaybackLabelsV30 #quizPlaybackStateV30{display:none!important}
+#quizView .quizPlaybackLabelsV30{justify-content:center!important}
+#quizView .v36-answer{min-height:22px!important}
+@media(max-width:760px){
+ #quizView .quizGrid{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ #quizView .quizMystery{min-height:240px!important}
+ #quizView .quizSide{min-width:0!important;min-height:180px!important}
+ #quizView .v36-amq-player{transform:translateX(-16px)}
+}
+</style>

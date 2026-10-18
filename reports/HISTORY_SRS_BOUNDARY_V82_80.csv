@@ -1,0 +1,15 @@
+﻿fragment,bytes,named_history_srs_functions,localStorage_calls,indexeddb_refs,key_refs,notes
+script_001.htmlpart,102981,addQuizHistorySummaryEntryV1 | beginQuizHistoryRoundV51 | emptyQuizHistorySummaryV1 | flushQuizHistorySummaryV1 | initQuizHistorySummaryV1 | isValidQuizHistorySummaryV1 | persistQuizHistorySummaryV1 | quizHistoryEntryKeyV1 | quizHistoryInstantThresholdV1 | rebuildQuizHistoryProcessedIdsV1 | recordQuizHistoryV51 | saveQuizHistoryV51 | scheduleQuizHistorySummarySaveV1 | scheduleQuizTargetSummarySaveV80 | statsFor | syncQuizHistorySummaryFromRecentV1,40,2,aniPlayHistory_v1 | aniQuizHistorySummaryV1 | aniQuizHistory_v1 | aniQuizPlanBackupSettingsV72,Static candidates; inspect complete bodies and API callers before extraction.
+script_004.htmlpart,95160,,27,0,aniQuizPlanBackupSettingsV72,Static candidates; inspect complete bodies and API callers before extraction.
+script_015.htmlpart,6872,renderHistory,0,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_016.htmlpart,10541,,6,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_020.htmlpart,39032,addReviewLog | addSrsRatingHost | clearAllSrsUiTimersV82 | clearSrsUiTimerV82 | gradePreviewLabel | isValidSchedule | preview | scheduleSessionTransitionV82 | scheduleSrsUiTimerV82,5,0,aniSrsScheduleV1,Static candidates; inspect complete bodies and API callers before extraction.
+script_023.htmlpart,44496,getHistory | getPlanMeta | historyDate | historyDayKey | historyInUtcCalendarDayWindow | renderLearningPlan | reviewCandidates | scheduleDashboardInsightsRefreshV82 | setPlanMeta | statsForHistory | weaknessEvidenceStatus,20,0,aniQuizPlanBackupSettingsV72,Static candidates; inspect complete bodies and API callers before extraction.
+script_024.htmlpart,3889,scheduleElapsedDeferredV82,0,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_025.htmlpart,53780,activeSrsSongIds | getWeakIds | systemHistory,8,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_026.htmlpart,33347,historyBaseline | parseHistory | updateProfileAfterHistory,12,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_028.htmlpart,140145,questionHistoryTable | reconcileHistory | recordHistoryEntry | scheduleDraftSend,25,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_029.htmlpart,8373,,4,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_036.htmlpart,21078,currentPreviewUrl | updatePreview,0,2,,Static candidates; inspect complete bodies and API callers before extraction.
+script_037.htmlpart,2684318,,0,0,,Static candidates; inspect complete bodies and API callers before extraction.
+script_038.htmlpart,15277,,5,0,,Static candidates; inspect complete bodies and API callers before extraction.

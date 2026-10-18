@@ -1,0 +1,88 @@
+<style id="v30-quiz-redesign">
+#quizView{padding:clamp(14px,2.2vw,28px)!important;margin:10px 0 100px!important;border-radius:16px!important}
+#quizView .quizTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px!important}
+#quizView .quizTop h2{margin:3px 0 4px!important;font-size:clamp(23px,3vw,32px)!important}
+#quizView .quizTop>div:last-child{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#quizView .quizTop #quizSettingsToggle{width:auto!important;margin:0!important;padding:8px 10px!important;white-space:nowrap}
+#quizView .quizQuickSettings{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0 6px!important}
+#quizView .quizQuickSettings label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+#quizView .quizQuickSettings select{background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 10px;max-width:100%}
+#quizView .quizGrid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(240px,290px)!important;gap:16px!important;align-items:stretch!important}
+#quizView .quizStage{min-width:0;padding:clamp(12px,2vw,22px)!important;border:1px solid var(--line)!important;border-radius:14px!important;background:var(--panel2)!important}
+#quizView .quizAnimeAnswerLabel{font-size:clamp(17px,2.3vw,24px);font-weight:750;line-height:1.35;min-height:1.35em;margin:0 0 10px;padding:0 2px;overflow-wrap:anywhere;color:var(--ink)}
+#quizView .quizAnimeAnswerLabel.hidden{visibility:hidden;display:block!important}
+#quizView .quizMystery{position:relative!important;display:grid!important;place-items:center!important;overflow:hidden!important;min-height:clamp(210px,22vw,270px)!important;height:clamp(210px,22vw,270px)!important;margin:0 0 14px!important;padding:0!important;border:1px solid var(--line)!important;border-radius:12px!important;background:#141820!important;color:#e9edf5!important}
+#quizView .quizMystery .note, #quizView .quizMystery b, #quizView .quizMystery small{display:none!important}
+#quizView .quizVisualizerV30{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(2px,.65vw,7px);padding:12% 9%;overflow:hidden;opacity:.78}
+#quizView .quizVisualizerV30[hidden]{display:none!important}
+#quizView .quizVisualizerV30 i{display:block;width:2.1%;max-width:12px;min-width:2px;height:var(--bar);max-height:74%;border-radius:99px;background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 45%,#8ca3ff));opacity:.68;transform-origin:center;animation:quizWaveV30 1.55s ease-in-out infinite alternate;animation-delay:var(--delay)}
+#quizView .visualizer-static-v30 .quizVisualizerV30 i{animation:none;height:14%;opacity:.38}
+@keyframes quizWaveV30{from{transform:scaleY(.34);opacity:.35}to{transform:scaleY(1);opacity:.82}}
+#quizView .quizAnimeCoverV30{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain;z-index:3;background:transparent}
+#quizView .quizAnimeCoverV30[hidden]{display:none!important}
+#quizView .quizControls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0!important}
+#quizView .quizControls .btn{min-height:40px}
+#quizView .quizSuggest{margin-top:12px!important}
+#quizView .quizAnswerInput{width:100%;min-height:54px!important;font-size:16px!important;padding:13px 15px!important;background:var(--field)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:10px!important}
+#quizView .quizSuggestions.open{display:block!important}
+#quizView .quizPlaybackMetaV30{margin:10px 0 12px;padding:0 1px}
+#quizView .quizPlaybackTrackV30{height:4px;border-radius:99px;overflow:hidden;background:var(--line)}
+#quizView .quizPlaybackTrackV30 span{display:block;height:100%;width:0;background:var(--accent);transition:width .15s linear}
+#quizView .quizPlaybackLabelsV30{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:11px;color:var(--muted)}
+#quizView .quizCountdownV30{font-size:12px;color:var(--muted);padding:6px 2px;min-height:28px}
+#quizView .quizCountdownV30.hidden{display:none!important}
+#quizView .quizStatus{min-height:0;margin:10px 0!important;font-size:12px;line-height:1.6}
+#quizView .quizResult{margin-top:8px!important;font-size:13px;line-height:1.65}
+#quizView .quizSide{position:static!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;min-width:0}
+#quizView .quizInfoToggleV30{display:none;width:100%;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font-weight:700;margin-bottom:8px}
+#quizView .quizSongInfo{height:100%;min-height:220px;border:1px solid var(--line);border-radius:13px;padding:14px;background:var(--panel)!important;color:var(--ink);overflow-wrap:anywhere}
+#quizView .quizInfoEmpty{min-height:190px}
+#quizView .quizInfoContentV30.hidden{display:none!important}
+#quizView .quizInfoEyebrow{font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:800;margin-bottom:8px}
+#quizView .quizInfoList{display:grid;grid-template-columns:1fr;gap:5px;margin:0}
+#quizView .quizInfoList dt{font-size:10px;color:var(--muted);margin-top:7px}
+#quizView .quizInfoList dd{font-size:13px;line-height:1.5;font-weight:650;margin:0;color:var(--ink)}
+#quizView .titleToggleV30{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--muted);text-underline-offset:3px}
+#quizView.is-revealed .quizMystery{background:#10141b!important}
+#quizView.is-revealed .quizVisualizerV30{display:none!important}
+#quizView.is-revealed .quizPlaybackMetaV30{display:none!important}
+#quizView.is-revealed .quizStage>.quizControls:first-of-type{display:none!important}
+#quizView.is-revealed .quizSuggest, #quizView.is-revealed .quizStage>.quizControls:not(:has(#quizNext)){display:none!important}
+#quizView.is-revealed #quizSubmit{display:none!important}
+#quizView.is-revealed #quizTimerDisplay{display:none!important}
+#quizView.is-revealed .quizAnswerInput{display:none!important}
+#quizView.is-revealed .quizAnimeAnswerLabel.hidden{display:none!important}
+#quizView .quizQuickSettings #quizStart{width:auto!important;margin:0!important}
+#quizView .quizQuickSettings #quizStart{white-space:nowrap}
+.quizSettingsOverlay{position:fixed;inset:0;z-index:99999;background:rgba(6,9,15,.66);display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px)}
+.quizSettingsOverlay.hidden{display:none!important}
+.quizSettingsDialog{width:min(760px,100%);max-height:min(90vh,900px);overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);padding:16px;box-shadow:0 24px 80px #0005}
+.quizSettingsModalHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.quizSettingsModalHead h2{font-size:22px;margin:2px 0}
+#quizSettingsBody.quizSettingsContent{display:block!important;max-height:none!important;overflow:visible!important}
+#quizSettingsBody .quizSetting{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;margin:9px 0}
+#quizSettingsBody .settingRow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+#quizSettingsBody label{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+#quizSettingsBody input[type=number], #quizSettingsBody input[type=text], #quizSettingsBody select{max-width:100%;background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px}
+#quizSettingsBody input[type=checkbox]{accent-color:var(--accent)}
+#quizSettingsBody .checkGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(max-width:760px){
+ #quizView .quizGrid{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+ #quizView .quizMystery{height:clamp(220px,58vw,340px)!important;min-height:220px!important}
+ #quizView .quizSide{order:3}
+ #quizView .quizInfoToggleV30{display:flex}
+ #quizView .quizSongInfo{display:none;min-height:0;height:auto}
+ #quizView .quizSide.info-open .quizSongInfo{display:block}
+ #quizView .quizInfoEmpty{min-height:70px}
+ #quizView .quizQuickSettings{align-items:stretch}
+ #quizView .quizQuickSettings label{flex:1 1 130px;min-width:0}
+ #quizView .quizQuickSettings select{width:100%;min-width:0}
+ #quizView .quizTop{align-items:flex-start}
+ #quizView .quizTop>div:last-child{justify-content:flex-end}
+ #quizView .quizTop .btn{padding:8px 9px;font-size:12px}
+ #quizView .quizPlaybackLabelsV30{font-size:10px}
+ .quizSettingsOverlay{padding:8px;align-items:flex-end}
+ .quizSettingsDialog{max-height:92vh;padding:12px;border-radius:14px 14px 8px 8px}
+}
+body.dark-theme .quizSettingsDialog{background:var(--panel);color:var(--ink)}
+</style>

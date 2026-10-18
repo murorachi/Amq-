@@ -1,0 +1,27 @@
+<style id="v82-44-ux-intuition-cleanup-style">
+/* Direct six-entry home navigation: no modal/circle click needed before users can see destinations. */
+body.ui-home-menu #homeMenu .home-menu-list.amqHomePrimaryGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;width:min(100%,620px)!important;margin:0 auto!important;padding:0!important}
+body.ui-home-menu #homeMenu .home-menu-card{display:flex!important;position:relative!important;box-sizing:border-box!important;min-width:0!important;width:100%!important;height:auto!important;min-height:clamp(112px,14vh,136px)!important;padding:18px 16px!important;border:1px solid var(--border)!important;border-radius:var(--radius-lg,18px)!important;background:var(--surface)!important;color:var(--text-primary)!important;box-shadow:var(--shadow-card)!important;text-align:left!important}
+body.ui-home-menu #homeMenu .home-menu-card .home-card-copy{display:flex;flex-direction:column;gap:8px;min-width:0;width:100%;padding-right:28px}
+body.ui-home-menu #homeMenu .home-menu-card .home-card-copy b{font-size:clamp(15px,1.4vw,18px);line-height:1.25}
+body.ui-home-menu #homeMenu .home-menu-card .home-card-copy small{font-size:12px;line-height:1.45;color:var(--text-secondary);white-space:normal}
+body.ui-home-menu #homeMenu .home-menu-card:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+body.ui-home-menu #homeMenu .amqHomeCenter{display:block!important;text-align:center!important;width:min(100%,620px)!important;margin:10px auto 18px!important}
+body.ui-home-menu #homeMenu .amqHomeCenter .amqHomeTitle{margin:0 0 7px!important}
+body.ui-home-menu #homeMenu .amqHomeOpenHint{display:block!important;margin-top:8px!important}
+.batchScopeSummaryV844{flex:1 1 100%;margin:6px 0 0;color:var(--text-secondary);font-size:12px;line-height:1.55}
+.quizCustomScopeSummaryV844{display:block;margin-top:7px;color:var(--text-secondary);font-size:12px;line-height:1.5;max-width:68ch}
+.practiceSourceSummaryV844{margin:8px 0 10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-md,10px);background:var(--surface-muted);color:var(--text-secondary);font-size:12px;line-height:1.55}
+/* Preserve frequent song actions inline; keep low-frequency tag/reset controls in a compact disclosure. */
+.songMoreMenuV844{position:relative;display:inline-flex;align-items:center;align-self:center;flex:0 0 auto}
+.songMoreMenuV844>summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--border);border-radius:999px;padding:7px 10px;background:var(--surface-muted);color:var(--text-primary);font-size:11px;font-weight:750;white-space:nowrap}
+.songMoreMenuV844>summary::-webkit-details-marker{display:none}
+.songMoreMenuV844>summary:after{content:' ▾';color:var(--text-secondary)}
+.songMoreMenuV844[open]>summary:after{content:' ▴'}
+.songMoreMenuV844>summary:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.songMoreActionsV844{position:absolute;right:0;top:calc(100% + 5px);z-index:20;display:flex;flex-direction:column;gap:5px;min-width:140px;padding:7px;border:1px solid var(--border);border-radius:var(--radius-md,10px);background:var(--surface);box-shadow:var(--shadow-dialog);}
+.songMoreActionsV844 .statusbtn{width:100%;text-align:left;background:var(--surface-muted);color:var(--text-primary);border-color:var(--border);white-space:nowrap}
+#dockInfoToggleV33{min-width:90px}
+@media(max-width:600px){body.ui-home-menu #homeMenu .home-menu-list.amqHomePrimaryGrid{gap:9px!important;width:100%!important}body.ui-home-menu #homeMenu .home-menu-card{min-height:104px!important;padding:13px 11px!important}body.ui-home-menu #homeMenu .home-menu-card .home-card-copy{padding-right:0}body.ui-home-menu #homeMenu .home-menu-card>i{display:none!important}.batchScopeSummaryV844{font-size:11px}.songMoreActionsV844{right:0;max-width:min(78vw,220px)}}
+@media(prefers-reduced-motion:reduce){body.ui-home-menu #homeMenu .home-menu-card{transition:none!important}}
+</style>

@@ -1,0 +1,7 @@
+<script id="v41-classification-diagnostic">
+(()=>{
+ // Retain the existing diagnostic marker without changing media playback.
+ const mark=()=>{try{window.__v41LastClassifiedSong=window.__aniQuizStateV45?.quizSong?.[1]??null}catch{}};
+ document.addEventListener('ani-quiz-answer-submitted',mark);
+})();
+</script>

@@ -1,0 +1,40 @@
+<style id="v82-40-watchlist-and-solo-quiz-layout-style">
+/* Clear the currently imported/manual watch-status map without touching learning data. */
+.watchHeadActionsV8240{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+#clearWatchlistCurrentV8240{white-space:nowrap;font-size:12px;min-height:34px}
+@media(max-width:560px){.watchHeadActionsV8240{width:100%;justify-content:space-between}.watchHeadActionsV8240 .watchSummary{flex:1;text-align:right}}
+/* Keep the song progress fully inside the bottom edge of the large quiz viewport. */
+#quizView .quizMystery{position:relative!important;box-sizing:border-box!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30{display:block!important;position:absolute!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;box-sizing:border-box!important;margin:0!important;padding:8px 12px 9px!important;z-index:3!important;background:linear-gradient(180deg,rgba(20,24,32,0),rgba(20,24,32,.94))!important;border-radius:0 0 12px 12px!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30 .quizPlaybackTrackV30{width:100%!important;height:5px!important;background:rgba(255,255,255,.25)!important;border-radius:999px!important;overflow:hidden!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30 .quizPlaybackTrackV30 span{background:var(--accent,#e982bd)!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30 .quizPlaybackLabelsV30{display:flex!important;justify-content:center!important;align-items:center!important;min-height:0!important;margin-top:4px!important;font-size:11px!important;color:#f7f2fb!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30 #quizPlaybackStateV30{display:none!important;}
+#quizView .quizMystery>.quizPlaybackMetaV30 #quizRemainingV30{display:block!important;position:static!important;min-height:0!important;width:max-content!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#fff!important;font-size:11px!important;font-weight:800!important;white-space:nowrap!important;text-align:center!important;}
+/* Put Skip/Next immediately to the left of the answer field, retaining the existing buttons and handlers. */
+#quizView .quizAnswerRowV42{display:flex!important;align-items:stretch!important;gap:7px!important;width:100%!important;}
+#quizView .quizAnswerRowV42 .v40-answer-navV8240{display:flex!important;align-items:stretch!important;gap:5px!important;flex:0 0 auto!important;flex-wrap:nowrap!important;width:auto!important;margin:0!important;padding:0!important;order:0!important;}
+#quizView .quizAnswerRowV42 .v40-answer-navV8240 .btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:54px!important;min-height:46px!important;padding:7px 9px!important;white-space:nowrap!important;}
+#quizView:not(.is-revealed) .quizAnswerRowV42 .v40-answer-navV8240 #quizNext{display:none!important;}
+#quizView.is-revealed .quizAnswerRowV42 .v40-answer-navV8240{display:flex!important;}
+#quizView.is-revealed .quizAnswerRowV42 .v40-answer-navV8240 #quizSkip{display:none!important;}
+#quizView.is-revealed .quizAnswerRowV42 .v40-answer-navV8240 #quizNext{display:inline-flex!important;}
+#quizView .quizAnswerRowV42 #quizAnswer{flex:1 1 auto!important;min-width:70px!important;}
+#quizView .quizAnswerRowV42 #quizManualSubmitV42{flex:0 0 auto!important;min-width:108px!important;}
+/* Anchor the avatar under the actual input centre while preserving its current vertical slot. */
+#quizView .v36-person-row{display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important;min-height:110px!important;height:110px!important;padding:2px 0!important;position:relative!important;}
+#quizView .v40-avatar-wrapV8240{position:relative!important;display:block!important;flex:0 0 86px!important;width:86px!important;height:105px!important;min-height:105px!important;transform:translateX(var(--v8240-avatar-offset,0px))!important;}
+#quizView .v40-avatar-wrapV8240 #v36Avatar{position:absolute!important;inset:0!important;display:block!important;width:86px!important;height:105px!important;margin:0!important;object-fit:cover!important;object-position:center top!important;border-radius:8px!important;}
+#quizView .v40-avatar-wrapV8240 #v36Count{position:absolute!important;left:0!important;right:auto!important;top:auto!important;bottom:0!important;z-index:2!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:20px!important;min-height:19px!important;margin:0!important;padding:1px 5px!important;border:1px solid #ffffff65!important;border-radius:5px!important;background:rgba(16,20,27,.86)!important;color:#fff!important;font-size:11px!important;font-weight:800!important;line-height:1.25!important;text-align:center!important;}
+#quizView .v40-avatar-wrapV8240 #quizTimerDisplay{position:absolute!important;left:auto!important;right:0!important;top:auto!important;bottom:0!important;z-index:2!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:auto!important;min-width:0!important;min-height:19px!important;margin:0!important;padding:1px 5px!important;border:1px solid #ffffff65!important;border-radius:5px!important;background:rgba(16,20,27,.9)!important;color:#fff!important;font-size:10px!important;font-weight:800!important;line-height:1.25!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important;}
+@media(max-width:760px){
+ #quizView .quizAnswerRowV42{gap:5px!important;}
+ #quizView .quizAnswerRowV42 .v40-answer-navV8240{gap:4px!important;}
+ #quizView .quizAnswerRowV42 .v40-answer-navV8240 .btn{min-width:47px!important;padding:6px 7px!important;font-size:11px!important;}
+ #quizView .quizAnswerRowV42 #quizManualSubmitV42{min-width:82px!important;padding:6px 8px!important;font-size:11px!important;}
+ #quizView .quizAnswerRowV42 #quizAnswer{min-width:55px!important;}
+ #quizView .v40-avatar-wrapV8240{flex-basis:74px!important;width:74px!important;height:92px!important;min-height:92px!important;}
+ #quizView .v40-avatar-wrapV8240 #v36Avatar{width:74px!important;height:92px!important;}
+ #quizView .v40-avatar-wrapV8240 #quizTimerDisplay{font-size:9px!important;padding:1px 3px!important;}
+}
+</style>

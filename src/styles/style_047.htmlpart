@@ -1,0 +1,43 @@
+<style id="v82-54-emq-list-tools-style">
+#quizView .emqSourceModeV8249 select{min-height:36px;max-width:100%;cursor:pointer}
+#quizView .emqWorkListPickerV8254{flex:1 1 100%;min-width:220px;max-width:min(100%,520px);font-size:12px}
+#quizView .emqWorkListPickerV8254 summary{cursor:pointer;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+#quizView .emqWorkListOptionsV8254{display:grid;gap:5px;max-height:220px;overflow:auto;padding:8px;margin-top:5px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+#quizView .emqWorkListOptionsV8254 label{display:flex;align-items:center;gap:8px;padding:5px;border-radius:6px}
+#quizView .emqAudioToolPanelV8254{margin:9px 0;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--muted);font-size:12px;line-height:1.55}
+#quizView .emqAudioToolPanelV8254[hidden]{display:none!important}
+#quizView .emqAudioToolPanelV8254 .emqAudioToolActionsV8254{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+#quizView .emqAudioToolPanelV8254 .btn{min-height:32px;font-size:12px}
+#watchlistView .mylistModeTabs #emqListsModeTabV8254.active{background:var(--accent,#7b5b91);color:#fff;border-color:transparent}
+#emqListsWorkV8254{margin-top:12px}
+.emqListManagerShellV8254{display:grid;gap:14px}
+.emqListManagerHeadV8254{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.emqListManagerHeadV8254 h2{margin:0 0 4px}
+.emqListManagerHeadV8254 p,.emqListSmallV8254{font-size:12px;line-height:1.6;color:var(--muted)}
+.emqListCreateV8254,.emqBulkToolbarV8254{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.emqListCreateV8254 input,.emqBulkToolbarV8254 select{min-width:190px;max-width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit;font-size:12px}
+.emqListGridV8254{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.emqListCardV8254{border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:12px;min-width:0}
+.emqListCardV8254 h3{margin:0 0 5px;overflow-wrap:anywhere}
+.emqListCardV8254 p{margin:4px 0 10px;font-size:12px;line-height:1.5;color:var(--muted)}
+.emqListCardV8254 .actions{display:flex;flex-wrap:wrap;gap:6px}
+.emqListMembersV8254{display:grid;gap:6px}
+.emqListMemberV8254{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:8px}
+.emqListMemberV8254 .meta{display:block;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
+.emqBulkPanelV8254{margin:10px 0!important}
+.emqBatchSelectV8254{display:flex;align-items:center;gap:6px;margin:0;padding:6px 8px;border-radius:7px;background:var(--panel);border:1px solid var(--line);font-size:11px;cursor:pointer}
+.emqBatchSelectV8254 input{margin:0}
+.vn49Card .emqBatchSelectV8254{align-self:flex-start;margin:0 0 7px}
+.emqBulkStatusV8254{font-size:11px;color:var(--muted);margin:0 0 3px}
+.emqAllWorksPanelV8254{display:grid;gap:10px;margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.emqAllWorksToolbarV8254{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.emqAllWorksToolbarV8254 input{flex:1;min-width:220px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit;font-size:12px}
+.emqAllWorksGridV8254{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.emqAllWorkCardV8254{display:flex;align-items:flex-start;gap:8px;min-width:0;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+.emqAllWorkCardV8254 .emqAllWorkInfoV8254{min-width:0;overflow-wrap:anywhere;flex:1}
+.emqAllWorkCardV8254 strong{display:block;font-size:12px;line-height:1.4}
+.emqAllWorkCardV8254 small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:4px}
+.emqAllWorkCardV8254 input{margin-top:3px;flex:0 0 auto}
+@media(max-width:650px){.emqAllWorksToolbarV8254 input{min-width:0;width:100%}.emqAllWorksGridV8254{grid-template-columns:1fr}}
+@media(max-width:650px){.emqListGridV8254{grid-template-columns:1fr}.emqListCreateV8254 input,.emqBulkToolbarV8254 select{flex:1;min-width:0;width:100%}.emqListMemberV8254{align-items:flex-start}}
+</style>

@@ -1,0 +1,6 @@
+<style id="v62-cover-stays-on-top">
+/* Feedback sits behind the anime cover; the cover remains the topmost visual layer. */
+#quizView .quizMystery .quizAnswerFeedbackV61{z-index:2!important}
+#quizView .quizMystery .quizAnimeCoverV30{position:relative!important;z-index:3!important}
+#quizView .quizMystery .quizAnimeCoverV30[hidden]{display:none!important}
+</style>

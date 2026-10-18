@@ -1,0 +1,12 @@
+<script id="v32-quiet-quiz-flow-script">
+(()=>{
+ const root=document.getElementById('quizView');
+ if(!root)return;
+ // Keep the audio playing through the answer/reveal buffer. It stops only when nextQuiz starts the next song.
+ const answer=document.getElementById('quizAnswer');
+ if(answer){answer.placeholder='輸入答案後按 Enter…';answer.setAttribute('aria-label','輸入答案，按 Enter 提交');}
+ const mystery=root.querySelector('.quizMystery');
+ const audio=document.getElementById('audioPlayer');
+ if(mystery&&audio){const sync=()=>mystery.classList.toggle('is-playing-v32',!audio.paused&&!audio.ended);audio.addEventListener('playing',sync);audio.addEventListener('pause',sync);audio.addEventListener('ended',sync);sync();}
+})();
+</script>

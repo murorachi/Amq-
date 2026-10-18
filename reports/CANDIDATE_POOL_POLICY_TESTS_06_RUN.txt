@@ -1,0 +1,71 @@
+PASS unknown source mode fails closed to AMQ
+PASS mixed mode admits AMQ
+PASS mixed mode admits EMQ
+PASS AMQ mode rejects EMQ
+PASS EMQ mode rejects AMQ
+PASS unknown source rejected
+PASS numeric primitive accepted
+PASS decimal string accepted
+PASS scientific notation accepted
+PASS empty string is missing, not numeric
+PASS boolean is not numeric
+PASS array is not numeric
+PASS infinity is rejected
+PASS NaN is rejected
+PASS missing song type maps to type 5
+PASS song type zero maps to type 5
+PASS malformed song type rejected
+PASS fractional song type rejected
+PASS missing setting uses fallback
+PASS malformed setting rejected
+PASS undefined lower bound uses default
+PASS malformed lower bound rejected
+PASS missing difficulty allowed as unknown
+PASS negative difficulty rejected
+PASS zero difficulty treated as unknown/allowed
+PASS difficulty in range allowed
+PASS difficulty out of range rejected
+PASS invalid difficulty range rejected
+PASS hard difficulty upper boundary included
+PASS hard difficulty above boundary rejected
+PASS unknown year included by default
+PASS unknown year excluded when requested
+PASS year zero follows unknown policy
+PASS year boundary included
+PASS fractional year rejected
+PASS malformed year rejected
+PASS unknown season allowed by default list
+PASS season prefix parsed
+PASS season mismatch rejected
+PASS known anime type retained
+PASS unknown anime type maps to Other
+PASS invalid status rejected
+PASS status zero accepted
+PASS quick pool all accepts status zero
+PASS quick pool unmarked requires status zero
+PASS quick pool heard accepts status one
+PASS quick pool tagged requires tag
+PASS quick pool tagged rejects blank tag
+PASS hard quick pool AMQ requires unmarked and difficulty <=20
+PASS hard quick pool AMQ rejects marked song
+PASS hard quick pool EMQ does not apply AMQ status/difficulty restriction
+PASS unknown quick pool rejected
+PASS required tag rejects blank
+PASS tag query is case-insensitive
+PASS disabled watchlist filter does not constrain
+PASS enabled watchlist requires exact selected status
+PASS enabled watchlist rejects empty selection
+PASS watchlist membership only when enabled
+PASS enabled watchlist requires member
+PASS blacklist rejects blocked item
+PASS repeat filter rejects previously seen ID
+PASS repeat filter rejects immediate repeat
+PASS repeat filter accepts unseen ID
+PASS repeat filter rejects empty ID when enabled
+PASS metadata rejects arrays
+PASS metadata rejects invalid source
+PASS metadata defaults source to AMQ
+PASS EMQ metadata skips AMQ-specific difficulty/season/type checks
+PASS AMQ-specific restriction detected for hard pool
+PASS no AMQ-specific restriction for defaults
+RESULT 70 passed, 0 failed

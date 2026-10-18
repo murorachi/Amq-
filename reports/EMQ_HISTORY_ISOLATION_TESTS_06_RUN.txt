@@ -1,0 +1,8 @@
+PASS EMQ history records resolve source and work metadata from EMQ song/work IDs
+PASS AMQ history records retain AMQ metadata and do not become EMQ records
+PASS familiarity and tags are keyed by song ID, not work ID
+PASS tag bridge rejects unknown IDs and preserves existing tag when storage fails
+PASS storedStatus uses song ID, local-storage fallback, and rejects invalid values
+PASS storedTag reads only the requested song ID and handles malformed storage safely
+PASS unified snapshots keep EMQ rows separate from AMQ source arrays
+RESULT 7 passed, 0 failed

@@ -1,0 +1,1 @@
+<style id="v45-theme-volume-compat">body.dark #quizView .v44-volume{background:var(--panel,#24252b);border-color:var(--line,#454751);color:var(--text,#ececf2)}body.dark #quizView .v44-volume input{color-scheme:dark;accent-color:var(--accent,#b99ad8)}</style>

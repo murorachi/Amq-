@@ -1,0 +1,29 @@
+<style id="v82-41-multiplayer-solo-player-style">
+#multiplayerView .mpPlayerGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}
+#multiplayerView .mpPlayerCard{display:flex;flex-direction:column;align-items:center;gap:9px;min-height:266px;padding:12px 10px 10px;border-radius:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 94%,var(--accent,#9567b0) 6%),var(--panel2,#fbf8fc));box-shadow:0 5px 15px rgba(52,34,68,.07);transition:border-color .16s,box-shadow .16s}
+#multiplayerView .mpPlayerCard.mpYou{border-color:color-mix(in srgb,var(--accent,#9567b0) 62%,var(--line,#e9ddeb));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent,#9567b0) 18%,transparent),0 7px 18px rgba(93,55,126,.10)}
+#multiplayerView .mpPlayerCard.mpOffline{opacity:.72;filter:saturate(.78)}
+#multiplayerView .mpSpeech{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:100%;min-height:48px;max-height:76px;overflow:auto;overflow-wrap:anywhere;padding:9px 11px;border-radius:17px 17px 17px 7px;border:1px solid color-mix(in srgb,var(--accent,#9567b0) 19%,var(--line,#e9ddeb));background:color-mix(in srgb,var(--accent,#9567b0) 7%,var(--panel,#fff));box-shadow:0 2px 0 color-mix(in srgb,var(--accent,#9567b0) 10%,transparent);text-align:center;font-size:12px;line-height:1.45;white-space:pre-wrap}
+#multiplayerView .mpSpeech::after{content:"";position:absolute;left:23px;bottom:-5px;width:9px;height:9px;transform:rotate(45deg);background:inherit;border-right:1px solid color-mix(in srgb,var(--accent,#9567b0) 19%,var(--line,#e9ddeb));border-bottom:1px solid color-mix(in srgb,var(--accent,#9567b0) 19%,var(--line,#e9ddeb));pointer-events:none}
+#multiplayerView .mpSpeech.mpSpeechOn{background:color-mix(in srgb,var(--accent,#9567b0) 11%,var(--panel,#fff));border-color:color-mix(in srgb,var(--accent,#9567b0) 39%,var(--line,#e9ddeb))}
+#multiplayerView .mpSpeechEmpty{display:block;width:100%;text-align:center;color:var(--muted,#7b6b83);opacity:.55}
+#multiplayerView .mpAvatarWrap{position:relative;flex:0 0 auto;grid-area:auto;width:86px;height:105px;margin:0 auto}
+#multiplayerView .mpAvatar{display:grid;place-items:center;width:86px;height:105px;border-radius:9px;background:var(--panel,#fff);box-shadow:0 4px 11px rgba(30,20,40,.13)}
+#multiplayerView .mpAvatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:inherit}
+#multiplayerView .mpAvatar>span{font-size:26px}
+#multiplayerView .mpPlayerStatus{right:-4px;bottom:-4px;width:13px;height:13px}
+#multiplayerView .mpPlayerIdentity{display:flex;flex:0 0 auto;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;width:100%;min-width:0;text-align:center}
+#multiplayerView .mpPlayerIdentity b{font-size:13px;line-height:1.35;text-align:center;overflow-wrap:anywhere}
+#multiplayerView .mpPlayerIdentity small{font-size:10px;line-height:1.4;text-align:center;overflow-wrap:anywhere}
+#multiplayerView .mpPlayerIdentity .mpPlayerId{display:inline-block;max-width:100%;padding:3px 7px;border:1px solid var(--line,#e9ddeb);border-radius:999px;background:color-mix(in srgb,var(--panel,#fff) 85%,var(--accent,#9567b0) 15%);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:9px;line-height:1.35;font-variant-numeric:tabular-nums;word-break:break-word}
+#multiplayerView .mpPlayerScore{display:flex;flex:0 0 auto;align-items:center;justify-content:space-between;gap:7px;width:100%;margin-top:auto;padding-top:8px;border-top:1px solid color-mix(in srgb,var(--line,#e9ddeb) 78%,transparent);font-size:12px}
+#multiplayerView .mpPlayerScore>span{font-weight:900;font-variant-numeric:tabular-nums}
+#multiplayerView .mpHostHandoff{max-width:100%;white-space:normal}
+#multiplayerView .mpStripHead small{display:none}
+@media(max-width:1000px){#multiplayerView .mpPlayerGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}#multiplayerView .mpPlayerCard{padding:10px 8px 9px;min-height:258px}}
+@media(max-width:760px){#multiplayerView .mpPlayerGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#multiplayerView .mpPlayerCard{min-height:250px;padding:10px}#multiplayerView .mpAvatarWrap,#multiplayerView .mpAvatar{width:78px;height:96px}#multiplayerView .mpSpeech{font-size:11px;min-height:44px;max-height:70px}}
+@media(max-width:390px){#multiplayerView .mpPlayerGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}#multiplayerView .mpPlayerCard{padding:8px 6px;min-height:238px;gap:8px}#multiplayerView .mpAvatarWrap,#multiplayerView .mpAvatar{width:68px;height:83px}#multiplayerView .mpPlayerIdentity b{font-size:12px}#multiplayerView .mpPlayerIdentity small{font-size:9px}#multiplayerView .mpPlayerIdentity .mpPlayerId{font-size:8px;padding:3px 5px}#multiplayerView .mpPlayerScore{font-size:11px}#multiplayerView .mpHostHandoff{font-size:9px;padding:4px 5px}}
+body.dark-theme #multiplayerView .mpPlayerCard{background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#211b2a) 94%,var(--accent,#9567b0) 6%),var(--panel2,#282130));box-shadow:0 5px 15px rgba(0,0,0,.18)}
+body.dark-theme #multiplayerView .mpSpeech{background:color-mix(in srgb,var(--accent,#9567b0) 15%,var(--panel,#211b2a));border-color:color-mix(in srgb,var(--accent,#9567b0) 35%,var(--line,#55465e));box-shadow:0 2px 0 rgba(0,0,0,.15)}
+#sectionDesc:empty{display:none!important}
+</style>

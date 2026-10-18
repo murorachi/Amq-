@@ -1,0 +1,454 @@
+<script>
+(()=>{
+const wrap=document.querySelector('.wrap');
+if(!wrap){return}
+const make=(tag,attrs={},html='')=>{const e=document.createElement(tag);for(const [k,v] of Object.entries(attrs))if(k==='class')e.className=v;else if(k==='style')e.style.cssText=v;else e.setAttribute(k,v);e.innerHTML=html;return e};
+const quiz=make('section',{id:'quizView',class:'quizView hidden'},`
+ <div class="quizTop"><div><h2>猜歌遊戲</h2></div><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn" id="quizThemeToggle" type="button">☾ 暗色模式</button><button class="btn" id="quizExit">返回收藏室</button></div></div>
+ <div class="quizQuickSettings"><label>猜什麼 <select id="quizTarget"><option value="title">歌曲名稱</option><option value="artist">歌手</option><option value="anime">動畫作品</option><option value="all">作品＋歌手＋歌曲</option></select></label><label>快速範圍 <select id="quizPool"><option value="unmarked">未標記歌曲</option><option value="heard">聽過／有印象</option><option value="all">全部歌曲</option><option value="hard">難度 0–20 且未標記</option><option value="tagged">有自訂標籤的歌曲</option></select></label><div class="quizCustomListsControl"><span>自訂清單</span><details id="qsCustomListsPicker"><summary id="qsCustomListSummary">不限制（依其他條件）</summary><div id="qsCustomListOptions" role="group" aria-label="自訂練習清單範圍"></div></details><select id="qsCustomListId" class="hidden" aria-hidden="true" tabindex="-1"><option value=""></option></select><small class="quizCustomScopeSummaryV844" id="quizCustomScopeSummaryV844" role="status" aria-live="polite"></small></div><label><input id="quizAutoNext" type="checkbox"> 答題後自動下一題</label></div>
+ <div class="quizRoundBar"><span id="quizRoundProgress"></span></div><div id="quizRoundLabel" style="font-size:11px;color:var(--muted);margin-bottom:10px">自由練習 · 尚未開始</div>
+ <div class="quizGrid"><div class="quizStage"><div class="quizMystery"><img id="quizAnimeCoverV26" class="quizAnimeCoverV26" alt="動畫封面" loading="lazy" hidden><div><div class="note">♫ ?</div><b id="quizPrompt">準備抽取第一首歌曲</b><small id="quizSubprompt">歌名、歌手、動畫資訊暫時隱藏</small></div></div>
+ <div class="quizControls quizSkipControls"><button class="btn" id="quizManualPlayV8262" type="button" hidden>▶ 播放音訊</button><button class="btn" id="quizSkip" type="button">跳過</button></div>
+ <div class="quizSuggest"><input class="quizAnswerInput" id="quizAnswer" lang="en" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="go" placeholder="輸入答案，選擇下拉建議後按 Enter…"><div class="quizSuggestions" id="quizSuggestions" role="listbox"></div></div><div id="quizAllAnswersV857" class="quizAllAnswersV857 hidden"><label>歌手／演唱者<input id="quizAnswerArtistV857" class="quizAnswerInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="輸入歌手名稱"></label><label>歌曲名稱<input id="quizAnswerTitleV857" class="quizAnswerInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="輸入歌曲名稱"></label></div>
+ <div class="quizControls"><button class="btn primary" id="quizSubmit">確認答案</button><button class="btn" id="quizNext" disabled>下一題 →</button><span id="quizTimerDisplay" style="font-size:12px;color:var(--muted)">--</span></div>
+ <div class="quizStatus" id="quizStatus">點「開始新題」抽歌。播放開始後才計時。</div><div class="quizResult hidden" id="quizResult"></div>
+ <div class="quizStats"><div class="quizStat"><b id="quizHeardCount">0</b><span>聽過</span></div><div class="quizStat"><b id="quizKnownCount">0</b><span>有印象</span></div><div class="quizStat"><b id="quizInstantCount">0</b><span>秒答</span></div></div></div>
+ <aside class="quizSide"><button class="quizSettingsToggle" id="quizSettingsToggle" type="button"><span>⚙ 出題設定（細項）</span><span id="quizSettingsChevron">＋</span></button><div id="quizSettingsBody" class="hidden">
+ <div class="quizSetting"><h4>題數與播放</h4><div class="settingRow"><label>每回合題數 <input id="qsCount" type="number" min="0" max="500" step="5" value="25"></label><label>音訊播放秒數 <input id="qsClip" type="number" min="5" max="120" step="5" value="20"></label></div><div class="settingRow"><label style="width:100%">Sample 段落位置 <input id="qsSamplePosition" type="range" min="0" max="100" step="1" value="0" style="width:min(100%,420px);vertical-align:middle"> <b id="qsSamplePositionValue">0%</b></label></div><div class="settingRow"><button class="btn" id="qsRandomSample" type="button" aria-pressed="true">隨機 Sample：開</button><span style="font-size:11px;color:var(--muted)">開啟後每首歌隨機抽取播放段落</span></div><div class="settingRow"><label style="width:100%">AMQ 小人角色 VNDB ID <input id="qsVndbCharacterId" type="text" placeholder="例如 c123" autocomplete="off" style="max-width:220px"></label><button class="btn" id="qsLoadVndbCharacter" type="button">載入角色圖片</button><span id="qsVndbStatus" style="font-size:11px;color:var(--muted)"></span></div><div class="settingRow"><label><input id="qsAutoPlay" type="checkbox" checked> 抽題後自動播放</label></div><div class="settingRow"><label><input id="qsAutoNext" type="checkbox"> 答題後自動下一題</label></div></div>
+ <div class="quizSetting"><h4>年代範圍</h4><div class="settingRow"><label>從 <input id="qsYearMin" type="number" min="1900" max="2100" value="1924"></label><label>到 <input id="qsYearMax" type="number" min="1900" max="2100" value="2026"></label></div><div class="settingRow"><label><input id="qsUnknownYear" type="checkbox" checked> 包含年份未知</label></div><div class="checkGrid"><label><input type="checkbox" name="qsSeason" value="Winter" checked> 冬季</label><label><input type="checkbox" name="qsSeason" value="Spring" checked> 春季</label><label><input type="checkbox" name="qsSeason" value="Summer" checked> 夏季</label><label><input type="checkbox" name="qsSeason" value="Fall" checked> 秋季</label></div></div>
+ <div class="quizSetting"><h4>作品類型</h4><div class="checkGrid"><label><input type="checkbox" name="qsAnimeType" value="TV" checked> TV</label><label><input type="checkbox" name="qsAnimeType" value="OVA" checked> OVA</label><label><input type="checkbox" name="qsAnimeType" value="Movie" checked> 劇場版</label><label><input type="checkbox" name="qsAnimeType" value="Special" checked> Special</label><label><input type="checkbox" name="qsAnimeType" value="ONA" checked> ONA</label><label><input type="checkbox" name="qsAnimeType" value="Other" checked> 其他類型</label></div></div>
+ <div class="quizSetting"><h4>歌曲類型</h4><div class="checkGrid"><label><input type="checkbox" name="qsSongType" value="1" checked> OP</label><label><input type="checkbox" name="qsSongType" value="2" checked> ED</label><label><input type="checkbox" name="qsSongType" value="3" checked> 插入歌</label><label><input type="checkbox" name="qsSongType" value="4" checked> OST</label><label><input type="checkbox" name="qsSongType" value="5" checked> 其他</label></div><div class="settingRow"><label>難度最低 <input id="qsDiffMin" type="number" min="0" max="100" value="0"></label><label>最高 <input id="qsDiffMax" type="number" min="0" max="100" value="100"></label></div></div>
+ <div class="quizSetting"><h4>熟悉度與收藏範圍</h4><div class="checkGrid"><label><input type="checkbox" name="qsStatus" value="0" checked> 未標記</label><label><input type="checkbox" name="qsStatus" value="1" checked> 聽過</label><label><input type="checkbox" name="qsStatus" value="2" checked> 有印象</label><label><input type="checkbox" name="qsStatus" value="3" checked> 秒答</label></div><div class="settingRow" style="margin-top:12px"><label><input id="qsWatchStatusFilterEnabled" type="checkbox"> 依看番狀態篩選出題範圍</label></div><div class="checkGrid" id="qsWatchStatusGrid"><label><input type="checkbox" name="qsWatchStatus" value="current" checked> 正在觀看</label><label><input type="checkbox" name="qsWatchStatus" value="completed" checked> 已看完</label><label><input type="checkbox" name="qsWatchStatus" value="paused" checked> 暫停觀看</label><label><input type="checkbox" name="qsWatchStatus" value="dropped" checked> 已棄番</label><label><input type="checkbox" name="qsWatchStatus" value="planning" checked> 計畫觀看</label></div><div class="toolhint">啟用後，只會出現勾選狀態的動畫；未標記看番狀態與「重看中」不會被納入這五類。</div><div class="settingRow"><label><input id="qsWatchlistOnly" type="checkbox"> 只出已加入我的清單的動畫</label></div><div class="settingRow"><label><input id="qsTagsOnly" type="checkbox"> 只出有自訂標籤的歌曲</label></div><label style="display:block;margin-top:8px">標籤包含文字 <input id="qsTagText" type="text" placeholder="例如：80年代、夏日感、電子鼓"></label></div>
+ <div class="quizSetting"><h4>答題判定</h4><div class="settingRow"><label>秒答上限（秒） <input id="qsInstantSec" type="number" min="1" max="30" value="5"></label></div><div class="settingRow"><label><input id="qsAcceptPartial" type="checkbox"> 允許答案包含關鍵字（較寬鬆）</label></div><div class="settingRow"><label><input id="qsKeepHigher" type="checkbox" checked> 不因答錯降低既有熟悉度</label></div></div>
+ <div class="settingRow"><button class="btn primary" id="quizApplySettings" type="button">套用設定並開始</button><button class="btn" id="quizResetSettings" type="button">恢復預設</button></div></div>
+ <h3 style="margin-top:16px">熟悉度自動分類</h3><ul class="quizRule"><li><b>答錯／跳過 → 聽過</b></li><li><b>答對但較慢 → 有印象</b></li><li><b>在設定秒數內答對 → 秒答</b></li><li>原本較高的熟悉度可選擇保留。</li></ul><div class="quizSource" id="quizAudioState">只播放音訊，不顯示影片。音訊來源可能受外部服務影響。</div><button class="btn primary" id="quizStart" style="width:100%;margin-top:12px">開始新題 ✨</button></aside></div>`);
+wrap.append(quiz);
+
+
+
+let quizActive=false,quizSong=null,quizStartedAt=0,quizFinished=false,quizAudioStarted=false,lastQuestionId=null,currentQuestionTarget='anime';
+Object.defineProperty(window,'__aniQuizStateV45',{configurable:true,get:()=>({quizSong,quizSettings,quizFinished,quizActive,quizAudioStarted,quizStartedAt,currentQuestionTarget})});
+const originalMediaFiles=window.mediaFiles;
+// Functions declared in the previous classic script are global bindings, so the quiz can reuse the existing mirror player.
+const norm=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{P}\p{S}\p{C}]/gu,'');
+const getTargetValue=(s,type)=>type==='artist'?String(s?.[5]||'').trim():(type==='anime'||type==='all')?String((window.__aniEmqAPI?.getWorkSummary?.(s?.[0])||window.byAnime.get(s?.[0]))?.[1]||'').trim():String(s?.[4]||'').trim();
+function enterSpecial(which='quiz'){document.body.classList.remove('ui-home-menu','ui-explore-open','ui-settings-open','relations-mode');document.body.classList.add('quiz-mode');quizActive=true;audioEl.controls=false;audioEl.style.display='none';document.getElementById('quizView').classList.remove('hidden');{document.getElementById('dockTitle').textContent='猜歌模式';document.getElementById('dockSubtitle').textContent='答案已隱藏';document.getElementById('playerTitle').textContent='猜歌模式';document.getElementById('playerSub').textContent='答案已隱藏';if(window.videoEl){videoEl.pause();videoEl.style.display='none'}if(!quizSong){document.getElementById('quizPrompt').textContent='準備開始猜歌';document.getElementById('quizSubprompt').textContent='按右側「開始新題」抽取第一首歌曲';document.getElementById('quizStatus').textContent='尚未開始。先調整出題設定，再按「開始新題」。'}}document.getElementById('dockMeta')?.removeAttribute('style');window.scrollTo({top:0,behavior:'instant'})}
+function deactivateQuizModeV82(){try{if(typeof window.__aniQuizStopStateV82==='function')window.__aniQuizStopStateV82()}catch(err){console.error('Quiz leave cleanup failed',err)}document.body.classList.remove('quiz-mode','relations-mode','quiz-round-paused');quizActive=false;audioEl.controls=true;audioEl.style.display='';if(typeof currentSong!=='undefined'&&currentSong)updateDock(currentSong);else updateDock(null)}
+window.__aniEnterQuizV82=()=>enterSpecial('quiz');window.__aniDeactivateQuizV82=deactivateQuizModeV82;
+function exitSpecial(){deactivateQuizModeV82();window.__aniNavigateApp?.('home')}
+const quizDefaults={target:'anime',count:25,clip:20,samplePosition:0,randomSample:true,vndbCharacterId:'',yearMin:1924,yearMax:2026,diffMin:0,diffMax:100,instantSec:5,unknownYear:true,noRepeat:true,autoPlay:true,autoNext:true,includeEmq:false,emqMode:'amq',watchlistOnly:false,tagsOnly:false,tagText:'',acceptPartial:false,keepHigher:true,watchStatusFilterEnabled:false,watchStatuses:['current','completed','paused','dropped','planning'],seasons:['Winter','Spring','Summer','Fall'],animeTypes:['TV','OVA','Movie','Special','ONA','Other'],songTypes:[1,2,3,4,5],statuses:[0,1,2,3]};
+let quizSettings={...quizDefaults},activeFocusSongIdsV72=[],activeFocusModeV72=false,activeFocusOriginalSettingsV72=null,activeFocusOriginalPoolV72=null,quizRound=0,quizRoundTarget=25,quizRoundSeen=new Set(),quizClipTimer=null,quizOptionFocus=-1,quizAnswerStopAt=0;
+function readQuizSettingsUI(){const g=id=>document.getElementById(id);quizSettings={count:Math.max(0,Math.min(500,Number(g('qsCount').value)||0)),clip:Math.max(5,Math.min(120,Number(g('qsClip').value)||20)),samplePosition:Math.max(0,Math.min(100,Number(g('qsSamplePosition')?.value)||0)),randomSample:g('qsRandomSample')?.getAttribute('aria-pressed')==='true',vndbCharacterId:g('qsVndbCharacterId')?.value.trim()||'',target:['anime','title','artist','all'].includes(g('quizTarget')?.value)?g('quizTarget').value:'anime',yearMin:window.__aniCandidatePoolPolicyV8265.settingNumber(g('qsYearMin').value,1924),yearMax:window.__aniCandidatePoolPolicyV8265.settingNumber(g('qsYearMax').value,2026),diffMin:window.__aniCandidatePoolPolicyV8265.settingNumber(g('qsDiffMin').value,0),diffMax:window.__aniCandidatePoolPolicyV8265.settingNumber(g('qsDiffMax').value,100),instantSec:Math.max(1,Math.min(30,Number(g('qsInstantSec').value)||5)),autoNextDelay:Math.max(1,Math.min(30,Number(g('qsAutoNextDelay')?.value)||5)),titleLanguage:g('qsTitleLanguage')?.value||'english',visualizerMode:g('qsVisualizerMode')?.value||'wave',unknownYear:g('qsUnknownYear').checked,noRepeat:true,autoPlay:g('qsAutoPlay').checked,autoNext:g('qsAutoNext').checked,includeEmq:!!g('qsEmqEnabled')?.checked,emqMode:['amq','mixed','emq'].includes(g('qsEmqModeV8249')?.value)?g('qsEmqModeV8249').value:(quizSettings.emqMode||'amq'),watchlistOnly:g('qsWatchlistOnly').checked,watchStatusFilterEnabled:g('qsWatchStatusFilterEnabled')?.checked||false,watchStatuses:[...document.querySelectorAll('[name=qsWatchStatus]:checked')].map(x=>x.value),tagsOnly:g('qsTagsOnly').checked,tagText:g('qsTagText').value.trim().toLowerCase(),acceptPartial:g('qsAcceptPartial').checked,keepHigher:g('qsKeepHigher').checked,seasons:[...document.querySelectorAll('[name=qsSeason]:checked')].map(x=>x.value),animeTypes:[...document.querySelectorAll('[name=qsAnimeType]:checked')].map(x=>x.value),songTypes:[...document.querySelectorAll('[name=qsSongType]:checked')].map(x=>Number(x.value)),statuses:[...document.querySelectorAll('[name=qsStatus]:checked')].map(x=>Number(x.value)),focusSongIds:Array.isArray(quizSettings.focusSongIds)?quizSettings.focusSongIds.map(String):[],customListIds:typeof window.__aniSelectedCustomListIdsV825==='function'?window.__aniSelectedCustomListIdsV825():(Array.isArray(quizSettings.customListIds)?quizSettings.customListIds.map(String):(quizSettings.customListId?[String(quizSettings.customListId)]:[])),customListId:(typeof window.__aniSelectedCustomListIdsV825==='function'?window.__aniSelectedCustomListIdsV825():(Array.isArray(quizSettings.customListIds)?quizSettings.customListIds.map(String):(quizSettings.customListId?[String(quizSettings.customListId)]:[]))).length===1?(typeof window.__aniSelectedCustomListIdsV825==='function'?window.__aniSelectedCustomListIdsV825()[0]:(Array.isArray(quizSettings.customListIds)?quizSettings.customListIds[0]:quizSettings.customListId||'')):''};try{localStorage.setItem('aniQuizSettingsV14',JSON.stringify(quizSettings))}catch(e){}applyQuizDisplaySettingsV30?.();}
+function loadQuizSettings(){try{const storageKey='aniQuizSettingsV14',selectionSemanticsKey='aniQuizSelectionSemanticsV8265',raw=localStorage.getItem(storageKey),x=JSON.parse(raw||'{}');quizSettings={...quizDefaults,...x};if(!['anime','title','artist','all'].includes(quizSettings.target))quizSettings.target='anime';if(localStorage.getItem(selectionSemanticsKey)!=='1'){const migrated={...x};let changed=false;for(const k of ['seasons','animeTypes','songTypes','statuses','watchStatuses'])if(Array.isArray(x[k])&&x[k].length===0&&Array.isArray(quizDefaults[k])&&quizDefaults[k].length>0){quizSettings[k]=[...quizDefaults[k]];migrated[k]=[...quizDefaults[k]];changed=true}if(changed&&raw!==null)localStorage.setItem(storageKey,JSON.stringify(migrated));localStorage.setItem(selectionSemanticsKey,'1')}for(const k of ['seasons','animeTypes','songTypes','statuses','watchStatuses'])if(!Array.isArray(quizSettings[k]))quizSettings[k]=[];if(typeof quizSettings.unknownYear!=='boolean')quizSettings.unknownYear=false;if(!Array.isArray(quizSettings.focusSongIds))quizSettings.focusSongIds=[]}catch(e){quizSettings={...quizDefaults,seasons:[...quizDefaults.seasons],animeTypes:[...quizDefaults.animeTypes],songTypes:[...quizDefaults.songTypes],statuses:[...quizDefaults.statuses],focusSongIds:[]}}
+// V82.61: migrate legacy settings once. Preserve an existing non-zero fixed Sample position; otherwise enable random Sample.
+try{const migrationKey='aniV8261RandomSampleDefaultMigrated';if(localStorage.getItem(migrationKey)!=='1'){const saved=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');const hasExplicitFixedSample=Number(saved.samplePosition)>0&&saved.randomSample!==true;quizSettings.randomSample=!hasExplicitFixedSample;saved.randomSample=quizSettings.randomSample;saved.noRepeat=true;delete saved.enterSubmitEnabled;localStorage.setItem('aniQuizSettingsV14',JSON.stringify(saved));localStorage.setItem(migrationKey,'1')}}catch{}
+quizSettings.noRepeat=true;const g=id=>document.getElementById(id);for(const [id,key] of [['qsCount','count'],['qsClip','clip'],['qsSamplePosition','samplePosition'],['qsVndbCharacterId','vndbCharacterId'],['qsYearMin','yearMin'],['qsYearMax','yearMax'],['qsDiffMin','diffMin'],['qsDiffMax','diffMax'],['qsInstantSec','instantSec'],['qsTagText','tagText']])g(id).value=quizSettings[key];for(const [id,key] of [['qsUnknownYear','unknownYear'],['qsAutoPlay','autoPlay'],['qsAutoNext','autoNext'],['qsWatchlistOnly','watchlistOnly'],['qsWatchStatusFilterEnabled','watchStatusFilterEnabled'],['qsTagsOnly','tagsOnly'],['qsAcceptPartial','acceptPartial'],['qsKeepHigher','keepHigher']])g(id).checked=!!quizSettings[key];if(g('qsEmqEnabled'))g('qsEmqEnabled').checked=!!quizSettings.includeEmq;if(g('qsEmqModeV8249'))g('qsEmqModeV8249').value=['amq','mixed','emq'].includes(quizSettings.emqMode)?quizSettings.emqMode:(quizSettings.includeEmq?'mixed':'amq');for(const [name,key] of [['qsSeason','seasons'],['qsAnimeType','animeTypes'],['qsSongType','songTypes'],['qsStatus','statuses'],['qsWatchStatus','watchStatuses']])document.querySelectorAll(`[name=${name}]`).forEach(el=>el.checked=(quizSettings[key]||[]).map(String).includes(String(el.value)));if(g('quizTarget'))g('quizTarget').value=quizSettings.target||'anime';if(g('qsTitleLanguage'))g('qsTitleLanguage').value=quizSettings.titleLanguage||'english';if(g('qsAutoNextDelay'))g('qsAutoNextDelay').value=quizSettings.autoNextDelay||5;if(g('qsVisualizerMode'))g('qsVisualizerMode').value=quizSettings.visualizerMode||'wave';const rs=g('qsRandomSample');if(rs){rs.setAttribute('aria-pressed',String(!!quizSettings.randomSample));rs.textContent='隨機 Sample：'+(quizSettings.randomSample?'開':'關');rs.classList.toggle('primary',!!quizSettings.randomSample)}}
+<!-- AMQ_SPLIT_MODULE:candidate_pool_policy -->
+<!-- AMQ_SPLIT_MODULE:get_quiz_pool -->
+const __aniEmqGetQuizPoolBaseV8248=getQuizPool;getQuizPool=function(){const base=__aniEmqGetQuizPoolBaseV8248();const mixed=window.__aniEmqAPI?.combinePool?.(base,quizSettings,activeFocusModeV72,quizRoundSeen,lastQuestionId,activeFocusSongIdsV72);const rows=(Array.isArray(mixed)?mixed:base);const health=window.__aniAudioHealthV857;const healthy=health?rows.filter(song=>health.eligible(song)):rows;if(rows.length&&!healthy.length){const status=document.getElementById('quizStatus');if(status)status.textContent='目前篩選範圍沒有可播放的音源；無音源歌曲已暫時排除，來源資料更新後會自動重新納入。'}const scopeFilter=window.__aniApplyQuizCustomListScopeV8265;let scoped=healthy;if(typeof scopeFilter==='function'){try{const result=scopeFilter(healthy,!!activeFocusModeV72);scoped=Array.isArray(result)?result:[]}catch(error){console.error('Custom-list candidate scope failed closed',error);scoped=[]}}else if(!activeFocusModeV72){const ids=Array.isArray(quizSettings?.customListIds)?quizSettings.customListIds:[];let invalid=false;try{invalid=localStorage.getItem('aniQuizCustomListScopeInvalidV8265')==='1'}catch{}if(ids.length||quizSettings?.customListId||invalid){scoped=[];const status=document.getElementById('quizStatus');if(status)status.textContent='自訂清單範圍驗證尚未載入，已停止抽題以避免擴大候選範圍。請重新載入頁面。'}}return scoped};
+function updateQuizCounts(){let h=0,k=0,i=0;for(const s of [...songs,...(quizSettings.includeEmq?(window.__aniEmqAPI?.getRows?.()||[]):[])]){const n=st(s[1]);if(n>=1)h++;if(n>=2)k++;if(n>=3)i++}document.getElementById('quizHeardCount').textContent=h.toLocaleString();document.getElementById('quizKnownCount').textContent=k.toLocaleString();document.getElementById('quizInstantCount').textContent=i.toLocaleString()}
+window.__aniEmqToggleChangedV1=(enabled,mode)=>{quizSettings.includeEmq=!!enabled;if(['amq','mixed','emq'].includes(mode))quizSettings.emqMode=mode;else if(!enabled)quizSettings.emqMode='amq';else if(!['mixed','emq'].includes(quizSettings.emqMode))quizSettings.emqMode='mixed';try{localStorage.setItem('aniQuizSettingsV14',JSON.stringify(quizSettings))}catch(e){}try{updateQuizCounts()}catch(e){}};
+function hideAnswer(){document.getElementById('quizResult').classList.add('hidden');document.getElementById('quizAnswer').value='';['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const field=document.getElementById(id);if(field){field.value='';field.disabled=true}});updateQuizAllAnswersV857();closeQuizSuggestions();document.getElementById('quizSuggestions').classList.remove('open');document.getElementById('quizNext').disabled=true;document.getElementById('quizSubmit').disabled=false;document.getElementById('quizSkip').disabled=false;document.getElementById('quizPrompt').textContent='♫ 盲聽中';document.getElementById('quizSubprompt').textContent='猜測目前選定的目標，音訊開始後計時';quizFinished=false;quizStartedAt=0;quizAnswerStopAt=0;quizAudioStarted=false;const target=document.getElementById('quizTarget');if(target)target.disabled=true}
+function nextQuiz(){if(document.body.classList.contains('quiz-round-paused')){const s=document.getElementById('quizStatus');if(s)s.textContent='本輪已暫停，請先按「繼續」再切換題目。';return}if(typeof clearQuizPlaybackV30==='function')clearQuizPlaybackV30();if(window.audioEl)audioEl.pause();if(quizClipTimer)clearTimeout(quizClipTimer);if(window.videoEl){videoEl.pause();videoEl.removeAttribute('src');videoEl.style.display='none'}if(!quizSettings||!quizSettings.statuses)readQuizSettingsUI();if(quizRoundTarget===0)quizRoundTarget=quizSettings.count||0;if(quizSettings.count>0&&quizRound>=quizSettings.count){quizActive=false;quizFinished=true;quizAudioStarted=false;quizStartedAt=0;try{window.__aniQuizPauseClockV82?.reset?.()}catch(e){}try{clearQuizPlaybackV30()}catch(e){}try{clearQuizAutoNextV30()}catch(e){}document.getElementById('quizStatus').textContent=`本回合完成：${quizRound} 題。按「開始新題」開始新回合。`;document.getElementById('quizRoundLabel').textContent=`回合完成 · ${quizRound}/${quizSettings.count}`;document.getElementById('quizRoundProgress').style.width='100%';quizRound=0;quizRoundSeen.clear();quizRoundTarget=quizSettings.count;return}const pool=getQuizPool();if(!pool.length){quizSong=null;quizFinished=true;quizAudioStarted=false;quizStartedAt=0;document.getElementById('quizPrompt').textContent='目前沒有可播放的歌曲';document.getElementById('quizSubprompt').textContent='請調整曲庫來源、篩選條件，或更新音源資料。';document.getElementById('quizAnswer').value='';document.getElementById('quizAnswer').disabled=true;document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSkip').disabled=true;document.getElementById('quizNext').disabled=true;document.getElementById('quizTimerDisplay').textContent='--';document.getElementById('quizAllAnswersV857')?.classList.add('hidden');return}quizSong=window.__aniEmqAPI?.chooseQuestion?.(pool,quizSettings,activeFocusModeV72)||pool[Math.floor(Math.random()*pool.length)];quizAnswerStopAt=0;quizStartedAt=0;quizAudioStarted=false;currentQuestionTarget=['anime','title','artist','all'].includes(document.getElementById('quizTarget')?.value)?document.getElementById('quizTarget').value:(quizSettings.target||'anime');quizSettings.target=currentQuestionTarget;lastQuestionId=quizSong[1];document.dispatchEvent(new CustomEvent('ani-quiz-new-question',{detail:{songId:quizSong[1],target:currentQuestionTarget}}));quizRoundSeen.add(String(quizSong[1]));hideAnswer();document.getElementById('quizStatus').textContent='先聽音訊，再輸入答案。按播放後開始計時。';document.getElementById('quizAudioState').textContent='正在準備音訊…';document.getElementById('quizRoundLabel').textContent=quizSettings.count?`本回合 ${quizRound+1}/${quizSettings.count}`:`自由練習 · 第 ${quizRound+1} 題`;document.getElementById('quizRoundProgress').style.width=quizSettings.count?`${Math.min(100,quizRound/quizSettings.count*100)}%`:'0%';document.getElementById('quizTimerDisplay').textContent='--';playQuizAudio();updateQuizCounts()} 
+function playQuizAudio(){if(document.body.classList.contains('quiz-round-paused')){const s=document.getElementById('quizStatus');if(s)s.textContent='本輪已暫停，請先按「繼續」再播放音訊。';return}if(!quizSong)return;const manualPlayBtnV8262=document.getElementById('quizManualPlayV8262');if(manualPlayBtnV8262){manualPlayBtnV8262.hidden=quizSettings?.autoPlay!==false;manualPlayBtnV8262.disabled=false;manualPlayBtnV8262.textContent='▶ 播放音訊'}quizActive=true;try{const original=mediaFiles;window.mediaFiles=function(s){const all=original(s);return quizActive?all.filter(x=>x.kind==='audio'):all};listenSong(quizSong,{autoPlay:quizSettings?.autoPlay!==false});window.mediaFiles=original;document.getElementById('dockTitle').textContent='猜歌模式';document.getElementById('dockSubtitle').textContent='答案已隱藏';document.getElementById('playerTitle').textContent='猜歌模式';document.getElementById('playerSub').textContent='答案已隱藏';if(videoEl){videoEl.pause();videoEl.removeAttribute('src');videoEl.style.display='none'}document.getElementById('quizAudioState').textContent=mediaFiles(quizSong).some(x=>x.kind==='audio')?(quizSettings?.autoPlay===false?'音源已準備，按播放器播放後開始計時。':'音訊鏡像正在載入。'):'這首歌沒有音訊鏡像檔，無法在本頁播放。';}catch(e){document.getElementById('quizAudioState').textContent='音訊載入失敗；可以跳過或換下一題。'}}
+<!-- AMQ_SPLIT_MODULE:quiz_suggestion_controller --><!-- AMQ_SPLIT_MODULE:quiz_suggestion_text -->
+<!-- AMQ_SPLIT_MODULE:quiz_suggestion_renderer -->function revealAnswer(resultText=''){if(!quizSong)return;const isEmq=!!window.__aniEmqAPI?.isSong?.(quizSong[1]),a=isEmq?(window.__aniEmqAPI?.getWorkSummary?.(quizSong[0])||null):byAnime.get(quizSong[0]);const workLabel=isEmq?'視覺小說／遊戲作品':'動畫作品';document.getElementById('quizPrompt').textContent=quizSong[4]||'未命名歌曲';document.getElementById('quizSubprompt').textContent=[quizSong[5]||'歌手未標示',a?.[1]||'未知作品',a?.[5]||'年代未知'].filter(Boolean).join(' · ');const box=document.getElementById('quizResult');const familiarityNote=currentQuestionTarget==='anime'?`作品辨認熟悉度：${['未標記','聽過','有印象','秒答'][st(quizSong[1])]||'未標記'}`:'輔助練習不修改作品辨認熟悉度';box.innerHTML=`<b>${resultText?esc(resultText):'答案揭曉'}</b><br>歌曲：${esc(quizSong[4]||'未命名歌曲')}<br>歌手：${esc(quizSong[5]||'未標示')}<br>${workLabel}：${esc(a?.[1]||'未知作品')}<br>${esc(familiarityNote)}`;box.classList.remove('hidden');document.getElementById('quizNext').disabled=false;document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSkip').disabled=true;document.getElementById('quizSuggestions').classList.remove('open');const target=document.getElementById('quizTarget');if(target)target.disabled=false}
+function skipUnplayedQuizQuestionV80(source='manual'){
+ if(!quizSong||quizFinished)return false;
+ quizFinished=true;if(quizClipTimer)clearTimeout(quizClipTimer);if(typeof clearQuizPlaybackV30==='function')clearQuizPlaybackV30();
+ if(activeFocusModeV72)activeFocusSongIdsV72=activeFocusSongIdsV72.filter(id=>String(id)!==String(quizSong[1]));
+ try{window.__aniQuizPlanV1?.removeFocusSong?.(quizSong[1])}catch(e){}
+ const msg='音訊未成功播放，本題略過且不計入答題歷史、熟悉度或間隔排程。';const statusEl=document.getElementById('quizStatus');if(statusEl)statusEl.textContent=msg;
+ try{revealAnswer(msg)}catch(e){const r=document.getElementById('quizResult');if(r){r.textContent=msg;r.classList.remove('hidden')}document.getElementById('quizNext')?.removeAttribute('disabled')}
+ document.dispatchEvent(new CustomEvent('ani-quiz-unplayed',{detail:{songId:String(quizSong[1]),target:currentQuestionTarget,source}}));return true;
+}
+function classifyQuiz(correct,submittedAnswer=''){
+ if(document.body.classList.contains('quiz-round-paused')){const s=document.getElementById('quizStatus');if(s)s.textContent='本輪已暫停，請先按「繼續」再提交或跳過。';return}
+ if(!quizSong||quizFinished)return;
+ if(!quizAudioStarted){skipUnplayedQuizQuestionV80('classify');return}
+ quizFinished=true;
+ if(quizClipTimer)clearTimeout(quizClipTimer);
+ if(typeof clearQuizPlaybackV30==='function')clearQuizPlaybackV30();
+ const stop=Number.isFinite(quizAnswerStopAt)&&quizAnswerStopAt>0?quizAnswerStopAt:performance.now();
+ const elapsed=quizStartedAt>0?Math.max(0,(stop-quizStartedAt)/1000):null;
+ const target=['anime','title','artist'].includes(currentQuestionTarget)?currentQuestionTarget:'anime';
+ const updatesFamiliarity=target==='anime';
+ let level=null,old=st(quizSong[1]),final=old;
+ if(updatesFamiliarity){level=correct?(elapsed!==null&&elapsed<=quizSettings.instantSec?3:2):1;final=quizSettings.keepHigher?Math.max(old,level):level;if(final>0)status[quizSong[1]]=final;else delete status[quizSong[1]];try{save();updateStats();updateQuizCounts();render()}catch(err){console.error('Quiz stats refresh failed',err)}}
+ quizRound++;
+ const isEmqQuestion=!!window.__aniEmqAPI?.isSong?.(quizSong),workLabel=isEmqQuestion?'作品':'動畫';const activeSourceMode=quizSettings?.emqMode||((quizSettings?.includeEmq)?'mixed':'amq');const targetLabel=target==='anime'?(activeSourceMode==='mixed'?'作品辨認':(isEmqQuestion?'作品辨認':'動畫辨認')):target==='title'?'歌曲名稱':'歌手';
+ const label=updatesFamiliarity?(correct?(level===3?`${workLabel}秒答 · ${elapsed.toFixed(1)} 秒`:`${workLabel}答對 · ${elapsed===null?'時間未知':elapsed.toFixed(1)+' 秒'} · 標記為「有印象」`):`${workLabel}答錯／跳過 · 標記為「聽過」`):`${targetLabel}輔助練習${correct?'答對':'答錯／跳過'}${elapsed===null?'':' · '+elapsed.toFixed(1)+' 秒'}（未修改作品辨認熟悉度）`;
+ try{window.__aniHistoryAPIv51?.record(quizSong,!!correct,submittedAnswer,elapsed,label,target)}catch(err){console.error('Quiz history record failed',err)}
+ if(activeFocusModeV72)activeFocusSongIdsV72=activeFocusSongIdsV72.filter(id=>String(id)!==String(quizSong[1]));
+ const statusEl=document.getElementById('quizStatus');if(statusEl)statusEl.textContent=label+(updatesFamiliarity&&quizSettings.keepHigher&&old>level?'；原本熟悉度較高，保留原等級。':'');
+ const roundLabel=document.getElementById('quizRoundLabel');if(roundLabel)roundLabel.textContent=quizSettings.count?`本回合 ${quizRound}/${quizSettings.count}`:`自由練習 · 已完成 ${quizRound} 題`;
+ const progress=document.getElementById('quizRoundProgress');if(progress)progress.style.width=quizSettings.count?`${Math.min(100,quizRound/quizSettings.count*100)}%`:'0%';
+ try{revealAnswer(label)}catch(err){console.error('Quiz reveal failed',err);const result=document.getElementById('quizResult');if(result){result.textContent=`${label}。答案：${quizSong[4]||''} · ${quizSong[5]||''}`;result.classList.remove('hidden')}document.getElementById('quizNext')?.removeAttribute('disabled')}
+ document.dispatchEvent(new CustomEvent('quiz-v35-answered',{detail:{correct:!!correct,answer:String(submittedAnswer||''),elapsed,songId:String(quizSong?.[1]??''),target,validAudio:true,familiarityUpdated:updatesFamiliarity}}));
+}
+function submitQuiz(fromTimer=false, options={}){
+ if(document.body.classList.contains('quiz-round-paused')){const s=document.getElementById('quizStatus');if(s)s.textContent='本輪已暫停，請先按「繼續」再提交答案。';return}
+ if(!quizSong||quizFinished)return;
+ const field=document.getElementById('quizAnswer');
+ const raw=options&&Object.prototype.hasOwnProperty.call(options,'rawAnswer')?String(options.rawAnswer??''):String(field?.value??'');
+ const input=raw.trim();
+ const force=!!options?.force;
+ if(!input&&!fromTimer&&!force){
+   const status=document.getElementById('quizStatus');if(status)status.textContent='輸入答案後按 Enter；時間結束會自動揭曉。';
+   return;
+ }
+ if(!quizAudioStarted){if(fromTimer||force){skipUnplayedQuizQuestionV80(fromTimer?'timer':'forced-submit')}else{const status=document.getElementById('quizStatus');if(status)status.textContent='音訊尚未成功播放，請重試播放；本題不會被計為答錯。';}return}
+ quizAnswerStopAt=performance.now();
+ // Submitted answers do not stop playback; the current clip continues through reveal/buffer.
+ let correct=false;
+ const normalizeAnswer=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');
+ try{
+   const type=answerField();let aliases=[];
+   const emqAliases=window.__aniEmqAPI?.getAliases?.(quizSong[1])||{};
+   if(type==='anime'){const a=window.__aniEmqAPI?.getWorkSummary?.(quizSong[0])||byAnime.get(quizSong[0]);aliases=[a?.[1],a?.[2],...(window.__aniChineseTitleAPIv8237?.getAliases(quizSong[0])||[]),...(emqAliases.work||[])];}
+   else if(type==='artist'){aliases=[quizSong[5],quizSong[11],quizSong[14],...(emqAliases.artist||[])];}
+   else{aliases=[quizSong[4],quizSong[12],quizSong[13],...(emqAliases.title||[])];}
+   const candidate=normalizeAnswer(input),valid=aliases.map(normalizeAnswer).filter(Boolean);
+   correct=!!candidate&&valid.includes(candidate);
+   // If the same normalized song title by the same artist is attached to multiple anime,
+   // any of those anime titles is accepted for an anime-target question.
+   if(!correct&&candidate&&type==='anime'&&!window.__aniEmqAPI?.isSong?.(quizSong)){
+     const songTitle=normalizeAnswer(quizSong[4]),songArtist=normalizeAnswer(quizSong[5]);
+     if(songTitle&&songArtist){
+       const relatedIds=new Set(songs.filter(s=>normalizeAnswer(s[4])===songTitle&&normalizeAnswer(s[5])===songArtist).map(s=>String(s[0])));
+       for(const aid of relatedIds){const other=byAnime.get(Number(aid));if(other&&[other[1],other[2],...(window.__aniChineseTitleAPIv8237?.getAliases(aid)||[])].some(t=>normalizeAnswer(t)===candidate)){correct=true;break;}}
+     }
+   }
+   if(!correct&&candidate&&quizSettings.acceptPartial&&candidate.length>=4)correct=valid.some(alias=>candidate.length>=Math.ceil(alias.length*.55)&&(alias.startsWith(candidate)||alias.includes(candidate)));
+   console.debug('[Quiz answer check]',{type,input,aliases,normalizedInput:candidate,correct,songId:quizSong[1],forced:force});
+ }catch(err){console.error('Quiz answer evaluation failed',err);correct=false}
+ document.dispatchEvent(new CustomEvent('ani-quiz-answer-submitted',{detail:{answer:raw,correct,at:quizAnswerStopAt,forced:force}}));
+ // Forced empty submissions are deliberate skips and must still enter reveal/buffer.
+ classifyQuiz(correct,raw);
+}
+
+function updateQuizAllAnswersV857(){const target=document.getElementById('quizTarget')?.value,wrap=document.getElementById('quizAllAnswersV857'),show=target==='all';if(wrap)wrap.classList.toggle('hidden',!show);if(wrap)wrap.querySelectorAll('input').forEach(input=>{input.disabled=!show||quizFinished||!quizAudioStarted||document.body.classList.contains('quiz-round-paused')});const main=document.getElementById('quizAnswer');if(main&&show){main.placeholder='輸入作品名稱（動畫／遊戲）';}else if(main){main.placeholder='輸入答案，選擇下拉建議後按 Enter…'}}
+function evaluateQuizTargetAnswerV857(type,value){const input=String(value??'').trim();if(!input||!quizSong)return false;const normalize=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');const emqSong=!!window.__aniEmqAPI?.isSong?.(quizSong),emqMeta=emqSong?(window.__aniEmqAPI?.getMeta?.(quizSong[1])||{}):{},emqWorkId=String(emqMeta.workId??quizSong[0]),aliases=window.__aniEmqAPI?.getAliases?.(quizSong[1])||{};let values=[];if(type==='anime'){const work=window.__aniEmqAPI?.getWorkSummary?.(quizSong[0])||byAnime.get(quizSong[0]);const zhAliases=emqSong?(window.__aniEmqChineseTitleAPIv8259?.getAliases?.(emqWorkId)||[]):(window.__aniChineseTitleAPIv8237?.getAliases?.(quizSong[0])||[]);values=[work?.[1],work?.[2],...(emqSong?[window.__aniEmqChineseTitleAPIv8259?.getTitle?.(emqWorkId)]:[]),...zhAliases,...(aliases.work||[])];}else if(type==='artist')values=[quizSong[5],quizSong[11],quizSong[14],...(aliases.artist||[])];else values=[quizSong[4],quizSong[12],quizSong[13],...(aliases.title||[])];const candidate=normalize(input),valid=values.map(normalize).filter(Boolean);let correct=!!candidate&&valid.includes(candidate);if(!correct&&candidate&&type==='anime'&&!window.__aniEmqAPI?.isSong?.(quizSong)){const title=normalize(quizSong[4]),artist=normalize(quizSong[5]);if(title&&artist){const related=new Set(songs.filter(row=>normalize(row[4])===title&&normalize(row[5])===artist).map(row=>String(row[0])));for(const id of related){const work=byAnime.get(Number(id));if(work&&[work[1],work[2],...(window.__aniChineseTitleAPIv8237?.getAliases?.(id)||[])].some(v=>normalize(v)===candidate)){correct=true;break}}}}if(!correct&&quizSettings.acceptPartial&&candidate.length>=4)correct=valid.some(alias=>candidate.length>=Math.ceil(alias.length*.55)&&(alias.startsWith(candidate)||alias.includes(candidate)));return correct}
+function submitQuizAllV857(fromTimer=false,options={}){if(document.body.classList.contains('quiz-round-paused')){const status=document.getElementById('quizStatus');if(status)status.textContent='本輪已暫停，請先按「繼續」再提交答案。';return}if(!quizSong||quizFinished)return;const values={anime:String(options.rawAnswer??document.getElementById('quizAnswer')?.value??'').trim(),artist:String(document.getElementById('quizAnswerArtistV857')?.value??'').trim(),title:String(document.getElementById('quizAnswerTitleV857')?.value??'').trim()};const force=!!options.force;if(!Object.values(values).some(Boolean)&&!fromTimer&&!force){const status=document.getElementById('quizStatus');if(status)status.textContent='請至少輸入作品、歌手或歌曲名稱其中一項。';return}if(!quizAudioStarted){if(fromTimer||force)skipUnplayedQuizQuestionV80('all-target-unplayed');else{const status=document.getElementById('quizStatus');if(status)status.textContent='音訊尚未成功播放，本題不會被計為答錯。';}return}quizAnswerStopAt=performance.now();const stop=quizAnswerStopAt,start=Number(quizStartedAt)||0,elapsed=start>0?Math.max(0,(stop-start)/1000):null;const correct={anime:evaluateQuizTargetAnswerV857('anime',values.anime),artist:evaluateQuizTargetAnswerV857('artist',values.artist),title:evaluateQuizTargetAnswerV857('title',values.title)};const savedTarget=currentQuestionTarget;currentQuestionTarget='anime';classifyQuiz(correct.anime,values.anime);currentQuestionTarget=savedTarget;for(const field of ['artist','title']){const label=(field==='artist'?'歌手辨認':'歌曲名稱辨認')+(correct[field]?'答對':'答錯／未作答')+(elapsed===null?'':' · '+elapsed.toFixed(1)+' 秒');try{window.__aniHistoryAPIv51?.record(quizSong,!!correct[field],values[field],elapsed,label,field)}catch(err){console.error('Multi-target history record failed',err)}}const result=document.getElementById('quizResult');if(result){const line=(field,label)=>`<div><b>${label}</b>：${values[field]?esc(values[field]):'（未作答）'} · <strong>${correct[field]?'答對':'未答對'}</strong></div>`;result.innerHTML=`<b>本題結果</b>${line('anime','作品')}${line('artist','歌手')}${line('title','歌曲')}`;result.classList.remove('hidden')}const status=document.getElementById('quizStatus');if(status)status.textContent=`三項結果：作品 ${correct.anime?'答對':'未答對'}、歌手 ${correct.artist?'答對':'未答對'}、歌曲 ${correct.title?'答對':'未答對'}。作品答案負責更新原有熟悉度；另外兩項分別記錄答題結果。`;['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const field=document.getElementById(id);if(field)field.disabled=true})}
+const submitQuizCoreV857=submitQuiz;submitQuiz=function(fromTimer=false,options={}){if(document.getElementById('quizTarget')?.value==='all')return submitQuizAllV857(fromTimer,options);return submitQuizCoreV857(fromTimer,options)};
+window.__aniQuizHandleAudioFailureV857=(song)=>{if(!song||!quizSong||String(song[1])!==String(quizSong[1])||quizFinished)return false;skipUnplayedQuizQuestionV80('audio-failed');const id=String(song[1]);setTimeout(()=>{if(quizActive&&quizSong&&String(quizSong[1])===id&&quizFinished&&!document.body.classList.contains('quiz-round-paused'))nextQuiz()},350);return true};
+
+// Public bridges for later compatibility scripts; the quiz implementation lives in this script's closure.
+window.__aniQuizSubmitV47=(fromTimer=false,options={})=>submitQuiz(fromTimer,options);
+window.__aniQuizClassifyV47=(correct,answer='')=>classifyQuiz(correct,answer);
+window.__aniQuizNextV47=()=>nextQuiz();
+window.__aniQuizStopStateV82=()=>{
+ quizActive=false;quizFinished=true;quizAudioStarted=false;quizStartedAt=0;quizAnswerStopAt=0;try{window.__aniQuizPauseClockV82?.reset?.()}catch(e){}
+ try{if(quizClipTimer)clearTimeout(quizClipTimer);quizClipTimer=null}catch(e){}
+ try{if(typeof clearQuizPlaybackV30==='function')clearQuizPlaybackV30()}catch(e){}
+ try{if(typeof clearQuizAutoNextV30==='function')clearQuizAutoNextV30()}catch(e){}
+ try{audioEl?.pause()}catch(e){} try{videoEl?.pause()}catch(e){}
+ const input=document.getElementById('quizAnswer');if(input){input.value='';input.disabled=true;document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSkip').disabled=true}
+ const target=document.getElementById('quizTarget');if(target)target.disabled=false;
+ ['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const field=document.getElementById(id);if(field){field.value='';field.disabled=true}});
+ const allFields=document.getElementById('quizAllAnswersV857');if(allFields)allFields.classList.add('hidden');
+ quizSong=null;lastQuestionId=null;quizRound=0;quizRoundSeen.clear();quizRoundTarget=quizSettings.count||0;currentQuestionTarget=target&&['anime','title','artist','all'].includes(target.value)?target.value:(quizSettings.target||'anime');
+ const root=document.getElementById('quizView');if(root){root.classList.add('hidden');root.classList.remove('is-revealed')}
+ const prompt=document.getElementById('quizPrompt'),subprompt=document.getElementById('quizSubprompt');if(prompt)prompt.textContent='猜歌已結束';if(subprompt)subprompt.textContent='按「開始新題」開始新回合。已保存的設定與學習紀錄不會清除。';
+ const timer=document.getElementById('quizTimerDisplay');if(timer)timer.textContent='--';
+ document.body.classList.remove('quiz-mode','quiz-round-paused');
+ document.dispatchEvent(new CustomEvent('ani-quiz-round-stopped-v82'));
+};
+// Start clock only when the audio truly begins, not while the network is loading.
+audioEl?.addEventListener('playing',()=>{if(quizActive&&quizSong&&String(currentSong?.[1])===String(quizSong[1])&&!quizFinished){if(!quizStartedAt)quizStartedAt=performance.now();quizAudioStarted=true;document.getElementById('quizAudioState').textContent='音訊播放中。計時已開始，播放器不會顯示答案。';const input=document.getElementById('quizAnswer'),submit=document.getElementById('quizSubmit'),skip=document.getElementById('quizSkip');if(!document.body.classList.contains('quiz-round-paused')&&!document.getElementById('quizView')?.classList.contains('is-revealed')){if(input)input.disabled=false;['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const extra=document.getElementById(id);if(extra)extra.disabled=document.getElementById('quizTarget')?.value!=='all'});if(submit)submit.disabled=false;if(skip)skip.disabled=false;updateQuizAllAnswersV857()}}});
+// Use capture so the legacy blind-listen button and placeholder graph handler cannot run first.
+document.addEventListener('click',e=>{if(e.target.closest?.('#blindNextBtn')){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();window.__aniNavigateApp?.('quiz');return}if(e.target.closest?.('#quizExit')){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();window.__aniSRSAPI?.end?.('已離開間隔複習；未評分的歌曲保留原排程。');window.__aniQuizPlanV1?.clearFocus();exitSpecial();return}},true);
+document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view!=='quiz')window.__aniQuizPlanV1?.clearFocus()});
+document.getElementById('quizStart').onclick=()=>{window.__aniHistoryAPIv51?.beginRound();readQuizSettingsUI();quizRound=0;quizRoundSeen.clear();lastQuestionId=null;quizSong=null;quizFinished=false;nextQuiz()};document.addEventListener('click',e=>{const button=e.target?.closest?.('#quizManualPlayV8262');if(!button)return;if(document.body.classList.contains('quiz-round-paused')){const status=document.getElementById('quizStatus');if(status)status.textContent='本輪已暫停，請先按「繼續」再播放音訊。';return}const el=currentMediaElementV80||audioEl;if(!currentSong||!el){button.disabled=false;button.textContent='▶ 重試播放';return}button.disabled=true;button.textContent='正在啟動…';let promise;try{promise=el.play()}catch(err){promise=Promise.reject(err)}Promise.resolve(promise).then(()=>{if(button.isConnected&&!button.hidden){button.disabled=false;button.textContent='▶ 重試播放'}}).catch(err=>{if(button.isConnected){button.hidden=false;button.disabled=false;button.textContent='▶ 重試播放'}const status=document.getElementById('quizAudioState');if(status)status.textContent='音訊無法啟動，請重試或略過本題。'})});document.getElementById('quizNext').onclick=nextQuiz;document.getElementById('quizSubmit').onclick=submitQuiz;document.getElementById('quizSkip').onclick=()=>{if(document.getElementById('quizTarget')?.value==='all')submitQuiz(false,{force:true});else classifyQuiz(false)};document.getElementById('quizAnswer').addEventListener('input',buildSuggestions);['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const input=document.getElementById(id);if(input&&!input.dataset.v857Bound){input.dataset.v857Bound='1';input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submitQuiz(false)}})}});const quizAnswerInput=document.getElementById('quizAnswer');let quizComposing=false;quizAnswerInput.setAttribute('autocapitalize','off');quizAnswerInput.setAttribute('spellcheck','false');quizAnswerInput.setAttribute('inputmode','text');quizAnswerInput.setAttribute('enterkeyhint','go');quizAnswerInput.addEventListener('compositionstart',()=>{quizComposing=true});quizAnswerInput.addEventListener('compositionend',()=>{quizComposing=false;setTimeout(()=>{if(document.activeElement===quizAnswerInput)buildSuggestions()},0)});quizAnswerInput.setAttribute('role','combobox');quizAnswerInput.setAttribute('aria-autocomplete','list');quizAnswerInput.setAttribute('aria-controls','quizSuggestions');quizAnswerInput.setAttribute('aria-expanded','false');quizAnswerInput.addEventListener('keydown',e=>{if(e.isComposing||e.keyCode===229||quizComposing)return;if(e.key==='Enter'&&window.__aniSRSAPI?.isAwaitingRating?.()){e.preventDefault();e.stopImmediatePropagation();return}const box=document.getElementById('quizSuggestions'),items=[...box.querySelectorAll('.quizSuggestion')];if(e.key==='ArrowDown'&&items.length&&box.classList.contains('open')){e.preventDefault();quizOptionFocus=(quizOptionFocus+1)%items.length;items.forEach((el,i)=>{el.classList.toggle('focus',i===quizOptionFocus);el.setAttribute('aria-selected',String(i===quizOptionFocus))});items[quizOptionFocus]?.scrollIntoView({block:'nearest'});return}if(e.key==='ArrowUp'&&items.length&&box.classList.contains('open')){e.preventDefault();quizOptionFocus=quizOptionFocus<=0?items.length-1:quizOptionFocus-1;items.forEach((el,i)=>{el.classList.toggle('focus',i===quizOptionFocus);el.setAttribute('aria-selected',String(i===quizOptionFocus))});items[quizOptionFocus]?.scrollIntoView({block:'nearest'});return}if(e.key==='Enter'){if(box.classList.contains('open')&&items.length){e.preventDefault();e.stopImmediatePropagation();const selectedIndex=quizOptionFocus>=0&&quizOptionFocus<items.length?quizOptionFocus:0;const selected=items[selectedIndex];if(selected){chooseQuizSuggestion(selected.textContent);return}}e.preventDefault();e.stopImmediatePropagation();if(!quizFinished)submitQuiz(false);else nextQuiz()}if(e.key==='Escape'){closeQuizSuggestions()}});document.getElementById('quizTarget').onchange=()=>{optionCache={};buildSuggestions();document.getElementById('quizAnswer').value='';['quizAnswerArtistV857','quizAnswerTitleV857'].forEach(id=>{const input=document.getElementById(id);if(input)input.value=''});updateQuizAllAnswersV857()};document.getElementById('quizPool').onchange=()=>{if(quizSong)nextQuiz()};document.addEventListener('click',e=>{if(!e.target.closest('.quizSuggest'))document.getElementById('quizSuggestions').classList.remove('open')});
+// Keep a true audio-only path in quiz mode even if the data lists a video mirror first.
+const mediaFilesV13=mediaFiles;window.mediaFiles=function(s){const all=mediaFilesV13(s);return quizActive?all.filter(x=>x.kind==='audio'):all};
+// V14 settings, theme, and quiz controls
+function applyTheme(dark){document.body.classList.toggle('dark-theme',!!dark);try{localStorage.setItem('aniCollectionThemeV18',dark?'dark':'light')}catch(e){}const text=dark?'☀ 亮色模式':'☾ 暗色模式';const a=document.getElementById('themeToggle'),b=document.getElementById('quizThemeToggle');if(a)a.textContent=text;if(b)b.textContent=text;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=dark?'#17131d':'#f7edf7'}
+let initialDark=true;try{const savedThemeV18=localStorage.getItem('aniCollectionThemeV18');initialDark=savedThemeV18===null?true:savedThemeV18==='dark'}catch(e){}applyTheme(initialDark);document.getElementById('themeToggle')?.addEventListener('click',()=>applyTheme(!document.body.classList.contains('dark-theme')));document.getElementById('quizThemeToggle')?.addEventListener('click',()=>applyTheme(!document.body.classList.contains('dark-theme')));
+loadQuizSettings();updateQuizAllAnswersV857();
+const samplePositionInput=document.getElementById('qsSamplePosition');const samplePositionValue=document.getElementById('qsSamplePositionValue');if(samplePositionInput&&samplePositionValue){samplePositionInput.value=String(quizSettings.samplePosition||0);samplePositionValue.textContent=samplePositionInput.value+'%';samplePositionInput.addEventListener('input',()=>{samplePositionValue.textContent=samplePositionInput.value+'%';const randomBtn=document.getElementById('qsRandomSample');if(randomBtn){randomBtn.setAttribute('aria-pressed','false');randomBtn.textContent='隨機 Sample：關';randomBtn.classList.remove('primary')}quizSettings.samplePosition=Math.max(0,Math.min(100,Number(samplePositionInput.value)||0));quizSettings.randomSample=false;try{const cfg=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');cfg.samplePosition=quizSettings.samplePosition;cfg.randomSample=false;localStorage.setItem('aniQuizSettingsV14',JSON.stringify(cfg))}catch{}});}
+document.getElementById('quizSettingsToggle').onclick=()=>{const modal=document.getElementById('quizSettingsOverlayV30');modal?.classList.remove('hidden');setTimeout(()=>document.getElementById('quizSettingsCloseV30')?.focus({preventScroll:true}),0)};
+document.getElementById('quizApplySettings').onclick=()=>{readQuizSettingsUI();quizRound=0;quizRoundSeen.clear();quizRoundTarget=quizSettings.count;document.getElementById('quizSettingsOverlayV30')?.classList.add('hidden');nextQuiz()};
+document.getElementById('quizResetSettings').onclick=()=>{try{localStorage.removeItem('aniQuizSettingsV14')}catch(e){}quizSettings={...quizDefaults,watchStatusFilterEnabled:false,watchStatuses:['current','completed','paused','dropped','planning'],seasons:['Winter','Spring','Summer','Fall'],animeTypes:['TV','OVA','Movie','Special','ONA','Other'],songTypes:[1,2,3,4,5],statuses:[0,1,2,3]};loadQuizSettings();window.__aniClearCustomListPickerV825?.();readQuizSettingsUI();toast('猜歌設定已恢復預設')};
+document.getElementById('qsAutoNext').onchange=()=>readQuizSettingsUI();
+document.getElementById('quizStart').onclick=()=>{if(document.body.classList.contains('quiz-round-paused')){const s=document.getElementById('quizStatus');if(s)s.textContent='本輪已暫停，請先恢復或停止本輪，再開始新回合。';return}try{window.__aniHistoryAPIv51?.beginRound();readQuizSettingsUI();quizRound=0;quizRoundSeen.clear();quizRoundTarget=quizSettings.count;lastQuestionId=null;quizSong=null;quizFinished=false;nextQuiz();if(!quizSong){document.getElementById('quizStatus').textContent='目前設定沒有符合的歌曲。請檢查年代、歌曲類型、熟悉度或標籤條件。';}}catch(err){console.error('Quiz start failed:',err);document.getElementById('quizStatus').textContent='猜歌啟動失敗：'+(err&&err.message?err.message:'未知錯誤')+'。請先按「恢復預設」再試一次。'}};
+
+// Relationship explorer: start from a matching song/anime/artist and connect up to 10 related items.
+// V30: consolidated quiz layout, reveal state, image loading, title toggles and countdown.
+const quizRootV30=document.getElementById('quizView');
+const quizStageV30=quizRootV30.querySelector('.quizStage');
+const quizMysteryV30=quizRootV30.querySelector('.quizMystery');
+const quizSideV30=quizRootV30.querySelector('.quizSide');
+const quizQuickV30=quizRootV30.querySelector('.quizQuickSettings');
+const quizSettingsBodyV30=document.getElementById('quizSettingsBody');
+const quizSettingsToggleV30=document.getElementById('quizSettingsToggle');
+const quizStartV30=document.getElementById('quizStart');
+const quizAudioStateV30=document.getElementById('quizAudioState');
+let quizAutoNextTimerV30=null, quizAutoNextTickV30=null, quizPlaybackTickerV30=null, quizStopTimerV30=null, quizClipDeadlineV30=0;
+let quizAutoNextDeadlineV30=0,quizAutoNextRemainingMsV30=null,quizAutoNextPausedV30=false;
+
+// Keep frequent controls in the main strip, and move the low-frequency settings into a modal.
+if(quizQuickV30&&quizStartV30&&quizStartV30.parentElement!==quizQuickV30)quizQuickV30.appendChild(quizStartV30);
+const oldAutoToggle=document.getElementById('quizAutoNext');if(oldAutoToggle)oldAutoToggle.closest('label')?.remove();
+if(quizSettingsToggleV30){quizSettingsToggleV30.textContent='⚙ 設定';quizRootV30.querySelector('.quizTop>div:last-child')?.prepend(quizSettingsToggleV30)}
+const settingsOverlayV30=make('div',{id:'quizSettingsOverlayV30',class:'quizSettingsOverlay hidden','role':'dialog','aria-modal':'true','aria-label':'猜歌設定'},'');
+const settingsDialogV30=make('div',{class:'quizSettingsDialog'},'<div class="quizSettingsModalHead"><div><div class="detailEyebrow">PREFERENCES</div><h2>猜歌設定</h2></div><button class="btn" id="quizSettingsCloseV30" type="button">關閉 ✕</button></div>');
+if(quizSettingsBodyV30){quizSettingsBodyV30.classList.remove('hidden');quizSettingsBodyV30.classList.add('quizSettingsContent');quizSettingsBodyV30.insertAdjacentHTML('afterbegin',`<div class="quizSetting"><h4>介面與學習節奏</h4><div class="settingRow"><label>名稱預設語言 <select id="qsTitleLanguage"><option value="english">英文名稱</option><option value="romaji">羅馬字</option><option value="chinese">繁體中文（台灣）</option></select></label><label>揭曉後倒數秒數 <input id="qsAutoNextDelay" type="number" min="1" max="30" value="5"></label></div></div>`);settingsDialogV30.appendChild(quizSettingsBodyV30)}
+settingsOverlayV30.appendChild(settingsDialogV30);document.body.appendChild(settingsOverlayV30);
+const chineseSuggestionRowV8239=document.createElement('div');chineseSuggestionRowV8239.className='settingRow';chineseSuggestionRowV8239.innerHTML='<label><input type="checkbox" id="qsChineseSuggestionsV8239"> 在答案下拉選單顯示繁體中文名稱</label><span class="quizChineseSuggestionHintV8239">關閉只隱藏中文選項，不會停用中文答案判定。</span>';
+const titleLanguageRowV8239=document.getElementById('qsTitleLanguage')?.closest('.settingRow');
+if(titleLanguageRowV8239)titleLanguageRowV8239.insertAdjacentElement('afterend',chineseSuggestionRowV8239);
+const chineseSuggestionToggleV8239=document.getElementById('qsChineseSuggestionsV8239');
+if(chineseSuggestionToggleV8239){chineseSuggestionToggleV8239.checked=chineseSuggestionStateV8239;chineseSuggestionToggleV8239.addEventListener('change',()=>{chineseSuggestionStateV8239=!!chineseSuggestionToggleV8239.checked;try{localStorage.setItem('aniChineseAnswerSuggestionsEnabledV8239',chineseSuggestionStateV8239?'1':'0')}catch{}optionCache={};closeQuizSuggestions();const status=document.getElementById('quizStatus');if(status)status.textContent=chineseSuggestionStateV8239?'答案下拉選單已加入繁體中文名稱；中文答案原本就可判定。':'已隱藏下拉選單中的繁體中文名稱；直接輸入中文仍可答對。'})}
+document.getElementById('quizSettingsCloseV30').onclick=()=>{settingsOverlayV30.classList.add('hidden');setTimeout(()=>quizSettingsToggleV30?.focus({preventScroll:true}),0)};
+settingsOverlayV30.addEventListener('click',e=>{if(e.target===settingsOverlayV30){settingsOverlayV30.classList.add('hidden');setTimeout(()=>quizSettingsToggleV30?.focus({preventScroll:true}),0)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!settingsOverlayV30.classList.contains('hidden')){settingsOverlayV30.classList.add('hidden');setTimeout(()=>quizSettingsToggleV30?.focus({preventScroll:true}),0)}});
+
+// Build a quiet visualizer; it is decorative only and never exposes the song or anime.
+const noteV30=quizMysteryV30.querySelector('.note');
+const promptV30=document.getElementById('quizPrompt');
+const subpromptV30=document.getElementById('quizSubprompt');
+const legacyCoverV30=document.getElementById('quizAnimeCoverV26');
+if(legacyCoverV30)legacyCoverV30.remove();
+const visualizerV30=make('div',{class:'quizVisualizerV30','aria-hidden':'true'},Array.from({length:72},(_,i)=>`<i style="--bar:${18+((i*17+i*i*3)%60)}%;--delay:${(i%9)*-0.13}s"></i>`).join(''));
+visualizerV30.remove();
+if(noteV30)noteV30.hidden=true;if(promptV30)promptV30.hidden=true;if(subpromptV30)subpromptV30.hidden=true;
+let animeTitleV30= document.getElementById('quizAnimeAnswerLabel');
+if(!animeTitleV30){animeTitleV30=make('h3',{id:'quizAnimeAnswerLabel',class:'quizAnimeAnswerLabel hidden'},'');quizMysteryV30.parentElement.insertBefore(animeTitleV30,quizMysteryV30)}
+
+// Rebuild the right rail as a fixed empty information frame before reveal.
+const oldInfoV30=document.getElementById('quizSongInfo');if(oldInfoV30)oldInfoV30.remove();
+quizSideV30.innerHTML='<button type="button" class="quizInfoToggleV30" id="quizInfoToggleV30" aria-expanded="false">本題資訊 <span>＋</span></button><section class="quizSongInfo" id="quizSongInfo"><div class="quizInfoEmpty" id="quizInfoEmpty"></div><div class="quizInfoContentV30 hidden" id="quizInfoContentV30"><div class="quizInfoEyebrow">ANSWER DETAILS</div><dl class="quizInfoList"><dt>動畫</dt><dd id="quizInfoAnime">—</dd><dt>歌曲</dt><dd id="quizInfoSong">—</dd><dt>演唱者</dt><dd id="quizInfoArtist">—</dd><dt>歌曲類型</dt><dd id="quizInfoType">—</dd><dt>歌曲難度</dt><dd id="quizInfoDifficulty">—</dd><dt>實際遊玩次數</dt><dd id="quizInfoPlayCount">—</dd><dt>上次作答答案</dt><dd id="quizInfoLastAnswer">—</dd><dt>年份</dt><dd id="quizInfoYear">—</dd></dl></div></section>';
+const infoToggleV30=document.getElementById('quizInfoToggleV30');infoToggleV30.onclick=()=>{const open=quizSideV30.classList.toggle('info-open');infoToggleV30.setAttribute('aria-expanded',String(open));infoToggleV30.querySelector('span').textContent=open?'−':'＋'};
+if(quizAudioStateV30&&quizAudioStateV30.parentElement!==quizStageV30){const statusEl=document.getElementById('quizStatus');if(statusEl)statusEl.insertAdjacentElement('afterend',quizAudioStateV30)}
+
+const playbackControlsV30=make('div',{class:'quizPlaybackMetaV30'},'<div class="quizPlaybackTrackV30"><span id="quizPlaybackFillV30"></span></div><div class="quizPlaybackLabelsV30"><span id="quizPlaybackStateV30">尚未播放</span><span id="quizRemainingV30">剩餘 -- 秒</span></div>');
+const mainControlsV30=quizStageV30.querySelector('.quizControls');if(mainControlsV30)mainControlsV30.insertAdjacentElement('afterend',playbackControlsV30);
+const countdownV30=make('div',{id:'quizCountdownV30',class:'quizCountdownV30 hidden','aria-live':'polite'},'');
+const nextBtnV30=document.getElementById('quizNext');if(nextBtnV30)nextBtnV30.textContent='下一題 →';if(nextBtnV30?.parentElement)nextBtnV30.insertAdjacentElement('afterend',countdownV30);
+const answerInputV30=document.getElementById('quizAnswer');if(answerInputV30){answerInputV30.placeholder='輸入答案後按 Enter…';answerInputV30.setAttribute('autocomplete','off');answerInputV30.setAttribute('autocorrect','off');answerInputV30.setAttribute('spellcheck','false')}
+const suggestionBoxV30=document.getElementById('quizSuggestions');if(suggestionBoxV30){suggestionBoxV30.replaceChildren();suggestionBoxV30.classList.remove('open');suggestionBoxV30.removeAttribute('hidden')}
+
+function clearQuizAutoNextTimersV30(){if(quizAutoNextTimerV30!==null){clearTimeout(quizAutoNextTimerV30);quizAutoNextTimerV30=null}if(quizAutoNextTickV30!==null){clearInterval(quizAutoNextTickV30);quizAutoNextTickV30=null}}
+function renderQuizAutoNextV30(){
+ if(!countdownV30)return;
+ if(quizAutoNextPausedV30){const left=Math.ceil(Math.max(0,Number(quizAutoNextRemainingMsV30)||0)/1000);countdownV30.classList.remove('hidden');countdownV30.textContent=`自動切題已暫停 · 尚餘 ${left} 秒`;return}
+ if(!quizAutoNextDeadlineV30)return;
+ const left=Math.ceil(Math.max(0,quizAutoNextDeadlineV30-performance.now())/1000);
+ countdownV30.classList.remove('hidden');countdownV30.textContent=`${left} 秒後自動進入下一題`;
+}
+function clearQuizAutoNextV30(){clearQuizAutoNextTimersV30();quizAutoNextDeadlineV30=0;quizAutoNextRemainingMsV30=null;quizAutoNextPausedV30=false;if(countdownV30){countdownV30.classList.add('hidden');countdownV30.textContent=''}}
+function startQuizAutoNextV30(delayMs){
+ clearQuizAutoNextTimersV30();quizAutoNextPausedV30=false;quizAutoNextRemainingMsV30=null;
+ const ms=Math.max(0,Math.min(30000,Number(delayMs)||0));quizAutoNextDeadlineV30=performance.now()+ms;renderQuizAutoNextV30();
+ quizAutoNextTickV30=setInterval(renderQuizAutoNextV30,150);
+ quizAutoNextTimerV30=setTimeout(()=>{
+  clearQuizAutoNextTimersV30();quizAutoNextDeadlineV30=0;quizAutoNextRemainingMsV30=null;quizAutoNextPausedV30=false;
+  if(countdownV30){countdownV30.classList.add('hidden');countdownV30.textContent=''}
+  if(!document.body.classList.contains('quiz-round-paused')&&quizActive&&!quizRootV30.classList.contains('hidden'))nextQuiz();
+ },ms);
+}
+function pauseQuizAutoNextV30(){
+ if(quizAutoNextPausedV30||!quizAutoNextDeadlineV30)return false;
+ quizAutoNextRemainingMsV30=Math.max(0,quizAutoNextDeadlineV30-performance.now());quizAutoNextDeadlineV30=0;quizAutoNextPausedV30=true;clearQuizAutoNextTimersV30();renderQuizAutoNextV30();return true;
+}
+function resumeQuizAutoNextV30(){
+ if(!quizAutoNextPausedV30||quizAutoNextRemainingMsV30===null)return false;
+ const remaining=Math.max(0,Number(quizAutoNextRemainingMsV30)||0);startQuizAutoNextV30(remaining);return true;
+}
+window.__aniQuizAutoNextV30={clear:()=>clearQuizAutoNextV30(),pause:()=>pauseQuizAutoNextV30(),resume:()=>resumeQuizAutoNextV30(),getState:()=>({paused:quizAutoNextPausedV30,remainingMs:quizAutoNextPausedV30?quizAutoNextRemainingMsV30:(quizAutoNextDeadlineV30?Math.max(0,quizAutoNextDeadlineV30-performance.now()):null),scheduled:!!(quizAutoNextDeadlineV30||quizAutoNextPausedV30)})};
+function clearQuizPlaybackV30(){if(quizPlaybackTickerV30){clearInterval(quizPlaybackTickerV30);quizPlaybackTickerV30=null}if(quizStopTimerV30){clearTimeout(quizStopTimerV30);quizStopTimerV30=null}quizClipDeadlineV30=0}
+function updateQuizPlaybackV30(){const fill=document.getElementById('quizPlaybackFillV30'),remaining=document.getElementById('quizRemainingV30'),state=document.getElementById('quizPlaybackStateV30');const duration=Math.max(5,Number(quizSettings.clip)||20);const left=quizClipDeadlineV30?Math.max(0,(quizClipDeadlineV30-Date.now())/1000):0;const revealed=quizRootV30.classList.contains('is-revealed');if(fill)fill.style.width=quizClipDeadlineV30?`${Math.min(100,Math.max(0,(1-left/duration)*100))}%`:'0%';if(remaining)remaining.textContent=revealed?'答案已揭曉':quizClipDeadlineV30?`剩餘 ${Math.ceil(left)} 秒`:'剩餘 -- 秒';if(state){if(audioEl&&!audioEl.paused&&quizClipDeadlineV30)state.textContent='正在播放';else if(revealed)state.textContent='答案已揭曉';else state.textContent='等待播放'}}
+let quizPauseClockStartedAtV82=null,quizPausedElapsedV82=null;
+// Public bridge for V42's separate IIFE: lexical quiz clocks must be adjusted in their owning closure.
+window.__aniQuizPauseClockV82={
+ pause(at=performance.now()){
+  if(quizPauseClockStartedAtV82!==null)return quizPausedElapsedV82;
+  const now=Number(at);quizPauseClockStartedAtV82=Number.isFinite(now)?now:performance.now();
+  quizPausedElapsedV82=quizAudioStarted&&quizStartedAt>0?Math.max(0,(quizPauseClockStartedAtV82-quizStartedAt)/1000):null;
+  return quizPausedElapsedV82;
+ },
+ resume(at=performance.now()){
+  if(quizPauseClockStartedAtV82===null)return 0;
+  const now=Number(at),resumedAt=Number.isFinite(now)?now:performance.now();
+  const delta=Math.max(0,resumedAt-quizPauseClockStartedAtV82);
+  quizPauseClockStartedAtV82=null;quizPausedElapsedV82=null;
+  if(delta>0){
+   if(quizStartedAt>0)quizStartedAt+=delta;
+   if(quizClipDeadlineV30>0)quizClipDeadlineV30+=delta;
+  }
+  updateQuizPlaybackV30();
+  return delta;
+ },
+ getPausedElapsed(){return quizPauseClockStartedAtV82===null?null:quizPausedElapsedV82},
+ reset(){quizPauseClockStartedAtV82=null;quizPausedElapsedV82=null}
+};
+function bindTitleToggleV30(el,defaultText,alternateText){if(!el)return;const base=String(defaultText||'—'),alt=String(alternateText||base);el.textContent=(quizSettings.titleLanguage==='romaji'?alt:base);el.dataset.defaultTitle=quizSettings.titleLanguage==='romaji'?alt:base;el.dataset.alternateTitle=quizSettings.titleLanguage==='romaji'?base:alt;el.classList.toggle('titleToggleV30',!!alt&&alt!==base);if(!alt||alt===base)return;const desktop=()=>window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;if(desktop()){el.onmouseenter=()=>{el.textContent=el.dataset.alternateTitle};el.onmouseleave=()=>{el.textContent=el.dataset.defaultTitle}}else{el.onclick=()=>{el.textContent=el.textContent===el.dataset.defaultTitle?el.dataset.alternateTitle:el.dataset.defaultTitle}}el.title='滑鼠懸停／點擊可切換名稱'}
+function resetQuizRevealInfoV30(){clearQuizAutoNextV30();quizRootV30.classList.remove('is-revealed');const cover=quizMysteryV30.querySelector('.quizAnimeCoverV30');if(cover){cover.hidden=true;cover.remove()}visualizerV30.hidden=false;animeTitleV30.textContent='';animeTitleV30.classList.add('hidden');const content=document.getElementById('quizInfoContentV30');if(content)content.classList.add('hidden');quizSideV30.classList.remove('info-open');const infoToggle=document.getElementById('quizInfoToggleV30');if(infoToggle){infoToggle.setAttribute('aria-expanded','false');const indicator=infoToggle.querySelector('span');if(indicator)indicator.textContent='＋'}const empty=document.getElementById('quizInfoEmpty');if(empty)empty.classList.remove('hidden');const input=document.getElementById('quizAnswer');if(input)input.disabled=true;document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSkip').disabled=false;updateQuizPlaybackV30()}
+// V82.39: bounded per-song practice metadata, full accepted-title tooltip, and lightweight floating details.
+const PRACTICE_META_KEY_V8239='aniSongPracticeMetaV8239';
+let quizPracticeMetaV8239={};
+try{const raw=JSON.parse(localStorage.getItem(PRACTICE_META_KEY_V8239)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))quizPracticeMetaV8239=raw}catch{}
+function saveQuizPracticeMetaV8239(){try{localStorage.setItem(PRACTICE_META_KEY_V8239,JSON.stringify(quizPracticeMetaV8239))}catch(e){console.warn('Song practice metadata could not be saved.',e)}}
+function getQuizPracticeMetaV8239(songId){return quizPracticeMetaV8239[String(songId)]||null}
+let quizQuestionTokenV8239=0,quizPlayedTokenV8239=-1;
+document.addEventListener('ani-quiz-new-question',()=>{quizQuestionTokenV8239++});
+const quizPracticeAudioV8239=document.getElementById('audioPlayer');
+quizPracticeAudioV8239?.addEventListener('playing',()=>{
+ if(!document.body.classList.contains('quiz-mode'))return;
+ const id=String(window.__aniQuizStateV45?.quizSong?.[1]??'');if(!id||quizPlayedTokenV8239===quizQuestionTokenV8239)return;
+ quizPlayedTokenV8239=quizQuestionTokenV8239;
+ const old=getQuizPracticeMetaV8239(id)||{};quizPracticeMetaV8239[id]={...old,playCount:Math.max(0,Number(old.playCount)||0)+1,lastPlayedAt:new Date().toISOString()};saveQuizPracticeMetaV8239();
+});
+document.addEventListener('ani-quiz-answer-submitted',event=>{
+ const state=window.__aniQuizStateV45||{},id=String(state.quizSong?.[1]??'');if(!id)return;
+ const old=getQuizPracticeMetaV8239(id)||{};quizPracticeMetaV8239[id]={...old,lastAnswer:String(event.detail?.answer??'').trim()||'未作答',lastCorrect:event.detail?.correct===true,lastTarget:String(state.currentQuestionTarget||state.quizSettings?.target||'anime'),lastAnsweredAt:new Date().toISOString()};saveQuizPracticeMetaV8239();
+});
+window.__aniSongPracticeMetaAPIv8239={get:getQuizPracticeMetaV8239};
+<!-- AMQ_SPLIT_MODULE:quiz_answer_metadata -->
+function quizAnswerAliasTooltipTextV8239(){
+ if(!quizSong)return '';
+ const isEmq=!!window.__aniEmqAPI?.isSong?.(quizSong),summary=isEmq?window.__aniEmqAPI?.getWorkSummary?.(quizSong[0]):null;
+ const current=isEmq?{row:summary,english:String(summary?.[1]||'').trim(),romaji:String(summary?.[2]||'').trim(),chinese:'',aliases:uniqueQuizNamesV8239([summary?.[1],summary?.[2],...(window.__aniEmqAPI?.getAliases?.(quizSong[1])?.work||[])])}:getQuizAnimeNameBundleV8239(quizSong[0]);
+ const lines=[isEmq?'可接受的作品名稱':'可接受的動畫名稱'];
+ if(current.english)lines.push(`英文／主要名稱：${current.english}`);
+ if(current.romaji)lines.push(`羅馬拼音／其他名稱：${current.romaji}`);
+ if(current.chinese)lines.push(`繁體中文名稱：${current.chinese}`);
+ const extras=current.aliases.filter(x=>![current.english,current.romaji,current.chinese].includes(x));if(extras.length)lines.push(`其他名稱：${extras.join('、')}`);
+ const normalize=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');
+ const title=normalize(quizSong[4]),artist=normalize(quizSong[5]),related=new Map();
+ if(!isEmq&&title&&artist)for(const song of (Array.isArray(songs)?songs:[])){
+  if(normalize(song?.[4])!==title||normalize(song?.[5])!==artist||String(song?.[0])===String(quizSong[0]))continue;
+  const bundle=getQuizAnimeNameBundleV8239(song[0]);if(bundle.row)related.set(String(song[0]),bundle);
+ }
+ if(related.size){lines.push('同歌名、同歌手收錄的其他動畫：');for(const bundle of [...related.values()].sort((a,b)=>(a.english||a.romaji).localeCompare(b.english||b.romaji)))lines.push('• '+uniqueQuizNamesV8239([bundle.english,bundle.romaji,bundle.chinese,...bundle.aliases]).join(' / '))}
+ else lines.push(isEmq?'EMQ 不會僅憑相同歌名與歌手自動接受其他作品。':'其他動畫：曲庫內沒有找到同歌名、同歌手的作品。');
+ return lines.join('\n');
+}
+let quizAliasTooltipV8239=null;
+function ensureQuizAnswerTooltipV8239(el){
+ if(!el||el.dataset.answerTooltipBoundV8239==='1')return;
+ el.dataset.answerTooltipBoundV8239='1';el.removeAttribute('title');el.tabIndex=el.tabIndex>=0?el.tabIndex:0;el.setAttribute('aria-describedby','quizAnswerAliasesTooltipV8239');
+ const show=()=>{if(!quizSong)return;if(!quizAliasTooltipV8239){quizAliasTooltipV8239=document.createElement('div');quizAliasTooltipV8239.id='quizAnswerAliasesTooltipV8239';quizAliasTooltipV8239.className='quizAnswerAliasesTooltipV8239';quizAliasTooltipV8239.setAttribute('role','tooltip');quizAliasTooltipV8239.hidden=true;document.body.appendChild(quizAliasTooltipV8239)}quizAliasTooltipV8239.textContent=quizAnswerAliasTooltipTextV8239();quizAliasTooltipV8239.hidden=false;const r=el.getBoundingClientRect();const w=Math.min(390,window.innerWidth-24);quizAliasTooltipV8239.style.width=w+'px';quizAliasTooltipV8239.style.left=Math.max(12,Math.min(window.innerWidth-w-12,r.left))+'px';quizAliasTooltipV8239.style.top='12px';const h=quizAliasTooltipV8239.offsetHeight;quizAliasTooltipV8239.style.top=(r.bottom+h+10<=window.innerHeight?Math.max(8,r.bottom+8):Math.max(8,r.top-h-8))+'px'};
+ const hide=()=>{if(quizAliasTooltipV8239)quizAliasTooltipV8239.hidden=true};
+ el.addEventListener('mouseenter',show);el.addEventListener('mouseleave',hide);el.addEventListener('focus',show);el.addEventListener('blur',hide);el.addEventListener('click',()=>{if(!(window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches)){show();setTimeout(hide,7000)}});
+}
+let quizFloatingDetailV8239=null,quizFloatingDragV8239=null;
+function createQuizFloatingDetailV8239(){
+ if(quizFloatingDetailV8239)return quizFloatingDetailV8239;
+ const panel=document.createElement('section');panel.id='quizFloatingDetailV8239';panel.className='quizFloatingDetailV8239';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','false');
+ const header=document.createElement('header');header.className='quizFloatingDetailHeadV8239';const title=document.createElement('strong');title.className='quizFloatingDetailTitleV8239';const close=document.createElement('button');close.type='button';close.className='quizFloatingDetailCloseV8239';close.textContent='關閉';close.setAttribute('aria-label','關閉詳情視窗');header.append(title,close);
+ const body=document.createElement('div');body.className='quizFloatingDetailBodyV8239';panel.append(header,body);document.body.appendChild(panel);quizFloatingDetailV8239={panel,header,title,close,body};
+ close.addEventListener('click',()=>{panel.hidden=true});
+ header.addEventListener('pointerdown',event=>{if(event.target.closest('button'))return;const r=panel.getBoundingClientRect();quizFloatingDragV8239={x:event.clientX,y:event.clientY,left:r.left,top:r.top,pointerId:event.pointerId};panel.setPointerCapture?.(event.pointerId);event.preventDefault()});
+ panel.addEventListener('pointermove',event=>{if(!quizFloatingDragV8239||event.pointerId!==quizFloatingDragV8239.pointerId)return;const p=quizFloatingDragV8239;const w=panel.offsetWidth,h=panel.offsetHeight;panel.style.left=Math.max(8,Math.min(window.innerWidth-w-8,p.left+event.clientX-p.x))+'px';panel.style.top=Math.max(8,Math.min(window.innerHeight-h-8,p.top+event.clientY-p.y))+'px'});
+ const stopDrag=event=>{if(quizFloatingDragV8239&&(!event||event.pointerId===quizFloatingDragV8239.pointerId))quizFloatingDragV8239=null};panel.addEventListener('pointerup',stopDrag);panel.addEventListener('pointercancel',stopDrag);
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&quizFloatingDetailV8239&&!quizFloatingDetailV8239.panel.hidden)quizFloatingDetailV8239.panel.hidden=true});
+ return quizFloatingDetailV8239;
+}
+function openQuizFloatingDetailV8239(kind,sourceId,anchor){
+ const ui=createQuizFloatingDetailV8239(),panel=ui.panel;ui.body.replaceChildren();
+ const makeText=(tag,cls,value)=>{const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=String(value??'');return el};
+ let titleText='',subtitle='';
+ const section=(heading)=>{const sec=document.createElement('section');sec.className='quizFloatingDetailSectionV8239';sec.appendChild(makeText('h4','',heading));ui.body.appendChild(sec);return sec};
+ if(kind==='anime'&&window.__aniEmqAPI?.getWorkSummary?.(sourceId)){
+  const api=window.__aniEmqAPI, row=api.getWorkSummary(sourceId), raw=api.getWork(sourceId)||{};
+  titleText=String(row?.[1]||'未知作品');subtitle=['視覺小說／遊戲',row?.[5]||'年份未知',raw.vndbId?'VNDB '+raw.vndbId:''].filter(Boolean).join(' · ');
+  const top=section('作品名稱');top.appendChild(makeText('p','quizFloatingDetailAliasV8239',`主要名稱：${row?.[1]||'未知作品'}`));if(row?.[2]&&row[2]!==row[1])top.appendChild(makeText('p','quizFloatingDetailAliasV8239',`其他名稱：${row[2]}`));if(raw.vndbId)top.appendChild(makeText('p','quizFloatingDetailAliasV8239',`VNDB：${raw.vndbId}`));
+  const list=api.getSongsForWork(sourceId)||[],songSection=section(`收錄歌曲（${list.length} 首）`),ul=document.createElement('ul');ul.className='quizFloatingDetailListV8239';for(const song of list){const li=document.createElement('li');li.textContent=`${song[4]||'未命名歌曲'} — ${song[5]||'歌手未標示'}`;ul.appendChild(li)}songSection.appendChild(ul);
+ }else if(kind==='anime'){
+  const row=(Array.isArray(anime)?anime:[]).find(a=>String(a[0])===String(sourceId));if(!row)return;
+  const names=getQuizAnimeNameBundleV8239(row[0]);titleText=names.english||names.romaji||'作品詳情';subtitle=[row[3],row[4],row[5]||'年份未知'].filter(Boolean).join(' · ');
+  const top=section('作品名稱');const cover=document.createElement('img');cover.className='quizFloatingAnimeCoverV8239';cover.alt=(names.english||names.romaji||'動畫')+' 封面';cover.loading='lazy';top.appendChild(cover);if(typeof queueCoverV6==='function'){try{cover.dataset.ann=String(row[0]||'');cover.dataset.mal=String(row[6]||'');queueCoverV6(row,cover)}catch{cover.hidden=true}}else cover.hidden=true;
+  const fields=[['英文／主要名稱',names.english],['羅馬拼音／日文名稱',names.romaji],['繁體中文名稱',names.chinese],['其他名稱',names.aliases.filter(x=>![names.english,names.romaji,names.chinese].includes(x)).join('、')]].filter(x=>x[1]);for(const [label,value] of fields)top.appendChild(makeText('p','quizFloatingDetailAliasV8239',`${label}：${value}`));
+  const list=(Array.isArray(songs)?songs:[]).filter(s=>String(s[0])===String(row[0])).sort((a,b)=>(Number(a[2])-Number(b[2]))||(Number(a[3])-Number(b[3]))||String(a[4]).localeCompare(String(b[4])));
+  const songSection=section(`收錄歌曲（${list.length} 首）`);const ul=document.createElement('ul');ul.className='quizFloatingDetailListV8239';for(const song of list){const li=document.createElement('li');li.textContent=`${quizSongRoleLabelV8239(song)} · ${song[4]||'未命名歌曲'} — ${song[5]||'歌手未標示'}`;ul.appendChild(li)}songSection.appendChild(ul);
+ }else{
+  const sourceSong=quizSong;if(!sourceSong)return;const artistName=String(sourceId||sourceSong[5]||'').trim();titleText=artistName||'歌手詳情';
+  const norm=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');const sought=norm(artistName);
+  const allSongRows=[...(Array.isArray(songs)?songs:[]),...(window.__aniEmqAPI?.getRows?.()||[])];const matches=allSongRows.filter(song=>norm(song[5])===sought).sort((a,b)=>String(a[5]||'').localeCompare(String(b[5]||''))||String(a[4]||'').localeCompare(String(b[4]||'')));
+  subtitle=`曲庫收錄 ${matches.length} 首相關歌曲`;
+  const intro=section('歌手／演唱者');intro.appendChild(makeText('p','quizFloatingDetailAliasV8239',`名稱：${artistName}`));
+  const listSection=section(`相關歌曲與作品（${matches.length} 首）`),ul=document.createElement('ul');ul.className='quizFloatingDetailListV8239';
+  for(const song of matches.slice(0,500)){const li=document.createElement('li'),isEmq=!!window.__aniEmqAPI?.isSong?.(song[1]),workRow=isEmq?window.__aniEmqAPI?.getWorkSummary?.(song[0]):(Array.isArray(anime)?anime.find(a=>String(a[0])===String(song[0])):null);const button=makeText('button','quizFloatingAnimeLinkV8239',workRow?(workRow[1]||workRow[2]||`作品 ${workRow[0]}`):`作品 ${song[0]}`);button.type='button';button.addEventListener('click',()=>openQuizFloatingDetailV8239('anime',song[0],button));li.append(button,makeText('span','',` — ${quizSongRoleLabelV8239(song)} · ${song[4]||'未命名歌曲'}`));ul.appendChild(li)}
+  listSection.appendChild(ul);if(matches.length>500)listSection.appendChild(makeText('p','quizFloatingDetailAliasV8239',`為維持視窗流暢，目前顯示前 500 首，共 ${matches.length} 首。`));
+ }
+ ui.title.textContent=titleText;panel.setAttribute('aria-label',titleText+'詳情');let sub=panel.querySelector('.quizFloatingDetailSubtitleV8239');if(!sub){sub=document.createElement('div');sub.className='quizFloatingDetailSubtitleV8239';ui.header.insertAdjacentElement('afterend',sub)}sub.textContent=subtitle;
+ const rect=(anchor||document.getElementById(kind==='anime'?'quizInfoAnime':'quizInfoArtist'))?.getBoundingClientRect();const width=Math.min(540,window.innerWidth-24),height=Math.min(620,window.innerHeight-24);panel.style.width=width+'px';panel.style.height=height+'px';panel.style.left=Math.max(12,Math.min(window.innerWidth-width-12,rect?rect.left:window.innerWidth-width-24))+'px';panel.style.top=Math.max(12,Math.min(window.innerHeight-height-12,rect?rect.bottom+8:24))+'px';panel.hidden=false;panel.style.zIndex='20050';
+}
+function wireQuizInfoDetailActionsV8239(){
+ const animeInfo=document.getElementById('quizInfoAnime'),artistInfo=document.getElementById('quizInfoArtist');
+ if(animeInfo){animeInfo.onclick=null;animeInfo.classList.add('quizInfoClickableV8239');animeInfo.setAttribute('role','button');animeInfo.setAttribute('aria-label',quizSong&&window.__aniEmqAPI?.isSong?.(quizSong)?'點擊開啟作品詳情':'點擊開啟作品詳情');animeInfo.tabIndex=0;if(animeInfo.dataset.detailClickBoundV8239!=='1'){animeInfo.dataset.detailClickBoundV8239='1';animeInfo.addEventListener('click',()=>{if(quizSong)openQuizFloatingDetailV8239('anime',quizSong[0],animeInfo)});animeInfo.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&quizSong){e.preventDefault();openQuizFloatingDetailV8239('anime',quizSong[0],animeInfo)}})}}
+ if(artistInfo){artistInfo.classList.add('quizInfoClickableV8239');artistInfo.setAttribute('role','button');artistInfo.setAttribute('aria-label','點擊開啟歌手詳情');artistInfo.tabIndex=0;if(artistInfo.dataset.detailClickBoundV8239!=='1'){artistInfo.dataset.detailClickBoundV8239='1';artistInfo.addEventListener('click',()=>{if(quizSong)openQuizFloatingDetailV8239('artist',quizSong[5],artistInfo)});artistInfo.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&quizSong){e.preventDefault();openQuizFloatingDetailV8239('artist',quizSong[5],artistInfo)}})}}
+}
+
+function showQuizRevealInfoV30(){if(!quizSong)return;clearQuizAutoNextV30();quizRootV30.classList.add('is-revealed');visualizerV30.hidden=true;const isEmqQuestion=!!window.__aniEmqAPI?.isSong?.(quizSong),a=isEmqQuestion?(window.__aniEmqAPI?.getWorkSummary?.(quizSong[0])||null):byAnime.get(quizSong[0]);const en=String(a?.[1]||(isEmqQuestion?'未知作品':'未知動畫')),romaji=String(a?.[2]||en),zh=String(isEmqQuestion?'':(window.__aniChineseTitleAPIv8237?.getTitle(quizSong[0])||'')),display=quizSettings.titleLanguage==='chinese'?(zh||en):(quizSettings.titleLanguage==='romaji'?romaji:en),alternate=display!==en?en:romaji;bindTitleToggleV30(animeTitleV30,display,alternate);animeTitleV30.classList.remove('hidden');
+ const oldCover=quizMysteryV30.querySelector('.quizAnimeCoverV30');if(oldCover)oldCover.remove();const cover=make('img',{id:'quizAnimeCoverV30',class:'quizAnimeCoverV30',alt:en+' 封面',loading:'eager'});cover.hidden=true;cover.addEventListener('load',()=>{cover.hidden=false});cover.addEventListener('error',()=>{cover.hidden=true});quizMysteryV30.appendChild(cover);if(typeof queueCoverV6==='function'&&a&&!isEmqQuestion)queueCoverV6(a,cover);else if(isEmqQuestion){Promise.resolve(window.__aniVnCoverAPIv857?.getCoverUrl?.(quizSong[0])).then(url=>{if(url&&cover.isConnected)cover.src=url;else if(cover.isConnected)cover.hidden=true}).catch(()=>{cover.hidden=true})}else cover.hidden=true;
+ const songName=String(quizSong[4]||'未命名歌曲'),artist=String(quizSong[5]||'歌手未標示');const typeNames={1:'OP',2:'ED',3:'插入歌',4:'OST',5:'其他'};const baseType=typeNames[Number(quizSong[2])]||'未標示',typeNumber=Number(quizSong[3]),type=(baseType==='OP'||baseType==='ED')&&Number.isFinite(typeNumber)&&typeNumber>0?`${baseType} ${typeNumber}`:baseType;const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=String(val||'未標示')};bindTitleToggleV30(document.getElementById('quizInfoAnime'),display,alternate);bindTitleToggleV30(document.getElementById('quizInfoSong'),songName,String(quizSong[12]||quizSong[13]||songName));set('quizInfoArtist',artist);set('quizInfoType',isEmqQuestion?'EMQ · '+type:type);set('quizInfoYear',a?.[5]||'年份未知');
+ const difficultyValue=quizSong[6],difficultyNumber=Number(difficultyValue),difficultyLabel=difficultyValue!=null&&String(difficultyValue).trim()!==''&&Number.isFinite(difficultyNumber)?`${difficultyNumber.toFixed(1).replace(/\.0$/,'')}%`:'未收錄';
+ const practiceMeta=getQuizPracticeMetaV8239(quizSong[1]);set('quizInfoDifficulty',difficultyLabel);set('quizInfoPlayCount',`${Math.max(0,Number(practiceMeta?.playCount)||0)} 次`);set('quizInfoLastAnswer',practiceMeta?.lastAnswer?`${practiceMeta.lastAnswer}${practiceMeta.lastCorrect?'（答對）':'（未答對）'}`:'尚無紀錄');
+ ensureQuizAnswerTooltipV8239(animeTitleV30);wireQuizInfoDetailActionsV8239();document.getElementById('quizInfoContentV30')?.classList.remove('hidden');document.getElementById('quizInfoEmpty')?.classList.add('hidden');if(window.matchMedia&&window.matchMedia('(max-width: 760px)').matches){quizSideV30.classList.add('info-open');const infoToggle=document.getElementById('quizInfoToggleV30');if(infoToggle){infoToggle.setAttribute('aria-expanded','true');const indicator=infoToggle.querySelector('span');if(indicator)indicator.textContent='−'}}
+ const input=document.getElementById('quizAnswer');if(input)input.disabled=true;document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSkip').disabled=true;document.getElementById('quizNext').disabled=false;
+ if(quizSettings.autoNext){const delay=Math.max(1,Math.min(30,Number(quizSettings.autoNextDelay)||5));startQuizAutoNextV30(delay*1000)}else{clearQuizAutoNextV30();countdownV30.classList.remove('hidden');countdownV30.textContent='自動切題已關閉'}updateQuizPlaybackV30()}
+const hideAnswerV30=hideAnswer;hideAnswer=function(){clearQuizAutoNextV30();hideAnswerV30();resetQuizRevealInfoV30();};
+const revealAnswerV30=revealAnswer;revealAnswer=function(resultText=''){revealAnswerV30(resultText);showQuizRevealInfoV30()};
+const oldNextQuizV30=nextQuiz;nextQuiz=function(){clearQuizAutoNextV30();clearQuizPlaybackV30();oldNextQuizV30();updateQuizPlaybackV30()};
+// Manual reveal uses the same post-answer state as submitted answers, without changing familiarity scores.
+
+document.getElementById('quizNext').onclick=()=>nextQuiz();
+// Audio clip countdown and progress. Revealing never pauses the current audio.
+function startQuizPlaybackTickerV30(){
+ // A media element may emit `playing` again after pause/resume or a brief buffering stall.
+ // Keep the existing deadline/ticker for the current question instead of resetting to full time.
+ if(!quizActive||!quizSong||quizFinished)return;
+ if(quizPlaybackTickerV30&&quizClipDeadlineV30>0){updateQuizPlaybackV30();return;}
+ clearQuizPlaybackV30();
+ const duration=Math.max(1,Number(quizSettings.clip)||20);
+ quizClipDeadlineV30=Date.now()+duration*1000;
+ updateQuizPlaybackV30();
+ quizPlaybackTickerV30=setInterval(()=>{
+   if(document.body.classList.contains('quiz-round-paused'))return;
+   /* V82.1: freeze the clip timer while the pause control is active. */
+   if(!quizActive||!quizSong||quizFinished){clearQuizPlaybackV30();return}
+   const left=Math.max(0,(quizClipDeadlineV30-Date.now())/1000);
+   updateQuizPlaybackV30();
+   if(left<=0){clearQuizPlaybackV30();submitQuiz(true);updateQuizPlaybackV30()}
+ },100)
+}
+audioEl?.addEventListener('playing',()=>{if(quizActive&&quizSong&&!quizFinished&&String(currentSong?.[1])===String(quizSong[1]))startQuizPlaybackTickerV30()});
+audioEl?.addEventListener('pause',()=>{if(audioEl?.ended||quizRootV30.classList.contains('is-revealed'))updateQuizPlaybackV30()});
+// Title language and visualizer settings are saved with the rest of the quiz preferences.
+function applyQuizDisplaySettingsV30(){const lang=document.getElementById('qsTitleLanguage')?.value||quizSettings.titleLanguage||'english';const mode=document.getElementById('qsVisualizerMode')?.value||quizSettings.visualizerMode||'wave';quizMysteryV30.classList.toggle('visualizer-static-v30',mode==='static');if(quizRootV30.classList.contains('is-revealed')&&quizSong)showQuizRevealInfoV30();}
+// Apply saved values once the new settings controls exist.
+if(document.getElementById('qsTitleLanguage'))document.getElementById('qsTitleLanguage').value=quizSettings.titleLanguage||'english';if(document.getElementById('qsAutoNextDelay'))document.getElementById('qsAutoNextDelay').value=quizSettings.autoNextDelay||5;if(document.getElementById('qsVisualizerMode'))document.getElementById('qsVisualizerMode').value=quizSettings.visualizerMode||'wave';
+for(const id of ['qsTitleLanguage','qsAutoNextDelay','qsVisualizerMode'])document.getElementById(id)?.addEventListener('change',()=>{readQuizSettingsUI();applyQuizDisplaySettingsV30()});
+applyQuizDisplaySettingsV30();resetQuizRevealInfoV30();updateQuizCounts();document.addEventListener('ani-familiarity-updated-v51',()=>{try{updateQuizCounts()}catch(e){}});
+// Planner bridge: persist settings, refresh the existing settings controls, and retain the old quiz workflow.
+window.__aniQuizPlanV1={
+ applySettings(overrides={}){
+  const ids=Object.prototype.hasOwnProperty.call(overrides,'focusSongIds')&&Array.isArray(overrides.focusSongIds)?[...new Set(overrides.focusSongIds.map(String))]:[];
+  const regular={...overrides};delete regular.focusSongIds;
+  if(ids.length&&!activeFocusOriginalSettingsV72){try{activeFocusOriginalSettingsV72=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');localStorage.setItem('aniQuizPlanBackupSettingsV72',JSON.stringify(activeFocusOriginalSettingsV72));activeFocusOriginalPoolV72=document.getElementById('quizPool')?.value||'unmarked'}catch(e){activeFocusOriginalSettingsV72={}}}
+  const next={...quizSettings,...regular,focusSongIds:[]};
+  activeFocusSongIdsV72=ids;activeFocusModeV72=ids.length>0; // Volatile session constraint: never trap later ordinary quizzes in an old review list.
+  try{localStorage.setItem('aniQuizSettingsV14',JSON.stringify(next))}catch(e){}
+  loadQuizSettings();
+  const poolSelect=document.getElementById('quizPool');if(poolSelect&&ids.length)poolSelect.value='all';
+  readQuizSettingsUI();
+  quizRound=0;quizRoundSeen.clear();quizRoundTarget=quizSettings.count;lastQuestionId=null;quizSong=null;quizFinished=false;
+  return true;
+ },
+ clearFocus(){
+  activeFocusSongIdsV72=[];activeFocusModeV72=false;quizSettings.focusSongIds=[];
+  let backup=activeFocusOriginalSettingsV72;
+  if(!backup){try{const raw=localStorage.getItem('aniQuizPlanBackupSettingsV72');if(raw)backup=JSON.parse(raw)}catch(e){}}
+  try{if(backup){localStorage.setItem('aniQuizSettingsV14',JSON.stringify(backup));activeFocusOriginalSettingsV72=null;localStorage.removeItem('aniQuizPlanBackupSettingsV72')}else{const saved=JSON.parse(localStorage.getItem('aniQuizSettingsV14')||'{}');saved.focusSongIds=[];localStorage.setItem('aniQuizSettingsV14',JSON.stringify(saved))}}catch(e){}
+  try{loadQuizSettings();readQuizSettingsUI()}catch(e){}
+  const poolSelect=document.getElementById('quizPool');if(poolSelect&&activeFocusOriginalPoolV72)poolSelect.value=activeFocusOriginalPoolV72;
+  activeFocusOriginalPoolV72=null;
+ },
+ getSettings:()=>({...quizSettings}),
+ getFocusCount:()=>activeFocusSongIdsV72.length,
+ removeFocusSong:id=>{activeFocusSongIdsV72=activeFocusSongIdsV72.filter(x=>String(x)!==String(id));return activeFocusSongIdsV72.length}
+};
+})();</script>

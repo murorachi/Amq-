@@ -1,0 +1,20 @@
+<style id="v82-58-multiplayer-consensus-layout">
+#multiplayerView .mpCreateAdvanced{margin:12px 0;padding:10px 12px;border:1px solid var(--line,#e5dce8);border-radius:12px;background:color-mix(in srgb,var(--panel,#fff) 94%,var(--accent,#9567b0) 6%)}
+#multiplayerView .mpCreateAdvanced>summary{cursor:pointer;font-weight:800;font-size:13px;padding:3px 0}
+#multiplayerView .mpCreateFilterGrid{margin-top:12px}
+#multiplayerView .mpCreateFilterGrid .mpFilterChoices{display:flex;flex-wrap:wrap;gap:8px 12px}
+#multiplayerView .mpCreateFilterGrid .mpFilterChoices label{display:inline-flex;align-items:center;gap:5px;font-size:12px}
+#multiplayerView .mpCreateFilterGrid .mpFormInline{gap:8px}
+#multiplayerView .mpCreateFilterGrid input[type=number]{width:100%;min-width:0}
+#multiplayerView .mpPlayPane .mpAnswerFields{width:min(100%,1120px);box-sizing:border-box;margin:18px auto;padding:22px;border:1px solid var(--line,#ded3e6);border-radius:17px;background:color-mix(in srgb,var(--panel,#fff) 97%,var(--accent,#9567b0) 3%);gap:14px}
+#multiplayerView .mpPlayPane .mpAnswerField{display:grid;grid-template-columns:116px minmax(0,1fr);align-items:center;gap:14px}
+#multiplayerView .mpPlayPane .mpAnswerField>label{font-size:15px;font-weight:850;color:var(--text,#34283b)}
+#multiplayerView .mpPlayPane .mpAnswerRow{display:block;min-width:0;margin:0}
+#multiplayerView .mpPlayPane .mpAnswerRow .mpInputSuggestWrap{display:block;width:100%}
+#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerRow .mpInput{display:block;box-sizing:border-box;width:100%;min-width:0;min-height:68px;font-size:21px;padding:17px 19px;border-radius:12px}
+#multiplayerView .mpPlayPane .mpSubmittedField{grid-column:2;overflow-wrap:anywhere;font-size:12px}
+#multiplayerView .mpPlayPane .mpAnswerSubmitAll{display:block;width:min(100%,1120px);min-height:58px;margin:0 auto 14px;font-size:16px;font-weight:850}
+#multiplayerView .mpPlayPane #mpAnswerHelp{width:min(100%,1120px);margin:8px auto;font-size:12px}
+#multiplayerView .mpResults .mpConsensusLine{display:block;margin-top:4px;font-size:11px;line-height:1.5}
+@media(max-width:560px){#multiplayerView .mpPlayPane .mpAnswerFields{padding:14px}#multiplayerView .mpPlayPane .mpAnswerField{grid-template-columns:minmax(0,1fr);gap:7px}#multiplayerView .mpPlayPane .mpAnswerFields .mpAnswerRow .mpInput{min-height:62px;font-size:19px;padding:14px 15px}#multiplayerView .mpPlayPane .mpSubmittedField{grid-column:1}#multiplayerView .mpCreateFilterGrid .mpFormInline{display:grid;grid-template-columns:1fr 1fr}}
+</style>

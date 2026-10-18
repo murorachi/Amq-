@@ -10,10 +10,8 @@ const script1 = fs.readFileSync(path.join(root, 'src/scripts/script_001.htmlpart
 const script4 = fs.readFileSync(path.join(root, 'src/scripts/script_004.htmlpart'), 'utf8');
 const script38 = fs.readFileSync(path.join(root, 'src/scripts/script_038.htmlpart'), 'utf8');
 
-const policyStart = script4.indexOf('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */');
-const policyEnd = script4.indexOf('/* V82.65_POOL_POLICY_END */', policyStart);
-assert.ok(policyStart >= 0 && policyEnd > policyStart, 'candidate policy sentinels exist');
-const policySource = script4.slice(policyStart, policyEnd + '/* V82.65_POOL_POLICY_END */'.length);
+const policySource = fs.readFileSync(path.join(root, 'src/modules/candidate_pool_policy.js'), 'utf8');
+assert.ok(policySource.includes('/* V82.65_POOL_POLICY_BEGIN: shared candidate-pool decisions for solo and multiplayer UI. */') && policySource.includes('/* V82.65_POOL_POLICY_END */'), 'candidate policy module sentinels exist');
 const statusSource = script38.split('\n').find(line => line.startsWith('function storedStatus('));
 const tagSource = script38.split('\n').find(line => line.startsWith('function storedTag('));
 assert.ok(statusSource && tagSource, 'exact storedStatus/storedTag source functions exist');
@@ -154,4 +152,4 @@ test('unified snapshots keep EMQ rows separate from AMQ source arrays', () => {
   assert.equal(animeRecords.find(x => x.source === 'emq').workKind, 'visual_novel_game');
   assert.equal(songRecords.find(x => x.source === 'emq').workKind, 'visual_novel_game');
 });
-console.log(\`RESULT \${passed} passed, \${process.exitCode ? 1 : 0} failed\`);
+console.log(`RESULT ${passed} passed, ${process.exitCode ? 1 : 0} failed`);

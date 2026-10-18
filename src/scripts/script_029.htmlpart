@@ -1,0 +1,61 @@
+<script id="v82-35-single-player-reveal-video">
+(()=>{
+ 'use strict';
+ const root=document.getElementById('quizView');
+ if(!root||root.dataset.v835MediaControls==='1')return;
+ root.dataset.v835MediaControls='1';
+ const $=id=>document.getElementById(id);
+ const VIDEO_KEY='aniQuizRevealVideoV835';
+ const mirrors=['https://nawdist.animemusicquiz.com/','https://naedist.animemusicquiz.com/','https://eudist.animemusicquiz.com/'];
+ let videoEnabled=false,revealedForQuestion=false,activeSongId='',videoCandidates=[],videoCandidateIndex=0,videoEpoch=0,quizVideo=null,videoPlayRequested=false,videoManuallyDismissed=false;
+ try{videoEnabled=localStorage.getItem(VIDEO_KEY)==='1'}catch{}
+ const stage=root.querySelector('.quizStage');
+ if(!stage)return;
+ const toolbar=document.createElement('div');toolbar.id='quizMediaControlsV835';toolbar.className='quizMediaControlsV835';toolbar.setAttribute('aria-label','猜歌遊戲影音控制');
+ const volume=document.getElementById('v44VolumeControl');
+ if(volume)toolbar.appendChild(volume);
+ else{
+  const wrap=document.createElement('div');wrap.id='v44VolumeControl';wrap.className='v44-volume';wrap.innerHTML='<label for="v44Volume">音量</label><input id="v44Volume" type="range" min="0" max="100" step="1" value="70"><output id="v44VolumeValue">70%</output>';
+  toolbar.appendChild(wrap);
+  const slider=wrap.querySelector('#v44Volume'),output=wrap.querySelector('#v44VolumeValue');
+  let v=70;try{const n=Number(localStorage.getItem('aniQuizVolume'));if(Number.isFinite(n))v=Math.max(0,Math.min(100,n))}catch{}
+  slider.value=String(v);output.textContent=v+'%';
+  slider.addEventListener('input',()=>{const value=Math.max(0,Math.min(100,Number(slider.value)||0));output.textContent=value+'%';try{localStorage.setItem('aniQuizVolume',String(value))}catch{}const audio=$('audioPlayer');if(audio){audio.volume=value/100;audio.muted=false}});
+ }
+ const toggleLabel=document.createElement('label');toggleLabel.className='quizVideoToggleV835';toggleLabel.htmlFor='quizRevealVideoToggleV835';
+ const toggle=document.createElement('input');toggle.type='checkbox';toggle.id='quizRevealVideoToggleV835';toggle.checked=videoEnabled;
+ const toggleText=document.createElement('span');toggleText.textContent='答題後顯示歌曲影片';toggleLabel.append(toggle,toggleText);
+ const hint=document.createElement('span');hint.className='quizVideoHintV835';hint.textContent='答題期間不顯示；提交答案後才會在緩衝階段播放。';
+ toolbar.append(toggleLabel,hint);
+ stage.insertBefore(toolbar,stage.firstElementChild);
+ const mount=document.createElement('div');mount.id='quizRevealVideoMountV835';mount.className='quizRevealVideoMountV835';mount.hidden=true;
+ const status=document.createElement('div');status.id='quizRevealVideoStatusV835';status.className='quizRevealVideoStatusV835';status.setAttribute('aria-live','polite');
+ const mystery=stage.querySelector('.quizMystery');
+ if(mystery){mystery.appendChild(mount);mystery.insertAdjacentElement('afterend',status)}else{stage.append(mount,status)}
+ const closeVideoButton=document.createElement('button');closeVideoButton.type='button';closeVideoButton.id='quizRevealVideoCloseV8239';closeVideoButton.className='quizRevealVideoCloseV8239';closeVideoButton.textContent='關閉影片';closeVideoButton.setAttribute('aria-label','關閉歌曲影片並恢復動畫封面');
+ closeVideoButton.addEventListener('click',()=>{videoManuallyDismissed=true;clearVideo();status.textContent='影片已關閉，已恢復動畫封面。'});
+ function restoreCover(){const cover=$('quizAnimeCoverV30');if(cover&&cover.isConnected&&cover.complete&&cover.naturalWidth>0)cover.hidden=false;}
+ function hideCover(){const cover=$('quizAnimeCoverV30');if(cover)cover.hidden=true;}
+ function currentQuizSong(){const id=String(window.__aniQuizStateV45?.quizSong?.[1]??'');if(!id)return null;const fromApi=window.__aniHistoryAPIv51?.getSong?.(id);if(fromApi)return fromApi;try{if(typeof songs!=='undefined'&&Array.isArray(songs))return songs.find(row=>String(row?.[1])===id)||null}catch{}return null}
+ function mayShow(){return videoEnabled&&!videoManuallyDismissed&&revealedForQuestion&&root.classList.contains('is-revealed')&&!!window.__aniQuizStateV45?.quizSong&&!document.body.classList.contains('quiz-round-paused')}
+ function clearVideo(clearSource=true){videoEpoch++;videoPlayRequested=false;if(quizVideo){try{quizVideo.pause()}catch{}if(clearSource){try{quizVideo.removeAttribute('src');quizVideo.load()}catch{}}}quizVideo=null;activeSongId='';videoCandidates=[];videoCandidateIndex=0;mount.classList.remove('is-visible');mount.hidden=true;mount.replaceChildren();restoreCover();status.textContent=''}
+ function buildCandidates(song){const refs=[song?.[10],song?.[11]].map(v=>String(v||'').split('/').pop().trim()).filter(Boolean);return [...new Set(refs.flatMap(ref=>mirrors.map(host=>host+encodeURIComponent(ref))))]}
+ function setVideoSource(epoch){if(epoch!==videoEpoch||!quizVideo||!videoCandidates[videoCandidateIndex])return;videoPlayRequested=true;quizVideo.src=videoCandidates[videoCandidateIndex];quizVideo.load();const p=quizVideo.play();if(p&&typeof p.catch==='function')p.catch(()=>{if(epoch===videoEpoch&&mayShow())status.textContent='影片已載入；若未自動播放，請按影片上的播放鍵。'})}
+ function syncRevealVideo(){if(!mayShow()){if(!revealedForQuestion||!videoEnabled||!root.classList.contains('is-revealed')){if(quizVideo){try{quizVideo.pause()}catch{}}mount.classList.remove('is-visible');mount.hidden=true;restoreCover()}return}
+  const song=currentQuizSong();if(!song){status.textContent='目前題目沒有可用的歌曲資料。';return}
+  const id=String(song[1]);
+  if(activeSongId===id&&(!videoCandidates.length||videoCandidateIndex>=videoCandidates.length))return;
+  if(activeSongId!==id||!quizVideo){clearVideo(false);const epoch=videoEpoch;activeSongId=id;videoCandidates=buildCandidates(song);videoCandidateIndex=0;if(!videoCandidates.length){status.textContent='這首歌沒有可用的影片來源。';return}quizVideo=document.createElement('video');quizVideo.id='quizRevealVideoPlayerV835';quizVideo.controls=true;quizVideo.playsInline=true;quizVideo.muted=true;quizVideo.preload='none';quizVideo.setAttribute('aria-label','答題後的歌曲影片');quizVideo.addEventListener('error',()=>{if(epoch!==videoEpoch||!mayShow())return;videoCandidateIndex++;if(videoCandidateIndex<videoCandidates.length)setVideoSource(epoch);else{status.textContent='影片來源無法播放；已恢復動畫封面，本題音訊與答題紀錄不受影響。';mount.classList.remove('is-visible');mount.hidden=true;restoreCover();try{quizVideo.pause();quizVideo.removeAttribute('src');quizVideo.load()}catch{}}});mount.replaceChildren(quizVideo,closeVideoButton);}
+  hideCover();mount.hidden=false;mount.classList.add('is-visible');status.textContent='影片已在動畫封面框內開啟（靜音）。';if(!quizVideo.src)setVideoSource(videoEpoch);else if(quizVideo.paused&&!videoPlayRequested){videoPlayRequested=true;const p=quizVideo.play();if(p&&p.catch)p.catch(()=>{status.textContent='影片已載入；若未自動播放，請按影片上的播放鍵。'})}
+ }
+ toggle.addEventListener('change',()=>{videoEnabled=toggle.checked;try{localStorage.setItem(VIDEO_KEY,videoEnabled?'1':'0')}catch{}if(!videoEnabled){clearVideo();status.textContent='影片已關閉。'}else if(mayShow())syncRevealVideo()});
+ document.addEventListener('ani-quiz-new-question',()=>{revealedForQuestion=false;videoManuallyDismissed=false;clearVideo()},{capture:true});
+ document.addEventListener('ani-quiz-answer-submitted',()=>{revealedForQuestion=true;queueMicrotask(syncRevealVideo)},{capture:false});
+ document.addEventListener('quiz-v35-answered',()=>{revealedForQuestion=true;syncRevealVideo()});
+ document.addEventListener('ani-quiz-unplayed',()=>{revealedForQuestion=false;clearVideo()});
+ document.addEventListener('ani-quiz-round-stopped-v82',()=>{revealedForQuestion=false;clearVideo()});
+ document.addEventListener('ani-app-navigation',e=>{if(e.detail?.view!=='quiz'){revealedForQuestion=false;clearVideo()}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&quizVideo){try{quizVideo.pause()}catch{}}});
+ // The original V44 input listener remains the sole volume handler; moving its existing control preserves it.
+})();
+</script>

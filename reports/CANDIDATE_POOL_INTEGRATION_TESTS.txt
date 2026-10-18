@@ -1,1 +1,23 @@
-22 integration fixture cases passed, 0 failed. Exact result: RESULT 22 passed, 0 failed.
+PASS base pool preserves source order and rejects blank titles/orphan anime
+PASS quick pool unmarked is applied before metadata and preserves order
+PASS status selection removes non-selected familiarity values
+PASS metadata year, season, anime type, song type and difficulty filters compose
+PASS missing year is included only when unknownYear is enabled
+PASS blacklist, tagsOnly and tag query filter independently
+PASS watch status filter rejects unknown and unselected statuses
+PASS watchlist-only requires a non-none list membership
+PASS repeat prevention rejects seen and last-question IDs
+PASS final repeat guard removes immediate previous question when alternatives exist
+PASS mixed combiner output replaces base pool when it returns an array
+PASS non-array combiner output falls back to base pool
+PASS audio health filters candidates and all-unhealthy case reports status
+PASS custom-list scope output is applied last and preserves its order
+PASS invalid custom-list scope helper fails closed when custom scope is requested
+PASS custom-list scope throwing fails closed
+PASS custom-list scope returning non-array fails closed
+PASS empty focus scope does not broaden to general pool
+PASS focus mode constrains IDs and applies repeat filtering
+PASS empty candidate pool does not auto-broaden settings
+PASS duplicate song IDs are not silently deduplicated by base pool
+PASS invalid source mode helper normalizes to AMQ and does not broaden EMQ-only filtering
+RESULT 22 passed, 0 failed

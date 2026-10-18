@@ -1,0 +1,20 @@
+<style id="v82-53-quiz-compact-cleanup">
+#quizView{background:var(--panel,#fff)!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:0 16px 40px #24182d12!important;padding:clamp(12px,2vw,22px)!important;margin:10px 0 100px!important}
+#quizView .quizTop{align-items:center!important;gap:10px!important;margin-bottom:10px!important;padding-bottom:12px;border-bottom:1px solid var(--line)}
+#quizView .quizTop h2{margin:0!important;font-size:clamp(22px,2.6vw,30px)!important;letter-spacing:-.025em}
+#quizView .quizTop .detailEyebrow{display:none!important}
+#quizView .quizTop>div:last-child{gap:7px!important}
+#quizView .quizQuickSettings{gap:7px!important;margin:10px 0 12px!important;padding:10px 11px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:var(--panel2)!important}
+#quizView .quizQuickSettings label{gap:6px!important;font-size:12px!important}
+#quizView .quizQuickSettings select{min-height:36px!important;border-radius:8px!important}
+#quizView .quizGrid{grid-template-columns:minmax(0,1fr) minmax(225px,270px)!important;gap:12px!important;align-items:stretch!important}
+#quizView .quizStage{padding:clamp(11px,1.8vw,18px)!important;border-radius:13px!important;border:1px solid var(--line)!important;background:var(--panel2)!important}
+#quizView .quizMystery{min-height:clamp(155px,20vh,215px)!important;margin-bottom:12px!important;border-radius:12px!important;box-shadow:none!important}
+#quizView .quizAnswerInput{min-height:48px!important;border-radius:10px!important;padding:12px 13px!important}
+#quizView .quizControls{gap:7px!important;margin:9px 0!important}
+#quizView .quizControls .btn,#quizView .quizTop .btn{min-height:36px!important;border-radius:9px!important}
+#quizView .quizSide{gap:8px!important;position:static!important}
+#quizView .quizSetting,#quizView .quizSongInfo{border-radius:11px!important}
+#quizView .quizPlaybackMetaV30{margin:8px 0 10px!important}
+@media(max-width:760px){#quizView .quizGrid{grid-template-columns:minmax(0,1fr)!important}#quizView .quizSide{position:static!important}#quizView .quizTop>div:last-child{width:100%;justify-content:flex-start!important}#quizView .quizMystery{min-height:155px!important}#quizView .quizQuickSettings{align-items:stretch!important}#quizView .quizQuickSettings label{flex-wrap:wrap}}
+</style>

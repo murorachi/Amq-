@@ -1,0 +1,21 @@
+PASS HTML file exists
+PASS HTML has head element for test shim
+PASS app document initializes in Chromium
+PASS home is initial view
+PASS practice controls exist
+PASS navigation bridge initializes
+PASS practice navigation works
+PASS practice workbench mounts
+PASS single-player quiz navigation works
+PASS round start selects a question
+PASS answer input stays disabled before playback
+PASS skip before playback uses unplayed path
+PASS unplayed question settles
+PASS unplayed skip does not add history
+PASS next question advances to another song ID
+PASS solo EMQ handoff opens list view
+PASS EMQ list mode is selected
+PASS embedded EMQ API is ready
+PASS no uncaught browser page errors
+LIMITATION UI smoke only: opaque about:blank origin, in-memory storage, IndexedDB unavailable, network blocked.
+NOT TESTED standalone file navigation, real persistence, IndexedDB round-trip, audio, Firefox, multiplayer.

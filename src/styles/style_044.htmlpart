@@ -1,0 +1,5 @@
+<style id="emq-toggle-v8248-style">
+.emqSourceToggleV8248{display:inline-flex!important;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line,#e5d7e5);border-radius:10px;background:var(--panel,#fff);font-size:12px;font-weight:700;color:var(--ink,#352a3b);cursor:pointer;white-space:normal;max-width:100%}
+.emqSourceToggleV8248 input{accent-color:var(--accent,#a45fba);width:15px;height:15px;flex:0 0 auto}.emqSourceToggleV8248 small{font-size:10px;font-weight:500;color:var(--muted,#766a7d)}.emqSourceToggleV8248:has(input:disabled){opacity:.62;cursor:wait}
+.emqSourceStatusV8248{font-size:11px;color:var(--muted,#766a7d);line-height:1.55;margin:4px 0 0}.emqSourceStatusV8248.error{color:#a33b53}
+</style>

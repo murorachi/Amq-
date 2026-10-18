@@ -1,0 +1,32 @@
+<script id="v65-answer-glow-fix-script">
+(()=>{
+ const root=document.getElementById('quizView');
+ if(!root || root.dataset.v65GlowBound==='1')return;
+ root.dataset.v65GlowBound='1';
+ const getCard=()=>root.querySelector('.quizMystery');
+ const clear=()=>{const card=getCard();if(card)card.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57');};
+ const mark=e=>{
+   const card=getCard();if(!card)return;
+   card.classList.remove('quiz-answer-correct-v57','quiz-answer-wrong-v57');
+   card.classList.add(e.detail && e.detail.correct===true?'quiz-answer-correct-v57':'quiz-answer-wrong-v57');
+ };
+ document.addEventListener('ani-quiz-answer-submitted',mark,true);
+ document.addEventListener('ani-quiz-new-question',clear,true);
+ // Fallback for answer/reveal paths that call classifyQuiz without emitting the custom event.
+ const wrap=()=>{
+   if(typeof window.classifyQuiz!=='function'||window.classifyQuiz.__v65Wrapped)return false;
+   const original=window.classifyQuiz;
+   const wrapped=function(correct,answer){
+     const result=original.apply(this,arguments);
+     mark({detail:{correct:correct===true}});
+     return result;
+   };
+   wrapped.__v65Wrapped=true;
+   window.classifyQuiz=wrapped;
+   return true;
+ };
+ if(!wrap()){
+   let tries=0;const timer=setInterval(()=>{tries++;if(wrap()||tries>=40)clearInterval(timer);},100);
+ }
+})();
+</script>

@@ -34,7 +34,7 @@ def check(page, condition, message):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--html", type=Path, default=Path(__file__).resolve().parents[2] / "dist" / "amq_learning_tool_v82_70.html")
+    parser.add_argument("--html", type=Path, default=Path(__file__).resolve().parents[2] / "dist" / "amq_learning_tool_v82_80.html")
     parser.add_argument("--chromium", default="/usr/bin/chromium")
     args = parser.parse_args()
     html_path = args.html.resolve()
@@ -100,25 +100,9 @@ def main():
             check(page, page.locator("#quizSuggestions .quizSuggestion").count() == 25,
                   "input event rebuilds bounded results after composition guard clears")
 
-            # Keyboard path: ArrowDown focuses a result; Enter selects it without submitting.
-            answer.press("ArrowDown")
-            focused = page.locator("#quizSuggestions .quizSuggestion.focus").count()
-            check(page, focused == 1, "ArrowDown moves focus to one suggestion")
-            keyboard_label = page.locator("#quizSuggestions .quizSuggestion.focus").inner_text()
-            answer.press("Enter")
-            check(page, answer.input_value() == keyboard_label, "Enter selects the focused suggestion")
-            check(page, page.locator("#quizSuggestions .quizSuggestion").count() == 0 and
-                  "open" not in (box.get_attribute("class") or "") and answer.get_attribute("aria-expanded") == "false",
-                  "keyboard selection clears list and resets aria-expanded")
-            selection = answer.evaluate("el => [el.selectionStart, el.selectionEnd, el.value.length]")
-            check(page, selection[0] == selection[2] and selection[1] == selection[2],
-                  "keyboard selection caret moves to end of inserted label")
-
-            answer.fill("a")
-            page.wait_for_timeout(30)
-            chosen = page.locator("#quizSuggestions .quizSuggestion").first
-            chosen_text = chosen.inner_text()
-            # Instrument only the user-visible contract; production listeners remain intact.
+            check(page, page.evaluate("typeof window.__aniSelectQuizSuggestionV8272 === 'function'"),
+                  "shared suggestion selection contract is installed")
+            # Instrument both input paths; the production listeners remain intact.
             page.evaluate("""() => {
               window.__suggestionContract = { inputEvents: 0, answeredEvents: 0, submitBridgeCalls: 0 };
               document.getElementById('quizAnswer').addEventListener('input', () => window.__suggestionContract.inputEvents++);
@@ -129,10 +113,56 @@ def main():
                 return bridge.apply(this, args);
               };
             }""")
+
+            # IME-composing input must not be overwritten by the shared selection contract.
+            ime_before = answer.input_value()
+            ime_result = page.evaluate("""() => {
+              const input = document.getElementById('quizAnswer');
+              input.dataset.imeComposing = '1';
+              const result = window.__aniSelectQuizSuggestionV8272('MUST NOT REPLACE', 'keyboard');
+              delete input.dataset.imeComposing;
+              return result;
+            }""")
+            check(page, ime_result is False and answer.input_value() == ime_before,
+                  "shared selection contract refuses to replace input during IME composition")
+            check(page, page.evaluate("window.__suggestionContract.inputEvents") == 0,
+                  "IME-guarded selection dispatches no input event")
+
+            # Keyboard path: ArrowDown focuses a result; Enter selects it without submitting.
+            answer.press("ArrowDown")
+            focused = page.locator("#quizSuggestions .quizSuggestion.focus").count()
+            check(page, focused == 1, "ArrowDown moves focus to one suggestion")
+            keyboard_label = page.locator("#quizSuggestions .quizSuggestion.focus").inner_text()
+            page.evaluate("window.__suggestionContract.inputEvents = 0")
+            answer.press("Enter")
+            check(page, answer.input_value() == keyboard_label, "Enter selects the focused suggestion")
+            check(page, page.evaluate("window.__suggestionContract.inputEvents") == 1,
+                  "keyboard selection dispatches exactly one bubbling input event")
+            check(page, page.locator("#v36Answer").inner_text() == keyboard_label,
+                  "keyboard selection updates answer mirror through input event")
+            check(page, page.locator("#quizSuggestions .quizSuggestion").count() == 0 and
+                  "open" not in (box.get_attribute("class") or "") and answer.get_attribute("aria-expanded") == "false",
+                  "keyboard selection clears list and resets aria-expanded")
+            check(page, page.evaluate("document.activeElement === document.getElementById('quizAnswer')"),
+                  "keyboard selection preserves input focus")
+            selection = answer.evaluate("el => [el.selectionStart, el.selectionEnd, el.value.length]")
+            check(page, selection[0] == selection[2] and selection[1] == selection[2],
+                  "keyboard selection caret moves to end of inserted label")
+            keyboard_events = page.evaluate("window.__suggestionContract")
+            check(page, keyboard_events["answeredEvents"] == 0 and keyboard_events["submitBridgeCalls"] == 0,
+                  "keyboard selection does not submit or settle an answer")
+
+            answer.fill("a")
+            page.wait_for_timeout(30)
+            chosen = page.locator("#quizSuggestions .quizSuggestion").first
+            chosen_text = chosen.inner_text()
+            page.evaluate("window.__suggestionContract.inputEvents = 0")
             pointerdown = chosen.evaluate("el => { const e = new PointerEvent('pointerdown', {bubbles:true, cancelable:true}); const prevented = !el.dispatchEvent(e); return prevented || e.defaultPrevented; }")
             check(page, pointerdown, "suggestion pointerdown prevents input blur before selection")
             chosen.click()
             check(page, answer.input_value() == chosen_text, "click handler copies selected suggestion into answer input")
+            check(page, page.locator("#v36Answer").inner_text() == chosen_text,
+                  "click selection updates answer mirror through input event")
             click_list_closed = page.locator("#quizSuggestions .quizSuggestion").count() == 0 and "open" not in (box.get_attribute("class") or "")
             check(page, click_list_closed, "click selection clears suggestion list")
             check(page, answer.get_attribute("aria-expanded") == "false",

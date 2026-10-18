@@ -1,0 +1,418 @@
+<script id="v77-interval-repetition">
+(()=>{
+ 'use strict';
+ const STORE_KEY='aniSrsScheduleV1';
+ const RECOVERY_PREFIX='aniSrsScheduleRecoveryV1_';
+ const DAY=86400000;
+ const MINUTE=60000;
+ const FSRS_VERSION='FSRS-6-default+song-learning-steps-v1';
+ const W=[0.212,1.2931,2.3065,8.2956,6.4133,0.8334,3.0194,0.001,1.8722,0.1666,0.796,1.4835,0.0614,0.2629,1.6483,0.6014,1.8729,0.5425,0.0912,0.0658,0.1542];
+ const FACTOR=Math.pow(0.9,-1/W[20])-1;
+ const $=(sel,root=document)=>root.querySelector(sel);
+ const $$=(sel,root=document)=>[...root.querySelectorAll(sel)];
+ const clone=x=>JSON.parse(JSON.stringify(x));
+ const clamp=(x,min,max)=>Math.min(max,Math.max(min,x));
+ const validStates=new Set(['new','learning','review','suspended']);
+ const gradeNames={1:'忘記了',2:'很困難',3:'想得起來',4:'秒答'};
+ const shortGradeNames={1:'Again',2:'Hard',3:'Good',4:'Easy'};
+ let persistenceBlocked=false, recoveryRaw=null, store=null, session=null, pendingRating=null, sessionTransitionTimerV82=null, srsUiTimersV82=new Map();
+ const localDay=(time=Date.now())=>{const d=new Date(time);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+ const notify=msg=>{try{if(typeof window.toast==='function')window.toast(msg);else if(typeof window.showToast==='function')window.showToast(msg);else console.info('[間隔複習]',msg)}catch(e){console.info('[間隔複習]',msg)}};
+ function emptyStore(){return {schemaVersion:1,algorithm:FSRS_VERSION,createdAt:new Date().toISOString(),settings:{dailyNew:30,batchSize:25,desiredRetention:0.9,learningStepsMinutes:[1,10],hardStepMinutes:5,relearnMinutes:10,easyGraduatingDays:4,maxIntervalDays:36500},cards:{}}}
+ function isValidSchedule(x){
+  if(!x||typeof x!=='object'||Array.isArray(x)||x.schemaVersion!==1||!x.cards||typeof x.cards!=='object'||Array.isArray(x.cards)||!x.settings||typeof x.settings!=='object'||Array.isArray(x.settings))return false;
+  const s=x.settings;
+  if(!Number.isFinite(Number(s.dailyNew))||Number(s.dailyNew)<0||Number(s.dailyNew)>500||!Number.isFinite(Number(s.batchSize))||Number(s.batchSize)<1||Number(s.batchSize)>500||!Number.isFinite(Number(s.desiredRetention))||Number(s.desiredRetention)<0.7||Number(s.desiredRetention)>0.97)return false;
+  for(const [id,c] of Object.entries(x.cards)){
+   if(!c||typeof c!=='object'||String(c.songId)!==String(id)||!validStates.has(c.state)||!Number.isFinite(Number(c.dueAt))||!Number.isFinite(Number(c.reps||0))||Number(c.reps||0)<0||!Number.isFinite(Number(c.lapses||0))||Number(c.lapses||0)<0)return false;
+   if(c.stability!==null&&c.stability!==undefined&&(!Number.isFinite(Number(c.stability))||Number(c.stability)<0))return false;
+   if(c.difficulty!==null&&c.difficulty!==undefined&&(!Number.isFinite(Number(c.difficulty))||Number(c.difficulty)<0||Number(c.difficulty)>10))return false;
+   if(c.reviewLog!==undefined&&!Array.isArray(c.reviewLog))return false;
+  }
+  return true;
+ }
+ function quarantine(raw){
+  try{const key=RECOVERY_PREFIX+Date.now();localStorage.setItem(key,raw);localStorage.removeItem(STORE_KEY);recoveryRaw=raw;notify('偵測到無法讀取的間隔複習資料，已先保留復原副本；目前以空排程啟動，原有熟悉度與答題歷史不受影響。請保留完整備份。');return true}catch(e){persistenceBlocked=true;recoveryRaw=raw;console.error('Could not quarantine invalid interval schedule; writes blocked to protect original data.',e);return false}
+ }
+ function loadStore(){
+  let raw=null;
+  try{raw=localStorage.getItem(STORE_KEY)}catch(e){persistenceBlocked=true;console.error('Local storage is unavailable for interval repetition.',e);return emptyStore()}
+  if(raw===null)return emptyStore();
+  let parsed=null;try{parsed=JSON.parse(raw)}catch(e){parsed=null}
+  if(isValidSchedule(parsed)){
+   const baseline=emptyStore();
+   return {...baseline,...parsed,settings:{...baseline.settings,...parsed.settings},cards:parsed.cards};
+  }
+  quarantine(raw);
+  return emptyStore();
+ }
+ store=loadStore();
+ function persist(next,quiet=false){
+  if(window.__aniSuppressPersistenceForRestoreV828)return false;
+  if(persistenceBlocked){if(!quiet)notify('間隔複習資料格式異常，原始資料受到保護。請先匯出完整備份，再處理瀏覽器儲存問題。');return false}
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(next));store=next;return true}catch(e){console.error('Interval repetition save failed',e);if(!quiet)notify('間隔複習資料儲存失敗。為避免進度不一致，這次修改未套用；請先匯出備份並檢查瀏覽器儲存空間。');return false}
+ }
+ function api(){return window.__aniHistoryAPIv51||null}
+ function songExists(id){try{return !!api()?.getSong?.(String(id))}catch(e){return false}}
+ function getCard(id){return store.cards[String(id)]||null}
+ function makeCard(id,now=Date.now()){return {songId:String(id),state:'new',resumeState:'new',createdAt:now,dueAt:now,firstReviewedAt:null,lastReviewedAt:null,lastRating:null,lastIntervalDays:0,reps:0,lapses:0,learningStep:0,relearning:false,stability:null,difficulty:null,reviewLog:[]}}
+ function enrollOne(id,now=Date.now(),allowUnknown=false){
+  const key=String(id??'');if(!key||key==='undefined'||key==='null')return {ok:false,reason:'invalid'};
+  if(!allowUnknown&&!songExists(key))return {ok:false,reason:'missing'};
+  const prior=getCard(key);if(prior){if(prior.state==='suspended'){const next=clone(store);const c=next.cards[key];c.state=validStates.has(c.resumeState)&&c.resumeState!=='suspended'?c.resumeState:'new';if(!persist(next))return {ok:false,reason:'storage'};return {ok:true,created:false,resumed:true,card:getCard(key)}}return {ok:true,created:false,resumed:false,card:prior}}
+  const next=clone(store);next.cards[key]=makeCard(key,now);if(!persist(next))return {ok:false,reason:'storage'};return {ok:true,created:true,resumed:false,card:getCard(key)};
+ }
+ function enrollMany(ids){
+  const next=clone(store);let added=0,existing=0,skipped=0;
+  for(const raw of ids){const id=String(raw??'');if(!id||id==='undefined'||id==='null'||!songExists(id)){skipped++;continue}const old=next.cards[id];if(old){existing++;if(old.state==='suspended')old.state=validStates.has(old.resumeState)&&old.resumeState!=='suspended'?old.resumeState:'new';continue}next.cards[id]=makeCard(id);added++}
+  if(!added&&!existing)return {ok:false,added:0,existing:0,skipped};
+  if(!persist(next))return {ok:false,added:0,existing:0,skipped,storage:true};
+  return {ok:true,added,existing,skipped};
+ }
+ function toggleOne(id){
+  const key=String(id),old=getCard(key);if(!old)return enrollOne(key);
+  const next=clone(store),c=next.cards[key];
+  if(c.state==='suspended'){c.state=validStates.has(c.resumeState)&&c.resumeState!=='suspended'?c.resumeState:'new';return persist(next)?{ok:true,action:'resumed'}:{ok:false,reason:'storage'}}
+  c.resumeState=c.state;c.state='suspended';return persist(next)?{ok:true,action:'suspended'}:{ok:false,reason:'storage'};
+ }
+ function initDifficulty(grade){return clamp(W[4]-Math.exp(W[5]*(grade-1))+1,1,10)}
+ function initMemory(c,grade){c.stability=W[grade-1];c.difficulty=initDifficulty(grade)}
+ function updateMemory(c,grade,elapsedDays){
+  let s=Math.max(0.001,Number(c.stability)||0.001),d=clamp(Number(c.difficulty)||initDifficulty(grade),1,10);
+  const d0Easy=initDifficulty(4);
+  const dNew=clamp(W[7]*d0Easy+(1-W[7])*(d-W[6]*(grade-3)),1,10);
+  let sNew;
+  if(elapsedDays<1){
+   sNew=s*Math.exp(W[17]*(grade-3+W[18]))*Math.pow(s,-W[19]);
+  }else{
+   const r=clamp(Math.pow(1+FACTOR*elapsedDays/s,-W[20]),0.01,1);
+   if(grade===1){sNew=W[11]*Math.pow(dNew,-W[12])*(Math.pow(s+1,W[13])-1)*Math.exp(W[14]*(1-r))}
+   else{const gradeModifier=grade===2?W[15]:grade===4?W[16]:1;sNew=s*(Math.exp(W[8])*(11-dNew)*Math.pow(s,-W[9])*(Math.exp(W[10]*(1-r))-1)*gradeModifier+1)}
+  }
+  c.stability=clamp(Number.isFinite(sNew)?sNew:s,0.01,36500);
+  c.difficulty=dNew;
+ }
+ function intervalDays(c){
+  const retention=clamp(Number(store.settings.desiredRetention)||0.9,0.7,0.97),s=Math.max(0.01,Number(c.stability)||1);
+  const days=s/FACTOR*(Math.pow(retention,-1/W[20])-1);
+  return clamp(Math.round(Number.isFinite(days)?days:1),1,Math.max(1,Number(store.settings.maxIntervalDays)||36500));
+ }
+ function addReviewLog(c,grade,now,intervalMs){
+  c.reviewLog=Array.isArray(c.reviewLog)?c.reviewLog:[];
+  c.reviewLog.push({at:now,grade,intervalMs,state:c.state,stability:c.stability,difficulty:c.difficulty});
+  if(c.reviewLog.length>20)c.reviewLog=c.reviewLog.slice(-20);
+ }
+ function applyRatingToCard(original,grade,now=Date.now()){
+  const c=clone(original);grade=Number(grade);if(![1,2,3,4].includes(grade))throw new Error('Invalid FSRS rating');
+  if(c.state==='suspended')c.state=validStates.has(c.resumeState)&&c.resumeState!=='suspended'?c.resumeState:'new';
+  const oldState=c.state,oldLast=Number(c.lastReviewedAt)||0,elapsed=oldLast?Math.max(0,(now-oldLast)/DAY):0;
+  if(c.stability==null||c.difficulty==null){initMemory(c,grade)}else updateMemory(c,grade,elapsed);
+  c.reps=(Number(c.reps)||0)+1;c.firstReviewedAt=Number(c.firstReviewedAt)||now;c.lastReviewedAt=now;c.lastRating=grade;
+  let delayMs=DAY;
+  if(oldState==='new'){
+   if(grade===1){c.state='learning';c.learningStep=0;c.relearning=false;delayMs=Number(store.settings.learningStepsMinutes?.[0]||1)*MINUTE}
+   else if(grade===2){c.state='learning';c.learningStep=0;c.relearning=false;delayMs=(Number(store.settings.hardStepMinutes)||5)*MINUTE}
+   else if(grade===3){c.state='learning';c.learningStep=1;c.relearning=false;delayMs=Number(store.settings.learningStepsMinutes?.[1]||10)*MINUTE}
+   else{c.state='review';c.learningStep=0;c.relearning=false;delayMs=(Number(store.settings.easyGraduatingDays)||4)*DAY}
+  }else if(oldState==='review'){
+   if(grade===1){c.lapses=(Number(c.lapses)||0)+1;c.state='learning';c.learningStep=0;c.relearning=true;delayMs=(Number(store.settings.relearnMinutes)||10)*MINUTE}
+   else{c.state='review';c.learningStep=0;c.relearning=false;delayMs=intervalDays(c)*DAY}
+  }else if(oldState==='learning'){
+   if(grade===1){c.state='learning';c.learningStep=0;delayMs=Number(store.settings.learningStepsMinutes?.[0]||1)*MINUTE}
+   else if(grade===2){c.state='learning';delayMs=(c.relearning?Number(store.settings.relearnMinutes)||10:(c.learningStep===0?Number(store.settings.hardStepMinutes)||5:20))*MINUTE}
+   else if(c.relearning){c.state='review';c.learningStep=0;c.relearning=false;delayMs=intervalDays(c)*DAY}
+   else if(grade===3&&c.learningStep===0){c.state='learning';c.learningStep=1;delayMs=Number(store.settings.learningStepsMinutes?.[1]||10)*MINUTE}
+   else{c.state='review';c.learningStep=0;c.relearning=false;delayMs=grade===4?Math.max(Number(store.settings.easyGraduatingDays)||4,intervalDays(c))*DAY:intervalDays(c)*DAY}
+  }
+  c.lastIntervalDays=delayMs/DAY;c.dueAt=now+delayMs;
+  addReviewLog(c,grade,now,delayMs);
+  return c;
+ }
+ function rate(id,grade,now=Date.now()){
+  const key=String(id),old=getCard(key);if(!old)return {ok:false,reason:'not-enrolled'};
+  let rated;try{rated=applyRatingToCard(old,grade,now)}catch(e){console.error('FSRS scheduling failed',e);return {ok:false,reason:'algorithm'}}
+  const next=clone(store);next.cards[key]=rated;
+  if(!persist(next))return {ok:false,reason:'storage'};
+  return {ok:true,card:getCard(key),nextDue:getCard(key).dueAt};
+ }
+ function preview(id,grade,now=Date.now()){
+  let card=getCard(id);if(!card)card=makeCard(id,now);
+  const out=applyRatingToCard(card,grade,now);return {dueAt:out.dueAt,intervalMs:out.lastIntervalDays*DAY,state:out.state};
+ }
+ function localDateCount(){const today=localDay();return Object.values(store.cards).filter(c=>c.firstReviewedAt&&localDay(Number(c.firstReviewedAt))===today).length}
+ function counts(now=Date.now()){
+  const cards=Object.values(store.cards),unsuspended=cards.filter(c=>c.state!=='suspended'),active=unsuspended.filter(c=>songExists(c.songId)&&!api()?.isBlacklisted?.(String(c.songId)));
+  return {total:cards.length,active:active.length,suspended:cards.length-unsuspended.length,new:active.filter(c=>c.state==='new').length,due:active.filter(c=>c.state!=='new'&&Number(c.dueAt)<=now).length,learning:active.filter(c=>c.state==='learning').length,review:active.filter(c=>c.state==='review').length,newStudiedToday:localDateCount(),dailyNew:Math.max(0,Number(store.settings.dailyNew)||0),batchSize:Math.max(1,Number(store.settings.batchSize)||25)};
+ }
+ function chooseSession(now=Date.now(),excludedIds=[]){
+  const blacklisted=id=>!!api()?.isBlacklisted?.(String(id));
+  const excluded=new Set(Array.from(excludedIds||[],id=>String(id)));
+  const active=Object.values(store.cards).filter(c=>c.state!=='suspended'&&songExists(c.songId)&&!blacklisted(c.songId)&&!excluded.has(String(c.songId)));
+  const due=active.filter(c=>c.state!=='new'&&Number(c.dueAt)<=now).sort((a,b)=>Number(a.dueAt)-Number(b.dueAt));
+  const cap=clamp(Number(store.settings.batchSize)||25,1,500);
+  const selected=due.slice(0,cap).map(c=>String(c.songId));
+  if(selected.length<cap){const allowance=Math.max(0,(Number(store.settings.dailyNew)||0)-localDateCount());const fresh=active.filter(c=>c.state==='new').sort((a,b)=>Number(a.createdAt)-Number(b.createdAt));selected.push(...fresh.slice(0,Math.min(allowance,cap-selected.length)).map(c=>String(c.songId)))}
+  return {ids:[...new Set(selected)],dueCount:due.length,newCount:Math.max(0,(Number(store.settings.dailyNew)||0)-localDateCount()),activeCount:active.length};
+ }
+ function fmt(n){return Number(n||0).toLocaleString()}
+ function fmtDelay(ms){if(ms<MINUTE*1.5)return '1 分鐘';if(ms<60*MINUTE)return `${Math.max(2,Math.round(ms/MINUTE))} 分鐘`;if(ms<DAY)return `${Math.max(1,Math.round(ms/(60*MINUTE)))} 小時`;const days=Math.max(1,Math.round(ms/DAY));return `約 ${days} 天`}
+ function gradePreviewLabel(id,grade){try{return fmtDelay(preview(id,grade).intervalMs)}catch(e){return '計算中'}}
+ function buttonLabelForSong(id){const c=getCard(id);if(!c)return '加入間隔複習';if(c.state==='suspended')return '已暫停 · 恢復';return '排程中 · 暫停'}
+ function updateToggleButton(btn,id){const c=getCard(id),label=buttonLabelForSong(id);if(btn.textContent!==label)btn.textContent=label;btn.classList.toggle('on',!!c&&c.state!=='suspended');const title=!c?'將這首歌加入獨立的間隔複習排程':c.state==='suspended'?'恢復這首歌的複習排程':'暫停這首歌的複習排程；既有學習資料會保留';if(btn.title!==title)btn.title=title;const pressed=String(!!c&&c.state!=='suspended');if(btn.getAttribute('aria-pressed')!==pressed)btn.setAttribute('aria-pressed',pressed)}
+ function ensureSongToggle(container,id){if(!container||!id)return;let btn=container.querySelector('.aniSrsSongToggle');if(!btn){btn=document.createElement('button');btn.type='button';btn.className=container.classList.contains('discBtns')?'btn aniSrsSongToggle':'statusbtn aniSrsSongToggle';btn.dataset.srsToggleSong=String(id);btn.textContent=buttonLabelForSong(id);container.appendChild(btn)}btn.dataset.srsToggleSong=String(id);updateToggleButton(btn,id)}
+ function updateAllToggles(){
+  $$('.songrow[data-id]').forEach(row=>{const target=row.querySelector('.songactions');if(target)ensureSongToggle(target,row.dataset.id)});
+  const discButtons=$('#discoverCard .discBtns');if(discButtons){let id=null;try{id=typeof discoverySong!=='undefined'&&discoverySong?String(discoverySong[1]):null}catch(e){}if(id)ensureSongToggle(discButtons,id)}
+ }
+ function renderWidget(){
+  const host=$('#aniSrsLearningWidget');if(!host)return;
+  host.dataset.ready='1';const c=counts(),s=store.settings;
+  const options=[0,10,20,30,50,60,100].map(n=>`<option value="${n}" ${Number(s.dailyNew)===n?'selected':''}>${n} 首</option>`).join('');
+  const batches=[10,25,50,100].map(n=>`<option value="${n}" ${Number(s.batchSize)===n?'selected':''}>${n} 首</option>`).join('');
+  const hasAny=c.due>0||((Number(s.dailyNew)||0)>c.newStudiedToday&&c.new>0);
+  host.innerHTML=`<section class="aniSrsWidget"><div class="aniSrsWidgetHead"><div><div class="aniSrsEyebrow">SPACED REPETITION</div><h3>間隔複習</h3><p>只排程你主動加入的歌曲；先複習到期歌曲，再依每日上限加入新歌。</p></div></div><div class="aniSrsMetrics"><div class="aniSrsMetric"><strong>${fmt(c.due)}</strong><span>到期複習</span></div><div class="aniSrsMetric"><strong>${fmt(c.new)}</strong><span>新歌待學</span></div><div class="aniSrsMetric"><strong>${fmt(c.active)}</strong><span>排程中</span></div></div><div class="aniSrsControls"><label>每日新歌上限<select data-srs-setting="dailyNew">${options}</select></label><label>每次最多<select data-srs-setting="batchSize">${batches}</select></label><button type="button" class="btn primary" data-srs-start ${hasAny?'':'disabled'}>開始間隔複習</button></div><p class="aniSrsFine">今日已開始 ${fmt(c.newStudiedToday)} 首新歌 · 加入排程不會改變歌曲原有熟悉度標記。</p></section>`;
+ }
+ function ensureLearningWidget(){
+  const panel=$('#learningPlanPanel');if(!panel)return null;
+  let host=$('#aniSrsLearningWidget',panel);
+  if(!host){host=document.createElement('div');host.id='aniSrsLearningWidget';panel.insertBefore(host,panel.firstChild)}
+  return host;
+ }
+ function ensureQuizShortcut(){
+  const top=$('#quizView .quizTop');if(!top)return;
+  const actions=top.children[1]||top;
+  let group=$('#aniSrsQuizLinks');
+  if(!group){
+   group=document.createElement('div');group.id='aniSrsQuizLinks';group.className='aniSrsQuizLinks';
+   group.innerHTML='<button type="button" class="btn aniSrsQuizStart" data-srs-start>間隔複習</button><button type="button" class="btn" data-srs-open-plan>練習工作台</button>';
+   const exit=$('#quizExit',actions);if(exit)actions.insertBefore(group,exit);else actions.appendChild(group);
+  }
+  const c=counts(),button=$('.aniSrsQuizStart',group);
+  if(button){const label=c.due?`間隔複習 · ${fmt(c.due)} 到期`:c.new?`間隔複習 · ${fmt(c.new)} 新歌`:'間隔複習';if(button.textContent!==label)button.textContent=label;button.title=`到期複習 ${fmt(c.due)} 首；新歌待學 ${fmt(c.new)} 首。開始排程式猜歌練習。`}
+ }
+ function refreshUi(){const host=ensureLearningWidget();if(host)renderWidget();updateAllToggles();ensureQuizShortcut()}
+ function addSrsRatingHost(){
+  const result=$('#quizResult');if(!result||$('#aniSrsRatingPanel'))return;
+  const node=document.createElement('section');node.className='aniSrsRating';node.id='aniSrsRatingPanel';node.hidden=true;
+  result.insertAdjacentElement('afterend',node);
+ }
+ function showActionPrompt(id){
+  addSrsRatingHost();const panel=$('#aniSrsRatingPanel');if(!panel)return;
+  const c=getCard(id),scheduled=!!c&&c.state!=='suspended';
+  panel.hidden=false;panel.dataset.mode='prompt';panel.dataset.songId=String(id);panel.innerHTML=`<h4>${scheduled?'這首歌已在間隔複習中':'把這首歌加入間隔複習？'}</h4><p>${scheduled?'你可以選擇為這次回憶評分，更新這首歌的下次複習時間。':'加入後，這首歌才會進入獨立排程。你可以直接根據剛才的回憶表現評分。'}</p><button type="button" class="btn primary" data-srs-rate-prompt="${String(id)}">${scheduled?'評估這次回憶':'加入並安排複習'}</button>`;
+ }
+ function showRatingPanel(id,mode){
+  addSrsRatingHost();const panel=$('#aniSrsRatingPanel');if(!panel)return;
+  try{window.__aniQuizAutoNextV30?.clear?.()}catch(e){}
+  const c=getCard(id);if(!c)return;
+  panel.hidden=false;panel.dataset.mode='rating';panel.dataset.songId=String(id);panel.dataset.ratingContext=mode||'general';
+  panel.innerHTML=`<h4>這次回憶有多容易？</h4><p>依照你實際想起歌曲所屬作品的難易程度評分。也可以直接按鍵盤 1–4；評分後會保存下次複習時間並自動準備下一題。</p><div class="aniSrsRatingButtons">${[1,2,3,4].map(g=>`<button type="button" class="aniSrsGrade" data-srs-grade="${g}"><b>${g} · ${gradeNames[g]}</b><span>${shortGradeNames[g]}</span><span>下次 ${gradePreviewLabel(id,g)}</span></button>`).join('')}</div>`;
+  const next=$('#quizNext');if(mode==='session'&&next)next.disabled=true;
+  if(mode!=='session'&&next)next.disabled=true;
+  // Move focus away from the answer field immediately. Besides making the rating state obvious,
+  // this prevents a CJK IME from consuming 1-4 as candidate selection instead of SRS shortcuts.
+  scheduleSrsUiTimerV82('ratingFocus',()=>{
+   const currentPanel=$('#aniSrsRatingPanel');
+   if(currentPanel===panel&&!panel.hidden&&panel.dataset.mode==='rating'&&panel.dataset.songId===String(id)&&panel.dataset.ratingContext===(mode||'general'))$('.aniSrsGrade',panel)?.focus({preventScroll:true});
+  },0);
+ }
+ function resetRatingPanel(){clearSrsUiTimerV82('ratingFocus');const panel=$('#aniSrsRatingPanel');if(panel){panel.hidden=true;panel.innerHTML='';delete panel.dataset.mode;delete panel.dataset.songId;delete panel.dataset.ratingContext}const next=$('#quizNext');if(next)next.disabled=false;}
+ function startQuizSession(ids){
+  if(!ids.length){notify('目前沒有到期歌曲，且今天的新歌額度已用完，或還沒有加入任何歌曲。');return false}
+  const bridge=window.__aniQuizPlanV1;if(!bridge?.applySettings){notify('猜歌設定橋接未載入，請重新開啟收藏室後再試。');return false}
+  try{bridge.clearFocus?.()}catch(e){}
+  const current=bridge.getSettings?.()||{};
+  const ok=bridge.applySettings({...current,target:'anime',autoNext:false,noRepeat:true,count:ids.length,focusSongIds:ids});
+  if(ok===false){notify('無法啟動間隔複習，原本猜歌設定未改變。');return false}
+  clearSessionTransitionV82();clearAllSrsUiTimersV82();
+  session={active:true,allIds:[...ids],remainingIds:new Set(ids.map(String)),pendingSongId:null,skippedIds:new Set(),startedAt:Date.now()};
+  resetRatingPanel();
+  window.__aniNavigateApp?.('quiz');
+  scheduleSessionTransitionV82(()=>{const start=$('#quizStart');if(start)start.click();else notify('已準備複習清單，請在猜歌頁按「開始新題」。')},140);
+  notify(`已開始間隔複習：${ids.length} 首。每題揭曉後請評估回憶難度。`);
+  return true;
+ }
+ function startDueSession(){
+  const chosen=chooseSession();if(!chosen.ids.length){const c=counts();if(c.due===0&&c.new===0)notify('目前沒有排程中的歌曲。先從動畫圖鑑或練習工作台加入歌曲。');else if(c.due===0&&c.new>0&&localDateCount()>=Number(store.settings.dailyNew))notify('今天的新歌上限已用完；到期複習仍可繼續，明天會恢復新歌額度。');else notify('沒有可開始的間隔複習歌曲。可能是相關歌曲已加入黑名單，或資料庫中已找不到它們。');return}
+  startQuizSession(chosen.ids);
+ }
+ function clearSrsUiTimerV82(key){
+  const timer=srsUiTimersV82.get(key);
+  if(timer!==undefined){clearTimeout(timer);srsUiTimersV82.delete(key);}
+ }
+ function scheduleSrsUiTimerV82(key,callback,delay=0){
+  clearSrsUiTimerV82(key);
+  const timer=setTimeout(()=>{
+   if(srsUiTimersV82.get(key)!==timer)return;
+   srsUiTimersV82.delete(key);
+   callback();
+  },delay);
+  srsUiTimersV82.set(key,timer);
+  return timer;
+ }
+ function clearAllSrsUiTimersV82(){
+  for(const timer of srsUiTimersV82.values())clearTimeout(timer);
+  srsUiTimersV82.clear();
+ }
+ function clearSessionTransitionV82(){
+  if(sessionTransitionTimerV82!==null){clearTimeout(sessionTransitionTimerV82);sessionTransitionTimerV82=null;}
+ }
+ function scheduleSessionTransitionV82(callback,delay=180){
+  clearSessionTransitionV82();
+  const expectedSession=session;
+  if(!expectedSession?.active)return;
+  sessionTransitionTimerV82=setTimeout(()=>{
+   sessionTransitionTimerV82=null;
+   // A delayed callback may never act on a later session, even if that session is active too.
+   if(session!==expectedSession||!expectedSession.active)return;
+   callback(expectedSession);
+  },delay);
+ }
+ function endSession(message='本次間隔複習已結束。未評分的歌曲仍保留原排程。'){
+  if(!session?.active)return;
+  clearSessionTransitionV82();clearAllSrsUiTimersV82();
+  session=null;pendingRating=null;resetRatingPanel();
+  try{window.__aniQuizPlanV1?.clearFocus?.()}catch(e){console.error('Could not restore prior quiz settings',e)}
+  const next=$('#quizNext');if(next)next.textContent='下一題 →';
+  const status=$('#quizStatus');if(status&&message)status.textContent=message;
+  refreshUi();
+ }
+ function continueAfterBatch(){
+  scheduleSessionTransitionV82(()=>{
+   if(!session?.active||pendingRating||session.remainingIds.size!==0)return;
+   const excluded=[...(session.skippedIds||[])],chosen=chooseSession(Date.now(),excluded);
+   if(chosen.ids.length){
+    const bridge=window.__aniQuizPlanV1,current=bridge?.getSettings?.()||{};
+    const ok=bridge?.applySettings?.({...current,target:'anime',autoNext:false,noRepeat:true,count:chosen.ids.length,focusSongIds:chosen.ids});
+    if(ok===false){endSession('本批已完成，但下一批無法啟動。未評分的歌曲仍保留原排程。');notify('本批已完成；下一批無法啟動，請重新按「間隔複習」。');return}
+    session={active:true,allIds:[...chosen.ids],remainingIds:new Set(chosen.ids.map(String)),pendingSongId:null,skippedIds:new Set(excluded),startedAt:Date.now()};
+    const start=$('#quizStart');if(start)start.click();else{endSession('本批已完成。未評分的歌曲仍保留原排程。');notify('本批已完成，請重新開始間隔複習。');return}
+    notify(`本批已完成，繼續下一批 ${chosen.ids.length} 首。`);
+   }else{
+    endSession('間隔複習已完成。目前沒有其他到期歌曲或今日可學的新歌；未評分的歌曲仍保留原排程。');
+    notify('間隔複習完成：目前沒有其他到期歌曲或今日可學的新歌。');
+    $('#aniSrsQuizLinks [data-srs-start]')?.focus({preventScroll:true});
+   }
+  },180);
+ }
+ function renderQuickCueV80(){
+  const state=window.__aniQuizStateV45, song=state?.quizSong,box=$('#quizInfoContentV30');if(!song||!state?.quizFinished||state.quizAudioStarted!==true||!box||box.classList.contains('hidden'))return;
+  box.querySelector('.quizQuickCueV80')?.remove();const host=document.createElement('div');host.className='quizQuickCueV80';host.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px';
+  const oldTag=api()?.getSongTag?.(song[1])||'';const open=document.createElement('button');open.type='button';open.className='btn btn-ghost';open.textContent=oldTag?`記憶線索：${oldTag} · 編輯`:'＋ 記憶線索（選填）';open.title='只在有助於回想歌曲時留下短標籤，不必每首都填';
+  const editor=document.createElement('div');editor.hidden=true;editor.style.cssText='display:flex;gap:6px;flex-wrap:wrap;align-items:center;width:100%';const input=document.createElement('input');input.type='text';input.maxLength=100;input.value=oldTag;input.placeholder='例如：80年代、電子鼓突出、男聲熱血';input.setAttribute('aria-label','歌曲記憶線索');input.style.cssText='flex:1 1 220px;min-width:160px;max-width:100%';const saveBtn=document.createElement('button');saveBtn.type='button';saveBtn.className='btn btn-primary';saveBtn.textContent='儲存';const cancel=document.createElement('button');cancel.type='button';cancel.className='btn btn-ghost';cancel.textContent='取消';const picks=document.createElement('div');picks.style.cssText='display:flex;gap:6px;flex-wrap:wrap;width:100%';for(const cue of ['80年代感','電子鼓突出','男聲熱血','夏日感','偶像舞台']){const b=document.createElement('button');b.type='button';b.className='btn btn-ghost';b.textContent=cue;b.addEventListener('click',()=>{input.value=cue;input.focus({preventScroll:true})});picks.appendChild(b)}
+  open.addEventListener('click',()=>{editor.hidden=false;open.hidden=true;input.focus({preventScroll:true})});saveBtn.addEventListener('click',()=>{const result=api()?.setSongTag?.(song[1],input.value);if(!result?.ok){notify(result?.reason==='storage'?'記憶線索無法保存，請檢查瀏覽器儲存空間。':'找不到這首歌曲。');return}open.textContent=result.tag?`記憶線索：${result.tag} · 編輯`:'＋ 記憶線索（選填）';open.hidden=false;editor.hidden=true});cancel.addEventListener('click',()=>{input.value=api()?.getSongTag?.(song[1])||'';editor.hidden=true;open.hidden=false});editor.append(input,saveBtn,cancel,picks);host.append(open,editor);box.appendChild(host);
+ }
+ function handleGeneralAnswer(event){
+  const detail=event?.detail||{},id=String(detail.songId??'');if(!id||!session?.active||!session.remainingIds.has(id))return;
+  if(detail.target!=='anime'||detail.validAudio!==true)return;
+  addSrsRatingHost();session.pendingSongId=id;pendingRating={songId:id,mode:'session'};showRatingPanel(id,'session');
+ }
+ function skipUnplayedSessionSongV80(id,source='unplayed'){
+  if(!session?.active||!session.remainingIds.has(String(id)))return;
+  session.remainingIds.delete(String(id));if(!session.skippedIds)session.skippedIds=new Set();session.skippedIds.add(String(id));
+  session.pendingSongId=null;pendingRating=null;try{window.__aniQuizPlanV1?.removeFocusSong?.(id)}catch(e){}
+  resetRatingPanel();const next=$('#quizNext');if(next){next.disabled=false;next.textContent=session.remainingIds.size===0?'檢查下一批…':'下一題 →'}
+  const status=$('#quizStatus');if(status)status.textContent='本題沒有成功播放音訊，未評分也未更新排程。'+(session.remainingIds.size?'正在準備下一題。':'正在檢查下一批歌曲。');
+  if(session.remainingIds.size)scheduleSessionTransitionV82(()=>{if(session?.active&&!pendingRating&&session.remainingIds.size>0&&!$('#quizNext')?.disabled)$('#quizNext')?.click()},180);else continueAfterBatch();
+  refreshUi();
+ }
+ function finishRating(id,grade){
+  const result=rate(id,grade);
+  if(!result.ok){$$('.aniSrsGrade',$('#aniSrsRatingPanel')).forEach(b=>{b.disabled=false});notify(result.reason==='storage'?'這次評分無法保存，因此沒有套用。請先檢查儲存空間。':'無法更新間隔複習排程，請重新操作。');return}
+  const card=result.card,delta=card.dueAt-Date.now();
+  if(session?.active){session.remainingIds.delete(String(id));session.pendingSongId=null;pendingRating=null;try{window.__aniQuizPlanV1?.removeFocusSong?.(id)}catch(e){}
+   resetRatingPanel();const next=$('#quizNext');if(next){next.disabled=false;next.textContent=session.remainingIds.size===0?'檢查下一批…':'準備下一題…'}
+   const status=$('#quizStatus');if(status)status.textContent=`已記錄「${gradeNames[grade]}」。下次複習：${fmtDelay(Math.max(0,delta))}。${session.remainingIds.size?'正在準備下一題。':'本批歌曲已全部評分，正在檢查是否還有到期歌曲或今日可學的新歌。'}`;
+   if(session.remainingIds.size){
+    scheduleSessionTransitionV82(()=>{if(session?.active&&!pendingRating&&session.remainingIds.size>0)$('#quizNext')?.click()},180);
+   }else continueAfterBatch();
+  }else{pendingRating=null;resetRatingPanel();notify(`已記錄「${gradeNames[grade]}」；下次複習：${fmtDelay(Math.max(0,delta))}。`);$('#quizNext')?.focus({preventScroll:true})}
+  refreshUi();
+ }
+ function onDocumentClick(e){
+  const target=e.target?.closest?.('[data-srs-toggle-song],[data-ls-srs-enroll],[data-srs-start],[data-srs-rate-prompt],[data-srs-grade],[data-srs-open-plan]');if(!target)return;
+  if(target.hasAttribute('data-srs-toggle-song')){
+   e.preventDefault();e.stopPropagation();const id=target.dataset.srsToggleSong;const result=toggleOne(id);
+   if(!result.ok){if(result.reason==='missing')notify('找不到這首歌曲，可能是資料庫版本不同。');else if(result.reason==='storage')notify('排程資料儲存失敗，沒有套用修改。');else notify('無法加入間隔複習。');return}
+   refreshUi();const c=getCard(id);notify(!c?'':c.state==='suspended'?'已暫停這首歌的間隔複習，既有紀錄保留。':`已更新間隔複習：${api()?.getSong?.(id)?.[4]||'歌曲'}。`);return;
+  }
+  if(target.hasAttribute('data-ls-srs-enroll')){
+   e.preventDefault();e.stopPropagation();const ids=String(target.dataset.lsSrsEnroll||'').split(',').filter(Boolean);const r=enrollMany(ids);if(!r.ok){notify(r.storage?'排程資料儲存失敗，沒有套用修改。':'這組沒有可加入的歌曲。');return}refreshUi();notify(`整組處理完成：新增 ${r.added} 首，原本已在排程 ${r.existing} 首${r.skipped?`，略過 ${r.skipped} 首`:''}。每日新歌上限會控制實際出題量。`);return;
+  }
+  if(target.hasAttribute('data-srs-open-plan')){e.preventDefault();if(typeof window.__aniNavigateApp==='function')window.__aniNavigateApp('learningPlan');else notify('練習工作台尚未準備好，請重新開啟收藏室後再試。');return;}
+  if(target.hasAttribute('data-srs-start')){e.preventDefault();startDueSession();return;}
+  if(target.hasAttribute('data-srs-rate-prompt')){
+   e.preventDefault();const id=String(target.dataset.srsRatePrompt);const result=enrollOne(id,Date.now(),false);if(!result.ok){notify(result.reason==='storage'?'排程資料儲存失敗。':'無法加入這首歌曲。');return}pendingRating={songId:id,mode:'general'};showRatingPanel(id,'general');refreshUi();return;
+  }
+  if(target.hasAttribute('data-srs-grade')){
+   e.preventDefault();const panel=$('#aniSrsRatingPanel'),id=String(panel?.dataset.songId||''),grade=Number(target.dataset.srsGrade);if(!id||![1,2,3,4].includes(grade))return;
+   $$('.aniSrsGrade',panel).forEach(b=>{b.disabled=true});finishRating(id,grade);
+  }
+ }
+ function handleSettingsChange(e){
+  const el=e.target?.closest?.('[data-srs-setting]');if(!el)return;
+  const key=el.dataset.srsSetting,n=Number(el.value);if(!Number.isFinite(n))return;
+  const next=clone(store);if(key==='dailyNew')next.settings.dailyNew=clamp(Math.round(n),0,500);else if(key==='batchSize')next.settings.batchSize=clamp(Math.round(n),1,500);else return;
+  if(!persist(next)){refreshUi();notify('設定無法保存，因此沒有套用。');return}refreshUi();
+ }
+ function initObservers(){
+  // These observers watch child-list changes. updateToggleButton must avoid rewriting identical textContent,
+  // because even an identical assignment replaces text nodes and would trigger this observer indefinitely.
+  if(typeof MutationObserver==='undefined')return;
+  const songlist=$('#songlist');if(songlist)new MutationObserver(()=>updateAllToggles()).observe(songlist,{childList:true,subtree:true});
+  const discover=$('#discoverCard');if(discover)new MutationObserver(()=>updateAllToggles()).observe(discover,{childList:true,subtree:true});
+  const plan=$('#learningPlanPanel');if(plan)new MutationObserver(()=>{const host=ensureLearningWidget();if(host&&host.dataset.ready!=='1')renderWidget()}).observe(plan,{childList:true,subtree:true});
+ }
+ function init(){
+  addSrsRatingHost();initObservers();refreshUi();ensureQuizShortcut();
+  document.addEventListener('click',onDocumentClick,true);
+  document.addEventListener('change',handleSettingsChange,true);
+  document.addEventListener('quiz-v35-answered',e=>{handleGeneralAnswer(e);renderQuickCueV80()});
+  document.addEventListener('ani-quiz-new-question',()=>{
+   clearSessionTransitionV82();clearSrsUiTimerV82('answerFocus');
+   if(!pendingRating)resetRatingPanel();
+   const expectedSession=session;
+   scheduleSrsUiTimerV82('answerFocus',()=>{
+    if(session!==expectedSession)return;
+    const input=$('#quizAnswer'),view=$('#quizView');
+    if(input&&view&&document.body.classList.contains('quiz-mode')&&view.getClientRects().length&&!input.disabled&&!window.__aniQuizStateV45?.quizFinished)input.focus({preventScroll:true});
+   },80);
+  });
+  document.addEventListener('ani-quiz-unplayed',e=>skipUnplayedSessionSongV80(String(e.detail?.songId||''),e.detail?.source||'unplayed'));
+  document.addEventListener('keydown',e=>{
+   if(e.repeat||!session?.active||!pendingRating)return;
+   const panel=$('#aniSrsRatingPanel');if(!panel||panel.hidden||panel.dataset.mode!=='rating')return;
+   const key=/^[1-4]$/.test(String(e.key||''))?String(e.key):(/^(?:Digit|Numpad)[1-4]$/.test(String(e.code||''))?String(e.code).slice(-1):'');
+   if(!key)return;
+   const target=e.target;
+   if(target?.isContentEditable||target?.matches?.('textarea,select')||(target?.matches?.('input')&&target.id!=='quizAnswer'))return;
+   // Intentional exception: when the SRS rating panel is active, a numeric key is a rating
+   // command even if the previous answer input's IME still reports isComposing=true.
+   e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+   const id=String(panel.dataset.songId||''),grade=Number(key),button=$(`[data-srs-grade="${grade}"]`,panel);if(!id||!button||button.disabled)return;
+   $$('.aniSrsGrade',panel).forEach(b=>{b.disabled=true});finishRating(id,grade);
+  },true);
+  document.addEventListener('ani-app-navigation',e=>{
+   if(e.detail?.view==='quiz'||!session?.active)return;
+   clearSrsUiTimerV82('answerFocus');
+   // Reuse the session-identity guarded queue, so an old leave event cannot end a newer session.
+   scheduleSessionTransitionV82(()=>endSession(),0);
+  });
+  const next=$('#quizNext');if(next){const old=next.onclick;next.onclick=function(ev){if(session?.active&&session.remainingIds.size>0)clearSessionTransitionV82();if(session?.active&&session.remainingIds.size===0&&!session.pendingSongId){endSession('本次間隔複習完成。已評分的歌曲依新排程安排下次出現；未評分的歌曲仍保留原排程。');return}return typeof old==='function'?old.call(this,ev):undefined}}
+  document.addEventListener('ani-quiz-history-updated-v51',refreshUi);
+  window.addEventListener('pagehide',()=>{if(window.__aniSuppressPersistenceForRestoreV828||persistenceBlocked)return;try{localStorage.setItem(STORE_KEY,JSON.stringify(store))}catch(e){}});
+ }
+ window.__aniSRSAPI={
+  version:FSRS_VERSION,storageKey:STORE_KEY,isValidSchedule,
+  snapshot:()=>clone(store),counts,
+  enroll:(id,now=Date.now())=>{const r=enrollOne(id,now,true);if(r.ok)refreshUi();return r},
+  enrollMany:(ids)=>{const r=enrollMany(ids);if(r.ok)refreshUi();return r},
+  toggle:toggleOne,rate,preview,chooseSession,refresh:refreshUi,
+  setSetting:(key,value)=>{const next=clone(store);if(key==='dailyNew')next.settings.dailyNew=clamp(Math.round(Number(value)||0),0,500);else if(key==='batchSize')next.settings.batchSize=clamp(Math.round(Number(value)||25),1,500);else return false;return persist(next)},
+  start:startDueSession,end:endSession,isAwaitingRating:()=>!!pendingRating,
+  getSessionState:()=>({active:!!session?.active,remaining:session?.remainingIds?.size||0,pendingSongId:session?.pendingSongId||null}),
+  validateBackupSchedule:raw=>{try{const x=typeof raw==='string'?JSON.parse(raw):raw;return isValidSchedule(x)}catch(e){return false}}
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>

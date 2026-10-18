@@ -1,0 +1,17 @@
+<style id="v32-quiet-quiz-flow">
+/* Quiet quiz: answer with Enter, or let the clip timer submit automatically. */
+#quizView #quizSubmit{display:none!important}
+#quizView .quizStats{display:none!important}
+#quizView .quizQuickSettings>label:has(#quizAutoNext){display:none!important}
+#quizView #quizSettingsBody label:has(#qsAutoPlay){display:none!important}
+#quizView .quizAnswerInput{margin-bottom:2px}
+#quizView .quizCountdownV30{padding:8px 2px;min-height:24px}
+/* Spread bars across the whole frame rather than clustering in a narrow center strip. */
+#quizView .quizVisualizerV30{inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important;padding:10px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:clamp(1px,.22vw,4px)!important;opacity:.9!important}
+#quizView .quizVisualizerV30[hidden]{display:none!important}
+#quizView .quizVisualizerV30 i{animation-play-state:paused!important;flex:1 1 0!important;width:auto!important;min-width:1px!important;max-width:none!important;height:var(--bar)!important;max-height:92%!important;border-radius:99px!important;transform-origin:center!important;animation:quizWaveV32 .72s ease-in-out infinite alternate!important;animation-delay:var(--delay)!important;opacity:.82!important}
+#quizView .quizMystery.is-playing-v32 .quizVisualizerV30 i{animation-play-state:running!important}
+#quizView .visualizer-static-v30 .quizVisualizerV30 i{animation:none!important;height:14%!important;opacity:.38!important}
+@keyframes quizWaveV32{0%{transform:scaleY(.2);filter:brightness(.8)}45%{transform:scaleY(.72);filter:brightness(1.1)}100%{transform:scaleY(.42);filter:brightness(.95)}}
+@media(max-width:760px){#quizView .quizVisualizerV30{padding:7px!important;gap:1px!important}#quizView .quizVisualizerV30 i{min-width:1px!important}}
+</style>

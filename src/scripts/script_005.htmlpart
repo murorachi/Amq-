@@ -1,0 +1,9 @@
+<script id="v33-player-cover-and-view-isolation-script">
+(()=>{
+ const dock=document.getElementById('audioDock');
+ const toggle=document.getElementById('dockInfoToggleV33');
+ toggle?.addEventListener('click',()=>{const hidden=dock.classList.toggle('dock-info-hidden');toggle.textContent=hidden?'顯示歌曲資訊':'隱藏歌曲資訊';toggle.title=hidden?'顯示歌曲資訊':'隱藏歌曲資訊';toggle.setAttribute('aria-label',toggle.title);toggle.setAttribute('aria-expanded',String(!hidden));});
+ dock?.querySelectorAll('[data-dock-status]').forEach(btn=>btn.addEventListener('click',()=>{if(!currentSong)return;const id=String(currentSong[1]),level=Number(btn.dataset.dockStatus);if(typeof status==='undefined')return;status[id]=level;if(typeof save==='function')save();if(typeof updateStats==='function')updateStats();if(typeof render==='function')render();dock.querySelectorAll('[data-dock-status]').forEach(b=>{b.classList.toggle('on',Number(b.dataset.dockStatus)===level);});if(typeof showToast==='function')showToast(['','已標記「聽過」','已標記「有印象」','已標記「秒答」'][level]);}));
+ 
+})();
+</script>

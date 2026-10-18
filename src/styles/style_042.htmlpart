@@ -1,0 +1,66 @@
+<style id="v82-45-home-icon-and-scene-background-style">
+/* V82.45: icon-only home center, keeping the existing feature profile/player above it. */
+body.ui-home-menu #homeMenu { justify-content:flex-start; gap:0; }
+body.ui-home-menu #homeMenu .amqHomeTopFrame { flex:0 0 auto; width:100%; }
+body.ui-home-menu #homeMenu .amqHomeCenter.amqHomeIconOnly {
+  display:grid; place-items:center; align-content:center; justify-content:center;
+  flex:1 0 auto; align-self:stretch; width:100%; min-height:clamp(220px,42vh,430px);
+  margin:0; padding:clamp(14px,3vh,28px) 0 clamp(20px,4vh,40px); gap:0;
+}
+body.ui-home-menu #homeMenu .amqHomeIconOnly .amqMainIcon { width:clamp(156px,23vw,226px); margin:0; }
+body.ui-home-menu #homeMenu .amqHomeOverlay { position:absolute; inset:0; z-index:40; }
+body.ui-home-menu #homeMenu .amqHomeDialog { width:min(100%,900px); }
+body.ui-home-menu #homeMenu .amqHomeDialogHead { margin-bottom:14px; }
+body.ui-home-menu #homeMenu .amqHomeDialogHead h2 { margin:0; }
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid {
+  display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(9px,1.5vw,14px)!important; width:100%; margin:0; padding:0;
+}
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-menu-card {
+  min-height:clamp(92px,13vh,124px); height:auto; padding:14px 12px;
+  justify-content:center; align-items:center; text-align:center; gap:8px;
+}
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-card-copy { align-items:center; justify-content:center; }
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-card-copy b { font-size:clamp(13px,1.15vw,16px); line-height:1.4; }
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-card-copy small { display:none!important; }
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-menu-card:before { width:34px; height:34px; border-radius:11px; }
+body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-menu-card:after { top:20px; left:50%; transform:translateX(-50%); font-size:13px; }
+body.ui-home-menu #homeMenu .amqHomeClose { display:grid; place-items:center; width:38px; height:38px; flex:0 0 auto; border:1px solid var(--border); border-radius:50%; background:var(--surface); color:var(--text-primary); font-size:23px; cursor:pointer; }
+body.ui-home-menu #homeMenu .amqHomeClose:hover { background:var(--surface-muted); }
+@media(max-width:700px) {
+  body.ui-home-menu #homeMenu .amqHomeTopFrame { gap:10px; }
+  body.ui-home-menu #homeMenu .amqHomeCenter.amqHomeIconOnly { min-height:clamp(190px,35vh,320px); }
+  body.ui-home-menu #homeMenu .amqHomePrimaryGrid { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:9px!important; }
+  body.ui-home-menu #homeMenu .amqHomePrimaryGrid .home-menu-card { min-height:92px; padding:12px 8px; }
+}
+
+/* Scene background layer sits behind app content; each view selects its own saved image. */
+#amqSceneBackgroundLayer { position:fixed; inset:0; z-index:0; pointer-events:none; background-color:var(--app-bg,#17141b); background-repeat:no-repeat,no-repeat; background-size:cover,cover; background-position:center,center; }
+.wrap { position:relative; z-index:1; }
+#amqSceneBackgroundLayer.amq-has-scene-image { background-image:linear-gradient(rgba(14,10,20,var(--amq-scene-dim,.28)),rgba(14,10,20,var(--amq-scene-dim,.28))),var(--amq-scene-image); background-size:cover,var(--amq-scene-fit,cover); background-position:center,var(--amq-scene-position,center center); background-repeat:no-repeat,no-repeat; background-attachment:fixed,fixed; }
+#overlay .drawer.amq-scene-detail-bg { background-image:linear-gradient(rgba(14,10,20,var(--amq-detail-dim,.28)),rgba(14,10,20,var(--amq-detail-dim,.28))),var(--amq-detail-image); background-size:cover,var(--amq-detail-fit,cover); background-position:center,var(--amq-detail-position,center center); background-repeat:no-repeat,no-repeat; }
+#overlay .drawer.amq-scene-detail-bg .drawerhead { background:color-mix(in srgb,var(--surface-muted) 86%,transparent); backdrop-filter:blur(5px); }
+#overlay .drawer.amq-scene-detail-bg .playerbar { background:color-mix(in srgb,var(--surface) 86%,transparent); backdrop-filter:blur(5px); }
+#overlay .drawer.amq-scene-detail-bg .songlist { background:transparent; }
+#overlay .drawer.amq-scene-detail-bg .songrow { background:color-mix(in srgb,var(--surface) 84%,transparent); }
+#amqSceneBgShade { position:fixed; inset:0; z-index:15000; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(18,12,24,.62); backdrop-filter:blur(5px); }
+#amqSceneBgShade[hidden] { display:none!important; }
+#amqSceneBgShade:not([hidden]) { display:flex; }
+#amqSceneBgDialog { box-sizing:border-box; width:min(720px,100%); max-height:92dvh; overflow:auto; padding:clamp(16px,2.6vw,26px); border:1px solid var(--border); border-radius:var(--radius-xl,20px); color:var(--text-primary); background:var(--surface); box-shadow:var(--shadow-dialog,0 20px 70px #0003); }
+#amqSceneBgDialog.amq-settings-has-bg { background-image:linear-gradient(rgba(14,10,20,var(--amq-settings-dim,.28)),rgba(14,10,20,var(--amq-settings-dim,.28))),var(--amq-settings-image); background-size:cover,var(--amq-settings-fit,cover); background-position:center,var(--amq-settings-position,center center); background-repeat:no-repeat,no-repeat; }
+#amqSceneBgDialog h2 { margin:0 0 6px; font-size:clamp(19px,2vw,24px); }
+#amqSceneBgDialog .sceneBgIntro { margin:0 0 16px; color:var(--text-secondary); font-size:13px; line-height:1.55; }
+#amqSceneBgDialog .sceneBgGrid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:16px; }
+#amqSceneBgDialog .sceneBgField { display:flex; flex-direction:column; gap:6px; margin:0 0 12px; min-width:0; }
+#amqSceneBgDialog .sceneBgField label { font-size:12px; font-weight:750; color:var(--text-secondary); }
+#amqSceneBgDialog select,#amqSceneBgDialog input[type=file] { width:100%; min-height:40px; border:1px solid var(--border); border-radius:var(--radius-sm,8px); padding:8px 10px; color:var(--text-primary); background:var(--surface-muted); }
+#amqSceneBgDialog input[type=range] { width:100%; accent-color:var(--primary); }
+#amqSceneBgDialog .sceneBgPreview { display:grid; place-items:center; min-height:215px; overflow:hidden; padding:14px; border:1px solid var(--border); border-radius:var(--radius-lg,16px); color:var(--text-primary); background-color:var(--surface-muted); background-position:center,center; background-size:cover,cover; background-repeat:no-repeat,no-repeat; text-align:center; }
+#amqSceneBgDialog .sceneBgPreview span { padding:7px 11px; border:1px solid color-mix(in srgb,var(--border) 80%,transparent); border-radius:999px; background:color-mix(in srgb,var(--surface) 88%,transparent); backdrop-filter:blur(4px); font-size:12px; font-weight:800; }
+#amqSceneBgDialog .sceneBgStatus { min-height:20px; margin:8px 0 0; color:var(--text-secondary); font-size:12px; overflow-wrap:anywhere; }
+#amqSceneBgDialog .sceneBgActions { display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid var(--border); }
+#amqSceneBgDialog .sceneBgActions .btn { min-height:40px; }
+#amqSceneBgDialog .sceneBgActions .danger { background:var(--danger-soft); color:var(--danger); border-color:var(--danger); }
+#sceneBackgroundOpen { white-space:nowrap; }
+@media(max-width:640px) { #amqSceneBgShade { padding:8px; align-items:flex-end; } #amqSceneBgDialog { max-height:94dvh; border-radius:var(--radius-xl,20px) var(--radius-xl,20px) 0 0; padding:16px; } #amqSceneBgDialog .sceneBgGrid { grid-template-columns:minmax(0,1fr); gap:8px; } #amqSceneBgDialog .sceneBgPreview { min-height:150px; } #amqSceneBgDialog .sceneBgActions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); } }
+</style>

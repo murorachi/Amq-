@@ -1,0 +1,129 @@
+<script id="v8243-player-detail-watchlist-patch">
+(()=>{
+  'use strict';
+  const $=(sel,root=document)=>root.querySelector(sel);
+  const $$=(sel,root=document)=>[...root.querySelectorAll(sel)];
+  const getView=()=>window.__aniGetActiveViewV82?.()||'home';
+
+  // 1) Player collapse / expand. Home and quiz keep their established dedicated layouts.
+  const dock=$('#audioDock');
+  if(dock&&!$('#audioDockCollapseToggleV843')){
+    const toggle=document.createElement('button');
+    toggle.id='audioDockCollapseToggleV843';toggle.type='button';toggle.className='btn';
+    toggle.setAttribute('aria-label','收合播放器');toggle.setAttribute('aria-expanded','true');toggle.title='收合底層播放器';toggle.textContent='⌄';
+    dock.appendChild(toggle);
+    let collapsed=false;
+    try{collapsed=localStorage.getItem('aniAudioDockCollapsed_v843')==='1'}catch(_){collapsed=false}
+    const apply=(view)=>{
+      const canCollapse=view!=='home'&&view!=='quiz';
+      dock.classList.toggle('dock-collapsed-v843',canCollapse&&collapsed);
+      toggle.hidden=!canCollapse;
+      toggle.setAttribute('aria-expanded',String(!(canCollapse&&collapsed)));
+      toggle.setAttribute('aria-label',canCollapse&&collapsed?'展開播放器':'收合播放器');
+      toggle.title=canCollapse&&collapsed?'展開底層播放器':'收合底層播放器';
+      toggle.textContent=canCollapse&&collapsed?'♫':'⌄';
+    };
+    toggle.addEventListener('click',()=>{
+      if(getView()==='home'||getView()==='quiz')return;
+      collapsed=!collapsed;
+      try{localStorage.setItem('aniAudioDockCollapsed_v843',collapsed?'1':'0')}catch(_){/* current session can still toggle */}
+      apply(getView());
+    });
+    document.addEventListener('ani-app-navigation',e=>apply(e.detail?.view||getView()));
+    apply(getView());
+    window.__aniAudioDockCollapseV843={apply,getCollapsed:()=>collapsed};
+  }
+
+  // 2) Move one shared tool panel between catalog and watchlist. No duplicate IDs or duplicate handlers.
+  const quick=$('#quicktools'),watchWork=$('#watchlistWork'),watchToolbar=$('#watchlistWork .watchToolbar');
+  if(quick&&watchWork&&watchToolbar){
+    const catalogParent=quick.parentNode;
+    const catalogAnchor=quick.nextElementSibling;
+    const mount=document.createElement('div');mount.id='myListBatchMountV843';
+    watchWork.insertBefore(mount,$('#watchTabs',watchWork));
+    let bulkContext='catalog';
+    const resetSelection=()=>{
+      try{selectedAnime.clear();selectionMode=false}catch(_){/* fail closed if project state is unavailable */}
+      document.body.classList.remove('v825-bulk-mode');
+      if(typeof updateSelectionHint==='function')updateSelectionHint();
+    };
+    const moveToolsForView=(view)=>{
+      if(view==='watchlist'){
+        if(bulkContext!=='watchlist'){resetSelection();bulkContext='watchlist'}
+        mount.appendChild(quick);quick.classList.remove('view-catalog','hidden');
+        decorateWatchCards();
+      }else{
+        if(quick.parentNode!==catalogParent){catalogParent.insertBefore(quick,catalogAnchor&&catalogAnchor.parentNode===catalogParent?catalogAnchor:null)}
+        quick.classList.add('view-catalog');quick.classList.toggle('hidden',view!=='catalog');
+        if(bulkContext!=='catalog'){resetSelection();bulkContext='catalog'}
+      }
+      if(typeof updateSelectionHint==='function')updateSelectionHint();
+    };
+    function decorateWatchCards(){
+      const grid=$('#watchGrid');if(!grid)return;
+      $$('.watchCard',grid).forEach(card=>{
+        const id=Number(card.dataset.animeId);if(!Number.isFinite(id)||!id)return;
+        let label=$('.myListBatchPickV843',card);
+        if(!label){
+          label=document.createElement('label');label.className='myListBatchPickV843';
+          const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.setAttribute('aria-label','批次選取此動畫');
+          const text=document.createElement('span');text.textContent='加入批次選取';
+          label.append(checkbox,text);
+          label.addEventListener('click',e=>e.stopPropagation());
+          checkbox.addEventListener('change',()=>{
+            if(checkbox.checked){selectedAnime.add(id);selectionMode=true;document.body.classList.add('v825-bulk-mode')}
+            else selectedAnime.delete(id);
+            card.classList.toggle('batch-selected-v843',selectedAnime.has(id));
+            if(typeof updateSelectionHint==='function')updateSelectionHint();
+          });
+          const status=$('[data-status]',card);if(status)card.insertBefore(label,status);else card.appendChild(label);
+        }
+        const input=$('input[type="checkbox"]',label);
+        if(input)input.checked=selectedAnime.has(id);
+        card.classList.toggle('batch-selected-v843',selectedAnime.has(id));
+      });
+    }
+    // Extend the existing hint rather than creating a second status channel.
+    if(typeof updateSelectionHint==='function'&&!window.__aniUpdateSelectionHintV843){
+      const oldHint=updateSelectionHint;
+      updateSelectionHint=function(){
+        oldHint();
+        if(getView()==='watchlist'){
+          const hint=$('#selectionHint');
+          if(hint)hint.textContent=selectionMode?`批次選取已開啟：已選 ${selectedAnime.size} 部作品。可勾選清單卡片，或選取目前篩選結果。`:`批次選取未開啟。${selectedAnime.size?`目前保留 ${selectedAnime.size} 部已選作品。`:''}`;
+          const b=$('#selectModeBtn');if(b)b.textContent=selectionMode?'✓ 結束批次選取':'□ 批次選取';
+        }
+      };
+      window.__aniUpdateSelectionHintV843=true;
+    }
+    const selectMode=$('#selectModeBtn'),selectVisible=$('#selectVisibleBtn'),selectFiltered=$('#selectFilteredBtn'),clearSelection=$('#clearSelectionBtn');
+    if(selectMode){const old=selectMode.onclick;selectMode.onclick=function(e){if(getView()==='watchlist'){
+      selectionMode=!selectionMode;document.body.classList.toggle('v825-bulk-mode',!!selectionMode);decorateWatchCards();updateSelectionHint();return;
+    }bulkContext='catalog';if(typeof old==='function')return old.call(this,e)}}
+    if(selectVisible){const old=selectVisible.onclick;selectVisible.onclick=function(e){if(getView()==='watchlist'){
+      selectionMode=true;document.body.classList.add('v825-bulk-mode');$$('#watchGrid .watchCard').forEach(card=>{const id=Number(card.dataset.animeId);if(id)selectedAnime.add(id)});decorateWatchCards();updateSelectionHint();return;
+    }bulkContext='catalog';if(typeof old==='function')return old.call(this,e)}}
+    if(selectFiltered){selectFiltered.addEventListener('click',e=>{if(getView()!=='watchlist')return;e.preventDefault();e.stopImmediatePropagation();selectionMode=true;document.body.classList.add('v825-bulk-mode');selectedAnime.clear();$$('#watchGrid .watchCard').forEach(card=>{const id=Number(card.dataset.animeId);if(id)selectedAnime.add(id)});decorateWatchCards();updateSelectionHint();},true)}
+    if(clearSelection){const old=clearSelection.onclick;clearSelection.onclick=function(e){if(getView()==='watchlist'){
+      selectedAnime.clear();selectionMode=false;document.body.classList.remove('v825-bulk-mode');decorateWatchCards();updateSelectionHint();return;
+    }bulkContext='catalog';if(typeof old==='function')return old.call(this,e)}}
+    // Existing batch handlers update the shared state; refresh current cards after their synchronous work.
+    ['applyBulkWatchBtn','applyBulkSongBtn','applyBulkPracticeAction'].forEach(id=>{
+      const b=$('#'+id);if(b)b.addEventListener('click',()=>setTimeout(()=>{
+        if(getView()==='watchlist'){
+          window.renderWatchlistV5?.();decorateWatchCards();
+          if(typeof updateSelectionHint==='function')updateSelectionHint();
+        }
+      },0));
+    });
+    const grid=$('#watchGrid');
+    if(grid&&'MutationObserver'in window){
+      const observer=new MutationObserver(records=>{if(records.some(r=>r.addedNodes.length||r.removedNodes.length))decorateWatchCards()});
+      observer.observe(grid,{childList:true});
+    }
+    document.addEventListener('ani-app-navigation',e=>moveToolsForView(e.detail?.view||getView()));
+    moveToolsForView(getView());
+    window.__aniMyListBatchToolsV843={moveToolsForView,decorateWatchCards,getContext:()=>bulkContext};
+  }
+})();
+</script>

@@ -1,0 +1,83 @@
+<script>
+// V11: ANN-first cover loader. AniSongDB's primary identifier is ANNID, so use it directly.
+let coverDiagV10={ok:0,fail:0,attempted:0};
+function updateCoverStatusV10(message){const el=document.getElementById('coverStatus');if(el)el.textContent=message||`封面載入狀態：成功 ${coverDiagV10.ok} 張 · 失敗 ${coverDiagV10.fail} 張 · 已嘗試 ${coverDiagV10.attempted} 張`}
+
+async function fetchAnnCoversBatch(ids){
+ // ANN supports slash-separated IDs in one Encyclopedia API request. Batch calls avoid one network round-trip per card.
+ const path=ids.join('/');
+ const r=await fetch(`https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=${path}`,{mode:'cors',credentials:'omit',cache:'default'});
+ if(!r.ok)throw Error('ANN API HTTP '+r.status);
+ const xml=await r.text();const doc=new DOMParser().parseFromString(xml,'application/xml');
+ if(doc.querySelector('parsererror'))throw Error('ANN XML 無法解析');
+ const out=new Map();
+ for(const node of doc.querySelectorAll('anime')){
+  const id=String(node.getAttribute('id')||'');if(!id)continue;
+  const pics=[...node.querySelectorAll('info[type="Picture"]')];let url='';
+  for(const p of pics){const v=p.getAttribute('src');if(v&&/^https?:\/\//i.test(v)){url=v;break}}
+  if(url)out.set(id,url);
+ }
+ return out;
+}
+async function processCoverQueueV12(){
+ if(coverBusyV6)return;coverBusyV6=true;
+ try{
+  while(coverQueueV6.length){
+   // Only query images still attached to the page; disconnected cards were scrolled away/re-rendered.
+   const batch=[];while(coverQueueV6.length&&batch.length<10){const item=coverQueueV6.shift();if(item.img&&item.img.isConnected)batch.push(item)}
+   if(!batch.length)continue;
+   const needs=[];
+   for(const item of batch){const cached=aniCoverCacheV6[item.key];if(cached&&cached.url&&cached.until>Date.now())applyCoverV6(item.img,cached.url,cached.alternate||'');else needs.push(item)}
+   if(!needs.length)continue;
+   coverDiagV10.attempted+=needs.length;updateCoverStatusV10(`正在批次查詢 ${needs.length} 張 ANN 封面…`);
+   try{
+    const urls=await fetchAnnCoversBatch(needs.map(x=>x.ann));
+    // A batch can succeed while returning only some of the requested anime.
+    // Retry every missing ID individually; checking only urls.size===0 silently lost partial results.
+    const missing=needs.filter(item=>!urls.has(String(item.ann)));
+    for(let j=0;j<missing.length;j++){
+     const item=missing[j];
+     try{const one=await fetchAnnCoversBatch([item.ann]);for(const [k,v] of one)urls.set(k,v)}catch(e){}
+     if(j<missing.length-1)await new Promise(r=>setTimeout(r,850));
+    }
+    for(const item of needs){const url=urls.get(String(item.ann));if(url){aniCoverCacheV6[item.key]={url,alternate:'',until:Number.MAX_SAFE_INTEGER};applyCoverV6(item.img,url)}else{aniCoverCacheV6[item.key]={url:'',until:Date.now()+30*60*1000};item.img.dataset.coverQueued='';item.img.dataset.coverDone='1';item.img.dataset.coverFailed='1';coverDiagV10.fail++}}
+    coverCacheSaveV6();updateCoverStatusV10(`ANN 批次載入：成功 ${coverDiagV10.ok} 張 · 失敗 ${coverDiagV10.fail} 張 · 已查詢 ${coverDiagV10.attempted} 張`);
+   }catch(e){
+    // If a multi-ID request is rejected, retry each item once individually before giving up.
+    updateCoverStatusV10('ANN 批次查詢失敗，改用單部作品查詢…');
+    for(let j=0;j<needs.length;j++){
+     const item=needs[j];let url='';
+     try{const one=await fetchAnnCoversBatch([item.ann]);url=one.get(String(item.ann))||''}catch(singleError){}
+     if(url){aniCoverCacheV6[item.key]={url,alternate:'',until:Number.MAX_SAFE_INTEGER};applyCoverV6(item.img,url)}
+     else{aniCoverCacheV6[item.key]={url:'',until:Date.now()+3*60*1000};item.img.dataset.coverQueued='';item.img.dataset.coverDone='1';item.img.dataset.coverFailed='1';coverDiagV10.fail++}
+     if(j<needs.length-1)await new Promise(r=>setTimeout(r,850));
+    }
+    coverCacheSaveV6();updateCoverStatusV10('ANN 查詢已完成；若仍無封面，請檢查目前網路是否能連線至 ANN 圖片服務。');
+   }
+   // ANN documents rate-limit requests; one request per batch is much faster than one request per anime.
+   if(coverQueueV6.length)await new Promise(r=>setTimeout(r,1050));
+  }
+ }finally{coverBusyV6=false;if(coverQueueV6.length)processCoverQueueV6()}
+}
+// Override the early queue dispatcher with the batched ANN-only worker.
+processCoverQueueV6=function(){if(coverQueueTimerV12||coverBusyV6)return;coverQueueTimerV12=setTimeout(()=>{coverQueueTimerV12=null;processCoverQueueV12()},180)};
+document.getElementById('retryCoversBtn')?.addEventListener('click',()=>{
+ const imgs=[...document.querySelectorAll('#grid .card img.realcover, #detailCover')].filter(img=>img&&img.isConnected);let n=0;
+ for(const img of imgs){const key=String(Number(img.dataset.ann||''));if(!key)continue;delete aniCoverCacheV6[key];img.dataset.coverQueued='';img.dataset.coverDone='';img.dataset.coverFailed='';img.removeAttribute('src');const a=anime.find(x=>String(x[0])===key);if(a){queueCoverV6(a,img);n++}}
+ coverCacheSaveV6();coverDiagV10={ok:0,fail:0,attempted:0};updateCoverStatusV10(`已重新排程 ${n} 張 ANN 封面（批次查詢）`);if(!n)toast('目前畫面沒有可重試的作品封面');
+});
+
+
+
+function renderDashboardV10(){
+ document.getElementById('dashboardPanel')?.classList.remove('hidden');
+ const panel=document.getElementById('dashboardPanel');const totalSongs=songs.length;let heard=0,known=0,instant=0,tagged=0;for(const s of songs){const n=st(s[1]);if(n>=1)heard++;if(n>=2)known++;if(n>=3)instant++;if((songTags[String(s[1])]||'').trim())tagged++}
+ const watchCounts={current:0,completed:0,paused:0,dropped:0,planning:0,repeating:0};for(const a of anime){const w=watchStatus(a[0]);if(watchCounts[w]!==undefined)watchCounts[w]++}
+ const metric=(label,value,sub='')=>`<div class="dashMetric"><span>${label}</span><strong>${Number(value).toLocaleString()}</strong><span>${sub}</span></div>`;
+ const row=(label,value,max,tail='')=>`<div class="dashRow"><span>${label}</span><div class="dashTrack"><i style="width:${max?Math.min(100,value/max*100):0}%"></i></div><em>${Number(value).toLocaleString()}${tail}</em></div>`;
+ const decadeStats=new Map();for(const a of anime){const d=Number(a[5])?Math.floor(Number(a[5])/10)*10:'未知';if(!decadeStats.has(d))decadeStats.set(d,{anime:0,songs:0,heard:0});const x=decadeStats.get(d);x.anime++;for(const s of songMap.get(a[0])||[]){x.songs++;if(st(s[1])>=1)x.heard++}}
+ const ds=[...decadeStats.entries()].sort((a,b)=>a[0]==='未知'?1:b[0]==='未知'?-1:a[0]-b[0]);const maxDecade=Math.max(1,...ds.map(x=>x[1].songs));
+ panel.innerHTML=`<div class="dashIntro"><b>學習統計儀表板</b><div style="font-size:12px;color:var(--muted);margin-top:5px">只統計這個瀏覽器目前保存的歌曲熟悉度、標籤與看番狀態。看過動畫不會自動算成學會歌曲。</div></div><div class="dashGrid">${metric('動畫作品',anime.length,'資料庫收錄')}${metric('歌曲總數',totalSongs,'資料庫收錄')}${metric('聽過',heard,`${(heard/Math.max(1,totalSongs)*100).toFixed(1)}%`)}${metric('有印象',known,'熟悉度至少 2')}${metric('能秒答',instant,'熟悉度 3')}${metric('已加自訂標籤',tagged,'以歌曲為單位')}${metric('待聽佇列',queueIds.length,'尚未移除的歌曲')}</div><section class="dashSection"><h4 style="margin:0 0 8px">歌曲熟悉度</h4>${row('聽過',heard,totalSongs)}${row('有印象',known,totalSongs)}${row('能秒答',instant,totalSongs)}${row('未標記',totalSongs-heard,totalSongs)}</section><section class="dashSection"><h4 style="margin:0 0 8px">看番狀態</h4>${Object.entries({觀看中:watchCounts.current,已看完:watchCounts.completed,暫停:watchCounts.paused,已棄番:watchCounts.dropped,計畫觀看:watchCounts.planning,重看中:watchCounts.repeating}).map(([k,v])=>row(k,v,anime.length)).join('')}</section><section class="dashSection"><h4 style="margin:0 0 8px">各年代歌曲探索進度</h4>${ds.map(([d,x])=>row(d==='未知'?'年代未知':`${d} 年代`,x.heard,x.songs,` / ${x.songs}`)).join('')}</section>`;
+}
+render();
+</script>

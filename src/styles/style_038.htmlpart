@@ -1,0 +1,17 @@
+<style id="v82-42-team-consensus-multilist-style">
+/* V82.42: compact multi-list picker in the practice workspace. */
+.practiceListPicker{display:flex;flex-direction:column;align-items:stretch!important;gap:6px!important;min-width:220px;max-width:100%;}
+.practiceCustomListsPicker{position:relative;min-width:0;}
+.practiceCustomListsPicker>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:38px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;background:var(--surface);color:var(--text-primary);font-size:12px;max-width:100%;overflow-wrap:anywhere;}
+.practiceCustomListsPicker>summary::-webkit-details-marker{display:none;}
+.practiceCustomListsPicker>summary::after{content:'⌄';flex:0 0 auto;}
+#phCustomListOptions{display:grid;gap:3px;margin-top:5px;padding:6px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);max-height:240px;overflow:auto;min-width:min(290px,80vw);}
+#phCustomListOptions .quizCustomListOption{display:flex;align-items:flex-start;gap:8px;padding:7px 8px;border-radius:7px;font-size:12px;line-height:1.4;cursor:pointer;}
+#phCustomListOptions .quizCustomListOption:hover{background:var(--surface-muted);}
+#phCustomListOptions .quizCustomListOption>input{margin-top:2px;flex:0 0 auto;}
+#phCustomListOptions .quizCustomListOption span{min-width:0;overflow-wrap:anywhere;}
+#phCustomListOptions .quizCustomListOption small{display:block;color:var(--text-secondary);font-size:10px;margin-top:2px;}
+/* Field text already appears in each placeholder; keep native labels for assistive technology. */
+.mpAnswerField>label{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+@media(max-width:600px){.practiceListPicker{width:100%;}.practiceCustomListsPicker>summary{width:100%;}}
+</style>

@@ -1,0 +1,29 @@
+<style id="v77-spaced-repetition-style">
+.aniSrsWidget{margin:0 0 16px;padding:18px;border:1px solid var(--line,#ead9e8);border-radius:14px;background:var(--panel,#fff);color:var(--ink,#34283c)}
+.aniSrsWidgetHead{display:flex;justify-content:space-between;align-items:start;gap:14px;flex-wrap:wrap}
+.aniSrsEyebrow{font-size:10px;letter-spacing:.14em;font-weight:900;color:var(--muted,#8b7b91)}
+.aniSrsWidget h3{margin:4px 0 5px;font-size:18px}
+.aniSrsWidget p{margin:0;color:var(--muted,#8b7b91);font-size:12px;line-height:1.65}
+.aniSrsMetrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}
+.aniSrsMetric{border:1px solid var(--line,#ead9e8);border-radius:10px;padding:12px;background:var(--panel2,#fff8fc);min-width:0}
+.aniSrsMetric strong{display:block;font-size:23px;line-height:1.15}
+.aniSrsMetric span{display:block;margin-top:5px;font-size:11px;color:var(--muted,#8b7b91)}
+.aniSrsControls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.aniSrsControls label{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted,#8b7b91)}
+.aniSrsControls select{max-width:100%;border:1px solid var(--line,#ead9e8);background:var(--panel,#fff);color:var(--ink,#34283c);border-radius:9px;padding:8px 10px;font-size:12px}
+.aniSrsFine{margin-top:10px!important;font-size:11px!important}
+.aniSrsRating{margin:12px 0;padding:13px;border:1px solid var(--line,#ead9e8);border-radius:12px;background:var(--panel2,#fff8fc);color:var(--ink,#34283c)}
+.aniSrsRating[hidden]{display:none!important}
+.aniSrsRating h4{margin:0 0 5px;font-size:14px}
+.aniSrsRating p{font-size:11px;line-height:1.6;color:var(--muted,#8b7b91);margin:0 0 10px}
+.aniSrsRatingButtons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.aniSrsGrade{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:10px 5px;border:1px solid var(--line,#ead9e8);border-radius:10px;background:var(--panel,#fff);color:var(--ink,#34283c);font-size:11px;font-weight:800}
+.aniSrsGrade span{font-size:10px;color:var(--muted,#8b7b91);font-weight:600}
+.aniSrsGrade[data-grade="1"]{border-color:#eda8b6}.aniSrsGrade[data-grade="2"]{border-color:#e7c27e}.aniSrsGrade[data-grade="3"]{border-color:#9ccfbd}.aniSrsGrade[data-grade="4"]{border-color:#afa0e5}
+.aniSrsGrade:disabled{opacity:.55;cursor:wait}
+.aniSrsGroupEnroll{white-space:nowrap}
+.songactions .aniSrsSongToggle{background:var(--panel2,#fff8fc);border-color:var(--line,#ead9e8);color:var(--ink,#34283c)}
+.discBtns .aniSrsSongToggle{white-space:nowrap}
+@media(max-width:640px){.aniSrsWidget{padding:13px}.aniSrsMetrics{gap:6px}.aniSrsMetric{padding:9px 7px}.aniSrsMetric strong{font-size:19px}.aniSrsMetric span{font-size:10px}.aniSrsControls{align-items:stretch}.aniSrsControls label{width:100%;justify-content:space-between}.aniSrsControls select{flex:1}.aniSrsControls>.btn{width:100%}.aniSrsRatingButtons{grid-template-columns:repeat(2,minmax(0,1fr))}.aniSrsGroupEnroll{white-space:normal}}
+body.dark-theme .aniSrsWidget, body.dark-theme .aniSrsMetric, body.dark-theme .aniSrsRating, body.dark-theme .aniSrsGrade{background:var(--panel,#202126);color:var(--ink,#e9eaf0);border-color:var(--line,#383a43)}
+</style>

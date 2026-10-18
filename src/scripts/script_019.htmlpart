@@ -1,0 +1,23 @@
+<script id="home-menu-navigation-v82-22">
+(()=>{
+ const body=document.body,homeMenu=document.getElementById('homeMenu');
+ if(!homeMenu)return;
+ const settings=document.getElementById('uiHomeSettings'),backHome=document.getElementById('uiBackHome');
+ const showHome=()=>window.__aniNavigateApp?.('home');
+ showHome();
+ settings?.addEventListener('click',()=>{const opened=body.classList.toggle('ui-settings-open');settings.setAttribute('aria-expanded',String(opened));});
+ backHome?.addEventListener('click',()=>showHome());
+ homeMenu.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-home-action]');if(!btn)return;
+  const action=btn.dataset.homeAction;body.classList.remove('ui-settings-open');
+  if(action==='learningCenter'){window.__aniSetLearningCenterMenuV846?.(true);return;}
+  if(action==='learningCenterBack'){window.__aniSetLearningCenterMenuV846?.(false);return;}
+  if(action==='practiceExplore'){window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');window.__aniSetPracticeModeV825?.('explore');return;}
+  if(action==='practiceWeak'){window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');window.__aniSetPracticeModeV825?.('weak');return;}
+  if(action==='explore'){window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('explore');document.getElementById('nextDiscover')?.click();return;}
+  if(action==='customLists'){window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('watchlist');setTimeout(()=>document.getElementById('customModeTab')?.click(),0);return;}
+  window.__aniSetHomeMenuOpenV846?.(false);
+  window.__aniNavigateApp?.(action);
+ });
+})();
+</script>

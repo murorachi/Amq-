@@ -1,0 +1,5 @@
+PASS selected list becomes a song-ID Set passed to the original combiner
+PASS no selected list passes null and leaves EMQ membership unrestricted
+PASS invalid persisted scope passes an empty Set and fails closed for EMQ rows
+PASS pool composition precedes audio eligibility and final custom-list adapter
+RESULT 4 passed, 0 failed
