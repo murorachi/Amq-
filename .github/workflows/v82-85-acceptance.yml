@@ -1,0 +1,103 @@
+name: V82.85.4 Native Storage and AMQ/EMQ Acceptance
+
+on:
+  push:
+    branches:
+      - v82.85.4-native-storage-and-list-acceptance-01
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-accept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Verify immutable baseline, source fragments, modules, and deterministic V82.82 build
+        run: python tools/verify.py
+
+      - name: Run every Node unit contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          for test_file in tests/unit/*.test.cjs; do
+            echo "::group::node $test_file"
+            node "$test_file"
+            echo "::endgroup::"
+            count=$((count+1))
+          done
+          echo "Node unit files passed: $count"
+
+      - name: Run Python boundary contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          for test_file in tests/unit/*.py; do
+            echo "::group::python $test_file"
+            python "$test_file"
+            echo "::endgroup::"
+            count=$((count+1))
+          done
+          echo "Python unit files passed: $count"
+
+      - name: Resolve Playwright-managed Chromium executable
+        id: browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROMIUM="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          test -x "$CHROMIUM"
+          echo "path=$CHROMIUM" >> "$GITHUB_OUTPUT"
+
+      - name: Native-origin storage, reload, export/import, and rollback acceptance
+        run: >-
+          python tests/browser/native_storage_backup_acceptance_v82_82.py
+          --html dist/amq_learning_tool_v82_82.html
+          --chromium "${{ steps.browser.outputs.path }}"
+
+      - name: AMQ/EMQ custom-list UI CRUD and fresh-document persistence acceptance
+        run: >-
+          python tests/browser/custom_lists_ui_acceptance.py
+          --html dist/amq_learning_tool_v82_82.html
+          --chromium "${{ steps.browser.outputs.path }}"
+
+      - name: Native-origin application and quiz suggestion smoke acceptance
+        run: >-
+          python tests/browser/real_origin_acceptance_localhost.py
+          --html dist/amq_learning_tool_v82_82.html
+          --chromium "${{ steps.browser.outputs.path }}"
+
+      - name: Publish scope and remaining gates
+        if: always()
+        run: |
+          {
+            echo "## V82.85.4 acceptance scope"
+            echo
+            echo "- Static integrity and deterministic V82.82 build are mandatory."
+            echo "- Node and Python contract suites are mandatory."
+            echo "- Chromium native-origin storage/backup and AMQ/EMQ UI CRUD are mandatory."
+            echo "- Firefox, production-domain policy, real audio, and multiplayer multi-client reconnect remain separate gates."
+          } >> "$GITHUB_STEP_SUMMARY"
