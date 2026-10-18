@@ -4,7 +4,7 @@
 - Product baseline remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Immutable V82.65 is unchanged.
 - The only runtime-source modularization in this follow-up is the exact `unique(v)` helper moved from `src/scripts/script_040.htmlpart` into `src/modules/emq_list_id_normalization.js`; it is reinserted at the original location by the manifest marker. No list data schema, ID mapping, UI, storage key, or event wiring was changed.
-- Acceptance and deterministic-build checks are defined in `.github/workflows/v82-85-acceptance.yml`; no workflow pass is claimed until its actual run is verified.
+- Acceptance and deterministic-build checks are defined in `.github/workflows/v82-85-acceptance.yml`. GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39107928804 passed at `21a390bd925e7bb919085b2c01b22e1ea8bc1d02`: verifier 118/118; all Node/Python contracts; native storage/backup 20 assertions; AMQ/EMQ UI 19 assertions; native-origin smoke 15 assertions.
 - Detailed record: `reports/V82_85_4_NATIVE_STORAGE_AND_LIST_ACCEPTANCE_01_REPORT.md`.
 
 # Baseline lock
