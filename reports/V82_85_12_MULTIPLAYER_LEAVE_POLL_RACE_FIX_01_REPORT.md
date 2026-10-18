@@ -34,7 +34,11 @@ In `tests/browser/multiplayer_lifecycle_acceptance.py`:
 
 - Candidate build fingerprint is recorded in `reports/FRAGMENT_MANIFEST.json`.
 - The workflow builds `dist/amq_learning_tool_v82_85_12.html` and uploads it as artifact `AMQ_V82_85_12_MULTIPLAYER_LEAVE_POLL_RACE_FIX_01`.
-- CI status: pending at report creation. This report does not claim the new regression or full suite has passed until the workflow log confirms it.
+- Final branch-head CI: PASS, https://github.com/murorachi/Amq-/actions/runs/39173733936. Source/unit, Chromium browser, and Firefox jobs all passed.
+- Source/build verifier: 122/122 checks passed; deterministic build hash matched the V82.85.12 candidate fingerprint.
+- Six Chromium browser suites: 136 PASS assertions, 0 FAIL/exception/timeout lines. Firefox responsive smoke: 17 assertions passed, no uncaught page errors.
+- Specific regression assertion passed: `late room poll response cannot reopen the room after leave`.
+- Artifact uploaded: `AMQ_V82_85_12_MULTIPLAYER_LEAVE_POLL_RACE_FIX_01`.
 - The earlier fingerprint-discovery run reported 118 passed and 2 failed only because the expected-release fingerprint was still V82.82; both deterministic builds produced the same V82.85.12 hash. That run was not acceptance.
 
 ## Limits
