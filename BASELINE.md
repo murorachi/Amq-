@@ -167,3 +167,10 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - Product remains V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; immutable V82.65 remains unchanged.
 - Existing manifest/build/verifier/unit/browser coverage and known native-origin/Firefox/audio/multiplayer gaps were inspected and recorded in `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
 - No product HTML, runtime JS/CSS, source fragments, manifest, or build configuration changed. Tests were not executed in this inventory-only step.
+
+
+## V82.86 runner-contract update — 2026-10-19
+- Added a static contract for tools/run_all_checks.py at tests/unit/automatic_acceptance_runner_contract.test.py, and registered it as command 35.
+- This is engineering/test tooling only; product remains V82.82 at 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b. Immutable V82.65 remains unchanged.
+- The new contract and modified runner have not yet been executed in a clean checkout; do not treat registration or remote readback as a test pass.
+- Confirmed the 345/346 report discrepancy is caused by one pseudo-path --help in the checksum JSON, whose fingerprint matches the product HTML but is not a repository path. The historical JSON is retained unchanged; upstream inventory-generator root cause remains open.
