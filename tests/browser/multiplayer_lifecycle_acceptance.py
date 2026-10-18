@@ -39,7 +39,7 @@ MOCK_SHIM = r"""<script>(() => {
   });
   const reply = (data,status=200) => new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json'}});
   const mock = {state:null,requests:[],sockets:[],wsMessages:[],media:[],createSettings:null,candidateCount:0,
-    releaseReady:null,rejoinCount:0,playCalls:0,pauseCalls:0};
+    releaseReady:null,rejoinCount:0,playCalls:0,pauseCalls:0,delayNextRoomGet:false,releaseRoomGet:null};
   window.__mpMock = mock;
   window.fetch = async (input, init={}) => {
     const url = new URL(typeof input==='string'?input:input.url,location.href);
@@ -53,7 +53,7 @@ MOCK_SHIM = r"""<script>(() => {
       mock.state=makeState(body?.settings);
       return reply({roomCode:'AB2345',playerId:'p1',token:'mock-token-p1',isHost:true});
     }
-    if(path==='/api/rooms/AB2345'&&method==='GET')return reply(clone(mock.state||makeState({mode:'team'})));
+    if(path==='/api/rooms/AB2345'&&method==='GET'){if(mock.delayNextRoomGet){mock.delayNextRoomGet=false;return new Promise(resolve=>{mock.releaseRoomGet=()=>resolve(reply(clone(mock.state||makeState({mode:'team'}))))})}return reply(clone(mock.state||makeState({mode:'team'})));}
     if(path.endsWith('/candidates'))return reply({ok:true});
     if(path.endsWith('/start')){mock.state.phase='preparing';mock.state.question=clone(question);mock.state.questionIndex=1;return reply({ok:true})}
     if(path.endsWith('/ready'))return new Promise(resolve=>{mock.releaseReady=()=>{mock.state.phase='running';resolve(reply({ok:true}))}})
@@ -222,12 +222,17 @@ def main():
             page.wait_for_function("window.__mpMock.sockets.length >= 2 && window.__mpMock.wsMessages.filter(m=>m.type==='auth').length >= 2",timeout=10000)
             check(page.locator("#mpAnswer_title").is_visible(),"rejoin restores the running room view")
             check(page.evaluate("window.__mpMock.sockets[0].readyState === 3 && window.__mpMock.sockets[1].readyState === 1"),"rejoin establishes a new live socket after the previous socket was closed")
+            page.evaluate("window.__mpMock.delayNextRoomGet=true")
+            page.wait_for_function("typeof window.__mpMock.releaseRoomGet === 'function'",timeout=5000)
             leave=page.locator("#mpLeaveTop")
             if not leave.is_visible():
                 leave=page.locator("#mpLeaveStopped")
             leave.click(timeout=10000)
             page.wait_for_function("document.getElementById('mpRoomStage').classList.contains('hidden')",timeout=10000)
             check(page.evaluate("window.__mpMock.sockets.every(s=>s.readyState===3)"),"final leave closes every live socket")
+            page.evaluate("window.__mpMock.releaseRoomGet()")
+            page.wait_for_timeout(200)
+            check(page.locator("#mpRoomStage").evaluate("(el)=>el.classList.contains('hidden')"),"late room poll response cannot reopen the room after leave")
             check(page.evaluate("sessionStorage.getItem('aniMultiplayerRoomSessionV2') === null"),"final leave clears rejoined session credentials")
             check(not errors,"no uncaught browser page errors during multiplayer lifecycle acceptance")
             page.close()
