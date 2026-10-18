@@ -185,17 +185,33 @@ def main():
                 check(song is not None and len(song) > 9 and bool(song[9]),
                       "catalog provides a real AMQ audio-mirror candidate")
 
-                # No user gesture: native play() must reject under Chromium's
-                # user-activation policy and the app must expose its retry state.
+                # Headless Chromium does not consistently enforce autoplay flags
+                # across runner images. Deterministically model the browser's
+                # NotAllowedError until a real user gesture, then restore native play().
+                page.evaluate("""() => {
+                  const nativePlay = HTMLMediaElement.prototype.play;
+                  window.__restoreNativeMediaPlay = () => {
+                    HTMLMediaElement.prototype.play = nativePlay;
+                    delete window.__restoreNativeMediaPlay;
+                  };
+                  HTMLMediaElement.prototype.play = function(...args) {
+                    if (this === audioEl && !navigator.userActivation?.isActive) {
+                      return Promise.reject(new DOMException(
+                        'Autoplay blocked by deterministic acceptance policy', 'NotAllowedError'));
+                    }
+                    return nativePlay.apply(this, args);
+                  };
+                }""")
                 page.evaluate("(s) => listenSong(s, {autoPlay:true})", song)
                 page.wait_for_function(
                     "document.getElementById('dockStatus')?.textContent.includes('瀏覽器尚未允許自動播放')",
                     timeout=10000)
-                check(True, "autoplay rejection is surfaced as a manual-play request")
+                check(True, "NotAllowedError is surfaced as a manual-play request")
                 page.wait_for_function(
                     "audioEl.currentSrc.includes('naedist.animemusicquiz.com')", timeout=15000)
                 check(mirror_requests["first"] >= 1 and mirror_requests["fallback"] >= 1,
                       "failed first mirror advances through the real fallback handler")
+                page.evaluate("window.__restoreNativeMediaPlay?.()")
 
                 page.locator("#playPauseBtn").click(timeout=10000)
                 page.wait_for_function("!audioEl.paused && audioEl.readyState >= 2", timeout=10000)
