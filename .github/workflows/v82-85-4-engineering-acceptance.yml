@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install pinned TypeScript parser for AST contracts
+        run: npm install --global typescript@5.8.3
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
