@@ -13,6 +13,7 @@ Automated runner (fresh rerun after creating dist outputs):
 - Commands 28-34: 7/7 PASS
 - Aggregate: 34/34 PASS
 - Integrity verifier: 116/116 PASS
+- Clean package-extraction rebuild: PASS; rebuilt V82.82 output matched expected SHA-256; verifier 116/116 PASS. This does not imply a clean remote GitHub checkout build.
 - AMQ/EMQ production HTML UI harness: 19/19 PASS
 - Backup export/import/rollback in-memory contract: 4/4 PASS
 - Responsive Chromium: 3 viewport sizes x 2 views PASS
