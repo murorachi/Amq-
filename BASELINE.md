@@ -1,5 +1,13 @@
 # Baseline lock
 
+## Proposed engineering-only checkpoint V82.85.5 (pending CI)
+
+- Extracted pure AMQ custom-list ID, row and payload validators to `src/modules/amq_custom_list_validation.htmlpart`; generated product must remain byte-identical to V82.82.
+- Focused validation contract has 12 cases. Acceptance pending branch CI and deterministic build.
+- Product lock: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+
 ## Verified engineering-only checkpoint: V82.85.4 native storage and custom-list acceptance
 
 - Product remains V82.82: `dist/amq_learning_tool_v82_82.html`, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
