@@ -1,3 +1,12 @@
+## V82.85.12 multiplayer stale-poll lifecycle fix (pending CI)
+
+- Base: V82.85.11 branch commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
+- Product source fragment changed: `src/scripts/script_028.htmlpart`. A completed poll response is discarded when its original session is no longer active, preventing stale responses from repainting a room after leave.
+- Added a deterministic browser regression test that holds a room GET response across leave and releases it after cleanup.
+- Candidate build: V82.85.12, 8,787,574 bytes, SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Immutable V82.82 remains 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- CI pending; acceptance requires deterministic build, unit tests, full Chromium browser suite, and Firefox responsive smoke to pass.
+
 # Baseline lock
 
 ## V82.85.9 accepted test-only checkpoint
