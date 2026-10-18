@@ -77,7 +77,7 @@ def make_html(path, mode):
     return html[:insert_at] + STORAGE_SHIM + media + html[insert_at:]
 
 
-def open_page(browser, html, errors):
+def open_page(browser, html, errors, target="title"):
     page = browser.new_page()
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     page.route("https://**/*", lambda route: route.abort())
@@ -93,7 +93,7 @@ def open_page(browser, html, errors):
     }""")
     page.evaluate("window.__aniNavigateApp?.('quiz'); window.__aniEnterQuizV82?.()")
     page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')", timeout=5000)
-    page.locator("#quizTarget").select_option("title", timeout=10000)
+    page.locator("#quizTarget").select_option(target, timeout=10000)
     return page
 
 
@@ -193,6 +193,50 @@ def main():
             })""")
             check(after == before, "unplayed skip does not add history or mutate familiarity storage")
             page.close()
+
+            # Wrong anime answer must update familiarity, while title-target answers
+            # must not mutate the anime familiarity level.
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="anime")
+            song = start_question(page, True)
+            before_status = page.evaluate("JSON.stringify(window.__aniHistoryAPIv51?.getHistory?.() || [])")
+            page.locator("#quizAnswer").fill("__definitely_not_the_correct_anime__")
+            page.locator("#quizManualSubmitV42").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is False and
+                  events["answered"][0].get("target") == "anime" and
+                  events["answered"][0].get("familiarityUpdated") is True,
+                  "incorrect anime-target answer records a wrong result and updates familiarity")
+            history = page.evaluate("window.__aniHistoryAPIv51?.getHistory?.() || []")
+            row = next((x for x in reversed(history) if str(x.get("songId")) == song["id"]), None)
+            check(bool(row) and row.get("correct") is False and row.get("target") == "anime",
+                  "incorrect anime-target answer is recorded in quiz history")
+            page.close()
+
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            start_question(page, True)
+            page.evaluate("window.__aniQuizSubmitV47(true,{rawAnswer:''})")
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is False and
+                  events["answered"][0].get("target") == "title",
+                  "timer-driven settlement reveals an unanswered played question without anime familiarity updates")
+            check(events["answered"][0].get("familiarityUpdated") is False,
+                  "timer-driven title-target settlement leaves anime familiarity unchanged")
+            page.close()
+
+            page = open_page(browser, make_html(html_path, "playing"), errors, target="title")
+            start_question(page, True)
+            page.locator("#quizSkip").click(timeout=5000)
+            page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
+            events = page.evaluate("window.__quizLifecycleEvents")
+            check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is False and
+                  events["answered"][0].get("target") == "title",
+                  "explicit skip settles a played question through the normal reveal path")
+            check(not events["unplayed"],
+                  "explicit skip after successful playback is not misclassified as unplayed audio")
+            page.close()
+
             check(not errors, "no uncaught browser page errors during quiz lifecycle acceptance")
         finally:
             browser.close()
