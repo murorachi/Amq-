@@ -51,3 +51,5 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 - Completed read-only inventory of existing acceptance assets and known gaps. Report: `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
 - Next: identify the exact canonical full-runner entry point and its 34 registered commands; check prerequisite handling and whether any failed command can be masked. Then add a machine-readable summary distinguishing PASS, FAIL, BLOCKED and NOT RUN.
 - Do not change product/runtime files. Do not treat historical results as a current test run. Native-origin Storage remains blocked by recorded Chromium policy; Firefox/audio/multiplayer remain NOT VERIFIED/NOT RUN.
+
+- Acceptance matrix now exists at `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` (14 gates). Continue by locating the canonical runner definition; do not invent its path or duplicate the existing verifier.
