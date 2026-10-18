@@ -25,9 +25,14 @@ Date: 2026-10-18
 
 ## Test status
 
-- New browser tests and CI workflow have been committed to the branch, but the workflow has not yet been executed by GitHub Actions in this report. Their actual browser runtime result is therefore **NOT RUN here**.
-- Existing recorded unit contracts and product fingerprint are prior evidence, not new execution results for this branch.
-- GitHub Actions is the reproducible execution path; the run result should be reviewed before merging or calling native-origin acceptance fully passed.
+- GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39107928804 — **SUCCESS** at commit `21a390bd925e7bb919085b2c01b22e1ea8bc1d02`.
+- `tools/verify.py`: **118 passed, 0 failed**. This includes immutable baseline/source/module fingerprints and deterministic V82.82 reconstruction.
+- Node unit contracts: **all passed**. Python boundary contracts: **all passed**.
+- Native-origin storage/backup suite: **20 PASS assertions**, including reload snapshot contract, real export, manifest exactness, malformed-import non-mutation, exact rollback after an injected one-shot write failure, successful file-input restore, and preservation of unrelated origin storage.
+- AMQ/EMQ UI acceptance: **19 assertions passed, 0 page errors**. It covers create, membership add, rename, fresh-document initialization, stale-selection fail-closed behavior, and deletion. This UI suite uses an in-memory storage shim for CRUD; native-origin persistence is separately covered by the 20-assertion suite.
+- Existing native-origin app/suggestion smoke suite: **15 PASS assertions**.
+- Deterministic build output remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. The production HTML is not changed by this source extraction.
+- First CI attempts exposed and fixed two reproducibility issues: a missing pip cache manifest assumption, and hard-coded TypeScript installation paths. The final successful run includes those fixes.
 
 ## Risk boundaries
 
