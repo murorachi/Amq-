@@ -1,10 +1,12 @@
-## V82.85.21 script_004 boundary decision (CI pending)
+## V82.85.21 script_004 boundary decision (ACCEPTED)
 
-- Decision: no additional script_004 extraction in this checkpoint. Remaining lifecycle/settings/playback/history/UI families share state, DOM, storage, APIs, listeners or timers; trivial local normalization helpers are not worthwhile modules.
-- Existing AST boundary contract added to recurring CI using portable pinned TypeScript.
-- CI pending; no product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39141674475 passed the full engineering workflow.
+- `script004_boundary_audit_contract.test.cjs` now runs in the main CI workflow and passed; 16 module contract tests, package/matrix tests, deterministic build and browser-native-origin suite also passed.
+- Decision: no additional script_004 extraction is justified until a meaningful boundary can be separated from shared quiz lifecycle/state, DOM, storage, API, listeners and timers.
+- No product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 

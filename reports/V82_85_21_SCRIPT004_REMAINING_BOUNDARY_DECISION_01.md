@@ -34,11 +34,12 @@ This is an explicit hold based on dependency evidence, not an assertion that scr
 - Added the existing `script004_boundary_audit_contract.test.cjs` to the recurring engineering CI workflow, using the portable, pinned TypeScript loader introduced in V82.85.20.
 - No extraction was made because no sufficiently safe, non-trivial boundary was demonstrated.
 
-## Validation status
+## Validation (ACCEPTED)
 
-- GitHub Actions: pending at report creation.
-- Local execution: not run in this environment.
-- Required acceptance: boundary audit contract, all module contracts, package/matrix contracts, deterministic V82.82 build and full browser-native-origin suite must pass.
+- GitHub Actions run 39141674475 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39141674475.
+- The script_004 boundary audit contract passed as part of the main workflow, alongside all 16 module contracts, package/matrix contracts and deterministic V82.82 build.
+- All browser-native-origin acceptance steps passed.
+- Local execution: not run in this environment; acceptance ran in GitHub Actions.
 
 ## Open limitations
 
