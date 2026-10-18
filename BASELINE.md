@@ -1,12 +1,12 @@
 # Baseline lock
 
-## V82.85.12 EMQ list normalization checkpoint (CI pending)
+## V82.85.12 EMQ list normalization checkpoint (accepted)
 
 - Starting commit: `8de8ab357f985542981e974e1c113731cf5bd537` on `v82.85.11-amq-list-normalization-01`; new branch: `v82.85.12-emq-list-normalization-01`.
 - Product output remains locked to V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
 - `readEmqLists()` stays in `script_028` because it combines storage access and normalization. Nine exact-source contract cases characterize payload compatibility, fallback IDs, stringification, deduplication, malformed rows and missing payload.
 - Pure `unique(v)` moved byte-for-byte from `script_040` to `src/modules/emq_list_normalization.htmlpart` at its original insertion point. Five behavior cases plus an exact-source byte assertion guard it.
-- No CSS or product behavior change is intended. Acceptance is pending CI, including deterministic V82.82 reconstruction.
+- No CSS or product behavior change is intended. Acceptance passed in [GitHub Actions run 39131137249](https://github.com/murorachi/Amq-/actions/runs/39131137249): both jobs succeeded, new contract 14/14, source/build verifier 124/124, and reconstructed V82.82 output remains byte-identical at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 ---
 
