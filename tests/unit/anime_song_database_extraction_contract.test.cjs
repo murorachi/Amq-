@@ -54,7 +54,7 @@ const consumerIndex = rebuiltFragment.indexOf(Buffer.from(consumerText));
 assert.ok(consumerIndex > markerIndex + moduleBytes.length, 'DB consumers remain after initializer');
 assert.ok(rebuiltFragment.subarray(0, markerIndex).toString('utf8').includes('<script>'), 'initializer remains in original classic script block');
 
-const shape = vm.runInNewContext(`${moduleBytes.toString('utf8')}\\n;({keys:Object.keys(DB).sort(), animeCount:DB.anime.length, songCount:DB.songs.length, animeLengths:[...new Set(DB.anime.map(row=>row.length))], songLengths:[...new Set(DB.songs.map(row=>row.length))], animeFirst:DB.anime[0][0], animeLast:DB.anime.at(-1)[0], songFirst:DB.songs[0][0], songLast:DB.songs.at(-1)[0]})`, { console }, { timeout: 30000 });
+const shape = vm.runInNewContext(`${moduleBytes.toString('utf8')}\n;({keys:Object.keys(DB).sort(), animeCount:DB.anime.length, songCount:DB.songs.length, animeLengths:[...new Set(DB.anime.map(row=>row.length))], songLengths:[...new Set(DB.songs.map(row=>row.length))], animeFirst:DB.anime[0][0], animeLast:DB.anime.at(-1)[0], songFirst:DB.songs[0][0], songLast:DB.songs.at(-1)[0]})`, { console }, { timeout: 30000 });
 assert.deepEqual(Array.from(shape.keys), ['anime', 'songs'], 'DB top-level object shape');
 assert.equal(shape.animeCount, 9516, 'anime row count');
 assert.equal(shape.songCount, 38821, 'song row count');
