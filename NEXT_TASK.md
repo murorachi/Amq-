@@ -1,22 +1,23 @@
 # Next task
 
-Current checkpoint: **V82.86.04 critical cross-fragment ownership audit**. Branch `v82.86.04-critical-cross-fragment-ownership-01`.
+Current checkpoint: **V82.86.05 custom-list ID lifecycle matrix**. Branch `v82.86.05-custom-list-id-lifecycle-matrix-01`.
 
-## Verified scope
-- Mapped the quiz answer globals and state/player bridge, AMQ custom-list adapter, EMQ list membership/combinePool wrapper, and the parallel storage-repository/direct-localStorage paths.
-- Added `tests/unit/critical_cross_fragment_dependency_contract.py` to lock the explicit source boundaries.
-- No product source or generated HTML was changed.
-- CI acceptance for this stage is pending until the branch run is inspected.
+## Scope completed in source
+- Extended exact-source CRUD/reload tests with AMQ and EMQ failed-write assertions.
+- Added EMQ direct song ID normalization/reload coverage.
+- Added EMQ corrupt JSON fallback assertion.
+- Wrote an explicit matrix identifying existing versus new tests and uncovered backup/restore paths.
+- No product source or generated HTML changed.
 
-## Backlog
-- AMQ-TODO-007 In Progress: selected critical cross-fragment calls mapped; not all 75 cross-fragment edges are resolved.
-- AMQ-TODO-008 In Progress: high-impact quiz/list/storage interfaces classified; not all 577 unresolved/global records are resolved.
-- AMQ-TODO-010 In Progress: AMQ animeIds and EMQ work/VNDB/song ID path mapped through selection/pool adapters; full CRUD/reload/backup matrix remains open.
+## Pending verification
+- Inspect GitHub Actions for this branch and report actual job/test results.
+- Do not mark the stage fully accepted until the unit test and source fingerprint/build gate pass.
 
-## Next bounded work
-1. Build a dedicated AMQ/EMQ ID boundary matrix across create/edit/delete, persistence, reload, backup/restore and invalid-scope handling.
-2. Keep real audio-provider timing/failure/pause/resume acceptance separate from mocked playback tests.
-3. Do not broadly refactor, change storage formats, or remove compatibility paths until these tests pass.
+## Next bounded task
+1. Locate the actual backup export/import path for AMQ and EMQ custom-list keys.
+2. Add browser-level backup → restore → reload assertions on real origin.
+3. Cover corrupt backup rejection before mutation and rollback behavior.
+4. Keep IndexedDB quota/corruption and real audio-provider tests as separate external gates.
 
 ## Rollback
-Revert the V82.86.04 report, contract, backlog/status updates and workflow change. Product rollback is not required.
+Revert the test/report/status changes in V82.86.05. Product rollback is not required.
