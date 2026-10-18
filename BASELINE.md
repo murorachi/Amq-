@@ -7,7 +7,8 @@
 - Browser test: `tests/browser/native_storage_custom_lists_acceptance.py`.
 - Scope: browser test and engineering records only; product source and generated HTML are unchanged.
 - New acceptance: backup restore followed by a real localhost reload preserves AMQ/EMQ IDs and memberships; invalid backup envelope must not mutate localStorage.
-- CI for this branch's final HEAD is pending; record the final run only after checking both jobs.
+- Browser acceptance run `39163991326`: both jobs PASS; final test code commit `9def4638eb1885dc738c77ab7f9325b163903025` is verified.
+- Existing backup validation and synthetic write-failure rollback tests are now wired into CI; source/unit job in run `39164060206` PASS.
 - Product lock: V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.65 remains immutable.
 
 ## V82.86.05
