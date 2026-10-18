@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, '../..');
 const amq = fs.readFileSync(path.join(root, 'src/scripts/script_025.htmlpart'), 'utf8');
 const emq = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
 const emqModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_membership.htmlpart'), 'utf8');
+const emqNormalizationModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_normalization.htmlpart'), 'utf8');
 const amqValidationModule = fs.readFileSync(path.join(root, 'src/modules/amq_custom_list_validation.htmlpart'), 'utf8');
 const amqAnimeNormalizationModule = fs.readFileSync(path.join(root, 'src/modules/amq_valid_anime_ids.htmlpart'), 'utf8');
 const passed = [];
@@ -94,7 +95,7 @@ function buildEmqContext(storage = memoryStorage()) {
   const meta=new Map([['910001',{vndbId:'v123'}],['910002',{vndbId:'v123'}],['910003',{vndbId:'v456'}]]);
   const context={localStorage:storage,window:{__aniEmqAPI:{ready:true,getRows:()=>rows,getMeta:id=>meta.get(String(id))||null,getWork:id=>works.get(String(id))||null,getWorkByVndbId:id=>byVn.get(String(id))||null}},Date,Math,Set,Map,Array,String,Number,Object,JSON,RegExp,console,alert:()=>{},renderManager:()=>{},refreshBatchSelectors:()=>{},renderQuizPicker:()=>{}};
   const code=[
-    "const KEY='aniEmqWorkListsV8254';",extractFunction(emq,'unique'),extractFunction(emq,'loadDb'),extractFunction(emq,'saveDb'),extractFunction(emq,'api'),
+    "const KEY='aniEmqWorkListsV8254';",extractFunction(emqNormalizationModule,'unique'),extractFunction(emq,'loadDb'),extractFunction(emq,'saveDb'),extractFunction(emq,'api'),
     'let db=loadDb(); let managerListId="";',extractFunction(emq,'makeId'),extractFunction(emq,'createList'),extractFunction(emq,'addMembers'),extractFunction(emq,'removeMembers'),extractFunction(emqModule,'listWorkIds'),extractFunction(emqModule,'listSongIds'),
     'globalThis.testHarness={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,get data(){return db}};'
   ].join('\n');
