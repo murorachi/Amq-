@@ -9,8 +9,8 @@ assert.equal(exact,"function getSelectedIds(){const picker=$('emqWorkListOptions
 function harness({picker=null,stored='[]',storageThrows=false,lists=['a','b','7']}={}){const storage={getItem(key){assert.equal(key,'aniEmqWorkListsSelectedV8254');if(storageThrows)throw Error('blocked');return stored}};const document={getElementById(id){assert.equal(id,'emqWorkListOptionsV8254');return picker}};const ctx={Array,Set,String,SELECTED_KEY:'aniEmqWorkListsSelectedV8254',localStorage:storage,document,db:{lists:lists.map(id=>({id}))}};vm.createContext(ctx);vm.runInContext(moduleSource+'\nconst $=id=>document.getElementById(id);\n'+exact+'\nglobalThis.readSelected=getSelectedIds;',ctx);return ()=>Array.from(ctx.readSelected())}
 const tests=[
 ['DOM selection takes precedence over stored IDs',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return [{value:'b'},{value:'a'}]}},stored:'["7"]'})(),['b','a'])],
-['duplicates removed preserving first occurrence',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return [{value:'a'},{value:'a'},{value:7},{value:'7'}]}})(),['a','7'])],
-['stale IDs filtered against current database',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return [{value:'missing'},{value:'a'}]}})(),['a'])],
+['duplicates removed preserving first occurrence',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return [{value:'a'},{value:'a'},{value:7},{value:'7'}]}}})(),['a','7'])],
+['stale IDs filtered against current database',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return [{value:'missing'},{value:'a'}]}}})(),['a'])],
 ['present but empty picker does not fall back to storage',()=>assert.deepEqual(harness({picker:{querySelectorAll(){return []}},stored:'["a"]'})(),[])],
 ['stored selection used when picker absent',()=>assert.deepEqual(harness({stored:'["b","a","b",7,"missing"]'})(),['b','a','7'])],
 ['malformed stored JSON becomes empty selection',()=>assert.deepEqual(harness({stored:'{broken'})(),[])],
