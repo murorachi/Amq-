@@ -212,6 +212,10 @@ def main():
                 check(mirror_requests["first"] >= 1 and mirror_requests["fallback"] >= 1,
                       "failed first mirror advances through the real fallback handler")
                 page.evaluate("window.__restoreNativeMediaPlay?.()")
+                # Wait for actual WAV decode before the manual gesture; currentSrc
+                # changes as soon as src is assigned, which is earlier than canplay.
+                page.wait_for_function("audioEl.readyState >= 2", timeout=10000)
+                check(True, "fallback WAV reaches native decoded-ready state")
 
                 page.locator("#playPauseBtn").click(timeout=10000)
                 page.wait_for_function("!audioEl.paused && audioEl.readyState >= 2", timeout=10000)
