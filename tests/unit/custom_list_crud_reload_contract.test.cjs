@@ -78,11 +78,11 @@ function buildAmqContext(storage = memoryStorage()) {
     extractFunction(amq, 'createList'),
     extractFunction(amq, 'mutateAnimeList'),
     'const syncListSelectors=()=>{}; const renderCustomLists=()=>{}; const renderManageModalIfOpen=()=>{};',
-    'globalThis.api={createList,mutateAnimeList,customListById,readListData,get data(){return listData}};'
+    'globalThis.testHarness={createList,mutateAnimeList,customListById,readListData,get data(){return listData}};'
   ].join('\n');
   const context = {localStorage:storage,window:{},Date,Math,Set,Map,Array,String,Number,Object,JSON,RegExp,console,anime:[],songs:[],document:{querySelector:()=>null,querySelectorAll:()=>[]}};
   vm.createContext(context); vm.runInContext(code,context,{timeout:1500});
-  return {storage,api:context.api};
+  return {storage,api:context.testHarness};
 }
 function buildEmqContext(storage = memoryStorage()) {
   const rows=[[900001,910001,1,0,'Song A','Artist A'],[900001,910002,2,0,'Song B','Artist B'],[900002,910003,1,0,'Song C','Artist C']];
@@ -93,10 +93,10 @@ function buildEmqContext(storage = memoryStorage()) {
   const code=[
     "const KEY='aniEmqWorkListsV8254';",extractFunction(emq,'unique'),extractFunction(emq,'loadDb'),extractFunction(emq,'saveDb'),extractFunction(emq,'api'),
     'let db=loadDb(); let managerListId="";',extractFunction(emq,'makeId'),extractFunction(emq,'createList'),extractFunction(emq,'addMembers'),extractFunction(emq,'removeMembers'),extractFunction(emqModule,'listWorkIds'),extractFunction(emqModule,'listSongIds'),
-    'globalThis.api={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,get data(){return db}};'
+    'globalThis.testHarness={createList,addMembers,removeMembers,listWorkIds,listSongIds,loadDb,get data(){return db}};'
   ].join('\n');
   vm.createContext(context);vm.runInContext(code,context,{timeout:1500});
-  return {storage,api:context.api};
+  return {storage,api:context.testHarness};
 }
 test('AMQ create normalizes names and persists stable identity',()=>{
   const h=buildAmqContext();assert.equal(h.api.createList('  My   AMQ List  '),true);
