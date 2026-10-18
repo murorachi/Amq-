@@ -1,3 +1,13 @@
+## V82.85.16 source inventory completeness gate (CI pending)
+
+- Added reverse inventory checks in `tools/verify.py` to detect unmanifested or stale fragment/module paths.
+- Change commit: `97a13a75b4e935a44d5b32b379c077336d16a751`.
+- No product source, manifest, build output, CSS or HTML changed.
+- GitHub Actions run pending: https://github.com/murorachi/Amq-/actions/runs/39137967441.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+
+---
+
 ## V82.85.15 pure-helper boundary audit (audit only)
 
 - Parent accepted checkpoint: V82.85.14, commit `e9b249364a79d7da896ff731899c879d29ddfebd`.
