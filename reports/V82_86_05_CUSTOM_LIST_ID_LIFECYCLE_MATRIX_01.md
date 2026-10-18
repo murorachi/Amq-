@@ -45,7 +45,7 @@
 3. EMQ 清單寫入失敗不發布新記憶體清單。
 4. EMQ 損毀 JSON fallback 為空清單。
 
-這些測試尚未在本地執行；它們會透過既有 CI 的 `custom_list_crud_reload_contract.test.cjs` 步驟執行。最終通過與否以本分支實際 GitHub Actions 結果為準。真實原生儲存、完整備份還原及生產網域政策不由 VM 單元測試替代。
+本地未執行；GitHub Actions run [39162546062](https://github.com/murorachi/Amq-/actions/runs/39162546062) 已實際執行這些測試，`custom_list_crud_reload_contract.test.cjs` 報告 15 passed、0 failed。首次執行曾因測試檔尾端的字面 `\\n` 造成 SyntaxError；已修正並以 commit `41bec9560a419693bff2a2f3edb829112588ca24` 重跑，最終兩個 job 均成功。V82.82 deterministic build 128 項檢查通過，輸出 8,787,490 bytes，SHA-256 仍為 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`。真實原生儲存、完整備份還原及生產網域政策仍不由 VM 單元測試替代。
 
 ## 風險與回滾
 

@@ -189,5 +189,4 @@ test('EMQ corrupt stored JSON falls back to empty list data without inventing ID
   const h=buildEmqContext(storage);
   assert.deepEqual(Array.from(h.api.data.lists),[]);
 });
-
-console.log('RESULT '+passed.length+' passed, '+(process.exitCode?'failed':'0 failed'));
+\nconsole.log('RESULT '+passed.length+' passed, '+(process.exitCode?'failed':'0 failed'));
