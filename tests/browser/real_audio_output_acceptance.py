@@ -255,12 +255,18 @@ def main():
                       "audio timeline continues after answer reveal")
                 page.wait_for_function("window.__realAudioEvents.ended > 0", timeout=12000)
                 check(True, "native decoded track emits ended without auto-advancing quiz")
-                page.evaluate("window.__aniNavigateApp?.('home')")
+                # Start another real question while playback is active, then use
+                # the production quiz-exit control to exercise its cleanup handler.
+                page.locator("#quizNext").click(timeout=10000)
+                page.wait_for_function("window.__aniQuizStateV45?.quizAudioStarted === true", timeout=15000)
+                check(not page.evaluate("audioEl.paused"),
+                      "next quiz question has active native audio before exit")
+                page.locator("#quizExit").click(timeout=10000)
                 page.wait_for_function("audioEl.paused", timeout=5000)
                 stopped_at = page.evaluate("audioEl.currentTime")
                 page.wait_for_timeout(350)
                 check(abs(page.evaluate("audioEl.currentTime") - stopped_at) < 0.08,
-                      "leaving quiz cleans up active audio playback")
+                      "production quiz-exit handler cleans up active audio playback")
                 check(not errors, "no uncaught browser page errors during real-audio acceptance")
             finally:
                 browser.close()
