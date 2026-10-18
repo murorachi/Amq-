@@ -3,7 +3,7 @@ name: V82.85.4 engineering acceptance
 on:
   push:
     branches:
-      - "v82.85.4-*"
+      - "v82.85.*"
   workflow_dispatch:
 
 permissions:
