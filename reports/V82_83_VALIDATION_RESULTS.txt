@@ -1,0 +1,31 @@
+V82.83 CSS_SELECTOR_RESIDUAL_REVIEW_01 VALIDATION RESULTS
+Date: 2026-10-18
+Product baseline: V82.82, 8,787,490 bytes, SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b
+
+RUNNER RESULTS
+- tools/run_all_checks.py --start 1 --end 17: 17/17 commands passed.
+- tools/run_all_checks.py --start 18 --end 27: 10/10 commands passed.
+- tools/run_all_checks.py --start 28 --end 34: 7/7 commands passed.
+- Aggregate: 34/34 runner commands passed across three range invocations.
+- One earlier attempt to run commands 1-27 in one invocation hit the outer 300-second timeout while entering command 27; the affected ranges were rerun in smaller batches and passed. This timeout is recorded, not hidden.
+
+TARGETED ASSERTIONS
+- CSS residual triage: 32/32 residual rows dispositioned; 8 parser artifacts identified; 0 unresolved; no CSS changed.
+- CSS residual review contract: PASS.
+- Full backup export/import/rollback round-trip: 4/4 assertions passed.
+- Existing storage repository contract: 9/9 passed.
+- Existing backup restore validator contract: 6/6 passed.
+- AMQ/EMQ production UI acceptance: 19/19 passed in isolated in-memory Storage harness; not native-origin acceptance.
+- Responsive Chromium baseline: 3 viewport sizes x home/quiz, no horizontal overflow or page errors.
+- Integrity verifier: 116/116 passed; two deterministic builds match the expected V82.82 output byte-for-byte.
+- Parser-backed dependency inventory completed with 0 parse diagnostics for executable JavaScript fragments; JSON/compressed data blocks are marked as data blocks.
+
+ENVIRONMENT BLOCKERS / NOT EXECUTED
+- Native localhost acceptance: BLOCKED before app navigation by Chromium ERR_BLOCKED_BY_ADMINISTRATOR. Native localStorage/IndexedDB persistence, actual reload, browser-level backup download/import, and native-origin rollback were not executed.
+- Firefox is not installed; no Firefox responsive comparison was run.
+- Real audio/network, two-client multiplayer and reconnect acceptance were not executed.
+- GitHub complete source-tree synchronization, remote SHA-256 audit and clean remote checkout build remain incomplete. The remote boundary-audit tool blob mismatch remains open.
+
+CSS DECISION
+- All 32 residual inventory rows now have a disposition. Eight are keyframe/style-tag parser artifacts, not component selectors; the other 24 are categorized by selector semantics and source context.
+- No CSS declarations were moved, reordered, merged or deleted. Firefox and cascade/runtime ownership gates remain open.
