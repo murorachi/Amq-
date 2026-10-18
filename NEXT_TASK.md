@@ -1,8 +1,8 @@
 # Next task
 
-Current checkpoint: **V82.85.7 quiz browser acceptance coverage, pending CI**.
+Current checkpoint: **V82.85.7 quiz browser acceptance coverage, accepted**. CI: https://github.com/murorachi/Amq-/actions/runs/39115364605
 
-1. Run the two newly wired browser suites and resolve any environment-specific failures without altering product behavior.
+1. Add a dedicated real-browser quiz submit/classify/skip and playback lifecycle contract, using deterministic media/network stubs and assertions for history, familiarity, events, timers, and teardown. Current suggestion tests deliberately assert selection does not submit; they do not verify settlement.
 2. Add a dedicated real-browser quiz submit/classify/skip and playback lifecycle contract, with deterministic audio/network stubs and assertions for history, familiarity, events, timers, and teardown.
 3. Add a separate multiplayer lifecycle acceptance harness using a controlled mock API/WebSocket for waiting → preparing → running → paused → reveal → finished → leave/reconnect; only then assess extraction boundaries.
 4. Keep CSS isolated from lifecycle refactors.

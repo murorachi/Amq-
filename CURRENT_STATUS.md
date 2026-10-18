@@ -1,9 +1,9 @@
-# Current engineering checkpoint: V82.85.7 QUIZ BROWSER ACCEPTANCE COVERAGE (pending CI)
+# Current engineering checkpoint: V82.85.7 QUIZ BROWSER ACCEPTANCE COVERAGE (ACCEPTED)
 
 - Parent V82.85.6 accepted: https://github.com/murorachi/Amq-/actions/runs/39115085244; documentation checkpoint also passed CI at https://github.com/murorachi/Amq-/actions/runs/39115187037.
 - Audit found the answer submit/classify/skip logic and playback timers co-located in `src/scripts/script_004.htmlpart`; base audio history/failure handling lives in `script_001.htmlpart`; reveal-video and global dock behaviors live in `script_029.htmlpart` and `script_034`-`035`.
 - Multiplayer session, polling, WebSocket team drafts, phase rendering and dual audio decks are tightly coupled in `src/scripts/script_028.htmlpart`.
-- Existing browser tests for real-origin IndexedDB/quiz input and suggestion interactions were not in the engineering CI workflow. This stage adds both without changing product code. Dedicated submit/playback and multiplayer lifecycle tests are still needed before extraction.
+- Existing browser tests for real-origin IndexedDB/quiz input and suggestion interactions were not in the engineering CI workflow. This stage adds both without changing product code. Accepted CI run: https://github.com/murorachi/Amq-/actions/runs/39115364605. Source/unit job passed; browser job passed all existing native-storage/custom-list checks plus real-origin IndexedDB/input and quiz suggestion integration. Combined browser logs contained 79 PASS assertions and 0 FAIL/exception lines. Dedicated submit/playback and multiplayer lifecycle tests are still needed before extraction.
 - Product remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
