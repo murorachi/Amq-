@@ -77,7 +77,7 @@ def make_html(path, mode):
     return html[:insert_at] + STORAGE_SHIM + media + html[insert_at:]
 
 
-def open_page(browser, html, errors, target="title")
+def open_page(browser, html, errors, target="title"):
     page = browser.new_page()
     page.on("pageerror", lambda exc: errors.append(str(exc)))
     page.route("https://**/*", lambda route: route.abort())
