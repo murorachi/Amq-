@@ -171,12 +171,13 @@ def main():
             song = start_question(page, False)
             check(page.evaluate("window.__aniQuizStateV45?.quizAudioStarted === false"),
                   "resolved play promise without a playing event does not start quiz timing")
-            page.locator("#quizAnswer").fill(song["title"])
+            check(page.locator("#quizAnswer").is_disabled(),
+                  "answer input remains disabled until successful playback")
             before = page.evaluate("""() => ({
               history:(window.__aniHistoryAPIv51?.getHistory?.() || []).length,
               familiarity:localStorage.getItem('aniCollection_v2')
             })""")
-            page.evaluate("window.__aniQuizSubmitV47(false,{rawAnswer:document.getElementById('quizAnswer').value})")
+            page.evaluate("(answer) => window.__aniQuizSubmitV47(false,{rawAnswer:answer})", song["title"])
             events = page.evaluate("window.__quizLifecycleEvents")
             check(not events["submitted"] and not events["answered"] and
                   page.evaluate("window.__aniQuizStateV45?.quizFinished === false"),
