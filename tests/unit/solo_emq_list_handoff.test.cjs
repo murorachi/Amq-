@@ -7,12 +7,14 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '../..');
 const s4 = fs.readFileSync(path.join(root, 'src/scripts/script_004.htmlpart'), 'utf8');
 const s40 = fs.readFileSync(path.join(root, 'src/scripts/script_040.htmlpart'), 'utf8');
+const uniqueModule = fs.readFileSync(path.join(root, 'src/modules/emq_list_normalization.htmlpart'), 'utf8');
+assert.equal((s40.match(/<!-- AMQ_SPLIT_MODULE:emq_list_normalization -->/g) || []).length, 1, 'exactly one EMQ normalization module marker');
 const line = (src, prefix) => {
   const value = src.split('\n').find(x => x.startsWith(prefix));
   assert.ok(value, 'exact source line: ' + prefix);
   return value;
 };
-const unique = line(s40, 'function unique(');
+const unique = line(uniqueModule, 'function unique(');
 const selected = line(s40, 'function getSelectedIds()');
 const workIds = line(s40, 'function listWorkIds(');
 const songIds = line(s40, 'function listSongIds(');
