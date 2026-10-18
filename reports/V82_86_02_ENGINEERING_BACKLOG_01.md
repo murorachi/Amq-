@@ -57,7 +57,7 @@
 - **AMQ-TODO-007 [P1] Resolve critical cross-fragment calls**：AUDIT_REQUIRED。驗收：Critical edges have verified owners.
 - **AMQ-TODO-008 [P1] Classify unresolved/global calls**：AUDIT_REQUIRED。驗收：Critical calls have documented contracts.
 - **AMQ-TODO-009 [P1] Review module decoupling**：AUDIT_REQUIRED。驗收：Every module has dependency/side-effect disposition.
-- **AMQ-TODO-010 [P1] Verify AMQ/EMQ ID boundaries**：DONE（V82.86.06）。驗收：AMQ／EMQ 清單在正式完整備份流程中往返還原；損毀 manifest 在任何 storage mutation 前被拒絕；注入寫入失敗後 storage 精確回滾；reload 後兩個清單仍存在並重新顯示。CI run [39166474674](https://github.com/murorachi/Amq-/actions/runs/39166474674) 通過。
+- **AMQ-TODO-010 [P1] Verify AMQ/EMQ ID boundaries**：IN PROGRESS。V82.86.06 已通過正式完整備份往返、損毀 manifest 不變更資料、注入寫入失敗精確回滾與 reload 後雙清單恢復；CI run [39166474674](https://github.com/murorachi/Amq-/actions/runs/39166474674) 通過。保留 In Progress，直到完整 ID 邊界與其餘接受條件一併關閉。
 - **AMQ-TODO-011 [P1] Complete IndexedDB failure matrix**：EXTERNAL_GATE。驗收：Each case has result and rollback assertion.
 - **AMQ-TODO-012 [P1] Verify backup restore on real origin**：EXTERNAL_GATE。驗收：Round-trip passes; corrupt backup rejected before mutation.
 - **AMQ-TODO-013 [P1] Run live two-client acceptance**：EXTERNAL_GATE。驗收：Both clients stay consistent; logs retained.
