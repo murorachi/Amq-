@@ -55,3 +55,10 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 - Acceptance matrix now exists at `reports/V82_86_AUTOMATIC_ACCEPTANCE_MATRIX.csv` (14 gates). Continue by locating the canonical runner definition; do not invent its path or duplicate the existing verifier.
 
 - Before calling publication acceptance complete, reconcile the V82.85.1 report's 345-file count against `reports/V82_85_1_REMOTE_SHA256SUMS.json`'s 346-file count and confirm the canonical runner's 34 commands.
+
+
+## V82.86 next verification steps — 2026-10-19
+- Read back tools/run_all_checks.py, tests/unit/automatic_acceptance_runner_contract.test.py, and status documents from exact branch v82.86-auto-acceptance-inventory-01; verify command 35 is registered and all script paths exist.
+- In a clean checkout/environment, execute the new runner contract first, then the complete runner in bounded batches after building the expected dist files. Record exact command counts, exits and output.
+- Fix the inventory producer so option tokens such as --help cannot be recorded as file paths; regenerate a separate corrected inventory artifact and compare the 345 actual paths against the exact branch. Do not rewrite the historical V82.85.1 evidence in place.
+- Native-origin Storage, Firefox, real audio and two-client multiplayer remain separate blocked/not-run acceptance gates.
