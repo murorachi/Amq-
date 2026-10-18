@@ -46,3 +46,7 @@ jobs:
         run: python tests/browser/native_storage_custom_lists_acceptance.py --html dist/amq_learning_tool_v82_82.html
       - name: Run isolated custom-list invalid-scope and UI regression suite
         run: python tests/browser/custom_lists_ui_acceptance.py --html dist/amq_learning_tool_v82_82.html
+      - name: Run real-origin browser acceptance for IndexedDB and quiz input
+        run: python tests/browser/real_origin_acceptance_localhost.py --html dist/amq_learning_tool_v82_82.html
+      - name: Run quiz suggestion and input integration acceptance
+        run: python tests/browser/quiz_suggestions_integration.py --html dist/amq_learning_tool_v82_82.html
