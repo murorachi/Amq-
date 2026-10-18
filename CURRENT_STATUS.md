@@ -1,14 +1,17 @@
-# Current engineering checkpoint: V82.85.12 MULTIPLAYER LEAVE / STALE-POLL RACE FIX (PENDING CI)
+# Current engineering checkpoint: V82.85.12 MULTIPLAYER LEAVE / STALE-POLL RACE FIX (ACCEPTED)
 
 - Base: `v82.85.11-firefox-responsive-acceptance-01`, commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
-- Failure evidence: Actions run `39172992441` passed source/build, unit tests, Firefox responsive smoke and the first five Chromium browser suites, but multiplayer lifecycle acceptance timed out waiting for the room stage to remain hidden after leave.
-- Root cause found in `src/scripts/script_028.htmlpart`: `loadState()` could resume after its awaited room poll after `releaseLocal()` had cleared the session, then render stale room state.
+- Root cause: `loadState()` could resume after its awaited room poll after `releaseLocal()` cleared the session, then render stale room state.
 - Fix: capture the active session identity before the request and discard the response if that session is no longer current.
-- Regression: the multiplayer browser test now deliberately holds a room poll open across leave, releases the stale response after local cleanup, and asserts that the room UI stays hidden.
-- Candidate product: `dist/amq_learning_tool_v82_85_12.html`; 8,787,574 bytes; SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
-- V82.82 remains immutable at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. The new versioned candidate is generated separately by CI and uploaded as a workflow artifact.
-- CI status: pending. Do not mark this checkpoint accepted until source/build, all Chromium browser tests, and Firefox responsive smoke pass on the V82.85.12 candidate.
-- No real audio or production-domain behavior is claimed as tested by this mock-based fix.
+- Deterministic regression: a room GET is deliberately held open across leave; after local cleanup the stale response is released and the room UI remains hidden.
+- Accepted final branch-head workflow run: https://github.com/murorachi/Amq-/actions/runs/39173733936 (all three jobs passed).
+- Source/build verifier: 122/122 checks passed; two deterministic builds matched the candidate fingerprint.
+- Chromium browser acceptance: 136 PASS assertions across six suites, 0 FAIL/exception/timeout lines.
+- Firefox responsive smoke: 17 assertions passed, no uncaught page errors.
+- Candidate: V82.85.12, 8,787,574 bytes, SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Artifact: `AMQ_V82_85_12_MULTIPLAYER_LEAVE_POLL_RACE_FIX_01`, uploaded by workflow run 39173733936.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; the new candidate is built to a separate filename.
+- Remaining separate gates: real audio playback and production-domain storage policy. Mock media and localhost-origin tests are not substitutes for those gates.
 
 ---
 
