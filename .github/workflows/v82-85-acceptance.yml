@@ -33,6 +33,9 @@ jobs:
           python -m pip install --upgrade pip playwright
           python -m playwright install --with-deps chromium
 
+      - name: Install TypeScript parser used by source-contract tests
+        run: npm install --global typescript@5.8.3
+
       - name: Verify immutable baseline, source fragments, modules, and deterministic V82.82 build
         run: python tools/verify.py
 
