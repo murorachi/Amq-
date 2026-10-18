@@ -1375,8 +1375,8 @@
       "path": "src/modules/emq_list_id_normalization.js",
       "marker": "<!-- AMQ_SPLIT_MODULE:emq_list_id_normalization -->",
       "insertion_fragment": "src/scripts/script_040.htmlpart",
-      "sha256": "1ced2733340cccf18b858eb3d676efd41efab25bcfa5f92805c5dd8c59db0271",
-      "byte_length": 110
+      "sha256": "d1dc2e3045137d2cb7895b4f1592b4feaf8fcec9f8bdb404d0e502f70fdfeed9",
+      "byte_length": 109
     }
   ],
   "module_count": 9,
