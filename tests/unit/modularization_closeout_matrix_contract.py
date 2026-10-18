@@ -43,7 +43,7 @@ def main():
     host_paths = {r["path"] for r in fragments}
     require(all(not r["linked_modules"] or r["path"] in host_paths for r in fragments),
             "module links point to manifest-listed host fragments")
-    require(all(r["path"] in host_paths for r in modules if r["linked_modules"]),
+    require(all(r["linked_modules"] in host_paths for r in modules if r["linked_modules"]),
             "every module insertion host exists in fragment inventory")
     release = manifest["release"]
     require(release["version"] == "V82.82" and release["bytes"] == 8787490
