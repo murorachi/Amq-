@@ -1,3 +1,14 @@
+## V82.85.12 multiplayer stale-poll lifecycle fix (ACCEPTED)
+
+- Base: V82.85.11 branch commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
+- Runtime fix in `src/scripts/script_028.htmlpart`: stale room-state responses are ignored when their original session is no longer active.
+- Deterministic browser regression proves a delayed poll cannot reopen the room UI after leave.
+- Final branch-head CI: https://github.com/murorachi/Amq-/actions/runs/39173733936; source/unit, Chromium browser, and Firefox jobs all passed.
+- Source/build verifier: 122/122 checks passed; six Chromium suites: 136 PASS, 0 FAIL; Firefox responsive smoke: 17 assertions passed, no page errors.
+- Candidate V82.85.12: 8,787,574 bytes, SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`. Artifact name: `AMQ_V82_85_12_MULTIPLAYER_LEAVE_POLL_RACE_FIX_01`.
+- Immutable V82.82: 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Not covered: real audio output, production-domain storage policies, or a real multi-client production backend.
+
 ## V82.85.12 multiplayer stale-poll lifecycle fix (pending CI)
 
 - Base: V82.85.11 branch commit `b82ba04f23ef5c28669d1cd90aa08bf5a91a7dd0`.
