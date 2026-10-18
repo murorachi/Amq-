@@ -1,11 +1,13 @@
-## V82.85.20 module contract CI coverage (CI pending)
+## V82.85.20 module contract CI coverage (ACCEPTED)
 
-- Adds `tests/unit/run_module_contracts.py`, which derives the unique Node module-contract test set from the current closeout matrix and executes each test fail-fast.
-- The runner verifies every module has at least one existing unit test reference and confirms all evidence paths exist; browser integration paths are checked but remain executed by the browser job.
-- Removes duplicate explicit workflow invocations for module tests now run by the matrix-driven runner.
-- CI pending; no product changes. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39141098175 passed source/unit and browser-native-origin jobs.
+- The matrix-driven runner executed all 16 unique Node contract test files referenced by the 13 module rows; all passed. Browser integration coverage also passed.
+- The suite exposed and fixed stale test assumptions around the later `near_number_v1` and `emq_list_membership` extractions.
+- TypeScript parser loading is now portable and CI installs pinned TypeScript 5.8.3.
+- No product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 

@@ -14,12 +14,13 @@ The current closeout matrix lists existing unit contract files for all 13 source
 - Browser evidence paths are checked for existence but are delegated to the browser workflow.
 - Updated the main engineering workflow to invoke the matrix-driven runner and removed redundant explicit invocations for module tests now executed by the runner.
 
-## Validation
+## Validation (ACCEPTED)
 
-- GitHub Actions: pending at report creation.
-- Local execution: not run in this environment.
-- Expected module suite: all unique Node contracts referenced by the 13 matrix rows; the runner prints each command and its result.
-- Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39141098175 passed both source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39141098175.
+- The matrix-driven runner executed all 16 unique Node contract test files referenced by the 13 module rows; all passed. The browser integration evidence path was also covered by the browser job.
+- Enabling the full suite exposed stale contracts, which were corrected rather than skipped: the anime/song DB test now restores both the database initializer and near-number module to reconstruct the pre-extraction script byte-for-byte; the EMQ handoff test now reads list membership helpers from their extracted module; TypeScript parser consumers now load a pinned TypeScript 5.8.3 dependency without an absolute machine-specific path.
+- The locked product build remained byte-identical at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- Local execution: not run in this environment; acceptance ran in GitHub Actions.
 
 ## Rollback
 
