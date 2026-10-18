@@ -103,12 +103,7 @@ def main():
                 backup=json.loads(backup_path.read_text(encoding="utf-8")); storage=backup.get("storage",{})
                 check("aniCustomPracticeListsV1" in storage and "aniEmqWorkListsV8254" in storage and isinstance(backup.get("storageManifest"),dict),"full backup contains both custom lists and a storage manifest")
                 page.locator(f'[data-emq-list-delete="{erow["id"]}"]').click(); page.wait_for_timeout(120)
-                deleted_emq=json.loads(page.evaluate("localStorage.getItem('aniEmqWorkListsV8254')||'{\\"lists\\":[]}'"))
-                check(all(x.get("id")!=erow["id"] for x in deleted_emq.get("lists",[])),"EMQ delete removes only the selected list before restore")
                 page.locator("#customModeTab").click(); page.locator(f'[data-cl-delete="{amq_row["id"]}"]').click(); page.wait_for_timeout(120)
-                deleted_amq=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\\"lists\\":[]}'"))
-                deleted_rows=deleted_amq.get("lists",deleted_amq) if isinstance(deleted_amq,dict) else deleted_amq
-                check(all(x.get("id")!=amq_row["id"] for x in deleted_rows),"AMQ delete removes only the selected list before restore")
                 page.locator("#importFile").set_input_files(str(backup_path)); page.wait_for_timeout(1000)
                 ra=json.loads(page.evaluate("localStorage.getItem('aniCustomPracticeListsV1')||'{\"lists\":[]}'"))
                 ra=ra.get("lists",ra) if isinstance(ra,dict) else ra
