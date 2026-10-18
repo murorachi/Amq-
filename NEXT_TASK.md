@@ -45,3 +45,9 @@ Current engineering checkpoint: **V82.79 MODULARIZATION_REMAINING_WORK_AUDIT_01*
 
 ## V82.85.1 GitHub source sync publication
 - Next stage: execute native-origin Storage and backup rollback acceptance; do not extract answer/playback or multiplayer lifecycle before its gate.
+
+
+## V82.86 automatic acceptance inventory — 2026-10-19
+- Completed read-only inventory of existing acceptance assets and known gaps. Report: `reports/V82_86_AUTOMATIC_ACCEPTANCE_INVENTORY_AND_GAP_PLAN.md`.
+- Next: identify the exact canonical full-runner entry point and its 34 registered commands; check prerequisite handling and whether any failed command can be masked. Then add a machine-readable summary distinguishing PASS, FAIL, BLOCKED and NOT RUN.
+- Do not change product/runtime files. Do not treat historical results as a current test run. Native-origin Storage remains blocked by recorded Chromium policy; Firefox/audio/multiplayer remain NOT VERIFIED/NOT RUN.
