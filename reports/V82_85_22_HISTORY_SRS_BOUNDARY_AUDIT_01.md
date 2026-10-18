@@ -32,11 +32,13 @@ These counts are lexical scans, not a complete call graph. The AST dependency su
 
 Added `tests/unit/srs_schedule_validation_contract.test.cjs`. It runs against the current inline function today and is designed to switch to the extracted module after a future manifest entry appears. Cases cover valid/invalid schedule envelopes, numeric boundaries, card identity/state/timestamps/counters, stability/difficulty and review-log shape. The main engineering workflow now runs this contract.
 
-## Validation status
+## Validation (ACCEPTED)
 
-- GitHub Actions: pending at report creation.
-- Local execution: not run in this environment.
-- Product baseline remains V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39142131467 passed source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39142131467.
+- The 28-case SRS schedule validation contract passed against the current inline function.
+- All 16 module contracts, script_004 boundary audit, package/matrix tests, deterministic V82.82 build and browser-native-origin suite passed.
+- Local execution: not run in this environment; acceptance ran in GitHub Actions.
+- Product baseline remained V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 - No production source change made.
 
 ## Rollback

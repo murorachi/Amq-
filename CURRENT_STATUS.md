@@ -1,11 +1,10 @@
-# Current engineering checkpoint: V82.85.22 history/SRS boundary audit (CI pending)
+# Current engineering checkpoint: V82.85.22 history/SRS boundary audit (ACCEPTED)
 
-- Parent V82.85.21 script_004 boundary decision passed GitHub Actions run 39141674475.
-- Audited current history/SRS evidence for `script_020` and `script_023`.
-- Identified `isValidSchedule(x)` in script_020 as a meaningful pure validation candidate; added a direct test-first contract and wired it into CI. No production extraction yet.
-- Storage recovery/quarantine, FSRS state transitions, history/backup restore and dashboard lifecycle remain coupled pending stronger contracts.
-- CI pending; no product source/module/manifest/CSS/HTML changed.
-- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39142131467 passed source-and-unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39142131467.
+- Added a 28-case direct contract for the SRS schedule validator `isValidSchedule`; all cases passed against the existing inline source.
+- Audit decision: `script_020` schedule validation is a testable candidate. Storage quarantine/persistence and FSRS state transitions remain coupled. `script_023` backup/restore, history insights and dashboard lifecycle remain high-risk.
+- All 16 module contracts, script_004 boundary audit, package/matrix tests and deterministic V82.82 build passed. Browser-native-origin suite passed.
+- Product lock unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product source/module/manifest/CSS/HTML changed.
 
 ---
 

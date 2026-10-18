@@ -1,11 +1,12 @@
-## V82.85.22 history/SRS boundary audit (CI pending)
+## V82.85.22 history/SRS boundary audit (ACCEPTED)
 
-- `script_020`: 36,104 bytes, 55 simple function declarations, 5 localStorage calls, 14 listener call sites, 5 timer call sites; storage recovery and FSRS state transitions remain coupled.
-- `script_023`: 42,137 bytes, 23 simple function declarations, 14 localStorage calls, 8 listener call sites, 9 timer call sites; backup/restore and history insights remain high risk.
-- Added a direct test-first contract for the pure persisted-schedule validator `isValidSchedule`; extraction is deferred until the contract passes.
-- CI pending; no product source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
+- GitHub Actions run 39142131467 passed source/unit and browser-native-origin.
+- The SRS schedule validator test passed all 28 cases against the current inline source.
+- Candidate decision: `isValidSchedule` can be extracted without moving persistence or FSRS lifecycle; storage recovery and state transitions remain coupled.
+- No production source changed. Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable.
 
 ---
+
 
 
 

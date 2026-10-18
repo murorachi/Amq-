@@ -1,14 +1,18 @@
 # Next task
 
-Current checkpoint: **V82.85.22 history/SRS boundary audit (CI pending)**.
+Current checkpoint: **V82.85.22 history/SRS boundary audit (ACCEPTED)**.
 Branch: `v82.85.22-history-srs-boundary-audit-01`.
+Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39142131467.
 
-## Acceptance gate
-- Run the new SRS schedule validation contract in CI.
-- Keep all module contracts, script_004 boundary audit, package/matrix tests, deterministic product build and browser-native-origin suite passing.
-- Confirm product fingerprint remains exactly V82.82.
+## Accepted gates
+- Source inventory and deterministic V82.82 build pass.
+- All 16 module contracts pass.
+- Script_004 boundary audit passes in CI.
+- Package/matrix tests pass.
+- SRS schedule validator contract passes all 28 cases.
+- Full browser-native-origin suite passes.
 
-## Next after acceptance
+## Next highest-value task
 Extract only `isValidSchedule(x)` from `script_020` into a source module at its original position. Preserve the function body byte-for-byte and retain the surrounding `validStates` closure. Add its module record and verify the assembled product remains byte-identical. Do not combine this with storage recovery or FSRS state-machine changes.
 
 Known environment gates remain Firefox/CSS cascade, real audio-provider playback, live two-client multiplayer reconnect, and production-domain storage policy/full IndexedDB failure cases.
