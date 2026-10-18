@@ -39,7 +39,7 @@ def main():
     assert "window.__aniApplyQuizCustomListScopeV8265" in quiz
     assert "Custom-list candidate scope failed closed" in quiz
     assert "scoped=[]" in quiz
-    assert "function validAnimeIds" in source("src/modules/amq_valid_anime_ids.htmlpart")
+    assert "const validAnimeIds=" in source("src/modules/amq_valid_anime_ids.htmlpart")
 
     # EMQ work, VNDB and song IDs remain distinct through membership and pool combination.
     for key in ("aniEmqWorkListsV8254", "aniEmqWorkListsSelectedV8254", "aniEmqAudioOverridesV8254"):
