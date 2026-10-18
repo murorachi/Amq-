@@ -128,6 +128,7 @@ def main():
             page.locator("#quizManualSubmitV42").click(timeout=5000)
             page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
             events = page.evaluate("window.__quizLifecycleEvents")
+            print("DIAGNOSTIC events " + json.dumps({"song":song,"events":events}), flush=True)
             check(len(events["submitted"]) == 1 and events["submitted"][0].get("answer") == song["title"],
                   "submit event preserves the exact submitted answer exactly once")
             check(len(events["answered"]) == 1 and events["answered"][0].get("correct") is True,
