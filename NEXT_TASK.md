@@ -1,18 +1,22 @@
 # Next task
 
-Current checkpoint: **V82.86.03 quiz lifecycle ownership audit**. Branch `v82.86.03-quiz-lifecycle-ownership-01`.
+Current checkpoint: **V82.86.04 critical cross-fragment ownership audit**. Branch `v82.86.04-critical-cross-fragment-ownership-01`.
 
-## Verified result
-GitHub Actions run 39155616680: both `source-and-unit` and `browser-native-origin` PASS. Product fingerprint remained unchanged at V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+## Verified scope
+- Mapped the quiz answer globals and state/player bridge, AMQ custom-list adapter, EMQ list membership/combinePool wrapper, and the parallel storage-repository/direct-localStorage paths.
+- Added `tests/unit/critical_cross_fragment_dependency_contract.py` to lock the explicit source boundaries.
+- No product source or generated HTML was changed.
+- CI acceptance for this stage is pending until the branch run is inspected.
 
-## Backlog status
-- AMQ-TODO-001 Done: shared quiz state owner map and transition tests documented.
-- AMQ-TODO-002 Done: key DOM mutation and teardown owners documented.
-- AMQ-TODO-003 In Progress: known timers/exit cleanup pass, but dynamic listener ownership and heap leak audit remain incomplete.
-- AMQ-TODO-004 Done: current suggestion click/keyboard/IME guard/input/focus/caret/ARIA behavior passes Chromium integration tests. OS-level IME and Firefox remain outside coverage.
+## Backlog
+- AMQ-TODO-007 In Progress: selected critical cross-fragment calls mapped; not all 75 cross-fragment edges are resolved.
+- AMQ-TODO-008 In Progress: high-impact quiz/list/storage interfaces classified; not all 577 unresolved/global records are resolved.
+- AMQ-TODO-010 In Progress: AMQ animeIds and EMQ work/VNDB/song ID path mapped through selection/pool adapters; full CRUD/reload/backup matrix remains open.
 
 ## Next bounded work
-Resolve high-risk cross-fragment dependencies, starting with the answer/playback/storage/custom-list paths. Classify ambiguous AST edges before any source movement. Do not delete compatibility code or broadly refactor.
+1. Build a dedicated AMQ/EMQ ID boundary matrix across create/edit/delete, persistence, reload, backup/restore and invalid-scope handling.
+2. Keep real audio-provider timing/failure/pause/resume acceptance separate from mocked playback tests.
+3. Do not broadly refactor, change storage formats, or remove compatibility paths until these tests pass.
 
 ## Rollback
-Revert the V82.86.03 audit/status commits. Product rollback is not required.
+Revert the V82.86.04 report, contract, backlog/status updates and workflow change. Product rollback is not required.
