@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "product": "V82.80",
+  "browser": "Chromium headless",
+  "viewport": {
+    "width": 1440,
+    "height": 1200,
+    "deviceScaleFactor": 1,
+    "colorScheme": "dark",
+    "reducedMotion": "reduce"
+  },
+  "storage": "isolated in-memory shim; no user data",
+  "network": "external HTTP/HTTPS blocked",
+  "pages": {
+    "home": {
+      "viewport": {
+        "width": 1440,
+        "height": 1200,
+        "devicePixelRatio": 1
+      },
+      "body": {
+        "className": "dark-theme ui-home-menu",
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollHeight": 1448,
+        "clientHeight": 1448
+      },
+      "elements": {
+        "#quizView": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#quizAnswer": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "block",
+          "visibility": "visible"
+        },
+        "#quizSuggestions": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#quizStatus": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#quizStart": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "flex",
+          "visibility": "visible"
+        },
+        "#homeView": null,
+        "#watchlistView": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#multiplayerView": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        }
+      },
+      "screenshot": {
+        "path": "reports/visual-baselines/v82_81_home.png",
+        "bytes": 144398,
+        "sha256": "3ef4dc8c4ea8c09ab248951d7b59b484828d7fb0deeafa268222a1e84df29bda"
+      }
+    },
+    "quiz": {
+      "viewport": {
+        "width": 1440,
+        "height": 1200,
+        "devicePixelRatio": 1
+      },
+      "body": {
+        "className": "dark-theme quiz-mode",
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollHeight": 1498,
+        "clientHeight": 1498
+      },
+      "elements": {
+        "#quizView": {
+          "x": 28,
+          "y": 82,
+          "width": 1384,
+          "height": 1146.48,
+          "display": "block",
+          "visibility": "visible"
+        },
+        "#quizAnswer": {
+          "x": 238.44,
+          "y": 925.23,
+          "width": 464,
+          "height": 49.25,
+          "display": "block",
+          "visibility": "visible"
+        },
+        "#quizSuggestions": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#quizStatus": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#quizStart": {
+          "x": 1134.39,
+          "y": 204,
+          "width": 97.61,
+          "height": 38,
+          "display": "flex",
+          "visibility": "visible"
+        },
+        "#homeView": null,
+        "#watchlistView": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        },
+        "#multiplayerView": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "visibility": "visible"
+        }
+      },
+      "screenshot": {
+        "path": "reports/visual-baselines/v82_81_quiz.png",
+        "bytes": 94349,
+        "sha256": "6c97e5c1d2b5e457f2d39e0bea09125f4e01b768cc4df7197f9d8e4c4e910ff7"
+      }
+    }
+  },
+  "pageErrors": []
+}
