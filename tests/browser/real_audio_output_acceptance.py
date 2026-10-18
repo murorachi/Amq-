@@ -233,7 +233,9 @@ def main():
                   if (api && typeof api.chooseQuestion === 'function') {
                     const original = api.chooseQuestion;
                     api.chooseQuestion = (pool, ...rest) =>
-                      pool.find(row => String(row[1]) === String(id)) || original.call(api, pool, ...rest);
+                      pool.find(row => String(row[1]) === String(id) && row[9]) ||
+                      pool.find(row => row && row[9]) ||
+                      original.call(api, pool, ...rest);
                   }
                 }""", str(song[1]))
                 page.locator("#quizStart").click(timeout=10000)
