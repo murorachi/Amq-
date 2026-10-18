@@ -15,11 +15,12 @@ Audit the source checkpoint ZIP builder only. The standalone product remains loc
 - Exposed the existing payload selection as `package_files()`; inclusion/exclusion behavior is otherwise unchanged.
 - Added `tests/unit/package_checkpoint_contract.py` and wired it into the engineering acceptance workflow. The test checks required build/source/test/status files and all manifest-listed fragments/modules, excludes generated `dist/` output, builds two ZIPs, compares their SHA-256, verifies sidecars and CRC, checks unique/exact entries, and validates every embedded SHA-256 manifest entry.
 
-## Validation status at report creation
+## Validation
 
 - Static review: complete.
-- GitHub Actions: pending; do not treat the package test as passed until its step is green.
-- Local execution: not run in this environment.
+- GitHub Actions run 39138953742 passed: source-and-unit and browser-native-origin both succeeded. Run: https://github.com/murorachi/Amq-/actions/runs/39138953742
+- Package contract test passed. Two generated ZIPs each measured 14,632,716 bytes with SHA-256 `fd9ab4c5d6dc53d14a9ab059890e9f1fb909137fc9181b150a7192174f38586b`; each had 350 unique entries and passed ZIP CRC. Sidecars matched; exact entry inventory and all embedded manifest file digests passed.
+- Local execution: not run in this environment; package acceptance ran in GitHub Actions.
 - Product HTML/runtime/CSS: unchanged by this task.
 
 ## Risks and limits

@@ -1,11 +1,11 @@
-# Current engineering checkpoint: V82.85.17 checkpoint package audit (CI pending)
+# Current engineering checkpoint: V82.85.17 checkpoint package audit (ACCEPTED)
 
-- Parent checkpoint: V82.85.16 source inventory completeness gate, latest parent commit `e2c0fddd9d144cafbb5cb4691b00bc6c1e6ea149`.
-- V82.85.16 GitHub Actions run 39137967441 completed successfully: both `source-and-unit` and `browser-native-origin` passed.
-- V82.85.17 updates the stale default package filename, exposes the exact ZIP payload inventory for assertions, and adds package completeness/reproducibility acceptance.
-- Package acceptance checks required source/build/test/status files, all manifest-listed fragments/modules, no generated `dist/` output, two-build SHA-256 equality, sidecar digests, ZIP CRC/unique entries, exact entry inventory, and every embedded manifest digest.
-- CI for V82.85.17 is pending. No local test execution was performed.
-- Product lock unchanged: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable. No product HTML, CSS, runtime fragment, or fragment manifest change is intended.
+- Parent V82.85.16 source inventory gate passed GitHub Actions run 39137967441.
+- V82.85.17 acceptance passed GitHub Actions run 39138953742: both `source-and-unit` and `browser-native-origin` jobs succeeded.
+- Package test verified all required source/build/test/status paths and manifest-listed fragments/modules are included; generated `dist/` output is excluded; two package builds are byte-identical; sidecar hashes, ZIP CRC, unique/exact entries, and every embedded manifest digest pass.
+- CI ZIP result: 14,632,716 bytes, SHA-256 `fd9ab4c5d6dc53d14a9ab059890e9f1fb909137fc9181b150a7192174f38586b`, 350 unique entries. This is a CI-generated test artifact, not a published release attachment.
+- Package default name now identifies V82.85.17 rather than V82.84.
+- Product lock unchanged: V82.82 standalone HTML, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable. No product HTML, CSS, runtime fragment, or fragment manifest changed.
 
 ---
 

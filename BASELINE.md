@@ -1,12 +1,13 @@
-## V82.85.17 checkpoint package audit (CI pending)
+## V82.85.17 checkpoint package audit (ACCEPTED)
 
-- Parent V82.85.16 acceptance passed in GitHub Actions run 39137967441: source/unit and browser-native-origin jobs both succeeded.
-- Package audit adds a contract test for required source/build/test/status inventory, manifest-listed fragment/module inclusion, deterministic two-build ZIP hash, external sidecars, ZIP CRC/unique entries, and embedded manifest digests.
-- Package naming corrected from stale V82.84 to `AMQ_V82_85_17_SOURCE_PACKAGE_AUDIT_01.zip`.
-- CI for this package audit is pending; local execution was not run.
+- GitHub Actions run 39138953742 passed both source/unit and browser-native-origin jobs: https://github.com/murorachi/Amq-/actions/runs/39138953742.
+- Package acceptance passed required file inventory, all manifest source paths, exclusion of generated `dist/`, deterministic two-build SHA-256, external sidecars, ZIP CRC, unique/exact entries, and embedded manifest digest checks.
+- Two package builds: 14,632,716 bytes, SHA-256 `fd9ab4c5d6dc53d14a9ab059890e9f1fb909137fc9181b150a7192174f38586b`, 350 unique entries. This hash is for CI test output, not a published release asset.
+- Package default filename corrected to `AMQ_V82_85_17_SOURCE_PACKAGE_AUDIT_01.zip`.
 - Product baseline unchanged: V82.82, 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 immutable. No product output changed.
 
 ---
+
 
 
 ## V82.85.15 pure-helper boundary audit (audit only)
