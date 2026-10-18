@@ -777,8 +777,8 @@
       "path": "src/scripts/script_025.htmlpart",
       "start_byte": 5441981,
       "end_byte": 5495761,
-      "byte_length": 53311,
-      "sha256": "fcdb3fe6857e5c683b8eaa386ac12e60def61f1e9160c2aca7d4929a083e4c9d",
+      "byte_length": 53270,
+      "sha256": "9a875f3718004d353315f4f836aef78af85ec995b943bc5d0eddac694241fdf3",
       "opening_tag": "<script id=\"v82-25-custom-lists-and-practice-hub\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1389,9 +1389,19 @@
       "insertion_fragment": "src/scripts/script_025.htmlpart",
       "purpose": "exact-source extraction of pure AMQ custom-list ID/row/payload validation",
       "runtime_contract": "exact original helper bytes restored at the same classic-script IIFE position; no runtime script tag or behavior change"
+    },
+    {
+      "name": "amq_valid_anime_ids",
+      "path": "src/modules/amq_valid_anime_ids.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:amq_valid_anime_ids -->",
+      "byte_length": 88,
+      "sha256": "51ed5054afc554263da872fe38b3c9973196effe5e0ee294ef13a9b509d35b3b",
+      "insertion_fragment": "src/scripts/script_025.htmlpart",
+      "purpose": "exact-source extraction of AMQ anime-ID normalization and catalog membership filtering",
+      "runtime_contract": "original helper bytes restored at original IIFE position; same stringification, deduplication, and catalog filtering; no runtime behavior change"
     }
   ],
-  "module_count": 10,
+  "module_count": 11,
   "release": {
     "version": "V82.82",
     "bytes": 8787490,
