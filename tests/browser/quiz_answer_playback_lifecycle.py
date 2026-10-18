@@ -160,7 +160,7 @@ def main():
                   "answer submission and reveal do not stop the current audio")
             page.locator("#quizExit").click(timeout=5000)
             page.wait_for_function("window.__aniQuizStateV45?.quizSong === null", timeout=5000)
-            check(page.evaluate("window.__quizMediaProbe.pauseCalls > 0 and window.__aniQuizStateV45?.quizActive === false"),
+            check(page.evaluate("window.__quizMediaProbe.pauseCalls > 0 && window.__aniQuizStateV45?.quizActive === false"),
                   "leaving quiz tears down playback and clears active round state")
             page.close()
 
