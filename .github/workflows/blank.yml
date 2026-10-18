@@ -20,15 +20,17 @@ permissions:
 
 jobs:
   retrieve-baseline:
-    name: Download and Verify V82.76
+    name: Download, Verify, and Export V82.76
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
+    env:
+      REPOSITORY: murorachi/Amq-
 
     steps:
       - name: Validate inputs and locate release asset
         env:
           GH_TOKEN: ${{ github.token }}
-          REPOSITORY: murorachi/Amq-
           RELEASE_TAG: ${{ inputs.release_tag }}
           EXPECTED_SHA256: ${{ inputs.expected_sha256 }}
         shell: bash
@@ -42,7 +44,7 @@ jobs:
 
           if [[ -n "$EXPECTED_SHA256" ]] &&
              [[ ! "$EXPECTED_SHA256" =~ ^[a-fA-F0-9]{64}$ ]]; then
-            echo "::error::SHA-256 must contain exactly 64 hexadecimal characters."
+            echo "::error::Expected SHA-256 must be exactly 64 hexadecimal characters."
             exit 1
           fi
 
@@ -58,6 +60,8 @@ jobs:
           with open("release.json", encoding="utf-8") as f:
               release = json.load(f)
 
+          # Match names such as:
+          # AMQ_V82_76_SCRIPT004_BOUNDARY_AUDIT_01.zip
           pattern = re.compile(
               r"(?<![A-Za-z0-9])v?82[._-]?76(?![0-9]).*\.zip$",
               re.IGNORECASE
@@ -71,9 +75,9 @@ jobs:
 
           if len(matches) != 1:
               print(
-                  f"Expected exactly one V82.76 ZIP, found {len(matches)}."
+                  f"Expected exactly one V82.76 ZIP; found {len(matches)}."
               )
-              print("Available release assets:")
+              print("Available assets:")
               for asset in assets:
                   print(" -", asset.get("name", "(unnamed)"))
               sys.exit(1)
@@ -83,21 +87,26 @@ jobs:
           size = asset.get("size")
 
           if not isinstance(size, int) or size <= 0:
-              print("Invalid asset size in release metadata.")
-              sys.exit(1)
+              sys.exit("Invalid asset size in GitHub release metadata.")
 
-          expected_prefix = (
+          prefix = (
               "https://github.com/murorachi/Amq-/releases/download/"
           )
+          if not url.startswith(prefix):
+              sys.exit("Unexpected release asset URL.")
 
-          if not url.startswith(expected_prefix):
-              print("Unexpected release asset download URL.")
-              sys.exit(1)
-
-          with open("asset.env", "w", encoding="utf-8") as f:
-              f.write("ASSET_NAME=" + json.dumps(asset["name"]) + "\n")
-              f.write("ASSET_URL=" + json.dumps(url) + "\n")
-              f.write("ASSET_SIZE=" + str(size) + "\n")
+          # JSON string encoding safely preserves shell metacharacters.
+          with open("asset.json", "w", encoding="utf-8") as f:
+              json.dump(
+                  {
+                      "name": asset["name"],
+                      "url": url,
+                      "size": size,
+                      "tag": release.get("tag_name", ""),
+                  },
+                  f,
+                  ensure_ascii=False
+              )
 
           print("Release:", release.get("tag_name", "unknown"))
           print("Selected asset:", asset["name"])
@@ -106,12 +115,26 @@ jobs:
 
       - name: Download and verify archive
         env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
           EXPECTED_SHA256: ${{ inputs.expected_sha256 }}
         shell: bash
         run: |
           set -euo pipefail
 
-          eval "$(cat asset.env)"
+          # Load asset metadata without evaluating shell code.
+          eval "$(
+            python - <<'PY'
+          import json
+          import shlex
+
+          with open("asset.json", encoding="utf-8") as f:
+              asset = json.load(f)
+
+          print("ASSET_NAME=" + shlex.quote(asset["name"]))
+          print("ASSET_URL=" + shlex.quote(asset["url"]))
+          print("ASSET_SIZE=" + shlex.quote(str(asset["size"])))
+          PY
+          )"
 
           curl \
             --fail \
@@ -128,13 +151,14 @@ jobs:
           ACTUAL_SIZE="$(stat -c %s V82.76.zip)"
           ACTUAL_SHA256="$(sha256sum V82.76.zip | cut -d ' ' -f 1)"
 
+          echo "Release tag: $RELEASE_TAG"
           echo "Asset: $ASSET_NAME"
           echo "Expected size: $ASSET_SIZE bytes"
           echo "Downloaded size: $ACTUAL_SIZE bytes"
           echo "SHA-256: $ACTUAL_SHA256"
 
           if [[ "$ACTUAL_SIZE" != "$ASSET_SIZE" ]]; then
-            echo "::error::Downloaded size does not match release metadata."
+            echo "::error::Downloaded file size differs from release metadata."
             exit 1
           fi
 
@@ -145,7 +169,7 @@ jobs:
             fi
             echo "Trusted SHA-256 comparison passed."
           else
-            echo "::warning::No trusted SHA-256 supplied; authenticity is not independently verified."
+            echo "::warning::No trusted SHA-256 supplied; authenticity has not been independently verified."
           fi
 
           python - <<'PY'
@@ -167,11 +191,11 @@ jobs:
               if bad_entry is not None:
                   raise SystemExit(f"ZIP CRC validation failed: {bad_entry}")
 
-              print(f"ZIP validation passed. Entries: {len(entries)}")
+              print(f"ZIP structure and CRC passed. Entries: {len(entries)}")
               for item in entries:
                   print(f"{item.file_size:>12} bytes  {item.filename}")
 
-          print("ZIP structure and CRC checks passed.")
+          print("ZIP validation passed.")
           PY
 
           printf '%s  %s\n' \
@@ -193,7 +217,7 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Upload archive as downloadable artifact
+      - name: Export verified archive
         uses: actions/upload-artifact@v4
         with:
           name: v82-76-source-archive
