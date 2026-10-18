@@ -3,7 +3,12 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const ts = require('/opt/nvm/versions/node/v22.16.0/lib/node_modules/typescript/lib/typescript.js');
+let ts;
+try { ts = require('typescript'); }
+catch (error) {
+  if (error.code !== 'MODULE_NOT_FOUND') throw error;
+  ts = require('/opt/nvm/versions/node/v22.16.0/lib/node_modules/typescript/lib/typescript.js');
+}
 const ROOT = path.resolve(__dirname, '../..');
 const sourcePath = path.join(ROOT, 'src/scripts/script_004.htmlpart');
 const raw = fs.readFileSync(sourcePath, 'utf8');

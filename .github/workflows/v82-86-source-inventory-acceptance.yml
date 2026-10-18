@@ -30,6 +30,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install TypeScript parser dependency
+        run: |
+          npm install --global typescript@5.8.3
+          echo "NODE_PATH=$(npm root -g)" >> "$GITHUB_ENV"
+
       - name: Install Playwright and Chromium
         run: |
           python -m pip install --upgrade pip
