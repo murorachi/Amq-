@@ -108,11 +108,14 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 
 
 
-## V82.85.33 EMQ Chinese-title cache contract
+## V82.85.33 EMQ Chinese-title cache contract — accepted with known CI limitation
 
 - Branch: `v82.85.33-emq-title-cache-contract-01`, based on accepted Chinese-title loader checkpoint V82.85.32.
-- Added `tests/unit/emq_chinese_title_cache_contract.test.cjs` with 19 exact-source cases for Unicode/title filtering, VNDB IDs, OpenCC loading/failure, cache precedence, alias normalization/caps, VNDB request shape, Bangumi exact-match fallback, fail-soft errors and batch deduplication.
-- Registered the test in CI and deterministic checkpoint package requirements. Production `src/scripts/script_041.htmlpart` unchanged; no external URL, cache schema, title priority or fallback behavior changed.
-- Local execution: NOT RUN in this authoring environment. Latest branch CI must be inspected before acceptance.
-- Prior corrected loader CI [39239470902](https://github.com/murorachi/Amq-/actions/runs/39239470902): Chinese-title 20/20, SRS 17/17, scene-background 18/18, source/unit, package reproducibility and Firefox passed. Chromium native-origin failed only at known final audio monitor capture (peak=0, rms=0); preceding storage, IndexedDB/input, quiz and multiplayer checks passed.
+- Added `tests/unit/emq_chinese_title_cache_contract.test.cjs`: 19 exact-source cases for Unicode/title filtering, VNDB IDs, OpenCC loading/failure, cache precedence, alias normalization/caps, VNDB request shape, Bangumi exact-match fallback, fail-soft errors and batch deduplication.
+- Registered in CI and deterministic checkpoint package requirements. Production `src/scripts/script_041.htmlpart` unchanged; no external URL, cache schema, title priority or fallback behavior changed.
+- Initial run [39240395756](https://github.com/murorachi/Amq-/actions/runs/39240395756) found three test-harness assumptions; corrected to match the existing async OpenCC and alias behavior. No production code changed.
+- Corrected CI [39240538829](https://github.com/murorachi/Amq-/actions/runs/39240538829): source/unit PASS; EMQ Chinese-title 19/19, Chinese-title loader 20/20, SRS 17/17, scene-background 18/18 PASS; package contract/reproducibility PASS (408 entries, repeated SHA-256 `75d2dd241094bb6e73d9c47f584de662fde505d5ba7f428b0a3f0ab4a5189954`); deterministic build PASS; Firefox responsive PASS.
+- Chromium native-origin: native storage/custom-list, IndexedDB/input, suggestion, quiz playback and multiplayer lifecycle passed. Only final non-silent audio monitor capture failed (peak=0, rms=0). Overall workflow is red due to known capture limitation; actual product playback was user-confirmed. Manual interactive acceptance was not performed.
+- Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
