@@ -8,7 +8,13 @@
    wrap.innerHTML='<label for="v44Volume">音量</label><input id="v44Volume" type="range" min="0" max="100" step="1" value="70"><output id="v44VolumeValue">70%</output>';
    const anchor=$('quizSettingsToggle')?.parentElement || root.querySelector('.quizTop') || root;
    anchor.insertAdjacentElement('afterbegin',wrap);
-   let volume=70;try{const n=Number(localStorage.getItem('aniQuizVolume'));if(Number.isFinite(n))volume=Math.max(0,Math.min(100,n))}catch{}
+   let volume=70;
+   try{
+     const saved=localStorage.getItem('aniQuizVolume');
+     // A missing preference must retain the 70% default; Number(null) is 0.
+     if(saved!==null&&String(saved).trim()!==''&&Number.isFinite(Number(saved)))
+       volume=Math.max(0,Math.min(100,Number(saved)));
+   }catch{}
    $('v44Volume').value=String(volume);$('v44VolumeValue').textContent=volume+'%';
    const apply=()=>{
      const v=Number($('v44Volume').value)/100;$('v44VolumeValue').textContent=Math.round(v*100)+'%';
