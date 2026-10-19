@@ -128,3 +128,11 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Produce printable playtest cards and facilitator settlement sheets only after rules are internally consistent.
 - Recruit/perform human paper sessions before claiming fun, fairness, or readiness for implementation.
 - No server/UI/database or production code until design gates and human playtest support the direction.
+
+
+## Rule ambiguities closed — next: reproducible distribution checks
+- The first-pass rule ambiguities recorded above have been resolved in `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`.
+- Next, add a small deterministic checker for probability totals, outcome counts, gross-return semantics, ladder success probability, Minefield conditional odds, Wheel's combined probabilities, Pot Split integer conservation/house remainder, and Debt Collector settlement arithmetic.
+- Then test for dominant choices and exploit loops with focused simulations; report distributions and extreme outcomes, not a single “balance score”.
+- Produce printable paper cards and a facilitator settlement sheet after the checker catches no rule/arithmetic contradictions.
+- Human playtesting remains necessary before claiming fun or authorizing implementation. No server/UI/database or production changes.
