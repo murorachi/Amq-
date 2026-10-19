@@ -66,3 +66,11 @@
 ## Design simulation CI
 - [Run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`.
 - Python syntax checks and Gate 05–09 scripts completed. This verifies script execution, not balance or enjoyment.
+
+
+## Design Gate 10–13
+- Reports: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_10.md` through `_13.md`; rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Candidate tuning: Insurance Bank/Balanced only with 10% refund; Vault Harness 20%; recovery once/run at strain 2 with 12% fee or 8% voucher fee; discard one held item if available.
+- Two-clue Signal Room fee is `ceil(6% × stake)` to avoid double rounding.
+- CI [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed the Gate 05–13 simulation suite. This is not proof of fun.
+- Next: paper-playtest kit 02 and human paper sessions. No product source changed.
