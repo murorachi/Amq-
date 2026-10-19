@@ -35,3 +35,11 @@
 - Scene-background IndexedDB/object-URL contract: 29 assertions passed in run [39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623); source/unit and Firefox responsive passed.
 - Both runs' Chromium native-origin job was still in progress at the last check. The known audio output capture assertion must remain separately classified if it fails.
 - No production source/formula/schema/CSS changes in these stages. Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## External-source/cache contract stage
+
+- Added `tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs` for `script_041.htmlpart` and wired it into the engineering acceptance workflow.
+- Report: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md`.
+- Automated execution pending CI. Production source and cache schema are unchanged.
+- Previously accepted characterization: SRS 41/41 and scene-background lifecycle 29/29; source/unit and Firefox responsive passed. Known audio output capture failure remains a separate browser-native acceptance limitation.
