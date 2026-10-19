@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 13 |
+| First-pass file audits completed | 21 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 78 |
+| Awaiting file-specific review | 70 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -44,24 +44,24 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | CSS 004 | `src/styles/style_004.htmlpart` | 2020 | `eb4c237cb464534c…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 005 | `src/styles/style_005.htmlpart` | 482 | `8f0301cd7d168f07…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 001 | `src/scripts/script_001.htmlpart` | 102981 | `07e91622000ebfe9…` | P1 | 首輪逐檔審查完成；風險保留 | 目錄索引、熟悉度／收藏／黑名單、三層答題歷史、IndexedDB 快照、媒體 fallback 共存。已對照歷史隔離、儲存、重載與備份還原契約；未改產品程式。詳見 `reports/AUDIT_SCRIPT_001_CATALOG_HISTORY_PLAYBACK_V82_85_29.md`。 |
-| JS 002 | `src/scripts/script_002.htmlpart` | 6038 | `4904e6862b21cd82…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 003 | `src/scripts/script_003.htmlpart` | 8126 | `ce363810ef726c8b…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 002 | `src/scripts/script_002.htmlpart` | 6038 | `4904e6862b21cd82…` | P2 | 首輪逐檔審查完成；風險保留 | 導覽／watchlist 顯示控制；保留離開猜歌時的 cleanup 呼叫順序。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
+| JS 003 | `src/scripts/script_003.htmlpart` | 8126 | `ce363810ef726c8b…` | P2 | 首輪逐檔審查完成；風險保留 | ANN 封面批次抓取與 XML 解析；需保留失敗診斷與非阻塞載入。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | JS 004 | `src/scripts/script_004.htmlpart` | 93004 | `f9dfcd2322a99bb1…` | P1 | 首輪逐檔審查完成；風險保留 | 35 個命名函式；答題／音訊／計時器／設定遷移／建議 UI 多職責耦合。既有 answer-flow、lifecycle 與瀏覽器測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md`。 |
 | CSS 006 | `src/styles/style_006.htmlpart` | 4051 | `4ec3b240b5f86c52…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 007 | `src/styles/style_007.htmlpart` | 8867 | `c61171df09a2acc0…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 008 | `src/styles/style_008.htmlpart` | 991 | `25b0813a768a24f8…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 005 | `src/scripts/script_005.htmlpart` | 1139 | `68f1ba7d7db6e010…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 005 | `src/scripts/script_005.htmlpart` | 1139 | `68f1ba7d7db6e010…` | P2 | 首輪逐檔審查完成；風險保留 | 音訊 Dock 顯示／熟悉度按鈕，依賴 script_001 全域狀態 API；未改程式。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | CSS 009 | `src/styles/style_009.htmlpart` | 326 | `f23f912148e78194…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 006 | `src/scripts/script_006.htmlpart` | 1628 | `fe81b21d1a0a3f3b…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 006 | `src/scripts/script_006.htmlpart` | 1628 | `fe81b21d1a0a3f3b…` | P2 | 首輪逐檔審查完成；風險保留 | 猜歌模式音訊控制與計時標籤修正；需保留 seek 與計時器的既有所有權。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | CSS 010 | `src/styles/style_010.htmlpart` | 895 | `cea29a86147270b8…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 007 | `src/scripts/script_007.htmlpart` | 4491 | `69f15478b96e81a2…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 007 | `src/scripts/script_007.htmlpart` | 4491 | `69f15478b96e81a2…` | P2 | 首輪逐檔審查完成；風險保留 | VNDB 角色頭像與外部請求；需留意失敗與過期回應，缺少專屬 exact-source 契約。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | CSS 011 | `src/styles/style_011.htmlpart` | 2976 | `7c629f4f0d10353e…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 008 | `src/scripts/script_008.htmlpart` | 5458 | `bcd739f91064842d…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 008 | `src/scripts/script_008.htmlpart` | 5458 | `bcd739f91064842d…` | P2 | 首輪逐檔審查完成；風險保留 | 答案鏡像及 AMQ／EMQ／中文別名匹配，屬答題正確性邊界。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | CSS 012 | `src/styles/style_012.htmlpart` | 525 | `490807a7172d6c15…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 009 | `src/scripts/script_009.htmlpart` | 2000 | `afa906fffd624fb5…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 009 | `src/scripts/script_009.htmlpart` | 2000 | `afa906fffd624fb5…` | P2 | 首輪逐檔審查完成；風險保留 | 頭像與倒數／播放標籤 DOM 排版調整；需瀏覽器視覺回歸。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | CSS 013 | `src/styles/style_013.htmlpart` | 343 | `86521017b5d64e81…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 014 | `src/styles/style_014.htmlpart` | 1241 | `dfb9d183b07ceaf1…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 010 | `src/scripts/script_010.htmlpart` | 1985 | `7f7290f9d4081d07…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 010 | `src/scripts/script_010.htmlpart` | 1985 | `7f7290f9d4081d07…` | P2 | 首輪逐檔審查完成；風險保留 | 停用舊 submitSkipPhase 設定遷移與頭像對齊同處一檔；保留音訊連續播放規則。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`. |
 | JS 011 | `src/scripts/script_011.htmlpart` | 311 | `b0da897f5476ad0b…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 015 | `src/styles/style_015.htmlpart` | 464 | `48c8914d6b230c45…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 012 | `src/scripts/script_012.htmlpart` | 7942 | `1ef550097de54373…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
