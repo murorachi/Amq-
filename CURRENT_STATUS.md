@@ -174,3 +174,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Report: `reports/V82_85_30_CHINESE_TITLE_CACHE_SHAPE_GUARD_01.md`.
 - Updated manifest release pin, workflow candidate/artifact names and checkpoint package naming/required paths. CI acceptance is pending for this version; do not claim release acceptance yet.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## V82.85.30 acceptance checkpoint
+
+- Run [39252468802](https://github.com/murorachi/Amq-/actions/runs/39252468802): source/unit **PASS** (132/132 source verifier checks and all unit steps), Firefox responsive **PASS**. Chromium native-origin is still running; real-origin storage/custom-list checks and isolated custom-list UI regression have passed, while the real-origin IndexedDB/quiz input acceptance is in progress.
+- Deterministic source package: two builds matched; SHA-256 `d1eab00af3bb59955bdcc11650a8edf5a8653df3c46912c08b725b60c7aea56a`; 14,691,859 bytes uploaded as `AMQ_V82_85_30_SOURCE_PACKAGE_CACHE_GUARD_01`.
+- Standalone candidate uploaded as `AMQ_V82_85_30_STANDALONE_HTML`; reconstructed output fingerprint 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- Final acceptance is not closed until browser-native job completes. If only the known audio-output capture assertion fails, report it separately; inspect any other failure on its own evidence.
