@@ -1,6 +1,20 @@
-# Current engineering checkpoint: V82.85.30 audio volume default fix
+# Current engineering checkpoint: V82.85.31 audio timeline wait hardening
 
-- Active branch: `v82.85.30-audio-volume-default-fix-01`.
+- Active branch: `v82.85.31-audio-timeline-wait-hardening-01` (test-only; based on V82.85.30).
+- Goal: remove a fixed-delay timing assumption from native audio acceptance without changing the actual progress thresholds or non-silent PCM gate.
+- Changed `tests/browser/real_audio_output_acceptance.py`: wait for `audioEl.currentTime > 0.15` with a 5-second timeout before the initial timeline assertion; after resume, wait for actual progress beyond the captured baseline with a 5-second timeout.
+- Product source, standalone HTML, manifest release fingerprint and audio behavior are unchanged. V82.85.30 candidate remains 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+- Previous stable audio-fix validation: [CI run 39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626) passed all three jobs; Chromium output peak=4899, RMS=2384.5.
+- V82.85.31 validation: PASS in [CI run 39292209164](https://github.com/murorachi/Amq-/actions/runs/39292209164), all three jobs. Source verifier 132/132; deterministic candidate fingerprint unchanged; Firefox responsive passed; native Chromium lifecycle and strict PCM passed (peak=4899, RMS=2252.9). Both condition-based timeline assertions passed. The 350 ms pause observation remains a deliberate measurement window; pause assertion is unchanged.
+- Rollback: revert the timing-only test change and V82.85.31 docs; retain V82.85.30 audio fix and immutable V82.82.
+
+---
+
+## Previous checkpoint: V82.85.30 audio volume default fix
+
+# Current engineering checkpoint: V82.85.31 audio timeline wait hardening
+
+- Active branch: `v82.85.31-audio-timeline-wait-hardening-01` (test-only; based on V82.85.30).
 - Previous diagnostic branch: `v82.85.29-chromium-pulse-stream-diagnostics-01`; CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693) failed at the strict non-silent PCM gate and revealed `muted=true` and `volume=0`.
 - Root cause: missing `aniQuizVolume` is `null`; applying `Number(null)` produces 0, overwriting the documented 70% default and muting the player.
 - Fix in `src/scripts/script_014.htmlpart`: only consume a non-empty stored preference. Explicit 0 remains a valid user choice.
