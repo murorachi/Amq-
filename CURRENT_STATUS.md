@@ -16,24 +16,24 @@
 
 - **Current phase: design iteration only. Implementation remains blocked by design gates.**
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
-- Design Gate 01: [product thesis and critique](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md).
-- Design Gate 02: [numeric stress test](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md).
-- Design simulation: [reproducible Python script](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate02.py).
-- Design-first plan: [plan](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
+- Gate 01: [product thesis and critique](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md).
+- Gate 02: [numeric stress test](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md).
+- Gate 03: [fair-EV and multiplayer exposure review](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md).
+- Simulations: [Gate 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate02.py), [Gate 03](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate03.py).
 - Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; no product HTML/source changed.
-- Existing `gamble-roguelike/` files are deterministic rule fixtures and an in-memory ledger, not a playable game. No server, database, UI, durable persistence, deployment, or live two-client run exists.
-- Previously recorded local working-copy checks: 10/10 subtests and syntax checks passed. Committed GitHub suite has 8 tests; remote CI result is not verified.
-- Gate 02 independently calculated Risk Contract expected net values and Vault stopping-point values, then ran two quota models with Python standard library, seed `20261020`, and 100,000 runs/configuration.
-- Rejected model: betting only enough to gain a 5% quota made Safe overwhelmingly dominant (89.398% clear) over Balanced (31.780%) and Jackpot (2.684%).
-- Fixed-stake model: quota-aware clear rate 38.830% before items; a free reroll upper bound produced 61.070%, proving that reroll effect needs a real cost. This is not evidence of fun or final balance.
-- Current mechanism set: Vault, Risk Contract, Blind Draft (item priority rather than shared-chip pot), and Team Gamble.
-- Ten draft items are documented; item combinations, multiplayer policies, and recovery branches remain unvalidated.
-- Next: Gate 03 revises quota/strain/recovery, simulates item combinations and 2/3/6-player policies, and prepares a paper-playtest kit. Do not implement the server/UI yet.
+- Existing `gamble-roguelike/` files are rule fixtures and an in-memory ledger, not a playable game. No server, database, UI, durable persistence, deployment, or live two-client test exists.
+- Previously recorded local core tests: 10/10 subtests and syntax checks passed. Committed GitHub suite has 8 tests; remote CI is not verified.
+- Gate 03 revised risk profiles to fair gross EV before fees/rounding: Safe 75% / 4/3×, Balanced 40% / 2.5×, Jackpot 15% / 20/3×.
+- One shared wager per stage achieved 46.563% clears in the quota-aware no-item simulation and 65.989% with a once-per-run reroll paying 90% of normal gross on the reroll. This is one simplified model, not final balance.
+- Separate wagers against a shared bank couple exposure to player count. A 20% aggregate cap helps but still lowers six-player clears in the tested model.
+- Design decision: one team wager per stage, selected from simultaneous private votes/actions. This avoids multiplying shared-bank exposure by party size.
+- Gate A–C are not passed: recovery/anti-griefing, item combinations, rounding, three viable strategies, and playtest protocol remain open.
+- Next: Gate 04 defines vote mapping, tests item combinations and player counts, and prepares paper-playtest materials. No implementation yet.
 
 ## Test/verification boundary
-- Gate 02 simulation executed locally with Python 3 standard library; product tests were not run because product source was not changed.
-- No human playtest, real multi-client run, or verified remote CI for the gamble core is claimed.
-- Roll back design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
+- Gate 03 simulation ran locally using Python 3 standard library, fixed seed 20261020, 100,000 runs/configuration; the committed script was read back from GitHub. Local syntax/execution passed for the corresponding working copy.
+- No human playtest, live multi-client run, or verified remote CI for the gamble core is claimed.
+- Revert design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
 
 ## Next AMQ maintenance task
 - Add a dedicated stable CI command for `backup_restore_contract.test.cjs`, `full_backup_restore_roundtrip_contract_v82_83.test.cjs`, and `custom_list_source_contract.test.cjs`.
