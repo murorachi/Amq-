@@ -67,6 +67,7 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 
 - Extracted repeated year/difficulty range validation from multiplayer `createSettings()` and `configureFromUi()` into one `validateRoomPoolBounds()` helper.
 - Existing input readers remain separate; validation error messages and precedence are centralized. No room payload, persisted preference shape, UI, audio, or song-pool policy change is intended.
-- Added a focused contract with 14 assertions and wired it into the engineering workflow. CI execution is pending; do not infer a pass from the test's presence.
-- Source fragment manifest and release candidate fingerprints must be refreshed from actual CI output before the checkpoint can be accepted.
+- Added a focused contract with 14 assertions and wired it into the engineering workflow. Contract and source/unit job passed in run [39228325204](https://github.com/murorachi/Amq-/actions/runs/39228325204).
+- Fragment fingerprint: 139,501 bytes / SHA-256 `0461515bbf8615bfe943f078238aaa9851e9845b62b53a79365fae6061dc9fff`. Candidate: 8,786,846 bytes / SHA-256 `cf89981db7241e929fb0c1f36f6919911e4abb069140b1e5dbe12f935ec3a251`. Source verifier, deterministic build, package reproducibility and Firefox responsive passed.
+- Native-origin storage, quiz, and multiplayer lifecycle checks passed; the only failure was the known CI audio output capture mismatch. A follow-up run verifies the corrected assertion-count label.
 - Manual interactive acceptance is not performed. Existing CI audio capture mismatch remains out of scope because actual product playback was user-confirmed.
