@@ -85,3 +85,10 @@
 
 - Added `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs`, workflow step and report `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`.
 - CI execution pending. The test records the current behavior that an array passes the `typeof records === 'object'` cache guard; no production behavior changed.
+
+
+## Chinese-title cache contract result
+
+- Cache version/read/write contract passed 14 assertions in run [39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871); source verifier 132/132, all source/unit steps and Firefox responsive passed. Chromium native-origin remained in progress at last check.
+- Array-shaped records currently pass the cache guard; documented for possible hardening, no production change.
+- Next task: evidence-based disposition update for the historical technical-debt inventory.
