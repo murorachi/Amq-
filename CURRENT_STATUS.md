@@ -163,3 +163,12 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Report: `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`. Production title-loader source and cache schema unchanged.
 - Known cache-hardening observation: array-shaped `records` currently passes the loader's object-type guard. Recorded but not fixed in this test-only stage.
 - The bounded SRS, scene-background, Chinese-title and VNDB cover characterization group is complete. Next: update the historical technical-debt inventory with evidence-based dispositions, distinguishing closed, tested/managed and deferred items.
+
+
+## Chinese-title malformed-cache guard fix
+
+- Corrected `src/scripts/script_031.htmlpart`: `readCache()` now rejects array-shaped `records` via `!Array.isArray(item.records)`. A malformed empty array can no longer be accepted as a successful cache hit; existing cache-miss/download fallback remains unchanged.
+- Updated `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` to assert array rejection. The contract had 14 assertions before this change; final CI for the updated test and source fingerprint is pending.
+- Refreshed `reports/FRAGMENT_MANIFEST.json` and `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md` for `script_031.htmlpart`: 13,842 bytes, SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
+- Latest run before manifest refresh failed source verification solely because the manifest fingerprint was stale. Do not treat that as a test failure; verify the newest run after the fingerprint update.
+- Overall browser CI may still report the known Chromium audio-capture mismatch; track source/unit, Firefox and native-origin results separately.
