@@ -96,8 +96,8 @@ function setFetch(handler) { context.fetch = handler; }
 function vndbRecord(id = 'v123') {
   return { id, title: 'English Native Title', titles: [
     { lang: 'zh-Hans', title: '简体名稱', official: true },
-    { lang: 'zh-Hant', title: '繁體名稱', official: false },
-    { lang: 'zh-Hant', title: '繁體別名', official: true },
+    { lang: 'zh-Hant', title: '繁體名稱', official: true },
+    { lang: 'zh-Hant', title: '繁體別名', official: false },
   ], aliases: ['額外別名', 'カタカナ'] };
 }
 
@@ -170,7 +170,10 @@ await test('traditional conversion keeps input when converter is unavailable', a
   reset();
   assert.equal(await context.traditional('  '), '');
   assert.equal(await context.traditional('Latin Title'), 'Latin Title');
-  assert.equal(await context.traditional('繁體原文'), '繁體原文');
+  const pending = context.traditional('繁體原文');
+  assert.equal(scripts.length, 1);
+  scripts[0].onerror();
+  assert.equal(await pending, '繁體原文');
 });
 
 await test('cached title and aliases are resolved only through valid work IDs', async () => {
@@ -190,7 +193,7 @@ await test('server alias map normalizes, deduplicates and caps aliases at eight'
   assert.equal(result['900001'].length, 8);
   assert.equal(new Set(result['900001'].map(context.normalize)).size, result['900001'].length);
   assert.ok(!result['900001'].some(x => /[\u3040-\u30ff\uff65-\uff9f]/u.test(x)));
-  assert.deepEqual(context.serverAliasMap(['other']), {});
+  assert.deepEqual(JSON.parse(JSON.stringify(context.serverAliasMap(['other']))), {});
 });
 
 await test('cacheRecord filters aliases, deduplicates normalized values and caps at eight', async () => {
