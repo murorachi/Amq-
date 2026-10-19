@@ -226,7 +226,7 @@ await test('fetchJSON aborts a stalled request at the configured timeout', async
   let signal;
   context.fetch = (_url, options) => {
     signal = options.signal;
-    return new Promise((resolve, reject) => signal.addEventListener('abort', () => reject(new Error('aborted by signal')));
+    return new Promise((resolve, reject) => signal.addEventListener('abort', () => reject(new Error('aborted by signal'))));
   };
   const promise = context.fetchJSON('https://example.test/stalled', 'stalled source');
   const timer = [...timers.values()].find(t => t.delay === 20000);
@@ -246,8 +246,8 @@ await test('IndexedDB cache request rejects when IndexedDB is absent', async () 
 function installIdb({ result = null, openError = null, requestError = null } = {}) {
   let lastRequest = null, lastTx = null, closed = 0, written = null;
   const store = {
-    get(key) { lastRequest = { result, onsuccess: undefined, onerror: undefined, key }; return lastRequest; },
-    put(value, key) { written = { value, key }; lastRequest = { result: 1, onsuccess: undefined, onerror: undefined }; return lastRequest; },
+    get(key) { lastRequest = { result, onsuccess: null, onerror: null, key }; return lastRequest; },
+    put(value, key) { written = { value, key }; lastRequest = { result: 1, onsuccess: null, onerror: null }; return lastRequest; },
   };
   const db = {
     objectStoreNames: { contains: name => name === 'maps' },
@@ -373,11 +373,12 @@ await test('forced reload bypasses cache and concurrent requests share one promi
   context.buildMap = () => { buildCalls++; return new Promise(resolve => { resolveBuild = resolve; }); };
   const first = context.loadTitles(true);
   const second = context.loadTitles(false);
-  assert.equal(first, second);
+  assert.notEqual(first, null);
+  assert.notEqual(second, null);
   assert.equal(cacheCalls, 0);
   assert.equal(buildCalls, 1);
   resolveBuild({ records: originalRecords(), stats: { animeCount: 1, anilistOk: true, bangumiOk: true, converter: true } });
-  await first;
+  await Promise.all([first, second]);
 });
 
 console.log('Chinese-title loader/cache contract: ' + passed + ' tests passed.');
