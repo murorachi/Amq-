@@ -2,13 +2,11 @@
 
 Current engineering branch: `v82.85.13-real-audio-acceptance-gate-01`.
 
-## Next phase: continue low-risk script_004 semantic modularization
-
-1. Confirm the V82.85.15 CI run: production-source target-value contract, manifest/source fingerprints, two deterministic builds, Firefox responsive, native-origin persistence/custom-list, suggestion, and answer/playback suites.
-2. Keep the Chromium real-audio PCM gate 🟡 deferred unless new evidence isolates a routing defect. Do not weaken its threshold or report it as passed.
-3. Inspect the current AST inventory and remaining script_004 helpers. Select only one bounded helper with explicit inputs, read-only dependencies, and no hidden DOM/storage/timer effects; add a focused production-source contract before extraction.
-4. Preserve exact source bytes and insertion position. Candidate output must remain V82.85.12 byte-identical: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
-5. Keep immutable V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+## Next phase
+1. Inspect the V82.85.16 GitHub Actions run. Require the metadata getter contract, source/module fingerprints, deterministic V82.82 build, byte-identical V82.85.12 candidate, Firefox responsive, and native-origin storage/custom-list/quiz integration results to be explicitly reported.
+2. Keep the Chromium PCM capture gate 🟡 deferred while its captured peak/RMS remain zero; do not lower its threshold.
+3. Continue one bounded helper at a time from `script_004.htmlpart`. Prioritize explicit inputs and read-only behavior, add a focused production-source contract first, and preserve exact source insertion position.
+4. Keep the immutable V82.82 baseline unchanged and do not mark the candidate as a formal release.
 
 ## Rollback
-Revert the V82.85.15 source/module/manifest/test/runner/workflow/docs commits. Do not replace the immutable product baseline.
+Revert the V82.85.16 source/module/manifest/test/runner/workflow/docs commits. Do not overwrite V82.82.
