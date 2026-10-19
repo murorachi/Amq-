@@ -5,7 +5,7 @@ Branch: `v82.85.27-room-pool-validation-dedup-01`.
 ## Current checkpoint
 
 - V82.85.27 consolidates duplicate year/difficulty validation in multiplayer `createSettings()` and `configureFromUi()` into `validateRoomPoolBounds()`.
-- Focused test: `tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs`, 11 declared assertions. Await CI before marking passed.
+- Focused test: `tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs`, 14 assertions. Await CI before marking passed.
 - Immutable V82.82 baseline: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Stage report: `reports/V82_85_27_ROOM_POOL_BOUNDS_VALIDATION_DEDUP_01.md`.
 
