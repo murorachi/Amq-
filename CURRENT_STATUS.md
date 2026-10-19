@@ -47,3 +47,12 @@
 - Exact committed integer-RNG simulation (100,000 runs per policy): never recover 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible 45.403% clear / 27.469% failure / mean final bank 947.30. Item reward opportunity cost is not modeled.
 - Gate 06 rejected generic all-game retry because it was either dominant or irrelevant depending on penalty. Integer-floor payout creates small implicit EV losses for Safe and Jackpot.
 - Full-run integration, item acquisition opportunity costs, three viable strategies, group fairness, and human playtest remain missing. Design only; server/UI/database implementation remains blocked.
+
+
+## Gamble Roguelike — Gate 08/09 design revision
+- Gate 08 report: [integrated model and strategy failure](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_08.md); simulation: `reports/design_simulations/gamble_roguelike_gate08.py`.
+- Gate 08 showed fixed absolute targets made quota-aware play dominate. Gate 09 changed stage targets to current bank + ceil(1%) and tied risk tier to stake size: Bank 5%, Balanced 10%, Push 15%.
+- Gate 09 report: [core strategy sensitivity](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_09.md); simulation: `reports/design_simulations/gamble_roguelike_gate09.py`; current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- At final goal 105% of starting bank, base clear rates across starting banks 750/1000/1500 were approximately Conservative 27.0–27.2%, Balanced 41.2–41.5%, Push 17.1–17.4%. Conservative has the lowest strain-failure rate; Balanced leads the standard clear; Push is strongest at the 150% high-score tier. This is a simulation signal, not evidence of fun.
+- Items, recovery, personal item ownership, route choices, 2/3/6-player voting, and human playtesting remain open. No implementation authorized.
+- New CI workflow: `.github/workflows/gamble-design-simulations.yml`; run status is pending verification.
