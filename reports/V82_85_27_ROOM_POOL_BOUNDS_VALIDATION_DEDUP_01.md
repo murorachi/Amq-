@@ -12,7 +12,7 @@
 
 Added `tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs`. It checks that the validator is defined once and called by both consumers, each validation message has one owner, valid inclusive bounds pass, missing/invalid values fail, inverted bounds fail, and validation precedence remains stable.
 
-The test declares 11 assertions. Execution status must be taken from the linked CI run after this branch's workflow starts; static creation of the test is not a test pass.
+The test declares 14 assertions. Execution status must be taken from the linked CI run after this branch's workflow starts; static creation of the test is not a test pass.
 
 ## Verification status
 
