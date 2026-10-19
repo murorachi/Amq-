@@ -1,99 +1,77 @@
 # Multiplayer Gamble Roguelike — Design-First Plan 01
 
-- Status: **Design Gate 03 complete; the preferred economy is one shared team wager per stage. Implementation remains blocked.**
+- Status: **Design Gate 05 complete; product implementation remains blocked.**
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
-- Product baseline remains V82.82 standalone HTML, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Design reviews: Gate 01, Gate 02, Gate 03 under `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_*.md`.
-- Simulations: `reports/design_simulations/gamble_roguelike_gate02.py`, `reports/design_simulations/gamble_roguelike_gate03.py`.
+- Product baseline: V82.82 standalone HTML, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Design reports: Gates 01–05 under `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_*.md`; Gate 04 correction is recorded in `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_04_ERRATA_01.md`.
+- Simulations: `reports/design_simulations/gamble_roguelike_gate02.py`, `gamble_roguelike_gate03.py`, `gamble_roguelike_gate05.py`.
 
-## 1. Delivery rule
+## 1. Hard rule
 
-**Do not implement the multiplayer server or browser UI until the design reaches the gate.** Existing `gamble-roguelike/` code is an isolated engineering fixture, not a validated product.
+**Do not implement the server, UI, database, or further production game code until the design gates pass.** Existing `gamble-roguelike/` source is an isolated engineering fixture, not a validated product.
 
-Iterate: specify a concrete loop; critique for shallow choices, dominant strategies, griefing, downtime, and runaway balance; revise; independently calculate odds/EV/variance/rounding; simulate player policies and run configurations; review gates; repeat while any gate fails.
+Iterate through concrete rules, critique, mathematical verification, simulation, and revision. Stop only when evidence supports the gates. Documents and simulations can reject bad designs; they cannot prove enjoyment.
 
 ## 2. Product hypothesis
 
-A short-session co-op gambling roguelite for 2–6 players. The team shares a virtual bankroll and must meet escalating stage quotas. Players submit simultaneous private choices, select routes, use run-only items, and decide when to preserve gains versus risk a larger reward.
+Short-session co-op gambling roguelite for 2–6 players, one shared virtual bankroll, escalating stage quotas, simultaneous private decisions, route choices, and run-only items. Target run length is 12–20 minutes, not yet validated. AMQ songs are optional atmosphere/event content. No real-money wagering, cash-out, transfers, or persistent wallet in the first target.
 
-The differentiator hypothesis is shared-bank social tension + private simultaneous commitments + informed route choices + item synergies. Target session length is 12–20 minutes, not yet validated. AMQ songs remain optional atmosphere/event content. No real-money betting, cash-out, player-to-player transfers, or persistent wallet in the first target.
+## 3. Design conclusions so far
 
-## 3. Design Gate 01 findings
+- Coin Call is a tutorial/settlement fixture, not a signature game; Exact Seven is too shallow for a core slot.
+- Preferred distinct mechanisms: Risk Contract, Vault, Signal Room, and Blind Draft.
+- Use one shared team wager per stage. Separate player wagers against the same bank make exposure and variance depend on party size.
+- Candidate Risk Contract profiles are fair-EV before fees/rounding: Safe 75% / 4/3×, Balanced 40% / 2.5×, Jackpot 15% / 20/3×.
+- The quota-sized model was rejected because Safe dominated survival. Fixed-stake models show a measurable but not yet proven-good difficulty curve.
+- Reroll is powerful: in one simplified model, quota-aware clear rate moved from 46.563% to 65.989% with one once-per-run reroll paying 90% of normal gross. It needs further tuning.
+- Signal Room's exact clue model is three equally likely outcomes; each clue reveals a pair containing the truth. Accuracy is 1/3 with no clue, 1/2 with one clue, and 3/4 with two clues. Gate 05 corrects the provisional 2/3 figure in Gate 04.
+- Gate 05 enumerated vote outcomes for 2/3/6 players. Median voting suppresses Push too much in six-player rooms; plurality with explicit tie handling is the current proposal.
+- Blind Draft replaces a shared-chip pot that would only move chips inside the same team account.
 
-- Coin Call is a tutorial/settlement fixture, not a signature game.
-- Exact Seven is an easily enumerated single-shot lottery with little decision depth.
-- Vault has promise but needs complete state/cash-out rules.
-- Blind High Card is economically awkward with a shared team wallet.
-
-Preferred mechanisms: Vault (individual stop/continue), Risk Contract (probability/reward profiles), Blind Draft (hidden rank and Favor-token decision for item priority), and Team Gamble (secret Bank/Push votes).
-
-## 4. Design Gate 02 findings
-
-- Initial risk profiles at 1.20×/2.20×/5.50× had expected net returns of −10%/−12%/−17.5% per stake.
-- The naive quota-sized model made Safe overwhelmingly dominant for survival (89.398% clear vs 31.780% Balanced and 2.684% Jackpot); reject that model.
-- Fixed 10%-stake model yielded 38.830% clears for quota-aware policy before items. A free reroll raised it to 61.070%, showing reroll power needs a real cost.
-- A ten-item draft exists in Gate 02; dangerous item pairs still need simulation.
-- Shared-bank Blind High Card was replaced by Blind Draft so the game does not pretend that transferring chips within one shared account changes team wealth.
-
-## 5. Design Gate 03 findings
-
-Report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md`.
-Simulation: `reports/design_simulations/gamble_roguelike_gate03.py`.
-
-- Revised Risk Contract multipliers to fair gross EV before fees/rounding: Safe 4/3× at 75%, Balanced 2.5× at 40%, Jackpot 20/3× at 15%. The profiles differ by variance rather than a large built-in house edge.
-- One shared wager per stage: quota-aware clear rate 46.563% without reroll and 65.989% with a once-per-run reroll whose payout is reduced 10%.
-- Separate simultaneous wagers from a shared bankroll make exposure depend on party size; a 20% aggregate cap reduces that issue but makes six-player quota clears harder (33.634% with the nerfed reroll in the tested model).
-- **Design decision:** one team wager per stage. Players still submit secret simultaneous votes/actions, but votes select the team's risk profile and item/support effects. Do not multiply team risk by player count.
-- These are 100,000-run seeded balance diagnostics, not proof of fun. No human playtest occurred.
-
-## 6. Mandatory design gates
+## 4. Design gates
 
 ### Gate A — Coherent product
-- [ ] One-sentence identity distinct from competitors beyond theme/game count.
-- [x] Core run loop and a numeric success/failure walkthrough exist.
-- [ ] Complete recovery branch and shared-bank anti-griefing/AFK rules.
-- [x] Four mechanism slots differ in decision structure.
-- [ ] Every stage has a meaningful decision without mandatory no-choice failure.
+- [ ] Full numeric run includes success and failure/recovery.
+- [x] Four game slots have distinct decision structures.
+- [ ] Recovery, AFK/disconnect, and anti-griefing rules are integrated.
+- [ ] Every stage presents a meaningful decision.
 
 ### Gate B — Mathematical integrity
-- [x] Base Risk Contract EVs independently calculated.
-- [x] Vault stopping-point probabilities/EVs calculated.
-- [x] Reproducible 100,000-run quota simulations performed.
-- [ ] Final integer rounding, minimum stakes, fees, and payout caps tested.
-- [ ] Item effects and dangerous combinations simulated.
-- [ ] Recovery and route modifiers tested for positive-EV loops/dominance.
+- [x] Risk Contract EV and Vault stopping-point math checked.
+- [x] Signal Room clue probabilities exactly enumerated.
+- [x] Seeded 100,000-run quota simulations performed.
+- [ ] Final integer rounding, minimum stakes, explicit fees, and payout caps tested.
+- [ ] Item combinations and recovery loops simulated.
 
 ### Gate C — Strategy/replayability
-- [ ] At least three viable approaches demonstrated (steady quota, information/control, high-variance growth).
+- [ ] Three viable strategies demonstrated across states/seeds.
 - [ ] No game/item is always best.
-- [ ] 8+ items form synergies without dominant combinations.
-- [ ] Route value changes across bank states and run modifiers.
-- [ ] Secret votes create useful negotiation rather than majority frustration.
+- [ ] Item synergies work without dominant or recursive combinations.
+- [ ] Vote rule does not create party-size unfairness or minority frustration.
 
 ### Gate D — Playtest readiness
-- [ ] Rules teachable in under 3 minutes.
-- [ ] Paper-playtest facilitator script and observation sheet ready.
-- [ ] Plan for at least 3 small groups, ideally 2–4 players per group.
-- [ ] Prototype target: at least 70% would play another run.
-- [ ] Median duration 12–20 minutes; no player inactive for more than 20% of a run.
+- [x] Draft paper-playtest kit exists at `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_01.md`.
+- [ ] Rules and cards are stable enough to run without facilitator improvisation.
+- [ ] Test plan: at least 3 groups, ideally 2–4 players each.
+- [ ] Target: at least 70% would play another run; median duration 12–20 minutes; no one inactive over 20%.
 
-Coding can begin only after Gates A–C pass and Gate D's playtest plan is ready. Actual fun still requires a low-fidelity playable prototype and external playtest.
+Coding is authorized only after Gates A–C pass and the playtest protocol is ready. A low-fidelity prototype and external playtest are still required before claiming comparable enjoyment.
 
-## 7. Next design cycle: Gate 04
+## 5. Next design cycle: Gate 06
 
-1. Specify the exact simultaneous-vote mapping to Safe/Balanced/Jackpot, including 2-, 3-, and 6-player thresholds, tie behavior, and AFK default.
-2. Compare no-item, nerfed-reroll, and small item-bundle configurations with the single-wager economy.
-3. Simulate item combinations and exact integer-chip rounding, including Lucky Break + Debt Eraser, Jackpot Fuse + Debt Eraser, and Safety Net + Vault Key.
-4. Write the paper-playtest facilitator script and observation sheet.
-5. Show three distinct viable strategies in the model. If one profile dominates in all relevant states, revise.
-6. Keep server/UI implementation blocked.
+1. Simulate the revised plurality vote and one-team-wager model for 2/3/6 players.
+2. Add Signal Room clue fees and integer-rational payout rounding.
+3. Simulate no-item, nerfed-reroll, and small item-bundle configurations.
+4. Test high-risk item combinations and max-payout/cap boundaries.
+5. Write a complete five-stage walkthrough with recovery and three candidate strategies.
+6. Prepare fixed paper-test cards; revise if one profile or item dominates.
 
-## 8. Architecture and evidence boundaries
+## 6. Architecture and evidence boundaries
 
 A lightweight authoritative service remains likely, but Node.js/TypeScript/SQLite are not locked. No server, database, API, browser UI, or deployment should start before design gates authorize a playable prototype.
 
-Previously recorded local core tests passed 10/10 in the fuller working copy; the committed GitHub suite has 8 tests and remote CI remains unverified. Design simulations were run locally with Python's standard library and fixed seed 20261020. No human playtest, real two-client run, or remote CI pass is claimed.
+Previously recorded local core tests passed 10/10 in the fuller working copy; the committed GitHub suite has 8 tests and remote CI is unverified. Gate 02/03 simulations ran locally with Python standard library and seed 20261020. Gate 05 exact enumeration ran locally and its committed script was read back. No human playtest or live two-client run has occurred.
 
-## 9. Rollback
+## 7. Rollback
 
-Revert the design-only reports/simulation commits on `multiplayer-gamble-engine-discovery-01`. No product rollback is required.
+Revert design-only reports/simulation commits on `multiplayer-gamble-engine-discovery-01`. No product rollback is required.
