@@ -24,7 +24,7 @@ The characterization confirmed that `cacheRecord` normalizes aliases for de-dupl
 ## Acceptance status
 
 - Static review: tests target filtering, source-title ordering and cache projection only; no production edits.
-- Automated execution: **PASS, 25 assertions** in run [39249715083](https://github.com/murorachi/Amq-/actions/runs/39249715083). The focused test step passed; the source/unit job was still running its remaining steps at the last check, while Firefox responsive and Chromium native-origin were also in progress. Do not close the full workflow until all jobs finish.
+- Automated execution: **PASS, 25 assertions** in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041). The focused step passed; the source/unit job had passed the 132/132 verifier and both title-contract tests. Firefox responsive and Chromium native-origin were still in progress at the last check. Do not close the full workflow until all jobs finish.
 - Not covered: live API throttling/freshness, concurrent requests against actual services, external converter delivery, or full browser integration with quiz/multiplayer clients.
 
 ## Rollback
