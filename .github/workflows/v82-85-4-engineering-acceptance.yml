@@ -1,4 +1,4 @@
-name: V82.85.13 real audio acceptance gate
+name: V82.85.22 historical debt and browser acceptance
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
           if-no-files-found: error
       - name: Guard acceptance runner artifact targets
         run: python tests/unit/run_all_checks_config_contract.py
-      - name: Build versioned V82.85.12 standalone candidate
+      - name: Build versioned V82.85.22 standalone candidate
         run: python tools/build.py dist/amq_learning_tool_v82_85_22.html
       - name: Upload versioned standalone candidate
         uses: actions/upload-artifact@v4
@@ -79,7 +79,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build versioned V82.85.12 standalone candidate
+      - name: Build versioned V82.85.22 standalone candidate
         run: python tools/build.py dist/amq_learning_tool_v82_85_22.html
       - name: Install Playwright
         run: |
@@ -114,7 +114,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build versioned V82.85.12 standalone candidate
+      - name: Build versioned V82.85.22 standalone candidate
         run: python tools/build.py dist/amq_learning_tool_v82_85_22.html
       - name: Install Playwright Firefox
         run: |

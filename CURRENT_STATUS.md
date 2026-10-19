@@ -1,18 +1,20 @@
 # Current engineering checkpoint: V82.85.22 historical debt and dedup
 
-- Branch: `v82.85.22-historical-debt-dedup-01`; source baseline commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
-- Consolidated three identical local `checked(selector)` helpers in `src/scripts/script_028.htmlpart` into one IIFE-level helper after `view` initialization. Existing call sites remain unchanged.
-- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` and CI integration. `tools/verify.py` now prints actual byte length/SHA-256 on source fingerprint mismatches.
-- Updated `script_028.htmlpart` fingerprint: 139,955 bytes, SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
-- Candidate fingerprint from the deterministic builder diagnostic: V82.85.22, 8,787,300 bytes, SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`. Manifest pin updated; clean CI verification required.
-- Package default and workflow artifact names aligned to V82.85.22; package completeness contract requires the debt inventory and dedup test/report.
+- Branch: `v82.85.22-historical-debt-dedup-01`.
+- Production refactor: consolidated three identical local `checked(selector)` helpers in `src/scripts/script_028.htmlpart` into one shared helper after `view` initialization. Existing call sites are unchanged.
+- Source fingerprint: 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
+- Pinned candidate V82.85.22: 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
+- CI run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296): source/unit and deterministic build passed (132 verifier checks); dedup contract passed (7 assertions); package completeness/reproducibility passed, two package builds identical at 14,640,473 bytes / SHA-256 `65174354609f5eec49e41bda558c4dee093611f60c29a710b2628899db6368e3`; package and standalone artifacts uploaded.
+- Firefox responsive acceptance: passed.
+- Native-origin acceptance: storage/custom-list, IndexedDB/input, suggestion integration, quiz playback lifecycle, and multiplayer lifecycle passed. The real-audio output assertion still failed with `peak=0, rms=0.0`; PulseAudio self-test passed but Chromium had no sink inputs. Full workflow remains failed because this required audio gate is open.
+- Browser debug output showed DBus/GPU environment warnings but no decisive audio-backend diagnostic proving the root cause. No audio production code changed.
+- Debt inventory: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`; stage report: `reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md`.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Real-audio output capture remains a separate open issue; no audio code changed.
 
 ## Next direction
 
-Verify the pinned V82.85.22 build, package reproducibility and helper contract in CI. Record Firefox and native-origin results independently.
+Continue bounded debt review from current source. Next candidate requires a clear equivalence proof; the `script_004` normalization helpers are not equivalent and remain separate. Investigate the audio gate separately without weakening its assertion.
 
 ## Rollback
 
-Restore the three local helpers and original `script_028` fingerprint; restore the prior release pin, package name and workflow artifact paths; remove the test and revert verifier/docs changes. Never overwrite V82.82.
+Restore the three local helpers and original `script_028` fingerprint; restore the prior release pin, package names and workflow artifact paths; remove the focused test and revert verifier/docs changes. Never overwrite V82.82.

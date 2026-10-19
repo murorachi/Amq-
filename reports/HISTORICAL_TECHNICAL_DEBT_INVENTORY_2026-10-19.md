@@ -32,12 +32,18 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 ## Validation status
 
 - Static scope review: completed.
-- Focused contract: added; CI pending.
-- Source/unit and deterministic build: pending CI.
-- Firefox responsive: pending CI.
-- Real-audio output capture: separate known failure from earlier CI; no audio code changed.
+- Focused contract: **PASS**, 7 assertions in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296).
+- Source/unit and deterministic build: **PASS**, verifier 132/132; candidate V82.85.22 pinned at 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
+- Firefox responsive: **PASS** in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296).
+- Real-audio output capture: **FAIL** in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296), `peak=0, rms=0.0`; PulseAudio self-test passed, but Chrome had no sink input. No audio code changed.
 - Manual interactive acceptance: not performed.
 
 ## Rollback
 
 Restore the three local helpers and original `script_028` manifest row; remove the focused test and workflow step. Revert the verifier diagnostics and documentation if rolling back the whole stage. V82.82 remains immutable.
+
+## Package reproducibility
+
+- Source package: `AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip`, 14,640,473 bytes.
+- SHA-256: `65174354609f5eec49e41bda558c4dee093611f60c29a710b2628899db6368e3`.
+- Two independent package builds matched; artifact upload succeeded under run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296).

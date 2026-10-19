@@ -21,11 +21,11 @@ Added a focused Node contract and CI step. Improved failed fragment/module finge
 
 - Changed fragment: 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
 - Candidate V82.85.22: 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
-- Manifest pins updated; clean CI acceptance remains pending.
+- Manifest pins updated; clean source/unit, deterministic-build, package, and Firefox checks passed; the separate native-origin real-audio output gate remains failed.
 
 ## Acceptance
 
-Source/unit, deterministic build, package reproducibility, Firefox and native-origin results must be recorded separately. The known real-audio capture failure remains open and unrelated to this refactor.
+CI run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296): verifier 132/132 passed; helper contract 7/7 passed; package completeness/reproducibility passed with two 14,640,473-byte ZIPs at SHA-256 `65174354609f5eec49e41bda558c4dee093611f60c29a710b2628899db6368e3`; package and standalone artifacts uploaded. Firefox responsive passed. Native-origin storage/custom-list, IndexedDB/input, suggestion, quiz playback lifecycle and multiplayer lifecycle checks passed. The real-audio output assertion still failed with `peak=0, rms=0.0`, so the overall workflow remains failed. This refactor does not touch audio behavior.
 
 ## Rollback
 
