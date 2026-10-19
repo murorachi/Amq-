@@ -296,3 +296,10 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - V82.85.2 adds an engineering-only native-origin storage/full-backup acceptance harness; no production HTML/source/CSS changed.
 - Harness SHA-256: `359275c2bb424aed739ba5967e6eb5c4b5037e1a9a5db436ca05b2c511630de2` (14,163 bytes). Local Python syntax and CLI smoke passed. Existing storage/backup contracts passed 9/9, 6/6 and 4/4; integrity verifier 116/116.
 - Browser acceptance remains NOT VERIFIED: localhost navigation was blocked by managed Chromium policy before app initialization. This does not change the product baseline or imply a test pass.
+
+
+## V82.85.15 engineering overlay — quiz target-value resolver extraction
+
+- Parent branch: `v82.85.13-real-audio-acceptance-gate-01`; product baseline remains V82.82 (8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`).
+- Extracts only the exact `getTargetValue(s, type)` helper to a source module at the same IIFE position. The deterministic V82.85.12 candidate must remain 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Audio PCM capture remains 🟡 deferred; it is not a product failure finding and its threshold is unchanged.
