@@ -99,3 +99,12 @@
 - `script_031.htmlpart` now rejects array-shaped cache records so malformed `[]` cannot masquerade as a successful cache hit. Existing download fallback handles the miss. DB/store/key/version and other runtime behavior are unchanged.
 - Regression test now asserts array rejection. Final CI pending after updating the manifest.
 - New fragment fingerprint: 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
+
+
+## Accepted V82.85.29 cache guard candidate
+
+- Candidate: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- `script_031.htmlpart` rejects array-shaped title cache records. Cache contract passed 14 assertions; source verifier 132/132 passed in [run 39257936940](https://github.com/murorachi/Amq-/actions/runs/39257936940).
+- Deterministic source package SHA-256: `e3448648c49dfcc4e2153c7825f016ab7b1fabfef2c57b868664ef524c13c913`.
+- Firefox responsive, native storage/custom list, IndexedDB/quiz, suggestions, quiz playback lifecycle and multiplayer lifecycle passed. The only full-workflow failure remains the known audio monitor non-silent assertion (`peak=0, rms=0.0`), despite actual playback being user-confirmed.
+- Immutable V82.82 baseline unchanged.
