@@ -42,3 +42,11 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Product HTML/source unchanged.
 - No product tests were run for design-only changes. Simulations and exact enumeration ran locally; no human playtest or verified remote core CI.
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
+
+
+## Gate 07 update — recovery loophole closed in the design draft
+- Report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_07.md`.
+- Simulation: `reports/design_simulations/gamble_roguelike_gate07.py`.
+- A repeatable recovery payment was found to eliminate strain-based failure in the simplified model. Recovery is now proposed **once per run only**, at 2 strain, for `ceil(15% of bank)`, clearing one strain and forfeiting that stage's item reward.
+- Exact committed integer-RNG simulation: never recover → 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible → 45.403% clear / 27.469% strain failure / mean final bank 947.30. This reduces failure but costs bank and slightly reduces clear rate. No item rewards or event diversity are modeled.
+- Next: Gate 08 must integrate all four game mechanisms and item opportunity cost into a full five-stage model. No implementation.
