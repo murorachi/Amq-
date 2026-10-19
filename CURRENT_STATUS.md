@@ -83,11 +83,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 
 
 
-## V82.85.31 scene-background lifecycle contract
+## V82.85.31 scene-background lifecycle contract — accepted with known CI limitation
 
-- Branch: `v82.85.31-scene-background-lifecycle-contract-01`, based on accepted SRS characterization checkpoint V82.85.30.
-- Added `tests/unit/scene_background_lifecycle_contract.test.cjs` with 18 exact-source cases for IndexedDB open/transaction/read paths, error/abort handling, object URL replacement/revocation, preview cleanup, image MIME/size/dimension limits and backup-restore source guards.
-- Registered the test in CI and deterministic checkpoint package requirements. Production `src/scripts/script_036.htmlpart` unchanged; no IndexedDB schema, image limits, backup format or UI changes.
-- Local execution: NOT RUN in this authoring environment. Newest branch CI must be inspected before acceptance.
-- Previous SRS checkpoint [39237555930](https://github.com/murorachi/Amq-/actions/runs/39237555930): SRS 17/17, source/unit, package reproducibility and Firefox passed. Chromium native-origin failed only at known final audio monitor capture (peak=0, rms=0); preceding browser lifecycle checks passed. Actual product playback was user-confirmed.
+- Branch: `v82.85.31-scene-background-lifecycle-contract-01`, based on accepted SRS checkpoint V82.85.30.
+- Added `tests/unit/scene_background_lifecycle_contract.test.cjs`: 18 exact-source cases for IndexedDB open/transaction/read paths, error/abort handling, object URL replacement/revocation, preview cleanup, image MIME/size/dimension limits and backup-restore source guards.
+- Registered in CI and deterministic checkpoint package requirements. Production `src/scripts/script_036.htmlpart` unchanged; no IndexedDB schema, image limits, backup format or UI changes.
+- CI [39238306059](https://github.com/murorachi/Amq-/actions/runs/39238306059): source/unit PASS; scene-background 18/18 PASS; SRS 17/17 PASS; package contract/reproducibility PASS (404 entries, repeated SHA-256 `43515ff8fbd44651cb558cb5a35c3464bc85b601fc97311d507efcdffed1296a`); deterministic standalone build PASS; Firefox responsive PASS.
+- Chromium native-origin: native storage/custom-list, IndexedDB/input, suggestion, quiz playback and multiplayer lifecycle steps passed. Only final non-silent audio monitor capture failed (peak=0, rms=0). Overall workflow is red due to the known capture limitation; actual product playback was user-confirmed. Manual interactive acceptance was not performed.
+- Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
