@@ -27,3 +27,11 @@
 - Added `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs` and CI step, with report `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`. Its execution is pending CI.
 - Production `script_020.htmlpart` and `script_036.htmlpart` remain unchanged; this stage adds characterization tests only.
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## Characterization results
+
+- SRS contract: 41 assertions passed in run [39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291); source/unit and Firefox responsive passed.
+- Scene-background IndexedDB/object-URL contract: 29 assertions passed in run [39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623); source/unit and Firefox responsive passed.
+- Both runs' Chromium native-origin job was still in progress at the last check. The known audio output capture assertion must remain separately classified if it fails.
+- No production source/formula/schema/CSS changes in these stages. Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
