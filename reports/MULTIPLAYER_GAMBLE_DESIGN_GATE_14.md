@@ -31,3 +31,9 @@ No product implementation changed.
 - Draft rank, Favor use, item-use votes, player disagreement, and sabotage risk are not simulated. These need human testing.
 
 Decision: the two-pick shared draft is coherent enough for the paper test. Human fairness and replay intent remain unproven; no server/UI implementation is authorized.
+
+
+## Verification
+- The Gate 14 simulation and all prior design simulation scripts passed [GitHub Actions run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351).
+- The test verifies reproducible script execution only. It does not verify human draft fairness, actual game fun, or a playable server.
+- Rollback: revert Gate 14 report/script and the Candidate 03/paper-kit snapshot commits on this design branch; no product rollback is required.
