@@ -31,6 +31,13 @@
 - Overall workflow is not green because the existing real-audio PCM capture assertion still fails: captured output `peak=0, rms=0.0`. PulseAudio self-test remains non-silent (`peak=6999, rms=4123.8`), and browser playback lifecycle assertions pass. This gate remains 🟡 deferred and was not weakened.
 - Multiplayer acceptance did not run after the audio step failed; prior accepted multiplayer regression evidence remains in the V82.85.12 checkpoint.
 
+## Failed attempts and corrections
+
+- Run `39185596953` failed at source verification because the first manifest update contained incorrect generated SHA-256 values and left `module_count` stale. This was an engineering metadata failure, not a product-runtime failure.
+- The source/module fingerprints were recomputed from the exact remote UTF-8 bytes in commit `c90841ff306497f70f85472eb98fbb10e19f3eac`; the manifest module count was then corrected to 12 in commit `a2c893c01db4946e2de07a021700c1c36acf82b5`.
+- The corrected run `39185741406` passed `tools/verify.py` 124/124, the new 18-assertion contract, source-and-unit, and Firefox responsive jobs. The only final workflow failure was the explicitly deferred Chromium PCM capture gate.
+- A later documentation-only commit triggered run `39186037766`; its source-and-unit job also passed. The run's browser jobs are tracked separately from the accepted extraction evidence.
+
 ## Delivery
 - The source/module/manifest, unit test, test runner, CI workflow, status files and this report are committed and verified remotely.
 - Product HTML was not changed; V82.82 remains the immutable production baseline.
