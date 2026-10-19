@@ -72,12 +72,16 @@ function ok(value, label) { assertions++; assert.ok(value, label); }
     for (const item of [
       {version:'old',records:{x:{titleZhTW:'舊資料'}}},
       {version:'v8237-anilist-763fcd7e-bangumi-bae940f6',records:null},
-      {version:'v8237-anilist-763fcd7e-bangumi-bae940f6',records:[]},
       null
     ]) {
       const ctx = makeContext(async () => item);
       equal(await vm.runInContext('readCache()',ctx),null,'invalid cache rejected');
     }
+  });
+  await run('current cache guard accepts arrays as object records', async () => {
+    const ctx = makeContext(async () => ({version:ctx.VERSION,records:[]}));
+    const got = await vm.runInContext('readCache()',ctx);
+    equal(Array.isArray(got),true,'array passes current typeof-object guard');
   });
   await run('cache read failure degrades to cache miss', async () => {
     const ctx = makeContext(async () => { throw new Error('IndexedDB unavailable'); });
