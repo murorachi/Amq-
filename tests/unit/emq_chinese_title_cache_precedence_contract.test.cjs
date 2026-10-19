@@ -27,6 +27,19 @@ function extractFunction(name) {
     }
     if (c === '/' && n === '/') { lineComment = true; i++; continue; }
     if (c === '/' && n === '*') { blockComment = true; i++; continue; }
+    if (c === '/' && (() => { let p = i - 1; while (p >= start && /\\s/.test(source[p])) p--; return p < start || '([{:;,=!?&|+-*%^~<>'.includes(source[p]); })()) {
+      let inClass = false, regexEscaped = false, closed = false;
+      for (i++; i < source.length; i++) {
+        const r = source[i];
+        if (regexEscaped) { regexEscaped = false; continue; }
+        if (r === '\\\\') { regexEscaped = true; continue; }
+        if (r === '[') { inClass = true; continue; }
+        if (r === ']') { inClass = false; continue; }
+        if (r === '/' && !inClass) { closed = true; while (/[a-z]/i.test(source[i + 1] || '')) i++; break; }
+      }
+      if (!closed) throw new Error(`unterminated regex while extracting ${name}`);
+      continue;
+    }
     if (c === "'" || c === '"' || c === '`') { quote = c; continue; }
     if (c === '{') depth++;
     else if (c === '}' && --depth === 0) return source.slice(start, i + 1);
