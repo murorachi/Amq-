@@ -11,7 +11,8 @@ The product direction is a multiplayer probability-game Roguelike. Gambling mech
 2. Inspected the existing multiplayer client and relevant engineering notes. The user clarified that the existing multiplayer feature substantively does not use a conventional authoritative server; do not treat missing server source as a blocker or infer a transport model from client route names alone.
 3. Added `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md` defining engine boundaries, game taxonomy, ledger/probability invariants, authority options, and acceptance gates.
 4. Added `reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md` with a proposed first playable scope, architecture, four game candidates and initial payout calculations, staged implementation gates, and open decisions.
-5. Updated `CURRENT_STATUS.md`, `BASELINE.md`, and this `NEXT_TASK.md` to record the separate workstream and its actual status.
+5. Added `reports/MULTIPLAYER_GAMBLE_STAGE1_CORE_TEST_REPORT.md` documenting local test results, remote CI uncertainty, and uncovered scope.
+6. Updated `CURRENT_STATUS.md`, `BASELINE.md`, and this `NEXT_TASK.md` to record the separate workstream and its actual status.
 
 ### Next bounded task: decision lock, then rules core
 1. Confirm the proposed authority model: lightweight authoritative service, developed locally first and hosted later if always-on friend access is needed. If serverless hosting is a hard requirement, explicitly accept the trust limitations or design a verifiable peer protocol before implementation.
