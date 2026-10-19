@@ -11,7 +11,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip'
+PACKAGE_NAME = 'AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
@@ -26,6 +26,9 @@ REQUIRED_PACKAGE_PATHS = {
     'tools/package_checkpoint.py',
     'tests/unit/source_inventory_completeness_contract.py',
     'reports/V82_85_18_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md',
+    'reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md',
+    'reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md',
+    'tests/unit/multiplayer_checked_values_dedup_contract.test.cjs',
 }
 EXCLUDED_FROM_MANIFEST = {
     'PACKAGE_SHA256SUMS.txt',

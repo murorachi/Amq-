@@ -27,7 +27,7 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 - Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` to verify one declaration, its three consumers, numeric song-type values, string-valued other filters and empty selections.
 - Improved `tools/verify.py` to print actual UTF-8 byte length and SHA-256 when a fragment/module fingerprint fails.
 - Wired the contract into the source/unit CI job.
-- The manifest and release fingerprints must be updated from the actual deterministic CI output before this candidate can be accepted.
+- Manifest source fingerprint is pinned at 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`. Candidate V82.85.22 is pinned at 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`; clean CI acceptance remains pending.
 
 ## Validation status
 

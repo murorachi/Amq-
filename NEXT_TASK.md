@@ -1,27 +1,26 @@
-# Next task: verify V82.85.22 dedup candidate and continue bounded debt review
+# Next task: accept V82.85.22 and continue bounded historical debt cleanup
 
-Current branch: `v82.85.22-historical-debt-dedup-01`.
-Base commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
+Branch: `v82.85.22-historical-debt-dedup-01`.
 
 ## Current stage
 
-- Historical technical-debt inventory refreshed; earlier AST/selector reports are explicitly treated as historical snapshots.
+- Historical technical-debt inventory refreshed; earlier AST/selector reports treated as historical snapshots.
 - Three byte-identical `checked(selector)` helpers in `script_028.htmlpart` consolidated to one shared declaration.
-- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` and CI integration.
-- Improved mismatch diagnostics in `tools/verify.py`.
-- Stage report: `reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md`.
+- Focused Node contract added and wired into CI; verifier mismatch diagnostics improved.
+- Manifest pins `script_028` at 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
+- Candidate V82.85.22 pinned at 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
 
-## Immediate acceptance tasks
+## Immediate acceptance
 
-1. Read CI output for the changed fragment's actual UTF-8 byte length and SHA-256; update `reports/FRAGMENT_MANIFEST.json`.
-2. Read the deterministic build's actual output byte count and SHA-256 from the release mismatch diagnostic; update the manifest release pin.
-3. Rerun CI after both fingerprints are pinned. Record source/unit, Firefox and native-origin results independently.
-4. Preserve the non-silent audio PCM assertion. The earlier real-audio capture issue remains open and unrelated to this refactor.
+1. Verify manifest-pinned build and source/unit suite pass.
+2. Verify checkpoint ZIP reproducibility, required paths and sidecar checksum.
+3. Record Firefox and native-origin job outcomes independently. Keep the known audio output failure open unless a later run proves it fixed.
+4. If this candidate passes, select the next exact duplicate from current source and add a behavior contract before changing it.
 
-## Following debt candidate
+## Guardrails
 
-After this stage passes, inspect the next small duplicate candidate using current source, not historical offsets. Keep the distinct `script_004` normalization semantics. Do not broad-refactor quiz or multiplayer lifecycle code without characterization tests.
+Do not merge different normalization semantics. Do not move CSS rules or broadly refactor quiz/multiplayer lifecycle state. Preserve V82.82.
 
 ## Rollback
 
-Restore the three local helpers and original manifest row, remove the test/workflow step and revert the diagnostic/report/status updates if needed. V82.82 remains immutable.
+Restore the original three helpers, fragment/release pins, package names and workflow paths; remove the focused test and revert verifier/docs changes if needed.

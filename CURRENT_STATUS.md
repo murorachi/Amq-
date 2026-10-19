@@ -1,19 +1,18 @@
 # Current engineering checkpoint: V82.85.22 historical debt and dedup
 
-- Branch: `v82.85.22-historical-debt-dedup-01`, based on `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
-- Scope: bounded historical technical-debt inventory and one exact duplicate-helper consolidation in `src/scripts/script_028.htmlpart`.
-- Consolidated three identical local `checked(selector)` helpers into one shared helper after `view` initialization; call sites remain unchanged.
-- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs`, CI integration, and more useful fingerprint mismatch diagnostics in `tools/verify.py`.
-- Inventory: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`; stage report: `reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md`.
-- Fragment and final release fingerprints are not yet accepted; CI must report actual hashes and the manifest must be pinned before the candidate can pass.
+- Branch: `v82.85.22-historical-debt-dedup-01`; source baseline commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
+- Consolidated three identical local `checked(selector)` helpers in `src/scripts/script_028.htmlpart` into one IIFE-level helper after `view` initialization. Existing call sites remain unchanged.
+- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` and CI integration. `tools/verify.py` now prints actual byte length/SHA-256 on source fingerprint mismatches.
+- Updated `script_028.htmlpart` fingerprint: 139,955 bytes, SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
+- Candidate fingerprint from the deterministic builder diagnostic: V82.85.22, 8,787,300 bytes, SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`. Manifest pin updated; clean CI verification required.
+- Package default and workflow artifact names aligned to V82.85.22; package completeness contract requires the debt inventory and dedup test/report.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- The prior real-audio output capture failure remains open; no audio code changed.
-- Tests for this stage are pending CI; no test result is claimed as passed.
+- Real-audio output capture remains a separate open issue; no audio code changed.
 
 ## Next direction
 
-Pin the actual fragment and candidate hashes from CI, then rerun source/unit and browser acceptance. Continue with the next small duplicate only after this candidate is verified. Avoid broad quiz/multiplayer lifecycle refactors without focused characterization tests.
+Verify the pinned V82.85.22 build, package reproducibility and helper contract in CI. Record Firefox and native-origin results independently.
 
 ## Rollback
 
-Restore the three local helpers and original manifest row, remove the contract test/workflow step and revert verifier/report/status changes if needed. Never overwrite V82.82.
+Restore the three local helpers and original `script_028` fingerprint; restore the prior release pin, package name and workflow artifact paths; remove the test and revert verifier/docs changes. Never overwrite V82.82.

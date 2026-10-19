@@ -9,7 +9,7 @@
 
 ## Why this candidate
 
-Three exact declarations in `src/scripts/script_028.htmlpart` performed the same operation. They occur in `readRoomFiltersFromUi`, `createSettings`, and `configureFromUi`, and all close over the same IIFE-level `view` element. They do not depend on distinct local state.
+Three exact declarations in `src/scripts/script_028.htmlpart` perform the same operation. They occur in `readRoomFiltersFromUi`, `createSettings`, and `configureFromUi`, and all close over the same IIFE-level `view` element.
 
 ## Change
 
@@ -17,10 +17,16 @@ Moved one copy to shared IIFE scope immediately after `view` initialization and 
 
 Added a focused Node contract and CI step. Improved failed fragment/module fingerprint diagnostics in `tools/verify.py`.
 
+## Fingerprints
+
+- Changed fragment: 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`.
+- Candidate V82.85.22: 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
+- Manifest pins updated; clean CI acceptance remains pending.
+
 ## Acceptance
 
-The changed fragment fingerprint and release fingerprint must be taken from CI output and pinned in the manifest before acceptance. Source/unit, deterministic build and browser results will be recorded separately. The known real-audio capture failure is separate and remains open.
+Source/unit, deterministic build, package reproducibility, Firefox and native-origin results must be recorded separately. The known real-audio capture failure remains open and unrelated to this refactor.
 
 ## Rollback
 
-Restore the three local declarations and original `script_028` manifest row, remove the contract test/workflow step and revert the verifier/report/status updates. Keep V82.82 immutable.
+Restore the three local declarations and original manifest row, remove the contract test/workflow step and revert verifier/report/status updates. Keep V82.82 immutable.
