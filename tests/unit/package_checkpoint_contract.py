@@ -31,6 +31,8 @@ class PackageCheckpointContract(unittest.TestCase):
             "tools/package_checkpoint.py",
             "tests/unit/source_inventory_completeness_contract.py",
             "reports/V82_85_18_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md",
+            "reports/V82_85_30_SRS_RATING_TRANSITION_CONTRACT_01.md",
+            "tests/unit/srs_rating_transition_contract.test.cjs",
         }.issubset(PACKAGE.REQUIRED_PACKAGE_PATHS))
 
 if __name__ == "__main__":
