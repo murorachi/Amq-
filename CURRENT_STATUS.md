@@ -154,3 +154,12 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Covers current-version reads, stale/malformed cache fallback, read/write failures, stable cache key/version, and current acceptance of array-shaped records.
 - Automated execution pending CI. Production source, DB/store/key/version unchanged.
 - The array acceptance is recorded as a possible hardening issue, not fixed in this characterization stage.
+
+
+## Chinese-title cache contract accepted
+
+- `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` passed **14 assertions** in run [39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871).
+- Same run: source verifier 132/132 and all source/unit steps passed; Firefox responsive passed. Chromium native-origin remained in progress at the last check.
+- Report: `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`. Production title-loader source and cache schema unchanged.
+- Known cache-hardening observation: array-shaped `records` currently passes the loader's object-type guard. Recorded but not fixed in this test-only stage.
+- The bounded SRS, scene-background, Chinese-title and VNDB cover characterization group is complete. Next: update the historical technical-debt inventory with evidence-based dispositions, distinguishing closed, tested/managed and deferred items.
