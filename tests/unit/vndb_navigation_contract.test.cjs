@@ -95,9 +95,9 @@ function reset() {
   node('vnCatalogView', { hidden: true });
   node('vn49CatalogStatus');
   node('vn49RetryCovers', { hidden: true });
-  context.$('vn49Grid');
+  node('vn49Grid');
   node('vn49More', { hidden: true });
-  context.$('vn49Count');
+  node('vn49Count');
   node('vn49SongPanel', { hidden: true });
   node('vn49ImportStatus');
   node('vn49User', { value: 'tester' });
