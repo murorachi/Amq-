@@ -1,6 +1,6 @@
 # Multiplayer Gamble Roguelike — Implementation Plan 01
 
-- Status: proposed plan; no game code or product HTML changed.
+- Status: Stage 1 core prototype committed; rules/ledger unit tests pass in the local working copy. Server, UI, persistence, and live multiplayer are not implemented.
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
 - Product baseline remains V82.82 standalone HTML, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Parent discovery record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
@@ -106,11 +106,13 @@ For local development, use a single command to start the service and a browser c
 - Confirm whether Node.js/TypeScript is acceptable.
 - No product HTML changes.
 
-### Stage 1 — Rules and ledger core
-- Implement pure functions for the four games and their payout calculations.
-- Implement ledger invariants and idempotent settlement.
-- Unit tests for odds, expected values, zero/min/max bets, invalid inputs, ties, rounding, duplicate settlement, and boundary phases.
-- No network transport yet.
+### Stage 1 — Rules and ledger core (initial prototype committed)
+- Added `gamble-roguelike/src/games.js`: deterministic rule functions for Coin Call, Exact Seven, Vault step resolution, and Blind High Card pot splitting.
+- Added `gamble-roguelike/src/ledger.js`: in-memory integer-chip ledger with atomic validation, non-negative balances, and idempotent settlement IDs.
+- Added Node's built-in test runner suite at `gamble-roguelike/test/core.test.js` and an isolated package manifest.
+- Local working-copy test run: 10 assertions/subtests passed in the fuller working tree; syntax checks passed. The GitHub copy has a consolidated 8-test suite, but its CI result has not yet been verified.
+- A GitHub Actions workflow was added to run `npm test` when this workstream changes. No verified workflow run is available yet.
+- No network transport yet. Ledger is in-memory and must not be treated as restart-safe or deployed multiplayer authority.
 
 ### Stage 2 — Authoritative room service
 - Room creation/join, session identity, state machine, deadlines, actions, snapshots, reconnect, durable event/ledger persistence.
@@ -153,7 +155,8 @@ Other content (art, names, extra game variety, song events, meta-progression) ca
 
 ## 9. Current limitations
 
-- This is a design proposal only. No server, client, database, or product HTML has been implemented.
-- Proposed odds/payouts are calculated but have not yet been checked by automated tests or playtested.
+- The pure rules/ledger core is now implemented in an isolated prototype directory; no server, client UI, database persistence, or product HTML has been implemented.
+- Local tests passed in the working copy. The committed GitHub copy's CI run has not been verified, and no payout simulation or playtest has occurred.
+- The ledger is in-memory only; service restart recovery is not implemented.
 - No deployment target, domain, authentication provider, or operational budget has been selected.
 - No real two-client run has been performed.
