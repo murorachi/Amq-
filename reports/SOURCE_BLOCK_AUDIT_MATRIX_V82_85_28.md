@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 5 |
+| First-pass file audits completed | 7 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 86 |
+| Awaiting file-specific review | 84 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -90,9 +90,9 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | CSS 029 | `src/styles/style_029.htmlpart` | 860 | `de9910b06deff293…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 022 | `src/scripts/script_022.htmlpart` | 1367 | `d540d0d19b316641…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 030 | `src/styles/style_030.htmlpart` | 2317 | `8a9312389b1daeaa…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 023 | `src/scripts/script_023.htmlpart` | 44496 | `b75a3e7a33ba2958…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 023 | `src/scripts/script_023.htmlpart` | 44496 | `b75a3e7a33ba2958…` | P1 | 首輪逐檔審查完成；風險保留 | 全備份／還原、舊版合併及學習洞察共存；回滾順序與匯出前摘要 flush 是關鍵邊界。已對照備份驗證與 round-trip 契約。詳見 `reports/AUDIT_SCRIPT_023_BACKUP_RESTORE_LEARNING_INSIGHTS_V82_85_29.md`。 |
 | JS 024 | `src/scripts/script_024.htmlpart` | 3889 | `1a2d70d23d102ee8…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 025 | `src/scripts/script_025.htmlpart` | 53270 | `9a875f3718004d35…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 025 | `src/scripts/script_025.htmlpart` | 53270 | `9a875f3718004d35…` | P1 | 首輪逐檔審查完成；風險保留 | 自訂清單 CRUD、作品 ID 到歌曲 ID 範圍轉換、批次操作與 SRS 練習交接共存；已對照清單驗證、重載與 EMQ handoff 契約。詳見 `reports/AUDIT_SCRIPT_025_CUSTOM_LISTS_PRACTICE_HUB_V82_85_29.md`。 |
 | JS 026 | `src/scripts/script_026.htmlpart` | 33347 | `9cd1bb16da042aa4…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 031 | `src/styles/style_031.htmlpart` | 75164 | `1b4e4cdc0ad23681…` | P1 | 待逐檔排查 | 大型樣式片段；盤點 selector、重複宣告、媒體查詢與載入順序，保留 cascade 順序。 |
 | JS 027 | `src/scripts/script_027.htmlpart` | 44 | `4ba9c72cbba7d24d…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
