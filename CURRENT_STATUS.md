@@ -70,12 +70,14 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 
-## V82.85.30 SRS transition characterization
+## V82.85.30 SRS transition characterization — accepted with known CI limitation
 
 - Branch: `v82.85.30-srs-transition-contract-01`, based on `v82.85.29-source-audit-matrix-01`.
-- Added `tests/unit/srs_rating_transition_contract.test.cjs` with 17 exact-source cases covering schema validation, invalid-record quarantine/recovery, new/learning/review/relearning transitions, interval bounds, review-log cap, invalid grades and failed persistence.
-- Registered the test in `.github/workflows/v82-85-4-engineering-acceptance.yml` and required it plus its report in the deterministic checkpoint package.
-- Product script `src/scripts/script_020.htmlpart` unchanged; no scheduling formula, storage key, schema or UI changes.
-- Local test execution: NOT RUN in this authoring environment. GitHub Actions result pending; do not call the stage accepted until the newest run is inspected.
-- Prior source-audit CI [39234884575](https://github.com/murorachi/Amq-/actions/runs/39234884575): source/unit passed, Firefox responsive passed; Chromium native-origin failed only at known final audio output capture assertion (peak=0, rms=0). This is unrelated to SRS and remains tracked separately.
+- Added `tests/unit/srs_rating_transition_contract.test.cjs`: 17 exact-source cases covering schema validation, invalid-record quarantine/recovery, new/learning/review/relearning transitions, interval bounds, review-log cap, invalid grades and failed persistence.
+- Test registered in `.github/workflows/v82-85-4-engineering-acceptance.yml` and required by the reproducible checkpoint package.
+- Product script `src/scripts/script_020.htmlpart` unchanged. No scheduling formula, storage key, schema or UI changes.
+- GitHub Actions [39237555930](https://github.com/murorachi/Amq-/actions/runs/39237555930): source/unit PASS; SRS 17/17 PASS; package contract PASS; deterministic package reproducibility PASS (402 entries, repeated SHA-256 `882d44845ff52f070326558327423878981ff1c0ff35bf086127a065fc04ab6d`); deterministic standalone build PASS; Firefox responsive PASS.
+- Chromium native-origin: native storage/custom-list, IndexedDB/input, suggestion, quiz playback lifecycle and multiplayer lifecycle steps passed. Only final non-silent audio monitor capture failed (peak=0, rms=0). Overall workflow is red due to this known capture limitation, not due to SRS. Actual product playback was user-confirmed. Manual interactive acceptance remains unperformed.
+- Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
