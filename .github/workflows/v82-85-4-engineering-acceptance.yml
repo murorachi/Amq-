@@ -42,6 +42,8 @@ jobs:
         run: node tests/unit/srs_state_transition_persistence_contract.test.cjs
       - name: Test scene-background IndexedDB and object-URL lifecycle
         run: node tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs
+      - name: Test EMQ Chinese-title cache precedence and filtering
+        run: node tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
       - name: Build and verify checkpoint source package
