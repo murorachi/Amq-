@@ -121,3 +121,8 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - Follow-up to `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`: Pot Split's rounding/insurance and Debt Collector's two-completed-settlement due counter are now explicit in the draft.
 - Wheel of Misfortune requires two probability layers to remain separately visible: chance to land on the selected color, then conditional result chance.
 - This is documentation-only; all numeric tables remain provisional and no simulation or human test has run.
+
+
+## Item system design note
+- See `reports/MULTIPLAYER_GAMBLE_ITEM_BUILD_SYSTEM_ZH_01.md` for the proposed Roguelike item framework.
+- Design only; no product code was changed.
