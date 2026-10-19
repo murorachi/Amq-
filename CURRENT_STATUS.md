@@ -14,24 +14,22 @@
 
 ## Separate workstream: multiplayer Gamble Roguelike
 
-- **Current phase: design iteration only. Implementation remains blocked by design gates.**
-- Work branch: `multiplayer-gamble-engine-discovery-01`.
-- Gate 01: [product thesis and critique](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md).
-- Gate 02: [numeric stress test](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md).
-- Gate 03: [fair-EV and multiplayer exposure review](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md).
-- Simulations: [Gate 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate02.py), [Gate 03](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate03.py).
+- **Current phase: design iteration only. Implementation remains blocked.**
+- Branch: `multiplayer-gamble-engine-discovery-01`.
+- Design reports: [Gate 01](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md), [Gate 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md), [Gate 03](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md), [Gate 04](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_04.md), [Gate 04 errata](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_04_ERRATA_01.md), [Gate 05](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_05.md).
+- Paper playtest draft: [protocol and observation sheet](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_01.md).
+- Design simulations: [Gate 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate02.py), [Gate 03](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate03.py), [Gate 05 exact enumeration](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate05.py).
 - Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; no product HTML/source changed.
-- Existing `gamble-roguelike/` files are rule fixtures and an in-memory ledger, not a playable game. No server, database, UI, durable persistence, deployment, or live two-client test exists.
+- Existing `gamble-roguelike/` code is rule fixtures and an in-memory ledger, not a playable game. No server, database, UI, durable persistence, deployment, or live two-client test exists.
 - Previously recorded local core tests: 10/10 subtests and syntax checks passed. Committed GitHub suite has 8 tests; remote CI is not verified.
-- Gate 03 revised risk profiles to fair gross EV before fees/rounding: Safe 75% / 4/3×, Balanced 40% / 2.5×, Jackpot 15% / 20/3×.
-- One shared wager per stage achieved 46.563% clears in the quota-aware no-item simulation and 65.989% with a once-per-run reroll paying 90% of normal gross on the reroll. This is one simplified model, not final balance.
-- Separate wagers against a shared bank couple exposure to player count. A 20% aggregate cap helps but still lowers six-player clears in the tested model.
-- Design decision: one team wager per stage, selected from simultaneous private votes/actions. This avoids multiplying shared-bank exposure by party size.
-- Gate A–C are not passed: recovery/anti-griefing, item combinations, rounding, three viable strategies, and playtest protocol remain open.
-- Next: Gate 04 defines vote mapping, tests item combinations and player counts, and prepares paper-playtest materials. No implementation yet.
+- Gate 05 exact enumeration corrected Signal Room two-clue success from provisional 2/3 to 3/4 using a defined pair-clue generator. Gross returns 3× / 2× / 4/3× preserve fair EV before fees/rounding.
+- Gate 05 found median risk voting suppresses Push in six-player rooms; plurality with explicit tie compromise is the current proposal.
+- Preferred economy: one shared team wager per stage. Separate wagers against a shared bank couple risk and variance to player count.
+- Gates A–C are not passed: recovery/anti-griefing, item combinations, integer rounding, three viable strategies, and vote fairness need more work. The paper-playtest kit is a draft and has not been used with humans.
+- Next: Gate 06 simulates the revised vote, clue fees/rounding, item bundles, and recovery; no implementation yet.
 
 ## Test/verification boundary
-- Gate 03 simulation ran locally using Python 3 standard library, fixed seed 20261020, 100,000 runs/configuration; the committed script was read back from GitHub. Local syntax/execution passed for the corresponding working copy.
+- Gate 02/03 seeded simulations ran locally; Gate 05 exact enumeration ran locally with Python standard library. Committed simulation source was read back from GitHub.
 - No human playtest, live multi-client run, or verified remote CI for the gamble core is claimed.
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
 
