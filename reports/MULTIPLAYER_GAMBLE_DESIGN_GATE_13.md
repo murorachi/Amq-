@@ -6,7 +6,7 @@ No product implementation changed.
 
 ## Event-order sensitivity
 
-100,000? No: 10,000 runs per each of the 30 unique event orders, seed 20262020. The base model excludes items/recovery.
+10,000 runs for each of the 30 unique event orders, seed 20262020. The base model excludes items/recovery.
 
 | Strategy | Lowest clear rate | Mean across orders | Highest clear rate |
 |---|---:|---:|---:|
