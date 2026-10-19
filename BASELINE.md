@@ -52,3 +52,12 @@
 - Exact results (100,000 runs/policy, seed 20261020): never recover 46.832% clear, 34.773% strain failure, mean bank 998.89; always recover 45.403% clear, 27.469% failure, mean bank 947.30.
 - This tests Risk Contract plus strain/recovery only; full-game balance and enjoyment are not validated. No product source changed.
 - Next design gate: integrate Risk Contract, Vault, Signal Room, Blind Draft, recovery, item opportunity costs, and three candidate strategies. No implementation until numerical gates pass.
+
+
+## Gamble Roguelike — Gate 08/09
+- Gate 08: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_08.md`; integrated fixed-target model showed quota-aware policy dominance.
+- Gate 09: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_09.md`; simulation `reports/design_simulations/gamble_roguelike_gate09.py`; revised rulebook `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Core revision: stage target = stage-start bank + ceil(1%); risk tiers also set stake size (Bank 5%, Balanced 10%, Push 15%); final target 105% of starting bank.
+- At 105% goal, clear rates remain stable across starting banks 750/1000/1500: Conservative about 27%, Balanced about 41%, Push about 17%. Conservative has lowest strain failure; Balanced best standard clear; Push better at 150% score tier.
+- The Gate 09 baseline excludes items and recovery. Integrated item/recovery tests and human playtest remain open. No product source changed.
+- Design simulation CI workflow added at `.github/workflows/gamble-design-simulations.yml`; remote result must be checked before claiming pass.
