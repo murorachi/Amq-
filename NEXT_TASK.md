@@ -1,26 +1,25 @@
-# Current task: validate Chinese-title IndexedDB cache contract
+# Current task: historical technical-debt disposition review
 
 Current branch: `v82.85.29-source-audit-matrix-01`.
 
-## Previously accepted focused contracts
+## Completed focused characterization
 
 - SRS transitions/persistence: 41 assertions passed.
 - Scene-background IndexedDB/object-URL lifecycle: 29 assertions passed.
 - EMQ Chinese-title cache precedence/filtering: 25 assertions passed.
 - Chinese-title source mapping/partial-source failures: 19 assertions passed.
+- Chinese-title IndexedDB cache version/read/write: 14 assertions passed in [run 39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871).
 - VNDB cover batching/retry lifecycle: 26 assertions passed.
-- Alias semantics decision: production change deferred because no harmful consumer behavior was demonstrated.
+- The source verifier (132/132), all source/unit steps and Firefox responsive passed in the latest recorded cache run; Chromium native-origin was still in progress.
+- Reports for each contract are under `reports/V82_85_29_*_CONTRACT.md`. No production runtime source changed.
 
 ## Current stage
 
-- Added `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` and CI step.
-- Report: `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`.
-- Verify focused test assertion count and source/unit result. Keep the current array acceptance as a documented observation; do not alter production cache validation in this test-only stage.
-
-## After acceptance
-
-Review the remaining historical debt categories and decide which need concrete follow-up. Preserve the V82.82 baseline and avoid broad refactors without a demonstrated behavior or maintainability benefit.
+- Refresh `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md` with a concise evidence-based disposition table.
+- Classify items as fixed/closed, covered by tests but still architecturally coupled, deferred by design, or still unverified. Do not label a risk fixed just because a contract exists.
+- Record the known alias dedup and cache-array observations as deferred, not production bugs unless a consumer impact is demonstrated.
+- Verify current CI conclusions separately from the known audio-output capture issue.
 
 ## Rollback
 
-Remove the cache contract and workflow step and revert its report/status references. No production source or immutable V82.82 baseline rollback is needed.
+Revert only the inventory/status documentation updates. No production source or immutable V82.82 baseline rollback is needed.
