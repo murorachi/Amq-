@@ -1,7 +1,7 @@
-# AMQ historical-code technical-debt inventory (V82.85.22 checkpoint)
+# AMQ historical-code technical-debt inventory (V82.85.25 checkpoint)
 
 - Date: 2026-10-19
-- Branch: `v82.85.22-historical-debt-dedup-01`
+- Branch: `v82.85.25-multiplayer-audio-callback-dedup-01`
 - Base commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`
 - Scope: bounded debt review and one exact duplicate-helper consolidation.
 
@@ -16,7 +16,7 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 | 1 | Quiz lifecycle coupling | `script_004.htmlpart` remains one IIFE combining settings, pool selection, answer settlement, suggestions, audio and timers. | No broad refactor. Add focused characterization before touching lifecycle boundaries. |
 | 2 | Multiplayer concern mixing | `script_028.htmlpart` combines preference migration, room/session/reconnect, filters, live draft, persistence, UI and audio lifecycle. | Only refactor small pure helpers or a boundary required by a concrete change. |
 | 3 | Repeated helper declarations | Three byte-identical local `checked(selector)` helpers in `readRoomFiltersFromUi`, `createSettings`, and `configureFromUi` all close over the same IIFE-level `view` element and implement the same selector/value conversion. | Consolidated into one shared declaration after `view` initialization; focused contract added. |
-| 4 | Same-name helpers with different semantics | `script_004` has `norm` helpers with different punctuation/symbol filtering; `script_028` has two `normal` helpers with different whitespace normalization. Paired audio callbacks are tied to separate playback state. | Do not merge by name alone. |
+| 4 | Same-name helpers with different semantics | `script_004` has `norm` helpers with different punctuation/symbol filtering; `script_028` has two `normal` helpers with different whitespace normalization. | Do not merge by name alone. |
 | 5 | Compatibility-sensitive persistence | Custom-list scope markers, backup restore rollback, history/SRS summaries and multiplayer preferences cross localStorage/IndexedDB and legacy-key boundaries. | No generic storage consolidation or key renaming. Use existing contracts. |
 | 6 | Order-sensitive CSS history | Duplicate selectors and late overrides may be intentional; ownership maps do not prove cascade equivalence. | No CSS movement or reordering in a dedup pass. |
 | 7 | Engineering inventory drift | Some AST/selector reports are old snapshots. | Regenerate only inventories needed by an actual refactor; record source commit and fingerprint. |
@@ -24,10 +24,11 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 ## Changes in this checkpoint
 
 - Removed two redundant copies of the exact `checked(selector)` helper from `script_028.htmlpart`, retaining one declaration at IIFE scope after `view` is initialized. Existing call sites are unchanged.
+- In V82.85.25, consolidated the two identical multiplayer audio `failed` callback bodies into `handleAudioFailure(id,a,watchdog)`. Both callers retain their local IDs, media elements and watchdog variables; a focused contract protects pending, active and stale-event branches.
 - Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` to verify one declaration, its three consumers, numeric song-type values, string-valued other filters and empty selections.
 - Improved `tools/verify.py` to print actual UTF-8 byte length and SHA-256 when a fragment/module fingerprint fails.
 - Wired the contract into the source/unit CI job.
-- Manifest source fingerprint is pinned at 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`. Candidate V82.85.22 is pinned at 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`; clean CI acceptance remains pending.
+- Manifest source fingerprint is pinned at 139,955 bytes / SHA-256 `8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4`. Candidate V82.85.22 was pinned at 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`. V82.85.25 updates the candidate fingerprint and requires a fresh deterministic build before acceptance.
 
 ## Validation status
 
