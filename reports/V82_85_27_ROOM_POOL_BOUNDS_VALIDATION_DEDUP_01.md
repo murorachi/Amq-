@@ -22,8 +22,6 @@ The test contains 14 assertions. It passed in [GitHub Actions run 39228325204](h
 - Candidate V82.85.27: 8,786,846 bytes / SHA-256 `cf89981db7241e929fb0c1f36f6919911e4abb069140b1e5dbe12f935ec3a251`; deterministic build, source verifier, package completeness/reproducibility and Firefox responsive: **PASS**.
 - Native-origin storage/custom-list, IndexedDB/quiz input, suggestion integration, answer/playback lifecycle and multiplayer lifecycle: **PASS**. Real browser audio output capture: **FAIL**, same known CI capture mismatch; actual product playback was user-confirmed and no audio code changed.
 - Manual interactive acceptance: not performed.
-- Manual interactive acceptance: not performed.
-- Known CI audio-output capture mismatch remains out of scope because actual product playback was user-confirmed; no audio code changed.
 
 ## Rollback
 
