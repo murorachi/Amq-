@@ -52,7 +52,7 @@ async function runHandler(scenario) {
     setStatus: (...args) => calls.push(['setStatus', ...args]),
     advanceActiveAudioV8261: async (...args) => { calls.push(['advanceActiveAudioV8261', ...args]); },
   };
-  vm.runInNewContext('(function(id,a,watchdog){' + body + '\\n})("song-1", media, 42)', { ...sandbox, media });
+  vm.runInNewContext('(function(id,a,watchdog){' + body + '\n})("song-1", media, 42)', { ...sandbox, media });
   await new Promise(resolve => setImmediate(resolve));
   return { calls, watchdogClears, state };
 }
