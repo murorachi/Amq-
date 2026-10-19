@@ -1,4 +1,4 @@
-name: V82.85.30 historical debt and browser acceptance
+name: V82.85.30 audio volume default fix acceptance
 
 on:
   push:
@@ -40,19 +40,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01.zip"
-          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01_REPEAT.zip"
-          first="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01.zip" | cut -d ' ' -f1)"
-          second="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01_REPEAT.zip" | cut -d ' ' -f1)"
+          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01.zip"
+          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01_REPEAT.zip"
+          first="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01.zip" | cut -d ' ' -f1)"
+          second="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01_REPEAT.zip" | cut -d ' ' -f1)"
           test "$first" = "$second"
           echo "PASS deterministic package SHA-256: $first"
       - name: Upload verified source package and checksum
         uses: actions/upload-artifact@v4
         with:
-          name: AMQ_V82_85_30_SOURCE_PACKAGE_DEDUP_01
+          name: AMQ_V82_85_30_SOURCE_PACKAGE_AUDIO_VOLUME_DEFAULT_FIX_01
           path: |
-            ${{ runner.temp }}/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01.zip
-            ${{ runner.temp }}/AMQ_V82_85_30_HISTORICAL_DEBT_DEDUP_01.zip.sha256
+            ${{ runner.temp }}/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01.zip
+            ${{ runner.temp }}/AMQ_V82_85_30_AUDIO_VOLUME_DEFAULT_FIX_01.zip.sha256
           if-no-files-found: error
       - name: Guard acceptance runner artifact targets
         run: python tests/unit/run_all_checks_config_contract.py
