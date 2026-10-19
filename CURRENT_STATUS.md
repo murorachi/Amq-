@@ -385,3 +385,11 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Added a production-source contract test for manifest fingerprints, exact declaration restoration, original insertion position, and 11 behavior cases; wired it into the full runner and engineering CI.
 - Expected product remains byte-identical to V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`. V82.82 remains immutable at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - CI verification is pending at the time this source change is prepared. The Chromium PCM audio capture gate remains 🟡 deferred and is not counted as passed.
+
+
+## V82.85.16 quiz practice metadata getter extraction — 2026-10-19
+
+- Extracted the exact `getQuizPracticeMetaV8239(songId)` declaration to `src/modules/quiz_practice_meta_getter.htmlpart` at its original IIFE position. Existing `String(songId)` lookup and `value || null` semantics are preserved.
+- Added a focused production-source contract and wired it into the full test runner and engineering CI. Automated execution for this commit is pending.
+- Prior V82.85.15 source-and-unit and Firefox jobs passed, including target-value contract, source fingerprints, and deterministic build. The Chromium PCM capture gate remains 🟡 deferred.
+- Formal V82.82 baseline and expected V82.85.12 candidate fingerprints remain unchanged.
