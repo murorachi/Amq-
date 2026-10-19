@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 8 |
+| First-pass file audits completed | 11 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 83 |
+| Awaiting file-specific review | 80 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -93,7 +93,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | JS 023 | `src/scripts/script_023.htmlpart` | 44496 | `b75a3e7a33ba2958…` | P1 | 首輪逐檔審查完成；風險保留 | 全備份／還原、舊版合併及學習洞察共存；回滾順序與匯出前摘要 flush 是關鍵邊界。已對照備份驗證與 round-trip 契約。詳見 `reports/AUDIT_SCRIPT_023_BACKUP_RESTORE_LEARNING_INSIGHTS_V82_85_29.md`。 |
 | JS 024 | `src/scripts/script_024.htmlpart` | 3889 | `1a2d70d23d102ee8…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | JS 025 | `src/scripts/script_025.htmlpart` | 53270 | `9a875f3718004d35…` | P1 | 首輪逐檔審查完成；風險保留 | 自訂清單 CRUD、作品 ID 到歌曲 ID 範圍轉換、批次操作與 SRS 練習交接共存；已對照清單驗證、重載與 EMQ handoff 契約。詳見 `reports/AUDIT_SCRIPT_025_CUSTOM_LISTS_PRACTICE_HUB_V82_85_29.md`。 |
-| JS 026 | `src/scripts/script_026.htmlpart` | 33347 | `9cd1bb16da042aa4…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 026 | `src/scripts/script_026.htmlpart` | 33347 | `9cd1bb16da042aa4…` | P1 | 首輪逐檔審查完成；風險保留 | 個人檔案、PP 計算、歷史摘要、模態焦點及手機答題恢復共存；缺少專屬 PP 公式契約。詳見 `reports/AUDIT_SCRIPT_026_PROFILE_PP_MOBILE_V82_85_29.md`。 |
 | CSS 031 | `src/styles/style_031.htmlpart` | 75164 | `1b4e4cdc0ad23681…` | P1 | 待逐檔排查 | 大型樣式片段；盤點 selector、重複宣告、媒體查詢與載入順序，保留 cascade 順序。 |
 | JS 027 | `src/scripts/script_027.htmlpart` | 44 | `4ba9c72cbba7d24d…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | JS 028 | `src/scripts/script_028.htmlpart` | 139202 | `24d805495ba443bd…` | P1 | 首輪逐檔審查完成；風險保留 | 120 個命名函式；混合房間／重連、REST／WebSocket、AMQ／EMQ／VNDB 清單範圍、持久化、UI 與音訊／影片生命週期。既有單元及瀏覽器生命週期測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_028_MULTIPLAYER_LIFECYCLE_V82_85_29.md`。 |
@@ -119,9 +119,9 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | CSS 043 | `src/styles/style_043.htmlpart` | 7981 | `d88dc1d72e3c3367…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 044 | `src/styles/style_044.htmlpart` | 723 | `17db67007e27243d…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 037 | `src/scripts/script_037.htmlpart` | 2684318 | `82af236544929fef…` | P1 | 首輪資料負載審查完成 | 確認為 gzip/Base64 EMQ 曲庫，不是應重構的程式邏輯；實際解壓為 8,383,856 bytes，6,645 works／16,839 songs，ID 唯一且歌曲作品引用有效。已更正 manifest 角色並新增實際資料完整性測試。詳見 `reports/AUDIT_SCRIPT_037_EMQ_PAYLOAD_V82_85_29.md`。 |
-| JS 038 | `src/scripts/script_038.htmlpart` | 15277 | `82bcb7e50ee45cdb…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 038 | `src/scripts/script_038.htmlpart` | 15277 | `82bcb7e50ee45cdb…` | P1 | 首輪逐檔審查完成；風險保留 | EMQ 壓縮曲庫載入、ID 碰撞保護、來源模式候選池、別名及音源 API；已對照真實 payload 與合成資料契約。詳見 `reports/AUDIT_SCRIPT_038_EMQ_API_POOL_LOADER_V82_85_29.md`。 |
 | CSS 045 | `src/styles/style_045.htmlpart` | 4363 | `ddb36950d8bdbcdf…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 039 | `src/scripts/script_039.htmlpart` | 33287 | `98c6b0014b6d7a37…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 039 | `src/scripts/script_039.htmlpart` | 33287 | `98c6b0014b6d7a37…` | P1 | 首輪逐檔審查完成；風險保留 | VNDB 目錄導覽、清單匯入、封面快取／重試與外部 API；尚缺專屬 exact-source 契約。詳見 `reports/AUDIT_SCRIPT_039_VNDB_NAVIGATION_V82_85_29.md`。 |
 | CSS 046 | `src/styles/style_046.htmlpart` | 2350 | `b8e53bbabad03378…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 047 | `src/styles/style_047.htmlpart` | 4452 | `d74bc877ceffaece…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 040 | `src/scripts/script_040.htmlpart` | 32350 | `6fb52a62ecf9bcba…` | P1 | 首輪逐檔審查完成；風險保留 | EMQ 清單以 workIds／vndbIds／songIds 分開儲存，並整合出題範圍及音源覆寫；已對照清單交接、API 與備份契約。詳見 `reports/AUDIT_SCRIPT_040_EMQ_LISTS_OVERRIDES_V82_85_29.md`。 |
