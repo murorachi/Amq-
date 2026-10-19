@@ -13,6 +13,7 @@ function exactBetween(start, end, label) {
   return source.slice(a, b).trim();
 }
 const fragments = [
+  exactBetween('function api()', 'function works()', 'EMQ API bridge'),
   exactBetween('function works()', 'function songRows()', 'VNDB-linked works'),
   exactBetween('function titleOfWork(', 'function aliasesOfWork(', 'work title precedence'),
   exactBetween('function aliasesOfWork(', 'function coverFor(', 'work alias collection'),
@@ -237,15 +238,15 @@ await test('filtered works applies search and year filters and returns determini
   context.state.vnDetails.set('v3', { released: '2015-01-01' });
   context.state.vnDetails.set('v4', { released: '2022-01-01' });
   context.state.search = 'blue alias';
-  assert.deepEqual(context.filteredWorks().map(w => w.vndbId), ['v1']);
+  assert.deepEqual(Array.from(context.filteredWorks(), w => w.vndbId), ['v1']);
   context.state.search = ''; context.state.year = 'old';
   assert.deepEqual(context.filteredWorks().map(w => w.vndbId), ['v1']);
   context.state.year = '2000';
-  assert.deepEqual(context.filteredWorks().map(w => w.vndbId), ['v2']);
+  assert.deepEqual(Array.from(context.filteredWorks(), w => w.vndbId), ['v2']);
   context.state.year = '2010';
-  assert.deepEqual(context.filteredWorks().map(w => w.vndbId), ['v3']);
+  assert.deepEqual(Array.from(context.filteredWorks(), w => w.vndbId), ['v3']);
   context.state.year = '2020';
-  assert.deepEqual(context.filteredWorks().map(w => w.vndbId), ['v4']);
+  assert.deepEqual(Array.from(context.filteredWorks(), w => w.vndbId), ['v4']);
 });
 
 await test('catalog renders at the current page limit and exposes more-results state', async () => {
