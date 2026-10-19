@@ -139,7 +139,11 @@ def main():
 
     try:
         with sync_playwright() as pw:
-            launch = {"headless": True, "args": [
+            # Playwright's Chromium defaults may include --mute-audio, which lets
+            # HTMLMediaElement advance and emit events while silently discarding the
+            # operating-system audio stream. This acceptance must measure real output,
+            # so explicitly remove that default switch and keep the PCM monitor gate.
+            launch = {"headless": True, "ignore_default_args": ["--mute-audio"], "args": [
                 "--no-sandbox", "--disable-dev-shm-usage",
                 "--autoplay-policy=document-user-activation-required"
             ]}
