@@ -12,14 +12,16 @@
 
 Added `tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs`. It checks that the validator is defined once and called by both consumers, each validation message has one owner, valid inclusive bounds pass, missing/invalid values fail, inverted bounds fail, and validation precedence remains stable.
 
-The test declares 14 assertions. Execution status must be taken from the linked CI run after this branch's workflow starts; static creation of the test is not a test pass.
+The test contains 14 assertions. It passed in [GitHub Actions run 39228325204](https://github.com/murorachi/Amq-/actions/runs/39228325204). The current branch revision corrects the printed assertion count and is queued for repeat verification.
 
 ## Verification status
 
 - Source change: committed to the versioned branch.
-- Focused contract: pending CI.
-- Source fingerprint / deterministic build: pending manifest refresh and CI.
-- Existing unit tests, package reproducibility, standalone candidate build, Firefox responsive and browser acceptance: pending CI.
+- Focused contract and source/unit job: **PASS** in run [39228325204](https://github.com/murorachi/Amq-/actions/runs/39228325204).
+- Modified fragment: 139,501 bytes / SHA-256 `0461515bbf8615bfe943f078238aaa9851e9845b62b53a79365fae6061dc9fff`.
+- Candidate V82.85.27: 8,786,846 bytes / SHA-256 `cf89981db7241e929fb0c1f36f6919911e4abb069140b1e5dbe12f935ec3a251`; deterministic build, source verifier, package completeness/reproducibility and Firefox responsive: **PASS**.
+- Native-origin storage/custom-list, IndexedDB/quiz input, suggestion integration, answer/playback lifecycle and multiplayer lifecycle: **PASS**. Real browser audio output capture: **FAIL**, same known CI capture mismatch; actual product playback was user-confirmed and no audio code changed.
+- Manual interactive acceptance: not performed.
 - Manual interactive acceptance: not performed.
 - Known CI audio-output capture mismatch remains out of scope because actual product playback was user-confirmed; no audio code changed.
 
