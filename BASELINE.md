@@ -50,3 +50,12 @@
 - Added `tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs` and CI step for `script_031.htmlpart`; report `reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md`.
 - CI execution pending. Production source and cache/schema unchanged.
 - EMQ Chinese-title cache contract passed 25 assertions in run [39249715083](https://github.com/murorachi/Amq-/actions/runs/39249715083); confirm source/unit job completion before marking the full stage accepted.
+
+
+## Chinese-title characterization results
+
+- EMQ title cache precedence/filtering: 25 assertions passed.
+- General Chinese-title source mapping and partial-source failures: 19 assertions passed.
+- Both focused tests passed in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041); source verifier 132/132 passed. Remaining source/unit steps and browser jobs were still in progress at the last check.
+- Deferred observation: serverAliasMap uses exact duplicate removal while cacheRecord/allKnownAliases use normalized duplicate removal. No production change made.
+- Next task: script_039 VNDB cover batching/retry contract. Immutable V82.82 and production source remain unchanged.
