@@ -176,7 +176,7 @@ def main():
             # Use the full Chromium binary, not Playwright's lightweight headless
             # shell: the latter can advance media timelines without opening an OS
             # audio sink, which makes a PulseAudio output gate meaningless.
-            launch = {"headless": True, "channel": "chromium",
+            launch = {"headless": False, "channel": "chromium",
                       "ignore_default_args": ["--mute-audio"], "args": [
                 "--no-sandbox", "--disable-dev-shm-usage",
                 # The Ubuntu CI audio service can fail to expose a PulseAudio sink
