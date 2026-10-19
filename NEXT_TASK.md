@@ -7,10 +7,12 @@ Branch: v82.85.29-chromium-pulse-stream-diagnostics-01.
 - Parent: v82.85.28-next-audio-state-reset-dedup-01. Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
 - Test-only change in tests/browser/real_audio_output_acceptance.py: capture media-element mute/volume/readiness/source state, sample PulseAudio sink-inputs ten times during active playback, record actual monotonic elapsed time for each sample, and print detailed sink-input properties.
 - Reason: run 39229842012 showed the native playing event and advancing media timeline, but PulseAudio reported no sink-input and an IDLE sink; final monitor PCM had peak=0 and RMS=0. Root cause remains unconfirmed.
+- Current branch head before CI-trigger checkpoint: 531d5036dafafb63a34629ac1324df3b0e2c72e8.
+- CI trigger investigation: `.github/workflows/v82-85-4-engineering-acceptance.yml` declares `push` on branches matching `v82.85.*` and `workflow_dispatch`, but no `pull_request` trigger. PR #2 was changed from draft to ready, yet no run appeared. The available GitHub connector exposes no workflow-dispatch action. This checkpoint update is intended to create a branch push so the declared push trigger can run.
 
 ## Steps
 
-1. Run the native-origin workflow on this branch and inspect PULSE_STREAM_DIAGNOSTIC.
+1. Confirm whether the push-triggered workflow starts on this checkpoint commit and inspect `PULSE_STREAM_DIAGNOSTIC`.
 2. Classify the evidence: (a) media muted/volume zero, (b) no PulseAudio sink-input despite active media, (c) sink-input present but monitor remains silent, or (d) stream appears only intermittently.
 3. Make the smallest test-environment-only fix supported by the logs. Do not change production audio logic unless a separate product regression is demonstrated.
 4. Re-run native audio output acceptance and verify non-silent PCM (peak >= 1000 and RMS >= 150), plus the existing lifecycle assertions. Report other CI jobs separately.
@@ -19,7 +21,7 @@ Branch: v82.85.29-chromium-pulse-stream-diagnostics-01.
 ## Current test status
 
 - Existing run 39229842012: source/unit and Firefox responsive passed; native audio lifecycle passed; non-silent PCM output failed.
-- V82.85.29 diagnostic workflow result: pending verification.
+- V82.85.29 diagnostic workflow result: not observed yet; latest workflow-run and combined-status queries returned empty results before this checkpoint push.
 - Local syntax/test execution: not run in this editing session.
 
 ## Rollback
