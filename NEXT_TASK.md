@@ -50,3 +50,11 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - A repeatable recovery payment was found to eliminate strain-based failure in the simplified model. Recovery is now proposed **once per run only**, at 2 strain, for `ceil(15% of bank)`, clearing one strain and forfeiting that stage's item reward.
 - Exact committed integer-RNG simulation: never recover → 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible → 45.403% clear / 27.469% strain failure / mean final bank 947.30. This reduces failure but costs bank and slightly reduces clear rate. No item rewards or event diversity are modeled.
 - Next: Gate 08 must integrate all four game mechanisms and item opportunity cost into a full five-stage model. No implementation.
+
+
+## Gate 07 update — recovery loophole
+- Report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_07.md`.
+- Simulation: `reports/design_simulations/gamble_roguelike_gate07.py`.
+- Repeated recovery at 2 strain could eliminate strain-based failure. Candidate correction: recovery once per run only, at 2 strain, costs ceil(15% of bank), clears one strain, and forfeits the stage item reward.
+- Exact committed integer-RNG simulation: never recover → 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible → 45.403% clear / 27.469% failure / mean final bank 947.30. Item rewards and other game mechanics are not modeled.
+- Next: Gate 08 integrates all four game mechanisms and item opportunity cost into a full five-stage model. No implementation.
