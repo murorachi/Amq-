@@ -14,6 +14,7 @@ COMMANDS = [
     ("quiz answer metadata extraction contract", ["node", "tests/unit/quiz_answer_metadata_extraction_contract.test.cjs"]),
     ("EMQ API and list contract", ["node", "tests/unit/emq_api_contract.test.cjs"]),
     ("custom-list source ID / membership / backup contract", ["node", "tests/unit/custom_list_source_contract.test.cjs"]),
+    ("build current V82.85.12 candidate for current-version browser checks", [sys.executable, "tools/build.py", "dist/amq_learning_tool_v82_85_12.html"]),
     ("AMQ/EMQ custom-list production UI acceptance", [sys.executable, "tests/browser/custom_lists_ui_acceptance.py", "--html", "dist/amq_learning_tool_v82_82.html"]),
     ("responsive Chromium visual baseline", [sys.executable, "tests/browser/responsive_visual_baseline.py", "--html", "dist/amq_learning_tool_v82_82.html"]),
     ("CSS unmapped-selector review triage", [sys.executable, "tools/review_css_selectors_v82_82.py"]),
@@ -37,13 +38,13 @@ COMMANDS = [
     ("quiz suggestion controller extraction contract", ["node", "tests/unit/quiz_suggestion_controller_extraction_contract.test.cjs"]),
     ("anime/song DB initializer extraction contract", ["node", "tests/unit/anime_song_database_extraction_contract.test.cjs"]),
     ("quiz suggestions browser integration", [sys.executable, "tests/browser/quiz_suggestions_integration.py", "--html", "dist/amq_learning_tool_v82_80.html"]),
-    ("Chromium CSS visual baseline", [sys.executable, "tests/browser/css_visual_baseline.py", "--html", "dist/amq_learning_tool_v82_80.html"]),
+    # The V82.80/V82.81 geometry baseline is historical and requires its archived HTML;
+    # do not run it against the current release candidate as part of default acceptance.
     ("parser-backed dependency inventory", ["node", "tools/ast_dependency_inventory.cjs"]),
     ("modularization remaining-work audit", [sys.executable, "tools/modularization_progress_audit.py"]),
     ("modularization boundary audit", [sys.executable, "tools/modularization_boundary_audit.py"]),
     ("modularization boundary inventory contract", [sys.executable, "tests/unit/modularization_boundary_audit_contract.test.py"]),
     ("script_004 boundary audit contract", ["node", "tests/unit/script004_boundary_audit_contract.test.cjs"]),
-    ("standalone HTML build", [sys.executable, "tools/build.py", "dist/amq_learning_tool_v82_82.html"]),
     ("integrity and deterministic rebuild", [sys.executable, "tools/verify.py"]),
 ]
 
