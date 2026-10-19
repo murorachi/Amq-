@@ -25,3 +25,11 @@ The Chromium PCM capture gate remains 🟡 deferred. Previous evidence shows Chr
 
 ## Rollback
 Revert the V82.85.15 source/module/manifest/test/runner/workflow/docs commits. The immutable V82.82 product baseline remains unchanged.
+
+
+## Publication and verification status
+
+- Remote readback confirmed the source fragment, module, contract test, manifest, runner, workflow, status files, baseline file, next-task file, and this report exist on the engineering branch.
+- Manual source-level checks confirmed the helper marker occurs once, remains between the same surrounding declarations, and replacing it with the fetched module restores the exact original helper declaration. Manifest source/module byte lengths and SHA-256 values were corrected and read back.
+- **Automated execution status: NOT VERIFIED in this report.** The available GitHub connector exposed no push-triggered workflow run identifier for the latest commit, and the commit-status endpoint returned no checks. The new contract, full verifier, deterministic build, and browser suites are therefore not marked as passed here. Confirm the latest run in GitHub Actions before accepting this checkpoint.
+- During staged publication, an initial manifest fingerprint calculation was incorrect and was corrected in follow-up commits before final readback. Intermediate CI outcomes could not be inspected through the available connector and are not counted as passes.
