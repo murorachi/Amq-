@@ -79,3 +79,12 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Gate 13 checked 30 event orders, exact 2/3/6-player plurality distributions, and fee boundaries. Strategy ranking did not reverse by event order; Push clear rates varied more than Conservative/Balanced.
 - CI: [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed Gate 05–13 syntax/simulation suite. This does not validate fun or human fairness.
 - Next: prepare Paper Playtest Kit 02 from Candidate 02, then stop for actual human paper sessions. Do not implement until paper test indicates meaningful decisions and replay intent; no human playtest has occurred yet.
+
+
+## Next action: human paper test, not implementation
+- Rules: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Facilitator kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`.
+- Gate 13 report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_13.md`.
+- CI run [39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax checks and Gate 05–13 simulations.
+- Design work has reached paper-test readiness. No human session has happened, so the requirement “near existing products in fun” is **not proven**. Do not build server/UI yet.
+- Next meaningful evidence is three paper sessions (2–4 players each; add a 6-player group if possible), measuring rule clarity, consequential decisions, 12–20 minute duration, perceived fairness, and voluntary replay. Revise rules from observed failure points before any implementation.
