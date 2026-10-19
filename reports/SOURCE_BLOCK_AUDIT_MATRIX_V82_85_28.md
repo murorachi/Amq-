@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 7 |
+| First-pass file audits completed | 8 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 84 |
+| Awaiting file-specific review | 83 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -124,7 +124,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | JS 039 | `src/scripts/script_039.htmlpart` | 33287 | `98c6b0014b6d7a37…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 046 | `src/styles/style_046.htmlpart` | 2350 | `b8e53bbabad03378…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 047 | `src/styles/style_047.htmlpart` | 4452 | `d74bc877ceffaece…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 040 | `src/scripts/script_040.htmlpart` | 32350 | `6fb52a62ecf9bcba…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 040 | `src/scripts/script_040.htmlpart` | 32350 | `6fb52a62ecf9bcba…` | P1 | 首輪逐檔審查完成；風險保留 | EMQ 清單以 workIds／vndbIds／songIds 分開儲存，並整合出題範圍及音源覆寫；已對照清單交接、API 與備份契約。詳見 `reports/AUDIT_SCRIPT_040_EMQ_LISTS_OVERRIDES_V82_85_29.md`。 |
 | CSS 048 | `src/styles/style_048.htmlpart` | 3252 | `2f6355b5a6617fcc…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 049 | `src/styles/style_049.htmlpart` | 2534 | `bb2e86ff9630efbd…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 041 | `src/scripts/script_041.htmlpart` | 9745 | `828791633111537a…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
