@@ -41,7 +41,7 @@ jobs:
       - name: Upload verified source package and checksum
         uses: actions/upload-artifact@v4
         with:
-          name: AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01
+          name: AMQ_V82_85_22_SOURCE_PACKAGE_DEDUP_01
           path: |
             ${{ runner.temp }}/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip
             ${{ runner.temp }}/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip.sha256
@@ -53,7 +53,7 @@ jobs:
       - name: Upload versioned standalone candidate
         uses: actions/upload-artifact@v4
         with:
-          name: AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01
+          name: AMQ_V82_85_22_STANDALONE_HTML
           path: dist/amq_learning_tool_v82_85_22.html
           if-no-files-found: error
       - name: Run answer-normalization extraction contract
