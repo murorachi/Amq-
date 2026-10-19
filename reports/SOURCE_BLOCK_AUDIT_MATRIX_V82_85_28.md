@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 21 |
+| First-pass file audits completed | 34 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 70 |
+| Awaiting file-specific review | 57 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -62,36 +62,36 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | CSS 013 | `src/styles/style_013.htmlpart` | 343 | `86521017b5d64e81…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 014 | `src/styles/style_014.htmlpart` | 1241 | `dfb9d183b07ceaf1…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 010 | `src/scripts/script_010.htmlpart` | 1985 | `7f7290f9d4081d07…` | P2 | 首輪逐檔審查完成；風險保留 | 停用舊 submitSkipPhase 設定遷移與頭像對齊同處一檔；保留音訊連續播放規則。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`. |
-| JS 011 | `src/scripts/script_011.htmlpart` | 311 | `b0da897f5476ad0b…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 011 | `src/scripts/script_011.htmlpart` | 311 | `b0da897f5476ad0b…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 015 | `src/styles/style_015.htmlpart` | 464 | `48c8914d6b230c45…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 012 | `src/scripts/script_012.htmlpart` | 7942 | `1ef550097de54373…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 013 | `src/scripts/script_013.htmlpart` | 733 | `f67a8ef39d3a5516…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 012 | `src/scripts/script_012.htmlpart` | 7942 | `1ef550097de54373…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
+| JS 013 | `src/scripts/script_013.htmlpart` | 733 | `f67a8ef39d3a5516…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 016 | `src/styles/style_016.htmlpart` | 974 | `7ef060e224a3e7f4…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 014 | `src/scripts/script_014.htmlpart` | 2740 | `fbe6f01ab40ba443…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 014 | `src/scripts/script_014.htmlpart` | 2740 | `fbe6f01ab40ba443…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 017 | `src/styles/style_017.htmlpart` | 3639 | `46b2a15eb6178ef7…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 015 | `src/scripts/script_015.htmlpart` | 6872 | `89340718cae57d83…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 016 | `src/scripts/script_016.htmlpart` | 10541 | `695634223ced2889…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 015 | `src/scripts/script_015.htmlpart` | 6872 | `89340718cae57d83…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
+| JS 016 | `src/scripts/script_016.htmlpart` | 10541 | `695634223ced2889…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 018 | `src/styles/style_018.htmlpart` | 1297 | `e5960a58096959c4…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 019 | `src/styles/style_019.htmlpart` | 1193 | `9854486c457a37ee…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 020 | `src/styles/style_020.htmlpart` | 364 | `87a33f88876ed180…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 017 | `src/scripts/script_017.htmlpart` | 945 | `9ca0cbb241b25a10…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 017 | `src/scripts/script_017.htmlpart` | 945 | `9ca0cbb241b25a10…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 021 | `src/styles/style_021.htmlpart` | 1267 | `e3fabe1bc2c8d679…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 018 | `src/scripts/script_018.htmlpart` | 1459 | `89d6c0bbcf2ee823…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 019 | `src/scripts/script_019.htmlpart` | 1665 | `502dd544413bcc14…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 018 | `src/scripts/script_018.htmlpart` | 1459 | `89d6c0bbcf2ee823…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
+| JS 019 | `src/scripts/script_019.htmlpart` | 1665 | `502dd544413bcc14…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 022 | `src/styles/style_022.htmlpart` | 3209 | `c7ee3fecd57738a1…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 020 | `src/scripts/script_020.htmlpart` | 39032 | `4cf04ec3e4668cfa…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 020 | `src/scripts/script_020.htmlpart` | 39032 | `4cf04ec3e4668cfa…` | P1 | 首輪逐檔審查完成；關鍵風險保留 | SRS／FSRS 狀態轉移、排程公式、無效資料隔離與恢復；缺少公式／轉移專屬契約。詳見 `reports/AUDIT_SCRIPT_020_SRS_ENGINE_V82_85_29.md`。 |
 | CSS 023 | `src/styles/style_023.htmlpart` | 1733 | `7758a7d56eeb26c2…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 024 | `src/styles/style_024.htmlpart` | 527 | `1e62b4a55a30d225…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 025 | `src/styles/style_025.htmlpart` | 1866 | `76ca4ec6dc09ac5d…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 021 | `src/scripts/script_021.htmlpart` | 757 | `decf8081a2cbb3df…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 021 | `src/scripts/script_021.htmlpart` | 757 | `decf8081a2cbb3df…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 026 | `src/styles/style_026.htmlpart` | 424 | `b54d9295296f46b1…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 027 | `src/styles/style_027.htmlpart` | 258 | `fe83f9f1e1d1311a…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 028 | `src/styles/style_028.htmlpart` | 1496 | `6a5b78ead3940de0…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 029 | `src/styles/style_029.htmlpart` | 860 | `de9910b06deff293…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 022 | `src/scripts/script_022.htmlpart` | 1367 | `d540d0d19b316641…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 022 | `src/scripts/script_022.htmlpart` | 1367 | `d540d0d19b316641…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 030 | `src/styles/style_030.htmlpart` | 2317 | `8a9312389b1daeaa…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 023 | `src/scripts/script_023.htmlpart` | 44496 | `b75a3e7a33ba2958…` | P1 | 首輪逐檔審查完成；風險保留 | 全備份／還原、舊版合併及學習洞察共存；回滾順序與匯出前摘要 flush 是關鍵邊界。已對照備份驗證與 round-trip 契約。詳見 `reports/AUDIT_SCRIPT_023_BACKUP_RESTORE_LEARNING_INSIGHTS_V82_85_29.md`。 |
-| JS 024 | `src/scripts/script_024.htmlpart` | 3889 | `1a2d70d23d102ee8…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
+| JS 024 | `src/scripts/script_024.htmlpart` | 3889 | `1a2d70d23d102ee8…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | JS 025 | `src/scripts/script_025.htmlpart` | 53270 | `9a875f3718004d35…` | P1 | 首輪逐檔審查完成；風險保留 | 自訂清單 CRUD、作品 ID 到歌曲 ID 範圍轉換、批次操作與 SRS 練習交接共存；已對照清單驗證、重載與 EMQ handoff 契約。詳見 `reports/AUDIT_SCRIPT_025_CUSTOM_LISTS_PRACTICE_HUB_V82_85_29.md`。 |
 | JS 026 | `src/scripts/script_026.htmlpart` | 33347 | `9cd1bb16da042aa4…` | P1 | 首輪逐檔審查完成；風險保留 | 個人檔案、PP 計算、歷史摘要、模態焦點及手機答題恢復共存；缺少專屬 PP 公式契約。詳見 `reports/AUDIT_SCRIPT_026_PROFILE_PP_MOBILE_V82_85_29.md`。 |
 | CSS 031 | `src/styles/style_031.htmlpart` | 75164 | `1b4e4cdc0ad23681…` | P1 | 待逐檔排查 | 大型樣式片段；盤點 selector、重複宣告、媒體查詢與載入順序，保留 cascade 順序。 |
