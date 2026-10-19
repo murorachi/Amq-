@@ -1,3 +1,14 @@
+# Current engineering checkpoint: V82.85.14 ANSWER NORMALIZATION SOURCE EXTRACTION (CI PENDING)
+
+- Status: implementation committed; automated acceptance pending.
+- Scope: extracted the pure `normalize` closure helper from `evaluateQuizTargetAnswerV857` into `src/modules/quiz_answer_target_normalization.htmlpart` at the exact original lexical position. No answer rules, Unicode handling, call sites, or runtime script tags were changed.
+- Build contract: manifest records the changed source fragment and new module fingerprint. Replacing the marker with the exact original helper bytes should preserve the V82.85.12 generated product fingerprint: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`. `tools/verify.py` and CI must confirm this.
+- New unit contract: `tests/unit/quiz_answer_target_normalization_contract.test.cjs` checks NFKC, compatibility expansion, case folding, whitespace/control removal, nullish input, punctuation, astral Unicode, and evaluator call-site preservation.
+- Audio PCM capture remains 🟡 deferred from run 39184503441; it does not block this phase.
+- Rollback: revert this checkpoint commit; product HTML is not replaced.
+
+---
+
 # Current engineering checkpoint: V82.85.13 REAL AUDIO OUTPUT ACCEPTANCE GATE (YELLOW / DEFERRED)
 
 - Status: 🟡 DEFERRED. This CI-only PCM capture gate is explicitly not a blocker for the next engineering phase. Do not report it as passed.

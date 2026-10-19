@@ -29,6 +29,7 @@ COMMANDS = [
     ("answer-flow contract", ["node", "tests/unit/answer_flow_contract.test.cjs"]),
     ("answer/playback/storage/multiplayer boundary contract", ["node", "tests/unit/lifecycle_boundary_contract.test.cjs"]),
     ("quiz suggestion helper contract", ["node", "tests/unit/quiz_suggestion_helpers_contract.test.cjs"]),
+    ("quiz answer target normalization extraction contract", ["node", "tests/unit/quiz_answer_target_normalization_contract.test.cjs"]),
     ("quiz suggestion renderer extraction contract", ["node", "tests/unit/quiz_suggestion_renderer_extraction_contract.test.cjs"]),
     ("quiz suggestion controller extraction contract", ["node", "tests/unit/quiz_suggestion_controller_extraction_contract.test.cjs"]),
     ("anime/song DB initializer extraction contract", ["node", "tests/unit/anime_song_database_extraction_contract.test.cjs"]),

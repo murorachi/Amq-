@@ -1,3 +1,13 @@
+# Engineering overlay: V82.85.14 answer normalization source extraction (CI pending)
+
+- Parent: `c943b115a0ae3038f29d9374b69d25b7e87026b0` on `v82.85.13-real-audio-acceptance-gate-01`.
+- Exact-source extraction only: local `normalize` helper from `evaluateQuizTargetAnswerV857` moved to `src/modules/quiz_answer_target_normalization.htmlpart`, restored at the same marker position and lexical scope.
+- No intended runtime behavior change. Product build fingerprint must remain V82.85.12, 8,787,574 bytes, SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- New contract tests cover Unicode normalization and evaluator call sites. Status remains pending until CI and deterministic build verification complete.
+- Audio capture remains 🟡 deferred; no changes to the audio gate.
+
+---
+
 # Engineering overlay: V82.85.13 real audio output acceptance gate (YELLOW / DEFERRED)
 
 - Status: 🟡 deferred by decision; not passed and not a blocker for the next phase.

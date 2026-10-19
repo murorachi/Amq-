@@ -30,6 +30,8 @@ jobs:
           name: AMQ_V82_85_12_MULTIPLAYER_LEAVE_POLL_RACE_FIX_01
           path: dist/amq_learning_tool_v82_85_12.html
           if-no-files-found: error
+      - name: Run answer-normalization extraction contract
+        run: node tests/unit/quiz_answer_target_normalization_contract.test.cjs
       - name: Run native-storage, custom-list and backup contract tests
         shell: bash
         run: |

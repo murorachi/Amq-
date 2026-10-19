@@ -1,0 +1,1 @@
+const normalize=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');
