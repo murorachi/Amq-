@@ -1,9 +1,11 @@
 # AMQ Learning Tool — Independent New Architecture
 
-This directory is a separate implementation track. It must not import, execute, patch, or depend on the existing AMQ application. Integration remains out of scope until the legacy codebase is re-evaluated and both projects pass separate acceptance gates.
+Checkpoint: `NEW_ARCH_V0.1.1_OSU_STABLE_UI_01`.
 
-Checkpoint: `NEW_ARCH_V0.1.0_FOUNDATION_01`.
+This is an independent UI implementation track. It must not import, execute, patch, or depend on the existing AMQ application. Integration remains out of scope until the legacy codebase is re-evaluated and both projects pass separate acceptance gates.
 
-The local checkpoint package contains modular source, a deterministic standalone-HTML builder, tests, and the generated HTML. **The source package and HTML have not yet been uploaded to this branch** because the available GitHub connection can write text files but does not expose a local-file/binary transfer path. Do not treat this documentation overlay as a reproducible release.
+This checkpoint corrects the main menu and song selection layout to follow the agreed osu! stable-inspired direction. It is not a claim of pixel-perfect recreation: reference screenshot measurement and browser visual acceptance remain pending. The quiz screen must follow AMQ's established interaction direction, and results should use the approved osu!-inspired hierarchy.
 
-Local commands: `python tools/build.py`; `node --test tests/*.test.cjs`.
+Build: `python tools/build.py`. Tests: `node --test tests/*.test.cjs`.
+
+Important publication limitation: this branch currently contains checkpoint documentation only. The exact source modules and generated HTML are not uploaded; this is not a complete remote source release.
