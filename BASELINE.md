@@ -13,7 +13,7 @@
 ## V82.85.29 checkpoint: Chromium PulseAudio stream diagnostics
 
 - Branch: v82.85.29-chromium-pulse-stream-diagnostics-01; parent V82.85.28. Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
-- Test-only change: tests/browser/real_audio_output_acceptance.py now records HTMLMediaElement mute/volume/source/readiness state and samples PulseAudio sink inputs ten times across 1.35 seconds while native playback is active. It also logs detailed sink-input properties. Production playback code and standalone candidate are unchanged.
+- Test-only change: tests/browser/real_audio_output_acceptance.py now records HTMLMediaElement mute/volume/source/readiness state and samples PulseAudio sink inputs ten times during native playback and records actual monotonic elapsed time for each sample. It also logs detailed sink-input properties. Production playback code and standalone candidate are unchanged.
 - Rationale: V82.85.28 logs showed Chromium as a PulseAudio client but no sink-input, an IDLE sink, and captured PCM peak=0/RMS=0. The one-time snapshot could not distinguish a missing/short-lived output stream from muted/zero-volume media.
 - Existing evidence from run 39229842012: source/unit verifier 132/132, focused state-reset contract 12 assertions, deterministic package/build and Firefox responsive passed. Native playback lifecycle assertions passed, but non-silent PCM output failed.
 - New diagnostic run has not yet been verified. No root cause or repair is claimed at this checkpoint.
