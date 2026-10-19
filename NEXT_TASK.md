@@ -1,19 +1,21 @@
-# Next task: accept EMQ title-cache contract, then VNDB navigation contract
+# Next task: VNDB navigation, request failure and cover retry contract
 
-Current branch: `v82.85.33-emq-title-cache-contract-01`.
+Current accepted branch: `v82.85.33-emq-title-cache-contract-01`.
+Next stage should use a separate branch based on this checkpoint.
 
-## Current stage
+## Completed EMQ Chinese-title cache stage
 
-- Added `tests/unit/emq_chinese_title_cache_contract.test.cjs`: 19 exact-source cases for cache precedence, alias normalization/filtering, OpenCC load/fallback, VNDB batch requests, Bangumi exact-match fallback, and fail-soft errors.
-- Test is registered in CI and deterministic checkpoint package. Production `src/scripts/script_041.htmlpart` unchanged.
-- Local execution: NOT RUN. Inspect the newest workflow run, verify the test output/package reproducibility and report Firefox/native-origin separately. Known audio monitor capture failure is unrelated unless actual product playback regresses.
+- Added `tests/unit/emq_chinese_title_cache_contract.test.cjs`: 19 exact-source cases for cache precedence, alias normalization/filtering, OpenCC load/fallback, VNDB batch requests, Bangumi exact-match fallback and fail-soft errors.
+- Product `src/scripts/script_041.htmlpart` unchanged.
+- Initial CI [39240395756](https://github.com/murorachi/Amq-/actions/runs/39240395756) exposed test-harness assumptions; corrected without changing production code.
+- Corrected CI [39240538829](https://github.com/murorachi/Amq-/actions/runs/39240538829): source/unit, EMQ Chinese-title 19/19, Chinese-title loader 20/20, SRS 17/17, scene-background 18/18, package reproducibility, deterministic build and Firefox responsive passed. Chromium native-origin failed only at known final audio monitor capture; all preceding storage, IndexedDB/input, suggestion, quiz and multiplayer lifecycle steps passed.
 
 ## Ordered next work
 
-1. Resolve any test-harness failures without changing production title/cache behavior merely to satisfy tests.
-2. Confirm source/unit, package contract/reproducibility, deterministic build, Firefox responsive and Chromium native-origin.
-3. After acceptance, add a separate contract for `src/scripts/script_039.htmlpart`: VNDB request failures, imported ID domains, cover retry races and render limits.
-4. Do not claim live upstream freshness from synthetic tests.
+1. Start a separate contract stage for `src/scripts/script_039.htmlpart`: VNDB request failures, imported ID domains, cover retry races, render limits and navigation mounting idempotence.
+2. Preserve VNDB work/song ID distinctions and current list import semantics.
+3. Register tests in CI and deterministic package; record actual results.
+4. Do not claim live upstream freshness from synthetic tests or modify production UI absent a reproduced defect.
 
 ## Rollback
 
