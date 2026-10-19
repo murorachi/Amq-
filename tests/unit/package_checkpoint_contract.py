@@ -39,6 +39,8 @@ class PackageCheckpointContract(unittest.TestCase):
             "tests/unit/chinese_title_loader_cache_contract.test.cjs",
             "reports/V82_85_33_EMQ_CHINESE_TITLE_CACHE_CONTRACT_01.md",
             "tests/unit/emq_chinese_title_cache_contract.test.cjs",
+            "reports/V82_85_34_VNDB_NAVIGATION_CONTRACT_01.md",
+            "tests/unit/vndb_navigation_contract.test.cjs",
         }.issubset(PACKAGE.REQUIRED_PACKAGE_PATHS))
 
 if __name__ == "__main__":
