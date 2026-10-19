@@ -25,7 +25,7 @@ The test extracts the named production functions and supplies deterministic fake
 ## Acceptance status
 
 - Static review: test targets the current production function bodies and isolates storage/URL side effects.
-- Automated execution: pending CI at report creation. Update with actual assertion count and run ID only after the focused test and source/unit job complete.
+- Automated execution: **PASS, 29 assertions** in run [39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623). The source/unit job completed successfully (132/132 source verifier checks, SRS contract 41/41, scene-background contract 29/29 and remaining unit steps); Firefox responsive passed. Chromium native-origin remained in progress at the last check, so the overall workflow was not yet closed.
 - Not covered: real-browser quota/security behavior, browser shutdown during an active transaction, image decode limits in a real browser, visual rendering, or actual IndexedDB persistence across browser restarts.
 
 ## Rollback
