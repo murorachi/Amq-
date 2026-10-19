@@ -30,7 +30,9 @@ These tests characterize the existing implementation. They do not prove live CDN
 
 - Static source-boundary inspection: PASS; test uses exact function bodies from the registered fragment.
 - Local execution in this authoring environment: NOT RUN; GitHub Actions is the execution authority.
-- CI source/unit, package reproducibility, Firefox responsive and Chromium native-origin: pending this branch's workflow run.
+- First run [39239399557](https://github.com/murorachi/Amq-/actions/runs/39239399557) exposed one test-harness timing assumption in the concurrent-load case (19/20 cases passed). The test was corrected to wait for the asynchronous loader startup; production source was not changed.
+- Corrected run [39239470902](https://github.com/murorachi/Amq-/actions/runs/39239470902): **source/unit PASS**, Chinese-title loader contract **20/20 PASS**, SRS **17/17 PASS**, scene-background **18/18 PASS**, checkpoint package contract/reproducibility **PASS** (406 entries, CRC and required paths pass; repeated ZIP SHA-256 `2bb266f79ef44d41d4bd9d9d25c487eb88d7dac891894450f8b8350d68f25795`), deterministic standalone V82.85.28 build **PASS**, Firefox responsive **PASS**.
+- Chromium native-origin: storage/custom-list, IndexedDB/input, suggestion, quiz playback and multiplayer lifecycle steps passed; only final non-silent audio monitor capture failed (peak=0, rms=0). This is the known environment capture limitation, not a title-loader regression. Actual product playback was user-confirmed. Manual interactive acceptance was not performed.
 - Known Chromium audio monitor capture limitation remains separate. Do not interpret it as a title-cache failure unless real title loading or actual playback regresses.
 
 ## Rollback and next work
