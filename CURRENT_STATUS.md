@@ -121,3 +121,12 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Reports: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md` and `reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md`.
 - Noted deferred semantic difference: `cacheRecord` and `allKnownAliases` normalize alias duplicates, but `serverAliasMap` only removes exact duplicates. Recorded in the EMQ title report; no production behavior changed.
 - Next bounded task: add deterministic contract for VNDB cover detail batching, failed-ID cleanup/retry state and cover fallback behavior in `script_039.htmlpart`.
+
+
+## VNDB cover lifecycle contract in progress
+
+- Added `tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs` and wired it into CI.
+- Report: `reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md`.
+- It covers 30-ID request batching, missing-record placeholders, HTTP failure cleanup, loaded/loading/failed skip behavior and explicit retry state reset, using mocked responses only.
+- Automated execution pending CI. Production `script_039.htmlpart` is unchanged.
+- Chinese-title tests passed 25 and 19 assertions in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041); verify the final source/unit and browser job conclusions separately.
