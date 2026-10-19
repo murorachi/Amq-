@@ -33,6 +33,8 @@ class PackageCheckpointContract(unittest.TestCase):
             "reports/V82_85_18_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md",
             "reports/V82_85_30_SRS_RATING_TRANSITION_CONTRACT_01.md",
             "tests/unit/srs_rating_transition_contract.test.cjs",
+            "reports/V82_85_31_SCENE_BACKGROUND_LIFECYCLE_CONTRACT_01.md",
+            "tests/unit/scene_background_lifecycle_contract.test.cjs",
         }.issubset(PACKAGE.REQUIRED_PACKAGE_PATHS))
 
 if __name__ == "__main__":
