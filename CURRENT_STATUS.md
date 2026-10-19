@@ -95,3 +95,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Same run: source/unit completed successfully (132/132 source verifier checks; SRS contract 41/41; scene lifecycle contract 29/29 and remaining unit steps passed), Firefox responsive passed. Chromium native-origin remained in progress at last check; overall workflow is not yet closed.
 - Report: `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`. Production `script_036.htmlpart` unchanged.
 - The two targeted lifecycle characterization stages are complete. Next bounded task: inspect existing tests for external-source/cache boundaries in `script_031`, `script_039`, and `script_041`; add only a concrete missing contract, without changing runtime behavior.
+
+
+## EMQ Chinese-title cache contract in progress
+
+- Added `tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs` and its CI step. It characterizes title normalization/filtering, VNDB Traditional Chinese title preference, cache alias deduplication/limit, source provenance, and work-ID-scoped alias export using synthetic data only.
+- Report: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md`.
+- Production `script_041.htmlpart` is unchanged. Automated execution is pending CI; no pass claim yet.
+- SRS and scene-background contracts already passed 41 and 29 assertions respectively; source/unit and Firefox responsive passed on their recorded runs. Full Chromium-native workflow continues to show the known audio-output capture failure separately from product playback.
