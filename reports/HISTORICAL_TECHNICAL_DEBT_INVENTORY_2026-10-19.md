@@ -41,9 +41,9 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 
 ## V82.85.25 validation checkpoint
 
-- Callback extraction: implemented, with focused pending/active/stale event contract updated.
-- Fragment and candidate fingerprints: recorded from GitHub CI output; follow-up CI verification pending.
-- User-confirmed product audio playback remains the acceptance reference; the CI audio capture mismatch is not a blocker for this bounded dedup task.
+- Callback extraction: implemented; focused pending/active/stale event contract passed with 14 assertions.
+- Source verifier: 132/132 passed; candidate build, package completeness/reproducibility and Firefox responsive passed in run [39223441076](https://github.com/murorachi/Amq-/actions/runs/39223441076).
+- Browser-native-origin job was still in progress when this inventory was updated. User-confirmed product audio playback remains the acceptance reference; the CI audio capture mismatch is not a blocker for this bounded dedup task.
 
 ## Rollback
 
