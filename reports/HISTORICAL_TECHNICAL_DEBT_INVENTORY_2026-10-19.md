@@ -145,3 +145,12 @@ The first-pass source audit and the bounded characterization set are complete fo
 - `src/scripts/script_031.htmlpart` now rejects array-shaped `records` in `readCache()`, preventing an empty array from being treated as a valid cache hit and suppressing the existing source-download fallback.
 - The focused cache contract now asserts array rejection. Manifest and audit matrix refreshed to 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
 - Latest CI before fingerprint refresh failed at source verification because the manifest still had the prior fingerprint. Final validation after the refresh is pending; do not count that stale-manifest run as a behavioral test failure.
+
+
+## V82.85.29 cache guard acceptance checkpoint
+
+- Narrow production fix accepted: `script_031.htmlpart` rejects array-shaped `records`, so malformed empty-array cache entries are treated as cache misses and use the existing source-download path.
+- Regression contract: 14 assertions passed; source verifier 132/132 passed; deterministic V82.85.29 candidate matched 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5` in [run 39257936940](https://github.com/murorachi/Amq-/actions/runs/39257936940).
+- Deterministic source package SHA-256: `e3448648c49dfcc4e2153c7825f016ab7b1fabfef2c57b868664ef524c13c913`.
+- Firefox responsive passed. Native-origin storage, IndexedDB/quiz, suggestion, quiz playback lifecycle and multiplayer lifecycle passed. The sole failure is the known non-silent audio monitor assertion (`peak=0, rms=0.0`), despite audio monitor PCM duration detection; actual product playback was previously user-confirmed.
+- The branch's engineering acceptance workflow and release pin are versioned as V82.85.29. Immutable V82.82 remains unchanged.
