@@ -141,7 +141,6 @@ def main():
     errors = []
     mirror_requests = {"first": 0, "fallback": 0}
     wav = make_wav()
-    alsa_config_path = None
 
     # Prove the monitor and PCM decoder can capture a known non-silent source
     # before testing Chromium. Then discard the probe samples so they cannot
@@ -169,12 +168,6 @@ def main():
           "PulseAudio monitor captures known non-silent PCM before Chromium test")
 
     try:
-        # Some CI Chromium builds choose ALSA even when PulseAudio is available.
-        # Route ALSA's default PCM/control devices through PulseAudio so the test's
-        # monitor measures the browser output rather than a silent/null ALSA device.
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".asoundrc", delete=False) as alsa_config:
-            alsa_config.write("pcm.!default { type pulse }\nctl.!default { type pulse }\n")
-            alsa_config_path = alsa_config.name
         with sync_playwright() as pw:
             # Playwright's Chromium defaults may include --mute-audio, which lets
             # HTMLMediaElement advance and emit events while silently discarding the
@@ -197,8 +190,7 @@ def main():
                 "--vmodule=*/audio*=2",
                 "--autoplay-policy=document-user-activation-required"
             ],
-                      "env": {**os.environ, "PULSE_SINK": "amq_acceptance",
-                              "ALSA_CONFIG_PATH": alsa_config_path}}
+                      "env": {**os.environ, "PULSE_SINK": "amq_acceptance"}}
             if args.chromium:
                 launch["executable_path"] = args.chromium
             browser = pw.chromium.launch(**launch)
@@ -419,8 +411,6 @@ def main():
                 browser.close()
     finally:
         raw_pcm = capture.stop()
-        if alsa_config_path:
-            Path(alsa_config_path).unlink(missing_ok=True)
 
     check(len(raw_pcm) >= 44100 * 2 * 2,
           "audio monitor captured at least one second of stereo PCM output")
