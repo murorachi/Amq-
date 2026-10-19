@@ -102,6 +102,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pulseaudio pulseaudio-utils libasound2-plugins alsa-utils
+      - name: Diagnose Chromium PulseAudio output routing
+        run: xvfb-run -a python tests/browser/chromium_pulse_output_route_probe.py
       - name: Run real browser audio decode and output acceptance
         env:
           DEBUG: pw:browser
