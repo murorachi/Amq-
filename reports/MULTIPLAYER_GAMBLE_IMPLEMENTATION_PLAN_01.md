@@ -93,3 +93,8 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 - Current rulebook candidate: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`. Each stage target is current bank + ceil(1%); risk tier sets stake size (Bank 5%, Balanced 10%, Push 15%); final run goal is 105% of starting bank.
 - Base simulation suggests distinct niches: conservative best for low strain failure, Balanced best for 105% clear, Push best among tested policies at the 150% high-score tier. At the 105% goal, clear rates were stable across starting banks 750/1000/1500 (about 27% / 41% / 17%).
 - Gate 09 excludes items/recovery. Next: reintroduce item effects and recovery one at a time, check interactions and opportunity costs, vary event order, and test 2/3/6-player voting/draft fairness. Design simulation workflow is pending remote result verification. No implementation until these gates pass.
+
+
+## CI evidence
+- Design simulation workflow [run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`.
+- Python syntax checks and Gate 05–09 simulation scripts completed successfully. This verifies repeatable execution, not game balance, strategy diversity beyond tested policies, or fun.
