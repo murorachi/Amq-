@@ -38,7 +38,7 @@ The scenarios cover:
 ## Test status
 
 - Static review: test extracts production functions and supplies deterministic dependencies; production source was not modified.
-- Automated execution: **pending CI run** at the time this report was authored. The workflow now invokes the test. Record the actual assertion count and CI conclusion after the run finishes; do not infer pass from workflow configuration alone.
+- Automated execution: **PASS, 41 assertions** in run [39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291). The source/unit job completed successfully (132/132 source verifier checks and all unit steps including this contract); Firefox responsive also passed. At the last check, Chromium native-origin remained in progress, so the overall three-job workflow was not yet complete. The known final audio output capture assertion must be reported separately if it fails.
 - Not covered: real-browser UI interactions, real browser storage quota/security behavior, randomized property testing, or independent numerical comparison against a canonical FSRS implementation.
 
 ## Rollback
