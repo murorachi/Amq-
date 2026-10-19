@@ -833,8 +833,8 @@
       "path": "src/scripts/script_028.htmlpart",
       "start_byte": 5612971,
       "end_byte": 5753116,
-      "byte_length": 139955,
-      "sha256": "8dc2d503becfd765fcb3dc9d3b402c0358c10a3f636ab1aa97515ddc2ed635c4",
+      "byte_length": 139754,
+      "sha256": "8a576848bf9a1528b801db3795996cf757679b44c9e5e2af34fc1e9fe7d18fa5",
       "opening_tag": "<script id=\"v82-34-multiplayer-ui\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1444,7 +1444,7 @@
   "module_count": 15,
   "release": {
     "version": "V82.85.22",
-    "bytes": 8787300,
+    "bytes": 8787099,
     "sha256": "69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2"
   }
 }
