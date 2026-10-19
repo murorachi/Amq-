@@ -90,3 +90,7 @@
 - Favor tie rerolls use raw d6; spent Favor remains spent. AFK players do not roll/spend Favor.
 - Gate 14 simulation and report: `reports/design_simulations/gamble_roguelike_gate14.py`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`.
 - CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed. Human fairness/fun remains untested; no product source changed.
+
+
+## Current design snapshot
+Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`. Gate 14 CI passed; human testing not executed.
