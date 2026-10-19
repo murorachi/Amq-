@@ -24,6 +24,8 @@ jobs:
         run: python tools/verify.py
       - name: Test reverse source inventory contract
         run: python tests/unit/source_inventory_completeness_contract.py
+      - name: Verify embedded EMQ gzip payload integrity
+        run: node tests/unit/embedded_emq_payload_integrity.test.cjs
       - name: Test multiplayer checked-value helper deduplication contract
         run: node tests/unit/multiplayer_checked_values_dedup_contract.test.cjs
       - name: Test multiplayer suggestion cache invalidation dedup contract
