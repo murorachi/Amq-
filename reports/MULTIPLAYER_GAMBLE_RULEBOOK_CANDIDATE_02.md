@@ -93,7 +93,7 @@ The draft pool contains one item per active player plus one extra. Players pick 
 - **Insurance:** attach before a Bank or Balanced wager; if it loses, refund 10% of the stake. It cannot be attached to Push. The item is consumed even if the wager wins.
 - **Signal Coupon:** waive the fee for one or two clues in a single Signal Room wager. It does not alter clue accuracy.
 - **Vault Harness:** attach before continuing past Vault step 1; if a continued step fails, refund 20% of the original stake. Consumed once attached to a continued attempt.
-- **Recovery Voucher:** once per run, reduce the recovery fee from 15% to 8% of current bank, rounded up. It does not grant another recovery.
+- **Recovery Voucher:** once per run, reduce the recovery fee from 12% to 8% of current bank, rounded up. It does not grant another recovery.
 
 No generic all-game retry item. Earlier simulations found that a retry was either too powerful or nearly irrelevant depending on its penalty. Item values are provisional and must be tested with acquisition opportunity cost and combinations.
 
