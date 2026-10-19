@@ -4,7 +4,6 @@
 - Parent baseline: `v82.86.05-custom-list-id-lifecycle-matrix-01`, commit `1b9b9a6e2e95bb2414968fe6aef1e119bd6ee8dc`.
 - Report: `reports/V82_86_06_CUSTOM_LIST_BACKUP_RESTORE_BROWSER_01.md`.
 - Changed test: `tests/browser/native_storage_custom_lists_acceptance.py`.
-- Scope: browser acceptance only; product HTML/source fragments/JS/CSS/manifest unchanged.
 - Verified CI commit: `cbc5fed2d513fa4c01761cd640ea65c160a76146`; run [39166474674](https://github.com/murorachi/Amq-/actions/runs/39166474674) passed both jobs.
 - Browser/native-origin job passed: AMQ and EMQ backup inclusion, corrupt-manifest rejection without mutation, injected restore-write failure with exact storage rollback, valid restore of both list IDs/names, actual reload persistence and UI re-render. Existing browser regression steps in that job also passed.
 - Source/unit job passed, including deterministic V82.82 build/fingerprint and engineering contracts.
@@ -14,13 +13,15 @@
 - Remaining external gates: Firefox CSS cascade, real audio provider, production-origin storage policy, naturally occurring IndexedDB quota/corruption. The injected write fault does not substitute for those gates.
 - Next: give backup/restore contracts a dedicated stable test command and continue the IndexedDB failure matrix. Do not infer full modularization completion.
 
-## Separate workstream: multiplayer Gamble Roguelike discovery
+## Separate workstream: multiplayer Gamble Roguelike
 
-- Status: **design/discovery only; no product implementation**.
+- Status: **planning/design only; no game code or product HTML changed**.
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
-- Design record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
-- Base: V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`; immutable product baseline remains V82.82 at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Read-only inspection found that the current multiplayer client uses a configurable HTTP API base, bearer-token authentication, and a WebSocket route for team drafts. Client fragment: `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`.
-- **Blocker:** current server implementation/deployment configuration was not found in the inspected repository tree. Existing multiplayer browser tests mock API/WebSocket/media and do not establish live-server correctness.
-- No live server was contacted; no tests were run for this documentation checkpoint; no source or product HTML was changed.
-- Next gate: locate current server source and its deployed version, or explicitly decide to build a new server service. Only then specify the authoritative bet/wallet/settlement API.
+- Discovery record: [`reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
+- Implementation proposal: [`reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
+- Parent product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Existing multiplayer client inspection found configurable HTTP API and WebSocket route references in `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`. The user clarified that the existing multiplayer feature substantively does not use a conventional server; therefore, absence of server source is not treated as a search failure or a blocker for new-game design.
+- Recommended direction: separate lightweight authoritative service for the new game; develop locally first, then host only when friends need always-on access. Host-authoritative private play remains a lower-infrastructure alternative with weaker trust.
+- Proposed first playable scope: 2–6 players, 1,000 virtual chips per run, five stages, reset balances each run, four mechanically distinct candidate games, run-only items, no real money/cash-out/transfers.
+- No server, client, database, or deployment has been implemented. No new tests were run for this documentation-only checkpoint. No real two-client run has been performed.
+- Next gate: discuss and lock authority model, stack, run format, and initial rules/payout proposal; then implement pure game rules and ledger with unit tests before adding network transport.
