@@ -1,23 +1,20 @@
-# Current engineering checkpoint: V82.85.18 package completeness guard
+# Current engineering checkpoint: V82.85.19 duplicate-candidate decision
 
 - Base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
 - Working branch: `v82.85.18-source-inventory-gate-01`.
-- Completed bounded changes: reverse source inventory validation and package completeness/reproducibility guards.
-- Package tool now uses `AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip`, verifies required handoff/build/test files before and after ZIP creation, and reports missing entries clearly.
-- Added focused contracts for source inventory (4 cases) and package completeness (4 cases); both are wired into CI.
-- Package report: `reports/V82_85_18_PACKAGE_COMPLETENESS_AUDIT_01.md`.
-- GitHub Actions [run 39193720849](https://github.com/murorachi/Amq-/actions/runs/39193720849): source/unit **PASS**, 132 integrity/build checks passed; package completeness and source inventory contracts passed; package built twice with identical SHA-256, CRC and required-file checks passed.
-- Package size: 14,635,418 bytes, 361 unique entries. The exact package digest is in the external sidecar bundled with the workflow artifact, not repeated in files inside the ZIP.
-- Uploaded workflow artifact: [AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01](https://github.com/murorachi/Amq-/actions/runs/39193720849).
-- Firefox responsive and browser-native-origin jobs were still running at last inspection; do not claim their final result yet.
-- Local test execution: not run in this environment.
-- No product HTML, runtime logic, CSS, or manifest changed.
-- Product candidate remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`; immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Latest inspected head before this decision: `3de5cd822048c477a5e65ece27b21ca0262e771a`.
+- Previous bounded stages: reverse source inventory guard and package completeness/reproducibility guard.
+- Latest package/source-unit acceptance: [GitHub Actions run 39193924298](https://github.com/murorachi/Amq-/actions/runs/39193924298). Source/unit passed (132 checks); Firefox responsive passed. Browser-native-origin was still running at last inspection, so full browser acceptance is not claimed.
+- Package artifact and external checksum are published under `AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01`.
+- Current bounded cleanup: inspected two `norm` helpers in `src/scripts/script_004.htmlpart`; their character classes and behavior differ. The candidate was rejected as unsafe to deduplicate. Report: `reports/V82_85_19_DUPLICATE_CANDIDATE_DECISION_01.md`.
+- Product source, manifest, generated HTML, runtime behavior and CSS were not changed in this stage.
+- Local tests for this documentation-only decision: not run; no production change was made.
+- Product candidate fingerprint remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`; immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 ## Direction
 
-The bounded historical technical-debt inventory is complete. Continue with one evidence-backed duplicate candidate at a time; do not perform bulk deletion based on name similarity alone. Preserve the known CI audio capture limitation as a separate issue.
+The current duplicate candidate was rejected because normalization behavior is observably different. Stop this cleanup stage without changing production code. Resume feature work or select a new candidate only when a concrete change justifies the verification cost. Do not expand into bulk deduplication.
 
 ## Rollback
 
-Revert the package tool, its focused test, workflow updates, and package report together if required. Revert source-inventory guard changes separately if needed. Never overwrite immutable V82.82.
+Revert the duplicate-candidate report and this documentation update if needed. No production rollback is required. Never overwrite immutable V82.82.
