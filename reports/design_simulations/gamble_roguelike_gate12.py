@@ -34,6 +34,7 @@ def simulate(strategy, mode, runs=RUNS):
     for _ in range(runs):
         bank, strain, recovery_available = 1000, 0, True
         inventory = []
+        skip_draft = 0
         stages = 0
         for stage, event in enumerate(EVENTS, start=1):
             stages += 1
@@ -49,11 +50,9 @@ def simulate(strategy, mode, runs=RUNS):
                     bank -= (bank * rate + 99) // 100
                     strain -= 1
                     recovery_available = False
+                    skip_draft += 1
                     if "recovery_voucher" in inventory:
                         inventory.remove("recovery_voucher")
-                    if inventory:
-                        weakest = max(inventory, key=lambda item: RANKING[strategy].index(item))
-                        inventory.remove(weakest)
 
             # Recovery settles before the stage target is calculated.
             target = bank + (bank + 99) // 100
@@ -115,6 +114,9 @@ def simulate(strategy, mode, runs=RUNS):
                 break
 
             if draft_enabled and stage in (2, 4) and bank >= target:
+                if skip_draft:
+                    skip_draft -= 1
+                    continue
                 available = [item for item in ITEMS if item not in inventory]
                 rng.shuffle(available)
                 offer = available[:3]
