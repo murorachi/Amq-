@@ -21,3 +21,13 @@ No product implementation changed.
 | Recovery + draft | Conservative | 26.500% | 0.510% | 982.43 |
 | Recovery + draft | Balanced | 35.356% | 23.512% | 986.46 |
 | Recovery + draft | Push | 19.938% | 66.838% | 1,007.43 |
+
+
+## Interpretation
+
+- A shared inventory capped at two items prevents the number of item uses from scaling automatically with party size.
+- Conservative remains the low-failure profile, Balanced the best standard clear, and Push the high-variance/high-score profile. Draft modestly improves Push clear rate without removing its high failure risk.
+- Recovery reduces Conservative/Balanced strain failure but lowers mean bank and standard clear rate; it remains a costly choice.
+- Draft rank, Favor use, item-use votes, player disagreement, and sabotage risk are not simulated. These need human testing.
+
+Decision: the two-pick shared draft is coherent enough for the paper test. Human fairness and replay intent remain unproven; no server/UI implementation is authorized.
