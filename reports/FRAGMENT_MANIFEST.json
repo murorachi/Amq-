@@ -133,8 +133,8 @@
       "path": "src/scripts/script_004.htmlpart",
       "start_byte": 5144918,
       "end_byte": 5259764,
-      "byte_length": 95121,
-      "sha256": "87507c79cc072957b5caa40bf5825fa7876686d63ffccad1e68d3289e802b41f",
+      "byte_length": 94935,
+      "sha256": "8a7a6ff0465e53d58cff071f376c1161e7aa46ca663f1e30fbbcd71746d55443",
       "opening_tag": "<script>",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1409,9 +1409,19 @@
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of the pure answer-normalization closure helper used by evaluateQuizTargetAnswerV857",
       "runtime_contract": "helper stays at its original lexical scope and execution position; byte-identical source is restored by the builder; no runtime script tag or behavior change"
+    },
+    {
+      "name": "quiz_target_value",
+      "path": "src/modules/quiz_target_value.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:quiz_target_value -->",
+      "byte_length": 229,
+      "sha256": "c6eb1a8193d5cbe6a6c5a15ec09125136bb05fb4130a457001cc2bb4057a766a",
+      "insertion_fragment": "src/scripts/script_004.htmlpart",
+      "purpose": "exact-source extraction of the read-only quiz target-value resolver",
+      "runtime_contract": "original helper bytes restored at the original IIFE position; only reads the song row and existing work lookup APIs; no DOM/storage/timer side effects or behavior change"
     }
   ],
-  "module_count": 12,
+  "module_count": 13,
   "release": {
     "version": "V82.85.12",
     "bytes": 8787574,
