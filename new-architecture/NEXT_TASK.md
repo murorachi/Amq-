@@ -1,11 +1,11 @@
 # Next task
 
-**Blocked: UI specification reconciliation. Do not proceed to the next implementation stage.**
+**Blocked: recover the already-approved visual reference, not redesign the brief.**
 
-1. Retrieve the exact previously approved 13-stage UI decisions and reference screenshots/links from the project record. Do not infer or reinvent them.
-2. Produce a traceability map from each reference region to the intended implementation region, including relative layout, visual hierarchy, density, spacing and button alignment.
-3. Compare the current rendered build against the reference at a matching viewport. The last user acceptance was 10/100, so the current UI is rejected.
-4. Correct only the first rejected screen, preserving the independent architecture and keeping legacy AMQ untouched.
-5. Run core regression tests and actual browser visual acceptance; do not treat Node tests as proof of visual fidelity.
-6. Advance to another page only after the current page meets the agreed reference and the user accepts it.
-7. Keep remote source/HTML publication status explicit; documentation-only GitHub commits are not a full release.
+1. Make the exact previously approved 13-stage notes and reference screenshots available to the implementation step. Current accessible project/library files did not contain them; do not substitute generic web screenshots or invent a new design.
+2. Use `UI_CONFORMANCE_MATRIX.md` as the discrepancy checklist.
+3. Fix only the main menu first, using the approved reference's actual composition and proportions.
+4. Run core regression tests, then inspect the real browser render at the reference viewport. Node tests do not count as visual acceptance.
+5. Do not advance to song select until the main menu conforms; do not advance to quiz/results until song select conforms.
+6. Keep the legacy AMQ untouched and separate.
+7. Keep GitHub source/HTML publication status explicit; documentation-only commits are not a full release.
