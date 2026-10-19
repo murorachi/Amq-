@@ -1434,8 +1434,8 @@
       "name": "quiz_answer_alias_tooltip_text",
       "path": "src/modules/quiz_answer_alias_tooltip_text.htmlpart",
       "marker": "<!-- AMQ_SPLIT_MODULE:quiz_answer_alias_tooltip_text -->",
-      "byte_length": 1946,
-      "sha256": "e23e87e0746db474b43031ac33c2ba525eba7d1f62be11bac65005cc7f925f84",
+      "byte_length": 1945,
+      "sha256": "1fab41115b0b7af88cd58f4239df0e64b0ebcceb4f631e1c33a7e814081db71d",
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of the read-only quiz answer alias tooltip text builder",
       "runtime_contract": "original function restored at the same IIFE position; reads active quiz song/catalog/name APIs; no DOM/storage/timer side effects"

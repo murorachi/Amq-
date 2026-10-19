@@ -6,7 +6,7 @@ const rec=manifest.modules.find(x=>x.name==='quiz_answer_alias_tooltip_text'),fr
 check('module manifest byte length and SHA-256',!!rec&&rec.byte_length===Buffer.byteLength(moduleSource)&&rec.sha256===sha(Buffer.from(moduleSource)));
 check('source fragment manifest byte length and SHA-256',!!frag&&frag.byte_length===Buffer.byteLength(source)&&frag.sha256===sha(Buffer.from(source)));
 check('marker unique and correctly positioned',source.split(marker).length-1===1&&source.indexOf('<!-- AMQ_SPLIT_MODULE:quiz_answer_metadata -->')<source.indexOf(marker)&&source.indexOf(marker)<source.indexOf('let quizAliasTooltipV8239'));
-check('exact helper bytes restored at marker',moduleSource===expected+'\n'&&source.replace(marker,moduleSource).includes(expected));
+check('exact helper bytes restored at marker',moduleSource===expected&&source.replace(marker,moduleSource).includes(expected));
 const bundles=new Map([['1',{row:[1,'Alpha','アルファ'],english:'Alpha',romaji:'アルファ',chinese:'甲',aliases:['Alpha','A Alias']}],['2',{row:[2,'Beta','ベータ'],english:'Beta',romaji:'ベータ',chinese:'乙',aliases:['Beta Alias']}]]);
 const unique=xs=>[...new Set(xs.filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim()))],api={isSong:()=>false,getWorkSummary:()=>null,getAliases:()=>({work:[]})};
 const c=vm.createContext({String,Map,Array,quizSong:[1,'song-1',1,1,'Shared Song','Singer'],songs:[[1,'song-1',1,1,'Shared Song','Singer'],[2,'song-2',1,1,'Shared Song','Singer'],[3,'song-3',1,1,'Other Song','Singer']],window:{__aniEmqAPI:api},uniqueQuizNamesV8239:unique,getQuizAnimeNameBundleV8239:id=>bundles.get(String(id))||{row:null,english:'',romaji:'',chinese:'',aliases:[]}});
