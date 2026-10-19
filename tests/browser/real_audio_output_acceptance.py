@@ -310,16 +310,19 @@ def main():
                   userActivationHasBeenActive: !!navigator.userActivation?.hasBeenActive
                 })""")
                 pulse_samples = []
+                pulse_sampling_started = time.monotonic()
                 for sample_index in range(10):
+                    sink_inputs_sample = subprocess.run(
+                        ["pactl", "list", "short", "sink-inputs"], check=True,
+                        capture_output=True, text=True, timeout=10).stdout.strip()
+                    default_sink_sample = subprocess.run(
+                        ["pactl", "get-default-sink"], check=True,
+                        capture_output=True, text=True, timeout=10).stdout.strip()
                     pulse_samples.append({
                         "sample": sample_index,
-                        "elapsedMs": sample_index * 150,
-                        "sinkInputs": subprocess.run(
-                            ["pactl", "list", "short", "sink-inputs"], check=True,
-                            capture_output=True, text=True, timeout=10).stdout.strip(),
-                        "defaultSink": subprocess.run(
-                            ["pactl", "get-default-sink"], check=True,
-                            capture_output=True, text=True, timeout=10).stdout.strip()
+                        "elapsedMs": round((time.monotonic() - pulse_sampling_started) * 1000),
+                        "sinkInputs": sink_inputs_sample,
+                        "defaultSink": default_sink_sample
                     })
                     if sample_index < 9:
                         page.wait_for_timeout(150)
