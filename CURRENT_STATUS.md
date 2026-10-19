@@ -120,3 +120,11 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Closed the first-pass ambiguities in `MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`: Pot Split now specifies floor-rounding and house-retained remainders, insurance payout source, and a worked integer example; Debt Collector now counts two completed game settlements and defines rounding/default handling.
 - Wheel's rules already separate the color-hit probability from the conditional result-card probability; any UI must show both, not collapse them into a misleading single number.
 - No simulation, exact enumeration, product test, or human playtest has been run yet.
+
+
+## Roguelike item/build system design — 2026-10-20
+- Added `reports/MULTIPLAYER_GAMBLE_ITEM_BUILD_SYSTEM_ZH_01.md`.
+- The design draft defines six item categories, item slots, rarity weights, acquisition/replacement rules, a fixed effect-resolution order, 24 provisional items, six curses, four example builds, compatibility constraints, and design acceptance gates.
+- The draft explicitly leaves open a key multiplayer ownership decision: per-player item inventories vs team-shared slots. It recommends no free player-to-player item trading in the first version.
+- This remains design-only. No simulation, exact enumeration, human playtest, implementation, or product regression test was run.
+- No production AMQ HTML, existing multiplayer behavior, server, UI, or database was changed.
