@@ -133,8 +133,8 @@
       "path": "src/scripts/script_004.htmlpart",
       "start_byte": 5144918,
       "end_byte": 5259764,
-      "byte_length": 94935,
-      "sha256": "88725c50d454f3da2791db4eb50d43457df6fd48b2636ff98f50fc150294fe90",
+      "byte_length": 94893,
+      "sha256": "388405f58a3d0848d64491f6147c2ac583372f0979a47b67d0bb2e3bf2b8d3dc",
       "opening_tag": "<script>",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1419,9 +1419,19 @@
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of the read-only quiz target-value resolver",
       "runtime_contract": "original helper bytes restored at the original IIFE position; only reads the song row and existing work lookup APIs; no DOM/storage/timer side effects or behavior change"
+    },
+    {
+      "name": "quiz_practice_meta_getter",
+      "path": "src/modules/quiz_practice_meta_getter.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:quiz_practice_meta_getter -->",
+      "byte_length": 93,
+      "sha256": "6da0fb7c7505743261456cc086a7c64a20737ab84316df6c9e3cf229c05c7776",
+      "insertion_fragment": "src/scripts/script_004.htmlpart",
+      "purpose": "exact-source extraction of the read-only per-song practice metadata accessor",
+      "runtime_contract": "original declaration restored at the same IIFE position; reads the existing lexical quizPracticeMetaV8239 object and preserves String(songId) plus || null semantics; no DOM/storage/timer side effects"
     }
   ],
-  "module_count": 13,
+  "module_count": 14,
   "release": {
     "version": "V82.85.12",
     "bytes": 8787574,
