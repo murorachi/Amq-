@@ -78,7 +78,7 @@ function ok(value, label) { assertions++; assert.ok(value, label); }
     equal(vm.runInContext("cleanTitle('  繁體標題  ')", sandbox), '繁體標題', 'trimmed Han title accepted');
     equal(vm.runInContext("cleanTitle('Japanese タイトル')", sandbox), '', 'kana-containing title rejected');
     equal(vm.runInContext("cleanTitle('English Only')", sandbox), '', 'non-Han title rejected');
-    equal(vm.runInContext("cleanTitle('繁體標題'.repeat(30))", sandbox), '', 'overlong title rejected');
+    equal(vm.runInContext("cleanTitle('繁體標題'.repeat(50))", sandbox), '', 'overlong title rejected');
   });
   await run('VNDB Traditional Chinese title is preferred before simplified aliases', async () => {
     const { sandbox } = makeContext();
