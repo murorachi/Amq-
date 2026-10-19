@@ -68,3 +68,14 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Latest completed full source/unit + Firefox run: [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248), source/unit 132/132 and Firefox responsive passed; both new payload tests passed. Chromium native-origin failed only at known audio output capture assertion (peak=0, rms=0.0). Newer audit commits are still running CI; verify the newest run before closing CI acceptance.
 - Highest-value follow-up: focused SRS state-transition/persistence contract, followed by scene-background IndexedDB/object-URL lifecycle coverage. Do not broaden into a general rewrite.
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## V82.85.30 SRS transition characterization
+
+- Branch: `v82.85.30-srs-transition-contract-01`, based on `v82.85.29-source-audit-matrix-01`.
+- Added `tests/unit/srs_rating_transition_contract.test.cjs` with 17 exact-source cases covering schema validation, invalid-record quarantine/recovery, new/learning/review/relearning transitions, interval bounds, review-log cap, invalid grades and failed persistence.
+- Registered the test in `.github/workflows/v82-85-4-engineering-acceptance.yml` and required it plus its report in the deterministic checkpoint package.
+- Product script `src/scripts/script_020.htmlpart` unchanged; no scheduling formula, storage key, schema or UI changes.
+- Local test execution: NOT RUN in this authoring environment. GitHub Actions result pending; do not call the stage accepted until the newest run is inspected.
+- Prior source-audit CI [39234884575](https://github.com/murorachi/Amq-/actions/runs/39234884575): source/unit passed, Firefox responsive passed; Chromium native-origin failed only at known final audio output capture assertion (peak=0, rms=0). This is unrelated to SRS and remains tracked separately.
+- Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
