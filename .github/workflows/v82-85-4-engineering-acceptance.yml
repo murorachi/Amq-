@@ -38,6 +38,8 @@ jobs:
         run: node tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs
       - name: Test multiplayer audio failure handler dedup contract
         run: node tests/unit/multiplayer_audio_failure_callback_contract.test.cjs
+      - name: Test SRS state transitions and persistence characterization
+        run: node tests/unit/srs_state_transition_persistence_contract.test.cjs
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
       - name: Build and verify checkpoint source package
