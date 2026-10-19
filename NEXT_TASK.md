@@ -1,23 +1,23 @@
-# Next task: diagnose Chromium audio output routing
+# Next task: continue historical-code deduplication
 
-Branch: `v82.85.23-audio-failure-contract-01`.
+Branch: `v82.85.25-multiplayer-audio-callback-dedup-01`.
 
 ## Current checkpoint
 
-- Production baseline remains V82.85.22, 8,787,300 bytes / SHA-256 `69909839f922b702635eec217fcbb836c388502f83d40b11021cd194de20cdc2`.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- The callback contract is registered in CI and passed in run [39211912490](https://github.com/murorachi/Amq-/actions/runs/39211912490). Local execution was not performed.
-- Firefox responsive and multiplayer lifecycle acceptance passed. The browser-native-origin job failed at real audio output: Chromium media time advances, but PulseAudio reports no sink inputs and captured PCM is silent (`peak=0, rms=0.0`).
-- No production code or standalone HTML fingerprint changed in V82.85.23.
+- V82.85.25 consolidates two identical multiplayer audio failure callback bodies into one parameterized helper. Both original flows retain their own `id`, media object and watchdog closure.
+- Focused contract checks the helper's pending candidate fallback, active audio fallback, stale event safety, and the two call sites.
+- Finish deterministic build fingerprint verification before treating this stage as accepted.
+- The user confirmed actual audio playback works. Do not spend more time on the known CI-only audio capture mismatch unless product playback regresses.
 
 ## Steps
 
-1. Investigate why Chromium registers as a PulseAudio client but creates no sink input while native media playback advances. Keep audio output assertion unchanged.
-2. Add or adjust only test-harness diagnostics/launch configuration based on evidence, then rerun the real audio gate.
-3. Re-run the full browser-native-origin and Firefox jobs after any harness change; distinguish test-environment fixes from actual application behavior.
-4. Defer the duplicate callback extraction unless later maintenance evidence makes it worthwhile; preserve the passing callback contract.
-5. Update release fingerprints and standalone artifacts only for a production-source change.
+1. Retrieve CI output and finalize V82.85.25 release fingerprint.
+2. Confirm source verifier, callback contract, package completeness/reproducibility, and Firefox responsive acceptance.
+3. Update the historical debt inventory with the completed dedup and its actual test results.
+4. Select the next exact/semantic duplicate with meaningful maintenance value; do not merge same-name helpers with different behavior.
+5. Keep the quiz lifecycle, persistence, CSS ordering, and multiplayer state boundaries intact unless a specific change requires touching them.
 
 ## Rollback
 
-For any future audio-harness change, revert only the relevant test/workflow change if it makes the output test less reliable. Do not weaken the non-silent PCM assertion. Production source remains V82.85.22 and needs no rollback. Never overwrite V82.82.
+Revert the helper extraction, test, workflow step, package/report metadata, and manifest fingerprints as a unit. Keep V82.82 immutable.
