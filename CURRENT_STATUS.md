@@ -38,3 +38,12 @@
 - Continue the IndexedDB failure matrix: open/blocked/upgrade, transaction failure, quota/corruption, rollback and reload.
 - Keep Firefox CSS cascade, real audio provider, production-origin storage policy, and naturally occurring IndexedDB quota/corruption as separate gates.
 - Do not change product source until test evidence identifies a product defect.
+
+
+## Gamble Roguelike design checkpoint — Gate 07
+- Report: [Design Gate 07](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_07.md).
+- Simulation: [Gate 07 recovery stress test](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/design_simulations/gamble_roguelike_gate07.py).
+- Repeated recovery payments at 2 strain could remove strain indefinitely. Candidate correction: once per run, at 2 strain, fee ceil(15% of bank), clear one strain, and forfeit that stage's item reward.
+- Exact committed integer-RNG simulation (100,000 runs per policy): never recover 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible 45.403% clear / 27.469% failure / mean final bank 947.30. Item reward opportunity cost is not modeled.
+- Gate 06 rejected generic all-game retry because it was either dominant or irrelevant depending on penalty. Integer-floor payout creates small implicit EV losses for Safe and Jackpot.
+- Full-run integration, item acquisition opportunity costs, three viable strategies, group fairness, and human playtest remain missing. Design only; server/UI/database implementation remains blocked.
