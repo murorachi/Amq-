@@ -133,8 +133,8 @@
       "path": "src/scripts/script_004.htmlpart",
       "start_byte": 5144918,
       "end_byte": 5259764,
-      "byte_length": 94893,
-      "sha256": "9dc70201257c84e12476c1b17cb0d05231948f112037b92a4a890e81f9b07c6a",
+      "byte_length": 93004,
+      "sha256": "f9dfcd2322a99bb1a2b0f2facece6209cdc9a6d9625799bfecaab07fcb56b011",
       "opening_tag": "<script>",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1429,9 +1429,19 @@
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of the read-only per-song practice metadata accessor",
       "runtime_contract": "original declaration restored at the same IIFE position; reads the existing lexical quizPracticeMetaV8239 object and preserves String(songId) plus || null semantics; no DOM/storage/timer side effects"
+    },
+    {
+      "name": "quiz_answer_alias_tooltip_text",
+      "path": "src/modules/quiz_answer_alias_tooltip_text.htmlpart",
+      "marker": "<!-- AMQ_SPLIT_MODULE:quiz_answer_alias_tooltip_text -->",
+      "byte_length": 1946,
+      "sha256": "e23e87e0746db474b43031ac33c2ba525eba7d1f62be11bac65005cc7f925f84",
+      "insertion_fragment": "src/scripts/script_004.htmlpart",
+      "purpose": "exact-source extraction of the read-only quiz answer alias tooltip text builder",
+      "runtime_contract": "original function restored at the same IIFE position; reads active quiz song/catalog/name APIs; no DOM/storage/timer side effects"
     }
   ],
-  "module_count": 14,
+  "module_count": 15,
   "release": {
     "version": "V82.85.12",
     "bytes": 8787574,

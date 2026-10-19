@@ -1,0 +1,19 @@
+function quizAnswerAliasTooltipTextV8239(){
+ if(!quizSong)return '';
+ const isEmq=!!window.__aniEmqAPI?.isSong?.(quizSong),summary=isEmq?window.__aniEmqAPI?.getWorkSummary?.(quizSong[0]):null;
+ const current=isEmq?{row:summary,english:String(summary?.[1]||'').trim(),romaji:String(summary?.[2]||'').trim(),chinese:'',aliases:uniqueQuizNamesV8239([summary?.[1],summary?.[2],...(window.__aniEmqAPI?.getAliases?.(quizSong[1])?.work||[])])}:getQuizAnimeNameBundleV8239(quizSong[0]);
+ const lines=[isEmq?'可接受的作品名稱':'可接受的動畫名稱'];
+ if(current.english)lines.push(`英文／主要名稱：${current.english}`);
+ if(current.romaji)lines.push(`羅馬拼音／其他名稱：${current.romaji}`);
+ if(current.chinese)lines.push(`繁體中文名稱：${current.chinese}`);
+ const extras=current.aliases.filter(x=>![current.english,current.romaji,current.chinese].includes(x));if(extras.length)lines.push(`其他名稱：${extras.join('、')}`);
+ const normalize=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\p{C}]/gu,'');
+ const title=normalize(quizSong[4]),artist=normalize(quizSong[5]),related=new Map();
+ if(!isEmq&&title&&artist)for(const song of (Array.isArray(songs)?songs:[])){
+  if(normalize(song?.[4])!==title||normalize(song?.[5])!==artist||String(song?.[0])===String(quizSong[0]))continue;
+  const bundle=getQuizAnimeNameBundleV8239(song[0]);if(bundle.row)related.set(String(song[0]),bundle);
+ }
+ if(related.size){lines.push('同歌名、同歌手收錄的其他動畫：');for(const bundle of [...related.values()].sort((a,b)=>(a.english||a.romaji).localeCompare(b.english||b.romaji)))lines.push('• '+uniqueQuizNamesV8239([bundle.english,bundle.romaji,bundle.chinese,...bundle.aliases]).join(' / '))}
+ else lines.push(isEmq?'EMQ 不會僅憑相同歌名與歌手自動接受其他作品。':'其他動畫：曲庫內沒有找到同歌名、同歌手的作品。');
+ return lines.join('\n');
+}

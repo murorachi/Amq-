@@ -32,6 +32,7 @@ COMMANDS = [
     ("quiz answer target normalization extraction contract", ["node", "tests/unit/quiz_answer_target_normalization_contract.test.cjs"]),
     ("quiz target-value extraction contract", ["node", "tests/unit/quiz_target_value_extraction_contract.test.cjs"]),
     ("quiz practice metadata getter extraction contract", ["node", "tests/unit/quiz_practice_meta_getter_extraction_contract.test.cjs"]),
+    ("quiz answer alias tooltip text extraction contract", ["node", "tests/unit/quiz_answer_alias_tooltip_text_extraction_contract.test.cjs"]),
     ("quiz suggestion renderer extraction contract", ["node", "tests/unit/quiz_suggestion_renderer_extraction_contract.test.cjs"]),
     ("quiz suggestion controller extraction contract", ["node", "tests/unit/quiz_suggestion_controller_extraction_contract.test.cjs"]),
     ("anime/song DB initializer extraction contract", ["node", "tests/unit/anime_song_database_extraction_contract.test.cjs"]),
