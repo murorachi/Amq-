@@ -314,7 +314,9 @@ def main():
                 page.wait_for_timeout(350)
                 before_reveal = page.evaluate("audioEl.currentTime")
                 page.locator("#quizAnswer").fill(quiz_song["title"])
-                page.locator("#quizSubmit").click(timeout=10000)
+                # In this quiz layout the submit control is visually hidden and
+                # answers are submitted through the answer field keyboard handler.
+                page.locator("#quizAnswer").press("Enter", timeout=10000)
                 page.wait_for_function("window.__aniQuizStateV45?.quizFinished === true", timeout=5000)
                 check(page.evaluate("!audioEl.paused"),
                       "revealing the answer does not pause the playing track")
