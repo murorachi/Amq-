@@ -147,7 +147,11 @@ def main():
             # HTMLMediaElement advance and emit events while silently discarding the
             # operating-system audio stream. This acceptance must measure real output,
             # so explicitly remove that default switch and keep the PCM monitor gate.
-            launch = {"headless": True, "ignore_default_args": ["--mute-audio"], "args": [
+            # Use the full Chromium binary, not Playwright's lightweight headless
+            # shell: the latter can advance media timelines without opening an OS
+            # audio sink, which makes a PulseAudio output gate meaningless.
+            launch = {"headless": True, "channel": "chromium",
+                      "ignore_default_args": ["--mute-audio"], "args": [
                 "--no-sandbox", "--disable-dev-shm-usage",
                 "--autoplay-policy=document-user-activation-required"
             ]}
