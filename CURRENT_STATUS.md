@@ -103,3 +103,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Report: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md`.
 - Production `script_041.htmlpart` is unchanged. Automated execution is pending CI; no pass claim yet.
 - SRS and scene-background contracts already passed 41 and 29 assertions respectively; source/unit and Firefox responsive passed on their recorded runs. Full Chromium-native workflow continues to show the known audio-output capture failure separately from product playback.
+
+
+## Chinese-title source mapping contract in progress
+
+- Added `tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs` for `script_031.htmlpart`, wired into CI, with report `reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md`.
+- Scenarios: unique/ambiguous AniList and MAL ID resolution, fail-closed conflicting mappings, AniList-only/Bangumi-only partial success, and both-source failure.
+- Automated execution pending CI; no pass claim yet. Production title loader, source URLs, cache version and IndexedDB schema unchanged.
+- EMQ title cache contract step passed 25 assertions in run [39249715083](https://github.com/murorachi/Amq-/actions/runs/39249715083); source/unit was still completing at last check. The current source mapping test must also pass before closing this task.
