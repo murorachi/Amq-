@@ -70,6 +70,8 @@ def revised_fixed_stake(policy, use_reroll=False, runs=RUNS):
         reroll_available = use_reroll
         for target in targets:
             gap = max(0.0, target - bank)
+            # Safe if its win can meet quota; otherwise balanced if it can; otherwise jackpot.
+            # Balanced policy accepts a little more risk when gap exceeds 2% of bank.
             if policy == "always-safe":
                 choice = "safe"
             elif policy == "quota-aware":
