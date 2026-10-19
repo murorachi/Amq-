@@ -55,3 +55,16 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Matrix count: 1 first-pass file audit complete, 1 partially reviewed known-risk fragment (`script_028`), 89 awaiting file-specific review. This is evidence-based audit status, not a claim that all unreviewed fragments contain defects.
 - V82.85.28 run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840) completed: source/unit passed 132/132; Firefox responsive passed; Chromium native-origin job failed only at the known non-silent CI audio output capture assertion (peak=0, rms=0.0). Other quiz and multiplayer lifecycle assertions in that job passed. Actual product playback was user-confirmed. Manual interactive acceptance was not performed.
 - Immutable V82.82 baseline remains unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## V82.85.29 audit milestone — first pass complete
+
+- Branch: `v82.85.29-source-audit-matrix-01`.
+- Audit matrix: `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`.
+- First-pass status: **91/91 registered fragments reviewed**, including 41 script fragments and 50 style fragments. Initial-review queue: 0.
+- CSS review is static selector/cascade inventory only. It does not claim pixel-diff or computed-style equivalence for every viewport/state.
+- Added actual embedded EMQ payload integrity test (6,645 works, 16,839 songs, 8,383,856 decompressed bytes) and AniList ID map integrity test (9,400 entries). Corrected manifest roles for data payloads; product payload/runtime source unchanged.
+- Summary: `reports/V82_85_29_SOURCE_AUDIT_SUMMARY.md`.
+- Latest completed full source/unit + Firefox run: [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248), source/unit 132/132 and Firefox responsive passed; both new payload tests passed. Chromium native-origin failed only at known audio output capture assertion (peak=0, rms=0.0). Newer audit commits are still running CI; verify the newest run before closing CI acceptance.
+- Highest-value follow-up: focused SRS state-transition/persistence contract, followed by scene-background IndexedDB/object-URL lifecycle coverage. Do not broaden into a general rewrite.
+- Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
