@@ -24,8 +24,8 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 1 |
-| Partially reviewed / known risk, not full sign-off | 1 |
+| First-pass file audits completed | 2 |
+| Partially reviewed / known risk, not full sign-off | 0 |
 | Awaiting file-specific review | 89 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
@@ -96,7 +96,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | JS 026 | `src/scripts/script_026.htmlpart` | 33347 | `9cd1bb16da042aa4…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 031 | `src/styles/style_031.htmlpart` | 75164 | `1b4e4cdc0ad23681…` | P1 | 待逐檔排查 | 大型樣式片段；盤點 selector、重複宣告、媒體查詢與載入順序，保留 cascade 順序。 |
 | JS 027 | `src/scripts/script_027.htmlpart` | 44 | `4ba9c72cbba7d24d…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 028 | `src/scripts/script_028.htmlpart` | 139202 | `24d805495ba443bd…` | P1 | 局部審查，未完成整檔審查 | 已有多人模式 checked helper、範圍驗證及下一首音訊狀態重設等局部整理；仍混合設定遷移、房間／重連、篩選、持久化、UI 與音訊生命週期。 |
+| JS 028 | `src/scripts/script_028.htmlpart` | 139202 | `24d805495ba443bd…` | P1 | 首輪逐檔審查完成；風險保留 | 120 個命名函式；混合房間／重連、REST／WebSocket、AMQ／EMQ／VNDB 清單範圍、持久化、UI 與音訊／影片生命週期。既有單元及瀏覽器生命週期測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_028_MULTIPLAYER_LIFECYCLE_V82_85_29.md`。 |
 | CSS 032 | `src/styles/style_032.htmlpart` | 5061 | `53935154da57f393…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 029 | `src/scripts/script_029.htmlpart` | 8373 | `d91ea61be8b60a48…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | JS 030 | `src/scripts/script_030.htmlpart` | 125793 | `8a5888099591e329…` | P1 | 待逐檔排查 | 大型腳本，優先盤點主要職責、全域狀態、事件註冊、計時器／媒體副作用與測試覆蓋。 |
