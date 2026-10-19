@@ -9,3 +9,13 @@
 - Latest completed source/unit + Firefox run: [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248), verifier 132/132, both payload tests and Firefox responsive passed. Native-origin failed only at known non-silent audio capture; a newer audit-only run is pending final status.
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Rollback: revert audit reports/matrix, the two integrity tests, workflow/package registration and manifest-role changes. No product-source rollback is required.
+
+
+## SRS characterization test checkpoint
+
+- Branch remains `v82.85.29-source-audit-matrix-01`.
+- Added `tests/unit/srs_state_transition_persistence_contract.test.cjs` and its workflow step; report: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md`.
+- Scope is limited to characterization of existing `script_020.htmlpart` behavior: rating/learning transitions, interval bounds, schema validation, reload preservation and storage quarantine/failure behavior.
+- Production source, formula, weights and storage schema unchanged.
+- CI execution pending; no pass claim until the new test is observed passing.
+- Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
