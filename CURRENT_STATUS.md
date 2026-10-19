@@ -77,3 +77,12 @@
 - CI passed: [run 39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158), including Python syntax checks and Gate 05–13 simulations. This verifies reproducible execution, not fun or human fairness.
 - Rule updates: shuffle two Risk / two Vault / one Signal event cards; stage target is post-recovery bank + ceil(1%); final goal 105%; two-clue fee is ceil(6% stake); Insurance is Bank/Balanced only at 10% refund; Vault Harness 20%; recovery once/run at 12% (8% with voucher), skips the next eligible Blind Draft.
 - Design is now stable enough for paper testing, but not proven comparable in enjoyment to existing products. No implementation authorized until real players show meaningful decisions and voluntary replay intent.
+
+
+## Gate 14 — shared draft inventory finalized
+- Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`; paper kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`.
+- Draft design changed from per-player items to a shared team inventory capped at two items. After a cleared stage 2 or 4, the two highest-ranked players each make one pick from three distinct item cards. The shared cap prevents item count scaling automatically with party size. Team votes whether to activate one eligible item.
+- Favor rules now state that a token spent before a tie remains spent; tie rerolls use raw d6. AFK/disconnected players do not roll or spend Favor; if no player is active, skip the draft.
+- Gate 14 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`, `reports/design_simulations/gamble_roguelike_gate14.py`. The two-pick simulation preserved the strategy niches in the fixed test sequence.
+- CI passed: [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351), including Gate 14 syntax and simulation. Human draft fairness is still untested.
+- Design is paper-test ready, not implementation-ready. No human paper session has occurred, so fun comparability remains unproven.
