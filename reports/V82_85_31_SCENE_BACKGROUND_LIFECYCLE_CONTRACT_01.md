@@ -32,7 +32,8 @@ The backup-restore checks are source-contract assertions; they do not simulate a
 
 - Static source-boundary inspection: PASS; exact function bodies are bounded by adjacent production declarations.
 - Local execution in this authoring environment: NOT RUN; GitHub Actions is the execution authority.
-- CI source/unit, package reproducibility, Firefox responsive and Chromium native-origin: pending this branch's workflow run.
+- GitHub Actions run [39238306059](https://github.com/murorachi/Amq-/actions/runs/39238306059): **source/unit PASS**, scene-background contract **18/18 PASS**, SRS contract **17/17 PASS**, checkpoint package contract/reproducibility **PASS** (404 entries, CRC and required paths pass; repeated ZIP SHA-256 `43515ff8fbd44651cb558cb5a35c3464bc85b601fc97311d507efcdffed1296a`), deterministic standalone V82.85.28 build **PASS**, Firefox responsive **PASS**.
+- Chromium native-origin: native storage/custom-list, IndexedDB/input, suggestion, quiz playback lifecycle and multiplayer lifecycle steps passed. Only final non-silent audio monitor capture failed (peak=0, rms=0), the known environment capture limitation. Overall workflow is marked failed because of this step; it is not evidence of a scene-background or SRS regression. Actual product playback was user-confirmed. Manual interactive acceptance was not performed.
 - Existing CI audio capture issue remains separate from this storage/resource stage. Actual product playback was user-confirmed; do not interpret the known non-silent output capture mismatch as an IndexedDB failure.
 
 ## Rollback and next work
