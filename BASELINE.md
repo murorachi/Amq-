@@ -12,35 +12,38 @@
 - Browser harness: `tests/browser/native_storage_custom_lists_acceptance.py`.
 - Verified test commit: `cbc5fed2d513fa4c01761cd640ea65c160a76146`.
 - CI run [39166474674](https://github.com/murorachi/Amq-/actions/runs/39166474674): both `source-and-unit` and `browser-native-origin` passed.
-- Added assertions: full backup includes AMQ/EMQ custom-list stores and manifest; corrupt manifest is rejected without storage mutation; injected write failure restores the exact prior application-storage snapshot; valid restore recovers both list IDs and names; real document reload preserves both payloads and both lists render again.
-- One initial attempt failed due to invalid Python string escaping in the test harness; fixed before the passing commit. Keep this failure in the audit trail.
+- Added assertions: backup includes AMQ/EMQ custom-list stores and manifest; corrupt manifest rejection without mutation; injected write failure restores exact prior storage; valid restore recovers both list IDs/names; reload persists both payloads and renders both lists.
+- One initial attempt failed due to Python string escaping; fixed before the passing commit. Keep the failure in the audit trail.
 
 ## Acceptance boundaries
-- Browser checks use Chromium on a temporary localhost HTTP origin and an isolated context with native browser storage.
-- The synthetic write failure verifies rollback logic, not a naturally occurring quota or disk failure.
-- Firefox CSS cascade, real audio-provider playback, production-domain storage policy and naturally occurring IndexedDB quota/corruption remain separate gates.
+- Browser checks use Chromium on a temporary localhost HTTP origin and isolated native browser storage.
+- Synthetic write failure verifies rollback logic, not naturally occurring quota/disk failure.
+- Firefox CSS cascade, real audio-provider playback, production-domain storage policy, and naturally occurring IndexedDB quota/corruption remain separate gates.
 - Thirteen modules have CI contracts but semantic modularization is not complete.
 
 ## Separate workstream: multiplayer Gamble Roguelike
 
 - Branch: `multiplayer-gamble-engine-discovery-01`, created from V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
 - Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Current phase is **design iteration only**. The existence of code-level rule fixtures does not authorize server/UI implementation.
-- Design Gate 01: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md`.
+- Current phase is **design iteration only**. Code-level rule fixtures do not authorize server/UI implementation.
+- Gate 01: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md`.
+- Gate 02: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md`.
+- Simulation: `reports/design_simulations/gamble_roguelike_gate02.py`.
 - Design-first plan: `reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`.
-- Discovery record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
-- Existing isolated files under `gamble-roguelike/` provide deterministic rules for Coin Call, Exact Seven, a partial Vault step, Blind High Card, and an in-memory integer-chip ledger. The ledger is not durable; Vault has no complete run-state/cash-out implementation. No server, database, browser UI, deployment, or live two-client test exists.
-- Previously recorded local working-copy tests: 10/10 subtests passed and syntax checks passed. The committed GitHub `test/core.test.js` has 8 tests. No verified remote CI result is available; do not report remote CI as passing.
-- Design Gate 01 concluded that Coin Call and Exact Seven are too shallow as signature games, Vault needs full state/cash-out rules, and Blind High Card needs an additional meaningful decision.
-- Revised hypothesis: 2–6-player co-op, shared virtual bankroll, simultaneous private actions, escalating stage quotas, route choices, 8–12 run-only items, and target 12–20 minute runs. All are unvalidated hypotheses, not approved final constants.
-- Proposed mechanism slots: Vault push-your-luck; Risk Contract with distinct probability/reward profiles; Blind Pot with one extra information/insurance choice; Team Gamble with collective push-your-luck.
-- Next design gate: numeric full-run walkthrough, item/synergy set, independent probability and expected-value calculations, reproducible simulation, and revision based on findings.
+- Existing `gamble-roguelike/` files contain deterministic rules for Coin Call, Exact Seven, a partial Vault step, Blind High Card, and an in-memory ledger. The ledger is not durable; Vault lacks complete run-state/cash-out logic. No server, database, browser UI, deployment, or live two-client test exists.
+- Previously recorded local working-copy tests: 10/10 subtests and syntax checks passed. The committed GitHub `test/core.test.js` has 8 tests. Remote CI is not verified.
+- Gate 02 risk-profile math: Safe EV −10%/stake, Balanced −12%/stake, Jackpot −17.5%/stake. Vault revised cash-out gross EVs: 0.880×, 0.840×, and 0.8064× of original stake at steps 1–3.
+- A 100,000-run quota-sized model exposed a dominant Safe strategy: 89.398% clear versus 31.780% Balanced and 2.684% Jackpot. The model was rejected.
+- A fixed-stake model gave 38.830% clear for quota-aware play before items. A free-reroll upper bound increased it to 61.070%; this shows reroll strength must be tuned, not that the item is balanced.
+- Mechanism slots: Vault; Risk Contract; Blind Draft with item priority rather than a fake shared-chip pot; Team Gamble.
+- Ten draft items are documented but not yet combination-tested. Simulation models the team as one actor and cannot establish multiplayer fun.
+- Next design gate: revise quota/strain/recovery, simulate items and 2/3/6-player policies, and prepare paper-playtest materials.
 - No product HTML, source, or existing multiplayer behavior has been changed in this workstream.
 
 ## Acceptance boundary
-- Design docs and simulations may identify weak balance but cannot prove real player enjoyment.
-- Do not implement a server or browser client until design Gates A–C pass and the Gate D playtest plan is ready. A low-fidelity playable prototype and external playtest are still required before claiming comparable fun.
-- Any unexecuted test must be marked unexecuted; local checks and remote CI are separate evidence.
+- Design simulations can detect bad balance but cannot prove enjoyment.
+- Do not implement server/UI until design Gates A–C pass and Gate D's playtest plan is ready. A low-fidelity playable prototype and external playtest are required before claiming comparable fun.
+- Unexecuted tests remain marked unexecuted; local tests and remote CI are separate evidence.
 
 ## Rollback
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`.
