@@ -18,3 +18,11 @@
 - Standalone candidate: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
 - Deterministic source package SHA-256 `d1eab00af3bb59955bdcc11650a8edf5a8653df3c46912c08b725b60c7aea56a`; package artifact uploaded.
 - Do not mark overall browser acceptance complete until run conclusion is final.
+
+
+## V82.85.30 full CI outcome
+
+- Run [39252741670](https://github.com/murorachi/Amq-/actions/runs/39252741670): source/unit PASS (132/132 verifier checks and all unit steps), Firefox responsive PASS.
+- Browser-native lifecycle checks passed except final non-silent audio output capture (`peak=0, rms=0.0`); PulseAudio self-test passed. This is the known capture mismatch. Actual product playback was user-confirmed.
+- Source package and standalone artifacts uploaded; verify the newest run after final documentation commits for the authoritative artifact IDs/fingerprints.
+- V82.82 immutable baseline remains unchanged.
