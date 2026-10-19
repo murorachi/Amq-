@@ -1,7 +1,7 @@
-# AMQ historical-code technical-debt inventory (V82.85.25 checkpoint)
+# AMQ historical-code technical-debt inventory (V82.85.26 checkpoint)
 
 - Date: 2026-10-19
-- Branch: `v82.85.25-multiplayer-audio-callback-dedup-01`
+- Branch: `v82.85.26-suggestion-cache-invalidation-dedup-01`
 - Base commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`
 - Scope: bounded debt review and one exact duplicate-helper consolidation.
 
@@ -25,6 +25,7 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 
 - Removed two redundant copies of the exact `checked(selector)` helper from `script_028.htmlpart`, retaining one declaration at IIFE scope after `view` is initialized. Existing call sites are unchanged.
 - In V82.85.25, consolidated the two identical multiplayer audio `failed` callback bodies into `handleAudioFailure(id,a,watchdog)`. Both callers retain their local IDs, media elements and watchdog variables; a focused contract protects pending, active and stale-event branches.
+- In V82.85.26, removed one redundant anime suggestion-cache invalidation loop from the display-language listener, because it immediately calls the shared refresh function that already clears those same entries and refreshes all suggestion fields. Added a focused contract.
 - Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` to verify one declaration, its three consumers, numeric song-type values, string-valued other filters and empty selections.
 - Improved `tools/verify.py` to print actual UTF-8 byte length and SHA-256 when a fragment/module fingerprint fails.
 - Wired the contract into the source/unit CI job.
@@ -38,6 +39,13 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 - Firefox responsive: **PASS** in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296).
 - Real-audio output capture: **FAIL** in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296), `peak=0, rms=0.0`; PulseAudio self-test passed, but Chrome had no sink input. No audio code changed.
 - Manual interactive acceptance: not performed.
+
+## V82.85.26 validation checkpoint
+
+- Change: removed one redundant 95-character cache invalidation loop; the shared refresh function is now the sole owner.
+- Modified fragment: 139,664 bytes / SHA-256 `c349421f2a4759677669079d5e37a212795958ec6e556b56f36cadddeb56d018`.
+- Candidate: 8,787,009 bytes / SHA-256 `1745600f52de09983ca3b66e45341a27acbd463e233fc77719e42f4673d4abad`; clean CI verification of this pin is pending.
+- The new contract checks the single invalidation loop and language-listener delegation. Post-change test results are pending.
 
 ## V82.85.25 validation checkpoint
 
