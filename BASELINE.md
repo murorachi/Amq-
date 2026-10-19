@@ -92,3 +92,10 @@
 - Cache version/read/write contract passed 14 assertions in run [39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871); source verifier 132/132, all source/unit steps and Firefox responsive passed. Chromium native-origin remained in progress at last check.
 - Array-shaped records currently pass the cache guard; documented for possible hardening, no production change.
 - Next task: evidence-based disposition update for the historical technical-debt inventory.
+
+
+## Chinese-title malformed-cache guard fix
+
+- `script_031.htmlpart` now rejects array-shaped cache records so malformed `[]` cannot masquerade as a successful cache hit. Existing download fallback handles the miss. DB/store/key/version and other runtime behavior are unchanged.
+- Regression test now asserts array rejection. Final CI pending after updating the manifest.
+- New fragment fingerprint: 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
