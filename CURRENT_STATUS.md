@@ -1,3 +1,18 @@
+# Current engineering checkpoint: V82.85.30 audio volume default fix
+
+- Active branch: `v82.85.30-audio-volume-default-fix-01`.
+- Previous diagnostic branch: `v82.85.29-chromium-pulse-stream-diagnostics-01`; CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693) failed at the strict non-silent PCM gate and revealed `muted=true` and `volume=0`.
+- Root cause: missing `aniQuizVolume` is `null`; applying `Number(null)` produces 0, overwriting the documented 70% default and muting the player.
+- Fix in `src/scripts/script_014.htmlpart`: only consume a non-empty stored preference. Explicit 0 remains a valid user choice.
+- Added `tests/unit/quiz_volume_default_contract.test.cjs` with 10 assertions for missing, zero, and nonzero preferences; wired into source/unit CI.
+- Updated fragment fingerprint, V82.85.30 artifact/package naming, and checkpoint metadata. Candidate release SHA-256 is pending CI reconstruction.
+- Not yet verified: local execution of the new Node test, complete CI, native Chromium non-silent PCM output, and the candidate HTML SHA-256.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+---
+
+## Historical checkpoints
+
 # Current engineering checkpoint: V82.85.26 suggestion cache invalidation dedup
 
 - Branch: `v82.85.26-suggestion-cache-invalidation-dedup-01`, based on the V82.85.25 multiplayer audio callback dedup checkpoint.

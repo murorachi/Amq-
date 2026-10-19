@@ -1,29 +1,36 @@
-# Next task: diagnose Chromium audio output stream
+# Next task: verify V82.85.30 audio volume default fix
 
-Branch: v82.85.29-chromium-pulse-stream-diagnostics-01.
+Branch: `v82.85.30-audio-volume-default-fix-01`.
 
-## Current checkpoint
+## Confirmed root cause
 
-- Parent: v82.85.28-next-audio-state-reset-dedup-01. Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
-- Test-only change in tests/browser/real_audio_output_acceptance.py: capture media-element mute/volume/readiness/source state, sample PulseAudio sink-inputs ten times during active playback, record actual monotonic elapsed time for each sample, and print detailed sink-input properties.
-- Reason: run 39229842012 showed the native playing event and advancing media timeline, but PulseAudio reported no sink-input and an IDLE sink; final monitor PCM had peak=0 and RMS=0. Root cause remains unconfirmed.
-- Current branch head before CI-trigger checkpoint: 531d5036dafafb63a34629ac1324df3b0e2c72e8.
-- CI trigger investigation: `.github/workflows/v82-85-4-engineering-acceptance.yml` declares `push` on branches matching `v82.85.*` and `workflow_dispatch`, but no `pull_request` trigger. PR #2 was changed from draft to ready, yet no run appeared. The available GitHub connector exposes no workflow-dispatch action. This checkpoint update is intended to create a branch push so the declared push trigger can run.
+CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693) reported:
+- media element: `muted=true`, `volume=0`, `paused=false`, `readyState=4`;
+- source was a valid WAV mirror and the decoded timeline advanced;
+- PulseAudio sink-input was absent across ten samples;
+- capture self-test succeeded (peak 6999, RMS 4131), while browser PCM was peak 0 / RMS 0.
 
-## Steps
+The volume initializer used `Number(localStorage.getItem('aniQuizVolume'))`. When no value exists, `getItem` returns `null` and `Number(null)` becomes 0. The slider then applies zero volume and mutes the player. This is a product initialization defect exposed by a clean browser profile, not evidence that Chromium's audio service itself is broken.
 
-1. Confirm whether the push-triggered workflow starts on this checkpoint commit and inspect `PULSE_STREAM_DIAGNOSTIC`.
-2. Classify the evidence: (a) media muted/volume zero, (b) no PulseAudio sink-input despite active media, (c) sink-input present but monitor remains silent, or (d) stream appears only intermittently.
-3. Make the smallest test-environment-only fix supported by the logs. Do not change production audio logic unless a separate product regression is demonstrated.
-4. Re-run native audio output acceptance and verify non-silent PCM (peak >= 1000 and RMS >= 150), plus the existing lifecycle assertions. Report other CI jobs separately.
-5. If the environment-level cause is not demonstrated, keep the issue open rather than weakening the PCM gate.
+## Current changes
 
-## Current test status
+1. Guard preference parsing against a missing or empty value; keep 70% as default.
+2. Preserve explicit stored 0 and valid saved nonzero values.
+3. Add a 10-assertion unit contract and run it in CI.
+4. Update fragment manifest, V82.85.30 candidate/package naming, and stage docs.
+5. Keep the native audio PCM gate unchanged.
 
-- Existing run 39229842012: source/unit and Firefox responsive passed; native audio lifecycle passed; non-silent PCM output failed.
-- V82.85.29 diagnostic workflow result: not observed yet; latest workflow-run and combined-status queries returned empty results before this checkpoint push.
-- Local syntax/test execution: not run in this editing session.
+## Required verification
 
-## Rollback
+- Run `node tests/unit/quiz_volume_default_contract.test.cjs`.
+- Run source verifier, deterministic build, package completeness/reproducibility and Firefox responsive tests.
+- Run native Chromium audio acceptance; verify sink-input appears and captured PCM has peak >= 1000 and RMS >= 150.
+- Confirm playback lifecycle assertions still pass.
+- Record candidate HTML bytes/SHA-256 and verify the manifest release fingerprint.
+- Verify GitHub Actions results and remote file fingerprints before declaring completion.
 
-Revert the V82.85.29 diagnostic-only test and checkpoint documentation. Preserve V82.85.28, V82.85.27, and immutable V82.82.
+## Status and rollback
+
+- Full validation: pending.
+- Do not change production audio lifecycle logic or weaken the PCM gate.
+- Roll back by reverting the V82.85.30 source, contract, manifest/workflow/package metadata and checkpoint docs together. Keep V82.85.28 and immutable V82.82 intact.

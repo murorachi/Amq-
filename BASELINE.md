@@ -1,3 +1,18 @@
+# Baseline checkpoint: V82.85.30 audio volume default fix
+
+- Branch: `v82.85.30-audio-volume-default-fix-01`, based on the V82.85.29 Chromium/PulseAudio diagnostic checkpoint, itself based on V82.85.28.
+- Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Confirmed root cause from CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693): the HTMLMediaElement was `muted=true`, `volume=0`, `paused=false`, `readyState=4`; PulseAudio had no sink-input across 10 samples and captured PCM was silent.
+- Source cause: `Number(localStorage.getItem('aniQuizVolume'))` converts a missing `null` preference to zero, overriding the intended 70% default. This then mutes the shared audio player.
+- Fix: only parse the saved volume when a non-empty stored value exists; preserve explicit saved 0 and other valid values. Added `tests/unit/quiz_volume_default_contract.test.cjs` for missing, zero, and nonzero preferences.
+- Product candidate fingerprint: pending first CI reconstruction; V82.85.28 and V82.82 remain untouched.
+- Tests: diagnostic evidence confirms the cause; regression contract and complete CI are pending.
+- Rollback: revert the V82.85.30 volume initialization change, focused contract, manifest/workflow/package metadata and checkpoint docs together. Preserve the V82.85.28 branch and immutable V82.82 baseline.
+
+---
+
+## Historical checkpoint: V82.85.28
+
 # Baseline checkpoint: V82.85.28 next-audio state reset dedup
 
 - Parent checkpoint: V82.85.27 room pool bounds validation dedup.
