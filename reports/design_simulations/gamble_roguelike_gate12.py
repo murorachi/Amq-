@@ -97,11 +97,11 @@ def simulate(strategy, mode, runs=RUNS):
             else:  # Signal Room
                 clues = {"conservative": 2, "balanced": 1, "push": 0}[strategy]
                 fee1 = (stake * 2 + 99) // 100
-                fee2 = (stake * 4 + 99) // 100
+                fee2 = (stake * 6 + 99) // 100
                 if attached is None and clues > 0 and "signal_coupon" in inventory:
                     attached = "signal_coupon"
                     inventory.remove("signal_coupon")
-                fee = 0 if attached == "signal_coupon" or clues == 0 else fee1 + (fee2 if clues == 2 else 0)
+                fee = 0 if attached == "signal_coupon" or clues == 0 else (fee1 if clues == 1 else fee2)
                 gross = {0: stake * 3, 1: stake * 2, 2: stake * 4 // 3}[clues]
                 numerator, denominator = {0: (1, 3), 1: (1, 2), 2: (3, 4)}[clues]
                 won = rng.randrange(denominator) < numerator
