@@ -115,3 +115,11 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 - Latest CI [run 39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax checks and Gate 05–13 simulations.
 - Candidate core rules: five shuffled event cards (2 Risk, 2 Vault, 1 Signal); stage target post-recovery bank + ceil(1%); final goal 105%; risk tier stakes 5/10/15%; combined two-clue fee ceil(6% stake); Insurance Bank/Balanced-only 10%; Vault Harness 20%; once-per-run recovery 12% (8% with voucher) skips next eligible Blind Draft.
 - No server/UI/database implementation until human paper sessions show understandable consequential decisions, acceptable fairness, and voluntary replay. The “close to existing games in fun” threshold is not yet proven.
+
+
+## Gate 14 — paper-test ready, implementation still blocked
+- Current rules: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`; paper kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`.
+- Shared draft: two picks per cleared draft phase, shared inventory cap two, top two ranks pick from three distinct cards; team votes on item activation. This prevents item count scaling with party size.
+- Favor tie rerolls use raw d6 and keep spent Favor spent. AFK/disconnected players do not draft.
+- Gate 14 simulation report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`, `reports/design_simulations/gamble_roguelike_gate14.py`.
+- CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed Gate 14. The design is ready for paper sessions, but no human session has occurred. Do not start server/UI/database implementation until the paper-test gates are met.
