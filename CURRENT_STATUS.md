@@ -114,3 +114,9 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Added walkthrough scenarios for catastrophic loss, jackpot rescue, cash-out regret, cooperation/betrayal, and delayed debt.
 - Status is still design-only. No simulations, exact enumeration, human playtest, product tests, or production code changes were performed in this step.
 - Open rule ambiguities to resolve before simulation: Pot Split integer settlement/insurance details, Wheel's two-stage probability presentation, and Debt Collector due-date counting.
+
+
+### Rule-closure follow-up
+- Closed the first-pass ambiguities in `MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`: Pot Split now specifies floor-rounding and house-retained remainders, insurance payout source, and a worked integer example; Debt Collector now counts two completed game settlements and defines rounding/default handling.
+- Wheel's rules already separate the color-hit probability from the conditional result-card probability; any UI must show both, not collapse them into a misleading single number.
+- No simulation, exact enumeration, product test, or human playtest has been run yet.
