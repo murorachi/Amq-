@@ -46,6 +46,8 @@ jobs:
         run: node tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs
       - name: Test Chinese-title source mapping and partial-source failure
         run: node tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs
+      - name: Test VNDB cover batching and retry lifecycle
+        run: node tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
       - name: Build and verify checkpoint source package
