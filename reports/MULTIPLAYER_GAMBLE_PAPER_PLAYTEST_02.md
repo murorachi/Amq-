@@ -1,7 +1,7 @@
 # Multiplayer Gamble Roguelike — Paper Playtest Kit 02
 
 - Status: **Ready for human paper testing; not yet executed.**
-- Rules source: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Rules source: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`.
 - Do not improvise missing rules. If the facilitator must invent a rule, mark that run invalid and record the missing rule.
 
 ## 1. Objective
