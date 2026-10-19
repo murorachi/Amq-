@@ -88,3 +88,13 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - CI run [39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax checks and Gate 05–13 simulations.
 - Design work has reached paper-test readiness. No human session has happened, so the requirement “near existing products in fun” is **not proven**. Do not build server/UI yet.
 - Next meaningful evidence is three paper sessions (2–4 players each; add a 6-player group if possible), measuring rule clarity, consequential decisions, 12–20 minute duration, perceived fairness, and voluntary replay. Revise rules from observed failure points before any implementation.
+
+
+## Gate 14 checkpoint — next is human paper testing
+- Current rules: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Facilitator kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`.
+- Draft now uses a shared inventory capped at two items. Two highest-ranked players pick one item each after cleared stages 2/4; the number of available items no longer scales automatically with party size. Team vote activates at most one item per wager.
+- Favor tie rerolls use raw d6 and do not refund Favor. AFK/disconnected players do not roll or spend Favor.
+- Gate 14 simulation: `reports/design_simulations/gamble_roguelike_gate14.py`; report `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`.
+- CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed Gate 14.
+- Next: run paper sessions with humans and record actual observations. Do not implement server/UI until decision quality, fairness, duration, and voluntary replay gates are met.
