@@ -94,3 +94,10 @@
 
 ## Current design snapshot
 Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`. Gate 14 CI passed; human testing not executed.
+
+## Gamble Roguelike — design direction reset (2026-10-20)
+- Branch HEAD at start of this change: `c3b6cba2f4d0a24d1d9061fe013b2e0637670fca`.
+- Added `reports/MULTIPLAYER_GAMBLE_DESIGN_DIRECTION_RESET_01.md` after owner feedback that Candidate 03 is too predictable and over-balanced for a gambling game.
+- Equal expected value and similar strategy clear rates are no longer primary design goals. The new target is honest but asymmetric odds, high variance, rare run-changing payouts, push-your-luck decisions, and meaningful run-dependent temptation.
+- Candidate 03 and Paper Playtest Kit 02 are preserved unchanged as historical snapshots. No production AMQ source/HTML or playable implementation changed.
+- Validation: documentation change only; no simulation or product tests run. Gate 14 CI only covers the previous design scripts and is not evidence for this new direction.
