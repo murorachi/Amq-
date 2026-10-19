@@ -132,13 +132,12 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 
 ## Audit order
 
-1. First-pass review completed: `src/scripts/script_004.htmlpart` (quiz lifecycle).
-2. First-pass review completed: `src/scripts/script_028.htmlpart` (multiplayer lifecycle).
-3. First-pass data-payload review completed: `src/scripts/script_037.htmlpart` (actual gzip catalogue decoded and structurally validated).
-4. First-pass review completed: `src/scripts/script_001.htmlpart` (catalogue, history and playback).
-5. Next P1 review: `src/scripts/script_030.htmlpart`, then persistence-sensitive `script_025` and `script_023`.
-6. Review remaining scripts in manifest order, then CSS while preserving load/cascade order.
-7. Close each fragment with evidence and explicit disposition. Recalculate remaining counts only from file-specific audit records.
+- First-pass inventory is complete for all 91 registered fragments.
+- All 41 script fragments have a file-specific first-pass review or a documented grouped review.
+- All 50 style fragments have a static selector/cascade scan.
+- CSS pixel-diff and computed-style equivalence are not complete; do not treat static selector counts as visual acceptance.
+- Highest-value follow-up is a focused SRS state-transition/persistence contract, then scene-background IndexedDB/resource-lifecycle coverage.
+- Do not start broad refactors solely because a fragment is large or contains repeated selectors.
 
 ## Non-goals
 
