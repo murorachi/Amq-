@@ -36,6 +36,8 @@ jobs:
         run: node tests/unit/chinese_title_loader_cache_contract.test.cjs
       - name: Test EMQ Chinese-title cache precedence and fallback contract
         run: node tests/unit/emq_chinese_title_cache_contract.test.cjs
+      - name: Test VNDB navigation, cover retry and list import contract
+        run: node tests/unit/vndb_navigation_contract.test.cjs
       - name: Test multiplayer checked-value helper deduplication contract
         run: node tests/unit/multiplayer_checked_values_dedup_contract.test.cjs
       - name: Test multiplayer suggestion cache invalidation dedup contract
