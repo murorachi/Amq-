@@ -12,7 +12,6 @@ The single remaining invalidation loop is now maintained by the refresh function
 - The first CI run reported the expected stale fragment fingerprint; the manifest is now pinned to the observed source hash (139,664 bytes / SHA-256 `c349421f2a4759677669079d5e37a212795958ec6e556b56f36cadddeb56d018`). GitHub Actions run [39224624431](https://github.com/murorachi/Amq-/actions/runs/39224624431): verifier 132/132 passed; suggestion cache contract passed; checkpoint package completeness and reproducibility passed; candidate build and upload passed. Firefox responsive and browser-native-origin suites were still running at the time of this report update.
 
 - Release candidate: 8,787,009 bytes / SHA-256 `1745600f52de09983ca3b66e45341a27acbd463e233fc77719e42f4673d4abad`.
-- Source package SHA-256: `fe183668c7117e24c7df2166b79c7565a69dc4809ee75aa0afd6abb62cf6fb7e`.
 - This is a behavior-preserving removal of redundant invalidation; no audio or multiplayer protocol logic changed.
 
 ## Artifacts
