@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 3 |
+| First-pass file audits completed | 4 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 88 |
+| Awaiting file-specific review | 87 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -43,7 +43,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | CSS 003 | `src/styles/style_003.htmlpart` | 3706 | `ae112d85ea02b0d8…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 004 | `src/styles/style_004.htmlpart` | 2020 | `eb4c237cb464534c…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 005 | `src/styles/style_005.htmlpart` | 482 | `8f0301cd7d168f07…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 001 | `src/scripts/script_001.htmlpart` | 102981 | `07e91622000ebfe9…` | P1 | 待逐檔排查 | 大型腳本，優先盤點主要職責、全域狀態、事件註冊、計時器／媒體副作用與測試覆蓋。 |
+| JS 001 | `src/scripts/script_001.htmlpart` | 102981 | `07e91622000ebfe9…` | P1 | 首輪逐檔審查完成；風險保留 | 目錄索引、熟悉度／收藏／黑名單、三層答題歷史、IndexedDB 快照、媒體 fallback 共存。已對照歷史隔離、儲存、重載與備份還原契約；未改產品程式。詳見 `reports/AUDIT_SCRIPT_001_CATALOG_HISTORY_PLAYBACK_V82_85_29.md`。 |
 | JS 002 | `src/scripts/script_002.htmlpart` | 6038 | `4904e6862b21cd82…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | JS 003 | `src/scripts/script_003.htmlpart` | 8126 | `ce363810ef726c8b…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | JS 004 | `src/scripts/script_004.htmlpart` | 93004 | `f9dfcd2322a99bb1…` | P1 | 首輪逐檔審查完成；風險保留 | 35 個命名函式；答題／音訊／計時器／設定遷移／建議 UI 多職責耦合。既有 answer-flow、lifecycle 與瀏覽器測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md`。 |
@@ -132,12 +132,13 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 
 ## Audit order
 
-1. `src/scripts/script_004.htmlpart`: map quiz lifecycle and existing contracts before any refactor.
-2. `src/scripts/script_028.htmlpart`: map multiplayer lifecycle and persistence boundaries; preserve existing room/audio behavior.
-3. Large scripts: determine code vs data payload, then map state, side effects, and existing tests.
-4. Remaining scripts: review in manifest order, reusing existing tests and recording only uncovered risks.
-5. Styles: inspect selectors and cascade in load order; do not reorder CSS during the audit.
-6. Close each fragment with evidence and explicit disposition. Recalculate the remaining count only from those sign-offs.
+1. First-pass review completed: `src/scripts/script_004.htmlpart` (quiz lifecycle).
+2. First-pass review completed: `src/scripts/script_028.htmlpart` (multiplayer lifecycle).
+3. First-pass data-payload review completed: `src/scripts/script_037.htmlpart` (actual gzip catalogue decoded and structurally validated).
+4. First-pass review completed: `src/scripts/script_001.htmlpart` (catalogue, history and playback).
+5. Next P1 review: `src/scripts/script_030.htmlpart`, then persistence-sensitive `script_025` and `script_023`.
+6. Review remaining scripts in manifest order, then CSS while preserving load/cascade order.
+7. Close each fragment with evidence and explicit disposition. Recalculate remaining counts only from file-specific audit records.
 
 ## Non-goals
 
