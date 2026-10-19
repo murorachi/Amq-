@@ -22,7 +22,7 @@
 
 ## V82.85.30 full CI outcome
 
-- Run [39252741670](https://github.com/murorachi/Amq-/actions/runs/39252741670): source/unit PASS (132/132 verifier checks and all unit steps), Firefox responsive PASS.
+- Run [39253372795](https://github.com/murorachi/Amq-/actions/runs/39253372795): source/unit PASS (132/132 verifier checks and all unit steps), Firefox responsive PASS.
 - Browser-native lifecycle checks passed except final non-silent audio output capture (`peak=0, rms=0.0`); PulseAudio self-test passed. This is the known capture mismatch. Actual product playback was user-confirmed.
 - Source package and standalone artifacts uploaded; verify the newest run after final documentation commits for the authoritative artifact IDs/fingerprints.
 - V82.82 immutable baseline remains unchanged.
