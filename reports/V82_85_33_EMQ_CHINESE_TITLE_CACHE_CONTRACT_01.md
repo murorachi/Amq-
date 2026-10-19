@@ -30,7 +30,9 @@ These are characterization tests, not evidence that upstream services are availa
 
 - Static source-boundary inspection: PASS; test executes exact function bodies from the registered source fragment.
 - Local execution in this authoring environment: NOT RUN; GitHub Actions is the execution authority.
-- CI source/unit, package reproducibility, Firefox responsive and Chromium native-origin: pending this branch's workflow run.
+- Initial run [39240395756](https://github.com/murorachi/Amq-/actions/runs/39240395756) exposed three harness assumptions: `getConverter()` is async, Hant priority preserves a Hans alias rather than converting every alias, and the converter is returned after awaiting. The test was corrected to match the actual production contract; production source was not changed.
+- Corrected run [39240538829](https://github.com/murorachi/Amq-/actions/runs/39240538829): **source/unit PASS**, EMQ Chinese-title contract **19/19 PASS**, Chinese-title loader **20/20 PASS**, SRS **17/17 PASS**, scene-background **18/18 PASS**, checkpoint package contract/reproducibility **PASS** (408 entries, CRC and required paths pass; repeated ZIP SHA-256 `75d2dd241094bb6e73d9c47f584de662fde505d5ba7f428b0a3f0ab4a5189954`), deterministic standalone V82.85.28 build **PASS**, Firefox responsive **PASS**.
+- Chromium native-origin: native storage/custom-list, IndexedDB/input, suggestion, quiz playback and multiplayer lifecycle steps passed. Only final non-silent audio monitor capture failed (peak=0, rms=0), the known environment capture limitation. Overall workflow is marked failed because of that step, not because of the title cache contract. Actual product playback was user-confirmed. Manual interactive acceptance was not performed.
 - Known Chromium audio monitor capture limitation remains separate. Do not interpret it as a title-cache failure unless real title loading or actual playback regresses.
 
 ## Rollback and next work
