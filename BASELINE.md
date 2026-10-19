@@ -74,3 +74,11 @@
 - Two-clue Signal Room fee is `ceil(6% × stake)` to avoid double rounding.
 - CI [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed the Gate 05–13 simulation suite. This is not proof of fun.
 - Next: paper-playtest kit 02 and human paper sessions. No product source changed.
+
+
+## Paper-test readiness — Gate 13
+- Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Paper test kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md` (prepared, not executed).
+- Gate 13 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_13.md`, `reports/design_simulations/gamble_roguelike_gate13.py`.
+- CI run [39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax and simulation steps for Gate 05–13.
+- Design is paper-test ready, not proven fun. No product source changed. Next evidence must come from human paper sessions before implementation.
