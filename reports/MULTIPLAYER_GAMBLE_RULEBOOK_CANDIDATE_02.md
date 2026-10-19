@@ -108,7 +108,7 @@ Recovery is usable at most once per run, only at 2 strain. Pay `ceil(12% of curr
 - A disconnected player cannot alter a locked stage.
 - The authority resolves each stage once; reconnecting clients read the stored result.
 - No transfers, private side bets, or direct confiscation of another player's resources.
-- Another player cannot activate a personal item unless a later rule explicitly permits delegation.
+- Items belong to the shared team inventory; no player owns or transfers them. Item activation is decided by team vote, with no item used on a tie.
 
 ## 11. Deterministic successful-run example
 
