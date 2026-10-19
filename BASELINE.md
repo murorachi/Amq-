@@ -59,3 +59,10 @@
 - Both focused tests passed in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041); source verifier 132/132 passed. Remaining source/unit steps and browser jobs were still in progress at the last check.
 - Deferred observation: serverAliasMap uses exact duplicate removal while cacheRecord/allKnownAliases use normalized duplicate removal. No production change made.
 - Next task: script_039 VNDB cover batching/retry contract. Immutable V82.82 and production source remain unchanged.
+
+
+## VNDB cover lifecycle stage
+
+- Added `tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs` for `script_039.htmlpart`, plus CI step and report `reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md`.
+- Automated execution pending. Production source unchanged; requests are mocked in unit tests.
+- Prior title tests passed 25/19 assertions; source verifier 132/132 passed in run 39250170041. Full browser-native result remains separately tracked.
