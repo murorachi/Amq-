@@ -14,17 +14,17 @@
 3. IndexedDB read errors degrade to a cache miss.
 4. Cache writes use the existing `merged-map` key and current `VERSION` value.
 5. Write errors return false without throwing.
-6. The current cache guard accepts an array as records because it checks only truthiness and `typeof records === 'object'`. The test records this existing behavior rather than silently changing production behavior.
+6. Array-shaped `records` are rejected as malformed cache data, forcing the existing cache-miss/download fallback rather than treating an empty array as a successful cache hit.
 
 ## Acceptance status
 
 - Static review: exact-source cache functions are tested through a deterministic IndexedDB-boundary stub.
-- Automated execution: pending CI at report creation. Record assertion count and run ID after the focused test and source/unit job complete.
+- Characterization test before the fix: **14 assertions passed** in [run 39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871). After the guard fix, the array case was changed to assert a cache miss; final CI for the updated fingerprint is pending.
 - Not covered: actual browser IndexedDB upgrade/transaction behavior, cache eviction, storage quota behavior or live source freshness.
 
 ## Deferred observation
 
-Array acceptance may be worth tightening to a non-array object check, but no production change is made in this characterization stage. If changed later, add a migration/cache compatibility decision and verify the fallback download path.
+Fixed in this stage: `readCache()` now rejects arrays with `!Array.isArray(item.records)`. The existing `loadTitles()` cache-miss path therefore proceeds to build/download the title map. DB name, store name, key and version are unchanged.
 
 ## Rollback
 
