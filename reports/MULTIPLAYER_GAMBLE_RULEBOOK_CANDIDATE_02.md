@@ -119,7 +119,7 @@ Arithmetic illustration only; it is not a simulated probability outcome. All sta
 | Start | — | — | 1,000 | — |
 | 1 | Risk Contract wins | stake 50; gross `floor(50×4/3)=66`; net +16 | 1,016 | 1,010 clear |
 | 2 | Vault step 1 wins, cash out | stake 50; gross `floor(50×1.25)=62`; net +12 | 1,028 | 1,027 clear |
-| 3 | Signal Room, two clues, correct | stake 51; fees 2+3; gross `floor(51×4/3)=68`; fee `ceil(6%×51)=4`; net +17−4 | 1,041 | 1,039 clear |
+| 3 | Signal Room, two clues, correct | stake 51; fee 4; gross `floor(51×4/3)=68`; fee `ceil(6%×51)=4`; net +17−4 | 1,041 | 1,039 clear |
 | 4 | Risk Contract wins | stake 52; gross `floor(52×4/3)=69`; net +17 | 1,058 | 1,052 clear |
 | 5 | Vault step 1 wins, cash out | stake 52; gross `floor(52×1.25)=65`; net +13 | 1,071 | 1,069 clear |
 
