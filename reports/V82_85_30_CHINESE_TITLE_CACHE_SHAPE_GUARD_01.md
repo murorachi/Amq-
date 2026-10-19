@@ -19,7 +19,7 @@
 - Updated `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` to assert that array-shaped cache records are rejected, while retaining current-version, stale-version, malformed-record, read-failure and write-failure cases.
 - Other focused characterization contracts are included in the versioned checkpoint package: SRS 41 assertions, scene-background lifecycle 29, EMQ cache/filtering 25, title source mapping/partial failure 19, VNDB cover batching/retry 26.
 - CI run [39252468802](https://github.com/murorachi/Amq-/actions/runs/39252468802): source/unit **PASS** (verifier 132/132 and all unit steps including the cache contract); Firefox responsive **PASS**; deterministic source package builds matched and uploaded; standalone candidate built and uploaded. Chromium native-origin was still in progress at the last check.
-- Deterministic source package SHA-256: `d1eab00af3bb59955bdcc11650a8edf5a8653df3c46912c08b725b60c7aea56a` (14,691,859 bytes uploaded).
+- The source package is reproducibly built twice and uploaded. Its authoritative ZIP checksum is emitted in the CI log rather than embedded in the package to avoid recursive hashing.
 - Standalone HTML candidate SHA-256: `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5` (8,786,577 bytes before artifact compression).
 - Known CI audio output capture mismatch is not treated as a product playback regression; actual playback was user-confirmed. Any current run failure must still be inspected rather than assumed to be this known issue.
 
