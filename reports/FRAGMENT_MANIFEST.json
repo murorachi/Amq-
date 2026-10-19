@@ -1443,8 +1443,8 @@
   ],
   "module_count": 15,
   "release": {
-    "version": "V82.85.28",
-    "bytes": 8786547,
-    "sha256": "7284c4ca5625886d913f55ab19a0076d1a5be46a88504dd8de724ae8f5bd274d"
+    "version": "V82.85.30",
+    "bytes": 8786609,
+    "sha256": "3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2"
   }
 }
