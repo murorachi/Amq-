@@ -163,3 +163,14 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Report: `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`. Production title-loader source and cache schema unchanged.
 - Known cache-hardening observation: array-shaped `records` currently passes the loader's object-type guard. Recorded but not fixed in this test-only stage.
 - The bounded SRS, scene-background, Chinese-title and VNDB cover characterization group is complete. Next: update the historical technical-debt inventory with evidence-based dispositions, distinguishing closed, tested/managed and deferred items.
+
+
+## V82.85.30 cache-shape hardening stage
+
+- Branch: `v82.85.30-chinese-title-cache-shape-guard-01`, based on V82.85.29 audit branch.
+- Production fix: `src/scripts/script_031.htmlpart` rejects array-shaped `records` from the versioned IndexedDB title cache. This closes the demonstrated malformed-cache path without changing cache version/schema or source-fetch logic.
+- Fragment fingerprint: 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
+- Candidate fingerprint: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- Report: `reports/V82_85_30_CHINESE_TITLE_CACHE_SHAPE_GUARD_01.md`.
+- Updated manifest release pin, workflow candidate/artifact names and checkpoint package naming/required paths. CI acceptance is pending for this version; do not claim release acceptance yet.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
