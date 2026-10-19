@@ -69,3 +69,13 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Next: add item/recovery effects one by one and test combinations, route choices, party-size vote fairness, and integer payout boundaries. Remain in design.
 
 - CI verification: [design simulation workflow run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`; Python syntax checks and Gate 05–09 simulations all completed. This is not a balance/fun pass.
+
+
+## Gate 10–13 checkpoint
+- Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Gate 10–13 reports: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_10.md` through `_13.md`; simulations: `reports/design_simulations/gamble_roguelike_gate10.py` through `_13.py`.
+- Insurance is now proposed only for Bank/Balanced with 10% stake refund; Vault Harness 20% refund on continued-step loss; recovery 12% fee (8% with voucher), once per run at strain 2, discarding one held item if available.
+- Signal Room two-clue fee uses one combined `ceil(6% × stake)` to avoid double-rounding. Small stakes still have a high effective fee due to whole-chip rounding.
+- Gate 13 checked 30 event orders, exact 2/3/6-player plurality distributions, and fee boundaries. Strategy ranking did not reverse by event order; Push clear rates varied more than Conservative/Balanced.
+- CI: [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed Gate 05–13 syntax/simulation suite. This does not validate fun or human fairness.
+- Next: prepare Paper Playtest Kit 02 from Candidate 02, then stop for actual human paper sessions. Do not implement until paper test indicates meaningful decisions and replay intent; no human playtest has occurred yet.
