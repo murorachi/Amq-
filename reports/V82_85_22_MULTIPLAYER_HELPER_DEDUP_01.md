@@ -25,7 +25,7 @@ Added a focused Node contract and CI step. Improved failed fragment/module finge
 
 ## Acceptance
 
-CI run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296): verifier 132/132 passed; helper contract 7/7 passed; package completeness/reproducibility passed with two 14,640,473-byte ZIPs at SHA-256 `65174354609f5eec49e41bda558c4dee093611f60c29a710b2628899db6368e3`; package and standalone artifacts uploaded. Firefox responsive passed. Native-origin storage/custom-list, IndexedDB/input, suggestion, quiz playback lifecycle and multiplayer lifecycle checks passed. The real-audio output assertion still failed with `peak=0, rms=0.0`, so the overall workflow remains failed. This refactor does not touch audio behavior.
+CI run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296): verifier 132/132 passed; helper contract 7/7 passed; package completeness/reproducibility passed with two byte-identical ZIPs; package and standalone artifacts uploaded. Exact package checksum is recorded in CI output and kept outside package contents to avoid recursive fingerprinting. Firefox responsive passed. Native-origin storage/custom-list, IndexedDB/input, suggestion, quiz playback lifecycle and multiplayer lifecycle checks passed. The real-audio output assertion still failed with `peak=0, rms=0.0`, so the overall workflow remains failed. This refactor does not touch audio behavior.
 
 ## Rollback
 

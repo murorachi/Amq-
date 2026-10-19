@@ -44,6 +44,5 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 
 ## Package reproducibility
 
-- Source package: `AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip`, 14,640,473 bytes.
-- SHA-256: `65174354609f5eec49e41bda558c4dee093611f60c29a710b2628899db6368e3`.
-- Two independent package builds matched; artifact upload succeeded under run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296).
+- Source package: `AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip`.
+- Two independent package builds matched; artifact upload succeeded under run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296). The exact archive checksum is retained in CI output rather than embedded in package contents.
