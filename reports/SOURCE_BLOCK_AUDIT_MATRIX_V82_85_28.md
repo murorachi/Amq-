@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 41 |
+| First-pass file audits completed | 61 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 50 |
+| Awaiting file-specific review | 30 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -38,42 +38,42 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 
 | Kind / index | Fragment | Bytes | Manifest SHA-256 | Priority | Audit state | Initial focus / existing evidence |
 |---|---|---:|---|---|---|---|
-| CSS 001 | `src/styles/style_001.htmlpart` | 27128 | `281256a268fba93b…` | P1 | 待逐檔排查 | 大型樣式片段；盤點 selector、重複宣告、媒體查詢與載入順序，保留 cascade 順序。 |
-| CSS 002 | `src/styles/style_002.htmlpart` | 182 | `e635065fa0c02640…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 003 | `src/styles/style_003.htmlpart` | 3706 | `ae112d85ea02b0d8…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 004 | `src/styles/style_004.htmlpart` | 2020 | `eb4c237cb464534c…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 005 | `src/styles/style_005.htmlpart` | 482 | `8f0301cd7d168f07…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 001 | `src/styles/style_001.htmlpart` | 27128 | `281256a268fba93b…` | P1 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 002 | `src/styles/style_002.htmlpart` | 182 | `e635065fa0c02640…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 003 | `src/styles/style_003.htmlpart` | 3706 | `ae112d85ea02b0d8…` | P2 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 004 | `src/styles/style_004.htmlpart` | 2020 | `eb4c237cb464534c…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 005 | `src/styles/style_005.htmlpart` | 482 | `8f0301cd7d168f07…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 001 | `src/scripts/script_001.htmlpart` | 102981 | `07e91622000ebfe9…` | P1 | 首輪逐檔審查完成；風險保留 | 目錄索引、熟悉度／收藏／黑名單、三層答題歷史、IndexedDB 快照、媒體 fallback 共存。已對照歷史隔離、儲存、重載與備份還原契約；未改產品程式。詳見 `reports/AUDIT_SCRIPT_001_CATALOG_HISTORY_PLAYBACK_V82_85_29.md`。 |
 | JS 002 | `src/scripts/script_002.htmlpart` | 6038 | `4904e6862b21cd82…` | P2 | 首輪逐檔審查完成；風險保留 | 導覽／watchlist 顯示控制；保留離開猜歌時的 cleanup 呼叫順序。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | JS 003 | `src/scripts/script_003.htmlpart` | 8126 | `ce363810ef726c8b…` | P2 | 首輪逐檔審查完成；風險保留 | ANN 封面批次抓取與 XML 解析；需保留失敗診斷與非阻塞載入。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
 | JS 004 | `src/scripts/script_004.htmlpart` | 93004 | `f9dfcd2322a99bb1…` | P1 | 首輪逐檔審查完成；風險保留 | 35 個命名函式；答題／音訊／計時器／設定遷移／建議 UI 多職責耦合。既有 answer-flow、lifecycle 與瀏覽器測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md`。 |
-| CSS 006 | `src/styles/style_006.htmlpart` | 4051 | `4ec3b240b5f86c52…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 007 | `src/styles/style_007.htmlpart` | 8867 | `c61171df09a2acc0…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 008 | `src/styles/style_008.htmlpart` | 991 | `25b0813a768a24f8…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 006 | `src/styles/style_006.htmlpart` | 4051 | `4ec3b240b5f86c52…` | P2 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 007 | `src/styles/style_007.htmlpart` | 8867 | `c61171df09a2acc0…` | P2 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 008 | `src/styles/style_008.htmlpart` | 991 | `25b0813a768a24f8…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 005 | `src/scripts/script_005.htmlpart` | 1139 | `68f1ba7d7db6e010…` | P2 | 首輪逐檔審查完成；風險保留 | 音訊 Dock 顯示／熟悉度按鈕，依賴 script_001 全域狀態 API；未改程式。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
-| CSS 009 | `src/styles/style_009.htmlpart` | 326 | `f23f912148e78194…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 009 | `src/styles/style_009.htmlpart` | 326 | `f23f912148e78194…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 006 | `src/scripts/script_006.htmlpart` | 1628 | `fe81b21d1a0a3f3b…` | P2 | 首輪逐檔審查完成；風險保留 | 猜歌模式音訊控制與計時標籤修正；需保留 seek 與計時器的既有所有權。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
-| CSS 010 | `src/styles/style_010.htmlpart` | 895 | `cea29a86147270b8…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 010 | `src/styles/style_010.htmlpart` | 895 | `cea29a86147270b8…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 007 | `src/scripts/script_007.htmlpart` | 4491 | `69f15478b96e81a2…` | P2 | 首輪逐檔審查完成；風險保留 | VNDB 角色頭像與外部請求；需留意失敗與過期回應，缺少專屬 exact-source 契約。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
-| CSS 011 | `src/styles/style_011.htmlpart` | 2976 | `7c629f4f0d10353e…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 011 | `src/styles/style_011.htmlpart` | 2976 | `7c629f4f0d10353e…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 008 | `src/scripts/script_008.htmlpart` | 5458 | `bcd739f91064842d…` | P2 | 首輪逐檔審查完成；風險保留 | 答案鏡像及 AMQ／EMQ／中文別名匹配，屬答題正確性邊界。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
-| CSS 012 | `src/styles/style_012.htmlpart` | 525 | `490807a7172d6c15…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 012 | `src/styles/style_012.htmlpart` | 525 | `490807a7172d6c15…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 009 | `src/scripts/script_009.htmlpart` | 2000 | `afa906fffd624fb5…` | P2 | 首輪逐檔審查完成；風險保留 | 頭像與倒數／播放標籤 DOM 排版調整；需瀏覽器視覺回歸。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`。 |
-| CSS 013 | `src/styles/style_013.htmlpart` | 343 | `86521017b5d64e81…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 014 | `src/styles/style_014.htmlpart` | 1241 | `dfb9d183b07ceaf1…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 013 | `src/styles/style_013.htmlpart` | 343 | `86521017b5d64e81…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 014 | `src/styles/style_014.htmlpart` | 1241 | `dfb9d183b07ceaf1…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 010 | `src/scripts/script_010.htmlpart` | 1985 | `7f7290f9d4081d07…` | P2 | 首輪逐檔審查完成；風險保留 | 停用舊 submitSkipPhase 設定遷移與頭像對齊同處一檔；保留音訊連續播放規則。詳見 `reports/AUDIT_SCRIPTS_002_010_NAVIGATION_COVER_QUIZ_PATCHES_V82_85_29.md`. |
 | JS 011 | `src/scripts/script_011.htmlpart` | 311 | `b0da897f5476ad0b…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
-| CSS 015 | `src/styles/style_015.htmlpart` | 464 | `48c8914d6b230c45…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 015 | `src/styles/style_015.htmlpart` | 464 | `48c8914d6b230c45…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 012 | `src/scripts/script_012.htmlpart` | 7942 | `1ef550097de54373…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | JS 013 | `src/scripts/script_013.htmlpart` | 733 | `f67a8ef39d3a5516…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
-| CSS 016 | `src/styles/style_016.htmlpart` | 974 | `7ef060e224a3e7f4…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 016 | `src/styles/style_016.htmlpart` | 974 | `7ef060e224a3e7f4…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 014 | `src/scripts/script_014.htmlpart` | 2740 | `fbe6f01ab40ba443…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
-| CSS 017 | `src/styles/style_017.htmlpart` | 3639 | `46b2a15eb6178ef7…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 017 | `src/styles/style_017.htmlpart` | 3639 | `46b2a15eb6178ef7…` | P2 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 015 | `src/scripts/script_015.htmlpart` | 6872 | `89340718cae57d83…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | JS 016 | `src/scripts/script_016.htmlpart` | 10541 | `695634223ced2889…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
-| CSS 018 | `src/styles/style_018.htmlpart` | 1297 | `e5960a58096959c4…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 019 | `src/styles/style_019.htmlpart` | 1193 | `9854486c457a37ee…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| CSS 020 | `src/styles/style_020.htmlpart` | 364 | `87a33f88876ed180…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
+| CSS 018 | `src/styles/style_018.htmlpart` | 1297 | `e5960a58096959c4…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 019 | `src/styles/style_019.htmlpart` | 1193 | `9854486c457a37ee…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
+| CSS 020 | `src/styles/style_020.htmlpart` | 364 | `87a33f88876ed180…` | P3 | 首輪靜態 CSS 盤點完成；視覺等價未驗收 | 已統計 selector、media query 與 !important；重複文字不視為可安全合併。詳見 `reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md`。 |
 | JS 017 | `src/scripts/script_017.htmlpart` | 945 | `9ca0cbb241b25a10…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
 | CSS 021 | `src/styles/style_021.htmlpart` | 1267 | `e3fabe1bc2c8d679…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 018 | `src/scripts/script_018.htmlpart` | 1459 | `89d6c0bbcf2ee823…` | P2 | 首輪逐檔審查完成；風險保留 | 已檢查為猜歌 UI／事件／音訊整合補丁；不依表面相似就刪除或合併。詳見 `reports/AUDIT_SCRIPTS_011_019_021_024_QUIZ_UI_PATCHES_V82_85_29.md`。 |
