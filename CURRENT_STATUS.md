@@ -146,3 +146,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Decision: defer production change. Inspected multiplayer sync uses `allKnownAliases`, which normalizes duplicates; no demonstrated user-facing defect or payload issue justifies changing the separately exported `serverAliasMap` behavior.
 - VNDB cover contract passed 26 assertions in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886); source/unit and Firefox passed, native-origin was still running at last check.
 - Remaining explicit gap in this group: script_031 IndexedDB cache version/read/write contract. Next add a small deterministic test for cache version validation and write-failure behavior.
+
+
+## Chinese-title IndexedDB cache contract in progress
+
+- Added `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` and CI step; report `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`.
+- Covers current-version reads, stale/malformed cache fallback, read/write failures, stable cache key/version, and current acceptance of array-shaped records.
+- Automated execution pending CI. Production source, DB/store/key/version unchanged.
+- The array acceptance is recorded as a possible hardening issue, not fixed in this characterization stage.
