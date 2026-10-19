@@ -20,11 +20,11 @@ Results:
 
 | Recovery policy | Clear all five stages | Run ends at 3 strain | Mean final bank | Mean stages played |
 |---|---:|---:|---:|---:|
-| Never pay recovery | 46.563% | 35.082% | 997.95 | 4.5413 |
-| Always pay when eligible | 45.059% | 27.846% | 945.99 | 4.8164 |
+| Never pay recovery | 46.832% | 34.773% | 998.89 | 4.5421 |
+| Always pay when eligible | 45.403% | 27.469% | 947.30 | 4.8218 |
 | Pay only if bank ≥ 1,000 | 46.563% | 35.082% | 997.95 | 4.5413 |
 
-The conditional policy did not trigger often enough to change rounded results in this model. Paying recovery once reduces strain-based failure, but the fee can make quota completion harder and reduces final bank. This is a real trade-off, not a guaranteed benefit.
+The conditional policy never triggered in these seeded runs, because the bank was below 1,000 whenever strain reached 2. Paying recovery once reduces strain-based failure, but the fee can make quota completion harder and reduces final bank. This is a real trade-off, not a guaranteed benefit.
 
 **Limitations:** no item reward, route selection, Signal Room fee, Vault cash-out, Blind Draft, group vote behavior, or human decision-making is included. The table does not establish final balance.
 
