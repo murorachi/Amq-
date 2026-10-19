@@ -1,12 +1,14 @@
-# Current engineering checkpoint: V82.85.31 audio timeline wait hardening
+# Current engineering checkpoint: V82.85.31 closed; resume bounded deduplication
 
-- Active branch: `v82.85.31-audio-timeline-wait-hardening-01` (test-only; based on V82.85.30).
-- Goal: remove a fixed-delay timing assumption from native audio acceptance without changing the actual progress thresholds or non-silent PCM gate.
-- Changed `tests/browser/real_audio_output_acceptance.py`: wait for `audioEl.currentTime > 0.15` with a 5-second timeout before the initial timeline assertion; after resume, wait for actual progress beyond the captured baseline with a 5-second timeout.
-- Product source, standalone HTML, manifest release fingerprint and audio behavior are unchanged. V82.85.30 candidate remains 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
-- Previous stable audio-fix validation: [CI run 39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626) passed all three jobs; Chromium output peak=4899, RMS=2384.5.
-- V82.85.31 validation: PASS in [CI run 39292209164](https://github.com/murorachi/Amq-/actions/runs/39292209164), all three jobs. Source verifier 132/132; deterministic candidate fingerprint unchanged; Firefox responsive passed; native Chromium lifecycle and strict PCM passed (peak=4899, RMS=2252.9). Both condition-based timeline assertions passed. The 350 ms pause observation remains a deliberate measurement window; pause assertion is unchanged.
-- Rollback: revert the timing-only test change and V82.85.31 docs; retain V82.85.30 audio fix and immutable V82.82.
+- Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+- V82.85.31 test-only audio timeline wait hardening was merged to the official branch in commit `0a642c9043b88684bbee0c7fe628e1635d7b7e73`.
+- Post-merge CI [39296217244](https://github.com/murorachi/Amq-/actions/runs/39296217244): **PASS**, all three jobs completed successfully: source/unit, Firefox responsive, and Chromium native-origin.
+- Source verifier: 132/132. Deterministic V82.85.30 standalone candidate remains 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; this stage did not alter product HTML.
+- Chromium native audio lifecycle: initial timeline progress, pause freeze, resume progress, answer reveal, ended event, and exit cleanup passed. PulseAudio sink was RUNNING; sink-input was present in all ten samples. Captured PCM was non-silent: peak=4899, RMS=2358.8.
+- Multiplayer lifecycle and real-origin native storage/custom-list acceptance passed; Firefox responsive acceptance passed; no uncaught browser page errors were reported.
+- V82.85.31 is closed. Do not continue modifying audio logic merely to polish a passing acceptance stage.
+- Next work returns to historical duplicate-code cleanup. Audit one non-audio candidate at a time; only consolidate when identical behavior and ownership are proven. Similar names or superficial textual similarity are not sufficient.
+- Manual interactive acceptance was not performed in this CI stage.
 
 ---
 

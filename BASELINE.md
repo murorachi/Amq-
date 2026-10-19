@@ -1,12 +1,13 @@
-# Baseline checkpoint: V82.85.31 audio timeline wait hardening
+# Baseline checkpoint: V82.85.31 merged and verified
 
-- Branch: `v82.85.31-audio-timeline-wait-hardening-01`, based on the V82.85.30 audio volume default fix checkpoint.
-- Product HTML and audio playback logic are unchanged. V82.85.30 candidate remains 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
-- Trigger: runs [39289800143](https://github.com/murorachi/Amq-/actions/runs/39289800143) and [39291809331](https://github.com/murorachi/Amq-/actions/runs/39291809331) exposed timing-sensitive failures. In 39291809331, PulseAudio sink-input was active but currentTime remained 0 after the fixed 450 ms sleep. An old-code rerun later passed, confirming intermittency rather than a deterministic product regression.
-- Test-only change: replace fixed 450 ms wait before asserting initial media progress with `page.wait_for_function("audioEl.currentTime > 0.15", timeout=5000)`; after resume, wait for actual progress beyond a captured baseline. Preserve the existing timeline thresholds and strict non-silent PCM gate.
-- Validation: PASS in [CI run 39292209164](https://github.com/murorachi/Amq-/actions/runs/39292209164), all three jobs. Source verifier 132/132; candidate remains byte-identical at 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; Firefox responsive passed; native Chromium lifecycle and strict PCM passed (peak=4899, RMS=2252.9). The condition-based initial and resume timeline assertions both passed.
-- Rollback: revert only the test timing wait change and this stage's checkpoint/report docs. Preserve V82.85.30 fix and immutable V82.82.
- 
+- Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+- Official HEAD: `0a642c9043b88684bbee0c7fe628e1635d7b7e73` (V82.85.31 closeout commit).
+- V82.85.31 audio timeline wait hardening was merged as `0a642c9043b88684bbee0c7fe628e1635d7b7e73`; it changes the acceptance test and engineering records only.
+- Post-merge CI [39296217244](https://github.com/murorachi/Amq-/actions/runs/39296217244) passed all three jobs. Native audio capture: peak=4899, RMS=2358.8; sink-input observed in all ten samples; timeline play/pause/resume assertions passed.
+- Product standalone candidate is unchanged: V82.85.30, 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Next work: continue bounded historical deduplication. Do not modify production code until one candidate's behavior, ownership, and regression assertions are documented.
+
 ---
 
 # Baseline checkpoint: V82.85.30 audio volume default fix

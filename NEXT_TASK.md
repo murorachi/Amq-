@@ -1,29 +1,35 @@
-# Next task: validate V82.85.31 audio timeline wait hardening
+# Next task: bounded non-audio duplicate-candidate audit
 
-Branch: `v82.85.31-audio-timeline-wait-hardening-01`.
+Branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+Baseline HEAD: `0a642c9043b88684bbee0c7fe628e1635d7b7e73`.
 
-## Scope
+## Goal
 
-- Test-only change to `tests/browser/real_audio_output_acceptance.py`.
-- Replace the fixed 450 ms initial playback wait with a condition-based wait for `audioEl.currentTime > 0.15`, bounded by a 5-second timeout.
-- Replace the fixed post-resume sleep with a condition-based wait for `currentTime` to advance by more than 0.12 seconds from the resumed baseline, also bounded by 5 seconds.
-- Keep the pause-freeze observation window, timeline thresholds, and strict PCM gate unchanged.
-- Do not change production playback logic or the V82.85.30 candidate HTML.
+Resume the historical technical-debt cleanup now that V82.85.31 is merged and post-merge CI is green. Keep this as one small, evidence-led task rather than broad cleanup.
 
-## Verification required
+## Scope and guardrails
 
-1. Python syntax/compile check and review the exact diff.
-2. Source/unit and deterministic package checks remain green; candidate fingerprint must remain unchanged.
-3. Firefox responsive acceptance passes.
-4. Run native Chromium audio acceptance repeatedly; verify playback lifecycle assertions and non-silent PCM threshold remain passing.
-5. Inspect final GitHub CI logs and confirm remote file fingerprints before closing this stage. Keep the PR test-only and do not merge automatically.
+1. Inspect one concrete **non-audio** repeated-logic candidate in the current source.
+2. Trace the owning functions, lexical scope, callers, and observable behavior before deciding whether it is truly redundant.
+3. If behavior differs or the only benefit is cosmetic, record a rejection and move on; do not force consolidation.
+4. If the candidate is equivalent, add a focused contract test before changing production source.
+5. Preserve the V82.82 immutable baseline, deterministic packaging, current release manifest rules, and all existing browser acceptance gates.
+6. Do not revisit or weaken audio-output acceptance. V82.85.31 is closed.
 
-## Current status
+## Latest verified checkpoint
 
-- Previous V82.85.30 full CI: PASS [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626), all three jobs.
-- V82.85.31 test-only changes: PASS in [CI run 39292209164](https://github.com/murorachi/Amq-/actions/runs/39292209164), all three jobs. Native output peak=4899 / RMS=2252.9; candidate fingerprint unchanged.
-- Risk: condition-based wait may expose a genuine playback stall as a timeout; that is intentional and more diagnostic than failing after an arbitrary fixed sleep.
-- Rollback: revert the timing-only test change and V82.85.31 checkpoint/report docs; preserve V82.85.30 source fix and immutable V82.82.
+- V82.85.31 merge commit: `0a642c9043b88684bbee0c7fe628e1635d7b7e73`.
+- Post-merge CI [39296217244](https://github.com/murorachi/Amq-/actions/runs/39296217244): PASS, all three jobs.
+- Source verifier: 132/132; Firefox responsive: PASS; Chromium native-origin: PASS.
+- Audio capture peak=4899 / RMS=2358.8, with sink-input present in all ten samples.
+- Product candidate fingerprint unchanged: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+
+## Acceptance for the next task
+
+- Candidate and decision documented.
+- If changed: focused regression contract, source/module fingerprint updates, deterministic candidate/package checks, Firefox responsive and native-origin CI.
+- If rejected: documentation-only result with explicit evidence; no production source change.
+- Rollback must preserve the current official HEAD and immutable V82.82.
 
 ---
 
