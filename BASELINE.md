@@ -72,3 +72,10 @@
 
 - VNDB cover batch/retry contract passed 26 assertions in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886). Source verifier 132/132, all source/unit steps and Firefox responsive passed; Chromium native-origin remained in progress at last check.
 - Production source unchanged. Next review is a decision-only assessment of script_041 alias deduplication semantics, not an automatic code change.
+
+
+## Alias semantics decision
+
+- Review report: `reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md`.
+- No production change. Existing inspected consumers use normalized `allKnownAliases`; no reproduced bug demonstrates the exported `serverAliasMap` difference is harmful.
+- Next: add a focused script_031 IndexedDB cache version/read/write contract to cover the remaining explicit gap.
