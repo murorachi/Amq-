@@ -61,3 +61,12 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 
 - Source package: `AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip`.
 - Two independent package builds matched; artifact upload succeeded under run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296). The exact archive checksum is retained in CI output rather than embedded in package contents.
+
+
+## V82.85.27 room pool validation checkpoint
+
+- Extracted repeated year/difficulty range validation from multiplayer `createSettings()` and `configureFromUi()` into one `validateRoomPoolBounds()` helper.
+- Existing input readers remain separate; validation error messages and precedence are centralized. No room payload, persisted preference shape, UI, audio, or song-pool policy change is intended.
+- Added a focused contract with 11 declared assertions and wired it into the engineering workflow. CI execution is pending; do not infer a pass from the test's presence.
+- Source fragment manifest and release candidate fingerprints must be refreshed from actual CI output before the checkpoint can be accepted.
+- Manual interactive acceptance is not performed. Existing CI audio capture mismatch remains out of scope because actual product playback was user-confirmed.
