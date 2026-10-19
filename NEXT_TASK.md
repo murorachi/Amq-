@@ -1,30 +1,29 @@
-# Next task: historical-code technical-debt inventory
+# Next task: resume requested feature development
 
 Current branch: `v82.85.13-real-audio-acceptance-gate-01`.
 
-## Acceptance closeout
-V82.85.17 required checks are complete with one explicitly deferred failure:
-- PASS: source/unit, deterministic builds, extraction contracts, storage/custom-list/backup contracts.
-- PASS: Firefox responsive.
-- PASS: Chromium storage/custom-list, IndexedDB/quiz input, quiz suggestions, answer/playback lifecycle.
-- PASS: multiplayer room/phase/live-draft/reconnect.
-- DEFERRED/FAIL: CI real-browser PCM output capture reports peak=0 / RMS=0.0 despite non-silent PulseAudio self-test and successful native playback lifecycle. Do not lower the threshold; do not ask the user to repeat real-device playback already confirmed.
+## Previous stage closeout
 
-Reference run: https://github.com/murorachi/Amq-/actions/runs/39189657895
+The bounded historical technical-debt inventory is complete:
+- Report: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`.
+- Product source and product HTML changed: **No**.
+- Main evidence-backed risks: tightly coupled quiz lifecycle in `src/scripts/script_004.htmlpart`; broad multiplayer closure in `src/scripts/script_028.htmlpart`; duplicate-name/compatibility inventory entries require proof before deletion.
+- Decision: do not perform broad cleanup just to achieve theoretical completeness. Start feature work. When a concrete feature touches a risky boundary, add a focused regression test and change only the smallest necessary area.
+- Existing full acceptance run: https://github.com/murorachi/Amq-/actions/runs/39189657895. Source/unit, Firefox responsive, Chromium storage/custom-list/quiz/playback and multiplayer checks passed. The only failed gate remains CI audio PCM capture (peak=0 / RMS=0.0), explicitly deferred; do not lower its threshold.
+- Fresh full suite during inventory: **NOT RUN**.
 
-## Next major phase (do not continue routine modularization)
-Perform a read-only audit of the verified source and produce a ranked inventory:
-1. duplicated functions/conditions/normalization logic;
-2. obsolete compatibility branches and historical workarounds;
-3. global state and multiple mutation paths;
-4. dead-code candidates, accounting for dynamic references;
-5. long mixed-responsibility functions and dependency clusters;
-6. high-risk boundaries: quiz/audio/storage/custom lists/multiplayer.
+## Baseline constraints
 
-For each finding record evidence/location, dependency impact, risk, likely benefit, and existing test coverage. Do not modify product logic during the initial inventory. Then select the highest-value low-risk refactor and add tests before changing behavior.
+- Immutable V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- V82.85.12 candidate: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Never overwrite the formal baseline.
+- Continue to produce a single-file HTML through the reproducible build when product changes require a deliverable.
+- Run the checks relevant to the changed boundary; distinguish static checks, automated tests and browser acceptance.
 
 ## Explicit stop condition
-Do not extract unrelated small helpers merely to increase module count. Modularization is sufficient unless the audit proves a specific blocker.
+
+Do not continue routine helper extraction or open another exhaustive audit phase. Keep unrelated debt as a backlog item. The next work should advance the user's requested product functionality.
 
 ## Rollback
-V82.85.17 extraction can be reverted independently. Never overwrite immutable V82.82.
+
+Inventory is documentation-only and can be reverted independently. V82.85.17 extraction commit `96f949b43a9168c499d8f8600ffec8efcadd78e8` is independently reversible. Never overwrite immutable V82.82.
