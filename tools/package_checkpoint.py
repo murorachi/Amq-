@@ -53,6 +53,7 @@ REQUIRED_PACKAGE_PATHS = {
     'reports/AUDIT_SCRIPTS_027_029_032_035_UI_MEDIA_PATCHES_V82_85_29.md',
     'reports/AUDIT_SCRIPT_036_SCENE_BACKGROUND_STORAGE_V82_85_29.md',
     'reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md',
+    'reports/V82_85_30_SRS_CHARACTERIZATION_CONTRACT.md',
     'reports/AUDIT_STYLES_021_040_STATIC_CASCADE_V82_85_29.md',
     'reports/AUDIT_STYLES_041_050_STATIC_CASCADE_V82_85_29.md',
     'reports/AUDIT_STYLES_021_040_STATIC_CASCADE_V82_85_29.md',
@@ -64,6 +65,7 @@ REQUIRED_PACKAGE_PATHS = {
     'tests/unit/multiplayer_checked_values_dedup_contract.test.cjs',
     'tests/unit/embedded_emq_payload_integrity.test.cjs',
     'tests/unit/anilist_id_map_payload_integrity.test.cjs',
+    'tests/unit/srs_engine_characterization_contract.test.cjs',
 }
 EXCLUDED_FROM_MANIFEST = {
     'PACKAGE_SHA256SUMS.txt',
