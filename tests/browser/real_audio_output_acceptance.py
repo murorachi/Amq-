@@ -343,7 +343,9 @@ def main():
                     "sinkInputDetails": sink_input_details
                 }, ensure_ascii=False), flush=True)
                 check(True, "user-initiated retry reaches the native playing event")
-                page.wait_for_timeout(450)
+                # Wait for actual decoded timeline progress instead of assuming the
+                # browser/CI scheduler has advanced media after a fixed sleep.
+                page.wait_for_function("audioEl.currentTime > 0.15", timeout=5000)
                 first_time = page.evaluate("audioEl.currentTime")
                 check(first_time > 0.15, "decoded media playback time advances")
                 page.locator("#playPauseBtn").click(timeout=10000)
@@ -355,7 +357,10 @@ def main():
                       "pause freezes the actual media timeline")
                 page.locator("#playPauseBtn").click(timeout=10000)
                 page.wait_for_function("!audioEl.paused", timeout=5000)
-                page.wait_for_timeout(350)
+                resume_baseline = page.evaluate("audioEl.currentTime")
+                page.wait_for_function(
+                    "(baseline) => audioEl.currentTime > baseline + 0.12",
+                    arg=resume_baseline, timeout=5000)
                 resumed_at = page.evaluate("audioEl.currentTime")
                 check(resumed_at > paused_after + 0.12,
                       "resume continues the existing media timeline")
