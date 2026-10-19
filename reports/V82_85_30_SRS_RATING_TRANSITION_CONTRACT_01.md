@@ -34,7 +34,8 @@ The suite has 17 named test cases. Assertions lock the existing behavior; they a
 
 - Static source-boundary inspection: PASS. Every extracted function is bounded by an adjacent production function marker; test uses no synthetic replacement for the function bodies.
 - Local execution in this authoring environment: NOT RUN. The repository runtime is not mounted here; GitHub Actions is the execution authority for the committed test.
-- CI source/unit, package reproducibility, Firefox responsive and Chromium native-origin: pending this branch's workflow run.
+- GitHub Actions run [39237555930](https://github.com/murorachi/Amq-/actions/runs/39237555930): **source/unit PASS**, SRS transition/persistence contract **17/17 PASS**, checkpoint package reproducibility **PASS** (402 entries, CRC and required paths pass; repeated ZIP SHA-256 `882d44845ff52f070326558327423878981ff1c0ff35bf086127a065fc04ab6d`), deterministic standalone V82.85.28 build **PASS**, Firefox responsive **PASS**.
+- Chromium native-origin: all storage/custom-list/IndexedDB/input/suggestion/quiz playback/multiplayer lifecycle steps passed; only the final non-silent audio monitor capture failed (peak=0, rms=0). This is the known environment capture limitation and not evidence of an SRS regression. Actual product playback was user-confirmed. The overall workflow is therefore marked failed due to that known audio capture step, not green across all jobs.
 - Existing known CI issue remains separate: the final non-silent audio monitor capture step has failed with peak=0/rms=0 while preceding playback lifecycle assertions passed and actual product playback was user-confirmed. Do not interpret that capture failure as an SRS regression.
 
 ## Rollback and next work
