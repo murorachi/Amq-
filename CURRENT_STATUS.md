@@ -93,3 +93,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
+
+
+## V82.85.32 Chinese-title loader cache contract
+
+- Branch: `v82.85.32-chinese-title-loader-contract-01`, based on scene-background contract checkpoint V82.85.31.
+- Added `tests/unit/chinese_title_loader_cache_contract.test.cjs` with 20 exact-source cases for normalization/alias filtering, ambiguous ID rejection, candidate priority, partial source failures, fetch timeout/abort, IndexedDB cache version/key, loader readiness and single-flight behavior.
+- Registered the test in CI and deterministic checkpoint package requirements. Production `src/scripts/script_031.htmlpart` unchanged; no URL, source revision, cache schema/key, title priority or alias behavior changed.
+- Local execution: NOT RUN in this authoring environment. Latest branch CI must be inspected before acceptance.
+- Prior scene-background CI [39238306059](https://github.com/murorachi/Amq-/actions/runs/39238306059): source/unit, scene-background 18/18, SRS 17/17, package reproducibility and Firefox passed. Chromium native-origin failed only at the known final audio monitor capture assertion (peak=0, rms=0); preceding storage, IndexedDB/input, quiz and multiplayer checks passed. Actual playback was user-confirmed.
+- Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
