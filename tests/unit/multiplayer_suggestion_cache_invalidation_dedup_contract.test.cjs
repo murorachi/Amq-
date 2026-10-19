@@ -30,4 +30,4 @@ assert.ok(languageChange.includes('window.__aniRefreshChineseSuggestionsV8237?.(
 assert.ok(!languageChange.includes(invalidation),
   'language change does not repeat the cache invalidation loop');
 
-console.log('PASS suggestion cache invalidation dedup contract: 6 assertions');
+console.log('PASS suggestion cache invalidation dedup contract: 9 assertions');
