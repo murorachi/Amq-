@@ -15,7 +15,7 @@
 
 ## Separate workstream: multiplayer Gamble Roguelike
 
-- Status: **planning/design only; no game code or product HTML changed**.
+- Status: **Stage 1 rules/ledger prototype committed; no product HTML changed**.
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
 - Discovery record: [`reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
 - Implementation proposal: [`reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
@@ -23,5 +23,7 @@
 - Existing multiplayer client inspection found configurable HTTP API and WebSocket route references in `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`. The user clarified that the existing multiplayer feature substantively does not use a conventional server; therefore, absence of server source is not treated as a search failure or a blocker for new-game design.
 - Recommended direction: separate lightweight authoritative service for the new game; develop locally first, then host only when friends need always-on access. Host-authoritative private play remains a lower-infrastructure alternative with weaker trust.
 - Proposed first playable scope: 2–6 players, 1,000 virtual chips per run, five stages, reset balances each run, four mechanically distinct candidate games, run-only items, no real money/cash-out/transfers.
-- No server, client, database, or deployment has been implemented. No new tests were run for this documentation-only checkpoint. No real two-client run has been performed.
-- Next gate: discuss and lock authority model, stack, run format, and initial rules/payout proposal; then implement pure game rules and ledger with unit tests before adding network transport.
+- Added isolated prototype files under `gamble-roguelike/`: pure rules for four game candidates, in-memory chip ledger, Node test suite, package manifest, README, and a scoped GitHub Actions workflow.
+- Local working-copy checks: 10/10 subtests passed; Node syntax checks passed. A GitHub workflow was added, but no verified remote CI result is available yet.
+- No HTTP/WebSocket server, room service, browser client, durable database, or deployment exists. The ledger does not survive process restart. No real two-client run has been performed.
+- Next gate: verify CI against the committed files, tighten rules/ledger edge cases, then implement the authoritative local room service and persistence in a separate bounded step.
