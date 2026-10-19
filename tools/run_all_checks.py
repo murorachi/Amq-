@@ -37,7 +37,7 @@ COMMANDS = [
     ("quiz suggestion renderer extraction contract", ["node", "tests/unit/quiz_suggestion_renderer_extraction_contract.test.cjs"]),
     ("quiz suggestion controller extraction contract", ["node", "tests/unit/quiz_suggestion_controller_extraction_contract.test.cjs"]),
     ("anime/song DB initializer extraction contract", ["node", "tests/unit/anime_song_database_extraction_contract.test.cjs"]),
-    ("quiz suggestions browser integration", [sys.executable, "tests/browser/quiz_suggestions_integration.py", "--html", "dist/amq_learning_tool_v82_80.html"]),
+    ("quiz suggestions browser integration", [sys.executable, "tests/browser/quiz_suggestions_integration.py", "--html", "dist/amq_learning_tool_v82_85_12.html"]),
     # The V82.80/V82.81 geometry baseline is historical and requires its archived HTML;
     # do not run it against the current release candidate as part of default acceptance.
     ("parser-backed dependency inventory", ["node", "tools/ast_dependency_inventory.cjs"]),
