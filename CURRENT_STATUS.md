@@ -376,3 +376,12 @@ V82.69 branch `v82.69-architecture-storage-multiplayer-01` was created. Status/a
 - Static/local checks passed: Python syntax and CLI smoke; storage repository contract 9/9; backup restore contract 6/6; full backup round-trip contract 4/4; integrity verifier 116/116; deterministic product fingerprint unchanged.
 - Native-origin acceptance is BLOCKED / NOT RUN in this environment: Chromium returns `ERR_BLOCKED_BY_ADMINISTRATOR` before localhost page initialization. No claim is made for native-origin persistence, real UI import/export or browser-level rollback. The acceptance script must be run in a Windows/browser environment that permits localhost.
 - No production runtime/CSS or product HTML changed. V82.65 remains immutable; V82.82 remains the product baseline. Answer/playback and multiplayer lifecycle extraction stays blocked until native acceptance and later audio/multiplayer gates are completed.
+
+
+## V82.85.15 quiz target-value resolver extraction — 2026-10-19
+
+- Extracted the exact `getTargetValue(s, type)` declaration from `src/scripts/script_004.htmlpart` to `src/modules/quiz_target_value.htmlpart` at its original IIFE execution position.
+- The helper reads the input song row plus existing `window.__aniEmqAPI.getWorkSummary` / `window.byAnime.get` lookups; it has no DOM, storage, timer, event, or state-write side effects. Target selection and fallback behavior are unchanged.
+- Added a production-source contract test for manifest fingerprints, exact declaration restoration, original insertion position, and 11 behavior cases; wired it into the full runner and engineering CI.
+- Expected product remains byte-identical to V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`. V82.82 remains immutable at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- CI verification is pending at the time this source change is prepared. The Chromium PCM audio capture gate remains 🟡 deferred and is not counted as passed.
