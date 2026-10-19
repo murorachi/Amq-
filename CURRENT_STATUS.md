@@ -78,3 +78,12 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Production `script_020.htmlpart`, FSRS formula, weights and storage schema are unchanged. Test runs extracted production functions in a deterministic VM with synthetic storage; it does not establish external FSRS conformance or real-browser storage behavior.
 - Automated execution is pending a CI result. Do not mark this stage passed until the focused test and full source/unit job complete.
 - Next after acceptance: add focused scene-background IndexedDB/object-URL lifecycle coverage for `script_036.htmlpart`.
+
+
+## SRS contract accepted; scene-background lifecycle test queued
+
+- SRS contract: `tests/unit/srs_state_transition_persistence_contract.test.cjs` passed **41 assertions** in run [39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291). The source/unit job completed successfully (132/132 source verifier checks plus all unit steps), and Firefox responsive passed. Chromium native-origin was still running at the last check; the full three-job workflow was not yet closed.
+- SRS report: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md`. Production `script_020.htmlpart`, formula, weights and schema remain unchanged.
+- Next focused test added: `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs`, wired into CI. It covers transaction commit/error/abort semantics, IndexedDB open failure/upgrade, scene URL replacement/revocation and temporary preview cleanup. Report: `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`.
+- Scene test automated execution is pending CI. No pass claim until logs show its assertion count and the source/unit job succeeds.
+- Product source/CSS and immutable V82.82 baseline remain unchanged.
