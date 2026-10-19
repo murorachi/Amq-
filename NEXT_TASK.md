@@ -5,7 +5,7 @@ Branch: v82.85.29-chromium-pulse-stream-diagnostics-01.
 ## Current checkpoint
 
 - Parent: v82.85.28-next-audio-state-reset-dedup-01. Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
-- Test-only change in tests/browser/real_audio_output_acceptance.py: capture media-element mute/volume/readiness/source state, sample PulseAudio sink-inputs ten times over 1.35 seconds during active playback, and print detailed sink-input properties.
+- Test-only change in tests/browser/real_audio_output_acceptance.py: capture media-element mute/volume/readiness/source state, sample PulseAudio sink-inputs ten times during active playback, record actual monotonic elapsed time for each sample, and print detailed sink-input properties.
 - Reason: run 39229842012 showed the native playing event and advancing media timeline, but PulseAudio reported no sink-input and an IDLE sink; final monitor PCM had peak=0 and RMS=0. Root cause remains unconfirmed.
 
 ## Steps
