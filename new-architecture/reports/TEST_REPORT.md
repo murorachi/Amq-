@@ -1,8 +1,8 @@
-# Test report — NEW_ARCH_V0.1.0_FOUNDATION_01
+# Test report — NEW_ARCH_V0.1.1_OSU_STABLE_UI_01
 
-- `node --test tests/*.test.cjs`: **9 passed, 0 failed**.
-- Covered empty-state isolation, song validation, answer normalization, quiz settlement, invalid-backup rejection, backup round-trip, deterministic build, JSON import deduplication/unique IDs, and settings validation.
-- `python tools/build.py` executed twice: both outputs were 50,807 bytes / SHA-256 `ed9de6758477e39e7a94f6698669d32076b54883f3b3b92f7f31114b8091c54d`.
-- Browser interaction acceptance: blocked/not completed. `file://` navigation returned `ERR_BLOCKED_BY_ADMINISTRATOR`; Playwright `set_content` subsequently terminated with `EPIPE`. No browser interaction assertion is counted as passed.
-- Not run or not implemented: real-origin storage reload, Firefox, real audio, multiplayer networking, spaced-repetition scheduling, full catalog completeness.
-- This is a foundation vertical slice, not full product acceptance.
+- `node --test tests/*.test.cjs`: 10 passed, 0 failed.
+- Coverage includes core song/quiz/backup/settings behavior and UI structure assertions that home uses the game-style composition and song select uses a track list/detail panel rather than a generic table.
+- `python tools/build.py` run twice: 64,114 bytes; SHA-256 `04c8f2e6d62a039442ed6dccce22ba1ee6674ea05d579723e27ea53c947faa63` both times.
+- Browser visual acceptance not completed; headless Chromium attempt timed out. No screenshot comparison is claimed.
+- Not verified/not implemented: real-origin storage reload, Firefox, real audio, multiplayer networking, spaced-repetition scheduling, pixel-measured screenshot comparison.
+- This is a visual-direction correction checkpoint, not full product acceptance.
