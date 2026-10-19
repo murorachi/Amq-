@@ -17,7 +17,7 @@ Disposition: first-pass data-payload review complete; no production runtime chan
 
 ## Integrity test
 
-Added tests/unit/anilist_id_map_payload_integrity.test.cjs to verify wrapper uniqueness, valid JSON, numeric source IDs, positive safe-integer target IDs, and manifest classification. It is wired into the engineering workflow and source package. Its first CI result is pending at report creation; no pass is claimed until the log confirms it.
+Added tests/unit/anilist_id_map_payload_integrity.test.cjs to verify wrapper uniqueness, valid JSON, numeric source IDs, positive safe-integer target IDs, and manifest classification. It is wired into the engineering workflow and source package. Run [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248) passed the contract: 9,400 entries and 9,364 unique target IDs. Source/unit passed 132/132; Firefox responsive passed. The browser-native job failed only at the known non-silent audio output capture assertion.
 
 ## Risks and limits
 
