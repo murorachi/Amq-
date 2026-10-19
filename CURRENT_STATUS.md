@@ -1,17 +1,18 @@
-# Current engineering checkpoint: V82.85.25 multiplayer audio failure handler deduplication
+# Current engineering checkpoint: V82.85.26 suggestion cache invalidation dedup
 
-- Branch: `v82.85.25-multiplayer-audio-callback-dedup-01`, based on the latest V82.85.23 callback-contract checkpoint.
-- Immutable V82.82 product remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Production source change: the two identical `failed` callback bodies in `src/scripts/script_028.htmlpart` now delegate to one `handleAudioFailure(id,a,watchdog)` helper. Both call sites preserve their local song ID, media element, and watchdog ownership.
-- Updated `tests/unit/multiplayer_audio_failure_callback_contract.test.cjs` to test the shared handler's pending, active, and stale-event branches and assert exactly two call sites.
-- Updated the fragment fingerprint and created the V82.85.25 candidate metadata. The deterministic standalone candidate is pinned at 8,787,104 bytes / SHA-256 `075068b01a6429629315157a4e412a0c28c8d58c920313dada607584234c71c1` based on the CI builder output. CI run [39223441076](https://github.com/murorachi/Amq-/actions/runs/39223441076) verified the updated pin: verifier 132/132, focused handler contract 14 assertions, package completeness and reproducibility, and standalone candidate build/upload all passed. Firefox responsive passed. Browser-native-origin acceptance is still running; the known CI audio capture mismatch is not a blocker for this refactor.
-- User manually confirmed the current app plays audio. The CI real-audio output capture mismatch is recorded as a known environment issue and is not a blocker for this bounded dedup refactor; the assertion itself remains unchanged.
-- Stage report: `reports/V82_85_25_MULTIPLAYER_AUDIO_FAILURE_HANDLER_DEDUP_01.md`.
+- Branch: `v82.85.26-suggestion-cache-invalidation-dedup-01`, based on the V82.85.25 multiplayer audio callback dedup checkpoint.
+- Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Production change: removed one redundant anime suggestion-cache invalidation loop from the multiplayer display-language change listener. It immediately calls `window.__aniRefreshChineseSuggestionsV8237`, which already clears the same anime cache entries and refreshes anime, artist, and title suggestions.
+- Change size: 95 source characters removed; only one invalidation loop remains.
+- Added `tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs` and wired it into the source/unit workflow.
+- Fragment fingerprint: 139,664 bytes / SHA-256 `c349421f2a4759677669079d5e37a212795958ec6e556b56f36cadddeb56d018`.
+- Release candidate fingerprint is awaiting the next CI builder output; do not mark the stage accepted until the candidate manifest hash, unit contract, reproducibility and relevant browser tests pass.
+- Stage report: `reports/V82_85_26_SUGGESTION_CACHE_INVALIDATION_DEDUP_01.md`.
 
 ## Next direction
 
-Finish source/unit fingerprint and deterministic-build verification for V82.85.25. Once verified, continue the historical technical-debt inventory with one small, demonstrably equivalent duplicate at a time. Do not return to deep CI audio-routing investigation unless actual product playback regresses.
+After the candidate passes, continue historical-code deduplication. Prefer removing duplicated work when an existing shared function already guarantees the same behavior. Do not merge similarly named functions with different semantics or expand into broad lifecycle changes.
 
 ## Rollback
 
-Revert the helper extraction, restore the two original callback bodies and V82.85.22 manifest/release fingerprint, and remove this stage's test/workflow/report changes. V82.82 remains immutable.
+Restore the removed loop in the `mpNameLanguage` listener and revert the focused test, workflow/package/report metadata, and manifest changes together. V82.82 remains immutable.
