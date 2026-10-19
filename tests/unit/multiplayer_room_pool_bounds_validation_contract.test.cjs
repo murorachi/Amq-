@@ -43,4 +43,4 @@ assert.throws(() => validate(null, 2100, null, 100),
 assert.throws(() => validate(2101, 1900, 101, 0),
   /年份下限不能大於上限/, 'year inversion retains precedence over difficulty inversion');
 
-console.log('PASS multiplayer room pool bounds validation dedup contract: 11 assertions');
+console.log('PASS multiplayer room pool bounds validation dedup contract: 14 assertions');
