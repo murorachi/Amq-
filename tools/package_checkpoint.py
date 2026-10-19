@@ -11,7 +11,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_85_27_HISTORICAL_DEBT_DEDUP_01.zip'
+PACKAGE_NAME = 'AMQ_V82_85_28_NEXT_AUDIO_RESET_DEDUP_01.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
@@ -31,9 +31,11 @@ REQUIRED_PACKAGE_PATHS = {
     'reports/V82_85_25_MULTIPLAYER_AUDIO_FAILURE_HANDLER_DEDUP_01.md',
     'reports/V82_85_26_SUGGESTION_CACHE_INVALIDATION_DEDUP_01.md',
     'reports/V82_85_27_ROOM_POOL_BOUNDS_VALIDATION_DEDUP_01.md',
+    'reports/V82_85_28_NEXT_AUDIO_STATE_RESET_DEDUP_01.md',
     'tests/unit/multiplayer_audio_failure_callback_contract.test.cjs',
     'tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs',
     'tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs',
+    'tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs',
     'tests/unit/multiplayer_checked_values_dedup_contract.test.cjs',
 }
 EXCLUDED_FROM_MANIFEST = {
