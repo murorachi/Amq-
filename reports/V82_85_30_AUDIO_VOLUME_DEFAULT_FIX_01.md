@@ -19,10 +19,10 @@
 ## Verification status
 
 - Diagnostic root-cause evidence: PASS.
-- New unit contract: local execution PASS, 10/10 assertions; CI execution pending.
+- New unit contract: local and CI execution PASS, 10/10 assertions (run 39289331801).
 - First reconstructed candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`. Manifest release fingerprint has been updated; CI confirmation of deterministic rebuild is pending.
-- Native Chromium output: pending; must pass peak >= 1000 and RMS >= 150.
-- Firefox responsive and remaining regression jobs: pending.
+- Native Chromium output: PASS in run 39289331801; media muted=false, volume=0.7; PulseAudio sink RUNNING with sink-input present in all ten samples; PCM peak=4899 and RMS=2468.4 (both strict thresholds passed).
+- Firefox responsive, multiplayer lifecycle, source/unit, package reproducibility, and candidate upload: PASS in run 39289331801. A subsequent workflow-artifact naming-only commit is being revalidated.
 
 ## Rollback
 

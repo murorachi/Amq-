@@ -26,12 +26,12 @@ The volume initializer used `Number(localStorage.getItem('aniQuizVolume'))`. Whe
 - Run source verifier, deterministic build, package completeness/reproducibility and Firefox responsive tests.
 - Run native Chromium audio acceptance; verify sink-input appears and captured PCM has peak >= 1000 and RMS >= 150.
 - Confirm playback lifecycle assertions still pass.
-- Confirm CI rebuild matches 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2` and verify the manifest release fingerprint.
+- Confirm the artifact-name alignment rerun passes, verify remote fingerprints, and prepare the V82.85.30 PR for review. Do not merge automatically.
 - Verify GitHub Actions results and remote file fingerprints before declaring completion.
 
 ## Status and rollback
 
 - Local regression contract: PASS, 10/10 assertions.
-- First candidate reconstruction: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; release manifest updated, full CI rerun pending.
+- CI run [39289331801](https://github.com/murorachi/Amq-/actions/runs/39289331801): PASS all three jobs. Source verifier 132/132; deterministic candidate 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; Firefox responsive PASS; Chromium audio lifecycle PASS; non-silent PCM PASS (peak=4899, RMS=2468.4).
 - Do not change production audio lifecycle logic or weaken the PCM gate.
 - Roll back by reverting the V82.85.30 source, contract, manifest/workflow/package metadata and checkpoint docs together. Keep V82.85.28 and immutable V82.82 intact.

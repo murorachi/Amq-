@@ -6,7 +6,7 @@
 - Source cause: `Number(localStorage.getItem('aniQuizVolume'))` converts a missing `null` preference to zero, overriding the intended 70% default. This then mutes the shared audio player.
 - Fix: only parse the saved volume when a non-empty stored value exists; preserve explicit saved 0 and other valid values. Added `tests/unit/quiz_volume_default_contract.test.cjs` for missing, zero, and nonzero preferences.
 - First reconstructed V82.85.30 candidate fingerprint: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`. This is a computed build fingerprint, not yet a passing acceptance result; V82.85.28 and V82.82 remain untouched.
-- Regression contract: locally passed 10/10 assertions. Complete CI and native audio output acceptance are pending.
+- Regression contract: local and CI both passed 10/10 assertions. CI run [39289331801](https://github.com/murorachi/Amq-/actions/runs/39289331801) passed source/unit, Firefox responsive, and native Chromium audio acceptance. Browser PCM peak=4899 and RMS=2468.4; PulseAudio sink-input appeared and sink state was RUNNING. A subsequent workflow-artifact naming-only commit is being revalidated.
 - Rollback: revert the V82.85.30 volume initialization change, focused contract, manifest/workflow/package metadata and checkpoint docs together. Preserve the V82.85.28 branch and immutable V82.82 baseline.
 
 ---
