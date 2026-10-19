@@ -32,11 +32,15 @@ REQUIRED_PACKAGE_PATHS = {
     'reports/V82_85_26_SUGGESTION_CACHE_INVALIDATION_DEDUP_01.md',
     'reports/V82_85_27_ROOM_POOL_BOUNDS_VALIDATION_DEDUP_01.md',
     'reports/V82_85_28_NEXT_AUDIO_STATE_RESET_DEDUP_01.md',
+    'reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md',
+    'reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md',
+    'reports/AUDIT_SCRIPT_028_MULTIPLAYER_LIFECYCLE_V82_85_29.md',
     'tests/unit/multiplayer_audio_failure_callback_contract.test.cjs',
     'tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs',
     'tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs',
     'tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs',
     'tests/unit/multiplayer_checked_values_dedup_contract.test.cjs',
+    'tests/unit/embedded_emq_payload_integrity.test.cjs',
 }
 EXCLUDED_FROM_MANIFEST = {
     'PACKAGE_SHA256SUMS.txt',
