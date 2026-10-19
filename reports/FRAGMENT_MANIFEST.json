@@ -833,8 +833,8 @@
       "path": "src/scripts/script_028.htmlpart",
       "start_byte": 5612971,
       "end_byte": 5753116,
-      "byte_length": 139759,
-      "sha256": "1112d964951abde8cfcb8e389aa4b601709f90cd049778b4d8423472d0347297",
+      "byte_length": 139664,
+      "sha256": "PENDING_CI_FINGERPRINT",
       "opening_tag": "<script id=\"v82-34-multiplayer-ui\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1443,8 +1443,8 @@
   ],
   "module_count": 15,
   "release": {
-    "version": "V82.85.25",
-    "bytes": 8787104,
-    "sha256": "075068b01a6429629315157a4e412a0c28c8d58c920313dada607584234c71c1"
+    "version": "V82.85.26",
+    "bytes": 8787009,
+    "sha256": "PENDING_CI_FINGERPRINT"
   }
 }
