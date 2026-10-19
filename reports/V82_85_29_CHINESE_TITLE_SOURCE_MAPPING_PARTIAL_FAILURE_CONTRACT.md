@@ -20,7 +20,7 @@ The test extracts production functions and supplies synthetic anime rows and moc
 ## Acceptance status
 
 - Static review: tests exercise the real `sourceCandidates`, `addCandidate` and `buildMap` implementations with deterministic dependencies.
-- Automated execution: pending CI at report creation. Record assertion count and run ID only after the focused test and source/unit job complete.
+- Automated execution: **PASS, 19 assertions** in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041). The focused source-mapping step passed; the source/unit job had passed the 132/132 verifier and both new title-contract tests. Firefox responsive and Chromium native-origin were still running at the last check.
 - Not covered: IndexedDB upgrade/cache expiry behavior, external resource freshness/licensing, OpenCC script delivery in a real browser, or live-source schema drift.
 
 ## Rollback
