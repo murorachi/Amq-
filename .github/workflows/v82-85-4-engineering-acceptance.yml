@@ -24,6 +24,10 @@ jobs:
         run: python tools/verify.py
       - name: Test reverse source inventory contract
         run: python tests/unit/source_inventory_completeness_contract.py
+      - name: Test checkpoint package completeness contract
+        run: python tests/unit/package_checkpoint_contract.py
+      - name: Build and verify checkpoint source package
+        run: python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip"
       - name: Guard acceptance runner artifact targets
         run: python tests/unit/run_all_checks_config_contract.py
       - name: Build versioned V82.85.12 standalone candidate
@@ -95,6 +99,7 @@ jobs:
       - name: Install Playwright Firefox
         run: |
           python -m pip install --upgrade pip
+          python -m pip install playwright
           python -m playwright install --with-deps firefox
       - name: Run Firefox responsive and quiz UI smoke acceptance
         run: python tests/browser/firefox_responsive_smoke_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
