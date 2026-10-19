@@ -43,3 +43,10 @@
 - Report: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md`.
 - Automated execution pending CI. Production source and cache schema are unchanged.
 - Previously accepted characterization: SRS 41/41 and scene-background lifecycle 29/29; source/unit and Firefox responsive passed. Known audio output capture failure remains a separate browser-native acceptance limitation.
+
+
+## Chinese title source-mapping contract
+
+- Added `tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs` and CI step for `script_031.htmlpart`; report `reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md`.
+- CI execution pending. Production source and cache/schema unchanged.
+- EMQ Chinese-title cache contract passed 25 assertions in run [39249715083](https://github.com/murorachi/Amq-/actions/runs/39249715083); confirm source/unit job completion before marking the full stage accepted.
