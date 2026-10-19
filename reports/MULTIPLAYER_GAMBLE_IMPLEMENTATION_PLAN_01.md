@@ -1,162 +1,130 @@
-# Multiplayer Gamble Roguelike — Implementation Plan 01
+# Multiplayer Gamble Roguelike — Design-First Plan 01
 
-- Status: Stage 1 core prototype committed; rules/ledger unit tests pass in the local working copy. Server, UI, persistence, and live multiplayer are not implemented.
+- Status: **Design Gate 01 drafted; no further implementation authorized yet.**
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
 - Product baseline remains V82.82 standalone HTML, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Parent discovery record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
+- Design review: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md`.
+- Discovery record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
 
-## 1. Recommended delivery strategy
+## 1. Delivery rule
 
-Build a separate, small multiplayer game application/service first. Do not embed new game logic directly into the existing AMQ standalone HTML in the first implementation stage. Keep AMQ integration as a later adapter so that a broken prototype cannot destabilize the existing product.
+**Do not implement the multiplayer server or browser UI until the design reaches the agreed gate.** The existing `gamble-roguelike/` rules/ledger package is an isolated engineering fixture. Passing unit tests proves selected code paths behave as written; it does not prove that the product is strategically interesting.
 
-Recommended trust model: a lightweight authoritative server. During development it runs on the developer's own computer; for friend play it can later be deployed to a small hosted service. The server owns the room/run state, random outcomes, accepted wagers, chip ledger, deadlines, and settlement. Clients submit choices and render server state; they never submit authoritative balances or payout values.
+Design should iterate through:
+1. Specify a concrete loop and representative decisions.
+2. Critique for shallow choices, dominant strategies, griefing, downtime, and runaway balance.
+3. Rework the rules.
+4. Independently calculate odds, expected value, variance, integer rounding, and quota success.
+5. Simulate multiple player policies and run configurations.
+6. Review the result against the design gates.
+7. Repeat while any gate fails.
 
-This is a recommendation for discussion, not an assertion that hosting has already been selected or deployed.
+No iteration count is fixed. Stop only when the gates are supported by evidence, not because the document feels complete.
 
-## 2. First playable milestone
+## 2. Product hypothesis
 
-Target: 2–6 players in one private room, one run, virtual chips only.
+A short-session (target 12–20 minute) co-op gambling roguelite for 2–6 players. The team shares a virtual bankroll and must meet escalating stage quotas. Players make simultaneous personal choices, select routes, use run-only items, and decide when to preserve gains versus risk a larger reward.
 
-Include:
-- Create/join room with a room code.
-- Host starts and ends a run.
-- Each run starts with 1,000 virtual chips per player; balance resets next run.
-- A run has 5 stages. Each stage offers a small set of game/event options.
-- Players act independently where supported; each game defines its own lock/deadline.
-- Server validates and locks bets, resolves the outcome, applies ledger entries once, and broadcasts a result.
-- Run-only items can modify one future game or one risk decision.
-- Disconnect/rejoin can restore the current public state and the player's own session.
-- A round history shows accepted bet, rule version, outcome, payout, and balance delta.
+The intended differentiator is the interaction of shared-bank social tension, private simultaneous commitments, informed route selection, and item synergies. This is a hypothesis to test, not a proven claim.
 
-Explicitly out of scope for this milestone:
-- Real-money wagering or cash-out.
-- Player-to-player transfers.
-- Persistent balances between runs.
-- Ranked matchmaking, public rooms, account economy, elaborate cosmetics.
-- Song playback as a dependency of every game.
-- Peer-to-peer fairness protocol.
+AMQ songs remain optional atmosphere/event content. No real-money betting, cash-out, player-to-player transfers, or persistent wallet in the first target.
 
-## 3. Candidate game set
+## 3. First design review outcome
 
-Start with four mechanically distinct games, not six thinly disguised versions of a coin toss.
+The current four pure-rule candidates are not sufficient as a product:
+- Coin Call is a useful tutorial/settlement fixture, not a signature game.
+- Exact Seven is an easily enumerated single-shot lottery with little decision depth.
+- Vault has a promising stop/continue decision, but needs a proper state machine and cash-out rules.
+- Blind High Card provides competition, but needs one meaningful pre-reveal decision beyond simply choosing a stake.
 
-### Game A — Coin Call (binary probability)
-- Player chooses heads or tails.
-- Probability of win: 1/2.
-- Proposed gross return on a win: 1.9× stake (includes the returned stake).
-- Expected gross return per stake: 0.5 × 1.9 = 0.95.
-- Expected net return: -0.05 stake, a 5% house edge.
-- This is the simplest test fixture for bet validation, locking, settlement, and replay protection.
+The design review proposes four mechanism slots:
+1. Vault push-your-luck.
+2. Risk Contract with distinct probability/reward profiles.
+3. Blind Pot with either optional insurance or paid information (not both initially).
+4. Team Gamble with a shared bank/collective push decision.
 
-### Game B — Exact Seven (outcome probability)
-- Roll two fair six-sided dice; player wins only if the sum is 7.
-- Probability: 6/36 = 1/6.
-- Proposed gross return: 5.4× stake.
-- Expected gross return per stake: (1/6) × 5.4 = 0.9.
-- Expected net return: -0.1 stake, a 10% house edge.
-- The payout table must state clearly that 5.4× is total return, not profit plus stake.
+Each must differ in decision structure, information, timing, player interaction, or cross-round consequences. Reskins do not count.
 
-### Game C — Vault Push-Your-Luck (stop/continue decision)
-- The player chooses a stake, then advances through a sequence of vault steps.
-- Each successful step increases the available cash-out multiplier. The player can cash out after a success; failure loses the original stake.
-- Candidate success probabilities per step: 0.80, then 0.70, then 0.60.
-- Candidate gross cash-out multipliers: 1.20× after step 1, 1.70× after step 2, 2.70× after step 3.
-- With independent step outcomes, reaching each cash-out point has probability 0.80, 0.56, and 0.336 respectively. Expected gross return if a player commits to that exact cash-out point is 0.96×, 0.952×, and 0.9072× stake respectively.
-- These are starting balance parameters, not final balance: tune them in simulation and playtests. The key mechanic is choosing when to stop, not just selecting a probability.
+## 4. Proposed first-run rules (unapproved until math and design gates pass)
 
-### Game D — Blind High Card (multiplayer interaction)
-- Each participating player contributes a declared stake before the lock deadline.
-- The server privately draws one rank per player and reveals all ranks together after lock.
-- Highest rank wins the shared pot; ties split the pot evenly, with integer-chip remainder distributed by a documented deterministic rule.
-- This is a player-versus-player pooled game, so its expected payout depends on player count and tie rules rather than a fixed house multiplier. The ledger must debit each accepted stake once and credit the pool distribution once.
-- No side bets or player-to-player transfers in the first implementation.
+- 2–6 players in a private room.
+- Shared team bankroll, virtual chips only.
+- Simultaneous private actions within a betting window, revealed together on lock.
+- Each player's single wager capped initially at 20% of current team bankroll; total accepted wagers cannot exceed available funds.
+- One team route vote per stage; do not vote on every individual wager.
+- No permanent early elimination; a zero-balance player retains a limited support/scouting role.
+- A run has stages with escalating quotas and a meaningful route choice.
+- If the quota is missed, a costly recovery contract may be offered; it cannot guarantee rescue.
+- 8–12 initial run-only items, emphasizing trade-offs and synergies rather than flat unconditional buffs.
+- Target run duration 12–20 minutes; validate with simulation and later playtests.
 
-Game IDs and rules versions must be stable and explicit. These rules and values remain proposed until approved and independently tested.
+These are design hypotheses. Do not encode them as final constants before the review gates pass.
 
-## 4. Architecture
+## 5. Mandatory design gates
 
-Suggested separate workspace layout:
-- `server/`: room state machine, rules registry, random outcome generation, bet validation, ledger, event log, API/WebSocket transport.
-- `client/`: room lobby, run screen, game-specific UI, inventory, history.
-- `shared/`: schema, stable game IDs, protocol types, validation constants.
-- `tests/`: deterministic rules tests, probability/payout checks, ledger/idempotency tests, API integration tests, multi-client browser tests.
-- `reports/`: design decisions, test reports, acceptance notes.
+### Gate A — Coherent product
+- One-sentence identity distinct from competitors beyond theme or game count.
+- Full run walkthrough including failure/recovery.
+- Every stage has a meaningful choice.
+- Four mechanically distinct games.
+- Explicit shared-bank anti-griefing and zero-balance participation rules.
 
-Preferred initial stack: Node.js with TypeScript for server and shared types; a lightweight HTTP/WebSocket layer; SQLite for durable room/run/ledger records during a small private beta. Keep transport and persistence behind interfaces so the stack can change without rewriting game rules. If the repo's existing toolchain imposes a strong constraint, reassess before implementation.
+### Gate B — Mathematical integrity
+- Independent payout and expected-value checks.
+- No obvious positive-EV loop or universally dominant action.
+- Quota success rates measured under conservative, median, and aggressive policies.
+- Item stacking and integer rounding bounded.
+- Run length and failure curve measured by simulation.
 
-For local development, use a single command to start the service and a browser client. For friend testing across the internet, localhost alone is insufficient: deploy to a reachable host or deliberately configure a private network tunnel. Do not expose a development server directly to the public internet without authentication and basic abuse protections.
+### Gate C — Strategy/replayability
+- 8+ items form several clear synergies.
+- At least three viable strategies.
+- No one game/item is always best.
+- Route value changes across seeds and bankroll states.
+- Simulations show actual trade-offs, not just differently named risk levels.
 
-## 5. Core invariants
+### Gate D — Playtest readiness
+- Core rules teachable in under 3 minutes.
+- Paper-playtest script can run without implementation assumptions.
+- Plan for at least 3 small groups, ideally 2–4 players per group.
+- Prototype target: at least 70% would play another run.
+- Median duration 12–20 minutes; no player inactive for more than 20% of a run.
 
-1. Chip amounts are non-negative integers in one documented unit.
-2. The server calculates and validates every accepted wager.
-3. A wager is accepted only in the correct phase and before the deadline.
-4. A client request carries a unique action/idempotency ID; retries cannot debit twice.
-5. Each round can settle at most once, even after duplicate messages or reconnect.
-6. An outcome is generated by the server after bets are locked and cannot be supplied by the client.
-7. The ledger is append-only at the application level; corrections use compensating entries rather than rewriting history.
-8. Room/run state can be recovered after service restart from durable records.
-9. Rules version and payout table are stored with each settled round.
-10. Disconnect policy and timeout behavior are explicit per game; timeout cannot create a duplicate settlement.
+Coding can begin only after Gates A–C pass and the Gate D test plan is ready. Actual fun cannot be proven by prose or probability simulation alone; a low-fidelity playable prototype and external playtest are still required before claiming comparable enjoyment.
 
-## 6. Implementation stages and gates
+## 6. Math and simulation requirements
 
-### Stage 0 — Plan and decision lock
-- Approve or amend trust model, player count, run structure, initial chip balance, and prototype game set.
-- Confirm whether Node.js/TypeScript is acceptable.
-- No product HTML changes.
+For each game and relevant item combination, report:
+- Outcome distribution and conditional probabilities.
+- Gross return versus net profit.
+- Expected net value, variance, loss probability, and quota success chance.
+- Integer-chip rounding/minimum stake effects.
+- Item-modified distributions and dominance checks.
+- At least 100,000 seeded runs per candidate configuration, plus exact enumeration where feasible.
+- 2, 3, and 6 player configurations; low, medium, and high bankrolls; conservative, median, and aggressive decision policies.
 
-### Stage 1 — Rules and ledger core (initial prototype committed)
-- Added `gamble-roguelike/src/games.js`: deterministic rule functions for Coin Call, Exact Seven, Vault step resolution, and Blind High Card pot splitting.
-- Added `gamble-roguelike/src/ledger.js`: in-memory integer-chip ledger with atomic validation, non-negative balances, and idempotent settlement IDs.
-- Added Node's built-in test runner suite at `gamble-roguelike/test/core.test.js` and an isolated package manifest.
-- Local working-copy test run: 10 assertions/subtests passed in the fuller working tree; syntax checks passed. The GitHub copy has a consolidated 8-test suite, but its CI result has not yet been verified.
-- A GitHub Actions workflow was added to run `npm test` when this workstream changes. No verified workflow run is available yet.
-- No network transport yet. Ledger is in-memory and must not be treated as restart-safe or deployed multiplayer authority.
+Do not tune payout numbers in isolation from the quota curve. A high theoretical return may be bad if it creates an obvious always-pick strategy or makes the run trivial.
 
-### Stage 2 — Authoritative room service
-- Room creation/join, session identity, state machine, deadlines, actions, snapshots, reconnect, durable event/ledger persistence.
-- API contract and integration tests.
-- Verify restart recovery and simultaneous requests.
+## 7. Architecture is deliberately deferred
 
-### Stage 3 — Minimal browser client
-- Lobby, room status, game selection, bet controls, result view, inventory, run progression, round history.
-- Test at least two independent browser contexts against one real local service; mocks alone do not pass this gate.
+The prior proposal recommends a lightweight authoritative service, locally developed and hosted later if friend play needs always-on access. Node.js/TypeScript/SQLite remain possible options, not locked decisions. No server, database, HTTP/WebSocket API, browser UI, or deployment work should start before the design gates authorize a playable prototype.
 
-### Stage 4 — Private friend play
-- Deploy to a reachable test host, configure authentication and secrets safely, test latency/disconnect/rejoin, inspect logs and backups.
-- Do not call this stage complete until external clients complete a full run.
+The existing prototype currently has deterministic rule functions and an in-memory ledger only. It has no durable persistence or live multiplayer. Its previous local tests do not constitute design acceptance.
 
-### Stage 5 — Roguelike depth and AMQ adapter
-- Add more game modules only after the first four are fun and mathematically checked.
-- Add run-only items, route/event choices, and optional song-triggered events.
-- Integrate with AMQ through a narrow adapter; do not couple the engine to the existing song-answer state machine.
+## 8. Current next task
 
-## 7. Acceptance gates
+Produce Design Gate 02:
+1. Walk through one complete run with concrete starting bankroll, stage quotas, route options, wagers, item draft, win/loss, and recovery branch.
+2. Draft 8–12 items with explicit costs, triggers, trade-offs, and synergy pairs.
+3. Build probability/expected-value tables for the four mechanism slots; call out any slot whose rules still fail to create a decision.
+4. Specify simulation assumptions and policy models, then run the calculations/simulations in a reproducible script without modifying the product prototype.
+5. Revise the design and gate checklist based on actual findings.
 
-- All game probabilities and expected returns independently recomputed.
-- Unit tests pass for each rule module and ledger invariant.
-- Duplicate bet/action/settlement requests do not alter balances twice.
-- Two clients cannot submit accepted bets after lock.
-- A service restart preserves the room/run/ledger according to the documented policy.
-- Two independent clients complete a real run using the service, not mocked endpoints.
-- Disconnect, reconnect, timeout, tie, zero balance, invalid action, and host disconnect are covered.
-- No existing AMQ product HTML/source is modified in these stages unless a separate scoped integration task is approved.
+No server/UI implementation in this task. Do not use document length as the success metric; close the specific evidence gaps above.
 
-## 8. Open decisions to discuss
+## 9. Baseline, test, and rollback boundaries
 
-Only these decisions materially block the first implementation:
-1. **Authority:** recommended lightweight authoritative server, developed locally first and hosted later. Alternative: host-authoritative casual play with explicitly weaker trust.
-2. **Development stack:** recommended Node.js + TypeScript + SQLite for the prototype.
-3. **Run format:** proposed 5 stages, 1,000 chips per player, reset each run, 2–6 players.
-4. **Prototype games and proposed payouts:** Coin Call, Exact Seven, Vault Push-Your-Luck, Blind High Card as specified above.
-
-Other content (art, names, extra game variety, song events, meta-progression) can be decided after a playable build exists.
-
-## 9. Current limitations
-
-- The pure rules/ledger core is now implemented in an isolated prototype directory; no server, client UI, database persistence, or product HTML has been implemented.
-- Local tests passed in the working copy. The committed GitHub copy's CI run has not been verified, and no payout simulation or playtest has occurred.
-- The ledger is in-memory only; service restart recovery is not implemented.
-- No deployment target, domain, authentication provider, or operational budget has been selected.
-- No real two-client run has been performed.
+- Product baseline remains V82.82; no product HTML/source is changed by this design review.
+- Existing core tests are not a substitute for payout simulation, playtesting, or real-client acceptance.
+- Remote CI for the existing consolidated core suite remains unverified unless a workflow run is explicitly inspected.
+- Roll back the design-only changes by reverting the design report and related workstream documentation commits on `multiplayer-gamble-engine-discovery-01`.
