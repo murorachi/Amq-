@@ -880,7 +880,7 @@
       "opening_tag": "<script type=\"application/json\" id=\"aniAnilistIdMapV8237\">",
       "script_type": "application/json",
       "executable_heuristic": false,
-      "role": "inline-script-or-data-payload"
+      "role": "json-id-mapping-payload"
     },
     {
       "order": 63,
