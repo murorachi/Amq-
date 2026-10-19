@@ -90,3 +90,11 @@
 
 ## Design snapshot
 Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`. No human playtest yet; no implementation authorized.
+
+## Design direction reset — 2026-10-20
+- Product-owner feedback: Candidate 03 feels too mathematically balanced and predictable; repeated fair-EV tuning has removed the intended gambling tension.
+- New design direction: asymmetric outcome distributions, frequent losses paired with rare run-changing jackpots, push-your-luck cash-out decisions, and run-state-dependent temptation. Honest odds remain mandatory; equal EV and similar clear rates are no longer goals.
+- New record: `reports/MULTIPLAYER_GAMBLE_DESIGN_DIRECTION_RESET_01.md`.
+- Candidate 03, Paper Playtest Kit 02, and Gates 05–14 are preserved as historical evidence, not the active design target. Do not implement server/UI from Candidate 03.
+- Next: paper-design a three-wager, three-stage prototype with asymmetric low-volatility, jackpot, and push-your-luck options; include catastrophic-loss, jackpot-rescue, and cash-out-regret example runs before writing new simulations.
+- No production source changed. No tests were run for this documentation-only direction reset; previous Gate 14 CI does not validate this new direction.
