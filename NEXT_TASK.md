@@ -4,43 +4,41 @@
 
 Branch: `multiplayer-gamble-engine-discovery-01`.
 
-**Current phase: DESIGN ONLY. Do not implement server, UI, persistence, or more product game code until the design gates pass.**
+**Current phase: DESIGN ONLY. Do not implement server, UI, persistence, or more production game code until the design gates pass.**
 
-### Verified baseline
+### Baseline and evidence
 - Product baseline: V82.82 standalone HTML, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Separate work branch; no product HTML/source modified.
-- Existing prototype contains pure-rule fixtures and an in-memory ledger only. No live server, database, browser client, durable persistence, or real two-client run.
-- Previous local working-copy core tests: 10/10 subtests and syntax checks passed. Committed GitHub suite has 8 tests; remote CI not verified.
+- Existing prototype has pure-rule fixtures and an in-memory ledger only; no server, database, browser UI, durable persistence, or real two-client run.
+- Previously recorded local core tests: 10/10 subtests and syntax checks passed. Committed GitHub suite has 8 tests; remote CI not verified.
+- Gate 01–05 reports and simulations are linked from `CURRENT_STATUS.md`.
 
-### Design checkpoints
-- Gate 01: product thesis, critique of shallow candidate games, initial loop and gates.
-- Gate 02: numeric run walkthrough, ten-item draft, EV/variance checks, quota model simulation. Naive quota-sized betting was rejected because Safe dominated survival.
-- Gate 03: fair-EV risk profiles and comparison of shared versus individual wagers. Recommended design is one shared team wager per stage.
-- Reports: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md`.
-- Simulations: `reports/design_simulations/gamble_roguelike_gate02.py`, `reports/design_simulations/gamble_roguelike_gate03.py`.
+### Gate 05 results
+- Exact Signal Room clue generator now yields 1/3, 1/2, and 3/4 success for zero, one, and two clues. Gross returns 3×, 2×, and 4/3× have fair expected gross return before fees/rounding.
+- Median voting can suppress Push in six-player rooms (for a hypothetical 40/35/25 Bank/Balanced/Push preference mix, Push was selected 3.76% of the time). Plurality with explicit tie compromise raises this to 13.60%; these are modeled preferences, not player research.
+- One shared team wager per stage remains the preferred economy.
+- Gate 04's provisional two-clue 2/3 value is superseded by `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_04_ERRATA_01.md`.
 
-### Next bounded task: Design Gate 04
-1. Define secret simultaneous voting that selects Safe/Balanced/Jackpot without making the 2-player and 6-player rooms unfair. Specify tie and AFK defaults.
-2. Simulate single shared wagers for 2/3/6 players; compare no item, nerfed reroll, and a small item bundle.
-3. Test item combinations and integer-chip rounding/caps; reject dominant or recursive item loops.
-4. Build the paper-playtest facilitator script and observation sheet.
-5. Demonstrate at least three viable strategies and revise the design if one choice dominates.
-6. Do not implement server/UI in this task.
+### Next bounded task: Design Gate 06
+1. Simulate plurality voting and the single-wager model for 2/3/6 players.
+2. Add Signal Room clue fees, integer-rational payouts, minimum stake, and rounding.
+3. Simulate no-item, nerfed-reroll, and small item-bundle configurations.
+4. Check item combos, recursive triggers, maximum payouts, and recovery loops.
+5. Complete a five-stage walkthrough with success/failure/recovery and at least three proposed strategies.
+6. Finalize the paper-playtest cards and revise any dominant strategy.
 
 ### Stop conditions before implementation
 - Complete numeric run includes success and failure/recovery branches.
-- Four mechanisms have genuinely different decisions.
-- Shared-bank griefing and zero-balance participation have clear rules.
+- Four mechanisms make genuinely different decisions.
+- Shared-bank griefing, AFK/disconnect, and recovery rules are explicit.
 - Three viable strategies are demonstrated without a universal best game/item.
-- Payout math, rounding, item effects, and quota/failure curves are checked.
-- Paper-playtest protocol is ready; human enjoyment remains explicitly unproven until tested.
+- Odds, rounding, fees, item effects, and quota curves are checked.
+- Paper-playtest can run without facilitator improvisation. Human enjoyment remains unproven until actual playtest.
 
-### Existing AMQ maintenance workstream (separate)
+### Separate AMQ maintenance workstream
 V82.86.06 maintenance remains separate: add a dedicated stable CI command for backup/restore contracts and continue the IndexedDB failure matrix. Do not modify product source during Gamble Roguelike design.
 
 ## Current status and rollback
-- Design Gate 03 complete; Gate A–C are not yet passed.
+- Gate 05 exact enumeration completed; Gates A–C still not passed.
 - Product HTML/source unchanged.
-- No product tests were run for the design-only changes. Simulations ran locally with Python 3 standard library, seed 20261020, 100,000 runs/configuration.
-- No human playtest or verified remote CI pass for the gamble core.
+- No product tests were run for design-only changes. Simulations and exact enumeration ran locally; no human playtest or verified remote core CI.
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
