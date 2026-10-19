@@ -1,3 +1,18 @@
+# Current engineering checkpoint: V82.85.30 audio volume default fix
+
+- Active branch: `v82.85.30-audio-volume-default-fix-01`.
+- Previous diagnostic branch: `v82.85.29-chromium-pulse-stream-diagnostics-01`; CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693) failed at the strict non-silent PCM gate and revealed `muted=true` and `volume=0`.
+- Root cause: missing `aniQuizVolume` is `null`; applying `Number(null)` produces 0, overwriting the documented 70% default and muting the player.
+- Fix in `src/scripts/script_014.htmlpart`: only consume a non-empty stored preference. Explicit 0 remains a valid user choice.
+- Added `tests/unit/quiz_volume_default_contract.test.cjs` with 10 assertions for missing, zero, and nonzero preferences; wired into source/unit CI.
+- Updated fragment fingerprint, V82.85.30 artifact/package naming, and checkpoint metadata. First reconstructed V82.85.30 candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; release manifest updated to this exact fingerprint.
+- Local Node contract: PASS, 10/10 assertions. Latest full CI run [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626) passed all three jobs. Source/unit verifier: 132/132; volume-default regression: 10/10; deterministic candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; package repeatability passed; Firefox responsive passed; Chromium native-origin passed. Browser media reported muted=false and volume=0.7; PulseAudio sink was RUNNING with sink-input present in all ten samples; captured PCM peak=4899 and RMS=2384.5 passed the unchanged thresholds. Artifact-name alignment run [39289986327](https://github.com/murorachi/Amq-/actions/runs/39289986327) also passed all jobs. One intermediate run failed at the fixed-delay media-timeline assertion while the PulseAudio stream was active; two later runs passed timeline and PCM checks. This leaves a possible timing-sensitive assertion in the acceptance test as a known test-only risk.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+---
+
+## Historical checkpoints
+
 # Current engineering checkpoint: V82.85.26 suggestion cache invalidation dedup
 
 - Branch: `v82.85.26-suggestion-cache-invalidation-dedup-01`, based on the V82.85.25 multiplayer audio callback dedup checkpoint.
@@ -45,3 +60,13 @@ Revert the V82.85.27 helper, focused test, workflow/package versioning, manifest
 ## Rollback
 
 Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerprint and checkpoint documentation together. Keep V82.85.27 and V82.82 intact.
+
+
+## V82.85.29 checkpoint: Chromium PulseAudio stream diagnostics
+
+- Branch: v82.85.29-chromium-pulse-stream-diagnostics-01; parent V82.85.28. Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
+- Test-only change: tests/browser/real_audio_output_acceptance.py now records HTMLMediaElement mute/volume/source/readiness state and samples PulseAudio sink inputs ten times during native playback and records actual monotonic elapsed time for each sample. It also logs detailed sink-input properties. Production playback code and standalone candidate are unchanged.
+- Rationale: V82.85.28 logs showed Chromium as a PulseAudio client but no sink-input, an IDLE sink, and captured PCM peak=0/RMS=0. The one-time snapshot could not distinguish a missing/short-lived output stream from muted/zero-volume media.
+- Existing evidence from run 39229842012: source/unit verifier 132/132, focused state-reset contract 12 assertions, deterministic package/build and Firefox responsive passed. Native playback lifecycle assertions passed, but non-silent PCM output failed.
+- New diagnostic run has not yet been verified. No root cause or repair is claimed at this checkpoint.
+- Rollback: revert the V82.85.29 test-only diagnostics and checkpoint documents; preserve V82.85.28 and immutable V82.82.

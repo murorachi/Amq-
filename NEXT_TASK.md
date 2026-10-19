@@ -1,20 +1,35 @@
-# Next task: verify V82.85.28 next-audio state reset dedup
+# Next task: verify V82.85.30 audio volume default fix
 
-Branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+Branch: `v82.85.30-audio-volume-default-fix-01`.
 
-## Current checkpoint
+## Confirmed root cause
 
-- Extracted repeated next-audio reset assignments into `resetNextAudioState()`, used by `stopAudio()`, `clearNextAudio()`, and `activateNextAudio()`.
-- Focused contract: `tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs`, 12 assertions; passed in run [39229842012](https://github.com/murorachi/Amq-/actions/runs/39229842012). Source/unit verifier passed 132/132; deterministic candidate and package reproducibility passed; Firefox responsive passed. Chromium native-origin acceptance is still in progress.
-- Immutable V82.82 baseline: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Stage report: `reports/V82_85_28_NEXT_AUDIO_STATE_RESET_DEDUP_01.md`.
+CI run [39286354693](https://github.com/murorachi/Amq-/actions/runs/39286354693) reported:
+- media element: `muted=true`, `volume=0`, `paused=false`, `readyState=4`;
+- source was a valid WAV mirror and the decoded timeline advanced;
+- PulseAudio sink-input was absent across ten samples;
+- capture self-test succeeded (peak 6999, RMS 4131), while browser PCM was peak 0 / RMS 0.
 
-## Steps
+The volume initializer used `Number(localStorage.getItem('aniQuizVolume'))`. When no value exists, `getItem` returns `null` and `Number(null)` becomes 0. The slider then applies zero volume and mutes the player. This is a product initialization defect exposed by a clean browser profile, not evidence that Chromium's audio service itself is broken.
 
-1. Finish Chromium native-origin acceptance and record the final conclusion separately from the known audio capture failure.
-2. Keep the focused contract, source/unit checks, deterministic package, standalone build and Firefox responsive results as recorded evidence. Do not reopen the known CI audio-output capture mismatch unless actual playback regresses.
-3. If accepted, continue the historical debt inventory with one small duplicate whose teardown/side-effect boundaries can be preserved.
+## Current changes
 
-## Rollback
+1. Guard preference parsing against a missing or empty value; keep 70% as default.
+2. Preserve explicit stored 0 and valid saved nonzero values.
+3. Add a 10-assertion unit contract and run it in CI.
+4. Update fragment manifest, V82.85.30 candidate/package naming, and stage docs.
+5. Keep the native audio PCM gate unchanged.
 
-Revert the V82.85.28 helper, test, workflow/package versioning, manifest update and checkpoint documentation as one stage. Keep V82.85.27 and V82.82 intact.
+## Required verification
+
+- V82.85.30 full validation is green in run [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626); see status below.
+- Next bounded task: inspect and, if the test structure permits, replace the fixed 450 ms media-timeline delay with a condition-based wait. This must remain test-only; preserve the currentTime advancement threshold and strict non-silent PCM gate. Add/retain explicit timeout failure diagnostics. Run the native-origin test repeatedly before considering this timing-risk item closed.
+- Keep PR #3 open until the test-timing decision and final docs are reviewed; do not merge automatically.
+
+## Status and rollback
+
+- Local regression contract: PASS, 10/10 assertions.
+- Latest full CI run [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626): PASS all three jobs. Source verifier 132/132; deterministic candidate 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; package reproducibility PASS; Firefox responsive PASS; Chromium audio lifecycle PASS; non-silent PCM PASS (peak=4899, RMS=2384.5).
+- PR #3 is open, mergeable, and targets V82.85.28; not merged.
+- Do not change production audio lifecycle logic or weaken the PCM gate.
+- Roll back by reverting the V82.85.30 source, contract, manifest/workflow/package metadata and checkpoint docs together. Keep V82.85.28 and immutable V82.82 intact.

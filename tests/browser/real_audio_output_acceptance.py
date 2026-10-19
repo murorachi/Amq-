@@ -297,25 +297,50 @@ def main():
                     print("NATIVE_AUDIO_PLAY_DIAGNOSTIC", json.dumps(diagnostic, ensure_ascii=False))
                     raise
                 page.wait_for_function("window.__realAudioEvents.playing > 0", timeout=10000)
-                # Diagnose the real OS output stream while the native media element
-                # is actively playing. Keep this evidence in CI logs if the monitor
-                # is silent; browser timeline events alone do not prove audible output.
+                # Record media-element state and repeatedly sample PulseAudio while
+                # playback is active. A one-shot sink query can miss a short-lived
+                # stream; media timeline progress alone does not prove OS output.
+                media_state = page.evaluate("""() => ({
+                  muted: audioEl.muted, defaultMuted: audioEl.defaultMuted,
+                  volume: audioEl.volume, paused: audioEl.paused,
+                  readyState: audioEl.readyState, networkState: audioEl.networkState,
+                  currentTime: audioEl.currentTime, currentSrc: audioEl.currentSrc,
+                  error: audioEl.error ? {code: audioEl.error.code, message: audioEl.error.message} : null,
+                  visibilityState: document.visibilityState,
+                  userActivationHasBeenActive: !!navigator.userActivation?.hasBeenActive
+                })""")
+                pulse_samples = []
+                pulse_sampling_started = time.monotonic()
+                for sample_index in range(10):
+                    sink_inputs_sample = subprocess.run(
+                        ["pactl", "list", "short", "sink-inputs"], check=True,
+                        capture_output=True, text=True, timeout=10).stdout.strip()
+                    default_sink_sample = subprocess.run(
+                        ["pactl", "get-default-sink"], check=True,
+                        capture_output=True, text=True, timeout=10).stdout.strip()
+                    pulse_samples.append({
+                        "sample": sample_index,
+                        "elapsedMs": round((time.monotonic() - pulse_sampling_started) * 1000),
+                        "sinkInputs": sink_inputs_sample,
+                        "defaultSink": default_sink_sample
+                    })
+                    if sample_index < 9:
+                        page.wait_for_timeout(150)
                 sink_state = subprocess.run(
                     ["pactl", "list", "short", "sinks"], check=True,
-                    capture_output=True, text=True, timeout=10).stdout.strip()
-                sink_inputs = subprocess.run(
-                    ["pactl", "list", "short", "sink-inputs"], check=True,
                     capture_output=True, text=True, timeout=10).stdout.strip()
                 pulse_clients = subprocess.run(
                     ["pactl", "list", "short", "clients"], check=True,
                     capture_output=True, text=True, timeout=10).stdout.strip()
-                print("PULSE_SINK_STATE " + json.dumps({
-                    "defaultSink": subprocess.run(
-                        ["pactl", "get-default-sink"], check=True,
-                        capture_output=True, text=True, timeout=10).stdout.strip(),
+                sink_input_details = subprocess.run(
+                    ["pactl", "list", "sink-inputs"], check=True,
+                    capture_output=True, text=True, timeout=10).stdout.strip()
+                print("PULSE_STREAM_DIAGNOSTIC " + json.dumps({
+                    "media": media_state,
                     "sinks": sink_state,
-                    "sinkInputs": sink_inputs,
-                    "clients": pulse_clients
+                    "clients": pulse_clients,
+                    "sinkInputSamples": pulse_samples,
+                    "sinkInputDetails": sink_input_details
                 }, ensure_ascii=False), flush=True)
                 check(True, "user-initiated retry reaches the native playing event")
                 page.wait_for_timeout(450)
