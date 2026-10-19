@@ -275,9 +275,18 @@ def main():
                 page.wait_for_function("!document.getElementById('quizView')?.classList.contains('hidden')",
                                        timeout=5000)
                 page.locator("#quizTarget").select_option("title")
-                auto_next = page.locator("#qsAutoNext")
-                if auto_next.is_checked():
-                    auto_next.uncheck()
+                # This legacy checkbox is visually hidden behind its styled label;
+                # set its state through the DOM and dispatch the production change event
+                # rather than asking Playwright to click an intentionally invisible input.
+                page.evaluate("""() => {
+                  const input = document.getElementById('qsAutoNext');
+                  if (input && input.checked) {
+                    input.checked = false;
+                    input.dispatchEvent(new Event('change', {bubbles:true}));
+                  }
+                }""")
+                check(not page.locator("#qsAutoNext").is_checked(),
+                      "auto-next is disabled for deterministic answer-reveal lifecycle checks")
                 hook_installed = page.evaluate("""id => {
                   const api = window.__aniEmqAPI;
                   if (!api || typeof api.chooseQuestion !== 'function') return false;
