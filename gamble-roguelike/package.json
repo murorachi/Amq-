@@ -1,0 +1,9 @@
+{
+  "name": "amq-gamble-roguelike-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure rules and virtual-chip ledger for the AMQ multiplayer Gamble Roguelike prototype",
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=20" }
+}
