@@ -373,6 +373,7 @@ await test('forced reload bypasses cache and concurrent requests share one promi
   context.buildMap = () => { buildCalls++; return new Promise(resolve => { resolveBuild = resolve; }); };
   const first = context.loadTitles(true);
   const second = context.loadTitles(false);
+  await Promise.resolve(); await Promise.resolve();
   assert.notEqual(first, null);
   assert.notEqual(second, null);
   assert.equal(cacheCalls, 0);
