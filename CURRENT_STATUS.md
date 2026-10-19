@@ -129,3 +129,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Local execution: NOT RUN in this authoring environment. Latest branch CI must be inspected before acceptance.
 - Parent corrected CI [39240538829](https://github.com/murorachi/Amq-/actions/runs/39240538829): EMQ Chinese-title 19/19, loader 20/20, SRS 17/17, scene-background 18/18, source/unit, package reproducibility and Firefox passed. Chromium native-origin failed only at known final audio monitor capture; preceding lifecycle tests passed.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## V82.85.35 historical code debt / deduplication checkpoint
+
+- Branch: `v82.85.35-selected-list-validation-dedup-01`, based on V82.85.34. This checkpoint adds acceptance/scope documentation only; production source is unchanged.
+- New report: `reports/V82_85_35_HISTORICAL_DEBT_DEDUP_CHECKPOINT_01.md`.
+- Carried-forward focused deduplications: suggestion cache invalidation (V82.85.26), room-pool bounds validation (V82.85.27), next-audio state reset (V82.85.28), checked-value/audio-failure callback contracts, plus the VNDB navigation contract (V82.85.34).
+- The AMQ/EMQ custom-list renderers remain separate because their data shape, invalid-state flags and persistent fault keys differ. A generic renderer is deferred unless tests justify the abstraction.
+- CI on this branch has not yet been inspected. Do not mark this checkpoint accepted until source/unit, VNDB contract, package reproducibility, deterministic build and Firefox results are confirmed. Report Chromium's known audio-monitor capture failure separately.
+- Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
