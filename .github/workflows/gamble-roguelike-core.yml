@@ -1,0 +1,30 @@
+name: Gamble Roguelike Core
+
+on:
+  push:
+    branches:
+      - multiplayer-gamble-engine-discovery-01
+    paths:
+      - 'gamble-roguelike/**'
+      - '.github/workflows/gamble-roguelike-core.yml'
+  pull_request:
+    paths:
+      - 'gamble-roguelike/**'
+      - '.github/workflows/gamble-roguelike-core.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rules-and-ledger:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gamble-roguelike
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
