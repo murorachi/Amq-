@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 2 |
+| First-pass file audits completed | 3 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 89 |
+| Awaiting file-specific review | 88 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
@@ -118,7 +118,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | JS 036 | `src/scripts/script_036.htmlpart` | 21078 | `7feae1adf93b2ef4…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 043 | `src/styles/style_043.htmlpart` | 7981 | `d88dc1d72e3c3367…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | CSS 044 | `src/styles/style_044.htmlpart` | 723 | `17db67007e27243d…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
-| JS 037 | `src/scripts/script_037.htmlpart` | 2684318 | `82af236544929fef…` | P1 | 待逐檔排查 | 片段體積極大，先辨識是否為資料／字典負載或執行邏輯，再決定適用的檢查方式；不可只因大小直接重構。 |
+| JS 037 | `src/scripts/script_037.htmlpart` | 2684318 | `82af236544929fef…` | P1 | 首輪資料負載審查完成 | 確認為 gzip/Base64 EMQ 曲庫，不是應重構的程式邏輯；實際解壓為 8,383,856 bytes，6,645 works／16,839 songs，ID 唯一且歌曲作品引用有效。已更正 manifest 角色並新增實際資料完整性測試。詳見 `reports/AUDIT_SCRIPT_037_EMQ_PAYLOAD_V82_85_29.md`。 |
 | JS 038 | `src/scripts/script_038.htmlpart` | 15277 | `82bcb7e50ee45cdb…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 045 | `src/styles/style_045.htmlpart` | 4363 | `ddb36950d8bdbcdf…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 039 | `src/scripts/script_039.htmlpart` | 33287 | `98c6b0014b6d7a37…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
