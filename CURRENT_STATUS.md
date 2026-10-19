@@ -68,3 +68,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Latest completed full source/unit + Firefox run: [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248), source/unit 132/132 and Firefox responsive passed; both new payload tests passed. Chromium native-origin failed only at known audio output capture assertion (peak=0, rms=0.0). Newer audit commits are still running CI; verify the newest run before closing CI acceptance.
 - Highest-value follow-up: focused SRS state-transition/persistence contract, followed by scene-background IndexedDB/object-URL lifecycle coverage. Do not broaden into a general rewrite.
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## SRS characterization stage in progress
+
+- Added `tests/unit/srs_state_transition_persistence_contract.test.cjs` and wired it into `.github/workflows/v82-85-4-engineering-acceptance.yml`.
+- Test scope: new-card Again/Hard/Good/Easy transitions, learning progression, review lapse/relearning, invalid rating, interval bounds, schema validation, valid reload preservation, invalid-data quarantine ordering, failed quarantine and failed-read fail-closed behavior.
+- Report: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md`.
+- Production `script_020.htmlpart`, FSRS formula, weights and storage schema are unchanged. Test runs extracted production functions in a deterministic VM with synthetic storage; it does not establish external FSRS conformance or real-browser storage behavior.
+- Automated execution is pending a CI result. Do not mark this stage passed until the focused test and full source/unit job complete.
+- Next after acceptance: add focused scene-background IndexedDB/object-URL lifecycle coverage for `script_036.htmlpart`.
