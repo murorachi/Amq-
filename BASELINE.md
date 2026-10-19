@@ -4,7 +4,7 @@
 - Current branch: `v82.85.25-multiplayer-audio-callback-dedup-01`.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Production change is limited to consolidating two identical audio failure callbacks into `handleAudioFailure(id,a,watchdog)`; the original call sites and their lexical variables remain in place.
-- Callback contract was passing before extraction in CI. Post-refactor contract and deterministic build must pass before accepting V82.85.25.
+- Callback contract passed post-refactor in CI run [39223441076](https://github.com/murorachi/Amq-/actions/runs/39223441076): verifier 132/132, handler contract 14 assertions, deterministic candidate build, package completeness/reproducibility, and Firefox responsive passed. Browser-native-origin acceptance was still running at checkpoint update.
 - The fragment manifest now records `script_028.htmlpart` at 139,759 bytes / SHA-256 `1112d964951abde8cfcb8e389aa4b601709f90cd049778b4d8423472d0347297`. Candidate V82.85.25 is pinned at 8,787,104 bytes / SHA-256 `075068b01a6429629315157a4e412a0c28c8d58c920313dada607584234c71c1`; the next CI run must verify this fingerprint.
 - User manually verified audible playback in the current application. The unrelated CI audio capture discrepancy is noted, not treated as a blocker for this small dedup stage; the audio test was not weakened.
 - Rollback: restore the previous helper bodies and manifest fingerprints together. Never overwrite V82.82.
