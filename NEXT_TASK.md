@@ -1,33 +1,27 @@
-# Next task: diagnose Chromium audio backend initialization in CI
+# Next task: verify V82.85.22 dedup candidate and continue bounded debt review
 
-Current checkpoint: V82.85.21 real-audio capture investigation.
-Branch: `v82.85.18-source-inventory-gate-01`.
-User-designated base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
+Current branch: `v82.85.22-historical-debt-dedup-01`.
+Base commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
 
-## Completed stage
+## Current stage
 
-The test-only ALSA default-device routing experiment did not fix the real-audio output failure and was reverted in `192481509c20fa26ba1f994def0224285f76cb12`. Report: `reports/V82_85_21_REAL_AUDIO_CAPTURE_INVESTIGATION_01.md`. No product source changed.
+- Historical technical-debt inventory refreshed; earlier AST/selector reports are explicitly treated as historical snapshots.
+- Three byte-identical `checked(selector)` helpers in `script_028.htmlpart` consolidated to one shared declaration.
+- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs` and CI integration.
+- Improved mismatch diagnostics in `tools/verify.py`.
+- Stage report: `reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md`.
 
-## Next bounded investigation
+## Immediate acceptance tasks
 
-Inspect Chromium audio backend/device initialization in the failing CI job from [run 39194836859](https://github.com/murorachi/Amq-/actions/runs/39194836859), especially `tests/browser/real_audio_output_acceptance.py` and the `browser-native-origin` job.
+1. Read CI output for the changed fragment's actual UTF-8 byte length and SHA-256; update `reports/FRAGMENT_MANIFEST.json`.
+2. Read the deterministic build's actual output byte count and SHA-256 from the release mismatch diagnostic; update the manifest release pin.
+3. Rerun CI after both fingerprints are pinned. Record source/unit, Firefox and native-origin results independently.
+4. Preserve the non-silent audio PCM assertion. The earlier real-audio capture issue remains open and unrelated to this refactor.
 
-Known evidence:
-- PulseAudio monitor self-test captures known non-silent PCM.
-- Chromium media decode, native playing events, media timeline, pause/resume, answer reveal, and exit cleanup pass.
-- PulseAudio lists a `chrome` client but no sink inputs while playback is active.
-- Final monitor PCM is silent (`peak=0, rms=0.0`).
-- ALSA config routing through `ALSA_CONFIG_PATH` was tested and did not change the outcome.
+## Following debt candidate
 
-Next, make Chromium's audio-service diagnostics visible in CI (capture browser stderr or enable an equivalent explicit diagnostic channel), determine the selected output backend/device and why no stream is created, and only then implement a narrowly scoped fix. Preserve the non-silent PCM assertion.
+After this stage passes, inspect the next small duplicate candidate using current source, not historical offsets. Keep the distinct `script_004` normalization semantics. Do not broad-refactor quiz or multiplayer lifecycle code without characterization tests.
 
-## Stop conditions
+## Rollback
 
-- No production playback changes without evidence of a product defect.
-- Do not weaken, skip, or remove the output assertion.
-- No further speculative audio routing switches without backend evidence.
-- After a fix, rerun the isolated real-audio acceptance and the full native-origin job; separately record source/unit and Firefox results.
-
-## Immutable baseline and rollback
-
-V82.82 remains immutable at 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. The failed test-only experiment is already reverted. Roll back only a later targeted harness fix and its documentation if needed.
+Restore the three local helpers and original manifest row, remove the test/workflow step and revert the diagnostic/report/status updates if needed. V82.82 remains immutable.

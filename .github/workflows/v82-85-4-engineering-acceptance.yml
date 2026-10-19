@@ -24,6 +24,8 @@ jobs:
         run: python tools/verify.py
       - name: Test reverse source inventory contract
         run: python tests/unit/source_inventory_completeness_contract.py
+      - name: Test multiplayer checked-value helper deduplication contract
+        run: node tests/unit/multiplayer_checked_values_dedup_contract.test.cjs
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
       - name: Build and verify checkpoint source package

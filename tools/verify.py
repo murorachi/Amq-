@@ -36,11 +36,13 @@ def main():
  check('module source inventory completeness',not missing and not stale,f'missing from manifest={missing}; absent on disk={stale}')
  for row in m['fragments']:
   p=ROOT/row['path']; b=p.read_bytes() if p.is_file() else b''
-  check('fragment '+row['path'],p.is_file() and len(b)==row['byte_length'] and sha(b)==row['sha256'])
+  valid=p.is_file() and len(b)==row['byte_length'] and sha(b)==row['sha256']
+  check('fragment '+row['path'],valid,'' if valid else f'actual bytes={len(b)} sha256={sha(b)}')
  check('module count',len(modules)==m.get('module_count',0))
  for row in modules:
   p=ROOT/row['path']; b=p.read_bytes() if p.is_file() else b''
-  check('module '+row['path'],p.is_file() and len(b)==row['byte_length'] and sha(b)==row['sha256'])
+  valid=p.is_file() and len(b)==row['byte_length'] and sha(b)==row['sha256']
+  check('module '+row['path'],valid,'' if valid else f'actual bytes={len(b)} sha256={sha(b)}')
   marker_source=ROOT/row.get('insertion_fragment','src/scripts/script_004.htmlpart')
   marker_bytes=row['marker'].encode()
   check('module marker '+row['name'],template.count(marker_bytes)==0 and marker_source.is_file() and marker_source.read_bytes().count(marker_bytes)==1)

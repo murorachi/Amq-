@@ -1,19 +1,19 @@
-# Current engineering checkpoint: V82.85.21 real-audio capture investigation
+# Current engineering checkpoint: V82.85.22 historical debt and dedup
 
-- User-designated base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
-- Working branch: `v82.85.18-source-inventory-gate-01`.
-- Latest investigation report: `reports/V82_85_21_REAL_AUDIO_CAPTURE_INVESTIGATION_01.md`.
-- Reverse source inventory and package completeness/reproducibility guards remain in place.
-- Generic helper deduplication was rejected as negligible benefit; see `reports/V82_85_20_HELPER_DEDUP_DECISION_01.md`.
-- Workflow run [39194836859](https://github.com/murorachi/Amq-/actions/runs/39194836859): source/unit passed; Firefox responsive passed; browser-native-origin failed at the final audio output assertion (`peak=0, rms=0.0`). Its PulseAudio self-test captured non-silent PCM, but during Chromium playback there was a `chrome` client and no PulseAudio sink inputs. Other native-origin checks, including quiz input, persistence, answer/playback lifecycle, and multiplayer lifecycle, passed.
-- A test-only ALSA routing experiment did not change the result and was reverted. Revert commit: `192481509c20fa26ba1f994def0224285f76cb12`. No production source or generated HTML changed.
-- Full browser acceptance is **not passed** while the audio-output gate fails.
-- Product candidate fingerprint remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`; immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Branch: `v82.85.22-historical-debt-dedup-01`, based on `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
+- Scope: bounded historical technical-debt inventory and one exact duplicate-helper consolidation in `src/scripts/script_028.htmlpart`.
+- Consolidated three identical local `checked(selector)` helpers into one shared helper after `view` initialization; call sites remain unchanged.
+- Added `tests/unit/multiplayer_checked_values_dedup_contract.test.cjs`, CI integration, and more useful fingerprint mismatch diagnostics in `tools/verify.py`.
+- Inventory: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`; stage report: `reports/V82_85_22_MULTIPLAYER_HELPER_DEDUP_01.md`.
+- Fragment and final release fingerprints are not yet accepted; CI must report actual hashes and the manifest must be pinned before the candidate can pass.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- The prior real-audio output capture failure remains open; no audio code changed.
+- Tests for this stage are pending CI; no test result is claimed as passed.
 
-## Direction
+## Next direction
 
-Next investigate Chromium audio backend/device initialization logs in the failing CI environment. Do not weaken the non-silent assertion or change production playback without a proven cause.
+Pin the actual fragment and candidate hashes from CI, then rerun source/unit and browser acceptance. Continue with the next small duplicate only after this candidate is verified. Avoid broad quiz/multiplayer lifecycle refactors without focused characterization tests.
 
 ## Rollback
 
-The ineffective test-only change is already reverted. Revert the investigation report/status/task documentation if needed. No product rollback is required. Never overwrite immutable V82.82.
+Restore the three local helpers and original manifest row, remove the contract test/workflow step and revert verifier/report/status changes if needed. Never overwrite V82.82.

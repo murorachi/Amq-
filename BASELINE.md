@@ -1,18 +1,18 @@
-# Baseline checkpoint: V82.85.21 real-audio capture investigation
+# Baseline checkpoint: V82.85.22 historical debt and dedup
 
-- Branch: `v82.85.18-source-inventory-gate-01`.
-- User-designated base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
-- Source inventory completeness and package completeness/reproducibility guards remain in place.
-- Generic `getElementById` helper consolidation was rejected due negligible benefit; see `reports/V82_85_20_HELPER_DEDUP_DECISION_01.md`.
-- Workflow run [39194836859](https://github.com/murorachi/Amq-/actions/runs/39194836859): source/unit and Firefox responsive passed; browser-native-origin failed at real audio output capture. PulseAudio self-test succeeded, but Chromium playback produced no PulseAudio sink inputs and captured PCM remained silent. Other quiz and multiplayer checks passed. See `reports/V82_85_21_REAL_AUDIO_CAPTURE_INVESTIGATION_01.md`.
-- An ALSA routing test-harness experiment did not affect the failure and was reverted in `192481509c20fa26ba1f994def0224285f76cb12`. Production source and generated HTML remain unchanged.
-- Immutable V82.82 baseline: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Product candidate HTML fingerprint remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Branch: `v82.85.22-historical-debt-dedup-01`.
+- Base commit: `7af202f0c7dbe8e28b71b92ba8afd718543383a1`.
+- Immutable V82.82 product: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Previous pinned V82.85.12 candidate: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- This checkpoint consolidates three identical `checked(selector)` helpers in `script_028` into one shared declaration. Focused contract added; final acceptance pending.
+- `tools/verify.py` now prints actual byte length and SHA-256 when a fragment/module fingerprint mismatches.
+- Historical debt ranking and limitations: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`.
+- Prior audio-output acceptance failure remains open; this refactor does not address it.
 
 ## Scope rule
 
-Do not treat media timeline advancement as proof of audible output. Preserve the non-silent PCM gate until the browser output path is genuinely verified. Do not declare full browser acceptance while a required job fails.
+Do not deduplicate by name alone. Require identical behavior, the same dependency scope, and meaningful maintenance benefit. Keep the immutable baseline and pin the generated candidate using actual byte count and SHA-256.
 
 ## Rollback
 
-The ineffective test-only change has been reverted. Revert this report and the associated status/task documentation if needed. Never modify or replace immutable V82.82.
+Restore the three local helpers and original manifest row, remove the test/workflow step and revert diagnostics/report/status updates. Never modify or replace V82.82.
