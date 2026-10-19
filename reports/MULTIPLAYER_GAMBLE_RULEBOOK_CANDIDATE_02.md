@@ -101,7 +101,7 @@ At most one support item may be attached to a wager. Recovery Voucher applies on
 
 ## 10. Recovery, AFK, and anti-griefing
 
-Recovery is usable at most once per run, only at 2 strain. Pay `ceil(12% of current bank)` to clear one strain and discard one held item of the team's choice, if any; otherwise decline and attempt the stage normally. If a Recovery Voucher is held, the fee is `ceil(8% of current bank)` and the voucher is consumed. Calculate the stage target after recovery settles. Recovery does not guarantee a clear. Repeatable recovery was rejected because it could make strain failure impossible.
+Recovery is usable at most once per run, only at 2 strain. Pay `ceil(12% of current bank)` to clear one strain and skip the next eligible Blind Draft; otherwise decline and attempt the stage normally. If a Recovery Voucher is held, the fee is `ceil(8% of current bank)` and the voucher is consumed. Calculate the stage target after recovery settles. Recovery does not guarantee a clear. Repeatable recovery was rejected because it could make strain failure impossible.
 
 - One 15-second grace window per run.
 - Missing/late risk vote defaults to Bank; no Favor is spent automatically.
