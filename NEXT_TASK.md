@@ -136,3 +136,11 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Then test for dominant choices and exploit loops with focused simulations; report distributions and extreme outcomes, not a single “balance score”.
 - Produce printable paper cards and a facilitator settlement sheet after the checker catches no rule/arithmetic contradictions.
 - Human playtesting remains necessary before claiming fun or authorizing implementation. No server/UI/database or production changes.
+
+
+## Active task — review item and build design
+- Primary artifact: `reports/MULTIPLAYER_GAMBLE_ITEM_BUILD_SYSTEM_ZH_01.md`.
+- Decide whether items belong to each player or are shared by the team before implementation.
+- Review all 24 items for unclear timing, incompatible game types, repeated protection on one loss, currency loops, debt interactions, and effects that trigger themselves.
+- Add reproducible checks for trigger order and resource arithmetic, then paper-test at least four build directions.
+- Human playtesting is required before claiming the system is fun. Do not start production implementation in this stage.
