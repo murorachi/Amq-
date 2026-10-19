@@ -95,9 +95,9 @@ function reset() {
   node('vnCatalogView', { hidden: true });
   node('vn49CatalogStatus');
   node('vn49RetryCovers', { hidden: true });
-  node('vn49Grid');
+  context.$('vn49Grid');
   node('vn49More', { hidden: true });
-  node('vn49Count');
+  context.$('vn49Count');
   node('vn49SongPanel', { hidden: true });
   node('vn49ImportStatus');
   node('vn49User', { value: 'tester' });
@@ -169,7 +169,7 @@ await test('cover request failure marks retryable IDs and clears loading state',
   await context.ensureCoverDetails([{ i: 1, vndbId: 'v1' }, { i: 2, vndbId: 'v2' }]);
   assert.deepEqual([...context.state.coverFailed].sort(), ['v1', 'v2']);
   assert.equal(context.state.coverLoading.size, 0);
-  assert.equal(node('vn49RetryCovers').hidden, false);
+  assert.equal(context.$('vn49RetryCovers').hidden, false);
   assert.ok(statusCalls.some(x => x.kind === 'error' && /封面查詢失敗/.test(x.message)));
 });
 
@@ -199,7 +199,7 @@ await test('retry clears failed/detail/cache state before re-fetching visible co
   assert.equal(context.state.coverFailed.has('v1'), false);
   assert.equal(context.state.vnDetails.get('v1').title, 'fresh');
   assert.equal(context.state.covers.v1, 'fresh-v1');
-  assert.equal(node('vn49RetryCovers').hidden, true);
+  assert.equal(context.$('vn49RetryCovers').hidden, true);
 });
 
 await test('image error tries the original URL once before replacing with a fallback', async () => {
@@ -219,7 +219,7 @@ await test('image error tries the original URL once before replacing with a fall
   assert.equal(replaced[0].node.className, 'vn49CoverFallback');
   assert.equal(context.state.coverFailed.has('v1'), true);
   assert.equal(context.state.covers.v1, undefined);
-  assert.equal(node('vn49RetryCovers').hidden, false);
+  assert.equal(context.$('vn49RetryCovers').hidden, false);
 });
 
 await test('image error ignores non-image and unrelated image elements', async () => {
@@ -255,19 +255,19 @@ await test('catalog renders at the current page limit and exposes more-results s
   node('vnCatalogView', { hidden: false });
   context.state.renderLimit = 72;
   context.renderVnCatalog(false);
-  assert.equal((node('vn49Grid').innerHTML.match(/class="vn49Card"/g) || []).length, 72);
-  assert.equal(node('vn49More').hidden, false);
-  assert.match(node('vn49Count').textContent, /72 \/ 80/);
+  assert.equal((context.$('vn49Grid').innerHTML.match(/class="vn49Card"/g) || []).length, 72);
+  assert.equal(context.$('vn49More').hidden, false);
+  assert.match(context.$('vn49Count').textContent, /72 \/ 80/);
   context.state.renderLimit = 80;
   context.renderVnCatalog(false);
-  assert.equal((node('vn49Grid').innerHTML.match(/class="vn49Card"/g) || []).length, 80);
-  assert.equal(node('vn49More').hidden, true);
+  assert.equal((context.$('vn49Grid').innerHTML.match(/class="vn49Card"/g) || []).length, 80);
+  assert.equal(context.$('vn49More').hidden, true);
 });
 
 await test('stored VN list rejects malformed storage and normalized status maps known labels', async () => {
   reset();
   storage.set('aniVNWatchlistV1', '{broken');
-  assert.deepEqual(context.storedVnList(), []);
+  assert.deepEqual(JSON.parse(JSON.stringify(context.storedVnList())), []);
   const cases = [
     [[{ label: 'Playing' }], 'playing'],
     [[{ label: '已完成' }], 'finished'],
@@ -295,10 +295,10 @@ await test('VNDB list import preserves VNDB ID domain and does not persist API t
   assert.equal(saved.items[0].vndbId, 'v123');
   assert.equal(saved.items[0].id, 'v123');
   assert.equal(saved.items[0].vn.id, 'v123');
-  assert.equal(node('vn49Token').value, '');
+  assert.equal(context.$('vn49Token').value, '');
   assert.ok(![...storage.values()].some(value => String(value).includes('private-token')));
   assert.equal(context.state.busy, false);
-  assert.equal(node('vn49Import').disabled, false);
+  assert.equal(context.$('vn49Import').disabled, false);
 });
 
 await test('private-list authorization failure is reported and busy state resets', async () => {
@@ -312,7 +312,7 @@ await test('private-list authorization failure is reported and busy state resets
   await context.importVnList();
   assert.ok(statusCalls.some(x => x.kind === 'error' && /listread/.test(x.message)));
   assert.equal(context.state.busy, false);
-  assert.equal(node('vn49Import').disabled, false);
+  assert.equal(context.$('vn49Import').disabled, false);
   assert.equal(storage.has('aniVNWatchlistV1'), false);
 });
 
