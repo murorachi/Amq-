@@ -14,6 +14,7 @@ on:
       - "reports/design_simulations/gamble_roguelike_gate11.py"
       - "reports/design_simulations/gamble_roguelike_gate12.py"
       - "reports/design_simulations/gamble_roguelike_gate13.py"
+      - "reports/design_simulations/gamble_roguelike_gate14.py"
       - ".github/workflows/gamble-design-simulations.yml"
   workflow_dispatch:
 
@@ -54,3 +55,7 @@ jobs:
         run: |
           python -m py_compile reports/design_simulations/gamble_roguelike_gate13.py
           python reports/design_simulations/gamble_roguelike_gate13.py
+      - name: Run Gate 14 shared draft simulation
+        run: |
+          python -m py_compile reports/design_simulations/gamble_roguelike_gate14.py
+          python reports/design_simulations/gamble_roguelike_gate14.py
