@@ -75,3 +75,13 @@ Previously recorded local core tests passed 10/10 in the fuller working copy; th
 ## 7. Rollback
 
 Revert design-only reports/simulation commits on `multiplayer-gamble-engine-discovery-01`. No product rollback is required.
+
+
+## Gate 06–07 design revisions
+- Gate 06 report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_06.md`; simulation: `reports/design_simulations/gamble_roguelike_gate06.py`.
+- Gate 06 rejected generic all-game retry: a 50% stake-profit penalty raised quota-aware clear rate from 46.999% to 58.699%; a 70% penalty reduced the uplift to about 0.7 points. Remove generic retry from the core pool.
+- Integer floor payout creates small implicit expected-value losses for Safe and Jackpot. Use exact integer rational payouts and disclose rounding effects.
+- Gate 07 report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_07.md`; simulation: `reports/design_simulations/gamble_roguelike_gate07.py`.
+- Repeatable recovery can make strain failure impossible in the simplified model. Candidate correction: once per run at 2 strain, cost ceil(15% of bank), clear one strain, and forfeit the stage item reward.
+- Exact results: never recover 46.832% clear / 34.773% failure / mean bank 998.89; always recover when eligible 45.403% clear / 27.469% failure / mean bank 947.30. Item reward opportunity cost and other game mechanisms are not modeled.
+- Still blocked: integrated five-stage simulation, item opportunity costs/synergies, three viable strategies, group-size fairness, and human playtest. Remain in design; no server/UI/database work.
