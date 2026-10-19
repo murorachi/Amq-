@@ -34,6 +34,8 @@ jobs:
         run: node tests/unit/quiz_answer_target_normalization_contract.test.cjs
       - name: Run quiz target-value extraction contract
         run: node tests/unit/quiz_target_value_extraction_contract.test.cjs
+      - name: Run quiz practice metadata getter extraction contract
+        run: node tests/unit/quiz_practice_meta_getter_extraction_contract.test.cjs
       - name: Run native-storage, custom-list and backup contract tests
         shell: bash
         run: |
