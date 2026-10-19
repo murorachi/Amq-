@@ -1,22 +1,30 @@
 # Next task
 
-Current checkpoint: **V82.86.06 AMQ／EMQ custom-list backup restore browser acceptance**. Branch `v82.86.06-custom-list-backup-restore-browser-01`.
+## Active discovery track: multiplayer Gamble Roguelike
+Branch: `multiplayer-gamble-engine-discovery-01`.
 
-## Scope completed and verified
-- Browser acceptance extended in `tests/browser/native_storage_custom_lists_acceptance.py`.
-- Real UI full backup contains both AMQ (`aniCustomPracticeListsV1`) and EMQ (`aniEmqWorkListsV8254`) storage entries and a manifest.
-- Corrupt/inconsistent manifest is rejected before storage mutation.
-- Injected write failure during full restore rolls application storage back to the exact prior snapshot.
-- Valid backup restores both list identities and names.
-- Actual document reload preserves both custom-list payloads and both lists render again in the UI.
-- GitHub Actions run [39166474674](https://github.com/murorachi/Amq-/actions/runs/39166474674) passed both jobs at test commit `cbc5fed2d513fa4c01761cd640ea65c160a76146`.
-- Product HTML unchanged: V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; V82.65 remains immutable.
+The product direction is a multiplayer probability-game Roguelike. Gambling mechanics are primary; AMQ songs are optional supporting content. This is a separate workstream from the V82.82 maintenance baseline.
 
-## Next bounded task
-1. Add a dedicated stable CI command that explicitly runs `backup_restore_contract.test.cjs`, `full_backup_restore_roundtrip_contract_v82_83.test.cjs` and `custom_list_source_contract.test.cjs`, so the existing exact-source backup contracts cannot silently be skipped by the main workflow.
-2. Continue the IndexedDB failure matrix: open/blocked/upgrade, transaction failure, quota/corruption, rollback and reload. Separate synthetic faults from naturally occurring browser failures.
-3. Keep Firefox CSS cascade, real audio provider and production-origin storage policy as separate external gates.
-4. Do not change product source until the test evidence identifies a product defect; do not claim full semantic modularization is complete.
+### Completed in this checkpoint
+1. Confirmed the latest referenced engineering branch is V82.86.06 and based the discovery branch on its head commit `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
+2. Inspected the current multiplayer client and relevant engineering notes.
+3. Added `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md` defining the proposed engine boundaries, game taxonomy, wallet/probability invariants, acceptance gates, and unresolved design choices.
+4. Confirmed the current repository tree does not contain the server implementation/deployment config for the room API. Existing browser multiplayer acceptance uses mocks.
+
+### Next bounded task
+1. Locate the currently deployed room API server source, exact commit/version, and deployment configuration; do not expose secrets.
+2. Confirm the live REST/WebSocket contract, persistence model, authentication, and restart/reconnect behavior.
+3. If the server source cannot be located, write an explicit new-server proposal including hosting/deployment and migration requirements.
+4. Do not add authoritative betting, virtual balances, or random outcomes in client-only code.
+5. Before implementation, specify the first small set of mechanically distinct games and verify each probability/payout table mathematically.
+6. Keep this workstream separate from V82.82; do not modify the existing standalone product unless a scoped implementation plan is approved.
+
+## Existing AMQ maintenance task (separate/deferred by this discovery branch)
+The V82.86.06 maintenance checkpoint still recommends:
+1. Add a dedicated stable CI command for `backup_restore_contract.test.cjs`, `full_backup_restore_roundtrip_contract_v82_83.test.cjs`, and `custom_list_source_contract.test.cjs`.
+2. Continue the IndexedDB failure matrix: open/blocked/upgrade, transaction failure, quota/corruption, rollback and reload.
+3. Keep Firefox CSS cascade, real audio provider, production-origin storage policy, and naturally occurring IndexedDB quota/corruption as separate gates.
+4. Do not change product source until test evidence identifies a product defect.
 
 ## Rollback
-Revert the V82.86.06 test/report/status changes. Product rollback is not required because no product source or generated HTML changed.
+Revert the documentation-only commit(s) on `multiplayer-gamble-engine-discovery-01`. No product rollback is required because product source and generated HTML are unchanged.
