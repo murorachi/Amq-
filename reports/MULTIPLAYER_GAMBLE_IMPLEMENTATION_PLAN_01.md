@@ -98,3 +98,11 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 ## CI evidence
 - Design simulation workflow [run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`.
 - Python syntax checks and Gate 05–09 simulation scripts completed successfully. This verifies repeatable execution, not game balance, strategy diversity beyond tested policies, or fun.
+
+
+## Gate 10–13 and paper-test decision
+- Gate 10–13 reports and scripts are recorded under `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_10.md` through `_13.md` and `reports/design_simulations/`.
+- Current rulebook is `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`. Insurance is Bank/Balanced-only at 10%; Vault Harness 20%; recovery 12% (8% with voucher), once per run at strain 2 and discards one held item if available. Signal Room two-clue fee is one `ceil(6% × stake)` calculation.
+- Gate 12's integrated model keeps different strategy niches under the tested fixed event order. Gate 13 tested all 30 event permutations, exact plurality distributions for 2/3/6 players, and clue fee boundaries. Human fairness/fun remain untested.
+- CI [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed the design simulation suite through Gate 13.
+- Next: produce Paper Playtest Kit 02 aligned with Candidate 02, then run actual human paper sessions. Implementation remains blocked until those results support meaningful decisions and replay intent.
