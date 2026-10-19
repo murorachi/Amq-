@@ -58,3 +58,13 @@
 - New CI workflow: `.github/workflows/gamble-design-simulations.yml`; run status is pending verification.
 
 - Design simulation CI verified: [run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618), commit `5942fc949d3d3962c1a63aebba9bf7f869017265`, completed successfully. Syntax checks and all Gate 05–09 simulation scripts passed. This verifies reproducibility/termination, not game balance or fun.
+
+
+## Gamble Roguelike — Gate 10–13
+- Gate 10 item/recovery report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_10.md`; Gate 11 item-strength sweep: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_11.md`; Gate 12 integrated item/recovery model: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_12.md`; Gate 13 vote/event-order/rounding checks: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_13.md`.
+- Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Gate 11/12 tuning: Insurance is Bank/Balanced only with 10% stake refund; Vault Harness refunds 20% on a continued-step loss; recovery fee 12%, or 8% with Recovery Voucher, once per run at strain 2 and discards one held item if any.
+- Signal Room two-clue fee changed from separately rounded 2%+4% to one `ceil(6% × stake)` fee. This avoids double-rounding at small stakes; low stakes still have higher effective percentage due to integer chips.
+- Gate 12 integrated model keeps strategy niches: Conservative lowest strain failure, Balanced best at the 105% clear target, Push higher variance and strongest at high score tier. Shared inventory/fixed rankings remain a simplification.
+- CI passed: [Gate 12 corrected model run 39320570030](https://github.com/murorachi/Amq-/actions/runs/39320570030) and [Gate 13 full design suite run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705). Syntax checks and simulations passed; this is not a fun or human-fairness pass.
+- Still open: personal item ownership, real 2/3/6-player draft/vote fairness, route choices, paper test with humans, and evidence that players want to replay. No implementation authorized.
