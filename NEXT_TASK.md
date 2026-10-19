@@ -1,24 +1,22 @@
-# Current task: validate scene-background IndexedDB/object-URL contract
+# Current task: inspect external-source/cache boundaries
 
 Current branch: `v82.85.29-source-audit-matrix-01`.
 
-## Completed in this sequence
+## Completed characterization
 
-- First-pass audit completed for all 91 fragments: 41 scripts and 50 styles.
-- SRS characterization test `tests/unit/srs_state_transition_persistence_contract.test.cjs` passed 41 assertions in [run 39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291). Source/unit and Firefox responsive passed; Chromium native-origin was still in progress at last check.
-- SRS report: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md`. No production SRS formula/schema/source changed.
+- SRS state-transition/persistence: 41 assertions passed in [run 39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291).
+- Scene-background IndexedDB/object-URL lifecycle: 29 assertions passed in [run 39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623).
+- In run 39248616623, source/unit (132/132 verifier checks and all unit steps) and Firefox responsive passed. Chromium native-origin was still in progress at last check.
+- Reports: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md` and `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`.
+- Production source unchanged in both stages.
 
-## Current stage
+## Next bounded work
 
-- Added `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs` and its CI step.
-- Report: `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`.
-- First inspect the newest workflow run, then confirm the focused scene test assertion count and source/unit job. Fix the test harness if it fails; do not change production scene code merely to make the test pass.
-
-## After acceptance
-
-1. Consider targeted external-source/cache contracts for `script_031`, `script_039` and `script_041`.
-2. Run CSS visual comparison only when a concrete style change is proposed; static duplicate selectors alone are not a reason to edit.
+1. Inspect `script_031`, `script_039` and `script_041` external-source, cache, timeout and stale-response behavior alongside existing contracts.
+2. Add only the most valuable missing deterministic contract. Do not duplicate already-covered cases or contact live services in unit tests.
+3. If no concrete gap remains, document that finding and move on without adding code.
+4. CSS visual comparison remains deferred unless a concrete style change is proposed.
 
 ## Rollback
 
-Remove the two new characterization tests and their workflow steps and revert their reports/status references. No production source or immutable V82.82 baseline rollback is needed.
+Revert only new characterization tests, workflow steps and report/status references. No production source or immutable V82.82 baseline rollback is required.
