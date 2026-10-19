@@ -37,6 +37,7 @@ REQUIRED_PACKAGE_PATHS = {
     'reports/AUDIT_SCRIPT_028_MULTIPLAYER_LIFECYCLE_V82_85_29.md',
     'reports/AUDIT_SCRIPT_001_CATALOG_HISTORY_PLAYBACK_V82_85_29.md',
     'reports/AUDIT_SCRIPT_037_EMQ_PAYLOAD_V82_85_29.md',
+    'reports/AUDIT_SCRIPT_030_ANILIST_ID_MAP_V82_85_29.md',
     'tests/unit/multiplayer_audio_failure_callback_contract.test.cjs',
     'tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs',
     'tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs',
