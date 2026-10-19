@@ -123,3 +123,7 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 - Favor tie rerolls use raw d6 and keep spent Favor spent. AFK/disconnected players do not draft.
 - Gate 14 simulation report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`, `reports/design_simulations/gamble_roguelike_gate14.py`.
 - CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed Gate 14. The design is ready for paper sessions, but no human session has occurred. Do not start server/UI/database implementation until the paper-test gates are met.
+
+
+## Current snapshot
+Rulebook `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`; paper kit `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`. Human testing not executed; implementation remains blocked.
