@@ -110,3 +110,11 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Review whether the decisions are exciting and state-dependent before writing simulations. Then use simulations only to check exploit loops, payout extremes, and outcome frequencies, not to force equal EV or equal clear rates.
 - Remain in design; no server/UI/database implementation until the design is compelling and later human testing supports it.
 - No tests run for this documentation-only reset. Existing Gate 14 CI does not validate the new design.
+
+## Active Gamble Roguelike task — build a diverse game floor
+- Game catalog: `reports/MULTIPLAYER_GAMBLE_GAME_CATALOG_01.md`.
+- Product requirement: 2–3 games are insufficient. Explore a library of 12 mechanically distinct launch-ready games; 15 concepts are currently in the discovery pool.
+- Next bounded task: create paper prototypes for six different mechanics: Vault Ladder, Minefield, Jackpot Draw, Wheel of Misfortune, Pot Split, and Debt Collector. Give each concrete rules, provisional asymmetric payout/outcome tables, and at least one worked example round.
+- Review whether each game has a real decision, a distinct emotional rhythm, and a reason to be chosen in some run states. Remove redundant/boring concepts before writing simulations.
+- Simulations may check outcome frequencies, dominant choices, payout bugs, and exploit loops; do not force equal expected value or similar clear rates.
+- Design only. No server/UI/database or production implementation until paper designs are compelling and human testing supports the direction. No tests run for the catalog document.
