@@ -86,3 +86,7 @@
 - Gate 14 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`, `reports/design_simulations/gamble_roguelike_gate14.py`. The two-pick simulation preserved the strategy niches in the fixed test sequence.
 - CI passed: [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351), including Gate 14 syntax and simulation. Human draft fairness is still untested.
 - Design is paper-test ready, not implementation-ready. No human paper session has occurred, so fun comparability remains unproven.
+
+
+## Design snapshot
+Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`. No human playtest yet; no implementation authorized.
