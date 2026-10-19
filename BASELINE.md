@@ -1,11 +1,9 @@
-# Baseline checkpoint: V82.85.29 first-pass source audit
+# Baseline checkpoint: V82.85.30 SRS transition contract
 
-- Branch: `v82.85.29-source-audit-matrix-01`.
-- Product/source parent: `v82.85.28-next-audio-state-reset-dedup-01`.
-- Audit matrix: `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`.
-- First-pass audit: 91/91 fragments; 41/41 script fragments reviewed and 50/50 style fragments statically scanned. Initial-review queue is 0.
-- CSS visual/pixel equivalence remains outside this static pass. No CSS or product runtime source changed.
-- Added tests for actual embedded EMQ gzip payload and AniList JSON mapping; corrected their manifest roles. EMQ payload: 6,645 works, 16,839 songs, 8,383,856 decompressed bytes. AniList map: 9,400 entries, 9,364 unique target IDs.
-- Latest completed source/unit + Firefox run: [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248), verifier 132/132, both payload tests and Firefox responsive passed. Native-origin failed only at known non-silent audio capture; a newer audit-only run is pending final status.
-- Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Rollback: revert audit reports/matrix, the two integrity tests, workflow/package registration and manifest-role changes. No product-source rollback is required.
+- Branch: `v82.85.30-srs-transition-contract-01`.
+- Parent audit branch: `v82.85.29-source-audit-matrix-01` (91/91 first-pass source fragments registered and reviewed; CSS assessment is static cascade inventory, not exhaustive visual equivalence).
+- Immutable product baseline: V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Production SRS source `src/scripts/script_020.htmlpart` unchanged, blob `a141a4d1e5d94fc422ddbc89d47b65eba9d166fd`.
+- This stage adds exact-source characterization only: `tests/unit/srs_rating_transition_contract.test.cjs` (17 named cases), workflow registration, package requirements and `reports/V82_85_30_SRS_RATING_TRANSITION_CONTRACT_01.md`.
+- Local execution was not run in this environment. Latest branch CI must be checked before acceptance.
+- Rollback: revert the test, workflow/package registration, stage report and status references; no product-source rollback is required.
