@@ -11,6 +11,7 @@ on:
       - "reports/design_simulations/gamble_roguelike_gate08.py"
       - "reports/design_simulations/gamble_roguelike_gate09.py"
       - "reports/design_simulations/gamble_roguelike_gate10.py"
+      - "reports/design_simulations/gamble_roguelike_gate11.py"
       - ".github/workflows/gamble-design-simulations.yml"
   workflow_dispatch:
 
@@ -34,7 +35,8 @@ jobs:
             reports/design_simulations/gamble_roguelike_gate07.py \
             reports/design_simulations/gamble_roguelike_gate08.py \
             reports/design_simulations/gamble_roguelike_gate09.py \
-            reports/design_simulations/gamble_roguelike_gate10.py
+            reports/design_simulations/gamble_roguelike_gate10.py \\
+            reports/design_simulations/gamble_roguelike_gate11.py
       - name: Run exact probability and economy simulations
         run: |
           python reports/design_simulations/gamble_roguelike_gate05.py
@@ -43,3 +45,4 @@ jobs:
           python reports/design_simulations/gamble_roguelike_gate08.py
           python reports/design_simulations/gamble_roguelike_gate09.py
           python reports/design_simulations/gamble_roguelike_gate10.py
+          python reports/design_simulations/gamble_roguelike_gate11.py
