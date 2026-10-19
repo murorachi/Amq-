@@ -78,10 +78,9 @@ function ok(value, label) { assertions++; assert.ok(value, label); }
       equal(await vm.runInContext('readCache()',ctx),null,'invalid cache rejected');
     }
   });
-  await run('current cache guard accepts arrays as object records', async () => {
+  await run('array-shaped cache records are rejected as a cache miss', async () => {
     const ctx = makeContext(async () => ({version:ctx.VERSION,records:[]}));
-    const got = await vm.runInContext('readCache()',ctx);
-    equal(Array.isArray(got),true,'array passes current typeof-object guard');
+    equal(await vm.runInContext('readCache()',ctx),null,'array records rejected');
   });
   await run('cache read failure degrades to cache miss', async () => {
     const ctx = makeContext(async () => { throw new Error('IndexedDB unavailable'); });
