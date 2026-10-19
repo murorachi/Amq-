@@ -26,7 +26,7 @@ The volume initializer used `Number(localStorage.getItem('aniQuizVolume'))`. Whe
 - Run source verifier, deterministic build, package completeness/reproducibility and Firefox responsive tests.
 - Run native Chromium audio acceptance; verify sink-input appears and captured PCM has peak >= 1000 and RMS >= 150.
 - Confirm playback lifecycle assertions still pass.
-- Confirm the artifact-name alignment rerun passes, verify remote fingerprints, and prepare the V82.85.30 PR for review. Do not merge automatically.
+- Verify final remote fingerprints and review PR #3. Consider replacing the fixed 450 ms timeline delay with a condition-based wait in a separate test-only step: run 39289800143 failed that timing assertion despite an active sink-input, while run 39289986327 passed it. Do not weaken the currentTime threshold or PCM gate.
 - Verify GitHub Actions results and remote file fingerprints before declaring completion.
 
 ## Status and rollback

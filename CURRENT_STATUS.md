@@ -6,7 +6,7 @@
 - Fix in `src/scripts/script_014.htmlpart`: only consume a non-empty stored preference. Explicit 0 remains a valid user choice.
 - Added `tests/unit/quiz_volume_default_contract.test.cjs` with 10 assertions for missing, zero, and nonzero preferences; wired into source/unit CI.
 - Updated fragment fingerprint, V82.85.30 artifact/package naming, and checkpoint metadata. First reconstructed V82.85.30 candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; release manifest updated to this exact fingerprint.
-- Local Node contract: PASS, 10/10 assertions. CI run [39289331801](https://github.com/murorachi/Amq-/actions/runs/39289331801) passed all three jobs. Native diagnostic now reports muted=false, volume=0.7, PulseAudio sink RUNNING, sink-input present in all ten samples, and non-silent PCM peak=4899 / RMS=2468.4. A follow-up run is rechecking the artifact-name alignment.
+- Local Node contract: PASS, 10/10 assertions. CI run [39289331801](https://github.com/murorachi/Amq-/actions/runs/39289331801) passed all three jobs. Native diagnostic now reports muted=false, volume=0.7, PulseAudio sink RUNNING, sink-input present in all ten samples, and non-silent PCM peak=4899 / RMS=2468.4. The artifact-name alignment run [39289986327](https://github.com/murorachi/Amq-/actions/runs/39289986327) also passed all three jobs. An intermediate run failed at the fixed-delay media-timeline assertion while the PulseAudio stream was active; the subsequent run passed timeline and PCM checks. This leaves a possible timing-sensitive assertion in the acceptance test as a known test-only risk.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
 ---

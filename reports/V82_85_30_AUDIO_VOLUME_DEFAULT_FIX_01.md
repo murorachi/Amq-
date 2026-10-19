@@ -22,7 +22,8 @@
 - New unit contract: local and CI execution PASS, 10/10 assertions (run 39289331801).
 - First reconstructed candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`. Manifest release fingerprint has been updated; CI confirmation of deterministic rebuild is pending.
 - Native Chromium output: PASS in run 39289331801; media muted=false, volume=0.7; PulseAudio sink RUNNING with sink-input present in all ten samples; PCM peak=4899 and RMS=2468.4 (both strict thresholds passed).
-- Firefox responsive, multiplayer lifecycle, source/unit, package reproducibility, and candidate upload: PASS in run 39289331801. A subsequent workflow-artifact naming-only commit is being revalidated.
+- Firefox responsive, multiplayer lifecycle, source/unit, package reproducibility, candidate upload, and artifact-name alignment: PASS in run [39289986327](https://github.com/murorachi/Amq-/actions/runs/39289986327).
+- Timing risk: run [39289800143](https://github.com/murorachi/Amq-/actions/runs/39289800143) failed at the existing fixed 450 ms media-timeline assertion despite a live PulseAudio sink-input; the following run passed the timeline assertion and strict PCM gate. Do not weaken either assertion; consider a condition-based wait as a separate test-only improvement.
 
 ## Rollback
 
