@@ -71,3 +71,11 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 - Fragment fingerprint: 139,501 bytes / SHA-256 `0461515bbf8615bfe943f078238aaa9851e9845b62b53a79365fae6061dc9fff`. Candidate: 8,786,846 bytes / SHA-256 `cf89981db7241e929fb0c1f36f6919911e4abb069140b1e5dbe12f935ec3a251`. Source verifier, deterministic build, package reproducibility and Firefox responsive passed.
 - Native-origin storage, quiz, and multiplayer lifecycle checks passed; the only failure was the known CI audio output capture mismatch. A follow-up run verifies the corrected assertion-count label.
 - Manual interactive acceptance is not performed. Existing CI audio capture mismatch remains out of scope because actual product playback was user-confirmed.
+
+
+## V82.85.28 next-audio state reset checkpoint
+
+- Centralized repeated next-audio state assignments into `resetNextAudioState()`, consumed by `stopAudio()`, `clearNextAudio()`, and `activateNextAudio()`.
+- Kept media teardown and promotion behavior in the original callers; no audio selection or playback logic was intentionally changed.
+- Added a focused 12-assertion contract and CI workflow step. CI execution is pending; no pass is inferred from the test file alone.
+- Source fragment and release fingerprints must be refreshed from observed CI output before accepting the checkpoint.
