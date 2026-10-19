@@ -25,22 +25,21 @@
 
 - Branch: `multiplayer-gamble-engine-discovery-01`, created from V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
 - Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Current phase: **design only**. Code-level rule fixtures do not authorize server/UI implementation.
-- Design Gate 01/02/03 reports: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_02.md`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_03.md`.
-- Design simulation scripts: `reports/design_simulations/gamble_roguelike_gate02.py`, `reports/design_simulations/gamble_roguelike_gate03.py`.
+- Current phase: **design only**. Existing code-level rule fixtures do not authorize server/UI implementation.
+- Reports: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md` through `_05.md`; Gate 04 correction: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_04_ERRATA_01.md`; paper-test draft: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_01.md`.
+- Simulations: `reports/design_simulations/gamble_roguelike_gate02.py`, `gamble_roguelike_gate03.py`, `gamble_roguelike_gate05.py`.
 - Existing `gamble-roguelike/` files contain deterministic rules for Coin Call, Exact Seven, a partial Vault step, Blind High Card, and an in-memory ledger. The ledger is not durable; Vault lacks complete run-state/cash-out logic. No server, database, browser UI, deployment, or live two-client test exists.
 - Previously recorded local core tests: 10/10 subtests and syntax checks passed. The committed GitHub `test/core.test.js` has 8 tests. Remote CI is not verified.
-- Gate 02 found the original 1.20×/2.20×/5.50× profiles too punitive and a quota-sized model with a dominant Safe strategy.
-- Gate 03 candidate profile multipliers are fair gross EV before fees/rounding: Safe 75% / 4/3×, Balanced 40% / 2.5×, Jackpot 15% / 20/3×.
-- In a simplified one-team-wager model, quota-aware clears were 46.563% without reroll and 65.989% with a one-use reroll whose payout was reduced by 10%. This does not prove fun or final balance.
-- Separate player wagers against a shared bank create party-size exposure problems. Preferred design is one team wager per stage, chosen by simultaneous private votes/actions.
-- Remaining design gaps: exact vote mapping and AFK/tie behavior, recovery/anti-griefing rules, item combination and integer-rounding simulation, three viable strategies, and playtest protocol.
-- No product HTML, source, or existing multiplayer behavior has been changed in this workstream.
+- Risk Contract candidates now have fair gross EV before fees/rounding: Safe 75% / 4/3×, Balanced 40% / 2.5×, Jackpot 15% / 20/3×.
+- Signal Room exact clue generator yields 1/3, 1/2, and 3/4 success with 0/1/2 clues and gross multipliers 3×/2×/4/3×. Gate 04's provisional two-clue 2/3 value is superseded by Gate 05/errata.
+- One shared team wager per stage is preferred. Median voting suppresses Push in six-player rooms; plurality with explicit tie handling is the current proposal.
+- Design gaps: integrated recovery/AFK rules, item combo and integer rounding simulation, three viable strategies, vote fairness, and a human playtest. The paper-playtest kit has not been executed.
+- No product HTML, source, or existing multiplayer behavior has been changed.
 
 ## Acceptance boundary
-- Design simulations detect balance failures but cannot prove enjoyment.
-- Do not implement server/UI until Gates A–C pass and the Gate D playtest plan is ready. A low-fidelity playable prototype and external playtest are required before claiming comparable fun.
-- Unexecuted tests remain unexecuted; local tests and remote CI are separate evidence.
+- Design simulations can detect balance failures but cannot prove enjoyment.
+- Do not implement server/UI until Gates A–C pass and Gate D's playtest plan is ready. A low-fidelity prototype and external playtest are required before claiming comparable fun.
+- Unexecuted tests remain unexecuted; local checks and remote CI are separate evidence.
 
 ## Rollback
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`.
