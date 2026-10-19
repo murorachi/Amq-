@@ -6,7 +6,7 @@ Base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
 
 ## First action
 
-Confirm the final status of browser-native-origin in [run 39193525013](https://github.com/murorachi/Amq-/actions/runs/39193525013). Source/unit and Firefox responsive passed; the browser-native-origin job was still running at the last inspection.
+Check the latest GitHub Actions run for this branch and confirm source/unit, Firefox responsive, and browser-native-origin results separately. Source/unit acceptance for the package guard passed, including deterministic package output; do not infer that all browser lifecycle/audio/multiplayer checks passed from that result.
 
 ## Next bounded cleanup
 
@@ -29,7 +29,8 @@ Choose exactly one potential duplicate from current source, not from stale inven
 - Bounded historical technical-debt inventory: `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`.
 - Source inventory completeness guard: `reports/V82_85_18_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md`.
 - Package completeness/reproducibility audit: `reports/V82_85_18_PACKAGE_COMPLETENESS_AUDIT_01.md`.
-- The package output name is no longer hard-coded to V82.84. Required handoff/build/test files are asserted and the package is built twice in CI for hash equality.
+- Package output is no longer hard-coded to V82.84. Required handoff/build/test files are asserted and the package is built twice in CI for hash equality.
+- Source package and external checksum are published as a workflow artifact under `AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01`.
 
 ## Immutable baseline and rollback
 
