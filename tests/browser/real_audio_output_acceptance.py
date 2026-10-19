@@ -11,6 +11,7 @@ import array
 import io
 import json
 import math
+import os
 import shutil
 import struct
 import subprocess
@@ -132,6 +133,9 @@ def main():
 
     capture = PulseCapture()
     capture.start()
+    # Force libpulse clients launched by this test to use the exact sink whose
+    # monitor is captured, rather than relying only on desktop default routing.
+    os.environ["PULSE_SINK"] = "amq_acceptance"
     raw_pcm = b""
     errors = []
     mirror_requests = {"first": 0, "fallback": 0}
@@ -253,6 +257,22 @@ def main():
                     print("NATIVE_AUDIO_PLAY_DIAGNOSTIC", json.dumps(diagnostic, ensure_ascii=False))
                     raise
                 page.wait_for_function("window.__realAudioEvents.playing > 0", timeout=10000)
+                # Diagnose the real OS output stream while the native media element
+                # is actively playing. Keep this evidence in CI logs if the monitor
+                # is silent; browser timeline events alone do not prove audible output.
+                sink_state = subprocess.run(
+                    ["pactl", "list", "short", "sinks"], check=True,
+                    capture_output=True, text=True, timeout=10).stdout.strip()
+                sink_inputs = subprocess.run(
+                    ["pactl", "list", "short", "sink-inputs"], check=True,
+                    capture_output=True, text=True, timeout=10).stdout.strip()
+                print("PULSE_SINK_STATE " + json.dumps({
+                    "defaultSink": subprocess.run(
+                        ["pactl", "get-default-sink"], check=True,
+                        capture_output=True, text=True, timeout=10).stdout.strip(),
+                    "sinks": sink_state,
+                    "sinkInputs": sink_inputs
+                }, ensure_ascii=False), flush=True)
                 check(True, "user-initiated retry reaches the native playing event")
                 page.wait_for_timeout(450)
                 first_time = page.evaluate("audioEl.currentTime")
