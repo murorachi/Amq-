@@ -1,3 +1,17 @@
+# Current engineering checkpoint: V82.85.33 audit stopped; product unchanged
+
+- Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+- Current documentation-only commit parent: `125ae0b8ec6ba07aedd65caade25edd875c77718`.
+- V82.85.33 inspected dock visibility synchronization in `script_012.htmlpart` and `script_013.htmlpart`; consolidation rejected because display-state ownership and deferred resynchronization differ.
+- V82.85.32 previously rejected answer-mirror listener consolidation in scripts 008 and 009 because their new-question behavior differs.
+- Stop condition met: two consecutive non-audio candidates lacked a safe, clearly equivalent extraction. End historical dedup scanning and return to product feature development.
+- No product source, manifest, generated HTML, release artifact, or immutable V82.82 artifact changed.
+- Focused tests, product rebuild, browser acceptance, and manual interaction acceptance were not run for this documentation-only audit.
+- Prior documentation CI run [39296906101](https://github.com/murorachi/Amq-/actions/runs/39296906101) passed all three jobs. Check the CI run triggered by the current commit separately.
+- Report: `reports/V82_85_33_FINAL_BOUNDED_NON_AUDIO_DEDUP_AUDIT_01.md`.
+
+---
+
 # Current engineering checkpoint: bounded dedup candidate rejected; product unchanged
 
 - Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.

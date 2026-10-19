@@ -1,3 +1,34 @@
+# Next task: resume product feature development
+
+Branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+Parent HEAD before this documentation-only update: `125ae0b8ec6ba07aedd65caade25edd875c77718`.
+
+## Dedup audit closed
+
+The bounded historical dedup audit is complete. Two consecutive candidates were rejected for evidence-based reasons:
+- V82.85.32: answer-mirror listeners in scripts 008/009 have different new-question outcomes.
+- V82.85.33: dock visibility listeners in scripts 012/013 use different display restoration ownership and resync behavior.
+
+Do not continue broad historical scanning without a concrete user-facing need. The purpose of cleanup is to make feature work safer, not to become a permanent substitute for feature work.
+
+## Next action
+
+Resume the existing product backlog and select the next user-facing feature or known defect by priority. Before touching code, confirm the applicable baseline and inspect the existing backlog/acceptance contracts. Keep the scope to one feature and preserve the current audio-output acceptance gate.
+
+## Current product baseline and guardrails
+
+- Standalone candidate: V82.85.30, 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+- Immutable V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Do not modify product code, manifest, or generated HTML as part of this audit-closeout commit.
+- For any future production change, add a focused contract test first, then run relevant source fingerprint, deterministic build/package, Firefox responsive, and native-origin checks.
+- Manual interactive acceptance must be reported separately from automated CI.
+
+## Rollback
+
+This closeout is documentation-only. Revert this report and matching status/baseline/next-task updates. No product artifact needs rollback.
+
+---
+
 # Next task: one final bounded non-audio duplicate-candidate audit
 
 Branch: `v82.85.28-next-audio-state-reset-dedup-01`.

@@ -1,3 +1,16 @@
+# Baseline checkpoint: V82.85.33 audit stop, product unchanged
+
+- Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+- Parent HEAD before this documentation-only update: `125ae0b8ec6ba07aedd65caade25edd875c77718`.
+- V82.85.33 rejected consolidation of dock visibility synchronization in `script_012.htmlpart` and `script_013.htmlpart`: one uses a local captured display value and deferred click resync; the other persists display ownership in a dataset property.
+- V82.85.32 rejected answer-mirror listener consolidation for different new-question behavior.
+- Historical dedup audit stop condition is met after two concrete candidate rejections. Next work should return to product feature development rather than continue broad cleanup.
+- Product candidate remains V82.85.30, 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+- Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- No product source, manifest, generated HTML, release artifact, or immutable baseline changed.
+
+---
+
 # Baseline checkpoint: V82.85.32 non-audio audit, no product changes
 
 - Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
