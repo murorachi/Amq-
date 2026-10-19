@@ -37,8 +37,8 @@ Revert the V82.85.27 helper, focused test, workflow/package versioning, manifest
 
 - Branch: `v82.85.28-next-audio-state-reset-dedup-01`; parent V82.85.27.
 - Extracted identical next-audio state assignments into `resetNextAudioState()`, used by `stopAudio()`, `clearNextAudio()`, and `activateNextAudio()`. Media pause/unload and active-audio transfer remain caller-owned.
-- Added `tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs` with 12 assertions and wired it into CI. Results are pending the V82.85.28 run; no pass is claimed before logs confirm it.
-- Versioned standalone candidate and source package to V82.85.28. Source manifest fingerprint and release fingerprint must be pinned from observed CI output.
+- Added `tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs` with 12 assertions and wired it into CI. The focused contract passed with 12 assertions; source/unit job passed with verifier 132/132 in run [39229842012](https://github.com/murorachi/Amq-/actions/runs/39229842012). Firefox responsive passed; Chromium native-origin acceptance is still running.
+- Versioned standalone candidate and source package to V82.85.28. Modified fragment: 139,202 bytes / SHA-256 `24d805495ba443bd8e927d3b3ae37dcd581cb2b1d9c7ab872e223234849e1a50`. Candidate V82.85.28: 8,786,547 bytes / SHA-256 `7284c4ca5625886d913f55ab19a0076d1a5be46a88504dd8de724ae8f5bd274d`. Source fingerprint, deterministic build, package completeness/reproducibility and Firefox responsive passed; Chromium native-origin browser acceptance remains in progress.
 - Stage report: `reports/V82_85_28_NEXT_AUDIO_STATE_RESET_DEDUP_01.md`.
 - Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
