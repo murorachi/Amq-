@@ -1145,8 +1145,8 @@
       "sha256": "82af236544929fef6e60a1de8404a0698e5d1b13a9345b50f067a0dedd566a9c",
       "opening_tag": "<script type=\"application/octet-stream\" id=\"emqLibraryGzipBase64V8248\">",
       "script_type": "application/octet-stream",
-      "executable_heuristic": true,
-      "role": "inline-script-or-data-payload"
+      "executable_heuristic": false,
+      "role": "compressed-data-payload"
     },
     {
       "order": 82,
