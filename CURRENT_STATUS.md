@@ -1,4 +1,14 @@
-# Current engineering checkpoint: V82.85.13 REAL AUDIO OUTPUT ACCEPTANCE GATE (CI PENDING)
+# Current engineering checkpoint: V82.85.13 REAL AUDIO OUTPUT ACCEPTANCE GATE (YELLOW / DEFERRED)
+
+- Status: 🟡 DEFERRED. This CI-only PCM capture gate is explicitly not a blocker for the next engineering phase. Do not report it as passed.
+- Latest run: https://github.com/murorachi/Amq-/actions/runs/39184503441 — source-and-unit and Firefox responsive jobs passed; browser-native-origin failed only at the final non-silent PCM assertion (peak=0, RMS=0.0).
+- Diagnostic evidence: PulseAudio self-test captured non-silent PCM (peak=6999, RMS=4131.5); Chromium appeared as a PulseAudio client but created no sink input. Native media decode/playback timeline, pause/resume, quiz gate, reveal continuity, ended event, next question, cleanup, and no-page-error assertions all passed.
+- User's real-machine check: song playback is audible. This supports real-device playback but does not substitute for CI PCM capture.
+- Decision: preserve this gate and its failure evidence for later; do not spend the next phase repeatedly tweaking CI audio flags. Reopen only after the next phase or if new evidence indicates a product playback regression.
+- Product remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. V82.85.12 candidate remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Rollback: `v82.85.12-multiplayer-leave-poll-race-fix-01`. This checkpoint changes test/workflow/reporting files only.
+
+---
 
 - Parent accepted checkpoint: `v82.85.12-multiplayer-leave-poll-race-fix-01`; no production runtime fragment or generated product HTML was changed.
 - Added `tests/browser/real_audio_output_acceptance.py`: native Chromium media decode with a deterministic PCM16 WAV served through the application's actual AMQ mirror fallback path. The first mirror is deliberately aborted; the second returns valid media bytes.
