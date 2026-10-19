@@ -303,3 +303,10 @@ V82.84 is an engineering-only checkpoint. Product remains V82.82 (8,787,490 byte
 - Parent branch: `v82.85.13-real-audio-acceptance-gate-01`; product baseline remains V82.82 (8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`).
 - Extracts only the exact `getTargetValue(s, type)` helper to a source module at the same IIFE position. The deterministic V82.85.12 candidate must remain 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
 - Audio PCM capture remains 🟡 deferred; it is not a product failure finding and its threshold is unchanged.
+
+
+## V82.85.16 engineering overlay — quiz practice metadata getter extraction
+
+- Parent branch remains `v82.85.13-real-audio-acceptance-gate-01`; formal product baseline V82.82 is unchanged (8,787,490 bytes; SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`).
+- Extracts only the exact read-only `getQuizPracticeMetaV8239(songId)` accessor. Expected candidate remains 8,787,574 bytes; SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- CI pending for this extraction; Chromium PCM capture remains 🟡 deferred and is not counted as passed.
