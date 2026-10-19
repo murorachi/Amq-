@@ -54,6 +54,8 @@ REQUIRED_PACKAGE_PATHS = {
     'tests/unit/srs_rating_transition_contract.test.cjs',
     'reports/V82_85_31_SCENE_BACKGROUND_LIFECYCLE_CONTRACT_01.md',
     'tests/unit/scene_background_lifecycle_contract.test.cjs',
+    'reports/V82_85_32_CHINESE_TITLE_LOADER_CACHE_CONTRACT_01.md',
+    'tests/unit/chinese_title_loader_cache_contract.test.cjs',
     'reports/AUDIT_SCRIPTS_027_029_032_035_UI_MEDIA_PATCHES_V82_85_29.md',
     'reports/AUDIT_SCRIPT_036_SCENE_BACKGROUND_STORAGE_V82_85_29.md',
     'reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md',
