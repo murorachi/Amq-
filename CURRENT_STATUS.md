@@ -19,6 +19,7 @@
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
 - Discovery record: [`reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
 - Implementation proposal: [`reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
+- Stage 1 test report: [`reports/MULTIPLAYER_GAMBLE_STAGE1_CORE_TEST_REPORT.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_STAGE1_CORE_TEST_REPORT.md).
 - Parent product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Existing multiplayer client inspection found configurable HTTP API and WebSocket route references in `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`. The user clarified that the existing multiplayer feature substantively does not use a conventional server; therefore, absence of server source is not treated as a search failure or a blocker for new-game design.
 - Recommended direction: separate lightweight authoritative service for the new game; develop locally first, then host only when friends need always-on access. Host-authoritative private play remains a lower-infrastructure alternative with weaker trust.
