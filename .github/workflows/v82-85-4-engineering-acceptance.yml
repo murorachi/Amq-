@@ -1,4 +1,4 @@
-name: V82.85.22 historical debt and browser acceptance
+name: V82.85.25 historical debt and browser acceptance
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
         run: python tests/unit/source_inventory_completeness_contract.py
       - name: Test multiplayer checked-value helper deduplication contract
         run: node tests/unit/multiplayer_checked_values_dedup_contract.test.cjs
-      - name: Test multiplayer audio failure callback branches
+      - name: Test multiplayer audio failure handler dedup contract
         run: node tests/unit/multiplayer_audio_failure_callback_contract.test.cjs
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip"
+          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_25_HISTORICAL_DEBT_DEDUP_01.zip"
           python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01_REPEAT.zip"
           first="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01.zip" | cut -d ' ' -f1)"
           second="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_22_HISTORICAL_DEBT_DEDUP_01_REPEAT.zip" | cut -d ' ' -f1)"
@@ -51,7 +51,7 @@ jobs:
       - name: Guard acceptance runner artifact targets
         run: python tests/unit/run_all_checks_config_contract.py
       - name: Build versioned V82.85.22 standalone candidate
-        run: python tools/build.py dist/amq_learning_tool_v82_85_22.html
+        run: python tools/build.py dist/amq_learning_tool_v82_85_25.html
       - name: Upload versioned standalone candidate
         uses: actions/upload-artifact@v4
         with:
