@@ -111,3 +111,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Scenarios: unique/ambiguous AniList and MAL ID resolution, fail-closed conflicting mappings, AniList-only/Bangumi-only partial success, and both-source failure.
 - Automated execution pending CI; no pass claim yet. Production title loader, source URLs, cache version and IndexedDB schema unchanged.
 - EMQ title cache contract step passed 25 assertions in run [39249715083](https://github.com/murorachi/Amq-/actions/runs/39249715083); source/unit was still completing at last check. The current source mapping test must also pass before closing this task.
+
+
+## Chinese-title contracts accepted; VNDB cover lifecycle next
+
+- `tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs`: **25 assertions passed**.
+- `tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs`: **19 assertions passed**.
+- Both focused tests passed in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041); source verifier passed 132/132. Source/unit job was still completing its remaining steps, while Firefox responsive and Chromium native-origin were in progress at last check.
+- Reports: `reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md` and `reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md`.
+- Noted deferred semantic difference: `cacheRecord` and `allKnownAliases` normalize alias duplicates, but `serverAliasMap` only removes exact duplicates. Recorded in the EMQ title report; no production behavior changed.
+- Next bounded task: add deterministic contract for VNDB cover detail batching, failed-ID cleanup/retry state and cover fallback behavior in `script_039.htmlpart`.
