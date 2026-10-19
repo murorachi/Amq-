@@ -1,25 +1,30 @@
-# Next task: historical code technical-debt inventory (not more routine modularization)
+# Next task: historical-code technical-debt inventory
 
 Current branch: `v82.85.13-real-audio-acceptance-gate-01`.
 
-## Final acceptance closeout
-1. Inspect the workflow after multiplayer is configured to run even if audio capture fails.
-2. Record the audio capture issue as a known deferred CI gate; do not lower thresholds or ask the user to repeat real-device playback already confirmed.
-3. Confirm source/unit and Firefox results remain green on the latest workflow.
-4. Keep the immutable V82.82 baseline and V82.85.12 standalone candidate fingerprints documented.
+## Acceptance closeout
+V82.85.17 required checks are complete with one explicitly deferred failure:
+- PASS: source/unit, deterministic builds, extraction contracts, storage/custom-list/backup contracts.
+- PASS: Firefox responsive.
+- PASS: Chromium storage/custom-list, IndexedDB/quiz input, quiz suggestions, answer/playback lifecycle.
+- PASS: multiplayer room/phase/live-draft/reconnect.
+- DEFERRED/FAIL: CI real-browser PCM output capture reports peak=0 / RMS=0.0 despite non-silent PulseAudio self-test and successful native playback lifecycle. Do not lower the threshold; do not ask the user to repeat real-device playback already confirmed.
 
-## Next major phase
-Start a read-only technical-debt inventory against the verified source:
-- duplicated functions and conditions;
-- obsolete compatibility/workaround branches;
-- global state and multiple write paths;
-- dead code candidates (prove dynamic references before removal);
-- long mixed-responsibility functions and dependency clusters;
-- high-risk boundaries around quiz/audio/storage/custom lists/multiplayer.
-Rank findings by evidence, risk, expected benefit and regression-test coverage. Do not edit product logic during the initial inventory. Then choose the highest-value bounded refactor and add tests before changing it.
+Reference run: https://github.com/murorachi/Amq-/actions/runs/39189657895
+
+## Next major phase (do not continue routine modularization)
+Perform a read-only audit of the verified source and produce a ranked inventory:
+1. duplicated functions/conditions/normalization logic;
+2. obsolete compatibility branches and historical workarounds;
+3. global state and multiple mutation paths;
+4. dead-code candidates, accounting for dynamic references;
+5. long mixed-responsibility functions and dependency clusters;
+6. high-risk boundaries: quiz/audio/storage/custom lists/multiplayer.
+
+For each finding record evidence/location, dependency impact, risk, likely benefit, and existing test coverage. Do not modify product logic during the initial inventory. Then select the highest-value low-risk refactor and add tests before changing behavior.
 
 ## Explicit stop condition
-Do not continue extracting unrelated small helpers merely to increase module count. Modularization is sufficient for now unless the inventory finds a specific blocker.
+Do not extract unrelated small helpers merely to increase module count. Modularization is sufficient unless the audit proves a specific blocker.
 
 ## Rollback
-The V82.85.17 helper extraction can be reverted independently from the workflow-only `if: always()` change. Never overwrite V82.82.
+V82.85.17 extraction can be reverted independently. Never overwrite immutable V82.82.

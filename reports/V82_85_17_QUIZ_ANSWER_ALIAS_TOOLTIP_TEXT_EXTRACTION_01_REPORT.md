@@ -34,3 +34,18 @@ Run [39189090958](https://github.com/murorachi/Amq-/actions/runs/39189090958), c
 
 ## Project direction
 V82.85.17 is the last planned routine helper extraction for now. Next work is a read-only historical code/technical-debt inventory, not more unrelated function extraction.
+
+
+## Final acceptance result
+
+Run [39189657895](https://github.com/murorachi/Amq-/actions/runs/39189657895), commit `4652a97c6e358710bbe9584cdc2147764e06d5a7`:
+- Source and unit: PASS.
+- Firefox responsive: PASS.
+- Chromium native storage/custom-list, isolated UI regression, IndexedDB/quiz input, quiz suggestion integration, and answer/playback lifecycle: PASS.
+- Multiplayer room/phase/live-draft/reconnect: PASS. Workflow was corrected to run multiplayer even when the audio step fails.
+- Real-browser audio output capture: FAIL at final PCM threshold only. PulseAudio self-test signal is non-silent; browser media decode, playing event, timeline progression, pause/resume, answer reveal and exit cleanup pass; captured output is still peak=0 / RMS=0.0.
+- Overall workflow: FAILURE solely due to the unresolved audio PCM capture gate. This is a deferred CI routing/capture issue, not a claim that playback is broken on the user's device. Threshold was not weakened.
+- Product candidate and immutable V82.82 fingerprints remain unchanged.
+
+## Next stage
+V82.85.17 is the last routine helper extraction for now. Next task is a read-only historical-code technical-debt inventory, followed by evidence-based deduplication/refactoring.
