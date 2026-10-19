@@ -84,7 +84,7 @@ Fees are paid from the bank and are non-refundable, including on a wrong answer.
 
 ## 8. Blind Draft
 
-Blind Draft is a reward phase after a cleared stage 2 or 4, not a separate bank wager. Each player has one personal Favor token per run. Players secretly roll rank 1–6 and may spend Favor to add +2. Highest rank picks first; ties reroll among tied players. Favor is not automatically spent; AFK players default to no spend.
+Blind Draft is a reward phase after a cleared stage 2 or 4, not a separate bank wager. Each player has one personal Favor token per run. Players secretly roll rank 1–6 and may spend Favor to add +2. Highest rank picks first; ties reroll among tied players. Favor is not automatically spent. A Favor token used on a tied roll remains spent; tie rerolls use raw d6 without another bonus. AFK/disconnected players do not roll or spend Favor; if nobody is active, skip the draft.
 
 The draft pool contains three distinct item cards drawn from the four item types. The two highest-ranked players each choose one item in order. The inventory is shared by the team and capped at two items, independent of party size. If a pick is not already held, it is added if a slot is free; otherwise the picker chooses one held item to replace. The replaced item is discarded. The team can discuss a build, but each pick is binding. Item use is decided by a majority vote before the wager lock. This makes draft priority meaningful without multiplying item count with player count. Draft fairness and Favor value remain unvalidated.
 
