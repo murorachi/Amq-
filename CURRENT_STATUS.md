@@ -45,3 +45,13 @@ Revert the V82.85.27 helper, focused test, workflow/package versioning, manifest
 ## Rollback
 
 Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerprint and checkpoint documentation together. Keep V82.85.27 and V82.82 intact.
+
+
+## V82.85.29 source audit matrix
+
+- Branch: `v82.85.29-source-audit-matrix-01`, based on V82.85.28.
+- Added `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`: 91 registered fragments (50 CSS, 41 JS), each listed with baseline size/fingerprint, priority, audit state and initial review focus.
+- First-pass file-specific review completed for `src/scripts/script_004.htmlpart`; report: `reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md`. No production source changed. Quiz lifecycle, timers, settings migrations, module markers and listener ownership remain risk areas; no broad refactor recommended.
+- Matrix count: 1 first-pass file audit complete, 1 partially reviewed known-risk fragment (`script_028`), 89 awaiting file-specific review. This is evidence-based audit status, not a claim that all unreviewed fragments contain defects.
+- V82.85.28 run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840) completed: source/unit passed 132/132; Firefox responsive passed; Chromium native-origin job failed only at the known non-silent CI audio output capture assertion (peak=0, rms=0.0). Other quiz and multiplayer lifecycle assertions in that job passed. Actual product playback was user-confirmed. Manual interactive acceptance was not performed.
+- Immutable V82.82 baseline remains unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
