@@ -11,7 +11,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_85_28_NEXT_AUDIO_RESET_DEDUP_01.zip'
+PACKAGE_NAME = 'AMQ_V82_85_30_CHINESE_TITLE_CACHE_SHAPE_GUARD_01.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
@@ -57,6 +57,20 @@ REQUIRED_PACKAGE_PATHS = {
     'reports/AUDIT_STYLES_041_050_STATIC_CASCADE_V82_85_29.md',
     'reports/AUDIT_STYLES_021_040_STATIC_CASCADE_V82_85_29.md',
     'reports/AUDIT_STYLES_001_020_STATIC_CASCADE_V82_85_29.md',
+    'reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md',
+    'reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md',
+    'reports/V82_85_29_EMQ_CHINESE_TITLE_CACHE_PRECEDENCE_CONTRACT.md',
+    'reports/V82_85_29_CHINESE_TITLE_SOURCE_MAPPING_PARTIAL_FAILURE_CONTRACT.md',
+    'reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md',
+    'reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md',
+    'reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md',
+    'reports/V82_85_30_CHINESE_TITLE_CACHE_SHAPE_GUARD_01.md',
+    'tests/unit/srs_state_transition_persistence_contract.test.cjs',
+    'tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs',
+    'tests/unit/emq_chinese_title_cache_precedence_contract.test.cjs',
+    'tests/unit/chinese_title_source_mapping_partial_failure_contract.test.cjs',
+    'tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs',
+    'tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs',
     'tests/unit/multiplayer_audio_failure_callback_contract.test.cjs',
     'tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs',
     'tests/unit/multiplayer_room_pool_bounds_validation_contract.test.cjs',
