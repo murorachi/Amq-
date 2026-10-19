@@ -32,7 +32,7 @@ Test three groups, ideally 2–4 players each. If available, add one six-player 
 - If strain is 2, recovery may be used once per run: pay ceil(12% bank), clear one strain, and skip the next eligible Blind Draft. Recovery Voucher changes the fee to ceil(8% bank) and is consumed.
 - Blind Draft happens after cleared stages 2 and 4. Each player rolls 1–6 and may spend their once-per-run Favor to add +2. Highest picks first; ties reroll. Pool is one item per player plus one extra.
 - Insurance can attach only to Bank/Balanced; it refunds 10% stake on a loss and is consumed even on a win. Signal Coupon waives the fee for one Signal wager. Vault Harness refunds 20% of stake if a continued Vault step fails. Recovery Voucher lowers recovery fee.
-- At most one support item attaches to a wager. Item holder chooses whether to use it. Players cannot transfer chips or items.
+- At most one support item attaches to a wager. Item holder chooses whether to use it. Items are shared; players cannot transfer chips or privately reserve an item.
 - All payout and fee calculations use whole chips. Two-clue fee is rounded once as ceil(6% stake), not as separate rounded 2% + 4%.
 
 ## 4. Session flow
@@ -60,7 +60,7 @@ Record misunderstandings before correcting them. If two or more players misunder
 1. If strain is 2, decide recovery before calculating the new stage target.
 2. Reveal event, bank, strain, target, odds, payout, fees, and item eligibility.
 3. Allow up to 30 seconds of discussion.
-4. Each player privately votes Bank / Balanced / Push. Missing vote defaults to Bank. Resolve plurality and published tie rules.
+4. Each player privately votes Bank / Balanced / Push. Missing vote defaults to Bank. Resolve plurality and published tie rules. If an eligible item is proposed, the team votes whether to activate it; a tie or missing item vote means no item.
 5. Let one eligible item be attached before the lock.
 6. Lock the single team wager and resolve the event using the printed probability table.
 7. Record each ledger entry, closing bank, target result, and strain change.
@@ -121,7 +121,7 @@ Stop the session or invalidate the run if:
 - the bank can become negative;
 - an item or recovery effect triggers twice;
 - a locked wager can be edited;
-- a player can force another player to lose a personal item;
+- a player can activate an item without the published team vote;
 - the facilitator has to invent a rule;
 - a player has no meaningful action for an entire stage.
 
