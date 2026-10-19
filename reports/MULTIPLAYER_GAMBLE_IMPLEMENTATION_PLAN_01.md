@@ -106,3 +106,12 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 - Gate 12's integrated model keeps different strategy niches under the tested fixed event order. Gate 13 tested all 30 event permutations, exact plurality distributions for 2/3/6 players, and clue fee boundaries. Human fairness/fun remain untested.
 - CI [run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705) passed the design simulation suite through Gate 13.
 - Next: produce Paper Playtest Kit 02 aligned with Candidate 02, then run actual human paper sessions. Implementation remains blocked until those results support meaningful decisions and replay intent.
+
+
+## Design checkpoint: paper-test readiness, not implementation approval
+- Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Human test kit: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`; not yet executed.
+- Gate 13 checked event-order sensitivity, exact plurality distributions for 2/3/6 players, and Signal Room fee boundaries.
+- Latest CI [run 39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax checks and Gate 05–13 simulations.
+- Candidate core rules: five shuffled event cards (2 Risk, 2 Vault, 1 Signal); stage target post-recovery bank + ceil(1%); final goal 105%; risk tier stakes 5/10/15%; combined two-clue fee ceil(6% stake); Insurance Bank/Balanced-only 10%; Vault Harness 20%; once-per-run recovery 12% (8% with voucher) skips next eligible Blind Draft.
+- No server/UI/database implementation until human paper sessions show understandable consequential decisions, acceptable fairness, and voluntary replay. The “close to existing games in fun” threshold is not yet proven.
