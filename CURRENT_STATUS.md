@@ -105,3 +105,12 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - A game counts as distinct by its decision structure, resolution rhythm, volatility shape, and emotional/social hook, not by reskinning symbols or changing payout numbers.
 - The catalog is design-only. No rules are numerically approved, no tests were run, and no production source or playable implementation changed.
 - Next: paper-prototype six mechanically diverse games with concrete asymmetric provisional payout tables and example rounds before any simulation or implementation.
+
+
+## Chinese paper prototypes — 2026-10-20
+- Added `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`.
+- Six priority games now have paper-playable draft rules, provisional asymmetric payout/outcome tables, worked rounds, extreme cases, and design risks: Vault Ladder, Minefield, Jackpot Draw, Wheel of Misfortune, Pot Split, Debt Collector.
+- The other nine catalog candidates also have Traditional Chinese rules drafts. Rising Tide is explicitly flagged as potentially redundant with Vault Ladder.
+- Added walkthrough scenarios for catastrophic loss, jackpot rescue, cash-out regret, cooperation/betrayal, and delayed debt.
+- Status is still design-only. No simulations, exact enumeration, human playtest, product tests, or production code changes were performed in this step.
+- Open rule ambiguities to resolve before simulation: Pot Split integer settlement/insurance details, Wheel's two-stage probability presentation, and Debt Collector due-date counting.
