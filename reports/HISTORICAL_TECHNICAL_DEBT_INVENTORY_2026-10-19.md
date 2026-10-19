@@ -39,6 +39,12 @@ V82.69/V82.76/V82.80 AST and selector reports are historical snapshots, not curr
 - Real-audio output capture: **FAIL** in run [39196582296](https://github.com/murorachi/Amq-/actions/runs/39196582296), `peak=0, rms=0.0`; PulseAudio self-test passed, but Chrome had no sink input. No audio code changed.
 - Manual interactive acceptance: not performed.
 
+## V82.85.25 validation checkpoint
+
+- Callback extraction: implemented, with focused pending/active/stale event contract updated.
+- Fragment and candidate fingerprints: recorded from GitHub CI output; follow-up CI verification pending.
+- User-confirmed product audio playback remains the acceptance reference; the CI audio capture mismatch is not a blocker for this bounded dedup task.
+
 ## Rollback
 
 Restore the three local helpers and original `script_028` manifest row; remove the focused test and workflow step. Revert the verifier diagnostics and documentation if rolling back the whole stage. V82.82 remains immutable.
