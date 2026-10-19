@@ -1,4 +1,4 @@
-# Current task: assess EMQ alias deduplication semantics
+# Current task: Chinese-title IndexedDB cache version contract
 
 Current branch: `v82.85.29-source-audit-matrix-01`.
 
@@ -7,15 +7,20 @@ Current branch: `v82.85.29-source-audit-matrix-01`.
 - SRS transitions/persistence: 41 assertions passed.
 - Scene-background IndexedDB/object-URL lifecycle: 29 assertions passed.
 - EMQ Chinese-title cache precedence/filtering: 25 assertions passed.
-- General Chinese-title source mapping/partial-source failures: 19 assertions passed.
-- VNDB cover batching/retry lifecycle: 26 assertions passed in [run 39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886). Source verifier 132/132, source/unit and Firefox responsive passed; Chromium native-origin was still running at last check.
+- Chinese-title source mapping/partial-source failures: 19 assertions passed.
+- VNDB cover batching/retry lifecycle: 26 assertions passed.
+- Alias semantics decision documented; no production change justified by current evidence.
 
 ## Current stage
 
-- Review `script_041.htmlpart`'s `serverAliasMap`, `allKnownAliases` and their consumers to decide whether exact-vs-normalized deduplication is a real correctness issue or an intentional presentation/transport distinction.
-- Trace current consumers and tests. Do not modify production behavior without evidence that the difference causes duplicate answers, payload overflow or inconsistent matching.
-- If no reliable behavior defect is demonstrated, record the finding as deferred and move on.
+- Add a deterministic contract for `script_031.htmlpart` cache version validation, valid cache read, invalid/stale cache rejection, write payload shape and write-failure behavior.
+- Stub IndexedDB interactions at the cache boundary. Do not change DB name, store name, cache key, version or production behavior.
+- Confirm focused test and source/unit CI before acceptance.
+
+## After acceptance
+
+Review the remaining historical debt categories and decide whether they need a concrete follow-up or can remain documented risks. Do not start a broad rewrite solely to reduce audit debt counts.
 
 ## Rollback
 
-This is a review-only stage. Revert its report/status references if necessary; no production source rollback is needed.
+Remove the cache contract and workflow step and revert its report/status references. No production source or immutable V82.82 baseline rollback is required.
