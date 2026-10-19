@@ -22,6 +22,8 @@ jobs:
           python-version: "3.12"
       - name: Verify source fingerprints and deterministic V82.82 build
         run: python tools/verify.py
+      - name: Guard acceptance runner artifact targets
+        run: python tests/unit/run_all_checks_config_contract.py
       - name: Build versioned V82.85.12 standalone candidate
         run: python tools/build.py dist/amq_learning_tool_v82_85_12.html
       - name: Upload versioned standalone candidate
