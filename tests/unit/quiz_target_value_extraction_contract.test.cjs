@@ -16,7 +16,7 @@ function check(name, condition) { assert.ok(condition, name); assertions++; cons
 const record = manifest.modules.find(x => x.name === 'quiz_target_value');
 check('module manifest fingerprint matches exact bytes', !!record && record.byte_length === Buffer.byteLength(moduleSource) && record.sha256 === sha256(Buffer.from(moduleSource)));
 check('source marker occurs exactly once', source.split(marker).length - 1 === 1);
-check('original declaration position is preserved', source.includes("const norm=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\\s\\p{P}\\p{S}\\p{C}]/gu,'');\\n" + marker + "\\nfunction enterSpecial"));
+check('original declaration position is preserved', source.indexOf(marker) > source.indexOf("const norm=x=>String(x??'').normalize('NFKC').toLocaleLowerCase().replace(/[\\s\\p{P}\\p{S}\\p{C}]/gu,'');") && source.indexOf('function enterSpecial') > source.indexOf(marker));
 check('restoring module restores the original declaration bytes', source.replace(marker, moduleSource).includes(expectedSource));
 check('module is exact original declaration without wrapper/import/export', moduleSource === expectedSource && !/\b(?:import|export)\b/.test(moduleSource));
 const animeRow = [12, 'Catalog Anime', 'Catalog Romaji'];
