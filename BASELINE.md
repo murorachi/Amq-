@@ -82,3 +82,11 @@
 - Gate 13 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_13.md`, `reports/design_simulations/gamble_roguelike_gate13.py`.
 - CI run [39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158) passed syntax and simulation steps for Gate 05–13.
 - Design is paper-test ready, not proven fun. No product source changed. Next evidence must come from human paper sessions before implementation.
+
+
+## Gate 14 shared draft
+- Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`; paper test: `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md`.
+- Shared inventory is capped at two items regardless of player count. The two highest-ranked players each pick one item after cleared stages 2/4. Team vote activates at most one item per wager.
+- Favor tie rerolls use raw d6; spent Favor remains spent. AFK players do not roll/spend Favor.
+- Gate 14 simulation and report: `reports/design_simulations/gamble_roguelike_gate14.py`, `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`.
+- CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed. Human fairness/fun remains untested; no product source changed.
