@@ -62,11 +62,11 @@ jobs:
         run: python tests/browser/quiz_suggestions_integration.py --html dist/amq_learning_tool_v82_85_12.html
       - name: Run quiz answer and playback lifecycle acceptance
         run: python tests/browser/quiz_answer_playback_lifecycle.py --html dist/amq_learning_tool_v82_85_12.html
-      - name: Install PulseAudio and ALSA-to-PulseAudio output tools
+      - name: Install PulseAudio and ALSA output tools
         run: |
           sudo apt-get update
           sudo apt-get install -y pulseaudio pulseaudio-utils libasound2-plugins alsa-utils
-          aplay -L | grep -E '^pulse$|^default      - name: Run real browser audio decode and output acceptance
+      - name: Run real browser audio decode and output acceptance
         run: xvfb-run -a python tests/browser/real_audio_output_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
       - name: Run multiplayer room, phase, live-draft and reconnect acceptance
         run: python tests/browser/multiplayer_lifecycle_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
