@@ -14,7 +14,7 @@ Test-only instrumentation to diagnose why Chromium media playback advances while
 ## Change
 
 - Add HTMLMediaElement state to the acceptance log: mute flags, volume, source, paused/readiness/network state, timeline, media error, document visibility, and user-activation state.
-- Sample sink-inputs and default sink ten times at 150 ms intervals during active native playback.
+- Sample sink-inputs and default sink ten times during active native playback, recording actual monotonic elapsed time for each sample (the 150 ms browser waits are targets, not assumed wall-clock timestamps).
 - Log full PulseAudio sink-input properties and client/sink summaries.
 - Keep the strict PCM assertion unchanged: peak >= 1000 and RMS >= 150. The known-good paplay self-test remains separate and its captured samples are cleared before browser acceptance.
 
