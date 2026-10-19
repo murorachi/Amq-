@@ -23,7 +23,7 @@ Virtual chips have no cash value. No real-money wagering, cash-out, player-to-pl
 
 ## 3. Standard stage flow
 
-1. Reveal event, stage target, current bank/strain, risk tiers, odds, gross payout, fees, and eligible item effects.
+1. If strain is 2, resolve the optional recovery decision first. Then reveal the post-recovery bank, stage target, risk tiers, odds, gross payout, fees, and eligible item effects.
 2. Players discuss for up to 30 seconds and submit private risk votes.
 3. Resolve votes simultaneously; missing/late votes default to Bank.
 4. Players may attach at most one eligible item before lock. No edits after lock.
@@ -101,7 +101,7 @@ At most one support item may be attached to a wager. Recovery Voucher applies on
 
 ## 10. Recovery, AFK, and anti-griefing
 
-Recovery is usable at most once per run, only at 2 strain. Pay `ceil(15% of current bank)` to clear one strain and forfeit that stage's item reward, or decline and attempt the stage normally. If a Recovery Voucher is attached to the recovery decision, the fee is `ceil(8% of current bank)`. Recovery does not guarantee a clear. Repeatable recovery was rejected because it could make strain failure impossible.
+Recovery is usable at most once per run, only at 2 strain. Pay `ceil(12% of current bank)` to clear one strain and discard one held item of the team's choice, if any; otherwise decline and attempt the stage normally. If a Recovery Voucher is held, the fee is `ceil(8% of current bank)` and the voucher is consumed. Calculate the stage target after recovery settles. Recovery does not guarantee a clear. Repeatable recovery was rejected because it could make strain failure impossible.
 
 - One 15-second grace window per run.
 - Missing/late risk vote defaults to Bank; no Favor is spent automatically.
