@@ -1411,7 +1411,7 @@
       "runtime_contract": "helper stays at its original lexical scope and execution position; byte-identical source is restored by the builder; no runtime script tag or behavior change"
     }
   ],
-  "module_count": 11,
+  "module_count": 12,
   "release": {
     "version": "V82.85.12",
     "bytes": 8787574,
