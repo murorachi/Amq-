@@ -18,7 +18,7 @@ Test three groups, ideally 2–4 players each. If available, add one six-player 
 - Vault card: step success 80% / 70% / 60%, cash-out gross 1.25× / 1.80× / 3.00×.
 - Signal Room card: A/B/C equally likely; clue success 1/3, 1/2, 3/4; fees 0, ceil(2% stake), ceil(6% stake).
 - Item cards: Insurance, Signal Coupon, Vault Harness, Recovery Voucher.
-- One Favor token per player, dice or shuffled rank cards 1–6, private vote slips, and a timer.
+- One Favor token per player, dice or shuffled rank cards 1–6, private risk/item vote slips, and a timer.
 - A ledger sheet with columns: opening bank, target, tier, stake, fee, gross payout, item/refund, closing bank, strain.
 - One-page rules reference for every participant.
 
@@ -30,9 +30,9 @@ Test three groups, ideally 2–4 players each. If available, add one six-player 
 - Final clear requires completing stage 5 with strain below 3 and bank at least 1,050.
 - One shared wager per stage. Stake fraction follows the risk tier. Gross return includes returned stake.
 - If strain is 2, recovery may be used once per run: pay ceil(12% bank), clear one strain, and skip the next eligible Blind Draft. Recovery Voucher changes the fee to ceil(8% bank) and is consumed.
-- Blind Draft happens after cleared stages 2 and 4. Each player rolls 1–6 and may spend their once-per-run Favor to add +2. Highest picks first; ties reroll. Pool is one item per player plus one extra.
+- Blind Draft happens after cleared stages 2 and 4. Each player rolls 1–6 and may spend their once-per-run Favor to add +2. The two highest-ranked players each pick one item in order; ties reroll. The pool has three distinct cards from the four item types. The shared team inventory is capped at two items. A new pick fills an empty slot or replaces one held item chosen by the picker.
 - Insurance can attach only to Bank/Balanced; it refunds 10% stake on a loss and is consumed even on a win. Signal Coupon waives the fee for one Signal wager. Vault Harness refunds 20% of stake if a continued Vault step fails. Recovery Voucher lowers recovery fee.
-- At most one support item attaches to a wager. Item holder chooses whether to use it. Items are shared; players cannot transfer chips or privately reserve an item.
+- At most one support item attaches to a wager, chosen by team vote; ties or missing item votes mean no item. Items are shared; no player owns or can transfer an item.
 - All payout and fee calculations use whole chips. Two-clue fee is rounded once as ceil(6% stake), not as separate rounded 2% + 4%.
 
 ## 4. Session flow
@@ -61,7 +61,7 @@ Record misunderstandings before correcting them. If two or more players misunder
 2. Reveal event, bank, strain, target, odds, payout, fees, and item eligibility.
 3. Allow up to 30 seconds of discussion.
 4. Each player privately votes Bank / Balanced / Push. Missing vote defaults to Bank. Resolve plurality and published tie rules. If an eligible item is proposed, the team votes whether to activate it; a tie or missing item vote means no item.
-5. Let one eligible item be attached before the lock.
+5. Resolve the item-use vote and attach the chosen eligible item before the lock.
 6. Lock the single team wager and resolve the event using the printed probability table.
 7. Record each ledger entry, closing bank, target result, and strain change.
 8. After cleared stage 2 or 4, run Blind Draft unless recovery skips that draft.
