@@ -88,3 +88,12 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 - Ledger currently records 1 first-pass file audit complete, 1 partially reviewed known-risk fragment (`script_028`), and 89 awaiting file-specific review. These are audit-state counts, not bug counts.
 - V82.85.28 run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): source/unit 132/132 and Firefox responsive passed. Native-origin job failed only at final non-silent audio monitor capture (peak=0, rms=0.0); preceding quiz and multiplayer lifecycle assertions passed. Manual interactive acceptance was not performed.
 - Next ordered review: `src/scripts/script_028.htmlpart`, without altering its behavior absent a focused finding.
+
+
+## V82.85.29 full first-pass audit milestone
+
+- First-pass audit is complete for all 91 registered fragments: 41 script fragments and 50 style fragments. Matrix: `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`; summary: `reports/V82_85_29_SOURCE_AUDIT_SUMMARY.md`.
+- The script review documents lifecycle, storage, identifier, network and media boundaries without broad refactoring. The CSS pass is a static selector/cascade scan only; pixel-diff and computed-style equivalence across all states remain unverified.
+- Added actual embedded EMQ payload integrity validation (6,645 works, 16,839 songs, 8,383,856 decompressed bytes) and AniList mapping integrity validation (9,400 entries). Corrected manifest roles for the two non-executable data payloads. No product runtime source or CSS changed.
+- Run [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248): source/unit 132/132, both payload integrity tests and Firefox responsive passed. Chromium native-origin failed only at the known non-silent audio output capture assertion; quiz and multiplayer lifecycle assertions before that step passed. Newer audit-only commits still require final CI confirmation.
+- Next high-value work: SRS state-transition/persistence characterization, followed by scene-background IndexedDB and object-URL lifecycle coverage. Avoid general-purpose refactors absent a concrete finding.
