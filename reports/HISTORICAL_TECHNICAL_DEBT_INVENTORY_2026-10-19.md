@@ -97,3 +97,44 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 - Added actual embedded EMQ payload integrity validation (6,645 works, 16,839 songs, 8,383,856 decompressed bytes) and AniList mapping integrity validation (9,400 entries). Corrected manifest roles for the two non-executable data payloads. No product runtime source or CSS changed.
 - Run [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248): source/unit 132/132, both payload integrity tests and Firefox responsive passed. Chromium native-origin failed only at the known non-silent audio output capture assertion; quiz and multiplayer lifecycle assertions before that step passed. Newer audit-only commits still require final CI confirmation.
 - Next high-value work: SRS state-transition/persistence characterization, followed by scene-background IndexedDB and object-URL lifecycle coverage. Avoid general-purpose refactors absent a concrete finding.
+
+
+## V82.85.29 evidence-based disposition update
+
+This section supplements the historical V82.85.26 checkpoint above. It does not rewrite old measurements or claim that architectural coupling has disappeared.
+
+### Disposition by debt category
+
+| Historical category | Current disposition | Evidence / remaining limit |
+|---|---|---|
+| Quiz lifecycle coupling (`script_004`) | **Tested/managed; still coupled** | First-pass audit documented timer/answer/storage boundaries. Existing answer-flow and lifecycle contracts remain. No broad refactor justified without a concrete defect. |
+| Multiplayer concern mixing (`script_028`) | **Tested/managed; still coupled** | Existing room-pool bounds (14), next-audio reset (12), audio-failure callback (14), session persistence and browser lifecycle tests protect narrow boundaries. Live two-client service behavior remains unverified. |
+| Exact duplicate helpers | **Closed for the recorded duplicate cases** | Prior checked-value helper consolidation and audio-failure handler consolidation have focused contracts; suggestion-cache invalidation dedup has a focused contract. This does not authorize merging same-name helpers with different semantics. |
+| Same-name helpers with different semantics | **Deferred by design** | Do not merge `norm`/`normal` functions based on names alone. No demonstrated bug requires changing these semantics. |
+| Compatibility-sensitive persistence | **Partially tested; still high risk** | SRS state/persistence 41 assertions, native-storage reload snapshot, custom-list CRUD and backup/restore contracts. Real-browser storage quota/security and every migration history remain unverified. |
+| Order-sensitive CSS history | **Static inventory complete; visual equivalence unverified** | All 50 style fragments were statically scanned. No CSS changed. Pixel-diff/computed-style coverage is only needed for a concrete proposed style change. |
+| Engineering inventory drift | **Current first-pass register established** | `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md` lists all 91 manifest fragments (41 scripts, 50 styles). Older AST/selector snapshots remain historical and are not treated as current metrics. |
+| SRS formula/transition coverage | **Characterized; independent algorithm conformance unverified** | 41 deterministic assertions cover state transitions, interval bounds, reload, quarantine and failed storage. No external FSRS reference comparison or randomized properties yet. |
+| Scene background storage/resource lifecycle | **Characterized; real-browser IndexedDB unverified** | 29 assertions cover transaction completion/error/abort, store creation and object-URL replacement/revocation/temp cleanup. Real browser quota, shutdown and image decode remain untested. |
+| Chinese-title source/cache boundaries | **Partially characterized; some observations deferred** | Source mapping/partial-source 19 assertions; cache version/read/write 14; EMQ cache/filtering 25. These use mocks, not live services. Cache loader currently accepts array-shaped records; possible hardening is deferred. |
+| VNDB cover batching/retry | **Characterized; live service behavior unverified** | 26 assertions cover 30-ID batching, missing records, failure cleanup and retry reset. Rate limits and live schema drift remain untested. |
+
+### New focused-test evidence
+
+- SRS transitions and persistence: 41 assertions passed in [run 39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291).
+- Scene-background IndexedDB/object-URL lifecycle: 29 assertions passed in [run 39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623).
+- EMQ Chinese-title cache precedence/filtering: 25 assertions passed in [run 39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041).
+- Chinese-title source mapping/partial-source failures: 19 assertions passed in [run 39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041).
+- VNDB cover batching/retry: 26 assertions passed in [run 39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886).
+- Chinese-title cache version/read/write: 14 assertions passed in [run 39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871).
+- For those recorded runs, source verifier 132/132 and Firefox responsive passed; browser-native audio output capture must be reported independently. Actual product playback was user-confirmed, and the known capture mismatch is not evidence of a product audio regression.
+
+### Deferred observations (not declared product defects)
+
+1. `serverAliasMap` performs exact-string de-duplication while `cacheRecord` and `allKnownAliases` normalize before de-duplication. Current inspected multiplayer sync uses `allKnownAliases`; no harmful user-facing impact is demonstrated. See `reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md`.
+2. `script_031` cache validation accepts arrays because it checks `typeof records === 'object'`. The new test records this current behavior. Tightening the guard should be a separate minimal fix with a cache fallback test, not an incidental change in the audit stage.
+3. CSS visual pixel-diff is intentionally not a general requirement until a concrete style modification is proposed.
+
+### Current conclusion
+
+The first-pass source audit and the bounded characterization set are complete for this sequence. The remaining work is not “audit every line again”; it is to handle the two deferred hardening questions only if they justify behavior changes, and to perform browser-level validation only for specific real-browser risks. Production runtime source was not changed in the V82.85.29 characterization stages; V82.82 remains immutable.
