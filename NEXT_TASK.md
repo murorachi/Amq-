@@ -1,22 +1,20 @@
-# Next task: SRS state-transition and persistence characterization
+# Next task: verify SRS characterization, then scene-background lifecycle
 
-Current branch: `v82.85.29-source-audit-matrix-01`.
+Current branch: `v82.85.30-srs-transition-contract-01`.
 
-## Completed milestone
+## Current stage
 
-- First-pass audit completed for all 91 registered fragments: 41 scripts and 50 styles.
-- Matrix: `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`.
-- Summary: `reports/V82_85_29_SOURCE_AUDIT_SUMMARY.md`.
-- Product source/CSS was not changed. Two data-integrity tests were added for the real embedded EMQ gzip payload and AniList mapping JSON; manifest roles were corrected.
-- Latest completed source/unit + Firefox run [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248): verifier 132/132, both payload tests and Firefox responsive passed. Native-origin failed only at the known audio monitor non-silent capture assertion. Newer audit commits need final CI confirmation.
+- Added `tests/unit/srs_rating_transition_contract.test.cjs`: 17 exact-source cases for default schedule, validation, quarantine, rating-state transitions, due intervals, review-log cap, invalid grades and persistence failure safety.
+- Test is registered in CI and the reproducible checkpoint package. Production `script_020.htmlpart` remains unchanged.
+- Local execution: NOT RUN. First inspect the latest branch workflow, confirm the new SRS test actually executes and passes, and inspect the package/reproducibility results. Do not treat the known audio-output capture failure as an SRS failure.
 
 ## Ordered next work
 
-1. Add focused characterization for script_020 SRS rating transitions, learning-step progression, interval calculation and invalid-record quarantine. Do not change production formula or storage schema in the test stage.
-2. Then add scene-background transaction/object-URL lifecycle coverage for script_036.
-3. Then consider targeted contracts for script_031/script_039/script_041 external-source/cache behavior.
-4. Only run CSS visual comparison when proposing a concrete style change; static selector duplication alone is not a reason to edit.
+1. Resolve any SRS contract test failures with the smallest correction; do not change production scheduling behavior to make characterization pass.
+2. Confirm source/unit and package reproducibility, Firefox responsive, and report Chromium native-origin separately. The known non-silent audio capture assertion is a pre-existing environment limitation.
+3. After SRS contract passes, create a separate stage for `src/scripts/script_036.htmlpart`: characterize IndexedDB transaction behavior, object-URL creation/revocation, failed storage operations and page cleanup. Preserve current UI and storage schema.
+4. Only then consider targeted contracts for script_031/script_039/script_041 external-source/cache behavior.
 
 ## Rollback
 
-The audit milestone is documentation/tests/manifest metadata only. Keep V82.85.28 and immutable V82.82 unchanged. Any later SRS test stage should be a separate branch/commit with its own report and acceptance.
+Revert the SRS test, its workflow/package registration, report and checkpoint-document changes. Keep V82.85.29 audit records, V82.85.28 product source and immutable V82.82 unchanged.
