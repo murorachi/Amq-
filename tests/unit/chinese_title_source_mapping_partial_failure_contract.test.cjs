@@ -80,7 +80,7 @@ function ok(value, label) { assertions++; assert.ok(value, label); }
 
 const bgmData = { items: [
   { title: 'Anime native title', sites: [{ site: 'mal', id: '100' }, { site: 'anilist', id: '200' }], titleTranslate: { 'zh-Hant': ['繁體標題'], 'zh-Hans': ['简体标题'] } },
-  { title: 'Other native title', sites: [{ site: 'mal', id: '200' }, { site: 'anilist', id: '999' }], titleTranslate: { 'zh-Hant': ['另一作品'] } }
+  { title: 'Other native title', sites: [{ site: 'mal', id: '200' }, { site: 'anilist', id: '200' }], titleTranslate: { 'zh-Hant': ['另一作品'] } }
 ] };
 const aniData = [{ id: '200', title: '中文標題', synonyms: ['中文別名', '日本語タイトル'] }];
 
