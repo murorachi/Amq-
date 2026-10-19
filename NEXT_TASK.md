@@ -1,24 +1,20 @@
-# Current task: verify malformed Chinese-title cache guard fix
+# Next task: resume feature development from accepted V82.85.29 source audit
 
 Current branch: `v82.85.29-source-audit-matrix-01`.
 
-## Change made
+## Completed stage
 
-- `src/scripts/script_031.htmlpart`: `readCache()` rejects arrays as malformed records, avoiding an empty-array cache hit that could skip title-map download.
-- Test: `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs` now asserts array cache rejection.
-- Manifest and source audit matrix refreshed to 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
+- First-pass review: all 91 registered fragments (41 scripts, 50 styles) represented in `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`.
+- Evidence-based debt dispositions recorded in `reports/HISTORICAL_TECHNICAL_DEBT_INVENTORY_2026-10-19.md`.
+- Narrow fix: `script_031.htmlpart` rejects array-shaped IndexedDB title-cache records, preserving the existing download fallback for malformed cache entries.
+- Cache contract: 14 assertions passed; source verifier 132/132 and deterministic V82.85.29 build passed in [run 39257936940](https://github.com/murorachi/Amq-/actions/runs/39257936940).
+- Candidate fingerprint: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- Firefox responsive and native-origin storage, IndexedDB/quiz, suggestions, quiz playback lifecycle and multiplayer lifecycle passed. The only CI failure is the known non-silent audio monitor assertion (`peak=0, rms=0.0`); actual playback was previously user-confirmed.
 
-## Acceptance steps
+## Recommended next step
 
-1. Check the latest workflow run after the manifest refresh.
-2. Confirm source verifier 132/132, deterministic package build, all source/unit tests including cache contract, and Firefox responsive.
-3. Report Chromium native-origin separately. Known audio output capture mismatch (`peak=0, rms=0`) is not evidence of a product audio regression because actual playback was user-confirmed; do not expand scope to debug it.
-4. If all required checks pass apart from that known audio capture assertion, mark this bounded stage accepted with that limitation explicit.
-
-## Next after acceptance
-
-The first-pass audit covers all 91 registered fragments. Do not re-audit every fragment. Pick the next concrete task only from remaining evidence-backed risks; otherwise pause broad audit work and resume the user's feature-development goals.
+Return to the user's feature-development priorities rather than continuing a broad audit. Keep the alias de-duplication difference deferred until a concrete consumer defect is reproduced. Do not undertake CSS pixel-diff or generalized lifecycle refactors without a proposed change that needs them.
 
 ## Rollback
 
-Revert the single `readCache()` guard change, restore the original test expectation, and restore the old manifest/matrix fingerprint. V82.82 remains immutable.
+Revert the single `readCache()` array guard, restore its test expectation, restore the prior script_031 manifest fingerprint and V82.85.28 release pin, and revert the V82.85.29 candidate/workflow version bump. Keep immutable V82.82 unchanged.
