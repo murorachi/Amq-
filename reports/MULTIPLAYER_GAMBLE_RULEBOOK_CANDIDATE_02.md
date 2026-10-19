@@ -78,7 +78,7 @@ The hidden result is A/B/C, equally likely. Each clue reveals a pair of outcomes
 |---|---:|---:|---:|
 | 0 | 1/3 | 3× | 0 |
 | 1 | 1/2 | 2× | `ceil(2% of stake)` |
-| 2 | 3/4 | 4/3× | `ceil(2% of stake) + ceil(4% of stake)` |
+| 2 | 3/4 | 4/3× | `ceil(6% of stake)` |
 
 Fees are paid from the bank and are non-refundable, including on a wrong answer. They do not change the hidden outcome. Clue accuracy is exactly 1/3, 1/2, and 3/4. Gross EV is 1.0× stake before fees/rounding; clue fees reduce net EV in exchange for better odds.
 
@@ -119,7 +119,7 @@ Arithmetic illustration only; it is not a simulated probability outcome. All sta
 | Start | — | — | 1,000 | — |
 | 1 | Risk Contract wins | stake 50; gross `floor(50×4/3)=66`; net +16 | 1,016 | 1,010 clear |
 | 2 | Vault step 1 wins, cash out | stake 50; gross `floor(50×1.25)=62`; net +12 | 1,028 | 1,027 clear |
-| 3 | Signal Room, two clues, correct | stake 51; fees 2+3; gross `floor(51×4/3)=68`; net +17−5 | 1,040 | 1,039 clear |
+| 3 | Signal Room, two clues, correct | stake 51; fees 2+3; gross `floor(51×4/3)=68`; fee `ceil(6%×51)=4`; net +17−4 | 1,041 | 1,039 clear |
 | 4 | Risk Contract wins | stake 52; gross `floor(52×4/3)=69`; net +17 | 1,057 | 1,051 clear |
 | 5 | Vault step 1 wins, cash out | stake 52; gross `floor(52×1.25)=65`; net +13 | 1,070 | 1,068 clear |
 
