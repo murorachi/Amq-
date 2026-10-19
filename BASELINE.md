@@ -79,3 +79,9 @@
 - Review report: `reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md`.
 - No production change. Existing inspected consumers use normalized `allKnownAliases`; no reproduced bug demonstrates the exported `serverAliasMap` difference is harmful.
 - Next: add a focused script_031 IndexedDB cache version/read/write contract to cover the remaining explicit gap.
+
+
+## Chinese-title IndexedDB cache contract
+
+- Added `tests/unit/chinese_title_indexeddb_cache_version_contract.test.cjs`, workflow step and report `reports/V82_85_29_CHINESE_TITLE_INDEXEDDB_CACHE_VERSION_CONTRACT.md`.
+- CI execution pending. The test records the current behavior that an array passes the `typeof records === 'object'` cache guard; no production behavior changed.
