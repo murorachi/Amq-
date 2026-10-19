@@ -95,11 +95,14 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 
 
 
-## V82.85.32 Chinese-title loader cache contract
+## V82.85.32 Chinese-title loader cache contract — accepted with known CI limitation
 
-- Branch: `v82.85.32-chinese-title-loader-contract-01`, based on scene-background contract checkpoint V82.85.31.
-- Added `tests/unit/chinese_title_loader_cache_contract.test.cjs` with 20 exact-source cases for normalization/alias filtering, ambiguous ID rejection, candidate priority, partial source failures, fetch timeout/abort, IndexedDB cache version/key, loader readiness and single-flight behavior.
-- Registered the test in CI and deterministic checkpoint package requirements. Production `src/scripts/script_031.htmlpart` unchanged; no URL, source revision, cache schema/key, title priority or alias behavior changed.
-- Local execution: NOT RUN in this authoring environment. Latest branch CI must be inspected before acceptance.
-- Prior scene-background CI [39238306059](https://github.com/murorachi/Amq-/actions/runs/39238306059): source/unit, scene-background 18/18, SRS 17/17, package reproducibility and Firefox passed. Chromium native-origin failed only at the known final audio monitor capture assertion (peak=0, rms=0); preceding storage, IndexedDB/input, quiz and multiplayer checks passed. Actual playback was user-confirmed.
+- Branch: `v82.85.32-chinese-title-loader-contract-01`, based on scene-background checkpoint V82.85.31.
+- Added `tests/unit/chinese_title_loader_cache_contract.test.cjs`: 20 exact-source cases for normalization/alias filtering, ambiguous ID rejection, candidate priority, independent source failures, fetch timeout/abort, IndexedDB cache version/key, loader readiness and single-flight behavior.
+- Registered in CI and deterministic checkpoint package requirements. Production `src/scripts/script_031.htmlpart` unchanged; no URL, source revision, cache schema/key, title priority or alias behavior changed.
+- Initial run [39239399557](https://github.com/murorachi/Amq-/actions/runs/39239399557) failed one test-harness timing assertion; fixed by waiting for async loader startup. No production code was changed.
+- Corrected CI [39239470902](https://github.com/murorachi/Amq-/actions/runs/39239470902): source/unit PASS; Chinese-title 20/20, SRS 17/17, scene-background 18/18 PASS; package contract/reproducibility PASS (406 entries, repeated SHA-256 `2bb266f79ef44d41d4bd9d9d25c487eb88d7dac891894450f8b8350d68f25795`); deterministic build PASS; Firefox responsive PASS.
+- Chromium native-origin: storage/custom-list, IndexedDB/input, suggestion, quiz playback and multiplayer lifecycle passed. Only final non-silent audio monitor capture failed (peak=0, rms=0). Overall workflow is red due to known capture limitation; actual product playback was user-confirmed. Manual interactive acceptance was not performed.
+- Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
