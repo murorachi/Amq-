@@ -1,19 +1,21 @@
-# Next task: verify SRS characterization, then scene-background lifecycle
+# Next task: scene-background IndexedDB and object-URL lifecycle contract
 
-Current branch: `v82.85.30-srs-transition-contract-01`.
+Current accepted branch: `v82.85.30-srs-transition-contract-01`.
+Next work should use a separate branch based on this accepted checkpoint.
 
-## Current stage
+## Completed SRS stage
 
 - Added `tests/unit/srs_rating_transition_contract.test.cjs`: 17 exact-source cases for default schedule, validation, quarantine, rating-state transitions, due intervals, review-log cap, invalid grades and persistence failure safety.
-- Test is registered in CI and the reproducible checkpoint package. Production `script_020.htmlpart` remains unchanged.
-- Local execution: NOT RUN. First inspect the latest branch workflow, confirm the new SRS test actually executes and passes, and inspect the package/reproducibility results. Do not treat the known audio-output capture failure as an SRS failure.
+- Product `src/scripts/script_020.htmlpart` unchanged.
+- CI [39237555930](https://github.com/murorachi/Amq-/actions/runs/39237555930): source/unit PASS, SRS 17/17 PASS, package contract/reproducibility PASS, deterministic standalone build PASS, Firefox responsive PASS. Chromium native-origin failed only at known final audio monitor capture (peak=0, rms=0); all preceding storage/custom-list/IndexedDB/input/suggestion/quiz/multiplayer lifecycle steps passed. Actual product playback was user-confirmed. Do not reopen audio capture unless actual playback regresses.
 
 ## Ordered next work
 
-1. Resolve any SRS contract test failures with the smallest correction; do not change production scheduling behavior to make characterization pass.
-2. Confirm source/unit and package reproducibility, Firefox responsive, and report Chromium native-origin separately. The known non-silent audio capture assertion is a pre-existing environment limitation.
-3. After SRS contract passes, create a separate stage for `src/scripts/script_036.htmlpart`: characterize IndexedDB transaction behavior, object-URL creation/revocation, failed storage operations and page cleanup. Preserve current UI and storage schema.
-4. Only then consider targeted contracts for script_031/script_039/script_041 external-source/cache behavior.
+1. Start a separate scene-background contract stage for `src/scripts/script_036.htmlpart`.
+2. Cover IndexedDB transaction success/error/abort, no-db failure, URL replacement/revocation, preview URL cleanup, image MIME/size/dimension limits, and backup-restore validation/rollback.
+3. Use exact production functions and synthetic browser/storage doubles. Do not change production code merely to simplify testing.
+4. Register tests in CI and the deterministic checkpoint package, add a report, and run the full workflow.
+5. After that, consider focused contracts for script_031/script_039/script_041 external-source/cache behavior.
 
 ## Rollback
 
