@@ -130,3 +130,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - It covers 30-ID request batching, missing-record placeholders, HTTP failure cleanup, loaded/loading/failed skip behavior and explicit retry state reset, using mocked responses only.
 - Automated execution pending CI. Production `script_039.htmlpart` is unchanged.
 - Chinese-title tests passed 25 and 19 assertions in run [39250170041](https://github.com/murorachi/Amq-/actions/runs/39250170041); verify the final source/unit and browser job conclusions separately.
+
+
+## VNDB cover lifecycle contract accepted
+
+- `tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs` passed **26 assertions** in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886).
+- Same run: source verifier 132/132 and all source/unit steps passed; Firefox responsive passed. Chromium native-origin was still running at last check, so overall workflow closure remains separate.
+- Report: `reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md`. Production `script_039.htmlpart` unchanged.
+- Next bounded review: assess whether `script_041` alias deduplication differences between `serverAliasMap` and `allKnownAliases` are intentional/meaningful before proposing any behavior change.
