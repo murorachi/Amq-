@@ -20,3 +20,11 @@
 - The synthetic write failure verifies rollback logic, not a naturally occurring quota or disk failure.
 - Firefox CSS cascade, real audio-provider playback, production-domain storage policy and naturally occurring IndexedDB quota/corruption remain separate gates.
 - Thirteen modules have CI contracts but semantic modularization is not complete.
+
+## Separate workstream: multiplayer Gamble Roguelike discovery
+- Branch: `multiplayer-gamble-engine-discovery-01`, based on V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
+- Design record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
+- This is documentation/discovery only. Product HTML, source fragments, workflows, and multiplayer behavior have not been changed.
+- Current inspected multiplayer client: `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`.
+- Blocking dependency: the current room API server source/deployment is not present in the inspected repository tree. Do not implement authoritative bets, balances, or random outcomes in the browser.
+- Next gate: identify the current server source and live API contract, or document an explicit decision to create a new server service.
