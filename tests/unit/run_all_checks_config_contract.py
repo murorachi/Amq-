@@ -14,7 +14,7 @@ assert candidate_path in source, "candidate build targets the versioned candidat
 assert source.index(build_label) < source.index(quiz_label), "candidate is built before quiz suggestion browser integration"
 quiz_command = source[source.index(quiz_label):source.index("\n", source.index(quiz_label))]
 assert quiz_path in quiz_command, "quiz suggestion integration uses the current candidate"
-assert '"dist/amq_learning_tool_v82_82.html"]),' not in source[source.index("tools/build.py"):], "runner must not overwrite the V82.82 artifact with the candidate"
+assert not any("tools/build.py" in line and "dist/amq_learning_tool_v82_82.html" in line for line in source.splitlines()), "runner must not overwrite the V82.82 artifact with the candidate"
 assert '("Chromium CSS visual baseline"' not in source, "historical V82.80/V82.81 visual baseline is not in default current acceptance"
 assert '"tools/verify.py"' in source, "deterministic build and integrity verification remains enabled"
 print("PASS current candidate is built before current-version browser integration")
