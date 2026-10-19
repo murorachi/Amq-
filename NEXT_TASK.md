@@ -1,37 +1,32 @@
-# Next task: bounded non-audio duplicate-candidate audit
+# Next task: one final bounded non-audio duplicate-candidate audit
 
 Branch: `v82.85.28-next-audio-state-reset-dedup-01`.
-Baseline HEAD: `0a642c9043b88684bbee0c7fe628e1635d7b7e73`.
+Baseline before V82.85.32 documentation update: `78ded6791e9591c4b4cce1529f10bb0f474a03bc`.
 
-## Goal
+## Completed candidate
 
-Resume the historical technical-debt cleanup now that V82.85.31 is merged and post-merge CI is green. Keep this as one small, evidence-led task rather than broad cleanup.
+Inspected the duplicate answer-mirror input listeners in `src/scripts/script_008.htmlpart` and `src/scripts/script_009.htmlpart`.
 
-## Scope and guardrails
+**Decision: reject consolidation.** Both copy the answer input into the mirror, but their `ani-quiz-new-question` behavior differs. Script 008 clears the mirror; script 009 clears and then synchronizes the current input. A mechanical merge could change visible behavior depending on event timing.
 
-1. Inspect one concrete **non-audio** repeated-logic candidate in the current source.
-2. Trace the owning functions, lexical scope, callers, and observable behavior before deciding whether it is truly redundant.
-3. If behavior differs or the only benefit is cosmetic, record a rejection and move on; do not force consolidation.
-4. If the candidate is equivalent, add a focused contract test before changing production source.
-5. Preserve the V82.82 immutable baseline, deterministic packaging, current release manifest rules, and all existing browser acceptance gates.
-6. Do not revisit or weaken audio-output acceptance. V82.85.31 is closed.
+- No product source, manifest, generated HTML, or immutable artifact changed.
+- No focused test or product rebuild was run because no production change was made.
+- The baseline documentation CI [39296906101](https://github.com/murorachi/Amq-/actions/runs/39296906101) passed all three jobs.
+- Report: `reports/V82_85_32_NON_AUDIO_MIRROR_LISTENER_DEDUP_AUDIT_01.md`.
 
-## Latest verified checkpoint
+## Next action and stop condition
 
-- V82.85.31 merge commit: `0a642c9043b88684bbee0c7fe628e1635d7b7e73`.
-- Post-merge CI [39296217244](https://github.com/murorachi/Amq-/actions/runs/39296217244): PASS, all three jobs.
-- Source verifier: 132/132; Firefox responsive: PASS; Chromium native-origin: PASS.
-- Audio capture peak=4899 / RMS=2358.8, with sink-input present in all ten samples.
-- Product candidate fingerprint unchanged: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+Inspect **one additional** non-audio candidate. If it is also behaviorally distinct or only cosmetically similar, stop historical dedup auditing and return to product feature development. Do not expand this into a broad cleanup campaign.
 
-## Acceptance for the next task
+## Guardrails
 
-- Candidate and decision documented.
-- If changed: focused regression contract, source/module fingerprint updates, deterministic candidate/package checks, Firefox responsive and native-origin CI.
-- If rejected: documentation-only result with explicit evidence; no production source change.
-- Rollback must preserve the current official HEAD and immutable V82.82.
+- Preserve immutable V82.82 and the deterministic package/release-manifest rules.
+- Do not revisit or weaken the closed audio-output acceptance gate.
+- Any production change must have a focused contract test before source modification, followed by source fingerprint, deterministic candidate/package, Firefox responsive, and native-origin CI checks.
+- Roll back this documentation-only stage by reverting the report and matching status/baseline/next-task updates.
 
 ---
+
 
 ## Historical V82.85.30 task record
 

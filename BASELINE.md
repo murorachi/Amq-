@@ -1,14 +1,16 @@
-# Baseline checkpoint: V82.85.31 merged and verified
+# Baseline checkpoint: V82.85.32 non-audio audit, no product changes
 
 - Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
-- Official HEAD: `0a642c9043b88684bbee0c7fe628e1635d7b7e73` (V82.85.31 closeout commit).
-- V82.85.31 audio timeline wait hardening was merged as `0a642c9043b88684bbee0c7fe628e1635d7b7e73`; it changes the acceptance test and engineering records only.
-- Post-merge CI [39296217244](https://github.com/murorachi/Amq-/actions/runs/39296217244) passed all three jobs. Native audio capture: peak=4899, RMS=2358.8; sink-input observed in all ten samples; timeline play/pause/resume assertions passed.
-- Product standalone candidate is unchanged: V82.85.30, 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
+- Official HEAD before this documentation-only stage: `78ded6791e9591c4b4cce1529f10bb0f474a03bc`.
+- V82.85.32 rejected consolidation of the answer-mirror input listeners in `script_008.htmlpart` and `script_009.htmlpart` because their new-question event behavior differs.
+- Baseline docs CI [39296906101](https://github.com/murorachi/Amq-/actions/runs/39296906101) passed all three jobs.
+- Product standalone candidate remains unchanged: V82.85.30, 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`.
 - Immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Next work: continue bounded historical deduplication. Do not modify production code until one candidate's behavior, ownership, and regression assertions are documented.
+- No product source, release manifest, generated HTML, or artifact was changed. This is a documentation-only checkpoint.
 
 ---
+
+# Previous baseline checkpoint: V82.85.31 merged and verified
 
 # Baseline checkpoint: V82.85.30 audio volume default fix
 

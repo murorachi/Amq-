@@ -1,3 +1,16 @@
+# Current engineering checkpoint: bounded dedup candidate rejected; product unchanged
+
+- Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+- Latest baseline before this stage: `78ded6791e9591c4b4cce1529f10bb0f474a03bc`; baseline documentation CI [39296906101](https://github.com/murorachi/Amq-/actions/runs/39296906101) passed all three jobs.
+- V82.85.32 inspected a non-audio duplicate candidate: answer-mirror input listeners in `src/scripts/script_008.htmlpart` and `src/scripts/script_009.htmlpart`.
+- Decision: reject consolidation. Although both copy `#quizAnswer.value` to `#v36Answer`, their `ani-quiz-new-question` handlers differ: script 008 clears unconditionally, while script 009 clears and then syncs the current input. They can produce different visible states when the input is not empty at event time.
+- Product source, manifest, generated HTML, and immutable V82.82 were not changed.
+- Focused test, product rebuild, and manual browser acceptance were not run because no product modification was made. Documentation-commit CI must be checked separately.
+- Next: inspect one additional non-audio candidate. If no clearly equivalent low-risk extraction is found, end the bounded audit and return to product feature development.
+- Report: `reports/V82_85_32_NON_AUDIO_MIRROR_LISTENER_DEDUP_AUDIT_01.md`.
+
+---
+
 # Current engineering checkpoint: V82.85.31 closed; resume bounded deduplication
 
 - Official branch: `v82.85.28-next-audio-state-reset-dedup-01`.
