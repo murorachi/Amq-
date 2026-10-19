@@ -19,8 +19,8 @@
 ## Verification status
 
 - Diagnostic root-cause evidence: PASS.
-- New unit contract: pending CI.
-- Manifest integrity and deterministic candidate build: pending; release fingerprint will be updated only from the actual reconstructed candidate.
+- New unit contract: local execution PASS, 10/10 assertions; CI execution pending.
+- First reconstructed candidate: 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`. Manifest release fingerprint has been updated; CI confirmation of deterministic rebuild is pending.
 - Native Chromium output: pending; must pass peak >= 1000 and RMS >= 150.
 - Firefox responsive and remaining regression jobs: pending.
 
