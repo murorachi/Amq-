@@ -10,3 +10,11 @@
 - CI validation is pending. Focused pre-fix characterization and source/unit tests passed, but V82.85.30 must pass the updated verifier/build/package/browser checks before acceptance.
 - Immutable V82.82 baseline: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Rollback: restore the previous cache guard and V82.85.29 manifest/workflow/package metadata; keep V82.82 untouched.
+
+
+## V82.85.30 CI checkpoint
+
+- Run [39252468802](https://github.com/murorachi/Amq-/actions/runs/39252468802): source/unit passed (132/132 verifier checks and all unit steps), Firefox responsive passed. Chromium native-origin is still running; real-origin storage/custom-list and custom-list UI steps passed, IndexedDB/quiz input acceptance is in progress.
+- Standalone candidate: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- Deterministic source package SHA-256 `d1eab00af3bb59955bdcc11650a8edf5a8653df3c46912c08b725b60c7aea56a`; package artifact uploaded.
+- Do not mark overall browser acceptance complete until run conclusion is final.
