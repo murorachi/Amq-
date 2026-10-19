@@ -29,9 +29,10 @@
 - The existing multiplayer client contains HTTP/WebSocket route references, but the user clarified the existing feature substantively does not use a conventional server. Do not treat missing server source as a blocker for planning the new game, and do not infer the current transport model from route names alone.
 - Recommended architecture for the new game: separate lightweight authoritative service, run locally during development and hosted later if always-on friend access is needed. This remains a proposal awaiting approval.
 - No product source, HTML, or existing multiplayer behavior has been changed in this workstream.
+- Added isolated source files under `gamble-roguelike/` for deterministic rules and an in-memory ledger, plus Node tests and a scoped CI workflow.
+- Local working-copy tests: 10/10 subtests passed; syntax checks passed. Remote CI status for the consolidated GitHub test file is not verified.
 - Proposed first playable scope: 2–6 players, per-run balance of 1,000 virtual chips, five stages, four mechanically distinct candidate games, run-only items, no real-money wagering/cash-out/player transfers.
-- Proposed payouts and probabilities are documented but have not been independently tested or playtested.
-- No new tests were run for the planning documents. No real two-client game run has been performed.
+- Proposed payouts have deterministic rule coverage but have not been simulated or playtested. Ledger persistence, server, client UI, and real two-client run are not implemented.
 
 ## Rollback
 - Revert the documentation-only commits on `multiplayer-gamble-engine-discovery-01`.
