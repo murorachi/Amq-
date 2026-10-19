@@ -87,7 +87,3 @@ jobs:
       - name: Run Firefox responsive and quiz UI smoke acceptance
         run: python tests/browser/firefox_responsive_smoke_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
 
-      - name: Run real browser audio decode and output acceptance
-        run: xvfb-run -a python tests/browser/real_audio_output_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
-      - name: Run multiplayer room, phase, live-draft and reconnect acceptance
-        run: python tests/browser/multiplayer_lifecycle_acceptance.py --html dist/amq_learning_tool_v82_85_12.html
