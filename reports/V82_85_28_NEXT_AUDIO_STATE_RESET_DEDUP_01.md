@@ -14,7 +14,10 @@ Added `tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs` (1
 
 ## Verification
 
-- Source/unit, deterministic build, package, and browser results are recorded from the V82.85.28 GitHub Actions run.
+- Source/unit job: **PASS**, verifier 132/132; focused contract: **PASS**, 12 assertions; deterministic standalone candidate and package reproducibility: **PASS**; Firefox responsive: **PASS** in [run 39229842012](https://github.com/murorachi/Amq-/actions/runs/39229842012).
+- Modified fragment: 139,202 bytes / SHA-256 `24d805495ba443bd8e927d3b3ae37dcd581cb2b1d9c7ab872e223234849e1a50`.
+- Candidate V82.85.28: 8,786,547 bytes / SHA-256 `7284c4ca5625886d913f55ab19a0076d1a5be46a88504dd8de724ae8f5bd274d`.
+- Chromium native-origin acceptance is still running; do not mark it passed until the job completes.
 - CI real-browser audio-output capture has previously failed despite user-confirmed actual playback. This change only centralizes existing state assignments; it does not alter media output logic.
 - Manual interactive acceptance is not performed.
 
