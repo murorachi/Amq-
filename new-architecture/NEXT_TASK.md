@@ -1,8 +1,9 @@
 # Next task
 
-1. Upload the exact source modules, builder, tests, and generated standalone HTML; verify remote readback and checksums. Until then, this branch is documentation-only.
-2. Fix any failures found in a permitted browser interaction environment; test song CRUD, navigation, quiz completion, and backup rollback.
-3. Add deterministic tests for CSV edge cases, list membership, settings, and import deduplication.
-4. Complete responsive visual and keyboard/focus acceptance.
-5. Implement real audio and spaced-repetition behavior only with explicit contracts and tests.
-6. Keep legacy AMQ integration deferred until both codebases independently pass their gates.
+1. Continue following the approved 13-stage UI specification without inventing features or changing direction.
+2. Rework the quiz screen according to AMQ's established interaction hierarchy; preserve quiz rules and input focus behavior.
+3. Rework the results page using the approved osu! stable-inspired hierarchy.
+4. Continue page-by-page implementation of learning plans, statistics, custom lists, settings and data management within the agreed scope.
+5. Run automated tests after each stage and visual/browser acceptance when a usable browser environment is available.
+6. Upload exact source modules, builder, tests and generated HTML to GitHub; verify remote readback and checksums. Current remote branch contains docs only.
+7. Keep legacy AMQ integration deferred until both codebases independently pass their gates.
