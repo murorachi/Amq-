@@ -107,3 +107,11 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - Catalog contains 15 candidate game concepts; design target is 12 mechanically distinct launch-ready games, with six diverse games selected for first paper prototyping.
 - Distinctness is defined by decision mechanic, outcome shape, resolution rhythm, and social/emotional tension; reskins do not count.
 - This is design-only. Candidate 03 remains historical, no production AMQ source/HTML or game implementation changed, and no tests/simulations were run for the catalog.
+
+
+## Gamble Roguelike — Chinese paper prototype checkpoint
+- Added `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md` on the design branch.
+- The report defines six detailed paper prototypes plus Traditional Chinese rule drafts for the other nine catalog concepts.
+- Provisional rules cover asymmetric outcomes and example rounds; they are not numerically approved. No simulation or human test was run for this artifact.
+- AMQ product HTML/source, existing multiplayer behavior, server, UI, and database remain unchanged.
+- Rollback is limited to the design report and its status-note commits.
