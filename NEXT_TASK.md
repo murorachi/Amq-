@@ -7,9 +7,9 @@ Current branch: `v82.85.30-chinese-title-cache-shape-guard-01`.
 - Source/unit: PASS, verifier 132/132 and all unit tests.
 - Firefox responsive: PASS.
 - Browser-native: native storage/custom-list, IndexedDB/quiz input, quiz suggestions, quiz answer/playback lifecycle and multiplayer lifecycle passed. Only the final non-silent audio output capture assertion failed (`peak=0, rms=0.0`); PulseAudio self-test passed. Treat this as the known capture mismatch, not a proven product regression.
-- Run: [39252741670](https://github.com/murorachi/Amq-/actions/runs/39252741670).
+- Run: [39253372795](https://github.com/murorachi/Amq-/actions/runs/39253372795).
 - Standalone candidate: 8,786,577 bytes / SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
-- Source package was built reproducibly and uploaded. Check the newest workflow run after final documentation commits for authoritative artifact metadata and confirm all required report/test files are included.
+- Source package was built reproducibly and uploaded. Latest run confirms source/unit and Firefox pass, deterministic package builds match, and both named artifacts were uploaded. Browser-native has only the known audio-output capture failure; all other lifecycle checks passed.
 
 ## After verification
 
