@@ -1,21 +1,21 @@
-# Next task: Chinese-title loader cache and partial-source contract
+# Next task: accept Chinese-title loader contract, then EMQ title cache precedence
 
-Current accepted branch: `v82.85.31-scene-background-lifecycle-contract-01`.
-Next stage should use a separate branch based on this checkpoint.
+Current branch: `v82.85.32-chinese-title-loader-contract-01`.
 
-## Completed scene-background stage
+## Current stage
 
-- Added `tests/unit/scene_background_lifecycle_contract.test.cjs`: 18 exact-source cases for IndexedDB open/transaction/read success and failure, URL replacement/revocation, temporary preview cleanup, image MIME/size/dimension limits, and backup-restore source guards.
-- Product `src/scripts/script_036.htmlpart` unchanged.
-- CI [39238306059](https://github.com/murorachi/Amq-/actions/runs/39238306059): source/unit, scene-background 18/18, SRS 17/17, package contract/reproducibility, deterministic build and Firefox responsive passed. Chromium native-origin failed only at known final audio monitor capture (peak=0, rms=0); all preceding storage/custom-list/IndexedDB/input/suggestion/quiz/multiplayer lifecycle steps passed. Actual product playback was user-confirmed.
+- Added `tests/unit/chinese_title_loader_cache_contract.test.cjs`: 20 exact-source cases for normalization/alias filtering, identifier ambiguity, source merge priority, independent source failure, fetch abort, IndexedDB cache version/key, partial readiness and concurrent load behavior.
+- Test is registered in CI and deterministic checkpoint package. Production `src/scripts/script_031.htmlpart` unchanged.
+- Local execution: NOT RUN. Inspect the newest workflow run, confirm test output/package reproducibility and report Firefox/native-origin separately. Known audio output capture failure is unrelated unless real product playback regresses.
 
 ## Ordered next work
 
-1. Start a separate contract stage for `src/scripts/script_031.htmlpart`: versioned IndexedDB cache, retry/abort handling, source-specific partial readiness and alias filtering.
-2. Preserve pinned source revisions, cache schema/key, and existing fail-soft behavior. No live upstream freshness claim from synthetic tests.
-3. Register tests in CI and the deterministic checkpoint package; report actual CI results.
-4. Then consider script_041 cache precedence/alias filtering and script_039 VNDB fetch/cover retry races as separate bounded stages.
+1. Resolve any contract test failures without changing production title/cache behavior merely to satisfy the test.
+2. Confirm source/unit, package contract/reproducibility, deterministic build, Firefox responsive and Chromium native-origin.
+3. After acceptance, create a separate contract stage for `src/scripts/script_041.htmlpart`: title cache precedence, alias merge/filtering and fail-soft external request behavior.
+4. Then consider `src/scripts/script_039.htmlpart` VNDB request failures, imported ID domains, cover retry races and render limits.
+5. Do not claim live upstream freshness from synthetic tests.
 
 ## Rollback
 
-Revert the scene-background test, workflow/package registration, report and checkpoint-document changes. Keep V82.85.30 SRS test/report, V82.85.28 product source and immutable V82.82 unchanged.
+Revert the Chinese-title loader test, workflow/package registration, report and checkpoint-document changes. Keep the V82.85.31 scene-background test/report, V82.85.30 SRS test/report, V82.85.28 product source and immutable V82.82 unchanged.
