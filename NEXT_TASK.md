@@ -1,27 +1,27 @@
-# Next task: finish bounded historical debt and deduplication acceptance
+# Next task: implement isolated Song Impostor selector
 
-Current branch: `v82.85.35-selected-list-validation-dedup-01`.
+Current branch: `multiplayer-song-impostor-spec-01`.
 
-## Current checkpoint
+## Completed in this checkpoint
+1. Created the MVP gameplay specification.
+2. Created the pair-scoring and simulation plan.
+3. Kept product/runtime source and standalone HTML unchanged.
 
-- Parent: `v82.85.34-vndb-navigation-contract-01`.
-- Product runtime source is unchanged in this documentation checkpoint.
-- The stage report is `reports/V82_85_35_HISTORICAL_DEBT_DEDUP_CHECKPOINT_01.md`.
-- Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+## Next steps, in order
+1. Inspect repository file inventory and current song record schema; identify trustworthy fields and missing-data rates.
+2. Inspect existing multiplayer session/room authority and current lifecycle contracts. Do not assume client-hidden state is secret.
+3. Record a field-to-feature mapping and an explicit no-go list for unsupported metadata.
+4. Implement a pure, DOM/network/audio-independent pair eligibility/scoring module with injected seeded RNG.
+5. Add focused unit tests for invalid pools, missing metadata, hard bounds, determinism, role-direction balance, repeat avoidance, and no-valid-pair behavior.
+6. Run the relevant focused tests and existing source/build checks available to this branch. Report commands and actual assertions.
+7. Add a synthetic simulation report, clearly separating synthetic robustness results from human playability evidence.
+8. Only after selector contracts pass, decide how the mode should integrate with multiplayer lifecycle and UI. Do not change the current UI branch.
 
-## Ordered acceptance work
-
-1. Inspect the workflow run triggered by this branch's push.
-2. Confirm source/unit, all focused dedup contracts, VNDB navigation contract (15 cases), package completeness/reproducibility, source verifier and deterministic build.
-3. Confirm Firefox responsive acceptance.
-4. Report Chromium native-origin steps individually. The known final audio-monitor capture failure is not a pass; if it remains the only failure and all preceding lifecycle checks pass, record it as an environment limitation rather than reopening unrelated product audio code.
-5. If no new regression appears, close this bounded historical-debt/deduplication phase. Do not pursue a zero-debt claim or broaden into UI/lifecycle rewrites.
-6. If a genuine failure appears, fix only that failure and rerun the affected contract plus relevant regression checks.
-
-## Deferred candidate
-
-AMQ and EMQ custom-list renderers have similar markup, but differ in list schema, summary text, invalid-setting flags and persistent fault keys. Do not unify them just to reduce line count. Reconsider only if a focused test demonstrates a worthwhile common behavior boundary.
+## Acceptance boundaries
+- No production HTML or existing mode changes in the selector stage.
+- No invented song metadata or unvalidated popularity assumptions.
+- No claims of human balance based only on synthetic simulation.
+- Parent V82.85.35 CI acceptance is a separate workstream and must not be reported as passed by this branch.
 
 ## Rollback
-
-Revert the V82.85.35 report and status-document changes to return to V82.85.34. Earlier deduplication commits are independent checkpoints; keep V82.82 immutable.
+Revert this branch's feature docs and selector/test files together, or close the branch. Existing product HTML remains unchanged.
