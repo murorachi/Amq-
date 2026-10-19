@@ -27,7 +27,23 @@ jobs:
       - name: Test checkpoint package completeness contract
         run: python tests/unit/package_checkpoint_contract.py
       - name: Build and verify checkpoint source package
-        run: python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip"
+          python tools/package_checkpoint.py "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01_REPEAT.zip"
+          first="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip" | cut -d ' ' -f1)"
+          second="$(sha256sum "$RUNNER_TEMP/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01_REPEAT.zip" | cut -d ' ' -f1)"
+          test "$first" = "$second"
+          echo "PASS deterministic package SHA-256: $first"
+      - name: Upload verified source package and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01
+          path: |
+            ${{ runner.temp }}/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip
+            ${{ runner.temp }}/AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip.sha256
+          if-no-files-found: error
       - name: Guard acceptance runner artifact targets
         run: python tests/unit/run_all_checks_config_contract.py
       - name: Build versioned V82.85.12 standalone candidate
