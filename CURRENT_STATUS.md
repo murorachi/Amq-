@@ -6,7 +6,7 @@
 - Change size: 95 source characters removed; only one invalidation loop remains.
 - Added `tests/unit/multiplayer_suggestion_cache_invalidation_dedup_contract.test.cjs` and wired it into the source/unit workflow.
 - Fragment fingerprint: 139,664 bytes / SHA-256 `c349421f2a4759677669079d5e37a212795958ec6e556b56f36cadddeb56d018`.
-- Release candidate fingerprint is awaiting the next CI builder output; do not mark the stage accepted until the candidate manifest hash, unit contract, reproducibility and relevant browser tests pass.
+- Candidate V82.85.26 is pinned at 8,787,009 bytes / SHA-256 `1745600f52de09983ca3b66e45341a27acbd463e233fc77719e42f4673d4abad`. The next CI run must verify this pin, the new contract, deterministic package and relevant browser tests before acceptance.
 - Stage report: `reports/V82_85_26_SUGGESTION_CACHE_INVALIDATION_DEDUP_01.md`.
 
 ## Next direction
