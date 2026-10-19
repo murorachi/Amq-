@@ -183,9 +183,14 @@ def main():
                 # when Chromium's utility-process audio service is sandboxed/OOP.
                 # Keep this test-only workaround scoped to the acceptance browser.
                 "--disable-features=AudioServiceSandbox,AudioServiceOutOfProcess",
-                "--alsa-output-device=pulse",
+                # Let Chromium select its native Linux audio backend instead of
+                # forcing the ALSA device path, which produced no PulseAudio client
+                # even though the media element decoded and played normally.
+                "--enable-logging=stderr",
+                "--vmodule=*/audio*=2",
                 "--autoplay-policy=document-user-activation-required"
-            ]}
+            ],
+                      "env": {**os.environ, "PULSE_SINK": "amq_acceptance"}}
             if args.chromium:
                 launch["executable_path"] = args.chromium
             browser = pw.chromium.launch(**launch)
@@ -301,12 +306,16 @@ def main():
                 sink_inputs = subprocess.run(
                     ["pactl", "list", "short", "sink-inputs"], check=True,
                     capture_output=True, text=True, timeout=10).stdout.strip()
+                pulse_clients = subprocess.run(
+                    ["pactl", "list", "short", "clients"], check=True,
+                    capture_output=True, text=True, timeout=10).stdout.strip()
                 print("PULSE_SINK_STATE " + json.dumps({
                     "defaultSink": subprocess.run(
                         ["pactl", "get-default-sink"], check=True,
                         capture_output=True, text=True, timeout=10).stdout.strip(),
                     "sinks": sink_state,
-                    "sinkInputs": sink_inputs
+                    "sinkInputs": sink_inputs,
+                    "clients": pulse_clients
                 }, ensure_ascii=False), flush=True)
                 check(True, "user-initiated retry reaches the native playing event")
                 page.wait_for_timeout(450)
