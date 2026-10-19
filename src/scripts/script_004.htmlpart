@@ -290,7 +290,7 @@ const PRACTICE_META_KEY_V8239='aniSongPracticeMetaV8239';
 let quizPracticeMetaV8239={};
 try{const raw=JSON.parse(localStorage.getItem(PRACTICE_META_KEY_V8239)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))quizPracticeMetaV8239=raw}catch{}
 function saveQuizPracticeMetaV8239(){try{localStorage.setItem(PRACTICE_META_KEY_V8239,JSON.stringify(quizPracticeMetaV8239))}catch(e){console.warn('Song practice metadata could not be saved.',e)}}
-function getQuizPracticeMetaV8239(songId){return quizPracticeMetaV8239[String(songId)]||null}
+<!-- AMQ_SPLIT_MODULE:quiz_practice_meta_getter -->
 let quizQuestionTokenV8239=0,quizPlayedTokenV8239=-1;
 document.addEventListener('ani-quiz-new-question',()=>{quizQuestionTokenV8239++});
 const quizPracticeAudioV8239=document.getElementById('audioPlayer');
