@@ -172,3 +172,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Refreshed `reports/FRAGMENT_MANIFEST.json` and `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md` for `script_031.htmlpart`: 13,842 bytes, SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
 - Latest run before manifest refresh failed source verification solely because the manifest fingerprint was stale. Do not treat that as a test failure; verify the newest run after the fingerprint update.
 - Overall browser CI may still report the known Chromium audio-capture mismatch; track source/unit, Firefox and native-origin results separately.
+
+
+## V82.85.29 malformed-cache guard accepted
+
+- Production fix: `script_031.htmlpart` rejects array-shaped `records` before accepting an IndexedDB title-cache hit. This prevents malformed `[]` from suppressing the existing source-download fallback.
+- Regression test: cache contract passed **14 assertions** in [run 39257936940](https://github.com/murorachi/Amq-/actions/runs/39257936940).
+- Source verifier: **132/132 passed**. Reconstructed standalone candidate matched V82.85.29 pin: 8,786,577 bytes, SHA-256 `e76c4a35a406b20b055e91278e3c917832f9a9cb662280ea3d7d3211a69b8bb5`.
+- Deterministic source package: SHA-256 `e3448648c49dfcc4e2153c7825f016ab7b1fabfef2c57b868664ef524c13c913`.
+- Firefox responsive passed. Native-origin storage, IndexedDB/quiz, suggestion, quiz playback lifecycle and multiplayer lifecycle checks passed. Only failure: known non-silent audio monitor assertion (`peak=0, rms=0.0`); real playback was previously user-confirmed.
+- Audit coverage remains 91/91 registered fragments first-pass reviewed; focused contracts now cover SRS 41, scene-background lifecycle 29, title cache/filter 25, source mapping 19, cache version/read/write 14, VNDB cover lifecycle 26, plus existing narrow multiplayer contracts. No broad refactor or CSS change was made.
