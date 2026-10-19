@@ -13,7 +13,7 @@ Virtual chips have no cash value. No real-money wagering, cash-out, player-to-pl
 ## 2. Run setup and objective
 
 - Starting bank: 1,000 chips (balance scales proportionally in test variants).
-- Five stages, with event order selected from Risk Contract, Vault, and Signal Room. Blind Draft is a reward phase after stages 2 and 4 if the stage target was cleared.
+- Five stages. For the paper-test baseline, shuffle a fixed deck of two Risk Contract cards, two Vault cards, and one Signal Room card at run start. Blind Draft is a reward phase after stages 2 and 4 if the stage target was cleared. Route voting is deferred; risk voting already provides a team decision, and adding a second vote is not yet justified.
 - At each stage start, target = current bank + `ceil(1% × current bank)`.
 - The target is checked after all fees, payouts, refunds, and item effects settle.
 - Miss target: strain +1. Clear target: strain −1 to a minimum of zero. At 3 strain, the run ends immediately.
