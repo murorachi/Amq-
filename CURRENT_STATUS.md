@@ -138,3 +138,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Same run: source verifier 132/132 and all source/unit steps passed; Firefox responsive passed. Chromium native-origin was still running at last check, so overall workflow closure remains separate.
 - Report: `reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md`. Production `script_039.htmlpart` unchanged.
 - Next bounded review: assess whether `script_041` alias deduplication differences between `serverAliasMap` and `allKnownAliases` are intentional/meaningful before proposing any behavior change.
+
+
+## Alias semantics decision recorded
+
+- Added `reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md`.
+- Decision: defer production change. Inspected multiplayer sync uses `allKnownAliases`, which normalizes duplicates; no demonstrated user-facing defect or payload issue justifies changing the separately exported `serverAliasMap` behavior.
+- VNDB cover contract passed 26 assertions in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886); source/unit and Firefox passed, native-origin was still running at last check.
+- Remaining explicit gap in this group: script_031 IndexedDB cache version/read/write contract. Next add a small deterministic test for cache version validation and write-failure behavior.
