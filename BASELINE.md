@@ -101,3 +101,9 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - Equal expected value and similar strategy clear rates are no longer primary design goals. The new target is honest but asymmetric odds, high variance, rare run-changing payouts, push-your-luck decisions, and meaningful run-dependent temptation.
 - Candidate 03 and Paper Playtest Kit 02 are preserved unchanged as historical snapshots. No production AMQ source/HTML or playable implementation changed.
 - Validation: documentation change only; no simulation or product tests run. Gate 14 CI only covers the previous design scripts and is not evidence for this new direction.
+
+## Gamble Roguelike — game catalog breadth (2026-10-20)
+- Added `reports/MULTIPLAYER_GAMBLE_GAME_CATALOG_01.md` on branch `multiplayer-gamble-engine-discovery-01`.
+- Catalog contains 15 candidate game concepts; design target is 12 mechanically distinct launch-ready games, with six diverse games selected for first paper prototyping.
+- Distinctness is defined by decision mechanic, outcome shape, resolution rhythm, and social/emotional tension; reskins do not count.
+- This is design-only. Candidate 03 remains historical, no production AMQ source/HTML or game implementation changed, and no tests/simulations were run for the catalog.
