@@ -20,7 +20,7 @@ The test extracts production functions and mocks VNDB responses. It makes no ext
 ## Acceptance status
 
 - Static review: the test exercises the current batching, loading/failure set and retry logic without changing production code.
-- Automated execution: pending CI at report creation. Record assertion count and run ID after the focused test and source/unit job complete.
+- Automated execution: **PASS, 26 assertions** in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886). The source/unit job completed successfully (132/132 verifier checks and all unit steps including this contract); Firefox responsive passed. Chromium native-origin was still in progress at the last check.
 - Not covered: real API rate limiting, live VNDB response schema changes, browser image decode errors and full visual UI acceptance.
 
 ## Rollback
