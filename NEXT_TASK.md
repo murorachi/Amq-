@@ -1,20 +1,27 @@
-# Next task: accept VNDB navigation contract and reassess remaining audit gaps
+# Next task: finish bounded historical debt and deduplication acceptance
 
-Current branch: `v82.85.34-vndb-navigation-contract-01`.
+Current branch: `v82.85.35-selected-list-validation-dedup-01`.
 
-## Current stage
+## Current checkpoint
 
-- Added `tests/unit/vndb_navigation_contract.test.cjs`: 15 exact-source cases for cover request batching/retry, URL fallback, cache cap, render limit, list import, VNDB ID preservation, token non-persistence and the 10,000-item cap.
-- Test is registered in CI and deterministic checkpoint package. Production `src/scripts/script_039.htmlpart` unchanged.
-- Local execution: NOT RUN. Inspect newest workflow, confirm the contract test/package reproducibility, and report Firefox/native-origin separately. The known audio monitor capture failure is unrelated unless actual playback regresses.
+- Parent: `v82.85.34-vndb-navigation-contract-01`.
+- Product runtime source is unchanged in this documentation checkpoint.
+- The stage report is `reports/V82_85_35_HISTORICAL_DEBT_DEDUP_CHECKPOINT_01.md`.
+- Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
-## Ordered next work
+## Ordered acceptance work
 
-1. Resolve any test harness issues without changing product behavior merely to satisfy the tests.
-2. Confirm source/unit, package contract/reproducibility, deterministic build, Firefox responsive and Chromium native-origin.
-3. After acceptance, review the remaining audit matrix and pick the next uncovered high-risk boundary from concrete evidence, not file size alone.
-4. Do not begin a broad UI refactor or claim live VNDB API availability from synthetic tests.
+1. Inspect the workflow run triggered by this branch's push.
+2. Confirm source/unit, all focused dedup contracts, VNDB navigation contract (15 cases), package completeness/reproducibility, source verifier and deterministic build.
+3. Confirm Firefox responsive acceptance.
+4. Report Chromium native-origin steps individually. The known final audio-monitor capture failure is not a pass; if it remains the only failure and all preceding lifecycle checks pass, record it as an environment limitation rather than reopening unrelated product audio code.
+5. If no new regression appears, close this bounded historical-debt/deduplication phase. Do not pursue a zero-debt claim or broaden into UI/lifecycle rewrites.
+6. If a genuine failure appears, fix only that failure and rerun the affected contract plus relevant regression checks.
+
+## Deferred candidate
+
+AMQ and EMQ custom-list renderers have similar markup, but differ in list schema, summary text, invalid-setting flags and persistent fault keys. Do not unify them just to reduce line count. Reconsider only if a focused test demonstrates a worthwhile common behavior boundary.
 
 ## Rollback
 
-Revert the VNDB navigation test, workflow/package registration, report and checkpoint-document changes. Keep the V82.85.33 EMQ title test/report, V82.85.32 loader test/report, V82.85.31 scene-background test/report, V82.85.30 SRS test/report, V82.85.28 product source and immutable V82.82 unchanged.
+Revert the V82.85.35 report and status-document changes to return to V82.85.34. Earlier deduplication commits are independent checkpoints; keep V82.82 immutable.
