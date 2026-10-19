@@ -1,11 +1,13 @@
 # Current status — independent new architecture
 
-Checkpoint: `NEW_ARCH_V0.1.0_FOUNDATION_01`.
+Checkpoint: `NEW_ARCH_V0.1.1_OSU_STABLE_UI_01`.
 
-- Local source and standalone HTML generated.
-- Unit/build tests: 9 passed, 0 failed.
-- Two consecutive builds produced 50,807 bytes with SHA-256 `ed9de6758477e39e7a94f6698669d32076b54883f3b3b92f7f31114b8091c54d`.
-- Browser visual/interaction acceptance: blocked/not completed. `file://` returned `ERR_BLOCKED_BY_ADMINISTRATOR`; Playwright then returned `EPIPE`.
-- Real-origin storage, Firefox, real audio, multiplayer networking, and spaced-repetition scheduling are not verified or not implemented.
+- Main menu corrected toward the agreed osu! stable-inspired game-style composition.
+- Song selection corrected to a selectable track list plus selected-song detail panel, replacing the generic table.
+- Shared button dimensions and focus-visible behavior standardized.
+- Quiz logic/data rules unchanged. Quiz visual redesign and result-page visual redesign remain open.
+- Local automated tests: 10 passed, 0 failed.
+- Local build: 64,114 bytes; SHA-256 `04c8f2e6d62a039442ed6dccce22ba1ee6674ea05d579723e27ea53c947faa63`.
+- Browser visual acceptance: not completed; headless Chromium attempt timed out.
 - Existing AMQ source and product were not modified.
-- GitHub branch currently contains checkpoint documentation only; source and HTML publication remain OPEN.
+- Remote source/HTML publication remains open. This branch currently contains documentation only.
