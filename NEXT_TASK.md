@@ -1,20 +1,27 @@
-# Next task: verify V82.85.28 next-audio state reset dedup
+# Next task: diagnose Chromium audio output stream
 
-Branch: `v82.85.28-next-audio-state-reset-dedup-01`.
+Branch: v82.85.29-chromium-pulse-stream-diagnostics-01.
 
 ## Current checkpoint
 
-- Extracted repeated next-audio reset assignments into `resetNextAudioState()`, used by `stopAudio()`, `clearNextAudio()`, and `activateNextAudio()`.
-- Focused contract: `tests/unit/multiplayer_next_audio_state_reset_dedup_contract.test.cjs`, 12 assertions; passed in run [39229842012](https://github.com/murorachi/Amq-/actions/runs/39229842012). Source/unit verifier passed 132/132; deterministic candidate and package reproducibility passed; Firefox responsive passed. Chromium native-origin acceptance is still in progress.
-- Immutable V82.82 baseline: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Stage report: `reports/V82_85_28_NEXT_AUDIO_STATE_RESET_DEDUP_01.md`.
+- Parent: v82.85.28-next-audio-state-reset-dedup-01. Immutable V82.82 product baseline remains 8,787,490 bytes / SHA-256 227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b.
+- Test-only change in tests/browser/real_audio_output_acceptance.py: capture media-element mute/volume/readiness/source state, sample PulseAudio sink-inputs ten times over 1.35 seconds during active playback, and print detailed sink-input properties.
+- Reason: run 39229842012 showed the native playing event and advancing media timeline, but PulseAudio reported no sink-input and an IDLE sink; final monitor PCM had peak=0 and RMS=0. Root cause remains unconfirmed.
 
 ## Steps
 
-1. Finish Chromium native-origin acceptance and record the final conclusion separately from the known audio capture failure.
-2. Keep the focused contract, source/unit checks, deterministic package, standalone build and Firefox responsive results as recorded evidence. Do not reopen the known CI audio-output capture mismatch unless actual playback regresses.
-3. If accepted, continue the historical debt inventory with one small duplicate whose teardown/side-effect boundaries can be preserved.
+1. Run the native-origin workflow on this branch and inspect PULSE_STREAM_DIAGNOSTIC.
+2. Classify the evidence: (a) media muted/volume zero, (b) no PulseAudio sink-input despite active media, (c) sink-input present but monitor remains silent, or (d) stream appears only intermittently.
+3. Make the smallest test-environment-only fix supported by the logs. Do not change production audio logic unless a separate product regression is demonstrated.
+4. Re-run native audio output acceptance and verify non-silent PCM (peak >= 1000 and RMS >= 150), plus the existing lifecycle assertions. Report other CI jobs separately.
+5. If the environment-level cause is not demonstrated, keep the issue open rather than weakening the PCM gate.
+
+## Current test status
+
+- Existing run 39229842012: source/unit and Firefox responsive passed; native audio lifecycle passed; non-silent PCM output failed.
+- V82.85.29 diagnostic workflow result: pending verification.
+- Local syntax/test execution: not run in this editing session.
 
 ## Rollback
 
-Revert the V82.85.28 helper, test, workflow/package versioning, manifest update and checkpoint documentation as one stage. Keep V82.85.27 and V82.82 intact.
+Revert the V82.85.29 diagnostic-only test and checkpoint documentation. Preserve V82.85.28, V82.85.27, and immutable V82.82.
