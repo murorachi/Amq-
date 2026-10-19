@@ -1,0 +1,1 @@
+const getTargetValue=(s,type)=>type==='artist'?String(s?.[5]||'').trim():(type==='anime'||type==='all')?String((window.__aniEmqAPI?.getWorkSummary?.(s?.[0])||window.byAnime.get(s?.[0]))?.[1]||'').trim():String(s?.[4]||'').trim();
