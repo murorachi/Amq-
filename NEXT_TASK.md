@@ -98,3 +98,7 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Gate 14 simulation: `reports/design_simulations/gamble_roguelike_gate14.py`; report `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_14.md`.
 - CI [run 39322221351](https://github.com/murorachi/Amq-/actions/runs/39322221351) passed Gate 14.
 - Next: run paper sessions with humans and record actual observations. Do not implement server/UI until decision quality, fairness, duration, and voluntary replay gates are met.
+
+
+## Frozen design snapshot
+Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md` for the human paper test. Candidate 02 is historical. Gate 14 CI passed; no human playtest has happened. Next action is paper sessions, not server/UI implementation.
