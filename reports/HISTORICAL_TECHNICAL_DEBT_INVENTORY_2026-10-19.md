@@ -79,3 +79,12 @@ Restore the three local helpers and original `script_028` manifest row; remove t
 - Kept media teardown and promotion behavior in the original callers; no audio selection or playback logic was intentionally changed.
 - Added a focused 12-assertion contract and CI workflow step. CI execution is pending; no pass is inferred from the test file alone.
 - Source fragment and release fingerprints must be refreshed from observed CI output before accepting the checkpoint.
+
+
+## V82.85.29 file audit checkpoint
+
+- Added `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md` covering all 91 manifest fragments (50 styles, 41 scripts) with baseline size/fingerprint, priority, initial audit state and focus.
+- First-pass file-specific audit completed for `src/scripts/script_004.htmlpart`; findings in `reports/AUDIT_SCRIPT_004_QUIZ_LIFECYCLE_V82_85_29.md`. No production source changes were made. High-risk quiz state/timer/storage/listener coupling is documented; no broad refactor is justified without a concrete testable boundary.
+- Ledger currently records 1 first-pass file audit complete, 1 partially reviewed known-risk fragment (`script_028`), and 89 awaiting file-specific review. These are audit-state counts, not bug counts.
+- V82.85.28 run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): source/unit 132/132 and Firefox responsive passed. Native-origin job failed only at final non-silent audio monitor capture (peak=0, rms=0.0); preceding quiz and multiplayer lifecycle assertions passed. Manual interactive acceptance was not performed.
+- Next ordered review: `src/scripts/script_028.htmlpart`, without altering its behavior absent a focused finding.
