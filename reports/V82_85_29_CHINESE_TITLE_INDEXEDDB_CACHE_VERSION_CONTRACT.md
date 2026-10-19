@@ -19,7 +19,7 @@
 ## Acceptance status
 
 - Static review: exact-source cache functions are tested through a deterministic IndexedDB-boundary stub.
-- Characterization test before the fix: **14 assertions passed** in [run 39251152871](https://github.com/murorachi/Amq-/actions/runs/39251152871). After the guard fix, the array case was changed to assert a cache miss; final CI for the updated fingerprint is pending.
+- Updated contract: **14 assertions passed** in run [39257936940](https://github.com/murorachi/Amq-/actions/runs/39257936940), including the array-shaped cache miss assertion. Source verifier passed 132/132, deterministic build matched the V82.85.29 pin, and Firefox responsive passed.
 - Not covered: actual browser IndexedDB upgrade/transaction behavior, cache eviction, storage quota behavior or live source freshness.
 
 ## Deferred observation
