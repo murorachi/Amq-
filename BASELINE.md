@@ -19,3 +19,11 @@
 - Production source, formula, weights and storage schema unchanged.
 - CI execution pending; no pass claim until the new test is observed passing.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+
+## Runtime lifecycle contract checkpoint
+
+- SRS characterization test passed 41 assertions in run [39248332291](https://github.com/murorachi/Amq-/actions/runs/39248332291); source/unit job and Firefox responsive passed. Chromium native-origin was still in progress at the last check.
+- Added `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs` and CI step, with report `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`. Its execution is pending CI.
+- Production `script_020.htmlpart` and `script_036.htmlpart` remain unchanged; this stage adds characterization tests only.
+- Immutable V82.82 baseline remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
