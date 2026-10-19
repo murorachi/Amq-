@@ -87,3 +87,11 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Next focused test added: `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs`, wired into CI. It covers transaction commit/error/abort semantics, IndexedDB open failure/upgrade, scene URL replacement/revocation and temporary preview cleanup. Report: `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`.
 - Scene test automated execution is pending CI. No pass claim until logs show its assertion count and the source/unit job succeeds.
 - Product source/CSS and immutable V82.82 baseline remain unchanged.
+
+
+## Scene-background lifecycle contract accepted
+
+- `tests/unit/scene_background_idb_object_url_lifecycle_contract.test.cjs` passed **29 assertions** in run [39248616623](https://github.com/murorachi/Amq-/actions/runs/39248616623).
+- Same run: source/unit completed successfully (132/132 source verifier checks; SRS contract 41/41; scene lifecycle contract 29/29 and remaining unit steps passed), Firefox responsive passed. Chromium native-origin remained in progress at last check; overall workflow is not yet closed.
+- Report: `reports/V82_85_29_SCENE_BACKGROUND_IDB_OBJECT_URL_LIFECYCLE_CONTRACT.md`. Production `script_036.htmlpart` unchanged.
+- The two targeted lifecycle characterization stages are complete. Next bounded task: inspect existing tests for external-source/cache boundaries in `script_031`, `script_039`, and `script_041`; add only a concrete missing contract, without changing runtime behavior.
