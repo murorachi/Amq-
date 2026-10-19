@@ -93,8 +93,6 @@ def simulate(strategy, runs=RUNS):
             elif event == "vault":
                 if rng.randrange(10) >= 8:  # step 1 fails: 20%
                     delta = -stake
-                    if attached == "insurance":
-                        delta += stake * 40 // 100
                 else:
                     gain1 = stake * 5 // 4 - stake
                     if strategy == "conservative" or (strategy == "quota-aware" and bank + gain1 >= target):
