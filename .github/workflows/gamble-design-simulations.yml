@@ -1,0 +1,42 @@
+name: Gamble Roguelike Design Simulations
+
+on:
+  push:
+    branches:
+      - multiplayer-gamble-engine-discovery-01
+    paths:
+      - "reports/design_simulations/gamble_roguelike_gate05.py"
+      - "reports/design_simulations/gamble_roguelike_gate06.py"
+      - "reports/design_simulations/gamble_roguelike_gate07.py"
+      - "reports/design_simulations/gamble_roguelike_gate08.py"
+      - "reports/design_simulations/gamble_roguelike_gate09.py"
+      - ".github/workflows/gamble-design-simulations.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  design-simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax-check design simulations
+        run: |
+          python -m py_compile \
+            reports/design_simulations/gamble_roguelike_gate05.py \
+            reports/design_simulations/gamble_roguelike_gate06.py \
+            reports/design_simulations/gamble_roguelike_gate07.py \
+            reports/design_simulations/gamble_roguelike_gate08.py \
+            reports/design_simulations/gamble_roguelike_gate09.py
+      - name: Run exact probability and economy simulations
+        run: |
+          python reports/design_simulations/gamble_roguelike_gate05.py
+          python reports/design_simulations/gamble_roguelike_gate06.py
+          python reports/design_simulations/gamble_roguelike_gate07.py
+          python reports/design_simulations/gamble_roguelike_gate08.py
+          python reports/design_simulations/gamble_roguelike_gate09.py
