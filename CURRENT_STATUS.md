@@ -119,3 +119,13 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 - Local execution outside CI: NOT RUN.
 - Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 
+
+
+## V82.85.34 VNDB navigation and cover retry contract
+
+- Branch: `v82.85.34-vndb-navigation-contract-01`, based on accepted EMQ title-cache checkpoint V82.85.33.
+- Added `tests/unit/vndb_navigation_contract.test.cjs` with 15 exact-source cases for VNDB-linked work filtering, cover cache cap, 30-ID request batches, failure/retry cleanup, thumbnail-to-full fallback, catalog render limit, list status normalization, paged import, ID-domain preservation, token non-persistence, authorization failure and 10,000-item cap.
+- Registered in CI and deterministic checkpoint package requirements. Production `src/scripts/script_039.htmlpart` unchanged; no API format, identifier mapping, cache schema, render limit or UI behavior changed.
+- Local execution: NOT RUN in this authoring environment. Latest branch CI must be inspected before acceptance.
+- Parent corrected CI [39240538829](https://github.com/murorachi/Amq-/actions/runs/39240538829): EMQ Chinese-title 19/19, loader 20/20, SRS 17/17, scene-background 18/18, source/unit, package reproducibility and Firefox passed. Chromium native-origin failed only at known final audio monitor capture; preceding lifecycle tests passed.
+- Immutable V82.82 baseline unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
