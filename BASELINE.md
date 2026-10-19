@@ -1,3 +1,14 @@
+# Engineering overlay: V82.85.14 answer normalization source extraction (ACCEPTED; audio gate yellow)
+
+- Parent: `c943b115a0ae3038f29d9374b69d25b7e87026b0` on `v82.85.13-real-audio-acceptance-gate-01`.
+- Exact-source extraction: local `normalize` helper from `evaluateQuizTargetAnswerV857` moved to `src/modules/quiz_answer_target_normalization.htmlpart`, restored at the same marker position and lexical scope.
+- Validation: GitHub Actions run 39185741406. `tools/verify.py` 124/124; new unit contract 18/18; source-and-unit job passed; Firefox responsive job passed. Native-origin storage/custom-list, quiz suggestion, and answer/playback lifecycle checks passed before the audio capture assertion failed.
+- Expected-release build is byte-identical to V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Audio PCM capture remains 🟡 deferred, not passed. PulseAudio known-source capture is non-silent, but Chromium monitor PCM remains peak=0 / RMS=0.0.
+- Production V82.82 baseline remains locked: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+
+---
+
 # Engineering overlay: V82.85.14 answer normalization source extraction (CI pending)
 
 - Parent: `c943b115a0ae3038f29d9374b69d25b7e87026b0` on `v82.85.13-real-audio-acceptance-gate-01`.

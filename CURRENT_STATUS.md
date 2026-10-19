@@ -1,3 +1,16 @@
+# Current engineering checkpoint: V82.85.14 ANSWER NORMALIZATION SOURCE EXTRACTION (ACCEPTED; AUDIO GATE YELLOW)
+
+- Status: 🟢 source extraction accepted; 🟡 real-audio PCM capture gate deferred.
+- Implementation: extracted the pure `normalize` closure helper from `evaluateQuizTargetAnswerV857` into `src/modules/quiz_answer_target_normalization.htmlpart` at its exact original lexical position. No answer rules, Unicode behavior, call sites, or runtime script tags changed.
+- CI run: https://github.com/murorachi/Amq-/actions/runs/39185741406. Source-and-unit and Firefox responsive jobs passed. Native-origin storage/custom-list, quiz suggestion integration, and answer/playback lifecycle steps passed before the final audio capture assertion failed.
+- `tools/verify.py`: 124/124 passed. New normalization contract: 18/18 assertions passed.
+- Candidate remains byte-identical to V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Audio failure: PulseAudio self-test captured non-silent PCM (peak=6999, RMS=4123.8), but Chromium capture remains peak=0, RMS=0.0 despite passing native playback lifecycle assertions. Keep this gate yellow; do not weaken the threshold.
+- Product baseline V82.82 remains unchanged: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Rollback: revert the V82.85.14 source extraction plus manifest-correction commits; product HTML itself was not replaced.
+
+---
+
 # Current engineering checkpoint: V82.85.14 ANSWER NORMALIZATION SOURCE EXTRACTION (CI PENDING)
 
 - Status: implementation committed; automated acceptance pending.
