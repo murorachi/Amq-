@@ -35,7 +35,7 @@ jobs:
             reports/design_simulations/gamble_roguelike_gate07.py \
             reports/design_simulations/gamble_roguelike_gate08.py \
             reports/design_simulations/gamble_roguelike_gate09.py \
-            reports/design_simulations/gamble_roguelike_gate10.py \\
+            reports/design_simulations/gamble_roguelike_gate10.py \
             reports/design_simulations/gamble_roguelike_gate11.py
       - name: Run exact probability and economy simulations
         run: |
