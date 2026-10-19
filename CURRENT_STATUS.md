@@ -56,3 +56,5 @@
 - At final goal 105% of starting bank, base clear rates across starting banks 750/1000/1500 were approximately Conservative 27.0–27.2%, Balanced 41.2–41.5%, Push 17.1–17.4%. Conservative has the lowest strain-failure rate; Balanced leads the standard clear; Push is strongest at the 150% high-score tier. This is a simulation signal, not evidence of fun.
 - Items, recovery, personal item ownership, route choices, 2/3/6-player voting, and human playtesting remain open. No implementation authorized.
 - New CI workflow: `.github/workflows/gamble-design-simulations.yml`; run status is pending verification.
+
+- Design simulation CI verified: [run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618), commit `5942fc949d3d3962c1a63aebba9bf7f869017265`, completed successfully. Syntax checks and all Gate 05–09 simulation scripts passed. This verifies reproducibility/termination, not game balance or fun.
