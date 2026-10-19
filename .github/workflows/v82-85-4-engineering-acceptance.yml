@@ -28,6 +28,8 @@ jobs:
         run: node tests/unit/embedded_emq_payload_integrity.test.cjs
       - name: Verify embedded AniList ID mapping integrity
         run: node tests/unit/anilist_id_map_payload_integrity.test.cjs
+      - name: Test SRS rating transitions and persistence contract
+        run: node tests/unit/srs_rating_transition_contract.test.cjs
       - name: Test multiplayer checked-value helper deduplication contract
         run: node tests/unit/multiplayer_checked_values_dedup_contract.test.cjs
       - name: Test multiplayer suggestion cache invalidation dedup contract
