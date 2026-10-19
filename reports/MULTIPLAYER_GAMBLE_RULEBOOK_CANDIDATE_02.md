@@ -91,7 +91,7 @@ The draft pool contains three distinct item cards drawn from the four item types
 ## 9. Candidate items for test only
 
 - **Insurance:** attach before a Bank or Balanced wager; if it loses, refund 10% of the stake. It cannot be attached to Push. The item is consumed even if the wager wins.
-- **Signal Coupon:** waive the fee for one or two clues in a single Signal Room wager. It does not alter clue accuracy.
+- **Signal Coupon:** when the team buys at least one clue, waive that Signal Room wager's fee. It does not alter clue accuracy; if no clue is bought, the coupon remains unused.
 - **Vault Harness:** attach before continuing past Vault step 1; if a continued step fails, refund 20% of the original stake. Consumed once attached to a continued attempt.
 - **Recovery Voucher:** once per run, reduce the recovery fee from 12% to 8% of current bank, rounded up. It does not grant another recovery.
 
