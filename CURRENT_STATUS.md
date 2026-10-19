@@ -9,22 +9,33 @@
 - Source/unit job passed, including deterministic V82.82 build/fingerprint and engineering contracts.
 - Product lock: V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
 - Immutable V82.65 unchanged.
-- The initial CI attempt failed on Python quoting in the test fixture; fixed in commit `cbc5fed2d513fa4c01761cd640ea65c160a76146`, whose complete CI run passed.
 - Remaining external gates: Firefox CSS cascade, real audio provider, production-origin storage policy, naturally occurring IndexedDB quota/corruption. The injected write fault does not substitute for those gates.
-- Next: give backup/restore contracts a dedicated stable test command and continue the IndexedDB failure matrix. Do not infer full modularization completion.
+- Thirteen modules have CI contracts but semantic modularization is not complete.
 
 ## Separate workstream: multiplayer Gamble Roguelike
 
-- Status: **Stage 1 rules/ledger prototype committed; no product HTML changed**.
+- **Current phase: design iteration only. No further implementation until the design gates pass.**
 - Work branch: `multiplayer-gamble-engine-discovery-01`.
-- Discovery record: [`reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
-- Implementation proposal: [`reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
-- Stage 1 test report: [`reports/MULTIPLAYER_GAMBLE_STAGE1_CORE_TEST_REPORT.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_STAGE1_CORE_TEST_REPORT.md).
-- Parent product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Existing multiplayer client inspection found configurable HTTP API and WebSocket route references in `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`. The user clarified that the existing multiplayer feature substantively does not use a conventional server; therefore, absence of server source is not treated as a search failure or a blocker for new-game design.
-- Recommended direction: separate lightweight authoritative service for the new game; develop locally first, then host only when friends need always-on access. Host-authoritative private play remains a lower-infrastructure alternative with weaker trust.
-- Proposed first playable scope: 2–6 players, 1,000 virtual chips per run, five stages, reset balances each run, four mechanically distinct candidate games, run-only items, no real money/cash-out/transfers.
-- Added isolated prototype files under `gamble-roguelike/`: pure rules for four game candidates, in-memory chip ledger, Node test suite, package manifest, README, and a scoped GitHub Actions workflow.
-- Local working-copy checks: 10/10 subtests passed; Node syntax checks passed. A GitHub workflow was added, but no verified remote CI result is available yet.
-- No HTTP/WebSocket server, room service, browser client, durable database, or deployment exists. The ledger does not survive process restart. No real two-client run has been performed.
-- Next gate: verify CI against the committed files, tighten rules/ledger edge cases, then implement the authoritative local room service and persistence in a separate bounded step.
+- Design Gate 01: [report](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_01.md).
+- Design-first plan: [implementation plan](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
+- Discovery record: [engine discovery](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
+- Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`; no product HTML/source changed.
+- Existing prototype files under `gamble-roguelike/` contain four pure-rule candidates, an in-memory ledger, a Node test suite, and a scoped GitHub Actions workflow. They are engineering fixtures, not a playable game.
+- Previously recorded local working-copy checks: 10/10 subtests passed and syntax checks passed. The committed GitHub suite has 8 tests; remote CI status has not been verified.
+- Design review found Coin Call and Exact Seven too shallow to count as signature games; Vault needs a full state/cash-out model; Blind High Card needs a meaningful decision. Revised hypothesis: 2–6-player co-op, shared virtual bankroll, simultaneous private actions, escalating quotas, meaningful route choices, 8–12 run-only items, and 12–20 minute target runs. These are unvalidated design hypotheses.
+- Proposed distinct game mechanisms: Vault push-your-luck, Risk Contract, Blind Pot with one extra information/insurance decision, and Team Gamble.
+- No server, durable database, HTTP/WebSocket transport, browser UI, deployment, or real two-client test exists.
+- Next: complete Design Gate 02 with a numeric full-run walkthrough, item/synergy set, independent payout/EV calculations, and reproducible simulations. Do not implement until design gates A–C pass and the playtest plan is ready.
+
+## Test/verification boundary for this checkpoint
+
+- Design-document changes only; no code tests were run for this documentation update.
+- GitHub write results must be followed by read-back verification; successful writes do not prove game quality or CI status.
+- Roll back this workstream by reverting design-only commits on `multiplayer-gamble-engine-discovery-01`; no product rollback is required.
+
+## Next AMQ maintenance task
+
+- Add a dedicated stable CI command for `backup_restore_contract.test.cjs`, `full_backup_restore_roundtrip_contract_v82_83.test.cjs`, and `custom_list_source_contract.test.cjs`.
+- Continue the IndexedDB failure matrix: open/blocked/upgrade, transaction failure, quota/corruption, rollback and reload.
+- Keep Firefox CSS cascade, real audio provider, production-origin storage policy, and naturally occurring IndexedDB quota/corruption as separate gates.
+- Do not change product source until test evidence identifies a product defect.
