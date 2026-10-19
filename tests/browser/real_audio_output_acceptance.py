@@ -153,6 +153,11 @@ def main():
             launch = {"headless": True, "channel": "chromium",
                       "ignore_default_args": ["--mute-audio"], "args": [
                 "--no-sandbox", "--disable-dev-shm-usage",
+                # The Ubuntu CI audio service can fail to expose a PulseAudio sink
+                # when Chromium's utility-process audio service is sandboxed/OOP.
+                # Keep this test-only workaround scoped to the acceptance browser.
+                "--disable-features=AudioServiceSandbox,AudioServiceOutOfProcess",
+                "--alsa-output-device=pulse",
                 "--autoplay-policy=document-user-activation-required"
             ]}
             if args.chromium:
