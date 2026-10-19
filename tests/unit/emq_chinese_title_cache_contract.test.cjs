@@ -131,8 +131,10 @@ await test('cache persistence writes the stable key and fails softly on storage 
 
 await test('existing OpenCC converter is reused without loading a script', async () => {
   reset(); installOpenCC(value => 'TW:' + value);
-  assert.equal(await context.getConverter()('word'), 'TW:word');
-  assert.equal(await context.getConverter()('next'), 'TW:next');
+  const first = await context.getConverter();
+  assert.equal(first('word'), 'TW:word');
+  const second = await context.getConverter();
+  assert.equal(second('next'), 'TW:next');
   assert.equal(scripts.length, 0);
 });
 
@@ -144,7 +146,8 @@ await test('OpenCC script load success and failure resolve safely and clear time
   assert.equal(scripts[0].async, true);
   installOpenCC(value => 'converted:' + value);
   scripts[0].onload();
-  assert.equal(await pending('詞'), 'converted:詞');
+  const converter = await pending;
+  assert.equal(converter('詞'), 'converted:詞');
   assert.equal(timers.size, 0);
 
   reset();
@@ -225,14 +228,16 @@ await test('VNDB batch request uses correct ID filter, fields and rejects HTTP e
   await assert.rejects(context.fetchVndbBatch(['v123', 'v456']), /VNDB API HTTP 429/);
 });
 
-await test('VNDB title extraction prefers Hant, converts Hans and filters Kana', async () => {
+await test('VNDB title extraction prefers Hant, preserves aliases and converts Hans-only titles', async () => {
   reset(); installOpenCC(value => value === '简体名稱' ? '簡體名稱' : value);
   const record = await context.recordFromVndb(vndbRecord());
   assert.equal(record.title, '繁體名稱');
-  assert.ok(record.aliases.includes('簡體名稱'));
+  assert.ok(record.aliases.includes('简体名稱'));
   assert.ok(record.aliases.includes('繁體別名'));
   assert.ok(!record.aliases.some(x => /[\u3040-\u30ff\uff65-\uff9f]/u.test(x)));
   assert.equal(record.source, 'vndb');
+  const hansOnly = await context.recordFromVndb({ id: 'v456', titles: [{ lang: 'zh-Hans', title: '简体名稱', official: true }] });
+  assert.equal(hansOnly.title, '簡體名稱');
 });
 
 await test('Bangumi fallback accepts exact normalized work-name matches only', async () => {
