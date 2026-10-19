@@ -1,22 +1,21 @@
-# Next task: SRS state-transition and persistence characterization
+# Current task: validate SRS state-transition and persistence contract
 
 Current branch: `v82.85.29-source-audit-matrix-01`.
 
-## Completed milestone
+## Current stage
 
-- First-pass audit completed for all 91 registered fragments: 41 scripts and 50 styles.
-- Matrix: `reports/SOURCE_BLOCK_AUDIT_MATRIX_V82_85_28.md`.
-- Summary: `reports/V82_85_29_SOURCE_AUDIT_SUMMARY.md`.
-- Product source/CSS was not changed. Two data-integrity tests were added for the real embedded EMQ gzip payload and AniList mapping JSON; manifest roles were corrected.
-- Latest completed source/unit + Firefox run [39232821248](https://github.com/murorachi/Amq-/actions/runs/39232821248): verifier 132/132, both payload tests and Firefox responsive passed. Native-origin failed only at the known audio monitor non-silent capture assertion. Newer audit commits need final CI confirmation.
+- Added `tests/unit/srs_state_transition_persistence_contract.test.cjs` and the corresponding CI step.
+- Report: `reports/V82_85_29_SRS_STATE_TRANSITION_PERSISTENCE_CONTRACT.md`.
+- Production `src/scripts/script_020.htmlpart` is unchanged. Test exercises extracted production functions with synthetic in-memory storage.
+- CI is pending. First confirm the focused test itself passes and inspect the source/unit job; do not infer success from the workflow file.
+- Known unrelated browser-native audio capture assertion may still fail; report it separately from source/unit results.
 
-## Ordered next work
+## After SRS acceptance
 
-1. Add focused characterization for script_020 SRS rating transitions, learning-step progression, interval calculation and invalid-record quarantine. Do not change production formula or storage schema in the test stage.
-2. Then add scene-background transaction/object-URL lifecycle coverage for script_036.
-3. Then consider targeted contracts for script_031/script_039/script_041 external-source/cache behavior.
-4. Only run CSS visual comparison when proposing a concrete style change; static selector duplication alone is not a reason to edit.
+1. Add scene-background IndexedDB transaction and object-URL lifecycle characterization for `src/scripts/script_036.htmlpart`.
+2. Then consider targeted external-source/cache contracts for `script_031`, `script_039` and `script_041`.
+3. Only run CSS visual comparisons when a concrete style change is proposed; static duplicate selectors alone are not a reason to edit.
 
 ## Rollback
 
-The audit milestone is documentation/tests/manifest metadata only. Keep V82.85.28 and immutable V82.82 unchanged. Any later SRS test stage should be a separate branch/commit with its own report and acceptance.
+Remove the SRS test and its workflow step and revert its report/status references. No production source or immutable V82.82 baseline rollback is needed.
