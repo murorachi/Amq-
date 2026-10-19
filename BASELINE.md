@@ -21,10 +21,18 @@
 - Firefox CSS cascade, real audio-provider playback, production-domain storage policy and naturally occurring IndexedDB quota/corruption remain separate gates.
 - Thirteen modules have CI contracts but semantic modularization is not complete.
 
-## Separate workstream: multiplayer Gamble Roguelike discovery
-- Branch: `multiplayer-gamble-engine-discovery-01`, based on V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
-- Design record: `reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`.
-- This is documentation/discovery only. Product HTML, source fragments, workflows, and multiplayer behavior have not been changed.
-- Current inspected multiplayer client: `src/scripts/script_028.htmlpart`, blob SHA `b89ed0014f02ae156b6c66b607feb2639024eae9`.
-- Blocking dependency: the current room API server source/deployment is not present in the inspected repository tree. Do not implement authoritative bets, balances, or random outcomes in the browser.
-- Next gate: identify the current server source and live API contract, or document an explicit decision to create a new server service.
+## Separate workstream: multiplayer Gamble Roguelike
+- Work branch: `multiplayer-gamble-engine-discovery-01`, created from V82.86.06 branch head `6bfe40908ae81e391c42ceeabb20896cac55ab50`.
+- Product baseline remains V82.82, 8,787,490 bytes, SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Discovery record: [`reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_ENGINE_DISCOVERY_01.md).
+- Implementation proposal: [`reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md`](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_IMPLEMENTATION_PLAN_01.md).
+- The existing multiplayer client contains HTTP/WebSocket route references, but the user clarified the existing feature substantively does not use a conventional server. Do not treat missing server source as a blocker for planning the new game, and do not infer the current transport model from route names alone.
+- Recommended architecture for the new game: separate lightweight authoritative service, run locally during development and hosted later if always-on friend access is needed. This remains a proposal awaiting approval.
+- No product source, HTML, or existing multiplayer behavior has been changed in this workstream.
+- Proposed first playable scope: 2–6 players, per-run balance of 1,000 virtual chips, five stages, four mechanically distinct candidate games, run-only items, no real-money wagering/cash-out/player transfers.
+- Proposed payouts and probabilities are documented but have not been independently tested or playtested.
+- No new tests were run for the planning documents. No real two-client game run has been performed.
+
+## Rollback
+- Revert the documentation-only commits on `multiplayer-gamble-engine-discovery-01`.
+- No product rollback is required because product HTML/source and generated output remain unchanged.
