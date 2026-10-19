@@ -834,7 +834,7 @@
       "start_byte": 5612971,
       "end_byte": 5753116,
       "byte_length": 139664,
-      "sha256": "PENDING_CI_FINGERPRINT",
+      "sha256": "c349421f2a4759677669079d5e37a212795958ec6e556b56f36cadddeb56d018",
       "opening_tag": "<script id=\"v82-34-multiplayer-ui\">",
       "script_type": "classic/default",
       "executable_heuristic": true,
