@@ -67,3 +67,5 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Fixed absolute bank targets made quota-aware play dominate. Candidate revision: each stage target is current bank + ceil(1%); Bank/ Safe uses 5% stake at 75% / 4/3x, Balanced uses 10% at 40% / 2.5x, Push uses 15% at 15% / 20/3x. Final clear target is 105% of starting bank.
 - Base simulation at 105% goal: Conservative ~27.1% clear and ~3.4% strain failure; Balanced ~41.5% clear and ~29.4% failure; Push ~17.2% clear and ~66.5% failure. At 150% final-bank tier, Push is strongest of these three. Items/recovery are excluded from this baseline.
 - Next: add item/recovery effects one by one and test combinations, route choices, party-size vote fairness, and integer payout boundaries. Remain in design.
+
+- CI verification: [design simulation workflow run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`; Python syntax checks and Gate 05–09 simulations all completed. This is not a balance/fun pass.
