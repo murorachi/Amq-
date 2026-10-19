@@ -22,13 +22,13 @@ For each of the two source callbacks, the contract checks:
 3. A stale event clears its own watchdog but does not clear or advance the newer song's pending load.
 4. Both callback bodies remain equivalent after whitespace normalization.
 
-Expected assertions: 18 across both callbacks. The test is registered in the source-and-unit GitHub Actions job.
+The test logs 20 counted assertions (18 branch assertions plus two global source-shape/equivalence assertions); it also checks brace balance while extracting both callbacks. The test is registered in the source-and-unit GitHub Actions job.
 
 ## Verification status
 
 - Source change: test and workflow only; production script unchanged.
 - Local execution: not run in this environment.
-- GitHub Actions: triggered by pushing this branch; result must be checked before claiming the contract passes.
+- GitHub Actions: branch and workflow changes are published; the result has not been independently retrieved in this turn, so the contract is not yet marked passed.
 - Browser audio output gate: still a separate unresolved failure. This stage does not weaken or replace it.
 
 ## Rollback
