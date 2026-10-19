@@ -115,3 +115,9 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - Provisional rules cover asymmetric outcomes and example rounds; they are not numerically approved. No simulation or human test was run for this artifact.
 - AMQ product HTML/source, existing multiplayer behavior, server, UI, and database remain unchanged.
 - Rollback is limited to the design report and its status-note commits.
+
+
+### Paper prototype rule-closure update
+- Follow-up to `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`: Pot Split's rounding/insurance and Debt Collector's two-completed-settlement due counter are now explicit in the draft.
+- Wheel of Misfortune requires two probability layers to remain separately visible: chance to land on the selected color, then conditional result chance.
+- This is documentation-only; all numeric tables remain provisional and no simulation or human test has run.
