@@ -58,3 +58,12 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 - Repeated recovery at 2 strain could eliminate strain-based failure. Candidate correction: recovery once per run only, at 2 strain, costs ceil(15% of bank), clears one strain, and forfeits the stage item reward.
 - Exact committed integer-RNG simulation: never recover → 46.832% clear / 34.773% strain failure / mean final bank 998.89; always recover when eligible → 45.403% clear / 27.469% failure / mean final bank 947.30. Item rewards and other game mechanics are not modeled.
 - Next: Gate 08 integrates all four game mechanisms and item opportunity cost into a full five-stage model. No implementation.
+
+
+## Gate 09 update — core strategy niches
+- Report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_09.md`.
+- Revised rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`.
+- Simulation: `reports/design_simulations/gamble_roguelike_gate09.py`.
+- Fixed absolute bank targets made quota-aware play dominate. Candidate revision: each stage target is current bank + ceil(1%); Bank/ Safe uses 5% stake at 75% / 4/3x, Balanced uses 10% at 40% / 2.5x, Push uses 15% at 15% / 20/3x. Final clear target is 105% of starting bank.
+- Base simulation at 105% goal: Conservative ~27.1% clear and ~3.4% strain failure; Balanced ~41.5% clear and ~29.4% failure; Push ~17.2% clear and ~66.5% failure. At 150% final-bank tier, Push is strongest of these three. Items/recovery are excluded from this baseline.
+- Next: add item/recovery effects one by one and test combinations, route choices, party-size vote fairness, and integer payout boundaries. Remain in design.
