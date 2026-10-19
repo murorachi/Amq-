@@ -24,9 +24,9 @@ Fingerprint values and byte sizes are copied from the baseline manifest. This le
 | Registered fragments | 91 |
 | Styles | 50 |
 | Scripts | 41 |
-| First-pass file audits completed | 4 |
+| First-pass file audits completed | 5 |
 | Partially reviewed / known risk, not full sign-off | 0 |
-| Awaiting file-specific review | 87 |
+| Awaiting file-specific review | 86 |
 
 These counts deliberately measure **full file-specific audit evidence**, not whether a fragment was ever touched. Previously reviewed helper contracts remain useful and are not repeated unless evidence suggests they are unreliable.
 
