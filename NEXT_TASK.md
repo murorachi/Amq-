@@ -22,16 +22,14 @@ The volume initializer used `Number(localStorage.getItem('aniQuizVolume'))`. Whe
 
 ## Required verification
 
-- Run `node tests/unit/quiz_volume_default_contract.test.cjs`.
-- Run source verifier, deterministic build, package completeness/reproducibility and Firefox responsive tests.
-- Run native Chromium audio acceptance; verify sink-input appears and captured PCM has peak >= 1000 and RMS >= 150.
-- Confirm playback lifecycle assertions still pass.
-- Verify final remote fingerprints and review PR #3. Consider replacing the fixed 450 ms timeline delay with a condition-based wait in a separate test-only step: run 39289800143 failed that timing assertion despite an active sink-input, while run 39289986327 passed it. Do not weaken the currentTime threshold or PCM gate.
-- Verify GitHub Actions results and remote file fingerprints before declaring completion.
+- V82.85.30 full validation is green in run [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626); see status below.
+- Next bounded task: inspect and, if the test structure permits, replace the fixed 450 ms media-timeline delay with a condition-based wait. This must remain test-only; preserve the currentTime advancement threshold and strict non-silent PCM gate. Add/retain explicit timeout failure diagnostics. Run the native-origin test repeatedly before considering this timing-risk item closed.
+- Keep PR #3 open until the test-timing decision and final docs are reviewed; do not merge automatically.
 
 ## Status and rollback
 
 - Local regression contract: PASS, 10/10 assertions.
-- CI run [39289331801](https://github.com/murorachi/Amq-/actions/runs/39289331801): PASS all three jobs. Source verifier 132/132; deterministic candidate 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; Firefox responsive PASS; Chromium audio lifecycle PASS; non-silent PCM PASS (peak=4899, RMS=2468.4).
+- Latest full CI run [39290498626](https://github.com/murorachi/Amq-/actions/runs/39290498626): PASS all three jobs. Source verifier 132/132; deterministic candidate 8,786,609 bytes / SHA-256 `3eb23d8711b5c5d504513ad72595b6177392c6865abd49ae0a93dea1d2de14d2`; package reproducibility PASS; Firefox responsive PASS; Chromium audio lifecycle PASS; non-silent PCM PASS (peak=4899, RMS=2384.5).
+- PR #3 is open, mergeable, and targets V82.85.28; not merged.
 - Do not change production audio lifecycle logic or weaken the PCM gate.
 - Roll back by reverting the V82.85.30 source, contract, manifest/workflow/package metadata and checkpoint docs together. Keep V82.85.28 and immutable V82.82 intact.
