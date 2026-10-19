@@ -28,7 +28,7 @@ The test logs 20 counted assertions (18 branch assertions plus two global source
 
 - Source change: test and workflow only; production script unchanged.
 - Local execution: not run in this environment.
-- GitHub Actions: branch and workflow changes are published; the result has not been independently retrieved in this turn, so the contract is not yet marked passed.
+- GitHub Actions run `39211912490`: source-and-unit passed, including `Test multiplayer audio failure callback branches`; Firefox responsive passed. Browser-native-origin failed at the separate real-audio output assertion; the remaining listed browser acceptance steps passed.
 - Browser audio output gate: still a separate unresolved failure. This stage does not weaken or replace it.
 
 ## Rollback
@@ -37,4 +37,4 @@ Remove `tests/unit/multiplayer_audio_failure_callback_contract.test.cjs`, remove
 
 ## Next task
 
-After the contract passes in CI, investigate a minimal shared callback factory only if it can retain the two lexical contexts without behavioral changes. Run the same contract and the multiplayer browser lifecycle suite before accepting such a refactor.
+The callback contract passed. A shared factory was reviewed and deferred: the duplicate logic is small, and a production change would require updating fragment/release fingerprints and rebuilding the standalone candidate without a demonstrated functional gain. The next task is to diagnose Chromium audio output routing. CI evidence shows a connected Chromium client but no PulseAudio sink inputs while media playback time advances; the PCM monitor remains silent. Do not weaken the non-silent output gate.
