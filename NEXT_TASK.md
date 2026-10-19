@@ -118,3 +118,13 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Review whether each game has a real decision, a distinct emotional rhythm, and a reason to be chosen in some run states. Remove redundant/boring concepts before writing simulations.
 - Simulations may check outcome frequencies, dominant choices, payout bugs, and exploit loops; do not force equal expected value or similar clear rates.
 - Design only. No server/UI/database or production implementation until paper designs are compelling and human testing supports the direction. No tests run for the catalog document.
+
+
+## Active task — resolve paper-rule ambiguities before simulation
+- Primary artifact: `reports/MULTIPLAYER_GAMBLE_PAPER_PROTOTYPES_ZH_01.md`.
+- First finalize Pot Split's exact integer settlement and insurance outcomes; Wheel of Misfortune's two-stage probabilities; and Debt Collector's due-date counter and default handling.
+- Verify every payout table's definitions (gross return includes stake), outcome counts, probability totals, and worked examples.
+- Then write small reproducible enumeration/simulation checks for outcome frequencies, payout extremes, dominant choices, and exploit loops. Do not optimize all games to equal EV.
+- Produce printable playtest cards and facilitator settlement sheets only after rules are internally consistent.
+- Recruit/perform human paper sessions before claiming fun, fairness, or readiness for implementation.
+- No server/UI/database or production code until design gates and human playtest support the direction.
