@@ -132,9 +132,16 @@ This section supplements the historical V82.85.26 checkpoint above. It does not 
 ### Deferred observations (not declared product defects)
 
 1. `serverAliasMap` performs exact-string de-duplication while `cacheRecord` and `allKnownAliases` normalize before de-duplication. Current inspected multiplayer sync uses `allKnownAliases`; no harmful user-facing impact is demonstrated. See `reports/V82_85_29_EMQ_ALIAS_DEDUP_SEMANTICS_DECISION.md`.
-2. `script_031` cache validation accepts arrays because it checks `typeof records === 'object'`. The new test records this current behavior. Tightening the guard should be a separate minimal fix with a cache fallback test, not an incidental change in the audit stage.
+2. `script_031` cache validation previously accepted arrays because it checked `typeof records === 'object'`. A narrow fix now rejects array-shaped records and the cache contract asserts fallback behavior. Final CI after refreshing the source fingerprint is pending.
 3. CSS visual pixel-diff is intentionally not a general requirement until a concrete style modification is proposed.
 
 ### Current conclusion
 
-The first-pass source audit and the bounded characterization set are complete for this sequence. The remaining work is not “audit every line again”; it is to handle the two deferred hardening questions only if they justify behavior changes, and to perform browser-level validation only for specific real-browser risks. Production runtime source was not changed in the V82.85.29 characterization stages; V82.82 remains immutable.
+The first-pass source audit and the bounded characterization set are complete for this sequence. The remaining work is not “audit every line again”; alias de-duplication remains deferred because no harmful consumer behavior is demonstrated, while malformed array-shaped title cache data has received a narrow guard fix and regression test. Final CI for the updated fingerprint is pending. Browser-level validation remains scoped to specific real-browser risks; V82.82 remains immutable.
+
+
+## Malformed Chinese-title cache guard follow-up
+
+- `src/scripts/script_031.htmlpart` now rejects array-shaped `records` in `readCache()`, preventing an empty array from being treated as a valid cache hit and suppressing the existing source-download fallback.
+- The focused cache contract now asserts array rejection. Manifest and audit matrix refreshed to 13,842 bytes / SHA-256 `bf6d46591ef75830fb6fa51ccdc55e061f6ac8b71c0848b08c27d35e245b4bb1`.
+- Latest CI before fingerprint refresh failed at source verification because the manifest still had the prior fingerprint. Final validation after the refresh is pending; do not count that stale-manifest run as a behavioral test failure.
