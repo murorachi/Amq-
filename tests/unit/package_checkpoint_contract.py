@@ -21,7 +21,7 @@ class PackageCheckpointContract(unittest.TestCase):
         )
 
     def test_current_package_name_is_not_stale_v82_84(self):
-        self.assertIn("V82_85_25_HISTORICAL_DEBT_DEDUP_01", PACKAGE.PACKAGE_NAME)
+        self.assertIn("V82_85_26_HISTORICAL_DEBT_DEDUP_01", PACKAGE.PACKAGE_NAME)
         self.assertNotIn("V82_84", PACKAGE.PACKAGE_NAME)
 
     def test_core_reproducibility_and_acceptance_files_are_required(self):
