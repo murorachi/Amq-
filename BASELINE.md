@@ -44,3 +44,11 @@
 ## Rollback
 - Revert design-only commits on `multiplayer-gamble-engine-discovery-01`.
 - No product rollback is required because product HTML/source and generated output remain unchanged.
+
+
+## Gamble Roguelike design checkpoint — Gate 07
+- Report: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_07.md`; script: `reports/design_simulations/gamble_roguelike_gate07.py`.
+- Gate 07 identified a recovery exploit: repeatable recovery could make strain failure impossible. Candidate rule: one use/run at 2 strain, fee ceil(15% bank), clear one strain, forfeit the stage item reward.
+- Exact results (100,000 runs/policy, seed 20261020): never recover 46.832% clear, 34.773% strain failure, mean bank 998.89; always recover 45.403% clear, 27.469% failure, mean bank 947.30.
+- This tests Risk Contract plus strain/recovery only; full-game balance and enjoyment are not validated. No product source changed.
+- Next design gate: integrate Risk Contract, Vault, Signal Room, Blind Draft, recovery, item opportunity costs, and three candidate strategies. No implementation until numerical gates pass.
