@@ -186,7 +186,7 @@ Revert the V82.85.28 helper, test, workflow/package versioning, manifest fingerp
 
 ## V82.85.30 CI result recorded
 
-- Run [39252741670](https://github.com/murorachi/Amq-/actions/runs/39252741670): source/unit **PASS** (132/132 verifier checks and all unit tests), Firefox responsive **PASS**.
+- Run [39253372795](https://github.com/murorachi/Amq-/actions/runs/39253372795): source/unit **PASS** (132/132 verifier checks and all unit tests), Firefox responsive **PASS**.
 - Browser-native: native storage/custom-list, custom-list UI, IndexedDB/quiz input, quiz suggestions, quiz answer/playback lifecycle and multiplayer lifecycle passed. Only the final audio output capture assertion failed (`peak=0, rms=0.0`); the PulseAudio self-test passed. This is the known CI capture mismatch, not a demonstrated product playback regression.
-- Artifacts on this run: `AMQ_V82_85_30_SOURCE_PACKAGE_CACHE_GUARD_01` (14,692,769 bytes) and `AMQ_V82_85_30_STANDALONE_HTML` (4,343,635-byte compressed artifact; reconstructed HTML is 8,786,577 bytes).
-- Deterministic source package SHA-256 from the build step: `(authoritative ZIP checksum is retained in the CI log rather than embedded in the package to avoid recursive hashing)` on the earlier equivalent package build; the newest report/status commits trigger a final run so verify the newest artifact metadata before declaring the branch checkpoint closed.
+- Artifacts uploaded on the latest run: `AMQ_V82_85_30_SOURCE_PACKAGE_CACHE_GUARD_01` and `AMQ_V82_85_30_STANDALONE_HTML`. Authoritative ZIP checksum remains in the CI log, not embedded in this package.
+- Latest run [39253372795](https://github.com/murorachi/Amq-/actions/runs/39253372795): source package reproducibility and standalone fingerprint checks passed. Browser-native failed only at the known non-silent audio-output capture assertion (`peak=0, rms=0.0`); all other native lifecycle tests passed.
