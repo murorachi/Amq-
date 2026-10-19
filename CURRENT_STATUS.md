@@ -6,9 +6,10 @@
 - Package tool now uses `AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip`, verifies required handoff/build/test files before and after ZIP creation, and reports missing entries clearly.
 - Added focused contracts for source inventory (4 cases) and package completeness (4 cases); both are wired into CI.
 - Package report: `reports/V82_85_18_PACKAGE_COMPLETENESS_AUDIT_01.md`.
-- GitHub Actions [run 39193525013](https://github.com/murorachi/Amq-/actions/runs/39193525013): source/unit **PASS**, Firefox responsive **PASS**. Browser-native-origin was still running at last inspection; do not claim its remaining lifecycle/audio/multiplayer checks passed.
-- Source package built twice: both 14,633,209 bytes, 360/360 unique entries, CRC PASS, required-file checks PASS; SHA-256 matched at `5806ae2af17790c3f1dd00d182f04b93463c73b265cc68ba1f521458458e888e`.
-- Uploaded workflow artifact: [AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01](https://github.com/murorachi/Amq-/actions/runs/39193525013).
+- GitHub Actions [run 39193720849](https://github.com/murorachi/Amq-/actions/runs/39193720849): source/unit **PASS**, 132 integrity/build checks passed; package completeness and source inventory contracts passed; package built twice with identical SHA-256, CRC and required-file checks passed.
+- Package size: 14,635,418 bytes, 361 unique entries. The exact package digest is in the external sidecar bundled with the workflow artifact, not repeated in files inside the ZIP.
+- Uploaded workflow artifact: [AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01](https://github.com/murorachi/Amq-/actions/runs/39193720849).
+- Firefox responsive and browser-native-origin jobs were still running at last inspection; do not claim their final result yet.
 - Local test execution: not run in this environment.
 - No product HTML, runtime logic, CSS, or manifest changed.
 - Product candidate remains 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`; immutable V82.82 remains 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
