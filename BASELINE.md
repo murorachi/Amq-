@@ -1,14 +1,19 @@
-# Baseline checkpoint: acceptance runner target cleanup verified
+# Baseline checkpoint: V82.85.18 source inventory completeness gate
 
-- Branch: `v82.85.13-real-audio-acceptance-gate-01`.
-- Latest full acceptance run: [39191769254](https://github.com/murorachi/Amq-/actions/runs/39191769254), source checkpoint `1e153a1b8b51d04a532ffcd26103bb28f4c86379`.
-- Source/unit, deterministic build verification and acceptance-runner configuration contract: **PASS**.
-- Firefox responsive, quiz suggestion/input integration against V82.85.12, and multiplayer lifecycle acceptance: **PASS**.
-- Deferred failure: real-browser audio PCM output capture remains **FAIL** at the final output assertion only. Do not lower its threshold.
-- Runner fix report: `reports/ACCEPTANCE_RUNNER_ARTIFACT_TARGET_CLEANUP_2026-10-19.md`.
-- `run_all_checks.py` builds the V82.85.12 candidate to its own versioned path and does not write that candidate to the V82.82-named path. The old V82.80/V82.81 CSS geometry baseline is no longer in the default current acceptance list.
-- Entire `run_all_checks.py` command list was **NOT RUN end-to-end** during this task.
-- Product HTML and product logic unchanged.
-- Candidate V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
-- Immutable V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
-- Next: resume feature development; perform additional cleanup opportunistically when a concrete defect or maintenance cost is evidenced. Never overwrite V82.82.
+- Working branch: `v82.85.18-source-inventory-gate-01`.
+- Base commit: `715e7a6d734a487a21f8c866093431edd2f4938d`.
+- Current engineering stage: source inventory completeness guard; CI status must be checked before acceptance.
+- Changes are limited to `tools/verify.py`, a focused Python contract test, the existing engineering workflow, and stage documentation.
+- No product HTML, runtime behavior, CSS, or manifest changes intended.
+- Product baseline remains immutable V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`.
+- Focused test: `python tests/unit/source_inventory_completeness_contract.py` (four cases); local execution not run here.
+- Full integrity/deterministic build checks and browser workflows are delegated to GitHub Actions; final status not yet confirmed.
+- Known real-browser audio PCM output capture failure remains deferred and is not altered by this stage.
+
+## Scope rule
+
+Inventory completeness should stop being a recurring silent omission risk. Do not turn this into a second exhaustive technical-debt audit. Once the source inventory contract and existing build gate pass, proceed to the next bounded packaging or feature task.
+
+## Rollback
+
+Revert the stage commits on this branch if the gate causes unrelated failures. Never modify or replace the immutable V82.82 artifact.
