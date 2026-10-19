@@ -61,3 +61,8 @@
 - At 105% goal, clear rates remain stable across starting banks 750/1000/1500: Conservative about 27%, Balanced about 41%, Push about 17%. Conservative has lowest strain failure; Balanced best standard clear; Push better at 150% score tier.
 - The Gate 09 baseline excludes items and recovery. Integrated item/recovery tests and human playtest remain open. No product source changed.
 - Design simulation CI workflow added at `.github/workflows/gamble-design-simulations.yml`; remote result must be checked before claiming pass.
+
+
+## Design simulation CI
+- [Run 39318826618](https://github.com/murorachi/Amq-/actions/runs/39318826618) passed on commit `5942fc949d3d3962c1a63aebba9bf7f869017265`.
+- Python syntax checks and Gate 05–09 scripts completed. This verifies script execution, not balance or enjoyment.
