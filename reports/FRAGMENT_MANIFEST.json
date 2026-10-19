@@ -134,7 +134,7 @@
       "start_byte": 5144918,
       "end_byte": 5259764,
       "byte_length": 95121,
-      "sha256": "1a70624af2398b35f1e678e47f5aff938480c61ba62f70169a86a7ad6d8d4d0b",
+      "sha256": "87507c79cc072957b5caa40bf5825fa7876686d63ffccad1e68d3289e802b41f",
       "opening_tag": "<script>",
       "script_type": "classic/default",
       "executable_heuristic": true,
@@ -1405,7 +1405,7 @@
       "path": "src/modules/quiz_answer_target_normalization.htmlpart",
       "marker": "<!-- AMQ_SPLIT_MODULE:quiz_answer_target_normalization -->",
       "byte_length": 97,
-      "sha256": "501fa17047b3965eb9d901039afec5b9a42f494cb50c6e0e72a69ef56a50abfe",
+      "sha256": "21d6062eb3629cbcf9172c948ad03375bf1bb2e11b39042c3375f2e304eb5480",
       "insertion_fragment": "src/scripts/script_004.htmlpart",
       "purpose": "exact-source extraction of the pure answer-normalization closure helper used by evaluateQuizTargetAnswerV857",
       "runtime_contract": "helper stays at its original lexical scope and execution position; byte-identical source is restored by the builder; no runtime script tag or behavior change"
