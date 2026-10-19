@@ -26,7 +26,7 @@ Virtual chips have no cash value. No real-money wagering, cash-out, player-to-pl
 1. If strain is 2, resolve the optional recovery decision first. Then reveal the post-recovery bank, stage target, risk tiers, odds, gross payout, fees, and eligible item effects.
 2. Players discuss for up to 30 seconds and submit private risk votes.
 3. Resolve votes simultaneously; missing/late votes default to Bank.
-4. Players may attach at most one eligible item before lock. No edits after lock.
+4. The team may use at most one shared item per wager. No edits after lock.
 5. Lock one shared wager using the stake fraction for the selected risk tier.
 6. Generate the outcome only after lock; settle the ledger atomically.
 7. Show the exact ledger entries, check target/strain, and offer any eligible draft reward.
