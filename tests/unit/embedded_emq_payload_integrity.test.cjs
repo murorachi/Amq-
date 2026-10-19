@@ -5,6 +5,12 @@ const fs = require('node:fs');
 const zlib = require('node:zlib');
 
 const source = fs.readFileSync('src/scripts/script_037.htmlpart', 'utf8');
+const manifest = JSON.parse(fs.readFileSync('reports/FRAGMENT_MANIFEST.json', 'utf8'));
+const manifestEntry = manifest.fragments.find(x => x.path === 'src/scripts/script_037.htmlpart');
+assert.ok(manifestEntry, 'manifest registers embedded EMQ payload');
+assert.equal(manifestEntry.script_type, 'application/octet-stream', 'payload uses a non-executable script MIME type');
+assert.equal(manifestEntry.role, 'compressed-data-payload', 'manifest identifies the fragment as compressed data');
+assert.equal(manifestEntry.executable_heuristic, false, 'payload is not classified as executable code');
 const openTag = '<script type="application/octet-stream" id="emqLibraryGzipBase64V8248">';
 const closeTag = '</script>';
 assert.equal(source.split(openTag).length - 1, 1,
