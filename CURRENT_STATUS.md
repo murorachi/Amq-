@@ -98,3 +98,10 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Candidate 03, Paper Playtest Kit 02, and Gates 05–14 are preserved as historical evidence, not the active design target. Do not implement server/UI from Candidate 03.
 - Next: paper-design a three-wager, three-stage prototype with asymmetric low-volatility, jackpot, and push-your-luck options; include catastrophic-loss, jackpot-rescue, and cash-out-regret example runs before writing new simulations.
 - No production source changed. No tests were run for this documentation-only direction reset; previous Gate 14 CI does not validate this new direction.
+
+## Game library breadth requirement — 2026-10-20
+- Product-owner clarified that two or three usable games are far too few for the intended gambling video game.
+- Added `reports/MULTIPLAYER_GAMBLE_GAME_CATALOG_01.md`: 15 candidate concepts across fast bets, push-your-luck, jackpot, multi-outcome, social-pot, and delayed-cost mechanics. Target is 12 launch-ready distinct games; 6 varied concepts are proposed for the first paper prototype.
+- A game counts as distinct by its decision structure, resolution rhythm, volatility shape, and emotional/social hook, not by reskinning symbols or changing payout numbers.
+- The catalog is design-only. No rules are numerically approved, no tests were run, and no production source or playable implementation changed.
+- Next: paper-prototype six mechanically diverse games with concrete asymmetric provisional payout tables and example rounds before any simulation or implementation.
