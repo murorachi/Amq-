@@ -102,3 +102,11 @@ V82.86.06 maintenance remains separate: add a dedicated stable CI command for ba
 
 ## Frozen design snapshot
 Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md` for the human paper test. Candidate 02 is historical. Gate 14 CI passed; no human playtest has happened. Next action is paper sessions, not server/UI implementation.
+
+## Active Gamble Roguelike task — design direction reset (2026-10-20)
+- Current direction record: `reports/MULTIPLAYER_GAMBLE_DESIGN_DIRECTION_RESET_01.md`.
+- Do not use Candidate 03 / Paper Playtest Kit 02 as the active target; preserve them for comparison only.
+- Next bounded task: design a 3-stage paper prototype with three genuinely different wager shapes: (1) lower-volatility but consequential downside, (2) frequent losses plus rare major jackpot, (3) push-your-luck ladder with cash-out/continue decisions. Add a few run-changing relics and three concrete example runs: catastrophic loss, jackpot rescue, and cash-out regret.
+- Review whether the decisions are exciting and state-dependent before writing simulations. Then use simulations only to check exploit loops, payout extremes, and outcome frequencies, not to force equal EV or equal clear rates.
+- Remain in design; no server/UI/database implementation until the design is compelling and later human testing supports it.
+- No tests run for this documentation-only reset. Existing Gate 14 CI does not validate the new design.
