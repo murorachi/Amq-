@@ -17,6 +17,7 @@ import struct
 import subprocess
 import threading
 import time
+import tempfile
 import wave
 from pathlib import Path
 
@@ -140,6 +141,31 @@ def main():
     errors = []
     mirror_requests = {"first": 0, "fallback": 0}
     wav = make_wav()
+
+    # Prove the monitor and PCM decoder can capture a known non-silent source
+    # before testing Chromium. Then discard the probe samples so they cannot
+    # accidentally satisfy the browser-output assertion.
+    paplay = shutil.which("paplay")
+    check(paplay is not None, "paplay utility is available for audio-capture self-test")
+    with tempfile.NamedTemporaryFile(suffix=".wav") as probe_file:
+        probe_file.write(wav)
+        probe_file.flush()
+        subprocess.run([paplay, "--device=amq_acceptance", probe_file.name],
+                       check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=12)
+    time.sleep(0.25)
+    with capture.lock:
+        probe_pcm = b"".join(capture.chunks)
+        capture.chunks.clear()
+    probe_samples = array.array("h")
+    probe_usable = len(probe_pcm) - (len(probe_pcm) % probe_samples.itemsize)
+    probe_samples.frombytes(probe_pcm[:probe_usable])
+    if probe_samples and struct.pack("=h", 1) != struct.pack("<h", 1):
+        probe_samples.byteswap()
+    probe_peak = max((abs(x) for x in probe_samples), default=0)
+    probe_rms = math.sqrt(sum(x * x for x in probe_samples) / max(1, len(probe_samples)))
+    print("PULSE_CAPTURE_SELF_TEST " + f"peak={probe_peak} rms={probe_rms:.1f} samples={len(probe_samples)}", flush=True)
+    check(probe_peak >= 1000 and probe_rms >= 150,
+          "PulseAudio monitor captures known non-silent PCM before Chromium test")
 
     try:
         with sync_playwright() as pw:
