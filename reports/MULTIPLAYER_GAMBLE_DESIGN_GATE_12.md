@@ -10,15 +10,15 @@ No product implementation was changed.
 
 | Mode | Strategy | Clear at 1050 | Strain failure | Mean final bank |
 |---|---|---:|---:|---:|
-| Baseline | Conservative | 27.160% | 3.416% | 994.89 |
+| Baseline | Conservative | 27.160% | 3.416% | 995.49 |
 | Baseline | Balanced | 41.638% | 29.132% | 1,000.60 |
 | Baseline | Push | 17.270% | 66.384% | 1,004.35 |
-| Recovery only | Conservative | 27.138% | 0.534% | 980.12 |
+| Recovery only | Conservative | 27.138% | 0.534% | 980.72 |
 | Recovery only | Balanced | 35.858% | 23.190% | 982.53 |
-| Draft only | Conservative | 27.178% | 3.482% | 996.58 |
+| Draft only | Conservative | 27.178% | 3.482% | 997.03 |
 | Draft only | Balanced | 41.398% | 29.386% | 1,000.57 |
 | Draft only | Push | 20.070% | 66.248% | 1,009.89 |
-| Recovery + draft | Conservative | 27.238% | 0.536% | 981.67 |
+| Recovery + draft | Conservative | 27.238% | 0.536% | 982.13 |
 | Recovery + draft | Balanced | 35.586% | 23.498% | 984.55 |
 | Recovery + draft | Push | 20.070% | 66.248% | 1,009.89 |
 
@@ -33,3 +33,7 @@ No product implementation was changed.
 ## Decision
 
 The numeric design is coherent enough to prepare paper-test materials, but **not enough to start implementation or claim competitor-level fun**. Before paper testing, vary event order, verify integer rounding at stake/fee boundaries, and simulate vote/draft behavior at 2/3/6 players. Then run actual paper sessions; simulation cannot substitute for player enjoyment.
+
+
+## Signal Room fee-rounding correction
+Gate 13's boundary check found that separately ceiling the 2% and 4% clue fees overcharged small stakes (at stake 10, the combined fee was 2 chips, or 20% of stake). The rule and Gate 12 simulation now charge one combined fee: one clue `ceil(2% × stake)`; two clues `ceil(6% × stake)`. The sample run was recalculated. This reduces accidental rounding punishment while preserving the visible cost of buying information.
