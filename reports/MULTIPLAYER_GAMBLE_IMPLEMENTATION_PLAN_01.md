@@ -85,3 +85,11 @@ Revert design-only reports/simulation commits on `multiplayer-gamble-engine-disc
 - Repeatable recovery can make strain failure impossible in the simplified model. Candidate correction: once per run at 2 strain, cost ceil(15% of bank), clear one strain, and forfeit the stage item reward.
 - Exact results: never recover 46.832% clear / 34.773% failure / mean bank 998.89; always recover when eligible 45.403% clear / 27.469% failure / mean bank 947.30. Item reward opportunity cost and other game mechanisms are not modeled.
 - Still blocked: integrated five-stage simulation, item opportunity costs/synergies, three viable strategies, group-size fairness, and human playtest. Remain in design; no server/UI/database work.
+
+
+## Gate 08–09 integrated design revisions
+- Gate 08 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_08.md`, `reports/design_simulations/gamble_roguelike_gate08.py`. Fixed absolute targets made quota-aware play dominate, so that target model was rejected.
+- Gate 09 report/script: `reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_09.md`, `reports/design_simulations/gamble_roguelike_gate09.py`.
+- Current rulebook candidate: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md`. Each stage target is current bank + ceil(1%); risk tier sets stake size (Bank 5%, Balanced 10%, Push 15%); final run goal is 105% of starting bank.
+- Base simulation suggests distinct niches: conservative best for low strain failure, Balanced best for 105% clear, Push best among tested policies at the 150% high-score tier. At the 105% goal, clear rates were stable across starting banks 750/1000/1500 (about 27% / 41% / 17%).
+- Gate 09 excludes items/recovery. Next: reintroduce item effects and recovery one at a time, check interactions and opportunity costs, vary event order, and test 2/3/6-player voting/draft fairness. Design simulation workflow is pending remote result verification. No implementation until these gates pass.
