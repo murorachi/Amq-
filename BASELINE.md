@@ -1,4 +1,14 @@
-# Engineering overlay: V82.85.13 real audio output acceptance gate (pending)
+# Engineering overlay: V82.85.13 real audio output acceptance gate (YELLOW / DEFERRED)
+
+- Status: 🟡 deferred by decision; not passed and not a blocker for the next phase.
+- CI run: https://github.com/murorachi/Amq-/actions/runs/39184503441. Source/unit and Firefox responsive jobs passed; the native-origin audio job failed only on captured PCM non-silence (peak=0, RMS=0.0).
+- The PulseAudio known-source self-test was non-silent (peak=6999, RMS=4131.5). Chromium was listed as a PulseAudio client but no sink input was created. Browser media lifecycle assertions otherwise passed, including decode-ready, playing/time advance, pause/resume, quiz gate, reveal continuity, ended, next question and teardown.
+- User confirmed audible playback on their real machine. This does not prove CI PCM capture and is not a reason to mark this gate green.
+- Decision: preserve the harness and logs; defer further CI routing diagnosis until a later phase or new product-regression evidence. Do not weaken the PCM threshold.
+- Product lock remains V82.82: 8,787,490 bytes / SHA-256 `227e89d80fa58db8e8f79c59f1203f06f8bc0663d11228d0986fe6e30f81e91b`. Candidate V82.85.12: 8,787,574 bytes / SHA-256 `b804fd66eecfef277d79d86611f589139025097313be937cf96d067cc201e067`.
+- Rollback: `v82.85.12-multiplayer-leave-poll-race-fix-01`.
+
+---
 
 - Parent accepted engineering baseline: `v82.85.12-multiplayer-leave-poll-race-fix-01`.
 - This is an engineering/test-only change. Production runtime fragments, CSS, and generated standalone product HTML are unchanged.
