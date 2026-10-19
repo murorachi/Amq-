@@ -66,3 +66,9 @@
 - Added `tests/unit/vndb_cover_batch_retry_lifecycle_contract.test.cjs` for `script_039.htmlpart`, plus CI step and report `reports/V82_85_29_VNDB_COVER_BATCH_RETRY_LIFECYCLE_CONTRACT.md`.
 - Automated execution pending. Production source unchanged; requests are mocked in unit tests.
 - Prior title tests passed 25/19 assertions; source verifier 132/132 passed in run 39250170041. Full browser-native result remains separately tracked.
+
+
+## VNDB cover lifecycle result
+
+- VNDB cover batch/retry contract passed 26 assertions in run [39250489886](https://github.com/murorachi/Amq-/actions/runs/39250489886). Source verifier 132/132, all source/unit steps and Firefox responsive passed; Chromium native-origin remained in progress at last check.
+- Production source unchanged. Next review is a decision-only assessment of script_041 alias deduplication semantics, not an automatic code change.
