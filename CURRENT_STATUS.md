@@ -68,3 +68,12 @@
 - Gate 12 integrated model keeps strategy niches: Conservative lowest strain failure, Balanced best at the 105% clear target, Push higher variance and strongest at high score tier. Shared inventory/fixed rankings remain a simplification.
 - CI passed: [Gate 12 corrected model run 39320570030](https://github.com/murorachi/Amq-/actions/runs/39320570030) and [Gate 13 full design suite run 39320747705](https://github.com/murorachi/Amq-/actions/runs/39320747705). Syntax checks and simulations passed; this is not a fun or human-fairness pass.
 - Still open: personal item ownership, real 2/3/6-player draft/vote fairness, route choices, paper test with humans, and evidence that players want to replay. No implementation authorized.
+
+
+## Paper-test readiness checkpoint — Gate 13
+- Current rulebook: [Candidate 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_02.md).
+- Paper test kit: [Kit 02](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_PAPER_PLAYTEST_02.md). It is prepared but has **not** been executed with human players.
+- Gate 13 report: [event order, vote size, and rounding](https://github.com/murorachi/Amq-/blob/multiplayer-gamble-engine-discovery-01/reports/MULTIPLAYER_GAMBLE_DESIGN_GATE_13.md).
+- CI passed: [run 39321094158](https://github.com/murorachi/Amq-/actions/runs/39321094158), including Python syntax checks and Gate 05–13 simulations. This verifies reproducible execution, not fun or human fairness.
+- Rule updates: shuffle two Risk / two Vault / one Signal event cards; stage target is post-recovery bank + ceil(1%); final goal 105%; two-clue fee is ceil(6% stake); Insurance is Bank/Balanced only at 10% refund; Vault Harness 20%; recovery once/run at 12% (8% with voucher), skips the next eligible Blind Draft.
+- Design is now stable enough for paper testing, but not proven comparable in enjoyment to existing products. No implementation authorized until real players show meaningful decisions and voluntary replay intent.
