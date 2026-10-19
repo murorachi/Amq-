@@ -99,7 +99,7 @@ Run [39230015840](https://github.com/murorachi/Amq-/actions/runs/39230015840): s
 | JS 028 | `src/scripts/script_028.htmlpart` | 139202 | `24d805495ba443bd…` | P1 | 首輪逐檔審查完成；風險保留 | 120 個命名函式；混合房間／重連、REST／WebSocket、AMQ／EMQ／VNDB 清單範圍、持久化、UI 與音訊／影片生命週期。既有單元及瀏覽器生命週期測試已對照；未改產品程式。詳見 `reports/AUDIT_SCRIPT_028_MULTIPLAYER_LIFECYCLE_V82_85_29.md`。 |
 | CSS 032 | `src/styles/style_032.htmlpart` | 5061 | `53935154da57f393…` | P2 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 029 | `src/scripts/script_029.htmlpart` | 8373 | `d91ea61be8b60a48…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
-| JS 030 | `src/scripts/script_030.htmlpart` | 125793 | `8a5888099591e329…` | P1 | 待逐檔排查 | 大型腳本，優先盤點主要職責、全域狀態、事件註冊、計時器／媒體副作用與測試覆蓋。 |
+| JS 030 | `src/scripts/script_030.htmlpart` | 125793 | `8a5888099591e329…` | P1 | 首輪資料負載審查完成；CI 契約待確認 | JSON AniList ID 對照表，共 9,400 組有效數值映射；已新增格式／ID 完整性契約，待最新 CI 確認。詳見 `reports/AUDIT_SCRIPT_030_ANILIST_ID_MAP_V82_85_29.md`。 |
 | CSS 033 | `src/styles/style_033.htmlpart` | 671 | `a55bc38453df2022…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
 | JS 031 | `src/scripts/script_031.htmlpart` | 13812 | `ec242f20784f75ca…` | P2 | 待逐檔排查 | 尚無本版完整逐檔審查紀錄；先完成職責辨識、依賴盤點與相關測試對照。 |
 | CSS 034 | `src/styles/style_034.htmlpart` | 807 | `fc56b524aa62d0fd…` | P3 | 待逐檔排查 | 盤點 selector 所屬頁面／元件、重複宣告及覆寫來源；未證明等價前不合併或調序。 |
