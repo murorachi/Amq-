@@ -11,11 +11,22 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = 'AMQ_V82_84_SOURCE_SYNC_AND_ACCEPTANCE_GATE_AUDIT_01.zip'
+PACKAGE_NAME = 'AMQ_V82_85_18_SOURCE_INVENTORY_GATE_01.zip'
 OUTPUT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path('/mnt/data') / PACKAGE_NAME
 SIDECAR = Path(str(OUTPUT) + '.sha256')
 MANIFEST = ROOT / 'PACKAGE_SHA256SUMS.txt'
 EXCLUDED_DIRS = {'dist', '.git', '__pycache__'}
+REQUIRED_PACKAGE_PATHS = {
+    'BASELINE.md',
+    'CURRENT_STATUS.md',
+    'NEXT_TASK.md',
+    '.github/workflows/v82-85-4-engineering-acceptance.yml',
+    'tools/build.py',
+    'tools/verify.py',
+    'tools/package_checkpoint.py',
+    'tests/unit/source_inventory_completeness_contract.py',
+    'reports/V82_85_18_SOURCE_INVENTORY_COMPLETENESS_GATE_01.md',
+}
 EXCLUDED_FROM_MANIFEST = {
     'PACKAGE_SHA256SUMS.txt',
     'reports/V82_66_ANSWER_FLOW_AND_RELIABILITY_07_SHA256.txt',
@@ -86,6 +97,10 @@ FIXED_TIME = (2026, 10, 18, 0, 0, 0)
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
+def missing_required_paths(paths):
+    """Return required checkpoint files that would be absent from a package."""
+    return sorted(REQUIRED_PACKAGE_PATHS - set(paths))
+
 def included_files():
     files = []
     for p in ROOT.rglob('*'):
@@ -108,6 +123,9 @@ def main():
         if not any(part in EXCLUDED_DIRS for part in Path(rel).parts)
         and rel not in EXCLUDED_FROM_PACKAGE
         and not rel.endswith('.pyc') and not rel.endswith('.zip') and not rel.endswith('.zip.sha256')]
+    missing = missing_required_paths(rel for rel, _ in payload_files)
+    if missing:
+        raise SystemExit('package missing required checkpoint files: ' + ', '.join(missing))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(OUTPUT, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9, strict_timestamps=True) as zf:
         for rel, p in payload_files:
@@ -123,12 +141,14 @@ def main():
         crc_error = zf.testzip()
         entry_count = len(zf.namelist())
         unique_count = len(set(zf.namelist()))
-    if crc_error is not None or entry_count != unique_count:
-        raise SystemExit(f'package integrity failed: crc={crc_error!r}, entries={entry_count}, unique={unique_count}')
+        archived_paths = {name.split('/', 1)[1] for name in zf.namelist() if '/' in name}
+    missing_archived = missing_required_paths(archived_paths)
+    if crc_error is not None or entry_count != unique_count or missing_archived:
+        raise SystemExit(f'package integrity failed: crc={crc_error!r}, entries={entry_count}, unique={unique_count}, missing_required={missing_archived}')
     print(f'PASS package: {OUTPUT}')
     print(f'bytes={OUTPUT.stat().st_size}')
     print(f'sha256={outer_hash}')
-    print(f'entries={entry_count} unique={unique_count} crc=PASS')
+    print(f'entries={entry_count} unique={unique_count} crc=PASS required=PASS')
     print(f'sidecar={SIDECAR}')
 
 if __name__ == '__main__':
