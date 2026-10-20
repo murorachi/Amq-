@@ -329,7 +329,18 @@ body.ui-home-menu #homeMenu .amqPlayerFrame {
  height:84px!important; min-height:0!important; max-height:84px!important; overflow:hidden!important;
  padding:7px 10px!important;
 }
-body.ui-home-menu #homeMenu #amqProfileCard { align-items:center!important; }
+body.ui-home-menu #homeMenu #amqProfileCard {
+ align-items:center!important; gap:10px!important;
+ background:linear-gradient(135deg,#352c39,#28212b)!important;
+ border:1px solid #574554!important; border-radius:12px!important;
+}
+body.ui-home-menu #homeMenu .amqProfileInfo { gap:2px!important; overflow:hidden!important; }
+body.ui-home-menu #homeMenu .amqProfileName {
+ color:#fff!important; font-size:14px!important; line-height:1.2!important;
+}
+body.ui-home-menu #homeMenu .amqProfileLine:not(.ppLine) { display:none!important; }
+body.ui-home-menu #homeMenu .amqProfileLine.ppLine { gap:5px!important; line-height:1.2!important; }
+body.ui-home-menu #homeMenu .amqProfileLine.ppLine strong { font-size:17px!important; }
 body.ui-home-menu #homeMenu .amqProfileHint { display:none!important; }
 body.ui-home-menu #homeMenu #amqProfileLine { margin-top:2px!important; }
 body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0 0 4px!important; font-size:8px!important; line-height:1.2!important; }
