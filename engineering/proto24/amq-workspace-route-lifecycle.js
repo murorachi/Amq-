@@ -6,10 +6,7 @@
 (() => {
   window.__amqWorkspaceRouteGuardReady = true;
   const syncWorkspaceShell = () => {
-    const view = window.__aniGetActiveViewV82?.();
-    if (view && view !== "dashboard") {
-      document.body.classList.remove("amq-workspace-active");
-    }
+    document.body.classList.remove("amq-workspace-active");
   };
   const scheduleRouteSync = () => {
     requestAnimationFrame(syncWorkspaceShell);
