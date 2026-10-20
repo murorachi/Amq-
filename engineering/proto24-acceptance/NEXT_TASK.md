@@ -20,13 +20,16 @@
 - Do not ask for user review until all target screens and required tests are complete, except where a genuine permission or irreversible-decision blocker requires user input.
 
 
-## Workflow trigger repair
-- Stage 24 workflow is PR-triggered only, avoiding a push-triggered publish loop. It targets `v82.85.30-proto25-ui-refactor-stage-24` and emits Stage 24 artifact/file names.
-- Latest workflow commits on Stage 24: `2294f0ce073d074df5f7df1728a9ab22b577b0d9` (trigger/name correction), `c9137b63747f861d86e4b45a7347f9d3c5d44023` (remove recursive push trigger).
-- A new head commit is required to prompt a fresh PR workflow event; verify run status and generated artifact rather than assuming it fired.
+## Immediate execution checkpoint
+1. Confirm a new Actions run on `v82.85.30-proto25-ui-refactor-work-03` after workflow commit `ec31a4b12c3e842859f06063c044dac0127a9ee4`.
+2. Inspect the job result and logs. The publisher now preserves the tested candidate, checks out the Stage 24 target branch and commits only the HTML, SHA-256 manifest and test report.
+3. Retrieve artifact screenshots and `acceptance-report.json`; confirm the new profile-gradient assertion passed and review the actual desktop/mobile images.
+4. Verify the Stage 24 branch head, published HTML size, checksum file and matching SHA-256. Do not treat an old successful run as evidence for the latest head.
+5. If the workflow fails, fix the exact root cause and rerun the affected acceptance. Then continue reviewing the quiz, catalog, Song Select, Settings, learning and analysis workspaces.
+6. Keep real audio output, complete quiz-answer lifecycle and multiplayer server lifecycle as separately reported NOT RUN until actually exercised.
 
-
-## Continuous execution checkpoint
-- Fresh validation PR: https://github.com/murorachi/Amq-/pull/9
-- Stage 24 workflow path/name repair: `9ebe65f7d7989f5717066acecf588948424bf74b`.
-- Do not pause for user review. Continue with run/artifact retrieval, then root-cause any failing browser assertions and inspect all target screenshots before declaring completion.
+## Safety and rollback
+- Keep all Proto25 work isolated to `v82.85.30-proto25-ui-refactor-work-03` and numbered Stage branches.
+- Preserve accepted baseline branch `v82.85.30-proto24-accepted-delivery-02` at commit `39d250cf5a269a0e2bf8f514474584bcc864f599`.
+- Do not merge PR #9 or promote a candidate without fresh screenshots, passing browser assertions, verified candidate hash and remote file read-back.
+- If validation exposes a regression, return to the last verified isolated checkpoint; production rollback remains the accepted Proto24 branch above.
