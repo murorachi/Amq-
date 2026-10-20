@@ -1,8 +1,14 @@
 # TEST REPORT — Proto22
-- HTML parse and unique IDs: PASS.
-- Desktop 1440x900 screenshot and menu geometry assertions: PASS if workflow succeeds.
-- Mobile 390x844 screenshot and overflow assertion: PASS if workflow succeeds.
-- Native localStorage/sessionStorage/IndexedDB and reload persistence: PASS if workflow succeeds.
-- Homepage navigation, settings layer, multiplayer route entry, console/page errors: PASS if workflow succeeds.
-- Quiz/audio real playback, answer lifecycle, multiplayer room lifecycle: NOT RUN in this UI-focused workflow.
-- Run: https://github.com/murorachi/Amq-/actions/runs/39470214100
+- HTML parser and unique-ID assertion: PASS.
+- Desktop 1440x900: left circular main visual, right stacked purple menu, top player/music row, duplicate legacy sections hidden: PASS.
+- Mobile 390x844: single-column layout and no horizontal overflow: PASS.
+- Native localStorage, sessionStorage and IndexedDB APIs: PASS.
+- Storage survives page reload: PASS.
+- Homepage routes: quiz, practiceExplore, practiceWeak, multiplayer, catalog, watchlist, learningPlan, dashboard: PASS.
+- Return-home after each route: PASS.
+- Visible broken image placeholders: 0; trailing literal escape: 0.
+- Browser page errors: 0; console errors: 0.
+- Settings button aria-expanded state toggles: PASS; visible settings panel discovery: NOT VERIFIED (0 panels matched test selectors).
+- Real audio playback, quiz answer lifecycle and multiplayer room lifecycle: NOT RUN.
+- Remote published HTML bytes and SHA-256 manifest verification: PASS, run 39470617728.
+- Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/39470716744
