@@ -20,16 +20,16 @@
 - Do not ask for user review until all target screens and required tests are complete, except where a genuine permission or irreversible-decision blocker requires user input.
 
 
-## Immediate execution checkpoint
-1. Confirm a new Actions run on `v82.85.30-proto25-ui-refactor-work-03` after workflow commit `ec31a4b12c3e842859f06063c044dac0127a9ee4`.
-2. Inspect the job result and logs. The publisher now preserves the tested candidate, checks out the Stage 24 target branch and commits only the HTML, SHA-256 manifest and test report.
-3. Retrieve artifact screenshots and `acceptance-report.json`; confirm the new profile-gradient assertion passed and review the actual desktop/mobile images.
-4. Verify the Stage 24 branch head, published HTML size, checksum file and matching SHA-256. Do not treat an old successful run as evidence for the latest head.
-5. If the workflow fails, fix the exact root cause and rerun the affected acceptance. Then continue reviewing the quiz, catalog, Song Select, Settings, learning and analysis workspaces.
-6. Keep real audio output, complete quiz-answer lifecycle and multiplayer server lifecycle as separately reported NOT RUN until actually exercised.
+## Next task: targeted workspace visual repair
+1. Use the latest successful evidence from run `39500770125` and artifact `12299323839`; do not rerun already-passing checks without a code change.
+2. Identify the precise element causing the prominent light panel in `proto24-learning-workspace.png`. Add a diagnostic to the existing Playwright report for visible large light-background elements in Learning Center and Analysis; use the resulting selector and geometry to fix the root CSS rule in `engineering/proto24/amq-workspace-osu-composition.css`.
+3. Add assertions that the target workspace panels use the expected dark palette and that no unintended large light panels remain. Preserve intentionally light controls/dialogs.
+4. Rerun static checks and the complete browser acceptance, inspect the updated desktop/mobile screenshots and read back the new artifact, candidate size, SHA-256 and Stage 24 commit.
+5. Review the other target screens as a group: home/profile strip, Play menu, catalog, Song Select, Settings, learning workspace and analysis workspace. Record visual deltas against osu!stable references; do not claim >=90% similarity without evidence.
+6. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle as separate NOT RUN items until tested.
 
-## Safety and rollback
-- Keep all Proto25 work isolated to `v82.85.30-proto25-ui-refactor-work-03` and numbered Stage branches.
-- Preserve accepted baseline branch `v82.85.30-proto24-accepted-delivery-02` at commit `39d250cf5a269a0e2bf8f514474584bcc864f599`.
-- Do not merge PR #9 or promote a candidate without fresh screenshots, passing browser assertions, verified candidate hash and remote file read-back.
-- If validation exposes a regression, return to the last verified isolated checkpoint; production rollback remains the accepted Proto24 branch above.
+## Verified checkpoint and safety
+- Latest successful workflow run: `39500770125`, commit `d6209c24f72e1d7cb8ea1eaf0a3739ca14a7b407`.
+- Artifact ID: `12299323839`; candidate size 8,899,371 bytes; SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`.
+- Candidate and all changes remain isolated on Proto25/Stage 24. Preserve accepted baseline `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`.
+- Do not merge PR #9 or promote until remaining visual and runtime acceptance are complete. Roll back to the accepted Proto24 branch if a regression cannot be resolved safely.
