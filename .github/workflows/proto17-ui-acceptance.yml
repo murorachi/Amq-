@@ -6,6 +6,8 @@ on:
       - amq-proto17-ui-init-acceptance-20261020
     paths:
       - .github/workflows/proto17-ui-acceptance.yml
+      - tools/patch_proto17_initialization.py
+      - tests/browser/proto17_ui_acceptance.py
 
 permissions:
   contents: write
