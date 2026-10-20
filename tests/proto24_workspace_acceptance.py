@@ -139,6 +139,8 @@ async def main():
             assert motion in ("0s","0s, 0s"),{"workspace":ws,"transitionDuration":motion}
             await page.emulate_media(reduced_motion="no-preference")
             report.setdefault("workspace_visuals",{})[ws]=styles
+            light_panels=await page.evaluate("""()=>[...document.querySelectorAll('body *')].map(e=>{const r=e.getBoundingClientRect(),c=getComputedStyle(e);return {tag:e.tagName.toLowerCase(),id:e.id||'',className:typeof e.className==='string'?e.className:'',text:(e.innerText||'').trim().slice(0,90),background:c.backgroundColor,backgroundImage:c.backgroundImage,x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height),area:Math.round(r.width*r.height)}}).filter(e=>e.w>=400&&e.h>=28&&e.area>=12000&&e.background==='rgb(255, 255, 255)'&&e.id!=='amqWorkspaceSidebar').sort((a,b)=>b.area-a.area).slice(0,15)""")
+            report.setdefault("workspace_light_panels",{})[ws]=light_panels
             report.setdefault("accessibility",{})[ws]={"reduced_motion_transition_duration":motion}
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
         # Catalog/song-selection surface and single-player quiz theme assertions.
