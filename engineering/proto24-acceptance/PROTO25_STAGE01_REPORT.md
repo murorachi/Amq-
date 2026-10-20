@@ -32,6 +32,10 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added keyboard Escape/Tab handling and a Playwright interaction check for menu labels, Back behavior, disabled multiplayer, and the Single Player route.
 - Stage 5 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-05`.
 
+## Static CI gate
+- Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
+- The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
+
 ## Verification
 - GitHub file writes and subsequent reads: PASS.
 - Immutable Proto24 baseline remains present: PASS.
