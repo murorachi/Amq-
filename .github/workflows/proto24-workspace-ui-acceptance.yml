@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - v82.85.30-proto25-ui-refactor-work-01
+  pull_request:
+    branches:
+      - v82.85.30-proto25-ui-refactor-stage-24
 permissions:
   contents: write
 jobs:
