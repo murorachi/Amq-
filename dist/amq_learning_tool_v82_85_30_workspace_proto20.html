@@ -6969,3 +6969,19 @@ body.amq-workspace-active button.primary{background:linear-gradient(135deg,#b786
 }
 @media(prefers-reduced-motion:reduce){#wsActions .wsAction,#amqWorkspaceDock button{transition:none!important}}
 </style>
+
+<script id="amq-proto20-workspace-route-sync">
+(()=>{'use strict';
+ function syncWorkspaceToRoute(){
+  let view='home';try{view=window.__aniGetActiveViewV82?.()||'home'}catch{}
+  const target=view==='dashboard'?'analysis':(['practice','learningPlan','explore'].includes(view)?'learning':null);
+  if(!target)return;
+  const button=document.querySelector('#amqWorkspaceDock [data-ws="'+target+'"]');
+  if(button&&button.getAttribute('aria-pressed')!=='true')button.click();
+ }
+ document.addEventListener('ani-app-navigation',()=>setTimeout(syncWorkspaceToRoute,80));
+ window.addEventListener('hashchange',()=>setTimeout(syncWorkspaceToRoute,80));
+ window.addEventListener('popstate',()=>setTimeout(syncWorkspaceToRoute,80));
+ setTimeout(syncWorkspaceToRoute,150);
+})();
+</script>
