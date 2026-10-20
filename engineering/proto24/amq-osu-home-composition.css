@@ -264,4 +264,28 @@ body.ui-home-menu #homeMenu .amqHomeLandingLinks button>span { font-size:12px!im
  body.ui-home-menu #homeMenu .amqHomeLandingAction { min-height:44px!important; }
 }
 
+
+/* Stage 14: position home settings as a Stable-like left Options sidebar. */
+body.ui-home-menu.ui-settings-open .top .actions {
+ top:8px!important; right:auto!important; bottom:8px!important; left:8px!important;
+ width:min(292px,calc(100vw - 16px))!important; max-height:calc(100dvh - 16px)!important;
+ grid-template-columns:minmax(0,1fr)!important; align-content:start!important; overflow:auto!important;
+ background:linear-gradient(180deg,#352c39,#28212b 85%)!important;
+}
+body.ui-home-menu.ui-settings-open .top .actions::before {
+ content:"OPTIONS · 設定"!important; display:block!important; grid-column:1!important;
+ padding:4px 5px 12px!important; border-bottom:1px solid #574554!important;
+ color:#ff8fc7!important; font-size:10px!important; font-weight:900!important; letter-spacing:.16em!important;
+}
+body.ui-home-menu.ui-settings-open .top .actions #uiHomeSettings { grid-column:1!important; }
+body.ui-home-menu.ui-settings-open .top .actions .btn { width:100%!important; justify-content:flex-start!important; text-align:left!important; }
+@media(max-width:520px) {
+ body.ui-home-menu.ui-settings-open .top .actions {
+  top:8px!important; left:8px!important; right:auto!important; bottom:8px!important;
+  width:min(292px,calc(100vw - 16px))!important; max-height:calc(100dvh - 16px)!important;
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ body.ui-home-menu.ui-settings-open .top .actions .btn { min-height:40px!important; }
+}
+
 </style>
