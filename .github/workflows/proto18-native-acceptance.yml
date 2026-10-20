@@ -1,0 +1,63 @@
+name: Proto18 native-origin acceptance
+
+on:
+  push:
+    branches:
+      - v82.85.30-proto18-native-origin-acceptance-01
+
+permissions:
+  contents: read
+
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct Proto18 from pinned Proto17 plus reviewed delta
+        run: |
+          set -euo pipefail
+          test -s amq_learning_tool_v82_85_30_workspace_proto17.html
+          cp amq_learning_tool_v82_85_30_workspace_proto17.html proto17.html
+          git apply --check engineering/proto18-acceptance/proto17-to-proto18.patch
+          git apply engineering/proto18-acceptance/proto17-to-proto18.patch
+          cp proto17.html candidate.html
+          sha256sum candidate.html | tee candidate.sha256
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html").read_text(encoding="utf-8")
+          assert "if(target.textContent!==next)target.textContent=next" in p
+          assert "window.__aniNavigateApp?.('practice')" in p
+          assert "查看清單與學習資料','watchlist'" in p
+          print("Proto18 patch assertions: PASS")
+          PY
+      - name: Install browser test dependencies
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+      - name: Run native-origin browser acceptance
+        run: |
+          set -euo pipefail
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/amq-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:8765/candidate.html -o /dev/null; then break; fi
+            sleep 1
+          done
+          python tests/proto18_native_acceptance.py
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proto18-native-origin-acceptance
+          path: |
+            candidate.sha256
+            acceptance-report.json
+            proto18-desktop.png
+            proto18-mobile.png
+          if-no-files-found: ignore
+          retention-days: 14
