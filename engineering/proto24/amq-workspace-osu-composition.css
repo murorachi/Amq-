@@ -428,4 +428,41 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  #amqStablePlayNotice { grid-column:1!important; grid-row:5!important; text-align:center!important; }
 }
 
+
+/* Stage 16: multiplayer room/setup uses the same dark panel system; networking and game state logic are untouched. */
+body.multiplayer-mode { background:#28212b!important; color:#f7edf3!important; }
+body.multiplayer-mode .wrap { background:#28212b!important; color:#f7edf3!important; }
+#multiplayerView {
+ border:1px solid #574554!important; border-radius:4px!important; background:#302632!important;
+ color:#f7edf3!important; box-shadow:0 3px 0 #1b151e!important;
+}
+#multiplayerView .mpCard,#multiplayerView .mpInfoCard,#multiplayerView .mpChatCard,
+#multiplayerView .mpLobbyPane,#multiplayerView .mpPlayPane,#multiplayerView .mpRevealPane,
+#multiplayerView .mpFinalPane {
+ border:1px solid #574554!important; border-radius:3px!important; background:#352c39!important; color:#f7edf3!important;
+ box-shadow:none!important;
+}
+#multiplayerView h1,#multiplayerView h2,#multiplayerView h3,#multiplayerView h4 { color:#fff!important; }
+#multiplayerView p,#multiplayerView small,#multiplayerView label,#multiplayerView .mpMuted { color:#cbbaca!important; }
+#multiplayerView input,#multiplayerView select,#multiplayerView textarea {
+ border:1px solid #6b5365!important; border-radius:3px!important; background:#211a24!important; color:#fff!important;
+}
+#multiplayerView input:focus-visible,#multiplayerView select:focus-visible,#multiplayerView textarea:focus-visible {
+ outline:2px solid #ff8fc7!important; outline-offset:2px!important; border-color:#ff8fc7!important;
+}
+#multiplayerView .btn { border:1px solid #6b5365!important; border-radius:3px!important; background:#403340!important; color:#f7edf3!important; }
+#multiplayerView .btn.primary,#multiplayerView .mpGameButtons .btn.primary {
+ border-color:#e86aa9!important; background:linear-gradient(110deg,#f184b9,#c84487)!important; color:#fff!important;
+}
+#multiplayerView .btn:disabled { opacity:.55!important; }
+#multiplayerView .mpTimerTrack,#multiplayerView .mpTimerBar { background:#211a24!important; }
+#multiplayerView .mpTimerFill { background:linear-gradient(90deg,#f184b9,#c84487)!important; }
+#multiplayerView .mpChatMessages,#multiplayerView .mpLobbyList,#multiplayerView .mpPlayerList {
+ border-color:#574554!important; background:#211a24!important; color:#f7edf3!important;
+}
+@media(max-width:700px) {
+ #multiplayerView { padding:10px!important; }
+ #multiplayerView .mpRoomConfigGrid,#multiplayerView .mpFilterGrid { grid-template-columns:minmax(0,1fr)!important; }
+}
+
 </style>
