@@ -1,0 +1,101 @@
+<style id="amq-osu-home-composition-v23">
+/* Proto23: geometry-first osu! Stable composition. No app logic or data flow changes. */
+:root { --amq-osu-purple:#7654c8; --amq-osu-purple-hi:#9875e7; --amq-osu-ink:#302744; }
+body.ui-home-menu { background:linear-gradient(135deg,#fbfaff 0%,#f3effb 52%,#eee7fa 100%)!important; }
+body.ui-home-menu .wrap { width:100%!important; max-width:none!important; padding:0 clamp(16px,3vw,44px) 100px!important; box-sizing:border-box!important; }
+body.ui-home-menu #homeMenu { width:100%!important; max-width:1480px!important; margin:0 auto!important; padding:0!important; display:flex!important; flex-direction:column!important; gap:0!important; }
+body.ui-home-menu #homeMenu .amqHomeTopFrame { display:grid!important; grid-template-columns:minmax(290px,.78fr) minmax(0,1.22fr)!important; gap:12px!important; width:100%!important; margin:14px 0 0!important; align-items:stretch!important; }
+body.ui-home-menu #homeMenu .amqProfileCard,
+body.ui-home-menu #homeMenu .amqPlayerFrame { min-width:0!important; min-height:94px!important; box-sizing:border-box!important; border:1px solid #ded5f0!important; border-radius:5px!important; background:rgba(255,255,255,.9)!important; box-shadow:0 2px 9px #49326d0d!important; padding:12px 16px!important; }
+body.ui-home-menu #homeMenu .amqProfileCard { display:flex!important; align-items:center!important; gap:13px!important; }
+body.ui-home-menu #homeMenu .amqAvatarButton { width:54px!important; height:54px!important; flex:0 0 54px!important; border:2px solid #fff!important; box-shadow:0 0 0 2px #c9b6ee!important; }
+body.ui-home-menu #homeMenu .amqProfileName { color:var(--amq-osu-purple)!important; font-size:17px!important; font-weight:850!important; }
+body.ui-home-menu #homeMenu .amqProfileLine { font-size:10px!important; }
+body.ui-home-menu #homeMenu .amqProfileHint { display:none!important; }
+body.ui-home-menu #homeMenu .amqPlayerFrame { display:flex!important; flex-direction:column!important; justify-content:center!important; gap:7px!important; }
+body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0!important; color:#8a78a9!important; font-size:9px!important; font-weight:900!important; letter-spacing:.16em!important; }
+body.ui-home-menu #homeMenu .amqHomePlayerSlot { min-height:24px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingV851 {
+ position:relative!important; isolation:isolate!important; display:grid!important;
+ grid-template-columns:minmax(280px,.9fr) minmax(390px,1.1fr)!important;
+ grid-template-rows:minmax(330px,1fr) auto!important; align-items:center!important;
+ column-gap:clamp(30px,5vw,76px)!important; row-gap:24px!important;
+ width:100%!important; min-height:530px!important; box-sizing:border-box!important;
+ margin:0!important; padding:clamp(20px,3vw,42px) clamp(18px,4.2vw,64px) 26px!important;
+ border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; overflow:visible!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
+ content:""; grid-column:1!important; grid-row:1!important; align-self:center!important; justify-self:center!important;
+ display:block!important; width:min(100%,clamp(245px,27vw,345px))!important; aspect-ratio:1!important; box-sizing:border-box!important;
+ border:10px solid #fff!important; border-radius:50%!important; outline:2px solid #bca7e7!important;
+ background:
+ radial-gradient(circle at 34% 26%,#d8c7fa 0%,#b39be9 26%,#8a6ad6 56%,#6a4ab5 79%,#51378f 100%)!important;
+ box-shadow:0 0 0 12px #7654c80d,0 12px 32px #3e2a641f,inset 0 0 0 2px #ffffff80!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingIntro { display:none!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingPrimary {
+ grid-column:2!important; grid-row:1!important; align-self:center!important; justify-self:stretch!important;
+ display:flex!important; flex-direction:column!important; gap:10px!important;
+ width:100%!important; max-width:620px!important; margin:0!important; padding:0!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingAction {
+ display:grid!important; grid-template-columns:48px minmax(0,1fr) 28px!important; grid-template-rows:auto auto!important;
+ align-items:center!important; column-gap:12px!important; row-gap:3px!important;
+ position:relative!important; width:100%!important; min-width:0!important; min-height:76px!important;
+ padding:12px 18px!important; border:0!important; border-radius:4px!important;
+ background:linear-gradient(100deg,#8f70d7 0%,#7654c8 48%,#6849b8 100%)!important;
+ color:#fff!important; text-align:left!important; box-shadow:0 3px 0 #4c368c,0 5px 12px #4b34851a!important;
+ transition:transform .12s ease,filter .12s ease,box-shadow .12s ease!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingAction::before {
+ content:attr(data-menu-number)!important; grid-column:1!important; grid-row:1/3!important; align-self:center!important;
+ display:grid!important; place-items:center!important; width:36px!important; height:36px!important;
+ border:1px solid #ffffff80!important; border-radius:50%!important; color:#fff!important;
+ font-size:12px!important; font-weight:900!important; letter-spacing:.04em!important; background:#ffffff12!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingActionTag { grid-column:2!important; grid-row:1!important; margin:0!important; font-size:8px!important; line-height:1.1!important; letter-spacing:.15em!important; font-weight:900!important; opacity:.82!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction strong { grid-column:2!important; grid-row:2!important; margin:0!important; font-size:clamp(16px,1.5vw,21px)!important; line-height:1.25!important; font-weight:850!important; color:#fff!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction small { grid-column:2!important; grid-row:3!important; display:block!important; margin-top:2px!important; font-size:10px!important; line-height:1.4!important; color:#f0eaff!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingArrow { grid-column:3!important; grid-row:1/4!important; justify-self:end!important; color:#fff!important; font-size:24px!important; opacity:.9!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingActionMain { background:linear-gradient(100deg,#a27fe8 0%,#8562d5 50%,#7250c1 100%)!important; box-shadow:0 3px 0 #51388f,0 8px 18px #50358d2e!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction:hover { transform:translateX(4px)!important; filter:brightness(1.07)!important; box-shadow:0 3px 0 #4c368c,0 9px 18px #4b34852e!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction:focus-visible { outline:3px solid #3b236d!important; outline-offset:3px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroups {
+ grid-column:1/-1!important; grid-row:2!important; display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:clamp(12px,2vw,28px)!important; margin:0!important; padding:16px 0 0!important; border-top:1px solid #d9cdec!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingGroup { min-width:0!important; padding:0!important; border:0!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroupHead { margin:0 0 9px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroupHead>span { color:#8b77ad!important; font-size:8px!important; letter-spacing:.17em!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroupHead h3 { color:#4c3d69!important; font-size:12px!important; font-weight:900!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:7px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button {
+ display:grid!important; grid-template-columns:minmax(0,1fr) auto!important; grid-template-rows:auto auto!important;
+ gap:3px 7px!important; min-width:0!important; min-height:54px!important; padding:9px 10px!important;
+ border:1px solid #ded4ef!important; border-radius:3px!important; background:#ffffffc9!important; color:#51416c!important;
+ text-align:left!important; box-shadow:none!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button strong { font-size:10px!important; line-height:1.3!important; color:#51416c!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button small { grid-column:1/-1!important; color:#8b7a9f!important; font-size:8px!important; line-height:1.4!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button>span { color:var(--amq-osu-purple)!important; font-size:15px!important; }
+body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home { display:none!important; }
+body.ui-home-menu #audioDock { position:fixed!important; left:clamp(12px,2vw,28px)!important; right:clamp(12px,2vw,28px)!important; bottom:10px!important; z-index:80!important; width:auto!important; margin:0!important; border:1px solid #d7c9ec!important; border-radius:5px!important; background:#fffd!important; box-shadow:0 5px 22px #3f2b641c!important; backdrop-filter:blur(12px)!important; }
+@media(max-width:900px) {
+ body.ui-home-menu #homeMenu .amqHomeTopFrame { grid-template-columns:minmax(0,1fr)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto!important; gap:20px!important; min-height:0!important; padding:24px 8px!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851::before { grid-column:1!important; grid-row:1!important; width:clamp(170px,40vw,250px)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingPrimary { grid-column:1!important; grid-row:2!important; max-width:none!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingGroups { grid-column:1!important; grid-row:3!important; grid-template-columns:minmax(0,1fr)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingLinks { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+ body.ui-home-menu #audioDock { left:8px!important; right:8px!important; bottom:8px!important; }
+}
+@media(max-width:460px) {
+ body.ui-home-menu .wrap { padding-left:12px!important; padding-right:12px!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingAction { grid-template-columns:36px minmax(0,1fr) 20px!important; padding:10px!important; min-height:70px!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingAction::before { width:30px!important; height:30px!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingLinks { grid-template-columns:minmax(0,1fr)!important; }
+}
+@media(prefers-reduced-motion:reduce) {
+ body.ui-home-menu #homeMenu .amqHomeLandingAction { transition:none!important; }
+}
+</style>
