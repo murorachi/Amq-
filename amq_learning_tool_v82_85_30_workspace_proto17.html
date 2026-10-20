@@ -6594,32 +6594,27 @@ async function runAction(a){
    else {const catalogView=await waitForElement('vnCatalogView',1200);if(catalogView){setStatus('已找到 VN 圖鑑區；請使用原有 VN 分頁操作。','success')}else setStatus('已開啟我的清單，但未能確認 VN 清單目前可見；未修改任何資料。','error')}
    return
  }
- if(a==='practiceExplore'||a==='practiceWeak'){
-   if(!clickHome('learningCenter'))return;
-   const mode=a==='practiceExplore'?'explore':'weak';
-   let button=null;const started=Date.now();
-   while(Date.now()-started<3500){button=[...document.querySelectorAll('[data-practice-mode="'+mode+'"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)break;await new Promise(resolve=>setTimeout(resolve,50))}
-   if(button){button.click();button.scrollIntoView({behavior:'smooth',block:'center'});setStatus(a==='practiceExplore'?'已開啟探索新歌模式；候選範圍沿用現有學習規則。':'已開啟弱點補強模式；系統弱點與手動補強仍依原有規則分開計算。','success')}
-   else setStatus('學習中心已開啟，但未找到可見的 '+(mode==='explore'?'探索新歌':'弱點補強')+' 控制項；未修改學習資料。','error');
-   return
- }
- if(a==='practice-self'){
-   if(!clickHome('learningCenter'))return;
-   let button=null;const started=Date.now();
-   while(Date.now()-started<3500){button=[...document.querySelectorAll('[data-practice-mode="self"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)break;await new Promise(resolve=>setTimeout(resolve,50))}
-   if(button){button.click();button.scrollIntoView({behavior:'smooth',block:'center'});setStatus('已開啟自選練習模式。請自行勾選一份或多份自訂清單，再確認題數與答題目標；不會自動開始練習。','success')}
-   else setStatus('學習中心已開啟，但未找到可見的自選練習控制項；未開始練習。','error');
-   return
- }
- if(a==='practice-srs'){
-   if(!clickHome('learningCenter'))return;
-   let button=null;const started=Date.now();
-   while(Date.now()-started<3500){button=[...document.querySelectorAll('[data-practice-mode="srs"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)break;await new Promise(resolve=>setTimeout(resolve,50))}
-   if(button){button.click();setStatus('已開啟間隔複習模式。到期歌曲與每日新卡仍由既有排程管理。','success')}
-   else setStatus('學習中心已開啟，但未找到可見的間隔複習選項；未修改排程。','error');
-   return
- }
- if(a==='batch-create-list'){
+ if(['practiceExplore','practiceWeak','practice-self','practice-srs'].includes(a)){
+    const modes={'practiceExplore':'explore','practiceWeak':'weak','practice-self':'self','practice-srs':'srs'};
+    const mode=modes[a];
+    window.__aniSetHomeMenuOpenV846?.(false);
+    window.__aniNavigateApp?.('practice');
+    window.__aniSetPracticeModeV825?.(mode);
+    let button=null;const started=Date.now();
+    while(Date.now()-started<2000){button=[...document.querySelectorAll('[data-practice-mode="'+mode+'"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)break;await new Promise(resolve=>setTimeout(resolve,50))}
+    if(button){if(button.getAttribute('aria-pressed')!=='true')button.click();button.scrollIntoView({behavior:'smooth',block:'center'});const messages={explore:'已開啟探索新歌模式；候選範圍沿用現有學習規則。',weak:'已開啟弱點補強模式；系統弱點與手動補強仍依原有規則分開計算。',self:'已開啟自選練習模式。請自行勾選一份或多份自訂清單，再確認題數與答題目標；不會自動開始練習。',srs:'已開啟間隔複習模式。到期歌曲與每日新卡仍由既有排程管理。'};setStatus(messages[mode],'success')}
+    else setStatus('已開啟練習工作台，但未找到可見的 '+({explore:'探索新歌',weak:'弱點補強',self:'自選練習',srs:'間隔複習'}[mode])+' 控制項；未開始練習。','error');
+    return
+  }
+  if(a==='learningCenter'){
+    window.__aniNavigateApp?.('home');
+    window.__aniSetHomeMenuOpenV846?.(true);
+    const group=$('#amqHomePrimaryNav [data-vn49-action="group"][data-group="learning"]');
+    if(group){group.click();setStatus('已開啟學習中心選單。','success')}
+    else setStatus('找不到既有的學習中心選單入口；未修改任何資料。','error');
+    return
+  }
+  if(a==='batch-create-list'){
    if(!clickHome('catalog'))return;
    const control=await waitForElement('createListFromCatalog');
    if(!control){setStatus('尚未找到圖鑑中的「建立自訂清單」控制項；沒有建立清單。','error');return}
@@ -6664,7 +6659,7 @@ let initial='lists';try{const saved=sessionStorage.getItem('amqWorkspacePrototyp
 // Keep the existing homepage as the true entry point. The workspace shell appears only on relevant work views.
 const workspaceViews=new Set(['catalog','vnCatalog','watchlist','vnList','customLists','explore','practice','learningPlan','dashboard']);
 function syncWorkspaceVisibility(){let view='home';try{view=window.__aniGetActiveViewV82?.()||'home';if(view==='catalog'&&document.querySelector('#vnCatalogView:not([hidden])'))view='vnCatalog';if(view==='watchlist'){const custom=document.querySelector('#customListsWork');if(custom&&(!custom.hidden&&!custom.classList.contains('hidden')))view='customLists';if(document.querySelector('#vnListView:not([hidden])'))view='vnList'}}catch{}const active=workspaceViews.has(view);document.body.classList.toggle('amq-workspace-active',active);return view}
-function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;target.textContent=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。'}
+function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;const text=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。';if(target.textContent!==text)target.textContent=text}
 refreshBatchScope();
 const scopeObserver=new MutationObserver(refreshBatchScope);const scopeSource=$('#batchScopeSummaryV844');if(scopeSource)scopeObserver.observe(scopeSource,{subtree:true,childList:true,characterData:true,attributes:true});
 const observer=new MutationObserver(()=>{syncWorkspaceVisibility();refreshBatchScope()});observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class','style']});

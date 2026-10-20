@@ -1,0 +1,10 @@
+Repository: murorachi/Amq-
+Baseline workflow run: 39395545055
+Baseline artifact: amq_learning_tool_v82_85_30_workspace_proto17
+Baseline source commit: 4fc4a099389b59850c46d3eab2332be3401d487a
+Baseline source HTML SHA-256: 3dd33bacf8b4482034150d2a858daa70c9bfc61914a36f7124a50204970c3864
+Final branch: amq-proto17-ui-init-acceptance-20261020
+Final file: amq_learning_tool_v82_85_30_workspace_proto17.html
+File size (bytes): 8832874
+SHA-256: c2e27b8e820a81f714439d02352a575db0c139f4326c50755161f26e6dc250fe
+Git blob SHA: 83b4e2a925ae470d8a8b19694ee0e09f9efe9b68
