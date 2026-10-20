@@ -21,7 +21,7 @@
 ## Current implementation checkpoint
 - Working branch: `v82.85.30-proto25-ui-refactor-work-01`.
 - Stage 14 branch: `v82.85.30-proto25-ui-refactor-stage-14`.
-- Last confirmed common engineering checkpoint: `755b23bb041eae9ad88f2aaa09957be0e15cd2b3`; stage-14 and working branches were fast-forwarded to this commit.
+- Last confirmed common engineering checkpoint: `a522cae666f86bba7f7c3b198fcd36f5f94e6395`; stage-14 and working branches were fast-forwarded to this workflow/artifact-list commit.
 - Candidate HTML and SHA-256 manifest for Proto25 Stage 14: NOT VERIFIED as generated artifacts.
 - Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
 
