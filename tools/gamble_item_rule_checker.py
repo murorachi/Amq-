@@ -103,6 +103,7 @@ class Curse:
     curse_id: str
     removable: bool = True
     active: bool = True
+    creation_run: str | None = None
 
 
 class CurseLedger:
@@ -111,12 +112,13 @@ class CurseLedger:
         self._curses: dict[str, Curse] = {}
         self._rewarded_runs: set[str] = set()
 
-    def add(self, curse_id: str, removable: bool = True) -> None:
+    def add(self, curse_id: str, removable: bool = True,
+            run_id: str | None = None) -> None:
         if not curse_id:
             raise RuleViolation("curse_id must be non-empty")
         if curse_id in self._curses:
             raise RuleViolation(f"duplicate curse event: {curse_id}")
-        self._curses[curse_id] = Curse(curse_id, removable, True)
+        self._curses[curse_id] = Curse(curse_id, removable, True, run_id)
 
     def remove(self, curse_id: str) -> None:
         curse = self._curses.get(curse_id)
@@ -143,8 +145,8 @@ class CurseLedger:
         if not run_id:
             raise RuleViolation("run_id must be non-empty")
         curse = self._curses.get(curse_id)
-        if curse is None or not curse.active:
-            raise RuleViolation("new active curse required")
+        if curse is None or not curse.active or curse.creation_run != run_id:
+            raise RuleViolation("new active curse from this run required")
         if run_id in self._rewarded_runs:
             raise RuleViolation("black obsidian reward already used this run")
         if choice == "keep":
@@ -409,27 +411,29 @@ class ContractTests(unittest.TestCase):
 
     def test_curse_wax_costs_20_and_only_removes_removable_active_curse(self):
         ledger = CurseLedger()
-        ledger.add("ordinary")
+        ledger.add("ordinary", run_id="run-1")
         self.assertEqual(ledger.curse_wax_remove(35, "ordinary"), 15)
         with self.assertRaisesRegex(RuleViolation, "curse is not active"):
             ledger.curse_wax_remove(35, "ordinary")
-        ledger.add("permanent", removable=False)
+        ledger.add("permanent", removable=False, run_id="run-1")
         with self.assertRaisesRegex(RuleViolation, "cannot be removed"):
             ledger.curse_wax_remove(100, "permanent")
-        ledger.add("poor")
+        ledger.add("poor", run_id="run-1")
         with self.assertRaisesRegex(RuleViolation, "costs 20"):
             ledger.curse_wax_remove(19, "poor")
 
     def test_black_obsidian_reward_is_once_per_run_and_requires_active_curse(self):
         ledger = CurseLedger()
-        ledger.add("curse-1")
+        ledger.add("curse-1", run_id="run-1")
         self.assertEqual(ledger.black_obsidian_reward("run-1", "curse-1", "keep"), 40)
         with self.assertRaisesRegex(RuleViolation, "already used this run"):
             ledger.black_obsidian_reward("run-1", "curse-1", "keep")
-        ledger.add("curse-2")
+        ledger.add("curse-2", run_id="run-2")
         self.assertEqual(ledger.black_obsidian_reward("run-2", "curse-2", "reject"), 0)
         self.assertFalse(ledger._curses["curse-2"].active)
-        with self.assertRaisesRegex(RuleViolation, "active curse required"):
+        with self.assertRaisesRegex(RuleViolation, "active curse from this run"):
+            ledger.black_obsidian_reward("run-3", "curse-1", "keep")
+        with self.assertRaisesRegex(RuleViolation, "active curse from this run"):
             ledger.black_obsidian_reward("run-3", "curse-2", "keep")
 
     def test_integer_rounding_and_crowbar_bonus(self):
