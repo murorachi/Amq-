@@ -385,4 +385,47 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  #amqSceneBgDialog .sceneBgActions .btn { min-width:0!important; white-space:normal!important; }
 }
 
+
+/* Stage 13: make the Play submenu match osu!Stable's cookie-left / horizontal-menu-right composition. */
+#amqStablePlayShade {
+ background:
+  radial-gradient(circle at 22% 46%,#f06cae13 0%,transparent 35%),
+  repeating-linear-gradient(135deg,#ffffff04 0 1px,transparent 1px 18px),
+  #120d16ed!important;
+}
+#amqStablePlayPanel {
+ display:grid!important; grid-template-columns:minmax(250px,.9fr) minmax(340px,1.1fr)!important;
+ grid-template-rows:auto auto auto auto!important; align-content:center!important; align-items:center!important;
+ gap:10px clamp(22px,4vw,52px)!important; width:min(100%,1080px)!important;
+ padding:clamp(22px,3vw,42px)!important; border:0!important; border-radius:0!important;
+ background:transparent!important; box-shadow:none!important;
+}
+#amqStablePlayPanel::before {
+ content:"osu!"!important; grid-column:1!important; grid-row:1/5!important; justify-self:center!important; align-self:center!important;
+ display:grid!important; place-items:center!important; width:min(100%,clamp(230px,28vw,350px))!important; aspect-ratio:1!important;
+ border:8px solid #fff!important; outline:2px solid #e86aa9!important; border-radius:50%!important;
+ background:radial-gradient(circle at 34% 24%,#ffb5d7 0%,#f47bb9 32%,#d94e96 67%,#a72e70 100%)!important;
+ color:#fff!important; font-family:Arial,sans-serif!important; font-size:clamp(62px,7vw,92px)!important;
+ font-weight:900!important; font-style:italic!important; letter-spacing:-.09em!important; text-shadow:0 3px 0 #7f2758!important;
+ box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
+}
+#amqStablePlayEyebrow { grid-column:2!important; grid-row:1!important; align-self:end!important; margin:0!important; }
+#amqStablePlayPanel h2 { grid-column:2!important; grid-row:2!important; align-self:end!important; margin:0 0 6px!important; }
+#amqStablePlayChoices { grid-column:2!important; grid-row:3!important; gap:6px!important; }
+#amqStablePlayChoices button { min-height:50px!important; padding:9px 14px!important; border-radius:2px!important; font-size:clamp(15px,1.4vw,20px)!important; }
+#amqStablePlayNotice { grid-column:2!important; grid-row:4!important; margin:0!important; }
+@media(max-width:760px) {
+ #amqStablePlayShade { padding:10px!important; }
+ #amqStablePlayPanel {
+  grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto auto auto auto!important;
+  gap:8px!important; width:100%!important; max-height:calc(100dvh - 20px)!important; overflow:auto!important; padding:12px!important;
+ }
+ #amqStablePlayPanel::before { grid-column:1!important; grid-row:1!important; width:clamp(145px,42vw,190px)!important; border-width:5px!important; font-size:clamp(42px,12vw,60px)!important; }
+ #amqStablePlayEyebrow { grid-column:1!important; grid-row:2!important; text-align:center!important; }
+ #amqStablePlayPanel h2 { grid-column:1!important; grid-row:3!important; text-align:center!important; font-size:24px!important; }
+ #amqStablePlayChoices { grid-column:1!important; grid-row:4!important; }
+ #amqStablePlayChoices button { min-height:44px!important; }
+ #amqStablePlayNotice { grid-column:1!important; grid-row:5!important; text-align:center!important; }
+}
+
 </style>
