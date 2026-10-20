@@ -72,7 +72,7 @@ jobs:
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto24-accepted-delivery-02
+          TARGET_BRANCH: v82.85.30-proto24-accepted-delivery-01
         run: |
           set -euo pipefail
           mkdir -p dist engineering/proto24-acceptance
