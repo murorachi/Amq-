@@ -52,6 +52,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Updated the browser height assertion from the old tall-card target to the new compact-row target.
 - Stage 10 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-10`.
 
+## Stage 11: Song Select full-screen layout
+- Converted the existing anime/song drawer into a full-screen two-column selection surface: metadata and player controls on the left, scrollable song rows on the right.
+- Added desktop screenshot capture and a 390×844 drawer overflow assertion; existing song playback and familiarity buttons remain the original handlers.
+- Stage 11 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-11`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
