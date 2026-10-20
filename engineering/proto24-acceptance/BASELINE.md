@@ -30,7 +30,7 @@
 - Stage 21 branch: `v82.85.30-proto25-ui-refactor-stage-21`.
 - Stage 22 source commit: `e695b80c8aca4ca4e8c8a5337f422de0a4384eb0`.
 - Last confirmed common source checkpoint: `12a999b6e23db26c95504d6abe7be9ba5b81a1f8`; stage-16 and working branches were fast-forwarded to this commit. Documentation updates follow that source checkpoint.
-- Stage 16–22 candidate HTML and SHA-256 manifest: static checks passed on run `39492892899`, but browser acceptance failed at home geometry. Selector fixes are committed; validation PR #7 is open and the new browser result is NOT YET VERIFIED.
+- Stage 16–22 candidate HTML and SHA-256 manifest: static checks pass. Run `39495757564` confirmed catalog/quicktools hidden but profile height remained 94px; border-box correction is committed as `ca70511a2978f0dbfbc422dcc9cb116f5f8b61bd`. Browser acceptance of that correction: NOT YET VERIFIED.
 - Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
 
 ## Rollback
