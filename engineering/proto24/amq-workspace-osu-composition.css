@@ -179,10 +179,20 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
 #overlay .detailHeroText p,#overlay .playerInfo span { color:#cbbaca!important; }
 #overlay .playerbar { border-top:1px solid #574554!important; border-bottom:1px solid #574554!important; background:#211a24!important; }
 #overlay .playerDisc { border:2px solid #fff!important; outline:2px solid #e86aa9!important; background:radial-gradient(circle at 35% 25%,#ffb5d7,#d94e96 70%,#8c285e)!important; }
-#songlist .songRow,#songlist .songItem {
+#grid.view-catalog .card { border:1px solid #574554!important; border-radius:4px!important; background:#302632!important; color:#f7edf3!important; box-shadow:0 3px 0 #1b151e!important; overflow:hidden!important; }
+#grid.view-catalog .card.selected { border-color:#ff8fc7!important; box-shadow:inset 0 0 0 2px #e86aa9,0 3px 0 #1b151e!important; }
+#grid.view-catalog .card .cover { border-radius:0!important; border-bottom:1px solid #574554!important; }
+#grid.view-catalog .card .cardbody { padding:12px!important; }
+#grid.view-catalog .card .cardtitle { color:#fff!important; font-weight:850!important; }
+#grid.view-catalog .card .sub { color:#cbbaca!important; }
+#grid.view-catalog .card .pill { border:1px solid #6b5365!important; border-radius:3px!important; background:#211a24!important; color:#f0bdd6!important; }
+#grid.view-catalog .card .tinybar { background:#211a24!important; }
+#grid.view-catalog .card .tinybar span { background:linear-gradient(90deg,#f184b9,#c84487)!important; }
+#grid.view-catalog .card .cardManage { border:1px solid #6b5365!important; background:#302632!important; color:#fff!important; }
+#songlist .songrow {
  border-bottom:1px solid #574554!important; background:#302632!important; color:#f7edf3!important;
 }
-#songlist .songRow:hover,#songlist .songItem:hover { background:#463441!important; }
+#songlist .songrow:hover { background:#463441!important; }
 #songlist button { border-radius:3px!important; }
 @media(max-width:900px) {
  .toolbar.view-catalog { grid-template-columns:minmax(0,1fr) repeat(2,minmax(0,1fr))!important; }
