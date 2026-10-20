@@ -72,7 +72,12 @@ async def main():
             assert styles["body"]=="rgb(40, 33, 43)",styles
             assert "rgb(112, 64, 92)" in styles["active"],styles
             assert styles["actions"]>=5,styles
+            await page.emulate_media(reduced_motion="reduce")
+            motion=await page.locator("#wsActions .wsAction").first.evaluate("(e)=>getComputedStyle(e).transitionDuration")
+            assert motion in ("0s","0s, 0s"),{"workspace":ws,"transitionDuration":motion}
+            await page.emulate_media(reduced_motion="no-preference")
             report.setdefault("workspace_visuals",{})[ws]=styles
+            report.setdefault("accessibility",{})[ws]={"reduced_motion_transition_duration":motion}
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
         report["elapsed_seconds"]=round(time.time()-started,2)
         await browser.close()
