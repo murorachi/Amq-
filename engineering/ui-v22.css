@@ -45,3 +45,5 @@ body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home{display:
 <style id="amq-osu-music-artwork-fallback-v22">body.ui-home-menu #homeMenu .amqPlayerFrame img,body.ui-home-menu #homeMenu .amqHomeDock img,body.ui-home-menu #amqHomePlayerSlot img{display:none!important}</style>
 
 <style id="amq-osu-hide-broken-audio-art-v22">body.ui-home-menu #audioDock img,body.ui-home-menu #homeMenu .amqHomeTopFrame img,body.ui-home-menu #amqHomePlayerSlot img{display:none!important}</style>
+
+<style id="amq-osu-home-broken-image-suppression-v22">body.ui-home-menu img{display:none!important}</style>
