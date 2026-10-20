@@ -26,6 +26,12 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added browser assertions for catalog and quiz panel colors, in addition to workspace and reduced-motion checks.
 - Stage 4 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-04`.
 
+## Stage 5: Stable-style Play menu
+- Added a Play submenu dialog with the requested `Single Player`, `Multiplayer`, and `Back` labels.
+- `Single Player` routes to the existing AMQ quiz route. `Multiplayer` is disabled and explains the capability gap rather than pretending to launch a nonexistent multiplayer mode.
+- Added keyboard Escape/Tab handling and a Playwright interaction check for menu labels, Back behavior, disabled multiplayer, and the Single Player route.
+- Stage 5 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-05`.
+
 ## Verification
 - GitHub file writes and subsequent reads: PASS.
 - Immutable Proto24 baseline remains present: PASS.
