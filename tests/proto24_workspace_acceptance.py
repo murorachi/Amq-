@@ -41,6 +41,16 @@ async def main():
         for action in expected:
             await page.locator('[data-home-action="'+action+'"]').first.click(timeout=8000)
             await page.wait_for_timeout(180)
+            if action=="quiz":
+                shade=page.locator("#amqStablePlayShade")
+                assert await shade.is_visible(),"Play action must open Stable-style Play menu"
+                assert await page.locator("#amqStableSinglePlayer").inner_text()=="Single Player"
+                assert await page.locator("#amqStableMultiplayer").is_disabled(),"unsupported multiplayer must not look functional"
+                await page.locator("#amqStablePlayClose").click(timeout=5000)
+                assert not await shade.is_visible(),"Back must close the Play menu"
+                await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
+                await page.locator("#amqStableSinglePlayer").click(timeout=5000)
+                await page.wait_for_timeout(180)
             state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
             assert state,action
             back=page.locator("#uiBackHome").first
