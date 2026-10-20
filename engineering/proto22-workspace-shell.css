@@ -46,3 +46,8 @@ body.amq-workspace-active #dashboardPanel .dashIntro b,body.amq-workspace-active
 body.amq-workspace-active #dashboardPanel .dashIntro div,body.amq-workspace-active .dashIntro div{color:#cfc2d8!important}
 body.amq-workspace-active #audioDock{left:auto!important;right:14px!important;transform:none!important;bottom:88px!important;width:min(420px,calc(100vw - 300px))!important;max-width:min(420px,calc(100vw - 300px))!important;z-index:9998!important}
 @media(max-width:900px){body.amq-workspace-active #audioDock{left:8px!important;right:8px!important;bottom:78px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important}}
+
+body.amq-workspace-active .dashSection{background:linear-gradient(145deg,#201a28,#17131d)!important;border-color:#403149!important;color:#f5f0fa!important}
+body.amq-workspace-active .dashMetric{background:#1a1521!important;border-color:#403149!important;color:#f5f0fa!important}
+body.amq-workspace-active .dashMetric span,body.amq-workspace-active .dashRow{color:#cfc2d8!important}
+body.amq-workspace-active .dashTrack{background:#34283f!important}
