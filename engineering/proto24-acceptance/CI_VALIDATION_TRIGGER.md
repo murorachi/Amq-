@@ -8,3 +8,5 @@ Retry after moving candidate write below Play menu injection.
 Retry after correcting Multiplayer's return-home selector to #mpBackHome.
 
 Retry after aligning Settings styles with the actual ui-settings-open state.
+
+Rerun: test Settings background-image gradient rather than expecting a solid background-color.
