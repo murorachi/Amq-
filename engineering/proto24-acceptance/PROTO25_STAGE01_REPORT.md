@@ -46,6 +46,12 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added mobile-width assertions for the Play submenu, catalog toolbar, and Settings panel at 390×844; homepage already had an overflow check at the same viewport.
 - Stage 9 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-09`.
 
+## Stage 10: measured osu!Stable home geometry pass
+- Inspected the pinned official Wiki main-menu screenshot and documented direct layout differences in `OSU_STABLE_VISUAL_COMPARISON.md`.
+- Changed the home menu to short horizontal action rows, compacted the player/profile strip, and reduced secondary footer link prominence.
+- Updated the browser height assertion from the old tall-card target to the new compact-row target.
+- Stage 10 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-10`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
