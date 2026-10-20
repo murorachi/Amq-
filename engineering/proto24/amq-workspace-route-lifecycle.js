@@ -31,9 +31,5 @@
       scheduleRouteSync();
     }
   }, true);
-  new MutationObserver(syncWorkspaceShell).observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"]
-  });
 })();
 </script>
