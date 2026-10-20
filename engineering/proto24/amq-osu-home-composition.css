@@ -296,7 +296,7 @@ body.ui-home-menu .wrap {
   radial-gradient(circle at 50% 44%,#f06cae0b 0%,transparent 36%),
   radial-gradient(circle at 18% 28%,#9b6d9918 0%,transparent 34%),
   radial-gradient(circle at 82% 72%,#d94e960a 0%,transparent 38%),
-  repeating-linear-gradient(135deg,#ffffff025 0 1px,transparent 1px 22px)!important;
+  repeating-linear-gradient(135deg,#ffffff04 0 1px,transparent 1px 22px)!important;
  background-attachment:fixed!important;
 }
 body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
