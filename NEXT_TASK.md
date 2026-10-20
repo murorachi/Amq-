@@ -174,3 +174,10 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Debt Scale/Heavy Interest stacking remains blocked until the exact curse effect and stacking order are explicitly approved. Human paper playtest remains required. No product implementation.
 - Latest checks: rule contracts 14/14 PASS; Crown sensitivity 4/4 PASS; Python compilation PASS. Remote Actions [run 39347173611](https://github.com/murorachi/Amq-/actions/runs/39347173611) PASS.
 
+## Active task — enumerate multiplayer trust/resentment outcomes
+
+- Current deterministic checker: `tools/gamble_item_rule_checker.py` (19 tests; latest CI pass: [run 39347703666](https://github.com/murorachi/Amq-/actions/runs/39347703666)).
+- Next build a small exhaustive outcome enumerator for Trust Badge and Traitor's Mark at 2, 3, and 6 players, including fully coordinated, one-defector, and mixed-choice profiles.
+- Report player-to-player transfers, Trust Badge system-created bonus chips, resentment token creation/redemption, and net chips separately. Do not call a positive system transfer an exploit until its intended funding rule is decided.
+- Then close Sin-Debt Scale and Heavy Interest stacking/due-date semantics before modeling those combinations.
+- Keep Broken Safe's protection precedence provisional until the paper rules confirm it. No product UI/server/database work; human paper playtest remains required.
