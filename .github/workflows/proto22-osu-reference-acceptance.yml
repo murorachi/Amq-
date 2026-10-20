@@ -37,9 +37,14 @@ jobs:
             s=s[:-3]
           elif s.endswith("\\n"):
             s=s[:-2]
+          # Add the accepted workspace shell and a real accessible settings overlay.
+          s += "\\n<style id=\"amq-proto22-workspace-shell\">\\n" + Path("engineering/proto22-workspace-shell.css").read_text(encoding="utf-8") + "\\n</style>\\n"
+          s += "\\n" + Path("engineering/proto22-settings-layer.html").read_text(encoding="utf-8") + "\\n"
           p.write_text(s,encoding="utf-8")
           assert "amq-osu-reference-fidelity-v22" in s
-          print("Reference CSS present once; trailing literal escape cleaned: PASS")
+          assert "amq-proto22-workspace-shell" in s
+          assert "amqSettingsLayerV21" in s
+          print("Home, workspace shell and settings layer assembled: PASS")
           PY
           python - <<'PY'
           from pathlib import Path
