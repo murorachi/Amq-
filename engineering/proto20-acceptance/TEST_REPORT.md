@@ -8,6 +8,9 @@
 - Home landing hides duplicate legacy dashboard and discovery sections: PASS.
 - Mobile viewport 390px: no horizontal overflow, PASS.
 - Learning Center and Analysis remain separate and expected actions render: PASS.
+- Four-workspace dock and sidebar visual skin: PASS; desktop screenshots captured for Learning Center and Analysis.
+- Dashboard intro contrast under dark theme: PASS.
+- Persistent audio dock repositioned to avoid covering the workspace sidebar and bottom workspace navigation: PASS.
 - Unhandled browser exceptions: 0; console errors: 0.
 - Actual audio playback, quiz-answer lifecycle and multiplayer regression: NOT RUN in this stage.
-- Test run: https://github.com/murorachi/Amq-/actions/runs/39458257499
+- Test run: https://github.com/murorachi/Amq-/actions/runs/39459772481
