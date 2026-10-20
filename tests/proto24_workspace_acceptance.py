@@ -19,11 +19,13 @@ async def main():
         assert all(storage.values()),storage
         report["checks"].append("Native-origin storage APIs: PASS")
         await page.screenshot(path="proto24-desktop.png",full_page=True)
-        layout=await page.evaluate("""()=>{const q=s=>document.querySelector(s);const r=e=>{const x=e.getBoundingClientRect();return {x:Math.round(x.x),y:Math.round(x.y),w:Math.round(x.width),h:Math.round(x.height)}};return {profile:r(q('#amqProfileCard')),player:r(q('.amqPlayerFrame')),landing:r(q('.amqHomeLandingV851')),logo:getComputedStyle(q('.amqHomeLandingV851'),'::before').display,primary:r(q('.amqHomeLandingPrimary')),actions:[...q('.amqHomeLandingPrimary').children].map(r),groups:r(q('.amqHomeLandingGroups')),legacy:[getComputedStyle(q('.hero.view-home')).display,getComputedStyle(q('.discover.view-home')).display]}}""")
+        layout=await page.evaluate("""()=>{const q=s=>document.querySelector(s);const r=e=>{const x=e.getBoundingClientRect();return {x:Math.round(x.x),y:Math.round(x.y),w:Math.round(x.width),h:Math.round(x.height)}};return {profile:r(q('#amqProfileCard')),player:r(q('.amqPlayerFrame')),landing:r(q('.amqHomeLandingV851')),logo:getComputedStyle(q('.amqHomeLandingV851'),'::before').display,primary:r(q('.amqHomeLandingPrimary')),actions:[...q('.amqHomeLandingPrimary').children].map(r),groups:r(q('.amqHomeLandingGroups')),legacy:[getComputedStyle(q('.hero.view-home')).display,getComputedStyle(q('.discover.view-home')).display],catalogToolbar:getComputedStyle(q('.toolbar.view-catalog')).display,quicktools:getComputedStyle(q('#quicktools')).display,profileHeight:r(q('#amqProfileCard')).h,playerHeight:r(q('.amqPlayerFrame')).h}}""")
         assert layout["profile"]["x"] < layout["player"]["x"],layout
         assert layout["primary"]["x"] > layout["landing"]["x"]+layout["landing"]["w"]*.30,layout
         assert len(layout["actions"])==3 and all(a["h"]>=40 for a in layout["actions"]),layout
         assert layout["legacy"]==["none","none"],layout
+        assert layout["catalogToolbar"]=="none" and layout["quicktools"]=="none",layout
+        assert layout["profileHeight"]<=90 and layout["playerHeight"]<=90,layout
         visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
         assert "osu!" in visual["logo"],visual
         assert layout["logo"]=="grid",layout
@@ -33,7 +35,7 @@ async def main():
         report["desktop_layout"]=layout
         cover=await page.evaluate("""()=>{const e=document.querySelector('#dockCoverV33');return !e||getComputedStyle(e).display==='none'||e.hidden}""")
         assert cover, "hidden dock cover must not show a broken image icon"
-        report["checks"].append("Desktop osu composition: profile upper-left, music bar top-right, centered circular mark left, three stacked purple actions right, balanced footer, legacy sections hidden: PASS")
+        report["checks"].append("Desktop osu composition: compact profile/player strip, circular osu-style mark left, compact horizontal menu rows right, utility links minimized, catalog hidden on home: PASS")
         report["checks"].append("No broken hidden cover icon: PASS")
         expected=["quiz","practiceExplore","practiceWeak","catalog","watchlist","learningPlan","dashboard"]
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
@@ -155,7 +157,7 @@ async def main():
         song_select=await page.evaluate("()=>({width:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns,rows:document.querySelectorAll('#songlist .songrow').length})")
         assert song_select["width"]>=1400 and len(song_select["columns"].split())==2,song_select
         report["song_select_visuals"]=song_select
-        await page.screenshot(path="proto25-song-select.png",full_page=True)
+        await page.screenshot(path="proto25-song-select.png",full_page=False)
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
         song_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,drawer:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns})")
         assert song_mobile["document"]<=song_mobile["viewport"] and song_mobile["drawer"]<=song_mobile["viewport"],song_mobile
