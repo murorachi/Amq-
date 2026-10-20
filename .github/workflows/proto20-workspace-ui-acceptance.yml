@@ -30,7 +30,10 @@ jobs:
           assert "amq-proto20-workspace-ui-pass" not in s
           s += "\n" + css + "\n"
           p.write_text(s,encoding="utf-8")
+          with p.open("a",encoding="utf-8") as f: f.write("\n<script id=\"amq-proto20-workspace-route-sync\">\n(()=>{'use strict';\n function syncWorkspaceToRoute(){\n  let view='home';try{view=window.__aniGetActiveViewV82?.()||'home'}catch{}\n  const target=view==='dashboard'?'analysis':(['practice','learningPlan','explore'].includes(view)?'learning':null);\n  if(!target)return;\n  const button=document.querySelector('#amqWorkspaceDock [data-ws=\"'+target+'\"]');\n  if(button&&button.getAttribute('aria-pressed')!=='true')button.click();\n }\n document.addEventListener('ani-app-navigation',()=>setTimeout(syncWorkspaceToRoute,80));\n window.addEventListener('hashchange',()=>setTimeout(syncWorkspaceToRoute,80));\n window.addEventListener('popstate',()=>setTimeout(syncWorkspaceToRoute,80));\n setTimeout(syncWorkspaceToRoute,150);\n})();\n</script>\n")
+          s=p.read_text(encoding="utf-8")
           assert s.count("amq-proto20-workspace-ui-pass")==1
+          assert s.count("amq-proto20-workspace-route-sync")==1
           print("Proto20 workspace UI layer appended after all existing styles: PASS")
           PY
           sha256sum candidate.html | tee candidate.sha256
