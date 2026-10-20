@@ -14,6 +14,24 @@
     setTimeout(syncWorkspaceShell, 180);
     setTimeout(syncWorkspaceShell, 260);
   };
+  const installNavigationGuard = () => {
+    const navigate = window.__aniNavigateApp;
+    if (typeof navigate !== "function" || navigate.__amqWorkspaceGuarded) return;
+    const guardedNavigate = function(view, ...args) {
+      const result = navigate.call(this, view, ...args);
+      if (view !== "dashboard") {
+        document.body.classList.remove("amq-workspace-active");
+        requestAnimationFrame(() => document.body.classList.remove("amq-workspace-active"));
+        setTimeout(() => document.body.classList.remove("amq-workspace-active"), 80);
+      }
+      return result;
+    };
+    guardedNavigate.__amqWorkspaceGuarded = true;
+    window.__aniNavigateApp = guardedNavigate;
+  };
+  installNavigationGuard();
+  setTimeout(installNavigationGuard, 0);
+  setTimeout(installNavigationGuard, 80);
   const standaloneActions = new Set([
     "quiz", "practiceExplore", "practiceWeak", "catalog",
     "watchlist", "learningPlan"
