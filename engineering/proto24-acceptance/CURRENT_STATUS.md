@@ -36,7 +36,7 @@
 - GitHub file writes and remote read-back: PASS.
 - Stage 14 source checkpoint branch equality with working branch at the last comparison: PASS.
 - Original Proto24 browser acceptance: PASS for the original Proto24 artifact only.
-- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The workflow artifact list now includes the Song Select screenshot. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
+- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The Stage 16 workflow includes desktop/mobile screenshots for home, workspaces and Song Select plus the test report and SHA-256 manifest. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
 - Local browser attempt: BLOCKED by the execution environment (`ERR_BLOCKED_BY_ADMINISTRATOR` for both local HTTP and file URLs); no local browser acceptance is claimed.
 - New candidate HTML parser/inline JS/browser assertions: NOT RUN on the actual generated Proto25 artifact.
 - Real audio output, full quiz lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
