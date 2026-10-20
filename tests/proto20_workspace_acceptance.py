@@ -94,9 +94,10 @@ async def main():
         assert ui_layer==1, f"Proto20 UI stylesheet missing: {ui_layer}"
         desktop_widths=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth})")
         assert desktop_widths["document"]<=desktop_widths["viewport"], desktop_widths
-        style_metrics=await page.evaluate("""()=>({hint:getComputedStyle(document.querySelector('.toolhint')).backgroundColor,audioBottom:getComputedStyle(document.querySelector('#audioDock')).bottom,dockHeight:document.querySelector('#amqWorkspaceDock').getBoundingClientRect().height})""")
+        style_metrics=await page.evaluate("""()=>({hint:getComputedStyle(document.querySelector('.toolhint')).backgroundColor,dashIntro:getComputedStyle(document.querySelector('.dashIntro')).backgroundColor,audioBottom:getComputedStyle(document.querySelector('#audioDock')).bottom,audioLeft:getComputedStyle(document.querySelector('#audioDock')).left,audioRight:getComputedStyle(document.querySelector('#audioDock')).right,audioTransform:getComputedStyle(document.querySelector('#audioDock')).transform,dockHeight:document.querySelector('#amqWorkspaceDock').getBoundingClientRect().height})""")
         assert style_metrics["hint"] not in ["rgb(255, 255, 255)","rgba(255, 255, 255, 1)"], style_metrics
-        assert style_metrics["audioBottom"]=="78px", style_metrics
+        assert style_metrics["audioBottom"]=="78px" and style_metrics["audioLeft"]=="auto" and style_metrics["audioRight"]=="14px" and style_metrics["audioTransform"]=="none", style_metrics
+        assert style_metrics["dashIntro"] not in ["rgb(255, 255, 255)","rgba(255, 255, 255, 1)"], style_metrics
         report["checks"].append("workspace hint matches dark UI; audio dock clears fixed workspace dock: PASS")
         report["checks"].append("Proto20 workspace visual layer present; desktop no horizontal overflow: PASS")
         report["elapsed_seconds"]=round(time.time()-started,2)
