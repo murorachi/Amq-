@@ -7,37 +7,21 @@
 - Production V82.82 and read-only V82.85.30 remain untouched.
 
 ## Current isolated Proto25 checkpoint
-- Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Latest source/test commit: `0efd88be9a8ab65da1c8a14db9aefb0b0c53e1b5`.
-- Validation/publish branch: `v82.85.30-proto25-ui-refactor-stage-24`.
-- Latest verified run: [39507319150](https://github.com/murorachi/Amq-/actions/runs/39507319150), SUCCESS.
-- Artifact ID: `12303243319`; artifact digest `sha256:0eb85cf8178f32f9c410931aa6213cb7e30db6babcbc14cc3924f87faee2cccb`.
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`; size 8,907,671 bytes; SHA-256 `04d27d56000a8e6d73858b6ff125edcff0669fdef8e3b78e55479460fdccb7c0`.
-- Downloaded artifact SHA-256 matches its manifest. Remote Stage 24 manifest and `TEST_REPORT.md` read-back match. Latest remote publish commit: `4487ebb43c3c512489384c30c82fd5a1728de832`.
 
-## Verified implementation and root causes
-- Fixed clipped profile/player row: the parent had padding plus `overflow:hidden`; the first attempted correction was outside the active `<style>` block and ignored. The corrected rule is inside the style block and browser assertions verify both 84px cards fit within the 86px parent.
-- Home primary actions use Stable-inspired purple gradients and slanted edges without changing existing AMQ routes.
-- Music bar displays metadata and native audio controls in a compact desktop row. Mobile stacks the 84px profile row and 78px music-control row; browser assertions verify control visibility, dimensions and containment.
-- Play menu keeps required labels `Single Player`, `Multiplayer`, `Back` and preserves existing quiz/room-setup routes. Its three choices now use the same Stable-inspired purple blade treatment as the main menu.
-- Latest artifact contains desktop/mobile home, Play menu, Settings, Learning Center, Analysis and Song Select screenshots. Screenshot review confirms the Play submenu now matches the main menu's purple geometry while preserving readable labels.
-
-## Latest test evidence
-- Static HTML parse, duplicate-ID detection and inline JavaScript syntax checks: PASS.
-- Browser acceptance: 17 Playwright checks PASS; 0 page errors; 0 console errors.
-- Covered: native-origin storage and reload persistence; all home actions and return routes; Play menu route, palette and responsive geometry; settings/background dialog; header containment; audio control visibility; mobile overflow; Learning Center/Analysis palette and separation; catalog, Song Select and quiz styling; overlay stacking; reduced motion.
-- Screenshot review: profile text is visible, primary and Play-menu action blades render, audio controls are visible, mobile header stacks without horizontal overflow, and Settings panel remains usable at desktop/mobile widths.
-- NOT RUN: actual audio output, complete quiz-answer lifecycle, multiplayer server connectivity and complete multiplayer lifecycle.
-- Stable release reference: public label `Stable 20260924.1`. Exact matching Stable source commit remains unverified; official wiki screenshots are traceable but not proven to match that exact client build. >=90% visual similarity remains NOT VERIFIED.
-
-## Release and rollback
-- PR #9 remains open and unmerged: https://github.com/murorachi/Amq-/pull/9
-- Do not promote Proto25 until target-screen visual comparison and required runtime acceptance are complete.
-- Rollback to accepted branch `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`.
+- Immutable accepted baseline remains `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`, HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`. It was not modified.
+- Current isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`; tested source head: `38978e192ccd7ea02e228c70974ecc3a96437a1d`.
+- Latest verified workflow run: [39512028498](https://github.com/murorachi/Amq-/actions/runs/39512028498), SUCCESS. Static HTML parsing, unique IDs, inline JavaScript syntax, and all 17 Playwright assertions passed. Page errors: 0. Console errors: 0.
+- Artifact: `proto25-stage24-ui-acceptance`, artifact ID `12305094086`; candidate size 8,913,254 bytes; SHA-256 `cf4a3a209b512ce30090596f9db618d0ef956d4ff3960970ea58af3f54e2efe9`. Downloaded artifact bytes match the checksum manifest exactly.
+- Remote Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`, current commit `1f9727e8082b13a4bcafdd781fc226362e75783f`. Git tree confirms candidate size 8,913,254 bytes; remote checksum manifest and `TEST_REPORT.md` match the verified candidate/run.
+- Root cause fixed: the workspace sidebar/dock could remain active when the actual view changed to catalog. Added an isolated route-lifecycle module, explicit standalone-route marker, CSS visibility scope and browser assertions. The catalog screenshot now shows the catalog instead of the stale Analysis workspace.
+- Root cause fixed: the expanded audio dock covered too much of the catalog. Standalone routes now use a compact 54px dock, and the scroll wrapper reserves bottom space. Browser assertions verify dock height/player visibility and wrapper padding.
+- Profile card gradient/name visibility, 84px desktop profile/player strips, 390px mobile width, dashboard dark palette, workspace separation, catalog route, Song Select overlay stacking and Play menu responsive layout are covered by the latest or prior successful browser assertions. Screenshots were downloaded and reviewed.
+- NOT RUN: actual audio output, complete quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact osu!Stable screenshot build identity remains unknown; >=90% visual similarity is NOT VERIFIED. Broken third-party cover imagery may still occur and is not treated as a layout pass.
+- Do not merge PR #9 or promote Proto25 yet. Keep remaining target-screen visual review and runtime acceptance on the isolated branch.
 
 ## Next engineering task
-1. Compare home, Play menu and Settings captures against pinned official osu!Stable wiki screenshots and record concrete visual deltas.
-2. Continue the coherent visual pass across catalog, Song Select, Learning Center and Analysis at desktop/mobile sizes.
-3. Fix related geometry, hierarchy, iconography, spacing and interaction-state issues at the modular CSS layer; preserve existing AMQ routes/data/playback logic.
-4. Add browser assertions only for demonstrated regressions; run the static gate and full browser suite after each coherent UI group.
-5. Verify fresh screenshots, candidate size, SHA-256, manifest, report and remote Stage 24 files after each successful stage. Keep untested runtime items explicitly NOT RUN.
+1. Review Song Select, Settings/background dialog, quiz, Learning Center and Analysis screenshots for remaining clipping, hierarchy, focus and responsive issues.
+2. Review the catalog screenshot after scrolling to the final rows to confirm fixed-dock clearance; investigate cover-image failures separately from layout.
+3. Compare the target screens against pinned osu!Stable references and record concrete deltas. Do not claim a similarity percentage without matching reference captures.
+4. Extend regression assertions only for observed failures, then rerun the full workflow and verify artifact, candidate size/hash, remote Stage 24 tree, manifest and report.
+5. Keep audio output, full quiz lifecycle and multiplayer lifecycle marked NOT RUN until they are exercised.
