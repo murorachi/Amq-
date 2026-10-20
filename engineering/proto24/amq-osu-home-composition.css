@@ -288,4 +288,21 @@ body.ui-home-menu.ui-settings-open .top .actions .btn { width:100%!important; ju
  body.ui-home-menu.ui-settings-open .top .actions .btn { min-height:40px!important; }
 }
 
+
+/* Stage 15: add restrained playfield texture without using a screenshot as a fake background. */
+body.ui-home-menu .wrap {
+ background-color:#28212b!important;
+ background-image:
+  radial-gradient(circle at 50% 44%,#f06cae0b 0%,transparent 36%),
+  radial-gradient(circle at 18% 28%,#9b6d9918 0%,transparent 34%),
+  radial-gradient(circle at 82% 72%,#d94e960a 0%,transparent 38%),
+  repeating-linear-gradient(135deg,#ffffff025 0 1px,transparent 1px 22px)!important;
+ background-attachment:fixed!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
+ background:
+  radial-gradient(circle at 34% 24%,#ffb5d7 0%,#f47bb9 32%,#d94e96 67%,#a72e70 100%),
+  repeating-linear-gradient(135deg,#ffffff08 0 1px,transparent 1px 17px)!important;
+}
+
 </style>
