@@ -38,7 +38,12 @@
 Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Never force-push or overwrite that branch. Proto25 work remains isolated and has not been promoted to production.
 
 
-## Latest workflow and validation checkpoint
-- Current PR head checkpoint: `8a237b25b953193716e2d3bb41f24c91b7b795f1` on `v82.85.30-proto25-ui-refactor-work-02`.
-- The Stage 24 workflow is PR-triggered only, to avoid a recursive publish loop. Despite the PR-head update, the available run/status integration currently returns no run and no status for this SHA. Triggering and browser acceptance therefore remain unverified.
-- Do not use the previous screenshot as evidence for the newest profile CSS: that screenshot predates the dark compact-card correction.
+## Current workflow and validation checkpoint (2026-10-21)
+- Immutable accepted baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; original candidate SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`. Do not modify or promote over it.
+- Isolated work branch: `v82.85.30-proto25-ui-refactor-work-03`; current source/test checkpoint includes `9cd8097d7db723fef1e77d8fc1e352512815c924`.
+- Stage 24 workflow branch fix: `1465e1134140cefc4ef785e60e86652dc325a547`. The publisher now checks out the target branch before committing artifacts, avoiding a non-fast-forward push from the synthetic PR merge ref.
+- Work-03 push-trigger workflow commit: `ec31a4b12c3e842859f06063c044dac0127a9ee4`. This is an isolated validation path, not a production workflow.
+- Prior Stage 24 run `39497858082` passed static checks and 17 Playwright assertions, generated an 8,899,371-byte candidate with SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`, and uploaded screenshots. It validated commit `2294f0ce073d074df5f7df1728a9ab22b577b0d9`, not the latest work-03 head.
+- The prior profile-card background assertion was insufficient because transparent backgrounds passed. The test now requires a computed `linear-gradient` for the profile card; fresh execution remains pending.
+- Latest work-03 push run, its artifact, and its published remote candidate are NOT YET VERIFIED. No browser acceptance claim applies to the latest profile assertion until evidence is read back.
+- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Do not merge PR #9 or promote Proto25 until fresh browser evidence, screenshots, size and SHA-256 are verified.
