@@ -16,7 +16,7 @@ async def main():
         await page.wait_for_function("document.querySelectorAll('[data-home-action]').length>=8",timeout=60000)
         await page.wait_for_timeout(2000)
         report["origin"]=await page.evaluate("location.origin")
-        storage=await page.evaluate("""async()=>{let indexed=false;try{await new Promise((resolve,reject)=>{let r=indexedDB.open('proto20-probe',1);r.onsuccess=()=>{indexed=true;r.result.close();indexedDB.deleteDatabase('proto20-probe');resolve()};r.onerror=()=>reject(r.error)})}catch{};localStorage.setItem('p20','ok');sessionStorage.setItem('p20','ok');return {local:localStorage.getItem('p20')==='ok',session:sessionStorage.getItem('p20')==='ok',indexed}}""")
+        storage=await page.evaluate("""async()=>{let indexed=false;try{await new Promise((resolve,reject)=>{let r=indexedDB.open('proto22-probe',1);r.onsuccess=()=>{indexed=true;r.result.close();indexedDB.deleteDatabase('proto22-probe');resolve()};r.onerror=()=>reject(r.error)})}catch{};localStorage.setItem('p20','ok');sessionStorage.setItem('p20','ok');return {local:localStorage.getItem('p20')==='ok',session:sessionStorage.getItem('p20')==='ok',indexed}}""")
         assert report["origin"]=="http://127.0.0.1:8765",report["origin"]
         assert all(storage.values()),storage
         report["checks"].append("native localStorage/sessionStorage/IndexedDB: PASS")
@@ -28,7 +28,7 @@ async def main():
         assert geom["legacyHero"]=="none" and geom["legacyDiscover"]=="none",geom
         report["desktop_geometry"]=geom
         report["checks"].append("osu-inspired desktop composition: logo left, stacked menu right, duplicate legacy sections hidden: PASS")
-        await page.screenshot(path="proto20-desktop.png",full_page=True)
+        await page.screenshot(path="proto22-desktop.png",full_page=True)
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         expected=["quiz","practiceExplore","practiceWeak","multiplayer","catalog","watchlist","learningPlan","dashboard"]
         assert all(a in actions for a in expected),{"expected":expected,"actual":actions}
@@ -70,7 +70,7 @@ async def main():
         assert mobile["menu"]["x"]<mobile["vw"] and mobile["menu"]["w"]>0,mobile
         report["mobile_geometry"]=mobile
         report["checks"].append("mobile layout 390x844 and no horizontal overflow: PASS")
-        await page.screenshot(path="proto20-mobile.png",full_page=True)
+        await page.screenshot(path="proto22-mobile.png",full_page=True)
         report["elapsed_seconds"]=round(time.time()-start,2)
         report["console_errors"]=report["console_errors"][:80]
         await browser.close()
