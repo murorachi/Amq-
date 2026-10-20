@@ -46,8 +46,13 @@ async def main():
                 assert await shade.is_visible(),"Play action must open Stable-style Play menu"
                 assert await page.locator("#amqStableSinglePlayer").inner_text()=="Single Player"
                 assert not await page.locator("#amqStableMultiplayer").is_disabled(),"Multiplayer must remain available through the existing AMQ route"
+                await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
+                play_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,shade:document.querySelector('#amqStablePlayShade').getBoundingClientRect().width,panel:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().width})")
+                assert play_mobile["document"]<=play_mobile["viewport"] and play_mobile["panel"]<=play_mobile["viewport"],play_mobile
+                report["play_menu_mobile"]=play_mobile
                 await page.locator("#amqStablePlayClose").click(timeout=5000)
                 assert not await shade.is_visible(),"Back must close the Play menu"
+                await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
                 await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
                 await page.locator("#amqStableSinglePlayer").click(timeout=5000)
                 await page.wait_for_timeout(180)
@@ -113,6 +118,11 @@ async def main():
         catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
         assert catalog["quicktools"]=="rgb(48, 38, 50)",catalog
         assert catalog["toolbar"]=="rgb(48, 38, 50)",catalog
+        await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
+        catalog_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,toolbar:document.querySelector('.toolbar.view-catalog').getBoundingClientRect().width,quicktools:document.querySelector('#quicktools').getBoundingClientRect().width})")
+        assert catalog_mobile["document"]<=catalog_mobile["viewport"] and catalog_mobile["toolbar"]<=catalog_mobile["viewport"],catalog_mobile
+        report["catalog_mobile"]=catalog_mobile
+        await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         report["catalog_visuals"]=catalog
         report["checks"].append("Catalog/song-selection panel palette: PASS")
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
