@@ -1,8 +1,8 @@
-name: Proto25 stage 16 multiplayer UI acceptance
+name: Proto25 Stage 24 UI acceptance
 on:
   push:
     branches:
-      - v82.85.30-proto25-ui-refactor-work-01
+      - v82.85.30-proto25-ui-refactor-stage-24
   pull_request:
     branches:
       - v82.85.30-proto25-ui-refactor-stage-24
@@ -154,7 +154,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto25-stage16-ui-acceptance
+          name: proto25-stage24-ui-acceptance
           path: |
             candidate.html
             candidate.sha256
@@ -180,7 +180,7 @@ jobs:
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
           # TEST REPORT — Proto25 Stage 24
           - Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
           - Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
@@ -192,6 +192,6 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html.sha256 engineering/proto24-acceptance
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html.sha256 engineering/proto24-acceptance
           git commit -m "Publish Proto25 stage 24 UI candidate and evidence"
           git push origin "HEAD:${TARGET_BRANCH}"
