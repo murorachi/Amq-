@@ -132,3 +132,12 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md` reviews the 24-item draft. It specifies rule closures to make event IDs, protection ordering, rounding, debt expiry, and shared escrow auditable.
 - Extreme builds and potential infinite loops are not automatically defects. Any proposed restriction needs an actual repeatable path and evidence; theoretical strength alone is insufficient.
 - Documentation only. No checker, simulation, human playtest, or product regression test was run. Product code unchanged.
+
+## Deterministic item checker baseline note — 2026-10-20
+
+- Design branch: `multiplayer-gamble-engine-discovery-01`.
+- Added the first executable contract model at `tools/gamble_item_rule_checker.py` and a dedicated GitHub Actions workflow at `.github/workflows/gamble-item-rule-checker.yml`.
+- The checker has 10 explicit unittest methods. It is a narrow reference model, not a parser, full engine, numeric balance simulation, or proof of fun.
+- The tests and workflow have not been verified as executed successfully in this session. Do not report them as passing until an actual run result is inspected.
+- Product baseline remains untouched; this design stage does not authorize production implementation.
+
