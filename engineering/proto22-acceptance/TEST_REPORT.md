@@ -8,7 +8,9 @@
 - Return-home after each route: PASS.
 - Visible broken image placeholders: 0; trailing literal escape: 0.
 - Browser page errors: 0; console errors: 0.
-- Settings button aria-expanded state toggles: PASS; visible settings panel discovery: NOT VERIFIED (0 panels matched test selectors).
+- Workspace sidebar/dock and Learning Center/Analysis panel distinction: PASS.
+- Settings overlay visibility and close behavior: PASS.
+- Settings overlay: visible dialog and close behavior verified by browser test: PASS.
 - Real audio playback, quiz answer lifecycle and multiplayer room lifecycle: NOT RUN.
 - Remote published HTML bytes and SHA-256 manifest verification: PASS, run 39470617728.
-- Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/39470716744
+- Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/39471782011
