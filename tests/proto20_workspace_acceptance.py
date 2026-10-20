@@ -57,7 +57,8 @@ async def main():
         await page.set_viewport_size({"width":1440,"height":900})
         await page.locator('[data-home-action="dashboard"]').last.click(timeout=8000)
         await page.wait_for_timeout(350)
-        await page.screenshot(path="proto20-dashboard-workspace.png",full_page=True)
+        await page.screenshot(path="proto20-dashboard-workspace.png",full_page=False)
+        assert await page.locator('#amqWorkspaceDock [data-ws="analysis"]').get_attribute("aria-pressed")=="true", "dashboard route must select Analysis workspace"
         assert await page.locator("#amqWorkspaceDock").is_visible()
         assert await page.locator("#amqWorkspaceSidebar").is_visible()
         # Dedicated workspace navigation: Learning Center and Analysis stay separate.
@@ -83,10 +84,11 @@ async def main():
         await page.wait_for_timeout(200)
         await page.locator('[data-home-action="learningPlan"]').last.click(timeout=8000)
         await page.wait_for_timeout(500)
-        await page.screenshot(path="proto20-learning-center.png",full_page=True)
+        await page.screenshot(path="proto20-learning-center.png",full_page=False)
+        assert await page.locator('#amqWorkspaceDock [data-ws="learning"]').get_attribute("aria-pressed")=="true", "learningPlan route must select Learning workspace"
         await page.locator('[data-ws="analysis"]').click()
         await page.wait_for_timeout(200)
-        await page.screenshot(path="proto20-analysis-workspace.png",full_page=True)
+        await page.screenshot(path="proto20-analysis-workspace.png",full_page=False)
         # Verify the final appended UI layer is active and no horizontal overflow is introduced.
         ui_layer=await page.locator("#amq-proto20-workspace-ui-pass").count()
         assert ui_layer==1, f"Proto20 UI stylesheet missing: {ui_layer}"
