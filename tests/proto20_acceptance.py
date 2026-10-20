@@ -33,7 +33,7 @@ async def main():
         expected=["quiz","practiceExplore","practiceWeak","multiplayer","catalog","watchlist","learningPlan","dashboard"]
         assert all(a in actions for a in expected),{"expected":expected,"actual":actions}
         for action in expected:
-            await page.locator('[data-home-action="'+action+'"]').first.click(timeout=10000)
+            await page.locator('[data-home-action="'+action+'"]:visible').first.click(timeout=10000)
             await page.wait_for_timeout(350)
             state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
             if action=="multiplayer":
