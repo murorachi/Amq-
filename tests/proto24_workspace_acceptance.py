@@ -50,7 +50,8 @@ async def main():
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         assert all(x in actions for x in expected),actions
         for action in expected:
-            await page.locator('[data-home-action="'+action+'"]').first.click(timeout=8000)
+            selector = ('.amqHomeLandingPrimary' if action in ('quiz','practiceExplore','practiceWeak') else '.amqHomeLandingLinks') + ' [data-home-action="'+action+'"]'
+            await page.locator(selector).click(timeout=8000)
             await page.wait_for_timeout(180)
             if action=="quiz":
                 shade=page.locator("#amqStablePlayShade")
@@ -73,11 +74,12 @@ async def main():
                 await page.locator("#amqStablePlayClose").click(timeout=5000)
                 assert not await shade.is_visible(),"Back must close the Play menu"
                 await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
-                await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
+                await page.locator('.amqHomeLandingPrimary [data-home-action="quiz"]').click(timeout=8000)
                 await page.locator("#amqStableSinglePlayer").click(timeout=5000)
                 await page.wait_for_timeout(180)
                 await page.screenshot(path="proto25-quiz.png",full_page=False)
             state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
+            report.setdefault("home_route_states",{})[action]=state
             assert state,action
             back=page.locator("#uiBackHome").first
             if await back.count() and await back.is_visible():
@@ -138,7 +140,7 @@ async def main():
         report["checks"].append("Mobile layout and horizontal overflow: PASS")
         # Test distinct workspaces and capture them at desktop reference dimensions.
         await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(300)
-        await page.locator('[data-home-action="dashboard"]').last.click(timeout=8000);await page.wait_for_timeout(200)
+        await page.locator('.amqHomeLandingLinks [data-home-action="dashboard"]').click(timeout=8000);await page.wait_for_timeout(200)
         for ws,heading,screenshot in [("learning","學習中心","proto24-learning-workspace.png"),("analysis","學習概況","proto24-analysis-workspace.png")]:
             button=page.locator('[data-ws="'+ws+'"]');await button.click(timeout=8000);await page.wait_for_timeout(180)
             assert await button.get_attribute("aria-pressed")=="true",ws
@@ -163,9 +165,10 @@ async def main():
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
         # Catalog/song-selection surface and single-player quiz theme assertions.
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(180)
-        assert await page.locator("#homeMenu").is_visible(),"Workspace return must restore the actual home menu before catalog routing"
-        await page.locator('[data-home-action="catalog"]').first.click(timeout=8000);await page.wait_for_timeout(220)
-        assert await page.locator("#grid.view-catalog").is_visible(),"Catalog action must open the visible catalog view"
+        assert await page.evaluate("window.__aniGetActiveViewV82?.()")=="home","Workspace return must restore the actual home view before catalog routing"
+        await page.locator('.amqHomeLandingLinks [data-home-action="catalog"]').click(timeout=8000);await page.wait_for_timeout(220)
+        assert await page.evaluate("window.__aniGetActiveViewV82?.()")=="catalog","Catalog action must navigate to the catalog view"
+        assert await page.locator("#grid.view-catalog").is_visible(),"Catalog action must open the visible catalog grid"
         catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,toolbarDisplay:getComputedStyle(document.querySelector('.toolbar.view-catalog')).display,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
         assert catalog["quicktools"]=="rgb(48, 38, 50)",catalog
         assert catalog["toolbar"] not in ("rgb(255, 255, 255)","rgb(255, 250, 255)") and catalog["toolbarDisplay"]=="grid",catalog
