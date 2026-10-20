@@ -25,7 +25,7 @@ body.ui-home-menu #homeMenu .amqHomeLandingV851 {
  border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; overflow:visible!important;
 }
 body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
- content:""; grid-column:1!important; grid-row:1!important; align-self:center!important; justify-self:center!important;
+ content:"♫ ?"; color:#fff!important; font-family:Arial,sans-serif!important; font-size:clamp(72px,9vw,112px)!important; line-height:1!important; font-weight:900!important; letter-spacing:-.12em!important; text-shadow:0 4px 0 #4c328a55!important; grid-column:1!important; grid-row:1!important; align-self:center!important; justify-self:center!important;
  display:block!important; width:min(100%,clamp(245px,27vw,345px))!important; aspect-ratio:1!important; box-sizing:border-box!important;
  border:10px solid #fff!important; border-radius:50%!important; outline:2px solid #bca7e7!important;
  background:
