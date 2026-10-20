@@ -4,3 +4,5 @@ This file exists only to create a pull request event so the browser/static accep
 Retry after fixing the false-negative DOCTYPE assertion in the static check.
 
 Retry after moving candidate write below Play menu injection.
+
+Retry after correcting Multiplayer's return-home selector to #mpBackHome.
