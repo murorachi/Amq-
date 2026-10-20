@@ -30,12 +30,15 @@ jobs:
           from pathlib import Path
           p=Path("candidate.html")
           s=p.read_text(encoding="utf-8")
+          # ui-v22.css is already appended by apply_proto20.py; remove only the stray literal escape.
           s=s.replace('\\\\n<style id="amq-home-legacy-sections-guard-v851">','<style id="amq-home-legacy-sections-guard-v851">')
-          s=s.replace('\\\\n','\\n')
-          s += "\\n" + Path("engineering/ui-v22.css").read_text(encoding="utf-8") + "\\n"
+          if s.endswith("\\\\n"):
+            s=s[:-3]
+          elif s.endswith("\\n"):
+            s=s[:-2]
           p.write_text(s,encoding="utf-8")
           assert "amq-osu-reference-fidelity-v22" in s
-          print("Reference CSS applied and legacy escape cleaned: PASS")
+          print("Reference CSS present once; trailing literal escape cleaned: PASS")
           PY
           python - <<'PY'
           from pathlib import Path
