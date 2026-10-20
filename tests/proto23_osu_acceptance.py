@@ -26,11 +26,15 @@ async def main():
         assert layout["legacy"]==["none","none"],layout
         visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
         assert "♫ ?" in visual["logo"],visual
+        assert layout["logo"]=="grid",layout
         assert visual["body"]=="rgb(23, 20, 30)" and visual["wrap"]=="rgb(23, 20, 30)",visual
         assert visual["footerHeading"]=="rgb(240, 233, 255)",visual
         report["visual_tokens"]=visual
         report["desktop_layout"]=layout
-        report["checks"].append("Desktop osu composition: profile upper-left, music bar top-right, logo left, three stacked purple actions right, legacy sections hidden: PASS")
+        cover=await page.evaluate("""()=>{const e=document.querySelector('#dockCoverV33');return !e||getComputedStyle(e).display==='none'||e.hidden}""")
+        assert cover, "hidden dock cover must not show a broken image icon"
+        report["checks"].append("Desktop osu composition: profile upper-left, music bar top-right, centered circular mark left, three stacked purple actions right, balanced footer, legacy sections hidden: PASS")
+        report["checks"].append("No broken hidden cover icon: PASS")
         expected=["quiz","practiceExplore","practiceWeak","catalog","watchlist","learningPlan","dashboard"]
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         assert all(x in actions for x in expected),actions
