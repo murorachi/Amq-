@@ -58,7 +58,8 @@ async def main():
         assert mobile["profile"]<=mobile["viewport"],mobile
         report["mobile_layout"]=mobile
         report["checks"].append("Mobile layout and horizontal overflow: PASS")
-        # Test distinct workspaces after entering a real app view.
+        # Test distinct workspaces and capture them at desktop reference dimensions.
+        await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(300)
         await page.locator('[data-home-action="dashboard"]').last.click(timeout=8000);await page.wait_for_timeout(200)
         for ws,heading,screenshot in [("learning","學習中心","proto24-learning-workspace.png"),("analysis","學習概況","proto24-analysis-workspace.png")]:
             button=page.locator('[data-ws="'+ws+'"]');await button.click(timeout=8000);await page.wait_for_timeout(180)
