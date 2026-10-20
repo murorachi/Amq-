@@ -1,3 +1,4 @@
+<script>
 /* Proto25 Stage 28: scope the persistent workspace shell to the dashboard workspace.
  * The existing route handlers sometimes leave the body shell class enabled when the
  * catalog/quiz/home route changes. Clear it after their synchronous and deferred work.
@@ -29,3 +30,4 @@
     }
   }, true);
 })();
+</script>
