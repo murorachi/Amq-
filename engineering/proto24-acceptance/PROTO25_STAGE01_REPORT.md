@@ -21,6 +21,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Extended browser acceptance to verify workspace palette and reduced-motion transition duration.
 - Stage 3 workflow and candidate branch: `v82.85.30-proto25-ui-refactor-stage-03`.
 
+## Stage 4: catalog, song drawer, watchlist and quiz surfaces
+- Added dark compact styling for catalog toolbar, filters, tabs, selection cards, song drawer, song rows, watchlist controls and single-player quiz panels.
+- Added browser assertions for catalog and quiz panel colors, in addition to workspace and reduced-motion checks.
+- Stage 4 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-04`.
+
 ## Verification
 - GitHub file writes and subsequent reads: PASS.
 - Immutable Proto24 baseline remains present: PASS.
