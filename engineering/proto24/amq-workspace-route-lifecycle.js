@@ -13,6 +13,7 @@
   const scheduleRouteSync = () => {
     requestAnimationFrame(clearUnlessWorkspace);
     setTimeout(clearUnlessWorkspace, 80);
+    setTimeout(clearUnlessWorkspace, 180);
     setTimeout(clearUnlessWorkspace, 260);
   };
   const standaloneActions = new Set([
