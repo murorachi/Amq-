@@ -23,9 +23,9 @@ jobs:
           p=Path("candidate.html"); s=p.read_text(encoding="utf-8")
           replacements=[
             ("查看清單與學習資料','learningCenter'", "查看清單與學習資料','watchlist'"),
-            ("if(!clickHome('learningCenter'))return;\\n   const mode=a==='practiceExplore'?'explore':'weak';", "window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');\\n    const mode=a==='practiceExplore'?'explore':'weak';"),
-            ("if(a==='practice-self'){\\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-self'){\\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
-            ("if(a==='practice-srs'){\\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-srs'){\\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("if(!clickHome('learningCenter'))return;\n   const mode=a==='practiceExplore'?'explore':'weak';", "window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');\n    const mode=a==='practiceExplore'?'explore':'weak';"),
+            ("if(a==='practice-self'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-self'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("if(a==='practice-srs'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-srs'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
             ("function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;target.textContent=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。'}", "function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;const next=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。';if(target.textContent!==next)target.textContent=next}")
           ]
           for old,new in replacements:
