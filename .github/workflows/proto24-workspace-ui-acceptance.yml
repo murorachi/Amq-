@@ -92,6 +92,7 @@ jobs:
           PY
           cat engineering/proto24/amq-osu-home-composition.css >> candidate.html
           cat engineering/proto24/amq-workspace-osu-composition.css >> candidate.html
+          cat engineering/proto24/amq-workspace-route-lifecycle.js >> candidate.html
           sha256sum candidate.html | tee candidate.sha256
       - uses: actions/setup-python@v5
         with:
