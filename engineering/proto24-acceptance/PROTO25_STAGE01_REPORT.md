@@ -67,6 +67,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added desktop two-column and mobile one-column layout assertions.
 - Stage 13 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-13`.
 
+## Stage 14: Options sidebar
+- Positioned the existing Settings controls as a left-side vertical Options panel, matching the reference's sidebar placement while preserving the real settings handlers.
+- Added a desktop position/width assertion and retained mobile width/overflow checks.
+- Stage 14 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-14`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
