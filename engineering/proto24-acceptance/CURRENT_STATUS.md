@@ -10,8 +10,10 @@
 - Working branch: `v82.85.30-proto25-ui-refactor-work-01`.
 - Stage 1 home-shell changes: dark/pink osu-inspired palette, compact profile/player panels, circular `osu!` wordmark treatment, smaller menu actions.
 - Stage 2 workspace changes: shared dark panel palette, pink active-state accents, compact sidebar and dock styling.
+- Stage 3 accessibility changes: visible keyboard focus indicators and reduced-motion support in home and workspace CSS; Playwright assertions check reduced-motion behavior.
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
-- Isolated stage checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-02`.
+- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02` and `v82.85.30-proto25-ui-refactor-stage-03`.
+- Latest stage workflow commit: `5b80e535b3d78c9af186fbaf50d9e51fef16fa7e`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
 ## Verification
