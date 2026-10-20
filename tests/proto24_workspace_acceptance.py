@@ -26,12 +26,13 @@ async def main():
         assert layout["legacy"]==["none","none"],layout
         assert layout["catalogToolbar"]=="none" and layout["quicktools"]=="none",layout
         assert layout["profileHeight"]<=90 and layout["playerHeight"]<=90,layout
-        visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,profileBackground:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundColor,profileNameVisible:!!(document.querySelector('#amqProfileName').getClientRects().length),profileNameDisplay:getComputedStyle(document.querySelector('#amqProfileName')).display,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
+        visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,profileBackground:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundColor,profileBackgroundImage:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundImage,profileNameVisible:!!(document.querySelector('#amqProfileName').getClientRects().length),profileNameDisplay:getComputedStyle(document.querySelector('#amqProfileName')).display,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
         assert "osu!" in visual["logo"],visual
         assert layout["logo"]=="grid",layout
         assert visual["body"]=="rgb(40, 33, 43)" and visual["wrap"]=="rgb(40, 33, 43)",visual
         assert visual["footerHeading"]=="rgb(255, 255, 255)",visual
         assert visual["profileNameVisible"] and visual["profileNameDisplay"]!="none",visual
+        assert "linear-gradient" in visual["profileBackgroundImage"],visual
         assert visual["profileBackground"] not in ("rgb(255, 255, 255)","rgb(255, 250, 255)"),visual
         report["visual_tokens"]=visual
         report["desktop_layout"]=layout
