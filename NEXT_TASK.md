@@ -152,3 +152,15 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Next, encode deterministic cases for event identity, protection ordering, integer rounding, Vault Ladder returns, Minefield information, debt due dates, public escrow, and repeated item reward triggers.
 - Then run focused simulations for Crown, Debt Scale, layered protection, curse conversion, and multiplayer trust/resentment loops. Report outcome distributions and practical cash-out conditions rather than a single balance score.
 - Human paper playtest still required to evaluate fun. No product implementation until design gates are met.
+
+## Active task — verify deterministic item checker 01
+
+- Checker: `tools/gamble_item_rule_checker.py`.
+- CI workflow: `.github/workflows/gamble-item-rule-checker.yml`.
+- Report: `reports/MULTIPLAYER_GAMBLE_DETERMINISTIC_ITEM_CHECKER_01.md`.
+- First inspect the actual GitHub Actions run and fix any failing assertions; do not treat a committed workflow as proof of success.
+- Then extend deterministic contracts for the canonical loss-protection sequence, complete debt due/default settlement, escrow ledger conservation, and the Broken Crown low-cost-bust hypothesis.
+- Keep the high-power-build policy: investigate concrete activation and cash-out paths; do not nerf/remove a build merely because it is strong or theoretically infinite.
+- After contract tests execute cleanly, run focused reproducible simulations for Crown, Debt Scale/Heavy Interest, layered protection, curse conversion, and multiplayer trust/resentment loops.
+- Human paper playtest remains necessary. No server/UI/database or production code.
+
