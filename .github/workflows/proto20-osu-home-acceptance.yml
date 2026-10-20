@@ -55,25 +55,25 @@ jobs:
           body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home{display:none!important}
           body.ui-home-menu #homeMenu{width:min(1320px,calc(100% - 48px))!important;gap:clamp(10px,1.2vw,18px)!important}
           body.ui-home-menu #homeMenu .amqHomeTopFrame{grid-template-columns:minmax(280px,.88fr) minmax(420px,1.12fr)!important;gap:14px!important}
-          body.ui-home-menu #homeMenu .amqHomeLandingV851{grid-template-columns:minmax(280px,.82fr) minmax(440px,1.18fr)!important;grid-template-rows:auto auto!important;align-items:center!important;column-gap:clamp(28px,5vw,76px)!important;row-gap:12px!important;padding:clamp(20px,2.8vw,38px)!important;min-height:0!important}
-          body.ui-home-menu #homeMenu .amqHomeLandingV851::before{grid-column:1!important;grid-row:1!important;width:min(100%,clamp(250px,29vw,390px))!important;align-self:center!important;justify-self:center!important}
+          body.ui-home-menu #homeMenu .amqHomeLandingV851{grid-template-columns:minmax(280px,.82fr) minmax(440px,1.18fr)!important;grid-template-rows:auto auto!important;align-items:center!important;column-gap:clamp(28px,5vw,76px)!important;row-gap:8px!important;padding:16px 28px!important;min-height:0!important;margin-top:0!important}
+          body.ui-home-menu #homeMenu .amqHomeLandingV851::before{grid-column:1!important;grid-row:1!important;width:min(100%,clamp(280px,24vw,340px))!important;align-self:center!important;justify-self:center!important}
           body.ui-home-menu #homeMenu .amqHomeLandingIntro{display:none!important}
           body.ui-home-menu #homeMenu .amqHomeLandingPrimary{grid-column:2!important;grid-row:1!important;align-self:center!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;width:100%!important;max-width:620px!important;margin:0!important}
-          body.ui-home-menu #homeMenu .amqHomeLandingAction{min-height:76px!important;padding:12px 18px!important;border-radius:2px!important;background:#6542a8!important;border:0!important;box-shadow:0 2px 0 #493078!important;color:#fff!important}
+          body.ui-home-menu #homeMenu .amqHomeLandingAction{min-height:62px!important;padding:8px 16px!important;border-radius:2px!important;background:#6542a8!important;border:0!important;box-shadow:0 2px 0 #493078!important;color:#fff!important}
           body.ui-home-menu #homeMenu .amqHomeLandingAction:nth-child(2){background:#7650c2!important}
           body.ui-home-menu #homeMenu .amqHomeLandingAction:nth-child(3){background:#8962d3!important}
           body.ui-home-menu #homeMenu .amqHomeLandingAction:hover{filter:brightness(1.1);transform:translateX(-3px)!important}
-          body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important;margin:6px 0 0!important;width:100%!important;max-width:620px!important;align-self:start!important}
+          body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;margin:0!important;width:100%!important;max-width:620px!important;align-self:start!important}
           body.ui-home-menu #homeMenu .amqHomeLandingGroup{border-top:2px solid #7655c8!important;padding-top:9px!important}
           body.ui-home-menu #homeMenu .amqHomeLandingGroup h3{font-size:11px!important;letter-spacing:.12em!important;margin:0 0 7px!important}
           body.ui-home-menu #homeMenu .amqHomeLandingLinks{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
-          body.ui-home-menu #homeMenu .amqHomeLandingLinks button{min-height:36px!important;padding:7px 3px!important;border-bottom:1px solid #ffffff20!important;border-radius:0!important;background:transparent!important;text-align:left!important;font-size:12px!important}
+          body.ui-home-menu #homeMenu .amqHomeLandingLinks button{min-height:28px!important;padding:4px 3px!important;border-bottom:1px solid #ffffff20!important;border-radius:0!important;background:transparent!important;text-align:left!important;font-size:11px!important}
           body.ui-home-menu #homeMenu .amqHomeLandingLinks button:hover{color:#d9c5ff!important;padding-left:8px!important}
           @media(max-width:760px){
             body.ui-home-menu #homeMenu{width:calc(100% - 24px)!important}
             body.ui-home-menu #homeMenu .amqHomeTopFrame{grid-template-columns:minmax(0,1fr)!important}
             body.ui-home-menu #homeMenu .amqHomeLandingV851{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;padding:18px 12px!important;row-gap:18px!important}
-            body.ui-home-menu #homeMenu .amqHomeLandingV851::before{grid-column:1!important;grid-row:1!important;width:min(68vw,280px)!important}
+            body.ui-home-menu #homeMenu .amqHomeLandingV851::before{grid-column:1!important;grid-row:1!important;width:min(60vw,260px)!important}
             body.ui-home-menu #homeMenu .amqHomeLandingPrimary{grid-column:1!important;grid-row:2!important}
             body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-column:1!important;grid-row:3!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
           }
@@ -129,17 +129,17 @@ jobs:
           cp candidate.sha256 dist/amq_learning_tool_v82_85_31_workspace_proto20.html.sha256
           cat > engineering/proto19-acceptance/BASELINE.md <<'EOF'
           # BASELINE — Proto20
-          - Source baseline: Proto17 at repository commit a763706e56324cf4be020d82667b36f5438e4784.
+          - Source baseline: Proto17, source file pinned in repository; Proto20 preserved as earlier candidate.
           - Intermediate candidate: Proto18, retained locally and not overwritten.
           - Proto20 is a new isolated candidate; production V82.82 and read-only V82.85.30 remain unchanged.
           EOF
           cat > engineering/proto19-acceptance/CURRENT_STATUS.md <<EOF
           # CURRENT STATUS — Proto20
           - Version: Proto20 home cascade and workspace acceptance.
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto19.html
+          - Candidate: dist/amq_learning_tool_v82_85_31_workspace_proto20.html
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
-          - Native-origin browser acceptance: PASS, run 39433563820 test suite extended and re-run on this delivery branch.
+          - Native-origin browser acceptance: PASS, run 39458257499.
           - Production release: NOT promoted; isolated engineering candidate only.
           EOF
           cat > engineering/proto19-acceptance/NEXT_TASK.md <<'EOF'
@@ -161,12 +161,12 @@ jobs:
           - Learning Center and Analysis remain separate and expected actions render: PASS.
           - Unhandled browser exceptions: 0; console errors: 0.
           - Actual audio playback, quiz-answer lifecycle and multiplayer regression: NOT RUN in this stage.
-          - Test run: https://github.com/murorachi/Amq-/actions/runs/39433563820
+          - Test run: https://github.com/murorachi/Amq-/actions/runs/39458257499
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto19.html dist/amq_learning_tool_v82_85_30_workspace_proto19.html.sha256 engineering/proto19-acceptance
+          git add dist/amq_learning_tool_v82_85_31_workspace_proto20.html dist/amq_learning_tool_v82_85_31_workspace_proto20.html.sha256 engineering/proto19-acceptance
           git commit -m "Publish accepted Proto20 UI candidate and test records"
           git push origin "HEAD:${TARGET_BRANCH}"
           echo "Remote candidate commit: $(git rev-parse HEAD)"
-          sha256sum dist/amq_learning_tool_v82_85_30_workspace_proto19.html
+          sha256sum dist/amq_learning_tool_v82_85_31_workspace_proto20.html
