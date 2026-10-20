@@ -3,7 +3,7 @@ name: Proto22 native-origin acceptance
 on:
   push:
     branches:
-      - v82.85.30-proto22-accepted-delivery-01
+      - v82.85.30-proto22-osu-home-rebuild-01
 
 permissions:
   contents: write
@@ -72,7 +72,7 @@ jobs:
             if curl --fail --silent http://127.0.0.1:8765/candidate.html -o /dev/null; then break; fi
             sleep 1
           done
-          python tests/proto22_final_acceptance_v3.py
+          python tests/proto22_final_acceptance.py
       - name: Upload acceptance evidence
         if: always()
         uses: actions/upload-artifact@v4
