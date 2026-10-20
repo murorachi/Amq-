@@ -387,4 +387,121 @@ body.ui-home-menu #homeMenu .amqHomeLandingAction:focus-visible {
   }
 }
 
+
+/* Proto25 Stage 26: keep the home music bar usable on desktop and mobile without clipping controls. */
+body.ui-home-menu #homeMenu #amqHomePlayerSlot {
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  overflow: hidden !important;
+}
+body.ui-home-menu #audioDock.amqHomeDock {
+  box-sizing: border-box !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  overflow: hidden !important;
+  grid-template-columns: minmax(0, 1fr) minmax(210px, .8fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 6px 10px !important;
+}
+body.ui-home-menu #audioDock.amqHomeDock .dockCoverV33,
+body.ui-home-menu #audioDock.amqHomeDock .dockStatus,
+body.ui-home-menu #audioDock.amqHomeDock .dockBtns {
+  display: none !important;
+}
+body.ui-home-menu #audioDock.amqHomeDock .dockMeta {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+body.ui-home-menu #audioDock.amqHomeDock .dockMeta b,
+body.ui-home-menu #audioDock.amqHomeDock .dockMeta span {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
+  display: block !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  max-height: 32px !important;
+}
+@media(max-width:680px) {
+  body.ui-home-menu #homeMenu .amqHomeTopFrame {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 84px 78px !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body.ui-home-menu #homeMenu #amqProfileCard {
+    height: 84px !important;
+    min-height: 84px !important;
+    max-height: 84px !important;
+    width: 100% !important;
+  }
+  body.ui-home-menu #homeMenu .amqPlayerFrame {
+    height: 78px !important;
+    min-height: 78px !important;
+    max-height: 78px !important;
+    padding: 4px 8px !important;
+    overflow: hidden !important;
+    gap: 2px !important;
+  }
+  body.ui-home-menu #homeMenu .amqPlayerCaption {
+    margin: 0 !important;
+    font-size: 8px !important;
+    line-height: 1.2 !important;
+  }
+  body.ui-home-menu #homeMenu #amqHomePlayerSlot {
+    height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+  }
+  body.ui-home-menu #audioDock.amqHomeDock {
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 22px 28px !important;
+    gap: 2px !important;
+  }
+  body.ui-home-menu #audioDock.amqHomeDock .dockMeta {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  body.ui-home-menu #audioDock.amqHomeDock .dockMeta b {
+    flex: 0 1 48% !important;
+    font-size: 11px !important;
+  }
+  body.ui-home-menu #audioDock.amqHomeDock .dockMeta span {
+    flex: 1 1 52% !important;
+    font-size: 9px !important;
+  }
+  body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+}
 </style>
