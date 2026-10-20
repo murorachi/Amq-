@@ -28,13 +28,15 @@ async def main():
         assert layout["profileHeight"]<=90 and layout["playerHeight"]<=90,layout
         assert layout["profile"]["y"] >= layout["topFrame"]["y"] and layout["profile"]["y"]+layout["profile"]["h"] <= layout["topFrame"]["y"]+layout["topFrame"]["h"],layout
         assert layout["player"]["y"] >= layout["topFrame"]["y"] and layout["player"]["y"]+layout["player"]["h"] <= layout["topFrame"]["y"]+layout["topFrame"]["h"],layout
-        visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,profileBackground:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundColor,profileBackgroundImage:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundImage,profileNameVisible:!!(document.querySelector('#amqProfileName').getClientRects().length),profileNameDisplay:getComputedStyle(document.querySelector('#amqProfileName')).display,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color,actionBackgroundImage:getComputedStyle(document.querySelector('.amqHomeLandingAction')).backgroundImage,actionClipPath:getComputedStyle(document.querySelector('.amqHomeLandingAction')).clipPath,mainActionBackgroundImage:getComputedStyle(document.querySelector('.amqHomeLandingActionMain')).backgroundImage})""")
+        visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,profileBackground:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundColor,profileBackgroundImage:getComputedStyle(document.querySelector('#amqProfileCard')).backgroundImage,profileNameVisible:!!(document.querySelector('#amqProfileName').getClientRects().length),profileNameDisplay:getComputedStyle(document.querySelector('#amqProfileName')).display,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color,actionBackgroundImage:getComputedStyle(document.querySelector('.amqHomeLandingAction')).backgroundImage,actionClipPath:getComputedStyle(document.querySelector('.amqHomeLandingAction')).clipPath,mainActionBackgroundImage:getComputedStyle(document.querySelector('.amqHomeLandingActionMain')).backgroundImage,audioPlayerDisplay:getComputedStyle(document.querySelector('#audioPlayer')).display,audioPlayerHeight:document.querySelector('#audioPlayer').getBoundingClientRect().height,audioPlayerWidth:document.querySelector('#audioPlayer').getBoundingClientRect().width,dockButtonsDisplay:getComputedStyle(document.querySelector('#audioDock .dockBtns')).display,homePlayerSlotHeight:document.querySelector('#amqHomePlayerSlot').getBoundingClientRect().height})""")
         assert "osu!" in visual["logo"],visual
         assert layout["logo"]=="grid",layout
         assert visual["body"]=="rgb(40, 33, 43)" and visual["wrap"]=="rgb(40, 33, 43)",visual
         assert visual["footerHeading"]=="rgb(255, 255, 255)",visual
         assert "linear-gradient" in visual["actionBackgroundImage"] and "linear-gradient" in visual["mainActionBackgroundImage"],visual
         assert visual["actionClipPath"] != "none",visual
+        assert visual["audioPlayerDisplay"]!="none" and visual["audioPlayerHeight"]>=28 and visual["audioPlayerWidth"]>=200,visual
+        assert visual["dockButtonsDisplay"]=="none" and visual["homePlayerSlotHeight"]<=54,visual
         assert visual["profileNameVisible"] and visual["profileNameDisplay"]!="none",visual
         assert "linear-gradient" in visual["profileBackgroundImage"],visual
         assert visual["profileBackground"] not in ("rgb(255, 255, 255)","rgb(255, 250, 255)"),visual
@@ -118,9 +120,12 @@ async def main():
         report["checks"].append("Native storage persistence after reload: PASS")
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(500)
         await page.screenshot(path="proto24-mobile.png",full_page=True)
-        mobile=await page.evaluate("""()=>({viewport:innerWidth,document:document.documentElement.scrollWidth,profile:document.querySelector('#amqProfileCard').getBoundingClientRect().width,primary:document.querySelector('.amqHomeLandingPrimary').getBoundingClientRect().width,actions:[...document.querySelectorAll('.amqHomeLandingPrimary>*')].map(e=>Math.round(e.getBoundingClientRect().height))})""")
+        mobile=await page.evaluate("""()=>{const r=e=>{const x=e.getBoundingClientRect();return {x:Math.round(x.x),y:Math.round(x.y),w:Math.round(x.width),h:Math.round(x.height)}};return {viewport:innerWidth,document:document.documentElement.scrollWidth,topFrame:r(document.querySelector('.amqHomeTopFrame')),profile:r(document.querySelector('#amqProfileCard')),player:r(document.querySelector('.amqPlayerFrame')),audio:r(document.querySelector('#audioPlayer')),audioDisplay:getComputedStyle(document.querySelector('#audioPlayer')).display,primary:document.querySelector('.amqHomeLandingPrimary').getBoundingClientRect().width,actions:[...document.querySelectorAll('.amqHomeLandingPrimary>*')].map(e=>Math.round(e.getBoundingClientRect().height))}}""")
         assert mobile["document"]<=mobile["viewport"],mobile
-        assert mobile["profile"]<=mobile["viewport"],mobile
+        assert mobile["profile"]["w"]<=mobile["viewport"],mobile
+        assert mobile["player"]["y"]>mobile["profile"]["y"] and mobile["player"]["h"]==78,mobile
+        assert mobile["profile"]["y"]+mobile["profile"]["h"]<=mobile["topFrame"]["y"]+mobile["topFrame"]["h"] and mobile["player"]["y"]+mobile["player"]["h"]<=mobile["topFrame"]["y"]+mobile["topFrame"]["h"],mobile
+        assert mobile["audioDisplay"]!="none" and mobile["audio"]["w"]>=300 and mobile["audio"]["h"]>=28,mobile
         report["mobile_layout"]=mobile
         report["checks"].append("Mobile layout and horizontal overflow: PASS")
         # Test distinct workspaces and capture them at desktop reference dimensions.
