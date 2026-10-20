@@ -15,7 +15,7 @@ replacement2="function runAction(a){\n if(a==='multiplayer'){const entry=documen
 assert s.count(needle2)==1, "workspace action dispatcher anchor mismatch"
 s=s.replace(needle2,replacement2,1)
 s=s.replace('\\\\n<style id="amq-home-legacy-sections-guard-v851">','<style id="amq-home-legacy-sections-guard-v851">')
-route = """\n<script id="amq-home-multiplayer-entry-v20">document.addEventListener('click',e=>{const b=e.target.closest?.('[data-home-action="multiplayer"]');if(!b)return;e.preventDefault();e.stopPropagation();const entry=document.querySelector('#quizMultiplayerOpen');if(entry)entry.click();},true);</script>\n"""
+route = """\n<script id="amq-home-multiplayer-entry-v20">document.addEventListener('click',e=>{const b=e.target.closest?.('[data-home-action="multiplayer"]');if(!b)return;e.preventDefault();e.stopPropagation();window.__aniNavigateApp?.('multiplayer');},true);</script>\n"""
 assert "amq-home-multiplayer-entry-v20" not in s
 s += route
 css=Path("engineering/ui-v20.css").read_text(encoding="utf-8")
