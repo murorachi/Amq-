@@ -54,6 +54,7 @@ async def main():
             await page.wait_for_timeout(180)
             if action=="quiz":
                 shade=page.locator("#amqStablePlayShade")
+                await page.screenshot(path="proto25-play-menu.png",full_page=False)
                 assert await shade.is_visible(),"Play action must open Stable-style Play menu"
                 assert await page.locator("#amqStableSinglePlayer").inner_text()=="Single Player"
                 assert not await page.locator("#amqStableMultiplayer").is_disabled(),"Multiplayer must remain available through the existing AMQ route"
@@ -65,6 +66,7 @@ async def main():
                 play_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,shade:document.querySelector('#amqStablePlayShade').getBoundingClientRect().width,panel:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#amqStablePlayPanel')).gridTemplateColumns})")
                 assert play_mobile["document"]<=play_mobile["viewport"] and play_mobile["panel"]<=play_mobile["viewport"] and len(play_mobile["columns"].split())==1,play_mobile
                 report["play_menu_mobile"]=play_mobile
+                await page.screenshot(path="proto25-play-menu-mobile.png",full_page=False)
                 await page.locator("#amqStablePlayClose").click(timeout=5000)
                 assert not await shade.is_visible(),"Back must close the Play menu"
                 await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
@@ -92,12 +94,14 @@ async def main():
         settings_desktop=await page.evaluate("({x:document.querySelector('.top .actions').getBoundingClientRect().x,width:document.querySelector('.top .actions').getBoundingClientRect().width,background:getComputedStyle(document.querySelector('.top .actions')).backgroundColor})")
         assert settings_desktop["x"]<=10 and settings_desktop["width"]<=320,settings_desktop
         report["settings_desktop"]=settings_desktop
+        await page.screenshot(path="proto25-settings-desktop.png",full_page=False)
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(100)
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         settings_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,panel:document.querySelector('.top .actions').getBoundingClientRect().width})")
         assert settings_mobile["document"]<=settings_mobile["viewport"] and settings_mobile["panel"]<=settings_mobile["viewport"],settings_mobile
         report["settings_mobile"]=settings_mobile
+        await page.screenshot(path="proto25-settings-mobile.png",full_page=False)
         assert await page.locator("body").evaluate("(e)=>e.classList.contains('ui-settings-open')")
         assert await page.locator("#themeToggle").is_visible()
         assert await page.locator("#sceneBackgroundOpen").is_visible()
