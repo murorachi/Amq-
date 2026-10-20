@@ -12,3 +12,11 @@
 - Official Stable release label verified on 2026-10-21: `20260924.1`.
 - Official osu!-wiki UI evidence pinned at commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`; exact osu!stable client source commit remains BLOCKED and must not be replaced with osu!lazer source.
 - No application HTML/CSS/JS was changed during the reference audit.
+
+## Proto25 refactor checkpoint (2026-10-21)
+
+- Active working branch: `v82.85.30-proto25-ui-refactor-work-01`.
+- Current recorded checkpoint: `19230f1d75c676462ba77a82803d53590070fb9f`.
+- Stage-02 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-02`.
+- Original Proto24 baseline above remains immutable; the stage-02 branch is an implementation checkpoint, not an accepted final delivery.
+- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; do not reset or force-push the original baseline.
