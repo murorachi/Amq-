@@ -102,4 +102,96 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  }
 }
 
+
+/* Proto25 stage 4: catalog/song-select surfaces and collection drawers. Existing search/filter/playback logic is untouched. */
+.toolbar.view-catalog {
+ display:grid!important; grid-template-columns:minmax(240px,1.8fr) repeat(3,minmax(125px,.7fr))!important;
+ gap:8px!important; padding:12px!important; margin:10px 0!important;
+ border:1px solid #574554!important; border-radius:4px!important; background:#302632!important;
+ box-shadow:0 3px 0 #1b151e!important;
+}
+.toolbar.view-catalog .search { min-width:0!important; }
+.toolbar.view-catalog input,
+.toolbar.view-catalog select,
+#quicktools input,#quicktools select,
+.watchToolbar input,.watchToolbar select {
+ min-width:0!important; border:1px solid #6b5365!important; border-radius:3px!important;
+ background:#211a24!important; color:#f7edf3!important; box-shadow:none!important;
+}
+.toolbar.view-catalog input:focus,
+.toolbar.view-catalog select:focus,
+#quicktools input:focus,#quicktools select:focus,
+.watchToolbar input:focus,.watchToolbar select:focus {
+ outline:2px solid #ff8fc7!important; outline-offset:1px!important; border-color:#ff8fc7!important;
+}
+.tabs.view-catalog {
+ display:flex!important; flex-wrap:wrap!important; gap:4px!important; padding:5px!important;
+ margin:10px 0!important; border:1px solid #574554!important; border-radius:4px!important;
+ background:#211a24!important;
+}
+.tabs.view-catalog .tab {
+ flex:1 1 145px!important; min-height:40px!important; border:1px solid transparent!important;
+ border-radius:3px!important; background:transparent!important; color:#d9cbd5!important;
+ font-weight:750!important;
+}
+.tabs.view-catalog .tab.active {
+ border-color:#8c536f!important; background:linear-gradient(110deg,#70405c,#4b2d43)!important;
+ color:#fff!important; box-shadow:inset 0 2px #ff8fc7!important;
+}
+#quicktools {
+ padding:14px!important; margin:12px 0!important; border:1px solid #574554!important;
+ border-radius:4px!important; background:#302632!important; color:#f7edf3!important;
+ box-shadow:0 3px 0 #1b151e!important;
+}
+#quicktools .quicktoolsHead { border-bottom:1px solid #574554!important; }
+#quicktools .quicktoolsHead>b { color:#ff8fc7!important; letter-spacing:.02em!important; }
+#quicktools .quicktoolsHead p { color:#cbbaca!important; }
+#quicktools .toolrow { gap:7px!important; }
+#quicktools .btn,#watchlistView .btn {
+ border:1px solid #6b5365!important; border-radius:3px!important; background:#403340!important;
+ color:#f7edf3!important; box-shadow:none!important;
+}
+#quicktools .btn:hover,#watchlistView .btn:hover { border-color:#ff8fc7!important; background:#503b4c!important; }
+#quicktools .btn.primary,#watchlistView .btn.primary {
+ border-color:#e86aa9!important; background:linear-gradient(110deg,#f184b9,#c84487)!important; color:#fff!important;
+}
+#watchlistView {
+ padding:clamp(12px,2vw,24px)!important; border:1px solid #574554!important;
+ border-radius:4px!important; background:#302632!important; color:#f7edf3!important;
+}
+#watchlistView .watchlistHead { border-bottom:1px solid #574554!important; }
+#watchlistView .watchlistHead h2 { color:#fff!important; }
+#watchlistView .watchSummary { color:#d9cbd5!important; }
+#watchlistView .watchTabs { gap:5px!important; }
+#watchlistView .watchTab {
+ border:1px solid #574554!important; border-radius:3px!important; background:#211a24!important; color:#d9cbd5!important;
+}
+#watchlistView .watchTab.active { border-color:#8c536f!important; background:#70405c!important; color:#fff!important; box-shadow:inset 0 2px #ff8fc7!important; }
+#watchGrid .watchCard,#customListsWork .customListCard {
+ border:1px solid #574554!important; border-radius:4px!important; background:#352c39!important; color:#f7edf3!important;
+ box-shadow:0 2px 0 #1b151e!important;
+}
+#overlay .drawer { background:#28212b!important; color:#f7edf3!important; border-left:1px solid #6b5365!important; }
+#overlay .drawerhead { background:#352c39!important; border-bottom:1px solid #574554!important; }
+#overlay .detailEyebrow { color:#ff8fc7!important; letter-spacing:.16em!important; }
+#overlay .detailHero { border:1px solid #574554!important; border-radius:4px!important; background:#302632!important; }
+#overlay .detailHeroText h2,#overlay .playerInfo b { color:#fff!important; }
+#overlay .detailHeroText p,#overlay .playerInfo span { color:#cbbaca!important; }
+#overlay .playerbar { border-top:1px solid #574554!important; border-bottom:1px solid #574554!important; background:#211a24!important; }
+#overlay .playerDisc { border:2px solid #fff!important; outline:2px solid #e86aa9!important; background:radial-gradient(circle at 35% 25%,#ffb5d7,#d94e96 70%,#8c285e)!important; }
+#songlist .songRow,#songlist .songItem {
+ border-bottom:1px solid #574554!important; background:#302632!important; color:#f7edf3!important;
+}
+#songlist .songRow:hover,#songlist .songItem:hover { background:#463441!important; }
+#songlist button { border-radius:3px!important; }
+@media(max-width:900px) {
+ .toolbar.view-catalog { grid-template-columns:minmax(0,1fr) repeat(2,minmax(0,1fr))!important; }
+ .toolbar.view-catalog .search { grid-column:1/-1!important; }
+}
+@media(max-width:520px) {
+ .toolbar.view-catalog { grid-template-columns:minmax(0,1fr)!important; }
+ .toolbar.view-catalog .search { grid-column:1!important; }
+ .tabs.view-catalog .tab { flex-basis:calc(50% - 4px)!important; }
+}
+
 </style>
