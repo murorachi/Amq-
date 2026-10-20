@@ -29,7 +29,7 @@
 - Stage 12: `v82.85.30-proto25-ui-refactor-stage-12`
 - Stage 13: `v82.85.30-proto25-ui-refactor-stage-13`
 - Stage 14: `v82.85.30-proto25-ui-refactor-stage-14`
-- Latest stage workflow commit: `d2af470fd4b305333e63251b2926808e5224367c`.
+- Latest stage workflow commit: `4ebe2edbe29ab6e9a569689221e7c5edd30c2375`.
 - Stage 14 branch was fast-forwarded to the same recorded engineering checkpoint as the working branch. The original Proto24 branch was not changed.
 
 ## Verification status
