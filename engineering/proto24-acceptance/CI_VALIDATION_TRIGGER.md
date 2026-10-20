@@ -10,3 +10,5 @@ Retry after correcting Multiplayer's return-home selector to #mpBackHome.
 Retry after aligning Settings styles with the actual ui-settings-open state.
 
 Rerun: test Settings background-image gradient rather than expecting a solid background-color.
+
+Rerun: assert dark catalog palette and grid layout rather than a single computed background token.
