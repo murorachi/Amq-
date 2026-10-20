@@ -101,4 +101,67 @@ body.ui-home-menu #audioDock { position:fixed!important; left:clamp(12px,2vw,28p
 @media(prefers-reduced-motion:reduce) {
  body.ui-home-menu #homeMenu .amqHomeLandingAction { transition:none!important; }
 }
+
+/* Proto25 stage 1: dark, compact Stable-inspired shell. Interaction handlers remain untouched. */
+:root { --amq-osu-purple:#f06cae; --amq-osu-purple-hi:#ff8fc7; --amq-osu-ink:#28212b; }
+body.ui-home-menu { background:#28212b!important; color:#fff!important; }
+body.ui-home-menu .wrap { background:#28212b!important; color:#fff!important; }
+body.ui-home-menu #homeMenu .amqHomeTopFrame { grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr)!important; gap:8px!important; margin-top:8px!important; }
+body.ui-home-menu #homeMenu .amqProfileCard,
+body.ui-home-menu #homeMenu .amqPlayerFrame {
+ min-height:74px!important; padding:9px 12px!important; border:1px solid #514752!important;
+ border-radius:3px!important; background:#352c39!important; color:#eee5ef!important;
+ box-shadow:0 2px 0 #171319!important;
+}
+body.ui-home-menu #homeMenu .amqAvatarButton { width:42px!important; height:42px!important; flex-basis:42px!important; border-color:#f5d9e8!important; box-shadow:0 0 0 2px #e86aa9!important; }
+body.ui-home-menu #homeMenu .amqProfileInfo,
+body.ui-home-menu #homeMenu .amqProfileLine,
+body.ui-home-menu #homeMenu .amqProfileHint { color:#c9bacb!important; }
+body.ui-home-menu #homeMenu .amqProfileName { color:#ff8fc7!important; font-size:15px!important; }
+body.ui-home-menu #homeMenu .amqPlayerFrame,
+body.ui-home-menu #homeMenu .amqPlayerFrame .amqHomePlayerSlot,
+body.ui-home-menu #homeMenu .amqPlayerFrame .amqHomePlayerSlot * { color:#eee5ef!important; }
+body.ui-home-menu #homeMenu .amqPlayerCaption { color:#ff8fc7!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingV851 {
+ grid-template-columns:minmax(220px,.72fr) minmax(330px,1.28fr)!important;
+ grid-template-rows:minmax(285px,1fr) auto!important;
+ column-gap:clamp(20px,3.8vw,58px)!important; min-height:440px!important;
+ padding:clamp(18px,2.4vw,32px) clamp(12px,2.6vw,38px) 22px!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
+ content:"osu!"!important; width:min(100%,clamp(220px,24vw,300px))!important;
+ border:7px solid #fff!important; outline:2px solid #e86aa9!important;
+ background:radial-gradient(circle at 34% 24%,#ffb5d7 0%,#f47bb9 32%,#d94e96 67%,#a72e70 100%)!important;
+ box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
+ font-family:Arial,sans-serif!important; font-size:clamp(64px,7vw,92px)!important;
+ font-weight:900!important; font-style:italic!important; letter-spacing:-.09em!important;
+ text-shadow:0 3px 0 #7f2758!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingPrimary { max-width:560px!important; gap:7px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction {
+ min-height:66px!important; padding:10px 15px!important; border-radius:3px!important;
+ background:linear-gradient(100deg,#a94479 0%,#8b356a 58%,#702952 100%)!important;
+ box-shadow:0 2px 0 #4d203d,0 4px 10px #120b1433!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingActionMain { background:linear-gradient(100deg,#f184b9 0%,#df5b9b 52%,#c84487 100%)!important; box-shadow:0 2px 0 #8b356a,0 5px 12px #120b1433!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction::before { border-color:#ffffffaa!important; background:#ffffff10!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction:hover { transform:translateX(3px)!important; filter:brightness(1.08)!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroups { border-top-color:#5c4a5b!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroupHead>span { color:#d49ab8!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroupHead h3 { color:#fff!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button {
+ border-color:#5b4a5a!important; background:#352c39!important; color:#fff!important;
+}
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button strong { color:#fff!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button small { color:#cbbaca!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button>span { color:#ff8fc7!important; }
+body.ui-home-menu #audioDock {
+ border-color:#5b4a5a!important; border-radius:3px!important; background:#352c39f2!important;
+ box-shadow:0 3px 16px #100b124d!important;
+}
+@media(max-width:900px) {
+ body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(0,1fr)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,35vw,230px)!important; }
+}
+
 </style>
