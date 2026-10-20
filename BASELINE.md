@@ -155,3 +155,9 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - The checked-in script blob hashes match the locally executed copies: checker `f770d78e09d7ca807f541e42ac34eec302581615`; Crown sensitivity `8a4f9cb03190097172c94ccf9fa12b0cd2c066cd`.
 - This validates these deterministic contracts and scenario arithmetic only. It does not validate the entire game, balance, or human enjoyment.
 
+## Protection and curse-conversion baseline — 2026-10-20
+
+- Rule checker now contains 19 unittest methods; GitHub Actions [run 39347703666](https://github.com/murorachi/Amq-/actions/runs/39347703666) passed on commit `9978fd98b96de5da7452aa661a890035d3d86ff2`.
+- Contracts cover one selected loss rewrite per event, loss capped at available chips, Reverse-Fate Seal producing a unique curse event, Curse Wax's 20-chip/removable-curse requirements, and Black Obsidian's once-per-run reward bound to the curse's creation run.
+- Broken Safe is modeled as an alternative protection in this reference model. This is provisional until the paper rules explicitly approve the sequence.
+- This validates reference-model assertions only; no product implementation, product regression, or human playtest was performed.
