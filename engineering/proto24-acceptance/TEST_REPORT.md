@@ -1,6 +1,6 @@
 # TEST REPORT — Proto25 Stage 24
-- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39507304645
-- Tested pull-request merge candidate: 5a19bb9f1c1a89fd7aad9c6714dce97ee4f068e6
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39507319150
+- Tested pull-request merge candidate: 0efd88be9a8ab65da1c8a14db9aefb0b0c53e1b5
 - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
 - Size: 8907671 bytes
 - SHA-256: 04d27d56000a8e6d73858b6ff125edcff0669fdef8e3b78e55479460fdccb7c0
