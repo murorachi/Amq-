@@ -3,6 +3,7 @@
 - Branch: `multiplayer-gamble-engine-discovery-01`
 - Baseline audit: `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md`
 - Checker: `tools/gamble_item_rule_checker.py`
+- Crown sensitivity model: `tools/gamble_crown_sensitivity.py`
 - CI workflow: `.github/workflows/gamble-item-rule-checker.yml`
 - Scope: deterministic reference-contract tests for selected rules; design-only.
 - Product source / standalone AMQ HTML: unchanged.
@@ -20,9 +21,11 @@ The checker uses Python's standard library and explicit assertions for:
 7. Public escrow principal return, explicit funding source for a bonus, and duplicate-resolution rejection.
 8. Reward option reroll replacing the options without creating another reward event.
 9. Broken Crown's +60 trigger occurring at most once per round while remaining eligible in a later round.
-10. Rejection of selected invalid identifiers and negative state values.
+10. Debt Collector's two-settlement due date, repayment, extension outcomes, ceiling rounding, one-extension limit, default-to-curse behavior, and run-end cleanup.
+11. Aggregate escrow principal conservation, duplicate escrow IDs/claims, and explicit bonus-source rules.
+12. Rejection of selected invalid identifiers and negative state values.
 
-The workflow runs `python tools/gamble_item_rule_checker.py` on pushes to this design branch when the checker or workflow changes, and supports manual dispatch.
+The workflow runs `python tools/gamble_item_rule_checker.py` and `python tools/gamble_crown_sensitivity.py` on pushes to this design branch when either script or the workflow changes, and supports manual dispatch.
 
 ## Interpretation boundaries
 
@@ -36,13 +39,15 @@ The workflow runs `python tools/gamble_item_rule_checker.py` on pushes to this d
 
 ## Test record
 
-- Test cases authored: 10 `unittest` methods with explicit expected values and rejected-state assertions.
-- Local execution in this work session: **not executed**.
-- Remote GitHub Actions result: **not yet verified**. The workflow was committed to make the test reproducible; workflow existence is not evidence that it passed.
-- Static review: source and workflow were read back from GitHub; this is not a substitute for executing the tests.
+- Deterministic contract tests: **14/14 passed** in a local temporary copy; the local Git blob SHA matched the GitHub source blob `f770d78e09d7ca807f541e42ac34eec302581615`.
+- Broken Crown sensitivity tests: **4/4 passed**; the local Git blob SHA matched the GitHub source blob `8a4f9cb03190097172c94ccf9fa12b0cd2c066cd`.
+- Python bytecode compilation: passed for both scripts.
+- Sensitivity sweep: 18 combinations (wagers 10/25/50/60/75/100; assumed item costs 0/50/100). Three +60 triggers at wager 50 and cost 0 yield +30 chips before other effects; cost 50 yields -20. Wager 60 and cost 0 yields 0. These are conditional arithmetic results, not proof of a practical game exploit: item cost, minimum wager, trigger eligibility, and wager-cap value are not finalized.
+- Static review: workflow includes both scripts and path filters include both scripts.
+- Remote GitHub Actions result: **not verified**; no confirmed remote run result was available in this step.
 - Product regression tests: not run; no product code was changed.
 - Human paper playtest: not run.
 
 ## Next step
 
-Verify the workflow result. Fix any failing assertions before adding more rules. Then extend the deterministic model only where the paper rules are sufficiently explicit, prioritizing the canonical loss-protection sequence, full debt due/default behavior, escrow ledger conservation, and the Broken Crown low-cost-bust hypothesis. Keep numeric simulations separate from rule-contract tests.
+Next add the canonical multi-protection sequence and explicit curse-conversion contracts, then model Debt Scale/Heavy Interest only after their stacking and due-date semantics are closed. Follow with focused trust/resentment-loop enumeration. Keep numeric sensitivity models separate from deterministic rule contracts; do not infer fun from either.
