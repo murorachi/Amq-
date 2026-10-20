@@ -20,15 +20,16 @@
 - Do not ask for user review until all target screens and required tests are complete, except where a genuine permission or irreversible-decision blocker requires user input.
 
 
-## Next task: full target-screen visual review
-1. Start from successful run `39502330658`, artifact `12301551997`, candidate SHA-256 `c215d6e2bf5d6f9e721167da0f0fa19ceaf3094a16986ea5b3f1fe7e02e52656`. Do not repeat unchanged checks without a code change.
-2. Review home/profile strip, Play menu, catalog, Song Select, Settings, Learning Center and Analysis screenshots at desktop and mobile sizes. Identify remaining issues as a related UI group and fix their root CSS selectors in the modular sources.
-3. Compare against pinned osu!stable references and record concrete differences in geometry, hierarchy, spacing, colors, hover/focus states and modal stacking. Do not claim >=90% similarity without matching screenshots and measured evidence.
-4. Add or adjust Playwright assertions for demonstrated regressions only. Rerun static checks and complete browser acceptance; inspect the resulting artifact/screenshots and read back the Stage 24 HTML, manifest, size, SHA-256 and report.
-5. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle as separate NOT RUN items until actually tested.
+## Next task: continue the coherent visual pass
+1. Start from the verified artifact in run `39505109779`, artifact `12302779205`, candidate SHA-256 `4497f0c48bd2d548bf0f8449c33be74c3728978ee915d3578ee961e3af83d3f9`. Do not repeat unchanged checks without a code change.
+2. Review fresh desktop/mobile screenshots for home, Play menu, catalog, Song Select, Settings, Learning Center and Analysis. Group issues by layout/component rather than changing isolated colors or buttons.
+3. Compare against the pinned osu!Stable references and record specific differences in geometry, hierarchy, spacing, colors, focus/hover states and overlay stacking. Do not claim >=90% similarity without comparable reference screenshots and measured evidence.
+4. Make modular CSS changes inside the active style block. Keep assertions for profile/header containment, responsive overflow, route integrity and no console/page errors.
+5. Rerun static and full browser acceptance; inspect the new artifact/screenshots; read back the Stage 24 candidate, checksum manifest and test report. Verify exact byte size and SHA-256.
+6. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle separately marked NOT RUN until exercised.
 
 ## Verified checkpoint and safety
-- Latest successful workflow run: `39502330658`, tested source head `0437f5656e0b3af0b34813b081c553eea239e94b`.
-- Artifact ID: `12301551997`; candidate size 8,901,002 bytes; SHA-256 `c215d6e2bf5d6f9e721167da0f0fa19ceaf3094a16986ea5b3f1fe7e02e52656`.
-- Candidate and all changes remain isolated on Proto25/Stage 24. Preserve accepted baseline `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`.
-- Do not merge PR #9 or promote until the target-screen visual review and runtime acceptance are complete. Roll back to the accepted Proto24 branch if a regression cannot be resolved safely.
+- Latest successful run: `39505109779`, source head `fbb8c8a3c94f554040be07eef38d76b7db359b31`.
+- Artifact ID: `12302779205`; candidate size 8,901,420 bytes; SHA-256 `4497f0c48bd2d548bf0f8449c33be74c3728978ee915d3578ee961e3af83d3f9`.
+- Production rollback baseline remains `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`.
+- Do not merge PR #9 or promote Proto25 until target-screen review and required runtime acceptance are complete.

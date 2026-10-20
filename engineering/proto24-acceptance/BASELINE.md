@@ -40,10 +40,9 @@ Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f5144
 
 ## Current workflow and validation checkpoint (2026-10-21)
 - Immutable accepted baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; original HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
-- Isolated work branch: `v82.85.30-proto25-ui-refactor-work-03`; latest tested head `0437f5656e0b3af0b34813b081c553eea239e94b`.
-- Latest verified acceptance run: `39502330658`, successful. Artifact ID `12301551997`, artifact digest `sha256:9281d753260b8d639b1fc53b3ee6354ce3dc6de393ce825d406033ad23e4ab9a`.
-- Candidate published to isolated Stage 24 branch: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`; size 8,901,002 bytes; SHA-256 `c215d6e2bf5d6f9e721167da0f0fa19ceaf3094a16986ea5b3f1fe7e02e52656`. Downloaded artifact hash matches its manifest; remote checksum manifest and TEST_REPORT read-back match.
-- Tests: static HTML parsing/unique IDs/inline JS syntax PASS; 17 Playwright checks PASS; page errors 0; console errors 0. New assertions cover profile gradient, dashboard dark palette, absence of large pale workspace panels and Song Select overlay stacking.
-- Targeted visual fixes: dashboard intro/metrics/sections no longer render as pale panels; Song Select modal now stacks above the persistent workspace sidebar and dock. The new screenshot confirms both fixes.
-- Not tested: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact Stable screenshot build identity is unknown; >=90% visual similarity is not verified. Proto25 is not promoted.
-- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Do not merge PR #9 or promote Proto25 until the remaining UI review and runtime acceptance are complete.
+- Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`; latest code checkpoint `fbb8c8a3c94f554040be07eef38d76b7db359b31`.
+- Latest verified run: [39505109779](https://github.com/murorachi/Amq-/actions/runs/39505109779), SUCCESS. Artifact ID `12302779205`; static gates PASS; all 17 Playwright assertions PASS; browser page errors 0; console errors 0.
+- Candidate published on isolated Stage 24 branch: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`; size 8,901,420 bytes; SHA-256 `4497f0c48bd2d548bf0f8449c33be74c3728978ee915d3578ee961e3af83d3f9`. Downloaded artifact hash matches its manifest, and the remote manifest and test report were read back and verified.
+- Fixed root cause: profile/player cards were clipped because the parent top frame had 20px padding and `overflow:hidden`; an initial CSS correction was outside the closing style tag and ignored. The correction is now inside the style block. The new containment assertions pass, and screenshot review confirms the profile/PP text is visible.
+- Remaining NOT RUN: actual audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact osu!Stable screenshot build identity and >=90% visual similarity remain unverified. No promotion or merge has occurred.
+- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; do not force-push or overwrite it.
