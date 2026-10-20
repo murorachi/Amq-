@@ -21,19 +21,30 @@ jobs:
         run: |
           set -euo pipefail
           test -s amq_learning_tool_v82_85_30_workspace_proto17.html
-          cp amq_learning_tool_v82_85_30_workspace_proto17.html proto17.html
-          git apply --check engineering/proto18-acceptance/proto17-to-proto18.patch
-          git apply engineering/proto18-acceptance/proto17-to-proto18.patch
-          cp proto17.html candidate.html
-          sha256sum candidate.html | tee candidate.sha256
+          cp amq_learning_tool_v82_85_30_workspace_proto17.html candidate.html
           python - <<'PY'
           from pathlib import Path
-          p=Path("candidate.html").read_text(encoding="utf-8")
-          assert "if(target.textContent!==next)target.textContent=next" in p
-          assert "window.__aniNavigateApp?.('practice')" in p
-          assert "查看清單與學習資料','watchlist'" in p
-          print("Proto18 patch assertions: PASS")
+          p=Path("candidate.html")
+          s=p.read_text(encoding="utf-8")
+          replacements=[
+            ("查看清單與學習資料','learningCenter'", "查看清單與學習資料','watchlist'"),
+            ("if(!clickHome('learningCenter'))return;\n   const mode=a==='practiceExplore'?'explore':'weak';", "window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');\n    const mode=a==='practiceExplore'?'explore':'weak';"),
+            ("if(a==='practice-self'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-self'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("if(a==='practice-srs'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-srs'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;target.textContent=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。'}", "function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;const next=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。';if(target.textContent!==next)target.textContent=next}")
+          ]
+          for old,new in replacements:
+            n=s.count(old)
+            if n != 1:
+              raise SystemExit(f"Expected exactly one source match, found {n}: {old[:100]!r}")
+            s=s.replace(old,new,1)
+          p.write_text(s,encoding="utf-8")
+          assert "if(target.textContent!==next)target.textContent=next" in s
+          assert "window.__aniNavigateApp?.('practice')" in s
+          assert "查看清單與學習資料','watchlist'" in s
+          print("Proto18 source reconstruction: PASS (5 exact replacements)")
           PY
+          sha256sum candidate.html | tee candidate.sha256
       - name: Install browser test dependencies
         run: |
           python -m pip install --upgrade pip playwright
