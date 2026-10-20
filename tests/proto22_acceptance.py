@@ -28,6 +28,9 @@ async def main():
         assert geom["legacyHero"]=="none" and geom["legacyDiscover"]=="none",geom
         report["desktop_geometry"]=geom
         report["checks"].append("osu-inspired desktop composition: logo left, stacked menu right, duplicate legacy sections hidden: PASS")
+        broken_images=await page.evaluate("""()=>[...document.querySelectorAll('body.ui-home-menu img')].filter(i=>{const r=i.getBoundingClientRect();return r.width>0&&r.height>0&&(!i.complete||i.naturalWidth===0)}).length""")
+        assert broken_images==0, {"visible_broken_images":broken_images}
+        report["checks"].append("no visible broken image placeholders on homepage: PASS")
         await page.screenshot(path="proto22-desktop.png",full_page=True)
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         expected=["quiz","practiceExplore","practiceWeak","multiplayer","catalog","watchlist","learningPlan","dashboard"]
