@@ -13,4 +13,4 @@
 - Settings overlay: visible dialog and close behavior verified by browser test: PASS.
 - Real audio playback, quiz answer lifecycle and multiplayer room lifecycle: NOT RUN.
 - Remote published HTML bytes and SHA-256 manifest verification: PASS, run 39470617728.
-- Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/39471782011
+- Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/39471953869

@@ -1,7 +1,7 @@
 # CURRENT STATUS — Proto22
 - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto22.html
-- Bytes: 8876753
-- SHA-256: 1c8ae4d265cccefbff812aa3a267e1ff04bbae2f829061f1a2ca33ed9cdecd97
+- Bytes: 8877203
+- SHA-256: 734fdad5ee97a7982ab119a3523c2f1b129fea7a3943bb1b8df1161b7dae2f0d
 - Desktop 1440x900 and mobile 390x844 browser acceptance: PASS.
 - Native localStorage/sessionStorage/IndexedDB and reload persistence: PASS.
 - Eight homepage routes and return-home flows: PASS.
