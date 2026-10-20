@@ -78,25 +78,8 @@ jobs:
           mkdir -p dist engineering/proto24-acceptance
           cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html
           cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256
-          cat > engineering/proto24-acceptance/BASELINE.md <<'EOF'
-          # BASELINE — Proto25 Stage 1
-          - Pinned source: Proto17 at a763706e56324cf4be020d82667b36f5438e4784.
-          - Proto22 retained as a separate prior candidate.
-          - Production V82.82 and read-only V82.85.30 are unchanged.
-          EOF
-          cat > engineering/proto24-acceptance/CURRENT_STATUS.md <<EOF
-          # CURRENT STATUS — Proto25 Stage 1
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html
-          - Size: $(stat -c %s candidate.html) bytes
-          - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
-          - Browser acceptance: PASS (see TEST_REPORT.md and this workflow run).
-          - Production promotion: NOT performed.
-          EOF
-          cat > engineering/proto24-acceptance/NEXT_TASK.md <<'EOF'
-          # NEXT TASK
-          - Verify real audio output, quiz-answer lifecycle, and multiplayer regression separately before production promotion.
-          - Do not alter quiz/audio logic as part of visual refinements.
-          EOF
+          # Preserve the pinned baseline and next-task records from the source branch.
+          # The workflow only writes stage-specific candidate artifacts and TEST_REPORT.md.
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
           # TEST REPORT — Proto25 Stage 1
           - Native origin localStorage/sessionStorage/IndexedDB: PASS if workflow succeeds.
