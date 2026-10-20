@@ -50,7 +50,32 @@ async def main():
             await page.evaluate("""()=>{if(window.__aniNavigateApp)window.__aniNavigateApp('home');else document.querySelector('#uiBackHome')?.click()}""")
             await page.wait_for_timeout(350)
             await page.wait_for_function("document.body.classList.contains('ui-home-menu')",timeout=10000)
-        # Settings layer must be operable and not throw.
+        # The four-workspace shell is distinct and its navigation state is real.
+        await page.locator('[data-home-action="dashboard"]:visible').first.click(timeout=8000)
+        await page.wait_for_timeout(250)
+        assert await page.locator("#amqWorkspaceSidebar").count()==1
+        assert await page.locator("#amqWorkspaceDock").count()==1
+        for ws, expected in [("learning","學習中心"),("analysis","學習概況")]:
+            button=page.locator('#amqWorkspaceDock [data-ws="'+ws+'"]')
+            await button.click(timeout=8000)
+            await page.wait_for_timeout(200)
+            assert await button.get_attribute("aria-pressed")=="true"
+            panel=await page.locator("#wsActions").inner_text()
+            assert expected in panel, {"workspace":ws,"text":panel[:400]}
+            report["checks"].append("workspace "+ws+" active and distinct: PASS")
+        await page.locator('[data-ws="learning"]').click()
+        learning_text=await page.locator("#wsActions").inner_text()
+        for label in ["探索新歌","弱點補強","自選清單練習","間隔複習","學習計畫"]:
+            assert label in learning_text, {"missing":label}
+        await page.locator('[data-ws="analysis"]').click()
+        analysis_text=await page.locator("#wsActions").inner_text()
+        for label in ["統計儀表板","查看動畫圖鑑進度","查看清單與學習資料","學習計畫"]:
+            assert label in analysis_text, {"missing":label}
+        report["checks"].append("Learning Center and Analysis action sets remain separate: PASS")
+        await page.screenshot(path="proto22-analysis-workspace.png",full_page=False)
+        await page.locator("#wsReturnHome").click(timeout=8000)
+        await page.wait_for_timeout(200)
+        # Settings layer must open a visible dialog and close cleanly.
         settings=page.locator("#uiHomeSettings")
         await settings.click(timeout=8000)
         await page.wait_for_timeout(250)
@@ -58,8 +83,14 @@ async def main():
         settings_visible=await page.evaluate("""()=>{const candidates=[...document.querySelectorAll('[role=dialog],dialog,[data-settings-panel],#settingsModal,#settingsDialog')];return candidates.filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden'}).map(e=>({id:e.id,role:e.getAttribute('role'),text:(e.innerText||'').slice(0,160)}))}""")
         report["settings_visible_panels"]=settings_visible
         assert report["settings_state"] in ("true","false",None) 
-        assert settings_visible or report["settings_state"]=="true" or await page.locator("#uiHomeSettings").is_visible(), "settings entry not operable"
-        report["checks"].append("settings entry operable: PASS; visible panels="+str(len(settings_visible)))
+        layer=page.locator("#amqSettingsLayerV21")
+        await page.wait_for_function("!!document.querySelector('#amqSettingsLayerV21')",timeout=8000)
+        assert await layer.is_visible(), "settings layer did not open"
+        report["checks"].append("settings layer visible: PASS")
+        await layer.locator("[data-settings-close]").first.click(timeout=5000)
+        await page.wait_for_timeout(150)
+        assert not await layer.is_visible(), "settings layer did not close"
+        report["checks"].append("settings layer closes cleanly: PASS")
         await page.evaluate("localStorage.setItem('p20reload','yes');sessionStorage.setItem('p20reload','yes')")
         await page.reload(wait_until="domcontentloaded",timeout=60000)
         await page.wait_for_function("document.readyState==='complete'",timeout=60000)
