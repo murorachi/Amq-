@@ -126,3 +126,9 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 ## Item system design note
 - See `reports/MULTIPLAYER_GAMBLE_ITEM_BUILD_SYSTEM_ZH_01.md` for the proposed Roguelike item framework.
 - Design only; no product code was changed.
+
+
+## Item rule audit note — 2026-10-20
+- `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md` reviews the 24-item draft. It specifies rule closures to make event IDs, protection ordering, rounding, debt expiry, and shared escrow auditable.
+- Extreme builds and potential infinite loops are not automatically defects. Any proposed restriction needs an actual repeatable path and evidence; theoretical strength alone is insufficient.
+- Documentation only. No checker, simulation, human playtest, or product regression test was run. Product code unchanged.
