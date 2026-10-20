@@ -66,9 +66,11 @@ async def main():
             assert await button.get_attribute("aria-pressed")=="true",ws
             assert heading in await page.locator("#wsActions").inner_text(),ws
             await page.screenshot(path=screenshot,full_page=True)
-            styles=await page.evaluate("""()=>({sidebar:getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).backgroundImage,dock:getComputedStyle(document.querySelector('#amqWorkspaceDock')).height,active:getComputedStyle(document.querySelector('#amqWorkspaceDock [aria-pressed="true"]')).backgroundImage,title:getComputedStyle(document.querySelector('#wsTitle')).color,actions:document.querySelectorAll('#wsActions .wsAction').length})""")
+            styles=await page.evaluate("""()=>({body:getComputedStyle(document.body).backgroundColor,sidebar:getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).backgroundImage,dock:getComputedStyle(document.querySelector('#amqWorkspaceDock')).height,dockBackground:getComputedStyle(document.querySelector('#amqWorkspaceDock')).backgroundColor,active:getComputedStyle(document.querySelector('#amqWorkspaceDock [aria-pressed="true"]')).backgroundImage,title:getComputedStyle(document.querySelector('#wsTitle')).color,actions:document.querySelectorAll('#wsActions .wsAction').length})""")
             assert "linear-gradient" in styles["sidebar"],styles
             assert "linear-gradient" in styles["active"],styles
+            assert styles["body"]=="rgb(40, 33, 43)",styles
+            assert "rgb(112, 64, 92)" in styles["active"],styles
             assert styles["actions"]>=5,styles
             report.setdefault("workspace_visuals",{})[ws]=styles
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
