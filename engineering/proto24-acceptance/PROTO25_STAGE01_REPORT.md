@@ -37,6 +37,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added browser checks for settings-open state, theme-toggle visibility, scene-background control visibility and computed panel color.
 - Stage 7 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-07`.
 
+## Stage 8: analytics and learning-plan surfaces
+- Darkened the legacy analytics/learning-plan cards, metrics, progress bars, spaced-repetition widgets and batch-management controls to avoid the white-on-dark mismatch visible in the Proto24 workspace screenshot.
+- Added a browser assertion that the legacy panel uses the dark workspace palette.
+- Stage 8 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-08`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
