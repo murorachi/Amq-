@@ -29,7 +29,7 @@
 - Stage 12: `v82.85.30-proto25-ui-refactor-stage-12`
 - Stage 13: `v82.85.30-proto25-ui-refactor-stage-13`
 - Stage 14: `v82.85.30-proto25-ui-refactor-stage-14`
-- Latest source CSS fix: `2ab2366755724f261cd3a6df378296f62339c371`; isolated CI target CSS fix: `14c82e6250667a266c5d5a3acd085821a00355b6`.
+- Latest test correction: `4a70a5374560a41e999349e130d1afd2a47f2e37`; isolated CI target test correction: `c4ba0497620522f81fd32f5158fe50340a426f1a`.
 - Stage 14 branch was fast-forwarded to the same recorded engineering checkpoint as the working branch. The original Proto24 branch was not changed.
 
 ## Verification status
