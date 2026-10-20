@@ -28,5 +28,6 @@
 - Stage-10 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-10`.
 - Stage-11 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-11`.
 - Stage-12 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-12`.
+- Stage-13 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-13`.
 - Original Proto24 baseline above remains immutable; the stage-02 branch is an implementation checkpoint, not an accepted final delivery.
 - Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; do not reset or force-push the original baseline.
