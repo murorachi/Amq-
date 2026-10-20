@@ -70,7 +70,11 @@ async def main():
         report["checks"].append("Play menu Multiplayer route to existing room setup: PASS (server connectivity not tested)")
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         # Settings panel opens the existing real controls without hiding or replacing them.
+        await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(100)
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
+        settings_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,panel:document.querySelector('.top .actions').getBoundingClientRect().width})")
+        assert settings_mobile["document"]<=settings_mobile["viewport"] and settings_mobile["panel"]<=settings_mobile["viewport"],settings_mobile
+        report["settings_mobile"]=settings_mobile
         assert await page.locator("body").evaluate("(e)=>e.classList.contains('ui-settings-open')")
         assert await page.locator("#themeToggle").is_visible()
         assert await page.locator("#sceneBackgroundOpen").is_visible()
@@ -79,6 +83,7 @@ async def main():
         report["settings_visuals"]={"background":settings_style,"themeToggleVisible":True,"sceneBackgroundVisible":True}
         report["checks"].append("Home settings panel and existing controls: PASS")
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
+        await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         await page.evaluate("localStorage.setItem('proto24reload','ok')")
         await page.reload(wait_until="domcontentloaded",timeout=45000)
         assert await page.evaluate("localStorage.getItem('proto24reload')")=="ok"
