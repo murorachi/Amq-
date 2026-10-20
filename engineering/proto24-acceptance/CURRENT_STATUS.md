@@ -29,14 +29,14 @@
 - Stage 12: `v82.85.30-proto25-ui-refactor-stage-12`
 - Stage 13: `v82.85.30-proto25-ui-refactor-stage-13`
 - Stage 14: `v82.85.30-proto25-ui-refactor-stage-14`
-- Latest stage workflow commit: `7fe4e73b61b0b9297381298d145e668179bb28d3`.
+- Latest stage workflow commit: `a522cae666f86bba7f7c3b198fcd36f5f94e6395`.
 - Stage 14 branch was fast-forwarded to the same recorded engineering checkpoint as the working branch. The original Proto24 branch was not changed.
 
 ## Verification status
 - GitHub file writes and remote read-back: PASS.
 - Stage 14 source checkpoint branch equality with working branch at the last comparison: PASS.
 - Original Proto24 browser acceptance: PASS for the original Proto24 artifact only.
-- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
+- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The workflow artifact list now includes the Song Select screenshot. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
 - Local browser attempt: BLOCKED by the execution environment (`ERR_BLOCKED_BY_ADMINISTRATOR` for both local HTTP and file URLs); no local browser acceptance is claimed.
 - New candidate HTML parser/inline JS/browser assertions: NOT RUN on the actual generated Proto25 artifact.
 - Real audio output, full quiz lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
