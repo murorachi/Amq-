@@ -62,6 +62,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added a mobile scene-background dialog width and palette assertion.
 - Stage 12 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-12`.
 
+## Stage 13: Play menu visual alignment
+- Changed the Play submenu from a centered dialog into an osu!Stable-inspired composition: circular pink cookie mark on the left, compact horizontal choices on the right, subtle dark background pattern.
+- Added desktop two-column and mobile one-column layout assertions.
+- Stage 13 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-13`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
