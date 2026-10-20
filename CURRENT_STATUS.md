@@ -134,3 +134,12 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Added `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md`, reviewing all 24 candidate items and defining unresolved timing, rounding, protection, debt, escrow, and resource-loop risks.
 - Treats extreme synergies as intended design candidates unless evidence shows repeated settlement, free resource generation, reset abuse, or loss of meaningful decisions. Per-player item ownership is used as a provisional audit assumption only, not final approval.
 - Static document review completed. Deterministic checker, numeric simulation, human playtest, and product regression tests were not run. No product code changed.
+
+## Deterministic item checker — 2026-10-20
+
+- Added `tools/gamble_item_rule_checker.py` with 10 standard-library `unittest` methods for event identity, mutually exclusive loss protection, integer floor arithmetic, Vault Ladder odds/returns, Minefield conditional odds, debt due-date counting, public escrow funding, reward reroll identity, Broken Crown once-per-round trigger, and invalid state rejection.
+- Added `.github/workflows/gamble-item-rule-checker.yml` to run the checker on relevant pushes to this design branch and by manual dispatch.
+- Report: `reports/MULTIPLAYER_GAMBLE_DETERMINISTIC_ITEM_CHECKER_01.md`.
+- Verification boundary: local execution not performed in this session; remote Actions result not verified. Workflow existence is not a passing test result.
+- Design-only changes. Product HTML/source and existing multiplayer mode unchanged.
+
