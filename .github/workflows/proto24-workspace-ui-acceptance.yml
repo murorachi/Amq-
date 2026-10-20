@@ -2,7 +2,7 @@ name: Proto24 workspace UI acceptance
 on:
   push:
     branches:
-      - v82.85.30-proto24-workspace-ui-pass-01
+      - v82.85.30-proto25-ui-refactor-work-01
 permissions:
   contents: write
 jobs:
@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto24-workspace-ui-acceptance
+          name: proto25-stage01-ui-acceptance
           path: |
             candidate.html
             candidate.sha256
@@ -72,12 +72,12 @@ jobs:
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto24-accepted-delivery-02
+          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-01
         run: |
           set -euo pipefail
           mkdir -p dist engineering/proto24-acceptance
-          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto24.html
-          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto24.html.sha256
+          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html
+          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256
           cat > engineering/proto24-acceptance/BASELINE.md <<'EOF'
           # BASELINE — Proto24
           - Pinned source: Proto17 at a763706e56324cf4be020d82667b36f5438e4784.
