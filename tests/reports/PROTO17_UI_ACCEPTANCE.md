@@ -27,3 +27,8 @@
 - Native localStorage and IndexedDB were tested with real browser APIs.
 - External requests were blocked for deterministic acceptance; remote covers, third-party APIs, and real audio playback were not tested.
 - This is functional acceptance, not a pixel-diff visual review.
+
+## Retry history
+
+- Run 39399434939 failed because the first test-harness version passed Playwright's keyword-only wait_for_function argument positionally. The resulting early test error also left later homepage controls on a non-home view, causing secondary click timeouts. This was a test-harness defect, not a failed application assertion.
+- The harness was corrected to pass arg by keyword. Run 39399704734 then completed with 12 passed and 0 failed, including normal-origin storage and all navigation checks.
