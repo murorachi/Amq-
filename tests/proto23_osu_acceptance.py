@@ -24,6 +24,11 @@ async def main():
         assert layout["primary"]["x"] > layout["landing"]["x"]+layout["landing"]["w"]*.30,layout
         assert len(layout["actions"])==3 and all(a["h"]>=65 for a in layout["actions"]),layout
         assert layout["legacy"]==["none","none"],layout
+        visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
+        assert "♫ ?" in visual["logo"],visual
+        assert visual["body"]=="rgb(23, 20, 30)" and visual["wrap"]=="rgb(23, 20, 30)",visual
+        assert visual["footerHeading"]=="rgb(240, 233, 255)",visual
+        report["visual_tokens"]=visual
         report["desktop_layout"]=layout
         report["checks"].append("Desktop osu composition: profile upper-left, music bar top-right, logo left, three stacked purple actions right, legacy sections hidden: PASS")
         expected=["quiz","practiceExplore","practiceWeak","catalog","watchlist","learningPlan","dashboard"]
