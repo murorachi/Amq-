@@ -1,0 +1,12 @@
+<style id="amq-osu-home-layout-correction-v21">
+body.ui-home-menu header{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"brand actions"!important}
+body.ui-home-menu header .brand{grid-area:brand!important}body.ui-home-menu header .actions{grid-area:actions!important}
+body.ui-home-menu #homeMenu{grid-template-columns:minmax(340px,.94fr) minmax(390px,1.06fr)!important;grid-template-areas:"player player" "stage landing"!important;align-items:center!important;row-gap:24px!important}
+body.ui-home-menu #homeMenu>.amqPlayerFrame,body.ui-home-menu #homeMenu>.amqHomePlayerFrame{grid-area:player!important;width:100%!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr)!important;align-items:center!important;border:1px solid #4a3a50!important;border-radius:10px!important;background:linear-gradient(115deg,#251f2a,#1c1921)!important;padding:14px 18px!important;margin:0!important}
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before{display:none!important;content:none!important}
+body.ui-home-menu #homeMenu .amqHomeStage{grid-area:stage!important}body.ui-home-menu #homeMenu .amqHomeLandingV851{grid-area:landing!important}
+body.ui-home-menu #homeMenu .amqPlayerFrame .amqPlayerCaption{margin:0 0 8px!important}body.ui-home-menu #amqHomePlayerSlot{min-width:0!important}body.ui-home-menu #amqHomePlayerSlot .amqHomeDock{width:100%!important;box-sizing:border-box!important}
+body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(max-width:1000px){body.ui-home-menu #homeMenu{grid-template-columns:1fr!important;grid-template-areas:"player" "stage" "landing"!important}body.ui-home-menu #homeMenu>.amqPlayerFrame,body.ui-home-menu #homeMenu>.amqHomePlayerFrame{grid-template-columns:1fr!important;gap:12px!important}}
+@media(max-width:560px){body.ui-home-menu header{grid-template-columns:1fr!important;grid-template-areas:"brand" "actions"!important}body.ui-home-menu #homeMenu>.amqPlayerFrame,body.ui-home-menu #homeMenu>.amqHomePlayerFrame{padding:10px!important}body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-template-columns:1fr!important}}
+</style>
