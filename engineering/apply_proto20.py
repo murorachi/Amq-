@@ -21,6 +21,6 @@ s += route
 css=Path("engineering/ui-v20.css").read_text(encoding="utf-8")
 assert "amq-osu-home-redesign-v20" in css
 assert "amq-osu-home-redesign-v20" not in s
-s += "\n"+css+"\n"
+s += "\n"+css+"\n"+Path("engineering/ui-v21.css").read_text(encoding="utf-8")+"\n"
 p.write_text(s,encoding="utf-8")
 print("Proto20 candidate patched")
