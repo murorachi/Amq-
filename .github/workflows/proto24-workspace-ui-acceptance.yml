@@ -3,6 +3,14 @@ on:
   push:
     branches:
       - v82.85.30-proto25-ui-refactor-work-03
+    paths:
+      - ".github/workflows/proto24-workspace-ui-acceptance.yml"
+      - "amq_learning_tool_v82_85_30_workspace_proto17.html"
+      - "engineering/proto24/**"
+      - "tests/proto24_workspace_acceptance.py"
+concurrency:
+  group: proto25-stage24-ui-acceptance-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
