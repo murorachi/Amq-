@@ -6,3 +6,5 @@ Retry after fixing the false-negative DOCTYPE assertion in the static check.
 Retry after moving candidate write below Play menu injection.
 
 Retry after correcting Multiplayer's return-home selector to #mpBackHome.
+
+Retry after aligning Settings styles with the actual ui-settings-open state.
