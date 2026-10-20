@@ -32,6 +32,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added keyboard Escape/Tab handling and a Playwright interaction check for menu labels, Back behavior, disabled multiplayer, and the Single Player route.
 - Stage 6 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-06`.
 
+## Stage 7: responsive Settings panel
+- Styled the existing Settings toggle and real controls as a compact responsive options panel; no settings functionality was replaced.
+- Added browser checks for settings-open state, theme-toggle visibility, scene-background control visibility and computed panel color.
+- Stage 7 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-07`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
