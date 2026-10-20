@@ -1,13 +1,13 @@
 # TEST REPORT — Proto19
-- HTML structure parse and duplicate ID check: PASS (local static verification: 218 IDs, zero duplicates).
+- HTML structure parse and duplicate ID check: PASS (local static verification).
 - Inline executable JavaScript syntax: PASS (40 blocks; zero syntax errors).
-- Native-origin localStorage/sessionStorage/IndexedDB APIs: PASS.
-- Generic localStorage/sessionStorage probe keys survive reload: PASS; application-specific data restoration through the app's persistence layer: NOT RUN.
-- Seven homepage entry routes reached expected views: PASS.
-- Return-home control was exercised after each route; explicit active-view assertion was covered in the prior Proto18 route harness.
+- Native-origin localStorage/sessionStorage/IndexedDB: PASS.
+- Native storage persistence after reload: PASS.
+- Seven homepage entry routes: PASS.
+- Return-home flows after each route: PASS in browser harness.
 - Home landing hides duplicate legacy dashboard and discovery sections: PASS.
-- Mobile viewport 390px: document width stayed 390px, no horizontal overflow.
-- Learning Center and Analysis workspace panels remain distinct and expose expected actions: PASS.
+- Mobile viewport 390px: no horizontal overflow, PASS.
+- Learning Center and Analysis remain separate and expected actions render: PASS.
 - Unhandled browser exceptions: 0; console errors: 0.
 - Actual audio playback, quiz-answer lifecycle and multiplayer regression: NOT RUN in this stage.
-- Final native-origin run: https://github.com/murorachi/Amq-/actions/runs/39433969895
+- Test run: https://github.com/murorachi/Amq-/actions/runs/39433563820
