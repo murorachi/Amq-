@@ -62,6 +62,9 @@ async def main():
                 play_desktop=await page.evaluate("({columns:getComputedStyle(document.querySelector('#amqStablePlayPanel')).gridTemplateColumns,height:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().height})")
                 assert len(play_desktop["columns"].split())==2,play_desktop
                 report["play_menu_desktop"]=play_desktop
+                play_visual=await page.evaluate("""()=>({background:getComputedStyle(document.querySelector('#amqStableSinglePlayer')).backgroundImage,clipPath:getComputedStyle(document.querySelector('#amqStableSinglePlayer')).clipPath,buttonHeight:document.querySelector('#amqStableSinglePlayer').getBoundingClientRect().height})""")
+                assert "linear-gradient" in play_visual["background"] and play_visual["clipPath"]!="none" and play_visual["buttonHeight"]>=40,play_visual
+                report["play_menu_visual"]=play_visual
                 await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
                 play_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,shade:document.querySelector('#amqStablePlayShade').getBoundingClientRect().width,panel:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#amqStablePlayPanel')).gridTemplateColumns})")
                 assert play_mobile["document"]<=play_mobile["viewport"] and play_mobile["panel"]<=play_mobile["viewport"] and len(play_mobile["columns"].split())==1,play_mobile
