@@ -72,6 +72,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added a desktop position/width assertion and retained mobile width/overflow checks.
 - Stage 14 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-14`.
 
+## Stage 15: home background texture
+- Added subtle layered radial gradients and low-contrast diagonal texture to the home background and cookie mark.
+- Corrected the alpha color token during static review before creating the stage checkpoint.
+- Stage 15 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-15`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
