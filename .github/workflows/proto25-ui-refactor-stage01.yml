@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto24-workspace-ui-acceptance
+          name: proto25-stage01-ui-acceptance
           path: |
             candidate.html
             candidate.sha256
@@ -86,7 +86,7 @@ jobs:
           EOF
           cat > engineering/proto24-acceptance/CURRENT_STATUS.md <<EOF
           # CURRENT STATUS — Proto25 Stage 1
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto24.html
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
           - Browser acceptance: PASS (see TEST_REPORT.md and this workflow run).
@@ -107,6 +107,6 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto24.html dist/amq_learning_tool_v82_85_30_workspace_proto24.html.sha256 engineering/proto24-acceptance
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto24.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256 engineering/proto24-acceptance
           git commit -m "Publish Proto25 stage 1 UI candidate and evidence"
           git push origin "HEAD:${TARGET_BRANCH}"
