@@ -11,9 +11,10 @@
 - Stage 1 home-shell changes: dark/pink osu-inspired palette, compact profile/player panels, circular `osu!` wordmark treatment, smaller menu actions.
 - Stage 2 workspace changes: shared dark panel palette, pink active-state accents, compact sidebar and dock styling.
 - Stage 3 accessibility changes: visible keyboard focus indicators and reduced-motion support in home and workspace CSS; Playwright assertions check reduced-motion behavior.
+- Stage 4 catalog/quiz changes: dark compact catalog toolbar and tabs, pink active states, dark anime cards, song drawer/list styling, watchlist panels, and consistent single-player quiz surfaces. Existing data/search/playback handlers are unchanged.
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
-- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02` and `v82.85.30-proto25-ui-refactor-stage-03`.
-- Latest stage workflow commit: `866b6855aa81f502b20f8f198b736c6b3dc2c144`.
+- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02`, `v82.85.30-proto25-ui-refactor-stage-03`, and `v82.85.30-proto25-ui-refactor-stage-04`.
+- Latest stage workflow commit: `ae00ded1242602215d16f8251612070dcab27b75`.
 - Latest recorded engineering checkpoint commit: `eb1ac24ae68164a2aea5a9187b58dd26564f5733`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
