@@ -47,3 +47,7 @@ body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home{display:
 <style id="amq-osu-hide-broken-audio-art-v22">body.ui-home-menu #audioDock img,body.ui-home-menu #homeMenu .amqHomeTopFrame img,body.ui-home-menu #amqHomePlayerSlot img{display:none!important}</style>
 
 <style id="amq-osu-home-broken-image-suppression-v22">body.ui-home-menu img{display:none!important}</style>
+
+<script id="amq-osu-broken-art-cleanup-v22">
+(()=>{const clean=img=>{if(img.complete&&img.naturalWidth===0)img.remove()};const scan=root=>{if(root?.matches?.('img'))clean(root);root?.querySelectorAll?.('img').forEach(img=>{clean(img);if(!img.complete)img.addEventListener('error',()=>img.remove(),{once:true})})};scan(document);new MutationObserver(records=>records.forEach(r=>r.addedNodes.forEach(scan))).observe(document.documentElement,{childList:true,subtree:true});})();
+</script>
