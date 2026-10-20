@@ -168,7 +168,9 @@ jobs:
             proto24-mobile.png
             proto24-learning-workspace.png
             proto24-analysis-workspace.png
-            proto25-song-select.png
+            proto25-catalog.png
+            proto25-catalog-detail.png
+            proto25-quiz.png
             proto25-play-menu.png
             proto25-play-menu-mobile.png
             proto25-settings-desktop.png
@@ -198,7 +200,7 @@ jobs:
           - SHA-256: $(sha256sum /tmp/amq-proto25-stage24-candidate.html | cut -d ' ' -f 1)
           - Static HTML/duplicate-ID/inline-JavaScript checks: PASS (required workflow gate).
           - Browser acceptance: PASS (required Playwright assertions and no page/console errors).
-          - Screenshots: desktop/mobile home, desktop/mobile Play menu, desktop/mobile Settings, Learning Center, Analysis and Song Select; machine-readable acceptance report is attached to the workflow artifact.
+          - Screenshots: desktop/mobile home, desktop/mobile Play menu, desktop/mobile Settings, catalog, catalog detail, single-player quiz, Learning Center and Analysis; machine-readable acceptance report is attached to the workflow artifact.
           - Actual audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
           EOF
           git config user.name "github-actions[bot]"

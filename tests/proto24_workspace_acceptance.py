@@ -76,6 +76,7 @@ async def main():
                 await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
                 await page.locator("#amqStableSinglePlayer").click(timeout=5000)
                 await page.wait_for_timeout(180)
+                await page.screenshot(path="proto25-quiz.png",full_page=False)
             state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
             assert state,action
             back=page.locator("#uiBackHome").first
@@ -172,6 +173,7 @@ async def main():
         report["catalog_mobile"]=catalog_mobile
         await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         report["catalog_visuals"]=catalog
+        await page.screenshot(path="proto25-catalog.png",full_page=False)
         report["checks"].append("Catalog/song-selection panel palette: PASS")
         await page.wait_for_function("document.querySelectorAll('#grid.view-catalog .card').length>0",timeout=20000)
         await page.locator("#grid.view-catalog .card").first.click(timeout=10000);await page.wait_for_timeout(250)
@@ -179,12 +181,12 @@ async def main():
         song_select=await page.evaluate("()=>({width:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns,rows:document.querySelectorAll('#songlist .songrow').length,overlayZ:Number(getComputedStyle(document.querySelector('#overlay')).zIndex),sidebarZ:Number(getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).zIndex),dockZ:Number(getComputedStyle(document.querySelector('#amqWorkspaceDock')).zIndex)})")
         assert song_select["width"]>=1400 and len(song_select["columns"].split())==2,song_select
         assert song_select["overlayZ"]>max(song_select["sidebarZ"],song_select["dockZ"]),song_select
-        report["song_select_visuals"]=song_select
-        await page.screenshot(path="proto25-song-select.png",full_page=False)
+        report["catalog_detail_visuals"]=song_select
+        await page.screenshot(path="proto25-catalog-detail.png",full_page=False)
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
         song_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,drawer:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns})")
         assert song_mobile["document"]<=song_mobile["viewport"] and song_mobile["drawer"]<=song_mobile["viewport"],song_mobile
-        report["song_select_mobile"]=song_mobile
+        report["catalog_detail_mobile"]=song_mobile
         await page.locator("#close").click(timeout=8000);await page.wait_for_timeout(120)
         await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
