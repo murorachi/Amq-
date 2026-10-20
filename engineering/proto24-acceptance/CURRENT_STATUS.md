@@ -14,6 +14,7 @@
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
 - Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02` and `v82.85.30-proto25-ui-refactor-stage-03`.
 - Latest stage workflow commit: `866b6855aa81f502b20f8f198b736c6b3dc2c144`.
+- Latest recorded engineering checkpoint commit: `eb1ac24ae68164a2aea5a9187b58dd26564f5733`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
 ## Verification
