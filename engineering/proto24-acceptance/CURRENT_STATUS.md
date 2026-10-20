@@ -15,8 +15,8 @@
 - Stage 5 Play menu: added a Stable-inspired Play dialog with `Single Player`, `Multiplayer`, and `Back`; Single Player routes to the existing quiz, and Multiplayer routes to the existing AMQ multiplayer room setup. Server connectivity and full multiplayer lifecycle remain separate tests. Browser acceptance covers labels, Back, disabled state, and Single Player route.
 - Added a CI static-check step for HTML parsing, duplicate IDs, and syntax-checking each executable inline JavaScript block with Node.
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
-- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02`, `v82.85.30-proto25-ui-refactor-stage-03`, `v82.85.30-proto25-ui-refactor-stage-04`, and `v82.85.30-proto25-ui-refactor-stage-05` and `v82.85.30-proto25-ui-refactor-stage-06` and `v82.85.30-proto25-ui-refactor-stage-07` and `v82.85.30-proto25-ui-refactor-stage-08` and `v82.85.30-proto25-ui-refactor-stage-09`.
-- Latest stage workflow commit: `dff4c318758169d2730c514c433824f1ccbc51b6`.
+- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02`, `v82.85.30-proto25-ui-refactor-stage-03`, `v82.85.30-proto25-ui-refactor-stage-04`, and `v82.85.30-proto25-ui-refactor-stage-05` and `v82.85.30-proto25-ui-refactor-stage-06` and `v82.85.30-proto25-ui-refactor-stage-07` and `v82.85.30-proto25-ui-refactor-stage-08` and `v82.85.30-proto25-ui-refactor-stage-09` and `v82.85.30-proto25-ui-refactor-stage-10`.
+- Latest stage workflow commit: `9b8421ee37c14e27617c22c0ca465ef7e04f4fe7`.
 - Latest recorded engineering checkpoint commit: `eb1ac24ae68164a2aea5a9187b58dd26564f5733`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
