@@ -18,5 +18,7 @@
 - Active working branch: `v82.85.30-proto25-ui-refactor-work-01`.
 - Current recorded checkpoint: `866b6855aa81f502b20f8f198b736c6b3dc2c144`.
 - Stage-02 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-02`.
+- Stage-03 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-03`.
+- Stage-04 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-04`.
 - Original Proto24 baseline above remains immutable; the stage-02 branch is an implementation checkpoint, not an accepted final delivery.
 - Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; do not reset or force-push the original baseline.
