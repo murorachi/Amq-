@@ -166,6 +166,9 @@ async def main():
         # Catalog/song-selection surface and single-player quiz theme assertions.
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(180)
         assert await page.evaluate("window.__aniGetActiveViewV82?.()")=="home","Workspace return must restore the actual home view before catalog routing"
+        assert not await page.locator("body").evaluate("(e)=>e.classList.contains('amq-workspace-active')"),"Returning home must deactivate the workspace shell"
+        assert not await page.locator("#amqWorkspaceSidebar").is_visible(),"Workspace sidebar must not cover standalone home/catalog routes"
+        assert not await page.locator("#amqWorkspaceDock").is_visible(),"Workspace dock must not cover standalone home/catalog routes"
         await page.locator('.amqHomeLandingLinks [data-home-action="catalog"]').click(timeout=8000);await page.wait_for_timeout(220)
         assert await page.evaluate("window.__aniGetActiveViewV82?.()")=="catalog","Catalog action must navigate to the catalog view"
         assert await page.locator("#grid.view-catalog").is_visible(),"Catalog action must open the visible catalog grid"
