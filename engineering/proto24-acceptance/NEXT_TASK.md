@@ -1,8 +1,8 @@
 # NEXT TASK — Proto25 UI Refactor
 
 ## Immediate blocker: build and acceptance evidence
-1. Verify the Stage 15 GitHub Actions run and outcome. The available GitHub integration does not expose push-triggered run listing, so no run has been independently confirmed in this session.
-2. Retrieve `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage15.html`, its SHA-256 manifest, acceptance report and screenshots, including `proto25-song-select.png`.
+1. Verify the Stage 16 GitHub Actions run and outcome. The available GitHub integration does not expose push-triggered run listing, so no run has been independently confirmed in this session.
+2. Retrieve `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html`, its SHA-256 manifest, acceptance report and screenshots, including `proto25-song-select.png`.
 3. If CI fails, fix the first failing assertion/build step on the working branch, create a new isolated numbered checkpoint and rerun.
 4. Compare the generated screenshots against the pinned main menu, Play menu, Song Select and Options references at matched viewports. Record concrete deltas; do not claim a similarity percentage without the screenshot evidence.
 
