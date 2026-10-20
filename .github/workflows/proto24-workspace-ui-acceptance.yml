@@ -83,6 +83,53 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Static HTML, duplicate-ID, and inline JavaScript checks
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import subprocess, tempfile
+
+          class Audit(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=False)
+                  self.ids=[]
+                  self.scripts=[]
+                  self.current=None
+              def handle_starttag(self, tag, attrs):
+                  attrs=dict(attrs)
+                  if attrs.get("id"): self.ids.append(attrs["id"])
+                  if tag.lower()=="script":
+                      self.current={"attrs":attrs,"body":""}
+              def handle_data(self, data):
+                  if self.current is not None: self.current["body"]+=data
+              def handle_endtag(self, tag):
+                  if tag.lower()=="script" and self.current is not None:
+                      self.scripts.append(self.current);self.current=None
+
+          source=Path("candidate.html").read_text(encoding="utf-8")
+          parser=Audit();parser.feed(source);parser.close()
+          assert source.lstrip().lower().startswith("<!doctype html"), "missing HTML doctype"
+          duplicates=sorted({x for x in parser.ids if parser.ids.count(x)>1})
+          if duplicates: raise SystemExit(f"duplicate IDs: {duplicates[:20]}")
+          checked=0
+          with tempfile.TemporaryDirectory() as td:
+              for index, item in enumerate(parser.scripts):
+                  attrs=item["attrs"]
+                  if attrs.get("src"): continue
+                  kind=attrs.get("type","").strip().lower()
+                  if kind and kind not in ("text/javascript","application/javascript","module"): continue
+                  body=item["body"].strip()
+                  if not body: continue
+                  path=Path(td)/f"inline-{index}.js"
+                  path.write_text(body,encoding="utf-8")
+                  result=subprocess.run(["node","--check",str(path)],text=True,capture_output=True)
+                  if result.returncode:
+                      raise SystemExit(f"inline script {index} syntax error:\n{result.stderr}")
+                  checked+=1
+          print(f"PASS: HTML parsed; {len(parser.ids)} IDs unique; {checked} inline JavaScript blocks syntax-checked.")
+          PY
       - name: Install Playwright
         run: |
           python -m pip install --upgrade pip playwright
