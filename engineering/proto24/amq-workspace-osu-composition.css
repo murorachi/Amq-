@@ -529,3 +529,10 @@ body.dark-theme .dashTrack i { background:linear-gradient(90deg,#f184b9,#c84487)
   }
 }
 </style>
+
+/* Proto25 Stage 28: workspace navigation chrome belongs only to active workspace routes.
+   The fixed sidebar/dock otherwise remains above the catalog even after returning home. */
+body:not(.amq-workspace-active) #amqWorkspaceSidebar,
+body:not(.amq-workspace-active) #amqWorkspaceDock {
+  display: none !important;
+}
