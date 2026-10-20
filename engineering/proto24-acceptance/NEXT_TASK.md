@@ -11,16 +11,17 @@
 - Static checks PASS; all 17 browser checks PASS; page errors 0; console errors 0.
 - Accepted rollback baseline remains `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`.
 
-## Next task: visual comparison and remaining UI gaps
-1. Compare home, Play menu and Settings screenshots with pinned official osu!Stable wiki references. Record geometry, hierarchy, color, icon and spacing differences before changing styles.
-2. Review catalog, Song Select, Learning Center and Analysis screenshots for clipping, fixed-dock overlap, hierarchy, keyboard focus and responsive behavior.
-3. Group related fixes at the modular CSS layer. Keep styles inside the active `<style>` block and preserve AMQ route, data and playback behavior.
-4. Keep the 17 existing assertions and add only checks for observed regressions. Run static and full browser acceptance after each coherent UI group.
-5. Inspect fresh screenshots and verify remote candidate, manifest, report, byte size and SHA-256 after each successful stage.
-6. Do not claim >=90% visual similarity until matching reference captures and measured comparison support it.
-7. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle marked NOT RUN until genuinely exercised.
+## Next task: complete target-screen visual review
+1. Start from successful run `39512028498`, artifact `12305094086`, candidate SHA-256 `cf4a3a209b512ce30090596f9db618d0ef956d4ff3960970ea58af3f54e2efe9`. Do not repeat unchanged tests without a code change.
+2. Review Song Select, Settings and scene-background dialog, quiz, Learning Center and Analysis screenshots at desktop/mobile sizes. Identify related issues as a coherent UI group and fix root selectors in modular sources.
+3. Review catalog after scrolling to the final rows. The dock is compact (54px) and the wrapper has 90px bottom padding; confirm last-row content can scroll fully above the dock.
+4. Compare screens against pinned osu!Stable references and record concrete geometry, hierarchy, spacing, colors, hover/focus and modal-stacking differences. Do not claim >=90% similarity without matching screenshots.
+5. Rerun static checks and the complete browser acceptance after changes. Download the artifact, inspect screenshots/report, verify candidate hash/size and read back the remote Stage 24 HTML tree entry, checksum manifest and TEST_REPORT.
+6. Keep real audio output, full quiz-answer lifecycle and multiplayer server lifecycle as separate NOT RUN items until actually exercised.
 
 ## Delivery safety
-- Do not merge PR #9 or promote Proto25 while target-screen review or required runtime tests remain incomplete.
-- Update `CURRENT_STATUS.md`, `BASELINE.md` and `NEXT_TASK.md` after each verified stage.
-- Roll back to the accepted Proto24 branch if a regression cannot be fixed safely.
+- Latest successful workflow run: `39512028498`; tested source head `38978e192ccd7ea02e228c70974ecc3a96437a1d`.
+- Artifact ID: `12305094086`; candidate size 8,913,254 bytes; SHA-256 `cf4a3a209b512ce30090596f9db618d0ef956d4ff3960970ea58af3f54e2efe9`.
+- Remote Stage 24 branch commit: `1f9727e8082b13a4bcafdd781fc226362e75783f`; remote HTML size and manifest match.
+- Keep Proto25 changes isolated on `v82.85.30-proto25-ui-refactor-work-03` and Stage 24. Preserve accepted Proto24 baseline `39d250cf5a269a0e2bf8f514474584bcc864f599`.
+- Do not merge PR #9 or promote until the target-screen visual review and separate runtime acceptance are complete. Roll back to the accepted Proto24 branch if a regression cannot be resolved safely.
