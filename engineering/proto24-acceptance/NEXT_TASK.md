@@ -20,16 +20,15 @@
 - Do not ask for user review until all target screens and required tests are complete, except where a genuine permission or irreversible-decision blocker requires user input.
 
 
-## Next task: targeted workspace visual repair
-1. Use the latest successful evidence from run `39500770125` and artifact `12299323839`; do not rerun already-passing checks without a code change.
-2. Identify the precise element causing the prominent light panel in `proto24-learning-workspace.png`. Add a diagnostic to the existing Playwright report for visible large light-background elements in Learning Center and Analysis; use the resulting selector and geometry to fix the root CSS rule in `engineering/proto24/amq-workspace-osu-composition.css`.
-3. Add assertions that the target workspace panels use the expected dark palette and that no unintended large light panels remain. Preserve intentionally light controls/dialogs.
-4. Rerun static checks and the complete browser acceptance, inspect the updated desktop/mobile screenshots and read back the new artifact, candidate size, SHA-256 and Stage 24 commit.
-5. Review the other target screens as a group: home/profile strip, Play menu, catalog, Song Select, Settings, learning workspace and analysis workspace. Record visual deltas against osu!stable references; do not claim >=90% similarity without evidence.
-6. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle as separate NOT RUN items until tested.
+## Next task: full target-screen visual review
+1. Start from successful run `39502330658`, artifact `12301551997`, candidate SHA-256 `c215d6e2bf5d6f9e721167da0f0fa19ceaf3094a16986ea5b3f1fe7e02e52656`. Do not repeat unchanged checks without a code change.
+2. Review home/profile strip, Play menu, catalog, Song Select, Settings, Learning Center and Analysis screenshots at desktop and mobile sizes. Identify remaining issues as a related UI group and fix their root CSS selectors in the modular sources.
+3. Compare against pinned osu!stable references and record concrete differences in geometry, hierarchy, spacing, colors, hover/focus states and modal stacking. Do not claim >=90% similarity without matching screenshots and measured evidence.
+4. Add or adjust Playwright assertions for demonstrated regressions only. Rerun static checks and complete browser acceptance; inspect the resulting artifact/screenshots and read back the Stage 24 HTML, manifest, size, SHA-256 and report.
+5. Keep actual audio output, full quiz-answer lifecycle and multiplayer server lifecycle as separate NOT RUN items until actually tested.
 
 ## Verified checkpoint and safety
-- Latest successful workflow run: `39500770125`, commit `d6209c24f72e1d7cb8ea1eaf0a3739ca14a7b407`.
-- Artifact ID: `12299323839`; candidate size 8,899,371 bytes; SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`.
+- Latest successful workflow run: `39502330658`, tested source head `0437f5656e0b3af0b34813b081c553eea239e94b`.
+- Artifact ID: `12301551997`; candidate size 8,901,002 bytes; SHA-256 `c215d6e2bf5d6f9e721167da0f0fa19ceaf3094a16986ea5b3f1fe7e02e52656`.
 - Candidate and all changes remain isolated on Proto25/Stage 24. Preserve accepted baseline `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`.
-- Do not merge PR #9 or promote until remaining visual and runtime acceptance are complete. Roll back to the accepted Proto24 branch if a regression cannot be resolved safely.
+- Do not merge PR #9 or promote until the target-screen visual review and runtime acceptance are complete. Roll back to the accepted Proto24 branch if a regression cannot be resolved safely.
