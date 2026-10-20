@@ -79,6 +79,20 @@ async def main():
             report.setdefault("workspace_visuals",{})[ws]=styles
             report.setdefault("accessibility",{})[ws]={"reduced_motion_transition_duration":motion}
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
+        # Catalog/song-selection surface and single-player quiz theme assertions.
+        await page.locator("#wsReturnHome").click(timeout=8000);await page.wait_for_timeout(150)
+        await page.locator('[data-home-action="catalog"]').first.click(timeout=8000);await page.wait_for_timeout(220)
+        catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
+        assert catalog["quicktools"]=="rgb(48, 38, 50)",catalog
+        assert catalog["toolbar"]=="rgb(48, 38, 50)",catalog
+        report["catalog_visuals"]=catalog
+        report["checks"].append("Catalog/song-selection panel palette: PASS")
+        await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
+        await page.locator('[data-home-action="quiz"]').first.click(timeout=8000);await page.wait_for_timeout(250)
+        quiz=await page.evaluate("""()=>({background:getComputedStyle(document.querySelector('#quizView')).backgroundColor,border:getComputedStyle(document.querySelector('#quizView')).borderTopColor})""")
+        assert quiz["background"]=="rgb(48, 38, 50)",quiz
+        report["quiz_visuals"]=quiz
+        report["checks"].append("Single-player quiz panel palette: PASS")
         report["elapsed_seconds"]=round(time.time()-started,2)
         await browser.close()
     assert not report["errors"],report["errors"]
