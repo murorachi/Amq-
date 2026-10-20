@@ -7433,6 +7433,84 @@ body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
     max-height: 28px !important;
   }
 }
+
+
+/* Proto25 Stage 29: keep the persistent audio dock compact on standalone catalog routes. */
+body.amq-standalone-route #audioDock:not(.amqHomeDock) {
+  box-sizing: border-box !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px !important;
+  overflow: hidden !important;
+  grid-template-columns: minmax(0, 1fr) minmax(210px, .8fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 6px 10px !important;
+}
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockCoverV33,
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockStatus,
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockBtns {
+  display: none !important;
+}
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta b,
+body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta span {
+  display: block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+body.amq-standalone-route #audioDock:not(.amqHomeDock) #audioPlayer {
+  display: block !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  max-height: 32px !important;
+}
+@media(max-width:680px) {
+  body.amq-standalone-route #audioDock:not(.amqHomeDock) {
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 22px 28px !important;
+    gap: 2px !important;
+  }
+  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta b {
+    flex: 0 1 48% !important;
+    font-size: 11px !important;
+  }
+  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta span {
+    flex: 1 1 52% !important;
+    font-size: 9px !important;
+  }
+  body.amq-standalone-route #audioDock:not(.amqHomeDock) #audioPlayer {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+}
 </style>
 <style id="amq-workspace-osu-composition-v24">
 /* Proto24: visual pass for the four workspaces; navigation and action handlers remain unchanged. */
