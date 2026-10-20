@@ -45,7 +45,7 @@ async def main():
                 shade=page.locator("#amqStablePlayShade")
                 assert await shade.is_visible(),"Play action must open Stable-style Play menu"
                 assert await page.locator("#amqStableSinglePlayer").inner_text()=="Single Player"
-                assert await page.locator("#amqStableMultiplayer").is_disabled(),"unsupported multiplayer must not look functional"
+                assert not await page.locator("#amqStableMultiplayer").is_disabled(),"Multiplayer must remain available through the existing AMQ route"
                 await page.locator("#amqStablePlayClose").click(timeout=5000)
                 assert not await shade.is_visible(),"Back must close the Play menu"
                 await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
@@ -57,6 +57,13 @@ async def main():
             if await back.count() and await back.is_visible():
                 await back.click(timeout=5000);await page.wait_for_timeout(120)
             report["checks"].append("Home action and return: "+action+" PASS")
+        # Verify Play -> Multiplayer reaches the existing room setup without claiming server connectivity.
+        await page.locator('[data-home-action="quiz"]').first.click(timeout=8000)
+        await page.locator("#amqStableMultiplayer").click(timeout=5000);await page.wait_for_timeout(250)
+        multiplayer_state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
+        assert multiplayer_state=="multiplayer",{"active_view":multiplayer_state}
+        report["checks"].append("Play menu Multiplayer route to existing room setup: PASS (server connectivity not tested)")
+        await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         await page.evaluate("localStorage.setItem('proto24reload','ok')")
         await page.reload(wait_until="domcontentloaded",timeout=45000)
         assert await page.evaluate("localStorage.getItem('proto24reload')")=="ok"
