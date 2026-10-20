@@ -71,7 +71,10 @@ async def main():
         await page.locator("#amqStableMultiplayer").click(timeout=5000);await page.wait_for_timeout(250)
         multiplayer_state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
         assert multiplayer_state=="multiplayer",{"active_view":multiplayer_state}
-        report["checks"].append("Play menu Multiplayer route to existing room setup: PASS (server connectivity not tested)")
+        multiplayer_visual=await page.evaluate("()=>({background:getComputedStyle(document.querySelector('#multiplayerView')).backgroundColor,border:getComputedStyle(document.querySelector('#multiplayerView')).borderTopColor})")
+        assert multiplayer_visual["background"]=="rgb(48, 38, 50)",multiplayer_visual
+        report["multiplayer_visuals"]=multiplayer_visual
+        report["checks"].append("Play menu Multiplayer route and room UI palette: PASS (server connectivity not tested)")
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         # Settings panel opens the existing real controls without hiding or replacing them.
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
