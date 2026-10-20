@@ -77,6 +77,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Corrected the alpha color token during static review before creating the stage checkpoint.
 - Stage 15 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-15`.
 
+## Stage 16: Multiplayer room UI
+- Applied the dark panel, pink accent and responsive form-control treatment to the existing Multiplayer room/setup view.
+- Added a browser assertion for the room view's computed palette; server connectivity and the full multiplayer lifecycle remain explicitly NOT RUN.
+- Stage 16 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-16`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
