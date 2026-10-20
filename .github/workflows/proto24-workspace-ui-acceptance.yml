@@ -166,7 +166,7 @@ jobs:
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-16
+          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-23
         run: |
           set -euo pipefail
           mkdir -p dist engineering/proto24-acceptance
