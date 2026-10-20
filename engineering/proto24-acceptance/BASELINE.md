@@ -26,8 +26,10 @@
 - Stage 17 branch: `v82.85.30-proto25-ui-refactor-stage-17`.
 - Stage 18 branch: `v82.85.30-proto25-ui-refactor-stage-18`.
 - Stage 19 branch: `v82.85.30-proto25-ui-refactor-stage-19`.
+- Stage 20 branch: `v82.85.30-proto25-ui-refactor-stage-20`.
+- Stage 21 branch: `v82.85.30-proto25-ui-refactor-stage-21`.
 - Last confirmed common source checkpoint: `12a999b6e23db26c95504d6abe7be9ba5b81a1f8`; stage-16 and working branches were fast-forwarded to this commit. Documentation updates follow that source checkpoint.
-- Stage 16/17/18/19 candidate HTML and SHA-256 manifest: static checks pass; the fifth browser run is queued/in progress after correcting the gradient assertion.
+- Stage 16–21 candidate HTML and SHA-256 manifest: static checks pass on the latest PR candidate; the sixth browser run is in progress after home/catalog and screenshot fixes.
 - Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
 
 ## Rollback
