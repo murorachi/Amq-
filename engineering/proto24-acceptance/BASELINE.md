@@ -39,11 +39,11 @@ Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f5144
 
 
 ## Current workflow and validation checkpoint (2026-10-21)
-- Immutable accepted baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; original candidate SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`. Do not modify or promote over it.
-- Isolated work branch: `v82.85.30-proto25-ui-refactor-work-03`; current source/test checkpoint includes `9cd8097d7db723fef1e77d8fc1e352512815c924`.
-- Stage 24 workflow branch fix: `1465e1134140cefc4ef785e60e86652dc325a547`. The publisher now checks out the target branch before committing artifacts, avoiding a non-fast-forward push from the synthetic PR merge ref.
-- Work-03 push-trigger workflow commit: `ec31a4b12c3e842859f06063c044dac0127a9ee4`. This is an isolated validation path, not a production workflow.
-- Prior Stage 24 run `39497858082` passed static checks and 17 Playwright assertions, generated an 8,899,371-byte candidate with SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`, and uploaded screenshots. It validated commit `2294f0ce073d074df5f7df1728a9ab22b577b0d9`, not the latest work-03 head.
-- The prior profile-card background assertion was insufficient because transparent backgrounds passed. The test now requires a computed `linear-gradient` for the profile card; fresh execution remains pending.
-- Latest work-03 push run, its artifact, and its published remote candidate are NOT YET VERIFIED. No browser acceptance claim applies to the latest profile assertion until evidence is read back.
-- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Do not merge PR #9 or promote Proto25 until fresh browser evidence, screenshots, size and SHA-256 are verified.
+- Immutable accepted baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; original candidate SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
+- Isolated work branch: `v82.85.30-proto25-ui-refactor-work-03`; current workflow commit `d6209c24f72e1d7cb8ea1eaf0a3739ca14a7b407`.
+- Latest verified acceptance run: `39500770125`, successful. Artifact ID `12299323839`, artifact digest `sha256:39a1e87fed6aa545ac6abc51ed07fd1fdafb65122ecd31366a1f00a5581d5917`.
+- Candidate published to isolated Stage 24 branch: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`; size 8,899,371 bytes; SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`. The downloaded artifact candidate hash matches its manifest; remote checksum manifest and TEST_REPORT read-back match.
+- Test results: static HTML parsing/unique IDs/inline JS syntax PASS; 17 Playwright checks PASS; page errors 0; console errors 0. Profile gradient is now explicitly asserted. Desktop profile/player strip is 84px; mobile viewport/document width is 390px/390px.
+- Prior concurrent publication failure on run `39500564062` was isolated to a non-fast-forward push race after successful browser checks. The workflow now serializes runs with a concurrency group and ignores docs-only pushes. Final run `39500770125` passed including publish step.
+- Not tested: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact Stable build identity is unknown; 90% visual similarity is not verified. Screenshot review still shows a conspicuous light panel in the Learning Center requiring targeted CSS diagnosis.
+- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Do not merge PR #9 or promote the Proto25 candidate until remaining visual review and runtime acceptance are completed.
