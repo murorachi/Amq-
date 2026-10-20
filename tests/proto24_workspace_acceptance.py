@@ -74,6 +74,11 @@ async def main():
         report["checks"].append("Play menu Multiplayer route to existing room setup: PASS (server connectivity not tested)")
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         # Settings panel opens the existing real controls without hiding or replacing them.
+        await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
+        settings_desktop=await page.evaluate("({x:document.querySelector('.top .actions').getBoundingClientRect().x,width:document.querySelector('.top .actions').getBoundingClientRect().width,background:getComputedStyle(document.querySelector('.top .actions')).backgroundColor})")
+        assert settings_desktop["x"]<=10 and settings_desktop["width"]<=320,settings_desktop
+        report["settings_desktop"]=settings_desktop
+        await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(100)
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         settings_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,panel:document.querySelector('.top .actions').getBoundingClientRect().width})")
