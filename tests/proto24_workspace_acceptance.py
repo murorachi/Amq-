@@ -162,8 +162,10 @@ async def main():
             report.setdefault("accessibility",{})[ws]={"reduced_motion_transition_duration":motion}
         report["checks"].append("Learning Center and Analysis workspace separation and visual styling: PASS")
         # Catalog/song-selection surface and single-player quiz theme assertions.
-        await page.locator("#wsReturnHome").click(timeout=8000);await page.wait_for_timeout(150)
+        await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(180)
+        assert await page.locator("#homeMenu").is_visible(),"Workspace return must restore the actual home menu before catalog routing"
         await page.locator('[data-home-action="catalog"]').first.click(timeout=8000);await page.wait_for_timeout(220)
+        assert await page.locator("#grid.view-catalog").is_visible(),"Catalog action must open the visible catalog view"
         catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,toolbarDisplay:getComputedStyle(document.querySelector('.toolbar.view-catalog')).display,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
         assert catalog["quicktools"]=="rgb(48, 38, 50)",catalog
         assert catalog["toolbar"] not in ("rgb(255, 255, 255)","rgb(255, 250, 255)") and catalog["toolbarDisplay"]=="grid",catalog
