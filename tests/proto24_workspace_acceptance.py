@@ -75,7 +75,7 @@ async def main():
         assert multiplayer_visual["background"]=="rgb(48, 38, 50)",multiplayer_visual
         report["multiplayer_visuals"]=multiplayer_visual
         report["checks"].append("Play menu Multiplayer route and room UI palette: PASS (server connectivity not tested)")
-        await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
+        await page.locator("#mpBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         # Settings panel opens the existing real controls without hiding or replacing them.
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         settings_desktop=await page.evaluate("({x:document.querySelector('.top .actions').getBoundingClientRect().x,width:document.querySelector('.top .actions').getBoundingClientRect().width,background:getComputedStyle(document.querySelector('.top .actions')).backgroundColor})")
