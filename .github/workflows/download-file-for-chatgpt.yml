@@ -1,0 +1,76 @@
+name: Download file for ChatGPT upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      download_url:
+        description: "HTTPS URL of the file to download"
+        required: true
+        type: string
+      file_name:
+        description: "Output filename, including extension"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chatgpt-file-download-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  download:
+    name: Download and package file
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Validate inputs and download
+        shell: bash
+        env:
+          DOWNLOAD_URL: ${{ inputs.download_url }}
+          FILE_NAME: ${{ inputs.file_name }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from urllib.parse import urlparse
+          url = os.environ["DOWNLOAD_URL"].strip()
+          parsed = urlparse(url)
+          if parsed.scheme != "https" or not parsed.hostname:
+              raise SystemExit("ERROR: download_url must be a valid HTTPS URL.")
+          name = os.environ["FILE_NAME"].strip()
+          if not name or name in {".", ".."} or "/" in name or "\\" in name or "\n" in name or "\r" in name:
+              raise SystemExit("ERROR: file_name must be a plain filename, not a path.")
+          if len(name) > 180:
+              raise SystemExit("ERROR: file_name is too long.")
+          PY
+
+          mkdir -p handoff
+          curl --fail --show-error --silent --location \
+            --proto '=https' --proto-redir '=https' \
+            --max-filesize 104857600 \
+            --connect-timeout 20 --max-time 300 \
+            "$DOWNLOAD_URL" --output "handoff/$FILE_NAME"
+          test -s "handoff/$FILE_NAME" || {
+            echo "ERROR: Downloaded file is empty."
+            exit 1
+          }
+          cd handoff
+          sha256sum "$FILE_NAME" > SHA256SUMS.txt
+          {
+            echo "Download completed successfully."
+            echo "Filename: $FILE_NAME"
+            echo "Size (bytes): $(wc -c < "$FILE_NAME" | tr -d ' ')"
+            echo "SHA-256:"
+            cat SHA256SUMS.txt
+          } > DOWNLOAD-INFO.txt
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chatgpt-handoff-${{ github.run_number }}
+          path: handoff/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
