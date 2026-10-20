@@ -12,11 +12,11 @@
 - Stage 2 workspace changes: shared dark panel palette, pink active-state accents, compact sidebar and dock styling.
 - Stage 3 accessibility changes: visible keyboard focus indicators and reduced-motion support in home and workspace CSS; Playwright assertions check reduced-motion behavior.
 - Stage 4 catalog/quiz changes: dark compact catalog toolbar and tabs, pink active states, dark anime cards, song drawer/list styling, watchlist panels, and consistent single-player quiz surfaces. Existing data/search/playback handlers are unchanged.
-- Stage 5 Play menu: added a Stable-inspired Play dialog with `Single Player`, `Multiplayer`, and `Back`; Single Player routes to the existing quiz, while Multiplayer is explicitly disabled because this AMQ build has no verified multiplayer flow. Browser acceptance covers labels, Back, disabled state, and Single Player route.
+- Stage 5 Play menu: added a Stable-inspired Play dialog with `Single Player`, `Multiplayer`, and `Back`; Single Player routes to the existing quiz, and Multiplayer routes to the existing AMQ multiplayer room setup. Server connectivity and full multiplayer lifecycle remain separate tests. Browser acceptance covers labels, Back, disabled state, and Single Player route.
 - Added a CI static-check step for HTML parsing, duplicate IDs, and syntax-checking each executable inline JavaScript block with Node.
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
-- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02`, `v82.85.30-proto25-ui-refactor-stage-03`, `v82.85.30-proto25-ui-refactor-stage-04`, and `v82.85.30-proto25-ui-refactor-stage-05`.
-- Latest stage workflow commit: `77e3d60931de6bcdf2552e93fe1af6fc886a0dcb`.
+- Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02`, `v82.85.30-proto25-ui-refactor-stage-03`, `v82.85.30-proto25-ui-refactor-stage-04`, and `v82.85.30-proto25-ui-refactor-stage-05` and `v82.85.30-proto25-ui-refactor-stage-06`.
+- Latest stage workflow commit: `944cc67152d26d174cc8d7ccf893e695f562487a`.
 - Latest recorded engineering checkpoint commit: `eb1ac24ae68164a2aea5a9187b58dd26564f5733`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
