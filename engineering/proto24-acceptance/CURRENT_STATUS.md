@@ -54,4 +54,4 @@
 
 ## Latest workflow repair checkpoint
 - Stage 24 workflow trigger/artifact naming correction commit: `2294f0ce073d074df5f7df1728a9ab22b577b0d9` on `v82.85.30-proto25-ui-refactor-stage-24`.
-- Next validation action: update this branch's PR head with a fresh commit so the base-branch `pull_request` workflow can run against the latest UI changes; do not treat workflow repair as acceptance.
+- PR head has been updated through `065af9a3e235e7ec1ff823d45bfe3f7858b8e15c`, but `fetch_commit_workflow_runs` and combined status still return no run/status. Workflow trigger is therefore still unverified through the available GitHub integration; no browser acceptance is claimed.
