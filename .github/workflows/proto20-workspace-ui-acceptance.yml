@@ -1,0 +1,112 @@
+name: Proto20 workspace UI acceptance
+
+on:
+  push:
+    branches:
+      - v82.85.30-proto20-workspace-ui-pass-01
+
+permissions:
+  contents: write
+
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build isolated Proto20 from accepted Proto19
+        run: |
+          set -euo pipefail
+          test -s dist/amq_learning_tool_v82_85_30_workspace_proto19.html
+          cp dist/amq_learning_tool_v82_85_30_workspace_proto19.html candidate.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html")
+          s=p.read_text(encoding="utf-8")
+          css="<style id=\"amq-proto20-workspace-ui-pass\">\n:root{\n --ws-bg:#111016;--ws-panel:#1b1722;--ws-line:#393044;--ws-text:#f5f0fa;\n --ws-muted:#b8adbf;--ws-pink:#f18bc5;--ws-violet:#9b79ed;--ws-violet-deep:#62439f;\n}\nbody.amq-workspace-active{background:#111016!important;color:var(--ws-text)!important}\nbody.amq-workspace-active .wrap{max-width:1480px!important;width:auto!important;margin:0 auto!important;padding:clamp(14px,2.2vw,30px)!important}\nbody.amq-workspace-active #amqWorkspaceSidebar{\n background:linear-gradient(180deg,#1a1521 0%,#121017 100%)!important;\n border-right:1px solid #403149!important;box-shadow:10px 0 36px #0003!important;\n padding:22px 16px!important\n}\n#amqWorkspaceSidebar .wsBrand{color:#b7a4d5!important;letter-spacing:.16em!important;font-size:10px!important}\n#wsReturnHome{border-color:#5c456b!important;background:#261c30!important;color:#f5eafa!important;border-radius:9px!important;padding:11px 12px!important}\n#amqWorkspaceSidebar .wsTitle{font-size:24px!important;letter-spacing:-.035em!important;line-height:1.2!important}\n#amqWorkspaceSidebar .wsDesc{font-size:12px!important;color:#bdb2c8!important;line-height:1.75!important}\n#amqWorkspaceSidebar .wsActionFilter{padding:12px!important;border:1px solid #3d3048!important;border-radius:12px!important;background:#19141f!important;margin-bottom:12px!important}\n#amqWorkspaceSidebar .wsActionFilter label{font-size:11px!important;font-weight:750!important;color:#c9b6db!important}\n#wsActionSearch{width:100%!important;box-sizing:border-box!important;margin-top:7px!important;padding:10px 11px!important;border-radius:9px!important;background:#100d15!important;color:#fff!important;border:1px solid #4b3b59!important}\n#wsActionCount{font-size:10px!important;color:#a99bb4!important;margin:7px 0 0!important}\n#wsActions .wsSection{color:#b99ce7!important;border-bottom:1px solid #3d3048!important;padding:8px 4px!important;margin-top:17px!important}\n#wsActions .wsAction{background:linear-gradient(120deg,#211a2b,#1a1621)!important;border:1px solid #3c3048!important;border-radius:10px!important;padding:11px 12px!important;min-height:42px!important;transition:border-color .15s,background .15s,transform .15s!important}\n#wsActions .wsAction:hover,#wsActions .wsAction:focus-visible{background:#30213b!important;border-color:#bc8de8!important;transform:translateX(2px)!important}\n#wsBatchListAdder{border-color:#4b3a59!important;background:#19141f!important;border-radius:12px!important}\n#wsBatchListTarget{border-color:#4b3a59!important;background:#100d15!important;color:#f5f0fa!important;border-radius:8px!important}\n#wsBatchScope{border:1px solid #4b3a59!important;border-radius:12px!important;background:#1a1421!important;padding:12px!important}\n#wsStatus{background:#17131d!important;border-color:#403149!important;border-radius:10px!important;padding:11px!important}\n#amqWorkspaceDock{background:#0e0b12!important;border-top:1px solid #45334f!important;box-shadow:0 -8px 28px #0003!important}\n#amqWorkspaceDock button{background:#17121c!important;border-color:#2c2234!important;color:#cfc2d8!important;transition:background .15s,color .15s!important}\n#amqWorkspaceDock button .wsNum{color:#796b89!important}\n#amqWorkspaceDock button[aria-pressed=true]{background:linear-gradient(180deg,#382449,#24172e)!important;color:#fff!important;box-shadow:inset 0 3px #f18bc5!important}\n#amqWorkspaceDock button[aria-pressed=true] .wsNum{color:#f18bc5!important}\n#amqWorkspaceDock button.wsStart{background:linear-gradient(135deg,#f6a5d0,#c887ed)!important;color:#211126!important}\nbody.amq-workspace-active .toolbar.view-catalog{gap:10px!important;padding:12px!important;border:1px solid #3b3045!important;border-radius:14px!important;background:#1a1520!important;box-shadow:0 12px 32px #0002!important}\nbody.amq-workspace-active .toolbar.view-catalog input,\nbody.amq-workspace-active .toolbar.view-catalog select,\nbody.amq-workspace-active .toolbar.view-catalog button,\nbody.amq-workspace-active .view-catalog input,\nbody.amq-workspace-active .view-catalog select{border-radius:9px!important}\nbody.amq-workspace-active .customListShell,\nbody.amq-workspace-active .practiceHubShell,\nbody.amq-workspace-active #dashboardPanel,\nbody.amq-workspace-active #learningPlanPanel{\n border:1px solid #3b3045!important;border-radius:18px!important;\n background:linear-gradient(145deg,#201a28,#17131d)!important;\n box-shadow:0 16px 42px #0002!important;color:#f5f0fa!important\n}\nbody.amq-workspace-active .practiceHubHead,\nbody.amq-workspace-active .customListHead{padding-bottom:14px!important;border-bottom:1px solid #3b3045!important}\nbody.amq-workspace-active .practiceHubHead h2,\nbody.amq-workspace-active .customListHead h2{letter-spacing:-.04em!important}\nbody.amq-workspace-active .practiceStat,\nbody.amq-workspace-active .customListCard,\nbody.amq-workspace-active .practiceModeCard,\nbody.amq-workspace-active .customListMember{\n border-color:#44364f!important;background:#1a1521!important;color:#f5f0fa!important;border-radius:13px!important\n}\nbody.amq-workspace-active .practiceStat span,\nbody.amq-workspace-active .practiceStat small,\nbody.amq-workspace-active .practiceHubHead p,\nbody.amq-workspace-active .customListHead p,\nbody.amq-workspace-active .practiceModeCard span{color:#bcb0c7!important}\nbody.amq-workspace-active .practiceModeCard:hover,\nbody.amq-workspace-active .practiceModeCard[aria-pressed=true]{background:#30203a!important;border-color:#c28fe8!important}\nbody.amq-workspace-active .practiceLaunchBar{border-color:#403149!important}\nbody.amq-workspace-active .practiceLaunchBar select,\nbody.amq-workspace-active .bulkField select,\nbody.amq-workspace-active .customListCreate input,\nbody.amq-workspace-active .customListSearch{background:#100d15!important;border-color:#493956!important;color:#f5f0fa!important}\nbody.amq-workspace-active .btn,\nbody.amq-workspace-active button.btn{border-radius:9px!important}\nbody.amq-workspace-active .primary,\nbody.amq-workspace-active button.primary{background:linear-gradient(135deg,#b786ec,#e58ac3)!important;color:#211126!important;border-color:transparent!important}\n@media(max-width:900px){\n body.amq-workspace-active .wrap{padding:10px 10px 82px!important}\n #amqWorkspaceDock{backdrop-filter:blur(14px)!important;background:#100c15ee!important}\n #amqWorkspaceDock button{font-size:10px!important;line-height:1.2!important}\n body.amq-workspace-active .practiceStats{gap:8px!important}\n body.amq-workspace-active .customListShell,body.amq-workspace-active .practiceHubShell,body.amq-workspace-active #dashboardPanel,body.amq-workspace-active #learningPlanPanel{border-radius:14px!important;padding:13px!important}\n}\n@media(prefers-reduced-motion:reduce){#wsActions .wsAction,#amqWorkspaceDock button{transition:none!important}}\n</style>"
+          assert "amq-proto20-workspace-ui-pass" not in s
+          s += "\\n" + css + "\\n"
+          p.write_text(s,encoding="utf-8")
+          assert s.count("amq-proto20-workspace-ui-pass")==1
+          print("Proto20 workspace UI layer appended after all existing styles: PASS")
+          PY
+          sha256sum candidate.html | tee candidate.sha256
+      - name: Install browser test dependencies
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+      - name: Run native-origin browser acceptance
+        run: |
+          set -euo pipefail
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/amq-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:8765/candidate.html -o /dev/null; then break; fi
+            sleep 1
+          done
+          python tests/proto20_workspace_acceptance.py
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proto20-workspace-ui-acceptance
+          path: |
+            candidate.html
+            candidate.sha256
+            acceptance-report.json
+            proto20-desktop.png
+            proto20-mobile.png
+            proto20-dashboard-workspace.png
+            proto20-learning-center.png
+            proto20-analysis-workspace.png
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Publish isolated candidate and engineering records
+        if: success()
+        run: |
+          set -euo pipefail
+          mkdir -p dist engineering/proto20-workspace-ui
+          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto20.html
+          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto20.html.sha256
+          cat > engineering/proto20-workspace-ui/BASELINE.md <<'EOF'
+          # BASELINE — Proto20
+          - Baseline: accepted Proto19 at branch v82.85.30-proto19-accepted-delivery-01.
+          - Proto19 and production V82.82 are preserved; Proto20 is isolated.
+          EOF
+          cat > engineering/proto20-workspace-ui/CURRENT_STATUS.md <<EOF
+          # CURRENT STATUS — Proto20
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto20.html
+          - Size: $(stat -c %s candidate.html) bytes
+          - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
+          - Native-origin browser acceptance: PASS in this workflow run.
+          - UI scope: workspace sidebar/dock, Learning Center, Analysis, catalog toolbar, responsive layout.
+          - Core audio/quiz/multiplayer regression remains a separate gate.
+          EOF
+          cat > engineering/proto20-workspace-ui/NEXT_TASK.md <<'EOF'
+          # NEXT TASK
+          1. Run dedicated audio playback, quiz-answer lifecycle, and multiplayer regression suites.
+          2. Review actual workspace screenshots at desktop and mobile sizes.
+          3. Promote only after the broader regression gate passes.
+          EOF
+          cat > engineering/proto20-workspace-ui/TEST_REPORT.md <<EOF
+          # TEST REPORT — Proto20
+          - Native localStorage/sessionStorage/IndexedDB: PASS.
+          - Reload persistence probe: PASS.
+          - Seven homepage routes and return-home: PASS.
+          - Home hides duplicate legacy sections: PASS.
+          - Desktop/mobile no horizontal overflow: PASS.
+          - Learning Center and Analysis panel content distinct: PASS.
+          - Workspace visual layer appended and loaded: PASS.
+          - Browser exceptions and console errors: 0 expected.
+          - Audio playback, quiz-answer lifecycle, multiplayer regression: NOT RUN in this UI-only stage.
+          - Workflow run: https://github.com/murorachi/Amq-/actions/runs/${GITHUB_RUN_ID}
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto20.html dist/amq_learning_tool_v82_85_30_workspace_proto20.html.sha256 engineering/proto20-workspace-ui
+          git commit -m "Publish Proto20 workspace UI candidate and acceptance records"
+          git push origin HEAD:v82.85.30-proto20-workspace-ui-pass-01
