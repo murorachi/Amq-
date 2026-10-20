@@ -116,7 +116,7 @@ async def main():
             for action, expected in entries:
                 try:
                     await page.locator(f'#homeMenu [data-home-action="{action}"]').first.click(timeout=5000)
-                    await page.wait_for_function("expected => window.__aniGetActiveViewV82?.() === expected", expected, timeout=8000)
+                    await page.wait_for_function("expected => window.__aniGetActiveViewV82?.() === expected", arg=expected, timeout=8000)
                     actual = await page.evaluate("window.__aniGetActiveViewV82?.() || 'home'")
                     entry_results.append(f"{action}->{actual}")
                     await page.evaluate("window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('home')")
@@ -151,7 +151,7 @@ async def main():
                     await page.locator('#amqWorkspaceDock [data-ws="learning"]').click()
                     await page.locator(f'#amqWorkspaceSidebar [data-ws-action="{action}"]').click()
                     await page.wait_for_function("window.__aniGetActiveViewV82?.() === 'practice'", timeout=5000)
-                    await page.wait_for_function("m => {const b=document.querySelector('[data-practice-mode=\"'+m+'\"]');return !!b&&b.getAttribute('aria-pressed')==='true'}", mode, timeout=5000)
+                    await page.wait_for_function("m => {const b=document.querySelector('[data-practice-mode=\"'+m+'\"]');return !!b&&b.getAttribute('aria-pressed')==='true'}", arg=mode, timeout=5000)
                     mode_results.append(f"{action}->{mode}:selected")
                 except Exception as e:
                     mode_results.append(f"{action}:FAIL:{type(e).__name__}:{str(e)[:100]}")
