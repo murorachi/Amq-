@@ -7435,6 +7435,11 @@ body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
 }
 
 
+/* Reserve space for the fixed dock so the last catalog row is never hidden behind it. */
+body.amq-standalone-route {
+  padding-bottom: 64px !important;
+}
+
 /* Proto25 Stage 29: keep the persistent audio dock compact on standalone catalog routes. */
 body.amq-standalone-route #audioDock:not(.amqHomeDock) {
   box-sizing: border-box !important;
