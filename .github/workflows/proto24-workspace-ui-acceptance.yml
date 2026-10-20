@@ -160,6 +160,7 @@ jobs:
             proto24-mobile.png
             proto24-learning-workspace.png
             proto24-analysis-workspace.png
+            proto25-song-select.png
           if-no-files-found: ignore
           retention-days: 14
       - name: Publish accepted candidate and engineering records to isolated branch
@@ -183,7 +184,7 @@ jobs:
           - Homepage routes, native storage, mobile overflow, and no browser exceptions/console errors: PASS only if all browser assertions succeed.
           - Play menu Single Player / Multiplayer / Back routes: PASS only if route assertions succeed; multiplayer server connectivity is not tested.
           - Catalog, single-player quiz, Settings panel, workspace palette, and reduced-motion assertions: PASS only if their respective browser assertions succeed.
-          - Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png in the workflow artifact.
+          - Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png, proto25-song-select.png in the workflow artifact.
           - Actual audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
           EOF
           git config user.name "github-actions[bot]"
