@@ -160,8 +160,9 @@ async def main():
         await page.wait_for_function("document.querySelectorAll('#grid.view-catalog .card').length>0",timeout=20000)
         await page.locator("#grid.view-catalog .card").first.click(timeout=10000);await page.wait_for_timeout(250)
         await page.wait_for_function("document.querySelector('#overlay')?.classList.contains('open')",timeout=8000)
-        song_select=await page.evaluate("()=>({width:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns,rows:document.querySelectorAll('#songlist .songrow').length})")
+        song_select=await page.evaluate("()=>({width:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns,rows:document.querySelectorAll('#songlist .songrow').length,overlayZ:Number(getComputedStyle(document.querySelector('#overlay')).zIndex),sidebarZ:Number(getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).zIndex),dockZ:Number(getComputedStyle(document.querySelector('#amqWorkspaceDock')).zIndex)})")
         assert song_select["width"]>=1400 and len(song_select["columns"].split())==2,song_select
+        assert song_select["overlayZ"]>max(song_select["sidebarZ"],song_select["dockZ"]),song_select
         report["song_select_visuals"]=song_select
         await page.screenshot(path="proto25-song-select.png",full_page=False)
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
