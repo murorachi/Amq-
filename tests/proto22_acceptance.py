@@ -86,6 +86,7 @@ async def main():
         layer=page.locator("#amqSettingsLayerV21")
         await page.wait_for_function("!!document.querySelector('#amqSettingsLayerV21')",timeout=8000)
         assert await layer.is_visible(), "settings layer did not open"
+        await page.screenshot(path="proto22-settings.png",full_page=False)
         report["checks"].append("settings layer visible: PASS")
         await layer.locator("[data-settings-close]").first.click(timeout=5000)
         await page.wait_for_timeout(150)
