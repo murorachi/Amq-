@@ -495,4 +495,7 @@ body.dark-theme .dashIntro div,body.dark-theme .dashMetric span,body.dark-theme 
 body.dark-theme .dashIntro b,body.dark-theme .dashMetric strong,body.dark-theme .dashSection h4 { color:#fff!important; }
 body.dark-theme .dashTrack { background:#211a24!important; border-color:#574554!important; }
 body.dark-theme .dashTrack i { background:linear-gradient(90deg,#f184b9,#c84487)!important; }
+
+/* Stage 25: modal Song Select must sit above the persistent workspace sidebar and dock. */
+#overlay.open { z-index:10010!important; }
 </style>
