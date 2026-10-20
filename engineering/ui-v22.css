@@ -1,0 +1,12 @@
+<style id="amq-osu-home-layout-correction-v22">
+body.ui-home-menu #homeMenu>.amqHomeTopFrame{grid-area:player!important;display:grid!important;grid-template-columns:minmax(240px,.85fr) minmax(0,1.15fr)!important;align-items:stretch!important;gap:18px!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
+body.ui-home-menu #homeMenu .amqProfileCard{min-width:0!important;width:auto!important;box-sizing:border-box!important;border:1px solid #4a3a50!important;border-radius:10px!important;background:linear-gradient(115deg,#251f2a,#1c1921)!important;padding:14px 18px!important;margin:0!important}
+body.ui-home-menu #homeMenu .amqPlayerFrame{min-width:0!important;width:auto!important;box-sizing:border-box!important;border:1px solid #4a3a50!important;border-radius:10px!important;background:linear-gradient(115deg,#251f2a,#1c1921)!important;padding:14px 16px!important;margin:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+body.ui-home-menu #homeMenu .amqHomePlayerSlot{width:100%!important;min-width:0!important}
+body.ui-home-menu #homeMenu .amqHomeDock{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+body.ui-home-menu #homeMenu .amqHomeLandingV851{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"intro" "primary" "groups"!important;justify-items:stretch!important}
+body.ui-home-menu #homeMenu .amqHomeLandingIntro,body.ui-home-menu #homeMenu .amqHomeLandingPrimary,body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-column:1!important;grid-row:auto!important;width:100%!important;min-width:0!important}
+body.ui-home-menu #homeMenu .amqHomeLandingIntro{grid-area:intro!important}body.ui-home-menu #homeMenu .amqHomeLandingPrimary{grid-area:primary!important}
+body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-area:groups!important}
+@media(max-width:1000px){body.ui-home-menu #homeMenu>.amqHomeTopFrame{grid-template-columns:1fr!important}body.ui-home-menu #homeMenu .amqPlayerFrame{min-width:0!important}}
+</style>
