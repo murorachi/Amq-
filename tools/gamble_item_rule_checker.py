@@ -93,6 +93,74 @@ def settle_debt_after_rounds(principal: int, rounds_settled: int,
     return principal, rounds_settled >= due_after
 
 
+def ceil_div(numerator: int, denominator: int) -> int:
+    if numerator < 0 or denominator <= 0:
+        raise RuleViolation("invalid ceiling-division inputs")
+    return (numerator + denominator - 1) // denominator
+
+
+@dataclass
+class DebtAccount:
+    amount: int
+    rounds_remaining: int = 2
+    extension_used: bool = False
+    active: bool = True
+
+    def __post_init__(self):
+        if self.amount < 0 or self.rounds_remaining < 0:
+            raise RuleViolation("invalid debt account")
+
+    def settle_game(self) -> bool:
+        """Count a completed game settlement; return whether debt is now due."""
+        if not self.active:
+            return False
+        if self.rounds_remaining > 0:
+            self.rounds_remaining -= 1
+        return self.rounds_remaining == 0
+
+    def resolve_due(self, chips: int, choice: str, die: int | None = None):
+        """Return (chips_after, curse_added, debt_amount_remaining)."""
+        if chips < 0:
+            raise RuleViolation("chips cannot be negative")
+        if not self.active or self.rounds_remaining != 0:
+            raise RuleViolation("debt is not due")
+        if choice == "repay":
+            if chips < self.amount:
+                raise RuleViolation("insufficient chips for full repayment")
+            chips -= self.amount
+            self.amount = 0
+            self.active = False
+            return chips, False, 0
+        if choice == "extend":
+            if self.extension_used:
+                raise RuleViolation("extension already used")
+            if die not in range(1, 7):
+                raise RuleViolation("extension requires a d6 result from 1 to 6")
+            self.extension_used = True
+            if die <= 3:
+                self.amount = ceil_div(self.amount * 3, 2)
+            elif die <= 5:
+                self.amount = ceil_div(self.amount, 2)
+            else:
+                self.amount = 0
+                self.active = False
+            return chips, False, self.amount
+        if choice == "default":
+            if chips >= self.amount:
+                raise RuleViolation("default is only valid when chips are insufficient")
+            unpaid = self.amount - chips
+            chips_paid = chips
+            self.amount = 0
+            self.active = False
+            return chips_paid, unpaid > 0, 0
+        raise RuleViolation("unknown debt resolution choice")
+
+    def end_run(self) -> None:
+        """Debt cannot carry into a new run."""
+        self.amount = 0
+        self.active = False
+
+
 @dataclass
 class Escrow:
     owner: str
@@ -112,6 +180,50 @@ class Escrow:
         if self.bonus:
             self.source = source
         return self.principal + self.bonus
+
+
+class EscrowLedger:
+    def __init__(self):
+        self._escrows: dict[str, Escrow] = {}
+        self._principal_deposited = 0
+        self._principal_returned = 0
+        self._bonus_paid = 0
+
+    def deposit(self, escrow_id: str, escrow: Escrow) -> None:
+        if not escrow_id:
+            raise RuleViolation("escrow_id must be non-empty")
+        if escrow_id in self._escrows:
+            raise RuleViolation(f"duplicate escrow_id: {escrow_id}")
+        if escrow.principal < 0 or escrow.bonus < 0:
+            raise RuleViolation("escrow amounts cannot be negative")
+        self._escrows[escrow_id] = escrow
+        self._principal_deposited += escrow.principal
+
+    def resolve(self, escrow_id: str, condition_met: bool,
+                source: str | None = None) -> int:
+        if escrow_id not in self._escrows:
+            raise RuleViolation("unknown escrow_id")
+        escrow = self._escrows[escrow_id]
+        payout = escrow.resolve(condition_met, source)
+        self._principal_returned += escrow.principal
+        self._bonus_paid += payout - escrow.principal
+        return payout
+
+    @property
+    def principal_in_escrow(self) -> int:
+        return sum(e.principal for e in self._escrows.values() if not e.released)
+
+    @property
+    def principal_returned(self) -> int:
+        return self._principal_returned
+
+    @property
+    def bonus_paid(self) -> int:
+        return self._bonus_paid
+
+    def assert_principal_conserved(self) -> None:
+        if self.principal_in_escrow + self._principal_returned != self._principal_deposited:
+            raise RuleViolation("escrow principal is not conserved")
 
 
 @dataclass
@@ -188,6 +300,56 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(settle_debt_after_rounds(160, 1), (160, False))
         self.assertEqual(settle_debt_after_rounds(160, 2), (160, True))
         self.assertEqual(settle_debt_after_rounds(160, 3), (160, True))
+
+    def test_debt_collector_due_date_repayment_and_run_end(self):
+        debt = DebtAccount(160)
+        self.assertFalse(debt.settle_game())
+        self.assertTrue(debt.settle_game())
+        self.assertEqual(debt.resolve_due(200, "repay"), (40, False, 0))
+        self.assertFalse(debt.active)
+
+        abandoned = DebtAccount(360)
+        abandoned.end_run()
+        self.assertEqual((abandoned.amount, abandoned.active), (0, False))
+
+    def test_debt_extension_outcomes_rounding_and_single_use(self):
+        increased = DebtAccount(161, rounds_remaining=0)
+        self.assertEqual(increased.resolve_due(0, "extend", 1), (0, False, 242))
+        with self.assertRaisesRegex(RuleViolation, "extension already used"):
+            increased.resolve_due(0, "extend", 4)
+
+        halved = DebtAccount(161, rounds_remaining=0)
+        self.assertEqual(halved.resolve_due(0, "extend", 4), (0, False, 81))
+        cleared = DebtAccount(360, rounds_remaining=0)
+        self.assertEqual(cleared.resolve_due(0, "extend", 6), (0, False, 0))
+        self.assertFalse(cleared.active)
+
+    def test_debt_default_pays_available_chips_and_adds_one_curse(self):
+        debt = DebtAccount(160, rounds_remaining=0)
+        self.assertEqual(debt.resolve_due(70, "default"), (70, True, 0))
+        self.assertFalse(debt.active)
+        with self.assertRaisesRegex(RuleViolation, "insufficient chips"):
+            DebtAccount(160, rounds_remaining=0).resolve_due(70, "repay")
+        with self.assertRaisesRegex(RuleViolation, "only valid when chips are insufficient"):
+            DebtAccount(100, rounds_remaining=0).resolve_due(120, "default")
+
+    def test_escrow_ledger_conserves_principal_and_prevents_duplicate_claims(self):
+        ledger = EscrowLedger()
+        ledger.deposit("e1", Escrow("p1", 100, 50))
+        ledger.deposit("e2", Escrow("p2", 75, 0))
+        ledger.assert_principal_conserved()
+        self.assertEqual(ledger.principal_in_escrow, 175)
+        self.assertEqual(ledger.resolve("e1", False), 100)
+        ledger.assert_principal_conserved()
+        self.assertEqual((ledger.principal_in_escrow, ledger.principal_returned), (75, 100))
+        self.assertEqual(ledger.resolve("e2", True), 75)
+        ledger.assert_principal_conserved()
+        self.assertEqual((ledger.principal_in_escrow, ledger.principal_returned), (0, 175))
+        self.assertEqual(ledger.bonus_paid, 0)
+        with self.assertRaisesRegex(RuleViolation, "already resolved"):
+            ledger.resolve("e1", True, "system_budget")
+        with self.assertRaisesRegex(RuleViolation, "duplicate escrow_id"):
+            ledger.deposit("e2", Escrow("p3", 10))
 
     def test_escrow_returns_principal_and_requires_bonus_source(self):
         failed = Escrow("p1", 100, 50)
