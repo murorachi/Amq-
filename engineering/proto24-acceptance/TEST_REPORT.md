@@ -1,34 +1,10 @@
-# TEST REPORT — Proto24 home and workspace UI
-
-- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39479839526
-- Browser result: PASS
-- Candidate size: 8,850,993 bytes
-- Candidate SHA-256: c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e
-- Desktop homepage, mobile homepage, Learning Center workspace, and Analysis workspace screenshots: artifact `proto24-workspace-ui-acceptance`.
-
-## Static checks
-
-1. HTML parser: PASS.
-2. IDs: 219 total, zero duplicates.
-3. Inline executable JavaScript: 40 script blocks checked with `node --check`, zero syntax errors.
-4. Proto23 home composition stylesheet and Proto24 workspace stylesheet present in candidate: PASS.
-
-## Browser acceptance passed
-
-1. Native-origin localStorage, sessionStorage, and IndexedDB availability.
-2. Homepage geometry: player information upper-left, music bar upper-right, centered circular mark left, three stacked purple actions right, balanced footer groups.
-3. Legacy dashboard and discovery sections hidden on the landing page.
-4. Hidden audio-cover image does not display a broken-image icon.
-5. All seven homepage actions route to an active view; return-home works.
-6. Native storage survives reload.
-7. Mobile layout at 390×844 has no horizontal overflow.
-8. Learning Center and Analysis are distinct; expected actions render and sidebar/dock styles apply.
-9. No unhandled browser exceptions and no console errors.
-
-## Not run in this UI stage
-
-- Real audio output quality and device output routing.
-- Full quiz-answer lifecycle regression.
-- Multiplayer lifecycle regression.
-
-These remain separate acceptance tasks before production promotion.
+# TEST REPORT — Proto25 Stage 3
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39488770779
+- Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage03.html
+- Size: 8859856 bytes
+- SHA-256: 994778e7621360505420955afc12721d597f7c53acdf01e57980fcb22e928f56
+- Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
+- Homepage routes, native storage, mobile overflow, no browser exceptions/console errors: PASS if all browser assertions succeed.
+- Workspace palette assertions: PASS if both Learning Center and Analysis checks succeed.
+- Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png in the workflow artifact.
+- Actual audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
