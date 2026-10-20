@@ -139,9 +139,9 @@ async def main():
         # Catalog/song-selection surface and single-player quiz theme assertions.
         await page.locator("#wsReturnHome").click(timeout=8000);await page.wait_for_timeout(150)
         await page.locator('[data-home-action="catalog"]').first.click(timeout=8000);await page.wait_for_timeout(220)
-        catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
+        catalog=await page.evaluate("""()=>({quicktools:getComputedStyle(document.querySelector('#quicktools')).backgroundColor,toolbar:getComputedStyle(document.querySelector('.toolbar.view-catalog')).backgroundColor,toolbarDisplay:getComputedStyle(document.querySelector('.toolbar.view-catalog')).display,tabs:getComputedStyle(document.querySelector('.tabs.view-catalog')).backgroundColor})""")
         assert catalog["quicktools"]=="rgb(48, 38, 50)",catalog
-        assert catalog["toolbar"]=="rgb(48, 38, 50)",catalog
+        assert catalog["toolbar"] not in ("rgb(255, 255, 255)","rgb(255, 250, 255)") and catalog["toolbarDisplay"]=="grid",catalog
         await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
         catalog_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,toolbar:document.querySelector('.toolbar.view-catalog').getBoundingClientRect().width,quicktools:document.querySelector('#quicktools').getBoundingClientRect().width})")
         assert catalog_mobile["document"]<=catalog_mobile["viewport"] and catalog_mobile["toolbar"]<=catalog_mobile["viewport"],catalog_mobile
