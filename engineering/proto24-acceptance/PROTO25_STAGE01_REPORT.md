@@ -15,11 +15,17 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added explicit browser assertions for workspace body color and active dock color in `tests/proto24_workspace_acceptance.py`.
 - Updated the build workflow to publish a separately named candidate and manifest to `v82.85.30-proto25-ui-refactor-stage-02`.
 
+## Stage 3: accessibility and acceptance coverage
+- Added visible keyboard focus indicators for home and workspace controls.
+- Added `prefers-reduced-motion: reduce` behavior to disable nonessential transitions.
+- Extended browser acceptance to verify workspace palette and reduced-motion transition duration.
+- Stage 3 workflow and candidate branch: `v82.85.30-proto25-ui-refactor-stage-03`.
+
 ## Verification
 - GitHub file writes and subsequent reads: PASS.
 - Immutable Proto24 baseline remains present: PASS.
 - Original Proto24 browser run: PASS for its original candidate only; not transferable to Proto25.
-- Proto25 workflow execution and generated artifact: NOT VERIFIED through the available Actions interface in this session.
+- Proto25 workflow execution and generated artifact: NOT VERIFIED through the available Actions interface in this session. Stage 3 source and workflow are committed remotely; candidate HTML and manifest still require independent retrieval.
 - Proto25 browser acceptance, HTML parser, inline JavaScript syntax, screenshots, and mobile browser checks: NOT RUN / NOT VERIFIED.
 - Real audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
 - 90%+ visual similarity: NOT VERIFIED; matched-viewport screenshot comparison is still required.
