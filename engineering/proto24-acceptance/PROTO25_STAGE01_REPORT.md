@@ -29,7 +29,7 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 ## Stage 5: Stable-style Play menu
 - Added a Play submenu dialog with the requested `Single Player`, `Multiplayer`, and `Back` labels.
 - `Single Player` routes to the existing AMQ quiz route. `Multiplayer` routes to the existing AMQ multiplayer room setup; the screen is not represented as server-connected unless its own connection checks pass.
-- Added keyboard Escape/Tab handling and a Playwright interaction check for menu labels, Back behavior, disabled multiplayer, and the Single Player route.
+- Added keyboard Escape/Tab handling and Playwright assertions for menu labels, Back behavior, Single Player routing, and entry to the existing Multiplayer room setup. Server connectivity and the full multiplayer lifecycle remain untested.
 - Stage 6 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-06`.
 
 ## Stage 7: responsive Settings panel
@@ -80,14 +80,14 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - GitHub file writes and subsequent reads: PASS.
 - Immutable Proto24 baseline remains present: PASS.
 - Original Proto24 browser run: PASS for its original candidate only; not transferable to Proto25.
-- Proto25 workflow execution and generated artifact: NOT VERIFIED through the available Actions interface in this session. Stage 3 source and workflow are committed remotely; candidate HTML and manifest still require independent retrieval.
-- Proto25 browser acceptance, HTML parser, inline JavaScript syntax, screenshots, and mobile browser checks: NOT RUN / NOT VERIFIED.
+- Proto25 workflow execution and generated artifact: NOT VERIFIED through the available Actions interface in this session. Stage 14 source and workflow are committed remotely; candidate HTML and manifest still require independent retrieval.
+- Proto25 browser acceptance, HTML parser, inline JavaScript syntax, screenshots, and mobile browser checks on the actual generated candidate: NOT RUN / NOT VERIFIED. A local browser attempt was BLOCKED by the execution environment with ERR_BLOCKED_BY_ADMINISTRATOR for local HTTP and file URLs.
 - Real audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
 - 90%+ visual similarity: NOT VERIFIED; matched-viewport screenshot comparison is still required.
 
 ## Risks
-- Home and workspace visual changes are CSS-only, but a candidate build has not yet been independently checked for runtime behavior.
-- Play menu, Song Select, Profile, and Settings still need explicit visual refactoring and feature-specific tests.
+- Most layout changes are CSS-only; the Play submenu is injected at build time and maps to existing routes. The generated candidate has not yet been independently checked for runtime behavior.
+- The profile/player strip and main settings/scene-background controls have visual changes, but all target screens still require post-build screenshot review and feature-specific acceptance.
 - Exact osu!Stable source commit and screenshot capture build remain unknown. Implementation uses the user's authorized, pinned official osu!-wiki visual fallback and does not substitute osu!lazer.
 
 ## Rollback
@@ -95,6 +95,7 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Proto25 is isolated; no production branch was promoted or overwritten.
 
 ## Next work
-1. Verify and repair the stage-02 CI workflow/artifact retrieval.
-2. Continue with Play navigation, Song Select, Profile, and Settings as a single connected UI pass.
-3. Add acceptance coverage for each screen and run required functional regressions before final delivery.
+1. Verify the Stage 14 CI workflow and retrieve its HTML, SHA-256 manifest, test report and screenshots.
+2. Compare the actual Stage 14 screenshots against the pinned main menu, Play, Song Select and Options references.
+3. Fix any failing browser assertion, CSS mismatch or workflow error on a new isolated checkpoint.
+4. Run audio output, full quiz lifecycle and multiplayer lifecycle regressions before final delivery.
