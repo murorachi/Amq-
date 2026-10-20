@@ -88,4 +88,18 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  #amqWorkspaceDock button[aria-pressed="true"] { box-shadow:inset 0 2px #ff8fc7!important; }
 }
 
+
+/* Accessibility polish: keyboard focus remains visible; respect reduced-motion preference. */
+#amqWorkspaceSidebar button:focus-visible,
+#amqWorkspaceSidebar a:focus-visible,
+#wsActions .wsAction:focus-visible,
+#amqWorkspaceDock button:focus-visible {
+ outline:2px solid #ff8fc7!important; outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce) {
+ #wsActions .wsAction,#amqWorkspaceDock button,#amqWorkspaceSidebar button {
+  transition:none!important; scroll-behavior:auto!important;
+ }
+}
+
 </style>
