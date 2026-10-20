@@ -19,10 +19,11 @@
     if (typeof navigate !== "function" || navigate.__amqWorkspaceGuarded) return;
     const guardedNavigate = function(view, ...args) {
       const result = navigate.call(this, view, ...args);
-      if (view !== "dashboard") {
+      if (view === "dashboard") {
+        document.body.classList.remove("amq-standalone-route");
+      } else {
+        document.body.classList.add("amq-standalone-route");
         document.body.classList.remove("amq-workspace-active");
-        requestAnimationFrame(() => document.body.classList.remove("amq-workspace-active"));
-        setTimeout(() => document.body.classList.remove("amq-workspace-active"), 80);
       }
       return result;
     };
@@ -39,10 +40,16 @@
   document.addEventListener("click", event => {
     const action = event.target.closest?.("[data-home-action]");
     if (action && standaloneActions.has(action.getAttribute("data-home-action"))) {
+      document.body.classList.add("amq-standalone-route");
       scheduleRouteSync();
       return;
     }
+    if (action && action.getAttribute("data-home-action") === "dashboard") {
+      document.body.classList.remove("amq-standalone-route");
+      return;
+    }
     if (event.target.closest?.("#uiBackHome, #wsReturnHome, #mpBackHome")) {
+      document.body.classList.add("amq-standalone-route");
       scheduleRouteSync();
     }
   }, true);
