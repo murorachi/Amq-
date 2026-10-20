@@ -82,11 +82,18 @@ async def main():
             text=await page.locator("#wsActions").inner_text()
             assert expected_text in text, {"workspace":ws,"text":text[:500]}
             report["checks"].append(f"workspace {ws} active and correct panel content: PASS")
+        await page.set_viewport_size({"width":1440,"height":900})
         await page.locator('[data-ws="learning"]').click()
+        await page.wait_for_timeout(200)
+        dock_style=await page.locator("#amqWorkspaceDock").evaluate("(e)=>({background:getComputedStyle(e).backgroundColor,border:getComputedStyle(e).borderTopColor})")
+        assert dock_style["background"]!="rgba(0, 0, 0, 0)", dock_style
+        await page.screenshot(path="proto20-workspace-desktop.png",full_page=False)
         learning_text=await page.locator("#wsActions").inner_text()
         for required in ["探索新歌","弱點補強","自選清單練習","間隔複習","學習計畫"]:
             assert required in learning_text, {"missing":required,"text":learning_text[:600]}
         await page.locator('[data-ws="analysis"]').click()
+        await page.wait_for_timeout(150)
+        await page.screenshot(path="proto20-analysis-desktop.png",full_page=False)
         analysis_text=await page.locator("#wsActions").inner_text()
         for required in ["統計儀表板","查看動畫圖鑑進度","查看清單與學習資料","學習計畫"]:
             assert required in analysis_text, {"missing":required,"text":analysis_text[:600]}
