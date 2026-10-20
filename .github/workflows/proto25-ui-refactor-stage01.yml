@@ -1,0 +1,112 @@
+name: Proto25 UI refactor stage 1 acceptance
+on:
+  push:
+    branches:
+      - v82.85.30-proto25-ui-refactor-work-01
+permissions:
+  contents: write
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct candidate with reviewed Proto24 layout
+        run: |
+          set -euo pipefail
+          cp amq_learning_tool_v82_85_30_workspace_proto17.html candidate.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html"); s=p.read_text(encoding="utf-8")
+          replacements=[
+            ("查看清單與學習資料','learningCenter'", "查看清單與學習資料','watchlist'"),
+            ("if(!clickHome('learningCenter'))return;\n   const mode=a==='practiceExplore'?'explore':'weak';", "window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');\n    const mode=a==='practiceExplore'?'explore':'weak';"),
+            ("if(a==='practice-self'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-self'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("if(a==='practice-srs'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-srs'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;target.textContent=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。'}", "function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;const next=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。';if(target.textContent!==next)target.textContent=next}")
+          ]
+          for old,new in replacements:
+            n=s.count(old)
+            if n != 1: raise SystemExit(f"Expected one match, got {n}: {old[:100]!r}")
+            s=s.replace(old,new,1)
+          p.write_text(s,encoding="utf-8")
+          assert "if(target.textContent!==next)target.textContent=next" in s
+          print("Source compatibility fixes: PASS")
+          PY
+          cat engineering/proto24/amq-osu-home-composition.css >> candidate.html
+          cat engineering/proto24/amq-workspace-osu-composition.css >> candidate.html
+          sha256sum candidate.html | tee candidate.sha256
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+      - name: Run browser acceptance
+        run: |
+          set -euo pipefail
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/amq-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do curl --fail --silent http://127.0.0.1:8765/candidate.html -o /dev/null && break || sleep 1; done
+          python tests/proto24_workspace_acceptance.py
+      - name: Upload screenshots and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proto24-workspace-ui-acceptance
+          path: |
+            candidate.html
+            candidate.sha256
+            acceptance-report.json
+            proto24-desktop.png
+            proto24-mobile.png
+            proto24-learning-workspace.png
+            proto24-analysis-workspace.png
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Publish accepted candidate and engineering records to isolated branch
+        if: success()
+        env:
+          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-01
+        run: |
+          set -euo pipefail
+          mkdir -p dist engineering/proto24-acceptance
+          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html
+          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256
+          cat > engineering/proto24-acceptance/BASELINE.md <<'EOF'
+          # BASELINE — Proto25 Stage 1
+          - Pinned source: Proto17 at a763706e56324cf4be020d82667b36f5438e4784.
+          - Proto22 retained as a separate prior candidate.
+          - Production V82.82 and read-only V82.85.30 are unchanged.
+          EOF
+          cat > engineering/proto24-acceptance/CURRENT_STATUS.md <<EOF
+          # CURRENT STATUS — Proto25 Stage 1
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto24.html
+          - Size: $(stat -c %s candidate.html) bytes
+          - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
+          - Browser acceptance: PASS (see TEST_REPORT.md and this workflow run).
+          - Production promotion: NOT performed.
+          EOF
+          cat > engineering/proto24-acceptance/NEXT_TASK.md <<'EOF'
+          # NEXT TASK
+          - Verify real audio output, quiz-answer lifecycle, and multiplayer regression separately before production promotion.
+          - Do not alter quiz/audio logic as part of visual refinements.
+          EOF
+          cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
+          # TEST REPORT — Proto25 Stage 1
+          - Native origin localStorage/sessionStorage/IndexedDB: PASS if workflow succeeds.
+          - Seven homepage actions and return-home: PASS if workflow succeeds.
+          - Desktop and mobile visual assertions: PASS if workflow succeeds.
+          - Actual audio output, quiz answer lifecycle, multiplayer: NOT RUN in this UI stage.
+          - Workflow: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto24.html dist/amq_learning_tool_v82_85_30_workspace_proto24.html.sha256 engineering/proto24-acceptance
+          git commit -m "Publish Proto25 stage 1 UI candidate and evidence"
+          git push origin "HEAD:${TARGET_BRANCH}"
