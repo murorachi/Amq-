@@ -1,0 +1,26 @@
+name: Gamble item rule checker
+
+on:
+  push:
+    branches:
+      - multiplayer-gamble-engine-discovery-01
+    paths:
+      - "tools/gamble_item_rule_checker.py"
+      - ".github/workflows/gamble-item-rule-checker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out design branch
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic item-rule contracts
+        run: python tools/gamble_item_rule_checker.py
