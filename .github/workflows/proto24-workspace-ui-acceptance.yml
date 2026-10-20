@@ -82,11 +82,15 @@ jobs:
           # Candidate fingerprint is recorded in the test report and manifest.
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
           # TEST REPORT — Proto25 Stage 2
-          - Native origin localStorage/sessionStorage/IndexedDB: PASS if workflow succeeds.
-          - Seven homepage actions and return-home: PASS if workflow succeeds.
-          - Desktop and mobile visual assertions: PASS if workflow succeeds.
-          - Actual audio output, quiz answer lifecycle, multiplayer: NOT RUN in this UI stage.
-          - Workflow: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          - Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage02.html
+          - Size: $(stat -c %s candidate.html) bytes
+          - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
+          - Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
+          - Homepage routes, native storage, mobile overflow, no browser exceptions/console errors: PASS if all browser assertions succeed.
+          - Workspace palette assertions: PASS if both Learning Center and Analysis checks succeed.
+          - Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png in the workflow artifact.
+          - Actual audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
