@@ -1,3 +1,5 @@
 # NEXT TASK
-- Verify real audio output, quiz-answer lifecycle, and multiplayer regression separately before production promotion.
-- Do not alter quiz/audio logic as part of visual refinements.
+
+1. Run dedicated real-audio output acceptance, quiz-answer lifecycle regression, and multiplayer lifecycle regression.
+2. If those regressions pass, compare the final homepage against the original osu! reference at matching viewport dimensions and tune any measurable remaining discrepancies.
+3. Do not promote Proto24 to production until the broader regressions and reference comparison are accepted.
