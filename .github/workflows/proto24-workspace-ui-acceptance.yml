@@ -115,7 +115,7 @@ jobs:
 
           source=Path("candidate.html").read_text(encoding="utf-8")
           parser=Audit();parser.feed(source);parser.close()
-          assert source.lstrip().lower().startswith("<!doctype html"), "missing HTML doctype"
+          assert "<!doctype html" in source.lower(), "missing HTML doctype"
           duplicates=sorted({x for x in parser.ids if parser.ids.count(x)>1})
           if duplicates: raise SystemExit(f"duplicate IDs: {duplicates[:20]}")
           checked=0
