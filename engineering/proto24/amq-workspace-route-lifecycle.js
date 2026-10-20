@@ -1,20 +1,21 @@
 <script>
 /* Proto25 Stage 28: scope the persistent workspace shell to the dashboard workspace.
- * The existing route handlers sometimes leave the body shell class enabled when the
- * catalog/quiz/home route changes. Clear it after their synchronous and deferred work.
+ * Existing navigation handlers sometimes leave the shell class enabled after route changes.
+ * Observe class mutations and re-check the authoritative active-view API after route clicks.
  */
 (() => {
-  const clearUnlessWorkspace = () => {
+  window.__amqWorkspaceRouteGuardReady = true;
+  const syncWorkspaceShell = () => {
     const view = window.__aniGetActiveViewV82?.();
     if (view && view !== "dashboard") {
       document.body.classList.remove("amq-workspace-active");
     }
   };
   const scheduleRouteSync = () => {
-    requestAnimationFrame(clearUnlessWorkspace);
-    setTimeout(clearUnlessWorkspace, 80);
-    setTimeout(clearUnlessWorkspace, 180);
-    setTimeout(clearUnlessWorkspace, 260);
+    requestAnimationFrame(syncWorkspaceShell);
+    setTimeout(syncWorkspaceShell, 80);
+    setTimeout(syncWorkspaceShell, 180);
+    setTimeout(syncWorkspaceShell, 260);
   };
   const standaloneActions = new Set([
     "quiz", "practiceExplore", "practiceWeak", "catalog",
@@ -30,5 +31,9 @@
       scheduleRouteSync();
     }
   }, true);
+  new MutationObserver(syncWorkspaceShell).observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
 })();
 </script>
