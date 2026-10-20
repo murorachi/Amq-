@@ -87,7 +87,8 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Second run `39491513713`: static checks passed; browser acceptance failed because the test tried to click hidden `#uiBackHome` after entering Multiplayer. The existing Multiplayer screen provides `#mpBackHome`; the test now uses that actual control.
 - Third run `39491718792`: static checks passed; browser acceptance then failed at Settings because `.top .actions` computed to transparent. Root cause: the new CSS selector required both `ui-home-menu` and `ui-settings-open`, but the actual return-home route only guarantees the latter. Updated the Settings panel selectors to key on `body.ui-settings-open`.
 - Fourth run `39491929550`: static checks PASS; browser acceptance failed at the Settings assertion. The CSS panel uses a linear-gradient, for which `getComputedStyle(...).backgroundColor` correctly returns transparent; the test incorrectly expected a solid RGB value. The test now checks `backgroundImage` for `linear-gradient`.
-- Fifth run is queued/in progress; results are not yet known.
+- Fifth run `39492186903`: static checks passed; browser acceptance failed because the catalog toolbar's computed background was `rgb(33, 29, 38)` rather than the single exact token in the assertion, despite remaining dark. The assertion now verifies dark palette and grid layout instead of overfitting a token.
+- Sixth run `39492892899`: static checks PASS; browser acceptance is in progress after adding home-menu hiding for underlying catalog controls, compacting the profile/player strip, and capturing the Song Select viewport instead of the full catalog page.
 
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
