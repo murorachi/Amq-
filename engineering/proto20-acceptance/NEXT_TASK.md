@@ -1,4 +1,4 @@
 # NEXT TASK
-1. Run actual audio playback and quiz-answer lifecycle regression acceptance.
-2. Run multiplayer lifecycle regression acceptance.
-3. Promote Proto20 to production only if those dedicated regressions pass and the production baseline is rechecked.
+1. Verify actual audio playback, quiz-answer lifecycle, and multiplayer lifecycle regressions with their dedicated acceptance harnesses.
+2. Run full audio/quiz/multiplayer regression acceptance before any production promotion.
+3. Do not promote to production until those broader regressions pass.
