@@ -1,0 +1,135 @@
+name: Proto17 UI initialization and navigation acceptance
+
+on:
+  push:
+    branches:
+      - amq-proto17-ui-init-acceptance-20261020
+    paths:
+      - .github/workflows/proto17-ui-acceptance.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: proto17-ui-acceptance
+  cancel-in-progress: false
+
+jobs:
+  accept-and-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the pinned Proto17 baseline
+        uses: actions/checkout@v4
+
+      - name: Set up Python and Node
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Apply the minimal initialization and workspace-route repair
+        run: python tools/patch_proto17_initialization.py
+
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+
+      - name: Run normal-origin browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/amq-proto17-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8765/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8765/amq_learning_tool_v82_85_30_workspace_proto17.html >/dev/null
+          python tests/browser/proto17_ui_acceptance.py \
+            --url http://127.0.0.1:8765/amq_learning_tool_v82_85_30_workspace_proto17.html \
+            --report tests/reports/PROTO17_UI_ACCEPTANCE.md
+
+      - name: Record final fingerprints and project status
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTML=amq_learning_tool_v82_85_30_workspace_proto17.html
+          SHA256=$(sha256sum "$HTML" | awk '{print $1}')
+          BLOB_SHA=$(git hash-object "$HTML")
+          BYTES=$(wc -c < "$HTML" | tr -d ' ')
+          cat > SHA256-MANIFEST.txt <<EOF
+          Repository: murorachi/Amq-
+          Baseline workflow run: 39395545055
+          Baseline artifact: amq_learning_tool_v82_85_30_workspace_proto17
+          Baseline source commit: 4fc4a099389b59850c46d3eab2332be3401d487a
+          Baseline source HTML SHA-256: 3dd33bacf8b4482034150d2a858daa70c9bfc61914a36f7124a50204970c3864
+          Final branch: $GITHUB_REF_NAME
+          Final file: $HTML
+          File size (bytes): $BYTES
+          SHA-256: $SHA256
+          Git blob SHA: $BLOB_SHA
+          EOF
+
+          cat > BASELINE.md <<EOF
+          # Baseline
+
+          - Selected artifact: GitHub Actions run 39395545055, artifact amq_learning_tool_v82_85_30_workspace_proto17.
+          - Pinned source commit: 4fc4a099389b59850c46d3eab2332be3401d487a.
+          - Original HTML SHA-256: 3dd33bacf8b4482034150d2a858daa70c9bfc61914a36f7124a50204970c3864.
+          - Downloaded artifact ZIP SHA-256: cf2cbbafbbdac95a8cb688fc82019a52feac6e1d70a20a14f4fb182d604ea63c.
+          - This baseline is retained; the repaired file is a separate branch version.
+          EOF
+
+          cat > CURRENT_STATUS.md <<EOF
+          # Current Status
+
+          - Version: V82.85.30 Proto17 initialization and workspace-route repair.
+          - Branch: $GITHUB_REF_NAME
+          - Baseline: 4fc4a099389b59850c46d3eab2332be3401d487a
+          - Final HTML SHA-256: $SHA256
+          - Final HTML bytes: $BYTES
+          - Root cause fixed: the body-wide MutationObserver observed the scope-summary target, while refreshBatchScope rewrote the same text on every callback, continually scheduling another mutation cycle.
+          - Workspace routes fixed: practice mode shortcuts now use the existing practice view API; the Learning Center shortcut opens the current Learning group instead of searching for a removed legacy button.
+          - Validation: embedded JavaScript syntax and normal-HTTP-origin browser acceptance passed before this status was committed.
+          - Storage validation: native localStorage and IndexedDB read/write checks passed on 127.0.0.1 HTTP origin.
+          - Scope limitation: external APIs, remote covers, real audio playback, and pixel-diff visual comparison are not covered by this acceptance run.
+          EOF
+
+          cat > NEXT_TASK.md <<EOF
+          # Next Task
+
+          1. Keep this accepted Proto17 branch as the rollback point; do not overwrite the pinned source commit.
+          2. For the next UI phase, perform reference-based visual comparison of the Learning Center and Learning Analysis screens before changing styling.
+          3. Run the browser acceptance workflow after each scoped UI change.
+          4. Keep real audio output acceptance as a separate test gate; this workflow does not claim to validate audio playback.
+          EOF
+
+          echo "Final HTML SHA-256: $SHA256"
+          echo "Final HTML Git blob SHA: $BLOB_SHA"
+          echo "Final HTML bytes: $BYTES"
+          cat SHA256-MANIFEST.txt
+
+      - name: Commit the accepted HTML, tests, report, and status records
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            amq_learning_tool_v82_85_30_workspace_proto17.html \
+            tools/patch_proto17_initialization.py \
+            tests/browser/proto17_ui_acceptance.py \
+            tests/reports/PROTO17_UI_ACCEPTANCE.md \
+            SHA256-MANIFEST.txt BASELINE.md CURRENT_STATUS.md NEXT_TASK.md \
+            .github/workflows/proto17-ui-acceptance.yml
+          git diff --cached --check
+          git commit -m "Fix Proto17 initialization loop and workspace navigation"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          echo "Accepted commit: $(git rev-parse HEAD)"
