@@ -5,14 +5,14 @@ body.ui-home-menu { background:#17141e!important; color:#f4efff!important; color
 body.ui-home-menu .wrap { width:100%!important; max-width:none!important; min-height:100vh!important; padding:0 clamp(16px,3vw,44px) 100px!important; box-sizing:border-box!important; background:#17141e!important; color:#f4efff!important; }
 body.ui-home-menu #homeMenu { width:100%!important; max-width:1480px!important; margin:0 auto!important; padding:0!important; display:flex!important; flex-direction:column!important; gap:0!important; }
 body.ui-home-menu #homeMenu .amqHomeTopFrame { display:grid!important; grid-template-columns:minmax(290px,.78fr) minmax(0,1.22fr)!important; gap:12px!important; width:100%!important; margin:14px 0 0!important; align-items:stretch!important; }
-body.ui-home-menu #homeMenu .amqProfileCard,
+body.ui-home-menu #homeMenu #amqProfileCard,
 body.ui-home-menu #homeMenu .amqPlayerFrame { min-width:0!important; min-height:94px!important; box-sizing:border-box!important; border:1px solid #ded5f0!important; border-radius:5px!important; background:#f7f3ff!important; color:#3d3154!important; box-shadow:0 2px 9px #00000025!important; padding:12px 16px!important; }
 body.ui-home-menu #homeMenu .amqProfileCard { display:flex!important; align-items:center!important; gap:13px!important; }
 body.ui-home-menu #homeMenu .amqAvatarButton { width:54px!important; height:54px!important; flex:0 0 54px!important; border:2px solid #fff!important; box-shadow:0 0 0 2px #c9b6ee!important; }
 body.ui-home-menu #homeMenu .amqProfileInfo,body.ui-home-menu #homeMenu .amqProfileLine,body.ui-home-menu #homeMenu .amqProfileHint { color:#776a8d!important; }
 body.ui-home-menu #homeMenu .amqProfileName { color:var(--amq-osu-purple)!important; font-size:17px!important; font-weight:850!important; }
 body.ui-home-menu #homeMenu .amqProfileLine { font-size:10px!important; }
-body.ui-home-menu #homeMenu .amqProfileHint { display:none!important; }
+body.ui-home-menu #homeMenu #amqProfileHint { display:none!important; }
 body.ui-home-menu #homeMenu .amqPlayerFrame { display:flex!important; flex-direction:column!important; justify-content:center!important; gap:7px!important; color:#45385c!important; }
 body.ui-home-menu #homeMenu .amqPlayerFrame .amqHomePlayerSlot,body.ui-home-menu #homeMenu .amqPlayerFrame .amqHomePlayerSlot * { color:#45385c!important; }
 body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0!important; color:#8a78a9!important; font-size:9px!important; font-weight:900!important; letter-spacing:.16em!important; }
