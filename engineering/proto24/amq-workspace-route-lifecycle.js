@@ -1,25 +1,31 @@
-/* Proto25 Stage 28: keep the persistent workspace shell scoped to workspace routes.
- * Returning to home or opening a standalone route must clear the active-shell body class
- * after the existing route handler has completed. Existing navigation handlers remain intact.
+/* Proto25 Stage 28: scope the persistent workspace shell to the dashboard workspace.
+ * The existing route handlers sometimes leave the body shell class enabled when the
+ * catalog/quiz/home route changes. Clear it after their synchronous and deferred work.
  */
 (() => {
+  const clearUnlessWorkspace = () => {
+    const view = window.__aniGetActiveViewV82?.();
+    if (view && view !== "dashboard") {
+      document.body.classList.remove("amq-workspace-active");
+    }
+  };
+  const scheduleRouteSync = () => {
+    requestAnimationFrame(clearUnlessWorkspace);
+    setTimeout(clearUnlessWorkspace, 80);
+    setTimeout(clearUnlessWorkspace, 260);
+  };
   const standaloneActions = new Set([
     "quiz", "practiceExplore", "practiceWeak", "catalog",
     "watchlist", "learningPlan"
   ]);
-  const clearWorkspaceShell = () => {
-    requestAnimationFrame(() => {
-      document.body.classList.remove("amq-workspace-active");
-    });
-  };
   document.addEventListener("click", event => {
     const action = event.target.closest?.("[data-home-action]");
     if (action && standaloneActions.has(action.getAttribute("data-home-action"))) {
-      clearWorkspaceShell();
+      scheduleRouteSync();
       return;
     }
     if (event.target.closest?.("#uiBackHome, #wsReturnHome, #mpBackHome")) {
-      clearWorkspaceShell();
+      scheduleRouteSync();
     }
   }, true);
 })();
