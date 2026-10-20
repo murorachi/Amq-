@@ -23,7 +23,7 @@
 - Stage 14 branch: `v82.85.30-proto25-ui-refactor-stage-14`.
 - Stage 15 branch: `v82.85.30-proto25-ui-refactor-stage-15`.
 - Stage 16 branch: `v82.85.30-proto25-ui-refactor-stage-16`.
-- Last confirmed common source checkpoint: `d656a45d1b09855a539bd5905b39628b71e734ea`; stage-15 and working branches were fast-forwarded to this commit. Documentation updates follow that source checkpoint.
+- Last confirmed common source checkpoint: `12a999b6e23db26c95504d6abe7be9ba5b81a1f8`; stage-16 and working branches were fast-forwarded to this commit. Documentation updates follow that source checkpoint.
 - Candidate HTML and SHA-256 manifest for Proto25 Stage 16: NOT VERIFIED as generated artifacts.
 - Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
 
