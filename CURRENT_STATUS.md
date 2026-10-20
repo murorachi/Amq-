@@ -143,3 +143,12 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Verification boundary: local execution not performed in this session; remote Actions result not verified. Workflow existence is not a passing test result.
 - Design-only changes. Product HTML/source and existing multiplayer mode unchanged.
 
+## Debt and escrow contracts + Crown sensitivity — 2026-10-20
+
+- Expanded `tools/gamble_item_rule_checker.py` from 10 to 14 unittest methods. New contracts cover Debt Collector due-date/repayment, one-time extension outcomes and ceiling rounding, default payment plus curse conversion, run-end cleanup, aggregate escrow principal conservation, and duplicate escrow claims.
+- Added `tools/gamble_crown_sensitivity.py` with 4 unittest methods and an 18-case deterministic sensitivity sweep across wager sizes 10/25/50/60/75/100 and assumed item costs 0/50/100.
+- Local test results: rule contracts 14/14 PASS; Crown sensitivity 4/4 PASS; Python compilation PASS. Local file Git blob hashes matched GitHub source blobs for both scripts.
+- Conditional Crown result: three +60 triggers at wager 50 produce +30 chips before other effects if item cost is zero, but -20 if cost is 50. The real minimum wager, acquisition cost and wager-cap utility are not finalized; this is a hypothesis to investigate, not a balance verdict.
+- Remote GitHub Actions: not verified. Product tests and human playtest: not run. Product source unchanged.
+- Full report: `reports/MULTIPLAYER_GAMBLE_DETERMINISTIC_ITEM_CHECKER_01.md`.
+
