@@ -53,7 +53,8 @@ async def main():
         report["mobile_widths"]=widths
         assert widths["document"]<=widths["viewport"], widths
         report["checks"].append("mobile no horizontal overflow: PASS")
-        # Enter dashboard and capture the first real workspace surface.
+        # Enter dashboard at desktop dimensions and capture the real workspace surface.
+        await page.set_viewport_size({"width":1440,"height":900})
         await page.locator('[data-home-action="dashboard"]').last.click(timeout=8000)
         await page.wait_for_timeout(350)
         await page.screenshot(path="proto20-dashboard-workspace.png",full_page=True)
@@ -78,6 +79,8 @@ async def main():
         for required in ["統計儀表板","查看動畫圖鑑進度","查看清單與學習資料","學習計畫"]:
             assert required in analysis_text, {"missing":required,"text":analysis_text[:600]}
         report["checks"].append("Learning Center and Analysis panels remain separate with expected actions: PASS")
+        await page.locator("#wsReturnHome").click(timeout=8000)
+        await page.wait_for_timeout(200)
         await page.locator('[data-home-action="learningPlan"]').last.click(timeout=8000)
         await page.wait_for_timeout(500)
         await page.screenshot(path="proto20-learning-center.png",full_page=True)
