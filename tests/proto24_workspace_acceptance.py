@@ -130,6 +130,19 @@ async def main():
         await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         report["catalog_visuals"]=catalog
         report["checks"].append("Catalog/song-selection panel palette: PASS")
+        await page.wait_for_function("document.querySelectorAll('#grid.view-catalog .card').length>0",timeout=20000)
+        await page.locator("#grid.view-catalog .card").first.click(timeout=10000);await page.wait_for_timeout(250)
+        await page.wait_for_function("document.querySelector('#overlay')?.classList.contains('open')",timeout=8000)
+        song_select=await page.evaluate("()=>({width:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns,rows:document.querySelectorAll('#songlist .songrow').length})")
+        assert song_select["width"]>=1400 and len(song_select["columns"].split())==2,song_select
+        report["song_select_visuals"]=song_select
+        await page.screenshot(path="proto25-song-select.png",full_page=True)
+        await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
+        song_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,drawer:document.querySelector('#overlay .drawer').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#overlay .drawer')).gridTemplateColumns})")
+        assert song_mobile["document"]<=song_mobile["viewport"] and song_mobile["drawer"]<=song_mobile["viewport"],song_mobile
+        report["song_select_mobile"]=song_mobile
+        await page.locator("#close").click(timeout=8000);await page.wait_for_timeout(120)
+        await page.set_viewport_size({"width":1440,"height":900});await page.wait_for_timeout(100)
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
         await page.locator('[data-home-action="quiz"]').first.click(timeout=8000);await page.wait_for_timeout(250)
         quiz=await page.evaluate("""()=>({background:getComputedStyle(document.querySelector('#quizView')).backgroundColor,border:getComputedStyle(document.querySelector('#quizView')).borderTopColor})""")
