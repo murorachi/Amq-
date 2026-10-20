@@ -24,9 +24,9 @@ async def main():
         assert legacy=={"hero":"none","discover":"none","home":True}, legacy
         report["checks"].append("home landing suppresses duplicate legacy dashboard/discovery sections: PASS")
         await page.screenshot(path="proto20-home-desktop.png",full_page=True)
-        shell=await page.evaluate("""()=>({style:!!document.querySelector('#amq-proto20-ui-rebuild-style'),sidebar: getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display,homeClass:document.body.classList.contains('ui-home-menu'),legacyHero:getComputedStyle(document.querySelector('.hero.view-home')).display,legacyDiscover:getComputedStyle(document.querySelector('.discover.view-home')).display})""")
+        shell=await page.evaluate("""()=>({style:!!document.querySelector('#amq-proto20-ui-rebuild-style'),legacyHero:getComputedStyle(document.querySelector('.hero.view-home')).display,legacyDiscover:getComputedStyle(document.querySelector('.discover.view-home')).display})""")
         assert shell["style"] and shell["legacyHero"]=="none" and shell["legacyDiscover"]=="none", shell
-        report["checks"].append("Proto20 rebuilt stylesheet loaded and legacy dashboard/discovery duplicates hidden: PASS")
+        report["checks"].append("Proto20 rebuilt stylesheet loaded and duplicate legacy sections hidden: PASS")
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         report["home_actions"]=actions
         expected=["quiz","practiceExplore","practiceWeak","catalog","watchlist","learningPlan","dashboard"]
