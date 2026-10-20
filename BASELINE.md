@@ -141,3 +141,10 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - The tests and workflow have not been verified as executed successfully in this session. Do not report them as passing until an actual run result is inspected.
 - Product baseline remains untouched; this design stage does not authorize production implementation.
 
+## Rule-contract expansion baseline — 2026-10-20
+
+- `tools/gamble_item_rule_checker.py`: 14 explicit unittest methods; local execution passed 14/14. Covers unique event identity, single-choice protection reference behavior, integer rounding, Vault Ladder and Minefield probabilities, Debt Collector due/repay/extension/default/run-end behavior, escrow principal conservation and duplicate claims, reward reroll identity, Broken Crown trigger count, and invalid state rejection.
+- `tools/gamble_crown_sensitivity.py`: 4 tests passed; 18 deterministic assumption combinations. The scenario uses provisional +60 per raw bust and a three-trigger break limit, but item cost, minimum wager and wager-cap value remain unspecified.
+- Local Git blob IDs matched GitHub for both executed scripts. Python compilation passed.
+- GitHub Actions result remains unverified. These are reference-model checks, not proof of full engine correctness, fun, or balanced outcomes. Product source unchanged.
+
