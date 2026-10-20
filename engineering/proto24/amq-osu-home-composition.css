@@ -179,4 +179,33 @@ body.ui-home-menu #audioDock button:focus-visible {
  body.ui-home-menu #homeMenu .amqHomeLandingAction:hover { transform:none!important; }
 }
 
+
+/* Proto25 stage 7: settings controls become a compact Stable-like options panel on the home screen. */
+body.ui-home-menu .top { align-items:center!important; border-bottom:1px solid #574554!important; }
+body.ui-home-menu .brand small { color:#ff8fc7!important; letter-spacing:.16em!important; }
+body.ui-home-menu .brand h1 { color:#fff!important; }
+body.ui-home-menu .brand .logo { filter:drop-shadow(0 0 10px #e86aa933)!important; }
+body.ui-home-menu .top .actions { gap:7px!important; }
+body.ui-home-menu .top .actions .btn {
+ min-height:36px!important; border:1px solid #6b5365!important; border-radius:3px!important;
+ background:#352c39!important; color:#f7edf3!important; box-shadow:none!important;
+}
+body.ui-home-menu .top .actions .btn:hover { border-color:#ff8fc7!important; background:#463441!important; }
+body.ui-home-menu .top .actions #uiHomeSettings { border-color:#e86aa9!important; background:linear-gradient(110deg,#70405c,#4b2d43)!important; color:#fff!important; }
+body.ui-home-menu.ui-settings-open .top .actions {
+ position:fixed!important; top:clamp(58px,8vh,82px)!important; right:clamp(12px,2vw,28px)!important;
+ z-index:150!important; display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:7px!important; width:min(520px,calc(100vw - 24px))!important; padding:14px!important;
+ border:1px solid #765267!important; border-radius:4px!important; background:#28212b!important;
+ box-shadow:0 16px 42px #0008!important;
+}
+body.ui-home-menu.ui-settings-open .top .actions>* { min-width:0!important; justify-content:center!important; text-align:center!important; }
+body.ui-home-menu.ui-settings-open .top .actions #uiHomeSettings { grid-column:1/-1!important; }
+body.ui-home-menu.ui-settings-open .top .actions input[type="file"] { display:none!important; }
+body.ui-home-menu.ui-settings-open .top .actions #uiHomeSettings[aria-expanded="true"]::after { content:"  ×"; }
+@media(max-width:520px) {
+ body.ui-home-menu.ui-settings-open .top .actions { top:56px!important; right:8px!important; width:calc(100vw - 16px)!important; padding:10px!important; }
+ body.ui-home-menu.ui-settings-open .top .actions .btn { min-height:42px!important; font-size:11px!important; }
+}
+
 </style>
