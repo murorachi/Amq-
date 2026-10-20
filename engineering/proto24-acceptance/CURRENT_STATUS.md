@@ -52,13 +52,21 @@
 - Do not promote until the stage workflow produces a candidate, all static/browser checks pass, screenshots are reviewed at matching viewports, and SHA-256 is verified.
 
 
-## Latest workflow repair checkpoint
-- Stage 24 workflow trigger/artifact naming correction commit: `2294f0ce073d074df5f7df1728a9ab22b577b0d9` on `v82.85.30-proto25-ui-refactor-stage-24`.
-- PR head has been updated through `065af9a3e235e7ec1ff823d45bfe3f7858b8e15c`, but `fetch_commit_workflow_runs` and combined status still return no run/status. Workflow trigger is therefore still unverified through the available GitHub integration; no browser acceptance is claimed.
+## Current validation checkpoint (2026-10-21)
 
+- Immutable accepted baseline remains branch `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`, HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
+- Current isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
+- Stage 24 workflow fix commit: `1465e1134140cefc4ef785e60e86652dc325a547`. The PR-triggered publisher previously checked out a synthetic PR merge commit and pushed it directly to the base branch, which is not a fast-forward update. Fixed publication to preserve the tested candidate, switch to the target branch, then commit only the candidate, checksum and test report.
+- Work branch workflow commit: `ec31a4b12c3e842859f06063c044dac0127a9ee4`. It now triggers on pushes to the isolated work-03 branch and uses the corrected publication procedure, so validation does not depend on an unconfirmed PR event.
+- Previous successful run `39497858082` produced candidate size 8,899,371 bytes and SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`. That run tested the Stage 24 branch snapshot at commit `2294f0ce073d074df5f7df1728a9ab22b577b0d9`, not the current work-03 head. Its 17 browser checks passed, but its profile background assertion accepted transparent backgrounds and therefore was too weak.
+- Tightened `tests/proto24_workspace_acceptance.py` to require the profile card's actual `linear-gradient` background image. Test change commit: `9cd8097d7db723fef1e77d8fc1e352512815c924`.
+- The latest work-03 push workflow run has not yet been confirmed by run ID. Current head must not be declared accepted until the new run, artifact, screenshots, candidate SHA-256 and remote publication are verified.
+- Browser acceptance of the previous candidate: PASS for its listed 17 checks only. Latest profile gradient assertion: NOT YET RUN. Real audio output, full quiz-answer lifecycle and multiplayer server connectivity/lifecycle: NOT RUN. 90% visual similarity: NOT VERIFIED.
+- Do not merge PR #9 or promote the candidate before fresh evidence is verified. No production or accepted baseline was changed.
 
-## Continuous execution checkpoint (2026-10-21)
-- User requested uninterrupted stage-by-stage execution, automated checkpoints, root-cause fixes, and no review pauses unless a genuine blocker exists.
-- Stage 24 workflow audit found stale Stage 16 artifact naming and Stage 23 publication target inside the Stage 24 workflow. Corrected all stale names/paths and verified the workflow file read-back at commit `9ebe65f7d7989f5717066acecf588948424bf74b` on `v82.85.30-proto25-ui-refactor-stage-24`.
-- Fresh validation PR: #9, head `v82.85.30-proto25-ui-refactor-work-03`, base `v82.85.30-proto25-ui-refactor-stage-24`.
-- Latest Actions run/status lookup still returns no run/status. Trigger is not verified, so browser acceptance, generated HTML, screenshot evidence and SHA-256 remain unverified. Do not promote.
+## Next verification
+1. Confirm a new push-triggered Actions run on work-03 and inspect its job steps/logs.
+2. Retrieve its artifact; inspect screenshots and machine-readable report, especially profile-card gradient and header geometry.
+3. Verify candidate HTML and SHA-256 manifest against the remote Stage 24 files and confirm the publish commit.
+4. Fix any assertion or screenshot failure at root cause and rerun the affected checks.
+5. Review remaining target screens and regression coverage before considering promotion.
