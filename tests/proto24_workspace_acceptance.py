@@ -25,10 +25,10 @@ async def main():
         assert len(layout["actions"])==3 and all(a["h"]>=65 for a in layout["actions"]),layout
         assert layout["legacy"]==["none","none"],layout
         visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
-        assert "♫ ?" in visual["logo"],visual
+        assert "osu!" in visual["logo"],visual
         assert layout["logo"]=="grid",layout
-        assert visual["body"]=="rgb(23, 20, 30)" and visual["wrap"]=="rgb(23, 20, 30)",visual
-        assert visual["footerHeading"]=="rgb(240, 233, 255)",visual
+        assert visual["body"]=="rgb(40, 33, 43)" and visual["wrap"]=="rgb(40, 33, 43)",visual
+        assert visual["footerHeading"]=="rgb(255, 255, 255)",visual
         report["visual_tokens"]=visual
         report["desktop_layout"]=layout
         cover=await page.evaluate("""()=>{const e=document.querySelector('#dockCoverV33');return !e||getComputedStyle(e).display==='none'||e.hidden}""")
