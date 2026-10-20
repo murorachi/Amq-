@@ -6,6 +6,7 @@ on:
       - multiplayer-gamble-engine-discovery-01
     paths:
       - "tools/gamble_item_rule_checker.py"
+      - "tools/gamble_crown_sensitivity.py"
       - ".github/workflows/gamble-item-rule-checker.yml"
   workflow_dispatch:
 
@@ -24,3 +25,5 @@ jobs:
           python-version: "3.12"
       - name: Run deterministic item-rule contracts
         run: python tools/gamble_item_rule_checker.py
+      - name: Run Broken Crown sensitivity checks
+        run: python tools/gamble_crown_sensitivity.py
