@@ -100,7 +100,10 @@ jobs:
           #amqWorkspaceDock button[aria-pressed="true"]{background:#6945a7!important;border-color:#a88be6!important;color:#fff!important}
           #amqWorkspaceDock button .wsNum{color:#d3baff!important}
           #amqWorkspaceDock .wsStart{background:#9b70d5!important;border-color:#b99ae8!important;color:#fff!important}
-          @media(max-width:760px){body.amq-workspace-prototype.amq-workspace-active{padding-left:0!important;padding-bottom:124px!important}#amqWorkspaceSidebar{top:auto!important;bottom:70px!important;left:8px!important;right:8px!important;width:auto!important;max-height:42vh!important;border:1px solid #49375e!important;border-radius:3px!important}#amqWorkspaceDock{grid-template-columns:repeat(4,minmax(0,1fr))!important;left:0!important;right:0!important;bottom:0!important}#amqWorkspaceDock button{font-size:11px!important;padding:5px 3px!important}}
+          body.dark-theme .dashIntro{background:#211c28!important;border-color:#49375e!important;color:#f1eaf8!important}
+          body.dark-theme .dashIntro div{color:#b9afc6!important}
+          body.amq-workspace-active .audioDock{left:248px!important;width:calc(100% - 248px)!important;bottom:72px!important;z-index:9000!important}
+          @media(max-width:760px){body.amq-workspace-prototype.amq-workspace-active{padding-left:0!important;padding-bottom:124px!important}#amqWorkspaceSidebar{top:auto!important;bottom:70px!important;left:8px!important;right:8px!important;width:auto!important;max-height:42vh!important;border:1px solid #49375e!important;border-radius:3px!important}#amqWorkspaceDock{grid-template-columns:repeat(4,minmax(0,1fr))!important;left:0!important;right:0!important;bottom:0!important}#amqWorkspaceDock button{font-size:11px!important;padding:5px 3px!important}body.amq-workspace-active .audioDock{left:0!important;width:100%!important;bottom:124px!important}}
           </style>"""
           assert "amq-home-osu-layout-v852" not in s
           assert "amq-workspace-osu-skin-v852" not in s
