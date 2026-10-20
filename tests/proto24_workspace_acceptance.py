@@ -14,6 +14,7 @@ async def main():
         assert res and res.status==200
         await page.wait_for_function("document.readyState==='complete'",timeout=45000)
         await page.wait_for_function("document.querySelectorAll('[data-home-action]').length>=7",timeout=45000)
+        assert await page.evaluate("window.__amqWorkspaceRouteGuardReady===true"),"workspace route lifecycle module must execute in the built candidate"
         await page.wait_for_timeout(1800)
         storage=await page.evaluate("""async()=>{let db=false;try{await new Promise((resolve,reject)=>{let r=indexedDB.open('proto24_probe',1);r.onsuccess=()=>{db=true;r.result.close();indexedDB.deleteDatabase('proto24_probe');resolve()};r.onerror=()=>reject(r.error)})}catch{};localStorage.setItem('proto24','1');sessionStorage.setItem('proto24','1');return {local:localStorage.getItem('proto24')==='1',session:sessionStorage.getItem('proto24')==='1',indexedDB:db}}""")
         assert all(storage.values()),storage
