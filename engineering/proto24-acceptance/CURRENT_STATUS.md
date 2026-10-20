@@ -13,13 +13,13 @@
 - Stage 3 accessibility changes: visible keyboard focus indicators and reduced-motion support in home and workspace CSS; Playwright assertions check reduced-motion behavior.
 - Acceptance script now checks the workspace palette in addition to navigation, storage, and responsive geometry.
 - Isolated stage checkpoint branches: `v82.85.30-proto25-ui-refactor-stage-02` and `v82.85.30-proto25-ui-refactor-stage-03`.
-- Latest stage workflow commit: `5b80e535b3d78c9af186fbaf50d9e51fef16fa7e`.
+- Latest stage workflow commit: `866b6855aa81f502b20f8f198b736c6b3dc2c144`.
 - Stage 2 workflow commit: `ddb81b89578fbc99fa4b7a3dd8b98f8fb8c007e0`.
 
 ## Verification
 - GitHub source file/commit writes and remote reads: PASS.
 - Original Proto24 acceptance run: PASS for the original Proto24 artifact only.
-- Proto25 browser acceptance: NOT VERIFIED. The integration available in this session does not expose push-triggered Actions run listing; no stage-02 HTML artifact/manifest has been independently retrieved.
+- Proto25 browser acceptance: NOT VERIFIED. The integration available in this session does not expose push-triggered Actions run listing; no stage-03 HTML artifact/manifest has been independently retrieved.
 - Static HTML parser, JS syntax, mobile browser, and console checks on the modified Proto25 build: NOT RUN locally.
 - Audio output, full quiz lifecycle, multiplayer lifecycle: NOT RUN.
 - 90% visual similarity: NOT VERIFIED; no matched viewport screenshot comparison has yet been completed.
