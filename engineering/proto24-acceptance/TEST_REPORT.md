@@ -1,9 +1,9 @@
 # TEST REPORT — Proto25 Stage 24
-- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39508447617
-- Tested pull-request merge candidate: 00f4d8b8e02d1d04ac62d3bc587ba25690f7d35f
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39511230113
+- Tested pull-request merge candidate: dfd8d93456566cbccd4657a676a0cf539eb1bc6e
 - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
-- Size: 8907671 bytes
-- SHA-256: 04d27d56000a8e6d73858b6ff125edcff0669fdef8e3b78e55479460fdccb7c0
+- Size: 8910328 bytes
+- SHA-256: 77188fe6ca8d1a40f878f4d640f56f3fc24cadaa70dc0503b266a9eb4e399027
 - Static HTML/duplicate-ID/inline-JavaScript checks: PASS (required workflow gate).
 - Browser acceptance: PASS (required Playwright assertions and no page/console errors).
 - Screenshots: desktop/mobile home, desktop/mobile Play menu, desktop/mobile Settings, catalog, catalog detail, single-player quiz, Learning Center and Analysis; machine-readable acceptance report is attached to the workflow artifact.
