@@ -3,7 +3,7 @@ name: Proto20 native-origin acceptance
 on:
   push:
     branches:
-      - v82.85.30-proto20-accepted-delivery-01
+      - v82.85.31-home-ui-rebuild-01
 
 permissions:
   contents: write
@@ -120,7 +120,7 @@ body.ui-home-menu #homeMenu .amqHomeStage:not(.is-open) .amqMainIcon,body.ui-hom
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto20-accepted-delivery-01
+          TARGET_BRANCH: v82.85.31-home-ui-rebuild-01
         run: |
           set -euo pipefail
           mkdir -p dist engineering/proto20-acceptance
