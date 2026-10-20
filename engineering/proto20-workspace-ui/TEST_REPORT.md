@@ -8,4 +8,4 @@
 - Workspace visual layer appended and loaded: PASS.
 - Browser exceptions and console errors: 0 expected.
 - Audio playback, quiz-answer lifecycle, multiplayer regression: NOT RUN in this UI-only stage.
-- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39441895421
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39442319690

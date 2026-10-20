@@ -6989,7 +6989,7 @@ body.amq-workspace-active button.primary{background:linear-gradient(135deg,#b786
  window.addEventListener('hashchange',()=>setTimeout(syncWorkspaceToRoute,80));
  window.addEventListener('popstate',()=>setTimeout(syncWorkspaceToRoute,80));
  setTimeout(syncWorkspaceToRoute,150);
- function suppressFailedHomeCovers(){document.querySelectorAll('#homeMenu .amqHomeTopFrame img').forEach(img=>{if(img.complete&&img.naturalWidth===0)img.hidden=true;img.addEventListener('error',()=>{img.hidden=true},{once:true})})}
- suppressFailedHomeCovers();document.addEventListener('error',event=>{const img=event.target;if(img instanceof HTMLImageElement&&img.closest('#homeMenu .amqHomeTopFrame'))img.hidden=true},true);setTimeout(suppressFailedHomeCovers,500);
+ function suppressFailedHomeCovers(){document.querySelectorAll('#homeMenu .amqHomeTopFrame img,#dockCoverV33').forEach(img=>{if(img.complete&&img.naturalWidth===0)img.hidden=true;img.addEventListener('error',()=>{img.hidden=true},{once:true})})}
+ suppressFailedHomeCovers();document.addEventListener('error',event=>{const img=event.target;if(img instanceof HTMLImageElement&&(img.id==='dockCoverV33'||img.closest('#homeMenu .amqHomeTopFrame')))img.hidden=true},true);setTimeout(suppressFailedHomeCovers,500);
 })();
 </script>
