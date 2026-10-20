@@ -39,7 +39,7 @@ async def main():
         assert "\\n" not in geometry["bodyText"], geometry["bodyText"]
         report["geometry"]=geometry
         report["checks"].append("osu-like landing geometry: circle left, vertical primary menu right, secondary links aligned below: PASS")
-        await page.screenshot(path="proto20-desktop.png",full_page=True)
+        await page.screenshot(path="proto20-desktop.png",full_page=False)
         actions=await page.locator("[data-home-action]").evaluate_all("(els)=>[...new Set(els.map(e=>e.getAttribute('data-home-action')))]")
         report["home_actions"]=actions
         expected=["quiz","practiceExplore","practiceWeak","catalog","watchlist","learningPlan","dashboard"]
@@ -64,7 +64,7 @@ async def main():
         report["checks"].append("native storage survives reload: PASS")
         await page.set_viewport_size({"width":390,"height":844})
         await page.wait_for_timeout(500)
-        await page.screenshot(path="proto20-mobile.png",full_page=True)
+        await page.screenshot(path="proto20-mobile.png",full_page=False)
         widths=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth})")
         report["mobile_widths"]=widths
         assert widths["document"]<=widths["viewport"], widths
