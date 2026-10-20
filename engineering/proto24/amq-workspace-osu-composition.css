@@ -344,4 +344,45 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  #overlay.open .songnum { width:25px!important; height:25px!important; }
 }
 
+
+/* Stage 12: scene-background, import/sync and queue dialogs share the same dark Options visual language. */
+.modalShade { background:#120d16ed!important; backdrop-filter:blur(8px)!important; }
+.modalShade .modalCard {
+ width:min(760px,100%)!important; max-height:min(90vh,900px)!important; padding:clamp(16px,2vw,26px)!important;
+ border:1px solid #765267!important; border-radius:4px!important; background:#28212b!important;
+ color:#f7edf3!important; box-shadow:0 18px 60px #0009!important;
+}
+.modalShade .modalCard h3,.modalShade .modalCard h4 { color:#fff!important; }
+.modalShade .modalCard p,.modalShade .modalCard small { color:#cbbaca!important; }
+.modalShade .modalCard label { color:#f0bdd6!important; }
+.modalShade .modalCard input:not([type="checkbox"]):not([type="radio"]),
+.modalShade .modalCard select,.modalShade .modalCard textarea {
+ border:1px solid #6b5365!important; border-radius:3px!important; background:#211a24!important; color:#fff!important;
+}
+.modalShade .modalCard .btn { border:1px solid #6b5365!important; border-radius:3px!important; background:#403340!important; color:#f7edf3!important; }
+.modalShade .modalCard .btn.primary { border-color:#e86aa9!important; background:linear-gradient(110deg,#f184b9,#c84487)!important; color:#fff!important; }
+.modalShade .modalCard .btn.danger { border-color:#97506d!important; background:#4b293d!important; color:#ffdce9!important; }
+#amqSceneBgShade { background:#120d16ed!important; backdrop-filter:blur(8px)!important; }
+#amqSceneBgDialog {
+ width:min(100%,980px)!important; max-height:calc(100dvh - 32px)!important; overflow:auto!important;
+ padding:clamp(16px,2.4vw,30px)!important; border:1px solid #765267!important; border-radius:4px!important;
+ background:#28212b!important; color:#f7edf3!important; box-shadow:0 18px 60px #0009!important;
+}
+#amqSceneBgDialog h2 { color:#fff!important; }
+#amqSceneBgDialog .sceneBgIntro,#amqSceneBgDialog .sceneBgStatus { color:#cbbaca!important; }
+#amqSceneBgDialog .sceneBgField label { color:#f0bdd6!important; }
+#amqSceneBgDialog input:not([type="file"]):not([type="range"]),#amqSceneBgDialog select { border:1px solid #6b5365!important; background:#211a24!important; color:#fff!important; }
+#amqSceneBgDialog input[type="file"] { max-width:100%!important; color:#f7edf3!important; }
+#amqSceneBgDialog input[type="range"] { accent-color:#e86aa9!important; }
+#amqSceneBgDialog .sceneBgPreview { border:1px solid #574554!important; border-radius:3px!important; background:#211a24!important; color:#cbbaca!important; }
+#amqSceneBgDialog .sceneBgActions { display:flex!important; flex-wrap:wrap!important; gap:7px!important; }
+#amqSceneBgDialog .sceneBgActions .btn { border-radius:3px!important; }
+@media(max-width:680px) {
+ #amqSceneBgShade { padding:8px!important; }
+ #amqSceneBgDialog { max-height:calc(100dvh - 16px)!important; padding:12px!important; }
+ #amqSceneBgDialog .sceneBgGrid { grid-template-columns:minmax(0,1fr)!important; gap:10px!important; }
+ #amqSceneBgDialog .sceneBgActions { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+ #amqSceneBgDialog .sceneBgActions .btn { min-width:0!important; white-space:normal!important; }
+}
+
 </style>
