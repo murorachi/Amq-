@@ -347,8 +347,6 @@ body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0 0 4px!important; font-s
 body.ui-home-menu #homeMenu #amqHomePlayerSlot { min-height:0!important; max-height:54px!important; overflow:hidden!important; }
 body.ui-home-menu #homeMenu #amqHomePlayerSlot audio { height:28px!important; max-height:28px!important; }
 
-</style>
-
 /* Proto25 Stage 24: prevent the 84px profile/player row from being clipped by its padded parent. */
 body.ui-home-menu #homeMenu .amqHomeTopFrame {
   box-sizing: border-box !important;
@@ -360,3 +358,5 @@ body.ui-home-menu #homeMenu .amqHomeTopFrame {
   grid-template-rows: minmax(0, 1fr) !important;
   align-items: stretch !important;
 }
+
+</style>
