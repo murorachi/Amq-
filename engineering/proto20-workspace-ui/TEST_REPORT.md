@@ -1,0 +1,11 @@
+# TEST REPORT — Proto20
+- Native localStorage/sessionStorage/IndexedDB: PASS.
+- Reload persistence probe: PASS.
+- Seven homepage routes and return-home: PASS.
+- Home hides duplicate legacy sections: PASS.
+- Desktop/mobile no horizontal overflow: PASS.
+- Learning Center and Analysis panel content distinct: PASS.
+- Workspace visual layer appended and loaded: PASS.
+- Browser exceptions and console errors: 0 expected.
+- Audio playback, quiz-answer lifecycle, multiplayer regression: NOT RUN in this UI-only stage.
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39439657168
