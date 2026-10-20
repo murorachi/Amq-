@@ -39,7 +39,7 @@ jobs:
             s=s[:-2]
           # Add the accepted workspace shell and a real accessible settings overlay.
           s += "\\n<style id=\"amq-proto22-workspace-shell\">\\n" + Path("engineering/proto22-workspace-shell.css").read_text(encoding="utf-8") + "\\n</style>\\n"
-          s += "\\n" + Path("engineering/proto22-settings-layer.html").read_text(encoding="utf-8") + "\\n"
+          s += "\n" + Path("engineering/proto22-settings-layer.html").read_text(encoding="utf-8") + "\n"
           p.write_text(s,encoding="utf-8")
           assert "amq-osu-reference-fidelity-v22" in s
           assert "amq-proto22-workspace-shell" in s
