@@ -56,6 +56,96 @@ def apply_single_loss_protection(loss: int, chosen_protection: str | None,
     raise RuleViolation(f"unknown protection: {chosen_protection}")
 
 
+@dataclass(frozen=True)
+class LossResolution:
+    chips_after: int
+    chips_lost: int
+    protection_used: str | None
+    curse_event_id: str | None = None
+
+
+def resolve_loss(chips: int, raw_loss: int, protection: str | None,
+                 available: set[str], event_id: str,
+                 curse_capacity: bool = True) -> LossResolution:
+    """Resolve one raw loss with at most one selected protection.
+
+    The chosen effect must be committed before the result is revealed.
+    Broken Safe is modeled as an alternative protection, not a second layer.
+    Sealed Envelope is handled by its own escrow accounting, not this helper.
+    """
+    if chips < 0 or raw_loss < 0 or not event_id:
+        raise RuleViolation("invalid loss state")
+    if protection is None:
+        if chips - raw_loss <= 0 and chips > 0:
+            return LossResolution(0, chips, None)
+        return LossResolution(chips - raw_loss, raw_loss, None)
+    if protection not in available:
+        raise RuleViolation("chosen protection is not available")
+    if protection == "sealed_envelope":
+        raise RuleViolation("sealed envelope must use its escrow settlement")
+    if protection == "escape_token":
+        paid_loss = raw_loss - raw_loss // 2
+        return LossResolution(max(0, chips - paid_loss), min(chips, paid_loss), protection)
+    if protection == "fate_seal":
+        return LossResolution(chips, 0, protection)
+    if protection == "broken_safe":
+        if chips > 0 and chips - raw_loss <= 0:
+            return LossResolution(1, max(0, chips - 1), protection)
+        return LossResolution(chips - raw_loss, raw_loss, None)
+    if protection == "reverse_fate_seal":
+        if not curse_capacity:
+            raise RuleViolation("reverse fate seal requires an available curse slot")
+        return LossResolution(chips, 0, protection, f"curse:{event_id}")
+    raise RuleViolation(f"unknown protection: {protection}")
+
+
+@dataclass
+class Curse:
+    curse_id: str
+    removable: bool = True
+    active: bool = True
+
+
+class CurseLedger:
+    """Unique curse events; rewards listen to creation, never removal/replay."""
+    def __init__(self):
+        self._curses: dict[str, Curse] = {}
+        self._rewarded_runs: set[str] = set()
+
+    def add(self, curse_id: str, removable: bool = True) -> None:
+        if not curse_id:
+            raise RuleViolation("curse_id must be non-empty")
+        if curse_id in self._curses:
+            raise RuleViolation(f"duplicate curse event: {curse_id}")
+        self._curses[curse_id] = Curse(curse_id, removable, True)
+
+    def remove(self, curse_id: str) -> None:
+        curse = self._curses.get(curse_id)
+        if curse is None or not curse.active:
+            raise RuleViolation("curse is not active")
+        if not curse.removable:
+            raise RuleViolation("curse cannot be removed")
+        curse.active = False
+
+    def black_obsidian_reward(self, run_id: str, curse_id: str,
+                              choice: str) -> int:
+        if not run_id:
+            raise RuleViolation("run_id must be non-empty")
+        curse = self._curses.get(curse_id)
+        if curse is None or not curse.active:
+            raise RuleViolation("new active curse required")
+        if run_id in self._rewarded_runs:
+            raise RuleViolation("black obsidian reward already used this run")
+        if choice == "keep":
+            self._rewarded_runs.add(run_id)
+            return 40
+        if choice == "reject":
+            self.remove(curse_id)
+            self._rewarded_runs.add(run_id)
+            return 0
+        raise RuleViolation("choice must be keep or reject")
+
+
 def floor_ratio(amount: int, numerator: int, denominator: int) -> int:
     if min(amount, numerator) < 0 or denominator <= 0:
         raise RuleViolation("invalid ratio inputs")
@@ -273,6 +363,50 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(RuleViolation):
             apply_single_loss_protection(101, "sealed_envelope",
                                          {"sealed_envelope"})
+
+    def test_loss_protections_are_precommitted_and_mutually_exclusive(self):
+        result = resolve_loss(100, 100, "escape_token",
+                              {"escape_token", "fate_seal", "broken_safe"}, "loss-1")
+        self.assertEqual((result.chips_after, result.chips_lost, result.protection_used),
+                         (50, 50, "escape_token"))
+        self.assertEqual(resolve_loss(100, 100, "fate_seal",
+                                      {"fate_seal"}, "loss-2").chips_after, 100)
+        self.assertEqual(resolve_loss(40, 40, "broken_safe",
+                                      {"broken_safe"}, "loss-3").chips_after, 1)
+        with self.assertRaisesRegex(RuleViolation, "not available"):
+            resolve_loss(100, 100, "fate_seal", {"escape_token"}, "loss-4")
+        with self.assertRaisesRegex(RuleViolation, "escrow settlement"):
+            resolve_loss(100, 50, "sealed_envelope", {"sealed_envelope"}, "loss-5")
+
+    def test_reverse_fate_seal_creates_one_curse_event_without_chip_loss(self):
+        result = resolve_loss(80, 80, "reverse_fate_seal",
+                              {"reverse_fate_seal"}, "loss-6")
+        self.assertEqual((result.chips_after, result.chips_lost,
+                          result.curse_event_id), (80, 0, "curse:loss-6"))
+        with self.assertRaisesRegex(RuleViolation, "curse slot"):
+            resolve_loss(80, 80, "reverse_fate_seal",
+                         {"reverse_fate_seal"}, "loss-7", curse_capacity=False)
+
+    def test_curse_events_cannot_be_replayed_or_removed_twice(self):
+        ledger = CurseLedger()
+        ledger.add("curse-1")
+        ledger.remove("curse-1")
+        with self.assertRaisesRegex(RuleViolation, "duplicate curse event"):
+            ledger.add("curse-1")
+        with self.assertRaisesRegex(RuleViolation, "not active"):
+            ledger.remove("curse-1")
+
+    def test_black_obsidian_reward_is_once_per_run_and_requires_active_curse(self):
+        ledger = CurseLedger()
+        ledger.add("curse-1")
+        self.assertEqual(ledger.black_obsidian_reward("run-1", "curse-1", "keep"), 40)
+        with self.assertRaisesRegex(RuleViolation, "already used this run"):
+            ledger.black_obsidian_reward("run-1", "curse-1", "keep")
+        ledger.add("curse-2")
+        self.assertEqual(ledger.black_obsidian_reward("run-2", "curse-2", "reject"), 0)
+        self.assertFalse(ledger._curses["curse-2"].active)
+        with self.assertRaisesRegex(RuleViolation, "active curse required"):
+            ledger.black_obsidian_reward("run-3", "curse-2", "keep")
 
     def test_integer_rounding_and_crowbar_bonus(self):
         self.assertEqual(floor_ratio(101, 25, 100), 25)
