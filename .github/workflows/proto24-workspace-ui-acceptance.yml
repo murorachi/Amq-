@@ -180,8 +180,9 @@ jobs:
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
           - Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
-          - Homepage routes, native storage, mobile overflow, no browser exceptions/console errors: PASS if all browser assertions succeed.
-          - Workspace palette assertions: PASS if both Learning Center and Analysis checks succeed.
+          - Homepage routes, native storage, mobile overflow, and no browser exceptions/console errors: PASS only if all browser assertions succeed.
+          - Play menu Single Player / Multiplayer / Back routes: PASS only if route assertions succeed; multiplayer server connectivity is not tested.
+          - Catalog, single-player quiz, Settings panel, workspace palette, and reduced-motion assertions: PASS only if their respective browser assertions succeed.
           - Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png in the workflow artifact.
           - Actual audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
           EOF
