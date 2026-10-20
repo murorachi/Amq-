@@ -94,6 +94,6 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256 engineering/proto24-acceptance
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage03.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage03.html.sha256 engineering/proto24-acceptance
           git commit -m "Publish Proto25 stage 3 UI candidate and evidence"
           git push origin "HEAD:${TARGET_BRANCH}"
