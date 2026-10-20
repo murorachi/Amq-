@@ -78,6 +78,7 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 
 ## Verification
 - GitHub file writes and subsequent reads: PASS.
+- Archived Proto24 candidate static checks rerun in the local container: PASS (HTML parser; 219 IDs with zero duplicates; 40 executable inline JavaScript blocks pass `node --check`). These checks apply only to the archived Proto24 baseline, not the new Proto25 candidate.
 - Immutable Proto24 baseline remains present: PASS.
 - Original Proto24 browser run: PASS for its original candidate only; not transferable to Proto25.
 - Proto25 workflow execution and generated artifact: NOT VERIFIED through the available Actions interface in this session. Stage 14 source and workflow are committed remotely; candidate HTML and manifest still require independent retrieval.
