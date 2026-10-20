@@ -144,3 +144,11 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Review all 24 items for unclear timing, incompatible game types, repeated protection on one loss, currency loops, debt interactions, and effects that trigger themselves.
 - Add reproducible checks for trigger order and resource arithmetic, then paper-test at least four build directions.
 - Human playtesting is required before claiming the system is fun. Do not start production implementation in this stage.
+
+
+## Active task — close item rules and prepare deterministic checks
+- Primary audit: `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md`.
+- Preserve high-power and potentially infinite synergies unless a reproducible exploit or decision-collapse is demonstrated.
+- Next, encode deterministic cases for event identity, protection ordering, integer rounding, Vault Ladder returns, Minefield information, debt due dates, public escrow, and repeated item reward triggers.
+- Then run focused simulations for Crown, Debt Scale, layered protection, curse conversion, and multiplayer trust/resentment loops. Report outcome distributions and practical cash-out conditions rather than a single balance score.
+- Human paper playtest still required to evaluate fun. No product implementation until design gates are met.
