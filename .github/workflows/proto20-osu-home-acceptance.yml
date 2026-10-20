@@ -136,6 +136,8 @@ jobs:
             acceptance-report.json
             proto20-desktop.png
             proto20-mobile.png
+            proto20-workspace-desktop.png
+            proto20-analysis-desktop.png
           if-no-files-found: ignore
           retention-days: 14
 
@@ -148,28 +150,28 @@ jobs:
           mkdir -p dist engineering/proto20-acceptance
           cp candidate.html dist/amq_learning_tool_v82_85_31_workspace_proto20.html
           cp candidate.sha256 dist/amq_learning_tool_v82_85_31_workspace_proto20.html.sha256
-          cat > engineering/proto19-acceptance/BASELINE.md <<'EOF'
+          cat > engineering/proto20-acceptance/BASELINE.md <<'EOF'
           # BASELINE — Proto20
-          - Source baseline: Proto17, source file pinned in repository; Proto20 preserved as earlier candidate.
-          - Intermediate candidate: Proto18, retained locally and not overwritten.
+          - Source baseline: Proto17, source file pinned in repository; Proto19 retained as rollback candidate.
+          - Intermediate candidates: Proto18 and Proto19 retained and not overwritten.
           - Proto20 is a new isolated candidate; production V82.82 and read-only V82.85.30 remain unchanged.
           EOF
-          cat > engineering/proto19-acceptance/CURRENT_STATUS.md <<EOF
+          cat > engineering/proto20-acceptance/CURRENT_STATUS.md <<EOF
           # CURRENT STATUS — Proto20
           - Version: Proto20 home cascade and workspace acceptance.
           - Candidate: dist/amq_learning_tool_v82_85_31_workspace_proto20.html
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
-          - Native-origin browser acceptance: PASS, run 39458257499.
+          - Native-origin browser acceptance: PASS; see this workflow run and attached acceptance report.
           - Production release: NOT promoted; isolated engineering candidate only.
           EOF
-          cat > engineering/proto19-acceptance/NEXT_TASK.md <<'EOF'
+          cat > engineering/proto20-acceptance/NEXT_TASK.md <<'EOF'
           # NEXT TASK
           1. Verify actual audio playback, quiz-answer lifecycle, and multiplayer lifecycle regressions with their dedicated acceptance harnesses.
-          2. Compare accepted screenshots with the osu! reference and refine only if a specific discrepancy remains.
+          2. Run full audio/quiz/multiplayer regression acceptance before any production promotion.
           3. Do not promote to production until those broader regressions pass.
           EOF
-          cat > engineering/proto19-acceptance/TEST_REPORT.md <<EOF
+          cat > engineering/proto20-acceptance/TEST_REPORT.md <<EOF
           # TEST REPORT — Proto20
           - HTML structure parse and duplicate ID check: PASS (local static verification).
           - Inline executable JavaScript syntax: PASS (40 blocks; zero syntax errors).
@@ -186,7 +188,7 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_31_workspace_proto20.html dist/amq_learning_tool_v82_85_31_workspace_proto20.html.sha256 engineering/proto19-acceptance
+          git add dist/amq_learning_tool_v82_85_31_workspace_proto20.html dist/amq_learning_tool_v82_85_31_workspace_proto20.html.sha256 engineering/proto20-acceptance
           git commit -m "Publish accepted Proto20 UI candidate and test records"
           git push origin "HEAD:${TARGET_BRANCH}"
           echo "Remote candidate commit: $(git rev-parse HEAD)"
