@@ -36,9 +36,9 @@
 - GitHub file writes and remote read-back: PASS.
 - Stage 14 source checkpoint branch equality with working branch at the last comparison: PASS.
 - Original Proto24 browser acceptance: PASS for the original Proto24 artifact only.
-- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The Stage 16 workflow includes desktop/mobile screenshots for home, workspaces and Song Select plus the test report and SHA-256 manifest. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
+- Proto25 Actions run and generated HTML/SHA-256 manifest: NOT VERIFIED. The Stage 24 workflow is being repaired to trigger from the isolated validation branch and includes desktop/mobile screenshots for home, workspaces and Song Select plus the test report and SHA-256 manifest. The available GitHub integration here does not expose push-triggered Actions run listing or a run ID for artifact retrieval.
 - Local browser attempt: BLOCKED by the execution environment (`ERR_BLOCKED_BY_ADMINISTRATOR` for both local HTTP and file URLs); no local browser acceptance is claimed.
-- New candidate HTML parser/inline JS/browser assertions: NOT RUN on the actual generated Proto25 artifact.
+- New profile-card visibility/background assertion and compact-header CSS fix: committed, but NOT YET VERIFIED by a fresh browser run.
 - Real audio output, full quiz lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
 - 90% visual similarity: NOT VERIFIED. Official Wiki references have been visually inspected, and deltas are documented, but the new candidate screenshot is still missing.
 
@@ -50,3 +50,8 @@
 ## Delivery state
 - No final Proto25 single-file HTML has been accepted or promoted.
 - Do not promote until the stage workflow produces a candidate, all static/browser checks pass, screenshots are reviewed at matching viewports, and SHA-256 is verified.
+
+
+## Latest workflow repair checkpoint
+- Stage 24 workflow trigger/artifact naming correction commit: `2294f0ce073d074df5f7df1728a9ab22b577b0d9` on `v82.85.30-proto25-ui-refactor-stage-24`.
+- Next validation action: update this branch's PR head with a fresh commit so the base-branch `pull_request` workflow can run against the latest UI changes; do not treat workflow repair as acceptance.
