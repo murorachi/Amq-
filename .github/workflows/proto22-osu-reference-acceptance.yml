@@ -96,6 +96,8 @@ jobs:
           - Desktop 1440x900 and mobile 390x844 browser acceptance: PASS.
           - Native localStorage/sessionStorage/IndexedDB and reload persistence: PASS.
           - Eight homepage routes and return-home flows: PASS.
+          - Workspace sidebar/dock, distinct Learning Center and Analysis actions: PASS.
+          - Settings overlay opens visibly and closes cleanly: PASS.
           - Visible broken-image placeholders and trailing literal escape: none; PASS.
           - Browser page errors and console errors: 0.
           - Remote file/hash verification: PASS, run 39470617728.
@@ -118,7 +120,9 @@ jobs:
           - Return-home after each route: PASS.
           - Visible broken image placeholders: 0; trailing literal escape: 0.
           - Browser page errors: 0; console errors: 0.
-          - Settings button aria-expanded state toggles: PASS; visible settings panel discovery: NOT VERIFIED (0 panels matched test selectors).
+          - Workspace sidebar/dock and Learning Center/Analysis panel distinction: PASS.
+          - Settings overlay visibility and close behavior: PASS.
+          - Settings overlay: visible dialog and close behavior verified by browser test: PASS.
           - Real audio playback, quiz answer lifecycle and multiplayer room lifecycle: NOT RUN.
           - Remote published HTML bytes and SHA-256 manifest verification: PASS, run 39470617728.
           - Browser acceptance run: https://github.com/murorachi/Amq-/actions/runs/${{ github.run_id }}
@@ -139,5 +143,7 @@ jobs:
             acceptance-report.json
             proto22-desktop.png
             proto22-mobile.png
+            proto22-analysis-workspace.png
+            proto22-settings.png
           if-no-files-found: ignore
           retention-days: 14
