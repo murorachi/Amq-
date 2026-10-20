@@ -305,4 +305,34 @@ body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
   repeating-linear-gradient(135deg,#ffffff08 0 1px,transparent 1px 17px)!important;
 }
 
+
+/* Stage 21: home menu must not leak catalog controls from the underlying application view. */
+body.ui-home-menu .toolbar.view-catalog,
+body.ui-home-menu .tabs.view-catalog,
+body.ui-home-menu #quicktools,
+body.ui-home-menu #grid.view-catalog,
+body.ui-home-menu #watchlistView,
+body.ui-home-menu #quizView,
+body.ui-home-menu #multiplayerView,
+body.ui-home-menu #dashboardPanel,
+body.ui-home-menu #learningPlanPanel,
+body.ui-home-menu #overlay {
+ display:none!important;
+}
+body.ui-home-menu #homeMenu .amqHomeTopFrame {
+ height:84px!important; min-height:84px!important; max-height:84px!important;
+ grid-template-rows:minmax(0,1fr)!important; align-items:stretch!important; overflow:hidden!important;
+}
+body.ui-home-menu #homeMenu .amqProfileCard,
+body.ui-home-menu #homeMenu .amqPlayerFrame {
+ height:84px!important; min-height:0!important; max-height:84px!important; overflow:hidden!important;
+ padding:7px 10px!important;
+}
+body.ui-home-menu #homeMenu .amqProfileCard { align-items:center!important; }
+body.ui-home-menu #homeMenu .amqProfileHint { display:none!important; }
+body.ui-home-menu #homeMenu .amqProfileLine { margin-top:2px!important; }
+body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0 0 4px!important; font-size:8px!important; line-height:1.2!important; }
+body.ui-home-menu #homeMenu #amqHomePlayerSlot { min-height:0!important; max-height:54px!important; overflow:hidden!important; }
+body.ui-home-menu #homeMenu #amqHomePlayerSlot audio { height:28px!important; max-height:28px!important; }
+
 </style>
