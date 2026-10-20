@@ -1,0 +1,20 @@
+/* Proto22: osu!-inspired landing composition. Kept separate so the candidate can be rebuilt deterministically. */
+body.ui-home-menu #homeMenu { margin-top:14px!important; gap:12px!important; }
+body.ui-home-menu #homeMenu .amqHomeTopFrame { grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr)!important; gap:12px!important; }
+body.ui-home-menu #homeMenu .amqProfileCard,body.ui-home-menu #homeMenu .amqPlayerFrame { min-height:112px!important; padding:12px 16px!important; border-radius:4px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(260px,.84fr) minmax(410px,1.16fr)!important; grid-template-rows:minmax(330px,auto) auto!important; align-content:center!important; padding:clamp(22px,3vw,42px) clamp(20px,4vw,56px) 24px!important; column-gap:clamp(36px,5.5vw,78px)!important; row-gap:24px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:min(100%,clamp(220px,24vw,305px))!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingIntro { display:none!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingPrimary { grid-column:2!important; grid-row:1!important; align-self:center!important; gap:12px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction { min-height:88px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingAction strong { font-size:20px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroups { grid-column:1/-1!important; grid-row:2!important; margin-top:0!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingGroup { min-width:0!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button { min-height:64px!important; }
+@media(max-width:850px) {
+ body.ui-home-menu #homeMenu .amqHomeTopFrame { grid-template-columns:1fr!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto!important; padding:22px 16px 28px!important; row-gap:18px!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851::before { grid-column:1!important; grid-row:1!important; width:clamp(150px,42vw,220px)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingPrimary { grid-column:1!important; grid-row:2!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingGroups { grid-column:1!important; grid-row:3!important; grid-template-columns:1fr!important; }
+}
