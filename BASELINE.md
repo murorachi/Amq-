@@ -148,3 +148,10 @@ Rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper test: `re
 - Local Git blob IDs matched GitHub for both executed scripts. Python compilation passed.
 - GitHub Actions result remains unverified. These are reference-model checks, not proof of full engine correctness, fun, or balanced outcomes. Product source unchanged.
 
+### Remote execution evidence — 2026-10-20
+
+- GitHub Actions run [39347173611](https://github.com/murorachi/Amq-/actions/runs/39347173611) succeeded for commit `f44e1fb382c0b57d5d0c7fb864d0b6f0ae3f377a`.
+- The job explicitly completed both `python tools/gamble_item_rule_checker.py` and `python tools/gamble_crown_sensitivity.py` with success.
+- The checked-in script blob hashes match the locally executed copies: checker `f770d78e09d7ca807f541e42ac34eec302581615`; Crown sensitivity `8a4f9cb03190097172c94ccf9fa12b0cd2c066cd`.
+- This validates these deterministic contracts and scenario arithmetic only. It does not validate the entire game, balance, or human enjoyment.
+
