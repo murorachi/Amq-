@@ -77,7 +77,7 @@ jobs:
           set -euo pipefail
           mkdir -p dist engineering/proto24-acceptance
           cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage03.html
-          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage01.html.sha256
+          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage03.html.sha256
           # Preserve the pinned baseline and next-task records from the source branch.
           # Candidate fingerprint is recorded in the test report and manifest.
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
