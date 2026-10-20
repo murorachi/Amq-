@@ -29,7 +29,7 @@
 - Stage 12: `v82.85.30-proto25-ui-refactor-stage-12`
 - Stage 13: `v82.85.30-proto25-ui-refactor-stage-13`
 - Stage 14: `v82.85.30-proto25-ui-refactor-stage-14`
-- Latest compact-header correction: `ca70511a2978f0dbfbc422dcc9cb116f5f8b61bd`; validation PR: https://github.com/murorachi/Amq-/pull/7.
+- Latest profile presentation fix: `dd25aba28a9045969f9058feb7297e70e8179fa8`; new profile visibility assertion: `ab181077d5875edc0853b26ce8c5ed27aacfdd10`; Stage 23 publish workflow: `340b33384ed97b5c41fa8dbb029ef3588152b088`; validation PR: https://github.com/murorachi/Amq-/pull/7.
 - Stage 14 branch was fast-forwarded to the same recorded engineering checkpoint as the working branch. The original Proto24 branch was not changed.
 
 ## Verification status
