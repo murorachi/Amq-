@@ -5,4 +5,4 @@
 - Native localStorage/sessionStorage/IndexedDB and reload persistence: PASS if workflow succeeds.
 - Homepage navigation, settings layer, multiplayer route entry, console/page errors: PASS if workflow succeeds.
 - Quiz/audio real playback, answer lifecycle, multiplayer room lifecycle: NOT RUN in this UI-focused workflow.
-- Run: https://github.com/murorachi/Amq-/actions/runs/39469656340
+- Run: https://github.com/murorachi/Amq-/actions/runs/39470214100

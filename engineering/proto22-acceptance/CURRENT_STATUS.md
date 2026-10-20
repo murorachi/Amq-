@@ -1,6 +1,6 @@
 # CURRENT STATUS — Proto22
 - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto22.html
-- Bytes: 8860011
-- SHA-256: 5cf1a849358214af5674fb781d5f2ae6999026129ca93c6fb32f85e7395fac00
+- Bytes: 8860607
+- SHA-256: 2566b85c36e2bc5665977b8b14478bdddfd5245a85459d6e07f662e9d76114ea
 - Acceptance: passed current workflow checks.
 - Production promotion: not performed.
