@@ -42,7 +42,7 @@ jobs:
             const shade = document.createElement("div");
             shade.id = "amqStablePlayShade";
             shade.hidden = true;
-            shade.innerHTML = '<section id="amqStablePlayPanel" role="dialog" aria-modal="true" aria-labelledby="amqStablePlayTitle"><p id="amqStablePlayEyebrow">OSU!STABLE · PLAY</p><h2 id="amqStablePlayTitle">Play</h2><div id="amqStablePlayChoices"><button id="amqStableSinglePlayer" type="button">Single Player</button><button id="amqStableMultiplayer" type="button" disabled aria-describedby="amqStablePlayNotice">Multiplayer</button><button id="amqStablePlayClose" type="button">Back</button></div><p id="amqStablePlayNotice">Multiplayer is unavailable in this AMQ build. No inactive or simulated multiplayer flow is presented as working.</p></section>';
+            shade.innerHTML = '<section id="amqStablePlayPanel" role="dialog" aria-modal="true" aria-labelledby="amqStablePlayTitle"><p id="amqStablePlayEyebrow">OSU!STABLE · PLAY</p><h2 id="amqStablePlayTitle">Play</h2><div id="amqStablePlayChoices"><button id="amqStableSinglePlayer" type="button">Single Player</button><button id="amqStableMultiplayer" type="button">Multiplayer</button><button id="amqStablePlayClose" type="button">Back</button></div><p id="amqStablePlayNotice">Multiplayer opens the existing AMQ room setup. Server connection and room readiness are verified in that screen.</p></section>';
             document.body.appendChild(shade);
             const single = document.getElementById("amqStableSinglePlayer");
             const multi = document.getElementById("amqStableMultiplayer");
@@ -60,6 +60,11 @@ jobs:
               shade.hidden = true;
               window.__aniSetHomeMenuOpenV846?.(false);
               window.__aniNavigateApp?.("quiz");
+            });
+            multi.addEventListener("click", () => {
+              shade.hidden = true;
+              window.__aniSetHomeMenuOpenV846?.(false);
+              window.__aniNavigateApp?.("multiplayer");
             });
             back.addEventListener("click", close);
             shade.addEventListener("click", event => { if (event.target === shade) close(); });
