@@ -184,7 +184,8 @@ async def main():
         catalog_state=await page.evaluate("window.__aniGetActiveViewV82?.()||null")
         assert catalog_state=="catalog",{"active_view":catalog_state}
         assert await page.locator("#grid.view-catalog").is_visible(),"catalog grid must be visible before catalog screenshot"
-        assert await page.locator("#amqWorkspaceSidebar").is_hidden() or not await page.locator("#amqWorkspaceSidebar").is_visible(),"workspace sidebar must not cover standalone catalog"
+        catalog_shell=await page.evaluate("""()=>({bodyClass:document.body.className,sidebarDisplay:getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display,dockDisplay:getComputedStyle(document.querySelector('#amqWorkspaceDock')).display,gridDisplay:getComputedStyle(document.querySelector('#grid.view-catalog')).display,gridHidden:document.querySelector('#grid.view-catalog').hidden,homeMenuDisplay:getComputedStyle(document.querySelector('#homeMenu')).display,activeView:window.__aniGetActiveViewV82?.()})""")
+        assert not await page.locator("#amqWorkspaceSidebar").is_visible(),{"workspace sidebar must not cover standalone catalog","state":catalog_shell}
         await page.screenshot(path="proto25-catalog.png",full_page=False)
         report["checks"].append("Catalog route, visible catalog grid and standalone layout: PASS")
         await page.wait_for_function("document.querySelectorAll('#grid.view-catalog .card').length>0",timeout=20000)
