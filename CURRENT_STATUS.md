@@ -128,3 +128,9 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - The draft explicitly leaves open a key multiplayer ownership decision: per-player item inventories vs team-shared slots. It recommends no free player-to-player item trading in the first version.
 - This remains design-only. No simulation, exact enumeration, human playtest, implementation, or product regression test was run.
 - No production AMQ HTML, existing multiplayer behavior, server, UI, or database was changed.
+
+
+## Item rule audit — 2026-10-20
+- Added `reports/MULTIPLAYER_GAMBLE_ITEM_RULE_AUDIT_01.md`, reviewing all 24 candidate items and defining unresolved timing, rounding, protection, debt, escrow, and resource-loop risks.
+- Treats extreme synergies as intended design candidates unless evidence shows repeated settlement, free resource generation, reset abuse, or loss of meaningful decisions. Per-player item ownership is used as a provisional audit assumption only, not final approval.
+- Static document review completed. Deterministic checker, numeric simulation, human playtest, and product regression tests were not run. No product code changed.
