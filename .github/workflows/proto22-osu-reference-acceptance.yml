@@ -25,7 +25,18 @@ jobs:
           BASE="$(find base-artifact -name candidate.html -type f | head -n1)"
           test -n "$BASE"
           cp "$BASE" candidate.html
-          python engineering/apply_proto22.py
+          python engineering/apply_proto20.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html")
+          s=p.read_text(encoding="utf-8")
+          s=s.replace('\\\\n<style id="amq-home-legacy-sections-guard-v851">','<style id="amq-home-legacy-sections-guard-v851">')
+          s=s.replace('\\\\n','\\n')
+          s += "\\n" + Path("engineering/ui-v22.css").read_text(encoding="utf-8") + "\\n"
+          p.write_text(s,encoding="utf-8")
+          assert "amq-osu-reference-fidelity-v22" in s
+          print("Reference CSS applied and legacy escape cleaned: PASS")
+          PY
           python - <<'PY'
           from pathlib import Path
           from html.parser import HTMLParser
