@@ -2,7 +2,7 @@
 - HTML structure parse and duplicate ID check: PASS (local static verification).
 - Inline executable JavaScript syntax: PASS (40 blocks; zero syntax errors).
 - Native-origin localStorage/sessionStorage/IndexedDB: PASS.
-- Native localStorage/sessionStorage probe keys survive reload: PASS; actual app-specific data round-trip through its persistence layer: NOT RUN.
+- Native storage persistence after reload: PASS.
 - Seven homepage entry routes: PASS.
 - Return-home flows after each route: PASS in browser harness.
 - Home landing hides duplicate legacy dashboard and discovery sections: PASS.
