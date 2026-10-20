@@ -1,0 +1,29 @@
+name: Proto22 published artifact fingerprint verification
+on:
+  push:
+    branches:
+      - v82.85.30-proto22-remote-hash-verify-01
+permissions:
+  contents: read
+jobs:
+  verify-published-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout published UI candidate branch
+        uses: actions/checkout@v4
+        with:
+          ref: v82.85.30-proto22-osu-reference-fidelity-01
+      - name: Verify exact remote HTML bytes against SHA-256 manifest
+        run: |
+          set -euo pipefail
+          test -s dist/amq_learning_tool_v82_85_30_workspace_proto22.html
+          test -s dist/amq_learning_tool_v82_85_30_workspace_proto22.html.sha256
+          EXPECTED="$(awk '{print $1}' dist/amq_learning_tool_v82_85_30_workspace_proto22.html.sha256)"
+          ACTUAL="$(sha256sum dist/amq_learning_tool_v82_85_30_workspace_proto22.html | awk '{print $1}')"
+          SIZE="$(wc -c < dist/amq_learning_tool_v82_85_30_workspace_proto22.html | tr -d ' ')"
+          test "$EXPECTED" = "$ACTUAL"
+          echo "Remote file: dist/amq_learning_tool_v82_85_30_workspace_proto22.html"
+          echo "Remote bytes: $SIZE"
+          echo "Expected SHA-256: $EXPECTED"
+          echo "Actual SHA-256:   $ACTUAL"
+          echo "Remote file/hash verification: PASS"
