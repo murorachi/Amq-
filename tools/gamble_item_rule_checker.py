@@ -148,11 +148,10 @@ class DebtAccount:
         if choice == "default":
             if chips >= self.amount:
                 raise RuleViolation("default is only valid when chips are insufficient")
-            unpaid = self.amount - chips
-            chips_paid = chips
+            curse_added = self.amount > chips
             self.amount = 0
             self.active = False
-            return chips_paid, unpaid > 0, 0
+            return 0, curse_added, 0
         raise RuleViolation("unknown debt resolution choice")
 
     def end_run(self) -> None:
@@ -326,7 +325,7 @@ class ContractTests(unittest.TestCase):
 
     def test_debt_default_pays_available_chips_and_adds_one_curse(self):
         debt = DebtAccount(160, rounds_remaining=0)
-        self.assertEqual(debt.resolve_due(70, "default"), (70, True, 0))
+        self.assertEqual(debt.resolve_due(70, "default"), (0, True, 0))
         self.assertFalse(debt.active)
         with self.assertRaisesRegex(RuleViolation, "insufficient chips"):
             DebtAccount(160, rounds_remaining=0).resolve_due(70, "repay")
