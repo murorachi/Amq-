@@ -35,7 +35,7 @@
 -   if(!clickHome('learningCenter'))return;
 +    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');
     let button=null;const started=Date.now();
-    while(Date.now()-started<3500){button=[...document.querySelectorAll('[data-practice-mode="srs"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)button.click();setStatus('已開啟間隔複習模式。到期歌曲與每日新卡仍由既有排程管理。','success')}
+    while(Date.now()-started<3500){button=[...document.querySelectorAll('[data-practice-mode="srs"]')].find(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');if(button)break;await new Promise(resolve=>setTimeout(resolve,50))}
 @@ -6664,7 +6664,7 @@
  // Keep the existing homepage as the true entry point. The workspace shell appears only on relevant work views.
  const workspaceViews=new Set(['catalog','vnCatalog','watchlist','vnList','customLists','explore','practice','learningPlan','dashboard']);
