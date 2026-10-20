@@ -1,4 +1,4 @@
-name: Proto25 stage 10 osu Stable home geometry acceptance
+name: Proto25 stage 11 Song Select acceptance
 on:
   push:
     branches:
@@ -151,7 +151,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto25-stage10-ui-acceptance
+          name: proto25-stage11-ui-acceptance
           path: |
             candidate.html
             candidate.sha256
@@ -165,18 +165,18 @@ jobs:
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-10
+          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-11
         run: |
           set -euo pipefail
           mkdir -p dist engineering/proto24-acceptance
-          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage10.html
-          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage10.html.sha256
+          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage11.html
+          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage11.html.sha256
           # Preserve the pinned baseline and next-task records from the source branch.
           # Candidate fingerprint is recorded in the test report and manifest.
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
-          # TEST REPORT — Proto25 Stage 10
+          # TEST REPORT — Proto25 Stage 11
           - Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage10.html
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage11.html
           - Size: $(stat -c %s candidate.html) bytes
           - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
           - Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
@@ -188,6 +188,6 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage10.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage10.html.sha256 engineering/proto24-acceptance
-          git commit -m "Publish Proto25 stage 10 UI candidate and evidence"
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage11.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage11.html.sha256 engineering/proto24-acceptance
+          git commit -m "Publish Proto25 stage 11 UI candidate and evidence"
           git push origin "HEAD:${TARGET_BRANCH}"
