@@ -1,34 +1,29 @@
-# BASELINE — Proto24
+# BASELINE — Proto25 UI Refactor
 
-- Pinned source: Proto17 at `4fc4a099389b59850c46d3eab2332be3401d487a` (`amq_learning_tool_v82_85_30_workspace_proto17.html`).
-- Proto22 retained as a separate prior candidate.
-- Production V82.82 and read-only V82.85.30 are unchanged.
-- Accepted UI candidate branch: `v82.85.30-proto24-accepted-delivery-02`.
-- Accepted candidate commit at audit start: `39d250cf5a269a0e2bf8f514474584bcc864f599`.
-- Candidate file: `dist/amq_learning_tool_v82_85_30_workspace_proto24.html`.
-- Candidate size: 8,850,993 bytes.
-- Candidate SHA-256: `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
-- Stable UI reference audit: `engineering/proto24-acceptance/OSU_STABLE_REFERENCE_AUDIT.md`.
-- Official Stable release label verified on 2026-10-21: `20260924.1`.
-- Official osu!-wiki UI evidence pinned at commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`; exact osu!stable client source commit remains BLOCKED and must not be replaced with osu!lazer source.
-- No application HTML/CSS/JS was changed during the reference audit.
+## Immutable accepted Proto24 baseline
+- Branch: `v82.85.30-proto24-accepted-delivery-02`
+- Commit at audit start: `39d250cf5a269a0e2bf8f514474584bcc864f599`
+- File: `dist/amq_learning_tool_v82_85_30_workspace_proto24.html`
+- Size: 8,850,993 bytes
+- SHA-256: `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`
+- Original Proto17 source commit: `4fc4a099389b59850c46d3eab2332be3401d487a`
+- Production V82.82 and read-only V82.85.30 remain unchanged.
 
-## Proto25 refactor checkpoint (2026-10-21)
+## osu!Stable reference
+- Stable release label checked on 2026-10-21: `20260924.1`.
+- Pinned official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
+- Main menu screenshot blob: `f6617a0da2058f79d9bdf11191326df8e74ecba1`.
+- Play menu screenshot blob: `a4413f514a4aec91ee3c45995ee500cff882de3f`.
+- Song Select screenshot blob: `1e927a00a1984a5ba20fa5efec639410f349607a`.
+- Options screenshot blob: `05d5917ccc53c67e70415f7a88d084c711f9b9cc`.
+- Exact Stable client source commit and screenshot capture build remain unknown. Use the user-authorized official Wiki screenshots as the visual fallback; do not substitute osu!lazer source.
 
-- Active working branch: `v82.85.30-proto25-ui-refactor-work-01`.
-- Current recorded checkpoint: `866b6855aa81f502b20f8f198b736c6b3dc2c144`.
-- Stage-02 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-02`.
-- Stage-03 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-03`.
-- Stage-04 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-04`.
-- Stage-05 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-05`.
-- Stage-06 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-06`.
-- Stage-07 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-07`.
-- Stage-08 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-08`.
-- Stage-09 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-09`.
-- Stage-10 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-10`.
-- Stage-11 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-11`.
-- Stage-12 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-12`.
-- Stage-13 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-13`.
-- Stage-14 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-14`.
-- Original Proto24 baseline above remains immutable; the stage-02 branch is an implementation checkpoint, not an accepted final delivery.
-- Rollback: return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`; do not reset or force-push the original baseline.
+## Current implementation checkpoint
+- Working branch: `v82.85.30-proto25-ui-refactor-work-01`.
+- Stage 14 branch: `v82.85.30-proto25-ui-refactor-stage-14`.
+- Last confirmed common engineering checkpoint: `b1c6bea9be37e231e31c5aa1d4f8c48dea0d3b55` (current status update follows the prior stage checkpoint; this file is updated in the same working branch).
+- Candidate HTML and SHA-256 manifest for Proto25 Stage 14: NOT VERIFIED as generated artifacts.
+- Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
+
+## Rollback
+Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Never force-push or overwrite that branch. Proto25 work remains isolated and has not been promoted to production.
