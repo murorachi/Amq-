@@ -9,6 +9,7 @@ body.ui-home-menu #homeMenu .amqHomeLandingIntro,body.ui-home-menu #homeMenu .am
 body.ui-home-menu #homeMenu .amqHomeLandingIntro{grid-area:intro!important}body.ui-home-menu #homeMenu .amqHomeLandingPrimary{grid-area:primary!important}
 body.ui-home-menu #homeMenu .amqHomeLandingGroups{grid-area:groups!important}
 @media(max-width:1000px){body.ui-home-menu #homeMenu>.amqHomeTopFrame{grid-template-columns:1fr!important}body.ui-home-menu #homeMenu .amqPlayerFrame{min-width:0!important}}
+body.ui-home-menu #homeMenu .amqPlayerFrame img,body.ui-home-menu #homeMenu .amqHomeDock img{display:none!important}
 </style>
 <style id="amq-osu-reference-fidelity-v22">
 :root{--osu-bg:#17151c;--osu-purple:#7650b8;--osu-pink:#ed82b5;--osu-text:#f8f2fa;--osu-muted:#b7aaba}
