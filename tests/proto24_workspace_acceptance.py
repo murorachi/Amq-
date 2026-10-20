@@ -46,9 +46,13 @@ async def main():
                 assert await shade.is_visible(),"Play action must open Stable-style Play menu"
                 assert await page.locator("#amqStableSinglePlayer").inner_text()=="Single Player"
                 assert not await page.locator("#amqStableMultiplayer").is_disabled(),"Multiplayer must remain available through the existing AMQ route"
+                assert await page.locator("#amqStableMultiplayer").inner_text()=="Multiplayer"
+                play_desktop=await page.evaluate("({columns:getComputedStyle(document.querySelector('#amqStablePlayPanel')).gridTemplateColumns,height:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().height})")
+                assert len(play_desktop["columns"].split())==2,play_desktop
+                report["play_menu_desktop"]=play_desktop
                 await page.set_viewport_size({"width":390,"height":844});await page.wait_for_timeout(120)
-                play_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,shade:document.querySelector('#amqStablePlayShade').getBoundingClientRect().width,panel:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().width})")
-                assert play_mobile["document"]<=play_mobile["viewport"] and play_mobile["panel"]<=play_mobile["viewport"],play_mobile
+                play_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,shade:document.querySelector('#amqStablePlayShade').getBoundingClientRect().width,panel:document.querySelector('#amqStablePlayPanel').getBoundingClientRect().width,columns:getComputedStyle(document.querySelector('#amqStablePlayPanel')).gridTemplateColumns})")
+                assert play_mobile["document"]<=play_mobile["viewport"] and play_mobile["panel"]<=play_mobile["viewport"] and len(play_mobile["columns"].split())==1,play_mobile
                 report["play_menu_mobile"]=play_mobile
                 await page.locator("#amqStablePlayClose").click(timeout=5000)
                 assert not await shade.is_visible(),"Back must close the Play menu"
