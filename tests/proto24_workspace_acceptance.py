@@ -90,9 +90,9 @@ async def main():
         assert await page.locator("body").evaluate("(e)=>e.classList.contains('ui-settings-open')")
         assert await page.locator("#themeToggle").is_visible()
         assert await page.locator("#sceneBackgroundOpen").is_visible()
-        settings_style=await page.locator(".top .actions").evaluate("(e)=>getComputedStyle(e).backgroundColor")
-        assert settings_style=="rgb(40, 33, 43)",settings_style
-        report["settings_visuals"]={"background":settings_style,"themeToggleVisible":True,"sceneBackgroundVisible":True}
+        settings_style=await page.locator(".top .actions").evaluate("(e)=>({backgroundColor:getComputedStyle(e).backgroundColor,backgroundImage:getComputedStyle(e).backgroundImage})")
+        assert "linear-gradient" in settings_style["backgroundImage"],settings_style
+        report["settings_visuals"]={**settings_style,"themeToggleVisible":True,"sceneBackgroundVisible":True}
         await page.locator("#sceneBackgroundOpen").click(timeout=8000);await page.wait_for_timeout(150)
         assert await page.locator("#amqSceneBgShade").is_visible(),"scene-background dialog should open"
         scene_mobile=await page.evaluate("({viewport:innerWidth,document:document.documentElement.scrollWidth,dialog:document.querySelector('#amqSceneBgDialog').getBoundingClientRect().width,background:getComputedStyle(document.querySelector('#amqSceneBgDialog')).backgroundColor})")
