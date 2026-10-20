@@ -204,4 +204,29 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  .tabs.view-catalog .tab { flex-basis:calc(50% - 4px)!important; }
 }
 
+
+/* Quiz / single-player surface: retain all answer, timer and audio behavior. */
+#quizView {
+ border:1px solid #574554!important; border-radius:4px!important; background:#302632!important;
+ color:#f7edf3!important; box-shadow:0 3px 0 #1b151e!important;
+}
+#quizView .quizTop { border-bottom:1px solid #574554!important; }
+#quizView .quizTop h2,#quizView h2,#quizView h3 { color:#fff!important; }
+#quizView .quizTop p,#quizView .quizMeta,#quizView .quizHint { color:#cbbaca!important; }
+#quizView .quizSongInfo,#quizView .quizSuggestion,#quizView .quizInfoClickableV8239 {
+ border:1px solid #574554!important; border-radius:3px!important; background:#352c39!important; color:#f7edf3!important;
+}
+#quizView input,#quizView select,#quizView textarea {
+ border:1px solid #6b5365!important; border-radius:3px!important; background:#211a24!important; color:#fff!important;
+}
+#quizView input:focus-visible,#quizView select:focus-visible,#quizView textarea:focus-visible {
+ outline:2px solid #ff8fc7!important; outline-offset:2px!important; border-color:#ff8fc7!important;
+}
+#quizView button:not(.primary) { border:1px solid #6b5365!important; border-radius:3px!important; background:#403340!important; color:#f7edf3!important; }
+#quizView button.primary,#quizView #quizSubmit,#quizView .quizAnswerRowV42 button[type="submit"] {
+ border-color:#e86aa9!important; border-radius:3px!important; background:linear-gradient(110deg,#f184b9,#c84487)!important; color:#fff!important;
+}
+#quizView .quizAnswerRowV42 { gap:8px!important; }
+#quizView .quizSuggestions { border:1px solid #574554!important; border-radius:3px!important; background:#211a24!important; }
+
 </style>
