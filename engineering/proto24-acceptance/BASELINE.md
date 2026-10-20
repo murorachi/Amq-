@@ -28,8 +28,9 @@
 - Stage 19 branch: `v82.85.30-proto25-ui-refactor-stage-19`.
 - Stage 20 branch: `v82.85.30-proto25-ui-refactor-stage-20`.
 - Stage 21 branch: `v82.85.30-proto25-ui-refactor-stage-21`.
+- Stage 22 source commit: `e695b80c8aca4ca4e8c8a5337f422de0a4384eb0`.
 - Last confirmed common source checkpoint: `12a999b6e23db26c95504d6abe7be9ba5b81a1f8`; stage-16 and working branches were fast-forwarded to this commit. Documentation updates follow that source checkpoint.
-- Stage 16–21 candidate HTML and SHA-256 manifest: static checks pass on the latest PR candidate; the sixth browser run is in progress after home/catalog and screenshot fixes.
+- Stage 16–22 candidate HTML and SHA-256 manifest: static checks passed on run `39492892899`, but browser acceptance failed at home geometry. Selector fixes are committed; validation PR #7 is open and the new browser result is NOT YET VERIFIED.
 - Do not treat a source checkpoint branch as proof that a built HTML candidate passed acceptance.
 
 ## Rollback
