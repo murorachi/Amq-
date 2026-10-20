@@ -82,6 +82,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added a browser assertion for the room view's computed palette; server connectivity and the full multiplayer lifecycle remain explicitly NOT RUN.
 - Stage 16 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-16`.
 
+## Stage 17: CI failure repair
+- First isolated PR run `39491278737`: static step failed because the checker required the doctype to be the first non-whitespace token; the candidate begins with a valid HTML comment. Fixed the assertion to require a doctype anywhere in the parsed source.
+- Second run `39491513713`: static checks passed; browser acceptance failed because the test tried to click hidden `#uiBackHome` after entering Multiplayer. The existing Multiplayer screen provides `#mpBackHome`; the test now uses that actual control.
+- Third run is in progress; results are not yet known.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
