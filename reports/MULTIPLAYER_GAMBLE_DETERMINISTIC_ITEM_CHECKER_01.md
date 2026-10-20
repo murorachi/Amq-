@@ -48,6 +48,16 @@ The workflow runs `python tools/gamble_item_rule_checker.py` and `python tools/g
 - Product regression tests: not run; no product code was changed.
 - Human paper playtest: not run.
 
+## Protection and curse-conversion contract expansion — 2026-10-20
+
+- Expanded `tools/gamble_item_rule_checker.py` to **19 unittest methods**.
+- New loss contracts cover precommitted mutually exclusive protection selection, Escape Token loss rounding, Fate Seal cancellation, Broken Safe's one-chip floor when selected as the sole protection, Reverse-Fate Seal conversion into a unique curse event, and rejection of Sealed Envelope by the generic protection path so it must use separate escrow accounting.
+- New curse contracts cover unique curse-event identity, removal only once, Curse Wax's 20-chip cost and removable-curse restriction, Black Obsidian's once-per-run choice, and binding its reward to a curse created in that same run. This prevents carrying one active curse event into another run to claim the same reward again.
+- A logic review caught and corrected an arithmetic edge case: ordinary loss settlement now caps the actual chip loss at the player's available chips rather than returning a negative chip balance.
+- GitHub Actions **PASS**: [run 39347703666](https://github.com/murorachi/Amq-/actions/runs/39347703666), commit `9978fd98b96de5da7452aa661a890035d3d86ff2`. The deterministic contract and Crown sensitivity steps both succeeded.
+- Design boundary: treating Broken Safe as an alternative rather than a second simultaneous protection is an explicit provisional contract to prevent double protection. It must be confirmed against the eventual approved paper rules; it is not a balance nerf decision.
+- Product regression tests and human paper playtest remain unperformed. No product code changed.
+
 ## Next step
 
-Next add the canonical multi-protection sequence and explicit curse-conversion contracts, then model Debt Scale/Heavy Interest only after their stacking and due-date semantics are closed. Follow with focused trust/resentment-loop enumeration. Keep numeric sensitivity models separate from deterministic rule contracts; do not infer fun from either.
+Next enumerate Trust Badge and Traitor's Mark outcomes across 2/3/6 players under coordinated and mixed choices, recording player-to-player transfers separately from system-created chips. Then formalize Debt Scale/Heavy Interest only after exact stacking and due-date semantics are approved. Keep simulation findings separate from deterministic contracts and human fun evaluation.
