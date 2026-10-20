@@ -104,12 +104,12 @@ class Escrow:
     def resolve(self, condition_met: bool, source: str | None = None) -> int:
         if self.released:
             raise RuleViolation("escrow already resolved")
+        if condition_met and self.bonus and not source:
+            raise RuleViolation("bonus funding source must be explicit")
         self.released = True
         if not condition_met:
             return self.principal
         if self.bonus:
-            if not source:
-                raise RuleViolation("bonus funding source must be explicit")
             self.source = source
         return self.principal + self.bonus
 
@@ -195,12 +195,12 @@ class ContractTests(unittest.TestCase):
         success = Escrow("p1", 100, 50)
         with self.assertRaisesRegex(RuleViolation, "funding source"):
             success.resolve(True)
-        # A failed resolution is final; it cannot be replayed to claim the bonus.
+        # Invalid funding metadata must not consume the escrow state.
+        self.assertFalse(success.released)
+        self.assertEqual(success.resolve(True, "declared_system_budget"), 150)
+        self.assertEqual(success.source, "declared_system_budget")
         with self.assertRaisesRegex(RuleViolation, "already resolved"):
-            success.resolve(True, "system_budget")
-        funded = Escrow("p1", 100, 50)
-        self.assertEqual(funded.resolve(True, "declared_system_budget"), 150)
-        self.assertEqual(funded.source, "declared_system_budget")
+            success.resolve(True, "duplicate_claim")
 
     def test_reward_reroll_replaces_options_not_reward_event(self):
         reward = RewardEvent("reward-1")
