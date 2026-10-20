@@ -14,3 +14,5 @@ Rerun: test Settings background-image gradient rather than expecting a solid bac
 Rerun: assert dark catalog palette and grid layout rather than a single computed background token.
 
 Rerun after hiding underlying catalog controls on the home menu, compacting the top strip, and switching Song Select evidence to viewport capture.
+
+Retry after strengthening the home catalog hide selectors and correcting the actual profile-card ID selectors; previous run 39492892899 failed these geometry assertions.
