@@ -323,8 +323,9 @@ body.ui-home-menu #homeMenu .amqHomeTopFrame {
  height:84px!important; min-height:84px!important; max-height:84px!important;
  grid-template-rows:minmax(0,1fr)!important; align-items:stretch!important; overflow:hidden!important;
 }
-body.ui-home-menu #homeMenu .amqProfileCard,
+body.ui-home-menu #homeMenu #amqProfileCard,
 body.ui-home-menu #homeMenu .amqPlayerFrame {
+ box-sizing:border-box!important;
  height:84px!important; min-height:0!important; max-height:84px!important; overflow:hidden!important;
  padding:7px 10px!important;
 }
