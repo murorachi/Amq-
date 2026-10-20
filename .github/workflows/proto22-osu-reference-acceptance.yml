@@ -32,6 +32,7 @@ jobs:
           s=p.read_text(encoding="utf-8")
           # ui-v22.css is already appended by apply_proto20.py; remove only the stray literal escape.
           s=s.replace('\\\\n<style id="amq-home-legacy-sections-guard-v851">','<style id="amq-home-legacy-sections-guard-v851">')
+          s=s.replace('</style>\\\\n','</style>')
           if s.endswith("\\\\n"):
             s=s[:-3]
           elif s.endswith("\\n"):
