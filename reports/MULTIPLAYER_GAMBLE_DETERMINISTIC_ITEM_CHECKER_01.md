@@ -44,7 +44,7 @@ The workflow runs `python tools/gamble_item_rule_checker.py` and `python tools/g
 - Python bytecode compilation: passed for both scripts.
 - Sensitivity sweep: 18 combinations (wagers 10/25/50/60/75/100; assumed item costs 0/50/100). Three +60 triggers at wager 50 and cost 0 yield +30 chips before other effects; cost 50 yields -20. Wager 60 and cost 0 yields 0. These are conditional arithmetic results, not proof of a practical game exploit: item cost, minimum wager, trigger eligibility, and wager-cap value are not finalized.
 - Static review: workflow includes both scripts and path filters include both scripts.
-- Remote GitHub Actions result: **not verified**; no confirmed remote run result was available in this step.
+- Remote GitHub Actions: **PASS**, [run 39347173611](https://github.com/murorachi/Amq-/actions/runs/39347173611), commit `f44e1fb382c0b57d5d0c7fb864d0b6f0ae3f377a`. The job completed both the deterministic contract step and the Crown sensitivity step successfully.
 - Product regression tests: not run; no product code was changed.
 - Human paper playtest: not run.
 
