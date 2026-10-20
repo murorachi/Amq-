@@ -64,6 +64,16 @@ async def main():
         assert multiplayer_state=="multiplayer",{"active_view":multiplayer_state}
         report["checks"].append("Play menu Multiplayer route to existing room setup: PASS (server connectivity not tested)")
         await page.locator("#uiBackHome").click(timeout=8000);await page.wait_for_timeout(150)
+        # Settings panel opens the existing real controls without hiding or replacing them.
+        await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
+        assert await page.locator("body").evaluate("(e)=>e.classList.contains('ui-settings-open')")
+        assert await page.locator("#themeToggle").is_visible()
+        assert await page.locator("#sceneBackgroundOpen").is_visible()
+        settings_style=await page.locator(".top .actions").evaluate("(e)=>getComputedStyle(e).backgroundColor")
+        assert settings_style=="rgb(40, 33, 43)",settings_style
+        report["settings_visuals"]={"background":settings_style,"themeToggleVisible":True,"sceneBackgroundVisible":True}
+        report["checks"].append("Home settings panel and existing controls: PASS")
+        await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         await page.evaluate("localStorage.setItem('proto24reload','ok')")
         await page.reload(wait_until="domcontentloaded",timeout=45000)
         assert await page.evaluate("localStorage.getItem('proto24reload')")=="ok"
