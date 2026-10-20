@@ -1,0 +1,41 @@
+/* Proto20: cohesive osu!-inspired four-workspace shell, desktop and mobile. */
+:root{--ws-bg:#17141f;--ws-panel:#211b2b;--ws-line:#40344f;--ws-text:#f7f1ff;--ws-muted:#c1b5d1;--ws-pink:#e78bc5;--ws-orange:#b99aff;--ws-blue:#9b8aff;--amq-workspace-accent:#8a68dd;--amq-workspace-accent-strong:#6848b4}
+body.amq-workspace-prototype.amq-workspace-active{padding-left:286px!important;padding-bottom:84px!important;box-sizing:border-box}
+body.amq-workspace-active #amqWorkspaceSidebar{display:block!important;position:fixed;z-index:10000;left:0;top:0;bottom:82px;width:266px;box-sizing:border-box;padding:22px 17px 18px;background:linear-gradient(180deg,#21192e,#18151f);color:var(--ws-text);border-right:1px solid #49375f;font:13px/1.5 system-ui,"Noto Sans TC",sans-serif;overflow:auto;box-shadow:8px 0 28px #120d1d26;scrollbar-color:#685184 transparent}
+#amqWorkspaceSidebar .wsBrand{font-size:10px;letter-spacing:.16em;color:#bba2ef;font-weight:900;margin:0 0 18px;padding-bottom:15px;border-bottom:1px solid #443451}
+#amqWorkspaceSidebar #wsReturnHome{display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;margin:0 0 22px;border:1px solid #59456f;border-radius:8px;background:#2c223a;color:#f6edff;font-weight:750;transition:background .15s,border-color .15s}
+#amqWorkspaceSidebar #wsReturnHome:hover{background:#39294e;border-color:#a78be8}
+#amqWorkspaceSidebar .wsTitle{font-size:24px;letter-spacing:-.035em;line-height:1.2;font-weight:900;margin:0 0 8px;color:#fff}
+#amqWorkspaceSidebar .wsDesc{font-size:12px;color:#c5b8d4;margin:0 0 22px;line-height:1.75}
+#amqWorkspaceSidebar .wsActionFilter{padding:12px;margin:0 0 16px;border:1px solid #41334f;border-radius:10px;background:#1b1725}
+#amqWorkspaceSidebar .wsActionFilter label{display:block;font-size:11px;font-weight:800;color:#dfd0f4;margin-bottom:7px}
+#amqWorkspaceSidebar #wsActionSearch{display:block;width:100%;min-width:0;box-sizing:border-box;padding:10px 11px;border:1px solid #554367;border-radius:7px;background:#120f19;color:#fff;outline:none}
+#amqWorkspaceSidebar #wsActionSearch:focus{border-color:#b99aff;box-shadow:0 0 0 3px #8a68dd33}
+#amqWorkspaceSidebar #wsActionCount{margin:7px 0 0;color:#a99ab9;font-size:10px}
+#amqWorkspaceSidebar .wsSection{font-size:10px;letter-spacing:.14em;color:#c2a7f7;font-weight:900;margin:21px 4px 8px;text-transform:uppercase}
+#amqWorkspaceSidebar .wsAction{position:relative;display:flex;align-items:center;gap:9px;width:100%;text-align:left;box-sizing:border-box;padding:11px 12px;margin:5px 0;border:1px solid transparent;border-radius:8px;background:#292232;color:#f1eaf8;font:inherit;font-weight:650;cursor:pointer;transition:background .14s,border-color .14s,transform .14s}
+#amqWorkspaceSidebar .wsAction:before{content:"›";color:#bd9cf8;font-size:18px;line-height:1;font-weight:800}
+#amqWorkspaceSidebar .wsAction:hover,#amqWorkspaceSidebar .wsAction:focus-visible{border-color:#8c6bc5;outline:none;background:#38284b;transform:translateX(2px)}
+#amqWorkspaceSidebar #wsBatchListAdder,#amqWorkspaceSidebar #wsBatchScope{padding:13px!important;border:1px solid #57446c!important;border-radius:10px!important;background:#1d1728!important}
+#amqWorkspaceSidebar #wsBatchListAdder label,#amqWorkspaceSidebar #wsBatchScope strong{color:#e1caff!important;font-weight:850}
+#amqWorkspaceSidebar #wsBatchListTarget{min-height:40px;border-color:#59456f!important;border-radius:7px!important;background:#130f1b!important;color:#fff!important}
+#amqWorkspaceSidebar #wsBatchListAdder .wsAction{min-height:40px;justify-content:flex-start}
+#amqWorkspaceSidebar #wsBatchListAdd{border-color:#8b68ce!important;background:#3a2852!important}
+#amqWorkspaceSidebar #wsBatchListRemove{border-color:#8e526c!important;background:#3b202f!important}
+#amqWorkspaceSidebar #wsStatus{font-size:11px;line-height:1.65;color:#ddd1ea;background:#1a1523;border:1px solid #493752;border-radius:9px;padding:11px 12px;margin:16px 0;min-height:38px}
+#amqWorkspaceSidebar #wsStatus[data-state="error"]{color:#ffd7e2;border-color:#b65b7b;background:#321d2b}
+#amqWorkspaceSidebar #wsStatus[data-state="success"]{color:#d6ffe4;border-color:#4e9878;background:#1b3029}
+#amqWorkspaceSidebar .wsFoot{font-size:10px;line-height:1.75;color:#b2a4c1;border-top:1px solid #443451;padding-top:14px;margin-top:22px}
+#amqWorkspaceDock{position:fixed;z-index:10001;left:0;right:0;bottom:0;height:82px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(170px,.82fr);gap:8px;box-sizing:border-box;padding:10px 14px;background:#17121fef;border-top:1px solid #453454;backdrop-filter:blur(16px);color:var(--ws-text);font:12px system-ui,"Noto Sans TC",sans-serif;box-shadow:0 -10px 30px #100a1b24}
+#amqWorkspaceDock button{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;padding:8px 14px;border:1px solid #453653;border-radius:9px;background:#241c2e;color:#d9cce8;cursor:pointer;font:inherit;font-weight:800;transition:background .15s,border-color .15s,transform .15s}
+#amqWorkspaceDock button:hover{background:#342544;border-color:#79609e;transform:translateY(-1px)}
+#amqWorkspaceDock button .wsNum{display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;border:1px solid #67517f;border-radius:50%;font-size:12px;font-weight:900;color:#c8b0f5}
+#amqWorkspaceDock button[aria-pressed="true"]{background:#4f3679;border-color:#a88be7;color:#fff;box-shadow:inset 0 -3px #c2a6ff}
+#amqWorkspaceDock button[aria-pressed="true"] .wsNum{background:#a98ae9;border-color:#d8c8ff;color:#21142f}
+#amqWorkspaceDock button.wsStart{border-color:#e3c6ff;background:#a98ae9;color:#21142f;font-size:14px;letter-spacing:.01em}
+#amqWorkspaceDock button.wsStart:hover{background:#c0a7f6;border-color:#fff}
+body.amq-workspace-active .wrap{max-width:1600px;padding-left:clamp(20px,2.2vw,36px);padding-right:clamp(20px,2.2vw,36px)}
+body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home{display:none!important}
+@media(max-width:1000px){body.amq-workspace-prototype.amq-workspace-active{padding-left:0!important;padding-bottom:82px!important}body.amq-workspace-active #amqWorkspaceSidebar{left:12px;right:12px;top:auto;bottom:94px;width:auto;height:auto;max-height:min(44vh,390px);padding:15px;border:1px solid #5a466e;border-radius:14px;box-shadow:0 14px 42px #100a1c55}#amqWorkspaceSidebar .wsBrand{margin-bottom:10px;padding-bottom:9px}#amqWorkspaceSidebar #wsReturnHome{margin-bottom:13px}#amqWorkspaceSidebar .wsTitle{font-size:20px}#amqWorkspaceSidebar .wsDesc{margin-bottom:12px}#amqWorkspaceSidebar .wsActionFilter{padding:9px;margin-bottom:10px}#amqWorkspaceSidebar .wsSection{margin-top:13px}#amqWorkspaceDock{height:82px;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px;gap:5px}#amqWorkspaceDock button{flex-direction:column;gap:3px;padding:5px 2px;font-size:10px}#amqWorkspaceDock button .wsNum{width:24px;height:24px;flex-basis:24px;font-size:11px}#amqWorkspaceDock button.wsStart{display:none}}
+@media(max-width:480px){body.amq-workspace-active #amqWorkspaceSidebar{left:8px;right:8px;bottom:88px;max-height:46vh;padding:12px}#amqWorkspaceSidebar .wsTitle{font-size:18px}#amqWorkspaceSidebar .wsAction{padding:9px 10px;font-size:12px}#amqWorkspaceDock{height:76px;grid-template-columns:repeat(4,minmax(0,1fr));padding:6px 5px;gap:4px}#amqWorkspaceDock button{font-size:9px}#amqWorkspaceDock button .wsNum{width:22px;height:22px;flex-basis:22px}body.amq-workspace-prototype.amq-workspace-active{padding-bottom:76px!important}}
+@media(prefers-reduced-motion:reduce){#amqWorkspaceSidebar .wsAction,#amqWorkspaceDock button{transition:none!important;transform:none!important}}
