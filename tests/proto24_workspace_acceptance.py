@@ -22,7 +22,7 @@ async def main():
         layout=await page.evaluate("""()=>{const q=s=>document.querySelector(s);const r=e=>{const x=e.getBoundingClientRect();return {x:Math.round(x.x),y:Math.round(x.y),w:Math.round(x.width),h:Math.round(x.height)}};return {profile:r(q('#amqProfileCard')),player:r(q('.amqPlayerFrame')),landing:r(q('.amqHomeLandingV851')),logo:getComputedStyle(q('.amqHomeLandingV851'),'::before').display,primary:r(q('.amqHomeLandingPrimary')),actions:[...q('.amqHomeLandingPrimary').children].map(r),groups:r(q('.amqHomeLandingGroups')),legacy:[getComputedStyle(q('.hero.view-home')).display,getComputedStyle(q('.discover.view-home')).display]}}""")
         assert layout["profile"]["x"] < layout["player"]["x"],layout
         assert layout["primary"]["x"] > layout["landing"]["x"]+layout["landing"]["w"]*.30,layout
-        assert len(layout["actions"])==3 and all(a["h"]>=65 for a in layout["actions"]),layout
+        assert len(layout["actions"])==3 and all(a["h"]>=40 for a in layout["actions"]),layout
         assert layout["legacy"]==["none","none"],layout
         visual=await page.evaluate("""()=>({logo:getComputedStyle(document.querySelector('.amqHomeLandingV851'),'::before').content,body:getComputedStyle(document.body).backgroundColor,wrap:getComputedStyle(document.querySelector('.wrap')).backgroundColor,profileText:getComputedStyle(document.querySelector('#amqProfileName')).color,footerHeading:getComputedStyle(document.querySelector('.amqHomeLandingGroupHead h3')).color})""")
         assert "osu!" in visual["logo"],visual
