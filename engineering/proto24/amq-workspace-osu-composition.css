@@ -47,4 +47,45 @@ body.amq-workspace-prototype.amq-workspace-active { padding-left:260px!important
  #amqWorkspaceDock { height:68px!important; }
  #amqWorkspaceDock button { font-size:9px!important; }
 }
+
+/* Proto25 stage 2: align workspace surfaces with the Stable-inspired shell without changing handlers. */
+:root {
+ --ws-purple:#df5a9b; --ws-purple-hi:#f184b9; --ws-purple-line:#8e3b68;
+ --ws-bg:#28212b; --ws-panel:#352c39; --ws-line:#574554; --ws-text:#f7edf3;
+ --ws-muted:#cbbaca; --ws-pink:#ff8fc7;
+}
+body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important; color:#f7edf3!important; }
+#amqWorkspaceSidebar {
+ background:linear-gradient(180deg,#352c39 0%,#28212b 100%)!important;
+ border-right:1px solid #574554!important; box-shadow:5px 0 20px #120d1438!important;
+}
+#amqWorkspaceSidebar .wsBrand { color:#ff8fc7!important; }
+#amqWorkspaceSidebar #wsReturnHome { border-color:#6b5365!important; background:#403340!important; }
+#amqWorkspaceSidebar #wsReturnHome:hover { background:#503b4c!important; border-color:#ff8fc7!important; }
+#amqWorkspaceSidebar .wsTitle::after { background:linear-gradient(90deg,#ff8fc7,#c84487)!important; }
+#amqWorkspaceSidebar .wsDesc { color:#d0c0cd!important; }
+#amqWorkspaceSidebar .wsActionFilter { border-color:#574554!important; background:#2e2531!important; }
+#amqWorkspaceSidebar .wsActionFilter label { color:#f0a6cc!important; }
+#amqWorkspaceSidebar #wsActionSearch { border-color:#6b5365!important; background:#211a24!important; }
+#amqWorkspaceSidebar #wsActionSearch:focus { border-color:#ff8fc7!important; box-shadow:0 0 0 2px #e86aa933!important; }
+#amqWorkspaceSidebar #wsActionCount { color:#c5b1c1!important; }
+#wsActions .wsSection { border-bottom-color:#574554!important; color:#f0a6cc!important; }
+#wsActions .wsAction { border-color:#574554!important; background:#352c39!important; color:#f7edf3!important; border-radius:3px!important; }
+#wsActions .wsAction::after { color:#ff8fc7!important; }
+#wsActions .wsAction:hover,#wsActions .wsAction:focus-visible { border-color:#e86aa9!important; background:#463441!important; box-shadow:inset 3px 0 #f184b9!important; }
+#wsStatus { border-color:#574554!important; background:#352c39!important; color:#eadde7!important; }
+#wsStatus[data-state="success"] { border-color:#d46c9e!important; color:#ffe6f2!important; }
+#amqWorkspaceSidebar .wsFoot { border-top-color:#574554!important; color:#bca9b8!important; }
+#amqWorkspaceDock { background:#211a24!important; border-top-color:#6a4b60!important; box-shadow:0 -6px 22px #120d1438!important; }
+#amqWorkspaceDock button { background:#302632!important; color:#d9cbd5!important; border-right-color:#4a3847!important; }
+#amqWorkspaceDock button .wsNum { border-color:#725267!important; color:#f0bdd6!important; }
+#amqWorkspaceDock button[aria-pressed="true"] { background:linear-gradient(110deg,#70405c,#4b2d43)!important; color:#fff!important; box-shadow:inset 0 3px #ff8fc7!important; }
+#amqWorkspaceDock button[aria-pressed="true"] .wsNum { border-color:#ffb5d7!important; background:#d94e96!important; color:#fff!important; }
+#amqWorkspaceDock button.wsStart { background:linear-gradient(110deg,#f184b9,#c84487)!important; color:#fff!important; box-shadow:inset 0 3px #ffb5d7!important; }
+#amqWorkspaceDock button.wsStart:hover { background:linear-gradient(110deg,#ff9ac9,#df5a9b)!important; }
+@media(max-width:900px) {
+ #amqWorkspaceDock { background:#211a24!important; }
+ #amqWorkspaceDock button[aria-pressed="true"] { box-shadow:inset 0 2px #ff8fc7!important; }
+}
+
 </style>
