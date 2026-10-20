@@ -152,3 +152,10 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - Remote GitHub Actions: not verified. Product tests and human playtest: not run. Product source unchanged.
 - Full report: `reports/MULTIPLAYER_GAMBLE_DETERMINISTIC_ITEM_CHECKER_01.md`.
 
+### Remote CI confirmation — 2026-10-20
+
+- GitHub Actions [run 39347173611](https://github.com/murorachi/Amq-/actions/runs/39347173611) completed with conclusion `success` on commit `f44e1fb382c0b57d5d0c7fb864d0b6f0ae3f377a`.
+- Verified job steps: checkout, Python setup, deterministic item-rule contracts, and Broken Crown sensitivity checks all completed successfully.
+- This run covers the 14-contract checker and 4-case Crown sensitivity script. Documentation-only status updates after the run do not change the tested scripts.
+- Human paper playtest remains unperformed; no product source changed.
+
