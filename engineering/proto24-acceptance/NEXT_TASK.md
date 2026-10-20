@@ -1,6 +1,10 @@
-# NEXT TASK
+# NEXT TASK — Proto25 UI Refactor
 
-1. Resolve the osu!stable visual-reference gate before changing any UI code: obtain a traceable screenshot set from Stable 20260924.1 at the target viewport, or record an explicit approved fallback to the pinned official osu!-wiki screenshots. Do not substitute osu!lazer source or claim the wiki screenshot is version-matched.
-2. Once the reference gate is resolved, compare the current Proto24 candidate against the stable main menu, Play menu, Song Select, and Options at matching viewport dimensions. Record measurable geometry/typography/asset differences and a per-screen acceptance checklist before implementation.
-3. Keep all work on a new isolated branch. Do not overwrite Proto17, Proto24 accepted-delivery-02, production V82.82, or read-only V82.85.30.
-4. Before any production promotion, run dedicated real-audio output acceptance, quiz-answer lifecycle regression, and multiplayer lifecycle regression.
+1. Verify that the isolated stage build workflow executes and publishes the Proto25 candidate and manifest to `v82.85.30-proto25-ui-refactor-stage-01`; if not, repair the workflow without touching Proto24 accepted-delivery.
+2. Retrieve screenshots and test report; verify HTML parsing, inline JavaScript syntax, mobile overflow, home navigation, storage, and console errors.
+3. Refine the home shell against the pinned official osu!-wiki main-menu screenshot at a matching viewport, recording differences rather than claiming an unsupported percentage.
+4. Reconstruct Play navigation and map Single Player / Multiplayer / Back to real AMQ flows.
+5. Rework the existing catalog as the Song Select surface, preserving search, sort, mode/source filters, song details, and playback handlers.
+6. Align profile and Settings UI, including light mode, scene background, database update, and backup import/export.
+7. Add per-screen browser acceptance and run audio-output, full quiz lifecycle, and multiplayer regressions before final delivery.
+8. Keep every stage on isolated branches with a remote checkpoint, test report, SHA-256 manifest, and rollback reference. Do not promote to production automatically.
