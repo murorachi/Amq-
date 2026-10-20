@@ -57,6 +57,11 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added desktop screenshot capture and a 390×844 drawer overflow assertion; existing song playback and familiarity buttons remain the original handlers.
 - Stage 11 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-11`.
 
+## Stage 12: Settings and utility dialogs
+- Aligned scene-background, sync and queue dialogs with the dark Options visual language, including form controls, status text and action buttons.
+- Added a mobile scene-background dialog width and palette assertion.
+- Stage 12 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-12`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
