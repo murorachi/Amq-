@@ -76,9 +76,8 @@ def resolve_loss(chips: int, raw_loss: int, protection: str | None,
     if chips < 0 or raw_loss < 0 or not event_id:
         raise RuleViolation("invalid loss state")
     if protection is None:
-        if chips - raw_loss <= 0 and chips > 0:
-            return LossResolution(0, chips, None)
-        return LossResolution(chips - raw_loss, raw_loss, None)
+        paid_loss = min(chips, raw_loss)
+        return LossResolution(max(0, chips - raw_loss), paid_loss, None)
     if protection not in available:
         raise RuleViolation("chosen protection is not available")
     if protection == "sealed_envelope":
@@ -126,6 +125,18 @@ class CurseLedger:
         if not curse.removable:
             raise RuleViolation("curse cannot be removed")
         curse.active = False
+
+    def curse_wax_remove(self, chips: int, curse_id: str) -> int:
+        """Pay 20 chips to remove one removable curse; debts are separate."""
+        if chips < 20:
+            raise RuleViolation("curse wax costs 20 chips")
+        curse = self._curses.get(curse_id)
+        if curse is None or not curse.active:
+            raise RuleViolation("curse is not active")
+        if not curse.removable:
+            raise RuleViolation("curse cannot be removed")
+        self.remove(curse_id)
+        return chips - 20
 
     def black_obsidian_reward(self, run_id: str, curse_id: str,
                               choice: str) -> int:
@@ -395,6 +406,19 @@ class ContractTests(unittest.TestCase):
             ledger.add("curse-1")
         with self.assertRaisesRegex(RuleViolation, "not active"):
             ledger.remove("curse-1")
+
+    def test_curse_wax_costs_20_and_only_removes_removable_active_curse(self):
+        ledger = CurseLedger()
+        ledger.add("ordinary")
+        self.assertEqual(ledger.curse_wax_remove(35, "ordinary"), 15)
+        with self.assertRaisesRegex(RuleViolation, "curse is not active"):
+            ledger.curse_wax_remove(35, "ordinary")
+        ledger.add("permanent", removable=False)
+        with self.assertRaisesRegex(RuleViolation, "cannot be removed"):
+            ledger.curse_wax_remove(100, "permanent")
+        ledger.add("poor")
+        with self.assertRaisesRegex(RuleViolation, "costs 20"):
+            ledger.curse_wax_remove(19, "poor")
 
     def test_black_obsidian_reward_is_once_per_run_and_requires_active_curse(self):
         ledger = CurseLedger()
