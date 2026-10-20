@@ -1,0 +1,87 @@
+name: Proto19 native-origin acceptance
+
+on:
+  push:
+    branches:
+      - v82.85.30-proto19-home-cascade-and-workspace-acceptance-01
+
+permissions:
+  contents: read
+
+jobs:
+  browser-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct Proto19 from pinned Proto17 plus reviewed delta
+        run: |
+          set -euo pipefail
+          test -s amq_learning_tool_v82_85_30_workspace_proto17.html
+          cp amq_learning_tool_v82_85_30_workspace_proto17.html candidate.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html")
+          s=p.read_text(encoding="utf-8")
+          replacements=[
+            ("查看清單與學習資料','learningCenter'", "查看清單與學習資料','watchlist'"),
+            ("if(!clickHome('learningCenter'))return;\n   const mode=a==='practiceExplore'?'explore':'weak';", "window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');\n    const mode=a==='practiceExplore'?'explore':'weak';"),
+            ("if(a==='practice-self'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-self'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("if(a==='practice-srs'){\n   if(!clickHome('learningCenter'))return;", "if(a==='practice-srs'){\n    window.__aniSetHomeMenuOpenV846?.(false);window.__aniNavigateApp?.('practice');"),
+            ("function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;target.textContent=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。'}", "function refreshBatchScope(){const source=$('#batchScopeSummaryV844'),target=$('#wsBatchScopeText');if(!target)return;const next=source?.textContent?.trim()||'尚未取得選取範圍。請先在圖鑑選取作品。';if(target.textContent!==next)target.textContent=next}")
+          ]
+          for old,new in replacements:
+            n=s.count(old)
+            if n != 1:
+              raise SystemExit(f"Expected exactly one source match, found {n}: {old[:100]!r}")
+            s=s.replace(old,new,1)
+          p.write_text(s,encoding="utf-8")
+          assert "if(target.textContent!==next)target.textContent=next" in s
+          assert "window.__aniNavigateApp?.('practice')" in s
+          assert "查看清單與學習資料','watchlist'" in s
+          print("Proto19 source reconstruction: PASS (5 exact replacements)")
+          PY
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("candidate.html")
+          s=p.read_text(encoding="utf-8")
+          marker="</head>"
+          style='<style id="amq-home-legacy-sections-guard-v851">body.ui-home-menu .hero.view-home,body.ui-home-menu .discover.view-home{display:none!important}</style>\\n'
+          assert s.count(marker)==1
+          assert "amq-home-legacy-sections-guard-v851" not in s
+          s=s.replace(marker,style+marker,1)
+          p.write_text(s,encoding="utf-8")
+          assert "amq-home-legacy-sections-guard-v851" in s
+          print("Proto19 home cascade correction: PASS")
+          PY
+          sha256sum candidate.html | tee candidate.sha256
+      - name: Install browser test dependencies
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+      - name: Run native-origin browser acceptance
+        run: |
+          set -euo pipefail
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/amq-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:8765/candidate.html -o /dev/null; then break; fi
+            sleep 1
+          done
+          python tests/proto18_native_acceptance.py
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proto18-native-origin-acceptance
+          path: |
+            candidate.sha256
+            acceptance-report.json
+            proto18-desktop.png
+            proto18-mobile.png
+          if-no-files-found: ignore
+          retention-days: 14
