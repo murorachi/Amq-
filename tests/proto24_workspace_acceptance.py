@@ -147,7 +147,7 @@ async def main():
             assert await button.get_attribute("aria-pressed")=="true",ws
             assert heading in await page.locator("#wsActions").inner_text(),ws
             await page.screenshot(path=screenshot,full_page=True)
-            styles=await page.evaluate("""()=>({body:getComputedStyle(document.body).backgroundColor,sidebar:getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).backgroundImage,dock:getComputedStyle(document.querySelector('#amqWorkspaceDock')).height,dockBackground:getComputedStyle(document.querySelector('#amqWorkspaceDock')).backgroundColor,active:getComputedStyle(document.querySelector('#amqWorkspaceDock [aria-pressed="true"]')).backgroundImage,title:getComputedStyle(document.querySelector('#wsTitle')).color,legacyPanel:getComputedStyle(document.querySelector('.v10Panel')).backgroundColor,actions:document.querySelectorAll('#wsActions .wsAction').length,dashIntro:getComputedStyle(document.querySelector('.dashIntro')).backgroundColor,dashMetric:getComputedStyle(document.querySelector('.dashMetric')).backgroundColor,dashSection:getComputedStyle(document.querySelector('.dashSection')).backgroundColor})""")
+            styles=await page.evaluate("""()=>({body:getComputedStyle(document.body).backgroundColor,sidebar:getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).backgroundImage,dock:getComputedStyle(document.querySelector('#amqWorkspaceDock')).height,dockBackground:getComputedStyle(document.querySelector('#amqWorkspaceDock')).backgroundColor,active:getComputedStyle(document.querySelector('#amqWorkspaceDock [aria-pressed="true"]')).backgroundImage,title:getComputedStyle(document.querySelector('#wsTitle')).color,legacyPanel:getComputedStyle(document.querySelector('.v10Panel')).backgroundColor,actions:document.querySelectorAll('#wsActions .wsAction').length,audioDockHeight:document.querySelector('#audioDock').getBoundingClientRect().height,audioPlayerHeight:document.querySelector('#audioPlayer').getBoundingClientRect().height,wrapPaddingBottom:parseFloat(getComputedStyle(document.querySelector('.wrap')).paddingBottom),dashIntro:getComputedStyle(document.querySelector('.dashIntro')).backgroundColor,dashMetric:getComputedStyle(document.querySelector('.dashMetric')).backgroundColor,dashSection:getComputedStyle(document.querySelector('.dashSection')).backgroundColor})""")
             assert "linear-gradient" in styles["sidebar"],styles
             assert "linear-gradient" in styles["active"],styles
             assert styles["body"]=="rgb(40, 33, 43)",styles
@@ -155,6 +155,7 @@ async def main():
             assert styles["dashIntro"]=="rgb(48, 38, 50)" and styles["dashMetric"]=="rgb(53, 44, 57)" and styles["dashSection"]=="rgb(48, 38, 50)",styles
             assert "rgb(112, 64, 92)" in styles["active"],styles
             assert styles["actions"]>=5,styles
+            assert styles["audioDockHeight"]<=60 and styles["audioPlayerHeight"]>=28 and styles["wrapPaddingBottom"]>=150,styles
             await page.emulate_media(reduced_motion="reduce")
             motion=await page.locator("#wsActions .wsAction").first.evaluate("(e)=>getComputedStyle(e).transitionDuration")
             assert motion in ("0s","0s, 0s"),{"workspace":ws,"transitionDuration":motion}
