@@ -164,4 +164,19 @@ body.ui-home-menu #audioDock {
  body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,35vw,230px)!important; }
 }
 
+
+/* Accessibility polish for the home shell. */
+body.ui-home-menu #homeMenu .amqHomeLandingLinks button:focus-visible,
+body.ui-home-menu #homeMenu .amqAvatarButton:focus-visible,
+body.ui-home-menu #audioDock button:focus-visible {
+ outline:2px solid #ff8fc7!important; outline-offset:3px!important;
+}
+@media(prefers-reduced-motion:reduce) {
+ body.ui-home-menu #homeMenu .amqHomeLandingAction,
+ body.ui-home-menu #homeMenu .amqHomeLandingLinks button {
+  transition:none!important; scroll-behavior:auto!important;
+ }
+ body.ui-home-menu #homeMenu .amqHomeLandingAction:hover { transform:none!important; }
+}
+
 </style>
