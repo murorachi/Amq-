@@ -1,8 +1,8 @@
-name: Proto25 stage 16 multiplayer UI acceptance
+name: Proto25 Stage 24 UI acceptance
 on:
   push:
     branches:
-      - v82.85.30-proto25-ui-refactor-work-01
+      - v82.85.30-proto25-ui-refactor-work-03
 permissions:
   contents: write
 jobs:
@@ -151,7 +151,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto25-stage16-ui-acceptance
+          name: proto25-stage24-ui-acceptance
           path: |
             candidate.html
             candidate.sha256
@@ -166,29 +166,31 @@ jobs:
       - name: Publish accepted candidate and engineering records to isolated branch
         if: success()
         env:
-          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-23
+          TARGET_BRANCH: v82.85.30-proto25-ui-refactor-stage-24
         run: |
           set -euo pipefail
+          # Keep the tested merge candidate outside the checkout before switching to the target branch.
+          cp candidate.html /tmp/amq-proto25-stage24-candidate.html
+          cp candidate.sha256 /tmp/amq-proto25-stage24-candidate.sha256
+          git fetch origin "${TARGET_BRANCH}"
+          git checkout --detach "origin/${TARGET_BRANCH}"
           mkdir -p dist engineering/proto24-acceptance
-          cp candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage23.html
-          cp candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage23.html.sha256
-          # Preserve the pinned baseline and next-task records from the source branch.
-          # Candidate fingerprint is recorded in the test report and manifest.
+          cp /tmp/amq-proto25-stage24-candidate.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
+          cp /tmp/amq-proto25-stage24-candidate.sha256 dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html.sha256
           cat > engineering/proto24-acceptance/TEST_REPORT.md <<EOF
-          # TEST REPORT — Proto25 Stage 23
+          # TEST REPORT — Proto25 Stage 24
           - Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
-          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html
-          - Size: $(stat -c %s candidate.html) bytes
-          - SHA-256: $(sha256sum candidate.html | cut -d ' ' -f 1)
-          - Browser acceptance: PASS (workflow only publishes this report after the test step succeeds).
-          - Homepage routes, native storage, mobile overflow, and no browser exceptions/console errors: PASS only if all browser assertions succeed.
-          - Play menu Single Player / Multiplayer / Back routes: PASS only if route assertions succeed; multiplayer server connectivity is not tested.
-          - Catalog, single-player quiz, Settings panel, workspace palette, and reduced-motion assertions: PASS only if their respective browser assertions succeed.
-          - Screenshots: proto24-desktop.png, proto24-mobile.png, proto24-learning-workspace.png, proto24-analysis-workspace.png, proto25-song-select.png in the workflow artifact.
-          - Actual audio output, full quiz-answer lifecycle, multiplayer lifecycle: NOT RUN.
+          - Tested pull-request merge candidate: ${GITHUB_SHA}
+          - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
+          - Size: $(stat -c %s /tmp/amq-proto25-stage24-candidate.html) bytes
+          - SHA-256: $(sha256sum /tmp/amq-proto25-stage24-candidate.html | cut -d ' ' -f 1)
+          - Static HTML/duplicate-ID/inline-JavaScript checks: PASS (required workflow gate).
+          - Browser acceptance: PASS (required Playwright assertions and no page/console errors).
+          - Screenshots and machine-readable acceptance report: attached to the workflow artifact.
+          - Actual audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage16.html.sha256 engineering/proto24-acceptance
-          git commit -m "Publish Proto25 stage 23 UI candidate and evidence"
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html.sha256 engineering/proto24-acceptance/TEST_REPORT.md
+          git commit -m "Publish Proto25 stage 24 UI candidate and evidence"
           git push origin "HEAD:${TARGET_BRANCH}"
