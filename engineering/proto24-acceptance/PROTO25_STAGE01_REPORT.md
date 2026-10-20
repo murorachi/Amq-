@@ -42,6 +42,10 @@ Immutable baseline: `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0
 - Added a browser assertion that the legacy panel uses the dark workspace palette.
 - Stage 8 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-08`.
 
+## Stage 9: responsive UI checks
+- Added mobile-width assertions for the Play submenu, catalog toolbar, and Settings panel at 390×844; homepage already had an overflow check at the same viewport.
+- Stage 9 checkpoint branch: `v82.85.30-proto25-ui-refactor-stage-09`.
+
 ## Static CI gate
 - Added reproducible HTML parser, duplicate-ID and inline JavaScript syntax checks before browser tests.
 - The workflow only publishes the single-file candidate after static and browser acceptance steps succeed.
