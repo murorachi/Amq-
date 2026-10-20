@@ -534,5 +534,9 @@ body:not(.amq-workspace-active) #amqWorkspaceSidebar,
 body:not(.amq-workspace-active) #amqWorkspaceDock {
   display: none !important;
 }
+body.amq-standalone-route #amqWorkspaceSidebar,
+body.amq-standalone-route #amqWorkspaceDock {
+  display: none !important;
+}
 </style>
 
