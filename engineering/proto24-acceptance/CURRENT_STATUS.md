@@ -29,7 +29,7 @@
 - Stage 12: `v82.85.30-proto25-ui-refactor-stage-12`
 - Stage 13: `v82.85.30-proto25-ui-refactor-stage-13`
 - Stage 14: `v82.85.30-proto25-ui-refactor-stage-14`
-- Latest home/test correction: `27d3543a6128fa2fd7e2e7658272aa0d9bb49d1f`; isolated CI target test correction: `b832ce55ed4b4f09a2b048b9b5efb17fb78be549`.
+- Latest home selector correction: `e695b80c8aca4ca4e8c8a5337f422de0a4384eb0`; isolated CI target: `79a304e7b3543efd8d536cd7e848ea3263f95add`; validation PR: https://github.com/murorachi/Amq-/pull/7.
 - Stage 14 branch was fast-forwarded to the same recorded engineering checkpoint as the working branch. The original Proto24 branch was not changed.
 
 ## Verification status
