@@ -159,3 +159,11 @@ Current rulebook: `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md`. Paper t
 - This run covers the 14-contract checker and 4-case Crown sensitivity script. Documentation-only status updates after the run do not change the tested scripts.
 - Human paper playtest remains unperformed; no product source changed.
 
+## Protection and curse-conversion contracts — 2026-10-20
+
+- `tools/gamble_item_rule_checker.py` now has 19 unittest methods. New contracts cover mutually exclusive loss protection, precommit timing, Broken Safe as an alternative protection, Reverse-Fate Seal curse conversion, Curse Wax removal cost/eligibility, and Black Obsidian reward identity across run boundaries.
+- Corrected loss arithmetic so a raw loss cannot deduct more chips than the player has.
+- GitHub Actions [run 39347703666](https://github.com/murorachi/Amq-/actions/runs/39347703666) succeeded on tested script commit `9978fd98b96de5da7452aa661a890035d3d86ff2`; both deterministic checker and Crown sensitivity steps passed.
+- Broken Safe's mutually exclusive treatment is a provisional rules contract pending final paper-rule approval, not a balance nerf decision.
+- Product regression tests and human paper playtest: not run. Product code unchanged.
+- Report: `reports/MULTIPLAYER_GAMBLE_DETERMINISTIC_ITEM_CHECKER_01.md`.
