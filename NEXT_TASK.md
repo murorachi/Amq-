@@ -172,5 +172,5 @@ Use `reports/MULTIPLAYER_GAMBLE_RULEBOOK_CANDIDATE_03.md` and `reports/MULTIPLAY
 - Then specify and test curse creation/removal ordering for Black Obsidian Chip, Reverse-Fate Seal, Curse Wax, and Sin-Debt Scale. Avoid coding a universal trigger order before the rule text chooses one.
 - Next enumerate Trust Badge and Traitor's Mark outcomes across 2/3/6 players and coordinated vs mixed choices; report net transfers and system-created chips separately.
 - Debt Scale/Heavy Interest stacking remains blocked until the exact curse effect and stacking order are explicitly approved. Human paper playtest remains required. No product implementation.
-- Latest local checks: rule contracts 14/14 PASS; Crown sensitivity 4/4 PASS; Python compilation PASS. Remote Actions not verified.
+- Latest checks: rule contracts 14/14 PASS; Crown sensitivity 4/4 PASS; Python compilation PASS. Remote Actions [run 39347173611](https://github.com/murorachi/Amq-/actions/runs/39347173611) PASS.
 
