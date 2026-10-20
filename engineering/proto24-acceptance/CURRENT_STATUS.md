@@ -54,19 +54,20 @@
 
 ## Current validation checkpoint (2026-10-21)
 
-- Immutable accepted baseline remains branch `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`, HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
-- Current isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Stage 24 workflow fix commit: `1465e1134140cefc4ef785e60e86652dc325a547`. The PR-triggered publisher previously checked out a synthetic PR merge commit and pushed it directly to the base branch, which is not a fast-forward update. Fixed publication to preserve the tested candidate, switch to the target branch, then commit only the candidate, checksum and test report.
-- Work branch workflow commit: `ec31a4b12c3e842859f06063c044dac0127a9ee4`. It now triggers on pushes to the isolated work-03 branch and uses the corrected publication procedure, so validation does not depend on an unconfirmed PR event.
-- Previous successful run `39497858082` produced candidate size 8,899,371 bytes and SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`. That run tested the Stage 24 branch snapshot at commit `2294f0ce073d074df5f7df1728a9ab22b577b0d9`, not the current work-03 head. Its 17 browser checks passed, but its profile background assertion accepted transparent backgrounds and therefore was too weak.
-- Tightened `tests/proto24_workspace_acceptance.py` to require the profile card's actual `linear-gradient` background image. Test change commit: `9cd8097d7db723fef1e77d8fc1e352512815c924`.
-- The latest work-03 push workflow run has not yet been confirmed by run ID. Current head must not be declared accepted until the new run, artifact, screenshots, candidate SHA-256 and remote publication are verified.
-- Browser acceptance of the previous candidate: PASS for its listed 17 checks only. Latest profile gradient assertion: NOT YET RUN. Real audio output, full quiz-answer lifecycle and multiplayer server connectivity/lifecycle: NOT RUN. 90% visual similarity: NOT VERIFIED.
-- Do not merge PR #9 or promote the candidate before fresh evidence is verified. No production or accepted baseline was changed.
+- Immutable accepted baseline remains branch `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`, HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`. Production and accepted baseline were not modified.
+- Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`. Current workflow commit: `d6209c24f72e1d7cb8ea1eaf0a3739ca14a7b407`.
+- Root cause 1 fixed: PR merge-ref publishing was not fast-forwardable. Publisher now preserves the tested candidate, checks out the isolated Stage 24 target branch, then commits only the HTML, checksum and test report.
+- Root cause 2 fixed: multiple documentation commits triggered concurrent runs that raced to publish to the same target branch. Workflow now uses a concurrency group and only runs for source, CSS, test or workflow changes. The docs-only pushes no longer launch redundant acceptance runs.
+- Latest verified run: [39500770125](https://github.com/murorachi/Amq-/actions/runs/39500770125), head `d6209c24f72e1d7cb8ea1eaf0a3739ca14a7b407`, conclusion SUCCESS. Static HTML parsing, duplicate-ID detection and inline-JavaScript syntax checks passed. Playwright browser acceptance passed all 17 checks, with zero page errors and zero console errors.
+- Latest evidence artifact: `proto25-stage24-ui-acceptance`, artifact ID `12299323839`. It contains candidate HTML, checksum, JSON report and desktop/mobile/workspace/Song Select screenshots.
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`; size 8,899,371 bytes; SHA-256 `9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6`. Local artifact hash matches its checksum manifest. Remote Stage 24 manifest and TEST_REPORT were read back and match this hash/size/run.
+- Profile regression test was strengthened to require a rendered `linear-gradient` background on `#amqProfileCard`, not merely reject white backgrounds. Latest browser report confirms gradient `linear-gradient(135deg, rgb(53, 44, 57), rgb(40, 33, 43))`, visible profile name, 84px desktop profile/player rows, and mobile width 390px without horizontal overflow.
+- A concurrent older run `39500564062` passed browser tests but failed only during publication because another run advanced the target branch first. The concurrency fix is in the latest workflow, and final run `39500770125` passed including publication.
+- NOT RUN: real audio output, complete quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact Stable build screenshot identity remains unknown. >=90% visual similarity is NOT VERIFIED; visual review still shows legacy workspace surfaces that need further polish, including a prominent light panel in the Learning Center screenshot.
+- Do not merge PR #9 or promote Proto25 yet. The latest candidate has passed the current acceptance suite, but broader visual review and untested runtime flows remain outstanding.
 
-## Next verification
-1. Confirm a new push-triggered Actions run on work-03 and inspect its job steps/logs.
-2. Retrieve its artifact; inspect screenshots and machine-readable report, especially profile-card gradient and header geometry.
-3. Verify candidate HTML and SHA-256 manifest against the remote Stage 24 files and confirm the publish commit.
-4. Fix any assertion or screenshot failure at root cause and rerun the affected checks.
-5. Review remaining target screens and regression coverage before considering promotion.
+## Next engineering task
+1. Identify the exact DOM selector responsible for the bright panel in the Learning Center screenshot, then theme it through the existing modular workspace CSS instead of adding broad catch-all overrides.
+2. Add a screenshot/DOM assertion for unintended light panels in the learning and analysis workspaces, then rerun the visual acceptance.
+3. Review Settings, Song Select, catalog, quiz and mobile screenshots as one UI group; record specific visual deltas against osu!stable references without claiming an unsupported similarity percentage.
+4. Keep real audio, full quiz lifecycle and multiplayer lifecycle as separately reported tests until actually executed.
