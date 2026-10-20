@@ -1,4 +1,4 @@
-/* Proto22: osu!-inspired landing composition. Kept separate so the candidate can be rebuilt deterministically. */
+<style id="amq-osu-home-composition-v22">\n/* Proto22: osu!-inspired landing composition. Kept separate so the candidate can be rebuilt deterministically. */
 body.ui-home-menu #homeMenu { margin-top:14px!important; gap:12px!important; }
 body.ui-home-menu #homeMenu .amqHomeTopFrame { grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr)!important; gap:12px!important; }
 body.ui-home-menu #homeMenu .amqProfileCard,body.ui-home-menu #homeMenu .amqPlayerFrame { min-height:112px!important; padding:12px 16px!important; border-radius:4px!important; }
@@ -17,4 +17,4 @@ body.ui-home-menu #homeMenu .amqHomeLandingLinks button { min-height:64px!import
  body.ui-home-menu #homeMenu .amqHomeLandingV851::before { grid-column:1!important; grid-row:1!important; width:clamp(150px,42vw,220px)!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingPrimary { grid-column:1!important; grid-row:2!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingGroups { grid-column:1!important; grid-row:3!important; grid-template-columns:1fr!important; }
-}
+}\n</style>\n
