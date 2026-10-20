@@ -55,7 +55,7 @@ The documentation describes the osu!stable main menu, osu! cookie, profile/user 
 - The `peppy/osu-stable-reference` links appear in public upstream discussions/commits, including reference SHA `baa8705f782c0de2b10a7387d78014c61c8b17fb`, but the repository could not be retrieved through the available GitHub integration during this audit. That SHA must not be claimed as the source commit for Stable 20260924.1 or as verified main-menu source.
 - The pinned wiki screenshots are official UI evidence, but their files do not state that they were captured from Stable 20260924.1. They are a traceable visual reference, not proof of a version-matched client source tree.
 
-Do not silently replace this blocker with osu!lazer source. Before UI implementation starts, obtain verifiable UI evidence captured from Stable 20260924.1 or explicitly document an approved fallback to the pinned official Wiki screenshots. Until that reference gate is resolved, do not modify the candidate HTML or create a new formal HTML deliverable.
+Do not silently replace this blocker with osu!lazer source. The user explicitly instructed that the official osu!-wiki be used when exact osu! pages are unknown. This is the approved fallback for UI implementation. Use the pinned official Wiki screenshots as a traceable visual target, while retaining the limitation that the screenshots are not proven to be captures of Stable 20260924.1. The matching Stable source commit remains blocked and must not be fabricated. Candidate UI changes may proceed on an isolated working branch; do not overwrite the pinned Proto24 baseline or promote without full acceptance.
 
 ## Existing candidate acceptance and limitations
 
