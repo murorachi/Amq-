@@ -34,6 +34,7 @@
     @media(min-width:901px){
       body:has(#overlay.open){overflow:auto!important}
       body:has(#overlay.open) #grid{width:calc(100% - min(470px,37vw) - 36px)!important;margin-left:0!important;margin-right:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      body:has(#overlay.open) .wrap .view-catalog:not(#grid),body:has(#overlay.open) .wrap #quicktools{width:calc(100% - min(470px,37vw) - 36px)!important;max-width:none!important;margin-left:0!important;margin-right:auto!important;box-sizing:border-box!important}
       body:has(#overlay.open) #overlay.open{position:fixed!important;inset:0!important;display:block!important;padding:0!important;background:transparent!important;backdrop-filter:none!important;pointer-events:none!important;z-index:40!important;align-items:stretch!important;justify-content:stretch!important}
       body:has(#overlay.open) #overlay.open .drawer{display:flex!important;flex-direction:column!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto minmax(0,1fr)!important;position:fixed!important;left:auto!important;right:18px!important;top:96px!important;bottom:86px!important;width:min(470px,37vw)!important;max-width:none!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:auto!important;border-radius:6px!important;border:1px solid #5b667a!important;background:#202632!important;color:#e8edf6!important;box-shadow:0 12px 40px #0009!important;pointer-events:auto!important}
       body:has(#overlay.open) #overlay.open .drawerhead{grid-column:auto!important;grid-row:auto!important;min-height:0!important;overflow:visible!important;padding:12px!important;background:#2b3444!important;border:0!important;border-bottom:1px solid #465064!important;color:#f1f4fa!important}
@@ -105,7 +106,7 @@
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.5',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto26.6',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
   if(!api.ready){
     const started=Date.now();
