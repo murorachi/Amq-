@@ -40,8 +40,8 @@
   "page_errors": [],
   "console_errors": [],
   "normalized_mean_absolute_pixel_difference": 0.280775,
-  "pixels_with_max_channel_difference_at_least_24": 812153,
+  "pixels_with_max_channel_difference_at_least_24": 812159,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.881242,
+  "changed_pixel_ratio": 0.881249,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }

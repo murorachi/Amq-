@@ -1,8 +1,8 @@
-Proto44 Song Select candidate-20 acceptance summary
-Commit under test: 625ec780a54b0ef49c7cfb3007d07323aa5243fb
-Date UTC: 2026-10-21T14:59:20Z
-8986029 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_20.html
-e9756c665c92b0bf35d9495c0140f7d9922ad033d1e2be8509b53443dffe2bec  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_20.html
+Proto45 Song Select candidate-21 acceptance summary
+Commit under test: e1ced6d32dba444415069778dd1f686789058375
+Date UTC: 2026-10-21T15:02:35Z
+8986944 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
+5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -36,20 +36,20 @@ PASS catalog quick-management controls do not obscure every cover at rest
 PASS cover decorations stay quiet while a compact fallback remains available without network art
 PASS default Song Select previews the first visible work without falsely marking it selected
 PASS visual comparison captures both default and selected-song states
-PASS desktop selected-song drawer is a compact scrollable song list rather than a large detail hero
+PASS desktop selected-song drawer overrides legacy detail styles with a compact scrollable song list
 PASS scene proportions prioritize the center artwork while preserving side panels
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_20.html
-OUTPUT_BYTES=8986029
-OUTPUT_SHA256=e9756c665c92b0bf35d9495c0140f7d9922ad033d1e2be8509b53443dffe2bec
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
+OUTPUT_BYTES=8986944
+OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=e9756c665c92b0bf35d9495c0140f7d9922ad033d1e2be8509b53443dffe2bec
+OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -180,5 +180,5 @@ BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.280775; changed-pixel-ratio=0.881242
+DIAGNOSTIC normalized MAE=0.280775; changed-pixel-ratio=0.881249
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
