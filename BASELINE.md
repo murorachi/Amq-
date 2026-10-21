@@ -68,3 +68,10 @@
 - New grid rule uses zero flex basis and zero explicit height with min-height 0 and overflow auto, so flex growth should allocate the remaining catalog viewport. This is a hypothesis awaiting browser confirmation, not a pass claim.
 - Current Actions run: https://github.com/murorachi/Amq-/actions/runs/39598805123 — in progress at documentation checkpoint.
 - Preserve candidate 10 and immutable Proto25 exactly as recorded above; do not promote candidate 11 until all acceptance checks pass.
+
+
+## Latest diagnostic run after failed zero-basis sizing
+- Run `39598805123` failed: the song grid remained 3px tall with a 362px mount, even after using `flex:1 1 0px`. The assumption that the flex basis alone was the cause is disproven/incomplete.
+- Diagnostic-only test change commit: `516497851fe4db38d6bc18993b5476695b2ba277`; it reports each direct child of `#p32Mount` with geometry and computed layout styles.
+- Latest diagnostic workflow: https://github.com/murorachi/Amq-/actions/runs/39598982384 — running at checkpoint time.
+- Do not promote candidate 11. Preserve candidate 10 and the immutable Proto25 baseline.
