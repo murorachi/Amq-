@@ -8,6 +8,7 @@ PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS workspace sidebar is conditional and dock remains available on desktop
 PASS default Song Select hides home hero and batch tools
+PASS default Song Select releases reserved workspace sidebar padding
 PASS dock selected state follows the active workspace mode
 PASS workspace dock switches existing panels inside Song Select
 PASS workspace panel visibility is scoped to the active Song Select mode

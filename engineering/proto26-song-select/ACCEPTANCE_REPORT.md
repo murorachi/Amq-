@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: 314a5a7aaa86e90e3d121dc386c3a994a3333a73
-Date UTC: 2026-10-21T08:42:01Z
+Commit under test: d0f89294ca16488453f9afa2225b8ac9d1c5dda5
+Date UTC: 2026-10-21T08:43:03Z
 8943265 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
 2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
 --- static test report ---
@@ -14,6 +14,7 @@ PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS workspace sidebar is conditional and dock remains available on desktop
 PASS default Song Select hides home hero and batch tools
+PASS default Song Select releases reserved workspace sidebar padding
 PASS dock selected state follows the active workspace mode
 PASS workspace dock switches existing panels inside Song Select
 PASS workspace panel visibility is scoped to the active Song Select mode
