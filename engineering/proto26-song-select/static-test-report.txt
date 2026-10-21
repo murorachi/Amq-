@@ -26,13 +26,13 @@ PASS catalog cards use the reference-scale density profile
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
 OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
-OUTPUT_BYTES=8977596
-OUTPUT_SHA256=2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+OUTPUT_BYTES=8978788
+OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
 STATIC_ACCEPTANCE=PASS

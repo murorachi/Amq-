@@ -1,8 +1,8 @@
 Proto34 Song Select catalog-density acceptance summary
-Commit under test: 6b16b578da8b800f10d1dabbb2fa92182183562a
-Date UTC: 2026-10-21T13:29:44Z
-8977596 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
-2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
+Commit under test: c0737573422be39ea5bebd19639e0d785ad1a64d
+Date UTC: 2026-10-21T13:33:45Z
+8978788 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
+660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -32,15 +32,15 @@ PASS catalog cards use the reference-scale density profile
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
 OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
-OUTPUT_BYTES=8977596
-OUTPUT_SHA256=2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+OUTPUT_BYTES=8978788
+OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -57,7 +57,7 @@ PASS at least six real AMQ catalog cards intersect the internal scroll viewport 
 PASS catalog grid owns vertical scrolling instead of extending behind the player
 PASS source controls are scoped to the catalog view
 PASS feature stage keeps its designed fallback when no scene background is configured
-SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 50% 38%, rgba(93, 116, 156, 0.28), rgba(18, 24, 37, 0.94) 74%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.32), rgba(19, 15, 30, 0.28))", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 22833, "ruleCount": 104}}
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 50% 38%, rgba(93, 116, 156, 0.28), rgba(18, 24, 37, 0.94) 74%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.22), rgba(19, 15, 30, 0.2))", "backdropFilter": "blur(1px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 24025, "ruleCount": 104}}
 PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
@@ -155,10 +155,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.259363; changed-pixel-ratio=0.790465
+DIAGNOSTIC normalized MAE=0.269961; changed-pixel-ratio=0.773776
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
