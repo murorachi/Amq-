@@ -1,5 +1,6 @@
 from pathlib import Path
 import hashlib
+import json
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,6 +22,17 @@ with sync_playwright() as p:
     check(page.locator("html").get_attribute("data-proto26-init") == "ready", "integration reports ready state")
     page.evaluate("window.__aniNavigateApp?.('catalog')")
     page.wait_for_timeout(500)
+    workspace_debug = page.evaluate("""() => ({
+        innerWidth: window.innerWidth,
+        bodyClasses: document.body.className,
+        activeView: window.__aniGetActiveViewV82?.() ?? null,
+        sidebarDisplay: getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display,
+        sidebarRect: (() => { const r=document.querySelector('#amqWorkspaceSidebar').getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height}; })(),
+        dockDisplay: getComputedStyle(document.querySelector('#amqWorkspaceDock')).display,
+        dockRect: (() => { const r=document.querySelector('#amqWorkspaceDock').getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height}; })()
+    })""")
+    print("WORKSPACE_DEBUG=" + json.dumps(workspace_debug, ensure_ascii=False))
+    check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "app navigation state is catalog")
     check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     check(page.locator("#amqWorkspaceSidebar").is_visible(), "existing workspace sidebar is visible in Song Select")
