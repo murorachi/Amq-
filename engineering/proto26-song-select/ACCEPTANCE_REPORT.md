@@ -1,6 +1,6 @@
 Song Select candidate-32 acceptance summary
-Commit under test: 4e61161eab1d78d6956bf25194fd053184dbc857
-Date UTC: 2026-10-21T16:29:10Z
+Commit under test: 822ff0c49c648db3ea6a2d4871081a7a80b15bd4
+Date UTC: 2026-10-21T16:31:37Z
 8987561 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html
 c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html
 --- static test report ---
@@ -43,7 +43,7 @@ PASS scene proportions prioritize the center artwork while preserving side panel
 PASS scene artwork stays bounded at constrained viewport widths
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html
 OUTPUT_BYTES=8987561
 OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 BUILD=PASS
