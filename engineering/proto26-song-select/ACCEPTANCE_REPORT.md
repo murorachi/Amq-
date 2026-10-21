@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: 61591b9167ea25db42d06a566f507044746d8e5e
-Date UTC: 2026-10-21T07:17:11Z
+Commit under test: 0878f28a5b6c54a2a7a641df99f7a803cf8fc57a
+Date UTC: 2026-10-21T07:36:22Z
 8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 --- static test report ---
@@ -13,21 +13,21 @@ PASS active EMQ/MIX view rerenders when library becomes ready
 PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS existing workspace sidebar and dock are kept visible on desktop
-PASS workspace dock changes the existing main view through the real app router
-PASS all catalog controls reserve the detail pane column
+PASS workspace dock switches existing panels inside Song Select
+PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
-OUTPUT_BYTES=8939182
-OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+OUTPUT_BYTES=8942305
+OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
+OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
