@@ -1,45 +1,39 @@
 # Next Task
 
-**Priority 1: continue Song Select visual composition against the pinned osu!stable reference. Do not switch to homepage polish.**
+**Continue Proto32 Song Select work. Do not switch to Home, Play, or Settings.**
 
-## Latest verified checkpoint
-- Branch: `v82.85.30-proto31-scene-background-integration-01`
-- Tested source commit: `a8bec92c8549d6fcc2cf13ffc0401c150ce247ed`
-- Generated artifact/report commit: `6eda007f92417c8bc3614d8451ae0379e3943d4b`
-- Passing CI: https://github.com/murorachi/Amq-/actions/runs/39581069788
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html`
-- Size: 8,952,996 bytes
-- SHA-256: `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`
-- Immutable baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
+## Current source and CI
+- Branch: `v82.85.30-proto32-song-select-reference-composition-01`
+- Current source commit: `8a209316f4b000b4fba767019fc1b28556e963bc`
+- CI run: https://github.com/murorachi/Amq-/actions/runs/39584392554
+- Last observed status: IN PROGRESS during dependency installation.
+- Candidate 09 path: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html`
+- Candidate 09 SHA-256 for the current source: NOT VERIFIED.
+- Latest verified artifact remains candidate 08 with SHA-256 `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`.
 
-## Next implementation stage
-1. Keep candidate 08 and all prior candidates immutable. Work from an isolated next-stage branch.
-2. Revisit the pinned Stable screenshot and measure the main visual regions at 1280×720. The reference is from the official osu!-wiki commit below; exact Stable client source commit remains NOT VERIFIED.
-3. Recompose the default Song Select hierarchy toward the reference's left information/ranking region, central visual composition, right-side horizontal song/work cards, and bottom controls. Map AMQ-specific content deliberately; do not use it as an excuse to retain unrelated generic layout.
-4. Trace actual history API/schema for selected-song play count and last wrong answer. Do not invent fields or data.
-5. Verify real sorting/filtering behavior for each mode and add search edge cases: partial text, case, leading/trailing whitespace, CJK, special characters, zero results, and mode changes.
-6. Test Enter versus pointer activation, ensure no duplicate selection/play events, and verify keyboard focus.
-7. Keep existing player, data stores, list management, batch processing, learning center, and analysis handlers. Add real audio-output acceptance after the UI stabilizes.
-8. Generate a uniquely named standalone HTML. Run static assertions, browser tests, geometry checks at 1280×720 and 1440×900, responsive overflow checks, reference overlay/difference evidence, and the relevant regression suite.
-9. Keep the visual result marked NOT VERIFIED until reference evidence and actual visual corrections support a defensible review. Do not interpret MAE or changed-pixel ratio as a similarity score.
+## Immediate action
+1. Check run 39584392554 to completion and read the full browser report.
+2. The prior blocker was horizontal overflow at 1000×562. Browser geometry showed the stage was 718px wide but its three grid tracks were 220px + 240px + 300px, plus gaps. The source now reduces the track minimums at <=1120px; confirm with the new geometry report.
+3. If it passes, confirm the visual-comparison step generates the matched screenshot, overlay and pixel-diff report, then verify the generated candidate commit and SHA-256. If it fails, use the captured stage/parent/grid metrics to fix the root cause and rerun.
+4. Add/retain tests for selected-song real playback count and wrong-answer history. These passed in the prior candidate 09 browser run, but must pass again on the current source.
+5. Review the new 1280×720 screenshot against the pinned official Wiki reference. Do not claim visual similarity from a generated diff or a successful CI run.
 
-## Reference record
-- Official Stable release label: `20260924.1` (not a source-control commit).
+## Work already present in Proto32
+- Left selected-song information panel, central scene-backed composition, right-side catalog.
+- Existing toolbar, filters, tabs, mode buttons and grid moved into the right catalog region.
+- Real song metadata, actual playback counts and retained wrong-answer details.
+- Responsive catalog controls and viewport-aware stage width.
+- Escape closes the selected-work detail pane.
+- Browser test has geometry diagnostics for the narrow viewport.
+
+## Reference and visual acceptance
 - Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
-- Song Select screenshot blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
-- Candidate 08 matched viewport: 1280×720, device scale factor 1.
-- Candidate 08 diagnostic normalized MAE: 0.277352.
-- Pixels with max-channel difference ≥ 24: 91.02%. Diagnostic only, not a similarity percentage.
-- Exact Stable client source commit matching `20260924.1`: **NOT VERIFIED**. Never substitute osu!lazer source.
-
-## Tests and remaining scope
-- Static acceptance: PASS.
-- Playwright browser acceptance: PASS for tested workspace switching, scene-style fallback/configured state, EMQ initialization/modes, Escape detail dismissal, desktop geometry, mobile overflow/drawer and zero browser errors.
-- Visual evidence generation: PASS; visual acceptance: NOT VERIFIED.
-- Real audio output, search edge cases, actual sort-result assertions, Enter/double-event regression, complete quiz lifecycle, multiplayer server lifecycle, Home/Play/Settings/profile visual acceptance: NOT RUN or not yet fully verified.
+- Screenshot blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
+- Exact osu!stable client source commit for release label `20260924.1`: NOT VERIFIED.
+- Latest verified candidate 08's diagnostic normalized MAE was 0.277352 and changed-pixel ratio 91.02%. These are diagnostics, not similarity percentages. Visual acceptance remains NOT VERIFIED.
 
 ## Rollback
-- Previous candidate 07 SHA-256: `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`.
-- Current candidate 08 SHA-256: `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`.
-- Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
-- Do not overwrite any prior candidate or merge PR #10/#11 before visual and functional acceptance.
+- Use candidate 08: SHA-256 `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`.
+- Immutable baseline: Proto25 SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
+- Never overwrite candidate 08 or the immutable baseline.
+- Do not merge PR #10/#11 before visual and functional acceptance.
