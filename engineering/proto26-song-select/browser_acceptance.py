@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_34.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -276,7 +276,7 @@ with sync_playwright() as p:
                 documentWidth: document.documentElement.scrollWidth,
                 bodyWidth: document.body.scrollWidth,
                 bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
-                stage: (() => { const el=document.querySelector("#amqSongSelectStage"); const r=el.getBoundingClientRect(); const scene=document.querySelector("#amqSongSelectStage .p32-scene"); const sr=scene?.getBoundingClientRect(); const image=document.querySelector("#p32SceneImage"); const ir=image?.getBoundingClientRect(); return {scene:sr?{left:Math.round(sr.left),right:Math.round(sr.right),width:Math.round(sr.width)}:null,sceneImage:ir?{left:Math.round(ir.left),right:Math.round(ir.right),width:Math.round(ir.width)}:null,left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),inlineWidth:el.style.width,computedWidth:getComputedStyle(el).width,gridColumns:getComputedStyle(el).gridTemplateColumns,parent:(()=>{const p=el.parentElement,pr=p.getBoundingClientRect();return {tag:p.tagName,cls:String(p.className||""),left:Math.round(pr.left),right:Math.round(pr.right),width:Math.round(pr.width)}})()}; })(),
+                stage: (() => { const el=document.querySelector("#amqSongSelectStage"); const r=el.getBoundingClientRect(); const scene=document.querySelector("#amqSongSelectStage .p32-scene"); const sr=scene?.getBoundingClientRect(); const image=document.querySelector("#p32SceneImage"); const ir=image?.getBoundingClientRect(); return {scene:sr?{left:Math.round(sr.left),right:Math.round(sr.right),width:Math.round(sr.width)}:null,sceneImage:ir?{left:Math.round(ir.left),right:Math.round(ir.right),width:Math.round(ir.width)}:null,catalog:(()=>{const c=document.querySelector("#amqSongSelectStage .p32-catalog");const cr=c.getBoundingClientRect();return {left:Math.round(cr.left),right:Math.round(cr.right)}})(),filterControls:[...document.querySelectorAll("#amqSongSelectStage .toolbar.view-catalog .p26-filter-strip select,#amqSongSelectStage .toolbar.view-catalog .p26-filter-strip input")].map(el=>{const fr=el.getBoundingClientRect();return {tag:el.tagName,left:Math.round(fr.left),right:Math.round(fr.right),width:Math.round(fr.width)}}),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),inlineWidth:el.style.width,computedWidth:getComputedStyle(el).width,gridColumns:getComputedStyle(el).gridTemplateColumns,parent:(()=>{const p=el.parentElement,pr=p.getBoundingClientRect();return {tag:p.tagName,cls:String(p.className||""),left:Math.round(pr.left),right:Math.round(pr.right),width:Math.round(pr.width)}})()}; })(),
                 overflowing: [...document.querySelectorAll('body *')].map(el => {
                     const r = el.getBoundingClientRect();
                     return {tag:el.tagName,id:el.id,cls:String(el.className||'').slice(0,70),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),display:getComputedStyle(el).display};
@@ -286,6 +286,10 @@ with sync_playwright() as p:
             check(overflow_debug["documentWidth"] <= overflow_debug["viewport"], "1000x562 Song Select viewport has no horizontal overflow")
             if overflow_debug["stage"].get("scene") and overflow_debug["stage"].get("sceneImage"):
                 check(overflow_debug["stage"]["sceneImage"]["left"] >= overflow_debug["stage"]["scene"]["left"] - 1 and overflow_debug["stage"]["sceneImage"]["right"] <= overflow_debug["stage"]["scene"]["right"] + 1, "scene artwork remains within the Song Select scene at 1000x562")
+            if overflow_debug["stage"].get("catalog") and overflow_debug["stage"].get("filterControls"):
+                cat = overflow_debug["stage"]["catalog"]
+                controls = overflow_debug["stage"]["filterControls"]
+                check(all(item["left"] >= cat["left"] - 1 and item["right"] <= cat["right"] + 1 for item in controls), "1000x562 Song Select filters remain inside the catalog panel")
             page.set_viewport_size({"width": 1440, "height": 900})
             page.wait_for_timeout(200)
             page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
