@@ -1,0 +1,48 @@
+from pathlib import Path
+import hashlib
+from playwright.sync_api import sync_playwright
+
+ROOT = Path(__file__).resolve().parents[2]
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_01.html"
+failures = []
+def check(ok, label):
+    print(("PASS " if ok else "FAIL ") + label)
+    if not ok: failures.append(label)
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page(viewport={"width": 1440, "height": 1000})
+    page_errors, console_errors = [], []
+    page.on("pageerror", lambda e: page_errors.append(str(e)))
+    page.on("console", lambda m: console_errors.append(m.text) if m.type == "error" else None)
+    page.goto(HTML.as_uri(), wait_until="domcontentloaded", timeout=60000)
+    page.wait_for_timeout(5000)
+    check(page.locator("#proto26SongModes").count() == 1, "source mode controls initialize")
+    check(page.locator("html").get_attribute("data-proto26-init") == "ready", "integration reports ready state")
+    check(page.locator("#grid").count() == 1 and page.locator("#audioDock").count() == 1, "catalog and audio dock remain present")
+    if page.locator("#proto26SongModes").count():
+        page.locator('[data-p26-mode="emq"]').click()
+        page.wait_for_timeout(1200)
+        check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "emq", "EMQ mode activates")
+        check(page.locator("#grid .p26-work-card").count() > 0, "EMQ mode renders actual work cards")
+        page.locator('[data-p26-mode="mix"]').click()
+        page.wait_for_timeout(800)
+        check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "mix", "MIX mode activates")
+        page.locator('[data-p26-mode="singer"]').click()
+        page.wait_for_timeout(800)
+        check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "singer", "Singer mode activates")
+        page.locator('[data-p26-mode="amq"]').click()
+        page.wait_for_timeout(800)
+        check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "amq", "AMQ mode restores legacy catalog")
+    check(not page_errors, "no uncaught page errors")
+    check(not console_errors, "no browser console errors")
+    page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-desktop.png"), full_page=True)
+    page.set_viewport_size({"width":390,"height":844})
+    page.wait_for_timeout(800)
+    check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "mobile layout has no horizontal overflow")
+    page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-mobile.png"), full_page=True)
+    browser.close()
+print("OUTPUT_SHA256=" + hashlib.sha256(HTML.read_bytes()).hexdigest())
+if failures:
+    raise SystemExit("BROWSER_ACCEPTANCE=FAIL: " + "; ".join(failures))
+print("BROWSER_ACCEPTANCE=PASS")
