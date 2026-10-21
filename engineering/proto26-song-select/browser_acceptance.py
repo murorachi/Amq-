@@ -16,9 +16,15 @@ with sync_playwright() as p:
     page.on("pageerror", lambda e: page_errors.append(str(e)))
     page.on("console", lambda m: console_errors.append(m.text) if m.type == "error" else None)
     page.goto(HTML.as_uri(), wait_until="domcontentloaded", timeout=60000)
-    page.wait_for_timeout(5000)
+    page.wait_for_timeout(300)
     check(page.locator("#proto26SongModes").count() == 1, "source mode controls initialize")
     check(page.locator("html").get_attribute("data-proto26-init") == "ready", "integration reports ready state")
+    try:
+        page.wait_for_function("window.__aniEmqAPI?.ready === true", timeout=30000)
+    except Exception:
+        pass
+    check(page.evaluate("!!window.__aniEmqAPI?.ready"), "EMQ library completes asynchronous initialization")
+    check(page.evaluate("window.__aniEmqAPI?.getWorks?.().length > 0"), "EMQ API exposes actual work records after initialization")
     check(page.locator("#grid").count() == 1 and page.locator("#audioDock").count() == 1, "catalog and audio dock remain present")
     if page.locator("#proto26SongModes").count():
         page.locator('[data-p26-mode="emq"]').click()
