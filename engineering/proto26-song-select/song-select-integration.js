@@ -20,6 +20,8 @@
   style.id='amq-proto26-song-select-css';
   style.textContent=`
     #proto26SongModes{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;padding:10px 12px;background:#171b25;border:1px solid #394151;border-radius:8px}
+    /* Default Song Select has no left workspace panel, so release the legacy reserved sidebar padding. */
+    body.amq-workspace-prototype.amq-workspace-active:not([data-amq-workspace-mode]){padding-left:0!important}
     /* Song Select is the default browsing surface; home hero and batch tools must not leak into it. */
     body.amq-workspace-active .view-home{display:none!important}
     body.amq-workspace-active:not([data-amq-workspace-mode]) #quicktools{display:none!important}
