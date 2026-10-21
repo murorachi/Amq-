@@ -8,35 +8,35 @@
 - SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
 - Read-only. Never overwrite this file or branch.
 
-## Latest verified development checkpoint: Proto28
-- Branch: `v82.85.30-proto28-song-select-default-state-fix-01`
-- CI source commit: `52e1677ae3f6385fec577dce3609ee7511cc73c4`
-- Generated artifact/report commit: `fbf48765d07401e8b87494eec7c3c84015db7867`
-- Run: https://github.com/murorachi/Amq-/actions/runs/39570523908 — **SUCCESS**
-- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
-- Size: 8,943,047 bytes
-- SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
-- Static tests: PASS. Playwright browser tests: PASS. Matched-viewport reference evidence: generated.
-- Visual acceptance: **NOT VERIFIED**. A large blank left column remains because the default Song Select route retains workspace padding. Candidate 06 is a rollback checkpoint, not final UI approval.
+## Latest verified development checkpoint: Proto29
+- Branch: `v82.85.30-proto29-song-select-layout-width-01`
+- CI source commit: `d0f89294ca16488453f9afa2225b8ac9d1c5dda5`
+- Generated artifact/report commit: `ae0377e5efab163b9501456c371bce5e0074cafc`
+- Run: https://github.com/murorachi/Amq-/actions/runs/39571163151 — **SUCCESS**
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html`
+- Size: 8,943,265 bytes
+- SHA-256: `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`
+- Static tests: PASS. Playwright browser tests: PASS. Matched-viewport visual evidence: generated.
+- Geometry: body left padding 0 px; search x=38 and catalog x=28 at 1440×900.
+- Visual acceptance: **NOT VERIFIED**. The generic grid/filter composition still differs substantially from the pinned Stable screenshot.
 
-## Earlier accepted rollback candidate
-- Branch: `v82.85.30-proto26-song-select-integration-01`
-- PR #10 remains draft/unmerged: https://github.com/murorachi/Amq-/pull/10
-- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Size: 8,938,670 bytes
-- SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- Run: https://github.com/murorachi/Amq-/actions/runs/39550068389 — static and browser acceptance PASS.
+## Previous verified checkpoints
+- Proto28 branch: `v82.85.30-proto28-song-select-default-state-fix-01`
+- Candidate 06 SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
+- Proto28 run: https://github.com/murorachi/Amq-/actions/runs/39570523908 — SUCCESS.
+- Earlier accepted candidate 04: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`, run https://github.com/murorachi/Amq-/actions/runs/39550068389.
 
-## Official osu!stable reference record
-- Stable release label: `20260924.1`; this label is not a source-control commit.
+## Official osu!stable reference
+- Stable release label: `20260924.1`; this is not a source-control commit.
 - Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
 - Song Select screenshot: `wiki/Client/Interface/img/song-selection.jpg`.
 - Verified Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
 - Exact osu!stable client source commit matching that release: **NOT VERIFIED**.
-- Visual evidence: `engineering/proto26-song-select/VISUAL_COMPARISON_REPORT.md`; image and pixel-difference files are available in the Proto28 Actions artifact.
+- Current comparison report: `engineering/proto26-song-select/VISUAL_COMPARISON_REPORT.md`.
 
 ## Rollback
-- For the latest accepted development checkpoint, use candidate 06 with SHA-256 `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`.
-- For the earlier accepted fallback, use candidate 04 with SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`.
-- For a clean baseline rebuild, use the immutable Proto25 file and pinned builder.
+- Latest verified development checkpoint: candidate 07, SHA-256 `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`.
+- Previous checkpoint: candidate 06, SHA-256 `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`.
+- Earlier accepted fallback: candidate 04, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`.
+- For a clean rebuild, use the immutable Proto25 baseline and pinned builder.
 - Do not merge PR #10/#11 until Song Select visual and functional gates are satisfied.
