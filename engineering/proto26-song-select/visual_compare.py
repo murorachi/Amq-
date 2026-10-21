@@ -64,7 +64,22 @@ def main() -> None:
         page.screenshot(path=str(candidate_path), full_page=False)
         active_view = page.evaluate("window.__aniGetActiveViewV82?.() ?? null")
         body_classes = page.locator("body").get_attribute("class") or ""
+        default_state = page.evaluate("""() => ({
+            homeHeroVisible: !!document.querySelector('section.hero.view-home') &&
+                getComputedStyle(document.querySelector('section.hero.view-home')).display !== 'none',
+            batchToolsVisible: !!document.querySelector('#quicktools') &&
+                getComputedStyle(document.querySelector('#quicktools')).display !== 'none',
+            workspaceSidebarVisible: !!document.querySelector('#amqWorkspaceSidebar') &&
+                getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display !== 'none',
+            selectedWorkspaceCount: document.querySelectorAll('#amqWorkspaceDock [data-ws][aria-pressed="true"]').length,
+            activeWorkspaceMode: document.body.dataset.amqWorkspaceMode || null
+        })""")
         browser.close()
+
+    if (active_view != "catalog" or default_state["homeHeroVisible"] or
+            default_state["batchToolsVisible"] or default_state["workspaceSidebarVisible"] or
+            default_state["selectedWorkspaceCount"] != 0 or default_state["activeWorkspaceMode"] is not None):
+        raise SystemExit(f"DEFAULT_SONG_SELECT_STATE_FAIL {json.dumps(default_state, ensure_ascii=False)}")
 
     candidate = Image.open(candidate_path).convert("RGB")
     if candidate.size != reference.size:
@@ -87,6 +102,7 @@ def main() -> None:
         "candidate_dimensions": {"width": candidate.width, "height": candidate.height},
         "active_app_view": active_view,
         "body_classes": body_classes,
+        "default_state": default_state,
         "page_errors": page_errors,
         "console_errors": console_errors,
         "normalized_mean_absolute_pixel_difference": round(mae, 6),
