@@ -173,6 +173,12 @@ with sync_playwright() as p:
     print("CONSOLE_ERRORS=" + json.dumps(console_errors, ensure_ascii=False))
     check(not console_errors, "no browser console errors")
     page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-desktop.png"), full_page=False)
+    # Re-open a real work detail to verify the responsive mobile drawer after Escape dismissal.
+    page.locator('[data-p26-mode="emq"]').click()
+    page.wait_for_timeout(500)
+    if page.locator("#grid .p26-work-card").count() > 0:
+        page.locator("#grid .p26-work-card").first.click()
+        page.wait_for_timeout(250)
     page.set_viewport_size({"width":390,"height":844})
     page.wait_for_timeout(800)
     check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "mobile layout has no horizontal overflow")
