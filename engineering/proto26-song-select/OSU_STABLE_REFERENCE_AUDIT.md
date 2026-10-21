@@ -58,3 +58,16 @@ Pinned evidence links:
 3. Integrate each workspace's existing content/actions into the Song Select main region without cloning business logic or breaking audio/player state.
 4. Capture the pinned official Song Select reference and candidate at matching 1440x900 viewport, record bounding boxes, produce overlay/difference image, and separate intentional AMQ content differences from layout defects.
 5. Keep PR #10 draft and do not promote the candidate until in-place workspace behavior and reference comparison pass.
+
+
+## Candidate 06 follow-up checkpoint (2026-10-21)
+
+- Latest generated candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`.
+- Source/workflow fix commit: `1985431f5055c470633efee823ef74de4198d333`.
+- Passing acceptance run: https://github.com/murorachi/Amq-/actions/runs/39565629059.
+- Artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
+- Candidate size: 8,942,305 bytes; SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
+- Static assertions and Playwright browser acceptance: PASS. Artifact upload and push of candidate/reports: PASS.
+- The latest browser report verifies four in-place workspace modes, list/batch/learning/analysis actions, asynchronous EMQ load and selected-work detail pane, AMQ/MIX/Singer switching, no uncaught page or console errors, and tested desktop/mobile layout constraints.
+- Visual diff against the pinned official Stable Song Select screenshot remains **NOT RUN**. Exact Stable client source commit remains **NOT VERIFIED**; the wiki screenshot is traceable but its capture build is unknown. Real audio-output acceptance and broader quiz/multiplayer lifecycle tests remain outside this run.
+- This checkpoint supersedes the older Proto26.6/04 candidate as the latest verified development candidate, but it does not grant final visual approval. Preserve candidate 04 as rollback: SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`. The immutable Proto25 baseline remains unchanged.
