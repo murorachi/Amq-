@@ -15,24 +15,25 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS Song Select stage height is constrained to the viewport
-PASS desktop Song Select uses a continuous scene with translucent side overlays
-PASS desktop catalog rows use compact two-column density
+PASS desktop Song Select uses a continuous scene with explicit panel geometry
+PASS desktop catalog preserves a compact single-column song list
 PASS AMQ empty state synchronizes after asynchronous catalog rendering
 PASS catalog filters remain reachable in a compact horizontal strip
 PASS catalog overlays the central scene with combined compact source/category controls
 PASS catalog viewport sizing reserves scroll space by compacting hidden and auxiliary controls
 PASS selected song row is visibly highlighted and shifts slightly left
-PASS catalog cards use the reference-scale density profile
+PASS base catalog cards retain their original density profile
+PASS browser acceptance includes a central-title overlap assertion
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
-OUTPUT_BYTES=8978788
-OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html
+OUTPUT_BYTES=8979311
+OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6
+OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
 STATIC_ACCEPTANCE=PASS
