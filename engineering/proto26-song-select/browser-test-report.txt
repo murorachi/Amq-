@@ -80,5 +80,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 BROWSER_ACCEPTANCE=PASS

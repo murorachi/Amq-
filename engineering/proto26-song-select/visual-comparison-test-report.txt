@@ -1,4 +1,4 @@
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.285936; changed-pixel-ratio=0.834361
+DIAGNOSTIC normalized MAE=0.303679; changed-pixel-ratio=0.904875
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)

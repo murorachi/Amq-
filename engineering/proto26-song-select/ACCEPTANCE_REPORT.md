@@ -1,8 +1,8 @@
 Proto26 Song Select acceptance summary
-Commit under test: 52e1677ae3f6385fec577dce3609ee7511cc73c4
-Date UTC: 2026-10-21T08:37:55Z
-8943047 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
-3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+Commit under test: ec61f3ab1feb80c2f95cb84037423f7e0cc1f15a
+Date UTC: 2026-10-21T08:40:57Z
+8943265 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
+2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -20,16 +20,16 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
-OUTPUT_BYTES=8943047
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
+OUTPUT_BYTES=8943265
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -114,10 +114,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.285936; changed-pixel-ratio=0.834361
+DIAGNOSTIC normalized MAE=0.303679; changed-pixel-ratio=0.904875
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)

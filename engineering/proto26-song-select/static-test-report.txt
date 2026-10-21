@@ -14,14 +14,14 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
-OUTPUT_BYTES=8943047
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
+OUTPUT_BYTES=8943265
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a
+OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
 STATIC_ACCEPTANCE=PASS
