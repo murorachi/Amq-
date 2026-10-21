@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_25.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_26.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -229,7 +229,7 @@ with sync_playwright() as p:
             song_rows = page.locator("#songlist .songrow")
             check(song_rows.count() > 0, "selected work exposes real song rows for history display")
             if song_rows.count() > 0:
-                selected_row = song_rows.first
+                selected_row = page.locator("#songlist .songrow:not(.proto26-song-selected)").first
                 selected_song_id = selected_row.get_attribute("data-id")
                 selected_song_title = selected_row.locator(".songname").inner_text().strip()
                 initial_selected_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
@@ -272,14 +272,14 @@ with sync_playwright() as p:
                 documentWidth: document.documentElement.scrollWidth,
                 bodyWidth: document.body.scrollWidth,
                 bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
-                stage: (() => { const el=document.querySelector("#amqSongSelectStage"); const r=el.getBoundingClientRect(); return {left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),inlineWidth:el.style.width,computedWidth:getComputedStyle(el).width,gridColumns:getComputedStyle(el).gridTemplateColumns,parent:(()=>{const p=el.parentElement,pr=p.getBoundingClientRect();return {tag:p.tagName,cls:String(p.className||""),left:Math.round(pr.left),right:Math.round(pr.right),width:Math.round(pr.width)}})()}; })(),
+                stage: (() => { const el=document.querySelector("#amqSongSelectStage"); const r=el.getBoundingClientRect(); const scene=document.querySelector("#amqSongSelectStage .p32-scene"); const sr=scene?.getBoundingClientRect(); const image=document.querySelector("#p32SceneImage"); const ir=image?.getBoundingClientRect(); return {scene:sr?{left:Math.round(sr.left),right:Math.round(sr.right),width:Math.round(sr.width)}:null,sceneImage:ir?{left:Math.round(ir.left),right:Math.round(ir.right),width:Math.round(ir.width)}:null,left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),inlineWidth:el.style.width,computedWidth:getComputedStyle(el).width,gridColumns:getComputedStyle(el).gridTemplateColumns,parent:(()=>{const p=el.parentElement,pr=p.getBoundingClientRect();return {tag:p.tagName,cls:String(p.className||""),left:Math.round(pr.left),right:Math.round(pr.right),width:Math.round(pr.width)}})()}; })(),
                 overflowing: [...document.querySelectorAll('body *')].map(el => {
                     const r = el.getBoundingClientRect();
                     return {tag:el.tagName,id:el.id,cls:String(el.className||'').slice(0,70),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),display:getComputedStyle(el).display};
                 }).filter(x => x.width > 0 && (x.left < -1 || x.right > window.innerWidth + 1)).slice(0,30)
             })""")
             print("OVERFLOW_DEBUG_1000x562=" + json.dumps(overflow_debug, ensure_ascii=False))
-            check(overflow_debug["documentWidth"] <= overflow_debug["viewport"], "1000x562 Song Select viewport has no horizontal overflow")
+            check(overflow_debug["documentWidth"] <= overflow_debug["viewport"], "1000x562 Song Select viewport has no horizontal overflow")\n            if overflow_debug.get("scene") and overflow_debug.get("sceneImage"):\n                check(overflow_debug["sceneImage"]["left"] >= overflow_debug["scene"]["left"] - 1 and overflow_debug["sceneImage"]["right"] <= overflow_debug["scene"]["right"] + 1, "scene artwork remains within the Song Select scene at 1000x562")
             page.set_viewport_size({"width": 1440, "height": 900})
             page.wait_for_timeout(200)
             page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
