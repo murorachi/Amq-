@@ -72,13 +72,19 @@ def main() -> None:
             workspaceSidebarVisible: !!document.querySelector('#amqWorkspaceSidebar') &&
                 getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display !== 'none',
             selectedWorkspaceCount: document.querySelectorAll('#amqWorkspaceDock [data-ws][aria-pressed="true"]').length,
-            activeWorkspaceMode: document.body.dataset.amqWorkspaceMode || null
+            activeWorkspaceMode: document.body.dataset.amqWorkspaceMode || null,
+            bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
+            searchLeft: document.querySelector('#search')?.getBoundingClientRect().left ?? null,
+            catalogLeft: document.querySelector('#grid')?.getBoundingClientRect().left ?? null,
+            dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null
         })""")
         browser.close()
 
     if (active_view != "catalog" or default_state["homeHeroVisible"] or
             default_state["batchToolsVisible"] or default_state["workspaceSidebarVisible"] or
-            default_state["selectedWorkspaceCount"] != 0 or default_state["activeWorkspaceMode"] is not None):
+            default_state["selectedWorkspaceCount"] != 0 or default_state["activeWorkspaceMode"] is not None or
+            default_state["bodyPaddingLeft"] != "0px" or default_state["searchLeft"] is None or
+            default_state["searchLeft"] >= 60):
         raise SystemExit(f"DEFAULT_SONG_SELECT_STATE_FAIL {json.dumps(default_state, ensure_ascii=False)}")
 
     candidate = Image.open(candidate_path).convert("RGB")
