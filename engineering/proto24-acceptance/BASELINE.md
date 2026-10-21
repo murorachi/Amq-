@@ -18,13 +18,13 @@
 
 ## Latest isolated candidate and verified delivery
 - Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `1e665b3036df061c7d0f4ff86a040a4522ac77a3`.
-- Workflow: [39540158570](https://github.com/murorachi/Amq-/actions/runs/39540158570), SUCCESS.
-- Artifact: `proto25-stage24-ui-acceptance`, ID `12318758166`, ZIP digest `a8a3ae0036f18c15bfe15cf65a097e8116382d159b0f250fdcca52ba43590f4d`.
+- Tested source commit: `452a7e2859ce9e1a118b60d5a9af1d38a84998e6`.
+- Workflow: [39540608714](https://github.com/murorachi/Amq-/actions/runs/39540608714), SUCCESS.
+- Artifact: `proto25-stage24-ui-acceptance`, ID `12318779090`, ZIP digest `0e1f91d162e6ea0dd6a1402dcf0268c9a33333f1596bcad286b02e9b16bf1c93`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,925,711 bytes.
-- SHA-256: `33ff46c97c50ae7f100a16d5a132a59c019e0e98a2819d402309ab835165e613`; downloaded candidate hash matches its manifest.
-- Remote Stage 24 branch head after publication: `125043fda3414ea3d87a0b42e61a29b197200e97`.
+- Size: 8,926,249 bytes.
+- SHA-256: `6e1a559fc7f6ab7602b66f12a25b148730a326181ff90680e72ef2260180729a`; downloaded candidate hash matches its manifest.
+- Remote Stage 24 branch head after publication: `41ad1a5cec439b4dd5af264edf85ebbc38e88073`.
 - Remote tree confirms candidate HTML, 81-byte checksum manifest and TEST_REPORT; report and manifest correspond to the successful workflow.
 
 ## Acceptance results
@@ -32,8 +32,9 @@
 - Browser acceptance: 18 assertions PASS; page errors 0; console errors 0.
 - Covered: desktop/mobile home, profile/player strip, Stable-inspired Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
 - Stage 31 profile/player dimensions are guarded on desktop and mobile.
-- Stage 32 adds triangular facets to home and Play cookies; Stage 33/35 add italic Stable-style menu typography and subtle radial-ray backgrounds, with opacity tuned after screenshot review.
-- Stage 34 compacted catalog chrome. Acceptance reports: summary 121.5px, batch tools 225.5px, filter toolbar 104.7px, tabs 50px, section heading 38px; grid top 680.75px at 1440×900. Both batch rows have equal client/scroll widths, and mobile overflow remains clear.
+- Stage 32 adds triangular facets to home and Play cookies; Stage 33/35 add italic menu typography and subdued radial-ray backgrounds.
+- Stage 34 catalog geometry at 1440×900: summary 121.5px, batch tools 225.5px, filter toolbar 104.7px, tabs 50px, section header 38px; grid top 680.75px. Both batch rows have equal client/scroll widths.
+- Stage 36 desktop top frame y=40px; profile/player panels y=41px, down from y=77px. Browser assertions guard this alignment.
 - Home cookie 560px; main actions 520px × 76px; Play cookie 500px; Play blades 520px × 92px. Options sidebar: desktop 340px; mobile 292px.
 - No >=90% similarity score is claimed because reference captures are not build/viewport matched.
 
