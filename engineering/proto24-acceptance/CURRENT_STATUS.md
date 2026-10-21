@@ -8,17 +8,17 @@
 
 ## Latest verified Proto25 checkpoint
 - Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `3c1ea186f7661f6312ee263800a45f34111a40e8`.
-- Successful workflow: [Run 39538605138](https://github.com/murorachi/Amq-/actions/runs/39538605138).
+- Tested source commit: `71d7f398d02a3044deb35f39cf5025e4a990c1ec`.
+- Successful workflow: [Run 39538953347](https://github.com/murorachi/Amq-/actions/runs/39538953347).
 - Workflow conclusion: SUCCESS. Static HTML parse, duplicate-ID check, inline JavaScript syntax checks and browser acceptance passed.
-- Browser assertions: 18 PASS; page errors: 0; console errors: 0; elapsed browser acceptance approximately 20 seconds.
-- Artifact: [proto25-stage24-ui-acceptance, ID 12318249366](https://github.com/murorachi/Amq-/actions/runs/39538605138/artifacts/12318249366).
-- Artifact ZIP SHA-256: `474f338638bbcb2acb6c2fe0970a751344b83dd0bd8beaaeaa4e1bae9df137d2`.
+- Browser assertions: 18 PASS; page errors: 0; console errors: 0.
+- Artifact: [proto25-stage24-ui-acceptance, ID 12318299844](https://github.com/murorachi/Amq-/actions/runs/39538953347/artifacts/12318299844).
+- Artifact ZIP SHA-256: `3ab2333d7aac2456d31067bdf6745b7803d5af97d4968a6893c3783765106302`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,920,621 bytes.
-- Candidate SHA-256: `a36cedd3fc2f2ca612e7f5aaa8708b80924bfe912b47094812174651989883ac`; independently checked against the downloaded artifact's manifest.
-- Stage 24 branch head after publication: `95f17580460b1dd1e17a7b069a1dd27f67c49576`.
-- Remote tree confirms the HTML, 81-byte SHA-256 manifest and TEST_REPORT. The remote manifest and report match Run 39538605138.
+- Size: 8,921,697 bytes.
+- Candidate SHA-256: `8df7f9f529bed5eaeb2f8a713dbfe24af628ce625a270add59d81edd6e7f2c69`; downloaded candidate SHA-256 matches the artifact manifest.
+- Stage 24 branch head after publication: `ffd9fd2813601a2351e4bf77fc5c9957c1c265bb`.
+- Remote tree confirms the HTML, 81-byte checksum manifest and TEST_REPORT. Remote manifest/report match Run 39538953347.
 
 ## Changes in the latest tested checkpoint
 - Preserved AMQ navigation, native storage, quiz, catalog, Learning Center, Analysis and Multiplayer UI behavior.
@@ -27,15 +27,15 @@
 - Enlarged the desktop home cookie to 560px and kept the three primary actions at 520px wide by 76px high.
 - Enlarged the Play submenu cookie to 500px and menu blades to 520px by 92px; required labels remain `Single Player`, `Multiplayer`, `Back`.
 - Widened the desktop Options sidebar to 340px while retaining 292px on mobile.
-- Stage 31 refined the home profile/player information hierarchy: desktop avatar 44px, profile name 15px, PP value 20px, player caption 9px and track title 13px; mobile avatar 40px and profile name 14px.
-- Browser assertions now guard those profile/player typography and avatar dimensions at desktop and mobile sizes.
-- Reviewed the latest desktop home screenshot after the change. The header remains inside its 86px frame; mobile viewport and document widths both remain 390px.
+- Stage 31 refined the home profile/player information hierarchy and added desktop/mobile assertions for avatar and typography sizes.
+- Stage 32 added a CSS-only translucent triangular skin pattern to the home and Play cookies, guided by the pinned official osu!Stable Wiki screenshots. No external image or copyrighted screenshot is embedded into the UI.
+- Stage 32 static checks PASS; 18 browser assertions PASS; page/console errors 0. The downloaded artifact's candidate hash matches its manifest, and remote HTML, manifest and TEST_REPORT were verified.
 
 ## Acceptance limits
 - NOT RUN: real audio output; full quiz-answer lifecycle; multiplayer server connectivity and lifecycle.
 - Exact osu!Stable client source commit and matching screenshot build remain unverified.
-- >=90% visual similarity: NOT VERIFIED. Current evidence is a qualitative comparison against pinned official Wiki screenshots, not a build/viewport-matched pixel score.
-- Background artwork, exact cookie artwork and differences between AMQ catalog data and osu!Stable Song Select remain. Do not invent osu! beatmap controls or settings to conceal those differences.
+- >=90% visual similarity: NOT VERIFIED. The comparison remains qualitative because reference captures are not build/viewport matched.
+- The synthetic cookie pattern is closer to the pinned reference, but its artwork, background/skin, and differences between AMQ catalog data and osu!Stable Song Select remain.
 - Do not merge PR #9 or promote Proto25 until remaining reference comparison and separate runtime acceptance are complete.
 
 ## Rollback
