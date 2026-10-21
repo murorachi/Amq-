@@ -91,7 +91,7 @@
       if(active&&desktop)dock.style.setProperty('display','grid','important');
       else dock.style.removeProperty('display');
     }
-    for(const button of $('#amqWorkspaceDock [data-ws]')){
+    for(const button of $$('#amqWorkspaceDock [data-ws]')){
       button.setAttribute('aria-pressed',String(Boolean(workspaceMode)&&button.dataset.ws===workspaceMode));
     }
   };
