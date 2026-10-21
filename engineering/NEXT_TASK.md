@@ -1,7 +1,7 @@
 # Next Task
 
-1. Upload the exact Candidate 65 HTML bytes to the isolated GitHub candidate branch using a supported artifact-transfer path, then fetch the remote artifact and verify SHA-256. The available connector actions expose text-content writes but no local-path/binary upload action for this generated 9 MB HTML artifact; direct container network access is unavailable.
+1. Transfer the exact Candidate 68 HTML bytes to the isolated GitHub branch via a supported binary/artifact route, then download and verify the remote SHA-256. The currently available connector does not expose local-path/binary upload for this 9 MB artifact.
 2. Run direct double-click / `file://` acceptance in an environment where local HTML navigation is permitted.
-3. Compare 1440×900, 1280×720, and 390×844 screenshots against verified osu!stable references: https://osu.ppy.sh/wiki/en/Client/Interface.
-4. Validate real IndexedDB background persistence, song audio/video playback, keyboard controls, search, filters, grouping/sorting, mode switching, catalog scrolling, and all four workspace modes.
-5. Do not mark the UI visually accepted until human comparison confirms the target fidelity.
+3. Fix the remaining desktop document-level vertical overflow (104px at both 1440×900 and 1280×720) without breaking internal catalog scrolling or fixed docks.
+4. Test real IndexedDB custom-background persistence and audio playback.
+5. Complete human visual acceptance against an installed osu!stable client before declaring UI refactor complete.
