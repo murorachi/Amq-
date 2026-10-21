@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: 0878f28a5b6c54a2a7a641df99f7a803cf8fc57a
-Date UTC: 2026-10-21T07:36:22Z
+Commit under test: 5324f99a49e91abf6e7f749a2986408fde62ec6d
+Date UTC: 2026-10-21T07:36:29Z
 8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 --- static test report ---
@@ -40,28 +40,41 @@ PASS existing workspace sidebar is visible in Song Select
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS workspace lists updates its existing action panel
-PASS workspace lists routes the main content to watchlist
-PASS workspace lists shows its existing main content surface
+PASS workspace lists keeps the app route inside Song Select
+PASS workspace lists shows its existing main content surface in place
+PASS workspace lists preserves all four dock controls
+PASS workspace lists records the active internal mode
+PASS workspace lists hides the unrelated catalog grid
 PASS workspace batch updates its existing action panel
-PASS workspace batch routes the main content to catalog
-PASS workspace batch shows its existing main content surface
+PASS workspace batch keeps the app route inside Song Select
+PASS workspace batch shows its existing main content surface in place
+PASS workspace batch preserves all four dock controls
+PASS workspace batch records the active internal mode
 PASS workspace learning updates its existing action panel
-PASS workspace learning routes the main content to learningPlan
-PASS workspace learning shows its existing main content surface
+PASS workspace learning keeps the app route inside Song Select
+PASS workspace learning shows its existing main content surface in place
+PASS workspace learning preserves all four dock controls
+PASS workspace learning records the active internal mode
+PASS workspace learning hides the unrelated catalog grid
 PASS workspace analysis updates its existing action panel
-PASS workspace analysis routes the main content to dashboard
-PASS workspace analysis shows its existing main content surface
-PASS custom-list action opens watchlist
+PASS workspace analysis keeps the app route inside Song Select
+PASS workspace analysis shows its existing main content surface in place
+PASS workspace analysis preserves all four dock controls
+PASS workspace analysis records the active internal mode
+PASS workspace analysis hides the unrelated catalog grid
+PASS custom-list action stays inside Song Select
+PASS custom-list action reveals the existing list-management panel
 PASS custom-list tab remains available
 PASS custom-list action reports successful completion
-PASS batch selection action opens catalog
+PASS batch selection action stays inside Song Select
 PASS batch selection control remains available
 PASS batch action really toggles selection mode
 PASS batch selection mode is restored after test
-PASS explore action opens practice view
+PASS learning workspace renders the existing learning panel in place
+PASS explicit explore action opens the existing practice flow
 PASS existing explore mode control remains available
-PASS dashboard action opens analysis view
-PASS dashboard panel is visible
+PASS dashboard action stays inside Song Select
+PASS dashboard panel is visible in the analysis workspace
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
@@ -83,5 +96,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
+OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 BROWSER_ACCEPTANCE=PASS
