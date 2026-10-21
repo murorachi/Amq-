@@ -16,20 +16,20 @@ PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS Song Select stage height is constrained to the viewport
 PASS AMQ empty state synchronizes after asynchronous catalog rendering
-PASS desktop catalog filters and source modes use compact density
+PASS catalog filters remain reachable in a compact horizontal strip
 PASS catalog viewport sizing reserves scroll space by compacting hidden and auxiliary controls
 PASS selected song row is visibly highlighted and shifts slightly left
 PASS catalog cards use the compact density profile
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
 OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
-OUTPUT_BYTES=8970671
-OUTPUT_SHA256=10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a
+OUTPUT_BYTES=8972100
+OUTPUT_SHA256=adfd08cd24b229178dd97d7f6cffe47aae0224dabcdd40063f4e7bdceba7a52b
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a
+OUTPUT_SHA256=adfd08cd24b229178dd97d7f6cffe47aae0224dabcdd40063f4e7bdceba7a52b
 STATIC_ACCEPTANCE=PASS
