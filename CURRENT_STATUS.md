@@ -1,5 +1,17 @@
 # Current Status
 
+## Latest verified checkpoint (2026-10-21)
+- Working branch: `v82.85.30-proto26-in-place-workspaces-01`
+- Source/workflow fix commit: `1985431f5055c470633efee823ef74de4198d333`.
+- CI acceptance run: https://github.com/murorachi/Amq-/actions/runs/39565629059 — **SUCCESS**.
+- Generated artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`, 8,942,305 bytes, SHA-256 `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
+- Static assertions: PASS. Playwright Chromium acceptance: PASS. Artifact upload and generated HTML/report push: PASS.
+- Browser assertions cover four workspace modes, existing list/batch/learning/analysis interactions, EMQ asynchronous load and work detail pane, AMQ/MIX/Singer mode switching, no uncaught page/console errors, and desktop/mobile overflow/drawer behavior.
+- Still NOT DONE: official osu!stable screenshot visual diff; exact Stable client source commit verification; real audio-output acceptance; broader quiz and multiplayer lifecycle acceptance. Candidate 06 is a verified development checkpoint, not final UI sign-off.
+- Rollback candidate remains `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`. Immutable Proto25 baseline SHA-256 remains `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f` and must not be overwritten.
+
+
 ## Active work: Proto26 Song Select integration
 
 Status: **Proto26.8 in-place workspace implementation committed; browser/static acceptance pending.** The four dock modes now target the existing watchlist, learning-plan and dashboard panels while preserving the app route as `catalog`. This is a candidate change, not final UI acceptance.
