@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: ae395aa60d20c944f687f86b48eb821981d90af2
-Date UTC: 2026-10-21T07:14:47Z
+Commit under test: cd8a792bbde4a3aabe0618412a8c2a423d779679
+Date UTC: 2026-10-21T07:17:01Z
 8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 --- static test report ---
@@ -53,8 +53,11 @@ PASS workspace analysis routes the main content to dashboard
 PASS workspace analysis shows its existing main content surface
 PASS custom-list action opens watchlist
 PASS custom-list tab remains available
+PASS custom-list action reports successful completion
 PASS batch selection action opens catalog
 PASS batch selection control remains available
+PASS batch action really toggles selection mode
+PASS batch selection mode is restored after test
 PASS explore action opens practice view
 PASS existing explore mode control remains available
 PASS dashboard action opens analysis view

@@ -21,8 +21,11 @@ PASS workspace analysis routes the main content to dashboard
 PASS workspace analysis shows its existing main content surface
 PASS custom-list action opens watchlist
 PASS custom-list tab remains available
+PASS custom-list action reports successful completion
 PASS batch selection action opens catalog
 PASS batch selection control remains available
+PASS batch action really toggles selection mode
+PASS batch selection mode is restored after test
 PASS explore action opens practice view
 PASS existing explore mode control remains available
 PASS dashboard action opens analysis view
