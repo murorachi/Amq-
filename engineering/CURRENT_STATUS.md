@@ -1,15 +1,9 @@
 # Current Status
 
-- Current candidate: Candidate 71, `amq_learning_tool_v82_85_30_workspace_proto28_song_select_71-background-ranking-audio-infinite-scroll.html`.
-- SHA-256: `dbea057c20f4cb6de1bacce1fde5a6a57d3194a86b46c25ebc1a324bcac3e08b`; size 9,068,098 bytes.
-- Static checks: 46/46 executable inline JS blocks syntax-valid; 71/71 CSS blocks parse cleanly; 0 duplicate HTML IDs.
-- Targeted browser interaction assertions: 20/20 PASS in `page.set_content()` harness.
-- Auto-scroll: AMQ and EMQ each advanced from 60 to 120 after scrolling their grid to the bottom.
-- Workspace labels, Back, category selector, page-size selector, ranking frame, restored audio dock, and inline EMQ expansion verified.
-- 390×844 viewport: no horizontal overflow; dock and ranking/audio regions remain inside viewport.
-- Background layer: synthetic image test confirms transparent surfaces reveal the background layer. Real saved background persistence is not verified.
-- VNDB images: NOT VERIFIED. API fetches were unavailable in this environment; 0/60 visible EMQ cover images confirmed loaded during the test.
-- Direct `file://` navigation: BLOCKED by environment `ERR_BLOCKED_BY_ADMINISTRATOR`.
-- Real IndexedDB persistence: NOT VERIFIED. Real audio playback: NOT RUN.
-- Pixel-level osu!stable acceptance: NOT ACCEPTED; work cards are still not the exact stable carousel.
-- GitHub branch: `amq-candidate71-background-ranking-audio-infinite-scroll`. Engineering docs are uploaded and re-fetched for verification. HTML binary upload and remote SHA-256 verification remain incomplete because the available connector has no local-byte upload route.
+- Current candidate: Candidate 72, `amq_learning_tool_v82_85_30_workspace_proto28_song_select_72-home-songselect-layout-fix.html`.
+- SHA-256: `5f1d6c7ab251dc593d061dac459b77fc18a24751cd6e7220f653d8f5758a9e57`; size 9,091,960 bytes.
+- Parent: Candidate 71 (`dbea057c20f4cb6de1bacce1fde5a6a57d3194a86b46c25ebc1a324bcac3e08b`).
+- Static: 49 executable inline JS blocks syntax-valid; 74 CSS blocks parse cleanly; 0 duplicate IDs; 9/9 required-hook checks passed.
+- Partial browser smoke: Settings Escape, Play submenu non-opaque placement, and quiz top-header hiding passed.
+- Important limitation: the environment blocks file/local HTTP navigation, while `page.set_content()` cannot provide the real storage origin. Full route/persistence behavior is not verified.
+- GitHub branch: `amq-candidate72-home-songselect-layout-fix`. Engineering docs are being committed and re-fetched. The 9 MB HTML binary is not uploaded by the available GitHub text-content connector.
