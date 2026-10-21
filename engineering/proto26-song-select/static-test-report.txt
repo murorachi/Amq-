@@ -14,16 +14,22 @@ PASS workspace dock switches existing panels inside Song Select
 PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
+PASS Song Select stage height is constrained to the viewport
+PASS AMQ empty state synchronizes after asynchronous catalog rendering
+PASS desktop catalog filters and source modes use compact density
+PASS catalog viewport sizing reserves scroll space by compacting hidden and auxiliary controls
+PASS selected song row is visibly highlighted and shifts slightly left
+PASS catalog cards use the compact density profile
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html
-OUTPUT_BYTES=8968245
-OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html
+OUTPUT_BYTES=8970671
+OUTPUT_SHA256=10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
+OUTPUT_SHA256=10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a
 STATIC_ACCEPTANCE=PASS

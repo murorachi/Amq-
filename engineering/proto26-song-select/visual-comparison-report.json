@@ -7,7 +7,7 @@
     "height": 720
   },
   "candidate_file": "engineering/proto26-song-select/proto26-song-select-matched-viewport.png",
-  "candidate_sha256": "21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421",
+  "candidate_sha256": "10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a",
   "candidate_dimensions": {
     "width": 1280,
     "height": 720
@@ -23,16 +23,19 @@
     "viewportWidth": 1280,
     "stageDisplay": "grid",
     "bodyPaddingLeft": "0px",
-    "searchLeft": 852.28125,
-    "searchWidth": 404.703125,
-    "catalogLeft": 842.28125,
-    "dockBottom": 708
+    "searchLeft": 839.28125,
+    "searchWidth": 430.71875,
+    "catalogLeft": 838.28125,
+    "dockBottom": 708,
+    "sourceMode": "amq",
+    "amqCardCount": 180,
+    "emqWorkCardCount": 0
   },
   "page_errors": [],
   "console_errors": [],
-  "normalized_mean_absolute_pixel_difference": 0.281997,
-  "pixels_with_max_channel_difference_at_least_24": 746824,
+  "normalized_mean_absolute_pixel_difference": 0.273457,
+  "pixels_with_max_channel_difference_at_least_24": 721328,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.810356,
+  "changed_pixel_ratio": 0.782691,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }
