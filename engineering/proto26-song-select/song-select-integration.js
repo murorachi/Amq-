@@ -252,7 +252,7 @@
   #amqSongSelectStage #gridCounter,#amqSongSelectStage #resultCount{color:#9ca8bc;font-size:10px}
   #amqSongSelectStage body[data-amq-workspace-mode="lists"]{display:none}
   body[data-amq-workspace-mode="lists"] #amqSongSelectStage,body[data-amq-workspace-mode="learning"] #amqSongSelectStage,body[data-amq-workspace-mode="analysis"] #amqSongSelectStage{display:none}
-  @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:minmax(220px,27%) minmax(240px,1fr) minmax(300px,34%);gap:6px}#amqSongSelectStage .p32-info{padding:14px}#amqSongSelectStage .p32-scene{padding:16px}#amqSongSelectStage .p32-catalog{padding:12px 8px}}
+  @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:minmax(170px,24%) minmax(180px,1fr) minmax(250px,32%);gap:6px}#amqSongSelectStage .p32-info{padding:14px}#amqSongSelectStage .p32-scene{padding:16px}#amqSongSelectStage .p32-catalog{padding:12px 8px}}
   @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:145px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:330px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:24px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:420px}}
   `;
   document.head.append(style32);
