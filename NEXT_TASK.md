@@ -18,7 +18,7 @@
 - Existing workspace action links are intercepted only while the workspace shell is active; explicit practice/quiz launches keep their original flow.
 - Draft PR #11: https://github.com/murorachi/Amq-/pull/11
 - Implementation commit: `5f9d3ab6ac659adcf83336838c3afb96abb862c4`; browser/static test updates: `21ef2851cd66eed50ee19eca737b55332c83b73b`.
-- Static build, browser acceptance, generated artifact and hash verification are pending. This is not yet accepted.
+- Local static acceptance and scoped Playwright acceptance have passed. Local snapshot SHA-256: `e71fdc60b18a08b660608077c84a5da5daca90798306f8f8573f72ca29196b8f`. Native-origin storage test, GitHub Actions acceptance and remote artifact/hash verification remain pending. Detailed report: `engineering/proto26-song-select/PROTO26_8_LOCAL_ACCEPTANCE_REPORT.md`.
 
 ## Next actions
 1. Run Proto26.8 static build and Playwright acceptance; correct any failures and rerun.
