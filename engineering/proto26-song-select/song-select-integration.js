@@ -75,7 +75,7 @@
   // The dock must change the main work surface, not only the selected button/sidebar title.
   // Reuse the application's existing view router; do not duplicate workspace business logic.
   const workspaceRoutes={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'};
-  for(const button of $('#amqWorkspaceDock [data-ws]')){
+  for(const button of $$('#amqWorkspaceDock [data-ws]')){
     button.addEventListener('click',()=>{
       const target=workspaceRoutes[button.dataset.ws];
       if(target)window.__aniNavigateApp?.(target);
