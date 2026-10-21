@@ -18,29 +18,29 @@
 
 ## Latest isolated candidate and verified delivery
 - Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `71d7f398d02a3044deb35f39cf5025e4a990c1ec`.
-- Workflow: [39538953347](https://github.com/murorachi/Amq-/actions/runs/39538953347), SUCCESS.
-- Artifact: `proto25-stage24-ui-acceptance`, ID `12318299844`, ZIP digest `3ab2333d7aac2456d31067bdf6745b7803d5af97d4968a6893c3783765106302`.
+- Tested source commit: `bf332b5cf4ac4e089d689e9ac9614cc38b11b167`.
+- Workflow: [39539309957](https://github.com/murorachi/Amq-/actions/runs/39539309957), SUCCESS.
+- Artifact: `proto25-stage24-ui-acceptance`, ID `12319085625`, ZIP digest `bb8aeb68a77ea862cc75febe6903b852030ab8e452f41ac527c592b1b61a8c76`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,921,697 bytes.
-- SHA-256: `8df7f9f529bed5eaeb2f8a713dbfe24af628ce625a270add59d81edd6e7f2c69`; downloaded candidate hash matches its manifest.
-- Remote Stage 24 branch head after publication: `ffd9fd2813601a2351e4bf77fc5c9957c1c265bb`.
+- Size: 8,923,325 bytes.
+- SHA-256: `0ff2bc155b7953bce29ad43209bb02cc94f2aa992e614670762ce0bf0e0c38fd`; downloaded candidate hash matches its manifest.
+- Remote Stage 24 branch head after publication: `ba12305759ed916dd69f42e38646505be84a5710`.
 - Remote tree confirms candidate HTML, 81-byte checksum manifest and TEST_REPORT; report and manifest correspond to the successful workflow.
 
 ## Acceptance results
 - Static HTML parse, duplicate-ID check and inline JavaScript syntax checks: PASS.
 - Browser acceptance: 18 assertions PASS; page errors 0; console errors 0.
 - Covered: desktop/mobile home, profile/player strip, Stable-inspired Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
-- Stage 31 guarded profile/avatar/player typography dimensions on desktop and mobile.
-- Stage 32 adds a subtle CSS triangular pattern to the main-menu and Play-menu cookies. Browser tests assert both cookie pseudo-elements use the layered pattern; screenshot reviewed.
-- Home geometry: cookie 560px; primary actions 520px wide by 76px high. Play menu cookie 500px; menu blades 520px wide by 92px high.
+- Stage 31 profile/player dimensions are guarded on desktop and mobile.
+- Stage 32 adds CSS triangular facets to the main-menu and Play cookies; Stage 33 adds Stable-style italic menu typography and subtle radial-ray backgrounds.
+- Home cookie 560px; main actions 520px by 76px; Play cookie 500px; Play blades 520px by 92px.
 - Options sidebar: desktop 340px; mobile 292px with no horizontal overflow.
 - No >=90% similarity score is claimed because reference captures are not build/viewport matched.
 
 ## Known gaps
 - NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle.
 - Exact Stable client source commit and reference screenshot build identity remain unknown.
-- Background artwork and exact cookie art remain approximate; AMQ catalog data model differs from osu!Stable Song Select.
+- Background and cookie art are approximations; AMQ catalog data model differs from osu!Stable Song Select.
 - Do not merge PR #9 or promote this candidate until remaining reference comparison and runtime acceptance are complete.
 
 ## Rollback
