@@ -29,3 +29,16 @@
 - Keep Proto25 changes isolated on the work branch and Stage 24.
 - Do not merge PR #9 or promote Proto25 until remaining reference comparison and required runtime acceptance are complete.
 - Do not overwrite the accepted Proto24 baseline. Roll back to `39d250cf5a269a0e2bf8f514474584bcc864f599` if an unresolved regression makes the candidate unsafe.
+
+
+## Next task after latest Play-screen refinement — 2026-10-21
+
+Latest workflow [39539309957](https://github.com/murorachi/Amq-/actions/runs/39539309957) is PASS, and the candidate SHA/remote manifest were verified. The Play menu now has a more Stable-like radial-ray background, cookie triangle texture and italic text. Do not rerun unchanged source.
+
+Priority order:
+1. Audit the current home header/profile/jukebox and main-menu geometry against the official Stable reference. The latest Play menu is closer, but logo typography/proportions and top-strip composition still differ.
+2. Audit the catalog and catalog-detail screens against the official Stable Song Select reference while preserving AMQ's collection/filter semantics. Separate genuine visual gaps from intentional product differences; do not fabricate beatmap-only controls.
+3. Make one cohesive, evidence-backed visual change set, add browser assertions for changed regions, and inspect the new desktop/mobile screenshots after the Stage 24 workflow.
+4. Keep the similarity estimate qualitative (currently ~70–75% across the current UI scope); do not claim >=90% without a matching Stable build and viewport comparison.
+5. Keep real audio output, full quiz-answer lifecycle and multiplayer server connectivity/lifecycle marked NOT RUN until directly exercised.
+6. Keep PR #9 unmerged and the accepted Proto24 baseline immutable until reference and runtime acceptance are complete.
