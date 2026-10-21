@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_30.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -52,6 +52,7 @@ def main():
     check("songrow:hover:not(.proto26-song-selected){position:relative!important;transform:translateX(-3px)!important" in js and "songrow.proto26-song-selected{position:relative!important;transform:translateX(-6px)!important" in js, "hover and selected song rows have explicit distinct left-shift states")
     check("proto26-song-select-matched-viewport.png" in Path(__file__).with_name("visual_compare.py").read_text(encoding="utf-8") and "SELECTED_STATE_CAPTURE_FAIL" in Path(__file__).with_name("visual_compare.py").read_text(encoding="utf-8"), "visual comparison requires a selected work and selected song state")
     check("minmax(0,24%) minmax(0,39.5%) minmax(0,36.5%)" in js and "left:24.5%!important;right:36.8%!important" in js, "scene proportions prioritize the center artwork while preserving side panels")
+    check("@media(max-width:1120px){#amqSongSelectStage .p32-scene-image{transform:none!important;box-sizing:border-box!important}}" in js, "scene artwork stays bounded at constrained viewport widths")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     result = subprocess.run([sys.executable, str(BUILDER)], cwd=ROOT, text=True, capture_output=True)
