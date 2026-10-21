@@ -27,7 +27,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: proto26-song-select-${{ github.ref }}
+  group: proto32-song-select-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
