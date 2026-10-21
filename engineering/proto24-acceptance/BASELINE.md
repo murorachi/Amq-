@@ -18,30 +18,28 @@
 
 ## Latest isolated candidate and verified delivery
 - Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `a05c66401f0053d2c7bee53f5a965422edd8f9e9`.
-- Workflow: [39536870515](https://github.com/murorachi/Amq-/actions/runs/39536870515), SUCCESS.
-- Artifact: `proto25-stage24-ui-acceptance`, ID `12318480861`, ZIP digest `def95408d91797c5cdbc247c4275a217f5a6eeecdace2f4700f90aca6218d587`.
+- Tested source commit: `3c1ea186f7661f6312ee263800a45f34111a40e8`.
+- Workflow: [39538605138](https://github.com/murorachi/Amq-/actions/runs/39538605138), SUCCESS.
+- Artifact: `proto25-stage24-ui-acceptance`, ID `12318249366`, ZIP digest `474f338638bbcb2acb6c2fe0970a751344b83dd0bd8beaaeaa4e1bae9df137d2`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,918,095 bytes.
-- SHA-256: `0ae1692288d85c3d7750af365b9fcb60cd57744e47b979ab9cdef08ce7a30232`.
-- Downloaded candidate hash matches its manifest.
-- Remote Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`.
-- Remote Stage 24 head at verification: `6f51f1f0b53dc194524c0be1c86e5a94bf4c7493`.
-- Remote tree confirms the candidate HTML size, 81-byte checksum manifest and TEST_REPORT. The remote manifest/report match the successful workflow.
+- Size: 8,920,621 bytes.
+- SHA-256: `a36cedd3fc2f2ca612e7f5aaa8708b80924bfe912b47094812174651989883ac`; downloaded candidate hash matches its manifest.
+- Remote Stage 24 branch head after publication: `95f17580460b1dd1e17a7b069a1dd27f67c49576`.
+- Remote tree confirms the candidate HTML, 81-byte checksum manifest and TEST_REPORT; report and manifest correspond to the successful workflow.
 
 ## Acceptance results
 - Static HTML parse, duplicate-ID check and inline JavaScript syntax checks: PASS.
 - Browser acceptance: 18 assertions PASS; page errors 0; console errors 0.
 - Covered: desktop/mobile home, profile/player strip, Stable-inspired Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
-- Latest home geometry: cookie 560px; three primary actions 520px wide by 76px high.
-- Latest Play menu geometry: cookie 500px; three menu blades 520px wide by 92px high.
+- Stage 31 header assertions: desktop avatar 44px, name 15px, PP value 20px, player caption 9px, track title 13px; mobile avatar 40px, name 14px.
+- Home geometry remains: logo/cookie 560px; primary actions 520px wide by 76px high. Play menu cookie 500px; menu blades 520px wide by 92px high.
 - Options sidebar: desktop 340px; mobile 292px with no horizontal overflow.
-- Latest screenshots were downloaded and reviewed. Layout geometry is closer to the pinned reference, but no >=90% similarity score is claimed because the reference captures are not build/viewport matched.
+- Latest desktop home screenshot reviewed. Exact >=90% similarity is not claimed because reference captures are not build/viewport matched.
 
 ## Known gaps
 - NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle.
 - Exact Stable client source commit and reference screenshot build identity remain unknown.
-- Background artwork, exact cookie artwork and some header details remain different from the official reference. Broken third-party cover imagery can still occur; image availability is separate from layout acceptance.
+- Background artwork, exact cookie artwork and AMQ-vs-Stable Song Select data-model differences remain.
 - Do not merge PR #9 or promote this candidate until remaining reference comparison and runtime acceptance are complete.
 
 ## Rollback
