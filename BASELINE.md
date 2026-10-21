@@ -25,7 +25,9 @@
 - Source implementation commit: `5f9d3ab6ac659adcf83336838c3afb96abb862c4`
 - Acceptance test commit: `21ef2851cd66eed50ee19eca737b55332c83b73b`
 - Target standalone artifact: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
-- Build, browser acceptance, artifact hash and Actions status: **NOT RUN / NOT VERIFIED** at checkpoint creation.
+- Local static acceptance: **PASS**. Local Playwright workspace acceptance: **PASS** for scoped cases; localStorage native-origin persistence is **NOT RUN**.
+- Local verification snapshot SHA-256: `e71fdc60b18a08b660608077c84a5da5daca90798306f8f8573f72ca29196b8f` (8,942,307 bytes). This is not yet a verified remote artifact fingerprint.
+- GitHub Actions acceptance and remote artifact/hash confirmation: **NOT RUN / NOT VERIFIED**. Detailed report: `engineering/proto26-song-select/PROTO26_8_LOCAL_ACCEPTANCE_REPORT.md`.
 - Rollback: return to accepted candidate `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`; immutable Proto25 baseline remains unchanged.
 
 ## Previous accepted rollback candidates
