@@ -11,10 +11,11 @@ Status: partial evidence verified; exact stable client source remains NOT VERIFI
 - Baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
 - Baseline source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
 - Current working branch: `v82.85.30-proto26-song-select-integration-01`
-- Current generated candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Current accepted candidate SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- Passing browser acceptance: https://github.com/murorachi/Amq-/actions/runs/39550068389
+- Current CI-accepted candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
+- Candidate SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`
+- Passing static + Playwright acceptance: https://github.com/murorachi/Amq-/actions/runs/39563090398
 - Draft PR #10: https://github.com/murorachi/Amq-/pull/10
+- Same-viewport visual comparison against the pinned reference is still NOT RUN.
 
 ## Official osu!stable reference identity
 
