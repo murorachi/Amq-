@@ -67,7 +67,9 @@ with sync_playwright() as p:
     })""")
     print("DEFAULT_GEOMETRY_1440x900=" + json.dumps(default_geometry, ensure_ascii=False))
     check(default_geometry["bodyPaddingLeft"] == "0px", "default Song Select releases reserved workspace sidebar padding at 1440x900")
-    check(default_geometry["searchLeft"] is not None and default_geometry["searchLeft"] < 60, "default Song Select search uses the full available width at 1440x900")
+    check(default_geometry["stageDisplay"] == "grid", "default Song Select three-zone composition is visible at 1440x900")
+    check(default_geometry["searchLeft"] is not None and default_geometry["searchLeft"] >= 1440 * 0.6 and default_geometry["searchLeft"] < 1440, "default Song Select search is positioned in the right catalog region at 1440x900")
+    check(default_geometry["searchWidth"] is not None and default_geometry["searchWidth"] > 250, "right catalog search retains usable width at 1440x900")
     page.set_viewport_size({"width": 1440, "height": 1000})
     page.wait_for_timeout(120)
     if page.locator("#amqWorkspaceDock").is_visible():
