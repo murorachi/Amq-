@@ -196,7 +196,7 @@
 
   const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
   style32.textContent=`
-  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 230px),560px);align-items:stretch}
+  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 180px),560px);align-items:stretch}
   #amqSongSelectStage *{box-sizing:border-box}
   #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:0;height:100%;overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
   #amqSongSelectStage .p32-info{display:flex;flex-direction:column;padding:14px;background:linear-gradient(180deg,rgba(13,19,31,.93),rgba(13,17,27,.78));backdrop-filter:blur(8px)}
@@ -226,14 +226,15 @@
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
   #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;height:auto!important;flex:1 1 auto!important;overflow:hidden}
-  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
+  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px!important;margin:0!important;padding:0!important;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
   #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
   #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;margin:0;padding:5px 9px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
+  #amqSongSelectStage #tagFilter{height:28px!important;min-height:28px!important;padding:3px 5px!important}
   #amqSongSelectStage #search:focus{border-color:#e768a7;box-shadow:0 0 0 1px rgba(231,104,167,.2)}
   #amqSongSelectStage #search::placeholder{color:#94a3b9}
   #amqSongSelectStage .toolbar.view-catalog select{width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;padding:3px 5px!important;background:rgba(12,18,29,.7);border:1px solid rgba(199,215,240,.2);color:#dce4f1;font-size:9px}
   #amqSongSelectStage #proto26SongModes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0}
-  #amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800;margin-bottom:2px}
+  #amqSongSelectStage #proto26SongModes .p26-label{display:none!important}
   #amqSongSelectStage #proto26SongModes button{height:24px;min-height:24px;padding:3px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:9px;font-weight:800;cursor:pointer}
   #amqSongSelectStage #proto26SongModes button[aria-pressed="true"]{background:#bd4e86;border-color:#e98ab8;color:#fff}
   #amqSongSelectStage .tabs.view-catalog{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:4px;margin:0!important;padding:0;min-width:0;height:28px!important;max-height:28px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin}
