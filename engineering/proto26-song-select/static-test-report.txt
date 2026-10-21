@@ -28,17 +28,18 @@ PASS scene artwork uses a genuinely loaded cover image and refreshes when covers
 PASS selected-work scene art handles delayed cover-image loading
 PASS catalog quick-management controls do not obscure every cover at rest
 PASS cover decorations stay quiet while a compact fallback remains available without network art
+PASS default Song Select previews the first visible work without falsely marking it selected
 PASS scene proportions prioritize the center artwork while preserving side panels
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html
-OUTPUT_BYTES=8981289
-OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html
+OUTPUT_BYTES=8982019
+OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
+OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 STATIC_ACCEPTANCE=PASS

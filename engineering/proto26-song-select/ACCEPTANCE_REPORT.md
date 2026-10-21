@@ -1,8 +1,8 @@
-Proto41 Song Select candidate-17 acceptance summary
-Commit under test: b556062fbc6d9bc6a30334787c729fa323caaf21
-Date UTC: 2026-10-21T14:46:16Z
-8981289 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html
-8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html
+Proto42 Song Select candidate-18 acceptance summary
+Commit under test: 1ebee746d5d5382e4d0e58f1e9325f7665563edd
+Date UTC: 2026-10-21T14:52:09Z
+8982019 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html
+b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -34,19 +34,20 @@ PASS scene artwork uses a genuinely loaded cover image and refreshes when covers
 PASS selected-work scene art handles delayed cover-image loading
 PASS catalog quick-management controls do not obscure every cover at rest
 PASS cover decorations stay quiet while a compact fallback remains available without network art
+PASS default Song Select previews the first visible work without falsely marking it selected
 PASS scene proportions prioritize the center artwork while preserving side panels
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html
-OUTPUT_BYTES=8981289
-OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html
+OUTPUT_BYTES=8982019
+OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
+OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -76,6 +77,8 @@ PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
 DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 934.625, "searchWidth": 496.375, "catalogLeft": 933.625, "stageDisplay": "grid", "dockBottom": 888}
 SCENE_GEOMETRY_1440x900={"stage": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "grid"}, "scene": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "block"}, "info": {"left": 28, "right": 367, "top": 52, "bottom": 712, "width": 339, "height": 660, "display": "flex"}, "title": {"left": 374, "right": 920, "top": 422, "bottom": 518, "width": 546, "height": 96, "display": "flex"}, "catalog": {"left": 925, "right": 1440, "top": 52, "bottom": 712, "width": 515, "height": 660, "display": "flex"}, "search": {"left": 935, "right": 1431, "top": 60, "bottom": 85, "width": 496, "height": 25, "display": "block"}, "grid": {"left": 934, "right": 1432, "top": 167, "bottom": 669, "width": 498, "height": 502, "display": "flex"}}
+DEFAULT_WORK_PREVIEW={"title": "The Hare and The Tortoise", "firstTitle": "The Hare and The Tortoise", "meta": "作品預覽 · Usagi to Kame"}
+PASS default Song Select previews the first visible work without marking it selected
 CATALOG_COVER_DIAGNOSTICS=[{"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 161, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "complete": true, "naturalWidth": 156, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 144, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "complete": true, "naturalWidth": 191, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 136, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 135, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 150, "objectFit": "cover", "visibility": "visible", "display": "block"}]
 SCENE_ARTWORK_DEBUG={"inlineBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "computedBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "opacity": "0.82"}
 CARD_MANAGE_AT_REST={"opacity": "0", "pointerEvents": "none"}
@@ -170,10 +173,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
+OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.265327; changed-pixel-ratio=0.858274
+DIAGNOSTIC normalized MAE=0.265799; changed-pixel-ratio=0.858851
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
