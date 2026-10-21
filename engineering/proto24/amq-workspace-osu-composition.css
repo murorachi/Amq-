@@ -395,25 +395,25 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
 }
 #amqStablePlayPanel {
  display:grid!important; grid-template-columns:minmax(420px,.95fr) minmax(340px,1.05fr)!important;
- grid-template-rows:auto auto auto auto!important; align-content:center!important; align-items:center!important;
+ grid-template-rows:auto auto!important; align-content:center!important; align-items:center!important;
  gap:10px 0!important; width:min(100%,1200px)!important;
  padding:clamp(22px,3vw,42px)!important; border:0!important; border-radius:0!important;
  background:transparent!important; box-shadow:none!important;
 }
 #amqStablePlayPanel::before {
- content:"osu!"!important; grid-column:1!important; grid-row:1/5!important; justify-self:center!important; align-self:center!important;
- display:grid!important; place-items:center!important; width:min(100%,clamp(460px,35vw,500px))!important; aspect-ratio:1!important; transform:translateX(80px)!important;
+ content:"osu!"!important; grid-column:1!important; grid-row:1/3!important; justify-self:center!important; align-self:center!important;
+ display:grid!important; place-items:center!important; width:min(100%,clamp(460px,35vw,500px))!important; aspect-ratio:1!important; transform:translateX(90px)!important;
  border:8px solid #fff!important; outline:2px solid #e86aa9!important; border-radius:50%!important;
  background:radial-gradient(circle at 34% 24%,#ffb5d7 0%,#f47bb9 32%,#d94e96 67%,#a72e70 100%)!important;
  color:#fff!important; font-family:Arial,sans-serif!important; font-size:clamp(62px,7vw,92px)!important;
  font-weight:900!important; font-style:italic!important; letter-spacing:-.09em!important; text-shadow:0 3px 0 #7f2758!important;
  box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
 }
-#amqStablePlayEyebrow { grid-column:2!important; grid-row:1!important; align-self:end!important; margin:0!important; }
-#amqStablePlayPanel h2 { grid-column:2!important; grid-row:2!important; align-self:end!important; margin:0 0 6px!important; }
-#amqStablePlayChoices { grid-column:2!important; grid-row:3!important; gap:16px!important; }
+#amqStablePlayEyebrow { display:none!important; }
+#amqStablePlayPanel h2 { display:none!important; }
+#amqStablePlayChoices { grid-column:2!important; grid-row:1!important; gap:16px!important; max-width:520px!important; justify-self:start!important; position:relative!important; left:-40px!important; }
 #amqStablePlayChoices button { min-height:92px!important; padding:14px 18px!important; border-radius:2px!important; font-size:clamp(18px,1.7vw,24px)!important; }
-#amqStablePlayNotice { grid-column:2!important; grid-row:4!important; margin:0!important; }
+#amqStablePlayNotice { grid-column:2!important; grid-row:2!important; margin:0!important; max-width:520px!important; position:relative!important; left:-40px!important; }
 @media(min-width:761px) and (max-width:1100px) {
  #amqStablePlayPanel { grid-template-columns:minmax(320px,.95fr) minmax(300px,1.05fr)!important; width:100%!important; gap:8px 0!important; }
  #amqStablePlayPanel::before { width:min(100%,clamp(320px,36vw,400px))!important; transform:translateX(48px)!important; }
@@ -429,9 +429,9 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
  #amqStablePlayPanel::before { grid-column:1!important; grid-row:1!important; width:clamp(145px,42vw,190px)!important; transform:none!important; border-width:5px!important; font-size:clamp(42px,12vw,60px)!important; }
  #amqStablePlayEyebrow { grid-column:1!important; grid-row:2!important; text-align:center!important; }
  #amqStablePlayPanel h2 { grid-column:1!important; grid-row:3!important; text-align:center!important; font-size:24px!important; }
- #amqStablePlayChoices { grid-column:1!important; grid-row:4!important; }
+ #amqStablePlayChoices { grid-column:1!important; grid-row:4!important; position:static!important; left:auto!important; max-width:none!important; }
  #amqStablePlayChoices button { min-height:44px!important; }
- #amqStablePlayNotice { grid-column:1!important; grid-row:5!important; text-align:center!important; }
+ #amqStablePlayNotice { grid-column:1!important; grid-row:5!important; text-align:center!important; position:static!important; left:auto!important; max-width:none!important; }
 }
 
 
