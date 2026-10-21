@@ -1,6 +1,18 @@
 # Current Status
 
-## Latest verified checkpoint: Proto29 default layout width fix (2026-10-21)
+## Latest verified checkpoint: Proto30 Song Select composition prototype (2026-10-21)
+
+- Working branch: `v82.85.30-proto30-song-select-composition-01`
+- Source commit: `3bc5ebb418d435905388c11bb63ba445362848e6`
+- Generated artifact/report commit: `a3e6bebf780a5bb82952db87a8dbaae5762ca8fa`
+- GitHub Actions: https://github.com/murorachi/Amq-/actions/runs/39574095207 — **SUCCESS**
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html`
+- Candidate SHA-256: `bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff`
+- Static acceptance: **PASS**; Playwright browser acceptance: **PASS**; reference evidence generation: **PASS**; page errors / console errors: **0 / 0**.
+- Visual acceptance: **NOT VERIFIED**. Diagnostic MAE `0.286490`; 78.28% of pixels have max-channel difference ≥24. These are difference diagnostics, not a similarity score.
+- Proto30 introduced a three-zone Song Select layout using existing catalog DOM nodes. Initial browser failure was traced to moving catalog nodes before inserting the new stage; corrected in `3bc5ebb`.
+
+## Previous verified checkpoint: Proto29 default layout width fix (2026-10-21)
 
 - Working branch: `v82.85.30-proto29-song-select-layout-width-01`
 - CI source commit: `d0f89294ca16488453f9afa2225b8ac9d1c5dda5`
