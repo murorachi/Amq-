@@ -5,11 +5,10 @@
 Current checkpoint:
 - Draft PR: https://github.com/murorachi/Amq-/pull/10
 - Branch: `v82.85.30-proto26-song-select-integration-01`
-- Integration JS latest commit: `5ef90689de080c897f8adfb299fff5810e9ef0c7`
 - Source fix commit: `9e2a09bb365ae80d8e234ffb6f70f6767816ef97` fixes the EMQ asynchronous initialization race.
-- Browser acceptance commit: `ffcf706a8f65d5d8ef4c55ce43233b2fbdf15366` waits for `api.ready` and asserts the real work list.
-- Prior GitHub Actions run produced a browser report. `EMQ mode renders actual work cards` FAILED. A false-success bug was found because piped tests lacked `set -o pipefail`; workflow corrected.
-- Browser acceptance on prior candidate: FAILED on actual EMQ card rendering. The source now refreshes the EMQ work list after `api.ready`; a new CI run is required to validate it.
+- Browser test commit: `ffcf706a8f65d5d8ef4c55ce43233b2fbdf15366` waits for `api.ready` and asserts real work records.
+- Passing GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39547940204 (run #21). Static acceptance and browser acceptance passed.
+- Accepted Proto26.3 HTML: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`.
 - Current scope is still an incremental source-mode integration, not final osu!stable replica.
 
 Next actions:
