@@ -1,8 +1,8 @@
-Proto32 Song Select acceptance summary
-Commit under test: 8a209316f4b000b4fba767019fc1b28556e963bc
-Date UTC: 2026-10-21T10:25:51Z
-8961290 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
-37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
+Proto33 Song Select acceptance summary
+Commit under test: 783a64e9207f1d4f7febbad240b136487d2cdc26
+Date UTC: 2026-10-21T10:38:28Z
+8968245 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html
+21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -22,38 +22,44 @@ PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
-OUTPUT_BYTES=8961290
-OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html
+OUTPUT_BYTES=8968245
+OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
+OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
 PASS integration reports ready state
-WORKSPACE_DEBUG={"innerWidth": 1440, "bodyClasses": "dark-theme amq-workspace-prototype amq-standalone-route amq-workspace-active", "activeView": "catalog", "sidebarDisplay": "none", "sidebarRect": {"x": 0, "y": 0, "width": 0, "height": 0}, "dockDisplay": "grid", "dockRect": {"x": 0, "y": 922, "width": 1440, "height": 78}}
+WORKSPACE_DEBUG={"innerWidth": 1440, "bodyClasses": "dark-theme amq-workspace-prototype amq-standalone-route amq-workspace-active", "activeView": "catalog", "sidebarDisplay": "none", "sidebarRect": {"x": 0, "y": 0, "width": 0, "height": 0}, "dockDisplay": "grid", "dockRect": {"x": 12, "y": 928, "width": 702, "height": 60}}
 PASS app navigation state is catalog
 PASS catalog view is visible before interacting with song cards
 PASS source controls are scoped to the catalog view
 PASS feature stage keeps its designed fallback when no scene background is configured
-SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "linear-gradient(135deg, rgba(16, 22, 34, 0.72), rgba(22, 18, 35, 0.44)), radial-gradient(at 48% 42%, rgba(94, 85, 130, 0.45), rgba(21, 27, 42, 0.62) 64%, rgba(11, 15, 24, 0.78))", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.48), rgba(19, 15, 30, 0.38))", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "flex", "styleTag": 9688, "ruleCount": 61}}
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "linear-gradient(135deg, rgba(13, 17, 29, 0.45), rgba(20, 15, 33, 0.35)), radial-gradient(at 62% 38%, rgba(210, 92, 158, 0.23), rgba(0, 0, 0, 0) 42%), radial-gradient(at 25% 70%, rgba(85, 116, 184, 0.22), rgba(0, 0, 0, 0) 48%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.48), rgba(19, 15, 30, 0.38))", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "flex", "styleTag": 15940, "ruleCount": 87}}
 PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
 PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
+PASS Song Select retains compact Settings and Home navigation
+PASS existing scene background manager remains accessible in Song Select
+PASS unrelated theme/database/backup actions are hidden from the default Song Select header
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
-DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 954.6875, "searchWidth": 462.3125, "catalogLeft": 944.6875, "stageDisplay": "grid", "dockBottom": 900}
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 954.6875, "searchWidth": 462.3125, "catalogLeft": 944.6875, "stageDisplay": "grid", "dockBottom": 888}
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select three-zone composition is visible at 1440x900
 PASS default Song Select search is positioned in the right catalog region at 1440x900
 PASS right catalog search retains usable width at 1440x900
+PASS audio player controls occupy the bottom-right region without viewport overflow
+PASS four-workspace dock occupies the bottom-left region
+PASS at least one catalog card is visible above the bottom player at 1280x720
 PASS workspace lists updates its existing action panel
 PASS workspace lists keeps the app route inside Song Select
 PASS workspace lists shows its existing main content surface in place
@@ -130,10 +136,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
+OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.277068; changed-pixel-ratio=0.805745
+DIAGNOSTIC normalized MAE=0.281997; changed-pixel-ratio=0.810356
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)

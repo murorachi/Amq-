@@ -16,14 +16,14 @@ PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
-OUTPUT_BYTES=8961290
-OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html
+OUTPUT_BYTES=8968245
+OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
+OUTPUT_SHA256=21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421
 STATIC_ACCEPTANCE=PASS
