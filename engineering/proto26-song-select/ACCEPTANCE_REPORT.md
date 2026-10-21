@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: ccf033399e2b4e30d0a7a70b5c2a746134b777b8
-Date UTC: 2026-10-21T07:37:33Z
+Commit under test: ea727d7e828a2b15a2769ea0f6bc2824105a1d60
+Date UTC: 2026-10-21T07:38:25Z
 8942305 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
 abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
 --- static test report ---
