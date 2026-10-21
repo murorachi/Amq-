@@ -2,7 +2,7 @@
 
 ## Active work: Proto26 Song Select integration
 
-Status: **Proto26.7 route integration passed static and Playwright browser acceptance; not final UI acceptance.** Run: https://github.com/murorachi/Amq-/actions/runs/39557544284. Tested commit: `d8751a5b0fc90cb786ad4eacea591fbbdad4aef1`; generated artifact/report commit: `a749b47` (verify full SHA from GitHub before release). The four dock routes now change the real main view and matching content surface. Full action-level in-place integration and osu!stable screenshot comparison remain incomplete.
+Status: **Proto26.8 in-place workspace implementation passed GitHub Actions static and Playwright acceptance; not final UI acceptance.** Run: https://github.com/murorachi/Amq-/actions/runs/39563090398. Tested commit: `ccf033399e2b4e30d0a7a70b5c2a746134b777b8`; generated candidate/report commit was verified on the working branch. Four dock modes now show existing panels while keeping the app route at `catalog`.
 
 ### Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
