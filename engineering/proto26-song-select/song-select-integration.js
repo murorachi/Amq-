@@ -33,20 +33,24 @@
     #grid.proto26-emq-grid .p26-work-count{margin-top:auto;font-size:11px;color:#a4c2f4}
     @media(min-width:901px){
       body:has(#overlay.open){overflow:auto!important}
-      body:has(#overlay.open) #grid{width:calc(100% - min(470px,37vw) - 36px);margin-left:0;margin-right:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
-      body:has(#overlay.open) .overlay.open{position:fixed;inset:0;display:block;padding:0;background:transparent;backdrop-filter:none;pointer-events:none;z-index:40}
-      body:has(#overlay.open) .overlay.open .drawer{position:fixed;right:18px;top:96px;bottom:86px;width:min(470px,37vw);max-height:none;overflow:auto;border-radius:6px;border:1px solid #5b667a;background:#202632;color:#e8edf6;box-shadow:0 12px 40px #0009;pointer-events:auto}
-      body:has(#overlay.open) .overlay.open .drawerhead{background:#2b3444;border-bottom:1px solid #465064;color:#f1f4fa}
-      body:has(#overlay.open) .overlay.open .drawerhead p,body:has(#overlay.open) .overlay.open .detailEyebrow{color:#b5c2d8}
-      body:has(#overlay.open) .overlay.open .songrow{background:#252d3a;border-color:#414c5f;color:#edf1f8}
-      body:has(#overlay.open) .overlay.open .songmeta{color:#b3bfd1}
-      body:has(#overlay.open) .overlay.open .close{display:none}
+      body:has(#overlay.open) #grid{width:calc(100% - min(470px,37vw) - 36px)!important;margin-left:0!important;margin-right:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      body:has(#overlay.open) #overlay.open{position:fixed!important;inset:0!important;display:block!important;padding:0!important;background:transparent!important;backdrop-filter:none!important;pointer-events:none!important;z-index:40!important;align-items:stretch!important;justify-content:stretch!important}
+      body:has(#overlay.open) #overlay.open .drawer{display:flex!important;flex-direction:column!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto minmax(0,1fr)!important;position:fixed!important;left:auto!important;right:18px!important;top:96px!important;bottom:86px!important;width:min(470px,37vw)!important;max-width:none!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:auto!important;border-radius:6px!important;border:1px solid #5b667a!important;background:#202632!important;color:#e8edf6!important;box-shadow:0 12px 40px #0009!important;pointer-events:auto!important}
+      body:has(#overlay.open) #overlay.open .drawerhead{grid-column:auto!important;grid-row:auto!important;min-height:0!important;overflow:visible!important;padding:12px!important;background:#2b3444!important;border:0!important;border-bottom:1px solid #465064!important;color:#f1f4fa!important}
+      body:has(#overlay.open) #overlay.open .drawerhead .close{display:none!important}
+      body:has(#overlay.open) #overlay.open .playerbar{grid-column:auto!important;grid-row:auto!important;min-width:0!important}
+      body:has(#overlay.open) #overlay.open .songlist{grid-column:auto!important;grid-row:auto!important;min-height:0!important;overflow:auto!important;background:#211a24!important}
+      body:has(#overlay.open) #overlay.open .songrow{background:#252d3a!important;border-color:#414c5f!important;color:#edf1f8!important}
+      body:has(#overlay.open) #overlay.open .songmeta{color:#b3bfd1!important}
     }
     @media(max-width:900px){
       #grid.proto26-emq-grid{grid-template-columns:1fr}
-      body:has(#overlay.open) .overlay.open{display:flex;position:fixed;inset:0;padding:12px;background:#111a2bdd;backdrop-filter:blur(6px);pointer-events:auto}
-      body:has(#overlay.open) .overlay.open .drawer{position:relative;inset:auto;width:100%;max-height:94vh;max-height:94dvh;border-radius:12px;background:#202632}
-      body:has(#overlay.open) .overlay.open .close{display:block;position:sticky;float:right;top:8px;right:auto;z-index:2;background:#313b4d;border-color:#59667c;color:#fff}
+      body:has(#overlay.open) #overlay.open{display:flex!important;position:fixed!important;inset:0!important;padding:12px!important;background:#111a2bdd!important;backdrop-filter:blur(6px)!important;pointer-events:auto!important;align-items:center!important;justify-content:center!important}
+      body:has(#overlay.open) #overlay.open .drawer{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto minmax(180px,1fr)!important;position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:94vh!important;max-height:94dvh!important;min-height:0!important;overflow:auto!important;border-radius:12px!important;background:#202632!important}
+      body:has(#overlay.open) #overlay.open .drawerhead{grid-column:1!important;grid-row:1!important;max-height:34vh!important;overflow:auto!important;padding:12px!important;border-right:0!important;border-bottom:1px solid #465064!important}
+      body:has(#overlay.open) #overlay.open .playerbar{grid-column:1!important;grid-row:2!important}
+      body:has(#overlay.open) #overlay.open .songlist{grid-column:1!important;grid-row:3!important;min-height:180px!important}
+      body:has(#overlay.open) #overlay.open .drawerhead .close{display:block!important;position:sticky!important;float:right!important;top:8px!important;right:auto!important;z-index:2!important;background:#313b4d!important;border-color:#59667c!important;color:#fff!important}
     }
   `;
   document.head.append(style);
@@ -84,7 +88,7 @@
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.4.1',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto26.4.2',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
   if(!api.ready){
     const started=Date.now();
