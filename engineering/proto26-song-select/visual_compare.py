@@ -45,6 +45,7 @@ def main() -> None:
     reference = Image.open(reference_path).convert("RGB")
     width, height = reference.size
 
+    default_candidate_path = OUT / "proto26-song-select-default-viewport.png"
     candidate_path = OUT / "proto26-song-select-matched-viewport.png"
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -64,6 +65,23 @@ def main() -> None:
             document.querySelectorAll('#grid > .card').length > 0 &&
             document.querySelectorAll('#grid > .p26-work-card').length === 0""", timeout=30000)
         page.wait_for_timeout(350)
+        page.screenshot(path=str(default_candidate_path), full_page=False)
+        first_card = page.locator("#grid > .card").first
+        if first_card.count() == 0:
+            raise SystemExit("SELECTED_STATE_CAPTURE_FAIL no AMQ catalog cards")
+        first_card.click()
+        page.wait_for_function("() => document.querySelector('#overlay')?.classList.contains('open')", timeout=15000)
+        page.wait_for_function("() => document.querySelectorAll('#songlist .songrow').length > 0", timeout=15000)
+        page.locator("#songlist .songrow").first.click()
+        page.wait_for_timeout(250)
+        selected_state = page.evaluate("""() => ({
+            workTitle: document.querySelector('#p32WorkTitle')?.textContent?.trim() || null,
+            songTitle: document.querySelector('#p32SongTitle')?.textContent?.trim() || null,
+            selectedSongRows: document.querySelectorAll('#songlist .songrow.proto26-song-selected').length,
+            detailOpen: !!document.querySelector('#overlay.open')
+        })""")
+        if not selected_state["detailOpen"] or not selected_state["songTitle"] or selected_state["selectedSongRows"] != 1:
+            raise SystemExit(f"SELECTED_STATE_CAPTURE_FAIL {json.dumps(selected_state, ensure_ascii=False)}")
         page.screenshot(path=str(candidate_path), full_page=False)
         active_view = page.evaluate("window.__aniGetActiveViewV82?.() ?? null")
         body_classes = page.locator("body").get_attribute("class") or ""
@@ -120,6 +138,7 @@ def main() -> None:
         "active_app_view": active_view,
         "body_classes": body_classes,
         "default_state": default_state,
+        "selected_state": selected_state,
         "page_errors": page_errors,
         "console_errors": console_errors,
         "normalized_mean_absolute_pixel_difference": round(mae, 6),
@@ -150,7 +169,8 @@ def main() -> None:
         "",
         "## Evidence files",
         "- osu-stable-song-selection-pinned.jpg",
-        "- proto26-song-select-matched-viewport.png",
+        " - proto26-song-select-default-viewport.png",
+        "- proto26-song-select-matched-viewport.png (selected-work and selected-song state)",
         "- proto26-song-select-overlay.png",
         "- proto26-song-select-pixel-diff.png",
         "- visual-comparison-report.json",
