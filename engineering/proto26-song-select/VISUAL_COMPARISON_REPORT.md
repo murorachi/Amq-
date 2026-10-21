@@ -5,8 +5,8 @@
 - Verified Git blob SHA: 1e927a00a1984a5ba20fa5efec639410f349607a
 - Matched viewport: 1280 x 720 at device scale factor 1
 - Candidate SHA-256: c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
-- Normalized mean absolute pixel difference (diagnostic): 0.273816
-- Pixels with max-channel difference >= 24: 656517/921600 (71.24%)
+- Normalized mean absolute pixel difference (diagnostic): 0.275356
+- Pixels with max-channel difference >= 24: 772410/921600 (83.81%)
 - Active app view: catalog
 - Page errors: 0; console errors: 0
 
