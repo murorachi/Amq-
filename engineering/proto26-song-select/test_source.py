@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -25,6 +25,7 @@ def main():
     check("proto26.6" in js and "#overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
     check("modes.classList.add('view-catalog')" in js, "Song Select controls remain hidden outside the catalog view")
     check("const syncWorkspaceShell=()=>" in js and "el.style.setProperty('display',display,'important')" in js, "existing workspace sidebar and dock are kept visible on desktop")
+    check("const workspaceRoutes={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'}" in js and "window.__aniNavigateApp?.(target)" in js, "workspace dock changes the existing main view through the real app router")
     check(".wrap .view-catalog:not(#grid),body:has(#overlay.open) .wrap #quicktools" in js, "all catalog controls reserve the detail pane column")
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
     check(SOURCE.is_file(), "immutable baseline file exists")
