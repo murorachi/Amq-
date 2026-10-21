@@ -194,9 +194,10 @@ async def main():
         await page.screenshot(path="proto25-catalog.png",full_page=False)
         report["checks"].append("Catalog route, visible catalog grid and standalone layout: PASS")
         await page.wait_for_function("document.querySelectorAll('#grid.view-catalog .card').length>0",timeout=20000)
-        await page.locator("#grid.view-catalog .card").last.evaluate("(e)=>e.scrollIntoView({block:'end',behavior:'instant'})")
-        await page.wait_for_timeout(100)
-        catalog_bottom=await page.evaluate("""()=>{const card=document.querySelector('#grid.view-catalog .card:last-child'),dock=document.querySelector('#audioDock'),c=card.getBoundingClientRect(),d=dock.getBoundingClientRect();return {lastCardBottom:Math.round(c.bottom),lastCardTop:Math.round(c.top),dockTop:Math.round(d.top),dockHeight:Math.round(d.height),viewport:innerHeight,scrollY:scrollY,documentHeight:document.documentElement.scrollHeight,wrapperPaddingBottom:parseFloat(getComputedStyle(document.querySelector('.wrap')).paddingBottom)}}""")
+        await page.evaluate("window.scrollTo(0,document.documentElement.scrollHeight)")
+        await page.wait_for_timeout(150)
+        catalog_bottom=await page.evaluate("""()=>{const card=document.querySelector('#grid.view-catalog .card:last-child'),dock=document.querySelector('#audioDock'),c=card.getBoundingClientRect(),d=dock.getBoundingClientRect();return {lastCardBottom:Math.round(c.bottom),lastCardTop:Math.round(c.top),dockTop:Math.round(d.top),dockHeight:Math.round(d.height),viewport:innerHeight,scrollY:scrollY,documentHeight:document.documentElement.scrollHeight,wrapperPaddingBottom:parseFloat(getComputedStyle(document.querySelector('.wrap')).paddingBottom),atDocumentEnd:Math.abs(scrollY+innerHeight-document.documentElement.scrollHeight)<=2}}""")
+        assert catalog_bottom["atDocumentEnd"], f"scroll clearance check must run at document end: {catalog_bottom}"
         assert catalog_bottom["lastCardBottom"] <= catalog_bottom["dockTop"]-2, f"last catalog row must remain fully above the fixed audio dock after scrolling to the end: {catalog_bottom}"
         assert catalog_bottom["wrapperPaddingBottom"] >= catalog_bottom["dockHeight"]+80, catalog_bottom
         report["catalog_bottom_clearance"]=catalog_bottom
