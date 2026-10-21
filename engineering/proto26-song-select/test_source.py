@@ -31,6 +31,7 @@ def main():
     check("const workspaceViews={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'}" in js and "window.__amqSetSongSelectWorkspaceMode=setWorkspaceMode" in js, "workspace dock switches existing panels inside Song Select")
     check('body[data-amq-workspace-mode="lists"] .view-catalog' in js and 'body[data-amq-workspace-mode="analysis"] #dashboardPanel' in js, "workspace panel visibility is scoped to the active Song Select mode")
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
+    check('body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p30-feature' in js and "backdrop-filter:blur(2px)" in js, "Song Select feature stage integrates the existing Catalog scene background with a fallback")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     result = subprocess.run([sys.executable, str(BUILDER)], cwd=ROOT, text=True, capture_output=True)
