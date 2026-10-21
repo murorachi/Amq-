@@ -18,29 +18,31 @@
 
 ## Latest isolated candidate and verified delivery
 - Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source head: `63451f4719f092587b02f2f30efa8bc25d6ec1c2`.
-- Workflow: [39527781872](https://github.com/murorachi/Amq-/actions/runs/39527781872), SUCCESS.
-- Artifact: `proto25-stage24-ui-acceptance`, ID `12313869495`, ZIP digest `fa0772649634f31be25dfda64ea5452a29d400617f2fa49dbf6b1662172875d1`.
+- Tested source head: `d37792fdf17b40dfb7afbcae43a2de7598860f02`.
+- Workflow: [39530034146](https://github.com/murorachi/Amq-/actions/runs/39530034146), SUCCESS.
+- Artifact: `proto25-stage24-ui-acceptance`, ID `12314713448`, ZIP digest `ddf0dc13028cebc5a6cf05a6bcab32c66e33df1361cf4f3ac4c71c9978ab26de`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,916,086 bytes.
-- SHA-256: `5d475770dc4ca8843fbb0562de8615b896a3355f692ff9a30753c3bcc3426b78`.
+- Size: 8,917,750 bytes.
+- SHA-256: `65ff22b43383c142153cab4a403e5c2ab8d0839f685d07f75705865f2b2a82c9`.
 - Downloaded candidate SHA-256 matches the artifact manifest.
 - Remote Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`.
-- Remote Stage 24 head: `ab4e4d14eb0b9e3533307709e7e226bb7aecd6b8`.
-- Remote Git tree confirms the candidate HTML size is 8,916,086 bytes; manifest and test report are present and match the successful workflow.
+- Remote Stage 24 head at verification: `7687521f27f0c0ad2afa20cbac3680511d9b2caf`.
+- Remote Git tree confirms the candidate HTML size is 8,917,750 bytes; manifest and test report are present and match the successful workflow.
 
 ## Acceptance results
 - Static HTML parse, duplicate-ID check and inline JavaScript syntax checks: PASS.
 - Browser acceptance: 18 assertions PASS; page errors 0; console errors 0.
-- Covered: desktop/mobile home, profile/player strip, Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
-- Final-row evidence at document end: card bottom 471px, dock top 834px, dock height 54px, wrapper bottom padding 160px.
-- Screenshots were downloaded and visually reviewed. No exact >=90% similarity score is claimed because the reference captures are not build/viewport matched.
+- Covered: desktop/mobile home, profile/player strip, Stable-inspired Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
+- Latest home geometry: logo diameter 560px; three primary actions 520px wide by 76px high.
+- Latest Play menu geometry: logo diameter 500px; three menu blades 520px wide by 92px high. The explanatory hint is hidden on desktop to avoid overlap with the cookie.
+- Catalog final-row evidence at document end: card bottom 471px, dock top 834px, dock height 54px, wrapper bottom padding 160px.
+- Latest screenshots were downloaded and reviewed. The geometry is closer to the pinned reference, but no >=90% similarity score is claimed because the reference captures are not build/viewport matched.
 
 ## Known gaps
 - NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle.
 - Exact Stable client source commit and reference screenshot build identity remain unknown.
-- Broken third-party cover imagery can still occur; image availability is not a layout pass.
-- Do not merge PR #9 or promote this candidate until the remaining reference comparison and runtime acceptance are complete.
+- Background artwork and some header details remain different from the official reference. Broken third-party cover imagery can still occur; image availability is not a layout pass.
+- Do not merge PR #9 or promote this candidate until remaining reference comparison and runtime acceptance are complete.
 
 ## Rollback
 Return to the immutable accepted Proto24 branch and commit above. Never force-push or overwrite the baseline.
