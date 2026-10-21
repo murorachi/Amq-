@@ -4,7 +4,7 @@ import json
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
