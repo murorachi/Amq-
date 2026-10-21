@@ -8,7 +8,10 @@ on:
     branches:
       - v82.85.30-proto26-song-select-integration-01
     paths:
-      - 'engineering/proto26-song-select/**'
+      - 'engineering/proto26-song-select/song-select-integration.js'
+      - 'engineering/proto26-song-select/build_single_file.py'
+      - 'engineering/proto26-song-select/test_source.py'
+      - 'engineering/proto26-song-select/browser_acceptance.py'
       - '.github/workflows/proto26-song-select.yml'
   workflow_dispatch:
 
