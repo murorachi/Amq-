@@ -87,3 +87,16 @@ Comparison sources: the pinned official screenshots listed above and the downloa
 | Background/skin | Official screenshots use a user skin/background with substantial texture and animation. | Candidate uses a restrained CSS texture and gradients. | Exact background matching is not possible from a generic screenshot without a version-matched client capture or licensed/reference assets. Do not use the official screenshot as a fake page background. |
 
 The home and Play-menu size adjustments passed workflow [39530034146](https://github.com/murorachi/Amq-/actions/runs/39530034146): 18 browser assertions passed, page/console errors were zero, the downloaded candidate SHA-256 matched its manifest, and the Stage 24 remote HTML/manifest/report were verified. The latest screenshots show the intended larger cookie and overlapping blades. Exact >=90% similarity remains NOT VERIFIED.
+
+
+## Proto25 Stage 30 — Options sidebar and responsive review
+
+Evidence workflow: [39536870515](https://github.com/murorachi/Amq-/actions/runs/39536870515), successful on tested source commit `a05c66401f0053d2c7bee53f5a965422edd8f9e9`.
+
+- Reviewed the latest desktop and mobile home, Play menu and Settings screenshots from the workflow artifact.
+- The mobile home cookie and primary blades stack without horizontal overflow; the 390px viewport and document widths both measure 390px.
+- The mobile Play menu keeps all three required labels visible and the implementation note remains reachable below the actions.
+- The Settings surface was previously 292px wide at desktop resolution, making it visually cramped compared with the Stable Options-sidebar reference. Increased desktop width to 340px while retaining 292px on mobile. Browser acceptance now asserts desktop width between 336px and 344px and checks mobile document width does not exceed the 390px viewport.
+- Latest Settings screenshot confirms the 340px panel stays inside the desktop viewport, the existing controls remain visible, and the home composition remains behind the sidebar. The change does not add fictional options or change settings behavior.
+- Stage 30 validation: static HTML/duplicate-ID/inline JavaScript checks PASS; 18 browser assertions PASS; page errors 0; console errors 0. Candidate size 8,918,095 bytes, SHA-256 `0ae1692288d85c3d7750af365b9fcb60cd57744e47b979ab9cdef08ce7a30232`; downloaded candidate matched its manifest and remote Stage 24 HTML/manifest/report were verified.
+- Remaining material differences are now more concentrated in the synthetic CSS cookie artwork/background, the compact profile/player header and the fact that AMQ's catalog/detail data model differs from osu!Stable Song Select. Improve these only with traceable visual evidence and without inventing osu! functionality. Exact >=90% similarity remains NOT VERIFIED.
