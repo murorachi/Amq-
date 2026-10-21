@@ -4,44 +4,47 @@
 
 ## Verified starting point
 
-- Branch: `v82.85.30-proto34-song-select-catalog-density-01`
-- Latest tested source: `38921fb2d206b908b363a19d804c2f79410d6fcb`
-- Generated candidate/report commit: `4d58e6a9c359f323a778c87271d54d1cc828a7d1`
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html`
-- Candidate SHA-256: `10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a`
-- Actions run https://github.com/murorachi/Amq-/actions/runs/39602822402: static PASS, browser PASS, evidence generation PASS.
-- Candidate 11 is a functional checkpoint only. Visual acceptance remains NOT VERIFIED.
-- Rollback candidate 10 SHA-256: `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
+- Active branch: `v82.85.30-proto34-song-select-catalog-density-01`
+- Last source commit tested: `c0737573422be39ea5bebd19639e0d785ad1a64d`
+- CI-generated artifact/report commit: `67c9cb875c2347635fae97a2121a7e48012c609f`
+- Run: https://github.com/murorachi/Amq-/actions/runs/39608921983 — static PASS, browser PASS, evidence generation PASS.
+- Current generated HTML SHA-256: `660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6`
+- Artifact ZIP SHA-256: `869cacdfce82e698146ce35579427024f75fa58efed4a51f4d7649910122a823`
 - Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
+- Rollback candidate 10 SHA-256: `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 
-## Visual audit findings
+## Latest test state
 
-Pinned reference: https://raw.githubusercontent.com/ppy/osu-wiki/ae2c6443a4264e5429ea7bcd2f3503be8a518a50/wiki/Client/Interface/img/song-selection.jpg
+- Static assertions/build: PASS.
+- Playwright browser acceptance: PASS.
+- Page errors / console errors: 0 / 0.
+- Matched-viewport evidence generation: PASS.
+- Visual acceptance: **NOT ACCEPTED**. Diagnostic normalized MAE is 0.269961 and changed-pixel ratio is 0.773776. These are not similarity percentages.
+- Exact osu! Stable client source commit corresponding to Wiki release label `20260924.1`: NOT VERIFIED.
 
-- Candidate screenshot, overlay, and pixel-diff are in workflow artifact https://github.com/murorachi/Amq-/actions/runs/39602822402/artifacts/12347311118.
-- Diagnostic normalized MAE: 0.273457; 78.27% of pixels have max-channel difference >=24. These metrics are not a similarity score, but visual inspection confirms major differences from the reference.
-- Candidate 11 fixes the collapsed catalog list: at 1280×720 the grid is 185.48px high with internal scrolling and at least three full cards above the player. This is not yet enough visual fidelity; the reference displays a denser song list.
-- The current candidate uses opaque three-zone panels, a large central title treatment, a selected-track information panel at left, and a right catalog. The reference instead uses a full-screen background with translucent overlays, ranking/detail content on the left, top Group/Sort controls, and a dense song list on the right.
-- The toolbar remains 94px high (search plus two filter rows). Source modes, category tabs, catalog header, counter and load-more control consume further vertical space.
+## Screenshot review findings
+
+Compared the actual 1280×720 candidate screenshot against the pinned osu! Stable screenshot.
+
+1. The center scene is mostly empty and dark; the background art is not convincingly integrated.
+2. The central title/content is partly obscured by the right catalog overlay and is not visually balanced.
+3. Song rows are readable and dense, but their cover/placeholder treatment and card styling do not resemble the Stable reference.
+4. The upper catalog chrome consumes too much visual attention and does not match the reference's Group/Sort plus category tabs hierarchy.
+5. The overall composition remains materially different; do not claim 90% similarity or promote this candidate.
 
 ## Next implementation steps
 
-1. Keep the immutable baseline and candidate 10 untouched. Continue from candidate 11 source on the Proto34 branch.
-2. Rework only Song Select composition and catalog density. Preserve the existing scene-background manager, audio player, four-workspace dock, real AMQ data, source modes, search/filter controls, and selected-song behavior.
-3. At 1280×720, target at least six fully visible song rows in the scroll viewport where practical. Reduce vertical chrome by making the search field one row and placing the existing filters in a compact, horizontally scrollable strip; keep every filter reachable and usable. Keep source modes and category tabs single-row.
-4. Bring the main visual hierarchy closer to osu! Stable: background art should read as a continuous scene rather than a boxed center panel; use restrained translucent overlays; match the reference's top controls and denser right-side song list. Do not delete AMQ features just to improve a screenshot.
-5. Add browser geometry assertions for filter reachability, six-row density target, internal scrolling, player clearance, and all existing controls. Run static and browser tests at 1280×720, 1440×900, 1000×562, and mobile.
-6. Review the matched-viewport screenshot, overlay and pixel-diff after every visual correction. Do not claim 90% similarity from a pixel metric. Visual acceptance requires explicit review and evidence.
-7. Once a stage passes, verify the generated HTML exists remotely, check its exact SHA-256 and byte size, and update this file plus CURRENT_STATUS.md and BASELINE.md. Preserve rollback instructions.
+1. **Fix artifact versioning first.** The workflow has regenerated different HTML under the same candidate-11 path. Preserve the existing candidate 11 artifact/hash as an immutable checkpoint, update the builder/test/workflow paths to create candidate 12, and never overwrite earlier candidates.
+2. Diagnose actual computed geometry for `.p32-scene`, `.p32-scene-content`, `.p32-info`, and `.p32-catalog` at 1280×720. Add those rectangles to browser diagnostics before further visual CSS changes.
+3. Correct the structural composition so the scene artwork/background spans the intended center canvas and the title is fully visible rather than underneath the catalog overlay.
+4. Use the existing Catalog scene-background manager as the primary optional art source. With no background configured, retain a deliberate fallback. Keep overlays translucent without making the center a featureless rectangle.
+5. Rework catalog rows to better match the reference hierarchy, keeping actual AMQ data, search/filter access, source modes, internal scrolling, and audio dock clearance.
+6. Run static and browser checks at 1280×720, 1440×900, 1000×562, and mobile. Review the actual screenshot, overlay, and pixel-diff after each visual correction.
+7. Update this file, `CURRENT_STATUS.md`, and `BASELINE.md` after the next accepted checkpoint. Do not label visual acceptance PASS without explicit screenshot review.
 
-## Remaining acceptance scope
-
-- Visual similarity / 90% target: NOT VERIFIED.
-- Exact osu! Stable client source commit matching Wiki label `20260924.1`: NOT VERIFIED.
-- Real audio output, full search/sort edge cases, Enter/double-event regression, full quiz lifecycle, multiplayer lifecycle, Home/Play/Settings/profile, light mode, backup/restore: NOT RUN or not fully verified.
-
-## Rollback
+## Rollback and immutable baseline
 
 - Candidate 10: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html`, SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 - Candidate 09: SHA-256 `37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d`.
 - Immutable Proto25 baseline: SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
+- Preserve all earlier candidates and the Proto25 baseline.

@@ -1,20 +1,20 @@
 # Baseline and rollback record
 
-## Current functional checkpoint: Proto34 candidate 11
+## Current functional checkpoint under visual review
 
 - Branch: `v82.85.30-proto34-song-select-catalog-density-01`
-- Tested source commit: `38921fb2d206b908b363a19d804c2f79410d6fcb`
-- Generated HTML/report commit: `4d58e6a9c359f323a778c87271d54d1cc828a7d1`
-- Actions run: https://github.com/murorachi/Amq-/actions/runs/39602822402 — **SUCCESS**
-- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html`
-- Size: 8,970,671 bytes
-- SHA-256: `10d94cdd4c1eb69f4bd83fdde3538390a4ccef12240d595c81c28a54c427a57a`
-- Static assertions: PASS. Playwright browser acceptance: PASS. Browser page errors / console errors: 0 / 0.
-- 1280×720 catalog grid: 185.48 px high, 10,079 px scroll height, 180 AMQ cards; at least three cards fully visible above the bottom player.
-- Visual evidence generation: PASS. Visual acceptance: **NOT VERIFIED**. Diagnostic normalized MAE is 0.273457 and changed-pixel ratio is 78.27%; these are not similarity percentages and indicate substantial differences requiring correction.
-- Artifact and screenshots: https://github.com/murorachi/Amq-/actions/runs/39602822402/artifacts/12347311118
-- Artifact ZIP SHA-256: `b9459630197269eb8fb84270e68836eae67b80c543c2412857f22571b578c888`
-- Candidate 11 is a functional checkpoint, not an accepted visual release.
+- Source commit tested: `c0737573422be39ea5bebd19639e0d785ad1a64d`
+- CI-generated artifact/report commit: `67c9cb875c2347635fae97a2121a7e48012c609f`
+- Run: https://github.com/murorachi/Amq-/actions/runs/39608921983 — **SUCCESS**
+- Generated HTML path currently used by workflow: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html`
+- Size: 8,978,788 bytes
+- SHA-256: `660738b4b193ccbfe6eb57931c520bd75ceca23239459cbe6b7a85269f3f41c6`
+- Static/browser checks: **PASS**. Page/console errors: 0 / 0.
+- Matched viewport evidence generation: **PASS**.
+- Visual acceptance: **NOT ACCEPTED**. Diagnostic normalized MAE 0.269961; changed-pixel ratio 77.3776%. Manual review shows substantial structural differences.
+- Artifact: https://github.com/murorachi/Amq-/actions/runs/39608921983/artifacts/12349617275
+- Artifact ZIP SHA-256: `869cacdfce82e698146ce35579427024f75fa58efed4a51f4d7649910122a823`
+- Candidate naming warning: preserve the previous candidate 11 file/hash from Git history or a separate immutable path before another iteration. The workflow currently reuses the candidate 11 path for different HTML content; next version should be candidate 12, not another overwrite.
 
 ## Previous functional rollback: Proto33 candidate 10
 
