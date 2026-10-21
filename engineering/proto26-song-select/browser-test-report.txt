@@ -1,7 +1,16 @@
 PASS source mode controls initialize
 PASS integration reports ready state
+WORKSPACE_DEBUG={"innerWidth": 1440, "bodyClasses": "dark-theme amq-workspace-prototype amq-standalone-route amq-workspace-active", "activeView": "catalog", "sidebarDisplay": "block", "sidebarRect": {"x": 0, "y": 0, "width": 244, "height": 922}, "dockDisplay": "grid", "dockRect": {"x": 0, "y": 922, "width": 1440, "height": 78}}
+PASS app navigation state is catalog
 PASS catalog view is visible before interacting with song cards
 PASS source controls are scoped to the catalog view
+PASS existing workspace sidebar is visible in Song Select
+PASS existing workspace dock is visible in Song Select
+PASS all four existing workspaces remain available
+PASS workspace lists activates its existing panel
+PASS workspace batch activates its existing panel
+PASS workspace learning activates its existing panel
+PASS workspace analysis activates its existing panel
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
@@ -15,9 +24,10 @@ PASS MIX mode activates
 PASS Singer mode activates
 PASS AMQ mode restores legacy catalog
 PASS no uncaught page errors
+CONSOLE_ERRORS=[]
 PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af
+OUTPUT_SHA256=aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06
 BROWSER_ACCEPTANCE=PASS
