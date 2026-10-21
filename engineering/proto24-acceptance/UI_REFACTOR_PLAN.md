@@ -1,53 +1,56 @@
 # Proto24 UI Refactor Plan and Reference Gate
 
 Date: 2026-10-21
-Working branch: `v82.85.30-proto24-stable-reference-audit-01`
-Pinned AMQ parent: `39d250cf5a269a0e2bf8f514474584bcc864f599`
+Working branch: `v82.85.30-proto24-stable-reference-audit-02`
+Pinned AMQ candidate branch: `v82.85.30-proto24-accepted-delivery-02`
+Pinned AMQ candidate commit: `39d250cf5a269a0e2bf8f514474584bcc864f599`
 
 ## Reference decision
 
-The user originally directed that the official osu! Wiki be used when exact osu! pages are unknown. That instruction authorizes the pinned official osu!-wiki screenshots as the visual fallback for this refactor. Use the four pinned screenshot assets listed in `OSU_STABLE_REFERENCE_AUDIT.md` as the current visual target, while preserving the explicit limitation that they are not proven captures of Stable 20260924.1. Do not use osu!lazer source or claim source-version equivalence.
+The target is osu!stable only. Do not use osu!lazer as the primary reference or infer stable behavior from lazer source.
 
-Reference gate status:
-- Official Stable version label: PASS (`20260924.1`).
-- Pinned official Wiki page and screenshot assets: PASS.
-- Exact matching Stable client source commit: BLOCKED / not required to use the user-authorized Wiki visual fallback.
-- Exact screenshot capture build: UNKNOWN; disclose this limitation.
+The official Stable release label on the audit date is `20260924.1` (2026-09-24):
+https://osu.ppy.sh/home/changelog/stable40/20260924.1
+
+The official osu!-wiki pages and screenshots are pinned at commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`. They provide traceable documentation and visual evidence for the main menu, Play menu, Song Select, and Options sidebar. However, their screenshots are not proven captures of Stable 20260924.1.
+
+**Reference gate: BLOCKED.** The exact official osu!stable client source/version mapping, source commit SHA, and matching UI source files have not been verified. The public `ppy/osu` repository explicitly describes itself as the successor/lazer client. A commit SHA mentioned in an upstream issue is not sufficient proof that it corresponds to Stable 20260924.1.
+
+No application HTML/CSS/JS changes or formal UI implementation may begin until the required source/version mapping is verified, unless the user explicitly changes this requirement.
 
 ## Scope and guardrails
 
-Target is a high-fidelity AMQ adaptation of osu!stable's interface, not a clone that discards AMQ functionality. Retain the AMQ feature model and map navigation/actions to actual existing handlers. No decorative controls without real behavior.
+Target a high-fidelity AMQ adaptation of osu!stable's interface while preserving existing AMQ functionality and data contracts. All visible controls must connect to real behavior. Do not invent statistics or fabricate functionality.
 
-Keep the following immutable:
+Keep these immutable:
 - `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`
 - `v82.85.30-proto24-workspace-ui-pass-01` at `25ac425472198e4f2a4547a3ca9d073a279a1c63`
 - Proto17 source at `4fc4a099389b59850c46d3eab2332be3401d487a`
-- Production and read-only baselines.
+- Production V82.82 and read-only V82.85.30.
 
-All implementation commits stay on an isolated working branch until full acceptance. Do not promote to production automatically.
+All implementation commits must stay on a new isolated branch until full acceptance. Do not promote to production automatically.
 
-## Implementation sequence
+## Implementation sequence after the reference gate passes
 
-1. **Main menu shell:** replace generic dashboard-like composition with Stable-inspired background, central circular primary control, restrained menu stack, user/profile affordance, and compact jukebox/player controls. Preserve real AMQ navigation and settings.
-2. **Play navigation:** reproduce the compact Stable play-choice panel and map Single Player / Multiplayer / Back to actual AMQ capabilities. If a requested mode has no existing implementation, expose a truthful disabled state or route to the actual available flow; do not fake a successful action.
-3. **Song Select:** build the left metadata column, central selection/list area, right visual/card area, search/sort/group controls, mode selection (AMQ/EMQ/MIX/Singer), player controls and details panel. Preserve current list, filtering, and playback handlers.
-4. **Profile and Settings:** bring account/statistics and settings into a consistent sidebar/panel visual language, including general settings, light mode, scene/background, database update, and backup import/export.
-5. **Integration:** compare each screen against its pinned reference at matching viewport sizes; run existing Proto24 acceptance plus feature-specific interaction checks, responsive checks, console checks, real audio output, quiz lifecycle and multiplayer lifecycle tests.
+1. Main menu shell: reproduce stable background, central circular primary control, restrained menu stack, user/profile affordance, and compact music controls. Preserve real AMQ navigation and settings.
+2. Play navigation: map Single Player, Multiplayer, and Back to actual AMQ capabilities. Do not use fake buttons.
+3. Song Select: implement the verified stable-inspired layout, song metadata, catalog cards, search/sort/group controls, AMQ/EMQ/MIX/Singer modes, playback controls, and details panel while retaining existing handlers.
+4. Profile and Settings: align profile/statistics and settings panels with verified stable references, including general settings, light mode, scene/background, database update, and backup import/export.
+5. Integration: compare each affected screen against the pinned, verified stable reference at matching viewport sizes; run scoped interaction tests, responsive checks, console checks, real audio output, quiz lifecycle, and multiplayer lifecycle tests.
 
 ## Acceptance and checkpoint policy
 
-- Every stage is a separate commit on this working branch.
-- After each stage, run scoped tests and record PASS / FAIL / NOT RUN with assertions and limitations.
-- Verify remote commit, changed file list and SHA-256 of generated single-file HTML after every candidate build.
-- Never treat a successful command exit as proof that all product flows work.
-- Final UI acceptance requires all target screens present, no fake controls, functional navigation, no console errors, responsive behavior, and evidence-backed visual review. The 90% similarity target is a goal to assess, not a number to claim without a documented comparison.
+- Every stage is a separate commit on an isolated working branch.
+- Record PASS / FAIL / NOT RUN / BLOCKED with actual cases, assertions, commands, and limitations.
+- Verify remote commit, changed file list, and SHA-256 of every generated single-file HTML candidate.
+- Visual similarity requires a documented comparison, not a subjective percentage claim.
 - Production promotion remains out of scope until explicit final acceptance and all required regressions pass.
 
-## Current verified candidate
+## Current pinned candidate
 
 - File: `dist/amq_learning_tool_v82_85_30_workspace_proto24.html`
 - Size: 8,850,993 bytes
 - SHA-256: `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`
-- Existing browser acceptance: PASS for homepage navigation, native storage, mobile overflow, Learning Center and Analysis workspaces.
+- Existing browser acceptance: PASS for the limited cases recorded in `TEST_REPORT.md`.
 - Not covered: real audio output, full quiz lifecycle, multiplayer lifecycle.
-- Visual review: existing homepage still shows `♫ ?` placeholder, large pale profile/player cards and large gradient action cards; not yet close enough to call the Stable visual refactor complete.
+- Visual review: placeholder `♫ ?` mark and generic panels remain; 90%+ similarity is NOT VERIFIED.
