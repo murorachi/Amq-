@@ -20,6 +20,9 @@ PASS selecting an EMQ work opens its detail pane
 PASS desktop detail pane is fixed at the right side
 PASS desktop detail pane remains persistent while browsing
 PASS catalog reserves horizontal space for the detail pane
+PASS batch tools reserve horizontal space for the detail pane
+PASS search and filter controls reserve horizontal space for the detail pane
+PASS 1000x562 Song Select viewport has no horizontal overflow
 PASS MIX mode activates
 PASS Singer mode activates
 PASS AMQ mode restores legacy catalog
@@ -29,5 +32,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06
+OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
 BROWSER_ACCEPTANCE=PASS

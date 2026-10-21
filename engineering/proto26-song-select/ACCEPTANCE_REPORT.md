@@ -1,8 +1,8 @@
 Proto26 Song Select acceptance summary
-Commit under test: 2efa064b18200ac7a63a8fb251d30cd567943160
-Date UTC: 2026-10-21T05:35:45Z
-8938405 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html
-aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html
+Commit under test: a627c118e05ab1aef7ac9fb46304c0b075aebf8f
+Date UTC: 2026-10-21T05:39:00Z
+8938670 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
+c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -13,19 +13,20 @@ PASS active EMQ/MIX view rerenders when library becomes ready
 PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS existing workspace sidebar and dock are kept visible on desktop
+PASS all catalog controls reserve the detail pane column
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html
-OUTPUT_BYTES=8938405
-OUTPUT_SHA256=aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
+OUTPUT_BYTES=8938670
+OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06
+OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -50,6 +51,9 @@ PASS selecting an EMQ work opens its detail pane
 PASS desktop detail pane is fixed at the right side
 PASS desktop detail pane remains persistent while browsing
 PASS catalog reserves horizontal space for the detail pane
+PASS batch tools reserve horizontal space for the detail pane
+PASS search and filter controls reserve horizontal space for the detail pane
+PASS 1000x562 Song Select viewport has no horizontal overflow
 PASS MIX mode activates
 PASS Singer mode activates
 PASS AMQ mode restores legacy catalog
@@ -59,5 +63,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06
+OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
 BROWSER_ACCEPTANCE=PASS
