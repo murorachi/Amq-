@@ -10,18 +10,15 @@
 - Browser acceptance: **PASS**.
 - Visual evidence generation: **PASS**.
 - Visual design acceptance: **NOT ACCEPTED**; normalized MAE 0.280775 and changed-pixel ratio 88.1249% are diagnostics only.
-- Candidate 21 remains an immutable functional checkpoint.
 
 ## Active candidate validation
 
 - Branch: `v82.85.30-proto35-song-select-visual-correction-01`.
-- Current candidate target: 26.
-- Candidate 25 HTML was generated during CI but not promoted because browser acceptance failed.
-- Candidate 25 failure was in the hover assertion: the test selected the first song row, which can already be selected, then incorrectly expected unselected hover behavior.
-- Candidate 26 changes the test to choose an unselected row and changes the scene/artwork layers to inset + auto dimensions. A new 1000×562 scene-artwork bounds assertion is included.
-- Workflow: https://github.com/murorachi/Amq-/actions/runs/39633186103.
-- Latest workflow commit: `c88cf9b9e407420a63b86f4751eb067f3124d7c0`.
-- Candidate 26 browser/visual result: pending at last update. Do not promote until tests finish.
+- Candidate 25 failed a Playwright hover assertion because the test selected the first row, which may already be selected.
+- Candidate 26 static checks passed, but browser acceptance did not run: a literal newline escape caused a Python SyntaxError in the test harness. Candidate 26 was not promoted.
+- Candidate 29 corrects the harness and adds a direct scene-artwork containment assertion at 1000×562 while removing conflicting width/height constraints from the absolute inset scene layers.
+- Candidate 29 workflow: https://github.com/murorachi/Amq-/actions/runs/39633715502.
+- Candidate 29 result: pending at last update. Do not promote until browser tests and visual review finish.
 
 ## Immutable AMQ baseline
 
