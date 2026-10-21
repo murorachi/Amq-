@@ -43,6 +43,19 @@ with sync_playwright() as p:
     check(page.locator("#amqWorkspaceDock").is_visible(), "existing workspace dock is visible in Song Select")
     check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
     check(page.locator("#amqWorkspaceDock [data-ws][aria-pressed='true']").count() == 0, "no unrelated workspace is falsely selected in default Song Select")
+    page.set_viewport_size({"width": 1440, "height": 900})
+    page.wait_for_timeout(120)
+    default_geometry = page.evaluate("""() => ({
+        bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
+        searchLeft: document.querySelector('#search')?.getBoundingClientRect().left ?? null,
+        catalogLeft: document.querySelector('#grid')?.getBoundingClientRect().left ?? null,
+        dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null
+    })""")
+    print("DEFAULT_GEOMETRY_1440x900=" + json.dumps(default_geometry, ensure_ascii=False))
+    check(default_geometry["bodyPaddingLeft"] == "0px", "default Song Select releases reserved workspace sidebar padding at 1440x900")
+    check(default_geometry["searchLeft"] is not None and default_geometry["searchLeft"] < 60, "default Song Select search uses the full available width at 1440x900")
+    page.set_viewport_size({"width": 1440, "height": 1000})
+    page.wait_for_timeout(120)
     if page.locator("#amqWorkspaceDock").is_visible():
         workspace_cases = [
             ("lists", "清單管理", "#watchlistView"),
