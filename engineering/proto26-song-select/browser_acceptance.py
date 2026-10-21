@@ -53,6 +53,9 @@ with sync_playwright() as p:
     check(not page.locator("#quicktools").is_visible(), "batch tools do not dominate the default Song Select view")
     check(not page.locator("#amqWorkspaceSidebar").is_visible(), "workspace action sidebar is hidden until a workspace is selected")
     check(page.locator("#amqWorkspaceDock").is_visible(), "existing workspace dock is visible in Song Select")
+    check(page.locator("#uiHomeSettings").is_visible() and page.locator("#uiBackHome").is_visible(), "Song Select retains compact Settings and Home navigation")
+    check(page.locator("#sceneBackgroundOpen").is_visible(), "existing scene background manager remains accessible in Song Select")
+    check(not page.locator("#themeToggle").is_visible() and not page.locator("#updateBtn").is_visible() and not page.locator("#exportBtn").is_visible() and not page.locator("#importBtn").is_visible(), "unrelated theme/database/backup actions are hidden from the default Song Select header")
     check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
     check(page.locator("#amqWorkspaceDock [data-ws][aria-pressed='true']").count() == 0, "no unrelated workspace is falsely selected in default Song Select")
     page.set_viewport_size({"width": 1440, "height": 900})
@@ -70,6 +73,18 @@ with sync_playwright() as p:
     check(default_geometry["stageDisplay"] == "grid", "default Song Select three-zone composition is visible at 1440x900")
     check(default_geometry["searchLeft"] is not None and default_geometry["searchLeft"] >= 1440 * 0.6 and default_geometry["searchLeft"] < 1440, "default Song Select search is positioned in the right catalog region at 1440x900")
     check(default_geometry["searchWidth"] is not None and default_geometry["searchWidth"] > 250, "right catalog search retains usable width at 1440x900")
+    audio_box = page.locator("#audioDock").bounding_box()
+    workspace_dock_box = page.locator("#amqWorkspaceDock").bounding_box()
+    check(audio_box is not None and audio_box["x"] > 1440 * 0.45 and audio_box["x"] + audio_box["width"] <= 1440 and audio_box["y"] + audio_box["height"] <= 900, "audio player controls occupy the bottom-right region without viewport overflow")
+    check(workspace_dock_box is not None and workspace_dock_box["x"] <= 20 and workspace_dock_box["x"] + workspace_dock_box["width"] < 1440 * 0.55 and workspace_dock_box["y"] + workspace_dock_box["height"] <= 900, "four-workspace dock occupies the bottom-left region")
+    page.set_viewport_size({"width":1280,"height":720})
+    page.wait_for_timeout(180)
+    card_locator = page.locator("#grid .card, #grid .p26-work-card").first
+    card_box = card_locator.bounding_box() if page.locator("#grid .card, #grid .p26-work-card").count() else None
+    player_box = page.locator("#audioDock").bounding_box()
+    check(card_box is not None and card_box["y"] < 720 and player_box is not None and card_box["y"] + card_box["height"] <= player_box["y"], "at least one catalog card is visible above the bottom player at 1280x720")
+    page.set_viewport_size({"width":1440,"height":900})
+    page.wait_for_timeout(120)
     page.set_viewport_size({"width": 1440, "height": 1000})
     page.wait_for_timeout(120)
     if page.locator("#amqWorkspaceDock").is_visible():
