@@ -1,43 +1,58 @@
 # Current Status
 
-## Proto26: Song Select integration
+## Active work: Proto26 Song Select integration
 
-Status: **Proto26.5 source modes, persistent detail pane, and four-workspace shell coexistence pass static and browser acceptance. In-place workspace-action integration and osu!stable visual comparison remain incomplete.**
+Status: **Proto26.6 is a verified development checkpoint, not final UI acceptance.** Four workspace buttons activate their existing side-panel content, and the shell remains visible next to Song Select. Full in-place workspace content/action integration and osu!stable screenshot comparison are still incomplete.
 
-### Verified baseline
-- Baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
-- Baseline HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
-- Baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
-- Baseline is read-only for this stage.
+### Immutable AMQ baseline
+- Branch: `v82.85.30-proto25-ui-refactor-stage-24`
+- File: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
+- Source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
+- SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
+- Baseline is read-only and must not be overwritten.
 
-### Changes committed on isolated branch
-- Added `engineering/proto26-song-select/song-select-integration.js` with AMQ / EMQ / MIX / Singer controls.
-- Proto26.4 adds a persistent desktop right-side selected-work details pane while retaining a full-screen, closable mobile drawer. Proto26.5 keeps the existing workspace sidebar and bottom dock visible alongside Song Select on desktop, and verifies that all four workspace panels activate. The legacy detail data/actions remain reused rather than duplicated.
-- Fixed MIX-mode rendering so the existing AMQ catalog is restored before AMQ and EMQ cards are combined.
-- Fixed a verified initialization race: the EMQ API returns an empty work list until its gzip library finishes asynchronous loading. Proto26 now waits for `api.ready`, refreshes the work list, and rerenders an already-active EMQ/MIX view.
-- Hardened browser acceptance to wait up to 30 seconds for the actual EMQ API readiness flag and assert that the API exposes work records, instead of relying on a fixed five-second sleep.
-- Fixed injection ordering: the builder now appends Proto26 after the legacy document's trailing styles/scripts, so old `#overlay.open` rules no longer override the new pane CSS.
-- Added a deterministic builder that rejects a baseline SHA-256 mismatch and writes a unique output path.
-- Added static assertions, Playwright acceptance code, GitHub Actions workflow, and project tracking documents.
-- Opened draft PR: https://github.com/murorachi/Amq-/pull/10. It remains unmerged.
-- No baseline or production branch files were overwritten.
+### Latest accepted development candidate
+- Branch: `v82.85.30-proto26-song-select-integration-01`
+- Draft PR: https://github.com/murorachi/Amq-/pull/10
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
+- Candidate tested by CI commit: `a627c118e05ab1aef7ac9fb46304c0b075aebf8f`
+- Final artifact/report commit: `be80c913beb7d3ec49b978d2c1d4169da0462a5f`
+- Size: 8,938,670 bytes
+- SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
+- GitHub Actions acceptance run #72: https://github.com/murorachi/Amq-/actions/runs/39550068389 (PASS)
+- Generated candidate and reports exist on the isolated branch. PR remains draft and unmerged.
 
-### Actual verification
-- Remote source existence: PASS. GitHub contents API returned the integration JS, builder, static tests, browser test, workflow, and status documents.
-- JavaScript syntax: PASS. The latest remote source parsed successfully with `new Function`; the CI static suite also passed.
-- API-shape inspection: PASS. Existing API confirms `getWorks()` returns `[]` before `ready`, `getWorks()` returns work objects after load, and `getSongsForWork(work.i)` returns song-row arrays. The previous one-time snapshot was therefore a real race, not a guess.
-- MIX-mode regression correction: PASS in browser acceptance. AMQ, EMQ, MIX, and Singer mode activation checks passed.
-- Previous candidate browser acceptance: FAIL, caused by the EMQ asynchronous initialization race. That candidate is rejected; SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`.
-- Proto26.3 candidate browser acceptance: PASS in GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39547940204.
-- Proto26.4 browser acceptance: PASS in GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39549067049.
-- Proto26.5 browser acceptance: PASS in GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39550068389. The workspace sidebar and dock are visible in catalog; four workspace buttons activate their existing panels; AMQ/EMQ/MIX/Singer and the right-side details pane still work; console error list is empty; no page errors or mobile horizontal overflow. Screenshot/report artifact: https://github.com/murorachi/Amq-/actions/runs/39550068389/artifacts/12322684082.
-- Earlier browser failures were real and corrected: EMQ readiness race; test clicks against a hidden home-view catalog; legacy `#overlay.open` CSS overriding the side pane; and legacy CSS hiding the workspace shell despite the active catalog route. Proto26.5 now synchronizes the sidebar/dock display against the active workspace state and browser tests exercise all four workspace buttons.
-- CI false-success bug found and fixed: test commands use `set -o pipefail`. Report-only commits are excluded from the push path filter. A concurrency group serializes runs, and the artifact commit step now fetches/reset-to-remote before reapplying generated files, preventing non-fast-forward pushes.
-- GitHub Actions execution: PASS. Run #46, https://github.com/murorachi/Amq-/actions/runs/39549067049, completed static acceptance, Chromium installation, browser acceptance, report/artifact upload, and remote artifact commit successfully. Run #43 had browser acceptance PASS but its concurrent push failed; the race-safe commit path fixed that issue. A follow-up PR-triggered duplicate run is `action_required`, but it is not the successful acceptance run.
-- Accepted Proto26.5 standalone HTML exists remotely at `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html`, size 8,938,405 bytes, SHA-256 `aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06`. GitHub contents lookup confirms the path exists (blob SHA `d80138b44fdbff298735a4fe7f8853089a1aa570`); size/hash are from the passing CI report.
-- Proto26.4 remains a prior accepted rollback checkpoint at `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html`, SHA-256 `9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af`.
-- Official osu!stable visual comparison: NOT RUN.
-- Full integrated Song Select workspace: NOT COMPLETE. The current source adds mode controls; the legacy detail overlay is still in use, and four workspaces have not been proven integrated into the same persistent view.
+### Verified changes
+- Added AMQ / EMQ / MIX / Singer controls while reusing the existing catalog tabs and song-row renderer.
+- Corrected MIX rendering to restore the existing AMQ catalog before composing mixed results.
+- Corrected EMQ asynchronous initialization race by waiting for the existing API's readiness signal.
+- Desktop selected-work details remain in a persistent right-side pane; mobile uses a closable drawer.
+- Workspace sidebar and dock remain visible beside Song Select on desktop.
+- Browser acceptance verified all four workspace buttons update the corresponding existing panel title.
+- Search and filter toolbar, batch tools, catalog and audio dock remain available; tested viewports had no horizontal overflow.
+- No uncaught page errors or browser console errors were reported in the accepted run.
+- Builder rejects baseline hash mismatch, injects the source only once, and produces a uniquely versioned standalone HTML.
 
-### Next engineering step
-Continue integrating workspace actions into the same Song Select view instead of navigating away to separate pages, while preserving each existing action/data path. Then compare fixed-viewport screenshots against official osu!stable references. Proto26.5 is accepted for continued development, not final UI sign-off. Keep PR #10 in draft until those remaining gates pass. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
+### Test status
+- Static assertions: **PASS** (CI run #72).
+- Playwright Chromium acceptance: **PASS** (CI run #72).
+- Existing AMQ baseline hash unchanged: **PASS** (builder assertion).
+- Official Stable reference identity: public stable release label Stable `20260924.1` previously pinned by Proto24 audit.
+- Official osu!-wiki references: pinned commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
+- Exact client source commit matching osu!stable Stable `20260924.1`: **NOT VERIFIED**. Do not use `ppy/osu` lazer source as a substitute.
+- Same-viewport visual diff against official Song Select screenshot: **NOT RUN**.
+- Full in-place workspace content/action integration: **NOT COMPLETE**.
+- Home, Play, Settings, profile/statistics visual acceptance against pinned references: **NOT RUN in this Proto26 stage**.
+- Real audio-output acceptance, full quiz answer lifecycle and multiplayer server lifecycle: not covered by this stage's browser test.
+
+### Newly pinned reference audit
+- `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`
+- Commit: `615ef8b92452009285845bf96a5609d0c8216784`
+- It records pinned Stable/Wiki identifiers and the exact remaining verification gates.
+
+### Next engineering work
+1. Trace actual `[data-ws]` and `#wsActions .wsAction` handlers and their destination DOM. Do not infer content targets from labels.
+2. Integrate the existing list-management, batch, learning and analysis content into the Song Select main region without cloning business logic or disrupting playback.
+3. Add assertions that prove the main content region changes, not merely the selected button/title.
+4. Capture and compare the candidate against the pinned official Song Select reference at matching 1440x900 viewport. Report geometry/overlay evidence; do not claim a similarity percentage without measurement.
+5. Only after those gates, return to homepage, Play and Settings work in the user's stated priority order.
