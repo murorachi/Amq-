@@ -827,4 +827,12 @@ body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
     font-size: clamp(18px, 4.8vw, 22px) !important;
   }
 }
+
+/* Proto25 Stage 33: add the low-contrast radial rays visible in the Stable home reference. */
+body.ui-home-menu .wrap {
+  background-image:
+    repeating-conic-gradient(from 2deg at 34% 38%, #ffffff04 0deg 0.8deg, transparent 0.8deg 9deg),
+    radial-gradient(circle at 34% 38%, #7654c80a 0%, transparent 47%) !important;
+  background-color: #17141e !important;
+}
 </style>
