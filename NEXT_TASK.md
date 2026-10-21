@@ -1,5 +1,15 @@
 # Next Task
 
+## Updated next actions after candidate 06 CI acceptance (2026-10-21)
+1. Obtain the pinned official osu!stable Song Select screenshot and candidate 06 screenshot at matching viewport; record overlay/difference and layout measurements. Do not substitute lazer references.
+2. Verify exact Stable client source commit if possible; current Stable release label alone is not a source commit.
+3. Run real audio-output acceptance and selected-song Enter/double-event regression tests.
+4. Review the newly committed static/browser reports and inspect the candidate manually at target desktop/mobile dimensions; distinguish automated checks from visual sign-off.
+5. Keep PR #10/#11 unmerged until visual comparison and remaining required gates are resolved. Do not overwrite baseline or candidate 04 rollback checkpoint.
+
+Latest verified run: https://github.com/murorachi/Amq-/actions/runs/39565629059 (PASS). Candidate 06 SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`; artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
+
+
 **Priority 1: finish Song Select as one integrated work area. Do not switch to homepage polish yet.**
 
 ## Current checkpoint
