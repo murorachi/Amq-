@@ -59,3 +59,12 @@
 - Build/test target: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html`.
 - Goal: reduce stage height and vertical whitespace, make the catalog grid internally scrollable, and require at least three visible real AMQ cards at 1280×720.
 - Acceptance status: PENDING. Candidate 11 must not replace candidate 10 until Actions, browser checks and reference comparison results are reviewed.
+
+
+## Active Proto34 continuation checkpoint (under test)
+- Branch: `v82.85.30-proto34-song-select-catalog-density-01`.
+- Browser diagnostics on run `39598657010` confirmed the catalog mount had 361.875px of height, but the song grid was only 3px because its intrinsic content size was used as the flex basis and shrunk under sibling controls.
+- Corrective source commit: `3769d8bdb503e84d198c045686d699f691668c7d`; static-test assertion commit: `1f76ff00111f27f4ab071d94e6e3d0de67956ea1`.
+- New grid rule uses zero flex basis and zero explicit height with min-height 0 and overflow auto, so flex growth should allocate the remaining catalog viewport. This is a hypothesis awaiting browser confirmation, not a pass claim.
+- Current Actions run: https://github.com/murorachi/Amq-/actions/runs/39598805123 — in progress at documentation checkpoint.
+- Preserve candidate 10 and immutable Proto25 exactly as recorded above; do not promote candidate 11 until all acceptance checks pass.
