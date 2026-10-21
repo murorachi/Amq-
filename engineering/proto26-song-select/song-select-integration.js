@@ -157,42 +157,132 @@
   // Proto30: recompose the existing catalog nodes into a three-zone Song Select screen.
   const root=grid.closest('.wrap')||grid.parentElement;
   const stage=document.createElement('section');stage.id='amqSongSelectStage';
-  stage.innerHTML='<aside class="p30-rail"><div class="p30-brand"><b>♫</b><span><strong>AMQ</strong><small>SONG SELECT</small></span></div><div class="p30-block"><small>LIBRARY</small><strong id="p30Count">曲庫載入中</strong><p>依目前資料即時更新</p></div><div class="p30-block"><small>BROWSE</small><button data-p30-jump="all">全部歌曲</button><button data-p30-jump="artists">歌手索引</button></div><div class="p30-foot">● 本機曲庫介面</div></aside><section class="p30-feature"><header>NOW BROWSING <i></i><span id="p30Mode">AMQ LIBRARY</span></header><div class="p30-art"><span class="p30-ring"></span><span class="p30-note">♫</span><small>ANIME MUSIC DATABASE</small></div><div class="p30-feature-copy"><small>SELECT A TRACK</small><h2 id="p30Title">選擇一首歌曲</h2><p id="p30Sub">從右側曲庫選取作品，查看歌曲與播放資訊。</p></div><footer><span>AMQ / EMQ</span><span id="p30Items">等待曲庫資料</span></footer></section><section class="p30-catalog"><header><div><small>TRACK BROWSER</small><h2>曲庫</h2></div><b>≡</b></header><div id="p30Mount"></div></section>';
+  stage.classList.add('view-catalog');
+  stage.innerHTML=`<aside class="p32-info" aria-label="目前選取歌曲資訊">
+    <header class="p32-panel-head"><small>SELECTED TRACK</small><span class="p32-live-dot"></span></header>
+    <div class="p32-song-label">目前選取歌曲</div>
+    <h2 id="p32SongTitle">尚未選取歌曲</h2>
+    <p id="p32SongMeta">開啟作品後選取歌曲列，這裡會顯示真實歌曲資料。</p>
+    <div class="p32-divider"></div>
+    <div class="p32-stat"><span>實際播放次數</span><strong id="p32PlayCount">尚無播放紀錄</strong></div>
+    <div class="p32-stat"><span>最近一次答錯</span><strong id="p32LastWrong">尚無錯題紀錄</strong></div>
+    <div class="p32-info-foot"><span>AMQ / EMQ</span><span id="p32Source">等待選曲</span></div>
+  </aside>
+  <section class="p32-scene" aria-label="選曲主視覺">
+    <div class="p32-scene-top"><span>NOW SELECTED</span><i></i><span id="p32Mode">AMQ LIBRARY</span></div>
+    <div class="p32-scene-image" id="p32SceneImage" aria-hidden="true"></div>
+    <div class="p32-scene-content">
+      <small id="p32WorkEyebrow">ANIME MUSIC / VISUAL NOVEL</small>
+      <h1 id="p32WorkTitle">選擇一部作品</h1>
+      <p id="p32WorkMeta">從右側曲庫選取作品，查看歌曲與既有播放紀錄。</p>
+    </div>
+    <div class="p32-scene-bottom"><span>SONG SELECT</span><span id="p32Items">等待曲庫資料</span></div>
+  </section>
+  <section class="p32-catalog" aria-label="動畫與 VN 曲庫">
+    <header class="p32-catalog-head"><div><small>TRACK BROWSER</small><h2>動畫 / VN 曲庫</h2></div><span class="p32-catalog-mark">≡</span></header>
+    <div id="p32Mount"></div>
+  </section>`;
   const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
-  const mount=stage.querySelector('#p30Mount');mount.append(modes);if(search)mount.append(search);mount.append(tabs,grid);
+  const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar)mount.append(toolbar);else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
   for(const id of ['gridCounter','empty','loadMoreWrap','quicktools']){const n=document.getElementById(id);if(n)mount.append(n)}
 
-  const style30=document.createElement('style');style30.id='amq-proto30-song-select-css';
-  style30.textContent=`
-  #amqSongSelectStage{display:grid;grid-template-columns:minmax(165px,200px) minmax(230px,1fr) minmax(300px,370px);gap:12px;width:100%;max-width:none;margin:10px 0 95px;color:#f0f3fa}
+  const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
+  style32.textContent=`
+  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:8px 0 105px;padding:0;color:#f4f5fa;isolation:isolate}
   #amqSongSelectStage *{box-sizing:border-box}
-  #amqSongSelectStage .p30-rail,#amqSongSelectStage .p30-feature,#amqSongSelectStage .p30-catalog{min-width:0;min-height:580px;border:1px solid #343c4b;background:#191e28}
-  #amqSongSelectStage .p30-rail{display:flex;flex-direction:column;padding:16px;background:linear-gradient(#1c222e,#151922)}
-  #amqSongSelectStage .p30-brand{display:flex;align-items:center;gap:10px;padding-bottom:20px;border-bottom:1px solid #343c4b}
-  #amqSongSelectStage .p30-brand>b{display:grid;place-items:center;width:42px;height:42px;background:#d94c8b;font-size:27px;box-shadow:4px 4px #77365f}
-  #amqSongSelectStage .p30-brand strong,#amqSongSelectStage .p30-brand small{display:block}#amqSongSelectStage .p30-brand strong{letter-spacing:.14em}#amqSongSelectStage .p30-brand small{font-size:9px;color:#9ca8bb;letter-spacing:.15em}
-  #amqSongSelectStage .p30-block{display:flex;flex-direction:column;gap:9px;padding:20px 0;border-bottom:1px solid #343c4b}#amqSongSelectStage .p30-block small,#amqSongSelectStage .p30-feature header,#amqSongSelectStage .p30-feature-copy>small,#amqSongSelectStage .p30-catalog header small{font-size:9px;letter-spacing:.16em;color:#aab5c8;font-weight:800}#amqSongSelectStage .p30-block p{margin:0;font-size:11px;line-height:1.6;color:#9ca8bb}
-  #amqSongSelectStage .p30-block button{padding:10px;text-align:left;border:1px solid #394354;background:#222a38;color:#e8edf6;cursor:pointer}#amqSongSelectStage .p30-block button:hover{border-color:#d94c8b}
-  #amqSongSelectStage .p30-foot{margin-top:auto;padding-top:20px;color:#91cdb0;font-size:10px}
-  #amqSongSelectStage .p30-feature{display:flex;flex-direction:column;padding:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#3b3449,#252633 40%,#191e28 75%)}
-  /* Respect the existing per-scene background configurator: reveal it gently through the feature stage only when Catalog has a saved image. Keep the original art-directed fallback when no image is configured. */
-  body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p30-feature{background:linear-gradient(135deg,rgba(18,20,31,.68),rgba(23,18,32,.42)),radial-gradient(ellipse at 50% 38%,rgba(105,74,123,.55),rgba(37,38,51,.62) 48%,rgba(25,30,40,.72) 78%);backdrop-filter:blur(2px)}
-  #amqSongSelectStage .p30-feature header{display:flex;gap:10px;align-items:center}#amqSongSelectStage .p30-feature header i{height:1px;flex:1;background:linear-gradient(90deg,#d94c8b,transparent)}
-  #amqSongSelectStage .p30-art{position:relative;display:grid;place-items:center;flex:1;min-height:270px;overflow:hidden}#amqSongSelectStage .p30-ring{position:absolute;width:70%;aspect-ratio:1;border:1px solid #d95a9b66;border-radius:50%;transform:scaleY(.72) rotate(-25deg);box-shadow:0 0 0 22px #d95a9b08}#amqSongSelectStage .p30-note{display:grid;place-items:center;width:clamp(120px,17vw,195px);aspect-ratio:1;border:1px solid #f3a4c966;border-radius:50%;background:radial-gradient(circle at 30% 20%,#f18ab6,#a63d78 38%,#28253b 75%);box-shadow:0 0 60px #d94c8b40;font-size:clamp(64px,9vw,105px);text-shadow:0 4px 22px #35102e}#amqSongSelectStage .p30-art>small{position:absolute;bottom:12px;font-size:9px;letter-spacing:.25em;color:#a7a8c0}
-  #amqSongSelectStage .p30-feature-copy{padding:20px 0;border-top:1px solid #ffffff18}#amqSongSelectStage .p30-feature-copy h2{margin:9px 0;font-size:clamp(22px,2.4vw,34px);overflow-wrap:anywhere}#amqSongSelectStage .p30-feature-copy p{font-size:12px;line-height:1.7;color:#aeb8cb}#amqSongSelectStage .p30-feature footer{display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid #ffffff18;font-size:9px;letter-spacing:.1em;color:#a7b1c4}
-  #amqSongSelectStage .p30-catalog{padding:14px 12px;overflow:hidden}#amqSongSelectStage .p30-catalog>header{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #343c4b;margin-bottom:12px}#amqSongSelectStage .p30-catalog h2{margin:4px 0 0;font-size:20px}#amqSongSelectStage .p30-catalog>header>b{font-size:25px;color:#d95a9b}#amqSongSelectStage #p30Mount{display:flex;flex-direction:column;gap:9px}
-  #amqSongSelectStage #proto26SongModes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0}#amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px}#amqSongSelectStage #proto26SongModes button{padding:8px 2px;font-size:10px}
-  #amqSongSelectStage #search{width:100%;min-width:0;margin:0;padding:10px;background:#10151e;border:1px solid #3a4353;color:#f0f3fa}#amqSongSelectStage .tabs.view-catalog{display:flex;flex-wrap:wrap;gap:4px;margin:0}#amqSongSelectStage #grid{display:flex!important;flex-direction:column;gap:6px;width:100%!important;max-height:470px;overflow:auto;padding:2px;margin:0!important;grid-template-columns:none!important}
-  #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:9px;width:100%;min-height:62px;padding:8px;background:#222936;border:1px solid #343d4d;border-radius:3px;color:#e7ebf3;text-align:left;box-shadow:none;cursor:pointer}#amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#d85896;background:#2c2c3b}#amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 42px;width:42px;height:42px;object-fit:cover}#amqSongSelectStage #gridCounter{color:#9ca8bc;font-size:10px}
+  #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:590px;overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
+  #amqSongSelectStage .p32-info{display:flex;flex-direction:column;padding:20px;background:linear-gradient(180deg,rgba(13,19,31,.93),rgba(13,17,27,.78));backdrop-filter:blur(8px)}
+  #amqSongSelectStage .p32-panel-head{display:flex;align-items:center;gap:9px;padding-bottom:14px;border-bottom:1px solid rgba(220,230,250,.16);font-size:9px;letter-spacing:.18em;color:#b9c9df;font-weight:800}
+  #amqSongSelectStage .p32-live-dot{width:6px;height:6px;border-radius:50%;background:#e95c9c;box-shadow:0 0 10px #e95c9c;margin-left:auto}
+  #amqSongSelectStage .p32-song-label{margin-top:25px;color:#c5cede;font-size:11px;letter-spacing:.1em}
+  #amqSongSelectStage #p32SongTitle{margin:9px 0 8px;font-size:clamp(20px,2vw,28px);line-height:1.22;overflow-wrap:anywhere}
+  #amqSongSelectStage #p32SongMeta{margin:0;color:#aebbd0;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+  #amqSongSelectStage .p32-divider{height:1px;background:rgba(220,230,250,.16);margin:24px 0 6px}
+  #amqSongSelectStage .p32-stat{display:flex;flex-direction:column;gap:8px;padding:16px 0;border-bottom:1px solid rgba(220,230,250,.12)}
+  #amqSongSelectStage .p32-stat>span{font-size:10px;color:#aab9cf;letter-spacing:.06em}
+  #amqSongSelectStage .p32-stat>strong{font-size:13px;line-height:1.6;font-weight:650;overflow-wrap:anywhere;color:#f2f4fb}
+  #amqSongSelectStage .p32-info-foot{display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:18px;color:#9ba9bf;font-size:9px;letter-spacing:.1em}
+  #amqSongSelectStage .p32-scene{display:flex;flex-direction:column;padding:22px;background:linear-gradient(135deg,rgba(16,22,34,.72),rgba(22,18,35,.44)),radial-gradient(ellipse at 48% 42%,rgba(94,85,130,.45),rgba(21,27,42,.62) 64%,rgba(11,15,24,.78));}
+  body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene{background:linear-gradient(135deg,rgba(10,14,24,.48),rgba(19,15,30,.38));backdrop-filter:blur(2px)}
+  #amqSongSelectStage .p32-scene-top{position:relative;z-index:2;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.17em;font-weight:800;color:#c5d0e2}
+  #amqSongSelectStage .p32-scene-top i{height:1px;flex:1;background:linear-gradient(90deg,#df5d9e,rgba(223,93,158,0))}
+  #amqSongSelectStage .p32-scene-image{position:absolute;inset:0;z-index:0;background-position:center;background-size:cover;opacity:.17;filter:saturate(.7);mask-image:linear-gradient(180deg,transparent 0%,#000 25%,#000 75%,transparent 100%)}
+  #amqSongSelectStage .p32-scene-content{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;flex:1;min-height:390px;padding:32px 8px}
+  #amqSongSelectStage .p32-scene-content small{font-size:9px;letter-spacing:.2em;color:#d1b5d2;font-weight:800}
+  #amqSongSelectStage #p32WorkTitle{max-width:100%;margin:16px 0 10px;font-size:clamp(30px,3.5vw,52px);line-height:1.04;letter-spacing:-.035em;overflow-wrap:anywhere;text-shadow:0 3px 24px rgba(0,0,0,.55)}
+  #amqSongSelectStage #p32WorkMeta{max-width:440px;margin:0;color:#d0d8e7;font-size:13px;line-height:1.8;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  #amqSongSelectStage .p32-scene-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid rgba(230,238,255,.2);color:#b7c4d9;font-size:9px;letter-spacing:.14em}
+  #amqSongSelectStage .p32-catalog{padding:14px 12px 18px;background:linear-gradient(180deg,rgba(12,17,28,.86),rgba(12,16,25,.72));backdrop-filter:blur(9px)}
+  #amqSongSelectStage .p32-catalog-head{display:flex;justify-content:space-between;align-items:center;padding:1px 0 13px;border-bottom:1px solid rgba(220,230,250,.16);margin-bottom:12px}
+  #amqSongSelectStage .p32-catalog-head small{font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800}
+  #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
+  #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
+  #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:9px;min-width:0}
+  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;background:transparent;border:0}
+  #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0}
+  #amqSongSelectStage #search{width:100%;min-width:0;margin:0;padding:10px 11px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
+  #amqSongSelectStage #search:focus{border-color:#e768a7;box-shadow:0 0 0 1px rgba(231,104,167,.2)}
+  #amqSongSelectStage #search::placeholder{color:#94a3b9}
+  #amqSongSelectStage .toolbar.view-catalog select{width:100%;min-width:0;padding:8px 6px;background:rgba(12,18,29,.7);border:1px solid rgba(199,215,240,.2);color:#dce4f1;font-size:10px}
+  #amqSongSelectStage #proto26SongModes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0}
+  #amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800;margin-bottom:2px}
+  #amqSongSelectStage #proto26SongModes button{padding:8px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:10px;font-weight:800;cursor:pointer}
+  #amqSongSelectStage #proto26SongModes button[aria-pressed="true"]{background:#bd4e86;border-color:#e98ab8;color:#fff}
+  #amqSongSelectStage .tabs.view-catalog{display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:0}
+  #amqSongSelectStage .tabs.view-catalog .tab{padding:7px 8px;background:rgba(15,22,34,.65);border:1px solid rgba(199,215,240,.17);border-radius:2px;color:#d2dbea;font-size:10px}
+  #amqSongSelectStage .tabs.view-catalog .tab.active{background:rgba(218,82,147,.88);border-color:#ed8abc;color:#fff}
+  #amqSongSelectStage .head.view-catalog{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0;padding:0;background:transparent;border:0}
+  #amqSongSelectStage .head.view-catalog h3{margin:0;font-size:12px;color:#edf2fb}
+  #amqSongSelectStage .head.view-catalog p{display:none}
+  #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px}
+  #amqSongSelectStage .head.view-catalog .result{font-size:10px;color:#aebbd0}
+  #amqSongSelectStage #grid{display:flex!important;flex-direction:column;gap:5px;width:100%!important;max-height:440px;overflow:auto;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
+  #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:10px;width:100%;min-height:62px;padding:7px 8px;background:rgba(24,31,45,.78);border:1px solid rgba(201,215,239,.18);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer}
+  #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
+  #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 54px;width:54px;height:54px;object-fit:cover}
+  #amqSongSelectStage #grid>.card .cardbody{min-width:0;flex:1}
+  #amqSongSelectStage #grid>.card .cardtitle,#amqSongSelectStage #grid>.p26-work-card .p26-work-title{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+  #amqSongSelectStage #grid>.card .sub,#amqSongSelectStage #grid>.p26-work-card .p26-work-sub{font-size:10px;color:#b4c0d2;line-height:1.4}
+  #amqSongSelectStage #grid>.card .cardfoot,#amqSongSelectStage #grid>.card .tinybar{display:none}
+  #amqSongSelectStage #gridCounter,#amqSongSelectStage #resultCount{color:#9ca8bc;font-size:10px}
+  #amqSongSelectStage body[data-amq-workspace-mode="lists"]{display:none}
   body[data-amq-workspace-mode="lists"] #amqSongSelectStage,body[data-amq-workspace-mode="learning"] #amqSongSelectStage,body[data-amq-workspace-mode="analysis"] #amqSongSelectStage{display:none}
-  @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:150px minmax(210px,1fr) minmax(275px,330px);gap:8px}#amqSongSelectStage .p30-feature{padding:14px}}
-  @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:10px;margin-bottom:110px}#amqSongSelectStage .p30-rail{min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}#amqSongSelectStage .p30-brand{grid-column:1/-1;padding-bottom:10px}#amqSongSelectStage .p30-block{padding:8px 0;border:0}#amqSongSelectStage .p30-foot{display:none}#amqSongSelectStage .p30-feature{min-height:400px}#amqSongSelectStage .p30-art{min-height:220px}#amqSongSelectStage .p30-catalog{min-height:400px}#amqSongSelectStage #grid{max-height:420px}}
+  @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:minmax(220px,27%) minmax(240px,1fr) minmax(300px,34%);gap:6px}#amqSongSelectStage .p32-info{padding:14px}#amqSongSelectStage .p32-scene{padding:16px}#amqSongSelectStage .p32-catalog{padding:12px 8px}}
+  @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:145px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:330px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:24px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:420px}}
   `;
-  document.head.append(style30);
-  const updateP30=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p30Count').textContent=c;$('#p30Items').textContent=c;$('#p30Mode').textContent=mode.toUpperCase()+' LIBRARY'};
-  stage.querySelectorAll('[data-p30-jump]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.p30Jump==='artists')activate('singer');else activate('amq')}));
-  grid.addEventListener('click',e=>{const c=e.target.closest('.card,.p26-work-card');if(!c)return;$('#p30Title').textContent=c.querySelector('.p26-work-title,.title,h3,.name,[class*="title"]')?.textContent?.trim()||c.textContent.trim().split('\n').map(v=>v.trim()).filter(Boolean)[0]||'已選取作品';$('#p30Sub').textContent='已選取曲庫項目。開啟作品後可查看歌曲與既有播放控制。'});
-  new MutationObserver(updateP30).observe(grid,{childList:true,subtree:true});updateP30();
+  document.head.append(style32);
+  let selectedSongId=null;
+  const updateP32=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY'};
+  function updateSelectedSongInfo(id,row){
+    selectedSongId=id==null?null:String(id);
+    const api=window.__aniHistoryAPIv51;
+    if(!selectedSongId){$('#p32SongTitle').textContent='尚未選取歌曲';$('#p32SongMeta').textContent='開啟作品後選取歌曲列，這裡會顯示真實歌曲資料。';$('#p32PlayCount').textContent='尚無播放紀錄';$('#p32LastWrong').textContent='尚無錯題紀錄';$('#p32Source').textContent='等待選曲';return}
+    const song=api?.getSong?.(selectedSongId);
+    const title=row?.querySelector('.songname')?.textContent?.trim()||song?.[4]||'歌曲資料暫不可用';
+    const meta=row?.querySelector('.songmeta')?.textContent?.trim()||[song?.[5]||'',song?('歌曲類型 '+song[2]):''].filter(Boolean).join(' · ')||'歌曲基本資料不完整';
+    $('#p32SongTitle').textContent=title;$('#p32SongMeta').textContent=meta;
+    const snapshot=api?.getPersonalSnapshot?.(),play=snapshot?.playHistory?.[selectedSongId];
+    $('#p32PlayCount').textContent=play&&Number(play.count)>0?Number(play.count).toLocaleString()+' 次':'尚無播放紀錄';
+    const history=api?.getHistory?.()||[];
+    const wrong=history.filter(entry=>String(entry?.songId)===selectedSongId&&entry?.correct===false).sort((a,b)=>(Date.parse(b?.at)||0)-(Date.parse(a?.at)||0))[0];
+    const summary=api?.getSongHistorySummary?.(selectedSongId);
+    if(wrong){const when=wrong.at?new Date(wrong.at).toLocaleString():'時間未記錄';$('#p32LastWrong').textContent=when+' · 作答：'+(String(wrong.answer||'').trim()||'答案未記錄')}
+    else if(Number(summary?.wrong)>0)$('#p32LastWrong').textContent='有錯題統計，但詳細紀錄目前不可用';
+    else $('#p32LastWrong').textContent='尚無錯題紀錄';
+    $('#p32Source').textContent=String(song?.source||'AMQ / EMQ').toUpperCase();
+  }
+  stage.querySelectorAll('[data-p32-jump]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.p32Jump==='artists')activate('singer');else activate('amq')}));
+  grid.addEventListener('click',e=>{
+    const c=e.target.closest('.card,.p26-work-card');if(!c)return;
+    $('#p32WorkTitle').textContent=c.querySelector('.p26-work-title,.title,h3,.name,[class*="title"]')?.textContent?.trim()||c.textContent.trim().split('\n').map(v=>v.trim()).filter(Boolean)[0]||'已選取作品';
+    $('#p32WorkMeta').textContent='已選取作品。開啟作品後可從歌曲列查看實際播放次數與最近錯題紀錄。';
+    const img=c.querySelector('img');const sceneImage=$('#p32SceneImage');
+    if(sceneImage){const url=img?.currentSrc||img?.src||'';sceneImage.style.backgroundImage=url?'linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")':'none'}
+    updateSelectedSongInfo(null);
+  });
+  $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(row?.dataset?.id)updateSelectedSongInfo(row.dataset.id,row)});
+  document.addEventListener('ani-song-playback-recorded-v80',event=>{if(selectedSongId&&String(event.detail?.songId)===selectedSongId)updateSelectedSongInfo(selectedSongId)});
+  new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true});updateP32();
 
   const getSongs=id=>{try{const a=api.getSongsForWork(id);return Array.isArray(a)?a:[]}catch(e){console.error('[Proto26] getSongsForWork failed',e);return[]}};
   function setButtons(){ $$('[data-p26-mode]',modes).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.p26Mode===mode))); tabs.classList.toggle('hidden',mode==='emq'||mode==='mix'); grid.classList.toggle('proto26-emq-grid',mode==='emq'||mode==='mix'); }
@@ -230,7 +320,7 @@
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.8',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto32.1',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
   if(!api.ready){
     const started=Date.now();
