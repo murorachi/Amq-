@@ -1,8 +1,8 @@
-Song Select candidate-33 acceptance summary
-Commit under test: 7045c6e5ab8aae796b9f5ada09671d076d3f1886
-Date UTC: 2026-10-21T16:31:55Z
-8987561 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html
-c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html
+Song Select candidate-32 acceptance summary
+Commit under test: a3d33c90de08a70602d440dac160a67ee56b4fe1
+Date UTC: 2026-10-21T16:32:47Z
+8987561 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html
+c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -185,5 +185,5 @@ BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.275356; changed-pixel-ratio=0.838118
+DIAGNOSTIC normalized MAE=0.275356; changed-pixel-ratio=0.838122
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
