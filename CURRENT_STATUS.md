@@ -2,7 +2,7 @@
 
 ## Proto26: Song Select integration
 
-Status: **EMQ startup race fix committed; previous browser acceptance failed and the CI pipeline’s false-success bug is being corrected. Full workspace UI remains incomplete.**
+Status: **Proto26.3 source-mode integration passes static and browser acceptance; persistent osu!stable-style workspace and visual comparison remain incomplete.**
 
 ### Verified baseline
 - Baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -22,16 +22,17 @@ Status: **EMQ startup race fix committed; previous browser acceptance failed and
 
 ### Actual verification
 - Remote source existence: PASS. GitHub contents API returned the integration JS, builder, static tests, browser test, workflow, and status documents.
-- JavaScript syntax: previous revision passed a `new Function` parse check. The new readiness-race revision still requires a fresh parse/static run.
+- JavaScript syntax: PASS. The latest remote source parsed successfully with `new Function`; the CI static suite also passed.
 - API-shape inspection: PASS. Existing API confirms `getWorks()` returns `[]` before `ready`, `getWorks()` returns work objects after load, and `getSongsForWork(work.i)` returns song-row arrays. The previous one-time snapshot was therefore a real race, not a guess.
-- MIX-mode regression correction: committed after code inspection; runtime interaction test still pending.
-- Browser acceptance on the prior generated candidate: FAIL. The GitHub Actions browser report showed `FAIL EMQ mode renders actual work cards`; other listed checks passed. Prior output SHA-256 was `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`, but that artifact predates the readiness-race fix and is not accepted.
+- MIX-mode regression correction: PASS in browser acceptance. AMQ, EMQ, MIX, and Singer mode activation checks passed.
+- Previous candidate browser acceptance: FAIL, caused by the EMQ asynchronous initialization race. That candidate is rejected; SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`.
+- Corrected candidate browser acceptance: PASS in GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39547940204. EMQ readiness and real work records passed; EMQ cards rendered; AMQ/MIX/Singer/AMQ restoration passed; no uncaught page errors or console errors; mobile horizontal overflow check passed.
 - Root cause found in API inspection: `getWorks()` returns an empty array until the EMQ loader completes asynchronous gzip decompression. Proto26 now polls `api.ready` and refreshes the work list. The fix has syntax/static source assertions, but it still requires a fresh real browser run.
-- CI false-success bug found: test commands were piped through `tee` without `set -o pipefail`, allowing a failing browser test to leave the step successful. This is fixed in the workflow. The push path filter was narrowed so report commits do not retrigger the workflow indefinitely.
-- GitHub Actions execution: a prior run definitely executed because it produced the browser report and generated HTML. Its browser assertion failed, but the workflow incorrectly treated the piped command as success. The corrected workflow now enables `pipefail` and excludes report-only commits from its push path filter. The browser test now explicitly waits for `api.ready` and asserts the actual work list. A fresh run for the corrected revision is not yet verified.
+- CI false-success bug found and fixed: test commands now use `set -o pipefail`. The push path filter excludes report-only commits, preventing endless reruns. The unnecessary `pull_request` trigger was removed after a duplicate PR run became approval-gated; the verified branch-push workflow is the authoritative acceptance path.
+- GitHub Actions execution: PASS. Run #21 completed successfully, including static tests, Chromium installation, browser acceptance, report generation, artifact upload, and commit of the generated candidate and reports. The later PR-triggered duplicate run was `action_required`; the PR trigger has now been removed to keep acceptance on the working branch-push path.
+- Corrected standalone HTML exists remotely at `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_01.html`, size 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`. The GitHub contents API confirms the path exists (blob SHA `06c48b378183ce217bfa6f25762a6275fe5c89f8`); the SHA-256 comes from the CI build report.
 - Official osu!stable visual comparison: NOT RUN.
-- Prior generated standalone HTML exists remotely (8,932,924 bytes, SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`), but it predates the race fix and failed browser acceptance. It is explicitly not accepted as the current candidate. The corrected revision’s HTML hash remains pending.
 - Full integrated Song Select workspace: NOT COMPLETE. The current source adds mode controls; the legacy detail overlay is still in use, and four workspaces have not been proven integrated into the same persistent view.
 
 ### Next engineering step
-Verify a fresh CI run with `pipefail`, confirm the EMQ work cards render after async library load, and record the new output hash. Only then continue the persistent Song Select layout and four-workspace integration. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
+Continue with the persistent Song Select layout and four-workspace integration. Preserve this accepted Proto26.3 checkpoint and perform the osu!stable visual comparison before claiming visual parity. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
