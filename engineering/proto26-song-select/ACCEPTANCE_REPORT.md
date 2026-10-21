@@ -1,8 +1,8 @@
-Song Select candidate-42 acceptance summary
-Commit under test: 84a79eaebad1065d5399cf631c94d0b8a2c4df51
-Date UTC: 2026-10-21T16:50:01Z
-8989121 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_42.html
-2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_42.html
+Song Select candidate-43 acceptance summary
+Commit under test: cfb314193eed41115b96e14d3c6a6209bba2240c
+Date UTC: 2026-10-21T16:51:57Z
+8989121 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
+2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -44,7 +44,7 @@ PASS scene artwork stays bounded at constrained viewport widths
 PASS constrained Song Select scene and filter controls have responsive bounds
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_42.html
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
 OUTPUT_BYTES=8989121
 OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
 BUILD=PASS
