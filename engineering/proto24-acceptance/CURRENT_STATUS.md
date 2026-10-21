@@ -4,24 +4,35 @@
 - Accepted Proto24 branch: `v82.85.30-proto24-accepted-delivery-02`.
 - Accepted commit: `39d250cf5a269a0e2bf8f514474584bcc864f599`.
 - Accepted HTML SHA-256: `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`.
-- Production V82.82 and read-only V82.85.30 remain untouched.
+- Production V82.82 and read-only V82.85.30 remain untouched. No force-push or overwrite of the accepted baseline.
 
-## Current isolated Proto25 checkpoint
+## Latest verified Proto25 checkpoint
+- Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
+- Tested source head: `63451f4719f092587b02f2f30efa8bc25d6ec1c2`.
+- Successful workflow: [Run 39527781872](https://github.com/murorachi/Amq-/actions/runs/39527781872).
+- Workflow conclusion: SUCCESS. Static HTML parse, duplicate-ID check, inline JavaScript syntax checks, and browser acceptance all passed.
+- Browser assertions: 18 PASS; page errors: 0; console errors: 0.
+- Artifact: [proto25-stage24-ui-acceptance, ID 12313869495](https://github.com/murorachi/Amq-/actions/runs/39527781872/artifacts/12313869495).
+- Candidate size: 8,916,086 bytes.
+- Candidate SHA-256: `5d475770dc4ca8843fbb0562de8615b896a3355f692ff9a30753c3bcc3426b78`.
+- Downloaded artifact's candidate hash exactly matches `candidate.sha256`.
+- Stage 24 publish branch head: `ab4e4d14eb0b9e3533307709e7e226bb7aecd6b8`.
+- Remote tree confirms candidate HTML size 8,916,086 bytes, checksum manifest size 81 bytes, and `engineering/proto24-acceptance/TEST_REPORT.md` size 875 bytes. The remote manifest and report match the successful run.
 
-- Immutable accepted baseline remains `v82.85.30-proto24-accepted-delivery-02`, commit `39d250cf5a269a0e2bf8f514474584bcc864f599`, HTML SHA-256 `c402b2af9e23fe3a1ddef2c78d2f63a79217547c1c3a607e911bacac47d9bc8e`. It was not modified.
-- Current isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`; tested source head: `38978e192ccd7ea02e228c70974ecc3a96437a1d`.
-- Latest verified workflow run: [39512028498](https://github.com/murorachi/Amq-/actions/runs/39512028498), SUCCESS. Static HTML parsing, unique IDs, inline JavaScript syntax, and all 17 Playwright assertions passed. Page errors: 0. Console errors: 0.
-- Artifact: `proto25-stage24-ui-acceptance`, artifact ID `12305094086`; candidate size 8,913,254 bytes; SHA-256 `cf4a3a209b512ce30090596f9db618d0ef956d4ff3960970ea58af3f54e2efe9`. Downloaded artifact bytes match the checksum manifest exactly.
-- Remote Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`, current commit `1f9727e8082b13a4bcafdd781fc226362e75783f`. Git tree confirms candidate size 8,913,254 bytes; remote checksum manifest and `TEST_REPORT.md` match the verified candidate/run.
-- Root cause fixed: the workspace sidebar/dock could remain active when the actual view changed to catalog. Added an isolated route-lifecycle module, explicit standalone-route marker, CSS visibility scope and browser assertions. The catalog screenshot now shows the catalog instead of the stale Analysis workspace.
-- Root cause fixed: the expanded audio dock covered too much of the catalog. Standalone routes now use a compact 54px dock, and the scroll wrapper reserves bottom space. Browser assertions verify dock height/player visibility and wrapper padding.
-- Profile card gradient/name visibility, 84px desktop profile/player strips, 390px mobile width, dashboard dark palette, workspace separation, catalog route, Song Select overlay stacking and Play menu responsive layout are covered by the latest or prior successful browser assertions. Screenshots were downloaded and reviewed.
-- NOT RUN: actual audio output, complete quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact osu!Stable screenshot build identity remains unknown; >=90% visual similarity is NOT VERIFIED. Broken third-party cover imagery may still occur and is not treated as a layout pass.
-- Do not merge PR #9 or promote Proto25 yet. Keep remaining target-screen visual review and runtime acceptance on the isolated branch.
+## Changes and evidence
+- Fixed workspace shell lifecycle so standalone catalog routes no longer retain the Learning/Analysis sidebar or dock.
+- Fixed standalone audio dock to 54px and reserved scroll-wrapper space beneath it.
+- Added a final-row scroll-clearance regression assertion. The first version of this new assertion failed because `scrollIntoView(block='end')` aligned the row to the viewport bottom without accounting for the fixed dock. This was a test setup error, not a confirmed UI defect. The test now scrolls to the actual document end and verifies the last card is above the dock.
+- Latest final-row result: last card bottom 471px, dock top 834px, dock height 54px, wrapper bottom padding 160px, at document end: true.
+- Downloaded and visually reviewed desktop/mobile home, Play menu, Settings, catalog, catalog detail, quiz, Learning Center and Analysis screenshots. No page/console errors were reported. Catalog detail has substantial empty space because the test fixture exposes a single song row; do not infer a broken layout from that alone.
+- The home, Play menu, Settings and workspace styling are structurally consistent with the intended osu!Stable-inspired direction. Exact visual similarity remains unmeasured because the official pinned wiki screenshots are not proven captures from Stable 20260924.1 and are not matching same-viewport captures.
 
-## Next engineering task
-1. Review Song Select, Settings/background dialog, quiz, Learning Center and Analysis screenshots for remaining clipping, hierarchy, focus and responsive issues.
-2. Review the catalog screenshot after scrolling to the final rows to confirm fixed-dock clearance; investigate cover-image failures separately from layout.
-3. Compare the target screens against pinned osu!Stable references and record concrete deltas. Do not claim a similarity percentage without matching reference captures.
-4. Extend regression assertions only for observed failures, then rerun the full workflow and verify artifact, candidate size/hash, remote Stage 24 tree, manifest and report.
-5. Keep audio output, full quiz lifecycle and multiplayer lifecycle marked NOT RUN until they are exercised.
+## Acceptance limits
+- NOT RUN: real audio output; full quiz-answer lifecycle; multiplayer server connectivity and lifecycle.
+- Exact osu!Stable client source commit and matching screenshot build remain unverified.
+- >=90% visual similarity: NOT VERIFIED.
+- Third-party cover-image availability is separate from layout acceptance.
+- Do not merge PR #9 or promote Proto25 until remaining target-screen visual comparison and separate runtime acceptance are complete.
+
+## Rollback
+Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. Keep all Proto25 work isolated.
