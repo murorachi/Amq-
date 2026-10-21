@@ -22,7 +22,7 @@ def main():
     check("api.getSongsForWork" in js and "makeSongRow" in js, "EMQ song details reuse existing data and song-row action")
     check("api.ready" in js and "readinessPoll" in js and "readEmqWorks()" in js, "EMQ work list refreshes after asynchronous library load")
     check("mode==='emq'||mode==='mix'" in js, "active EMQ/MIX view rerenders when library becomes ready")
-    check("proto26.4" in js and "#overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
+    check("proto26.5" in js and "#overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
     check("modes.classList.add('view-catalog')" in js, "Song Select controls remain hidden outside the catalog view")
     check("function syncWorkspaceShell()" in js and "el.style.setProperty('display',display,'important')" in js, "existing workspace sidebar and dock are kept visible on desktop")
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
