@@ -37,9 +37,12 @@ with sync_playwright() as p:
     check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "app navigation state is catalog")
     check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
-    check(page.locator("#amqWorkspaceSidebar").is_visible(), "existing workspace sidebar is visible in Song Select")
+    check(not page.locator("section.hero.view-home").is_visible(), "home collection hero is hidden in Song Select")
+    check(not page.locator("#quicktools").is_visible(), "batch tools do not dominate the default Song Select view")
+    check(not page.locator("#amqWorkspaceSidebar").is_visible(), "workspace action sidebar is hidden until a workspace is selected")
     check(page.locator("#amqWorkspaceDock").is_visible(), "existing workspace dock is visible in Song Select")
     check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
+    check(page.locator("#amqWorkspaceDock [data-ws][aria-pressed='true']").count() == 0, "no unrelated workspace is falsely selected in default Song Select")
     if page.locator("#amqWorkspaceDock").is_visible():
         workspace_cases = [
             ("lists", "清單管理", "#watchlistView"),
@@ -55,6 +58,9 @@ with sync_playwright() as p:
             check(page.locator(main_selector).is_visible(), f"workspace {key} shows its existing main content surface in place")
             check(page.locator("#amqWorkspaceDock [data-ws]").filter(has=page.locator("span")).count() == 4, f"workspace {key} preserves all four dock controls")
             check(page.evaluate("document.body.dataset.amqWorkspaceMode") == key, f"workspace {key} records the active internal mode")
+            check(page.locator("#amqWorkspaceSidebar").is_visible(), f"workspace {key} reveals its matching action sidebar")
+            check(page.locator(f'#amqWorkspaceDock [data-ws="{key}"]').get_attribute("aria-pressed") == "true", f"workspace {key} marks only its own dock button selected")
+            check(page.locator("#quicktools").is_visible() == (key == "batch"), f"workspace {key} shows batch tools only in batch mode")
             if key != "batch":
                 check(not page.locator("#grid").is_visible(), f"workspace {key} hides the unrelated catalog grid")
         # Existing actions must also preserve the in-place shell while invoking the real handler.
@@ -133,7 +139,7 @@ with sync_playwright() as p:
     check(not page_errors, "no uncaught page errors")
     print("CONSOLE_ERRORS=" + json.dumps(console_errors, ensure_ascii=False))
     check(not console_errors, "no browser console errors")
-    page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-desktop.png"), full_page=True)
+    page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-desktop.png"), full_page=False)
     page.set_viewport_size({"width":390,"height":844})
     page.wait_for_timeout(800)
     check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "mobile layout has no horizontal overflow")
