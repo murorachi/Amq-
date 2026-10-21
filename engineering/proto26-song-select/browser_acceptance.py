@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -41,10 +41,30 @@ with sync_playwright() as p:
     check(page.locator("#amqWorkspaceDock").is_visible(), "existing workspace dock is visible in Song Select")
     check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
     if page.locator("#amqWorkspaceDock").is_visible():
-        for key, title in [("lists", "清單管理"), ("batch", "批次整理"), ("learning", "學習中心"), ("analysis", "學習分析")]:
+        workspace_cases = [
+            ("lists", "清單管理", "watchlist", "#watchlistView"),
+            ("batch", "批次整理", "catalog", "#grid"),
+            ("learning", "學習中心", "learningPlan", "#learningPlanPanel"),
+            ("analysis", "學習分析", "dashboard", "#dashboardPanel"),
+        ]
+        for key, title, expected_view, main_selector in workspace_cases:
             page.locator(f'#amqWorkspaceDock [data-ws="{key}"]').click()
-            page.wait_for_timeout(100)
-            check(page.locator("#wsTitle").inner_text().strip() == title, f"workspace {key} activates its existing panel")
+            try:
+                page.wait_for_function(
+                    "(expected) => window.__aniGetActiveViewV82?.() === expected",
+                    arg=expected_view,
+                    timeout=5000,
+                )
+            except Exception:
+                pass
+            page.wait_for_timeout(180)
+            check(page.locator("#wsTitle").inner_text().strip() == title, f"workspace {key} updates its existing action panel")
+            check(page.evaluate("window.__aniGetActiveViewV82?.()") == expected_view, f"workspace {key} routes the main content to {expected_view}")
+            check(page.locator(main_selector).is_visible(), f"workspace {key} shows its existing main content surface")
+        # Mode-specific catalog checks must start from the catalog view, not whichever workspace ran last.
+        page.evaluate("window.__aniNavigateApp?.('catalog')")
+        page.wait_for_function("window.__aniGetActiveViewV82?.() === 'catalog'", timeout=5000)
+        page.wait_for_timeout(250)
     try:
         page.wait_for_function("window.__aniEmqAPI?.ready === true", timeout=30000)
     except Exception:
