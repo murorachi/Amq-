@@ -4,7 +4,7 @@ import json
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -62,6 +62,14 @@ with sync_playwright() as p:
             check(page.locator("#overlay .drawer").evaluate("(el) => getComputedStyle(el).position") == "fixed", "desktop detail pane is fixed at the right side")
             check(page.locator("#overlay .close").evaluate("(el) => getComputedStyle(el).display") == "none", "desktop detail pane remains persistent while browsing")
             check(page.locator("#grid").evaluate("(el) => el.getBoundingClientRect().width < window.innerWidth * 0.8"), "catalog reserves horizontal space for the detail pane")
+            check(page.locator("#quicktools").evaluate("(el) => el.getBoundingClientRect().width < window.innerWidth * 0.8"), "batch tools reserve horizontal space for the detail pane")
+            check(page.locator(".toolbar.view-catalog").evaluate("(el) => el.getBoundingClientRect().width < window.innerWidth * 0.8"), "search and filter controls reserve horizontal space for the detail pane")
+            page.set_viewport_size({"width": 1000, "height": 562})
+            page.wait_for_timeout(250)
+            check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "1000x562 Song Select viewport has no horizontal overflow")
+            page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
+            page.set_viewport_size({"width": 1440, "height": 1000})
+            page.wait_for_timeout(150)
         page.locator('[data-p26-mode="mix"]').click()
         page.wait_for_timeout(800)
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "mix", "MIX mode activates")
