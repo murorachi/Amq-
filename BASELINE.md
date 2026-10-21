@@ -50,3 +50,12 @@
 2. Candidate 10 SHA-256: `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 3. Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
 4. Never overwrite prior candidates or merge PR #10/#11 before visual and functional acceptance.
+
+
+## Active isolated work branch: Proto34 candidate 11 (not yet accepted)
+- Branch: `v82.85.30-proto34-song-select-catalog-density-01`
+- Base checkpoint: `e2f1fef6299d217d500e90999b64c1852c9bbd50`.
+- Current integration source change commit: `7c7190c2905a105d76f0467dbc2d872cc47e9ec5`.
+- Build/test target: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html`.
+- Goal: reduce stage height and vertical whitespace, make the catalog grid internally scrollable, and require at least three visible real AMQ cards at 1280×720.
+- Acceptance status: PENDING. Candidate 11 must not replace candidate 10 until Actions, browser checks and reference comparison results are reviewed.
