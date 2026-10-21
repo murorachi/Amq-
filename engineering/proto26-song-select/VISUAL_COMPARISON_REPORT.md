@@ -4,9 +4,9 @@
 - Reference: https://raw.githubusercontent.com/ppy/osu-wiki/ae2c6443a4264e5429ea7bcd2f3503be8a518a50/wiki/Client/Interface/img/song-selection.jpg
 - Verified Git blob SHA: 1e927a00a1984a5ba20fa5efec639410f349607a
 - Matched viewport: 1280 x 720 at device scale factor 1
-- Candidate SHA-256: adfd08cd24b229178dd97d7f6cffe47aae0224dabcdd40063f4e7bdceba7a52b
-- Normalized mean absolute pixel difference (diagnostic): 0.269339
-- Pixels with max-channel difference >= 24: 725548/921600 (78.73%)
+- Candidate SHA-256: 2938419cd2011641f04d8d76840c6b82f3aa8985ce722f5b2b4809d51ec0e4ea
+- Normalized mean absolute pixel difference (diagnostic): 0.259363
+- Pixels with max-channel difference >= 24: 728493/921600 (79.05%)
 - Active app view: catalog
 - Page errors: 0; console errors: 0
 
