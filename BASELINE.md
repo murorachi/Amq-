@@ -10,6 +10,7 @@
 - Draft PR: https://github.com/murorachi/Amq-/pull/10.
 - Baseline must remain immutable. Proto26 output is a distinct versioned path.
 - Rejected prior Proto26 candidate (pre-readiness-fix): 8,932,924 bytes, SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`; browser acceptance failed because EMQ work cards did not render. Do not use this file as an accepted candidate.
-- Corrected Proto26.3 candidate: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39547940204 passed static and browser acceptance.
-- The corrected candidate is accepted for continued development, not as final UI approval. Persistent workspace integration and osu!stable visual comparison remain outstanding.
+- Accepted Proto26.3 rollback candidate: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39547940204 passed static and browser acceptance.
+- Accepted Proto26.4 candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html`, 8,937,515 bytes, SHA-256 `9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af`; remote GitHub blob SHA `30200ab24f363bf19084d6582f6441597a17b188`; GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39549067049 passed static and browser acceptance.
+- Proto26.4 is accepted for continued development, not final UI approval. Four-workspace integration and osu!stable visual comparison remain outstanding.
 - No promotion/merge until actual browser acceptance and osu!stable visual comparison pass.
