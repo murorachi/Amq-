@@ -18,28 +18,29 @@
 
 ## Latest isolated candidate and verified delivery
 - Source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `3c1ea186f7661f6312ee263800a45f34111a40e8`.
-- Workflow: [39538605138](https://github.com/murorachi/Amq-/actions/runs/39538605138), SUCCESS.
-- Artifact: `proto25-stage24-ui-acceptance`, ID `12318249366`, ZIP digest `474f338638bbcb2acb6c2fe0970a751344b83dd0bd8beaaeaa4e1bae9df137d2`.
+- Tested source commit: `71d7f398d02a3044deb35f39cf5025e4a990c1ec`.
+- Workflow: [39538953347](https://github.com/murorachi/Amq-/actions/runs/39538953347), SUCCESS.
+- Artifact: `proto25-stage24-ui-acceptance`, ID `12318299844`, ZIP digest `3ab2333d7aac2456d31067bdf6745b7803d5af97d4968a6893c3783765106302`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,920,621 bytes.
-- SHA-256: `a36cedd3fc2f2ca612e7f5aaa8708b80924bfe912b47094812174651989883ac`; downloaded candidate hash matches its manifest.
-- Remote Stage 24 branch head after publication: `95f17580460b1dd1e17a7b069a1dd27f67c49576`.
-- Remote tree confirms the candidate HTML, 81-byte checksum manifest and TEST_REPORT; report and manifest correspond to the successful workflow.
+- Size: 8,921,697 bytes.
+- SHA-256: `8df7f9f529bed5eaeb2f8a713dbfe24af628ce625a270add59d81edd6e7f2c69`; downloaded candidate hash matches its manifest.
+- Remote Stage 24 branch head after publication: `ffd9fd2813601a2351e4bf77fc5c9957c1c265bb`.
+- Remote tree confirms candidate HTML, 81-byte checksum manifest and TEST_REPORT; report and manifest correspond to the successful workflow.
 
 ## Acceptance results
 - Static HTML parse, duplicate-ID check and inline JavaScript syntax checks: PASS.
 - Browser acceptance: 18 assertions PASS; page errors 0; console errors 0.
 - Covered: desktop/mobile home, profile/player strip, Stable-inspired Play menu and Multiplayer route UI, Settings/background dialog, native storage persistence, responsive overflow, Learning Center/Analysis separation, standalone catalog route, catalog detail overlay stacking, quiz panel palette and catalog final-row clearance above the fixed audio dock.
-- Stage 31 header assertions: desktop avatar 44px, name 15px, PP value 20px, player caption 9px, track title 13px; mobile avatar 40px, name 14px.
-- Home geometry remains: logo/cookie 560px; primary actions 520px wide by 76px high. Play menu cookie 500px; menu blades 520px wide by 92px high.
+- Stage 31 guarded profile/avatar/player typography dimensions on desktop and mobile.
+- Stage 32 adds a subtle CSS triangular pattern to the main-menu and Play-menu cookies. Browser tests assert both cookie pseudo-elements use the layered pattern; screenshot reviewed.
+- Home geometry: cookie 560px; primary actions 520px wide by 76px high. Play menu cookie 500px; menu blades 520px wide by 92px high.
 - Options sidebar: desktop 340px; mobile 292px with no horizontal overflow.
-- Latest desktop home screenshot reviewed. Exact >=90% similarity is not claimed because reference captures are not build/viewport matched.
+- No >=90% similarity score is claimed because reference captures are not build/viewport matched.
 
 ## Known gaps
 - NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle.
 - Exact Stable client source commit and reference screenshot build identity remain unknown.
-- Background artwork, exact cookie artwork and AMQ-vs-Stable Song Select data-model differences remain.
+- Background artwork and exact cookie art remain approximate; AMQ catalog data model differs from osu!Stable Song Select.
 - Do not merge PR #9 or promote this candidate until remaining reference comparison and runtime acceptance are complete.
 
 ## Rollback
