@@ -72,6 +72,7 @@ with sync_playwright() as p:
         page.wait_for_timeout(800)
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "amq", "AMQ mode restores legacy catalog")
     check(not page_errors, "no uncaught page errors")
+    print("CONSOLE_ERRORS=" + json.dumps(console_errors, ensure_ascii=False))
     check(not console_errors, "no browser console errors")
     page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-desktop.png"), full_page=True)
     page.set_viewport_size({"width":390,"height":844})
