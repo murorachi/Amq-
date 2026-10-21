@@ -37,3 +37,14 @@
 - Candidate 09: SHA-256 `37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d`.
 - Immutable Proto25 baseline: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`, SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
 - Roll back by checking out candidate 10 or rebuilding from the immutable Proto25 baseline; never overwrite prior candidates.
+
+
+## Latest continuation checkpoint — catalog flex sizing fix under test
+
+- Active branch: `v82.85.30-proto34-song-select-catalog-density-01`.
+- Current source/test checkpoint: source commit `3769d8bdb503e84d198c045686d699f691668c7d`; regression assertion commit `1f76ff00111f27f4ab071d94e6e3d0de67956ea1`.
+- Earlier candidate 11 run `39597001530` and first flex-layout fix run `39598456761` both failed browser acceptance: at 1280×720, `#grid` remained 3px high despite a 450px stage and 362px mount. Browser diagnostics confirmed `display:flex`, parent `#p32Mount` height 361.875px, and grid flex `1 1 auto`; the large intrinsic content basis was shrinking the list.
+- Root-cause correction now sets the list to `flex:1 1 0px!important;height:0px!important;min-height:0!important`, preserving the remaining viewport for scrolling. Static regression assertion was updated accordingly.
+- Latest Actions run: https://github.com/murorachi/Amq-/actions/runs/39598805123 — in progress at checkpoint time; no result claimed yet.
+- Candidate 11 and visual acceptance remain NOT VERIFIED until the current run passes browser acceptance and reference comparison evidence is reviewed.
+- Candidate 10 remains the latest verified functional rollback: SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`. Immutable Proto25 baseline unchanged.
