@@ -188,7 +188,7 @@
   const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
   const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar){
     mount.append(toolbar);
-    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
+    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
     const searchWrap=toolbar.querySelector('.search');if(searchWrap){searchWrap.style.setProperty('grid-column','1/-1','important');searchWrap.style.setProperty('width','100%','important');searchWrap.style.setProperty('min-width','0','important');searchWrap.style.setProperty('max-width','100%','important');}
     toolbar.querySelectorAll('input,select').forEach(control=>{control.style.setProperty('width','100%','important');control.style.setProperty('min-width','0','important');control.style.setProperty('max-width','100%','important');control.style.setProperty('box-sizing','border-box','important')});
   }else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
@@ -196,7 +196,7 @@
 
   const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
   style32.textContent=`
-  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 270px),560px);align-items:stretch}
+  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 230px),560px);align-items:stretch}
   #amqSongSelectStage *{box-sizing:border-box}
   #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:0;height:100%;overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
   #amqSongSelectStage .p32-info{display:flex;flex-direction:column;padding:14px;background:linear-gradient(180deg,rgba(13,19,31,.93),rgba(13,17,27,.78));backdrop-filter:blur(8px)}
@@ -226,7 +226,7 @@
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
   #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;height:auto!important;flex:1 1 auto!important;overflow:hidden}
-  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0;padding:0;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
+  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
   #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
   #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;margin:0;padding:5px 9px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
   #amqSongSelectStage #search:focus{border-color:#e768a7;box-shadow:0 0 0 1px rgba(231,104,167,.2)}
@@ -234,12 +234,12 @@
   #amqSongSelectStage .toolbar.view-catalog select{width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;padding:3px 5px!important;background:rgba(12,18,29,.7);border:1px solid rgba(199,215,240,.2);color:#dce4f1;font-size:9px}
   #amqSongSelectStage #proto26SongModes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0}
   #amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800;margin-bottom:2px}
-  #amqSongSelectStage #proto26SongModes button{height:28px;min-height:28px;padding:4px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:9px;font-weight:800;cursor:pointer}
+  #amqSongSelectStage #proto26SongModes button{height:24px;min-height:24px;padding:3px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:9px;font-weight:800;cursor:pointer}
   #amqSongSelectStage #proto26SongModes button[aria-pressed="true"]{background:#bd4e86;border-color:#e98ab8;color:#fff}
   #amqSongSelectStage .tabs.view-catalog{display:flex;flex-wrap:nowrap;gap:4px;margin:0;padding:0;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
   #amqSongSelectStage #empty.hidden{display:none!important}
-  #amqSongSelectStage #loadMoreWrap{height:auto!important;min-height:0!important;flex:0 0 auto!important;padding:4px 0!important;margin:0!important}
-  #amqSongSelectStage #loadMoreWrap button{min-height:24px!important;padding:3px 8px!important}
+  #amqSongSelectStage #loadMoreWrap{height:auto!important;min-height:0!important;flex:0 0 auto!important;padding:1px 0!important;margin:0!important}
+  #amqSongSelectStage #loadMoreWrap button{min-height:22px!important;padding:2px 8px!important}
   #amqSongSelectStage #gridCounter{flex:0 0 auto!important;min-height:0!important;margin:0!important}
   #amqSongSelectStage .tabs.view-catalog .tab{padding:4px 6px;background:rgba(15,22,34,.65);border:1px solid rgba(199,215,240,.17);border-radius:2px;color:#d2dbea;font-size:9px;line-height:1.2}
   #amqSongSelectStage .tabs.view-catalog .tab.active{background:rgba(218,82,147,.88);border-color:#ed8abc;color:#fff}
@@ -291,12 +291,12 @@
   document.head.append(style32);
   const fitStageToViewport=()=>{
     if(!stage.isConnected)return;
-    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');
+    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');
     const left=Math.max(0,stage.getBoundingClientRect().left);
     const width=Math.max(0,window.innerWidth-left);
     stage.style.setProperty('width',width+'px','important');
     stage.style.setProperty('max-width','100vw','important');
-    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');
+    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');
   };
   window.addEventListener('resize',fitStageToViewport,{passive:true});
   window.addEventListener('resize',()=>setTimeout(fitStageToViewport,80),{passive:true});
@@ -305,7 +305,8 @@
   new MutationObserver(()=>window.requestAnimationFrame(fitStageToViewport)).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
   window.requestAnimationFrame(fitStageToViewport);
   let selectedSongId=null,selectedWorkImage='',hasSelectedWork=false;
-  const updateP32=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork&&!selectedWorkImage){const img=grid.querySelector('.card img,.p26-work-card img');const url=img?.currentSrc||img?.src||'';if(url){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")'}}}
+  const syncCatalogEmptyState=()=>{if(mode!=='amq'&&mode!=='singer')return;const hasCards=grid.querySelectorAll(':scope > .card,:scope > .p26-work-card').length>0;$('#empty')?.classList.toggle('hidden',hasCards)};
+  const updateP32=()=>{syncCatalogEmptyState();const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork&&!selectedWorkImage){const img=grid.querySelector('.card img,.p26-work-card img');const url=img?.currentSrc||img?.src||'';if(url){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")'}}}
   function updateSelectedSongInfo(id,row){
     selectedSongId=id==null?null:String(id);
     const api=window.__aniHistoryAPIv51;
