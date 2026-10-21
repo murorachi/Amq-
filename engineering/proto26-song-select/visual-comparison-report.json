@@ -1,0 +1,24 @@
+{
+  "status": "EVIDENCE_GENERATED",
+  "reference_url": "https://raw.githubusercontent.com/ppy/osu-wiki/ae2c6443a4264e5429ea7bcd2f3503be8a518a50/wiki/Client/Interface/img/song-selection.jpg",
+  "reference_git_blob_sha": "1e927a00a1984a5ba20fa5efec639410f349607a",
+  "reference_dimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "candidate_file": "engineering/proto26-song-select/proto26-song-select-matched-viewport.png",
+  "candidate_sha256": "abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca",
+  "candidate_dimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "active_app_view": "catalog",
+  "body_classes": "dark-theme amq-workspace-prototype amq-standalone-route amq-workspace-active",
+  "page_errors": [],
+  "console_errors": [],
+  "normalized_mean_absolute_pixel_difference": 0.283001,
+  "pixels_with_max_channel_difference_at_least_24": 849476,
+  "pixel_count": 921600,
+  "changed_pixel_ratio": 0.92174,
+  "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
+}

@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: e5153275b791dd91fdf5cad3b7c2fecca140e228
-Date UTC: 2026-10-21T08:21:09Z
+Commit under test: 979af8f96f822831e7014a789136881eec1b14a4
+Date UTC: 2026-10-21T08:29:32Z
 8942305 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
 abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
 --- static test report ---
@@ -98,3 +98,8 @@ PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
 OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 BROWSER_ACCEPTANCE=PASS
+--- visual comparison report ---
+PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
+PASS candidate screenshot matches reference viewport 1280x720
+DIAGNOSTIC normalized MAE=0.283001; changed-pixel-ratio=0.921740
+VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
