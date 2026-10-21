@@ -23,6 +23,14 @@ with sync_playwright() as p:
     page.wait_for_timeout(500)
     check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
+    check(page.locator("#amqWorkspaceSidebar").is_visible(), "existing workspace sidebar is visible in Song Select")
+    check(page.locator("#amqWorkspaceDock").is_visible(), "existing workspace dock is visible in Song Select")
+    check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
+    if page.locator("#amqWorkspaceDock").is_visible():
+        for key, title in [("lists", "清單管理"), ("batch", "批次整理"), ("learning", "學習中心"), ("analysis", "學習分析")]:
+            page.locator(f'#amqWorkspaceDock [data-ws="{key}"]').click()
+            page.wait_for_timeout(100)
+            check(page.locator("#wsTitle").inner_text().strip() == title, f"workspace {key} activates its existing panel")
     try:
         page.wait_for_function("window.__aniEmqAPI?.ready === true", timeout=30000)
     except Exception:
