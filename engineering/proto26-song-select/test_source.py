@@ -26,6 +26,7 @@ def main():
     check("modes.classList.add('view-catalog')" in js, "Song Select controls remain hidden outside the catalog view")
     check("const syncWorkspaceShell=()=>" in js and "sidebar.style.setProperty('display','block','important')" in js and "dock.style.setProperty('display','grid','important')" in js, "workspace sidebar is conditional and dock remains available on desktop")
     check("body.amq-workspace-active .view-home{display:none!important}" in js and "body.amq-workspace-active:not([data-amq-workspace-mode]) #quicktools{display:none!important}" in js, "default Song Select hides home hero and batch tools")
+    check("body.amq-workspace-prototype.amq-workspace-active:not([data-amq-workspace-mode]){padding-left:0!important}" in js, "default Song Select releases reserved workspace sidebar padding")
     check("String(Boolean(workspaceMode)&&button.dataset.ws===workspaceMode)" in js and "'data-amq-workspace-mode']" in js, "dock selected state follows the active workspace mode")
     check("const workspaceViews={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'}" in js and "window.__amqSetSongSelectWorkspaceMode=setWorkspaceMode" in js, "workspace dock switches existing panels inside Song Select")
     check('body[data-amq-workspace-mode="lists"] .view-catalog' in js and 'body[data-amq-workspace-mode="analysis"] #dashboardPanel' in js, "workspace panel visibility is scoped to the active Song Select mode")
