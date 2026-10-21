@@ -10,5 +10,6 @@
 - Draft PR: https://github.com/murorachi/Amq-/pull/10.
 - Baseline must remain immutable. Proto26 output is a distinct versioned path.
 - Rejected prior Proto26 candidate (pre-readiness-fix): 8,932,924 bytes, SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`; browser acceptance failed because EMQ work cards did not render. Do not use this file as an accepted candidate.
-- Corrected candidate SHA-256: pending a fresh successful build and browser acceptance.
+- Corrected Proto26.3 candidate: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; GitHub Actions run https://github.com/murorachi/Amq-/actions/runs/39547940204 passed static and browser acceptance.
+- The corrected candidate is accepted for continued development, not as final UI approval. Persistent workspace integration and osu!stable visual comparison remain outstanding.
 - No promotion/merge until actual browser acceptance and osu!stable visual comparison pass.
