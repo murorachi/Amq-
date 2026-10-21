@@ -1,8 +1,8 @@
 Proto26 Song Select acceptance summary
-Commit under test: c8ad782ef88b5091ba66a6f6bc61abffb3b14f54
-Date UTC: 2026-10-21T06:39:11Z
-8938670 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
-c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
+Commit under test: d8751a5b0fc90cb786ad4eacea591fbbdad4aef1
+Date UTC: 2026-10-21T06:47:39Z
+8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
+07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -13,20 +13,21 @@ PASS active EMQ/MIX view rerenders when library becomes ready
 PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS existing workspace sidebar and dock are kept visible on desktop
+PASS workspace dock changes the existing main view through the real app router
 PASS all catalog controls reserve the detail pane column
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
-OUTPUT_BYTES=8938670
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
+OUTPUT_BYTES=8939182
+OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -38,10 +39,18 @@ PASS source controls are scoped to the catalog view
 PASS existing workspace sidebar is visible in Song Select
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
-PASS workspace lists activates its existing panel
-PASS workspace batch activates its existing panel
-PASS workspace learning activates its existing panel
-PASS workspace analysis activates its existing panel
+PASS workspace lists updates its existing action panel
+PASS workspace lists routes the main content to watchlist
+PASS workspace lists shows its existing main content surface
+PASS workspace batch updates its existing action panel
+PASS workspace batch routes the main content to catalog
+PASS workspace batch shows its existing main content surface
+PASS workspace learning updates its existing action panel
+PASS workspace learning routes the main content to learningPlan
+PASS workspace learning shows its existing main content surface
+PASS workspace analysis updates its existing action panel
+PASS workspace analysis routes the main content to dashboard
+PASS workspace analysis shows its existing main content surface
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
@@ -63,5 +72,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
 BROWSER_ACCEPTANCE=PASS

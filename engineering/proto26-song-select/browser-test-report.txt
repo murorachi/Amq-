@@ -7,10 +7,18 @@ PASS source controls are scoped to the catalog view
 PASS existing workspace sidebar is visible in Song Select
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
-PASS workspace lists activates its existing panel
-PASS workspace batch activates its existing panel
-PASS workspace learning activates its existing panel
-PASS workspace analysis activates its existing panel
+PASS workspace lists updates its existing action panel
+PASS workspace lists routes the main content to watchlist
+PASS workspace lists shows its existing main content surface
+PASS workspace batch updates its existing action panel
+PASS workspace batch routes the main content to catalog
+PASS workspace batch shows its existing main content surface
+PASS workspace learning updates its existing action panel
+PASS workspace learning routes the main content to learningPlan
+PASS workspace learning shows its existing main content surface
+PASS workspace analysis updates its existing action panel
+PASS workspace analysis routes the main content to dashboard
+PASS workspace analysis shows its existing main content surface
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
@@ -32,5 +40,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT_SHA256=07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532
 BROWSER_ACCEPTANCE=PASS
