@@ -1,15 +1,23 @@
 PASS source mode controls initialize
 PASS integration reports ready state
+PASS catalog view is visible before interacting with song cards
+PASS source controls are scoped to the catalog view
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
 PASS EMQ mode activates
 PASS EMQ mode renders actual work cards
+PASS selecting an EMQ work opens its detail pane
+PASS desktop detail pane is fixed at the right side
+PASS desktop detail pane remains persistent while browsing
+PASS catalog reserves horizontal space for the detail pane
 PASS MIX mode activates
 PASS Singer mode activates
 PASS AMQ mode restores legacy catalog
 PASS no uncaught page errors
 PASS no browser console errors
 PASS mobile layout has no horizontal overflow
-OUTPUT_SHA256=fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f
+PASS mobile detail drawer fits the viewport
+PASS mobile detail drawer retains its close control
+OUTPUT_SHA256=9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af
 BROWSER_ACCEPTANCE=PASS
