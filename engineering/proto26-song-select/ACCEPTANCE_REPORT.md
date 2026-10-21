@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: b1f47f08363e85f1355b98479c8e37751f960346
-Date UTC: 2026-10-21T07:10:35Z
+Commit under test: 31495efc6e46cfb83c7daba925522f6e86740d32
+Date UTC: 2026-10-21T07:14:43Z
 8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
 --- static test report ---
@@ -51,6 +51,14 @@ PASS workspace learning shows its existing main content surface
 PASS workspace analysis updates its existing action panel
 PASS workspace analysis routes the main content to dashboard
 PASS workspace analysis shows its existing main content surface
+PASS custom-list action opens watchlist
+PASS custom-list tab remains available
+PASS batch selection action opens catalog
+PASS batch selection control remains available
+PASS explore action opens practice view
+PASS existing explore mode control remains available
+PASS dashboard action opens analysis view
+PASS dashboard panel is visible
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present

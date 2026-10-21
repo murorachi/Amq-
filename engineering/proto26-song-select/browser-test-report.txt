@@ -19,6 +19,14 @@ PASS workspace learning shows its existing main content surface
 PASS workspace analysis updates its existing action panel
 PASS workspace analysis routes the main content to dashboard
 PASS workspace analysis shows its existing main content surface
+PASS custom-list action opens watchlist
+PASS custom-list tab remains available
+PASS batch selection action opens catalog
+PASS batch selection control remains available
+PASS explore action opens practice view
+PASS existing explore mode control remains available
+PASS dashboard action opens analysis view
+PASS dashboard panel is visible
 PASS EMQ library completes asynchronous initialization
 PASS EMQ API exposes actual work records after initialization
 PASS catalog and audio dock remain present
