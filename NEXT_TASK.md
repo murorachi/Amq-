@@ -1,18 +1,26 @@
 # Next Task
 
-**Priority 1: complete and validate the Proto26 Song Select integration.**
+**Priority 1: finish Song Select as one integrated work area. Do not switch to homepage polish yet.**
 
-Current checkpoint:
-- Draft PR: https://github.com/murorachi/Amq-/pull/10
-- Branch: `v82.85.30-proto26-song-select-integration-01`
-- EMQ asynchronous readiness fix: `9e2a09bb365ae80d8e234ffb6f70f6767816ef97`.
-- Proto26.5 keeps the four-workspace sidebar/dock visible and functional beside Song Select. Browser acceptance verifies all four panel selections.
-- Passing GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39550068389 (run #72); static and browser acceptance passed, and artifact/report commit succeeded.
-- Accepted Proto26.5 HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html`, 8,938,405 bytes, SHA-256 `aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06`.
-- Proto26.4 and Proto26.3 HTML remain previous rollback checkpoints. Current scope is still not a final osu!stable replica.
+## Current checkpoint
+- Baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
+- Immutable baseline HTML SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
+- Working branch: `v82.85.30-proto26-song-select-integration-01`
+- Draft PR #10: https://github.com/murorachi/Amq-/pull/10
+- Latest accepted development artifact: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
+- Artifact SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
+- Passing CI: https://github.com/murorachi/Amq-/actions/runs/39550068389
+- Reference audit: `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`, commit `615ef8b92452009285845bf96a5609d0c8216784`.
 
-Next actions:
-1. Keep workspace actions inside the Song Select view where feasible; currently the sidebar/dock and panel selections are integrated, but some existing actions still navigate to their original views. Reuse existing action handlers and data; do not fake or duplicate them.
-2. Retrieve official osu!stable reference images and compare fixed-viewport screenshots, including the workspace sidebar, song list, and detail pane. Do not claim visual parity before evidence.
-3. Preserve Proto26.5, Proto26.4, and Proto26.3 as immutable rollback checkpoints. Any next artifact must use a new versioned filename and pass static/browser acceptance before its hash is recorded.
-4. Keep PR #10 draft and unmerged until in-place workspace action integration and visual comparison pass.
+## Next actions
+1. Inspect existing workspace sidebar/dock handlers and identify the actual destination DOM/functions for list management, batch processing, learning center and analysis.
+2. Build a real mapping table: old entry, handler, data source, destination DOM, Song Select placement, regression test, unknowns.
+3. Integrate the existing workspace content/actions into the Song Select main content area. Preserve handlers/data and audio state. No fake controls, duplicated business logic, or speculative DOM selectors.
+4. Extend browser acceptance so each workspace selection asserts that the main content region changes and its existing core actions remain operable; current test only verifies sidebar/dock visibility and workspace title activation.
+5. Obtain the pinned official Song Select screenshot and the accepted candidate screenshot at matching 1440x900. Record bounding boxes and create overlay/difference evidence. Exact Stable source commit remains NOT VERIFIED; do not use lazer source as a substitute.
+6. Generate the next unique standalone HTML version only after scoped tests pass; keep all prior candidates unchanged and record SHA-256 + remote existence.
+7. Keep PR #10 draft/unmerged until workspace integration and visual comparison pass.
+
+## Acceptance gates
+- Static checks, browser interaction tests, visual comparison, audio output, quiz lifecycle, and multiplayer lifecycle must be reported separately.
+- No final UI completion claim until all requested screens and necessary regressions have evidence.
