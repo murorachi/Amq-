@@ -225,7 +225,7 @@
   #amqSongSelectStage .p32-catalog-head small{font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800}
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
-  #amqSongSelectStage #p32Mount{display:grid;grid-template-rows:auto auto auto auto minmax(0,1fr);gap:4px;min-width:0;min-height:0;height:calc(100% - 68px)!important;flex:0 0 auto!important;overflow:hidden}
+  #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;height:auto!important;flex:1 1 auto!important;overflow:hidden}
   #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0;padding:0;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
   #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
   #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;margin:0;padding:5px 9px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
@@ -244,7 +244,7 @@
   #amqSongSelectStage .head.view-catalog p{display:none}
   #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px}
   #amqSongSelectStage .head.view-catalog .result{font-size:10px;color:#aebbd0}
-  #amqSongSelectStage #grid{display:flex!important;display:flex!important;flex:initial!important;flex-direction:column;gap:4px;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
+  #amqSongSelectStage #grid{display:flex!important;flex:1 1 auto!important;flex-direction:column;gap:4px;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;min-height:52px;padding:3px 5px;background:rgba(24,31,45,.78);border:1px solid rgba(201,215,239,.18);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer}
   #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
   #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 42px;width:42px;height:42px;object-fit:cover}
