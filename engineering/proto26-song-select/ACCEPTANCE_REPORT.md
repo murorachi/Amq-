@@ -1,8 +1,8 @@
-Proto37 Song Select candidate-13 acceptance summary
-Commit under test: 9049513569e42dabca5d11b07c1e25b08730a2e8
-Date UTC: 2026-10-21T14:26:37Z
-8979593 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
-04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
+Proto38 Song Select candidate-14 acceptance summary
+Commit under test: 0a0974e1d7f44108572ad018ed938041af46ae87
+Date UTC: 2026-10-21T14:37:00Z
+8980732 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_14.html
+cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_14.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -31,18 +31,20 @@ PASS selected song row is visibly highlighted and shifts slightly left
 PASS base catalog cards retain their original density profile
 PASS browser acceptance includes a central-title overlap assertion
 PASS scene artwork uses a genuinely loaded cover image and refreshes when covers load
+PASS selected-work scene art handles delayed cover-image loading
+PASS catalog quick-management controls do not obscure every cover at rest
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
-OUTPUT_BYTES=8979593
-OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_14.html
+OUTPUT_BYTES=8980732
+OUTPUT_SHA256=cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
+OUTPUT_SHA256=cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -59,7 +61,7 @@ PASS at least six real AMQ catalog cards intersect the internal scroll viewport 
 PASS catalog grid owns vertical scrolling instead of extending behind the player
 PASS source controls are scoped to the catalog view
 PASS feature stage keeps its designed fallback when no scene background is configured
-SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 49% 44%, rgba(70, 91, 132, 0.3), rgba(17, 23, 35, 0.48) 72%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.2), rgba(19, 15, 30, 0.16))", "backdropFilter": "blur(1px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 24548, "ruleCount": 104}}
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 49% 44%, rgba(70, 91, 132, 0.3), rgba(17, 23, 35, 0.48) 72%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.2), rgba(19, 15, 30, 0.16))", "backdropFilter": "blur(1px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 25081, "ruleCount": 106}}
 PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
@@ -73,6 +75,10 @@ PASS no unrelated workspace is falsely selected in default Song Select
 DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 892.265625, "searchWidth": 538.734375, "catalogLeft": 891.265625, "stageDisplay": "grid", "dockBottom": 888}
 SCENE_GEOMETRY_1440x900={"stage": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "grid"}, "scene": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "block"}, "info": {"left": 28, "right": 437, "top": 52, "bottom": 712, "width": 409, "height": 660, "display": "flex"}, "title": {"left": 459, "right": 868, "top": 422, "bottom": 518, "width": 409, "height": 96, "display": "flex"}, "catalog": {"left": 882, "right": 1440, "top": 52, "bottom": 712, "width": 558, "height": 660, "display": "flex"}, "search": {"left": 892, "right": 1431, "top": 60, "bottom": 85, "width": 539, "height": 25, "display": "block"}, "grid": {"left": 891, "right": 1432, "top": 167, "bottom": 669, "width": 541, "height": 502, "display": "flex"}}
 CATALOG_COVER_DIAGNOSTICS=[{"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 161, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "complete": true, "naturalWidth": 156, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 144, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "complete": true, "naturalWidth": 191, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 136, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 135, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 150, "objectFit": "cover", "visibility": "visible", "display": "block"}]
+SCENE_ARTWORK_DEBUG={"inlineBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "computedBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "opacity": "0.5"}
+CARD_MANAGE_AT_REST={"opacity": "0", "pointerEvents": "none"}
+PASS default scene artwork uses a loaded catalog cover rather than only a gradient
+PASS catalog quick-management button is unobtrusive until hover/focus
 PASS central work title does not overlap the right catalog panel at 1440x900
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select three-zone composition is visible at 1440x900
@@ -160,10 +166,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
+OUTPUT_SHA256=cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.266530; changed-pixel-ratio=0.849965
+DIAGNOSTIC normalized MAE=0.266485; changed-pixel-ratio=0.849370
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)

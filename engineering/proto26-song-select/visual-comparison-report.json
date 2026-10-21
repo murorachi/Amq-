@@ -7,7 +7,7 @@
     "height": 720
   },
   "candidate_file": "engineering/proto26-song-select/proto26-song-select-matched-viewport.png",
-  "candidate_sha256": "04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9",
+  "candidate_sha256": "cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2",
   "candidate_dimensions": {
     "width": 1280,
     "height": 720
@@ -33,9 +33,9 @@
   },
   "page_errors": [],
   "console_errors": [],
-  "normalized_mean_absolute_pixel_difference": 0.26653,
-  "pixels_with_max_channel_difference_at_least_24": 783328,
+  "normalized_mean_absolute_pixel_difference": 0.266485,
+  "pixels_with_max_channel_difference_at_least_24": 782779,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.849965,
+  "changed_pixel_ratio": 0.84937,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }
