@@ -2,7 +2,7 @@
 
 ## Proto26: Song Select integration
 
-Status: **EMQ startup race fixed in source; acceptance and full workspace UI remain incomplete.**
+Status: **EMQ startup race fix committed; previous browser acceptance failed and the CI pipeline’s false-success bug is being corrected. Full workspace UI remains incomplete.**
 
 ### Verified baseline
 - Baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -24,11 +24,13 @@ Status: **EMQ startup race fixed in source; acceptance and full workspace UI rem
 - JavaScript syntax: previous revision passed a `new Function` parse check. The new readiness-race revision still requires a fresh parse/static run.
 - API-shape inspection: PASS. Existing API confirms `getWorks()` returns `[]` before `ready`, `getWorks()` returns work objects after load, and `getSongsForWork(work.i)` returns song-row arrays. The previous one-time snapshot was therefore a real race, not a guess.
 - MIX-mode regression correction: committed after code inspection; runtime interaction test still pending.
-- Browser test: NOT RUN. The local environment has no installed Playwright Chromium; browser launch reported the missing executable. This is an environment limitation, not a passing test.
-- GitHub Actions execution: NOT VERIFIED. The latest checked commit status had no status checks, and the PR-run lookup returned no workflow runs. Do not assume the newly added workflow executed.
+- Browser acceptance on the prior generated candidate: FAIL. The GitHub Actions browser report showed `FAIL EMQ mode renders actual work cards`; other listed checks passed. Prior output SHA-256 was `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`, but that artifact predates the readiness-race fix and is not accepted.
+- Root cause found in API inspection: `getWorks()` returns an empty array until the EMQ loader completes asynchronous gzip decompression. Proto26 now polls `api.ready` and refreshes the work list. The fix has syntax/static source assertions, but it still requires a fresh real browser run.
+- CI false-success bug found: test commands were piped through `tee` without `set -o pipefail`, allowing a failing browser test to leave the step successful. This is fixed in the workflow. The push path filter was narrowed so report commits do not retrigger the workflow indefinitely.
+- GitHub Actions execution: a prior run definitely executed because it produced the browser report and generated HTML. Its browser assertion failed, but the workflow incorrectly treated the piped command as success. The corrected workflow now enables `pipefail` and excludes report-only commits from its push path filter. A fresh run for the corrected revision is not yet verified.
 - Official osu!stable visual comparison: NOT RUN.
-- Generated standalone HTML and its SHA-256: NOT YET GENERATED/VERIFIED remotely.
+- Prior generated standalone HTML exists remotely (8,932,924 bytes, SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`), but it predates the race fix and failed browser acceptance. It is explicitly not accepted as the current candidate. The corrected revision’s HTML hash remains pending.
 - Full integrated Song Select workspace: NOT COMPLETE. The current source adds mode controls; the legacy detail overlay is still in use, and four workspaces have not been proven integrated into the same persistent view.
 
 ### Next engineering step
-Run the new static assertions and confirm the push-triggered workflow/build result. Obtain a real browser run if CI executes; then continue the persistent Song Select layout and four-workspace integration. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
+Verify a fresh CI run with `pipefail`, confirm the EMQ work cards render after async library load, and record the new output hash. Only then continue the persistent Song Select layout and four-workspace integration. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
