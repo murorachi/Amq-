@@ -1,51 +1,43 @@
 # Next Task
 
-**Priority 1: continue Song Select visual correction. Do not switch to Home, Play, or Settings.**
+**Priority 1: finish candidate 26 validation, then continue Song Select visual correction. Do not switch to Home, Play, or Settings.**
 
 ## Verified starting point
 
-- Active branch: `v82.85.30-proto34-song-select-catalog-density-01`
-- Tested source commit: `f449129ea01221ab48c2e04f8560b00b61f52f22`
-- CI artifact/report commit: `8361c21e3cd391e56b37f4a23fd635ddec54330e`
-- Latest run: https://github.com/murorachi/Amq-/actions/runs/39615864371 — static PASS, browser PASS, evidence generation PASS.
-- Candidate 12: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html`
-- Candidate 12 SHA-256: `8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470`
-- Artifact ZIP SHA-256: `cf1053e793e7fb73ce2db9565ca75e766a3c1647efcc8b4ea28a265609d277e2`
+- Latest verified functional checkpoint: candidate 21.
+- Candidate 21 SHA-256: `5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293`.
 - Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
-- Rollback candidate 10 SHA-256: `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
+- Visual acceptance remains **NOT ACCEPTED**.
 
-## Latest test state
+## Current candidate 26 validation
 
-- Static assertions/build: PASS.
-- Playwright browser acceptance: PASS.
-- Page errors / console errors: 0 / 0.
-- Scene geometry/title overlap assertion: PASS.
-- Matched viewport screenshot and diff evidence generation: PASS.
-- Visual design acceptance: **NOT ACCEPTED**. Diagnostic normalized MAE 0.266530 and changed-pixel ratio 0.849977; these are not similarity percentages.
-- Exact osu!Stable client source commit corresponding to Wiki release label `20260924.1`: NOT VERIFIED.
+- Branch: `v82.85.30-proto35-song-select-visual-correction-01`.
+- Workflow: https://github.com/murorachi/Amq-/actions/runs/39633186103.
+- Latest workflow commit: `c88cf9b9e407420a63b86f4751eb067f3124d7c0`.
+- Candidate 25 failed Playwright because the test tried to measure hover displacement on the first song row, which may already carry the selected class. The test now chooses `.songrow:not(.proto26-song-selected)` first.
+- Candidate 25 also showed the scene artwork bounds extending beyond the stage at 1000×562. Candidate 26 removes conflicting fixed width/height from the absolute inset layers and asserts the artwork stays within the scene.
+- Candidate 26 browser acceptance and visual comparison are pending. Review the actual result and screenshot before further CSS changes.
 
-## Screenshot review findings
+## After candidate 26 finishes
 
-Candidate 12 fixes the major title/catalog overlap and full-stage background geometry, but it is not yet visually close enough.
+1. If browser tests fail, use the exact failing assertion and logs to fix the root cause, increment to candidate 27, and rerun.
+2. If browser tests pass, review the generated candidate screenshot, overlay and pixel-diff image against the pinned reference. A passing browser test is not visual acceptance.
+3. Inspect the scene artwork and real cover loading in the default AMQ state. Preserve real cover URLs and the existing custom-background manager; do not fabricate art.
+4. Continue correcting the left information hierarchy, center composition, right catalog density and bottom controls against the pinned osu!Stable screenshot.
+5. Run static and browser checks at 1280×720, 1440×900, 1000×562 and mobile, including scene/artwork bounds, search/mode behavior, workspace switching and selected/hover row behavior.
+6. Keep each generated HTML filename unique and immutable. Update these records after each verified checkpoint.
 
-1. The center is still mostly a blue-gray gradient, without convincing artwork filling the scene. The default screenshot does not have a configured custom background.
-2. The left information panel remains too much like a static dashboard card rather than the osu!Stable-style in-scene leaderboard/details.
-3. Catalog card images still show placeholder/overlay treatment; inspect the actual image URLs and loaded dimensions before changing CSS. Do not fabricate external artwork or mask broken images with arbitrary icons.
-4. Catalog top controls remain visually dense and differ from the reference hierarchy.
-5. Overall visual design remains materially different; do not claim 90% similarity or promote candidate 12.
+## Reference record
 
-## Next implementation steps
+- Official Wiki release label: `20260924.1`; exact matching osu!Stable client source commit: **NOT VERIFIED**.
+- Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
+- Song Select screenshot Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
+- Candidate 21 diagnostic normalized MAE: 0.280775.
+- Candidate 21 changed-pixel ratio: 88.1249%. These are diagnostic values, not similarity percentages.
 
-1. Keep candidate 12 and prior candidates immutable. The builder now outputs candidate 12 separately; use candidate 13 for the next distinct HTML output.
-2. Diagnose the first several catalog cover images in Playwright: source URL, current source URL, complete state, natural dimensions, computed object-fit, and overlay element. Determine whether the placeholder is data-driven or a CSS overlay before changing it.
-3. Verify why the scene background is not receiving usable cover art. If the existing Catalog background manager has a user-configured image, preserve it; if none is configured, create a deliberate but subdued fallback and don't silently force an external image.
-4. Rebalance the left panel, center art canvas, and right song list against the pinned reference. Keep the center title fully clear of the catalog; maintain a single-column dense list, scroll ownership, audio dock clearance, and existing app behavior.
-5. Run static and browser checks at 1280×720, 1440×900, 1000×562, and mobile. Review the actual screenshot and overlay after each visual correction.
-6. Update this file, CURRENT_STATUS.md, and BASELINE.md after each verified checkpoint. Never mark visual acceptance PASS based only on browser assertions.
+## Rollback
 
-## Rollback and immutable baseline
-
-- Candidate 10: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html`, SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
+- Candidate 21: SHA-256 `5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293`.
+- Candidate 10: SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 - Candidate 09: SHA-256 `37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d`.
 - Immutable Proto25 baseline: SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
-- Preserve all earlier candidates and the Proto25 baseline.
