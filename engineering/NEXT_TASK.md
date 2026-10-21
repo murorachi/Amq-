@@ -1,8 +1,8 @@
 # Next Task
 
-1. Open Candidate 73 in a normal browser at mobile widths and navigate into Song Select.
-2. Open each of the four workspace controls; confirm the management panel appears inside the left-middle frame and the frame is visible behind it. Confirm toggling the active control closes the panel.
-3. Check desktop behavior for regressions; the desktop geometry was intentionally left unchanged.
-4. Capture route-driven screenshots for Home, Play menu, Song Select default, expanded workspace panel, and quiz mode. Do not use a Home screenshot as evidence of Song Select state.
-5. Continue remaining visual comparisons against the corresponding osu!stable reference screens, then run the available end-to-end checks for background persistence, VNDB covers, and audio.
-6. Upload the Candidate 73 HTML bytes through a route supporting binary/local-file content; verify remote file size and SHA-256 separately from tests.
+1. Review Candidate 74's route-driven mobile screenshots and confirm the collapsed frame no longer obscures the catalog.
+2. Continue Song Select visual work: the mobile screenshot still shows a large unused catalog area below the first visible works; investigate catalog/grid sizing without altering data loading.
+3. Compare the desktop Song Select frame, metadata, curved top border and catalog proportions against the corresponding osu!stable reference screen.
+4. Capture and verify each named screenshot from the actual target state. Do not accept a Home screenshot under a Song Select filename.
+5. Run normal-origin checks for storage persistence, VNDB cover loading, and real audio when a permitted origin/browser environment is available.
+6. Upload Candidate 74 HTML through a workflow that can read local file bytes; verify remote file size and SHA-256 independently from test status.
