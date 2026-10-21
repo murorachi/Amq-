@@ -44,7 +44,7 @@ with sync_playwright() as p:
     had_scene_bg = page.locator("body").evaluate("(el) => el.classList.contains('amq-custom-bg-active')")
     page.locator("body").evaluate("(el) => { el.classList.add('amq-custom-bg-active'); el.dataset.amqScene='catalog'; }")
     configured_style = page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
-    print("SCENE_BACKGROUND_STYLE_DEBUG=" + json.dumps({"fallback":fallback_style,"configured":configured_style}, ensure_ascii=False))
+    print("SCENE_BACKGROUND_STYLE_DEBUG=" + json.dumps({"fallback":fallback_style,"configured":configured_style,"element":page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({tag:el.tagName,id:el.id,cls:el.className,parent:el.parentElement?.id,matched:el.matches(\'#amqSongSelectStage .p30-feature\'),display:getComputedStyle(el).display,styleTag:document.querySelector(\'#amq-proto30-song-select-css\')?.textContent.length||0,ruleCount:document.querySelector(\'#amq-proto30-song-select-css\')?.sheet?.cssRules.length||0})")}, ensure_ascii=False))
     check(configured_style["backgroundImage"] != fallback_style["backgroundImage"], "feature stage blends with the configured Catalog scene background")
     if not had_scene_bg:
         page.locator("body").evaluate("(el) => el.classList.remove('amq-custom-bg-active')")
