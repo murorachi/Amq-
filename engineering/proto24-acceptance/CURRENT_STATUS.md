@@ -52,3 +52,14 @@ Return to `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f5144
 - Confirmed new layout assertions: profile name visible, profile 84px high, standalone catalog audio dock 54px high, audio player visible at 32px. The latest screenshots still show a stylized AMQ home rather than a verified close reproduction of osu!Stable.
 - NOT RUN: real audio output, complete quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Exact Stable client build and screenshot viewport match remain unknown; >=90% similarity remains NOT VERIFIED. Current qualitative estimate remains 70–75%, not a measured pixel score.
 - The accepted Proto24 baseline remains untouched; PR #9 remains unmerged. Keep Proto25 isolated.
+
+
+## Latest visual refinement checkpoint — 2026-10-21 03:36 UTC
+
+- Added restrained radial-ray background and strengthened the Stable-like triangular cookie pattern on the Play screen; menu labels now use italic typography closer to the official Stable reference. Existing AMQ routes and labels remain unchanged.
+- Latest workflow [39539309957](https://github.com/murorachi/Amq-/actions/runs/39539309957) PASS at work candidate `bf332b5cf4ac4e089d689e9ac9614cc38b11b167`; isolated Stage 24 publication commit `ba12305759ed916dd69f42e38646505be84a5710`.
+- Candidate `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`: 8,923,325 bytes; SHA-256 `0ff2bc155b7953bce29ad43209bb02cc94f2aa992e614670762ce0bf0e0c38fd`. Remote manifest matches. Artifact ID `12319085625`, ZIP SHA-256 `bb8aeb68a77ea862cc75febe6903b852030ab8e452f41ac527c592b1b61a8c76`.
+- Static checks PASS: HTML parse, 220 unique IDs, 42 inline JavaScript blocks syntax-checked. Browser acceptance PASS: 18 checks; no page errors or console errors. New assertions verify home action text is italic at 28px and Play submenu text is italic at 24px on desktop. Mobile overflow and key routes remain passing.
+- Screenshot review confirms the Play submenu is closer in typography, cookie texture and background treatment. Remaining differences include exact logo proportions/font, actual skin/background artwork, top profile/jukebox composition, and app-specific catalog versus osu!Stable Song Select.
+- Similarity remains a qualitative estimate of about 70–75% across the current UI scope, not a measured pixel score or >=90% acceptance. Exact Stable build/screenshot viewport is not verified.
+- NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle. Accepted Proto24 baseline remains unchanged; PR #9 remains unmerged.
