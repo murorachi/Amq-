@@ -5,5 +5,5 @@
 - Candidate 67: SHA-256 `e3f17f2e32c51c6093c41f6269cdb236231e9bfbcb3b1ce615f01b50073debc2`.
 - Candidate 68: SHA-256 `c43c5d67069db076321834415cfc3431fc7a06b16c80b94844750b2cad39b209`.
 - Candidate 69: SHA-256 `84440ee44f5451df94853a4e66d7c02f00b5d39a330fb8752f66c384015131de`.
-- Candidate 70 (current local artifact): SHA-256 `99f56732782abfb04c29c7de55945a6efda56acfdd9c737126769c29f31847eb`; size 9,043,637 bytes. Parent: Candidate 69. Remote HTML hash not verified; direct file-origin acceptance and human pixel-level acceptance remain pending.
+- Candidate 70 (current local artifact): SHA-256 `78f2ed58756ff64e1f22f583cc5a9396a549d4eb373a83bbdb50d185ba6f81a0`; size 9,043,637 bytes. Parent: Candidate 69. Remote HTML hash not verified; direct file-origin acceptance and human pixel-level acceptance remain pending.
 - Immutable Proto25 baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`, SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
