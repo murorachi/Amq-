@@ -188,15 +188,19 @@
   const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
   const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar){
     mount.append(toolbar);
-    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
-    const searchWrap=toolbar.querySelector('.search');if(searchWrap){searchWrap.style.setProperty('grid-column','1/-1','important');searchWrap.style.setProperty('width','100%','important');searchWrap.style.setProperty('min-width','0','important');searchWrap.style.setProperty('max-width','100%','important');}
-    toolbar.querySelectorAll('input,select').forEach(control=>{control.style.setProperty('width','100%','important');control.style.setProperty('min-width','0','important');control.style.setProperty('max-width','100%','important');control.style.setProperty('box-sizing','border-box','important')});
+    const searchWrap=toolbar.querySelector('.search');let filterStrip=toolbar.querySelector('.p26-filter-strip');
+    if(!filterStrip){filterStrip=document.createElement('div');filterStrip.className='p26-filter-strip';[...toolbar.children].filter(el=>el!==searchWrap).forEach(el=>filterStrip.append(el));toolbar.append(filterStrip)}
+    toolbar.style.setProperty('display','flex','important');toolbar.style.setProperty('flex-direction','column','important');toolbar.style.setProperty('gap','4px','important');toolbar.style.setProperty('padding','0','important');toolbar.style.setProperty('margin','0','important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
+    if(searchWrap){searchWrap.style.setProperty('width','100%','important');searchWrap.style.setProperty('min-width','0','important');searchWrap.style.setProperty('max-width','100%','important');searchWrap.style.setProperty('margin','0','important')}
+    filterStrip.style.setProperty('display','flex','important');filterStrip.style.setProperty('flex','0 0 28px','important');filterStrip.style.setProperty('flex-wrap','nowrap','important');filterStrip.style.setProperty('gap','4px','important');filterStrip.style.setProperty('width','100%','important');filterStrip.style.setProperty('min-width','0','important');filterStrip.style.setProperty('height','28px','important');filterStrip.style.setProperty('overflow-x','auto','important');filterStrip.style.setProperty('overflow-y','hidden','important');filterStrip.style.setProperty('scrollbar-width','thin','important');
+    filterStrip.querySelectorAll('input,select,button').forEach(control=>{control.style.setProperty('flex','0 0 100px','important');control.style.setProperty('width','100px','important');control.style.setProperty('min-width','100px','important');control.style.setProperty('max-width','100px','important');control.style.setProperty('height','28px','important');control.style.setProperty('min-height','28px','important');control.style.setProperty('box-sizing','border-box','important')});
+    toolbar.querySelectorAll('input,select').forEach(control=>control.style.setProperty('box-sizing','border-box','important'));
   }else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
   for(const id of ['gridCounter','empty','loadMoreWrap','quicktools']){const n=document.getElementById(id);if(n)mount.append(n)}
 
   const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
   style32.textContent=`
-  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 180px),560px);align-items:stretch}
+  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 118px;padding:0;color:#f4f5fa;isolation:isolate;height:clamp(380px,calc(100vh - 140px),580px);align-items:stretch}
   #amqSongSelectStage *{box-sizing:border-box}
   #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:0;height:100%;overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
   #amqSongSelectStage .p32-info{display:flex;flex-direction:column;padding:14px;background:linear-gradient(180deg,rgba(13,19,31,.93),rgba(13,17,27,.78));backdrop-filter:blur(8px)}
@@ -221,12 +225,14 @@
   #amqSongSelectStage #p32WorkMeta{max-width:440px;margin:0;color:#d0d8e7;font-size:13px;line-height:1.8;text-shadow:0 2px 12px rgba(0,0,0,.7)}
   #amqSongSelectStage .p32-scene-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid rgba(230,238,255,.2);color:#b7c4d9;font-size:9px;letter-spacing:.14em}
   #amqSongSelectStage .p32-catalog{display:flex;flex-direction:column;min-height:0;padding:8px 8px 8px;background:linear-gradient(180deg,rgba(12,17,28,.86),rgba(12,16,25,.72));backdrop-filter:blur(9px)}
-  #amqSongSelectStage .p32-catalog-head{display:flex;justify-content:space-between;align-items:center;padding:1px 0 5px;border-bottom:1px solid rgba(220,230,250,.16);margin-bottom:7px}
+  #amqSongSelectStage .p32-catalog-head{display:none!important}
   #amqSongSelectStage .p32-catalog-head small{font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800}
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
-  #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;height:auto!important;flex:1 1 auto!important;overflow:hidden}
-  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px!important;margin:0!important;padding:0!important;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
+  #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:2px!important;min-width:0;min-height:0;height:auto!important;flex:1 1 auto!important;overflow:hidden}
+  #amqSongSelectStage .toolbar.view-catalog{display:flex;flex-direction:column;gap:4px!important;margin:0!important;padding:0!important;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
+  #amqSongSelectStage .toolbar.view-catalog .p26-filter-strip{display:flex;flex-wrap:nowrap;gap:4px;min-width:0;width:100%;height:28px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+  #amqSongSelectStage .toolbar.view-catalog .p26-filter-strip>*{flex:0 0 100px;min-width:100px;max-width:100px;height:28px;box-sizing:border-box}
   #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
   #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;height:28px!important;min-height:28px!important;box-sizing:border-box;margin:0;padding:5px 9px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
   #amqSongSelectStage #tagFilter{height:28px!important;min-height:28px!important;padding:3px 5px!important}
@@ -237,17 +243,18 @@
   #amqSongSelectStage #proto26SongModes .p26-label{display:none!important}
   #amqSongSelectStage #proto26SongModes button{height:24px;min-height:24px;padding:3px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:9px;font-weight:800;cursor:pointer}
   #amqSongSelectStage #proto26SongModes button[aria-pressed="true"]{background:#bd4e86;border-color:#e98ab8;color:#fff}
-  #amqSongSelectStage .tabs.view-catalog{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:4px;margin:0!important;padding:0;min-width:0;height:28px!important;max-height:28px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin}
+  #amqSongSelectStage .tabs.view-catalog{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:4px;margin:0!important;padding:0;min-width:0;height:24px!important;max-height:24px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin}
   #amqSongSelectStage #empty.hidden{display:none!important}
-  #amqSongSelectStage #loadMoreWrap{height:auto!important;min-height:0!important;flex:0 0 auto!important;padding:1px 0!important;margin:0!important}
+  #amqSongSelectStage #loadMoreWrap{height:22px!important;min-height:0!important;flex:0 0 22px!important;padding:0!important;margin:0!important}
   #amqSongSelectStage #loadMoreWrap button{min-height:22px!important;padding:2px 8px!important}
-  #amqSongSelectStage #gridCounter{flex:0 0 auto!important;min-height:0!important;margin:0!important}
-  #amqSongSelectStage .tabs.view-catalog .tab{padding:4px 6px;background:rgba(15,22,34,.65);border:1px solid rgba(199,215,240,.17);border-radius:2px;color:#d2dbea;font-size:9px;line-height:1.2}
+  #amqSongSelectStage #gridCounter{flex:0 0 auto!important;min-height:0!important;height:12px!important;line-height:12px!important;margin:0!important}
+  #amqSongSelectStage .tabs.view-catalog .tab{padding:2px 5px;background:rgba(15,22,34,.65);border:1px solid rgba(199,215,240,.17);border-radius:2px;color:#d2dbea;font-size:9px;line-height:1.2}
   #amqSongSelectStage .tabs.view-catalog .tab.active{background:rgba(218,82,147,.88);border-color:#ed8abc;color:#fff}
-  #amqSongSelectStage .head.view-catalog{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0;padding:0;background:transparent;border:0}
+  #amqSongSelectStage .head.view-catalog{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0!important;padding:0;background:transparent;border:0;height:30px!important;min-height:30px!important}
   #amqSongSelectStage .head.view-catalog h3{margin:0;font-size:12px;color:#edf2fb}
   #amqSongSelectStage .head.view-catalog p{display:none}
-  #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px}
+  #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px;height:28px!important}
+  #amqSongSelectStage .head.view-catalog .catalogHeadTools>*{height:28px!important;min-height:28px!important;padding:4px 8px!important}
   #amqSongSelectStage .head.view-catalog .result{font-size:10px;color:#aebbd0}
   #amqSongSelectStage #grid{display:flex!important;flex:1 1 0px!important;flex-direction:column;gap:4px;width:100%!important;height:0px!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;min-height:52px;padding:3px 5px;background:rgba(24,31,45,.78);border:1px solid rgba(201,215,239,.18);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer}
@@ -292,12 +299,10 @@
   document.head.append(style32);
   const fitStageToViewport=()=>{
     if(!stage.isConnected)return;
-    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');
     const left=Math.max(0,stage.getBoundingClientRect().left);
     const width=Math.max(0,window.innerWidth-left);
     stage.style.setProperty('width',width+'px','important');
     stage.style.setProperty('max-width','100vw','important');
-    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1400?3:(window.innerWidth>1120?4:2)},minmax(0,1fr))`,'important');
   };
   window.addEventListener('resize',fitStageToViewport,{passive:true});
   window.addEventListener('resize',()=>setTimeout(fitStageToViewport,80),{passive:true});

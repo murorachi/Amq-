@@ -59,7 +59,7 @@ with sync_playwright() as p:
         return {cardCount:cards.length,visibleCardCount:visible.length,gridHeight:Math.round(gr.height),gridScrollHeight:grid.scrollHeight,gridOverflow:getComputedStyle(grid).overflowY,gridStyle:{display:getComputedStyle(grid).display,flex:getComputedStyle(grid).flex,height:getComputedStyle(grid).height,parent:grid.parentElement?.id,parentDisplay:getComputedStyle(grid.parentElement).display},mountRect:mr?{y:Math.round(mr.y),height:Math.round(mr.height)}:null,mountStyle:mount?{display:getComputedStyle(mount).display,flex:getComputedStyle(mount).flex,height:getComputedStyle(mount).height}:null,mountChildren,catalogRect:cr?{y:Math.round(cr.y),height:Math.round(cr.height)}:null,catalogStyle:catalog?{display:getComputedStyle(catalog).display,flex:getComputedStyle(catalog).flex,height:getComputedStyle(catalog).height}:null,stageHeight:Math.round(sr.height),stageBottom:Math.round(sr.bottom),viewportHeight:window.innerHeight,playerBottom:player?Math.round(player.getBoundingClientRect().bottom):null};
     }""")
     print("CATALOG_DENSITY_1280x720=" + json.dumps(density, ensure_ascii=False))
-    check(density["visibleCardCount"] >= 3, "at least three real AMQ catalog cards are visible in the internal scroll viewport at 1280x720")
+    check(density["visibleCardCount"] >= 6, "at least six real AMQ catalog cards intersect the internal scroll viewport at 1280x720")
     check(density["gridOverflow"] in ("auto", "scroll"), "catalog grid owns vertical scrolling instead of extending behind the player")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     # The central feature art should remain complete without a saved background, then reveal the
@@ -113,7 +113,7 @@ with sync_playwright() as p:
         if box and box["y"] < 720 and player_box and box["y"] + box["height"] <= player_box["y"]:
             visible_cards += 1
     check(card_box is not None and card_box["y"] < 720 and player_box is not None and card_box["y"] + card_box["height"] <= player_box["y"], "at least one catalog card is visible above the bottom player at 1280x720")
-    check(visible_cards >= 3, "at least three catalog cards are fully visible above the bottom player at 1280x720")
+    check(visible_cards >= 6, "at least six catalog cards are fully visible above the bottom player at 1280x720")
     page.set_viewport_size({"width":1440,"height":900})
     page.wait_for_timeout(120)
     page.set_viewport_size({"width": 1440, "height": 1000})
