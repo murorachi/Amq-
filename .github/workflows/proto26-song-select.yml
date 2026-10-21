@@ -82,7 +82,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proto27-song-select-visual-audit
+          name: proto32-song-select-reference-composition
           path: |
             engineering/proto26-song-select/proto26-desktop.png
             engineering/proto26-song-select/proto26-mobile.png
