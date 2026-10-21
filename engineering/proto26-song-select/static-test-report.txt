@@ -27,16 +27,18 @@ PASS browser acceptance includes a central-title overlap assertion
 PASS scene artwork uses a genuinely loaded cover image and refreshes when covers load
 PASS selected-work scene art handles delayed cover-image loading
 PASS catalog quick-management controls do not obscure every cover at rest
+PASS cover decorations stay quiet while a compact fallback remains available without network art
+PASS scene proportions prioritize the center artwork while preserving side panels
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_14.html
-OUTPUT_BYTES=8980732
-OUTPUT_SHA256=cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html
+OUTPUT_BYTES=8981289
+OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=cb209cf6674b15eb14cc3756a7a88b8bf2350cfadf4f96842ca65505148828d2
+OUTPUT_SHA256=8e3698486376d5e7546a9e72f4f680698f729363bdaa655808f6555934add900
 STATIC_ACCEPTANCE=PASS
