@@ -73,8 +73,11 @@ def main() -> None:
                 getComputedStyle(document.querySelector('#amqWorkspaceSidebar')).display !== 'none',
             selectedWorkspaceCount: document.querySelectorAll('#amqWorkspaceDock [data-ws][aria-pressed="true"]').length,
             activeWorkspaceMode: document.body.dataset.amqWorkspaceMode || null,
+            viewportWidth: window.innerWidth,
+            stageDisplay: document.querySelector('#amqSongSelectStage') ? getComputedStyle(document.querySelector('#amqSongSelectStage')).display : null,
             bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
             searchLeft: document.querySelector('#search')?.getBoundingClientRect().left ?? null,
+            searchWidth: document.querySelector('#search')?.getBoundingClientRect().width ?? null,
             catalogLeft: document.querySelector('#grid')?.getBoundingClientRect().left ?? null,
             dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null
         })""")
@@ -83,8 +86,10 @@ def main() -> None:
     if (active_view != "catalog" or default_state["homeHeroVisible"] or
             default_state["batchToolsVisible"] or default_state["workspaceSidebarVisible"] or
             default_state["selectedWorkspaceCount"] != 0 or default_state["activeWorkspaceMode"] is not None or
-            default_state["bodyPaddingLeft"] != "0px" or default_state["searchLeft"] is None or
-            default_state["searchLeft"] >= 60):
+            default_state["bodyPaddingLeft"] != "0px" or default_state["stageDisplay"] != "grid" or
+            default_state["searchLeft"] is None or default_state["searchLeft"] < default_state["viewportWidth"] * 0.6 or
+            default_state["searchLeft"] >= default_state["viewportWidth"] or default_state["searchWidth"] is None or
+            default_state["searchWidth"] <= 250):
         raise SystemExit(f"DEFAULT_SONG_SELECT_STATE_FAIL {json.dumps(default_state, ensure_ascii=False)}")
 
     candidate = Image.open(candidate_path).convert("RGB")
