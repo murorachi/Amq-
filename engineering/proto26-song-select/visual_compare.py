@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "engineering/proto26-song-select"
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html"
 REFERENCE_URL = (
     "https://raw.githubusercontent.com/ppy/osu-wiki/"
     "ae2c6443a4264e5429ea7bcd2f3503be8a518a50/"
@@ -60,7 +60,10 @@ def main() -> None:
             "document.querySelector('#grid') && getComputedStyle(document.querySelector('#grid')).display !== 'none'",
             timeout=30000,
         )
-        page.wait_for_timeout(500)
+        page.wait_for_function("""() => window.__amqProto26SongSelect?.getMode?.() === 'amq' &&
+            document.querySelectorAll('#grid > .card').length > 0 &&
+            document.querySelectorAll('#grid > .p26-work-card').length === 0""", timeout=30000)
+        page.wait_for_timeout(350)
         page.screenshot(path=str(candidate_path), full_page=False)
         active_view = page.evaluate("window.__aniGetActiveViewV82?.() ?? null")
         body_classes = page.locator("body").get_attribute("class") or ""
@@ -79,7 +82,10 @@ def main() -> None:
             searchLeft: document.querySelector('#search')?.getBoundingClientRect().left ?? null,
             searchWidth: document.querySelector('#search')?.getBoundingClientRect().width ?? null,
             catalogLeft: document.querySelector('#grid')?.getBoundingClientRect().left ?? null,
-            dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null
+            dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null,
+            sourceMode: window.__amqProto26SongSelect?.getMode?.() ?? null,
+            amqCardCount: document.querySelectorAll('#grid > .card').length,
+            emqWorkCardCount: document.querySelectorAll('#grid > .p26-work-card').length
         })""")
         browser.close()
 
@@ -89,7 +95,7 @@ def main() -> None:
             default_state["bodyPaddingLeft"] != "0px" or default_state["stageDisplay"] != "grid" or
             default_state["searchLeft"] is None or default_state["searchLeft"] < default_state["viewportWidth"] * 0.6 or
             default_state["searchLeft"] >= default_state["viewportWidth"] or default_state["searchWidth"] is None or
-            default_state["searchWidth"] <= 250):
+            default_state["searchWidth"] <= 250 or default_state["sourceMode"] != "amq" or default_state["amqCardCount"] == 0 or default_state["emqWorkCardCount"] != 0):
         raise SystemExit(f"DEFAULT_SONG_SELECT_STATE_FAIL {json.dumps(default_state, ensure_ascii=False)}")
 
     candidate = Image.open(candidate_path).convert("RGB")
