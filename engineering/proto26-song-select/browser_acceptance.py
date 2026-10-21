@@ -61,6 +61,31 @@ with sync_playwright() as p:
             check(page.locator("#wsTitle").inner_text().strip() == title, f"workspace {key} updates its existing action panel")
             check(page.evaluate("window.__aniGetActiveViewV82?.()") == expected_view, f"workspace {key} routes the main content to {expected_view}")
             check(page.locator(main_selector).is_visible(), f"workspace {key} shows its existing main content surface")
+        # Representative existing actions: navigation and selection toggle only, no data mutation.
+        page.locator('#amqWorkspaceDock [data-ws="lists"]').click()
+        page.locator('#wsActions [data-ws-action="watchlist-custom"]').click()
+        page.wait_for_timeout(250)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'watchlist'"), "custom-list action opens watchlist")
+        check(page.locator("#customModeTab").is_visible(), "custom-list tab remains available")
+
+        page.locator('#amqWorkspaceDock [data-ws="batch"]').click()
+        page.locator('#wsActions [data-ws-action="batch-select"]').click()
+        page.wait_for_timeout(250)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "batch selection action opens catalog")
+        check(page.locator("#selectModeBtn").is_visible(), "batch selection control remains available")
+
+        page.locator('#amqWorkspaceDock [data-ws="learning"]').click()
+        page.locator('#wsActions [data-ws-action="practiceExplore"]').click()
+        page.wait_for_timeout(500)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'practice'"), "explore action opens practice view")
+        check(page.locator('[data-practice-mode="explore"]').count() > 0, "existing explore mode control remains available")
+
+        page.locator('#amqWorkspaceDock [data-ws="analysis"]').click()
+        page.locator('#wsActions [data-ws-action="dashboard"]').click()
+        page.wait_for_timeout(250)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'dashboard'"), "dashboard action opens analysis view")
+        check(page.locator("#dashboardPanel").is_visible(), "dashboard panel is visible")
+        
         # Mode-specific catalog checks must start from the catalog view, not whichever workspace ran last.
         page.evaluate("window.__aniNavigateApp?.('catalog')")
         page.wait_for_function("window.__aniGetActiveViewV82?.() === 'catalog'", timeout=5000)
