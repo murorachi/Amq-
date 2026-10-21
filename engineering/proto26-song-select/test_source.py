@@ -20,6 +20,8 @@ def main():
     check("tabs = ," not in js, "malformed tabs declaration is absent")
     check("data-p26-mode=\"amq\"" in js and "data-p26-mode=\"emq\"" in js and "data-p26-mode=\"mix\"" in js and "data-p26-mode=\"singer\"" in js, "four source modes are present")
     check("api.getSongsForWork" in js and "makeSongRow" in js, "EMQ song details reuse existing data and song-row action")
+    check("api.ready" in js and "readinessPoll" in js and "readEmqWorks()" in js, "EMQ work list refreshes after asynchronous library load")
+    check("mode==='emq'||mode==='mix'" in js, "active EMQ/MIX view rerenders when library becomes ready")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     result = subprocess.run([sys.executable, str(BUILDER)], cwd=ROOT, text=True, capture_output=True)
