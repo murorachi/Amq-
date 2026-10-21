@@ -36,6 +36,14 @@ with sync_playwright() as p:
     print("WORKSPACE_DEBUG=" + json.dumps(workspace_debug, ensure_ascii=False))
     check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "app navigation state is catalog")
     check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
+    try:
+        page.wait_for_function("""() => window.__amqProto26SongSelect?.getMode?.() === 'amq' &&
+            document.querySelectorAll('#grid > .card').length > 0""", timeout=12000)
+    except Exception:
+        pass
+    check(page.evaluate("window.__amqProto26SongSelect?.getMode?.() === 'amq'"), "initial Song Select source mode is AMQ")
+    check(page.locator("#grid > .card").count() > 0, "default AMQ mode renders the real legacy catalog cards")
+    check(page.locator("#grid > .p26-work-card").count() == 0, "default AMQ mode does not leak EMQ-only work cards")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     # The central feature art should remain complete without a saved background, then reveal the
     # existing scene image gently when the Catalog background setting is active.
@@ -82,7 +90,13 @@ with sync_playwright() as p:
     card_locator = page.locator("#grid .card, #grid .p26-work-card").first
     card_box = card_locator.bounding_box() if page.locator("#grid .card, #grid .p26-work-card").count() else None
     player_box = page.locator("#audioDock").bounding_box()
+    visible_cards = 0
+    for idx in range(page.locator("#grid .card, #grid .p26-work-card").count()):
+        box = page.locator("#grid .card, #grid .p26-work-card").nth(idx).bounding_box()
+        if box and box["y"] < 720 and player_box and box["y"] + box["height"] <= player_box["y"]:
+            visible_cards += 1
     check(card_box is not None and card_box["y"] < 720 and player_box is not None and card_box["y"] + card_box["height"] <= player_box["y"], "at least one catalog card is visible above the bottom player at 1280x720")
+    check(visible_cards >= 3, "at least three catalog cards are fully visible above the bottom player at 1280x720")
     page.set_viewport_size({"width":1440,"height":900})
     page.wait_for_timeout(120)
     page.set_viewport_size({"width": 1440, "height": 1000})
