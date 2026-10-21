@@ -1,4 +1,4 @@
-name: Proto26 Song Select integration
+name: AMQ Song Select integration and visual acceptance
 
 on:
   pull_request:
