@@ -706,4 +706,88 @@ body.amq-workspace-active #audioDock:not(.amqHomeDock) #audioPlayer {
     width:min(292px,calc(100vw - 16px))!important;
   }
 }
+
+
+/* Proto25 Stage 31: improve the profile/player information hierarchy without changing AMQ data or controls. */
+body.ui-home-menu #homeMenu #amqProfileCard {
+  gap: 12px !important;
+  padding: 7px 12px !important;
+}
+body.ui-home-menu #homeMenu #amqProfileCard .amqAvatarButton {
+  width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+  box-shadow: 0 0 0 2px #e86aa9, 0 0 0 4px #e86aa91c !important;
+}
+body.ui-home-menu #homeMenu .amqProfileInfo {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  gap: 3px !important;
+}
+body.ui-home-menu #homeMenu .amqProfileName {
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  letter-spacing: .01em !important;
+}
+body.ui-home-menu #homeMenu .amqProfileLine.ppLine {
+  align-items: baseline !important;
+  gap: 6px !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+}
+body.ui-home-menu #homeMenu .amqProfileLine.ppLine strong {
+  font-size: 20px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  color: #ff8fc7 !important;
+}
+body.ui-home-menu #homeMenu .amqPlayerFrame {
+  padding: 7px 12px !important;
+  gap: 5px !important;
+}
+body.ui-home-menu #homeMenu .amqPlayerCaption {
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+  letter-spacing: .14em !important;
+}
+body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta b {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta span {
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+}
+@media(max-width:680px) {
+  body.ui-home-menu #homeMenu #amqProfileCard {
+    padding: 7px 10px !important;
+    gap: 10px !important;
+  }
+  body.ui-home-menu #homeMenu #amqProfileCard .amqAvatarButton {
+    width: 40px !important;
+    height: 40px !important;
+    flex-basis: 40px !important;
+  }
+  body.ui-home-menu #homeMenu .amqProfileName {
+    font-size: 14px !important;
+  }
+  body.ui-home-menu #homeMenu .amqProfileLine.ppLine strong {
+    font-size: 18px !important;
+  }
+  body.ui-home-menu #homeMenu .amqPlayerFrame {
+    padding: 4px 8px !important;
+    gap: 2px !important;
+  }
+  body.ui-home-menu #homeMenu .amqPlayerCaption {
+    font-size: 8px !important;
+  }
+  body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta b {
+    font-size: 11px !important;
+  }
+  body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta span {
+    font-size: 9px !important;
+  }
+}
 </style>
