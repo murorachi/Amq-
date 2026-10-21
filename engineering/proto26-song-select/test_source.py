@@ -22,7 +22,7 @@ def main():
     check("api.getSongsForWork" in js and "makeSongRow" in js, "EMQ song details reuse existing data and song-row action")
     check("api.ready" in js and "readinessPoll" in js and "readEmqWorks()" in js, "EMQ work list refreshes after asynchronous library load")
     check("mode==='emq'||mode==='mix'" in js, "active EMQ/MIX view rerenders when library becomes ready")
-    check("proto26.8" in js and "#overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
+    check("proto32.1" in js and "#overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
     check("modes.classList.add('view-catalog')" in js, "Song Select controls remain hidden outside the catalog view")
     check("const syncWorkspaceShell=()=>" in js and "sidebar.style.setProperty('display','block','important')" in js and "dock.style.setProperty('display','grid','important')" in js, "workspace sidebar is conditional and dock remains available on desktop")
     check("body.amq-workspace-active .view-home{display:none!important}" in js and "body.amq-workspace-active:not([data-amq-workspace-mode]) #quicktools{display:none!important}" in js, "default Song Select hides home hero and batch tools")
