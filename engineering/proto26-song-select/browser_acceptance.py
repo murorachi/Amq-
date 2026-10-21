@@ -202,7 +202,11 @@ with sync_playwright() as p:
                 selected_row = song_rows.first
                 selected_song_id = selected_row.get_attribute("data-id")
                 selected_song_title = selected_row.locator(".songname").inner_text().strip()
+                before_selected_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
                 selected_row.click(position={"x": 5, "y": 5})
+                selected_row = page.locator("#songlist .songrow.proto26-song-selected").first
+                after_selected_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
+                check(selected_row.count() == 1 and after_selected_x < before_selected_x - 2, "selected song row receives a visible leftward offset")
                 check(page.locator("#p32SongTitle").inner_text().strip() == selected_song_title, "selected-song panel uses the actual song-row title")
                 expected_play_count = page.evaluate("(id) => Number(window.__aniHistoryAPIv51?.getPersonalSnapshot?.().playHistory?.[id]?.count) || 0", selected_song_id)
                 actual_play_text = page.locator("#p32PlayCount").inner_text().strip()
