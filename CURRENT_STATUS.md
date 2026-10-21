@@ -48,3 +48,11 @@
 - Latest Actions run: https://github.com/murorachi/Amq-/actions/runs/39598805123 — in progress at checkpoint time; no result claimed yet.
 - Candidate 11 and visual acceptance remain NOT VERIFIED until the current run passes browser acceptance and reference comparison evidence is reviewed.
 - Candidate 10 remains the latest verified functional rollback: SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`. Immutable Proto25 baseline unchanged.
+
+
+## Follow-up after zero-basis test failure
+
+- Run `39598805123` failed browser acceptance again. Diagnostic values: mount height 362px, grid height 3px, grid computed flex `1 1 0px`. This proves the zero-basis change alone did not resolve the collapse; do not claim the layout fix passed.
+- Added child-by-child geometry diagnostics to `browser_acceptance.py` in commit `516497851fe4db38d6bc18993b5476695b2ba277` to identify which siblings consume the mount's height.
+- Diagnostic workflow: https://github.com/murorachi/Amq-/actions/runs/39598982384 — running at checkpoint time; no result claimed.
+- Candidate 11 remains NOT VERIFIED. Candidate 10 is still the rollback checkpoint and Proto25 remains immutable.
