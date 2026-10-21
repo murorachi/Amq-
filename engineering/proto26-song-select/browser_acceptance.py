@@ -60,7 +60,9 @@ with sync_playwright() as p:
     default_geometry = page.evaluate("""() => ({
         bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
         searchLeft: document.querySelector('#search')?.getBoundingClientRect().left ?? null,
+        searchWidth: document.querySelector('#search')?.getBoundingClientRect().width ?? null,
         catalogLeft: document.querySelector('#grid')?.getBoundingClientRect().left ?? null,
+        stageDisplay: document.querySelector('#amqSongSelectStage') ? getComputedStyle(document.querySelector('#amqSongSelectStage')).display : null,
         dockBottom: document.querySelector('#amqWorkspaceDock')?.getBoundingClientRect().bottom ?? null
     })""")
     print("DEFAULT_GEOMETRY_1440x900=" + json.dumps(default_geometry, ensure_ascii=False))
