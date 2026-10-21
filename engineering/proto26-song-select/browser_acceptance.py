@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_30.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -232,6 +232,8 @@ with sync_playwright() as p:
                 selected_row = page.locator("#songlist .songrow:not(.proto26-song-selected)").first
                 selected_song_id = selected_row.get_attribute("data-id")
                 selected_song_title = selected_row.locator(".songname").inner_text().strip()
+                page.mouse.move(0, 0)
+                page.wait_for_timeout(120)
                 initial_selected_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
                 selected_row.hover(position={"x": 5, "y": 5})
                 page.wait_for_timeout(120)
@@ -282,8 +284,8 @@ with sync_playwright() as p:
             })""")
             print("OVERFLOW_DEBUG_1000x562=" + json.dumps(overflow_debug, ensure_ascii=False))
             check(overflow_debug["documentWidth"] <= overflow_debug["viewport"], "1000x562 Song Select viewport has no horizontal overflow")
-            if overflow_debug.get("scene") and overflow_debug.get("sceneImage"):
-                check(overflow_debug["sceneImage"]["left"] >= overflow_debug["scene"]["left"] - 1 and overflow_debug["sceneImage"]["right"] <= overflow_debug["scene"]["right"] + 1, "scene artwork remains within the Song Select scene at 1000x562")
+            if overflow_debug["stage"].get("scene") and overflow_debug["stage"].get("sceneImage"):
+                check(overflow_debug["stage"]["sceneImage"]["left"] >= overflow_debug["stage"]["scene"]["left"] - 1 and overflow_debug["stage"]["sceneImage"]["right"] <= overflow_debug["stage"]["scene"]["right"] + 1, "scene artwork remains within the Song Select scene at 1000x562")
             page.set_viewport_size({"width": 1440, "height": 900})
             page.wait_for_timeout(200)
             page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
