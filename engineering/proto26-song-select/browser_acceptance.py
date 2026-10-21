@@ -136,6 +136,7 @@ with sync_playwright() as p:
         page.locator('[data-p26-mode="amq"]').click()
         page.wait_for_timeout(800)
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "amq", "AMQ mode restores legacy catalog")
+    print("PAGE_ERRORS=" + json.dumps(page_errors, ensure_ascii=False))
     check(not page_errors, "no uncaught page errors")
     print("CONSOLE_ERRORS=" + json.dumps(console_errors, ensure_ascii=False))
     check(not console_errors, "no browser console errors")
