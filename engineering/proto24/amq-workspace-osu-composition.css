@@ -563,5 +563,94 @@ body.amq-standalone-route #amqWorkspaceDock {
     radial-gradient(circle at 22% 46%, #f06cae13 0%, transparent 35%),
     repeating-linear-gradient(135deg,#ffffff04 0 1px,transparent 1px 18px) !important;
 }
+
+
+/* Proto25 Stage 34: compact catalog management chrome so actual collection cards appear sooner. */
+@media(min-width:761px) {
+  .hero.view-home .heroDashboard {
+    padding: 13px 16px !important;
+    gap: 14px !important;
+    min-height: 0 !important;
+  }
+  .hero.view-home .heroDashboard .bigNum {
+    font-size: 38px !important;
+    line-height: 1 !important;
+    margin: 3px 0 !important;
+  }
+  .hero.view-home .heroDashboard .stats .stat {
+    min-height: 60px !important;
+    padding: 9px 11px !important;
+  }
+  #quicktools {
+    padding: 10px 12px !important;
+    margin: 10px 0 !important;
+    gap: 7px !important;
+  }
+  #quicktools .quicktoolsHead {
+    margin-bottom: 5px !important;
+  }
+  #quicktools .quicktoolsHead p {
+    margin: 4px 0 7px !important;
+    line-height: 1.35 !important;
+  }
+  #quicktools .toolrow {
+    gap: 6px !important;
+    margin-top: 6px !important;
+  }
+  #quicktools .toolrow:not(.practiceBulkRow) {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+  }
+  #quicktools .toolrow .btn,
+  #quicktools .toolrow select {
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    min-height: 34px !important;
+    padding: 7px 9px !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+  }
+  #quicktools .practiceBulkRow {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto auto !important;
+    align-items: end !important;
+  }
+  #quicktools .practiceBulkRow .bulkField {
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+  }
+  #quicktools .practiceBulkRow .bulkField select {
+    width: 100% !important;
+  }
+  .toolbar.view-catalog {
+    padding: 9px !important;
+    gap: 7px !important;
+  }
+  .toolbar.view-catalog input,
+  .toolbar.view-catalog select {
+    min-height: 38px !important;
+    padding: 8px 10px !important;
+  }
+  .tabs.view-catalog {
+    padding: 5px !important;
+    gap: 5px !important;
+  }
+  .tabs.view-catalog .tab {
+    min-height: 38px !important;
+    padding: 8px 10px !important;
+  }
+  .head.view-catalog {
+    min-height: 38px !important;
+    margin: 9px 0 !important;
+  }
+  .head.view-catalog h3 {
+    margin: 0 !important;
+    font-size: 20px !important;
+  }
+}
 </style>
 
