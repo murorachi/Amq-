@@ -18,6 +18,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: proto26-song-select-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-accept:
     runs-on: ubuntu-latest
