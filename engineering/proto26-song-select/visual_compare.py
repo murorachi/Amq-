@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+"""Capture a matched-viewport Song Select screenshot and produce objective diff evidence.
+
+This script deliberately does not convert a pixel metric into a claimed similarity
+percentage. The reference image is a pinned official osu!-wiki asset, not proof of
+the exact Stable client build used to capture it.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import urllib.request
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageStat
+from playwright.sync_api import sync_playwright
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "engineering/proto26-song-select"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html"
+REFERENCE_URL = (
+    "https://raw.githubusercontent.com/ppy/osu-wiki/"
+    "ae2c6443a4264e5429ea7bcd2f3503be8a518a50/"
+    "wiki/Client/Interface/img/song-selection.jpg"
+)
+EXPECTED_GIT_BLOB_SHA = "1e927a00a1984a5ba20fa5efec639410f349607a"
+
+
+def git_blob_sha(data: bytes) -> str:
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    request = urllib.request.Request(REFERENCE_URL, headers={"User-Agent": "AMQ-UI-Acceptance/1.0"})
+    with urllib.request.urlopen(request, timeout=30) as response:
+        reference_bytes = response.read()
+    actual_blob_sha = git_blob_sha(reference_bytes)
+    if actual_blob_sha != EXPECTED_GIT_BLOB_SHA:
+        raise SystemExit(
+            f"REFERENCE_IDENTITY_FAIL expected={EXPECTED_GIT_BLOB_SHA} actual={actual_blob_sha}"
+        )
+    reference_path = OUT / "osu-stable-song-selection-pinned.jpg"
+    reference_path.write_bytes(reference_bytes)
+    reference = Image.open(reference_path).convert("RGB")
+    width, height = reference.size
+
+    candidate_path = OUT / "proto26-song-select-matched-viewport.png"
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
+        page_errors, console_errors = [], []
+        page.on("pageerror", lambda error: page_errors.append(str(error)))
+        page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
+        page.goto(HTML.as_uri(), wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_timeout(500)
+        page.evaluate("window.__aniNavigateApp?.('catalog')")
+        page.wait_for_function(
+            "() => window.__aniGetActiveViewV82?.() === 'catalog' && "
+            "document.querySelector('#grid') && getComputedStyle(document.querySelector('#grid')).display !== 'none'",
+            timeout=30000,
+        )
+        page.wait_for_timeout(500)
+        page.screenshot(path=str(candidate_path), full_page=False)
+        active_view = page.evaluate("window.__aniGetActiveViewV82?.() ?? null")
+        body_classes = page.locator("body").get_attribute("class") or ""
+        browser.close()
+
+    candidate = Image.open(candidate_path).convert("RGB")
+    if candidate.size != reference.size:
+        raise SystemExit(f"VIEWPORT_MISMATCH candidate={candidate.size} reference={reference.size}")
+    overlay = Image.blend(reference, candidate, 0.5)
+    diff = ImageChops.difference(reference, candidate)
+    overlay.save(OUT / "proto26-song-select-overlay.png")
+    diff.save(OUT / "proto26-song-select-pixel-diff.png")
+    stat = ImageStat.Stat(diff)
+    mae = sum(stat.mean) / (3 * 255)
+    changed = sum(1 for pixel in diff.getdata() if max(pixel) >= 24)
+    total = width * height
+    report = {
+        "status": "EVIDENCE_GENERATED",
+        "reference_url": REFERENCE_URL,
+        "reference_git_blob_sha": actual_blob_sha,
+        "reference_dimensions": {"width": width, "height": height},
+        "candidate_file": str(candidate_path.relative_to(ROOT)),
+        "candidate_sha256": hashlib.sha256(HTML.read_bytes()).hexdigest(),
+        "candidate_dimensions": {"width": candidate.width, "height": candidate.height},
+        "active_app_view": active_view,
+        "body_classes": body_classes,
+        "page_errors": page_errors,
+        "console_errors": console_errors,
+        "normalized_mean_absolute_pixel_difference": round(mae, 6),
+        "pixels_with_max_channel_difference_at_least_24": changed,
+        "pixel_count": total,
+        "changed_pixel_ratio": round(changed / total, 6),
+        "interpretation": (
+            "Metrics are diagnostic only, not a visual similarity percentage. "
+            "The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. "
+            "Intentional AMQ content differences must be separated from layout defects during review."
+        ),
+    }
+    (OUT / "visual-comparison-report.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    markdown = [
+        "# Song Select visual comparison evidence",
+        "",
+        f"- Status: {report['status']}",
+        f"- Reference: {REFERENCE_URL}",
+        f"- Verified Git blob SHA: {actual_blob_sha}",
+        f"- Matched viewport: {width} x {height} at device scale factor 1",
+        f"- Candidate SHA-256: {report['candidate_sha256']}",
+        f"- Normalized mean absolute pixel difference (diagnostic): {mae:.6f}",
+        f"- Pixels with max-channel difference >= 24: {changed}/{total} ({changed / total:.2%})",
+        f"- Active app view: {active_view}",
+        f"- Page errors: {len(page_errors)}; console errors: {len(console_errors)}",
+        "",
+        "## Evidence files",
+        "- osu-stable-song-selection-pinned.jpg",
+        "- proto26-song-select-matched-viewport.png",
+        "- proto26-song-select-overlay.png",
+        "- proto26-song-select-pixel-diff.png",
+        "- visual-comparison-report.json",
+        "",
+        "## Interpretation limits",
+        "This report does not claim a similarity percentage or a visual pass. The reference is a pinned official osu!-wiki screenshot, but its exact osu!stable capture build is unknown. Review the overlay and pixel-difference image, separating required AMQ content changes from layout, scale, spacing, color, and hierarchy defects.",
+    ]
+    (OUT / "VISUAL_COMPARISON_REPORT.md").write_text("\n".join(markdown) + "\n", encoding="utf-8")
+    print(f"PASS pinned official Wiki image identity {actual_blob_sha}")
+    print(f"PASS candidate screenshot matches reference viewport {width}x{height}")
+    print(f"DIAGNOSTIC normalized MAE={mae:.6f}; changed-pixel-ratio={changed / total:.6f}")
+    print("VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)")
+
+
+if __name__ == "__main__":
+    main()
