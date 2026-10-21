@@ -4,15 +4,20 @@ WORKSPACE_DEBUG={"innerWidth": 1440, "bodyClasses": "dark-theme amq-workspace-pr
 PASS app navigation state is catalog
 PASS catalog view is visible before interacting with song cards
 PASS source controls are scoped to the catalog view
+PASS feature stage keeps its designed fallback when no scene background is configured
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 50% 38%, rgb(59, 52, 73), rgb(37, 38, 51) 40%, rgb(25, 30, 40) 75%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(18, 20, 31, 0.68), rgba(23, 18, 32, 0.42)), radial-gradient(at 50% 38%, rgba(105, 74, 123, 0.55), rgba(37, 38, 51, 0.62) 48%, rgba(25, 30, 40, 0.72) 78%)", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p30-feature", "parent": "amqSongSelectStage", "matched": true, "display": "flex", "styleTag": 6673, "ruleCount": 45}}
+PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
 PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
-DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 38, "catalogLeft": 28, "dockBottom": 900}
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 1055, "searchWidth": 344, "catalogLeft": 1055, "stageDisplay": "grid", "dockBottom": 900}
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
-PASS default Song Select search uses the full available width at 1440x900
+PASS default Song Select three-zone composition is visible at 1440x900
+PASS default Song Select search is positioned in the right catalog region at 1440x900
+PASS right catalog search retains usable width at 1440x900
 PASS workspace lists updates its existing action panel
 PASS workspace lists keeps the app route inside Song Select
 PASS workspace lists shows its existing main content surface in place
@@ -69,6 +74,7 @@ PASS EMQ mode renders actual work cards
 PASS selecting an EMQ work opens its detail pane
 PASS desktop detail pane is fixed at the right side
 PASS desktop detail pane remains persistent while browsing
+PASS Escape closes the selected-work detail pane and restores catalog controls
 PASS catalog reserves horizontal space for the detail pane
 PASS batch tools reserve horizontal space for the detail pane
 PASS search and filter controls reserve horizontal space for the detail pane
@@ -83,5 +89,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
 BROWSER_ACCEPTANCE=PASS

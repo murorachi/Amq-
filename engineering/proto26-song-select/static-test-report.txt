@@ -13,16 +13,17 @@ PASS dock selected state follows the active workspace mode
 PASS workspace dock switches existing panels inside Song Select
 PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
+PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
-OUTPUT_BYTES=8943265
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
+OUTPUT_BYTES=8952996
+OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
 STATIC_ACCEPTANCE=PASS

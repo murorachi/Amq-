@@ -7,7 +7,7 @@
     "height": 720
   },
   "candidate_file": "engineering/proto26-song-select/proto26-song-select-matched-viewport.png",
-  "candidate_sha256": "2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8",
+  "candidate_sha256": "4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f",
   "candidate_dimensions": {
     "width": 1280,
     "height": 720
@@ -20,16 +20,19 @@
     "workspaceSidebarVisible": false,
     "selectedWorkspaceCount": 0,
     "activeWorkspaceMode": null,
+    "viewportWidth": 1280,
+    "stageDisplay": "grid",
     "bodyPaddingLeft": "0px",
-    "searchLeft": 38,
-    "catalogLeft": 28,
+    "searchLeft": 895,
+    "searchWidth": 344,
+    "catalogLeft": 895,
     "dockBottom": 720
   },
   "page_errors": [],
   "console_errors": [],
-  "normalized_mean_absolute_pixel_difference": 0.303679,
-  "pixels_with_max_channel_difference_at_least_24": 833933,
+  "normalized_mean_absolute_pixel_difference": 0.277352,
+  "pixels_with_max_channel_difference_at_least_24": 838829,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.904875,
+  "changed_pixel_ratio": 0.910188,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }
