@@ -183,7 +183,12 @@
     <div id="p32Mount"></div>
   </section>`;
   const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
-  const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar)mount.append(toolbar);else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
+  const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar){
+    mount.append(toolbar);
+    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
+    const searchWrap=toolbar.querySelector('.search');if(searchWrap){searchWrap.style.setProperty('grid-column','1/-1','important');searchWrap.style.setProperty('width','100%','important');searchWrap.style.setProperty('min-width','0','important');searchWrap.style.setProperty('max-width','100%','important');}
+    toolbar.querySelectorAll('input,select').forEach(control=>{control.style.setProperty('width','100%','important');control.style.setProperty('min-width','0','important');control.style.setProperty('max-width','100%','important');control.style.setProperty('box-sizing','border-box','important')});
+  }else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
   for(const id of ['gridCounter','empty','loadMoreWrap','quicktools']){const n=document.getElementById(id);if(n)mount.append(n)}
 
   const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
