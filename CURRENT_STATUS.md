@@ -41,7 +41,7 @@ Status: **Proto26.8 in-place workspace implementation passed GitHub Actions stat
 - Official osu!-wiki references: pinned commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
 - Exact client source commit matching osu!stable Stable `20260924.1`: **NOT VERIFIED**. Do not use `ppy/osu` lazer source as a substitute.
 - Same-viewport visual diff against official Song Select screenshot: **NOT RUN**.
-- Full in-place workspace content/action integration: **NOT COMPLETE**.
+- Four in-place workspace panel switching: **PASS** (run #39563090398). Full list/batch mutation coverage and learning-flow lifecycle: **PARTIALLY VERIFIED / INCOMPLETE**.
 - Home, Play, Settings, profile/statistics visual acceptance against pinned references: **NOT RUN in this Proto26 stage**.
 - Real audio-output acceptance, full quiz answer lifecycle and multiplayer server lifecycle: not covered by this stage's browser test.
 
