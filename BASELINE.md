@@ -1,60 +1,42 @@
 # Baseline and rollback record
 
-## Verified Proto26.8 candidate 06 checkpoint (2026-10-21)
-- Working branch: `v82.85.30-proto26-in-place-workspaces-01`.
-- CI run: https://github.com/murorachi/Amq-/actions/runs/39565629059 — success.
-- Workflow fix commit: `1985431f5055c470633efee823ef74de4198d333`.
-- Artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
-- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`.
-- Size: 8,942,305 bytes. SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
-- Static acceptance, Playwright browser acceptance, artifact upload, and branch push of candidate/reports: PASS.
-- This is a verified development checkpoint, not final visual acceptance. osu!stable screenshot comparison, exact Stable source commit verification, real audio output, and broader quiz/multiplayer lifecycle tests remain outstanding.
-- Rollback: use accepted candidate 04 with SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`. Immutable Proto25 baseline SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f` remains untouched.
-
-
 ## Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
 - HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
 - Source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
 - Size: 8,926,248 bytes
 - SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
-- Do not overwrite this branch/file.
+- Read-only. Never overwrite this file or branch.
 
-## Current isolated Proto26 candidate
+## Latest verified development checkpoint: Proto28
+- Branch: `v82.85.30-proto28-song-select-default-state-fix-01`
+- CI source commit: `52e1677ae3f6385fec577dce3609ee7511cc73c4`
+- Generated artifact/report commit: `fbf48765d07401e8b87494eec7c3c84015db7867`
+- Run: https://github.com/murorachi/Amq-/actions/runs/39570523908 — **SUCCESS**
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
+- Size: 8,943,047 bytes
+- SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
+- Static tests: PASS. Playwright browser tests: PASS. Matched-viewport reference evidence: generated.
+- Visual acceptance: **NOT VERIFIED**. A large blank left column remains because the default Song Select route retains workspace padding. Candidate 06 is a rollback checkpoint, not final UI approval.
+
+## Earlier accepted rollback candidate
 - Branch: `v82.85.30-proto26-song-select-integration-01`
-- Draft PR #10: https://github.com/murorachi/Amq-/pull/10
-- Current accepted development candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Tested source commit: `a627c118e05ab1aef7ac9fb46304c0b075aebf8f`
-- Artifact/report commit: `be80c913beb7d3ec49b978d2c1d4169da0462a5f`
+- PR #10 remains draft/unmerged: https://github.com/murorachi/Amq-/pull/10
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
 - Size: 8,938,670 bytes
 - SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39550068389 (static + Playwright browser acceptance PASS).
-- Keep this candidate as a rollback checkpoint; it is not final UI approval.
-
-## Current unaccepted Proto26.8 candidate
-- Isolated branch: `v82.85.30-proto26-in-place-workspaces-01`
-- Draft PR #11: https://github.com/murorachi/Amq-/pull/11
-- Source implementation commit: `5f9d3ab6ac659adcf83336838c3afb96abb862c4`
-- Acceptance test commit: `21ef2851cd66eed50ee19eca737b55332c83b73b`
-- Target standalone artifact: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
-- Local static acceptance: **PASS**. Local Playwright workspace acceptance: **PASS** for scoped cases; localStorage native-origin persistence is **NOT RUN**.
-- Local verification snapshot SHA-256: `e71fdc60b18a08b660608077c84a5da5daca90798306f8f8573f72ca29196b8f` (8,942,307 bytes). This is not yet a verified remote artifact fingerprint.
-- GitHub Actions acceptance and remote artifact/hash confirmation: **NOT RUN / NOT VERIFIED**. Detailed report: `engineering/proto26-song-select/PROTO26_8_LOCAL_ACCEPTANCE_REPORT.md`.
-- Rollback: return to accepted candidate `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`; immutable Proto25 baseline remains unchanged.
-
-## Previous accepted rollback candidates
-- Proto26.3: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; run https://github.com/murorachi/Amq-/actions/runs/39547940204.
-- Proto26.4 / file `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html`: 8,937,515 bytes, SHA-256 `9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af`; run https://github.com/murorachi/Amq-/actions/runs/39549067049.
-- Proto26.5 / file `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_03.html`: 8,938,405 bytes, SHA-256 `aa7da030b6324526cbdd0497b71b1607b8c832497940f5041a1dad559f6e7d06`; run https://github.com/murorachi/Amq-/actions/runs/39550068389 is the historical CI report for the then-current artifact; the same workflow later generated Proto26.6.
+- Run: https://github.com/murorachi/Amq-/actions/runs/39550068389 — static and browser acceptance PASS.
 
 ## Official osu!stable reference record
-- Stable release label: `20260924.1`, as pinned by the existing Proto24 reference audit. This release label is not a source-control commit.
+- Stable release label: `20260924.1`; this label is not a source-control commit.
 - Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
-- Exact client source commit matching that Stable build: **NOT VERIFIED**.
-- Song Select screenshot path: `wiki/Client/Interface/img/song-selection.jpg`, blob SHA `1e927a00a1984a5ba20fa5efec639410f349607a`.
-- Reference evidence and limitations: `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`.
+- Song Select screenshot: `wiki/Client/Interface/img/song-selection.jpg`.
+- Verified Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
+- Exact osu!stable client source commit matching that release: **NOT VERIFIED**.
+- Visual evidence: `engineering/proto26-song-select/VISUAL_COMPARISON_REPORT.md`; image and pixel-difference files are available in the Proto28 Actions artifact.
 
 ## Rollback
-- To return to the last accepted candidate, use the versioned HTML listed above without overwriting the baseline.
-- For source rollback, revert only the isolated Proto26 branch to the prior accepted commit or rebuild from the immutable Proto25 baseline using the pinned builder.
-- Never merge PR #10 until in-place workspace actions and evidence-backed visual comparison pass.
+- For the latest accepted development checkpoint, use candidate 06 with SHA-256 `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`.
+- For the earlier accepted fallback, use candidate 04 with SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`.
+- For a clean baseline rebuild, use the immutable Proto25 file and pinned builder.
+- Do not merge PR #10/#11 until Song Select visual and functional gates are satisfied.
