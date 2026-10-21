@@ -64,6 +64,7 @@
       body:has(#overlay.open) #overlay.open .playerbar{grid-column:auto!important;grid-row:auto!important;min-width:0!important}
       body:has(#overlay.open) #overlay.open .songlist{grid-column:auto!important;grid-row:auto!important;min-height:0!important;overflow:auto!important;background:#211a24!important}
       body:has(#overlay.open) #overlay.open .songrow{background:#252d3a!important;border-color:#414c5f!important;color:#edf1f8!important}
+      body:has(#overlay.open) #overlay.open .songrow.proto26-song-selected{position:relative!important;transform:translateX(-6px)!important;width:calc(100% + 6px)!important;z-index:1!important;background:#343043!important;border-color:#e768a7!important;box-shadow:inset 3px 0 #e768a7!important}
       body:has(#overlay.open) #overlay.open .songmeta{color:#b3bfd1!important}
     }
     @media(max-width:900px){
@@ -326,7 +327,7 @@
     if(sceneImage){const url=selectedWorkImage;sceneImage.style.backgroundImage=url?'linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")':'none'}
     updateSelectedSongInfo(null);
   });
-  $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(row?.dataset?.id)updateSelectedSongInfo(row.dataset.id,row)});
+  $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(!row?.dataset?.id)return;$('#songlist').querySelectorAll('.songrow.proto26-song-selected').forEach(el=>el.classList.remove('proto26-song-selected'));row.classList.add('proto26-song-selected');updateSelectedSongInfo(row.dataset.id,row)});
   document.addEventListener('ani-song-playback-recorded-v80',event=>{if(selectedSongId&&String(event.detail?.songId)===selectedSongId)updateSelectedSongInfo(selectedSongId)});
   new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true});updateP32();
 
