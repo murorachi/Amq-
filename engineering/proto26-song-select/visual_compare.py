@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "engineering/proto26-song-select"
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_32.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html"
 REFERENCE_URL = (
     "https://raw.githubusercontent.com/ppy/osu-wiki/"
     "ae2c6443a4264e5429ea7bcd2f3503be8a518a50/"
@@ -64,14 +64,20 @@ def main() -> None:
         page.wait_for_function("""() => window.__amqProto26SongSelect?.getMode?.() === 'amq' &&
             document.querySelectorAll('#grid > .card').length > 0 &&
             document.querySelectorAll('#grid > .p26-work-card').length === 0""", timeout=30000)
-        page.wait_for_function("""() => {
-            const imgs = [...document.querySelectorAll('#grid > .card img')].slice(0, 8);
-            return imgs.length > 0 && imgs.every(img => img.complete);
-        }""", timeout=15000)
+        try:
+            page.wait_for_function("""() => {
+                const covers = [...document.querySelectorAll('#grid > .card .cover')].slice(0, 8);
+                return covers.filter(cover => cover.classList.contains('has-real-cover')).length >= 3;
+            }""", timeout=12000)
+        except Exception:
+            pass
         page.wait_for_timeout(200)
         cover_capture_state = page.evaluate("""() => {
-            const imgs = [...document.querySelectorAll('#grid > .card img')].slice(0, 8);
+            const covers = [...document.querySelectorAll('#grid > .card .cover')].slice(0, 8);
+            const imgs = [...document.querySelectorAll('#grid > .card img')].filter(img => getComputedStyle(img).display !== 'none').slice(0, 8);
             return {
+                coverCount: covers.length,
+                realCoverCount: covers.filter(cover => cover.classList.contains('has-real-cover')).length,
                 imageCount: imgs.length,
                 loadedCount: imgs.filter(img => img.complete && img.naturalWidth > 0).length,
                 images: imgs.map(img => ({
@@ -188,7 +194,8 @@ def main() -> None:
         f"- Normalized mean absolute pixel difference (diagnostic): {mae:.6f}",
         f"- Pixels with max-channel difference >= 24: {changed}/{total} ({changed / total:.2%})",
         f"- Active app view: {active_view}",
-        f"- Catalog cover images loaded before capture: {cover_capture_state['loadedCount']}/{cover_capture_state['imageCount']}",
+        f"- Catalog real covers before capture: {cover_capture_state['realCoverCount']}/{cover_capture_state['coverCount']}",
+        f"- Loaded visible catalog images before capture: {cover_capture_state['loadedCount']}/{cover_capture_state['imageCount']}",
         f"- Page errors: {len(page_errors)}; console errors: {len(console_errors)}",
         "",
         "## Evidence files",
