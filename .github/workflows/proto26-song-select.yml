@@ -31,6 +31,7 @@ jobs:
           python-version: '3.12'
       - name: Build versioned standalone HTML and run source assertions
         run: |
+          set -o pipefail
           python engineering/proto26-song-select/test_source.py | tee engineering/proto26-song-select/static-test-report.txt
       - name: Install Playwright Chromium
         run: |
@@ -38,6 +39,7 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Run browser acceptance
         run: |
+          set -o pipefail
           python engineering/proto26-song-select/browser_acceptance.py | tee engineering/proto26-song-select/browser-test-report.txt
       - name: Record hashes and acceptance summary
         if: always()
