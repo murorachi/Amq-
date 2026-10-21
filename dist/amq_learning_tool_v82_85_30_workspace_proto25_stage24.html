@@ -7623,6 +7623,18 @@ body.amq-workspace-active #audioDock:not(.amqHomeDock) #audioPlayer {
     max-height: 28px !important;
   }
 }
+
+/* Proto25 Stage 30: give the Options sidebar more room on desktop without inventing controls. */
+@media(min-width:761px) {
+  body.ui-settings-open .top .actions {
+    width:min(340px,calc(100vw - 16px))!important;
+  }
+}
+@media(max-width:760px) {
+  body.ui-settings-open .top .actions {
+    width:min(292px,calc(100vw - 16px))!important;
+  }
+}
 </style>
 <style id="amq-workspace-osu-composition-v24">
 /* Proto24: visual pass for the four workspaces; navigation and action handlers remain unchanged. */
