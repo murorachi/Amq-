@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_29.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_30.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -235,7 +235,9 @@ with sync_playwright() as p:
                 initial_selected_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
                 selected_row.hover(position={"x": 5, "y": 5})
                 page.wait_for_timeout(120)
-                hover_x = selected_row.evaluate("(el) => el.getBoundingClientRect().left")
+                hover_debug = selected_row.evaluate("(el) => ({left:el.getBoundingClientRect().left,className:el.className,transform:getComputedStyle(el).transform,hovered:el.matches(':hover'),selected:el.classList.contains('proto26-song-selected')})")
+                print("HOVER_ROW_DEBUG=" + json.dumps(hover_debug, ensure_ascii=False))
+                hover_x = hover_debug["left"]
                 check(hover_x < initial_selected_x - 1, "hovered unselected song row shifts slightly left")
                 selected_row.click(position={"x": 5, "y": 5})
                 selected_row = page.locator("#songlist .songrow.proto26-song-selected").first
