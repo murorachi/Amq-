@@ -1,7 +1,8 @@
 # Next Task
 
-1. Validate VNDB cover requests in a normal browser with external network access. Confirm actual image URLs, thumbnail-to-full fallback, and retry behavior rather than treating image elements as successful downloads.
-2. Run double-click / `file://` acceptance where local HTML navigation is permitted; verify IndexedDB background save/reload and actual audio playback.
-3. Establish a supported binary upload/artifact path for Candidate 71 HTML, then download the remote artifact and verify its SHA-256.
-4. Continue pixel-level osu!stable comparison against a real Stable client screenshot, especially carousel geometry, selected/hover states, metadata placement, and ranking region.
-5. Human acceptance is still required before declaring the UI refactor complete.
+1. Open Candidate 72 in a normal browser by double-clicking the HTML and inspect the Home frame proportions, enlarged central icon, and Play submenu.
+2. Navigate to Song Select, then test each of the four lower-left workspace controls. Confirm their content appears inside the left-middle frame below song metadata and no stray panel appears in the bottom-left.
+3. Confirm the curved black Song Select frame matches the intended osu!stable geometry at desktop and mobile widths; adjust only after comparing actual reference screenshots.
+4. Verify the full quiz page has no global top header and test Escape on Home Settings without changing the existing quiz Escape behavior.
+5. Re-run end-to-end tests in a real-origin browser context, including localStorage/IndexedDB, saved background reload, VNDB cover loading, and audio playback.
+6. Upload the HTML bytes to GitHub using a route that supports binary/local-file content; verify remote size and SHA-256 separately from test results.
