@@ -218,7 +218,7 @@
   #amqSongSelectStage #p32WorkMeta{max-width:440px;margin:0;color:#d0d8e7;font-size:13px;line-height:1.8;text-shadow:0 2px 12px rgba(0,0,0,.7)}
   #amqSongSelectStage .p32-scene-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid rgba(230,238,255,.2);color:#b7c4d9;font-size:9px;letter-spacing:.14em}
   #amqSongSelectStage .p32-catalog{padding:14px 12px 18px;background:linear-gradient(180deg,rgba(12,17,28,.86),rgba(12,16,25,.72));backdrop-filter:blur(9px)}
-  #amqSongSelectStage .p32-catalog-head{display:flex;justify-content:space-between;align-items:center;padding:1px 0 13px;border-bottom:1px solid rgba(220,230,250,.16);margin-bottom:12px}
+  #amqSongSelectStage .p32-catalog-head{display:flex;justify-content:space-between;align-items:center;padding:1px 0 8px;border-bottom:1px solid rgba(220,230,250,.16);margin-bottom:7px}
   #amqSongSelectStage .p32-catalog-head small{font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800}
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
@@ -266,11 +266,25 @@
   body.amq-workspace-active #audioDock .dockBtns{min-width:0!important;max-width:100%!important;display:flex;flex-wrap:wrap;gap:4px;overflow:auto;max-height:54px}
   body.amq-workspace-active #audioDock .dockBtns select{min-width:0!important;max-width:100%!important;width:auto}
   @media(max-width:1120px){body.amq-workspace-active #amqWorkspaceDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1.05fr!important;bottom:12px!important;height:56px!important}body.amq-workspace-active #audioDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;bottom:76px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}#amqSongSelectStage .toolbar.view-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  body.amq-workspace-active .top{min-height:30px!important;margin:0 0 4px!important;padding:0 0 4px!important;gap:0!important}
+  body.amq-workspace-active .top .actions{gap:6px!important;flex-wrap:nowrap!important}
+  body.amq-workspace-active .top .actions #themeToggle,body.amq-workspace-active .top .actions #updateBtn,body.amq-workspace-active .top .actions #exportBtn,body.amq-workspace-active .top .actions #importBtn{display:none!important}
+  body.amq-workspace-active.ui-settings-open .top .actions #themeToggle,body.amq-workspace-active.ui-settings-open .top .actions #updateBtn,body.amq-workspace-active.ui-settings-open .top .actions #exportBtn,body.amq-workspace-active.ui-settings-open .top .actions #importBtn{display:inline-flex!important}
+  body.amq-workspace-active .top .actions #uiHomeSettings,body.amq-workspace-active .top .actions #uiBackHome,body.amq-workspace-active .top .actions #sceneBackgroundOpen{min-height:28px!important;padding:5px 8px!important;font-size:10px!important;box-shadow:none!important;border-radius:3px!important}
+  body.amq-workspace-active #amqWorkspaceDock{left:12px!important;right:auto!important;width:calc(50vw - 18px)!important;max-width:calc(50vw - 18px)!important;bottom:12px!important;height:60px!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1.05fr!important;z-index:10001!important}
+  body.amq-workspace-active #amqWorkspaceDock button{min-width:0!important;padding:5px 3px!important;font-size:10px!important;gap:4px!important}
+  body.amq-workspace-active #audioDock{left:auto!important;right:12px!important;bottom:12px!important;width:calc(50vw - 18px)!important;max-width:calc(50vw - 18px)!important;margin:0!important;z-index:10000!important;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.2fr)!important;gap:6px!important;padding:7px!important;border-radius:4px!important;min-width:0!important}
+  body.amq-workspace-active #audioDock>*{min-width:0!important;max-width:100%!important}
+  body.amq-workspace-active #audioDock audio{width:100%!important;min-width:0!important}
+  body.amq-workspace-active #audioDock .dockBtns{min-width:0!important;max-width:100%!important;display:flex;flex-wrap:wrap;gap:4px;overflow:auto;max-height:54px}
+  body.amq-workspace-active #audioDock .dockBtns select{min-width:0!important;max-width:100%!important;width:auto}
+  @media(max-width:1120px){body.amq-workspace-active #amqWorkspaceDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1.05fr!important;bottom:12px!important;height:56px!important}body.amq-workspace-active #audioDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;bottom:76px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}#amqSongSelectStage .toolbar.view-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:200px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:300px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:18px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:260px}body.amq-workspace-active #amqWorkspaceDock{height:54px!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1fr!important}body.amq-workspace-active #amqWorkspaceDock button{font-size:9px!important}body.amq-workspace-active #audioDock{bottom:70px!important;grid-template-columns:minmax(0,1fr)!important;max-height:110px;overflow:auto}}
   `;
   document.head.append(style32);
   const fitStageToViewport=()=>{
     if(!stage.isConnected)return;
+    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');
     const left=Math.max(0,stage.getBoundingClientRect().left);
     const width=Math.max(0,window.innerWidth-left);
     stage.style.setProperty('width',width+'px','important');
