@@ -24,16 +24,17 @@ PASS catalog viewport sizing reserves scroll space by compacting hidden and auxi
 PASS selected song row is visibly highlighted and shifts slightly left
 PASS base catalog cards retain their original density profile
 PASS browser acceptance includes a central-title overlap assertion
+PASS scene artwork uses a genuinely loaded cover image and refreshes when covers load
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html
-OUTPUT_BYTES=8979311
-OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
+OUTPUT_BYTES=8979593
+OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
+OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
 STATIC_ACCEPTANCE=PASS

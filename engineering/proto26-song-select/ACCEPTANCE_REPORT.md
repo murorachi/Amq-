@@ -1,8 +1,8 @@
-Proto36 Song Select candidate-12 acceptance summary
-Commit under test: f449129ea01221ab48c2e04f8560b00b61f52f22
-Date UTC: 2026-10-21T14:20:20Z
-8979311 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html
-8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html
+Proto37 Song Select candidate-13 acceptance summary
+Commit under test: 9049513569e42dabca5d11b07c1e25b08730a2e8
+Date UTC: 2026-10-21T14:26:37Z
+8979593 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
+04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -30,18 +30,19 @@ PASS catalog viewport sizing reserves scroll space by compacting hidden and auxi
 PASS selected song row is visibly highlighted and shifts slightly left
 PASS base catalog cards retain their original density profile
 PASS browser acceptance includes a central-title overlap assertion
+PASS scene artwork uses a genuinely loaded cover image and refreshes when covers load
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html
-OUTPUT_BYTES=8979311
-OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html
+OUTPUT_BYTES=8979593
+OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
+OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -71,6 +72,7 @@ PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
 DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 892.265625, "searchWidth": 538.734375, "catalogLeft": 891.265625, "stageDisplay": "grid", "dockBottom": 888}
 SCENE_GEOMETRY_1440x900={"stage": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "grid"}, "scene": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "block"}, "info": {"left": 28, "right": 437, "top": 52, "bottom": 712, "width": 409, "height": 660, "display": "flex"}, "title": {"left": 459, "right": 868, "top": 422, "bottom": 518, "width": 409, "height": 96, "display": "flex"}, "catalog": {"left": 882, "right": 1440, "top": 52, "bottom": 712, "width": 558, "height": 660, "display": "flex"}, "search": {"left": 892, "right": 1431, "top": 60, "bottom": 85, "width": 539, "height": 25, "display": "block"}, "grid": {"left": 891, "right": 1432, "top": 167, "bottom": 669, "width": 541, "height": 502, "display": "flex"}}
+CATALOG_COVER_DIAGNOSTICS=[{"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 161, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "complete": true, "naturalWidth": 156, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 144, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "complete": true, "naturalWidth": 191, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 136, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 135, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 150, "objectFit": "cover", "visibility": "visible", "display": "block"}]
 PASS central work title does not overlap the right catalog panel at 1440x900
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select three-zone composition is visible at 1440x900
@@ -158,10 +160,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=8934c12d814d8846f90f6331d1b0757f17a86b20f12e336619c27371c7dd4470
+OUTPUT_SHA256=04e0c028040b9a30ef07c9b07eaeb4d82e8d46dcb550813d265463bdde8c75e9
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.266530; changed-pixel-ratio=0.849977
+DIAGNOSTIC normalized MAE=0.266530; changed-pixel-ratio=0.849965
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
