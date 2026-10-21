@@ -19,6 +19,15 @@
 - Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39550068389 (static + Playwright browser acceptance PASS).
 - Keep this candidate as a rollback checkpoint; it is not final UI approval.
 
+## Current unaccepted Proto26.8 candidate
+- Isolated branch: `v82.85.30-proto26-in-place-workspaces-01`
+- Draft PR #11: https://github.com/murorachi/Amq-/pull/11
+- Source implementation commit: `5f9d3ab6ac659adcf83336838c3afb96abb862c4`
+- Acceptance test commit: `21ef2851cd66eed50ee19eca737b55332c83b73b`
+- Target standalone artifact: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
+- Build, browser acceptance, artifact hash and Actions status: **NOT RUN / NOT VERIFIED** at checkpoint creation.
+- Rollback: return to accepted candidate `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`; immutable Proto25 baseline remains unchanged.
+
 ## Previous accepted rollback candidates
 - Proto26.3: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; run https://github.com/murorachi/Amq-/actions/runs/39547940204.
 - Proto26.4 / file `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html`: 8,937,515 bytes, SHA-256 `9d052a0557a021309a596bf0fcdb127389107dc9b08878e63d13b31c4d6d15af`; run https://github.com/murorachi/Amq-/actions/runs/39549067049.
