@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_14.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_15.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -45,6 +45,8 @@ def main():
     check("naturalWidth>=80&&el.naturalHeight>=50" in js and "grid.addEventListener" in js, "scene artwork uses a genuinely loaded cover image and refreshes when covers load")
     check("applySceneCover=(card,img)" in js and "selectedWorkCard?.contains(event.target)" in js, "selected-work scene art handles delayed cover-image loading")
     check("#amqSongSelectStage #grid>.card:hover .cardManage" in js and "opacity:0!important;pointer-events:none!important" in js, "catalog quick-management controls do not obscure every cover at rest")
+    check("#amqSongSelectStage #grid>.card .cover .symbol" in js and ".cover .coverFallback{display:none!important}" in js, "decorative cover badges do not obscure real artwork in the dense song list")
+    check("minmax(0,24%) minmax(0,39.5%) minmax(0,36.5%)" in js and "left:24.5%!important;right:36.8%!important" in js, "scene proportions prioritize the center artwork while preserving side panels")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     result = subprocess.run([sys.executable, str(BUILDER)], cwd=ROOT, text=True, capture_output=True)
