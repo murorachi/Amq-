@@ -2,7 +2,7 @@
 
 ## Active work: Proto26 Song Select integration
 
-Status: **Proto26.7 workspace-route integration is under browser acceptance; not final UI acceptance.** The dock now routes each workspace to an existing main view instead of only changing the sidebar title. Full action-level in-place integration and osu!stable screenshot comparison remain incomplete.
+Status: **Proto26.7 route integration passed static and Playwright browser acceptance; not final UI acceptance.** Run: https://github.com/murorachi/Amq-/actions/runs/39557544284. Tested commit: `d8751a5b0fc90cb786ad4eacea591fbbdad4aef1`; generated artifact/report commit: `a749b47` (verify full SHA from GitHub before release). The four dock routes now change the real main view and matching content surface. Full action-level in-place integration and osu!stable screenshot comparison remain incomplete.
 
 ### Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -11,16 +11,16 @@ Status: **Proto26.7 workspace-route integration is under browser acceptance; not
 - SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
 - Baseline is read-only and must not be overwritten.
 
-### Latest accepted development candidate
+### Latest generated and browser-accepted candidate
 - Branch: `v82.85.30-proto26-song-select-integration-01`
 - Draft PR: https://github.com/murorachi/Amq-/pull/10
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Candidate tested by CI commit: `a627c118e05ab1aef7ac9fb46304c0b075aebf8f`
-- Final artifact/report commit: `be80c913beb7d3ec49b978d2c1d4169da0462a5f`
-- Size: 8,938,670 bytes
-- SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- GitHub Actions acceptance run #72: https://github.com/murorachi/Amq-/actions/runs/39550068389 (PASS)
-- Generated candidate and reports exist on the isolated branch. PR remains draft and unmerged.
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html`
+- Tested source commit: `d8751a5b0fc90cb786ad4eacea591fbbdad4aef1`
+- Generated artifact/report commit: `a749b47` (short SHA; confirm full remote SHA before release)
+- SHA-256: `07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532`
+- GitHub Actions run: https://github.com/murorachi/Amq-/actions/runs/39557544284 (static + Playwright browser acceptance PASS)
+- Artifact ZIP SHA-256: `44b03bbf73575a80a944e02e40156f8b61b79cf79d6c0cfe27e612eba069a32b`
+- Generated candidate and reports were pushed to the isolated branch. PR remains draft and unmerged; visual comparison is not run.
 
 ### Verified changes
 - Added AMQ / EMQ / MIX / Singer controls while reusing the existing catalog tabs and song-row renderer.
