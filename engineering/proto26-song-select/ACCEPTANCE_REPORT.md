@@ -1,8 +1,8 @@
 Proto26 Song Select acceptance summary
-Commit under test: 5324f99a49e91abf6e7f749a2986408fde62ec6d
-Date UTC: 2026-10-21T07:36:29Z
-8939182 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
-07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
+Commit under test: e4aa68374c05262bbf99cb499eab412a77d22f50
+Date UTC: 2026-10-21T07:37:26Z
+8942305 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
