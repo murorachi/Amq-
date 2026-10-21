@@ -8,34 +8,35 @@
 
 ## Latest verified Proto25 checkpoint
 - Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source commit: `bf332b5cf4ac4e089d689e9ac9614cc38b11b167`.
-- Successful workflow: [Run 39539309957](https://github.com/murorachi/Amq-/actions/runs/39539309957).
+- Tested source commit: `1e665b3036df061c7d0f4ff86a040a4522ac77a3`.
+- Successful workflow: [Run 39540158570](https://github.com/murorachi/Amq-/actions/runs/39540158570).
 - Workflow conclusion: SUCCESS. Static HTML parse, duplicate-ID check, inline JavaScript syntax checks and browser acceptance passed.
 - Browser assertions: 18 PASS; page errors: 0; console errors: 0.
-- Artifact: [proto25-stage24-ui-acceptance, ID 12319085625](https://github.com/murorachi/Amq-/actions/runs/39539309957/artifacts/12319085625).
-- Artifact ZIP SHA-256: `bb8aeb68a77ea862cc75febe6903b852030ab8e452f41ac527c592b1b61a8c76`.
+- Artifact: [proto25-stage24-ui-acceptance, ID 12318758166](https://github.com/murorachi/Amq-/actions/runs/39540158570/artifacts/12318758166).
+- Artifact ZIP SHA-256: `a8a3ae0036f18c15bfe15cf65a097e8116382d159b0f250fdcca52ba43590f4d`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,923,325 bytes.
-- Candidate SHA-256: `0ff2bc155b7953bce29ad43209bb02cc94f2aa992e614670762ce0bf0e0c38fd`; downloaded candidate hash matches the artifact manifest.
-- Stage 24 branch head after publication: `ba12305759ed916dd69f42e38646505be84a5710`.
-- Remote tree confirms the HTML, 81-byte checksum manifest and TEST_REPORT. Remote manifest/report match Run 39539309957.
+- Size: 8,925,711 bytes.
+- Candidate SHA-256: `33ff46c97c50ae7f100a16d5a132a59c019e0e98a2819d402309ab835165e613`; downloaded candidate hash matches the artifact manifest.
+- Stage 24 branch head after publication: `125043fda3414ea3d87a0b42e61a29b197200e97`.
+- Remote tree confirms the HTML, 81-byte checksum manifest and TEST_REPORT. Remote manifest/report match Run 39540158570.
 
 ## Changes in the latest tested checkpoint
 - Preserved AMQ navigation, native storage, quiz, catalog, Learning Center, Analysis and Multiplayer UI behavior.
 - Fixed workspace shell lifecycle so standalone catalog routes do not retain the Learning/Analysis sidebar or dock; the catalog's final row clears the fixed audio dock.
-- Enlarged the desktop home cookie to 560px and kept the three primary actions at 520px wide by 76px high. The Play submenu cookie is 500px and its three blades are 520px by 92px.
-- Required labels remain `Single Player`, `Multiplayer`, `Back`.
-- Widened the desktop Options sidebar to 340px while retaining 292px on mobile.
+- Main-menu cookie is 560px with 520px × 76px primary actions. Play submenu cookie is 500px with 520px × 92px blades. Required labels remain `Single Player`, `Multiplayer`, `Back`.
+- Widened desktop Options sidebar to 340px while retaining 292px on mobile.
 - Stage 31 refined profile/player typography and avatar sizing, with desktop/mobile assertions.
-- Stage 32 added a CSS-only translucent triangular skin pattern to the home and Play cookies based on the pinned official osu!Stable Wiki screenshots.
-- Stage 33 matched the primary menu labels to the Stable reference's italic typography and added low-contrast radial-ray background layers to the home and Play screens.
-- Stage 33 static checks PASS; 18 browser assertions PASS; page/console errors 0. Candidate hash matches the downloaded manifest; remote HTML, manifest and TEST_REPORT were verified.
+- Stage 32 added a CSS-only translucent triangular skin pattern to home and Play cookies, based on pinned official osu!Stable Wiki screenshots.
+- Stage 33 applied italic typography to the main actions and added radial-ray background layers; Stage 35 reduced ray opacity after screenshot review so the background texture remains subordinate to the cookie.
+- Stage 34 compacted the catalog summary, batch-management controls, filters and tabs. The card grid now begins at y=681px in the 1440×900 acceptance viewport, compared with y≈775px before the change. Batch controls remain visible and neither row overflows horizontally.
+- Stage 34's first measured run correctly failed the new assertion because the batch panel was 253.5px tall against a 240px limit. Reduced padding, gaps and control height; the verified panel is now 225.5px. The final workflow passes.
+- Latest static checks PASS; 18 browser assertions PASS; page/console errors 0. Candidate hash matches the downloaded manifest; remote HTML, manifest and TEST_REPORT were verified.
 
 ## Acceptance limits
 - NOT RUN: real audio output; full quiz-answer lifecycle; multiplayer server connectivity and lifecycle.
 - Exact osu!Stable client source commit and matching screenshot build remain unverified.
-- >=90% visual similarity: NOT VERIFIED. Comparison is qualitative because the official screenshots are not build/viewport matched.
-- Background/skin and cookie artwork remain CSS approximations; AMQ catalog data differs from osu!Stable Song Select.
+- >=90% visual similarity: NOT VERIFIED. Comparison remains qualitative because the official screenshots are not build/viewport matched.
+- Background/skin and cookie artwork are CSS approximations; AMQ catalog data differs from osu!Stable Song Select.
 - Do not merge PR #9 or promote Proto25 until remaining reference comparison and separate runtime acceptance are complete.
 
 ## Rollback
