@@ -1,75 +1,57 @@
 # Current Status
 
-## Latest verified checkpoint (2026-10-21)
-- Working branch: `v82.85.30-proto26-in-place-workspaces-01`
-- Source/workflow fix commit: `1985431f5055c470633efee823ef74de4198d333`.
-- CI acceptance run: https://github.com/murorachi/Amq-/actions/runs/39565629059 — **SUCCESS**.
-- Generated artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`, 8,942,305 bytes, SHA-256 `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
-- Static assertions: PASS. Playwright Chromium acceptance: PASS. Artifact upload and generated HTML/report push: PASS.
-- Browser assertions cover four workspace modes, existing list/batch/learning/analysis interactions, EMQ asynchronous load and work detail pane, AMQ/MIX/Singer mode switching, no uncaught page/console errors, and desktop/mobile overflow/drawer behavior.
-- Still NOT DONE: official osu!stable screenshot visual diff; exact Stable client source commit verification; real audio-output acceptance; broader quiz and multiplayer lifecycle acceptance. Candidate 06 is a verified development checkpoint, not final UI sign-off.
-- Rollback candidate remains `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`, SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`. Immutable Proto25 baseline SHA-256 remains `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f` and must not be overwritten.
+## Latest verified checkpoint: Proto28 default-state fix (2026-10-21)
 
+- Working branch: `v82.85.30-proto28-song-select-default-state-fix-01`
+- CI source commit: `52e1677ae3f6385fec577dce3609ee7511cc73c4`
+- Generated artifact/report commit: `fbf48765d07401e8b87494eec7c3c84015db7867`
+- GitHub Actions: https://github.com/murorachi/Amq-/actions/runs/39570523908 — **SUCCESS**
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
+- Size: 8,943,047 bytes
+- SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
+- Static acceptance: **PASS**
+- Playwright browser acceptance: **PASS**
+- Pinned reference identity and matched-viewport evidence generation: **PASS**
+- Page errors / console errors: **0 / 0**
+- Baseline hash verification: **PASS**, unchanged.
 
-## Active work: Proto26 Song Select integration
+### Verified Proto28 changes
+- Hides the home collection hero while the Song Select route is active.
+- Hides batch tools until the user selects the batch workspace.
+- Hides the workspace action sidebar until one of the four workspace modes is selected.
+- Keeps the four-button dock visible without falsely marking a workspace selected.
+- Synchronizes dock selection, sidebar visibility, and batch-tool visibility with the selected workspace.
+- Adds browser assertions for default state and all four workspace modes.
+- Fixed an iterator error found by the first browser run; the successful rerun includes the corrected code.
 
-Status: **Proto26.8 in-place workspace implementation committed; browser/static acceptance pending.** The four dock modes now target the existing watchlist, learning-plan and dashboard panels while preserving the app route as `catalog`. This is a candidate change, not final UI acceptance.
+### Visual comparison: evidence generated, visual acceptance NOT VERIFIED
+- Official osu!-wiki reference commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`
+- Reference image Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`
+- Matched viewport: 1280 × 720
+- Diagnostic normalized MAE: `0.285936`
+- Pixels with max-channel difference ≥ 24: 768,947 / 921,600 (83.44%); this is **not** a similarity score.
+- Confirmed visual defect: after hiding the left workspace sidebar, the body still reserves about 260–288 px of left padding, leaving a large blank column and narrowing the catalog.
+- The candidate still differs structurally from the Stable reference: the main content is a generic grid/catalog with AMQ filters rather than the reference's ranking panel, background composition, right-side song/beatmap list and bottom control layout.
+- Exact osu!stable client source commit matching Stable `20260924.1`: **NOT VERIFIED**. Do not substitute osu!lazer.
 
-### Immutable AMQ baseline
-- Branch: `v82.85.30-proto25-ui-refactor-stage-24`
-- File: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
-- Source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
-- SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
-- Baseline is read-only and must not be overwritten.
+### Remaining gates
+- Fix the reserved left padding in default Song Select without breaking the workspace modes.
+- Generate a uniquely named next standalone HTML candidate; preserve candidate 06 unchanged as this checkpoint.
+- Continue evidence-backed geometry/layout comparison and corrections.
+- Search edge cases, sort-result assertions, Enter/double-event regression, and real audio-output acceptance: **NOT RUN** in this stage.
+- Full quiz answer lifecycle and multiplayer server lifecycle: **NOT RUN** in this stage.
+- Home, Play, Settings, profile/statistics visual acceptance: **NOT RUN**.
 
-### Latest accepted development candidate
-- Branch: `v82.85.30-proto26-song-select-integration-01`
-- Draft PR: https://github.com/murorachi/Amq-/pull/10
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Candidate tested by CI commit: `a627c118e05ab1aef7ac9fb46304c0b075aebf8f`
-- Final artifact/report commit: `be80c913beb7d3ec49b978d2c1d4169da0462a5f`
-- Size: 8,938,670 bytes
-- SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- GitHub Actions acceptance run #72: https://github.com/murorachi/Amq-/actions/runs/39550068389 (PASS)
-- Generated candidate and reports exist on the isolated branch. PR remains draft and unmerged.
+## Immutable baseline and rollback
 
-### Verified changes
-- Added AMQ / EMQ / MIX / Singer controls while reusing the existing catalog tabs and song-row renderer.
-- Corrected MIX rendering to restore the existing AMQ catalog before composing mixed results.
-- Corrected EMQ asynchronous initialization race by waiting for the existing API's readiness signal.
-- Desktop selected-work details remain in a persistent right-side pane; mobile uses a closable drawer.
-- Workspace sidebar and dock remain visible beside Song Select on desktop.
-- Browser acceptance verified all four workspace buttons update the corresponding existing panel title.
-- Search and filter toolbar, batch tools, catalog and audio dock remain available; tested viewports had no horizontal overflow.
-- No uncaught page errors or browser console errors were reported in the accepted run.
-- Builder rejects baseline hash mismatch, injects the source only once, and produces a uniquely versioned standalone HTML.
+- Immutable baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
+- Baseline file: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
+- Baseline source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
+- Baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
+- Earlier accepted rollback candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
+- Rollback candidate SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
+- Draft PRs #10 and #11 remain unmerged. Do not overwrite the immutable baseline or prior candidates.
 
-### Test status
-- Static assertions: **PASS** (CI run #72).
-- Playwright Chromium acceptance: **PASS** (CI run #72).
-- Existing AMQ baseline hash unchanged: **PASS** (builder assertion).
-- Official Stable reference identity: public stable release label Stable `20260924.1` previously pinned by Proto24 audit.
-- Official osu!-wiki references: pinned commit `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
-- Exact client source commit matching osu!stable Stable `20260924.1`: **NOT VERIFIED**. Do not use `ppy/osu` lazer source as a substitute.
-- Same-viewport visual diff against official Song Select screenshot: **NOT RUN**.
-- Full in-place workspace content/action integration: **NOT COMPLETE**.
-- Home, Play, Settings, profile/statistics visual acceptance against pinned references: **NOT RUN in this Proto26 stage**.
-- Real audio-output acceptance, full quiz answer lifecycle and multiplayer server lifecycle: not covered by this stage's browser test.
+## Next task
 
-### Proto26.8 in-progress change
-- Added a route map in `song-select-integration.js`: lists → existing `watchlist` view; batch → existing `catalog` view; learning → existing `learningPlan` view; analysis → existing `dashboard` view. This uses the existing `window.__aniNavigateApp` router and does not duplicate business logic.
-- Expanded browser acceptance to assert the expected active route and visible main content surface for each dock button.
-- First CI attempt exposed a stale static assertion still expecting `proto26.6`. Fixed the assertion; static acceptance then passed on the next push run. Chromium install/browser acceptance are still in progress, so Proto26.7 is not yet accepted.
-
-### Newly pinned reference audit
-- `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`
-- Commit: `615ef8b92452009285845bf96a5609d0c8216784`
-- It records pinned Stable/Wiki identifiers and the exact remaining verification gates.
-
-### Next engineering work
-1. Trace actual `[data-ws]` and `#wsActions .wsAction` handlers and their destination DOM. Do not infer content targets from labels.
-2. Integrate the existing list-management, batch, learning and analysis content into the Song Select main region without cloning business logic or disrupting playback.
-3. Add assertions that prove the main content region changes, not merely the selected button/title.
-4. Capture and compare the candidate against the pinned official Song Select reference at matching 1440x900 viewport. Report geometry/overlay evidence; do not claim a similarity percentage without measurement.
-5. Only after those gates, return to homepage, Play and Settings work in the user's stated priority order.
+Fix the default Song Select left-padding/layout defect on a new isolated branch and produce a uniquely named standalone candidate. Keep workspace behavior unchanged and rerun static, browser, and matched-viewport visual evidence. Do not move to homepage polish before Song Select's layout and remaining functional gates are addressed.
