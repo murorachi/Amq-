@@ -2,7 +2,7 @@
 
 ## Proto26: Song Select integration
 
-Status: **Incremental source-mode code committed; acceptance and full workspace UI remain incomplete.**
+Status: **EMQ startup race fixed in source; acceptance and full workspace UI remain incomplete.**
 
 ### Verified baseline
 - Baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -13,6 +13,7 @@ Status: **Incremental source-mode code committed; acceptance and full workspace 
 ### Changes committed on isolated branch
 - Added `engineering/proto26-song-select/song-select-integration.js` with AMQ / EMQ / MIX / Singer controls.
 - Fixed MIX-mode rendering so the existing AMQ catalog is restored before AMQ and EMQ cards are combined.
+- Fixed a verified initialization race: the EMQ API returns an empty work list until its gzip library finishes asynchronous loading. Proto26 now waits for `api.ready`, refreshes the work list, and rerenders an already-active EMQ/MIX view.
 - Added a deterministic builder that rejects a baseline SHA-256 mismatch and writes a unique output path.
 - Added static assertions, Playwright acceptance code, GitHub Actions workflow, and project tracking documents.
 - Opened draft PR: https://github.com/murorachi/Amq-/pull/10. It remains unmerged.
@@ -20,7 +21,8 @@ Status: **Incremental source-mode code committed; acceptance and full workspace 
 
 ### Actual verification
 - Remote source existence: PASS. GitHub contents API returned the integration JS, builder, static tests, browser test, workflow, and status documents.
-- JavaScript syntax: PASS. Parsed the remotely fetched integration source using the JavaScript runtime `new Function`; no syntax exception. This is a parse check only, not execution or browser acceptance.
+- JavaScript syntax: previous revision passed a `new Function` parse check. The new readiness-race revision still requires a fresh parse/static run.
+- API-shape inspection: PASS. Existing API confirms `getWorks()` returns `[]` before `ready`, `getWorks()` returns work objects after load, and `getSongsForWork(work.i)` returns song-row arrays. The previous one-time snapshot was therefore a real race, not a guess.
 - MIX-mode regression correction: committed after code inspection; runtime interaction test still pending.
 - Browser test: NOT RUN. The local environment has no installed Playwright Chromium; browser launch reported the missing executable. This is an environment limitation, not a passing test.
 - GitHub Actions execution: NOT VERIFIED. The latest checked commit status had no status checks, and the PR-run lookup returned no workflow runs. Do not assume the newly added workflow executed.
@@ -29,4 +31,4 @@ Status: **Incremental source-mode code committed; acceptance and full workspace 
 - Full integrated Song Select workspace: NOT COMPLETE. The current source adds mode controls; the legacy detail overlay is still in use, and four workspaces have not been proven integrated into the same persistent view.
 
 ### Next engineering step
-Resolve the workflow execution path and obtain a real browser run. Then fix runtime/API-shape failures before continuing the persistent Song Select layout and four-workspace integration. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
+Run the new static assertions and confirm the push-triggered workflow/build result. Obtain a real browser run if CI executes; then continue the persistent Song Select layout and four-workspace integration. Keep PR #10 in draft until the generated HTML, browser tests, and visual comparison are verified.
