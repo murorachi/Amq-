@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -42,6 +42,7 @@ def main():
     check(".songrow.proto26-song-selected" in js and "translateX(-6px)" in js and "row.classList.add('proto26-song-selected')" in js, "selected song row is visibly highlighted and shifts slightly left")
     check("min-height:60px;padding:4px 6px" in js, "base catalog cards retain their original density profile")
     check("central work title does not overlap the right catalog panel" in Path(__file__).with_name("browser_acceptance.py").read_text(encoding="utf-8"), "browser acceptance includes a central-title overlap assertion")
+    check("naturalWidth>=80&&el.naturalHeight>=50" in js and "grid.addEventListener" in js, "scene artwork uses a genuinely loaded cover image and refreshes when covers load")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     result = subprocess.run([sys.executable, str(BUILDER)], cwd=ROOT, text=True, capture_output=True)

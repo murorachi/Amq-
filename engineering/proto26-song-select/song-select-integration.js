@@ -351,7 +351,7 @@
   window.requestAnimationFrame(fitStageToViewport);
   let selectedSongId=null,selectedWorkImage='',hasSelectedWork=false;
   const syncCatalogEmptyState=()=>{if(mode!=='amq'&&mode!=='singer')return;const hasCards=grid.querySelectorAll(':scope > .card,:scope > .p26-work-card').length>0;$('#empty')?.classList.toggle('hidden',hasCards)};
-  const updateP32=()=>{syncCatalogEmptyState();const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork&&!selectedWorkImage){const img=grid.querySelector('.card img,.p26-work-card img');const url=img?.currentSrc||img?.src||'';if(url){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")'}}}
+  const updateP32=()=>{syncCatalogEmptyState();const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork){const images=[...grid.querySelectorAll('.card img,.p26-work-card img')];const img=images.find(el=>el.complete&&el.naturalWidth>=80&&el.naturalHeight>=50)||images.find(el=>el.naturalWidth>=80&&el.naturalHeight>=50);const url=img?.currentSrc||img?.src||'';if(url&&url!==selectedWorkImage){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.28),rgba(12,16,27,.36)),url("'+url.replaceAll('"','%22')+'")'}}}
   function updateSelectedSongInfo(id,row){
     selectedSongId=id==null?null:String(id);
     const api=window.__aniHistoryAPIv51;
@@ -381,6 +381,7 @@
   });
   $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(!row?.dataset?.id)return;$('#songlist').querySelectorAll('.songrow.proto26-song-selected').forEach(el=>el.classList.remove('proto26-song-selected'));row.classList.add('proto26-song-selected');updateSelectedSongInfo(row.dataset.id,row)});
   document.addEventListener('ani-song-playback-recorded-v80',event=>{if(selectedSongId&&String(event.detail?.songId)===selectedSongId)updateSelectedSongInfo(selectedSongId)});
+  grid.addEventListener('load',event=>{if(event.target instanceof HTMLImageElement)requestAnimationFrame(updateP32)},true);
   new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true});updateP32();
 
   const getSongs=id=>{try{const a=api.getSongsForWork(id);return Array.isArray(a)?a:[]}catch(e){console.error('[Proto26] getSongsForWork failed',e);return[]}};

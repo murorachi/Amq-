@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_12.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_13.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -99,6 +99,8 @@ with sync_playwright() as p:
         return {stage:rect('#amqSongSelectStage'),scene:rect('#amqSongSelectStage .p32-scene'),info:rect('#amqSongSelectStage .p32-info'),title:rect('#amqSongSelectStage .p32-scene-content'),catalog:rect('#amqSongSelectStage .p32-catalog'),search:rect('#search'),grid:rect('#grid')};
     }""")
     print("SCENE_GEOMETRY_1440x900=" + json.dumps(scene_geometry, ensure_ascii=False))
+    cover_diagnostics = page.evaluate("""() => [...document.querySelectorAll('#grid .card img,#grid .p26-work-card img')].slice(0,8).map(img=>({src:(img.getAttribute('src')||'').slice(0,160),currentSrc:(img.currentSrc||'').slice(0,160),complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,objectFit:getComputedStyle(img).objectFit,visibility:getComputedStyle(img).visibility,display:getComputedStyle(img).display}))""")
+    print("CATALOG_COVER_DIAGNOSTICS=" + json.dumps(cover_diagnostics, ensure_ascii=False))
     check(scene_geometry["title"] is not None and scene_geometry["catalog"] is not None and scene_geometry["title"]["right"] <= scene_geometry["catalog"]["left"] + 2, "central work title does not overlap the right catalog panel at 1440x900")
     check(default_geometry["bodyPaddingLeft"] == "0px", "default Song Select releases reserved workspace sidebar padding at 1440x900")
     check(default_geometry["stageDisplay"] == "grid", "default Song Select three-zone composition is visible at 1440x900")
