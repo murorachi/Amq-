@@ -67,12 +67,17 @@ with sync_playwright() as p:
         page.wait_for_timeout(250)
         check(page.evaluate("window.__aniGetActiveViewV82?.() === 'watchlist'"), "custom-list action opens watchlist")
         check(page.locator("#customModeTab").is_visible(), "custom-list tab remains available")
+        check(page.locator("#wsStatus").get_attribute("data-state") == "success", "custom-list action reports successful completion")
 
         page.locator('#amqWorkspaceDock [data-ws="batch"]').click()
         page.locator('#wsActions [data-ws-action="batch-select"]').click()
         page.wait_for_timeout(250)
         check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "batch selection action opens catalog")
         check(page.locator("#selectModeBtn").is_visible(), "batch selection control remains available")
+        check(page.locator("#selectModeBtn").inner_text().strip().startswith("✓"), "batch action really toggles selection mode")
+        page.locator("#selectModeBtn").click()
+        page.wait_for_timeout(100)
+        check(page.locator("#selectModeBtn").inner_text().strip().startswith("□"), "batch selection mode is restored after test")
 
         page.locator('#amqWorkspaceDock [data-ws="learning"]').click()
         page.locator('#wsActions [data-ws-action="practiceExplore"]').click()
