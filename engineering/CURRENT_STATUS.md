@@ -1,7 +1,7 @@
 # Current Status
 
 - Latest local candidate: Candidate 70, `amq_learning_tool_v82_85_30_workspace_proto27_song_select_70-toolbar-inline-catalog.html`.
-- Local SHA-256: `99f56732782abfb04c29c7de55945a6efda56acfdd9c737126769c29f31847eb`; size 9,043,637 bytes.
+- Local SHA-256: `78f2ed58756ff64e1f22f583cc5a9396a549d4eb373a83bbdb50d185ba6f81a0`; size 9,043,637 bytes.
 - Parent Candidate 69 SHA-256: `84440ee44f5451df94853a4e66d7c02f00b5d39a330fb8752f66c384015131de`.
 - Static checks: 11/11 PASS; 45 inline JavaScript blocks syntax-valid; no duplicate IDs; CSS top-level parse clean.
 - Browser interaction checks: 20/20 PASS; console errors 0; page errors 0.
