@@ -73,6 +73,7 @@ jobs:
           path: |
             engineering/proto26-song-select/proto26-desktop.png
             engineering/proto26-song-select/proto26-mobile.png
+            engineering/proto26-song-select/proto26-stable-reference-viewport.png
             engineering/proto26-song-select/ACCEPTANCE_REPORT.md
             engineering/proto26-song-select/*test-report.txt
             dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
