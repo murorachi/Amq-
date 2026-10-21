@@ -6726,7 +6726,10 @@ window.addEventListener('hashchange',syncWorkspaceVisibility);window.addEventLis
   }
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let mode='amq', emqWorks=[];
-  try { emqWorks=api.getWorks()||[]; } catch(e) { console.error('[Proto26] getWorks failed',e); }
+  // EMQ data is decompressed asynchronously by the existing v82.48 loader.
+  // getWorks() deliberately returns [] until api.ready becomes true, so do not snapshot it once at startup.
+  const readEmqWorks=()=>{try{emqWorks=api.getWorks()||[];return emqWorks.length;}catch(e){console.error('[Proto26] getWorks failed',e);return 0;}};
+  readEmqWorks();
   const style=document.createElement('style');
   style.id='amq-proto26-song-select-css';
   style.textContent=`
@@ -6779,8 +6782,22 @@ window.addEventListener('hashchange',syncWorkspaceVisibility);window.addEventLis
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.2',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto26.3',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
+  if(!api.ready){
+    const started=Date.now();
+    const readinessPoll=window.setInterval(()=>{
+      if(api.ready){
+        window.clearInterval(readinessPoll);
+        readEmqWorks();
+        if(mode==='emq'||mode==='mix')renderEmq(mode==='mix');
+      }else if(Date.now()-started>=30000){
+        window.clearInterval(readinessPoll);
+        document.documentElement.dataset.proto26Emq='load-timeout';
+      }
+    },100);
+  }else{readEmqWorks();}
+  document.documentElement.dataset.proto26Emq=api.ready?'ready':(emqWorks.length?'ready':'loading');
 })();
 
 </script>
