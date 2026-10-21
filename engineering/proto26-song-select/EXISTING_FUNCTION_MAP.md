@@ -1,0 +1,29 @@
+# Existing Function Map — Proto26 Song Select
+
+Date: 2026-10-21
+Scope: Evidence-backed mapping for integrating existing functionality into the Song Select work area.
+Rule: **NOT VERIFIED** means the current acceptance evidence does not prove the full handler/data path. Do not treat a label or visible button as proof of implementation.
+
+| Existing function | Existing entry / DOM | Known handler or data path | Target in Song Select | Current evidence | Remaining verification |
+|---|---|---|---|---|---|
+| AMQ song catalog | `#grid`, `.tabs.view-catalog`, `[data-tab="all"]` | Existing `render()`, catalog tabs and `makeSongRow(s)` | Main browse/list region | PASS: Proto26.6 browser test restores AMQ mode and sees catalog | Search edge cases, keyboard Enter behavior, single-activation playback, sort/filter regression |
+| Singer catalog | `[data-tab="artists"]` | Existing `renderArtists()` and `openArtist(g)` | Same browse/list region in Singer mode | PASS: Singer mode activates in browser test | Validate actual filtered results and artist-song selection lifecycle |
+| EMQ works | `window.__aniEmqAPI.getWorks()` | Asynchronous API readiness; `getSongsForWork(work.i)`; existing `makeSongRow(s)` | Work cards in main browse/list region; selected work details at right | PASS: API readiness, real work cards, selected-work detail pane | Search field coverage for all actual metadata; sorting/filtering parity with available fields |
+| MIX | Proto26 mode button and existing AMQ catalog | Temporarily activates AMQ catalog, combines existing AMQ cards with actual EMQ work cards | Combined browse/list region | PASS: mode activation and no browser/console errors | Assert mixed result membership, duplicates policy, search consistency and result ordering |
+| Song details and audio | `#overlay`, `#detailTitle`, `#detailSub`, `#detailStats`, `#songlist`, `#audioDock` | Existing detail overlay, `makeSongRow`, existing player controls | Persistent desktop details column; mobile drawer | PASS: selected EMQ work opens detail pane, audio dock remains present, mobile drawer fits | Full real audio-output test and selected-song Enter/play duplicate-event test |
+| List management workspace | `#amqWorkspaceDock [data-ws="lists"]`; `#amqWorkspaceSidebar`; `#wsTitle`; `#wsActions` | Existing workspace shell and actions | Song Select internal workspace mode | PASS: button updates title to 清單管理 | Exact action handlers, data sources, destination DOM and in-place operation are NOT VERIFIED |
+| Batch organization workspace | `#amqWorkspaceDock [data-ws="batch"]`; `#quicktools` exists | Existing batch action panel and quick tools; handler mapping not fully traced in current report | Song Select internal workspace mode | PASS: button updates title to 批次整理; quick tools reserve space beside detail pane | Exact batch functions, confirmations, data mutation boundaries and in-place operation are NOT VERIFIED |
+| Learning Center workspace | `#amqWorkspaceDock [data-ws="learning"]` | Existing workspace action panel; legacy learning flow must be reused | Song Select internal workspace mode | PASS: button updates title to 學習中心 | Actual learning entry, dependency chain, quiz/audio lifecycle and in-place operation are NOT VERIFIED |
+| Learning Analysis workspace | `#amqWorkspaceDock [data-ws="analysis"]`; `#dashboardPanel` exists in baseline inventory | Existing dashboard/history data paths; exact action mapping not fully traced | Song Select internal workspace mode | PASS: button updates title to 學習分析 | Each analysis action/data source and in-place operation are NOT VERIFIED |
+| Song history | `window.__aniHistoryAPIv51` | `getSongHistorySummary(id)`, `getHistory()` | Selected-song information, including last wrong answer if stored | API identifiers verified by prior source audit | Schema fields, definition of play count and wrong-answer record for each selected song need explicit assertions |
+| Existing search/filter/sort | `#search`, `#decade`, `#type`, `#sort` | Existing catalog event handlers and `render()` | Transparent search and compact catalog controls | Existing controls remain visible; layout reservation passes | Partial text, case, whitespace, CJK, special characters, zero results, mode switching and actual sort result assertions |
+| Home navigation | `[data-home-action]`, `window.__aniNavigateApp` | Existing navigation state API | Outside current Song Select scope; later stage | Prior Proto24 acceptance covered home action/return routes | Re-run only after Song Select integration is stable |
+| Play menu | Existing Play shade and routes | Prior test maps Single Player to quiz and Multiplayer to multiplayer route | Later stage | Prior Proto24 acceptance covered route/UI; server lifecycle was not tested | Regression after Song Select work |
+| Settings and backup | `#themeToggle`, `#sceneBackgroundOpen`, existing database/backup controls | Existing settings, scene dialog and storage functions | Later stage | Prior Proto24 acceptance covered settings/scene dialog and native storage persistence | Explicit database update, backup export/import restore tests remain separate |
+
+## Current acceptance interpretation
+
+- The latest browser run proves the four workspace dock buttons change their corresponding panel title and active state. It does **not** prove that the main Song Select content region changes to each workspace or that all actions remain in that region.
+- No workspace business logic should be duplicated to simulate in-place integration. Trace existing handler targets first, then move/rehost the actual view or route the existing action functions.
+- Do not invent missing song play counts or last-wrong-answer history. If the stored schema has no field, show an empty state and record the gap.
+- Do not mark osu!stable visual parity as passed until the candidate and pinned official Song Select screenshot are compared at matching viewport and state.
