@@ -72,3 +72,18 @@ These results are not a visual similarity acceptance. The screenshot still shows
 ## No source modifications
 
 This audit changes no AMQ HTML, application logic, CSS, or tests. The new audit branch is isolated from the original candidate and production branches.
+
+## Proto25 screenshot comparison — 2026-10-21
+
+Comparison sources: the pinned official screenshots listed above and the downloaded Proto25 browser artifact screenshots. This is a qualitative geometry audit, not a pixel-similarity score; the captures use different viewports and the wiki images do not identify their exact Stable build.
+
+| Screen element | Official Stable reference | Previous Proto25 capture | Observed delta / action |
+|---|---|---|---|
+| Main-menu cookie/logo | Approximately 480px diameter in a 1280px-wide reference; it overlaps the left edge of the menu blades. | Approximately 292px diameter in a 1440px-wide capture, separated from the menu. | Materially undersized and too isolated. Increased the desktop logo to a 400–490px range and translated it into the menu area; increased the landing region and primary action row height. Browser assertions now guard logo width, landing height and action height. |
+| Play submenu cookie/logo | Approximately 500px diameter in a 1280px-wide reference; overlaps the menu blades. | Approximately 356px diameter in a 1440px-wide capture. | Materially undersized. Increased the desktop cookie to a 460–500px range and shifted it toward the menu; increased the three action blades to 92px minimum height and 16px spacing. Added desktop browser assertions for logo width and all three button heights. |
+| Primary menu blades | Large purple trapezoids with italic white labels and relatively generous vertical spacing. | Shape/color direction was already close, but the previous actions were short and tightly packed. | Retained the existing AMQ routes and Stable-inspired clip-path/gradient; enlarged desktop actions without changing their click handlers. |
+| Options sidebar | Screenshot shows a wide left options surface with an icon rail and settings content over the home scene. | AMQ options drawer is narrower and contains only controls supported by this app. | Keep AMQ-specific controls rather than inventing osu! options. Width and information hierarchy remain a possible visual delta; review after the current main-menu/Play-menu changes. |
+| Song Select | Skin-driven background, song/difficulty list, sorting/grouping and score panels. | AMQ catalog/detail is a different data model and has a sparse single-row fixture in the browser screenshot. | Do not claim equivalence. Keep AMQ catalog semantics; future work may improve the Stable-inspired visual structure only where it does not invent beatmap features. |
+| Background/skin | Official screenshots use a user skin/background with substantial texture and animation. | Candidate uses a restrained CSS texture and gradients. | Exact background matching is not possible from a generic screenshot without a version-matched client capture or licensed/reference assets. Do not use the official screenshot as a fake page background. |
+
+The home and Play-menu size adjustments are isolated source changes and are not accepted until the latest workflow completes successfully, its screenshots are reviewed, and the candidate SHA-256/remote publish are verified.
