@@ -2,7 +2,7 @@
 
 Artifact: `amq_learning_tool_v82_85_30_workspace_proto27_song_select_70-toolbar-inline-catalog.html`
 
-SHA-256: `78f2ed58756ff64e1f22f583cc5a9396a549d4eb373a83bbdb50d185ba6f81a0`
+SHA-256: `25abdf0e901f58965d5098231de31a9d9efb511de2c6423896abf748b3b5eda5`
 
 Parent: Candidate 69, SHA-256 `84440ee44f5451df94853a4e66d7c02f00b5d39a330fb8752f66c384015131de`.
 
