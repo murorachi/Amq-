@@ -1,0 +1,12 @@
+PASS source mode controls initialize
+PASS integration reports ready state
+PASS catalog and audio dock remain present
+PASS EMQ mode activates
+FAIL EMQ mode renders actual work cards
+PASS MIX mode activates
+PASS Singer mode activates
+PASS AMQ mode restores legacy catalog
+PASS no uncaught page errors
+PASS no browser console errors
+PASS mobile layout has no horizontal overflow
+OUTPUT_SHA256=b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c
