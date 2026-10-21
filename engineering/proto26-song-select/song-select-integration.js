@@ -72,6 +72,16 @@
   new MutationObserver(syncWorkspaceShell).observe(document.body,{attributes:true,attributeFilter:['class']});
   window.addEventListener('resize',syncWorkspaceShell,{passive:true});
 
+  // The dock must change the main work surface, not only the selected button/sidebar title.
+  // Reuse the application's existing view router; do not duplicate workspace business logic.
+  const workspaceRoutes={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'};
+  for(const button of $('#amqWorkspaceDock [data-ws]')){
+    button.addEventListener('click',()=>{
+      const target=workspaceRoutes[button.dataset.ws];
+      if(target)window.__aniNavigateApp?.(target);
+    });
+  }
+
   const modes=document.createElement('nav');
   modes.id='proto26SongModes'; modes.classList.add('view-catalog'); modes.setAttribute('aria-label','曲庫來源');
   modes.innerHTML='<span class="p26-label">SONG SELECT</span><button type="button" data-p26-mode="amq" aria-pressed="true">AMQ</button><button type="button" data-p26-mode="emq" aria-pressed="false">EMQ</button><button type="button" data-p26-mode="mix" aria-pressed="false">MIX</button><button type="button" data-p26-mode="singer" aria-pressed="false">Singer</button>';
@@ -106,7 +116,7 @@
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.6',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto26.7',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
   if(!api.ready){
     const started=Date.now();
