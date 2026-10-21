@@ -33,6 +33,8 @@ def main():
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
     check('body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene' in js and "backdrop-filter:blur(2px)" in js, "Song Select feature stage integrates the existing Catalog scene background with a fallback")
     check("height:clamp(380px,calc(100vh - 120px),600px)" in js, "Song Select stage height is constrained to the viewport")
+    check("Proto35 visual correction: osu! Stable-style continuous scene with translucent side overlays." in js and "#amqSongSelectStage .p32-scene{position:absolute!important;inset:0!important" in js, "desktop Song Select uses a continuous scene with translucent side overlays")
+    check("#amqSongSelectStage #grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(54px,auto)!important" in js, "desktop catalog rows use compact two-column density")
     check("const syncCatalogEmptyState=()=>{if(mode!=='amq'&&mode!=='singer')return" in js and "new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true})" in js, "AMQ empty state synchronizes after asynchronous catalog rendering")
     check("p26-filter-strip" in js and "overflow-x" in js and "height:24px;min-height:24px" in js, "catalog filters remain reachable in a compact horizontal strip")
     check("p26-mode-tabs-row" in js and "position:absolute;top:0;right:0;bottom:0;width:44%" in js, "catalog overlays the central scene with combined compact source/category controls")
