@@ -555,7 +555,7 @@ document.getElementById('queueBtn').onclick=()=>{renderQueue();document.getEleme
 makeSongRow=function(s){const row=document.createElement('div');row.className='songrow';row.dataset.id=s[1];const type=typeNames[s[2]]||'歌曲';const tag=songTags[String(s[1])]||'',hist=playHistory[String(s[1])];row.innerHTML=`<div class="songnum">${String(s[3]||'•').padStart(2,'0')}</div><div><div class="songname">${esc(s[4]||'未命名歌曲')}</div><div class="songmeta">${esc(s[5]||'歌手未標示')} · ${type}${s[6]?' · 難度 '+s[6]:''}${hist?.count?' · 播放 '+hist.count+' 次':''}</div>${tag?`<div class="songtags">✎ ${esc(tag)}</div>`:''}</div><div class="songactions"><button class="statusbtn listenBtn" data-act="listen">▶ 播放</button><button class="statusbtn queueBtn" data-act="queue">＋佇列</button>${[['聽過',1],['有印象',2],['秒答',3]].map(([label,n])=>`<button class="statusbtn ${st(s[1])===n?'on':''}" data-s="${n}">${label}</button>`).join('')}<details class="songMoreMenuV844"><summary aria-label="更多歌曲操作">更多</summary><div class="songMoreActionsV844"><button class="statusbtn" data-act="tag">編輯標籤</button><button class="statusbtn ${st(s[1])===0?'on':''}" data-s="0">重設熟悉度</button></div></details></div>`;row.querySelector('[data-act="listen"]').onclick=()=>listenSong(s);row.querySelector('[data-act="queue"]').onclick=()=>addQueue(s);row.querySelector('[data-act="tag"]').onclick=()=>{const val=prompt('替這首歌加一個辨識標籤，例如：80年代、電子鼓、男聲熱血、夏日感。留空可刪除。',songTags[String(s[1])]||'');if(val===null)return;if(val.trim())songTags[String(s[1])]=val.trim();else delete songTags[String(s[1])];saveObj('aniSongTags_v1',songTags);document.dispatchEvent(new CustomEvent('ani-song-tag-updated-v80',{detail:{songId:String(s[1]),tag:songTags[String(s[1])]||''}}));openAnime(currentId)};row.querySelectorAll('button[data-s]').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.s);if(n===0)delete status[s[1]];else status[s[1]]=n;save();row.querySelectorAll('button[data-s]').forEach(x=>x.classList.toggle('on',Number(x.dataset.s)===st(s[1])));refreshDetail();updateStats();render()}));return row};
 
 // Catalog rendering; cover loading is intentionally disabled.
-function render(){if(tab==='artists'){renderArtists();return}const q=document.getElementById('search').value.trim().toLowerCase(),dec=document.getElementById('decade').value,typ=document.getElementById('type').value,sort=document.getElementById('sort').value;let arr=anime.filter(a=>{if(typ!=='all'&&a[4]!==typ)return false;if(dec==='pre'&&(!a[5]||a[5]>=1980))return false;if(dec!=='all'&&dec!=='pre'&&(!a[5]||Math.floor(a[5]/10)*10!==Number(dec)))return false;const ss=statsFor(a[0]),ws=watchStatus(a[0]),wf=document.getElementById('watchFilter')?.value||'all';if(wf==='watched'&&ws!=='completed')return false;if(wf==='notwatched'&&ws==='completed')return false;if(wf==='unmarked'&&ws!=='none')return false;if(wf==='current'&&ws!=='current')return false;if(tab==='progress'&&!ss.heard)return false;if(tab==='unexplored'&&ss.heard)return false;const ff=document.getElementById('familiarityFilter')?.value||'all',tf=(document.getElementById('tagFilter')?.value||'').trim().toLowerCase();const animeSongs=songMap.get(a[0])||[];if(ff!=='all'&&!animeSongs.some(s=>ff==='unmarked'?st(s[1])===0:ff==='heard'?st(s[1])===1:ff==='known'?st(s[1])===2:st(s[1])===3))return false;if(tf&&!animeSongs.some(s=>(songTags[String(s[1])]||'').toLowerCase().includes(tf)))return false;if(q){const zhNames=(window.__aniChineseTitleAPIv8237?.getAliases(a[0])||[]).join(' ');const inA=(a[1]+' '+a[2]+' '+a[3]+' '+zhNames).toLowerCase().includes(q);const inS=(songMap.get(a[0])||[]).some(s=>(s[4]+' '+s[5]+' '+(songTags[String(s[1])]||'')).toLowerCase().includes(q));if(!inA&&!inS)return false}return true});if(sort==='name')arr.sort((a,b)=>{const x=String(a[1]||'').toLowerCase(),y=String(b[1]||'').toLowerCase();return x<y?-1:x>y?1:0});else if(sort==='songs')arr.sort((a,b)=>(songMap.get(b[0])||[]).length-(songMap.get(a[0])||[]).length);else if(sort==='progress')arr.sort((a,b)=>statsFor(b[0]).progress-statsFor(a[0]).progress);else if(sort==='random')arr.sort(()=>Math.random()-.5);else arr.sort((a,b)=>(a[5]||9999)-(b[5]||9999)||a[1].localeCompare(b[1]));visible=arr;const grid=document.getElementById('grid');grid.innerHTML='';const subset=arr.slice(0,renderLimit);for(const a of subset){const ss=songMap.get(a[0])||[],x=statsFor(a[0]),c=colors(a),year=a[5]||'年代未知',sym=['♫','✦','♡','✧','♪','✺','◇','☆','♬'][a[0]%9],ws=watchStatus(a[0]);const el=document.createElement('div');el.className='card'+(selectedAnime.has(Number(a[0]))?' selected':'');el.setAttribute('role','button');el.tabIndex=0;el.innerHTML=`<label class="cardSelect" title="選取這部作品"><input type="checkbox" ${selectedAnime.has(Number(a[0]))?'checked':''}> 選取</label><div class="cover" style="--c1:${c[0]};--c2:${c[1]}"><span class="coverFallback">${sym}</span><img class="realcover" alt="${esc(a[1])} 封面" loading="lazy" style="display:block"><button class="cardManage" type="button" aria-label="管理 ${esc(a[1])}" title="快速管理">⋯</button><span class="symbol">${sym}</span><span class="year">${esc(year)} · ${esc(a[4]||'')}</span><span class="sticker">${x.heard?'♡':'✧'}</span></div><div class="cardbody"><div class="cardtitle">${esc(a[1])}</div><div class="sub">${esc(a[2]||a[3]||'作品資料')}</div>${ws!=='none'?`<span class="watchpill ${esc(ws)}">${esc(watchNames[ws]||ws)}</span>`:''}<div class="cardfoot"><span class="pill">♫ ${ss.length} 首</span><span class="pill">${x.heard}/${x.total}</span></div><div class="tinybar"><span style="width:${x.progress*100}%"></span></div></div>`;const cb=el.querySelector('input[type=checkbox]');cb.onchange=e=>{e.stopPropagation();if(e.target.checked)selectedAnime.add(Number(a[0]));else selectedAnime.delete(Number(a[0]));el.classList.toggle('selected',selectedAnime.has(Number(a[0])));updateSelectionHint()};el.onclick=e=>{if(e.target.closest('.cardSelect,.cardManage'))return;if(selectionMode){if(selectedAnime.has(Number(a[0])))selectedAnime.delete(Number(a[0]));else selectedAnime.add(Number(a[0]));render();updateSelectionHint()}else openAnime(a[0])};el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}};if(selectionMode)el.classList.add('selectionMode');el.querySelector('.cardManage')?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();window.__aniOpenPracticeManagerV825?.(a[0])});grid.appendChild(el);const coverImg=el.querySelector('img.realcover');if(coverImg){coverImg.dataset.mal=String(a[6]||'');coverImg.style.display='none';queueCoverV6(a,coverImg)}}document.body.classList.toggle('selectionMode',selectionMode);document.getElementById('empty').classList.toggle('hidden',arr.length!==0);document.getElementById('resultCount').textContent=`${arr.length.toLocaleString()} 部作品`;document.getElementById('loadMoreWrap').style.display=arr.length>renderLimit?'block':'none';document.getElementById('loadMoreBtn').textContent=`再顯示 ${Math.min(180,arr.length-renderLimit)} 部作品`;document.getElementById('gridCounter').textContent=`目前顯示 ${Math.min(arr.length,renderLimit).toLocaleString()} / ${arr.length.toLocaleString()} 部`;document.getElementById('sectionTitle').textContent=tab==='progress'?'已探索作品':tab==='unexplored'?'未探索作品':'動畫圖鑑';document.getElementById('sectionDesc').textContent=tab==='progress'?'至少有一首歌曲已標記為「聽過」的作品；這裡代表探索進度，不是手動收藏。':tab==='unexplored'?'尚未有歌曲標記為「聽過」的作品。':'';updateSelectionHint()}
+function render(){if(tab==='artists'){renderArtists();return}const q=document.getElementById('search').value.trim().toLowerCase(),dec=document.getElementById('decade').value,typ=document.getElementById('type').value,sort=document.getElementById('sort').value;let arr=anime.filter(a=>{if(typ!=='all'&&a[4]!==typ)return false;if(dec==='pre'&&(!a[5]||a[5]>=1980))return false;if(dec!=='all'&&dec!=='pre'&&(!a[5]||Math.floor(a[5]/10)*10!==Number(dec)))return false;const ss=statsFor(a[0]),ws=watchStatus(a[0]),wf=document.getElementById('watchFilter')?.value||'all';if(wf==='watched'&&ws!=='completed')return false;if(wf==='notwatched'&&ws==='completed')return false;if(wf==='unmarked'&&ws!=='none')return false;if(wf==='current'&&ws!=='current')return false;if(tab==='progress'&&!ss.heard)return false;if(tab==='unexplored'&&ss.heard)return false;const ff=document.getElementById('familiarityFilter')?.value||'all',tf=(document.getElementById('tagFilter')?.value||'').trim().toLowerCase();const animeSongs=songMap.get(a[0])||[];if(ff!=='all'&&!animeSongs.some(s=>ff==='unmarked'?st(s[1])===0:ff==='heard'?st(s[1])===1:ff==='known'?st(s[1])===2:st(s[1])===3))return false;if(tf&&!animeSongs.some(s=>(songTags[String(s[1])]||'').toLowerCase().includes(tf)))return false;if(q){const zhNames=(window.__aniChineseTitleAPIv8237?.getAliases(a[0])||[]).join(' ');const inA=(a[1]+' '+a[2]+' '+a[3]+' '+zhNames).toLowerCase().includes(q);const inS=(songMap.get(a[0])||[]).some(s=>(s[4]+' '+s[5]+' '+(songTags[String(s[1])]||'')).toLowerCase().includes(q));if(!inA&&!inS)return false}return true});if(sort==='name')arr.sort((a,b)=>{const x=String(a[1]||'').toLowerCase(),y=String(b[1]||'').toLowerCase();return x<y?-1:x>y?1:0});else if(sort==='songs')arr.sort((a,b)=>(songMap.get(b[0])||[]).length-(songMap.get(a[0])||[]).length);else if(sort==='progress')arr.sort((a,b)=>statsFor(b[0]).progress-statsFor(a[0]).progress);else if(sort==='random')arr.sort(()=>Math.random()-.5);else arr.sort((a,b)=>(a[5]||9999)-(b[5]||9999)||a[1].localeCompare(b[1]));visible=arr;const grid=document.getElementById('grid');grid.innerHTML='';const subset=arr.slice(0,renderLimit);for(const a of subset){const ss=songMap.get(a[0])||[],x=statsFor(a[0]),c=colors(a),year=a[5]||'年代未知',sym=['♫','✦','♡','✧','♪','✺','◇','☆','♬'][a[0]%9],ws=watchStatus(a[0]);const el=document.createElement('div');el.className='card'+(selectedAnime.has(Number(a[0]))?' selected':'');el.setAttribute('role','button');el.tabIndex=0;el.innerHTML=`<label class="cardSelect" title="選取這部作品"><input type="checkbox" ${selectedAnime.has(Number(a[0]))?'checked':''}> 選取</label><div class="cover" style="--c1:${c[0]};--c2:${c[1]}"><span class="coverFallback">${sym}</span><img class="realcover" alt="${esc(a[1])} 封面" loading="lazy" style="display:block"><button class="cardManage" type="button" aria-label="管理 ${esc(a[1])}" title="快速管理">⋯</button><span class="symbol">${sym}</span><span class="year">${esc(year)} · ${esc(a[4]||'')}</span><span class="sticker">${x.heard?'♡':'✧'}</span></div><div class="cardbody"><div class="cardtitle">${esc(a[1])}</div><div class="sub">${esc(a[2]||a[3]||'作品資料')}</div>${ws!=='none'?`<span class="watchpill ${esc(ws)}">${esc(watchNames[ws]||ws)}</span>`:''}<div class="cardfoot"><span class="pill">♫ ${ss.length} 首</span><span class="pill">${x.heard}/${x.total}</span></div><div class="tinybar"><span style="width:${x.progress*100}%"></span></div></div>`;const cb=el.querySelector('input[type=checkbox]');cb.onchange=e=>{e.stopPropagation();if(e.target.checked)selectedAnime.add(Number(a[0]));else selectedAnime.delete(Number(a[0]));el.classList.toggle('selected',selectedAnime.has(Number(a[0])));updateSelectionHint()};el.onclick=e=>{if(e.target.closest('.cardSelect,.cardManage'))return;if(selectionMode){if(selectedAnime.has(Number(a[0])))selectedAnime.delete(Number(a[0]));else selectedAnime.add(Number(a[0]));render();updateSelectionHint()}else openAnime(a[0])};el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}};if(selectionMode)el.classList.add('selectionMode');el.querySelector('.cardManage')?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();window.__aniOpenPracticeManagerV825?.(a[0])});grid.appendChild(el);const coverImg=el.querySelector('img.realcover');if(coverImg){coverImg.dataset.mal=String(a[6]||'');coverImg.style.display='block';queueCoverV6(a,coverImg)}}document.body.classList.toggle('selectionMode',selectionMode);document.getElementById('empty').classList.toggle('hidden',arr.length!==0);document.getElementById('resultCount').textContent=`${arr.length.toLocaleString()} 部作品`;document.getElementById('loadMoreWrap').style.display=arr.length>renderLimit?'block':'none';document.getElementById('loadMoreBtn').textContent=`再顯示 ${Math.min(180,arr.length-renderLimit)} 部作品`;document.getElementById('gridCounter').textContent=`目前顯示 ${Math.min(arr.length,renderLimit).toLocaleString()} / ${arr.length.toLocaleString()} 部`;document.getElementById('sectionTitle').textContent=tab==='progress'?'已探索作品':tab==='unexplored'?'未探索作品':'動畫圖鑑';document.getElementById('sectionDesc').textContent=tab==='progress'?'至少有一首歌曲已標記為「聽過」的作品；這裡代表探索進度，不是手動收藏。':tab==='unexplored'?'尚未有歌曲標記為「聽過」的作品。':'';updateSelectionHint()}
 // Existing render listeners stay attached to the overridden function.
 const watchFilter=document.createElement('select');watchFilter.id='watchFilter';watchFilter.innerHTML='<option value="all">所有看番狀態</option><option value="watched">只看已看過</option><option value="notwatched">尚未標記為看完</option><option value="unmarked">只看未標記</option><option value="current">正在看</option>';watchFilter.style.cssText='border:1px solid #e8d7e8;background:#fff;border-radius:10px;padding:9px 10px;color:var(--ink);font:inherit;font-size:12px';document.querySelector('.toolbar').appendChild(watchFilter);
 watchFilter.addEventListener('change',()=>{renderLimit=180;renderLimitV6=180;render()});
@@ -7148,38 +7148,20 @@ body.ui-home-menu #homeMenu .amqAvatarButton { width:38px!important; height:38px
 body.ui-home-menu #homeMenu .amqProfileName { font-size:13px!important; }
 body.ui-home-menu #homeMenu .amqProfileLine { font-size:9px!important; }
 body.ui-home-menu #homeMenu .amqHomeLandingV851 {
- grid-template-columns:minmax(400px,.95fr) minmax(300px,1.05fr)!important;
- grid-template-rows:minmax(510px,1fr) auto!important;
- column-gap:clamp(0px,1vw,14px)!important; row-gap:16px!important;
- min-height:660px!important; padding:clamp(16px,2vw,26px) clamp(12px,3vw,42px) 18px!important;
+ grid-template-columns:minmax(220px,.82fr) minmax(300px,1.18fr)!important;
+ grid-template-rows:minmax(250px,1fr) auto!important;
+ column-gap:clamp(24px,4vw,58px)!important; row-gap:14px!important;
+ min-height:360px!important; padding:clamp(16px,2vw,26px) clamp(12px,3vw,42px) 16px!important;
 }
 body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
- width:min(100%,clamp(500px,39vw,560px))!important;
- transform:translate(clamp(90px,9vw,130px),-18px)!important;
- border-width:8px!important;
- outline-width:2px!important; box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
+ width:min(100%,clamp(210px,23vw,290px))!important; border-width:7px!important;
+ outline-width:2px!important; box-shadow:0 0 0 7px #f06cae18,0 7px 20px #100b124d,inset 0 0 0 2px #ffffff80!important;
 }
-body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:12px!important; max-width:520px!important; justify-self:start!important; transform:translate(-36px,-18px)!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:6px!important; max-width:540px!important; }
 body.ui-home-menu #homeMenu .amqHomeLandingAction {
  grid-template-columns:minmax(0,1fr) 24px!important; grid-template-rows:auto!important;
- min-height:76px!important; padding:14px 18px!important; column-gap:10px!important; row-gap:0!important;
+ min-height:43px!important; padding:7px 12px!important; column-gap:8px!important; row-gap:0!important;
  border-radius:2px!important; box-shadow:0 2px 0 #8b356a!important;
-}
-body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
- font-size:clamp(18px,1.7vw,24px)!important; line-height:1.2!important;
-}
-@media(min-width:901px) and (max-width:1100px) {
- body.ui-home-menu #homeMenu .amqHomeLandingV851 {
-  grid-template-columns:minmax(280px,.82fr) minmax(300px,1.18fr)!important;
-  grid-template-rows:minmax(320px,1fr) auto!important; min-height:470px!important;
-  column-gap:12px!important;
- }
- body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
-  width:min(100%,clamp(280px,32vw,350px))!important; transform:translateX(70px)!important;
- }
- body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:8px!important; }
- body.ui-home-menu #homeMenu .amqHomeLandingAction { min-height:58px!important; padding:10px 12px!important; }
- body.ui-home-menu #homeMenu .amqHomeLandingAction strong { font-size:clamp(16px,1.6vw,20px)!important; }
 }
 body.ui-home-menu #homeMenu .amqHomeLandingAction::before { display:none!important; }
 body.ui-home-menu #homeMenu .amqHomeLandingActionTag { display:none!important; }
@@ -7206,7 +7188,7 @@ body.ui-home-menu #homeMenu .amqHomeLandingLinks button small { display:none!imp
 body.ui-home-menu #homeMenu .amqHomeLandingLinks button>span { font-size:12px!important; }
 @media(max-width:900px) {
  body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto auto!important; }
- body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,36vw,230px)!important; transform:none!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,36vw,230px)!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:6px!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingAction { min-height:44px!important; }
 }
@@ -7294,495 +7276,6 @@ body.ui-home-menu #homeMenu .amqPlayerCaption { margin:0 0 4px!important; font-s
 body.ui-home-menu #homeMenu #amqHomePlayerSlot { min-height:0!important; max-height:54px!important; overflow:hidden!important; }
 body.ui-home-menu #homeMenu #amqHomePlayerSlot audio { height:28px!important; max-height:28px!important; }
 
-/* Proto25 Stage 24: prevent the 84px profile/player row from being clipped by its padded parent. */
-body.ui-home-menu #homeMenu .amqHomeTopFrame {
-  box-sizing: border-box !important;
-  height: 86px !important;
-  min-height: 86px !important;
-  max-height: 86px !important;
-  padding: 0 !important;
-  overflow: visible !important;
-  grid-template-rows: minmax(0, 1fr) !important;
-  align-items: stretch !important;
-}
-
-
-/* Proto25 Stage 25: Stable-inspired purple menu blades, retaining the existing AMQ action routes. */
-body.ui-home-menu #homeMenu .amqHomeLandingAction {
-  clip-path: polygon(2.5% 0, 100% 0, 96.5% 100%, 0 100%) !important;
-  background: linear-gradient(102deg, #7654c8 0%, #6245a9 58%, #49327f 100%) !important;
-  color: #fff !important;
-  box-shadow: none !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 4px 5px #09070c66) !important;
-  transition: filter 120ms ease, transform 120ms ease, background 120ms ease !important;
-}
-body.ui-home-menu #homeMenu .amqHomeLandingActionMain {
-  background: linear-gradient(102deg, #9270e2 0%, #7654c8 55%, #5a3c9f 100%) !important;
-}
-body.ui-home-menu #homeMenu .amqHomeLandingAction:hover {
-  background: linear-gradient(102deg, #a187ee 0%, #8060d3 58%, #6245a9 100%) !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 6px 9px #09070c88) !important;
-}
-body.ui-home-menu #homeMenu .amqHomeLandingAction:focus-visible {
-  outline: 2px solid #fff !important;
-  outline-offset: 4px !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 0 5px #c7afff) !important;
-}
-@media(prefers-reduced-motion:reduce) {
-  body.ui-home-menu #homeMenu .amqHomeLandingAction {
-    transition: none !important;
-  }
-}
-
-
-/* Proto25 Stage 26: keep the home music bar usable on desktop and mobile without clipping controls. */
-body.ui-home-menu #homeMenu #amqHomePlayerSlot {
-  height: 54px !important;
-  min-height: 54px !important;
-  max-height: 54px !important;
-  overflow: hidden !important;
-}
-body.ui-home-menu #audioDock.amqHomeDock {
-  box-sizing: border-box !important;
-  height: 54px !important;
-  min-height: 54px !important;
-  max-height: 54px !important;
-  overflow: hidden !important;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, .8fr) !important;
-  grid-template-rows: minmax(0, 1fr) !important;
-  align-items: center !important;
-  gap: 6px 10px !important;
-}
-body.ui-home-menu #audioDock.amqHomeDock .dockCoverV33,
-body.ui-home-menu #audioDock.amqHomeDock .dockStatus,
-body.ui-home-menu #audioDock.amqHomeDock .dockBtns {
-  display: none !important;
-}
-body.ui-home-menu #audioDock.amqHomeDock .dockMeta {
-  grid-column: 1 !important;
-  grid-row: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-}
-body.ui-home-menu #audioDock.amqHomeDock .dockMeta b,
-body.ui-home-menu #audioDock.amqHomeDock .dockMeta span {
-  display: block !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
-  display: block !important;
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: 32px !important;
-  max-height: 32px !important;
-}
-@media(max-width:680px) {
-  body.ui-home-menu #homeMenu .amqHomeTopFrame {
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: 84px 78px !important;
-    gap: 8px !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-  body.ui-home-menu #homeMenu #amqProfileCard {
-    height: 84px !important;
-    min-height: 84px !important;
-    max-height: 84px !important;
-    width: 100% !important;
-  }
-  body.ui-home-menu #homeMenu .amqPlayerFrame {
-    height: 78px !important;
-    min-height: 78px !important;
-    max-height: 78px !important;
-    padding: 4px 8px !important;
-    overflow: hidden !important;
-    gap: 2px !important;
-  }
-  body.ui-home-menu #homeMenu .amqPlayerCaption {
-    margin: 0 !important;
-    font-size: 8px !important;
-    line-height: 1.2 !important;
-  }
-  body.ui-home-menu #homeMenu #amqHomePlayerSlot {
-    height: 54px !important;
-    min-height: 54px !important;
-    max-height: 54px !important;
-  }
-  body.ui-home-menu #audioDock.amqHomeDock {
-    height: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: 22px 28px !important;
-    gap: 2px !important;
-  }
-  body.ui-home-menu #audioDock.amqHomeDock .dockMeta {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-  body.ui-home-menu #audioDock.amqHomeDock .dockMeta b {
-    flex: 0 1 48% !important;
-    font-size: 11px !important;
-  }
-  body.ui-home-menu #audioDock.amqHomeDock .dockMeta span {
-    flex: 1 1 52% !important;
-    font-size: 9px !important;
-  }
-  body.ui-home-menu #audioDock.amqHomeDock #audioPlayer {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    height: 28px !important;
-    max-height: 28px !important;
-  }
-}
-
-
-/* Reserve space for the fixed dock so the last catalog row is never hidden behind it. */
-body.amq-standalone-route {
-  padding-bottom: 64px !important;
-}
-body.amq-standalone-route .wrap {
-  padding-bottom: 90px !important;
-  box-sizing: border-box !important;
-}
-
-/* Proto25 Stage 29: keep the persistent audio dock compact on standalone catalog routes. */
-body.amq-standalone-route #audioDock:not(.amqHomeDock) {
-  box-sizing: border-box !important;
-  height: 54px !important;
-  min-height: 54px !important;
-  max-height: 54px !important;
-  overflow: hidden !important;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, .8fr) !important;
-  grid-template-rows: minmax(0, 1fr) !important;
-  align-items: center !important;
-  gap: 6px 10px !important;
-}
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockCoverV33,
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockStatus,
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockBtns {
-  display: none !important;
-}
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta {
-  grid-column: 1 !important;
-  grid-row: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-}
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta b,
-body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta span {
-  display: block !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-body.amq-standalone-route #audioDock:not(.amqHomeDock) #audioPlayer {
-  display: block !important;
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: 32px !important;
-  max-height: 32px !important;
-}
-@media(max-width:680px) {
-  body.amq-standalone-route #audioDock:not(.amqHomeDock) {
-    height: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: 22px 28px !important;
-    gap: 2px !important;
-  }
-  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta b {
-    flex: 0 1 48% !important;
-    font-size: 11px !important;
-  }
-  body.amq-standalone-route #audioDock:not(.amqHomeDock) .dockMeta span {
-    flex: 1 1 52% !important;
-    font-size: 9px !important;
-  }
-  body.amq-standalone-route #audioDock:not(.amqHomeDock) #audioPlayer {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    height: 28px !important;
-    max-height: 28px !important;
-  }
-}
-
-
-/* Proto25 Stage 30: compact the audio dock in Learning/Analysis workspaces as well. */
-body.amq-workspace-active {
-  padding-bottom: 142px !important;
-}
-body.amq-workspace-active .wrap {
-  padding-bottom: 160px !important;
-  box-sizing: border-box !important;
-}
-body.amq-workspace-active #audioDock:not(.amqHomeDock) {
-  box-sizing: border-box !important;
-  height: 54px !important;
-  min-height: 54px !important;
-  max-height: 54px !important;
-  overflow: hidden !important;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, .8fr) !important;
-  grid-template-rows: minmax(0, 1fr) !important;
-  align-items: center !important;
-  gap: 6px 10px !important;
-}
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockCoverV33,
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockStatus,
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockBtns {
-  display: none !important;
-}
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta {
-  grid-column: 1 !important;
-  grid-row: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-}
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta b,
-body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta span {
-  display: block !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-body.amq-workspace-active #audioDock:not(.amqHomeDock) #audioPlayer {
-  display: block !important;
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: 32px !important;
-  max-height: 32px !important;
-}
-@media(max-width:680px) {
-  body.amq-workspace-active #audioDock:not(.amqHomeDock) {
-    height: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: 22px 28px !important;
-    gap: 2px !important;
-  }
-  body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-  body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta b {
-    flex: 0 1 48% !important;
-    font-size: 11px !important;
-  }
-  body.amq-workspace-active #audioDock:not(.amqHomeDock) .dockMeta span {
-    flex: 1 1 52% !important;
-    font-size: 9px !important;
-  }
-  body.amq-workspace-active #audioDock:not(.amqHomeDock) #audioPlayer {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    height: 28px !important;
-    max-height: 28px !important;
-  }
-}
-
-/* Proto25 Stage 30: give the Options sidebar more room on desktop without inventing controls. */
-@media(min-width:761px) {
-  body.ui-settings-open .top .actions {
-    width:min(340px,calc(100vw - 16px))!important;
-  }
-}
-@media(max-width:760px) {
-  body.ui-settings-open .top .actions {
-    width:min(292px,calc(100vw - 16px))!important;
-  }
-}
-
-
-/* Proto25 Stage 31: improve the profile/player information hierarchy without changing AMQ data or controls. */
-body.ui-home-menu #homeMenu #amqProfileCard {
-  gap: 12px !important;
-  padding: 7px 12px !important;
-}
-body.ui-home-menu #homeMenu #amqProfileCard .amqAvatarButton {
-  width: 44px !important;
-  height: 44px !important;
-  flex: 0 0 44px !important;
-  box-shadow: 0 0 0 2px #e86aa9, 0 0 0 4px #e86aa91c !important;
-}
-body.ui-home-menu #homeMenu .amqProfileInfo {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  min-width: 0 !important;
-  gap: 3px !important;
-}
-body.ui-home-menu #homeMenu .amqProfileName {
-  font-size: 15px !important;
-  line-height: 1.2 !important;
-  letter-spacing: .01em !important;
-}
-body.ui-home-menu #homeMenu .amqProfileLine.ppLine {
-  align-items: baseline !important;
-  gap: 6px !important;
-  font-size: 10px !important;
-  line-height: 1.15 !important;
-}
-body.ui-home-menu #homeMenu .amqProfileLine.ppLine strong {
-  font-size: 20px !important;
-  line-height: 1 !important;
-  font-weight: 900 !important;
-  color: #ff8fc7 !important;
-}
-body.ui-home-menu #homeMenu .amqPlayerFrame {
-  padding: 7px 12px !important;
-  gap: 5px !important;
-}
-body.ui-home-menu #homeMenu .amqPlayerCaption {
-  font-size: 9px !important;
-  line-height: 1.2 !important;
-  letter-spacing: .14em !important;
-}
-body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta b {
-  font-size: 13px !important;
-  line-height: 1.25 !important;
-}
-body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta span {
-  font-size: 10px !important;
-  line-height: 1.2 !important;
-}
-@media(max-width:680px) {
-  body.ui-home-menu #homeMenu #amqProfileCard {
-    padding: 7px 10px !important;
-    gap: 10px !important;
-  }
-  body.ui-home-menu #homeMenu #amqProfileCard .amqAvatarButton {
-    width: 40px !important;
-    height: 40px !important;
-    flex-basis: 40px !important;
-  }
-  body.ui-home-menu #homeMenu .amqProfileName {
-    font-size: 14px !important;
-  }
-  body.ui-home-menu #homeMenu .amqProfileLine.ppLine strong {
-    font-size: 18px !important;
-  }
-  body.ui-home-menu #homeMenu .amqPlayerFrame {
-    padding: 4px 8px !important;
-    gap: 2px !important;
-  }
-  body.ui-home-menu #homeMenu .amqPlayerCaption {
-    font-size: 8px !important;
-  }
-  body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta b {
-    font-size: 11px !important;
-  }
-  body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta span {
-    font-size: 9px !important;
-  }
-}
-
-/* Proto25 Stage 32: add the Stable cookie's subtle triangular skin pattern using CSS only. */
-body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
-  background-image:
-    linear-gradient(60deg, transparent 48%, #ffffff12 49% 50%, transparent 51%),
-    linear-gradient(120deg, #ffffff0b 49%, transparent 50% 100%),
-    radial-gradient(circle at 34% 26%, #ffb5d7 0%, #f47bb9 32%, #d94e96 67%, #a72e70 100%) !important;
-  background-size: 76px 66px, 76px 66px, 100% 100% !important;
-  background-position: 0 0, 38px 33px, center !important;
-}
-
-
-/* Proto25 Stage 33: match Stable menu typography while retaining AMQ labels and routes. */
-body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
-  font-style: italic !important;
-  font-weight: 600 !important;
-  font-size: clamp(20px, 2vw, 28px) !important;
-  letter-spacing: -0.025em !important;
-}
-#amqStablePlayChoices button {
-  font-style: italic !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em !important;
-  font-size: clamp(20px, 2.2vw, 30px) !important;
-}
-#amqStablePlayChoices button::after {
-  font-style: normal !important;
-  font-weight: 400 !important;
-}
-@media(max-width:680px) {
-  body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
-    font-size: clamp(17px, 4.5vw, 21px) !important;
-  }
-  #amqStablePlayChoices button {
-    font-size: clamp(18px, 4.8vw, 22px) !important;
-  }
-}
-
-/* Proto25 Stage 33: add the low-contrast radial rays visible in the Stable home reference. */
-body.ui-home-menu .wrap {
-  background-image:
-    repeating-conic-gradient(from 2deg at 34% 38%, #ffffff02 0deg 0.8deg, transparent 0.8deg 9deg),
-    radial-gradient(circle at 34% 38%, #7654c805 0%, transparent 47%) !important;
-}
-
-
-/* Proto25 Stage 36: align the profile/player strip with the top edge of the Stable main-menu composition. */
-@media(min-width:761px) {
-  body.ui-home-menu .top {
-    box-sizing: border-box !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    margin: 0 !important;
-    padding: 2px 0 !important;
-  }
-  body.ui-home-menu .top .actions {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  body.ui-home-menu #homeMenu .amqHomeTopFrame {
-    margin-top: 0 !important;
-  }
-}
 </style>
 <style id="amq-workspace-osu-composition-v24">
 /* Proto24: visual pass for the four workspaces; navigation and action handlers remain unchanged. */
@@ -8180,44 +7673,38 @@ body.amq-workspace-prototype.amq-workspace-active { background:#28212b!important
   #120d16ed!important;
 }
 #amqStablePlayPanel {
- display:grid!important; grid-template-columns:minmax(420px,.95fr) minmax(340px,1.05fr)!important;
- grid-template-rows:auto auto!important; align-content:center!important; align-items:center!important;
- gap:10px 0!important; width:min(100%,1200px)!important;
+ display:grid!important; grid-template-columns:minmax(250px,.9fr) minmax(340px,1.1fr)!important;
+ grid-template-rows:auto auto auto auto!important; align-content:center!important; align-items:center!important;
+ gap:10px clamp(22px,4vw,52px)!important; width:min(100%,1080px)!important;
  padding:clamp(22px,3vw,42px)!important; border:0!important; border-radius:0!important;
  background:transparent!important; box-shadow:none!important;
 }
 #amqStablePlayPanel::before {
- content:"osu!"!important; grid-column:1!important; grid-row:1/3!important; justify-self:center!important; align-self:center!important;
- display:grid!important; place-items:center!important; width:min(100%,clamp(460px,35vw,500px))!important; aspect-ratio:1!important; transform:translateX(90px)!important;
+ content:"osu!"!important; grid-column:1!important; grid-row:1/5!important; justify-self:center!important; align-self:center!important;
+ display:grid!important; place-items:center!important; width:min(100%,clamp(230px,28vw,350px))!important; aspect-ratio:1!important;
  border:8px solid #fff!important; outline:2px solid #e86aa9!important; border-radius:50%!important;
  background:radial-gradient(circle at 34% 24%,#ffb5d7 0%,#f47bb9 32%,#d94e96 67%,#a72e70 100%)!important;
  color:#fff!important; font-family:Arial,sans-serif!important; font-size:clamp(62px,7vw,92px)!important;
  font-weight:900!important; font-style:italic!important; letter-spacing:-.09em!important; text-shadow:0 3px 0 #7f2758!important;
  box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
 }
-#amqStablePlayEyebrow { display:none!important; }
-#amqStablePlayPanel h2 { display:none!important; }
-#amqStablePlayChoices { grid-column:2!important; grid-row:1!important; gap:16px!important; width:100%!important; max-width:520px!important; justify-self:start!important; position:relative!important; left:-40px!important; }
-#amqStablePlayChoices button { width:100%!important; min-height:92px!important; padding:14px 18px!important; border-radius:2px!important; font-size:clamp(18px,1.7vw,24px)!important; }
-#amqStablePlayNotice { display:none!important; }
-@media(min-width:761px) and (max-width:1100px) {
- #amqStablePlayPanel { grid-template-columns:minmax(320px,.95fr) minmax(300px,1.05fr)!important; width:100%!important; gap:8px 0!important; }
- #amqStablePlayPanel::before { width:min(100%,clamp(320px,36vw,400px))!important; transform:translateX(48px)!important; }
- #amqStablePlayChoices { gap:10px!important; }
- #amqStablePlayChoices button { min-height:66px!important; padding:10px 12px!important; }
-}
+#amqStablePlayEyebrow { grid-column:2!important; grid-row:1!important; align-self:end!important; margin:0!important; }
+#amqStablePlayPanel h2 { grid-column:2!important; grid-row:2!important; align-self:end!important; margin:0 0 6px!important; }
+#amqStablePlayChoices { grid-column:2!important; grid-row:3!important; gap:6px!important; }
+#amqStablePlayChoices button { min-height:50px!important; padding:9px 14px!important; border-radius:2px!important; font-size:clamp(15px,1.4vw,20px)!important; }
+#amqStablePlayNotice { grid-column:2!important; grid-row:4!important; margin:0!important; }
 @media(max-width:760px) {
  #amqStablePlayShade { padding:10px!important; }
  #amqStablePlayPanel {
   grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto auto auto auto!important;
   gap:8px!important; width:100%!important; max-height:calc(100dvh - 20px)!important; overflow:auto!important; padding:12px!important;
  }
- #amqStablePlayPanel::before { grid-column:1!important; grid-row:1!important; width:clamp(145px,42vw,190px)!important; transform:none!important; border-width:5px!important; font-size:clamp(42px,12vw,60px)!important; }
+ #amqStablePlayPanel::before { grid-column:1!important; grid-row:1!important; width:clamp(145px,42vw,190px)!important; border-width:5px!important; font-size:clamp(42px,12vw,60px)!important; }
  #amqStablePlayEyebrow { grid-column:1!important; grid-row:2!important; text-align:center!important; }
  #amqStablePlayPanel h2 { grid-column:1!important; grid-row:3!important; text-align:center!important; font-size:24px!important; }
- #amqStablePlayChoices { grid-column:1!important; grid-row:4!important; position:static!important; left:auto!important; max-width:none!important; }
+ #amqStablePlayChoices { grid-column:1!important; grid-row:4!important; }
  #amqStablePlayChoices button { min-height:44px!important; }
- #amqStablePlayNotice { display:block!important; grid-column:1!important; grid-row:5!important; text-align:center!important; position:static!important; left:auto!important; max-width:none!important; }
+ #amqStablePlayNotice { grid-column:1!important; grid-row:5!important; text-align:center!important; }
 }
 
 
@@ -8257,243 +7744,4 @@ body.multiplayer-mode .wrap { background:#28212b!important; color:#f7edf3!import
  #multiplayerView .mpRoomConfigGrid,#multiplayerView .mpFilterGrid { grid-template-columns:minmax(0,1fr)!important; }
 }
 
-
-/* Stage 25: dashboard intro and metrics were outside the legacy .v10Panel theme scope. */
-.dashIntro,.dashSection {
- border:1px solid #574554!important;
- border-radius:4px!important;
- background:#302632!important;
- color:#f7edf3!important;
- box-shadow:0 2px 0 #1b151e!important;
-}
-.dashMetric {
- border:1px solid #574554!important;
- border-radius:3px!important;
- background:#352c39!important;
- color:#f7edf3!important;
- box-shadow:none!important;
-}
-.dashIntro b,.dashMetric strong,.dashSection h4 { color:#fff!important; }
-.dashIntro div,.dashMetric span,.dashSection p,.dashRow { color:#cbbaca!important; }
-.dashTrack { border:1px solid #574554!important; background:#211a24!important; }
-.dashTrack i { background:linear-gradient(90deg,#f184b9,#c84487)!important; }
-body.dark-theme .dashIntro,body.dark-theme .dashSection {
- background:#302632!important; border-color:#574554!important; color:#f7edf3!important;
-}
-body.dark-theme .dashMetric {
- background:#352c39!important; border-color:#574554!important; color:#f7edf3!important;
-}
-body.dark-theme .dashIntro div,body.dark-theme .dashMetric span,body.dark-theme .dashSection p,body.dark-theme .dashRow { color:#cbbaca!important; }
-body.dark-theme .dashIntro b,body.dark-theme .dashMetric strong,body.dark-theme .dashSection h4 { color:#fff!important; }
-body.dark-theme .dashTrack { background:#211a24!important; border-color:#574554!important; }
-body.dark-theme .dashTrack i { background:linear-gradient(90deg,#f184b9,#c84487)!important; }
-
-/* Stage 25: modal Song Select must sit above the persistent workspace sidebar and dock. */
-#overlay.open { z-index:10010!important; }
-
-/* Proto25 Stage 27: align Play submenu choices with Stable-style purple menu blades. */
-#amqStablePlayChoices button {
-  clip-path: polygon(2.5% 0, 100% 0, 96.5% 100%, 0 100%) !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: linear-gradient(102deg, #7654c8 0%, #6245a9 58%, #49327f 100%) !important;
-  color: #fff !important;
-  box-shadow: none !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 4px 5px #09070c66) !important;
-  transition: filter 120ms ease, transform 120ms ease, background 120ms ease !important;
-}
-#amqStablePlayChoices button:first-child {
-  background: linear-gradient(102deg, #9270e2 0%, #7654c8 55%, #5a3c9f 100%) !important;
-}
-#amqStablePlayChoices button:hover:not(:disabled) {
-  background: linear-gradient(102deg, #a187ee 0%, #8060d3 58%, #6245a9 100%) !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 6px 9px #09070c88) !important;
-}
-#amqStablePlayChoices button:focus-visible,
-#amqStablePlayClose:focus-visible {
-  outline: 2px solid #fff !important;
-  outline-offset: 4px !important;
-  filter: drop-shadow(0 2px 0 #30204f) drop-shadow(0 0 5px #c7afff) !important;
-}
-@media(prefers-reduced-motion:reduce) {
-  #amqStablePlayChoices button {
-    transition: none !important;
-  }
-}
-/* Proto25 Stage 28: workspace navigation chrome belongs only to active workspace routes.
-   The fixed sidebar/dock otherwise remains above the catalog even after returning home. */
-body:not(.amq-workspace-active) #amqWorkspaceSidebar,
-body:not(.amq-workspace-active) #amqWorkspaceDock {
-  display: none !important;
-}
-body.amq-standalone-route #amqWorkspaceSidebar,
-body.amq-standalone-route #amqWorkspaceDock {
-  display: none !important;
-}
-
-/* Proto25 Stage 32: carry the same subtle triangular skin pattern into the Stable-style Play cookie. */
-#amqStablePlayPanel::before {
-  background-image:
-    linear-gradient(60deg, transparent 48%, #ffffff12 49% 50%, transparent 51%),
-    linear-gradient(120deg, #ffffff0b 49%, transparent 50% 100%),
-    radial-gradient(circle at 34% 24%, #ffb5d7 0%, #f47bb9 32%, #d94e96 67%, #a72e70 100%) !important;
-  background-size: 76px 66px, 76px 66px, 100% 100% !important;
-  background-position: 0 0, 38px 33px, center !important;
-}
-
-/* Proto25 Stage 33: the Play submenu uses the same restrained radial-ray background as Stable. */
-#amqStablePlayShade {
-  background-image:
-    repeating-conic-gradient(from 2deg at 35% 48%, #ffffff02 0deg 0.8deg, transparent 0.8deg 9deg),
-    radial-gradient(circle at 35% 48%, #7654c805 0%, transparent 48%),
-    radial-gradient(circle at 22% 46%, #f06cae13 0%, transparent 35%),
-    repeating-linear-gradient(135deg,#ffffff02 0 1px,transparent 1px 18px) !important;
-}
-
-
-/* Proto25 Stage 34: compact catalog management chrome so actual collection cards appear sooner. */
-@media(min-width:761px) {
-  .hero.view-home .heroDashboard {
-    padding: 13px 16px !important;
-    gap: 14px !important;
-    min-height: 0 !important;
-  }
-  .hero.view-home .heroDashboard .bigNum {
-    font-size: 38px !important;
-    line-height: 1 !important;
-    margin: 3px 0 !important;
-  }
-  .hero.view-home .heroDashboard .stats .stat {
-    min-height: 60px !important;
-    padding: 9px 11px !important;
-  }
-  #quicktools {
-    padding: 7px 10px !important;
-    margin: 8px 0 !important;
-    gap: 7px !important;
-  }
-  #quicktools .quicktoolsHead {
-    margin-bottom: 5px !important;
-  }
-  #quicktools .quicktoolsHead p {
-    margin: 2px 0 4px !important;
-    line-height: 1.35 !important;
-  }
-  #quicktools .toolrow {
-    gap: 4px !important;
-    margin-top: 4px !important;
-  }
-  #quicktools .toolrow:not(.practiceBulkRow) {
-    display: grid !important;
-    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-    align-items: stretch !important;
-  }
-  #quicktools .toolrow .btn,
-  #quicktools .toolrow select {
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    min-height: 30px !important;
-    padding: 5px 7px !important;
-    font-size: 11px !important;
-    line-height: 1.2 !important;
-    white-space: normal !important;
-  }
-  #quicktools .practiceBulkRow {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto auto !important;
-    align-items: end !important;
-  }
-  #quicktools .practiceBulkRow .bulkField {
-    min-width: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 3px !important;
-  }
-  #quicktools .practiceBulkRow .bulkField select {
-    width: 100% !important;
-  }
-  .toolbar.view-catalog {
-    padding: 9px !important;
-    gap: 7px !important;
-  }
-  .toolbar.view-catalog input,
-  .toolbar.view-catalog select {
-    min-height: 38px !important;
-    padding: 8px 10px !important;
-  }
-  .tabs.view-catalog {
-    padding: 5px !important;
-    gap: 5px !important;
-  }
-  .tabs.view-catalog .tab {
-    min-height: 38px !important;
-    padding: 8px 10px !important;
-  }
-  .head.view-catalog {
-    min-height: 38px !important;
-    margin: 9px 0 !important;
-  }
-  .head.view-catalog h3 {
-    margin: 0 !important;
-    font-size: 20px !important;
-  }
-}
 </style>
-
-<script>
-/* Proto25 Stage 28: scope the persistent workspace shell to the dashboard workspace.
- * Existing navigation handlers sometimes leave the shell class enabled after route changes.
- * Observe class mutations and re-check the authoritative active-view API after route clicks.
- */
-(() => {
-  window.__amqWorkspaceRouteGuardReady = true;
-  const syncWorkspaceShell = () => {
-    document.body.classList.remove("amq-workspace-active");
-  };
-  const scheduleRouteSync = () => {
-    requestAnimationFrame(syncWorkspaceShell);
-    setTimeout(syncWorkspaceShell, 80);
-    setTimeout(syncWorkspaceShell, 180);
-    setTimeout(syncWorkspaceShell, 260);
-  };
-  const installNavigationGuard = () => {
-    const navigate = window.__aniNavigateApp;
-    if (typeof navigate !== "function" || navigate.__amqWorkspaceGuarded) return;
-    const guardedNavigate = function(view, ...args) {
-      const result = navigate.call(this, view, ...args);
-      if (view === "dashboard") {
-        document.body.classList.remove("amq-standalone-route");
-      } else {
-        document.body.classList.add("amq-standalone-route");
-        document.body.classList.remove("amq-workspace-active");
-      }
-      return result;
-    };
-    guardedNavigate.__amqWorkspaceGuarded = true;
-    window.__aniNavigateApp = guardedNavigate;
-  };
-  installNavigationGuard();
-  setTimeout(installNavigationGuard, 0);
-  setTimeout(installNavigationGuard, 80);
-  const standaloneActions = new Set([
-    "quiz", "practiceExplore", "practiceWeak", "catalog",
-    "watchlist", "learningPlan"
-  ]);
-  document.addEventListener("click", event => {
-    const action = event.target.closest?.("[data-home-action]");
-    if (action && standaloneActions.has(action.getAttribute("data-home-action"))) {
-      document.body.classList.add("amq-standalone-route");
-      scheduleRouteSync();
-      return;
-    }
-    if (action && action.getAttribute("data-home-action") === "dashboard") {
-      document.body.classList.remove("amq-standalone-route");
-      return;
-    }
-    if (event.target.closest?.("#uiBackHome, #wsReturnHome, #mpBackHome")) {
-      document.body.classList.add("amq-standalone-route");
-      scheduleRouteSync();
-    }
-  }, true);
-})();
-</script>

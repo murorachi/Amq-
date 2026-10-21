@@ -1,10 +1,10 @@
 # TEST REPORT — Proto25 Stage 24
-- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39541057705
-- Tested pull-request merge candidate: 3aea33e7137b7e3e3105c76ed896a515a335c2a3
+- Workflow run: https://github.com/murorachi/Amq-/actions/runs/39547235308
+- Tested pull-request merge candidate: b00772bb6eaaedcb522fcbc283846df48e086622
 - Candidate: dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html
-- Size: 8926248 bytes
-- SHA-256: 5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
+- Size: 8899371 bytes
+- SHA-256: 9c21bb784ee6e920eeb5a4ce118e5a6ee3e6b19584605078642f1d3dec7605a6
 - Static HTML/duplicate-ID/inline-JavaScript checks: PASS (required workflow gate).
 - Browser acceptance: PASS (required Playwright assertions and no page/console errors).
-- Screenshots: desktop/mobile home, desktop/mobile Play menu, desktop/mobile Settings, catalog, catalog detail, single-player quiz, Learning Center and Analysis; machine-readable acceptance report is attached to the workflow artifact.
+- Screenshots and machine-readable acceptance report: attached to the workflow artifact.
 - Actual audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle: NOT RUN.
