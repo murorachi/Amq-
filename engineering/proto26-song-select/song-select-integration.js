@@ -185,7 +185,7 @@
   const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
   const mount=stage.querySelector('#p32Mount');const toolbar=$('.toolbar.view-catalog'),catalogHead=$('.head.view-catalog');if(toolbar){
     mount.append(toolbar);
-    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
+    toolbar.style.setProperty('display','grid','important');toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');toolbar.style.setProperty('width','100%','important');toolbar.style.setProperty('min-width','0','important');toolbar.style.setProperty('max-width','100%','important');
     const searchWrap=toolbar.querySelector('.search');if(searchWrap){searchWrap.style.setProperty('grid-column','1/-1','important');searchWrap.style.setProperty('width','100%','important');searchWrap.style.setProperty('min-width','0','important');searchWrap.style.setProperty('max-width','100%','important');}
     toolbar.querySelectorAll('input,select').forEach(control=>{control.style.setProperty('width','100%','important');control.style.setProperty('min-width','0','important');control.style.setProperty('max-width','100%','important');control.style.setProperty('box-sizing','border-box','important')});
   }else if(search)mount.append(search);mount.append(modes,tabs);if(catalogHead)mount.append(catalogHead);mount.append(grid);
@@ -193,9 +193,9 @@
 
   const style32=document.createElement('style');style32.id='amq-proto32-song-select-css';
   style32.textContent=`
-  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:8px 0 105px;padding:0;color:#f4f5fa;isolation:isolate}
+  #amqSongSelectStage{display:grid;grid-template-columns:minmax(245px,29%) minmax(280px,1fr) minmax(330px,36%);gap:8px;width:100%;max-width:none;margin:0 0 150px;padding:0;color:#f4f5fa;isolation:isolate}
   #amqSongSelectStage *{box-sizing:border-box}
-  #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:590px;overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
+  #amqSongSelectStage .p32-info,#amqSongSelectStage .p32-scene,#amqSongSelectStage .p32-catalog{position:relative;min-width:0;min-height:clamp(390px,calc(100vh - 300px),650px);overflow:hidden;border:1px solid rgba(214,225,245,.18);box-shadow:0 8px 28px rgba(0,0,0,.22)}
   #amqSongSelectStage .p32-info{display:flex;flex-direction:column;padding:20px;background:linear-gradient(180deg,rgba(13,19,31,.93),rgba(13,17,27,.78));backdrop-filter:blur(8px)}
   #amqSongSelectStage .p32-panel-head{display:flex;align-items:center;gap:9px;padding-bottom:14px;border-bottom:1px solid rgba(220,230,250,.16);font-size:9px;letter-spacing:.18em;color:#b9c9df;font-weight:800}
   #amqSongSelectStage .p32-live-dot{width:6px;height:6px;border-radius:50%;background:#e95c9c;box-shadow:0 0 10px #e95c9c;margin-left:auto}
@@ -207,12 +207,12 @@
   #amqSongSelectStage .p32-stat>span{font-size:10px;color:#aab9cf;letter-spacing:.06em}
   #amqSongSelectStage .p32-stat>strong{font-size:13px;line-height:1.6;font-weight:650;overflow-wrap:anywhere;color:#f2f4fb}
   #amqSongSelectStage .p32-info-foot{display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:18px;color:#9ba9bf;font-size:9px;letter-spacing:.1em}
-  #amqSongSelectStage .p32-scene{display:flex;flex-direction:column;padding:22px;background:linear-gradient(135deg,rgba(16,22,34,.72),rgba(22,18,35,.44)),radial-gradient(ellipse at 48% 42%,rgba(94,85,130,.45),rgba(21,27,42,.62) 64%,rgba(11,15,24,.78));}
+  #amqSongSelectStage .p32-scene{display:flex;flex-direction:column;padding:22px;background:linear-gradient(135deg,rgba(13,17,29,.45),rgba(20,15,33,.35)),radial-gradient(ellipse at 62% 38%,rgba(210,92,158,.23),transparent 42%),radial-gradient(ellipse at 25% 70%,rgba(85,116,184,.22),transparent 48%);}
   body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene{background:linear-gradient(135deg,rgba(10,14,24,.48),rgba(19,15,30,.38));backdrop-filter:blur(2px)}
   #amqSongSelectStage .p32-scene-top{position:relative;z-index:2;display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.17em;font-weight:800;color:#c5d0e2}
   #amqSongSelectStage .p32-scene-top i{height:1px;flex:1;background:linear-gradient(90deg,#df5d9e,rgba(223,93,158,0))}
   #amqSongSelectStage .p32-scene-image{position:absolute;inset:0;z-index:0;background-position:center;background-size:cover;opacity:.17;filter:saturate(.7);mask-image:linear-gradient(180deg,transparent 0%,#000 25%,#000 75%,transparent 100%)}
-  #amqSongSelectStage .p32-scene-content{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;flex:1;min-height:390px;padding:32px 8px}
+  #amqSongSelectStage .p32-scene-content{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;flex:1;min-height:260px;padding:18px 8px}
   #amqSongSelectStage .p32-scene-content small{font-size:9px;letter-spacing:.2em;color:#d1b5d2;font-weight:800}
   #amqSongSelectStage #p32WorkTitle{max-width:100%;margin:16px 0 10px;font-size:clamp(30px,3.5vw,52px);line-height:1.04;letter-spacing:-.035em;overflow-wrap:anywhere;text-shadow:0 3px 24px rgba(0,0,0,.55)}
   #amqSongSelectStage #p32WorkMeta{max-width:440px;margin:0;color:#d0d8e7;font-size:13px;line-height:1.8;text-shadow:0 2px 12px rgba(0,0,0,.7)}
@@ -223,7 +223,7 @@
   #amqSongSelectStage .p32-catalog-head h2{margin:5px 0 0;font-size:19px;letter-spacing:.01em}
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
   #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:9px;min-width:0}
-  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;background:transparent;border:0}
+  #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0;padding:0;background:transparent;border:0;min-width:0;width:100%;max-width:100%}
   #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
   #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box;margin:0;padding:10px 11px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
   #amqSongSelectStage #search:focus{border-color:#e768a7;box-shadow:0 0 0 1px rgba(231,104,167,.2)}
@@ -241,7 +241,7 @@
   #amqSongSelectStage .head.view-catalog p{display:none}
   #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px}
   #amqSongSelectStage .head.view-catalog .result{font-size:10px;color:#aebbd0}
-  #amqSongSelectStage #grid{display:flex!important;flex-direction:column;gap:5px;width:100%!important;max-height:440px;overflow:auto;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
+  #amqSongSelectStage #grid{display:flex!important;flex-direction:column;gap:5px;width:100%!important;max-height:min(32vh,320px);overflow:auto;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:10px;width:100%;min-height:62px;padding:7px 8px;background:rgba(24,31,45,.78);border:1px solid rgba(201,215,239,.18);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer}
   #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
   #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 54px;width:54px;height:54px;object-fit:cover}
@@ -253,7 +253,20 @@
   #amqSongSelectStage body[data-amq-workspace-mode="lists"]{display:none}
   body[data-amq-workspace-mode="lists"] #amqSongSelectStage,body[data-amq-workspace-mode="learning"] #amqSongSelectStage,body[data-amq-workspace-mode="analysis"] #amqSongSelectStage{display:none}
   @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:minmax(170px,24%) minmax(180px,1fr) minmax(250px,32%);gap:6px}#amqSongSelectStage .p32-info{padding:14px}#amqSongSelectStage .p32-scene{padding:16px}#amqSongSelectStage .p32-catalog{padding:12px 8px}}
-  @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:145px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:330px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:24px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:420px}}
+  body.amq-workspace-active .top{min-height:30px!important;margin:0 0 4px!important;padding:0 0 4px!important;gap:0!important}
+  body.amq-workspace-active .top .actions{gap:6px!important;flex-wrap:nowrap!important}
+  body.amq-workspace-active .top .actions #themeToggle,body.amq-workspace-active .top .actions #updateBtn,body.amq-workspace-active .top .actions #exportBtn,body.amq-workspace-active .top .actions #importBtn{display:none!important}
+  body.amq-workspace-active.ui-settings-open .top .actions #themeToggle,body.amq-workspace-active.ui-settings-open .top .actions #updateBtn,body.amq-workspace-active.ui-settings-open .top .actions #exportBtn,body.amq-workspace-active.ui-settings-open .top .actions #importBtn{display:inline-flex!important}
+  body.amq-workspace-active .top .actions #uiHomeSettings,body.amq-workspace-active .top .actions #uiBackHome,body.amq-workspace-active .top .actions #sceneBackgroundOpen{min-height:28px!important;padding:5px 8px!important;font-size:10px!important;box-shadow:none!important;border-radius:3px!important}
+  body.amq-workspace-active #amqWorkspaceDock{left:12px!important;right:auto!important;width:calc(50vw - 18px)!important;max-width:calc(50vw - 18px)!important;bottom:12px!important;height:60px!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1.05fr!important;z-index:10001!important}
+  body.amq-workspace-active #amqWorkspaceDock button{min-width:0!important;padding:5px 3px!important;font-size:10px!important;gap:4px!important}
+  body.amq-workspace-active #audioDock{left:auto!important;right:12px!important;bottom:12px!important;width:calc(50vw - 18px)!important;max-width:calc(50vw - 18px)!important;margin:0!important;z-index:10000!important;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.2fr)!important;gap:6px!important;padding:7px!important;border-radius:4px!important;min-width:0!important}
+  body.amq-workspace-active #audioDock>*{min-width:0!important;max-width:100%!important}
+  body.amq-workspace-active #audioDock audio{width:100%!important;min-width:0!important}
+  body.amq-workspace-active #audioDock .dockBtns{min-width:0!important;max-width:100%!important;display:flex;flex-wrap:wrap;gap:4px;overflow:auto;max-height:54px}
+  body.amq-workspace-active #audioDock .dockBtns select{min-width:0!important;max-width:100%!important;width:auto}
+  @media(max-width:1120px){body.amq-workspace-active #amqWorkspaceDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1.05fr!important;bottom:12px!important;height:56px!important}body.amq-workspace-active #audioDock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;bottom:76px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}#amqSongSelectStage .toolbar.view-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:200px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:300px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:18px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:260px}body.amq-workspace-active #amqWorkspaceDock{height:54px!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1fr!important}body.amq-workspace-active #amqWorkspaceDock button{font-size:9px!important}body.amq-workspace-active #audioDock{bottom:70px!important;grid-template-columns:minmax(0,1fr)!important;max-height:110px;overflow:auto}}
   `;
   document.head.append(style32);
   const fitStageToViewport=()=>{
@@ -262,6 +275,7 @@
     const width=Math.max(0,window.innerWidth-left);
     stage.style.setProperty('width',width+'px','important');
     stage.style.setProperty('max-width','100vw','important');
+    if(toolbar)toolbar.style.setProperty('grid-template-columns',`repeat(${window.innerWidth>1120?3:2},minmax(0,1fr))`,'important');
   };
   window.addEventListener('resize',fitStageToViewport,{passive:true});
   window.addEventListener('resize',()=>setTimeout(fitStageToViewport,80),{passive:true});
@@ -269,8 +283,8 @@
   document.getElementById('amqWorkspaceDock')?.addEventListener('click',()=>window.requestAnimationFrame(fitStageToViewport));
   new MutationObserver(()=>window.requestAnimationFrame(fitStageToViewport)).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
   window.requestAnimationFrame(fitStageToViewport);
-  let selectedSongId=null;
-  const updateP32=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY'};
+  let selectedSongId=null,selectedWorkImage='',hasSelectedWork=false;
+  const updateP32=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork&&!selectedWorkImage){const img=grid.querySelector('.card img,.p26-work-card img');const url=img?.currentSrc||img?.src||'';if(url){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")'}}}
   function updateSelectedSongInfo(id,row){
     selectedSongId=id==null?null:String(id);
     const api=window.__aniHistoryAPIv51;
@@ -294,8 +308,8 @@
     const c=e.target.closest('.card,.p26-work-card');if(!c)return;
     $('#p32WorkTitle').textContent=c.querySelector('.p26-work-title,.title,h3,.name,[class*="title"]')?.textContent?.trim()||c.textContent.trim().split('\n').map(v=>v.trim()).filter(Boolean)[0]||'已選取作品';
     $('#p32WorkMeta').textContent='已選取作品。開啟作品後可從歌曲列查看實際播放次數與最近錯題紀錄。';
-    const img=c.querySelector('img');const sceneImage=$('#p32SceneImage');
-    if(sceneImage){const url=img?.currentSrc||img?.src||'';sceneImage.style.backgroundImage=url?'linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")':'none'}
+    const img=c.querySelector('img');const sceneImage=$('#p32SceneImage');hasSelectedWork=true;selectedWorkImage=img?.currentSrc||img?.src||'';
+    if(sceneImage){const url=selectedWorkImage;sceneImage.style.backgroundImage=url?'linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")':'none'}
     updateSelectedSongInfo(null);
   });
   $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(row?.dataset?.id)updateSelectedSongInfo(row.dataset.id,row)});
