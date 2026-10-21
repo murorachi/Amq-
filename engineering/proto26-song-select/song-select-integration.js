@@ -64,6 +64,8 @@
       body:has(#overlay.open) #overlay.open .playerbar{grid-column:auto!important;grid-row:auto!important;min-width:0!important}
       body:has(#overlay.open) #overlay.open .songlist{grid-column:auto!important;grid-row:auto!important;min-height:0!important;overflow:auto!important;background:#211a24!important}
       body:has(#overlay.open) #overlay.open .songrow{background:#252d3a!important;border-color:#414c5f!important;color:#edf1f8!important}
+      body:has(#overlay.open) #overlay.open .songrow{transition:transform 90ms ease,background-color 90ms ease,border-color 90ms ease}
+      body:has(#overlay.open) #overlay.open .songrow:hover:not(.proto26-song-selected){position:relative!important;transform:translateX(-3px)!important;width:calc(100% + 3px)!important;z-index:1!important}
       body:has(#overlay.open) #overlay.open .songrow.proto26-song-selected{position:relative!important;transform:translateX(-6px)!important;width:calc(100% + 6px)!important;z-index:1!important;background:#343043!important;border-color:#e768a7!important;box-shadow:inset 3px 0 #e768a7!important}
       body:has(#overlay.open) #overlay.open .songmeta{color:#b3bfd1!important}
     }
