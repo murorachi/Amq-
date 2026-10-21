@@ -44,3 +44,19 @@
 
 ## Rollback
 Return to the immutable accepted Proto24 branch and commit above. Never force-push or overwrite the baseline.
+
+
+## Latest candidate verification checkpoint — 2026-10-21
+
+The immutable accepted baseline remains `v82.85.30-proto24-accepted-delivery-02` at `39d250cf5a269a0e2bf8f514474584bcc864f599`. The following is a separately validated Proto25 candidate, not a replacement for that baseline:
+
+- Workflow: [Stage 24 run 39538605138](https://github.com/murorachi/Amq-/actions/runs/39538605138), successful.
+- Isolated Stage 24 publication commit: `95f17580460b1dd1e17a7b069a1dd27f67c49576`.
+- Candidate file: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`, 8,920,621 bytes.
+- Candidate SHA-256: `a36cedd3fc2f2ca612e7f5aaa8708b80924bfe912b47094812174651989883ac`; remote manifest matches.
+- Static: 220 unique IDs and 42 inline JavaScript blocks syntax-checked, PASS.
+- Browser: 18 checks PASS; no page or console errors. Evidence artifact ID `12318249366`, ZIP digest `474f338638bbcb2acb6c2fe0970a751344b83dd0bd8beaaeaa4e1bae9df137d2`.
+- NOT RUN: real audio output, full quiz-answer lifecycle, multiplayer server connectivity/lifecycle.
+- Visual similarity >=90% remains unverified. The available screenshots show the home still differs substantially from a proven osu!Stable reference capture; no Stable source commit/build-matched pixel comparison is available.
+
+This checkpoint verifies the candidate and browser-tested UI scope only. It does not authorize merging PR #9 or replacing the accepted baseline.
