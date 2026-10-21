@@ -1,8 +1,8 @@
-Proto26 Song Select acceptance summary
-Commit under test: a8bec92c8549d6fcc2cf13ffc0401c150ce247ed
-Date UTC: 2026-10-21T09:59:17Z
-8952996 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
-4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
+Proto32 Song Select acceptance summary
+Commit under test: 8a209316f4b000b4fba767019fc1b28556e963bc
+Date UTC: 2026-10-21T10:25:51Z
+8961290 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
+37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -22,16 +22,16 @@ PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
-OUTPUT_BYTES=8952996
-OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html
+OUTPUT_BYTES=8961290
+OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
+OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -41,7 +41,7 @@ PASS app navigation state is catalog
 PASS catalog view is visible before interacting with song cards
 PASS source controls are scoped to the catalog view
 PASS feature stage keeps its designed fallback when no scene background is configured
-SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 50% 38%, rgb(59, 52, 73), rgb(37, 38, 51) 40%, rgb(25, 30, 40) 75%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(18, 20, 31, 0.68), rgba(23, 18, 32, 0.42)), radial-gradient(at 50% 38%, rgba(105, 74, 123, 0.55), rgba(37, 38, 51, 0.62) 48%, rgba(25, 30, 40, 0.72) 78%)", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p30-feature", "parent": "amqSongSelectStage", "matched": true, "display": "flex", "styleTag": 6673, "ruleCount": 45}}
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "linear-gradient(135deg, rgba(16, 22, 34, 0.72), rgba(22, 18, 35, 0.44)), radial-gradient(at 48% 42%, rgba(94, 85, 130, 0.45), rgba(21, 27, 42, 0.62) 64%, rgba(11, 15, 24, 0.78))", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.48), rgba(19, 15, 30, 0.38))", "backdropFilter": "blur(2px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "flex", "styleTag": 9688, "ruleCount": 61}}
 PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
@@ -49,7 +49,7 @@ PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
-DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 1055, "searchWidth": 344, "catalogLeft": 1055, "stageDisplay": "grid", "dockBottom": 900}
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 954.6875, "searchWidth": 462.3125, "catalogLeft": 944.6875, "stageDisplay": "grid", "dockBottom": 900}
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select three-zone composition is visible at 1440x900
 PASS default Song Select search is positioned in the right catalog region at 1440x900
@@ -108,12 +108,17 @@ PASS catalog and audio dock remain present
 PASS EMQ mode activates
 PASS EMQ mode renders actual work cards
 PASS selecting an EMQ work opens its detail pane
+PASS selected work exposes real song rows for history display
+PASS selected-song panel uses the actual song-row title
+PASS selected-song panel reads the real playback-count store
+PASS selected-song panel shows an honest empty state for wrong-answer history
 PASS desktop detail pane is fixed at the right side
 PASS desktop detail pane remains persistent while browsing
 PASS Escape closes the selected-work detail pane and restores catalog controls
 PASS catalog reserves horizontal space for the detail pane
 PASS batch tools reserve horizontal space for the detail pane
 PASS search and filter controls reserve horizontal space for the detail pane
+OVERFLOW_DEBUG_1000x562={"viewport": 1000, "documentWidth": 1000, "bodyWidth": 1000, "bodyPaddingLeft": "260px", "stage": {"left": 282, "right": 1000, "width": 718, "inlineWidth": "718px", "computedWidth": "718px", "gridColumns": "172.312px 283.688px 250px", "parent": {"tag": "DIV", "cls": "wrap", "left": 260, "right": 1000, "width": 740}}, "overflowing": []}
 PASS 1000x562 Song Select viewport has no horizontal overflow
 PASS MIX mode activates
 PASS Singer mode activates
@@ -125,10 +130,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f
+OUTPUT_SHA256=37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.277352; changed-pixel-ratio=0.910188
+DIAGNOSTIC normalized MAE=0.277068; changed-pixel-ratio=0.805745
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
