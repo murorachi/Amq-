@@ -236,7 +236,7 @@
   #amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800;margin-bottom:2px}
   #amqSongSelectStage #proto26SongModes button{height:24px;min-height:24px;padding:3px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:9px;font-weight:800;cursor:pointer}
   #amqSongSelectStage #proto26SongModes button[aria-pressed="true"]{background:#bd4e86;border-color:#e98ab8;color:#fff}
-  #amqSongSelectStage .tabs.view-catalog{display:flex;flex-wrap:nowrap;gap:4px;margin:0;padding:0;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+  #amqSongSelectStage .tabs.view-catalog{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:4px;margin:0!important;padding:0;min-width:0;height:28px!important;max-height:28px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin}
   #amqSongSelectStage #empty.hidden{display:none!important}
   #amqSongSelectStage #loadMoreWrap{height:auto!important;min-height:0!important;flex:0 0 auto!important;padding:1px 0!important;margin:0!important}
   #amqSongSelectStage #loadMoreWrap button{min-height:22px!important;padding:2px 8px!important}
