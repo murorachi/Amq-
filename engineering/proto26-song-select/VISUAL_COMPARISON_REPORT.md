@@ -8,7 +8,8 @@
 - Normalized mean absolute pixel difference (diagnostic): 0.275356
 - Pixels with max-channel difference >= 24: 772410/921600 (83.81%)
 - Active app view: catalog
-- Catalog cover images loaded before capture: 0/8
+- Catalog real covers before capture: 7/8
+- Loaded visible catalog images before capture: 8/8
 - Page errors: 0; console errors: 0
 
 ## Evidence files
