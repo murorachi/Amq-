@@ -1,0 +1,10 @@
+/* Proto31: Song Select stage proportions and background-independent artwork. */
+#amqSongSelectStage{grid-template-columns:minmax(220px,250px) minmax(400px,1fr) minmax(270px,310px)!important;gap:10px!important}
+#amqSongSelectStage .p30-rail,#amqSongSelectStage .p30-catalog{min-height:0!important}
+#amqSongSelectStage .p30-feature{position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 36%,#504057 0,#292633 42%,#191e28 78%)!important}
+#amqSongSelectStage .p30-feature:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#10131b22,#10131b88)}
+#amqSongSelectStage .p30-art{background:radial-gradient(ellipse at center,#d95a9b18 0,transparent 68%)}
+#amqSongSelectStage .p30-note{transition:transform .2s ease,box-shadow .2s ease}
+#amqSongSelectStage .p30-feature:hover .p30-note{transform:translateY(-3px);box-shadow:0 0 72px #d94c8b55}
+@media(max-width:1120px){#amqSongSelectStage{grid-template-columns:minmax(180px,210px) minmax(300px,1fr) minmax(245px,280px)!important;gap:8px!important}}
+@media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr)!important}}
