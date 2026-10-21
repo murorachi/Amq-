@@ -116,6 +116,8 @@ with sync_playwright() as p:
             page.set_viewport_size({"width": 1000, "height": 562})
             page.wait_for_timeout(250)
             check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "1000x562 Song Select viewport has no horizontal overflow")
+            page.set_viewport_size({"width": 1440, "height": 900})
+            page.wait_for_timeout(200)
             page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
             page.set_viewport_size({"width": 1440, "height": 1000})
             page.wait_for_timeout(150)
