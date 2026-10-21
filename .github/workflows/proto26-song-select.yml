@@ -1,6 +1,9 @@
 name: Proto26 Song Select integration
 
 on:
+  pull_request:
+    branches:
+      - v82.85.30-proto25-ui-refactor-stage-24
   push:
     branches:
       - v82.85.30-proto26-song-select-integration-01
