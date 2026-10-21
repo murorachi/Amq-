@@ -20,6 +20,22 @@
   style.id='amq-proto26-song-select-css';
   style.textContent=`
     #proto26SongModes{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;padding:10px 12px;background:#171b25;border:1px solid #394151;border-radius:8px}
+    /* The four dock modes are panels within Song Select, not separate app pages. */
+    body[data-amq-workspace-mode="lists"] .view-catalog,
+    body[data-amq-workspace-mode="learning"] .view-catalog,
+    body[data-amq-workspace-mode="analysis"] .view-catalog{display:none!important}
+    body[data-amq-workspace-mode="lists"] #watchlistView,
+    body[data-amq-workspace-mode="learning"] #learningPlanPanel,
+    body[data-amq-workspace-mode="analysis"] #dashboardPanel{display:block!important;min-width:0;width:100%;box-sizing:border-box}
+    body[data-amq-workspace-mode="lists"] #dashboardPanel,
+    body[data-amq-workspace-mode="lists"] #learningPlanPanel,
+    body[data-amq-workspace-mode="learning"] #watchlistView,
+    body[data-amq-workspace-mode="learning"] #dashboardPanel,
+    body[data-amq-workspace-mode="analysis"] #watchlistView,
+    body[data-amq-workspace-mode="analysis"] #learningPlanPanel{display:none!important}
+    body[data-amq-workspace-mode="batch"] #watchlistView,
+    body[data-amq-workspace-mode="batch"] #dashboardPanel,
+    body[data-amq-workspace-mode="batch"] #learningPlanPanel{display:none!important}
     #proto26SongModes .p26-label{font-size:11px;letter-spacing:.12em;color:#9da8bb;font-weight:800;margin-right:4px}
     #proto26SongModes button{border:1px solid #4b566a;background:#242b39;color:#e5e9f2;border-radius:4px;padding:8px 15px;font-weight:800;cursor:pointer}
     #proto26SongModes button[aria-pressed="true"]{background:#344a70;border-color:#86a9e8;color:#fff}
@@ -72,15 +88,53 @@
   new MutationObserver(syncWorkspaceShell).observe(document.body,{attributes:true,attributeFilter:['class']});
   window.addEventListener('resize',syncWorkspaceShell,{passive:true});
 
-  // The dock must change the main work surface, not only the selected button/sidebar title.
-  // Reuse the application's existing view router; do not duplicate workspace business logic.
-  const workspaceRoutes={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'};
-  for(const button of $$('#amqWorkspaceDock [data-ws]')){
-    button.addEventListener('click',()=>{
-      const target=workspaceRoutes[button.dataset.ws];
-      if(target)window.__aniNavigateApp?.(target);
-    });
+  // Song Select's dock is an internal workspace switch, not four app-level routes.
+  // Existing panels and renderers are reused; no business logic or data stores are cloned.
+  const workspaceViews={lists:'watchlist',batch:'catalog',learning:'learningPlan',analysis:'dashboard'};
+  function setWorkspaceMode(key){
+    if(!Object.prototype.hasOwnProperty.call(workspaceViews,key))key='batch';
+    const target=workspaceViews[key];
+    // Ask the existing router to render each legacy panel, then return to catalog so
+    // the application route and persistent Song Select shell stay in one workspace.
+    if(key!=='batch'){
+      window.__aniNavigateApp?.(target);
+      window.__aniNavigateApp?.('catalog');
+    }else{
+      window.__aniNavigateApp?.('catalog');
+    }
+    document.body.dataset.amqWorkspaceMode=key;
+    const panels={lists:$('#watchlistView'),learning:$('#learningPlanPanel'),analysis:$('#dashboardPanel')};
+    for(const [name,panel] of Object.entries(panels)){
+      if(!panel)continue;
+      panel.classList.toggle('hidden',name!==key);
+      panel.setAttribute('aria-hidden',String(name!==key));
+    }
+    for(const button of $$('#amqWorkspaceDock [data-ws]')){
+      button.setAttribute('aria-pressed',String(button.dataset.ws===key));
+    }
+    document.documentElement.dataset.amqWorkspaceMode=key;
+    return key;
   }
+  window.__amqSetSongSelectWorkspaceMode=setWorkspaceMode;
+  for(const button of $$('#amqWorkspaceDock [data-ws]')){
+    button.addEventListener('click',()=>setWorkspaceMode(button.dataset.ws));
+  }
+  // The legacy workspace action handler invokes existing home-action buttons.
+  // While the Song Select shell is active, route those requests into the matching
+  // in-place panel instead of leaving Song Select. Learning actions that launch a
+  // quiz/practice session still use their original explicit flow.
+  document.addEventListener('click',event=>{
+    const action=event.target.closest?.('[data-home-action]')?.dataset.homeAction;
+    if(!action||!document.body.classList.contains('amq-workspace-active'))return;
+    const modes={watchlist:'lists',catalog:'batch',dashboard:'analysis',learningPlan:'learning'};
+    if(!modes[action])return;
+    event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+    setWorkspaceMode(modes[action]);
+  },true);
+  $('#wsReturnHome')?.addEventListener('click',()=>{
+    delete document.body.dataset.amqWorkspaceMode;
+    delete document.documentElement.dataset.amqWorkspaceMode;
+  });
 
   const modes=document.createElement('nav');
   modes.id='proto26SongModes'; modes.classList.add('view-catalog'); modes.setAttribute('aria-label','曲庫來源');
@@ -116,7 +170,7 @@
   modes.addEventListener('click',e=>{const b=e.target.closest('[data-p26-mode]');if(b)activate(b.dataset.p26Mode)});
   search?.addEventListener('input',()=>{if(mode==='emq'||mode==='mix')renderEmq(mode==='mix')});
   tabs.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t||mode==='emq'||mode==='mix')return;mode=t.dataset.tab==='artists'?'singer':'amq';setButtons()});
-  window.__amqProto26SongSelect={version:'proto26.7',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
+  window.__amqProto26SongSelect={version:'proto26.8',getMode:()=>mode,getEmqWorkCount:()=>emqWorks.length,activate};
   document.documentElement.dataset.proto26Init='ready';setButtons();
   if(!api.ready){
     const started=Date.now();
