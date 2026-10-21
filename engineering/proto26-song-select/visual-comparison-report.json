@@ -7,18 +7,25 @@
     "height": 720
   },
   "candidate_file": "engineering/proto26-song-select/proto26-song-select-matched-viewport.png",
-  "candidate_sha256": "abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca",
+  "candidate_sha256": "3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a",
   "candidate_dimensions": {
     "width": 1280,
     "height": 720
   },
   "active_app_view": "catalog",
   "body_classes": "dark-theme amq-workspace-prototype amq-standalone-route amq-workspace-active",
+  "default_state": {
+    "homeHeroVisible": false,
+    "batchToolsVisible": false,
+    "workspaceSidebarVisible": false,
+    "selectedWorkspaceCount": 0,
+    "activeWorkspaceMode": null
+  },
   "page_errors": [],
   "console_errors": [],
-  "normalized_mean_absolute_pixel_difference": 0.283001,
-  "pixels_with_max_channel_difference_at_least_24": 849476,
+  "normalized_mean_absolute_pixel_difference": 0.285936,
+  "pixels_with_max_channel_difference_at_least_24": 768947,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.92174,
+  "changed_pixel_ratio": 0.834361,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }
