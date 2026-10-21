@@ -15,7 +15,7 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS Song Select stage height is constrained to the viewport
-PASS desktop Song Select uses a continuous scene with explicit panel geometry
+PASS desktop Song Select scene fills its grid stage without over-constrained dimensions
 PASS desktop catalog preserves a compact single-column song list
 PASS AMQ empty state synchronizes after asynchronous catalog rendering
 PASS catalog filters remain reachable in a compact horizontal strip
@@ -31,17 +31,20 @@ PASS cover decorations stay quiet while a compact fallback remains available wit
 PASS default Song Select previews the first visible work without falsely marking it selected
 PASS visual comparison captures both default and selected-song states
 PASS desktop selected-song drawer overrides legacy detail styles with a compact scrollable song list
+PASS hover and selected song rows have explicit distinct left-shift states
+PASS visual comparison requires a selected work and selected song state
 PASS scene proportions prioritize the center artwork while preserving side panels
+PASS scene artwork stays bounded at constrained viewport widths
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
-OUTPUT_BYTES=8986944
-OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html
+OUTPUT_BYTES=8987561
+OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
+OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 STATIC_ACCEPTANCE=PASS

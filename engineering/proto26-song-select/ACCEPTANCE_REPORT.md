@@ -1,8 +1,8 @@
-Proto45 Song Select candidate-21 acceptance summary
-Commit under test: e1ced6d32dba444415069778dd1f686789058375
-Date UTC: 2026-10-21T15:02:35Z
-8986944 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
-5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
+Song Select candidate-31 acceptance summary
+Commit under test: a09ba9fb9fdc443d8100042569d920f5dc1313df
+Date UTC: 2026-10-21T16:24:50Z
+8987561 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html
+c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -21,7 +21,7 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS Song Select feature stage integrates the existing Catalog scene background with a fallback
 PASS Song Select stage height is constrained to the viewport
-PASS desktop Song Select uses a continuous scene with explicit panel geometry
+PASS desktop Song Select scene fills its grid stage without over-constrained dimensions
 PASS desktop catalog preserves a compact single-column song list
 PASS AMQ empty state synchronizes after asynchronous catalog rendering
 PASS catalog filters remain reachable in a compact horizontal strip
@@ -37,19 +37,22 @@ PASS cover decorations stay quiet while a compact fallback remains available wit
 PASS default Song Select previews the first visible work without falsely marking it selected
 PASS visual comparison captures both default and selected-song states
 PASS desktop selected-song drawer overrides legacy detail styles with a compact scrollable song list
+PASS hover and selected song rows have explicit distinct left-shift states
+PASS visual comparison requires a selected work and selected song state
 PASS scene proportions prioritize the center artwork while preserving side panels
+PASS scene artwork stays bounded at constrained viewport widths
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html
-OUTPUT_BYTES=8986944
-OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html
+OUTPUT_BYTES=8987561
+OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293
+OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -66,7 +69,7 @@ PASS at least six real AMQ catalog cards intersect the internal scroll viewport 
 PASS catalog grid owns vertical scrolling instead of extending behind the player
 PASS source controls are scoped to the catalog view
 PASS feature stage keeps its designed fallback when no scene background is configured
-SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 49% 44%, rgba(70, 91, 132, 0.3), rgba(17, 23, 35, 0.48) 72%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.2), rgba(19, 15, 30, 0.16))", "backdropFilter": "blur(1px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 25511, "ruleCount": 109}}
+SCENE_BACKGROUND_STYLE_DEBUG={"fallback": {"backgroundImage": "radial-gradient(at 49% 44%, rgba(70, 91, 132, 0.3), rgba(17, 23, 35, 0.48) 72%)", "backdropFilter": "none"}, "configured": {"backgroundImage": "linear-gradient(135deg, rgba(10, 14, 24, 0.2), rgba(19, 15, 30, 0.16))", "backdropFilter": "blur(1px)"}, "element": {"tag": "SECTION", "id": "", "cls": "p32-scene", "parent": "amqSongSelectStage", "matched": true, "display": "block", "styleTag": 31053, "ruleCount": 111}}
 PASS feature stage blends with the configured Catalog scene background
 PASS home collection hero is hidden in Song Select
 PASS batch tools do not dominate the default Song Select view
@@ -152,6 +155,7 @@ PASS EMQ mode activates
 PASS EMQ mode renders actual work cards
 PASS selecting an EMQ work opens its detail pane
 PASS selected work exposes real song rows for history display
+HOVER_ROW_DEBUG={"left": 867, "className": "songrow", "transform": "matrix(1, 0, 0, 1, -3, 0)", "hovered": true, "selected": false}
 PASS hovered unselected song row shifts slightly left
 PASS selected song row shifts farther left than hover state
 PASS selected-song panel uses the actual song-row title
@@ -163,8 +167,9 @@ PASS Escape closes the selected-work detail pane and restores catalog controls
 PASS catalog reserves horizontal space for the detail pane
 PASS batch tools reserve horizontal space for the detail pane
 PASS search and filter controls reserve horizontal space for the detail pane
-OVERFLOW_DEBUG_1000x562={"viewport": 1000, "documentWidth": 1000, "bodyWidth": 1000, "bodyPaddingLeft": "260px", "stage": {"left": 282, "right": 1000, "width": 718, "inlineWidth": "718px", "computedWidth": "718px", "gridColumns": "172.312px 271.625px 262.062px", "parent": {"tag": "DIV", "cls": "wrap", "left": 260, "right": 1000, "width": 740}}, "overflowing": [{"tag": "DIV", "id": "p32SceneImage", "cls": "p32-scene-image", "left": 269, "right": 1013, "width": 743, "display": "block"}, {"tag": "SELECT", "id": "sort", "cls": "", "left": 956, "right": 1056, "width": 100, "display": "block"}, {"tag": "SELECT", "id": "watchFilter", "cls": "", "left": 1060, "right": 1160, "width": 100, "display": "block"}, {"tag": "SELECT", "id": "familiarityFilter", "cls": "", "left": 1164, "right": 1264, "width": 100, "display": "block"}, {"tag": "INPUT", "id": "tagFilter", "cls": "", "left": 1268, "right": 1368, "width": 100, "display": "block"}]}
+OVERFLOW_DEBUG_1000x562={"viewport": 1000, "documentWidth": 1000, "bodyWidth": 1000, "bodyPaddingLeft": "260px", "stage": {"scene": {"left": 282, "right": 1000, "width": 718}, "sceneImage": {"left": 282, "right": 1000, "width": 718}, "left": 282, "right": 1000, "width": 718, "inlineWidth": "718px", "computedWidth": "718px", "gridColumns": "172.312px 271.625px 262.062px", "parent": {"tag": "DIV", "cls": "wrap", "left": 260, "right": 1000, "width": 740}}, "overflowing": [{"tag": "SELECT", "id": "sort", "cls": "", "left": 956, "right": 1056, "width": 100, "display": "block"}, {"tag": "SELECT", "id": "watchFilter", "cls": "", "left": 1060, "right": 1160, "width": 100, "display": "block"}, {"tag": "SELECT", "id": "familiarityFilter", "cls": "", "left": 1164, "right": 1264, "width": 100, "display": "block"}, {"tag": "INPUT", "id": "tagFilter", "cls": "", "left": 1268, "right": 1368, "width": 100, "display": "block"}]}
 PASS 1000x562 Song Select viewport has no horizontal overflow
+PASS scene artwork remains within the Song Select scene at 1000x562
 PASS MIX mode activates
 PASS Singer mode activates
 PASS AMQ mode restores legacy catalog
@@ -175,10 +180,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
+OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.280775; changed-pixel-ratio=0.881249
+DIAGNOSTIC normalized MAE=0.275356; changed-pixel-ratio=0.838122
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
