@@ -188,7 +188,7 @@
   @media(max-width:1120px){#amqSongSelectStage{grid-template-columns:150px minmax(210px,1fr) minmax(275px,330px);gap:8px}#amqSongSelectStage .p30-feature{padding:14px}}
   @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:10px;margin-bottom:110px}#amqSongSelectStage .p30-rail{min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}#amqSongSelectStage .p30-brand{grid-column:1/-1;padding-bottom:10px}#amqSongSelectStage .p30-block{padding:8px 0;border:0}#amqSongSelectStage .p30-foot{display:none}#amqSongSelectStage .p30-feature{min-height:400px}#amqSongSelectStage .p30-art{min-height:220px}#amqSongSelectStage .p30-catalog{min-height:400px}#amqSongSelectStage #grid{max-height:420px}}
   `;
-  document.head.append(style);
+  document.head.append(style30);
   const updateP30=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p30Count').textContent=c;$('#p30Items').textContent=c;$('#p30Mode').textContent=mode.toUpperCase()+' LIBRARY'};
   stage.querySelectorAll('[data-p30-jump]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.p30Jump==='artists')activate('singer');else activate('amq')}));
   grid.addEventListener('click',e=>{const c=e.target.closest('.card,.p26-work-card');if(!c)return;$('#p30Title').textContent=c.querySelector('.p26-work-title,.title,h3,.name,[class*="title"]')?.textContent?.trim()||c.textContent.trim().split('\n').map(v=>v.trim()).filter(Boolean)[0]||'已選取作品';$('#p30Sub').textContent='已選取曲庫項目。開啟作品後可查看歌曲與既有播放控制。'});
