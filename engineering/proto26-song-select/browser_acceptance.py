@@ -189,6 +189,8 @@ with sync_playwright() as p:
                 viewport: window.innerWidth,
                 documentWidth: document.documentElement.scrollWidth,
                 bodyWidth: document.body.scrollWidth,
+                bodyPaddingLeft: getComputedStyle(document.body).paddingLeft,
+                stage: (() => { const el=document.querySelector("#amqSongSelectStage"); const r=el.getBoundingClientRect(); return {left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),inlineWidth:el.style.width,computedWidth:getComputedStyle(el).width,gridColumns:getComputedStyle(el).gridTemplateColumns,parent:(()=>{const p=el.parentElement,pr=p.getBoundingClientRect();return {tag:p.tagName,cls:String(p.className||""),left:Math.round(pr.left),right:Math.round(pr.right),width:Math.round(pr.width)}})()}; })(),
                 overflowing: [...document.querySelectorAll('body *')].map(el => {
                     const r = el.getBoundingClientRect();
                     return {tag:el.tagName,id:el.id,cls:String(el.className||'').slice(0,70),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),display:getComputedStyle(el).display};
