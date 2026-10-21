@@ -19,6 +19,10 @@ with sync_playwright() as p:
     page.wait_for_timeout(300)
     check(page.locator("#proto26SongModes").count() == 1, "source mode controls initialize")
     check(page.locator("html").get_attribute("data-proto26-init") == "ready", "integration reports ready state")
+    page.evaluate("window.__aniNavigateApp?.('catalog')")
+    page.wait_for_timeout(500)
+    check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
+    check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     try:
         page.wait_for_function("window.__aniEmqAPI?.ready === true", timeout=30000)
     except Exception:
