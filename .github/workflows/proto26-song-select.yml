@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Checkout isolated integration branch
+      - name: Checkout triggering commit
         uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
@@ -56,9 +56,9 @@ jobs:
             echo "Proto26 Song Select acceptance summary"
             echo "Commit under test: $GITHUB_SHA"
             echo "Date UTC: $(date -u +%FT%TZ)"
-            if [ -f dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html ]; then
-              wc -c dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
-              sha256sum dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
+            if [ -f dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html ]; then
+              wc -c dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+              sha256sum dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
             fi
             echo "--- static test report ---"
             cat engineering/proto26-song-select/static-test-report.txt 2>/dev/null || true
@@ -75,7 +75,7 @@ jobs:
             engineering/proto26-song-select/proto26-mobile.png
             engineering/proto26-song-select/ACCEPTANCE_REPORT.md
             engineering/proto26-song-select/*test-report.txt
-            dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html
+            dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
           if-no-files-found: warn
           retention-days: 30
       - name: Commit generated HTML and reports only after all acceptance checks pass
@@ -84,13 +84,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p /tmp/proto26-generated
-          cp dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html /tmp/proto26-generated/
+          cp dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html /tmp/proto26-generated/
           cp engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt /tmp/proto26-generated/
           git fetch origin "${GITHUB_REF_NAME}"
           git reset --hard "origin/${GITHUB_REF_NAME}"
-          cp /tmp/proto26-generated/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html dist/
+          cp /tmp/proto26-generated/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html dist/
           cp /tmp/proto26-generated/ACCEPTANCE_REPORT.md /tmp/proto26-generated/static-test-report.txt /tmp/proto26-generated/browser-test-report.txt engineering/proto26-song-select/
-          git add dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt
           if git diff --cached --quiet; then
             echo "Generated candidate and reports already match the remote checkpoint"
           else
