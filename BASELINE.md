@@ -1,5 +1,14 @@
 # Baseline and rollback record
 
+## In-progress candidate (not a verified baseline)
+- Working branch: `v82.85.30-proto32-song-select-reference-composition-01`
+- Latest source under test: `8a209316f4b000b4fba767019fc1b28556e963bc`
+- CI run: https://github.com/murorachi/Amq-/actions/runs/39584392554 — last observed IN PROGRESS.
+- Candidate path: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html`
+- Candidate 09 SHA-256 for this source: NOT VERIFIED.
+- The previous candidate 09 build hash `bc8a727b7dcea34e01c63fb16588f02a2461a100e3ae190fcab192d62d75e8fc` belongs to an earlier failing source commit and must not be reused.
+- The latest verified artifact remains candidate 08 below until current static, browser and visual-evidence gates complete.
+
 ## Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
 - HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
