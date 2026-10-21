@@ -331,6 +331,14 @@
     #amqSongSelectStage #grid>.card{min-height:54px!important;padding:6px 8px!important}
     #amqSongSelectStage #grid>.card .title{font-size:11px!important;line-height:1.25!important}
     #amqSongSelectStage #grid>.card .meta{font-size:9px!important;line-height:1.2!important}
+    #amqSongSelectStage{background:transparent!important}
+    #amqSongSelectStage .p32-scene-content{left:30%!important;right:40%!important;top:9%!important;z-index:2!important;padding:12px 8px!important;opacity:.96!important;overflow:hidden!important}
+    #amqSongSelectStage .p32-info{background:linear-gradient(90deg,rgba(12,17,28,.70),rgba(12,17,28,.42))!important;backdrop-filter:blur(3px)!important}
+    #amqSongSelectStage .p32-catalog{background:linear-gradient(90deg,rgba(12,17,28,.48),rgba(12,16,25,.72))!important;backdrop-filter:blur(3px)!important}
+    #amqSongSelectStage #grid>.card{background:rgba(18,25,38,.72)!important;border-color:rgba(201,215,239,.30)!important}
+    #amqSongSelectStage #grid>.card .title,#amqSongSelectStage #grid>.card .cardtitle{font-size:11px!important;line-height:1.2!important;font-weight:700!important}
+    #amqSongSelectStage #grid>.card .meta,#amqSongSelectStage #grid>.card .sub{font-size:9px!important;line-height:1.25!important}
+    body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene{background-image:linear-gradient(135deg,rgba(10,14,24,.22),rgba(19,15,30,.20))!important;backdrop-filter:blur(1px)!important}
   }
   @media(max-width:900px){#amqSongSelectStage{height:auto!important;grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:200px}#amqSongSelectStage .p32-catalog{position:relative;top:auto;right:auto;bottom:auto;width:auto;height:auto;min-height:0}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:300px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:18px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:260px}body.amq-workspace-active #amqWorkspaceDock{height:54px!important;grid-template-columns:repeat(4,minmax(0,1fr)) 1fr!important}body.amq-workspace-active #amqWorkspaceDock button{font-size:9px!important}body.amq-workspace-active #audioDock{bottom:70px!important;grid-template-columns:minmax(0,1fr)!important;max-height:110px;overflow:auto}}
   `;
