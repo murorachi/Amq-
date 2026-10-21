@@ -269,7 +269,7 @@
     if(wrong){const when=wrong.at?new Date(wrong.at).toLocaleString():'時間未記錄';$('#p32LastWrong').textContent=when+' · 作答：'+(String(wrong.answer||'').trim()||'答案未記錄')}
     else if(Number(summary?.wrong)>0)$('#p32LastWrong').textContent='有錯題統計，但詳細紀錄目前不可用';
     else $('#p32LastWrong').textContent='尚無錯題紀錄';
-    $('#p32Source').textContent=String(song?.source||'AMQ / EMQ').toUpperCase();
+    $('#p32Source').textContent=window.__aniEmqAPI?.isSong?.(selectedSongId)?'EMQ':'AMQ';
   }
   stage.querySelectorAll('[data-p32-jump]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.p32Jump==='artists')activate('singer');else activate('amq')}));
   grid.addEventListener('click',e=>{
