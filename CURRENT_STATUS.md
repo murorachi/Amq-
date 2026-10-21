@@ -30,7 +30,7 @@
 - Matched viewport: 1280×720, device scale factor 1.
 - Candidate SHA-256: `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 - Diagnostic normalized MAE: `0.281997`.
-- Pixels with max-channel difference ≥ 24: 746,? / 921,600 (81.04%). This is a diagnostic changed-pixel ratio, not a similarity percentage.
+- Pixels with max-channel difference ≥ 24: 746,824 / 921,600 (81.04%). This is a diagnostic changed-pixel ratio, not a similarity percentage.
 - The visual metric is slightly worse than candidate 09; do not describe this as a visual improvement. The structural changes were accepted functionally, but the reference layout still differs substantially.
 - Exact osu!stable client source commit matching release label `20260924.1`: **NOT VERIFIED**. The pinned Wiki screenshot's exact capture build is unknown.
 
