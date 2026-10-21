@@ -52,8 +52,10 @@ with sync_playwright() as p:
         const stage=document.querySelector('#amqSongSelectStage');
         const player=document.querySelector('#amqAudioPlayer, #audioPlayer, .audio-player, #playerBar');
         const gr=grid.getBoundingClientRect(), sr=stage.getBoundingClientRect();
+        const mount=document.querySelector('#p32Mount'), catalog=grid.closest('.p32-catalog');
+        const mr=mount?.getBoundingClientRect(), cr=catalog?.getBoundingClientRect();
         const visible=cards.filter(el=>{const r=el.getBoundingClientRect();return r.bottom>gr.top && r.top<gr.bottom && r.top<window.innerHeight && r.bottom>0;});
-        return {cardCount:cards.length,visibleCardCount:visible.length,gridHeight:Math.round(gr.height),gridScrollHeight:grid.scrollHeight,gridOverflow:getComputedStyle(grid).overflowY,stageHeight:Math.round(sr.height),stageBottom:Math.round(sr.bottom),viewportHeight:window.innerHeight,playerBottom:player?Math.round(player.getBoundingClientRect().bottom):null};
+        return {cardCount:cards.length,visibleCardCount:visible.length,gridHeight:Math.round(gr.height),gridScrollHeight:grid.scrollHeight,gridOverflow:getComputedStyle(grid).overflowY,gridStyle:{display:getComputedStyle(grid).display,flex:getComputedStyle(grid).flex,height:getComputedStyle(grid).height,parent:grid.parentElement?.id,parentDisplay:getComputedStyle(grid.parentElement).display},mountRect:mr?{y:Math.round(mr.y),height:Math.round(mr.height)}:null,mountStyle:mount?{display:getComputedStyle(mount).display,flex:getComputedStyle(mount).flex,height:getComputedStyle(mount).height}:null,catalogRect:cr?{y:Math.round(cr.y),height:Math.round(cr.height)}:null,catalogStyle:catalog?{display:getComputedStyle(catalog).display,flex:getComputedStyle(catalog).flex,height:getComputedStyle(catalog).height}:null,stageHeight:Math.round(sr.height),stageBottom:Math.round(sr.bottom),viewportHeight:window.innerHeight,playerBottom:player?Math.round(player.getBoundingClientRect().bottom):null};
     }""")
     print("CATALOG_DENSITY_1280x720=" + json.dumps(density, ensure_ascii=False))
     check(density["visibleCardCount"] >= 3, "at least three real AMQ catalog cards are visible in the internal scroll viewport at 1280x720")
