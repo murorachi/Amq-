@@ -23,7 +23,7 @@ Rule: **NOT VERIFIED** means the current acceptance evidence does not prove the 
 
 ## Current acceptance interpretation
 
-- Proto26.8 adds in-place panel switching for the four workspace modes. This remains **unverified until the updated Playwright run passes**; do not count implementation code as acceptance evidence.
+- Proto26.8 in-place panel switching is **PASS** in GitHub Actions run #39563090398. The run proves panel visibility and route retention for the tested flows, not every list/batch mutation or the complete learning lifecycle.
 - No workspace business logic should be duplicated to simulate in-place integration. Trace existing handler targets first, then move/rehost the actual view or route the existing action functions.
 - Do not invent missing song play counts or last-wrong-answer history. If the stored schema has no field, show an empty state and record the gap.
 - Do not mark osu!stable visual parity as passed until the candidate and pinned official Song Select screenshot are compared at matching viewport and state.
