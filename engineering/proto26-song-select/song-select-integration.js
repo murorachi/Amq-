@@ -244,7 +244,7 @@
   #amqSongSelectStage .head.view-catalog p{display:none}
   #amqSongSelectStage .head.view-catalog .catalogHeadTools{display:flex;align-items:center;gap:6px}
   #amqSongSelectStage .head.view-catalog .result{font-size:10px;color:#aebbd0}
-  #amqSongSelectStage #grid{display:flex!important;flex:1 1 auto!important;flex-direction:column;gap:4px;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
+  #amqSongSelectStage #grid{display:flex!important;flex:1 1 0px!important;flex-direction:column;gap:4px;width:100%!important;height:0px!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;min-height:52px;padding:3px 5px;background:rgba(24,31,45,.78);border:1px solid rgba(201,215,239,.18);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer}
   #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
   #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 42px;width:42px;height:42px;object-fit:cover}
