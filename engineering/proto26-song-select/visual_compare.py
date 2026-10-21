@@ -64,7 +64,29 @@ def main() -> None:
         page.wait_for_function("""() => window.__amqProto26SongSelect?.getMode?.() === 'amq' &&
             document.querySelectorAll('#grid > .card').length > 0 &&
             document.querySelectorAll('#grid > .p26-work-card').length === 0""", timeout=30000)
-        page.wait_for_timeout(350)
+        page.wait_for_function("""() => {
+            const imgs = [...document.querySelectorAll('#grid > .card img')].slice(0, 8);
+            return imgs.length > 0 && imgs.every(img => img.complete);
+        }""", timeout=15000)
+        page.wait_for_timeout(200)
+        cover_capture_state = page.evaluate("""() => {
+            const imgs = [...document.querySelectorAll('#grid > .card img')].slice(0, 8);
+            return {
+                imageCount: imgs.length,
+                loadedCount: imgs.filter(img => img.complete && img.naturalWidth > 0).length,
+                images: imgs.map(img => ({
+                    src: img.currentSrc || img.src,
+                    complete: img.complete,
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight,
+                    opacity: getComputedStyle(img).opacity,
+                    filter: getComputedStyle(img).filter,
+                    visibility: getComputedStyle(img).visibility,
+                    display: getComputedStyle(img).display,
+                    coverOpacity: getComputedStyle(img.closest('.cover') || img.parentElement).opacity
+                }))
+            };
+        }""")
         page.screenshot(path=str(default_candidate_path), full_page=False)
         first_card = page.locator("#grid > .card").first
         if first_card.count() == 0:
@@ -139,6 +161,7 @@ def main() -> None:
         "body_classes": body_classes,
         "default_state": default_state,
         "selected_state": selected_state,
+        "cover_capture_state": cover_capture_state,
         "page_errors": page_errors,
         "console_errors": console_errors,
         "normalized_mean_absolute_pixel_difference": round(mae, 6),
@@ -165,6 +188,7 @@ def main() -> None:
         f"- Normalized mean absolute pixel difference (diagnostic): {mae:.6f}",
         f"- Pixels with max-channel difference >= 24: {changed}/{total} ({changed / total:.2%})",
         f"- Active app view: {active_view}",
+        f"- Catalog cover images loaded before capture: {cover_capture_state['loadedCount']}/{cover_capture_state['imageCount']}",
         f"- Page errors: {len(page_errors)}; console errors: {len(console_errors)}",
         "",
         "## Evidence files",
