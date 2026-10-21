@@ -12,6 +12,7 @@ on:
       - v82.85.30-proto28-song-select-default-state-fix-01
       - v82.85.30-proto29-song-select-layout-width-01
       - v82.85.30-proto30-song-select-composition-01
+      - v82.85.30-proto31-scene-background-integration-01
     paths:
       - 'engineering/proto26-song-select/song-select-integration.js'
       - 'engineering/proto26-song-select/build_single_file.py'
