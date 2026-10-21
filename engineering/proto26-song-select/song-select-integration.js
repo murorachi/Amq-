@@ -267,6 +267,8 @@
   #amqSongSelectStage #grid{display:flex!important;flex:1 1 0px!important;flex-direction:column;gap:4px;width:100%!important;height:0px!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:1px 3px 2px 1px;margin:0!important;grid-template-columns:none!important;background:transparent}
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;min-height:60px;padding:4px 6px;background:rgba(24,31,45,.56);border:1px solid rgba(201,215,239,.24);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer;backdrop-filter:blur(2px)}
   #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
+  #amqSongSelectStage #grid>.card .cardManage{top:2px!important;right:2px!important;width:20px!important;height:20px!important;min-height:20px!important;padding:0!important;border-radius:3px!important;font-size:14px!important;opacity:0!important;pointer-events:none!important;transition:opacity .12s ease!important;box-shadow:none!important;backdrop-filter:none!important}
+  #amqSongSelectStage #grid>.card:hover .cardManage,#amqSongSelectStage #grid>.card:focus-within .cardManage{opacity:1!important;pointer-events:auto!important}
   #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 50px;width:50px;height:50px;object-fit:cover}
   #amqSongSelectStage #grid>.card .cardbody{min-width:0;flex:1}
   #amqSongSelectStage #grid>.card .cardtitle,#amqSongSelectStage #grid>.p26-work-card .p26-work-title{font-size:13px;line-height:1.3;overflow-wrap:anywhere}
@@ -349,9 +351,10 @@
   document.getElementById('amqWorkspaceDock')?.addEventListener('click',()=>window.requestAnimationFrame(fitStageToViewport));
   new MutationObserver(()=>window.requestAnimationFrame(fitStageToViewport)).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
   window.requestAnimationFrame(fitStageToViewport);
-  let selectedSongId=null,selectedWorkImage='',hasSelectedWork=false;
+  let selectedSongId=null,selectedWorkImage='',hasSelectedWork=false,selectedWorkCard=null;
   const syncCatalogEmptyState=()=>{if(mode!=='amq'&&mode!=='singer')return;const hasCards=grid.querySelectorAll(':scope > .card,:scope > .p26-work-card').length>0;$('#empty')?.classList.toggle('hidden',hasCards)};
-  const updateP32=()=>{syncCatalogEmptyState();const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork){const images=[...grid.querySelectorAll('.card img,.p26-work-card img')];const img=images.find(el=>el.complete&&el.naturalWidth>=80&&el.naturalHeight>=50)||images.find(el=>el.naturalWidth>=80&&el.naturalHeight>=50);const url=img?.currentSrc||img?.src||'';if(url&&url!==selectedWorkImage){selectedWorkImage=url;$('#p32SceneImage').style.backgroundImage='linear-gradient(rgba(12,16,27,.28),rgba(12,16,27,.36)),url("'+url.replaceAll('"','%22')+'")'}}}
+  const applySceneCover=(card,img)=>{const sceneImage=$('#p32SceneImage');if(!sceneImage)return;const apply=()=>{if(hasSelectedWork&&selectedWorkCard!==card)return;const url=img?.currentSrc||img?.src||'';if(url&&img.complete&&img.naturalWidth>=80&&img.naturalHeight>=50){selectedWorkImage=url;sceneImage.style.backgroundImage='linear-gradient(rgba(12,16,27,.28),rgba(12,16,27,.36)),url("'+url.replaceAll('"','%22')+'")'}else if(hasSelectedWork&&selectedWorkCard===card){selectedWorkImage='';sceneImage.style.backgroundImage='none'}};if(img?.complete)apply();else if(img){const done=()=>{img.removeEventListener('load',done);img.removeEventListener('error',done);requestAnimationFrame(apply)};img.addEventListener('load',done);img.addEventListener('error',done)}};
+  const updateP32=()=>{syncCatalogEmptyState();const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY';if(!hasSelectedWork){const images=[...grid.querySelectorAll('.card img,.p26-work-card img')];const img=images.find(el=>el.complete&&el.naturalWidth>=80&&el.naturalHeight>=50);if(img)applySceneCover(null,img)}}
   function updateSelectedSongInfo(id,row){
     selectedSongId=id==null?null:String(id);
     const api=window.__aniHistoryAPIv51;
@@ -375,13 +378,13 @@
     const c=e.target.closest('.card,.p26-work-card');if(!c)return;
     $('#p32WorkTitle').textContent=c.querySelector('.p26-work-title,.title,h3,.name,[class*="title"]')?.textContent?.trim()||c.textContent.trim().split('\n').map(v=>v.trim()).filter(Boolean)[0]||'已選取作品';
     $('#p32WorkMeta').textContent='已選取作品。開啟作品後可從歌曲列查看實際播放次數與最近錯題紀錄。';
-    const img=c.querySelector('img');const sceneImage=$('#p32SceneImage');hasSelectedWork=true;selectedWorkImage=img?.currentSrc||img?.src||'';
-    if(sceneImage){const url=selectedWorkImage;sceneImage.style.backgroundImage=url?'linear-gradient(rgba(12,16,27,.45),rgba(12,16,27,.45)),url("'+url.replaceAll('"','%22')+'")':'none'}
+    const img=c.querySelector('img');hasSelectedWork=true;selectedWorkCard=c;selectedWorkImage='';const sceneImage=$('#p32SceneImage');if(sceneImage)sceneImage.style.backgroundImage='none';applySceneCover(c,img)
     updateSelectedSongInfo(null);
   });
   $('#songlist')?.addEventListener('click',event=>{const row=event.target.closest?.('.songrow');if(!row?.dataset?.id)return;$('#songlist').querySelectorAll('.songrow.proto26-song-selected').forEach(el=>el.classList.remove('proto26-song-selected'));row.classList.add('proto26-song-selected');updateSelectedSongInfo(row.dataset.id,row)});
   document.addEventListener('ani-song-playback-recorded-v80',event=>{if(selectedSongId&&String(event.detail?.songId)===selectedSongId)updateSelectedSongInfo(selectedSongId)});
   grid.addEventListener('load',event=>{if(event.target instanceof HTMLImageElement)requestAnimationFrame(updateP32)},true);
+  grid.addEventListener('load',event=>{if(event.target instanceof HTMLImageElement&&hasSelectedWork&&selectedWorkCard?.contains(event.target))applySceneCover(selectedWorkCard,event.target)},true);
   new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true});updateP32();
 
   const getSongs=id=>{try{const a=api.getSongsForWork(id);return Array.isArray(a)?a:[]}catch(e){console.error('[Proto26] getSongsForWork failed',e);return[]}};
