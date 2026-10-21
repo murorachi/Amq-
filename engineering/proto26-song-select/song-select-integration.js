@@ -256,6 +256,17 @@
   @media(max-width:900px){#amqSongSelectStage{grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:145px}#amqSongSelectStage .p32-info{min-height:0;padding:14px}#amqSongSelectStage .p32-song-label{margin-top:12px}#amqSongSelectStage .p32-divider{margin:12px 0 4px}#amqSongSelectStage .p32-stat{padding:10px 0}#amqSongSelectStage .p32-scene{min-height:330px;padding:15px}#amqSongSelectStage .p32-scene-content{min-height:220px;padding:24px 4px}#amqSongSelectStage #p32WorkTitle{font-size:34px}#amqSongSelectStage .p32-catalog{min-height:0}#amqSongSelectStage #grid{max-height:420px}}
   `;
   document.head.append(style32);
+  const fitStageToViewport=()=>{
+    if(!stage.isConnected)return;
+    const left=Math.max(0,stage.getBoundingClientRect().left);
+    const width=Math.max(0,window.innerWidth-left);
+    stage.style.setProperty('width',width+'px','important');
+    stage.style.setProperty('max-width','100vw','important');
+  };
+  window.addEventListener('resize',fitStageToViewport,{passive:true});
+  document.getElementById('amqWorkspaceDock')?.addEventListener('click',()=>window.requestAnimationFrame(fitStageToViewport));
+  new MutationObserver(()=>window.requestAnimationFrame(fitStageToViewport)).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
+  window.requestAnimationFrame(fitStageToViewport);
   let selectedSongId=null;
   const updateP32=()=>{const n=grid.querySelectorAll('.card,.p26-work-card').length;const c=$('#gridCounter')?.textContent?.trim()||n+' 個目前顯示項目';$('#p32Items').textContent=c;$('#p32Mode').textContent=mode.toUpperCase()+' LIBRARY'};
   function updateSelectedSongInfo(id,row){
