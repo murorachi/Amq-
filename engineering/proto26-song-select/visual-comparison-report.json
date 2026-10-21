@@ -31,11 +31,17 @@
     "amqCardCount": 180,
     "emqWorkCardCount": 0
   },
+  "selected_state": {
+    "workTitle": "The Hare and The Tortoise",
+    "songTitle": "Usagi to Kame",
+    "selectedSongRows": 1,
+    "detailOpen": true
+  },
   "page_errors": [],
   "console_errors": [],
-  "normalized_mean_absolute_pixel_difference": 0.265799,
-  "pixels_with_max_channel_difference_at_least_24": 791517,
+  "normalized_mean_absolute_pixel_difference": 0.256664,
+  "pixels_with_max_channel_difference_at_least_24": 783409,
   "pixel_count": 921600,
-  "changed_pixel_ratio": 0.858851,
+  "changed_pixel_ratio": 0.850053,
   "interpretation": "Metrics are diagnostic only, not a visual similarity percentage. The reference is a pinned official osu!-wiki screenshot; its exact Stable capture build is unknown. Intentional AMQ content differences must be separated from layout defects during review."
 }

@@ -29,10 +29,11 @@ PASS selected-work scene art handles delayed cover-image loading
 PASS catalog quick-management controls do not obscure every cover at rest
 PASS cover decorations stay quiet while a compact fallback remains available without network art
 PASS default Song Select previews the first visible work without falsely marking it selected
+PASS visual comparison captures both default and selected-song states
 PASS scene proportions prioritize the center artwork while preserving side panels
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_19.html
 OUTPUT_BYTES=8982019
 OUTPUT_SHA256=b65752672b9ccb39f29edd271534e7315fcbcb2fb83974c80ecb8cd29d427f79
 BUILD=PASS
