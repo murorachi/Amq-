@@ -12,6 +12,11 @@
 - Passing CI: https://github.com/murorachi/Amq-/actions/runs/39550068389
 - Reference audit: `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`, commit `615ef8b92452009285845bf96a5609d0c8216784`.
 
+## Current in-progress implementation
+- Proto26.7 adds actual route changes from workspace dock selection: lists → `watchlist`, batch → `catalog`, learning → `learningPlan`, analysis → `dashboard`, using `window.__aniNavigateApp`.
+- Browser acceptance now checks both the active route and the visible primary content surface for each workspace.
+- CI run #106: https://github.com/murorachi/Amq-/actions/runs/39556859215. Static acceptance passed after correcting a stale `proto26.6` assertion; Chromium install/browser acceptance are still running. Do not accept Proto26.7 until the run completes successfully and the generated artifact/hash are verified.
+
 ## Next actions
 1. Inspect existing workspace sidebar/dock handlers and identify the actual destination DOM/functions for list management, batch processing, learning center and analysis.
 2. Build a real mapping table: old entry, handler, data source, destination DOM, Song Select placement, regression test, unknowns.
