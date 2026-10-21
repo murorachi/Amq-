@@ -5,7 +5,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html"
 EXPECTED_SOURCE_SHA256 = "5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f"
 
 def sha256(data: bytes) -> str:
