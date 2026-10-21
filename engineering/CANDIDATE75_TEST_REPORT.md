@@ -16,7 +16,8 @@ Size: 9,094,014 bytes.
   - Re-clicking each active control collapsed the panel; mobile frame returned to hidden state.
   - Mobile catalog bottom = 674px, audio dock top = 676px; no overlap.
   - Mobile expanded frame bottom = 674px, audio dock top = 676px; no overlap.
-- Route-driven screenshots captured for mobile/desktop collapsed and expanded states.
+- Mobile filter-strip scrolling: `scrollWidth=603px`, `clientWidth=354px`; scrolling to maximum exposed the final tag filter fully inside the strip (2/2 assertions passed).
+- Route-driven screenshots captured for mobile/desktop collapsed and expanded states plus scrolled mobile filters.
 
 ## Failures / limitations
 - Browser console recorded two `localStorage` access errors because `page.set_content` uses an opaque origin. Navigation to `file://`, `data:` and local HTTP URLs is blocked by this environment.
