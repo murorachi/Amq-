@@ -1,0 +1,98 @@
+name: Proto26 Song Select integration
+
+on:
+  pull_request:
+    branches:
+      - v82.85.30-proto25-ui-refactor-stage-24
+  push:
+    branches:
+      - v82.85.30-proto26-song-select-integration-01
+    paths:
+      - 'engineering/proto26-song-select/song-select-integration.js'
+      - 'engineering/proto26-song-select/build_single_file.py'
+      - 'engineering/proto26-song-select/test_source.py'
+      - 'engineering/proto26-song-select/browser_acceptance.py'
+      - '.github/workflows/proto26-song-select.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: proto26-song-select-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-accept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout isolated integration branch
+        uses: actions/checkout@v4
+        with:
+          ref: v82.85.30-proto26-song-select-integration-01
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build versioned standalone HTML and run source assertions
+        run: |
+          set -o pipefail
+          python engineering/proto26-song-select/test_source.py | tee engineering/proto26-song-select/static-test-report.txt
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Run browser acceptance
+        run: |
+          set -o pipefail
+          python engineering/proto26-song-select/browser_acceptance.py | tee engineering/proto26-song-select/browser-test-report.txt
+      - name: Record hashes and acceptance summary
+        if: always()
+        run: |
+          {
+            echo "Proto26 Song Select acceptance summary"
+            echo "Commit under test: $GITHUB_SHA"
+            echo "Date UTC: $(date -u +%FT%TZ)"
+            if [ -f dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html ]; then
+              wc -c dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+              sha256sum dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+            fi
+            echo "--- static test report ---"
+            cat engineering/proto26-song-select/static-test-report.txt 2>/dev/null || true
+            echo "--- browser test report ---"
+            cat engineering/proto26-song-select/browser-test-report.txt 2>/dev/null || true
+          } > engineering/proto26-song-select/ACCEPTANCE_REPORT.md
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proto26-song-select-acceptance
+          path: |
+            engineering/proto26-song-select/proto26-desktop.png
+            engineering/proto26-song-select/proto26-mobile.png
+            engineering/proto26-song-select/ACCEPTANCE_REPORT.md
+            engineering/proto26-song-select/*test-report.txt
+            dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit generated HTML and reports only after all acceptance checks pass
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/proto26-generated
+          cp dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html /tmp/proto26-generated/
+          cp engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt /tmp/proto26-generated/
+          git fetch origin v82.85.30-proto26-song-select-integration-01
+          git reset --hard origin/v82.85.30-proto26-song-select-integration-01
+          cp /tmp/proto26-generated/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html dist/
+          cp /tmp/proto26-generated/ACCEPTANCE_REPORT.md /tmp/proto26-generated/static-test-report.txt /tmp/proto26-generated/browser-test-report.txt engineering/proto26-song-select/
+          git add dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt
+          if git diff --cached --quiet; then
+            echo "Generated candidate and reports already match the remote checkpoint"
+          else
+            git commit -m "Build and accept Proto26 Song Select integration"
+            git push origin HEAD:v82.85.30-proto26-song-select-integration-01
+          fi
