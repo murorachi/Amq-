@@ -7,18 +7,19 @@ PASS active EMQ/MIX view rerenders when library becomes ready
 PASS selected work uses a persistent right-side detail pane on desktop
 PASS Song Select controls remain hidden outside the catalog view
 PASS existing workspace sidebar and dock are kept visible on desktop
-PASS all catalog controls reserve the detail pane column
+PASS workspace dock switches existing panels inside Song Select
+PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html
-OUTPUT_BYTES=8938670
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html
+OUTPUT_BYTES=8942305
+OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950
+OUTPUT_SHA256=abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca
 STATIC_ACCEPTANCE=PASS
