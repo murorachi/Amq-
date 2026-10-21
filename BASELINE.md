@@ -11,13 +11,13 @@
 ## Current isolated Proto26 candidate
 - Branch: `v82.85.30-proto26-song-select-integration-01`
 - Draft PR #10: https://github.com/murorachi/Amq-/pull/10
-- Current accepted development candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Tested source commit: `a627c118e05ab1aef7ac9fb46304c0b075aebf8f`
-- Artifact/report commit: `be80c913beb7d3ec49b978d2c1d4169da0462a5f`
-- Size: 8,938,670 bytes
-- SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39550068389 (static + Playwright browser acceptance PASS).
-- Keep this candidate as a rollback checkpoint; it is not final UI approval.
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html`
+- Tested source commit: `d8751a5b0fc90cb786ad4eacea591fbbdad4aef1`
+- Artifact/report commit: `a749b47` (short SHA; full SHA verification still required)
+- SHA-256: `07998d6bcb76dc09e0f7c92e266f98581d60411f09e93220c1eb57e0e4d4a532`
+- Acceptance run: https://github.com/murorachi/Amq-/actions/runs/39557544284 (static + Playwright browser acceptance PASS).
+- Artifact ZIP SHA-256: `44b03bbf73575a80a944e02e40156f8b61b79cf79d6c0cfe27e612eba069a32b`
+- Keep Proto26.4/04 and the immutable Proto25 baseline as rollback checkpoints; this is not final UI approval.
 
 ## Previous accepted rollback candidates
 - Proto26.3: 8,933,730 bytes, SHA-256 `fae6492da52d5e1389e9b2d0122496843697d1fa42088a2805593420a296ff4f`; run https://github.com/murorachi/Amq-/actions/runs/39547940204.
