@@ -1,32 +1,32 @@
 # Next Task
 
-**Priority 1: fix the remaining Song Select layout defect. Do not switch to homepage polish.**
+**Priority 1: restructure Song Select around the pinned osu!stable composition. Do not switch to homepage polish.**
 
 ## Current verified checkpoint
-- Branch: `v82.85.30-proto28-song-select-default-state-fix-01`
-- CI source commit: `52e1677ae3f6385fec577dce3609ee7511cc73c4`
-- Generated artifact/report commit: `fbf48765d07401e8b87494eec7c3c84015db7867`
-- Passing CI: https://github.com/murorachi/Amq-/actions/runs/39570523908
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
-- Candidate SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
-- Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
+- Branch: `v82.85.30-proto29-song-select-layout-width-01`
+- CI source commit: `d0f89294ca16488453f9afa2225b8ac9d1c5dda5`
+- Generated artifact/report commit: `ae0377e5efab163b9501456c371bce5e0074cafc`
+- Passing CI: https://github.com/murorachi/Amq-/actions/runs/39571163151
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html`
+- SHA-256: `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`
+- Immutable baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
 
-## Next implementation step
-1. Remove the body left padding reserved for the workspace sidebar when no workspace mode is selected; preserve the bottom dock and full-width catalog.
-2. Keep the sidebar hidden in the default Song Select state, then restore it only after selecting one of the four workspace modes.
-3. Give the next candidate a new filename instead of overwriting candidate 06.
-4. Add browser assertions for the body/content bounding boxes at 1280×720 and 1440×900, and assert the catalog uses the available width.
-5. Re-run static tests, all four workspace interaction cases, mobile overflow checks, and the pinned-reference screenshot/diff generation.
-6. Inspect the new overlay/diff. Treat the remaining structural difference from osu!stable as an implementation gap, not as an acceptable score.
-7. Then expand search/sort/keyboard/audio acceptance. Keep real audio output, full quiz lifecycle, multiplayer lifecycle, and all other screens separately marked NOT RUN until executed.
+## Next implementation stage
+1. Create a new isolated branch from candidate 07. Do not overwrite candidate 07 or the immutable baseline.
+2. Inventory the actual DOM/CSS for the catalog wrapper, search/filter toolbar, card grid, selected-work detail pane, audio dock, and existing song-history API.
+3. Record bounding boxes from the pinned 1280×720 osu!-wiki reference and candidate screenshot. Keep AMQ-required content differences separate from layout differences.
+4. Map the reference's left information/ranking region, central background/primary focus, right horizontal catalog cards, and bottom controls to AMQ's real data and existing handlers. Do not invent history fields or song statistics.
+5. Reuse existing data and event handlers. The current grid may be rehosted or restyled, but do not duplicate catalog or player business logic.
+6. Produce a uniquely named standalone HTML (next candidate version), then run static assertions, four workspace interaction tests, 1280×720 and 1440×900 geometry tests, mobile overflow checks, and the pinned-reference overlay/diff workflow.
+7. Expand search edge-case, sort-result, Enter/double-event and real audio-output tests after the layout changes are stable.
 
-## Reference and visual evidence
+## Reference record and current evidence
 - Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
 - Screenshot Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
-- Reference dimensions: 1280×720.
-- Current diagnostic normalized MAE: 0.285936; 83.44% of pixels have max-channel difference ≥ 24. These are diagnostic metrics, not a similarity percentage.
-- Exact osu!stable client source commit matching Stable `20260924.1`: NOT VERIFIED.
-- Current comparison report: `engineering/proto26-song-select/VISUAL_COMPARISON_REPORT.md`.
+- Viewport: 1280×720.
+- Current diagnostic normalized MAE: 0.303679; 90.49% of pixels have max-channel difference ≥ 24. These are diagnostics, not a similarity score.
+- Full-width fix is verified: body padding-left 0 px; search x=38 and catalog x=28 at 1440×900.
+- Exact osu!stable client source commit matching Stable `20260924.1`: **NOT VERIFIED**.
 
 ## Rollback
-Keep candidate 06 and the immutable Proto25 baseline unchanged. If the next layout adjustment fails, revert only the isolated new branch to candidate 06. Draft PRs #10/#11 remain unmerged.
+Keep candidate 07 and all earlier checkpoints unchanged. If the next composition redesign fails, revert only the new isolated branch to candidate 07. Draft PRs #10/#11 remain unmerged.
