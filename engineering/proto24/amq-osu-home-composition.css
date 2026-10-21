@@ -790,4 +790,14 @@ body.ui-home-menu #homeMenu #audioDock.amqHomeDock .dockMeta span {
     font-size: 9px !important;
   }
 }
+
+/* Proto25 Stage 32: add the Stable cookie's subtle triangular skin pattern using CSS only. */
+body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
+  background-image:
+    linear-gradient(60deg, transparent 48%, #ffffff12 49% 50%, transparent 51%),
+    linear-gradient(120deg, #ffffff0b 49%, transparent 50% 100%),
+    radial-gradient(circle at 34% 26%, #ffb5d7 0%, #f47bb9 32%, #d94e96 67%, #a72e70 100%) !important;
+  background-size: 76px 66px, 76px 66px, 100% 100% !important;
+  background-position: 0 0, 38px 33px, center !important;
+}
 </style>
