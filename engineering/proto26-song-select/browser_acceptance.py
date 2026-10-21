@@ -140,9 +140,41 @@ with sync_playwright() as p:
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "emq", "EMQ mode activates")
         check(page.locator("#grid .p26-work-card").count() > 0, "EMQ mode renders actual work cards")
         if page.locator("#grid .p26-work-card").count() > 0:
-            page.locator("#grid .p26-work-card").first.click()
+            work_index = page.evaluate("""() => {
+                const works = window.__aniEmqAPI?.getWorks?.() || [];
+                return works.slice(0, 48).findIndex(w => {
+                    try { return (window.__aniEmqAPI?.getSongsForWork?.(w.i) || []).length > 0; }
+                    catch { return false; }
+                });
+            }""")
+            if work_index >= 0 and work_index < page.locator("#grid .p26-work-card").count():
+                page.locator("#grid .p26-work-card").nth(work_index).click()
+            else:
+                page.locator("#grid .p26-work-card").first.click()
             page.wait_for_timeout(300)
             check(page.locator("#overlay.open").count() == 1, "selecting an EMQ work opens its detail pane")
+            song_rows = page.locator("#songlist .songrow")
+            check(song_rows.count() > 0, "selected work exposes real song rows for history display")
+            if song_rows.count() > 0:
+                selected_row = song_rows.first
+                selected_song_id = selected_row.get_attribute("data-id")
+                selected_song_title = selected_row.locator(".songname").inner_text().strip()
+                selected_row.click(position={"x": 5, "y": 5})
+                check(page.locator("#p32SongTitle").inner_text().strip() == selected_song_title, "selected-song panel uses the actual song-row title")
+                expected_play_count = page.evaluate("(id) => Number(window.__aniHistoryAPIv51?.getPersonalSnapshot?.().playHistory?.[id]?.count) || 0", selected_song_id)
+                actual_play_text = page.locator("#p32PlayCount").inner_text().strip()
+                check((str(expected_play_count) in actual_play_text) if expected_play_count > 0 else actual_play_text == "尚無播放紀錄", "selected-song panel reads the real playback-count store")
+                wrong_record = page.evaluate("""(id) => (window.__aniHistoryAPIv51?.getHistory?.() || [])
+                    .filter(entry => String(entry?.songId) === String(id) && entry?.correct === false)
+                    .sort((a,b) => (Date.parse(b?.at)||0) - (Date.parse(a?.at)||0))[0] || null""", selected_song_id)
+                wrong_summary = page.evaluate("(id) => window.__aniHistoryAPIv51?.getSongHistorySummary?.(id)?.wrong || 0", selected_song_id)
+                actual_wrong_text = page.locator("#p32LastWrong").inner_text().strip()
+                if wrong_record:
+                    check((str(wrong_record.get("answer") or "").strip() in actual_wrong_text) if str(wrong_record.get("answer") or "").strip() else bool(actual_wrong_text), "selected-song panel uses the latest real wrong-answer record")
+                elif wrong_summary > 0:
+                    check("詳細紀錄目前不可用" in actual_wrong_text, "selected-song panel distinguishes summary-only wrong-answer history")
+                else:
+                    check(actual_wrong_text == "尚無錯題紀錄", "selected-song panel shows an honest empty state for wrong-answer history")
             check(page.locator("#overlay .drawer").evaluate("(el) => getComputedStyle(el).position") == "fixed", "desktop detail pane is fixed at the right side")
             check(page.locator("#overlay .close").evaluate("(el) => getComputedStyle(el).display") == "none", "desktop detail pane remains persistent while browsing")
             page.keyboard.press("Escape")
