@@ -1,8 +1,8 @@
 # Next Task
 
-1. Continue Song Select visual refinement using the now route-driven screenshots as valid evidence.
-2. Compare the curved top border, metadata position, catalog width, card sizing, and left workspace frame against the matching osu!stable reference state.
-3. Inspect the mobile catalog's horizontal filter strip overflow and verify all controls remain reachable by horizontal scroll.
-4. Run normal-origin checks for storage persistence, VNDB cover loading, and real audio when a permitted origin/browser environment is available.
-5. Do not treat CSS/static checks as full visual acceptance; keep screenshot state and filename aligned.
-6. Upload Candidate 75 HTML through a workflow that can read local file bytes; verify remote file size and SHA-256 independently from test status.
+1. Audit every action in the four workspace definitions (`lists`, `batch`, `learning`, `analysis`) and classify it as working in-place, navigating to a legacy page, no-op/missing target, or destructive/applying action.
+2. Identify the actual existing DOM panels and renderers for watchlists/custom lists, batch tools, learning plan/practice and dashboard. Verify their event/data dependencies before moving or reusing them.
+3. Migrate one workspace at a time into the popup without leaving Song Select; reuse existing DOM/data stores and do not clone data logic.
+4. For each migrated action, test visible outcome, route remains Song Select, Escape closes only the popup, and data mutations still require existing confirmation controls.
+5. Keep Candidate 76 as a rollback checkpoint. Do not retire legacy interfaces until all four workspace feature sets pass regression.
+6. Obtain normal-origin browser verification for storage persistence, cover loading and audio. Upload HTML binary only through a workflow that can read local bytes; verify remote size/hash separately.
