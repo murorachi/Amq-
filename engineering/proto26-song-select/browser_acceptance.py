@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_10.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_11.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -44,6 +44,20 @@ with sync_playwright() as p:
     check(page.evaluate("window.__amqProto26SongSelect?.getMode?.() === 'amq'"), "initial Song Select source mode is AMQ")
     check(page.locator("#grid > .card").count() > 0, "default AMQ mode renders the real legacy catalog cards")
     check(page.locator("#grid > .p26-work-card").count() == 0, "default AMQ mode does not leak EMQ-only work cards")
+    check(page.locator("#grid > .card").count() >= 3, "default AMQ catalog contains multiple real AMQ cards")
+    page.set_viewport_size({"width": 1280, "height": 720})
+    page.wait_for_timeout(250)
+    density = page.evaluate("""() => {
+        const grid=document.querySelector('#grid'), cards=[...grid.querySelectorAll(':scope > .card')];
+        const stage=document.querySelector('#amqSongSelectStage');
+        const player=document.querySelector('#amqAudioPlayer, #audioPlayer, .audio-player, #playerBar');
+        const gr=grid.getBoundingClientRect(), sr=stage.getBoundingClientRect();
+        const visible=cards.filter(el=>{const r=el.getBoundingClientRect();return r.bottom>gr.top && r.top<gr.bottom && r.top<window.innerHeight && r.bottom>0;});
+        return {cardCount:cards.length,visibleCardCount:visible.length,gridHeight:Math.round(gr.height),gridScrollHeight:grid.scrollHeight,gridOverflow:getComputedStyle(grid).overflowY,stageHeight:Math.round(sr.height),stageBottom:Math.round(sr.bottom),viewportHeight:window.innerHeight,playerBottom:player?Math.round(player.getBoundingClientRect().bottom):null};
+    }""")
+    print("CATALOG_DENSITY_1280x720=" + json.dumps(density, ensure_ascii=False))
+    check(density["visibleCardCount"] >= 3, "at least three real AMQ catalog cards are visible in the internal scroll viewport at 1280x720")
+    check(density["gridOverflow"] in ("auto", "scroll"), "catalog grid owns vertical scrolling instead of extending behind the player")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     # The central feature art should remain complete without a saved background, then reveal the
     # existing scene image gently when the Catalog background setting is active.
