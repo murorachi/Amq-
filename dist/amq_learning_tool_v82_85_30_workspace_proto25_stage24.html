@@ -7756,6 +7756,13 @@ body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
     font-size: clamp(18px, 4.8vw, 22px) !important;
   }
 }
+
+/* Proto25 Stage 33: add the low-contrast radial rays visible in the Stable home reference. */
+body.ui-home-menu .wrap {
+  background-image:
+    repeating-conic-gradient(from 2deg at 34% 38%, #ffffff04 0deg 0.8deg, transparent 0.8deg 9deg),
+    radial-gradient(circle at 34% 38%, #7654c80a 0%, transparent 47%) !important;
+}
 </style>
 <style id="amq-workspace-osu-composition-v24">
 /* Proto24: visual pass for the four workspaces; navigation and action handlers remain unchanged. */
@@ -8312,6 +8319,15 @@ body.amq-standalone-route #amqWorkspaceDock {
     radial-gradient(circle at 34% 24%, #ffb5d7 0%, #f47bb9 32%, #d94e96 67%, #a72e70 100%) !important;
   background-size: 76px 66px, 76px 66px, 100% 100% !important;
   background-position: 0 0, 38px 33px, center !important;
+}
+
+/* Proto25 Stage 33: the Play submenu uses the same restrained radial-ray background as Stable. */
+#amqStablePlayShade {
+  background-image:
+    repeating-conic-gradient(from 2deg at 35% 48%, #ffffff04 0deg 0.8deg, transparent 0.8deg 9deg),
+    radial-gradient(circle at 35% 48%, #7654c80a 0%, transparent 48%),
+    radial-gradient(circle at 22% 46%, #f06cae13 0%, transparent 35%),
+    repeating-linear-gradient(135deg,#ffffff04 0 1px,transparent 1px 18px) !important;
 }
 </style>
 
