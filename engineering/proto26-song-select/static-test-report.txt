@@ -35,16 +35,17 @@ PASS hover and selected song rows have explicit distinct left-shift states
 PASS visual comparison requires a selected work and selected song state
 PASS scene proportions prioritize the center artwork while preserving side panels
 PASS scene artwork stays bounded at constrained viewport widths
+PASS constrained Song Select scene and filter controls have responsive bounds
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_34.html
-OUTPUT_BYTES=8987561
-OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_42.html
+OUTPUT_BYTES=8989121
+OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
+OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
 STATIC_ACCEPTANCE=PASS
