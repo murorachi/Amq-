@@ -9,5 +9,6 @@
 - Candidate branch: `v82.85.30-proto26-song-select-integration-01`.
 - Draft PR: https://github.com/murorachi/Amq-/pull/10.
 - Baseline must remain immutable. Proto26 output is a distinct versioned path.
-- Generated Proto26 HTML SHA-256: not yet available because build/acceptance has not been observed to run.
+- Rejected prior Proto26 candidate (pre-readiness-fix): 8,932,924 bytes, SHA-256 `b43a446dd8019e21b7db255e0adf56256ebffd499a12f381c0f3364210e0757c`; browser acceptance failed because EMQ work cards did not render. Do not use this file as an accepted candidate.
+- Corrected candidate SHA-256: pending a fresh successful build and browser acceptance.
 - No promotion/merge until actual browser acceptance and osu!stable visual comparison pass.
