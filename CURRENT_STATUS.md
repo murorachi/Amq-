@@ -8,40 +8,35 @@
 - Size: 8,968,944 bytes.
 - SHA-256: `5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293`.
 - Browser acceptance: **PASS**; page/console errors: 0 / 0.
-- Visual evidence generated: **PASS**.
+- Visual evidence generation: **PASS**.
 - Visual design acceptance: **NOT ACCEPTED**. Normalized MAE 0.280775 and changed-pixel ratio 0.881249 are diagnostics, not similarity percentages.
-- Run/artifact history: branch workflow commits around 2026-10-21 15:02 UTC; latest accepted output is candidate 21, not the current builder target.
 
 ## Active work
 
 - Active branch: `v82.85.30-proto35-song-select-visual-correction-01`.
-- Immutable base inherited from `v82.85.30-proto34-song-select-catalog-density-01`, whose source had advanced beyond the last generated/verified candidate.
-- Current builder target: candidate 26.
-- Candidate 25 test build SHA-256: `1ed232a0bf7a005f2189cf7f9d785a7ab267acb489bcb3c86f3e8bc54cb23ee0`; **not promoted** because browser acceptance failed.
-- Candidate 25 failure: hover assertion picked `.songrows.first` even though the first row may already be selected. Browser test now explicitly selects an unselected row before testing hover displacement.
-- Candidate 25 also exposed scene artwork bounds outside the Song Select scene at 1000×562. Candidate 26 changes the absolute scene and artwork layers to auto-sized inset geometry and adds a bounding-box assertion.
-- Candidate 26 workflow: https://github.com/murorachi/Amq-/actions/runs/39633186103 — **IN PROGRESS / result pending at last update**.
-- Latest workflow commit: `c88cf9b9e407420a63b86f4751eb067f3124d7c0`.
-- Candidate 26 has not been promoted or visually accepted yet.
+- Immutable baseline inherited from Proto25; no prior candidate or baseline overwritten.
+- Candidate 25 browser acceptance: **FAIL** on an invalid hover-test assumption; the test selected the first row even when it already had the selected class.
+- Candidate 26 static/build assertions: **PASS**; HTML SHA-256 `f6b8f6c94a1b83472428fe9ad17609695111efb76e0ffbd1010ceebb67b7c1f3`. Browser acceptance did not execute because the test script contained a literal newline escape and raised a Python SyntaxError. This was a test-harness failure, not a functional test result. Candidate 26 was not promoted.
+- Candidate 27/28 are superseded by the correction below; their runs were cancelled while candidate filenames and tests were being aligned.
+- Candidate 29 fixes the test-script newline, chooses an actually unselected song row for the hover assertion, and tests that scene artwork stays within its scene at 1000×562. It also uses auto dimensions for the absolute inset scene layers to avoid over-constrained sizing.
+- Candidate 29 workflow: https://github.com/murorachi/Amq-/actions/runs/39633715502 — queued/pending at last check.
+- Latest source changes are not yet functionally or visually accepted.
 
 ## Reference and immutable baseline
 
-- Official osu! Wiki release label: `20260924.1`; this is not a client source commit.
+- Official osu! Wiki release label: `20260924.1`; exact matching Stable client source commit: **NOT VERIFIED**.
 - Pinned reference Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
 - Song Select reference image Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
-- Exact osu!Stable client source commit matching that release label: **NOT VERIFIED**.
 - Immutable Proto25 baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`.
 
 ## Test state
 
 - Candidate 21 static/build assertions: **PASS**.
 - Candidate 21 Playwright acceptance: **PASS**.
-- Candidate 21 visual evidence generation: **PASS**.
-- Candidate 21 visual design acceptance: **NOT ACCEPTED**.
-- Candidate 25 static/build assertions: **PASS**.
-- Candidate 25 Playwright acceptance: **FAIL** on hover displacement assertion; visual comparison step was skipped.
-- Candidate 26 static/build assertions: **PASS** in the current workflow.
-- Candidate 26 browser and visual tests: **NOT RUN / IN PROGRESS** at last update.
+- Candidate 21 visual evidence generation: **PASS**; visual design acceptance: **NOT ACCEPTED**.
+- Candidate 25 static/build assertions: **PASS**; Playwright: **FAIL**.
+- Candidate 26 static/build assertions: **PASS**; Playwright: **NOT RUN** due test script SyntaxError.
+- Candidate 29 static/browser/visual acceptance: **IN PROGRESS / PENDING**.
 
 ## Rollback
 
