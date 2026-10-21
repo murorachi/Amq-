@@ -8,7 +8,17 @@
 - SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
 - Read-only. Never overwrite this file or branch.
 
-## Latest verified development checkpoint: Proto29
+## Latest verified development checkpoint: Proto30
+- Branch: `v82.85.30-proto30-song-select-composition-01`
+- Source commit: `3bc5ebb418d435905388c11bb63ba445362848e6`
+- Generated artifact/report commit: `a3e6bebf780a5bb82952db87a8dbaae5762ca8fa`
+- Run: https://github.com/murorachi/Amq-/actions/runs/39574095207 — **SUCCESS**
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html`
+- SHA-256: `bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff`
+- Static tests: PASS. Playwright browser tests: PASS. Page/console errors: 0/0.
+- Visual acceptance: **NOT VERIFIED**. Diagnostic MAE `0.286490`; 78.28% pixels have max-channel difference ≥24. Candidate 08 is a layout prototype, not yet visual-final.
+
+## Previous verified development checkpoint: Proto29
 - Branch: `v82.85.30-proto29-song-select-layout-width-01`
 - CI source commit: `d0f89294ca16488453f9afa2225b8ac9d1c5dda5`
 - Generated artifact/report commit: `ae0377e5efab163b9501456c371bce5e0074cafc`
