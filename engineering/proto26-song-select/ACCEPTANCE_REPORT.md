@@ -1,6 +1,6 @@
 Proto26 Song Select acceptance summary
-Commit under test: ec61f3ab1feb80c2f95cb84037423f7e0cc1f15a
-Date UTC: 2026-10-21T08:40:57Z
+Commit under test: 314a5a7aaa86e90e3d121dc386c3a994a3333a73
+Date UTC: 2026-10-21T08:42:01Z
 8943265 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
 2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
 --- static test report ---
@@ -44,6 +44,9 @@ PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 38, "catalogLeft": 28, "dockBottom": 900}
+PASS default Song Select releases reserved workspace sidebar padding at 1440x900
+PASS default Song Select search uses the full available width at 1440x900
 PASS workspace lists updates its existing action panel
 PASS workspace lists keeps the app route inside Song Select
 PASS workspace lists shows its existing main content surface in place

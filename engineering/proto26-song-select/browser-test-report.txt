@@ -10,6 +10,9 @@ PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 38, "catalogLeft": 28, "dockBottom": 900}
+PASS default Song Select releases reserved workspace sidebar padding at 1440x900
+PASS default Song Select search uses the full available width at 1440x900
 PASS workspace lists updates its existing action panel
 PASS workspace lists keeps the app route inside Song Select
 PASS workspace lists shows its existing main content surface in place

@@ -19,7 +19,11 @@
     "batchToolsVisible": false,
     "workspaceSidebarVisible": false,
     "selectedWorkspaceCount": 0,
-    "activeWorkspaceMode": null
+    "activeWorkspaceMode": null,
+    "bodyPaddingLeft": "0px",
+    "searchLeft": 38,
+    "catalogLeft": 28,
+    "dockBottom": 720
   },
   "page_errors": [],
   "console_errors": [],
