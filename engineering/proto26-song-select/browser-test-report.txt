@@ -10,7 +10,7 @@ PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
-DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 38, "catalogLeft": 28, "dockBottom": 900}
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 28, "catalogLeft": 28, "dockBottom": 900}
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select search uses the full available width at 1440x900
 PASS workspace lists updates its existing action panel
@@ -83,5 +83,5 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT_SHA256=bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff
 BROWSER_ACCEPTANCE=PASS

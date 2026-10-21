@@ -1,8 +1,8 @@
 Proto26 Song Select acceptance summary
-Commit under test: d0f89294ca16488453f9afa2225b8ac9d1c5dda5
-Date UTC: 2026-10-21T08:43:03Z
-8943265 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
-2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
+Commit under test: 3bc5ebb418d435905388c11bb63ba445362848e6
+Date UTC: 2026-10-21T09:05:13Z
+8952209 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
+bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -21,16 +21,16 @@ PASS workspace panel visibility is scoped to the active Song Select mode
 PASS desktop split view and mobile detail layout rules are present
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html
-OUTPUT_BYTES=8943265
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html
+OUTPUT_BYTES=8952209
+OUTPUT_SHA256=bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT_SHA256=bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -45,7 +45,7 @@ PASS workspace action sidebar is hidden until a workspace is selected
 PASS existing workspace dock is visible in Song Select
 PASS all four existing workspaces remain available
 PASS no unrelated workspace is falsely selected in default Song Select
-DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 38, "catalogLeft": 28, "dockBottom": 900}
+DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 28, "catalogLeft": 28, "dockBottom": 900}
 PASS default Song Select releases reserved workspace sidebar padding at 1440x900
 PASS default Song Select search uses the full available width at 1440x900
 PASS workspace lists updates its existing action panel
@@ -118,10 +118,10 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8
+OUTPUT_SHA256=bb56c70202b90c9926eb9299fa863048fb71fe0edc402460ddfda8f0a2f6c3ff
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a
 PASS candidate screenshot matches reference viewport 1280x720
-DIAGNOSTIC normalized MAE=0.303679; changed-pixel-ratio=0.904875
+DIAGNOSTIC normalized MAE=0.286490; changed-pixel-ratio=0.782809
 VISUAL_ACCEPTANCE=NOT VERIFIED (evidence generated; human/design review and corrections remain required)
