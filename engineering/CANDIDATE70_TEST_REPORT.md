@@ -2,7 +2,7 @@
 
 Artifact: `amq_learning_tool_v82_85_30_workspace_proto27_song_select_70-toolbar-inline-catalog.html`
 
-SHA-256: `99f56732782abfb04c29c7de55945a6efda56acfdd9c737126769c29f31847eb`
+SHA-256: `78f2ed58756ff64e1f22f583cc5a9396a549d4eb373a83bbdb50d185ba6f81a0`
 
 Parent: Candidate 69, SHA-256 `84440ee44f5451df94853a4e66d7c02f00b5d39a330fb8752f66c384015131de`.
 
@@ -16,7 +16,7 @@ Parent: Candidate 69, SHA-256 `84440ee44f5451df94853a4e66d7c02f00b5d39a330fb8752
 - CSS parses with no top-level parser errors.
 
 ## Browser interaction checks: 20/20 PASS
-Executed Chromium `page.set_content()` with a test-only in-memory localStorage shim. Verified initialization, Song Select route, initial upper-left song metadata, Back button, removal of start-practice dock control, audio dock hidden, empty ranking frame, header settings/search hidden, numbered toolbox expansion, compact dock geometry, Escape behavior, populated catalog, inline song expansion without opening legacy detail drawer, top-left song metadata update, inline row selection, Escape returning Home, direct background control, zero page errors, and zero console errors.
+Executed Chromium `page.set_content()` with a test-only in-memory localStorage shim. Verified initialization, Song Select route, initial upper-left song metadata, Back button, removal of start-practice dock control, audio dock hidden, empty ranking frame, header settings/search hidden, numbered toolbox expansion, compact dock geometry, Escape behavior, populated catalog, inline song expansion below the work card without opening the legacy detail drawer, top-left song metadata update, inline row selection, Escape returning Home, direct background control, zero page errors, and zero console errors.
 
 ## Viewport checks: 8/8 PASS
 - 1280×720: no horizontal overflow; dock remains inside viewport; all four numbered controls select the corresponding workspace; background dialog opens and offers only Home, Multiplayer, and Song Select.
