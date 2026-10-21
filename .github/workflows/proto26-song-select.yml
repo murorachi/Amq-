@@ -9,6 +9,7 @@ on:
       - v82.85.30-proto26-song-select-integration-01
       - v82.85.30-proto26-in-place-workspaces-01
       - v82.85.30-proto27-song-select-visual-audit-01
+      - v82.85.30-proto28-song-select-default-state-fix-01
     paths:
       - 'engineering/proto26-song-select/song-select-integration.js'
       - 'engineering/proto26-song-select/build_single_file.py'
