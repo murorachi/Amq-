@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -39,12 +39,12 @@ with sync_playwright() as p:
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
     # The central feature art should remain complete without a saved background, then reveal the
     # existing scene image gently when the Catalog background setting is active.
-    fallback_style = page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
+    fallback_style = page.locator("#amqSongSelectStage .p32-scene").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
     check("radial-gradient" in fallback_style["backgroundImage"], "feature stage keeps its designed fallback when no scene background is configured")
     had_scene_bg = page.locator("body").evaluate("(el) => el.classList.contains('amq-custom-bg-active')")
     page.locator("body").evaluate("(el) => { el.classList.add('amq-custom-bg-active'); el.dataset.amqScene='catalog'; }")
-    configured_style = page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
-    print("SCENE_BACKGROUND_STYLE_DEBUG=" + json.dumps({"fallback":fallback_style,"configured":configured_style,"element":page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({tag:el.tagName,id:el.id,cls:el.className,parent:el.parentElement?.id,matched:el.matches(\'#amqSongSelectStage .p30-feature\'),display:getComputedStyle(el).display,styleTag:document.querySelector(\'#amq-proto30-song-select-css\')?.textContent.length||0,ruleCount:document.querySelector(\'#amq-proto30-song-select-css\')?.sheet?.cssRules.length||0})")}, ensure_ascii=False))
+    configured_style = page.locator("#amqSongSelectStage .p32-scene").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
+    print("SCENE_BACKGROUND_STYLE_DEBUG=" + json.dumps({"fallback":fallback_style,"configured":configured_style,"element":page.locator("#amqSongSelectStage .p32-scene").evaluate("(el) => ({tag:el.tagName,id:el.id,cls:el.className,parent:el.parentElement?.id,matched:el.matches(\'#amqSongSelectStage .p32-scene\'),display:getComputedStyle(el).display,styleTag:document.querySelector(\'#amq-proto32-song-select-css\')?.textContent.length||0,ruleCount:document.querySelector(\'#amq-proto32-song-select-css\')?.sheet?.cssRules.length||0})")}, ensure_ascii=False))
     check(configured_style["backgroundImage"] != fallback_style["backgroundImage"], "feature stage blends with the configured Catalog scene background")
     if not had_scene_bg:
         page.locator("body").evaluate("(el) => el.classList.remove('amq-custom-bg-active')")
