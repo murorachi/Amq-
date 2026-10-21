@@ -8,7 +8,7 @@ Parent: Candidate 71.
 - Increased the central AMQ icon dimensions through a final runtime geometry override so existing inline important styles do not defeat the stylesheet.
 - Removed the duplicate Home-only background shortcut; the canonical background control remains in Settings.
 - Replaced the Play submenu's full-screen opaque takeover with a transparent, in-Home state. Single Player, Multiplayer, and Back use consistent button geometry and a coordinated color family.
-- Added a black top/bottom Song Select frame treatment with a clipped curved sweep below the song metadata.
+- Added black top/bottom Song Select frame styling and a separate rounded sweep element to make the curved transition smooth rather than a polygon of straight segments.
 - Moved the empty management frame from the bottom-right to the left-middle below song metadata. Removed its false “排行榜” label.
 - Corrected the workspace panel's visibility and pointer-event state when the lower-left workspace buttons are expanded. The panel is intended to occupy the left-middle frame, not spawn as a lower-left popup.
 - For requirement A, hid the entire global top header on the quiz screen, not merely the Settings control.
