@@ -3,7 +3,7 @@
 Artifact: `amq_learning_tool_v82_85_30_workspace_proto28_song_select_73-mobile-workspace-frame-fix.html`
 
 SHA-256: `8a6f0e16ec730c39d7f45f7bc17ac0a73310a8192ed297c040ef273f33aa88c1`
-Size: 9,093,878 bytes.
+Size: 9,093,909 bytes.
 
 ## Passed
 
@@ -28,4 +28,4 @@ Size: 9,093,878 bytes.
 
 ## Limitation
 
-Prior browser harness attempts were blocked for direct `file://` and local HTTP navigation (`ERR_BLOCKED_BY_ADMINISTRATOR`). `page.set_content()` does not provide the normal persisted origin and therefore cannot substitute for real-origin application acceptance.
+A fresh Playwright navigation attempt was not run to completion because the Chromium executable is absent from this environment. Prior browser harness attempts were also blocked for direct `file://` and local HTTP navigation (`ERR_BLOCKED_BY_ADMINISTRATOR`). `page.set_content()` does not provide the normal persisted origin and therefore cannot substitute for real-origin application acceptance.
