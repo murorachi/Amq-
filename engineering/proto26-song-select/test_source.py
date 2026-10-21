@@ -23,6 +23,7 @@ def main():
     check("api.ready" in js and "readinessPoll" in js and "readEmqWorks()" in js, "EMQ work list refreshes after asynchronous library load")
     check("mode==='emq'||mode==='mix'" in js, "active EMQ/MIX view rerenders when library becomes ready")
     check("proto26.4" in js and "body:has(#overlay.open) .overlay.open .drawer" in js, "selected work uses a persistent right-side detail pane on desktop")
+    check("modes.classList.add('view-catalog')" in js, "Song Select controls remain hidden outside the catalog view")
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
