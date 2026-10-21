@@ -30,3 +30,12 @@
 ## Rollback
 - Use candidate 10 or rebuild from immutable Proto25 baseline.
 - Never overwrite candidate 09/10 or the immutable baseline. Do not merge PR #10/#11 before visual and functional acceptance.
+
+
+## Immediate continuation — verify zero-basis catalog sizing
+
+1. Review Actions run https://github.com/murorachi/Amq-/actions/runs/39598805123 and wait for its actual result.
+2. Inspect `CATALOG_DENSITY_1280x720` diagnostics. Required: grid height must be materially greater than 3px, at least three real AMQ cards visible, internal vertical scrolling, and at least three cards fully above the bottom player.
+3. If it still fails, use the logged `catalogRect`, `mountRect`, `mountStyle`, and `gridStyle` values to correct the actual flex sizing cause; do not add arbitrary pixel heights without geometry evidence.
+4. Only after browser acceptance passes, inspect the generated matched-viewport reference screenshot, overlay, pixel diff and report. Visual acceptance remains NOT VERIFIED until reviewed.
+5. On success, verify generated candidate 11 file and SHA-256 on the remote branch, then update the status and baseline records. Candidate 10 remains rollback; immutable Proto25 remains read-only.
