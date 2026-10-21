@@ -62,3 +62,17 @@ Environment limitation:
 ## Interpretation
 
 The local tests support the specific claim that the four workspace dock modes now display the existing panels in place while the app route remains Song Select. They do not establish final UI completion, 90% visual similarity, full data-action correctness, native storage persistence, or official GitHub CI acceptance.
+
+
+## Remote GitHub Actions follow-up (2026-10-21)
+
+- Workflow run: [39563090398](https://github.com/murorachi/Amq-/actions/runs/39563090398) — **PASS**.
+- Static acceptance: PASS.
+- Playwright Chromium acceptance: PASS, including all four in-place workspace modes, existing custom-list and batch-selection actions, explicit practice entry, dashboard action, EMQ initialization, AMQ/EMQ/MIX/Singer mode checks, desktop layout checks and mobile drawer checks.
+- Generated artifact: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`.
+- Size: 8,942,305 bytes.
+- SHA-256 from CI report and downloaded artifact: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
+- Git blob SHA from committed candidate: `d953acd9fdcf5a5211ab95c996603325a1b9dd22`; it matches the downloaded artifact bytes.
+- Artifact/report package: workflow artifact ID `12328707758`, expires 2026-11-20.
+
+The local-origin storage limitation above does not apply to the GitHub Actions browser run, which reported no uncaught page errors and no console errors. Visual pixel-diff against osu!stable, real audio output and exact stable client source Commit verification remain separate outstanding gates.
