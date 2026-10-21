@@ -53,7 +53,7 @@
     b.addEventListener('click',()=>showWork(w));return b;
   }
   function renderEmq(withAmq){
-    if(withAmq) $('[data-tab="all"]')?.click();
+    if(withAmq){ const modeBeforeRender=mode; mode='amq'; $('[data-tab="all"]')?.click(); mode=modeBeforeRender; }
     const q=(search?.value||'').trim().toLocaleLowerCase();
     const amq=withAmq?[...grid.querySelectorAll('.card')]:[];
     const matched=emqWorks.filter(w=>!q||[w.t,w.n,w.vndbId].some(v=>String(v??'').toLocaleLowerCase().includes(q)));
