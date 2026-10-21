@@ -82,6 +82,17 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/proto26-generated
+          cp dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html /tmp/proto26-generated/
+          cp engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt /tmp/proto26-generated/
+          git fetch origin v82.85.30-proto26-song-select-integration-01
+          git reset --hard origin/v82.85.30-proto26-song-select-integration-01
+          cp /tmp/proto26-generated/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html dist/
+          cp /tmp/proto26-generated/ACCEPTANCE_REPORT.md /tmp/proto26-generated/static-test-report.txt /tmp/proto26-generated/browser-test-report.txt engineering/proto26-song-select/
           git add dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html engineering/proto26-song-select/ACCEPTANCE_REPORT.md engineering/proto26-song-select/static-test-report.txt engineering/proto26-song-select/browser-test-report.txt
-          git commit -m "Build and accept Proto26 Song Select integration" || echo "No generated changes to commit"
-          git push origin HEAD:v82.85.30-proto26-song-select-integration-01
+          if git diff --cached --quiet; then
+            echo "Generated candidate and reports already match the remote checkpoint"
+          else
+            git commit -m "Build and accept Proto26 Song Select integration"
+            git push origin HEAD:v82.85.30-proto26-song-select-integration-01
+          fi
