@@ -1,5 +1,17 @@
 # Baseline and rollback record
 
+## Verified Proto26.8 candidate 06 checkpoint (2026-10-21)
+- Working branch: `v82.85.30-proto26-in-place-workspaces-01`.
+- CI run: https://github.com/murorachi/Amq-/actions/runs/39565629059 — success.
+- Workflow fix commit: `1985431f5055c470633efee823ef74de4198d333`.
+- Artifact/report commit: `8228fd1d827551ee2fbff8ce3f1e5cfcf7e375c1`.
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`.
+- Size: 8,942,305 bytes. SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
+- Static acceptance, Playwright browser acceptance, artifact upload, and branch push of candidate/reports: PASS.
+- This is a verified development checkpoint, not final visual acceptance. osu!stable screenshot comparison, exact Stable source commit verification, real audio output, and broader quiz/multiplayer lifecycle tests remain outstanding.
+- Rollback: use accepted candidate 04 with SHA-256 `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`. Immutable Proto25 baseline SHA-256 `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f` remains untouched.
+
+
 ## Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
 - HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
