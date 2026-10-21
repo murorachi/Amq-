@@ -22,6 +22,7 @@ async def main():
         await page.screenshot(path="proto24-desktop.png",full_page=True)
         layout=await page.evaluate("""()=>{const q=s=>document.querySelector(s);const r=e=>{const x=e.getBoundingClientRect();return {x:Math.round(x.x),y:Math.round(x.y),w:Math.round(x.width),h:Math.round(x.height)}};return {topFrame:r(q('.amqHomeTopFrame')),topFrameOverflow:getComputedStyle(q('.amqHomeTopFrame')).overflow,profile:r(q('#amqProfileCard')),player:r(q('.amqPlayerFrame')),landing:r(q('.amqHomeLandingV851')),logo:getComputedStyle(q('.amqHomeLandingV851'),'::before').display,primary:r(q('.amqHomeLandingPrimary')),actions:[...q('.amqHomeLandingPrimary').children].map(r),groups:r(q('.amqHomeLandingGroups')),legacy:[getComputedStyle(q('.hero.view-home')).display,getComputedStyle(q('.discover.view-home')).display],catalogToolbar:getComputedStyle(q('.toolbar.view-catalog')).display,quicktools:getComputedStyle(q('#quicktools')).display,profileHeight:r(q('#amqProfileCard')).h,playerHeight:r(q('.amqPlayerFrame')).h}}""")
         assert layout["profile"]["x"] < layout["player"]["x"],layout
+        assert layout["topFrame"]["y"]<=48 and layout["profile"]["y"]<=49 and layout["player"]["y"]<=49,layout
         assert layout["primary"]["x"] > layout["landing"]["x"]+layout["landing"]["w"]*.30,layout
         assert len(layout["actions"])==3 and all(a["h"]>=40 for a in layout["actions"]),layout
         assert layout["legacy"]==["none","none"],layout
