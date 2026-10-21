@@ -7148,18 +7148,18 @@ body.ui-home-menu #homeMenu .amqAvatarButton { width:38px!important; height:38px
 body.ui-home-menu #homeMenu .amqProfileName { font-size:13px!important; }
 body.ui-home-menu #homeMenu .amqProfileLine { font-size:9px!important; }
 body.ui-home-menu #homeMenu .amqHomeLandingV851 {
- grid-template-columns:minmax(360px,.82fr) minmax(300px,1.18fr)!important;
- grid-template-rows:minmax(470px,1fr) auto!important;
+ grid-template-columns:minmax(400px,.95fr) minmax(300px,1.05fr)!important;
+ grid-template-rows:minmax(510px,1fr) auto!important;
  column-gap:clamp(0px,1vw,14px)!important; row-gap:16px!important;
- min-height:620px!important; padding:clamp(16px,2vw,26px) clamp(12px,3vw,42px) 18px!important;
+ min-height:660px!important; padding:clamp(16px,2vw,26px) clamp(12px,3vw,42px) 18px!important;
 }
 body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
- width:min(100%,clamp(400px,34vw,490px))!important;
- transform:translateX(clamp(90px,11vw,160px))!important;
+ width:min(100%,clamp(500px,39vw,560px))!important;
+ transform:translate(clamp(90px,9vw,130px),18px)!important;
  border-width:8px!important;
  outline-width:2px!important; box-shadow:0 0 0 8px #f06cae18,0 8px 24px #100b124d,inset 0 0 0 2px #ffffff80!important;
 }
-body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:12px!important; max-width:620px!important; }
+body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:12px!important; max-width:520px!important; justify-self:start!important; transform:translate(-36px,18px)!important; }
 body.ui-home-menu #homeMenu .amqHomeLandingAction {
  grid-template-columns:minmax(0,1fr) 24px!important; grid-template-rows:auto!important;
  min-height:76px!important; padding:14px 18px!important; column-gap:10px!important; row-gap:0!important;
@@ -7206,7 +7206,7 @@ body.ui-home-menu #homeMenu .amqHomeLandingLinks button small { display:none!imp
 body.ui-home-menu #homeMenu .amqHomeLandingLinks button>span { font-size:12px!important; }
 @media(max-width:900px) {
  body.ui-home-menu #homeMenu .amqHomeLandingV851 { grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto auto!important; }
- body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,36vw,230px)!important; }
+ body.ui-home-menu #homeMenu .amqHomeLandingV851::before { width:clamp(170px,36vw,230px)!important; transform:none!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingPrimary { gap:6px!important; }
  body.ui-home-menu #homeMenu .amqHomeLandingAction { min-height:44px!important; }
 }
