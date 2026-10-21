@@ -219,11 +219,11 @@
   #amqSongSelectStage .p32-catalog-mark{font-size:25px;color:#e768a7}
   #amqSongSelectStage #p32Mount{display:flex;flex-direction:column;gap:9px;min-width:0}
   #amqSongSelectStage .toolbar.view-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0;padding:0;background:transparent;border:0}
-  #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0}
-  #amqSongSelectStage #search{width:100%;min-width:0;margin:0;padding:10px 11px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
+  #amqSongSelectStage .toolbar.view-catalog .search{grid-column:1/-1;min-width:0!important;width:100%!important;max-width:100%!important;flex:initial!important}
+  #amqSongSelectStage .toolbar.view-catalog .search input,#amqSongSelectStage #search{display:block;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box;margin:0;padding:10px 11px;background:rgba(9,14,24,.48);border:1px solid rgba(199,215,240,.24);border-radius:2px;color:#f4f6fb;outline:none}
   #amqSongSelectStage #search:focus{border-color:#e768a7;box-shadow:0 0 0 1px rgba(231,104,167,.2)}
   #amqSongSelectStage #search::placeholder{color:#94a3b9}
-  #amqSongSelectStage .toolbar.view-catalog select{width:100%;min-width:0;padding:8px 6px;background:rgba(12,18,29,.7);border:1px solid rgba(199,215,240,.2);color:#dce4f1;font-size:10px}
+  #amqSongSelectStage .toolbar.view-catalog select{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box;padding:8px 6px;background:rgba(12,18,29,.7);border:1px solid rgba(199,215,240,.2);color:#dce4f1;font-size:10px}
   #amqSongSelectStage #proto26SongModes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:0;background:transparent;border:0}
   #amqSongSelectStage #proto26SongModes .p26-label{grid-column:1/-1;font-size:9px;letter-spacing:.16em;color:#aebbd0;font-weight:800;margin-bottom:2px}
   #amqSongSelectStage #proto26SongModes button{padding:8px 2px;border:1px solid rgba(199,215,240,.22);border-radius:2px;background:rgba(20,28,43,.8);color:#dbe4f1;font-size:10px;font-weight:800;cursor:pointer}
