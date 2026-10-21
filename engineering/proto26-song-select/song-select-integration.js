@@ -158,9 +158,10 @@
   const root=grid.closest('.wrap')||grid.parentElement;
   const stage=document.createElement('section');stage.id='amqSongSelectStage';
   stage.innerHTML='<aside class="p30-rail"><div class="p30-brand"><b>♫</b><span><strong>AMQ</strong><small>SONG SELECT</small></span></div><div class="p30-block"><small>LIBRARY</small><strong id="p30Count">曲庫載入中</strong><p>依目前資料即時更新</p></div><div class="p30-block"><small>BROWSE</small><button data-p30-jump="all">全部歌曲</button><button data-p30-jump="artists">歌手索引</button></div><div class="p30-foot">● 本機曲庫介面</div></aside><section class="p30-feature"><header>NOW BROWSING <i></i><span id="p30Mode">AMQ LIBRARY</span></header><div class="p30-art"><span class="p30-ring"></span><span class="p30-note">♫</span><small>ANIME MUSIC DATABASE</small></div><div class="p30-feature-copy"><small>SELECT A TRACK</small><h2 id="p30Title">選擇一首歌曲</h2><p id="p30Sub">從右側曲庫選取作品，查看歌曲與播放資訊。</p></div><footer><span>AMQ / EMQ</span><span id="p30Items">等待曲庫資料</span></footer></section><section class="p30-catalog"><header><div><small>TRACK BROWSER</small><h2>曲庫</h2></div><b>≡</b></header><div id="p30Mount"></div></section>';
+  const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
   const mount=stage.querySelector('#p30Mount');mount.append(modes);if(search)mount.append(search);mount.append(tabs,grid);
   for(const id of ['gridCounter','empty','loadMoreWrap','quicktools']){const n=document.getElementById(id);if(n)mount.append(n)}
-  const anchor=modes.parentElement;anchor.insertBefore(stage,modes);
+
   const style30=document.createElement('style');style30.id='amq-proto30-song-select-css';
   style30.textContent=`
   #amqSongSelectStage{display:grid;grid-template-columns:minmax(165px,200px) minmax(230px,1fr) minmax(300px,370px);gap:12px;width:100%;max-width:none;margin:10px 0 95px;color:#f0f3fa}
