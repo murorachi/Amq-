@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_05.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -42,37 +42,34 @@ with sync_playwright() as p:
     check(page.locator("#amqWorkspaceDock [data-ws]").count() == 4, "all four existing workspaces remain available")
     if page.locator("#amqWorkspaceDock").is_visible():
         workspace_cases = [
-            ("lists", "清單管理", "watchlist", "#watchlistView"),
-            ("batch", "批次整理", "catalog", "#grid"),
-            ("learning", "學習中心", "learningPlan", "#learningPlanPanel"),
-            ("analysis", "學習分析", "dashboard", "#dashboardPanel"),
+            ("lists", "清單管理", "#watchlistView"),
+            ("batch", "批次整理", "#grid"),
+            ("learning", "學習中心", "#learningPlanPanel"),
+            ("analysis", "學習分析", "#dashboardPanel"),
         ]
-        for key, title, expected_view, main_selector in workspace_cases:
+        for key, title, main_selector in workspace_cases:
             page.locator(f'#amqWorkspaceDock [data-ws="{key}"]').click()
-            try:
-                page.wait_for_function(
-                    "(expected) => window.__aniGetActiveViewV82?.() === expected",
-                    arg=expected_view,
-                    timeout=5000,
-                )
-            except Exception:
-                pass
-            page.wait_for_timeout(180)
+            page.wait_for_timeout(350)
             check(page.locator("#wsTitle").inner_text().strip() == title, f"workspace {key} updates its existing action panel")
-            check(page.evaluate("window.__aniGetActiveViewV82?.()") == expected_view, f"workspace {key} routes the main content to {expected_view}")
-            check(page.locator(main_selector).is_visible(), f"workspace {key} shows its existing main content surface")
-        # Representative existing actions: navigation and selection toggle only, no data mutation.
+            check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), f"workspace {key} keeps the app route inside Song Select")
+            check(page.locator(main_selector).is_visible(), f"workspace {key} shows its existing main content surface in place")
+            check(page.locator("#amqWorkspaceDock [data-ws]").filter(has=page.locator("span")).count() == 4, f"workspace {key} preserves all four dock controls")
+            check(page.evaluate("document.body.dataset.amqWorkspaceMode") == key, f"workspace {key} records the active internal mode")
+            if key != "batch":
+                check(not page.locator("#grid").is_visible(), f"workspace {key} hides the unrelated catalog grid")
+        # Existing actions must also preserve the in-place shell while invoking the real handler.
         page.locator('#amqWorkspaceDock [data-ws="lists"]').click()
         page.locator('#wsActions [data-ws-action="watchlist-custom"]').click()
-        page.wait_for_timeout(250)
-        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'watchlist'"), "custom-list action opens watchlist")
+        page.wait_for_timeout(350)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "custom-list action stays inside Song Select")
+        check(page.locator("#watchlistView").is_visible(), "custom-list action reveals the existing list-management panel")
         check(page.locator("#customModeTab").is_visible(), "custom-list tab remains available")
         check(page.locator("#wsStatus").get_attribute("data-state") == "success", "custom-list action reports successful completion")
 
         page.locator('#amqWorkspaceDock [data-ws="batch"]').click()
         page.locator('#wsActions [data-ws-action="batch-select"]').click()
         page.wait_for_timeout(250)
-        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "batch selection action opens catalog")
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "batch selection action stays inside Song Select")
         check(page.locator("#selectModeBtn").is_visible(), "batch selection control remains available")
         check(page.locator("#selectModeBtn").inner_text().strip().startswith("✓"), "batch action really toggles selection mode")
         page.locator("#selectModeBtn").click()
@@ -80,20 +77,20 @@ with sync_playwright() as p:
         check(page.locator("#selectModeBtn").inner_text().strip().startswith("□"), "batch selection mode is restored after test")
 
         page.locator('#amqWorkspaceDock [data-ws="learning"]').click()
+        check(page.locator("#learningPlanPanel").is_visible(), "learning workspace renders the existing learning panel in place")
         page.locator('#wsActions [data-ws-action="practiceExplore"]').click()
         page.wait_for_timeout(500)
-        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'practice'"), "explore action opens practice view")
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'practice'"), "explicit explore action opens the existing practice flow")
         check(page.locator('[data-practice-mode="explore"]').count() > 0, "existing explore mode control remains available")
 
         page.locator('#amqWorkspaceDock [data-ws="analysis"]').click()
         page.locator('#wsActions [data-ws-action="dashboard"]').click()
         page.wait_for_timeout(250)
-        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'dashboard'"), "dashboard action opens analysis view")
-        check(page.locator("#dashboardPanel").is_visible(), "dashboard panel is visible")
-        
-        # Mode-specific catalog checks must start from the catalog view, not whichever workspace ran last.
-        page.evaluate("window.__aniNavigateApp?.('catalog')")
-        page.wait_for_function("window.__aniGetActiveViewV82?.() === 'catalog'", timeout=5000)
+        check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "dashboard action stays inside Song Select")
+        check(page.locator("#dashboardPanel").is_visible(), "dashboard panel is visible in the analysis workspace")
+
+        # Return to the catalog mode before testing source modes.
+        page.locator('#amqWorkspaceDock [data-ws="batch"]').click()
         page.wait_for_timeout(250)
     try:
         page.wait_for_function("window.__aniEmqAPI?.ready === true", timeout=30000)
