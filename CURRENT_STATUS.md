@@ -2,7 +2,7 @@
 
 ## Active work: Proto26 Song Select integration
 
-Status: **Proto26.6 is a verified development checkpoint, not final UI acceptance.** Four workspace buttons activate their existing side-panel content, and the shell remains visible next to Song Select. Full in-place workspace content/action integration and osu!stable screenshot comparison are still incomplete.
+Status: **Proto26.7 workspace-route integration is under browser acceptance; not final UI acceptance.** The dock now routes each workspace to an existing main view instead of only changing the sidebar title. Full action-level in-place integration and osu!stable screenshot comparison remain incomplete.
 
 ### Immutable AMQ baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -44,6 +44,11 @@ Status: **Proto26.6 is a verified development checkpoint, not final UI acceptanc
 - Full in-place workspace content/action integration: **NOT COMPLETE**.
 - Home, Play, Settings, profile/statistics visual acceptance against pinned references: **NOT RUN in this Proto26 stage**.
 - Real audio-output acceptance, full quiz answer lifecycle and multiplayer server lifecycle: not covered by this stage's browser test.
+
+### Proto26.7 in-progress change
+- Added a route map in `song-select-integration.js`: lists → existing `watchlist` view; batch → existing `catalog` view; learning → existing `learningPlan` view; analysis → existing `dashboard` view. This uses the existing `window.__aniNavigateApp` router and does not duplicate business logic.
+- Expanded browser acceptance to assert the expected active route and visible main content surface for each dock button.
+- First CI attempt exposed a stale static assertion still expecting `proto26.6`. Fixed the assertion; static acceptance then passed on the next push run. Chromium install/browser acceptance are still in progress, so Proto26.7 is not yet accepted.
 
 ### Newly pinned reference audit
 - `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`
