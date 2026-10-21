@@ -185,7 +185,17 @@ with sync_playwright() as p:
             check(page.locator(".toolbar.view-catalog").evaluate("(el) => el.getBoundingClientRect().width < window.innerWidth * 0.8"), "search and filter controls reserve horizontal space for the detail pane")
             page.set_viewport_size({"width": 1000, "height": 562})
             page.wait_for_timeout(250)
-            check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "1000x562 Song Select viewport has no horizontal overflow")
+            overflow_debug = page.evaluate("""() => ({
+                viewport: window.innerWidth,
+                documentWidth: document.documentElement.scrollWidth,
+                bodyWidth: document.body.scrollWidth,
+                overflowing: [...document.querySelectorAll('body *')].map(el => {
+                    const r = el.getBoundingClientRect();
+                    return {tag:el.tagName,id:el.id,cls:String(el.className||'').slice(0,70),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),display:getComputedStyle(el).display};
+                }).filter(x => x.width > 0 && (x.left < -1 || x.right > window.innerWidth + 1)).slice(0,30)
+            })""")
+            print("OVERFLOW_DEBUG_1000x562=" + json.dumps(overflow_debug, ensure_ascii=False))
+            check(overflow_debug["documentWidth"] <= overflow_debug["viewport"], "1000x562 Song Select viewport has no horizontal overflow")
             page.set_viewport_size({"width": 1440, "height": 900})
             page.wait_for_timeout(200)
             page.screenshot(path=str(SCREENSHOT_DIR / "proto26-stable-reference-viewport.png"), full_page=False)
