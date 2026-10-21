@@ -37,6 +37,100 @@
     "selectedSongRows": 1,
     "detailOpen": true
   },
+  "cover_capture_state": {
+    "imageCount": 8,
+    "loadedCount": 0,
+    "images": [
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      },
+      {
+        "src": "",
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0,
+        "opacity": "1",
+        "filter": "none",
+        "visibility": "visible",
+        "display": "none",
+        "coverOpacity": "1"
+      }
+    ]
+  },
   "page_errors": [],
   "console_errors": [],
   "normalized_mean_absolute_pixel_difference": 0.275356,
