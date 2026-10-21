@@ -14,19 +14,21 @@
 - Reference audit: `engineering/proto26-song-select/OSU_STABLE_REFERENCE_AUDIT.md`, commit `615ef8b92452009285845bf96a5609d0c8216784`.
 
 ## Latest verified implementation
-- Proto26.7 routes dock selection to `watchlist`, `catalog`, `learningPlan`, and `dashboard` through `window.__aniNavigateApp`.
-- Static acceptance PASS; Playwright browser acceptance PASS. Browser assertions include each workspace's active route and visible primary content surface, actual EMQ work records/detail pane, AMQ/MIX/Singer mode switching, no uncaught browser errors, and desktop/mobile overflow/drawer checks.
-- Chromium installation emitted transient DNS errors, but the browser acceptance subsequently ran and passed.
-- Visual screenshot comparison against osu!stable: NOT RUN. Full in-place action-level integration: INCOMPLETE. Keep PR #10 draft and unmerged.
+- Proto26.8 keeps the four workspace modes inside Song Select. Existing list, learning-plan and dashboard panels are reused; batch mode retains the catalog and quick tools.
+- GitHub Actions run #39563090398: PASS. Static assertions and Playwright Chromium acceptance passed.
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_06.html`
+- Size: 8,942,305 bytes; SHA-256: `abaf342050f0d73c0450544114b124e1f95be9cb109956f25189532e770e52ca`.
+- Remote artifact SHA-256 and Git blob SHA were verified against the downloaded CI artifact.
+- PR #10 remains draft/unmerged. The immutable Proto25 baseline is unchanged.
 
 ## Next actions
-1. Inspect existing workspace sidebar/dock handlers and identify the actual destination DOM/functions for list management, batch processing, learning center and analysis.
-2. Build a real mapping table: old entry, handler, data source, destination DOM, Song Select placement, regression test, unknowns.
-3. Integrate the existing workspace content/actions into the Song Select main content area. Preserve handlers/data and audio state. No fake controls, duplicated business logic, or speculative DOM selectors.
-4. Extend browser acceptance so each workspace selection asserts that the main content region changes and its existing core actions remain operable; current test only verifies sidebar/dock visibility and workspace title activation.
-5. Obtain the pinned official Song Select screenshot and the accepted candidate screenshot at matching 1440x900. Record bounding boxes and create overlay/difference evidence. Exact Stable source commit remains NOT VERIFIED; do not use lazer source as a substitute.
-6. Generate the next unique standalone HTML version only after scoped tests pass; keep all prior candidates unchanged and record SHA-256 + remote existence.
-7. Keep PR #10 draft/unmerged until workspace integration and visual comparison pass.
+1. Compare Song Select against the pinned official osu!stable screenshot at a matching viewport. Record bounding boxes and overlay/difference evidence; do not claim a similarity percentage without measurement.
+2. Test search edge cases (partial text, case, whitespace, CJK, special characters, zero results), actual sorting/filtering and mode switching.
+3. Verify selected-song Enter behavior, duplicate activation and real audio output.
+4. Trace and test the data-changing list/batch actions with confirmations and rollback-safe assertions.
+5. Confirm the exact Stable client source Commit matching release `20260924.1`; remains NOT VERIFIED. Do not substitute osu!lazer source.
+6. Only after Song Select gates pass, continue homepage, Play and Settings visual acceptance.
+
 
 ## Acceptance gates
 - Static checks, browser interaction tests, visual comparison, audio output, quiz lifecycle, and multiplayer lifecycle must be reported separately.
