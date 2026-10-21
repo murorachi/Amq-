@@ -37,6 +37,17 @@ with sync_playwright() as p:
     check(page.evaluate("window.__aniGetActiveViewV82?.() === 'catalog'"), "app navigation state is catalog")
     check(page.locator("#grid").is_visible(), "catalog view is visible before interacting with song cards")
     check(page.locator("#proto26SongModes").is_visible(), "source controls are scoped to the catalog view")
+    # The central feature art should remain complete without a saved background, then reveal the
+    # existing scene image gently when the Catalog background setting is active.
+    fallback_style = page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
+    check("radial-gradient" in fallback_style["backgroundImage"] and fallback_style["backdropFilter"] == "none", "feature stage keeps its designed fallback when no scene background is configured")
+    had_scene_bg = page.locator("body").evaluate("(el) => el.classList.contains('amq-custom-bg-active')")
+    page.locator("body").evaluate("(el) => { el.classList.add('amq-custom-bg-active'); el.dataset.amqScene='catalog'; }")
+    configured_style = page.locator("#amqSongSelectStage .p30-feature").evaluate("(el) => ({backgroundImage:getComputedStyle(el).backgroundImage,backdropFilter:getComputedStyle(el).backdropFilter})")
+    check("rgba" in configured_style["backgroundImage"] and "blur" in configured_style["backdropFilter"], "feature stage blends with the configured Catalog scene background")
+    if not had_scene_bg:
+        page.locator("body").evaluate("(el) => el.classList.remove('amq-custom-bg-active')")
+
     check(not page.locator("section.hero.view-home").is_visible(), "home collection hero is hidden in Song Select")
     check(not page.locator("#quicktools").is_visible(), "batch tools do not dominate the default Song Select view")
     check(not page.locator("#amqWorkspaceSidebar").is_visible(), "workspace action sidebar is hidden until a workspace is selected")
