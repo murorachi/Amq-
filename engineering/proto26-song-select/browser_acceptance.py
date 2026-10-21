@@ -3,7 +3,7 @@ import hashlib
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_01.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_02.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -31,6 +31,13 @@ with sync_playwright() as p:
         page.wait_for_timeout(1200)
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "emq", "EMQ mode activates")
         check(page.locator("#grid .p26-work-card").count() > 0, "EMQ mode renders actual work cards")
+        if page.locator("#grid .p26-work-card").count() > 0:
+            page.locator("#grid .p26-work-card").first.click()
+            page.wait_for_timeout(300)
+            check(page.locator("#overlay.open").count() == 1, "selecting an EMQ work opens its detail pane")
+            check(page.locator("#overlay .drawer").evaluate("(el) => getComputedStyle(el).position") == "fixed", "desktop detail pane is fixed at the right side")
+            check(page.locator("#overlay .close").evaluate("(el) => getComputedStyle(el).display") == "none", "desktop detail pane remains persistent while browsing")
+            check(page.locator("#grid").evaluate("(el) => el.getBoundingClientRect().width < window.innerWidth * 0.8"), "catalog reserves horizontal space for the detail pane")
         page.locator('[data-p26-mode="mix"]').click()
         page.wait_for_timeout(800)
         check(page.evaluate("window.__amqProto26SongSelect.getMode()") == "mix", "MIX mode activates")
@@ -46,6 +53,8 @@ with sync_playwright() as p:
     page.set_viewport_size({"width":390,"height":844})
     page.wait_for_timeout(800)
     check(page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "mobile layout has no horizontal overflow")
+    check(page.locator("#overlay.open .drawer").evaluate("(el) => el.getBoundingClientRect().width <= window.innerWidth"), "mobile detail drawer fits the viewport")
+    check(page.locator("#overlay.open .close").evaluate("(el) => getComputedStyle(el).display") == "block", "mobile detail drawer retains its close control")
     page.screenshot(path=str(ROOT / "engineering/proto26-song-select/proto26-mobile.png"), full_page=True)
     browser.close()
 print("OUTPUT_SHA256=" + hashlib.sha256(HTML.read_bytes()).hexdigest())
