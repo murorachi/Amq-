@@ -17,7 +17,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "engineering/proto26-song-select"
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html"
 REFERENCE_URL = (
     "https://raw.githubusercontent.com/ppy/osu-wiki/"
     "ae2c6443a4264e5429ea7bcd2f3503be8a518a50/"

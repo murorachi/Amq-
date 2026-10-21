@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_18.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -99,6 +99,13 @@ with sync_playwright() as p:
         return {stage:rect('#amqSongSelectStage'),scene:rect('#amqSongSelectStage .p32-scene'),info:rect('#amqSongSelectStage .p32-info'),title:rect('#amqSongSelectStage .p32-scene-content'),catalog:rect('#amqSongSelectStage .p32-catalog'),search:rect('#search'),grid:rect('#grid')};
     }""")
     print("SCENE_GEOMETRY_1440x900=" + json.dumps(scene_geometry, ensure_ascii=False))
+    preview_state = page.evaluate("""() => ({
+        title: document.querySelector('#p32WorkTitle')?.textContent?.trim(),
+        firstTitle: document.querySelector('#grid > .card .cardtitle, #grid > .p26-work-card .p26-work-title')?.textContent?.trim(),
+        meta: document.querySelector('#p32WorkMeta')?.textContent?.trim()
+    })""")
+    print("DEFAULT_WORK_PREVIEW=" + json.dumps(preview_state, ensure_ascii=False))
+    check(preview_state["title"] and preview_state["title"] == preview_state["firstTitle"], "default Song Select previews the first visible work without marking it selected")
     cover_diagnostics = page.evaluate("""() => [...document.querySelectorAll('#grid .card img,#grid .p26-work-card img')].slice(0,8).map(img=>({src:(img.getAttribute('src')||'').slice(0,160),currentSrc:(img.currentSrc||'').slice(0,160),complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,objectFit:getComputedStyle(img).objectFit,visibility:getComputedStyle(img).visibility,display:getComputedStyle(img).display}))""")
     print("CATALOG_COVER_DIAGNOSTICS=" + json.dumps(cover_diagnostics, ensure_ascii=False))
     scene_artwork = page.locator("#p32SceneImage").evaluate("(el) => ({inlineBackground:el.style.backgroundImage,computedBackground:getComputedStyle(el).backgroundImage,opacity:getComputedStyle(el).opacity})")
