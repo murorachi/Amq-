@@ -33,7 +33,13 @@ def main() -> int:
         print("FAIL: integration marker already exists; refusing duplicate injection")
         return 6
     injection = "\n" + marker + "\n<script>\n" + js + "\n</script>\n"
-    html = html.replace("</body>", injection + "</body>", 1)
+    # The legacy HTML has styles/scripts after its first </body>. Inject at the final
+    # document boundary so Proto26 runs after those overrides and event handlers.
+    closing_html = html.rfind("</html>")
+    if closing_html < 0:
+        print("FAIL: final HTML boundary not found")
+        return 7
+    html = html[:closing_html] + injection + html[closing_html:]
     output_bytes = html.encode("utf-8")
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_bytes(output_bytes)
