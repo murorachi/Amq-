@@ -6,7 +6,7 @@
 - Matched viewport: 1280 x 720 at device scale factor 1
 - Candidate SHA-256: c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 - Normalized mean absolute pixel difference (diagnostic): 0.275356
-- Pixels with max-channel difference >= 24: 772413/921600 (83.81%)
+- Pixels with max-channel difference >= 24: 772410/921600 (83.81%)
 - Active app view: catalog
 - Catalog real covers before capture: 7/8
 - Loaded visible catalog images before capture: 8/8

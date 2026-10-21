@@ -37,7 +37,7 @@ PASS scene proportions prioritize the center artwork while preserving side panel
 PASS scene artwork stays bounded at constrained viewport widths
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_33.html
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_34.html
 OUTPUT_BYTES=8987561
 OUTPUT_SHA256=c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d
 BUILD=PASS
