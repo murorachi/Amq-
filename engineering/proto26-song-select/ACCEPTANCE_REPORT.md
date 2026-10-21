@@ -1,8 +1,8 @@
-Song Select candidate-43 acceptance summary
-Commit under test: cfb314193eed41115b96e14d3c6a6209bba2240c
-Date UTC: 2026-10-21T16:51:57Z
-8989121 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
-2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
+Song Select candidate-44 acceptance summary
+Commit under test: 1bd01bbd0820f5f4a5c61c46aa3eed75bac5016e
+Date UTC: 2026-10-21T16:52:49Z
+8989055 dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_44.html
+787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c  dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_44.html
 --- static test report ---
 PASS Song Select uses existing catalog tabs selector
 PASS malformed tabs declaration is absent
@@ -44,16 +44,16 @@ PASS scene artwork stays bounded at constrained viewport widths
 PASS constrained Song Select scene and filter controls have responsive bounds
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
-OUTPUT_BYTES=8989121
-OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_44.html
+OUTPUT_BYTES=8989055
+OUTPUT_SHA256=787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
+OUTPUT_SHA256=787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c
 STATIC_ACCEPTANCE=PASS
 --- browser test report ---
 PASS source mode controls initialize
@@ -85,10 +85,10 @@ DEFAULT_GEOMETRY_1440x900={"bodyPaddingLeft": "0px", "searchLeft": 934.625, "sea
 SCENE_GEOMETRY_1440x900={"stage": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "grid"}, "scene": {"left": 28, "right": 1440, "top": 52, "bottom": 712, "width": 1412, "height": 660, "display": "block"}, "info": {"left": 28, "right": 367, "top": 52, "bottom": 712, "width": 339, "height": 660, "display": "flex"}, "title": {"left": 374, "right": 920, "top": 422, "bottom": 518, "width": 546, "height": 96, "display": "flex"}, "catalog": {"left": 925, "right": 1440, "top": 52, "bottom": 712, "width": 515, "height": 660, "display": "flex"}, "search": {"left": 935, "right": 1431, "top": 60, "bottom": 85, "width": 496, "height": 25, "display": "block"}, "grid": {"left": 934, "right": 1432, "top": 167, "bottom": 669, "width": 498, "height": 502, "display": "flex"}}
 DEFAULT_WORK_PREVIEW={"title": "The Hare and The Tortoise", "firstTitle": "The Hare and The Tortoise", "meta": "作品預覽 · Usagi to Kame"}
 PASS default Song Select previews the first visible work without marking it selected
-CATALOG_COVER_DIAGNOSTICS=[{"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}]
-SCENE_ARTWORK_DEBUG={"inlineBackground": "", "computedBackground": "none", "opacity": "0.82"}
+CATALOG_COVER_DIAGNOSTICS=[{"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 161, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15441-2521422905.1372240854.jpg", "complete": true, "naturalWidth": 156, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A15382-3091557267.1474569209.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 144, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "", "currentSrc": "", "complete": true, "naturalWidth": 0, "naturalHeight": 0, "objectFit": "cover", "visibility": "visible", "display": "none"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A1501-3071407385.1521432071.jpg", "complete": true, "naturalWidth": 191, "naturalHeight": 200, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A631-9.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 136, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3527-5.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 135, "objectFit": "cover", "visibility": "visible", "display": "block"}, {"src": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "currentSrc": "https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A3528-2283743420.1500879838.jpg", "complete": true, "naturalWidth": 200, "naturalHeight": 150, "objectFit": "cover", "visibility": "visible", "display": "block"}]
+SCENE_ARTWORK_DEBUG={"inlineBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "computedBackground": "linear-gradient(rgba(12, 16, 27, 0.28), rgba(12, 16, 27, 0.36)), url(\"https://cdn.animenewsnetwork.com/thumbnails/fit200x200/encyc/A4938-6.jpg\")", "opacity": "0.82"}
 CARD_MANAGE_AT_REST={"opacity": "0", "pointerEvents": "none"}
-COVER_DECORATIONS_DEBUG=[{"className": "coverFallback", "display": "grid"}, {"className": "symbol", "display": "none"}, {"className": "year", "display": "none"}, {"className": "sticker", "display": "none"}, {"className": "coverFallback", "display": "grid"}, {"className": "symbol", "display": "none"}, {"className": "year", "display": "none"}, {"className": "sticker", "display": "none"}]
+COVER_DECORATIONS_DEBUG=[{"className": "coverFallback", "display": "none"}, {"className": "symbol", "display": "none"}, {"className": "year", "display": "none"}, {"className": "sticker", "display": "none"}, {"className": "coverFallback", "display": "none"}, {"className": "symbol", "display": "none"}, {"className": "year", "display": "none"}, {"className": "sticker", "display": "none"}]
 PASS loaded covers have no decorative overlays and unloaded covers retain a compact fallback
 PASS scene uses a real cover when the external cover service has loaded one, otherwise preserves the fallback
 PASS catalog quick-management button is unobtrusive until hover/focus
@@ -168,7 +168,7 @@ PASS Escape closes the selected-work detail pane and restores catalog controls
 PASS catalog reserves horizontal space for the detail pane
 PASS batch tools reserve horizontal space for the detail pane
 PASS search and filter controls reserve horizontal space for the detail pane
-OVERFLOW_DEBUG_1000x562={"viewport": 1000, "documentWidth": 1000, "bodyWidth": 1000, "bodyPaddingLeft": "260px", "stage": {"scene": {"left": 282, "right": 1000, "width": 718}, "sceneImage": {"left": 282, "right": 1000, "width": 718}, "catalog": {"left": 738, "right": 1000}, "filterControls": [{"tag": "SELECT", "left": 904, "right": 946, "width": 42}, {"tag": "SELECT", "left": 949, "right": 991, "width": 42}, {"tag": "SELECT", "left": 904, "right": 946, "width": 42}, {"tag": "SELECT", "left": 949, "right": 991, "width": 42}, {"tag": "SELECT", "left": 904, "right": 946, "width": 42}, {"tag": "INPUT", "left": 949, "right": 991, "width": 42}], "left": 282, "right": 1000, "width": 718, "inlineWidth": "718px", "computedWidth": "718px", "gridColumns": "172.312px 271.625px 262.062px", "parent": {"tag": "DIV", "cls": "wrap", "left": 260, "right": 1000, "width": 740}}, "overflowing": []}
+OVERFLOW_DEBUG_1000x562={"viewport": 1000, "documentWidth": 1000, "bodyWidth": 1000, "bodyPaddingLeft": "260px", "stage": {"scene": {"left": 282, "right": 1000, "width": 718}, "sceneImage": {"left": 282, "right": 1000, "width": 718}, "catalog": {"left": 738, "right": 1000}, "filterControls": [{"tag": "SELECT", "left": 748, "right": 868, "width": 120}, {"tag": "SELECT", "left": 871, "right": 991, "width": 120}, {"tag": "SELECT", "left": 748, "right": 868, "width": 120}, {"tag": "SELECT", "left": 871, "right": 991, "width": 120}, {"tag": "SELECT", "left": 748, "right": 868, "width": 120}, {"tag": "INPUT", "left": 871, "right": 991, "width": 120}], "left": 282, "right": 1000, "width": 718, "inlineWidth": "718px", "computedWidth": "718px", "gridColumns": "172.312px 271.625px 262.062px", "parent": {"tag": "DIV", "cls": "wrap", "left": 260, "right": 1000, "width": 740}}, "overflowing": []}
 PASS 1000x562 Song Select viewport has no horizontal overflow
 PASS scene artwork remains within the Song Select scene at 1000x562
 PASS 1000x562 Song Select filters remain inside the catalog panel
@@ -182,7 +182,7 @@ PASS no browser console errors
 PASS mobile layout has no horizontal overflow
 PASS mobile detail drawer fits the viewport
 PASS mobile detail drawer retains its close control
-OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
+OUTPUT_SHA256=787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c
 BROWSER_ACCEPTANCE=PASS
 --- visual comparison report ---
 PASS pinned official Wiki image identity 1e927a00a1984a5ba20fa5efec639410f349607a

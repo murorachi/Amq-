@@ -38,14 +38,14 @@ PASS scene artwork stays bounded at constrained viewport widths
 PASS constrained Song Select scene and filter controls have responsive bounds
 PASS immutable baseline file exists
 BASELINE_SHA256=5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f
-OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_43.html
-OUTPUT_BYTES=8989121
-OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
+OUTPUT=dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_44.html
+OUTPUT_BYTES=8989055
+OUTPUT_SHA256=787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c
 BUILD=PASS
 PASS new versioned standalone HTML was built
 PASS integration injected exactly once
 PASS integration runs after legacy trailing styles and scripts
 PASS generated HTML includes source controls
 PASS baseline was not modified
-OUTPUT_SHA256=2413a516eb6d142222b7ae7c67e3d41a4cf5c8925b4611dfc5a941a22b963705
+OUTPUT_SHA256=787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c
 STATIC_ACCEPTANCE=PASS
