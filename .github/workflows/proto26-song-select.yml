@@ -64,7 +64,7 @@ jobs:
         if: always()
         run: |
           {
-            echo "Proto26 Song Select acceptance summary"
+            echo "Proto32 Song Select acceptance summary"
             echo "Commit under test: $GITHUB_SHA"
             echo "Date UTC: $(date -u +%FT%TZ)"
             if [ -f dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_09.html ]; then
