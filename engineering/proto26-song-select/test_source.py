@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_25.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_26.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -33,7 +33,7 @@ def main():
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
     check('body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene' in js and "backdrop-filter:blur(2px)" in js, "Song Select feature stage integrates the existing Catalog scene background with a fallback")
     check("height:clamp(380px,calc(100vh - 120px),600px)" in js, "Song Select stage height is constrained to the viewport")
-    check("Proto36: explicit non-overlapping scene geometry" in js and "#amqSongSelectStage .p32-scene{position:absolute!important;left:0!important;right:0!important;top:0!important;bottom:0!important;inset:0!important;grid-column:auto!important" in js, "desktop Song Select uses a continuous scene with explicit panel geometry")
+    check("Proto36: explicit non-overlapping scene geometry" in js and "#amqSongSelectStage .p32-scene{position:absolute!important;left:0!important;right:0!important;top:0!important;bottom:0!important;inset:0!important;grid-column:auto!important" in js and "width:auto!important;height:auto!important" in js, "desktop Song Select scene fills its grid stage without over-constrained dimensions")
     check("#amqSongSelectStage #grid{display:flex!important;flex:1 1 0px!important;flex-direction:column!important" in js and "min-height:52px!important;padding:3px 6px!important" in js, "desktop catalog preserves a compact single-column song list")
     check("const syncCatalogEmptyState=()=>{if(mode!=='amq'&&mode!=='singer')return" in js and "new MutationObserver(updateP32).observe(grid,{childList:true,subtree:true})" in js, "AMQ empty state synchronizes after asynchronous catalog rendering")
     check("p26-filter-strip" in js and "overflow-x" in js and "height:24px;min-height:24px" in js, "catalog filters remain reachable in a compact horizontal strip")
