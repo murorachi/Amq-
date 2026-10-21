@@ -8,32 +8,34 @@
 
 ## Latest verified Proto25 checkpoint
 - Isolated source branch: `v82.85.30-proto25-ui-refactor-work-03`.
-- Tested source head: `d37792fdf17b40dfb7afbcae43a2de7598860f02`.
-- Successful workflow: [Run 39530034146](https://github.com/murorachi/Amq-/actions/runs/39530034146).
-- Workflow conclusion: SUCCESS. Static HTML parse, duplicate-ID check, inline JavaScript syntax checks and browser acceptance all passed.
+- Tested source commit: `a05c66401f0053d2c7bee53f5a965422edd8f9e9`.
+- Successful workflow: [Run 39536870515](https://github.com/murorachi/Amq-/actions/runs/39536870515).
+- Workflow conclusion: SUCCESS. Static HTML parse, duplicate-ID check, inline JavaScript syntax checks and browser acceptance passed.
 - Browser assertions: 18 PASS; page errors: 0; console errors: 0.
-- Artifact: [proto25-stage24-ui-acceptance, ID 12314713448](https://github.com/murorachi/Amq-/actions/runs/39530034146/artifacts/12314713448).
-- Artifact ZIP SHA-256: `ddf0dc13028cebc5a6cf05a6bcab32c66e33df1361cf4f3ac4c71c9978ab26de`.
+- Artifact: [proto25-stage24-ui-acceptance, ID 12318480861](https://github.com/murorachi/Amq-/actions/runs/39536870515/artifacts/12318480861).
+- Artifact ZIP SHA-256: `def95408d91797c5cdbc247c4275a217f5a6eeecdace2f4700f90aca6218d587`.
 - Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`.
-- Size: 8,917,750 bytes.
-- SHA-256: `65ff22b43383c142153cab4a403e5c2ab8d0839f685d07f75705865f2b2a82c9`.
-- Downloaded candidate hash exactly matches `candidate.sha256`.
-- Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`; verified remote head: `7687521f27f0c0ad2afa20cbac3680511d9b2caf`.
-- Remote tree confirms candidate HTML size 8,917,750 bytes, checksum manifest size 81 bytes and TEST_REPORT size 875 bytes. Remote manifest and report match the successful run.
+- Size: 8,918,095 bytes.
+- SHA-256: `0ae1692288d85c3d7750af365b9fcb60cd57744e47b979ab9cdef08ce7a30232`.
+- Downloaded candidate SHA-256 matches the artifact manifest.
+- Stage 24 branch: `v82.85.30-proto25-ui-refactor-stage-24`; verified remote head: `6f51f1f0b53dc194524c0be1c86e5a94bf4c7493`.
+- Remote tree confirms candidate HTML size 8,918,095 bytes, manifest size 81 bytes and TEST_REPORT presence. Remote manifest/report match the successful run.
 
-## Changes and evidence
-- Fixed workspace shell lifecycle so standalone catalog routes no longer retain the Learning/Analysis sidebar or dock.
-- Fixed standalone audio dock to 54px and reserved scroll-wrapper space beneath it. Final-row scroll clearance passes at document end: last card bottom 471px, dock top 834px, dock height 54px, wrapper bottom padding 160px.
-- Enlarged the desktop home logo to 560px and moved it into the menu-blade area. Primary actions now use a 520px maximum width and 76px height. Browser assertions cover logo width, landing height and action heights.
-- Enlarged the desktop Play submenu logo to 500px and menu blades to 520px wide by 92px high. The desktop-only implementation hint is hidden to prevent overlap; the mobile hint remains available. Browser assertions cover logo width, blade width/height and hidden desktop hint.
-- Downloaded and reviewed the latest home and Play menu screenshots. Geometry is materially closer to the pinned osu!Stable references. Background texture, exact logo artwork, header layout and screen-specific differences remain; this is not a pixel-perfect clone claim.
-- Other latest screenshots cover mobile home/Play menu/Settings, catalog/detail, quiz, Learning Center and Analysis. No page or console errors were reported.
+## Changes in the latest tested checkpoint
+- Preserved existing AMQ navigation, native storage, quiz, catalog, Learning Center, Analysis and Multiplayer UI behavior.
+- Fixed workspace shell lifecycle so standalone catalog routes do not retain the Learning/Analysis sidebar or dock.
+- Kept standalone audio dock at 54px and reserved scroll-wrapper clearance beneath it; final-row clearance passes at document end.
+- Enlarged the desktop home cookie to 560px and kept the three primary actions at 520px wide by 76px high.
+- Enlarged the Play submenu cookie to 500px and menu blades to 520px by 92px; required labels remain `Single Player`, `Multiplayer`, `Back`.
+- Widened the desktop Options sidebar from 292px to 340px while retaining the 292px mobile panel. The browser test now asserts the desktop width and mobile overflow constraint.
+- Downloaded and reviewed the latest desktop Settings screenshot; the wider panel remains within the viewport and existing controls remain visible.
+- Reviewed desktop/mobile home, Play menu and Settings screenshots. Mobile document width remains 390px at a 390px viewport.
 
 ## Acceptance limits
 - NOT RUN: real audio output; full quiz-answer lifecycle; multiplayer server connectivity and lifecycle.
 - Exact osu!Stable client source commit and matching screenshot build remain unverified.
-- >=90% visual similarity: NOT VERIFIED.
-- Third-party cover-image availability is separate from layout acceptance.
+- >=90% visual similarity: NOT VERIFIED. Current evidence is a qualitative comparison against pinned official Wiki screenshots, not a build/viewport-matched pixel score.
+- Background artwork, exact cookie artwork, header details and some screen-specific composition remain different. Third-party cover-image availability is not a layout pass.
 - Do not merge PR #9 or promote Proto25 until remaining reference comparison and separate runtime acceptance are complete.
 
 ## Rollback
