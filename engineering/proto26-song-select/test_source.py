@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
 BUILDER = ROOT / "engineering/proto26-song-select/build_single_file.py"
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
-OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_20.html"
+OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_21.html"
 
 def check(condition, label):
     print(("PASS " if condition else "FAIL ") + label)
@@ -48,7 +48,7 @@ def main():
     check(".cover .symbol,#amqSongSelectStage #grid>.card .cover .year,#amqSongSelectStage #grid>.card .cover .sticker{display:none!important}" in js and ".cover:not(.has-real-cover) .coverFallback{font-size:16px!important" in js, "cover decorations stay quiet while a compact fallback remains available without network art")
     check("const first=cards[0]" in js and "作品預覽 · " in js, "default Song Select previews the first visible work without falsely marking it selected")
     check("proto26-song-select-default-viewport.png" in Path(__file__).with_name("visual_compare.py").read_text(encoding="utf-8") and "SELECTED_STATE_CAPTURE_FAIL" in Path(__file__).with_name("visual_compare.py").read_text(encoding="utf-8"), "visual comparison captures both default and selected-song states")
-    check("#overlay.open .detailHero{display:none!important}" in js and "#overlay.open .songrow{display:grid!important" in js, "desktop selected-song drawer is a compact scrollable song list rather than a large detail hero")
+    check("body:has(#overlay.open) #overlay.open .drawer .detailHero{display:none!important}" in js and "body:has(#overlay.open) #overlay.open .drawer .songlist .songrow{display:grid!important" in js, "desktop selected-song drawer overrides legacy detail styles with a compact scrollable song list")
     check("minmax(0,24%) minmax(0,39.5%) minmax(0,36.5%)" in js and "left:24.5%!important;right:36.8%!important" in js, "scene proportions prioritize the center artwork while preserving side panels")
     check(SOURCE.is_file(), "immutable baseline file exists")
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
