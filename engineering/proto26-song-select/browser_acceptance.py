@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_16.html"
+HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_17.html"
 failures = []
 def check(ok, label):
     print(("PASS " if ok else "FAIL ") + label)
@@ -108,7 +108,8 @@ with sync_playwright() as p:
     print("CARD_MANAGE_AT_REST=" + json.dumps(manage_at_rest, ensure_ascii=False))
     cover_decorations = page.locator("#grid > .card .cover .symbol, #grid > .card .cover .year, #grid > .card .cover .sticker, #grid > .card .cover .coverFallback").evaluate_all("(els) => els.slice(0,8).map(el => ({className:el.className,display:getComputedStyle(el).display}))")
     print("COVER_DECORATIONS_DEBUG=" + json.dumps(cover_decorations, ensure_ascii=False))
-    check(all(el["display"] == "none" for el in cover_decorations), "cover artwork is not obscured by decorative icons and badges")
+    cover_state = page.locator("#grid > .card .cover").evaluate_all("(els) => els.slice(0,8).map(el => ({loaded:el.classList.contains('has-real-cover'),decorations:[...el.querySelectorAll('.symbol,.year,.sticker,.coverFallback')].map(item=>({className:item.className,display:getComputedStyle(item).display}))}))")
+    check(all((all(item["display"] == "none" for item in state["decorations"]) if state["loaded"] else (all(item["display"] == "none" for item in state["decorations"] if item["className"] in ["symbol","year","sticker"]) and any(item["display"] != "none" for item in state["decorations"] if item["className"] == "coverFallback"))) for state in cover_state), "loaded covers have no decorative overlays and unloaded covers retain a compact fallback")
     loaded_cover_count = page.locator("#grid > .card img").evaluate_all("(imgs) => imgs.filter(img => img.complete && img.naturalWidth >= 80 && img.naturalHeight >= 50).length")
     check(("url(" in scene_artwork["computedBackground"]) if loaded_cover_count else (scene_artwork["computedBackground"] == "none"), "scene uses a real cover when the external cover service has loaded one, otherwise preserves the fallback")
     check(manage_at_rest is not None and manage_at_rest["opacity"] == "0" and manage_at_rest["pointerEvents"] == "none", "catalog quick-management button is unobtrusive until hover/focus")

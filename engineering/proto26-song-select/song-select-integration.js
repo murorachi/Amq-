@@ -268,7 +268,9 @@
   #amqSongSelectStage #grid>.card,#amqSongSelectStage #grid>.p26-work-card{display:flex;flex-direction:row;align-items:center;gap:8px;width:100%;min-height:60px;padding:4px 6px;background:rgba(24,31,45,.56);border:1px solid rgba(201,215,239,.24);border-radius:2px;color:#e8edf6;text-align:left;box-shadow:none;cursor:pointer;backdrop-filter:blur(2px)}
   #amqSongSelectStage #grid>.card:hover,#amqSongSelectStage #grid>.p26-work-card:hover{border-color:#e768a7;background:rgba(48,39,59,.88)}
   #amqSongSelectStage #grid>.card .cardManage{top:2px!important;right:2px!important;width:20px!important;height:20px!important;min-height:20px!important;padding:0!important;border-radius:3px!important;font-size:14px!important;opacity:0!important;pointer-events:none!important;transition:opacity .12s ease!important;box-shadow:none!important;backdrop-filter:none!important}
-  #amqSongSelectStage #grid>.card .cover.has-real-cover .symbol,#amqSongSelectStage #grid>.card .cover.has-real-cover .year,#amqSongSelectStage #grid>.card .cover.has-real-cover .sticker,#amqSongSelectStage #grid>.card .cover.has-real-cover .coverFallback{display:none!important}
+  #amqSongSelectStage #grid>.card .cover .symbol,#amqSongSelectStage #grid>.card .cover .year,#amqSongSelectStage #grid>.card .cover .sticker{display:none!important}
+  #amqSongSelectStage #grid>.card .cover.has-real-cover .coverFallback{display:none!important}
+  #amqSongSelectStage #grid>.card .cover:not(.has-real-cover) .coverFallback{font-size:16px!important;opacity:.62!important}
   #amqSongSelectStage #grid>.card:hover .cardManage,#amqSongSelectStage #grid>.card:focus-within .cardManage{opacity:1!important;pointer-events:auto!important}
   #amqSongSelectStage #grid>.card img,#amqSongSelectStage #grid>.card .cover,#amqSongSelectStage #grid>.p26-work-card .p26-work-mark{flex:0 0 50px;width:50px;height:50px;object-fit:cover}
   #amqSongSelectStage #grid>.card .cardbody{min-width:0;flex:1}
