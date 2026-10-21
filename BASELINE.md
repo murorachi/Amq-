@@ -2,19 +2,19 @@
 
 ## Latest verified functional candidate
 
-- Candidate: Song Select candidate 31.
-- Source commit tested: `a09ba9fb9fdc443d8100042569d920f5dc1313df`.
-- Generated report commit: `46db5f2bc21b39fbe3fbcf6084da13ad08d3ae0d`.
-- Run: https://github.com/murorachi/Amq-/actions/runs/39634395693 — **SUCCESS**.
-- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_31.html`.
-- Size: 8,987,561 bytes.
-- SHA-256: `c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d`.
+- Candidate: Song Select candidate 44.
+- Tested source commit: `1bd01bbd0820f5f4a5c61c46aa3eed75bac5016e`.
+- Generated report/artifact commit: `c64b35cf9aa2f1b6cbd7667d35c8379ab7603b4e`.
+- Run: https://github.com/murorachi/Amq-/actions/runs/39638583685 — **SUCCESS**.
+- HTML: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_44.html`.
+- Size: 8,989,055 bytes.
+- SHA-256: `787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c`.
+- Remote Git blob SHA: `473b087541bcb9eb80b1d6771e8277f18ea72530`.
 - Static/build assertions: **PASS**.
 - Playwright browser acceptance: **PASS**; page/console errors 0 / 0.
 - Visual evidence generation: **PASS**.
-- Visual design acceptance: **NOT ACCEPTED**; normalized MAE 0.275356 and changed-pixel ratio 83.8122% are diagnostic only.
-- Artifact ZIP SHA-256: `e82909846742e5faad821b5baaa1cb7ec4a197f91eb907b969e30d6b2afc92bb`.
-- The generated HTML exists on the remote branch and the artifact SHA-256 matches the workflow report.
+- Visual design acceptance: **NOT ACCEPTED**; normalized MAE 0.275356 and changed-pixel ratio 83.81% are diagnostics only.
+- Artifact ZIP SHA-256: `102f000aec43ffaf5774b8339f220198a1fba6491f72cc86d39ec07821033feb`.
 
 ## Immutable AMQ baseline
 
@@ -40,7 +40,7 @@
 
 ## Rollback
 
-1. Candidate 31: SHA-256 `c7041795ed3be10993dc9785bb97a86c794ff7861df8c7212a89ea4bac5b529d`.
+1. Candidate 44: SHA-256 `787332a554e40d52a7b0f0e0c9ba490cbf14bb16da1c9e0e56148afb469f432c`.
 2. Candidate 21: SHA-256 `5a89a1f27b1ce25984e6076ff16531397e48c319fd02d602ee87d984486d2293`.
 3. Candidate 10: SHA-256 `21a608f1357f020b6e56e8d1dec6735ef2da9bcccb4b34fcf5541c4f535f2421`.
 4. Candidate 09: SHA-256 `37d5055e91688e7604007d052041aa0f846c04c29793fced2312592f282ea01d`.
