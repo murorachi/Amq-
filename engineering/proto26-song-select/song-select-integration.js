@@ -264,6 +264,8 @@
     stage.style.setProperty('max-width','100vw','important');
   };
   window.addEventListener('resize',fitStageToViewport,{passive:true});
+  window.addEventListener('resize',()=>setTimeout(fitStageToViewport,80),{passive:true});
+  const stageFitObserver=new ResizeObserver(fitStageToViewport);if(stage.parentElement)stageFitObserver.observe(stage.parentElement);const workspaceSidebar=document.getElementById('amqWorkspaceSidebar');if(workspaceSidebar)stageFitObserver.observe(workspaceSidebar);
   document.getElementById('amqWorkspaceDock')?.addEventListener('click',()=>window.requestAnimationFrame(fitStageToViewport));
   new MutationObserver(()=>window.requestAnimationFrame(fitStageToViewport)).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
   window.requestAnimationFrame(fitStageToViewport);
