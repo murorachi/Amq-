@@ -5,6 +5,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html"
 JS = ROOT / "engineering/proto26-song-select/song-select-integration.js"
+REFINEMENT_CSS = ROOT / "engineering/proto26-song-select/song-select-refinement.css"
 OUTPUT = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html"
 EXPECTED_SOURCE_SHA256 = "5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f"
 
@@ -12,7 +13,7 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 def main() -> int:
-    if not SOURCE.is_file() or not JS.is_file():
+    if not SOURCE.is_file() or not JS.is_file() or not REFINEMENT_CSS.is_file():
         print("FAIL: required source or integration JS is missing")
         return 2
     raw = SOURCE.read_bytes()
@@ -22,6 +23,8 @@ def main() -> int:
         return 3
     html = raw.decode("utf-8")
     js = JS.read_text(encoding="utf-8")
+    refinement_css = REFINEMENT_CSS.read_text(encoding="utf-8")
+    js = js.replace("document.head.append(style30);", "style30.textContent += " + repr(refinement_css) + ";\n  document.head.append(style30);")
     if "const grid = $('#grid'), tabs = ," in js:
         print("FAIL: known malformed tabs declaration still present")
         return 4
