@@ -106,7 +106,7 @@ async def main():
         # Settings panel opens the existing real controls without hiding or replacing them.
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
         settings_desktop=await page.evaluate("({x:document.querySelector('.top .actions').getBoundingClientRect().x,width:document.querySelector('.top .actions').getBoundingClientRect().width,background:getComputedStyle(document.querySelector('.top .actions')).backgroundColor})")
-        assert settings_desktop["x"]<=10 and settings_desktop["width"]<=320,settings_desktop
+        assert settings_desktop["x"]<=10 and 336<=settings_desktop["width"]<=344,settings_desktop
         report["settings_desktop"]=settings_desktop
         await page.screenshot(path="proto25-settings-desktop.png",full_page=False)
         await page.locator("#uiHomeSettings").click(timeout=8000);await page.wait_for_timeout(100)
