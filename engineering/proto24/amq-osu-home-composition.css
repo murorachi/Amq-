@@ -800,4 +800,31 @@ body.ui-home-menu #homeMenu .amqHomeLandingV851::before {
   background-size: 76px 66px, 76px 66px, 100% 100% !important;
   background-position: 0 0, 38px 33px, center !important;
 }
+
+
+/* Proto25 Stage 33: match Stable menu typography while retaining AMQ labels and routes. */
+body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: clamp(20px, 2vw, 28px) !important;
+  letter-spacing: -0.025em !important;
+}
+#amqStablePlayChoices button {
+  font-style: italic !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+  font-size: clamp(20px, 2.2vw, 30px) !important;
+}
+#amqStablePlayChoices button::after {
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+@media(max-width:680px) {
+  body.ui-home-menu #homeMenu .amqHomeLandingAction strong {
+    font-size: clamp(17px, 4.5vw, 21px) !important;
+  }
+  #amqStablePlayChoices button {
+    font-size: clamp(18px, 4.8vw, 22px) !important;
+  }
+}
 </style>
