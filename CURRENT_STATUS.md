@@ -2,7 +2,7 @@
 
 ## Proto26: Song Select integration
 
-Status: **Stage 1 audit in progress; no UI implementation changes have been made yet.**
+Status: **Stage 1 audit complete; Stage 2 implementation is the next active task. No production UI changes have been made yet.**
 
 ### Verified baseline
 - Branch: `v82.85.30-proto25-ui-refactor-stage-24`
@@ -17,6 +17,13 @@ Status: **Stage 1 audit in progress; no UI implementation changes have been made
 - Existing Learning Center and Analysis workspaces are separate and use the existing workspace dock; their controls must be reused and extended, not replaced with empty mock buttons.
 - The previous Playwright acceptance tests cover navigation, basic catalog layout, mobile overflow, workspace styling, settings visibility, and browser console errors. They do not establish the requested integrated Song Select layout or verify all four workspace buttons within that Song Select space.
 - Baseline UI tests explicitly did not run real audio output, full quiz-answer lifecycle, or multiplayer server lifecycle.
+
+### Stage 1 completed
+- Downloaded and extracted the Proto25 Stage 24 CI artifact.
+- Verified the candidate file size and SHA-256 against the report.
+- Inspected actual HTML and the Playwright acceptance script to map existing data and event handlers.
+- Confirmed the song-selection overlay is the central structural mismatch.
+- Created an isolated Proto26 branch and committed this baseline/audit record.
 
 ### Next actions
 1. Inspect the actual song data structures, current catalog filtering/sorting, song selection/detail drawer, and workspace dock event handlers.
