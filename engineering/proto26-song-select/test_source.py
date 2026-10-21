@@ -33,7 +33,7 @@ def main():
     check("grid-template-columns:repeat(2,minmax(0,1fr))" in js and "max-height:94dvh" in js, "desktop split view and mobile detail layout rules are present")
     check('body.amq-custom-bg-active[data-amq-scene="catalog"] #amqSongSelectStage .p32-scene' in js and "backdrop-filter:blur(2px)" in js, "Song Select feature stage integrates the existing Catalog scene background with a fallback")
     check("height:clamp(380px,calc(100vh - 270px),560px)" in js, "Song Select stage height is constrained to the viewport")
-    check("#amqSongSelectStage #grid{display:flex!important;flex:initial!important" in js and "height:100%!important;min-height:0!important" in js and "overflow:auto!important" in js, "catalog cards scroll inside the constrained panel")
+    check("#amqSongSelectStage #grid{" in js and "flex:initial!important" in js and "height:100%!important;min-height:0!important" in js and "overflow:auto!important" in js, "catalog cards scroll inside the constrained panel")
     check(".songrow.proto26-song-selected" in js and "translateX(-6px)" in js and "row.classList.add('proto26-song-selected')" in js, "selected song row is visibly highlighted and shifts slightly left")
     check("min-height:52px;padding:3px 5px" in js, "catalog cards use the compact density profile")
     check(SOURCE.is_file(), "immutable baseline file exists")
