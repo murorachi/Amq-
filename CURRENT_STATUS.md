@@ -1,56 +1,67 @@
 # Current Status
 
-## Latest verified checkpoint: Proto29 default layout width fix (2026-10-21)
+## Latest verified development checkpoint: Proto31 Song Select composition and scene-style fix (2026-10-21)
 
-- Working branch: `v82.85.30-proto29-song-select-layout-width-01`
-- CI source commit: `d0f89294ca16488453f9afa2225b8ac9d1c5dda5`
-- Generated artifact/report commit: `ae0377e5efab163b9501456c371bce5e0074cafc`
-- GitHub Actions: https://github.com/murorachi/Amq-/actions/runs/39571163151 — **SUCCESS**
-- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_07.html`
-- Size: 8,943,265 bytes
-- SHA-256: `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`
+- Working branch: `v82.85.30-proto31-scene-background-integration-01`
+- Tested source commit: `a8bec92c8549d6fcc2cf13ffc0401c150ce247ed`
+- Generated artifact/report commit: `6eda007f92417c8bc3614d8451ae0379e3943d4b`
+- GitHub Actions: https://github.com/murorachi/Amq-/actions/runs/39581069788 — **SUCCESS**
+- Candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_08.html`
+- File size: 8,952,996 bytes
+- SHA-256: `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`
+- Git blob SHA: `34e3f50af4d3224fd56b5237e202bc5bb3904958`
 - Static acceptance: **PASS**
 - Playwright browser acceptance: **PASS**
-- Pinned reference identity and matched-viewport evidence generation: **PASS**
-- Page errors / console errors: **0 / 0**
-- Immutable baseline hash verification: **PASS**, unchanged.
+- Matched-viewport visual evidence generation: **PASS**
+- Visual acceptance / 90% similarity target: **NOT VERIFIED**
+- Browser page errors / console errors: **0 / 0**
+- Immutable baseline SHA-256 verification: **PASS**, unchanged.
 
-### Verified Proto29 changes
-- Removed the legacy left padding reserved for the workspace sidebar when no workspace mode is selected.
-- Default Song Select now uses the full available width; at 1440×900 the measured body left padding is 0 px, search starts at x=38, and catalog starts at x=28.
-- Preserved the bottom four-workspace dock and conditional sidebar behavior.
-- Created a unique candidate filename `...song_select_07.html`; candidate 06 remains unchanged as the previous checkpoint.
-- Added static and browser assertions for the full-width geometry and continued workspace-mode behavior.
+### Verified changes
 
-### Visual comparison: evidence generated, visual acceptance NOT VERIFIED
-- Official osu!-wiki reference commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`
-- Reference image Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`
-- Matched viewport: 1280×720; geometry additionally checked at 1440×900.
-- Diagnostic normalized MAE: `0.303679`
-- Pixels with max-channel difference ≥ 24: 833,933 / 921,600 (90.49%). This is **not** a similarity score. The changed-pixel ratio rose after filling the previously blank left region; do not interpret that as a regression by itself.
-- The blank left column defect is fixed.
-- Remaining major visual gaps: AMQ still uses a generic filter bar and multi-column catalog card grid; the Stable reference uses a left ranking/score panel, large central background composition, right-side horizontal song/beatmap cards, and bottom controls. AMQ's required content must be mapped into that hierarchy rather than simply retaining the existing grid.
-- Exact osu!stable client source commit matching Stable `20260924.1`: **NOT VERIFIED**. Do not substitute osu!lazer.
+- Fixed the Proto30 stylesheet attachment bug: the Song Select composition stylesheet is now appended as `style30`, rather than accidentally re-appending the unrelated Proto26 stylesheet.
+- Verified fallback feature-stage background when no scene background is active.
+- Verified the configured Catalog scene state changes the feature-stage computed background and backdrop filter.
+- Added Escape dismissal for the desktop selected-work detail pane so the catalog controls remain reachable.
+- Updated browser and visual-geometry assertions to test the active three-zone layout rather than the obsolete pre-composition full-width search position.
+- Browser acceptance confirms the four workspace buttons, existing list/batch/learning/analysis surfaces, EMQ data initialization, AMQ/EMQ/MIX/Singer mode switching, selected-work detail pane, Escape dismissal, responsive layout, and zero browser errors.
+- Generated a uniquely named standalone HTML candidate. The immutable baseline and earlier candidates remain unchanged.
+
+### Visual comparison: evidence generated, acceptance NOT VERIFIED
+
+- Official osu! Stable reference label: `20260924.1`; this label is not a source-control commit.
+- Official Wiki commit: `ae2c6443a4264e5429ea7bcd2f3503be8a518a50`.
+- Reference image: `wiki/Client/Interface/img/song-selection.jpg`.
+- Reference image Git blob SHA: `1e927a00a1984a5ba20fa5efec639410f349607a`.
+- Matched viewport: 1280×720, device scale factor 1.
+- Diagnostic normalized MAE: `0.277352`.
+- Pixels with max-channel difference ≥ 24: 838,829 / 921,600 (91.02%). This is a diagnostic changed-pixel ratio, **not** a similarity score.
+- Exact osu!stable client source commit matching release `20260924.1`: **NOT VERIFIED**. Do not substitute osu!lazer source.
+- The screenshot evidence is traceable to the official Wiki commit, but its exact capture build is unknown.
+- The current candidate still requires substantial visual correction against the reference. Evidence generation and functional tests do not constitute visual approval.
 
 ### Remaining gates
-- Redesign Song Select's main composition around the pinned Stable reference while preserving AMQ's required information and existing data handlers.
-- Trace real song history/play-count/last-wrong-answer data before adding the selected-song information panel; missing fields must show empty states.
-- Integrate the existing anime/VN catalog as horizontal cards, with real sorting/filtering and AMQ/EMQ/MIX/Singer mode behavior.
-- Search edge cases, sort-result assertions, Enter/double-event regression, and real audio-output acceptance: **NOT RUN** in this stage.
-- Full quiz answer lifecycle and multiplayer server lifecycle: **NOT RUN**.
-- Home, Play, Settings, profile/statistics visual acceptance: **NOT RUN**.
 
-## Immutable baseline and rollback
+1. Rework the composition against the pinned Stable reference: current AMQ three-zone layout is a useful integration checkpoint, not a claim of high-fidelity replication.
+2. Replace remaining generic catalog composition with the reference's visual hierarchy and appropriate horizontal song/work cards while retaining AMQ-required data.
+3. Trace and assert real selected-song play-count and last-wrong-answer fields; use empty states when the history schema lacks a value.
+4. Add search edge-case tests for partial text, case, whitespace, CJK, special characters, zero results, and mode changes.
+5. Add actual sort-result assertions and Enter/single-activation regression tests.
+6. Run real audio-output acceptance.
+7. Full quiz-answer lifecycle and multiplayer server lifecycle: **NOT RUN**.
+8. Home, Play, Settings, profile/statistics visual acceptance: **NOT RUN**.
+
+### Immutable baseline and rollback
 
 - Immutable baseline branch: `v82.85.30-proto25-ui-refactor-stage-24`
 - Baseline file: `dist/amq_learning_tool_v82_85_30_workspace_proto25_stage24.html`
 - Baseline source commit: `3aea33e7137b7e3e3105c76ed896a515a335c2a3`
 - Baseline SHA-256: `5a0f18f47fb059427b385484086c66dd14716a03843fcba37f9eb5fe89a7d66f`
-- Earlier accepted rollback candidate: `dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html`
-- Rollback candidate SHA-256: `c1155dc7969613bbc20914816a7833842ba8384fd25f2a4611917ee7d2dd5950`
-- Candidate 06 checkpoint SHA-256: `3b1626b825ca223d6ff18dc5fb0927ed275f3fd58314782bdec4fe1b1919c08a`
-- Draft PRs #10 and #11 remain unmerged. Do not overwrite the baseline or any prior candidate.
+- Previous verified candidate 07 SHA-256: `2aad33f00a7553545784d726dd9b89f07ce90ae390596c277452014605d988f8`
+- Current candidate 08 SHA-256: `4fcf49520729584e9353f3779551c5f1cd0dc88799aa2ae8cfb69f36c2f4853f`
+- If this stage needs rollback, use candidate 07 or rebuild from the immutable Proto25 baseline. Do not overwrite either.
+- Draft PRs #10/#11 remain unmerged; do not merge until visual and functional gates are satisfied.
 
 ## Next task
 
-Start an isolated Song Select composition stage from candidate 07. Use the pinned reference to establish the layout regions and map existing AMQ data/functions into them. Keep candidate 07 unchanged, build a uniquely named next HTML, and rerun static, browser, geometry, and visual-evidence tests before claiming progress.
+Continue with Song Select visual composition, not homepage polish. Start from candidate 08 on the current isolated branch, keep candidate 08 immutable, map existing data/handlers into the pinned Stable hierarchy, then run static, browser, geometry, visual-evidence, and applicable regression tests.
