@@ -4,6 +4,8 @@ import json
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
+SCREENSHOT_DIR = ROOT / "engineering/proto26-song-select"
+SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
 HTML = ROOT / "dist/amq_learning_tool_v82_85_30_workspace_proto26_song_select_04.html"
 failures = []
 def check(ok, label):
