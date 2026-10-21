@@ -206,6 +206,12 @@
     else songs.forEach(s=>{if(typeof window.makeSongRow==='function')box.append(window.makeSongRow(s));});
     overlay.classList.add('open');document.body.style.overflow='hidden';
   }
+  // Keep the catalog controls reachable when the desktop detail drawer is open.
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape'||!overlay.classList.contains('open'))return;
+    overlay.classList.remove('open');
+    document.body.style.overflow='';
+  });
   function card(w){
     const b=document.createElement('button');b.type='button';b.className='p26-work-card';
     b.innerHTML='<span class="p26-work-mark">♫</span><span class="p26-work-copy"><span class="p26-work-title">'+esc(w.t||w.n||w.title||'未命名作品')+'</span><span class="p26-work-sub">'+esc([w.n&&w.n!==w.t?w.n:'',w.y||'',w.vndbId?'VNDB '+w.vndbId:''].filter(Boolean).join(' · '))+'</span><span class="p26-work-count">EMQ 曲庫作品</span></span>';
