@@ -29,3 +29,16 @@
 - Keep Proto25 changes isolated on the work branch and Stage 24.
 - Do not merge PR #9 or promote Proto25 until remaining reference comparison and required runtime acceptance are complete.
 - Do not overwrite the accepted Proto24 baseline. Roll back to `39d250cf5a269a0e2bf8f514474584bcc864f599` if an unresolved regression makes the candidate unsafe.
+
+
+## Next task after Stage 24 browser acceptance — 2026-10-21
+
+Stage 24 browser acceptance is now PASS at [run 39538605138](https://github.com/murorachi/Amq-/actions/runs/39538605138). The latest candidate is published to the isolated Stage 24 branch and its size/SHA-256 have been checked. Do not repeat this run unless source changes.
+
+Priority order:
+1. Perform a focused reference audit of the current desktop home, Play menu, Settings, catalog, catalog detail and mobile home against the pinned official osu! Wiki reference images. Record each visible mismatch by region; do not rely on memory or generic osu!-inspired styling.
+2. Resolve the missing exact osu!Stable client build/screenshot identity if feasible. Do not substitute osu!lazer. Without a matching build and viewport, keep similarity as a qualitative estimate, not a pass/fail metric.
+3. Make one cohesive, evidence-backed UI change set, preserving AMQ behavior and avoiding invented Stable-only controls/data.
+4. Add or update assertions for affected regions, then run Stage 24 acceptance and inspect the newly generated screenshots/report. Verify the remote candidate SHA manifest and publication commit again.
+5. Keep real audio output, full quiz-answer lifecycle and multiplayer server connectivity/lifecycle as NOT RUN until directly exercised.
+6. Do not merge PR #9 or promote Proto25 until reference comparison and required runtime acceptance are complete. Keep accepted Proto24 baseline immutable.
