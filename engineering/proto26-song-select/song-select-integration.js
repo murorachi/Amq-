@@ -20,6 +20,10 @@
   style.id='amq-proto26-song-select-css';
   style.textContent=`
     #proto26SongModes{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;padding:10px 12px;background:#171b25;border:1px solid #394151;border-radius:8px}
+    /* Song Select is the default browsing surface; home hero and batch tools must not leak into it. */
+    body.amq-workspace-active .view-home{display:none!important}
+    body.amq-workspace-active:not([data-amq-workspace-mode]) #quicktools{display:none!important}
+    body.amq-workspace-active:not([data-amq-workspace-mode]) #amqWorkspaceSidebar{display:none!important}
     /* The four dock modes are panels within Song Select, not separate app pages. */
     body[data-amq-workspace-mode="lists"] .view-catalog,
     body[data-amq-workspace-mode="learning"] .view-catalog,
@@ -76,16 +80,23 @@
   const syncWorkspaceShell=()=>{
     const active=document.body.classList.contains('amq-workspace-active');
     const desktop=window.innerWidth>900;
+    const workspaceMode=document.body.dataset.amqWorkspaceMode||'';
     const sidebar=document.getElementById('amqWorkspaceSidebar');
     const dock=document.getElementById('amqWorkspaceDock');
-    for(const [el,display] of [[sidebar,'block'],[dock,'grid']]){
-      if(!el)continue;
-      if(active&&desktop)el.style.setProperty('display',display,'important');
-      else el.style.removeProperty('display');
+    if(sidebar){
+      if(active&&desktop&&workspaceMode)sidebar.style.setProperty('display','block','important');
+      else sidebar.style.removeProperty('display');
+    }
+    if(dock){
+      if(active&&desktop)dock.style.setProperty('display','grid','important');
+      else dock.style.removeProperty('display');
+    }
+    for(const button of $('#amqWorkspaceDock [data-ws]')){
+      button.setAttribute('aria-pressed',String(Boolean(workspaceMode)&&button.dataset.ws===workspaceMode));
     }
   };
   syncWorkspaceShell();
-  new MutationObserver(syncWorkspaceShell).observe(document.body,{attributes:true,attributeFilter:['class']});
+  new MutationObserver(syncWorkspaceShell).observe(document.body,{attributes:true,attributeFilter:['class','data-amq-workspace-mode']});
   window.addEventListener('resize',syncWorkspaceShell,{passive:true});
 
   // Song Select's dock is an internal workspace switch, not four app-level routes.
