@@ -39,3 +39,12 @@
 3. If it still fails, use the logged `catalogRect`, `mountRect`, `mountStyle`, and `gridStyle` values to correct the actual flex sizing cause; do not add arbitrary pixel heights without geometry evidence.
 4. Only after browser acceptance passes, inspect the generated matched-viewport reference screenshot, overlay, pixel diff and report. Visual acceptance remains NOT VERIFIED until reviewed.
 5. On success, verify generated candidate 11 file and SHA-256 on the remote branch, then update the status and baseline records. Candidate 10 remains rollback; immutable Proto25 remains read-only.
+
+
+## Immediate next action after the second sizing failure
+
+1. Inspect the diagnostic run https://github.com/murorachi/Amq-/actions/runs/39598982384 and read the `mountChildren` geometry from `CATALOG_DENSITY_1280x720`.
+2. Identify which direct children consume the 362px mount height; fix the specific oversized/hidden controls or row allocation rather than adding arbitrary heights.
+3. Rerun static and browser acceptance. Required: grid height large enough for at least three real cards, internal scroll works, and at least three cards fully visible above the player at 1280×720.
+4. If browser acceptance passes, review generated reference screenshot, overlay and pixel-diff report before any visual acceptance claim.
+5. Candidate 10 remains rollback; immutable Proto25 remains read-only. Do not promote candidate 11 before all acceptance gates pass.
