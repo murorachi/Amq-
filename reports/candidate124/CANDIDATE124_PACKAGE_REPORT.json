@@ -1,0 +1,11 @@
+{
+  "zip": "candidate124_stage3_delivery.zip",
+  "bytes": 9913232,
+  "sha256": "b234deb7ca95e99e4f21c91571a907beee4abed5aa09c4c8ce37df1f70eb8c00",
+  "entries": 24,
+  "integrity": "PASS",
+  "html_included": true,
+  "html_size_bytes": 9236297,
+  "html_sha256": "3dedd925ba75fbaa71ed180ef34d3f6cb9024e205c9da5f6b0a720896c0693a9",
+  "remote_html_binary_upload": "BLOCKED: currently available GitHub connector file actions accept UTF-8 text and do not provide a local binary upload path."
+}
