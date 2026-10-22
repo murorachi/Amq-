@@ -9,11 +9,11 @@
 Fixed the existing Candidate 114 player-layout reset's route race. `ani-app-navigation` can fire before the Song Select body class is updated. The old reset could reapply the homepage player class/styles after the player had moved out of the homepage slot. The reset now checks the app's active view and re-checks it before delayed callbacks.
 
 ## Verification
-- Browser assertions: 16 PASS / 0 FAIL.
+- Browser assertions: 17 PASS / 0 FAIL.
 - Inline JavaScript syntax: 62 scripts, 0 errors.
 - CSS: 90 style blocks, 2,569 qualified rules, 0 parse errors.
 - ZIP integrity: PASS.
-- Home ↔ Song Select: 4 complete cycles; player uses `amqHomeDock` only on Home and restores correctly.
+- Home ↔ Song Select: 4 complete cycles; player uses `amqHomeDock` only on Home and restores correctly. Home-only player measured 46px; Song Select-only rail/back/home controls are hidden on Home.
 - Home main icon opens exactly 開始遊戲、歌曲選擇、設定.
 - Song Select search, sort, six filter controls, four mode toggles, selected-song info, batch selection, list management and learning plan entry detected.
 - Dashboard entry opens populated dashboard and exits Song Select route.
