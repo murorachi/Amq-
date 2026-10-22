@@ -1,0 +1,37 @@
+{
+  "candidate": 130,
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_130.html",
+  "bytes": 9237889,
+  "sha256": "9085754d5b6d8b1463709c25a97402a217e8ddb07afb9e4beb5d14dd1fbc3916",
+  "static_validation": {
+    "checks_passed": 8,
+    "checks_failed": 0,
+    "inline_javascript_blocks": 62,
+    "javascript_parse_errors": 0,
+    "css_blocks": 90,
+    "css_top_level_rules": 2579,
+    "css_parse_errors": 0
+  },
+  "browser": {
+    "rendered_with_playwright_set_content": true,
+    "viewports": [
+      "1648x928@DPR1",
+      "1440x900@DPR1",
+      "1280x720@DPR1"
+    ],
+    "catalog_cards": 180,
+    "vertical_flex_stack": true,
+    "hover_offset_px": 3,
+    "selected_row_offset_px": 7,
+    "file_scheme": "BLOCKED ERR_BLOCKED_BY_ADMINISTRATOR",
+    "localStorage": "NOT RUN opaque origin denies access",
+    "live_apis": "NOT RUN",
+    "audio": "NOT RUN"
+  },
+  "visual_metrics_1648x928": {
+    "ssim": 0.312034,
+    "mae": 63.4492,
+    "rmse": 84.851
+  },
+  "acceptance": "NOT ACCEPTED; stage 1 incomplete; stages 2 and 3 incomplete"
+}
