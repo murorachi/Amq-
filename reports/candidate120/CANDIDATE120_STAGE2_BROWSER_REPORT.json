@@ -1,0 +1,25 @@
+{
+  "candidate": 120,
+  "artifact_sha256": "2b5f874693998f9748ddd579737563a78a22c3c7db0d089547cfc891fb6248a2",
+  "summary": {
+    "passed": 17,
+    "failed": 0
+  },
+  "checks": [
+    "Homepage icon-only initial state",
+    "Homepage profile/player each unique",
+    "Four Home → Song Select cycles without duplicate nodes",
+    "Four Song Select → Home cycles restore compact player and clean route state",
+    "Home-only player dock style is absent on Song Select",
+    "Home icon reveals exactly three actions",
+    "Song Select search/sort/filter/mode and list/learning controls remain present",
+    "Dashboard opens populated existing panel",
+    "No uncaught browser errors"
+  ],
+  "not_run": [
+    "Real reload persistence",
+    "Live import requests",
+    "Real audio playback",
+    "Full osu!stable geometry/pixel comparison"
+  ]
+}
