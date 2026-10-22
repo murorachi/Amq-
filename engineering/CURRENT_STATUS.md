@@ -7,6 +7,6 @@
 - Fixed dashboard/learning/quiz/multiplayer panel registration so the empty-state fallback no longer masks mounted nodes.
 - Catalog portal selection now moves leaf `.view-catalog` nodes rather than nested ancestors and descendants together.
 - Practice actions select the matching existing mode control when available, without automatically starting a session.
-- Tests: JS syntax 53/53; CSS parse 78/78; workspace action shell/navigation checks 28/28; DOM restoration 3/3; batch safety 3/3.
-- Limits: real persistent storage, audio, external cover/API loading, full CRUD/data mutation tests, and pixel parity remain unverified.
+- Tests: JS syntax 53/53; CSS parse 78/78; workspace action shell/navigation checks 28/28; DOM restoration 3/3; batch safety 3/3; custom-list create/rename/delete UI checks 4/4 with test-only storage.
+- Limits: real persistent storage, audio, external cover/API loading, full watch-state mutation coverage, and pixel parity remain unverified.
 - GitHub HTML binary has not been uploaded or remotely hash-verified; engineering text records are uploaded separately.
