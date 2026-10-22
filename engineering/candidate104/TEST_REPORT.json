@@ -1,0 +1,89 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_104.html",
+  "sha256": "39526d4fcbb2d92fb2e5da0c808b1a7c38f187141a21e168a81b4156873a5b93",
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "58 script blocks; 0 syntax errors"
+    },
+    {
+      "name": "CSS parsing",
+      "result": "PASS",
+      "detail": "86 style blocks, 2519 qualified rules, 0 parse errors"
+    },
+    {
+      "name": "Song Select route",
+      "result": "PASS"
+    },
+    {
+      "name": "Eight left-rail entries",
+      "result": "PASS",
+      "detail": "8"
+    },
+    {
+      "name": "Custom-list picker population and selection wiring",
+      "result": "PASS",
+      "detail": "Injected in-memory storage shim"
+    },
+    {
+      "name": "Next-song stays within selected custom-list candidate pool",
+      "result": "PASS",
+      "detail": "Focused test with valid anime IDs"
+    },
+    {
+      "name": "Source switching leaves current title unchanged",
+      "result": "PASS",
+      "detail": "Source selector maps to legacy source setting"
+    },
+    {
+      "name": "Native media chrome hidden",
+      "result": "PASS"
+    },
+    {
+      "name": "Bottom dock geometry",
+      "result": "PASS",
+      "detail": "x=115.36 y=822 width=1414 height=106 at 1648x928"
+    },
+    {
+      "name": "Song list bottom clearance",
+      "result": "PASS",
+      "detail": "bottom=820; bottom band starts y=822"
+    },
+    {
+      "name": "Mode/source controls fit vertical stack",
+      "result": "PASS"
+    },
+    {
+      "name": "Song hover displacement",
+      "result": "PASS",
+      "detail": "dx=-7 px, dy=0; background changes"
+    },
+    {
+      "name": "Uncaught page errors",
+      "result": "PASS",
+      "detail": "0 in focused test"
+    },
+    {
+      "name": "Durable storage across reload",
+      "result": "BLOCKED",
+      "detail": "file:// and localhost navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR; in-memory shim cannot prove durability"
+    },
+    {
+      "name": "Real audible playback",
+      "result": "NOT RUN",
+      "detail": "Remote audio URL selected but network playback unavailable"
+    },
+    {
+      "name": "Full pixel-difference parity",
+      "result": "NOT RUN",
+      "detail": "Geometry and computed styles sampled; no full pixel-diff benchmark"
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "blocked": 1,
+    "not_run": 2
+  }
+}
