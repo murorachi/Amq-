@@ -1,0 +1,30 @@
+{
+  "candidate": "amq_learning_tool_v82_85_41_workspace_proto39-card-toggle-modal-close_91.html",
+  "size_bytes": 9151420,
+  "sha256": "cfd13fca8522265b13e5b5cb336b569d5b8e0da520adb754405eb3b3d118d628",
+  "static": {
+    "javascript_blocks": 56,
+    "failures": 0,
+    "css_blocks": 81,
+    "parser_errors": 0,
+    "assertions_passed": 14,
+    "total_assertions": 14
+  },
+  "browser": {
+    "startup": "PASS in Chromium page.set_content with in-memory localStorage/sessionStorage shim",
+    "dom_mutations_in_quiet_window_1s": 10,
+    "dock": "PASS: fixed at bottom-left and remains under BODY through workspace switches",
+    "workspace_navigation": "PASS: lists, batch, learning, data quality",
+    "custom_list": "PASS in harness: create/add/remove/filter and persisted serialized storage loaded in a fresh page context",
+    "learning_center": "PASS: five distinct routes; dashboard only once under Learning Center",
+    "import_ui": "PASS: separate AniList/MAL/VNDB fields; delegates to existing importer controls",
+    "limitations": [
+      "file:// and localhost navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR",
+      "real origin-backed browser localStorage not tested",
+      "live AniList/MAL/VNDB API calls not tested"
+    ]
+  },
+  "github": {
+    "html_binary_uploaded": false
+  }
+}
