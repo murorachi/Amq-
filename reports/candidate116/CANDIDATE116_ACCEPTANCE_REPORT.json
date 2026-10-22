@@ -1,0 +1,60 @@
+{
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_116.html",
+  "bytes": 9235279,
+  "sha256": "78e665ad23ee21c9b0ab5c644f0bba2be3d311d8fee0e2015cf5fbaab06fe756",
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "not_run": 0
+  },
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "62 scripts; 0 syntax errors"
+    },
+    {
+      "name": "Rail destinations and grouping",
+      "result": "PASS",
+      "detail": "Four destinations; two semantic headings"
+    },
+    {
+      "name": "Placeholder statistics modal removed",
+      "result": "PASS",
+      "detail": "No c99DashboardModal node"
+    },
+    {
+      "name": "Existing targets retained",
+      "result": "PASS",
+      "detail": "syncOpenBtn, watchlist, learningPlan and dashboard actions present"
+    },
+    {
+      "name": "Rail viewport bounds",
+      "result": "PASS",
+      "detail": "All four entries within 1648x928 viewport"
+    },
+    {
+      "name": "Custom-list route",
+      "result": "PASS",
+      "detail": "Click opens existing watchlist view"
+    },
+    {
+      "name": "Uncaught browser errors",
+      "result": "PASS",
+      "detail": "0 page errors"
+    },
+    {
+      "name": "CSS parse",
+      "result": "PASS",
+      "detail": "90 style blocks, 2569 qualified rules, 0 errors"
+    }
+  ],
+  "limitations": [
+    "Statistics dashboard click-through NOT VERIFIED; isolated browser run timed out.",
+    "Live AniList/MAL and VNDB imports NOT VERIFIED.",
+    "Real audio playback NOT VERIFIED.",
+    "Durable storage across real browser reload NOT VERIFIED; in-memory localStorage shim used.",
+    "Full osu!stable pixel comparison NOT COMPLETE.",
+    "HTML binary upload and remote SHA-256 verification NOT COMPLETE."
+  ]
+}
