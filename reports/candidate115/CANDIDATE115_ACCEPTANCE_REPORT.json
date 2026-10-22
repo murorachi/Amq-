@@ -1,0 +1,53 @@
+{
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_115.html",
+  "bytes": 9235288,
+  "sha256": "7e24020480515fd8a4fad34907de9a4da1694abf998c2ae933a005b64f5ff1b1",
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "62 scripts; 0 syntax errors"
+    },
+    {
+      "name": "Song row has work artwork tile",
+      "result": "PASS",
+      "detail": "54×66px artwork tile on tested expanded row"
+    },
+    {
+      "name": "Selected song row uses non-transform focus state",
+      "result": "PASS",
+      "detail": "selected=true; transform=none; row width 986px"
+    },
+    {
+      "name": "Existing AMQ song actions preserved",
+      "result": "PASS",
+      "detail": "play, queue, familiarity, tag editing and reset controls present"
+    },
+    {
+      "name": "Hover does not translate row outside scrollport",
+      "result": "PASS",
+      "detail": "hover=true; transform=none; row within #grid bounds"
+    },
+    {
+      "name": "No uncaught browser errors",
+      "result": "PASS",
+      "detail": "0 page errors"
+    },
+    {
+      "name": "CSS parse",
+      "result": "PASS",
+      "detail": "90 style blocks, 2,567 qualified rules, 0 parse errors"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0
+  },
+  "limitations": [
+    "Remote artwork availability depends on external sources and is not universally verified.",
+    "Actual remote audio playback NOT VERIFIED.",
+    "Durable storage across actual browser reload NOT VERIFIED; in-memory localStorage shim used.",
+    "Full osu!stable pixel comparison NOT COMPLETE.",
+    "HTML binary upload and remote SHA-256 verification NOT COMPLETE."
+  ]
+}
