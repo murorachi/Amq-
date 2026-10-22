@@ -11,4 +11,4 @@
 - BLOCKED: direct file URL navigation denied.
 - NOT RUN: real IndexedDB background application/persistence, reload persistence, live APIs, audio, full feature regression.
 - Overall Song Select acceptance NOT ACCEPTED. Stage 1 layout incomplete; Stages 2 and 3 incomplete.
-- GitHub report/status upload is verified separately; HTML binary upload and remote HTML SHA-256 remain unverified.
+- GitHub: report, static report, BASELINE, CURRENT_STATUS and NEXT_TASK uploaded to `amq-candidate104-songselect-layout-fix` and read back successfully. HTML binary upload and remote HTML SHA-256 remain unverified.
