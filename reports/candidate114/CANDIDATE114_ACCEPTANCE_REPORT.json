@@ -1,0 +1,53 @@
+{
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_114.html",
+  "bytes": 9226969,
+  "sha256": "79b5f809abd1af10bf46fd4f2450153f7aba0486a70d164e37d2a54e085f6d02",
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "not_run": 0
+  },
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "61 scripts checked; 0 syntax errors"
+    },
+    {
+      "name": "Song Select dock compacted",
+      "result": "PASS",
+      "detail": "76px high; mode/source stack 62px"
+    },
+    {
+      "name": "Catalog-to-dock gap",
+      "result": "PASS",
+      "detail": "2px at 1648x928"
+    },
+    {
+      "name": "Home player initial geometry",
+      "result": "PASS",
+      "detail": "dock 46px; frame 68px"
+    },
+    {
+      "name": "Home player after returning from Song Select",
+      "result": "PASS",
+      "detail": "dock 46px; frame 68px; no fixed-position leakage"
+    },
+    {
+      "name": "No uncaught browser errors",
+      "result": "PASS",
+      "detail": "0 errors observed"
+    },
+    {
+      "name": "CSS parse",
+      "result": "PASS",
+      "detail": "89 style blocks, 2549 qualified rules, 0 parse errors"
+    }
+  ],
+  "limitations": [
+    "Persistent storage across reload NOT VERIFIED; in-memory shim used",
+    "Actual remote audio playback NOT VERIFIED",
+    "Full pixel acceptance against osu!stable NOT COMPLETE",
+    "HTML binary upload and remote SHA-256 verification NOT COMPLETE"
+  ]
+}
