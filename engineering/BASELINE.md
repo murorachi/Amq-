@@ -7,4 +7,5 @@
 - Candidate 74 parent of Candidate 75: SHA-256 `69191737e6dcfba22c8018c4a5020959f28e39f923e45fa2b4b46b8a8c08b721`.
 - Candidate 75 parent of Candidate 76: `amq_learning_tool_v82_85_30_workspace_proto28_song_select_75-mobile-catalog-clearance.html`, SHA-256 `4ad5a0d50bb072f36c936640c14b3744bf2a91c50b79b653392880ce8084a6dd`, 9,094,014 bytes.
 - Candidate 76: `amq_learning_tool_v82_85_30_workspace_proto28_song_select_76-workspace-panel-shell.html`, SHA-256 `2586036ce96d4c3fc0be6df2fb482a280936465e0ec51f45ed97c7a7475e136d`, 9,105,137 bytes.
-- Candidate 76 scope: stable single-row dock, adjacent workspace popup, 88% black opacity, close button and Escape handling. This is a shell/layout checkpoint, not completion of the four workspaces' feature migration.
+- Candidate 76 scope: shell/layout checkpoint only. The existing popup is adjacent to the left-middle frame, but the four workspace buttons remain in a separate bottom-left dock; this is not the intended final hierarchy.
+- Candidate 76 is immutable as the rollback checkpoint for the next architecture correction. See `engineering/CANDIDATE76_OLD_STYLE_AUDIT.md`.
