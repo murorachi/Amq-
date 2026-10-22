@@ -1,9 +1,7 @@
 # Next Task
 
-1. Migrate the workspace actions into the retained right-side popup without leaving Song Select where the action is intended to be in-place. Use `engineering/CANDIDATE80_WORKSPACE_ACTION_AUDIT.md` as the source-of-truth classification.
-2. Start with one domain at a time, reusing existing renderers/data stores rather than cloning them. Keep selection separate from apply/commit actions.
-3. Preserve the current safety rule: batch apply-target actions locate and focus the existing confirmation controls but do not activate them automatically.
-4. For each migrated action, test visible result, route stays Song Select when required, Escape closes only the popup, data mutations require existing confirmation, and the dock bounding box remains stable after interaction.
-5. Obtain normal-origin browser verification for storage persistence, audio, and cover loading; current page.set_content tests cannot validate these.
-6. Refine mobile behavior after functional migration: at 390x844 the popup is viewport-constrained but overlays the frame controls while open.
-7. Keep Candidate 76 immutable as rollback checkpoint. Do not remove legacy views until all migrated actions pass regression.
+1. Run per-action tests for all 28 workspace actions, with special attention to learning plan/practice initialization, VN catalog behavior, and preserving Song Select as the parent route.
+2. Validate existing feature controls after DOM portal/restoration, including custom-list create/rename/delete confirmations, watch-status changes, selection state, and batch confirmation safety.
+3. Test a real-origin browser for storage persistence, cover loading, and audio. The current environment blocks localhost navigation and page.set_content has an opaque origin.
+4. Improve mobile three-stage navigation: keep the workspace action list accessible and return focus to the correct action.
+5. Only after these pass, consider moving legacy rendering logic to native panel components. Do not remove legacy views before regression is complete.
