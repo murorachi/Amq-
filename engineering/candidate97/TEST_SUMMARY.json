@@ -1,0 +1,37 @@
+{
+  "candidate_file": "amq_learning_tool_v82_85_46_workspace_proto44-list-removal-catalog_97_release.html",
+  "candidate_sha256": "38a298083e5c32fe15b6aeed98eceddb3fce9990e651aabaaac0124fc80e9540",
+  "candidate_bytes": 9160008,
+  "baseline_file": "amq_learning_tool_v82_85_46_workspace_proto44-inline-card-filter_96.html",
+  "baseline_sha256": "52cbaa536cc728d202431214cdf1181dbbb1c14fa68279a61a126bfa69181de2",
+  "static": {
+    "javascript_blocks": 56,
+    "syntax_failures": 0,
+    "css_blocks": 83,
+    "css_parse_errors": 0,
+    "required_control_assertions": "5/5"
+  },
+  "browser": {
+    "main_cases": "20/20 passed",
+    "uncaught_page_errors": 0,
+    "workspace_actions": "5/5 passed",
+    "catalog_cover_expansion": "2/2 passed"
+  },
+  "visual": {
+    "viewport": "1440x900",
+    "candidate96_to_97_home": "pixel-identical",
+    "catalog_changed_pixel_ratio_threshold_12": 0.1606,
+    "official_osu_reference": "not run"
+  },
+  "not_run": [
+    "file:// browser execution",
+    "origin-backed localStorage persistence",
+    "live AniList/MAL/VNDB APIs",
+    "live cover hosts",
+    "official osu!stable screenshot comparison"
+  ],
+  "remote_artifact": {
+    "standalone_html_uploaded": false,
+    "reason": "The connected GitHub file-writing actions accept inline text but cannot transfer the local 9.16 MB binary artifact; no remote HTML hash match is claimed."
+  }
+}
