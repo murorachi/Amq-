@@ -1,8 +1,8 @@
 # Next Task
 
-1. Continue function-first integration across the eight agreed modules, starting with watch-status mutations and confirmation behavior in the third-stage panel; custom-list create/rename/delete UI smoke checks now pass with test-only storage.
-2. Add data assertions for adding/removing list members, watch-state changes, and selection scope; keep batch apply behind the original explicit confirmation.
-3. Verify VN personal list and VN catalog behavior independently; retain separate VN list storage and do not silently substitute anime lists.
-4. Test normal-origin storage, audio, and cover/API loading in an environment where local navigation and external requests are allowed.
-5. Validate learning plan/practice modes and dashboard metrics against existing stores and event records.
-6. Only after functional acceptance, begin the separate osu!stable visual fidelity phase. Do not use visual polish as a substitute for functional verification.
+1. Run real-origin tests for custom-list create/rename/delete, member add/remove, watch-status mutation, and persisted storage across reloads.
+2. Validate VN personal list and VN catalog independently with the real VNDB API available; confirm no anime-list fallback and correct empty/error states.
+3. Exercise batch selection scope and each explicit apply confirmation against seeded test data; verify no action applies automatically on panel open.
+4. Validate learning plan/practice modes and dashboard metrics against existing stores and event records.
+5. Fix any discovered data or lifecycle regressions and rerun all 28 workspace action shell checks.
+6. Only after functional acceptance, begin the separate osu!stable visual-fidelity phase. Do not substitute visual polish for feature verification.
