@@ -1,0 +1,15 @@
+{
+  "candidate": 125,
+  "parent": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_124.html",
+  "parent_sha256": "3dedd925ba75fbaa71ed180ef34d3f6cb9024e205c9da5f6b0a720896c0693a9",
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_125.html",
+  "bytes": 9237382,
+  "sha256": "aec14a5d04e643c605770e2923e2755b1f307a5758ddafd281fc4e373ab71178",
+  "changes": [
+    "Canonical existing row styling changed to right-aligned staggered viewport-relative widths",
+    "Canonical cover slot changed from 78px to 58px",
+    "Canonical Candidate 106 layout owner changed catalog from left 39.5vw/width 60.5vw to left 35.5vw/width 64.5vw"
+  ],
+  "browser_visual_capture": "BLOCKED / NOT RUN",
+  "reason": "Playwright with system Chromium did not complete within the available run window."
+}
