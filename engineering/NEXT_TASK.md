@@ -1,7 +1,8 @@
 # Next Task
 
-1. Run per-action tests for all 28 workspace actions, with special attention to learning plan/practice initialization, VN catalog behavior, and preserving Song Select as the parent route.
-2. Validate existing feature controls after DOM portal/restoration, including custom-list create/rename/delete confirmations, watch-status changes, selection state, and batch confirmation safety.
-3. Test a real-origin browser for storage persistence, cover loading, and audio. The current environment blocks localhost navigation and page.set_content has an opaque origin.
-4. Improve mobile three-stage navigation: keep the workspace action list accessible and return focus to the correct action.
-5. Only after these pass, consider moving legacy rendering logic to native panel components. Do not remove legacy views before regression is complete.
+1. Continue function-first integration across the eight agreed modules, starting with custom-list CRUD and watch-status mutations in the third-stage panel.
+2. Add data assertions for create/rename/delete list, add/remove list members, watch-state changes, and selection scope; keep batch apply behind the original explicit confirmation.
+3. Verify VN personal list and VN catalog behavior independently; retain separate VN list storage and do not silently substitute anime lists.
+4. Test normal-origin storage, audio, and cover/API loading in an environment where local navigation and external requests are allowed.
+5. Validate learning plan/practice modes and dashboard metrics against existing stores and event records.
+6. Only after functional acceptance, begin the separate osu!stable visual fidelity phase. Do not use visual polish as a substitute for functional verification.
