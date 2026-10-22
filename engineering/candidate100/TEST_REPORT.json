@@ -8,6 +8,11 @@
       "detail": "57 script blocks checked; failures=0"
     },
     {
+      "name": "CSS stylesheet parsing",
+      "result": "PASS",
+      "detail": "84 style blocks parsed; 2,500 qualified rules; 0 CSS parse errors"
+    },
+    {
       "name": "Song Select route entered",
       "result": "PASS",
       "detail": "Route uses existing app navigation"
@@ -68,10 +73,13 @@
     "Combined legacy Playwright integration harness still has known EPIPE"
   ],
   "summary": {
-    "passed": 10,
+    "passed": 11,
     "failed": 0,
     "blocked": 1,
     "static_js_blocks_checked": 57,
-    "syntax_failures": []
+    "syntax_failures": [],
+    "style_blocks_checked": 84,
+    "css_rules_checked": 2500,
+    "css_parse_failures": []
   }
 }
