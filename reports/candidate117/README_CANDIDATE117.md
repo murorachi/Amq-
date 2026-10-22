@@ -10,7 +10,7 @@ The Song Select sidebar's Learning Statistics button now calls the existing navi
 
 ## Verification
 - Static checks: 8 PASS / 0 FAIL (62 inline scripts parsed; 90 CSS blocks, 2,569 rules parsed).
-- Browser route/dashboard checks: 5 PASS / 0 FAIL.
+- Browser route/dashboard checks: 5 PASS / 0 FAIL. Combined executed checks: 14 PASS / 0 FAIL.
 - Home → Song Select → Home passed 4 cycles; profile/player/sidebar nodes were not duplicated and profile/player returned to their home containers.
 - The statistics panel opened with its real title and six content sections.
 
