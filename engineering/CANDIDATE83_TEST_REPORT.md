@@ -8,14 +8,15 @@
 ## Passed
 - JavaScript syntax: 53 executable inline script blocks checked with `node --check`; 0 failures.
 - CSS parse: 78 style blocks parsed with `tinycss2`; 0 parser errors.
-- Candidate 82 shell regression harness run against Candidate 83: 28/28 action entries passed the assertions for panel opening, Escape close, unchanged active route, and non-empty content; page errors 0 in the test harness.
+- Candidate 82 shell regression harness run against Candidate 83: 28/28 action entries passed assertions for panel opening, Escape close, unchanged active route, and non-empty content; page errors 0 in the test harness.
+- Additional Chromium `set_content` feature smoke: custom-list panel exposed its create form; creating a test list produced one list card; rename confirmation changed the name; delete confirmation removed the card; VN list opened its dedicated `#vnListView` and import controls without falling back to anime catalog; watch-status panel exposed its existing controls. Browser page errors: 0. These checks use an in-memory storage shim and do not prove persistence across reload.
 
 ## Failed / blocked
 - Real `file://` Chromium navigation was blocked by the execution environment (`ERR_BLOCKED_BY_ADMINISTRATOR`); normal-origin interaction and real localStorage persistence could not be tested here.
-- The harness initially requires its explicit HTML path argument; running without it exits with usage status, not a product failure.
+- The harness requires its explicit HTML path argument; running without it exits with usage status, not a product failure.
 
 ## Not run / not verified
-- End-to-end custom-list create/rename/delete and member add/remove against persistent storage.
+- End-to-end custom-list member add/remove against persistent storage.
 - Watch-status mutations and state persistence across reload.
 - VNDB import/API behavior, external cover loads, and audio playback.
 - Full per-control functional tests for all eight modules.
@@ -23,4 +24,4 @@
 - Remote HTML upload and SHA-256 verification. The connected GitHub API path used here can update text engineering records but did not upload the large HTML binary.
 
 ## Interpretation
-The passing 28/28 result proves only shell/navigation behavior in the `set_content` test harness. It does not establish completion of all feature workflows.
+The passing 28/28 result proves shell/navigation behavior in the `set_content` test harness. Additional smoke tests prove selected UI workflows with in-memory storage only. The eight feature modules are not yet fully accepted.
