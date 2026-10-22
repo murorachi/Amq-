@@ -48,5 +48,13 @@
     "reference_resize": "2555x1438 to 1648x928 using Lanczos",
     "limitation": "Full-frame score is descriptive only because reference contains actual artwork while candidate intentionally uses CSS-only fallback."
   },
+  "github": {
+    "branch": "amq-candidate104-songselect-layout-fix",
+    "report_files_uploaded_and_read_back": true,
+    "html_binary_uploaded": false,
+    "html_remote_sha256_verified": false,
+    "html_remote_path_checked": "dist/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_131.html",
+    "html_remote_path_result": "404 NOT FOUND"
+  },
   "acceptance": "INTERMEDIATE ONLY; overall Song Select Stage 1 incomplete, Stages 2 and 3 incomplete"
 }
