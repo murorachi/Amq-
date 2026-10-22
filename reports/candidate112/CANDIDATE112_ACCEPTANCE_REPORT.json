@@ -1,0 +1,56 @@
+{
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_112.html",
+  "sha256": "96132bd477341861bc04ecd0cc0592357b8d0678e9857cbefa20871ea3453cf4",
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "60 script blocks; 0 syntax errors"
+    },
+    {
+      "name": "Initial preview highlight exists",
+      "result": "PASS",
+      "detail": "rgba(255, 255, 255, 0.9)"
+    },
+    {
+      "name": "Active work follows clicked card without stealing song highlight",
+      "result": "PASS",
+      "detail": "Exactly one inline song list; clicked work active pink; previous work returns to inactive pink"
+    },
+    {
+      "name": "Selected song row uses white focus state",
+      "result": "PASS",
+      "detail": "White background rgba(255,255,255,0.94), dark text rgb(23,23,23), selected title Chameko no Ichinichi"
+    },
+    {
+      "name": "Active work moves when switching cards",
+      "result": "PASS",
+      "detail": "Expanded-work state follows newly clicked work"
+    },
+    {
+      "name": "Hover stays transient and geometry is stable",
+      "result": "PASS",
+      "detail": "Hover dx=-7px, dy=0; transient hover color rgba(245,73,158,0.9)"
+    },
+    {
+      "name": "No uncaught browser errors",
+      "result": "PASS",
+      "detail": "No page errors observed"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "not_run": 0
+  },
+  "additional_checks": {
+    "css_parse": "PASS; 88 style blocks; 2540 qualified rules; 0 parse errors",
+    "geometry": "PASS; cover 78x58px; title 15px"
+  },
+  "limitations": [
+    "Durable localStorage persistence across reload NOT VERIFIED; test harness used in-memory storage shim",
+    "Actual remote audio playback NOT VERIFIED",
+    "Full matched-state pixel acceptance NOT COMPLETE",
+    "HTML binary upload and remote SHA-256 verification NOT COMPLETE"
+  ]
+}
