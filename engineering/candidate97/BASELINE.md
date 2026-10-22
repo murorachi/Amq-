@@ -13,7 +13,7 @@
 - SHA-256: `3a94d6e137748f6ba8f836615e9a4c8e5654b915c447b9a3a5029b6501807e6d`
 - Size: 9,160,167 bytes
 - Parent baseline: Candidate 96 above.
-- The standalone HTML is currently local only. It has not been uploaded to this branch, so this record does not claim a remote HTML hash match.
+- The standalone HTML is currently local only. It has not been uploaded to this branch, so no remote HTML hash match is claimed.
 
 ## Change scope
 
