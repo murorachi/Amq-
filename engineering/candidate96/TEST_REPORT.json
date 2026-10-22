@@ -1,0 +1,30 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-inline-card-filter_96.html",
+  "size_bytes": 9154988,
+  "sha256": "52cbaa536cc728d202431214cdf1181dbbb1c14fa68279a61a126bfa69181de2",
+  "static": {
+    "javascript_blocks_checked": 56,
+    "javascript_failures": 0,
+    "css_blocks_checked": 83,
+    "css_errors": 0,
+    "assertions_passed": 15,
+    "total_assertions": 15
+  },
+  "browser": {
+    "startup": "PASS with Chromium Playwright page.set_content and in-memory storage shim; no fresh-load page errors.",
+    "dom_stability": "PASS: 10 mutations in 1 second after route settles; no sustained self-triggering loop observed.",
+    "dock": "PASS: direct child of BODY, fixed bottom-left; x=10,y=848,width=320,height=42 at 1440x900 and remains stable through four workspace switches.",
+    "custom_list": "PASS in harness: create, add, remove, manage filtering (nonmembers display:none), close manager dialog after toggles, and serialized storage roundtrip into a fresh page context.",
+    "learning_center": "PASS: five routes open distinct content/status; dashboard appears once under Learning Center; fourth workspace is Data Quality.",
+    "imports": "PASS: separate AniList, MAL and VNDB inputs are present and delegate to existing importer controls. Live network imports not tested.",
+    "limitations": [
+      "Direct file:// and localhost navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR",
+      "Storage is emulated in memory; actual origin-backed localStorage not tested",
+      "Live AniList/MAL/VNDB API behavior not tested"
+    ]
+  },
+  "github": {
+    "branch": "amq-candidate96-functional-acceptance",
+    "html_binary_uploaded": false
+  }
+}
