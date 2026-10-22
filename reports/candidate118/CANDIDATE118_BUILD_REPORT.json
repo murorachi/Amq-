@@ -1,0 +1,33 @@
+{
+  "candidate": 118,
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_118.html",
+  "size_bytes": 9235643,
+  "sha256": "bb1536744bea764ecf9cb010a6cb1f23fcea2ab69f809193125c695ba9404163",
+  "source_candidate": 117,
+  "source_sha256": "c5542b9769c70e4fb8b74044c7bf09bbe76121df1418321bef803d55bc9b5b8b",
+  "change": "Guard existing Candidate 114 player layout reset using active app view, including delayed callbacks, to prevent homepage styles being reapplied during route event/body-class race.",
+  "scope": "One existing route-owner function only.",
+  "tests": {
+    "browser_assertions": {
+      "pass": 16,
+      "fail": 0
+    },
+    "inline_javascript": {
+      "checked": 62,
+      "errors": 0
+    },
+    "css": {
+      "style_blocks": 90,
+      "qualified_rules": 2569,
+      "parse_errors": 0
+    },
+    "zip_integrity": "PASS"
+  },
+  "not_verified": [
+    "live AniList/MAL/VNDB imports",
+    "real audio playback",
+    "durable persistence after actual browser reload",
+    "full osu!stable pixel comparison",
+    "HTML binary upload and remote SHA-256 verification"
+  ]
+}
