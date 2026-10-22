@@ -1,0 +1,50 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-list-removal-catalog_97_final.html",
+  "sha256": "a24c08be677903e9c46cc2795aad2c989dbfa69e290e17622583e67de3e17b95",
+  "bytes": 9159860,
+  "static": {
+    "javascript_blocks_checked": 56,
+    "javascript_failures": 0,
+    "css_blocks_checked": 83,
+    "css_errors": 0,
+    "required_controls": {
+      "AniList_remove": true,
+      "MAL_remove": true,
+      "VNDB_remove": true,
+      "no_batch_workspace": true,
+      "catalog_workspace": true
+    }
+  },
+  "isolated_browser_suites": {
+    "core_stability": {
+      "passed": 6,
+      "total": 6
+    },
+    "custom_lists": {
+      "passed": 4,
+      "total": 4
+    },
+    "workspace_actions": {
+      "passed": 5,
+      "total": 5
+    },
+    "catalog_mocked": {
+      "passed": 2,
+      "total": 2
+    }
+  },
+  "isolated_browser_assertions": {
+    "passed": 17,
+    "total": 17
+  },
+  "combined_integration_suite": {
+    "status": "FAILED_NOT_ACCEPTED",
+    "reason": "Node/Playwright EPIPE during rerun; not counted in isolated passing total."
+  },
+  "limitations": [
+    "Real external APIs and cover hosts not verified; mocked responses used.",
+    "file:///localhost origin-backed localStorage persistence not verified.",
+    "Pinned official osu!stable same-state screenshot/geometry comparison not completed.",
+    "Candidate 97 HTML itself is not included in this commit; GitHub remote SHA verification is pending."
+  ]
+}
