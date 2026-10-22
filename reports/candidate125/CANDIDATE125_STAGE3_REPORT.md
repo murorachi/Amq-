@@ -3,8 +3,8 @@
 ## Baseline and artifact
 - Parent Candidate 124 SHA-256: `3dedd925ba75fbaa71ed180ef34d3f6cb9024e205c9da5f6b0a720896c0693a9`
 - Candidate 125 file: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_125.html`
-- Candidate 125 size: 9,237,382 bytes
-- Candidate 125 SHA-256: `aec14a5d04e643c605770e2923e2755b1f307a5758ddafd281fc4e373ab71178`
+- Candidate 125 size: 9,237,370 bytes
+- Candidate 125 SHA-256: `6dfe4ddc2b48e3a1c5ee7c12ae42f371877d1b30aae6abf99f68caebf3221145`
 - Candidate 124 remains unchanged and is available for rollback.
 
 ## Changes
@@ -12,7 +12,8 @@
 2. Kept the measured 60px row height and used six viewport-relative card widths (64.5vw focus preview, then 42vw, 40vw, 46vw, 38vw, 41vw) to restore osu!stable-like right-aligned staggered composition.
 3. Updated the actual Candidate 106 JavaScript layout owner from `left:39.5vw / width:60.5vw` to `left:35.5vw / width:64.5vw`, allowing the widest row to fit without relying on clipped overflow.
 4. Reduced the canonical cover slot from 78px to 58px to match the viewport-normalized reference cover size.
-5. No song data, ranking values, or external artwork were invented. The existing scene-background tool remains the intended source for user-selected backgrounds.
+5. Restored the historical Candidate 100 marker and updated the latest candidate marker to Candidate 125, preserving history and making the parent explicit.
+6. No song data, ranking values, or external artwork were invented. The existing scene-background tool remains the intended source for user-selected backgrounds.
 
 ## Tests
 - PASS 7 / FAIL 0 static checks (`CANDIDATE125_STATIC_REPORT.json`).
