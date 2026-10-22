@@ -10,4 +10,5 @@ Completed route fixes: VNDB sidebar destination opens the existing VNDB list/imp
 
 BLOCKED: actual browser reload persistence. Managed Chromium navigation to `file://` and localhost returns `ERR_BLOCKED_BY_ADMINISTRATOR`; storage checks used an in-memory shim. Do not claim durable persistence.
 
-NOT RUN: live AniList/MAL/VNDB imports; real audio playback; full osu!stable pixel comparison; GitHub binary HTML upload and remote HTML SHA-256 verification. Stage 3 has not started.
+NOT RUN: live AniList/MAL/VNDB imports; full osu!stable pixel comparison; GitHub binary HTML upload and remote HTML SHA-256 verification. Audio playback: user confirms music plays in the app; no independent playback test was run in this environment. Stage 3 has not started.
+- Import validation: static code inspection confirms AniList and VNDB empty-user guards; isolated Playwright blank-input test was BLOCKED by 180-second timeout / driver EPIPE, so no runtime validation result is claimed.
