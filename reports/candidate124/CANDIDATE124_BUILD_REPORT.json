@@ -1,0 +1,16 @@
+{
+  "candidate": 124,
+  "parent": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_123.html",
+  "parent_sha256": "cf800068783be96805b858a99b79c8a81b63089fc43189f3d40f15894239a53e",
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_124.html",
+  "bytes": 9236297,
+  "sha256": "3dedd925ba75fbaa71ed180ef34d3f6cb9024e205c9da5f6b0a720896c0693a9",
+  "root_cause": "The desktop catalog mount height was reduced by 91px even though header controls were already laid out in the parent. This left a large empty gap above the footer.",
+  "change": "Desktop catalog mount height calc(100% - 91px) to calc(100% - 16px), aligning list bottom near y=820 at 1648x928. Mobile-specific rule intentionally unchanged.",
+  "assertions": [
+    "Parent SHA matched before editing.",
+    "Desktop CSS rule and canonical JS owner each matched exactly once.",
+    "Mobile-specific rule remains unchanged.",
+    "Candidate 123 preserved."
+  ]
+}
