@@ -1,0 +1,33 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-list-learning-workspaces_98.html",
+  "bytes": 9158841,
+  "sha256": "0f9a914b2d11f56fb629a3098df85e79e22e9146bac5c965f3732679418fec4f",
+  "static": {
+    "javascript_blocks_checked": 56,
+    "javascript_failures": 0,
+    "css_blocks_checked": 83,
+    "css_errors": 0
+  },
+  "browser_suites": {
+    "workspace_ui": {
+      "passed": 7,
+      "total": 7,
+      "page_errors": 0
+    },
+    "custom_lists": {
+      "passed": 4,
+      "total": 4
+    }
+  },
+  "total_isolated_assertions": {
+    "passed": 11,
+    "total": 11
+  },
+  "limitations": [
+    "page.set_content harness; direct file:// and localhost unavailable.",
+    "Live APIs and real image hosts not tested.",
+    "Official osu!stable geometry comparison incomplete.",
+    "Combined integration EPIPE remains unresolved.",
+    "HTML artifact upload and remote SHA verification pending."
+  ]
+}
