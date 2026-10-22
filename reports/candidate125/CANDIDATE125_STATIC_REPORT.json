@@ -1,0 +1,17 @@
+{
+  "candidate": 125,
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_125.html",
+  "bytes": 9237382,
+  "sha256": "aec14a5d04e643c605770e2923e2755b1f307a5758ddafd281fc4e373ab71178",
+  "checks": [
+    {"name":"parent fingerprint preserved","status":"PASS"},
+    {"name":"candidate marker","status":"PASS"},
+    {"name":"canonical row owner replaced once","status":"PASS"},
+    {"name":"cover width corrected once","status":"PASS"},
+    {"name":"inline JavaScript syntax","status":"PASS","detail":"62 executable inline JS blocks, zero syntax errors"},
+    {"name":"CSS syntax parse","status":"PASS","detail":"90 CSS blocks, 2,578 top-level qualified rules, zero parse errors"},
+    {"name":"stagger geometry declarations","status":"PASS"}
+  ],
+  "summary":{"pass":7,"fail":0},
+  "browser_visual_capture":"BLOCKED / NOT RUN"
+}
