@@ -1,0 +1,42 @@
+{
+  "candidate": 117,
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_117.html",
+  "size_bytes": 9235330,
+  "sha256": "c5542b9769c70e4fb8b74044c7bf09bbe76121df1418321bef803d55bc9b5b8b",
+  "source_candidate": 116,
+  "source_sha256": "78e665ad23ee21c9b0ab5c644f0bba2be3d311d8fee0e2015cf5fbaab06fe756",
+  "checks": {
+    "static": {
+      "pass": 8,
+      "fail": 0,
+      "assertions": [
+        "62 inline scripts parse",
+        "90 CSS blocks / 2569 qualified rules parse",
+        "four rail destinations",
+        "custom-list route",
+        "no uncaught browser errors"
+      ]
+    },
+    "browser": {
+      "pass": 5,
+      "fail": 0,
+      "assertions": [
+        "Home ↔ Song Select 4 cycles",
+        "no duplicate profile/player/rail/top-shell nodes",
+        "profile/player restore to home slots",
+        "sidebar dashboard click opens populated panel",
+        "no uncaught page errors"
+      ]
+    }
+  },
+  "not_verified": [
+    "live AniList/MAL import",
+    "live VNDB import",
+    "real audio playback",
+    "durable persistence after actual reload",
+    "full osu!stable pixel comparison",
+    "profile-card relocation into Song Select",
+    "HTML binary upload and remote HTML SHA-256"
+  ],
+  "rollback": "Candidate 116"
+}
