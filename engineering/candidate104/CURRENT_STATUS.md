@@ -27,4 +27,4 @@
 - Full pixel-difference parity: NOT RUN; geometry/style measurements only.
 
 ## GitHub
-Engineering records are being uploaded to this branch. HTML artifact upload and remote SHA-256 verification remain NOT VERIFIED. The GitHub connector exposes text-file operations but no binary asset upload/release upload operation; the container cannot resolve api.github.com. See NEXT_TASK.md for the supported route.
+Engineering records are uploaded and re-fetched on branch `amq-candidate104-songselect-layout-fix`. The HTML itself remains NOT VERIFIED remotely because the execution container cannot resolve `api.github.com`, and the available connector has no binary upload/release-asset operation. A PowerShell helper and official upload guide are now present in the branch. Remote HTML SHA-256 must only be claimed after the helper completes successfully.
