@@ -1,0 +1,30 @@
+{
+  "candidate": 126,
+  "parent": {
+    "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_125.html",
+    "size_bytes": 9237370,
+    "sha256": "6dfe4ddc2b48e3a1c5ee7c12ae42f371877d1b30aae6abf99f68caebf3221145"
+  },
+  "artifact": {
+    "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_126.html",
+    "size_bytes": 9237739,
+    "sha256": "15e8644ec1ea079b6784fdeb8ac399aeecfc57ba00bd2b13b4d8b9b0a6a286a4"
+  },
+  "change": "Set the actual #grid owner to a single vertical flex stack with right alignment. Candidate 125 changed item widths while #grid remained CSS Grid, so the intended staggered song rows could not reliably occupy a shared right edge.",
+  "static_validation": {
+    "executable_inline_js_blocks": 62,
+    "inline_js_parse_errors": [],
+    "js_result": "PASS",
+    "css": {
+      "blocks": 90,
+      "qualified_rules": 2579,
+      "parse_errors": [],
+      "error_count": 0
+    },
+    "grid_owner_has_flex_stack": true,
+    "marker_correct": true,
+    "parent_hash_verified": true,
+    "result": "PASS"
+  },
+  "browser_visual_acceptance": "BLOCKED / NOT RUN: managed Chromium navigation has previously timed out or been denied; no Candidate 126 screenshot or pixel score is claimed."
+}
