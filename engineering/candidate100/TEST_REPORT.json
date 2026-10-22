@@ -1,0 +1,77 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_100.html",
+  "sha256": "c645a9fed52dc2f8c01808305bde47df0cb46cf27d50736ea8551c619a8b2639",
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "57 script blocks checked; failures=0"
+    },
+    {
+      "name": "Song Select route entered",
+      "result": "PASS",
+      "detail": "Route uses existing app navigation"
+    },
+    {
+      "name": "Exactly eight left-rail entries",
+      "result": "PASS",
+      "detail": "8"
+    },
+    {
+      "name": "Dashboard label and icon",
+      "result": "PASS",
+      "detail": "Dashboard card rendered below eight entries"
+    },
+    {
+      "name": "Dashboard modal open/close",
+      "result": "PASS",
+      "detail": "Placeholder modal only; full statistics content deferred by scope"
+    },
+    {
+      "name": "Source selector maps to existing AMQ/EMQ/MIX control",
+      "result": "PASS",
+      "detail": "legacy source=emq; current title unchanged=True"
+    },
+    {
+      "name": "Custom-list picker exposes saved list",
+      "result": "BLOCKED",
+      "detail": "Opaque page.set_content origin denies localStorage access before the shim can be installed; requires an origin-backed browser context."
+    },
+    {
+      "name": "Alt+wheel changes real media volume and radial indicator",
+      "result": "PASS",
+      "detail": "before=0.7; volume=0.75; dial text=75% VOLUME"
+    },
+    {
+      "name": "Bottom player geometry and song-list column",
+      "result": "PASS",
+      "detail": "dock x=115.36 y=856 width=1414 height=72 bottom=928; song list right=1648 left=1013.53 bottom=853.77"
+    },
+    {
+      "name": "Player controls fit bottom strip without legacy collapse control",
+      "result": "PASS",
+      "detail": "controls and mode selector stay within dock; collapse control hidden"
+    },
+    {
+      "name": "No duplicate rail after route re-observation",
+      "result": "PASS",
+      "detail": "Single DOM instance after route mutation"
+    }
+  ],
+  "page_errors": [
+    "Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+  ],
+  "limitations": [
+    "page.set_content opaque origin; native file persistence not tested",
+    "Real AniList/MAL/VNDB APIs and public cover/audio hosts not tested",
+    "Official osu!stable pixel comparison not performed",
+    "Combined legacy Playwright integration harness still has known EPIPE"
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "blocked": 1,
+    "static_js_blocks_checked": 57,
+    "syntax_failures": []
+  }
+}
