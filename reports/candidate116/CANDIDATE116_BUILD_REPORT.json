@@ -1,0 +1,18 @@
+{
+  "candidate": "116",
+  "source": "Candidate 115",
+  "source_sha256": "7e24020480515fd8a4fad34907de9a4da1694abf998c2ae933a005b64f5ff1b1",
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_116.html",
+  "bytes": 9235279,
+  "sha256": "78e665ad23ee21c9b0ab5c644f0bba2be3d311d8fee0e2015cf5fbaab06fe756",
+  "changes": [
+    "Reduce rail from eight mixed actions to four actual destinations grouped into data/list and learning sections.",
+    "Remove permanent batch-select shortcut and duplicate/speculative practice shortcuts while retaining underlying features.",
+    "Replace placeholder stats modal with existing dashboard action; click-through remains unverified.",
+    "Place statistics card below navigation and avoid player overlap."
+  ],
+  "limitations": [
+    "Stats dashboard click-through NOT VERIFIED.",
+    "Live imports, audio, persistence, full pixel acceptance and binary upload not verified."
+  ]
+}
