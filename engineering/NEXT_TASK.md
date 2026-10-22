@@ -1,9 +1,8 @@
 # Next Task
 
-1. Correct the workspace shell architecture first: make the left-middle frame the actual control container, put the four workspace buttons inside it, and retain the existing sidebar as the right-side popup. Centralize click/expanded/layout ownership and neutralize traced conflicting Song Select overrides. See `engineering/CANDIDATE76_OLD_STYLE_AUDIT.md`.
-2. Audit every action in the four workspace definitions (`lists`, `batch`, `learning`, `analysis`) and classify it as working in-place, navigating to a legacy page, no-op/missing target, or destructive/applying action.
-3. Identify the actual existing DOM panels and renderers for watchlists/custom lists, batch tools, learning plan/practice and dashboard. Verify their event/data dependencies before moving or reusing them.
-4. Migrate one workspace at a time into the popup without leaving Song Select; reuse existing DOM/data stores and do not clone data logic.
-5. For each migrated action, test visible outcome, route remains Song Select, Escape closes only the popup, and data mutations still require existing confirmation controls.
-6. Keep Candidate 76 as a rollback checkpoint. Do not retire legacy interfaces until all four workspace feature sets pass regression.
-7. Obtain normal-origin browser verification for storage persistence, cover loading and audio. Upload HTML binary only through a workflow that can read local bytes; verify remote size/hash separately.
+1. Audit every action in the four workspace definitions (`lists`, `batch`, `learning`, `analysis`) and classify as working in-place, legacy navigation, no-op/missing target, or destructive/applying action.
+2. Migrate one workspace at a time into the retained popup, reusing the existing renderers/data stores and keeping the Song Select route active where required.
+3. Test each action's visible result, route, Escape behavior, data safety/confirmation, and interactions with other controls.
+4. Reproduce normal-origin browser testing for storage persistence, audio, and cover loading; current page.set_content tests cannot validate these.
+5. Refine mobile behavior after functional migration: at 390x844 the popup is viewport-constrained but necessarily overlays the frame controls while open.
+6. Keep Candidate 76 immutable as rollback checkpoint. Do not remove legacy views until all migrated actions pass regression.
