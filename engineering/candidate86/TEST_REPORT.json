@@ -1,0 +1,12 @@
+{
+  "candidate": "amq_learning_tool_v82_85_36_workspace_proto34-loop-guard_86.html",
+  "bytes": 9141792,
+  "sha256": "aa96ecab96e5708edc71f8264bec1f124f01f658349f1f83d0439a515e64e387",
+  "javascript_blocks_checked": 55,
+  "javascript_failures": [],
+  "css_blocks_checked": 80,
+  "css_errors": [],
+  "static_assertions_passed": 7,
+  "static_assertions_total": 7,
+  "browser_test": "NOT RUN: Chromium navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR for both file:// and localhost origins; no interaction/persistence claims."
+}
