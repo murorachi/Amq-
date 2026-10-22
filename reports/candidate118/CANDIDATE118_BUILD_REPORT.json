@@ -9,7 +9,7 @@
   "scope": "One existing route-owner function only.",
   "tests": {
     "browser_assertions": {
-      "pass": 16,
+      "pass": 17,
       "fail": 0
     },
     "inline_javascript": {
@@ -21,7 +21,11 @@
       "qualified_rules": 2569,
       "parse_errors": 0
     },
-    "zip_integrity": "PASS"
+    "zip_integrity": "PASS",
+    "overall": {
+      "pass": 19,
+      "fail": 0
+    }
   },
   "not_verified": [
     "live AniList/MAL/VNDB imports",
