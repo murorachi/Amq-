@@ -1,7 +1,7 @@
 {
   "candidate_file": "amq_learning_tool_v82_85_46_workspace_proto44-list-removal-catalog_97_release.html",
-  "candidate_sha256": "38a298083e5c32fe15b6aeed98eceddb3fce9990e651aabaaac0124fc80e9540",
-  "candidate_bytes": 9160008,
+  "candidate_sha256": "3a94d6e137748f6ba8f836615e9a4c8e5654b915c447b9a3a5029b6501807e6d",
+  "candidate_bytes": 9160167,
   "baseline_file": "amq_learning_tool_v82_85_46_workspace_proto44-inline-card-filter_96.html",
   "baseline_sha256": "52cbaa536cc728d202431214cdf1181dbbb1c14fa68279a61a126bfa69181de2",
   "static": {
@@ -11,27 +11,32 @@
     "css_parse_errors": 0,
     "required_control_assertions": "5/5"
   },
-  "browser": {
-    "main_cases": "20/20 passed",
-    "uncaught_page_errors": 0,
-    "workspace_actions": "5/5 passed",
-    "catalog_cover_expansion": "2/2 passed"
+  "browser_suites": {
+    "main_mocked_integration": "15/15 PASS",
+    "core_route_dom": "4/4 PASS",
+    "custom_list_crud_reload": "6/6 PASS",
+    "provider_imports": "8/8 PASS",
+    "workspace_actions": "5/5 PASS",
+    "catalog_cover_expansion_paging": "2/2 PASS"
   },
   "visual": {
     "viewport": "1440x900",
-    "candidate96_to_97_home": "pixel-identical",
-    "catalog_changed_pixel_ratio_threshold_12": 0.1606,
-    "official_osu_reference": "not run"
+    "home_vs_candidate96": "pixel-identical",
+    "catalog_changed_pixel_ratio_threshold_12": 0.001606,
+    "official_osu_reference": "NOT RUN"
   },
+  "incomplete": [
+    "A monolithic run stalled while transitioning from import tests to custom-list filtering; isolated CRUD/reload passes. Long-session acceptance remains open."
+  ],
   "not_run": [
-    "file:// browser execution",
-    "origin-backed localStorage persistence",
+    "file:// execution",
+    "origin-backed localStorage",
     "live AniList/MAL/VNDB APIs",
     "live cover hosts",
-    "official osu!stable screenshot comparison"
+    "official osu!stable reference comparison"
   ],
   "remote_artifact": {
     "standalone_html_uploaded": false,
-    "reason": "The connected GitHub file-writing actions accept inline text but cannot transfer the local 9.16 MB binary artifact; no remote HTML hash match is claimed."
+    "reason": "The connected GitHub file-writing action accepts inline UTF-8 text but cannot transfer the local 9.16 MB binary artifact. No remote HTML hash match is claimed."
   }
 }
