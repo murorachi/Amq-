@@ -39,5 +39,8 @@ Reference resized from 2555×1438 to 1648×928 using Lanczos vs Candidate 131: S
 
 The full-frame reference score is descriptive only: the reference contains anime artwork, while this candidate intentionally uses a neutral no-image fallback. It is not a valid acceptance score for the fallback feature.
 
+## GitHub checkpoint
+The five report/status files under `reports/candidate131/` were uploaded to `amq-candidate104-songselect-layout-fix` and read back successfully. The remote HTML path `dist/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_131.html` returned 404, so the HTML binary is **not uploaded** and its remote SHA-256 is **not verified**.
+
 ## Acceptance and rollback
 **NOT ACCEPTED as final Song Select.** The no-image fallback subtask passes available CSS/rendering checks. Overall Stage 1 layout is incomplete; Stages 2 and 3 remain incomplete. Roll back to Candidate 130 SHA-256 `9085754d5b6d8b1463709c25a97402a217e8ddb07afb9e4beb5d14dd1fbc3916`.
