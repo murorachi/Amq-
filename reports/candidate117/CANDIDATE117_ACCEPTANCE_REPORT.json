@@ -7,14 +7,18 @@
   "source_sha256": "78e665ad23ee21c9b0ab5c644f0bba2be3d311d8fee0e2015cf5fbaab06fe756",
   "checks": {
     "static": {
-      "pass": 8,
+      "pass": 9,
       "fail": 0,
       "assertions": [
         "62 inline scripts parse",
         "90 CSS blocks / 2569 qualified rules parse",
-        "four rail destinations",
-        "custom-list route",
-        "no uncaught browser errors"
+        "four rail destinations grouped under two headings",
+        "placeholder dashboard modal removed",
+        "existing action targets remain available",
+        "rail fits viewport",
+        "custom-list route opens watchlist",
+        "no uncaught browser errors",
+        "CSS parser reports zero errors"
       ]
     },
     "browser": {
@@ -38,5 +42,16 @@
     "profile-card relocation into Song Select",
     "HTML binary upload and remote HTML SHA-256"
   ],
-  "rollback": "Candidate 116"
+  "rollback": "Candidate 116",
+  "overall": {
+    "pass": 14,
+    "fail": 0,
+    "not_run": [
+      "live AniList/MAL and VNDB imports",
+      "real audio playback",
+      "durable persistence after actual browser reload",
+      "full osu!stable pixel comparison",
+      "profile card relocation into Song Select"
+    ]
+  }
 }
