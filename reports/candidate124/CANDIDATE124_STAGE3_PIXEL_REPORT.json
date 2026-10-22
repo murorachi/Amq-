@@ -1,0 +1,16 @@
+{
+  "candidate": 124,
+  "reference": "image.png",
+  "reference_sha256": "f0fd3ab5ec11e87632d95aac0ab7b9df3595c96e20bb03c5201d012d613b99a4",
+  "viewport": [1648, 928],
+  "regions": {
+    "full": {"ssim": 0.29483, "mae": 67.495, "rmse": 89.379, "exact_pixels_pct": 0.018, "rgb_delta_le20_pct": 10.696},
+    "header": {"ssim": 0.05664, "mae": 67.525, "rmse": 97.638, "exact_pixels_pct": 0.0067, "rgb_delta_le20_pct": 6.066},
+    "left_column": {"ssim": 0.25249, "mae": 67.684, "rmse": 85.733, "exact_pixels_pct": 0.0233, "rgb_delta_le20_pct": 13.578},
+    "catalog": {"ssim": 0.37598, "mae": 68.997, "rmse": 89.863, "exact_pixels_pct": 0.0122, "rgb_delta_le20_pct": 4.436},
+    "bottom_controls": {"ssim": 0.16602, "mae": 62.812, "rmse": 98.517, "exact_pixels_pct": 0.0331, "rgb_delta_le20_pct": 29.819},
+    "center": {"ssim": 0.38745, "mae": 58.986, "rmse": 80.218, "exact_pixels_pct": 0.019, "rgb_delta_le20_pct": 13.815}
+  },
+  "acceptance": "FAIL",
+  "reason": "Geometry matches the reference estimates, but structural/content mismatches remain in the background, ranking/player panel, artwork-led row composition, and header."
+}
