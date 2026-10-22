@@ -1,0 +1,50 @@
+{
+  "candidate": 129,
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_129.html",
+  "bytes": 9237869,
+  "sha256": "b23fbbfc1596d6f54db3bb54345cc4052b5128284387e43057754107dcdac1ef",
+  "static_validation": {
+    "checks_passed": 7,
+    "checks_failed": 0,
+    "inline_javascript_blocks": 62,
+    "javascript_parse_errors": 0,
+    "css_blocks": 90,
+    "css_top_level_rules": 2579,
+    "css_parse_errors": 0,
+    "parent_sha_verified": true,
+    "candidate_marker_verified": true,
+    "css_and_js_catalog_owner_agree": true,
+    "first_row_width_vw": 46,
+    "hover_offset_px": 3
+  },
+  "browser_acceptance": {
+    "rendered_with_playwright_set_content": true,
+    "viewports": [
+      "1648x928@DPR1",
+      "1440x900@DPR1",
+      "1280x720@DPR1"
+    ],
+    "catalog_card_count": 180,
+    "vertical_flex_stack_verified": true,
+    "card_expand_and_metadata": "PASS",
+    "hover_offset": "PASS",
+    "selected_row_transform": "PARTIAL: selected class and white styling appear; computed transform remains none",
+    "file_scheme_navigation": "BLOCKED: ERR_BLOCKED_BY_ADMINISTRATOR",
+    "persistent_storage": "NOT RUN: opaque about:blank origin denies localStorage",
+    "live_apis": "NOT RUN",
+    "audio": "NOT RUN"
+  },
+  "visual_metrics_1648x928": {
+    "candidate126": {
+      "ssim": 0.308599,
+      "mae": 64.4134,
+      "rmse": 86.2203
+    },
+    "candidate129": {
+      "ssim": 0.312034,
+      "mae": 63.4492,
+      "rmse": 84.851
+    }
+  },
+  "acceptance": "NOT ACCEPTED; stage 1 incomplete; stages 2 and 3 incomplete"
+}
