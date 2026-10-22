@@ -34,7 +34,7 @@
 ## Remaining gaps
 
 - A monolithic test run stalled when transitioning from importer tests to custom-list filtering. The same CRUD/reload cases pass in an isolated context. Long-session acceptance remains open.
-- Real `file://` execution and origin-backed browser localStorage persistence were blocked by the current environment; the reload carryover used an in-memory Storage shim.
+- Real `file://` execution and origin-backed browser localStorage persistence were blocked by the current environment; reload carryover used an in-memory Storage shim.
 - Live AniList/MAL/VNDB APIs and live cover hosts were not tested.
 - Official osu!stable reference screenshot comparison was not run.
 - Workspace action handlers were dispatched through DOM click events; physical-pointer hit-testing of every action control is not fully accepted.
