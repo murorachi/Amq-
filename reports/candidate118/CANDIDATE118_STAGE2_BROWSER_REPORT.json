@@ -6,10 +6,10 @@
   "source_candidate": 117,
   "source_sha256": "c5542b9769c70e4fb8b74044c7bf09bbe76121df1418321bef803d55bc9b5b8b",
   "summary": {
-    "passed": 18,
+    "passed": 19,
     "failed": 0,
     "breakdown": {
-      "browser_assertions": 16,
+      "browser_assertions": 17,
       "javascript_syntax": 1,
       "css_parse": 1
     }
@@ -25,7 +25,8 @@
     "Dashboard route opens populated dashboard and exits Song Select route",
     "No uncaught browser errors",
     "62 inline scripts parse",
-    "90 CSS blocks / 2,569 qualified rules parse"
+    "90 CSS blocks / 2,569 qualified rules parse",
+    "Home hides Song Select-only rail/back/home controls; compact player measured 46px"
   ],
   "not_verified": [
     "live AniList/MAL/VNDB imports",
@@ -34,5 +35,10 @@
     "full osu!stable pixel comparison",
     "HTML binary upload and remote HTML SHA-256 verification"
   ],
-  "rollback": "Candidate 117"
+  "rollback": "Candidate 117",
+  "home_workspace_isolation": {
+    "home_player_height_px": 46,
+    "songselect_only_controls_visible_on_home": false,
+    "result": "PASS"
+  }
 }
