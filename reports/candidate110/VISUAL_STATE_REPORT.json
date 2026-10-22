@@ -1,0 +1,33 @@
+{
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_110.html",
+  "sha256": "27838d55b659818982fc55bb9d6de5664f6cef7d29a62ca4013e6fabc3a37d67",
+  "bytes": 9220277,
+  "tests": {
+    "passed": 7,
+    "failed": 0,
+    "not_run": 0
+  },
+  "selected_song_row": {
+    "background": "rgba(255, 255, 255, 0.94)",
+    "color": "rgb(23, 23, 23)",
+    "x": 652.953125,
+    "width": 979.03125,
+    "transform": "translateX(-7px)",
+    "title": "Chameko no Ichinichi"
+  },
+  "active_work": {
+    "background": "rgba(245, 73, 158, 0.96)",
+    "previous_work_background": "rgba(232, 48, 133, 0.78)"
+  },
+  "hover": {
+    "dx": -7,
+    "dy": 0,
+    "background": "rgba(245, 73, 158, 0.9)"
+  },
+  "limitations": [
+    "Remote audio playback unverified",
+    "Durable storage across reload blocked in sandbox",
+    "Pixel-perfect comparison against content-matched osu screenshot not performed",
+    "HTML binary not uploaded; remote SHA verification pending"
+  ]
+}
