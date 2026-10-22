@@ -1,0 +1,52 @@
+{
+  "candidate": 131,
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_131.html",
+  "bytes": 9238776,
+  "sha256": "f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3",
+  "parent": "Candidate 130",
+  "parent_sha256": "9085754d5b6d8b1463709c25a97402a217e8ddb07afb9e4beb5d14dd1fbc3916",
+  "static": {
+    "checks_passed": 8,
+    "checks_total": 8,
+    "executable_js_blocks": 62,
+    "javascript_parse_errors": 0,
+    "css_blocks": 90,
+    "css_top_level_rules": 2580,
+    "css_parse_errors": 0,
+    "duplicate_ids": 0
+  },
+  "browser": {
+    "engine": "system Chromium via Playwright",
+    "method": "page.set_content; opaque origin",
+    "viewports": [
+      "1648x928@DPR1",
+      "1440x900@DPR1",
+      "1280x720@DPR1"
+    ],
+    "catalog_cards": 180,
+    "fallback_active_without_scene_image": true,
+    "fallback_absent_on_home": true,
+    "stage_background_transparent": true,
+    "simulated_custom_scene_image_disables_fallback": true,
+    "file_scheme": "BLOCKED: environment denies file:// navigation",
+    "persistent_storage": "NOT RUN: opaque origin denies localStorage; IndexedDB-backed image load/clear persistence not tested",
+    "live_apis": "NOT RUN",
+    "audio": "NOT RUN",
+    "full_feature_regression": "NOT RUN"
+  },
+  "pixel_metrics_1648x928": {
+    "candidate130_vs_candidate131": {
+      "ssim": 0.962566,
+      "mae": 4.8648,
+      "rmse": 9.4962
+    },
+    "reference_vs_candidate131": {
+      "ssim": 0.301583,
+      "mae": 64.5942,
+      "rmse": 85.9324
+    },
+    "reference_resize": "2555x1438 to 1648x928 using Lanczos",
+    "limitation": "Full-frame score is descriptive only because reference contains actual artwork while candidate intentionally uses CSS-only fallback."
+  },
+  "acceptance": "INTERMEDIATE ONLY; overall Song Select Stage 1 incomplete, Stages 2 and 3 incomplete"
+}
