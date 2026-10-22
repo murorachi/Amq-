@@ -1,0 +1,35 @@
+{
+  "candidate": 120,
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_120.html",
+  "artifact_sha256": "2b5f874693998f9748ddd579737563a78a22c3c7db0d089547cfc891fb6248a2",
+  "summary": {
+    "passed": 12,
+    "failed": 0
+  },
+  "passed_operations": [
+    "Create custom list using existing form",
+    "Add a work through existing manager",
+    "Filter list members by title",
+    "Remove work through existing UI",
+    "Verify removed work is absent after rerender",
+    "No stale member row remains",
+    "Clean up only test list",
+    "AniList/MAL import UI opens",
+    "VNDB list/import view opens",
+    "Learning Plan route opens existing practice hub",
+    "Custom-list workspace opens",
+    "Return to Song Select without uncaught browser errors"
+  ],
+  "blocked": [
+    {
+      "item": "Durable custom-list persistence across actual reload",
+      "reason": "Managed Chromium returns ERR_BLOCKED_BY_ADMINISTRATOR for file:// and localhost navigation; in-memory localStorage shim was used instead."
+    }
+  ],
+  "not_run": [
+    "Live AniList/MAL/VNDB requests",
+    "Real audio playback",
+    "osu!stable pixel comparison",
+    "Remote HTML hash verification"
+  ]
+}
