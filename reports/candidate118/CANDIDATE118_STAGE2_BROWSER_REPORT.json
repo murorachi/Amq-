@@ -1,0 +1,38 @@
+{
+  "candidate": 118,
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_118.html",
+  "artifact_bytes": 9235643,
+  "artifact_sha256": "bb1536744bea764ecf9cb010a6cb1f23fcea2ab69f809193125c695ba9404163",
+  "source_candidate": 117,
+  "source_sha256": "c5542b9769c70e4fb8b74044c7bf09bbe76121df1418321bef803d55bc9b5b8b",
+  "summary": {
+    "passed": 18,
+    "failed": 0,
+    "breakdown": {
+      "browser_assertions": 16,
+      "javascript_syntax": 1,
+      "css_parse": 1
+    }
+  },
+  "checks": [
+    "Homepage icon-only initial state",
+    "Homepage profile/player unique",
+    "Four Home → Song Select cycles with no duplicate nodes",
+    "Four Song Select → Home cycles restore compact player and clean route",
+    "Player class amqHomeDock absent on Song Select and restored on Home",
+    "Home icon reveals exactly three actions: 開始遊戲、歌曲選擇、設定",
+    "Song Select search, sort, 6 filter controls, 4 mode toggles, selected-song info and list/batch/learning entry points present",
+    "Dashboard route opens populated dashboard and exits Song Select route",
+    "No uncaught browser errors",
+    "62 inline scripts parse",
+    "90 CSS blocks / 2,569 qualified rules parse"
+  ],
+  "not_verified": [
+    "live AniList/MAL/VNDB imports",
+    "real audio playback",
+    "durable persistence after actual browser reload (test used in-memory localStorage shim)",
+    "full osu!stable pixel comparison",
+    "HTML binary upload and remote HTML SHA-256 verification"
+  ],
+  "rollback": "Candidate 117"
+}
