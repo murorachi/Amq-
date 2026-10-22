@@ -1,0 +1,15 @@
+{
+  "candidate": 120,
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_120.html",
+  "size_bytes": 9235686,
+  "sha256": "2b5f874693998f9748ddd579737563a78a22c3c7db0d089547cfc891fb6248a2",
+  "parent_candidate": 119,
+  "parent_sha256": "eff6a381c00c33442ff2392f99feab1b1966872476b7748a162465a3e75e093e",
+  "changes": [
+    "VNDB route uses existing openList API",
+    "Learning Plan route uses existing app router",
+    "Custom-list route uses existing watchlist route and custom tab"
+  ],
+  "scope": "Existing route handlers only",
+  "baseline_preserved": true
+}
