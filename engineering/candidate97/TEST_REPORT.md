@@ -25,7 +25,7 @@
 
 ## Incomplete / not run
 
-- A monolithic run combining import scenarios and custom-list filtering stalled at the stage transition. The same CRUD/reload cases pass when isolated; long-session acceptance is still open.
+- A monolithic run combining import scenarios and custom-list filtering stalled at the stage transition. The same CRUD/reload cases pass when isolated; long-session acceptance remains open.
 - Real `file://` and localhost navigation was blocked. Reload carryover used an in-memory Storage shim, not origin-backed localStorage.
 - Live AniList/MAL/VNDB endpoints and live cover hosts were not tested.
 - Official osu!stable screenshot comparison was not run because the pinned reference image could not be retrieved.
