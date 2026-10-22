@@ -20,3 +20,4 @@
 Important: durable persistence after a real browser reload is BLOCKED. Managed Chromium rejects `file://` and localhost navigation with `ERR_BLOCKED_BY_ADMINISTRATOR`; storage checks used an in-memory shim. This is not a persistence PASS. Live AniList/MAL/VNDB import requests and real audio playback were not run.
 
 Stage 3 osu!stable geometry comparison has NOT started because pre-Stage-3 validation remains incomplete.
+Import validation note: the isolated blank-input Playwright attempt timed out (180 seconds, driver EPIPE); it produced no accepted PASS results. Audio playback is user-confirmed working, not independently tested in this environment.
