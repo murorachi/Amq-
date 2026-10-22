@@ -1,0 +1,32 @@
+{
+  "candidate": 120,
+  "artifact_sha256": "2b5f874693998f9748ddd579737563a78a22c3c7db0d089547cfc891fb6248a2",
+  "summary": {
+    "passed": 5,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "Inline JavaScript syntax",
+      "result": "PASS",
+      "detail": "62 inline scripts; errors=0"
+    },
+    {
+      "name": "CSS parse",
+      "result": "PASS",
+      "detail": "90 style blocks, 2569 qualified rules, 0 parse errors"
+    },
+    {
+      "name": "VNDB route uses existing list API",
+      "result": "PASS"
+    },
+    {
+      "name": "Learning Plan route uses app router",
+      "result": "PASS"
+    },
+    {
+      "name": "Custom-list route uses watchlist + custom tab",
+      "result": "PASS"
+    }
+  ]
+}
