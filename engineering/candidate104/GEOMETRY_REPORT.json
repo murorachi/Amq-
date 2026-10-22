@@ -1,0 +1,33 @@
+{
+  "reference": {
+    "file": "image.png",
+    "width": 2555,
+    "height": 1438
+  },
+  "viewport": {
+    "width": 1648,
+    "height": 928
+  },
+  "measurements": {
+    "referenceScaledBottomBandTopEstimate": 821,
+    "candidateBottomBandTop": 822,
+    "candidateBottomBandHeight": 106,
+    "candidateSongListBottom": 820,
+    "leftRailRight": 462,
+    "songListLeft": 1013.53,
+    "songListRight": 1648,
+    "rowHeight": 68,
+    "hoverShiftX": -7,
+    "hoverShiftY": 0
+  },
+  "transparency": {
+    "unselectedRow": "rgba(232, 48, 133, 0.78)",
+    "selectedRow": "rgba(255, 255, 255, 0.9)",
+    "hoverRow": "rgba(245, 73, 158, 0.9)",
+    "leftRailBackground": "transparent"
+  },
+  "limitations": [
+    "Geometry/style samples and normalized estimates, not a full pixel-difference benchmark.",
+    "Center background art excluded per specification."
+  ]
+}
