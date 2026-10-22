@@ -10,6 +10,7 @@
 - CSS parse: 78 style blocks parsed with `tinycss2`; 0 parser errors.
 - Candidate 82 shell regression harness run against Candidate 83: 28/28 action entries passed assertions for panel opening, Escape close, unchanged active route, and non-empty content; page errors 0 in the test harness.
 - Additional Chromium `set_content` feature smoke: custom-list panel exposed its create form; creating a test list produced one list card; rename confirmation changed the name; delete confirmation removed the card; VN list opened its dedicated `#vnListView` and import controls without falling back to anime catalog; watch-status panel exposed its existing controls. Browser page errors: 0. These checks use an in-memory storage shim and do not prove persistence across reload.
+- Batch safety smoke: opening `batch-apply-target`, `batch-watch-target`, and `batch-create-list` left all apply/watch/create click counters at zero; no data-apply operation was triggered automatically; page errors 0.
 
 ## Failed / blocked
 - Real `file://` Chromium navigation was blocked by the execution environment (`ERR_BLOCKED_BY_ADMINISTRATOR`); normal-origin interaction and real localStorage persistence could not be tested here.
