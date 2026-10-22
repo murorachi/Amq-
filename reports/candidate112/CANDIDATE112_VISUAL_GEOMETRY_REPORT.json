@@ -1,0 +1,55 @@
+{
+  "candidate": 112,
+  "reference": {
+    "file": "image.png",
+    "native_dimensions": [
+      2555,
+      1438
+    ],
+    "comparison_viewport": [
+      1648,
+      928
+    ],
+    "scale_factor": 0.6446183953,
+    "method": "reference dimensions normalized to candidate viewport; comparable catalog card geometry measured, not whole-frame pixel identity"
+  },
+  "candidate_112_measurements": {
+    "catalog_left_x": 650.95,
+    "catalog_width": 997.03,
+    "first_card_x": 651.95,
+    "first_card_y": 94,
+    "card_height": 64,
+    "cover_width": 78,
+    "cover_height": 58,
+    "title_font_size": 15,
+    "title_line_height": 18
+  },
+  "reference_estimates_at_1648x928": {
+    "ordinary_card_left_x": 650,
+    "ordinary_card_height_range": [
+      59,
+      62
+    ],
+    "cover_width_range": [
+      76,
+      80
+    ],
+    "cover_height_range": [
+      56,
+      60
+    ],
+    "title_font_size_range": [
+      15,
+      16
+    ]
+  },
+  "findings": [
+    "Catalog start position is close to normalized reference estimate; do not shift the entire catalog rail as part of this adjustment.",
+    "Candidate 112 changes cover geometry from 54x54 to 78x58 and title font from 13px to 15px.",
+    "Card height remains 64px, slightly taller than estimated 59-62px reference range; unchanged to avoid clipping subtitle/card content.",
+    "Selected-song row remains an AMQ-specific inline control panel without osu!stable's artwork-led selected-card structure.",
+    "Left rail remains function/tool cards rather than the reference player-ranking panel.",
+    "Full-frame SSIM is not claimed as a success metric because screenshot content, covers, background and control semantics are not matched."
+  ],
+  "result": "PARTIAL_VISUAL_IMPROVEMENT_NOT_PIXEL_ACCEPTED"
+}
