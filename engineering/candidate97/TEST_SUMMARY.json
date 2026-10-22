@@ -26,7 +26,7 @@
     "official_osu_reference": "NOT RUN"
   },
   "incomplete": [
-    "A monolithic run stalled while transitioning from import tests to custom-list filtering; isolated CRUD/reload passes. Long-session acceptance remains open."
+    "A monolithic run stalled while transitioning from importer tests to custom-list filtering; isolated CRUD/reload passes. Long-session acceptance remains open."
   ],
   "not_run": [
     "file:// execution",
