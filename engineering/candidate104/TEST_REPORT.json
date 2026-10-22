@@ -78,10 +78,15 @@
       "name": "Full pixel-difference parity",
       "result": "NOT RUN",
       "detail": "Geometry and computed styles sampled; no full pixel-diff benchmark"
+    },
+    {
+      "name": "Alt+wheel volume and radial indicator",
+      "result": "PASS",
+      "detail": "Media volume 0.70 -> 0.75; radial overlay shows 75% VOLUME."
     }
   ],
   "summary": {
-    "passed": 12,
+    "passed": 14,
     "failed": 0,
     "blocked": 1,
     "not_run": 2
