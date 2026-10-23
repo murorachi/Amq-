@@ -1,0 +1,38 @@
+{
+  "candidate": 132,
+  "file_sha256": "1de08a187020d1818a9f752ba565a04deea576d8bb6d59673af002df9bbd6cce",
+  "browser": "Playwright + system Chromium, page.set_content, external HTTP(S) blocked",
+  "viewport_results": {
+    "1648x928": {
+      "grid_height": 759,
+      "card_height": 100,
+      "full_cards": 7,
+      "partial_fraction": 0.5,
+      "catalog_cards": 180
+    },
+    "1440x900": {
+      "grid_height": 731,
+      "card_height": 96.265625,
+      "full_cards": 7,
+      "partial_fraction": 0.500081,
+      "catalog_cards": 180
+    },
+    "1280x720": {
+      "grid_height": 551,
+      "card_height": 72.265625,
+      "full_cards": 7,
+      "partial_fraction": 0.500108,
+      "catalog_cards": 180
+    }
+  },
+  "interaction": {
+    "selected_row_transform_px": -7,
+    "selected_row_margin_top_px": 2,
+    "selected_row_margin_bottom_px": 2,
+    "adjacent_hover_transform_px": -3,
+    "adjacent_hover_opacity": 0.9,
+    "keyboard_enter_opens_work": true,
+    "custom_image_preserved": true
+  },
+  "result": "PASS for 7.5-card viewport and tested selection-distance styling; not a full Song Select acceptance"
+}\n
