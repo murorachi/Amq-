@@ -1,0 +1,48 @@
+{
+  "method": "Playwright page.set_content; in-memory localStorage shim; real Chromium IndexedDB in opaque-origin test page",
+  "tests": [
+    {
+      "name": "empty scene store initializes with fallback and no fake image",
+      "status": "PASS",
+      "detail": {
+        "api": true,
+        "list": {},
+        "layer": true,
+        "hasImage": false
+      }
+    },
+    {
+      "name": "scene image file passes validation and preview status updates",
+      "status": "PASS",
+      "detail": {
+        "text": "選歌頁 · 背景預覽",
+        "status": "預覽中：scene_manager_test_pattern.png。按「套用到目前介面」後才會保存。"
+      }
+    },
+    {
+      "name": "blob URL image rendering in the test page",
+      "status": "BLOCKED",
+      "detail": "Opaque page origin produces blob:null URLs; background-image computes to none. Direct file/localhost runtime unavailable."
+    },
+    {
+      "name": "IndexedDB image persistence, export, clear and restore",
+      "status": "BLOCKED",
+      "detail": {
+        "status": "保存失敗：背景圖片儲存區尚未準備好。 原有背景未主動刪除。"
+      }
+    },
+    {
+      "name": "no uncaught page errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ],
+  "pass": 3,
+  "fail": 0,
+  "blocked": 2,
+  "limits": [
+    "Not a direct file:// test",
+    "Synthetic test PNG is only a test fixture",
+    "Browser profile persistence across restarts NOT tested"
+  ]
+}
