@@ -1,10 +1,10 @@
-# NEXT TASK — Continue Candidate 190 Root-cause Integration
+# NEXT TASK — Candidate 193: Verify workspace lifecycle, then core data
 
-1. Preserve Candidate 178 as recovery baseline and all candidate files unchanged.
-2. Candidate 190 fixes two import actions that bypassed the shared workspace: AniList/MAL opens the existing modal in place; VNDB opens its existing view via the shared content panel. These are targeted changes, not overall acceptance.
-3. Next inspect and fix remaining legacy route calls from workspace actions, especially learning actions that still invoke `practice`, and ensure the shared panel restores moved DOM nodes and focus safely on close/back/Escape.
-4. Decide the four useful workspace destinations from existing functionality. Do not restore the removed batch organizer or leave misleading dead controls; do not invent placeholder panels.
-5. Test opening, switching, closing, Escape, focus restoration, backdrop/back, repeated switching, and ensure Song Select stays active with no duplicated nodes/listeners.
-6. Verify custom-list CRUD and reload persistence, AniList/MAL/VNDB import/error paths, cover recovery, player geometry and real playback, Enter selection, and reference screenshot geometry.
-7. Browser environment currently blocks native local-file navigation; use an approved browser context if available. Opaque-origin `page.set_content` localStorage errors are BLOCKED, not PASS.
-8. Update the validation report and handoff docs after each meaningful verified change. Upload the final HTML and confirm remote path, version, byte size, and SHA-256 before calling delivery complete.
+1. Preserve Candidate 178 as recovery baseline and all candidate artifacts unchanged.
+2. Candidate 193 now exposes four existing-function workspaces: 清單管理, 學習中心, 猜歌練習, 多人模式. It routes legacy watchlist/practice/explore/learningPlan/dashboard/vnList navigation into the shared panel only while Song Select is active.
+3. First verify on an approved real-browser context that Song Select remains the active route during all six intercepted destinations. The set_content harness confirms interception events and panel titles, but cannot prove route state because the app's active-view state defaults to home in that harness.
+4. Test panel open/switch/close, Back, Escape, backdrop if supported, focus restoration, and repeated switching. Confirm original DOM nodes restore to original parents and no event listeners/DOM nodes accumulate.
+5. Then test custom-list CRUD/reload persistence; AniList/MAL and VNDB actual import, empty/error/duplicate/retry and list removal; cover retry/fallback; actual audio controls; Enter selection; and preserved learning state/tags/favorites/blacklist/multiplayer.
+6. Recover the original 26-test suite and document every assertion. Run all applicable P0/P1 tests.
+7. Complete fixed-resolution osu!stable screenshot geometry/pixel comparison, including 7.5 cards, bottom half-card, selected-vs-hover left shift, right-side details and player geometry.
+8. Only after runtime and regression tests pass, create a uniquely named final candidate, update handoff docs/report, upload HTML and source/build/test files, read back the remote artifact, and compare version, size and SHA-256.
