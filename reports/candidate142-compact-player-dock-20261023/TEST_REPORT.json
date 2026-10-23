@@ -1,0 +1,40 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_142_compact_player_dock.html",
+  "bytes": 9262779,
+  "sha256": "6eb84e1339a2d2d7efd7cb6961b3031ceb3690195de22539de5850b0fe78af0a",
+  "method": "Playwright page.set_content; test-only in-memory Storage shim",
+  "pass": 21,
+  "fail": 0,
+  "viewports": [
+    "1648x928",
+    "1440x900",
+    "1280x720"
+  ],
+  "assertions": [
+    "selected row index 3",
+    "7.5 rows visible at all three viewports",
+    "no document overflow",
+    "no uncaught page errors",
+    "real profile moved into left rail without duplicate IDs",
+    "rail does not overlap catalog",
+    "transparent placeholder remains functional",
+    "workspace panel opens",
+    "ArrowDown and ArrowUp selection",
+    "hover translation -3px",
+    "search selects valid result",
+    "EMQ mode filters to EMQ source",
+    "profile restores to home",
+    "player dock height 76px",
+    "top metadata remains upper-left and above dock"
+  ],
+  "not_run": [
+    "direct file:// navigation",
+    "localhost navigation",
+    "durable localStorage/IndexedDB persistence",
+    "live APIs",
+    "real audio playback",
+    "full custom-list CRUD",
+    "cross-workspace regressions"
+  ],
+  "acceptance": "NOT ACCEPTED"
+}
