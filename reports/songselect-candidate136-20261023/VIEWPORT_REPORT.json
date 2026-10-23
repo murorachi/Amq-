@@ -1,0 +1,27 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_136_interaction_rootfix.html",
+  "viewportSizes": [
+    [
+      1648,
+      928
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1280,
+      720
+    ]
+  ],
+  "allNoDocumentOverflow": true,
+  "cardCount": 180,
+  "gridHeightByViewport": {
+    "1648x928": 759,
+    "1440x900": 731,
+    "1280x720": 551
+  },
+  "selectedSongTransform": "translateX(-7px)",
+  "pageErrors": 0,
+  "note": "Chromium page.set_content; test-only in-memory Storage shim; not a direct-file or durable persistence test"
+}
