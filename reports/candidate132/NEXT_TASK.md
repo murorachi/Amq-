@@ -1,6 +1,6 @@
 # NEXT TASK — Song Select continuation
 
-1. Preserve the separate remote Candidate 131 artifact (`f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3`); continue this line from Candidate 132 based on Candidate 130.
+1. Preserve the separate remote Candidate 131 artifact (`f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3`); continue this line from Candidate 132 based on Candidate 130. Do not overwrite Candidate 130 or the formal release baseline.
 2. Rebuild the left feature rail into the compact ranking/player composition using only real data; preserve access to imports, lists, and learning tools.
 3. Finish top-left song metadata hierarchy and bottom control geometry with browser screenshots and DOM measurements.
 4. Verify long/short titles, missing cover/data, search/sort/filter, mode changes, scrolling, Enter, hover, selected state, and re-render stability.
