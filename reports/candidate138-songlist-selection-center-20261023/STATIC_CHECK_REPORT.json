@@ -1,0 +1,11 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_138_songlist_selection_center.html",
+  "bytes": 9259775,
+  "sha256": "e240eee8d06cc2bcf59ad572bfcc42a89491c916972486a571fd39dee3918962",
+  "script_tags_total": 65,
+  "executable_inline_scripts_checked": 63,
+  "javascript_syntax_failures": 0,
+  "style_blocks": 91,
+  "css_parse_errors": 0,
+  "method": "Node.js --check for executable inline scripts; tinycss2 parsing for stylesheets/declarations; embedded JSON/data blocks excluded"
+}
