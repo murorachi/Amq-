@@ -1,0 +1,38 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_162_scene_image_visibility_rootfix.html",
+  "bytes": 9272334,
+  "sha256": "537607bf392b3f0f54e922db9049acaeae3020af8fd337da67566deebe9166a0",
+  "sourceDiff": {
+    "parent": "Candidate 161",
+    "changedDeclarations": 1,
+    "change": "display:block!important",
+    "selector": "body.amq-songselect-route-active #amqSongSelectStage .p32-scene-image"
+  },
+  "checks": {
+    "mainPlaywright": {
+      "pass": 26,
+      "fail": 0
+    },
+    "additional": {
+      "pass": 5,
+      "fail": 0
+    },
+    "css": {
+      "styleBlocks": 96,
+      "qualifiedRules": 2648,
+      "parseErrors": 0
+    }
+  },
+  "computedState": {
+    "display": "block",
+    "position": "fixed",
+    "opacity": "0.18",
+    "routeActive": true
+  },
+  "blocked": [
+    "file:// and localhost navigation",
+    "real image Blob rendering",
+    "IndexedDB save/reload/export/clear/restore"
+  ],
+  "accepted": false
+}
