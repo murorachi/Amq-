@@ -1,0 +1,61 @@
+{
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_161_bottom_player_geometry.html",
+  "bytes": 9272310,
+  "sha256": "e144bd6ee4ad69ee2f05e4b761700c4c748b50d00fc31dd9117d6ce862974839",
+  "styleBlocks": 96,
+  "qualifiedRules": 2648,
+  "parseErrors": [],
+  "repeatedExactSelectors": 379,
+  "highImpactConflicts": [
+    {
+      "selector": ".p32-scene",
+      "count": 3,
+      "styleBlocks": [
+        75,
+        82,
+        94
+      ],
+      "issue": "Later style 94 switches to fixed full viewport geometry."
+    },
+    {
+      "selector": ".p32-scene-image",
+      "count": 2,
+      "styleBlocks": [
+        82,
+        94
+      ],
+      "issue": "Conflicting visibility and full-screen overlay properties."
+    },
+    {
+      "selector": ".p32-info .p32-stat",
+      "count": 3,
+      "styleBlocks": [
+        72,
+        83,
+        87
+      ],
+      "issue": "Layout changes from inline row to column then row."
+    },
+    {
+      "selector": "#audioDock.amqHomeDock",
+      "count": 2,
+      "styleBlocks": [
+        69,
+        89
+      ],
+      "issue": "Different height and grid column layouts."
+    },
+    {
+      "selector": "#amqWorkspaceSidebar",
+      "count": 4,
+      "styleBlocks": [
+        59,
+        60,
+        88,
+        92
+      ],
+      "issue": "Materially different coordinates and dimensions."
+    }
+  ],
+  "caveat": "Repeated selectors are diagnostic, not automatically defects; consolidation needs controlled runtime regression."
+}
