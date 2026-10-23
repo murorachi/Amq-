@@ -1,16 +1,17 @@
-# CURRENT STATUS — Candidate 173 Left Rail Root Fix
+# CURRENT STATUS — Candidate 178 Song Select Visual Pass
 
-- Current local experimental candidate: Candidate 173.
-- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_173_left_rail_specificity_fix.html`
-- Local SHA-256: `282edb78e91de4c4f65f1c917d6edf333b52efef11de7c6b65256404e4101b27`
-- Size: 9,271,506 bytes.
-- Root cause fixed: the actual legacy rail is `#c99LeftRail`, and its later-injected Candidate 99 `!important` rule beat the prior equal-specificity hide rule. Candidate 173 raises selector specificity and hides the rail plus its curved-frame decoration on the Song Select route.
-- PASS: 64 executable inline JS blocks checked with Node `--check`, 0 syntax errors.
-- PASS: Chromium `page.set_content` route/geometry checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. Legacy rail hidden, 180 rows present, no horizontal overflow, dock in viewport.
-- PASS: ArrowDown changes selected row; hover displacement (-3px) is smaller than selected-row displacement (-7px); desktop list shows a partial eighth row.
-- Report: `reports/candidate173-left-rail-root-fix-20261023/VALIDATION.md`, created on GitHub.
-- BLOCKED: native file:// navigation returns ERR_BLOCKED_BY_ADMINISTRATOR. page.set_content has opaque origin and localStorage access errors, so durable persistence is not verified.
-- NOT RUN: full pixel-diff, native-origin CRUD persistence, live APIs/covers, audio playback, full workspace regression.
-- Candidate 173 HTML remains local; GitHub upload and remote hash verification NOT COMPLETED. Candidate is NOT ACCEPTED.
+- Current local experimental candidate: Candidate 178.
+- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_178_metadata_selector_specificity_fix.html`
+- Local SHA-256: `b91109c7c660be064cedf76b20e473b12ca415be8e0650f16d8086339c2a9f80`
+- Size: 9,274,075 bytes.
+- Root composition: actual legacy `#c99LeftRail` hidden on Song Select; no horizontal overflow at six tested viewport sizes.
+- Catalog: 180 rows rendered; translucent distance-tier backgrounds; 7.5-row visual clipping retained at desktop/reference sizes.
+- Metadata: title scales 39.6px at 2555 width, 25.5px at 1648, 20px at 1280; real song metadata retained.
+- Static checks PASS: 64 executable inline JS blocks checked individually by Node `--check`; 0 syntax errors.
+- Chromium set_content checks PASS with test-only in-document storage shim: six viewport sizes, route activation, hidden rail, dock/catalog bounds, ArrowDown selection, hover -3px vs selected -7px, AMQ source data, EMQ source switch; 0 page errors under shim.
+- Report uploaded and remote read-back pending: `reports/candidate178-songselect-root-catalog-metadata-20261023/VALIDATION.md`.
+- BLOCKED: native file:// navigation ERR_BLOCKED_BY_ADMINISTRATOR. Test shim is in-memory only; persistence not verified.
+- NOT RUN: live covers/APIs, real audio, full custom-list CRUD/import/workspace regression, reference pixel-diff score.
+- Candidate 178 HTML remains local; GitHub HTML upload and remote SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
 
-Next: improve row/background visual treatment against the user reference without breaking the scene-background manager, then modal workspace panels in a later stage. Preserve Candidate 170/169 rollback points.
+Next: validate real scene-background/art loading in a supported native-origin browser; implement the requested modal workspace launcher with background dimming/state restoration; then run full regression. Preserve Candidate 175/173/170/169 checkpoints.
