@@ -1,0 +1,10 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_141_profile_panel.html",
+  "bytes": 9262671,
+  "sha256": "d42061e6255c6636a7bf953980bcc2ddc8584e8cbd1057c098d75e45f716e8dc",
+  "pass": 19,
+  "fail": 0,
+  "method": "System Chromium + Playwright page.set_content; in-memory Storage shim",
+  "limits": ["file:// BLOCKED", "localhost BLOCKED", "durable persistence NOT RUN", "live APIs NOT RUN", "real audio NOT RUN", "full custom-list CRUD NOT RUN", "other-workspace regression NOT RUN"],
+  "acceptance": "NOT ACCEPTED"
+}
