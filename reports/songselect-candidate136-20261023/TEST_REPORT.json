@@ -1,0 +1,44 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_136_interaction_rootfix.html",
+  "bytes": 9238967,
+  "sha256": "acb9a4aea61f5c8776bcbd8bac43562eca3754307fdb758ea3b522bb58baf717",
+  "environment": "system Chromium + Playwright page.set_content + test-only in-memory Storage shim",
+  "results": {
+    "PASS": 12,
+    "FAIL": 0,
+    "BLOCKED": [
+      "direct file:// navigation",
+      "localhost navigation"
+    ],
+    "NOT_RUN": [
+      "durable storage/reload",
+      "live APIs",
+      "real audio playback",
+      "complete custom-list CRUD",
+      "other-workspace regression"
+    ]
+  },
+  "assertions": [
+    "document initialized",
+    "180 catalog works",
+    "catalog hover approximately -3px",
+    "work click opens actual song rows",
+    "mouse click selects one row",
+    "song hover -3px while selected row -7px",
+    "ArrowDown advances selection",
+    "ArrowUp returns to previous row",
+    "Enter preserves one selected row",
+    "search Usagi filters 180 to 26",
+    "one stage/no duplicate IDs/no document overflow at three sizes",
+    "no uncaught page/console errors"
+  ],
+  "visual": {
+    "viewport": "1648x928 DPR1",
+    "referenceResize": "2555x1438 to 1648x928 via PIL Lanczos",
+    "SSIM": 0.31203440162059276,
+    "MAE": 63.44923880217052,
+    "RMSE": 84.85098974266978,
+    "baselinePixelChangedCountVsCandidate130": 0
+  },
+  "acceptance": "NOT ACCEPTED"
+}
