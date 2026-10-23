@@ -1,13 +1,8 @@
-# NEXT TASK — Song Select Visual Fidelity and Native-Origin Acceptance
+# NEXT TASK — Song Select Acceptance
 
-1. Current local working candidate: Candidate 205, SHA-256 `e7003bc154bb74fcd89a8d5f0694200ff2ffb849026cce23416c4fe90fc8bd02`. Candidate 205 is not accepted; its HTML has not been uploaded to GitHub.
-2. Candidate 205 corrects the history-panel top/width proportions and fixes the later Candidate 180 inline runtime that overwrote tablet layout. Candidate 203/204 are failed intermediate attempts; do not deliver them.
-3. Static JS syntax passes: 70 executable inline blocks, 0 syntax errors. AMQ/EMQ/MIX totals/source counts are 38,821 / 16,839 / 55,660, with 180 rows per mode.
-4. Eighth-row clipping is ~46% on 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720; ~50% at 900×700, 900×928 and 390×844. No document overflow at these tested sizes.
-5. Workspace modal check at 1648×928 passes: dim backdrop, Escape close, selected song ID and scrollTop restore exactly. Local-history rendering test displays selected-song records and excludes a different song's record; synthetic fixture only, not a persistence test.
-6. Next visual fix: align top category/sort/search controls and bottom dock to the user's primary 2555×1438 reference. Measure current DOM rectangles against reference before changing the owning CSS/runtime. Do not change the scene-background manager or remove its no-custom-background fallback.
-7. Recompute pixel/region metrics at the same 2555×1438 viewport after visual changes. Candidate 201 historical metrics were low (SSIM 0.37455, MAE 63.7712, RMSE 85.0330); no Candidate 205 pixel score exists yet.
-8. Native `file://` and local HTTP navigation remain blocked by ERR_BLOCKED_BY_ADMINISTRATOR. Opaque-origin page.set_content emits two localStorage access-denied errors. Persistent reload and actual stored-history tests are NOT verified.
-9. Remaining NOT RUN: custom-list create/add/remove/filter/reload persistence; live AniList/MAL/VNDB APIs and cover-failure recovery; real audio playback; full workspace/back-navigation regression; scene-background manager persistence; registered pixel-diff.
-10. GitHub validation report for Candidate 205 has been created. Candidate HTML upload and remote SHA-256 verification are NOT COMPLETED; do not conflate report upload with HTML delivery.
-11. Preserve Candidate 202 SHA-256 `ffc6e0aaf4ee273f7cff3db38b440bac24624feccc4dc2625120cec33bdca2dc`, Candidate 201 `1a353023584509d188cb57a97f3efccff355ccab94d55824d047209d4c8ee093`, Candidate 200, Candidate 193, Candidate 186, Candidate 185, Candidate 179, Candidate 170 and Candidate 169 rollback points.
+1. Keep Candidate 184 as a distinct experimental checkpoint; never overwrite Candidate 178 or Candidate 183.
+2. Candidate 183 narrow-viewport document overflow is fixed in the shimmed Chromium harness at 900×928 and 390×844; repeat with native-origin browser access when permitted.
+3. Perform visual measurement and pixel/region comparison against the user-provided 2555×1438 osu!stable reference. Geometry-only checks do not establish visual fidelity.
+4. Test custom-list create, add, remove, filter, and reload persistence in an origin with functioning persistent storage.
+5. Test live AniList/MAL/VNDB APIs, cover failure recovery, and real audio separately; mark unavailable checks BLOCKED/NOT RUN.
+6. GitHub upload of the 9.28 MB HTML and remote hash verification remain incomplete. Do not mark delivery accepted until remote content and SHA-256 are verified.
