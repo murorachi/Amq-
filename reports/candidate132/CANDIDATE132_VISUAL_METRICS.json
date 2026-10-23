@@ -1,0 +1,79 @@
+{
+  "viewport": "1648x928",
+  "resize": "Reference image 2555x1438 resized to 1648x928 using Lanczos",
+  "regions": {
+    "full": {
+      "candidate130": {
+        "ssim": 0.312034,
+        "mae": 63.4492,
+        "rmse": 84.851
+      },
+      "candidate132": {
+        "ssim": 0.314905,
+        "mae": 65.1377,
+        "rmse": 86.3097
+      }
+    },
+    "left_player_panel": {
+      "candidate130": {
+        "ssim": 0.126903,
+        "mae": 93.7021,
+        "rmse": 104.1608
+      },
+      "candidate132": {
+        "ssim": 0.127048,
+        "mae": 94.0013,
+        "rmse": 104.2475
+      }
+    },
+    "top_song_info": {
+      "candidate130": {
+        "ssim": 0.024062,
+        "mae": 45.1157,
+        "rmse": 74.1118
+      },
+      "candidate132": {
+        "ssim": 0.023807,
+        "mae": 45.189,
+        "rmse": 74.1103
+      }
+    },
+    "central_scene": {
+      "candidate130": {
+        "ssim": 0.433449,
+        "mae": 47.7094,
+        "rmse": 67.5444
+      },
+      "candidate132": {
+        "ssim": 0.420712,
+        "mae": 49.2983,
+        "rmse": 68.2742
+      }
+    },
+    "right_catalog": {
+      "candidate130": {
+        "ssim": 0.40264,
+        "mae": 63.702,
+        "rmse": 82.9174
+      },
+      "candidate132": {
+        "ssim": 0.416169,
+        "mae": 67.0872,
+        "rmse": 86.3711
+      }
+    },
+    "bottom_controls": {
+      "candidate130": {
+        "ssim": 0.166022,
+        "mae": 62.8117,
+        "rmse": 98.5172
+      },
+      "candidate132": {
+        "ssim": 0.17639,
+        "mae": 62.0319,
+        "rmse": 98.3609
+      }
+    }
+  },
+  "interpretation": "Descriptive only, not a high-fidelity acceptance result. SSIM improved slightly, but MAE/RMSE increased as row geometry changed; the CSS fallback cannot match the reference artwork."
+}
