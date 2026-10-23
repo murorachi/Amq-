@@ -1,13 +1,16 @@
-# CURRENT STATUS — Candidate 171 Root Composition
+# CURRENT STATUS — Candidate 173 Left Rail Root Fix
 
-- Current experimental candidate: Candidate 171, Song Select root composition.
-- Local HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_171_songselect_root_composition.html`
-- Local SHA-256: `0c54a57cb359ac1549d9d4558102fc6757e5aab6fb3577d680a521384c219fed`
-- Size: 9,270,964 bytes.
-- Change: route-scoped CSS suppresses home dashboard/discovery, quicktools/batch organization, and legacy sidebar while Song Select is active; resets inherited left padding/wrapper width. Compact dock remains. Modal panels are deferred.
-- Static validation: 64 executable inline JS blocks parsed by Node `--check`; 0 syntax errors.
-- Browser validation: NOT RUN. Playwright Chromium executable is missing; launch failed before page load.
-- GitHub report `reports/candidate171-songselect-root-composition-20261023/VALIDATION.md` created. Candidate HTML itself is NOT uploaded or remotely verified.
-- Candidate 171 is NOT ACCEPTED; no visual or behavioral pass is claimed.
+- Current local experimental candidate: Candidate 173.
+- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_173_left_rail_specificity_fix.html`
+- Local SHA-256: `282edb78e91de4c4f65f1c917d6edf333b52efef11de7c6b65256404e4101b27`
+- Size: 9,271,506 bytes.
+- Root cause fixed: the actual legacy rail is `#c99LeftRail`, and its later-injected Candidate 99 `!important` rule beat the prior equal-specificity hide rule. Candidate 173 raises selector specificity and hides the rail plus its curved-frame decoration on the Song Select route.
+- PASS: 64 executable inline JS blocks checked with Node `--check`, 0 syntax errors.
+- PASS: Chromium `page.set_content` route/geometry checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. Legacy rail hidden, 180 rows present, no horizontal overflow, dock in viewport.
+- PASS: ArrowDown changes selected row; hover displacement (-3px) is smaller than selected-row displacement (-7px); desktop list shows a partial eighth row.
+- Report: `reports/candidate173-left-rail-root-fix-20261023/VALIDATION.md`, created on GitHub.
+- BLOCKED: native file:// navigation returns ERR_BLOCKED_BY_ADMINISTRATOR. page.set_content has opaque origin and localStorage access errors, so durable persistence is not verified.
+- NOT RUN: full pixel-diff, native-origin CRUD persistence, live APIs/covers, audio playback, full workspace regression.
+- Candidate 173 HTML remains local; GitHub upload and remote hash verification NOT COMPLETED. Candidate is NOT ACCEPTED.
 
-Rollback: Candidate 170 SHA-256 `089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662`. Next: secure a working browser runtime and inspect route layout at 2555×1438 and responsive sizes before further scene tuning.
+Next: improve row/background visual treatment against the user reference without breaking the scene-background manager, then modal workspace panels in a later stage. Preserve Candidate 170/169 rollback points.
