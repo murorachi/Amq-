@@ -13,9 +13,9 @@
 
 - Report: `CANDIDATE170_LOCAL_ACCEPTANCE_RERUN.json`, GitHub blob SHA `373ed9c55cebb0a64ba092eb0ed2338e042c5aaa`.
 - Tested Candidate 170 HTML SHA-256 `089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662` using system Chromium + Playwright `page.set_content`; navigated via the home icon and Song Select menu.
-- PASS: document reaches complete; Song Select route activated through UI; 180 catalog records populated; catalog remains within document width at 1280x720, 1440x900, 1648x928, 1920x1080, 2555x1438, 900x700; ArrowDown changes selected song ID (45305 to 13404); no non-storage uncaught page errors.
+- PASS: document reaches complete; Song Select route activated through UI; 180 catalog cards present; EMQ mode returns only EMQ source records (16,839); switching back returns AMQ source records (38,821); catalog bounds pass at 1280x720, 1440x900, 1648x928, 1920x1080, 2555x1438, 900x700; ArrowDown changes selected song ID (45305 to 13404); no non-storage uncaught page errors.
 - 7.5-card cue: preliminary geometry remains consistent at the main 16:9 sizes. At 1280x720 the final row shows 41.4/70.5 px; at 2555x1438 it shows 90.7/169.3 px. Pixel-perfect source comparison remains NOT RUN.
-- WARN: two localStorage access-denied errors and one console warning are caused by opaque `about:blank` origin under `page.set_content`. They were recorded and not counted as non-storage application errors.
+- WARN: two localStorage access-denied errors and one localStorage console warning are caused by opaque `about:blank` origin under `page.set_content`. Additional external resource requests failed with `ERR_NAME_NOT_RESOLVED` because this runtime has no external DNS/network. These are recorded; live cover/API availability remains unverified.
 - NOT RUN/BLOCKED: native file/http navigation (Chromium returns `ERR_BLOCKED_BY_ADMINISTRATOR`), durable storage, live API/audio, full CRUD, original historical 26-case suite, registered pixel-diff.
-- Screenshot: `candidate170_1280x720_acceptance_rerun.png`, local SHA-256 `40d4503587e5e99934468621c4336432aa92ebf7adc45c93f924840cb5094ce0`.
+- Screenshot: `candidate170_1280x720_acceptance_rerun.png`, local SHA-256 `88022fece66d2c5800daf47aac4afefb0fe59edbe476fb67fba69fd390c97bad`. Detailed local report SHA-256 `f7509ca87ab5a3db42bb5b32b1fa8c4422538e8109ed964b4e662a928173d7c2`.
 - Acceptance status remains experimental. Candidate 169 is still the rollback point; Candidate 170 is not promoted to formal baseline.
