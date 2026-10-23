@@ -1,0 +1,10 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_139_scene_sweep_geometry.html",
+  "bytes": 9259788,
+  "sha256": "bb25b714a90d6bfc579435d0e890f40c657654f80b1d26cbd97aa5cbc948f087",
+  "method": "System Chromium + Playwright page.set_content; test-only in-memory Storage shim",
+  "pass": 14,
+  "fail": 0,
+  "limits": ["file:// navigation BLOCKED_BY_ADMINISTRATOR", "localhost navigation BLOCKED_BY_ADMINISTRATOR", "durable persistence NOT RUN", "live APIs NOT RUN", "real audio NOT RUN", "full custom-list CRUD NOT RUN", "other-workspace regression NOT RUN"],
+  "acceptance": "NOT ACCEPTED"
+}
