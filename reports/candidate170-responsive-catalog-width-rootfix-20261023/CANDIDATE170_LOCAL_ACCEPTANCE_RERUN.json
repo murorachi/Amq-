@@ -1,0 +1,204 @@
+{
+  "candidate": "Candidate 170",
+  "html_sha256": "089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662",
+  "test_method": "Playwright with system Chromium, page.set_content. The actual application navigation was performed through the home icon and catalog menu. This is not native-origin acceptance because page.set_content uses an opaque about:blank origin.",
+  "checks": [
+    {
+      "name": "Document reaches readyState complete",
+      "status": "PASS"
+    },
+    {
+      "name": "Navigate via homepage menu into Song Select",
+      "status": "PASS",
+      "actual": "window.__aniGetActiveViewV82() = catalog; body class amq-songselect-route-active"
+    },
+    {
+      "name": "Catalog data populated",
+      "status": "PASS",
+      "actual": "180 cards/records"
+    },
+    {
+      "name": "Responsive catalog bounds at 6 viewports",
+      "status": "PASS",
+      "actual": "1280x720, 1440x900, 1648x928, 1920x1080, 2555x1438, 900x700; document width never exceeded viewport and catalog right edge stayed within viewport"
+    },
+    {
+      "name": "ArrowDown changes selected song",
+      "status": "PASS",
+      "actual": "selected data-id changed from 45305 to 13404"
+    },
+    {
+      "name": "No non-storage uncaught page errors",
+      "status": "PASS",
+      "actual": "0 non-storage errors"
+    }
+  ],
+  "viewport_measurements": [
+    {
+      "viewport": "1280x720",
+      "catalog": {
+        "x": 684.8,
+        "y": 44,
+        "width": 595.2,
+        "height": 568,
+        "right": 1280
+      },
+      "row_height": 70.5,
+      "selected_row_height": 73.4,
+      "row_starts": [
+        93,
+        147.3,
+        212.9,
+        292,
+        368.1,
+        439.4,
+        505,
+        570.6
+      ],
+      "last_row_visible_px": 41.4,
+      "last_row_height_px": 70.5
+    },
+    {
+      "viewport": "1440x900",
+      "catalog": {
+        "x": 770.4,
+        "y": 44,
+        "width": 669.6,
+        "height": 748,
+        "right": 1440
+      },
+      "row_height": 95.3,
+      "selected_row_height": 99.1,
+      "row_starts": [
+        93,
+        166.4,
+        255,
+        361.8,
+        464.7,
+        561,
+        649.6,
+        738.3
+      ],
+      "last_row_visible_px": 53.7,
+      "last_row_height_px": 95.3
+    },
+    {
+      "viewport": "1648x928",
+      "catalog": {
+        "x": 881.7,
+        "y": 44,
+        "width": 766.3,
+        "height": 776,
+        "right": 1648
+      },
+      "row_height": 99.2,
+      "selected_row_height": 103.1,
+      "row_starts": [
+        93,
+        169.4,
+        261.6,
+        372.6,
+        479.7,
+        579.9,
+        672.1,
+        764.3
+      ],
+      "last_row_visible_px": 55.7,
+      "last_row_height_px": 99.2
+    },
+    {
+      "viewport": "1920x1080",
+      "catalog": {
+        "x": 1027.2,
+        "y": 44,
+        "width": 892.8,
+        "height": 928,
+        "right": 1920
+      },
+      "row_height": 120.1,
+      "selected_row_height": 124.9,
+      "row_starts": [
+        93,
+        185.5,
+        297.1,
+        431.6,
+        561.3,
+        682.6,
+        794.3,
+        905.9
+      ],
+      "last_row_visible_px": 66.1,
+      "last_row_height_px": 120.1
+    },
+    {
+      "viewport": "2555x1438",
+      "catalog": {
+        "x": 1366.9,
+        "y": 44,
+        "width": 1188.1,
+        "height": 1286,
+        "right": 2555
+      },
+      "row_height": 169.3,
+      "selected_row_height": 176.1,
+      "row_starts": [
+        93,
+        223.4,
+        380.9,
+        570.5,
+        753.4,
+        924.4,
+        1081.9,
+        1239.3
+      ],
+      "last_row_visible_px": 90.7,
+      "last_row_height_px": 169.3
+    },
+    {
+      "viewport": "900x700",
+      "catalog": {
+        "x": 481.5,
+        "y": 44,
+        "width": 418.5,
+        "height": 548,
+        "right": 900
+      },
+      "row_height": 43,
+      "selected_row_height": 44.8,
+      "row_starts": [
+        186,
+        219.2,
+        259.2,
+        307.4,
+        353.9,
+        397.4,
+        437.4,
+        477.4
+      ],
+      "last_row_visible_px": 71,
+      "last_row_height_px": 43,
+      "notes": "Narrow viewport layout differs; not used to claim 7.5-card behavior."
+    }
+  ],
+  "warnings": [
+    {
+      "status": "WARN",
+      "detail": "Two localStorage access-denied page errors and one console warning caused by the opaque about:blank origin used by page.set_content. These were excluded from the non-storage page-error assertion, not suppressed."
+    }
+  ],
+  "not_run": [
+    "Native file:// or HTTP navigation; local Chromium navigation remains blocked by ERR_BLOCKED_BY_ADMINISTRATOR.",
+    "Durable storage persistence, live API/audio, full CRUD.",
+    "Historical original 26-test suite; executable runner not recovered.",
+    "Pixel-perfect registered image diff against the official reference."
+  ],
+  "screenshot": {
+    "path": "/mnt/data/amq_songselect_work/candidate170_visual_audit/candidate170_1280x720_acceptance_rerun.png",
+    "sha256": "40d4503587e5e99934468621c4336432aa92ebf7adc45c93f924840cb5094ce0"
+  },
+  "detailed_local_report": {
+    "path": "/mnt/data/amq_songselect_work/candidate170_visual_audit/CANDIDATE170_LOCAL_ACCEPTANCE_RERUN.json",
+    "sha256": "9c05368f81bf34c0eb28e33a5167875a65cc5830f3efa03b2f44412581d7f5a2"
+  },
+  "rollback_candidate169_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
+}
