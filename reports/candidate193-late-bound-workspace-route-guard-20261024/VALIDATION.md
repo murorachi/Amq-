@@ -14,21 +14,23 @@ Status: EXPERIMENTAL / NOT ACCEPTED
 1. Added four actual workspace destinations backed by existing application UI: 清單管理, 學習中心, 猜歌練習, 多人模式.
 2. Removed the redundant standalone quick-start button and did not restore a batch-organization workspace.
 3. Added a final, late-bound wrapper around `window.__aniNavigateApp`. While `amq-songselect-route-active` is present, legacy destinations `watchlist`, `practice`, `explore`, `learningPlan`, `dashboard`, and `vnList` open corresponding existing panels through `__amqWorkspaceContentOpen`. Outside Song Select, the original navigator is preserved.
-4. Kept the earlier AniList/MAL modal and VNDB shared-panel fixes.
+4. Kept earlier AniList/MAL modal and VNDB shared-panel fixes.
 
 ## Tests
 - PASS: 66 executable inline script blocks passed `node --check`.
 - EXCLUDED: one JSON data block and one compressed/base64 data block. The compressed-data toggle block was excluded from this JS syntax pass because its source references the non-JS payload.
-- PASS: structural assertions: four workspace buttons; four definitions exist; no separate quick quiz button; no batch-organizer button in the dock; legacy custom-list/VN-list aliases call the shared panel.
-- PASS: Playwright set_content harness dispatched 12 workspace switches (lists -> learning -> quiz -> multiplayer, repeated 3 times); final DOM retained 4 workspace buttons, one sidebar, one content panel and one action list.
-- PASS: six legacy destinations (watchlist, practice, explore, learningPlan, dashboard, vnList) emitted `amq-workspace-route-intercepted` events and displayed their mapped shared-panel titles.
-- PASS: shared-panel Back closes panel; Escape closes panel.
-- BLOCKED: harness reports two localStorage SecurityErrors because `page.set_content` has an opaque origin.
-- BLOCKED: native `file://` navigation is blocked by environment. The set_content harness's active-view state defaults to home, so route class persistence after a delay cannot be asserted there. The interception event and panel mapping were asserted, but native route-state acceptance remains outstanding.
-- NOT RUN: original 26-test suite, custom-list CRUD/reload, actual external imports/error handling, cover retry, actual audio playback, keyboard acceptance, fixed-resolution screenshot pixel comparison, multiplayer lifecycle and full data regression.
+- PASS: structural assertions for four workspace buttons and definitions, no separate quick quiz button, no batch-organizer button in dock, and shared-panel routing for custom-list/VN-list aliases.
+- PASS: 12 workspace switches (lists -> learning -> quiz -> multiplayer, repeated 3 times); final DOM retained four workspace buttons, one sidebar, one shared content panel and one action list.
+- PASS: 18 route-intercepted open/close cycles across six legacy destinations; each emitted the interception event, showed the mapped panel title, and closed without accumulating panels. Shared content was empty after close.
+- PASS: existing watchlist, learning plan, dashboard, quiz and multiplayer DOM nodes were moved into the shared panel and restored to their original parent after close. VNDB parent restoration also passed; the initial in-panel assertion used the wrong key casing and is not counted.
+- PASS: Back and Escape close the shared panel.
+- PASS: custom practice list creation and deletion via existing UI using an in-memory localStorage shim.
+- BLOCKED: reload persistence. The shim is in-memory and native `file://` navigation is blocked by the environment; this does not establish persistence.
+- BLOCKED: browser harness cannot establish stable native route state because its active-view source defaults to home, although it does verify the route-interception event and panel mapping.
+- NOT RUN: list member add/remove, reload persistence, real AniList/MAL/VNDB imports and failure/retry paths, cover retry, actual audio playback, keyboard acceptance, fixed-resolution screenshot pixel comparison, original 26-test suite, and full multiplayer lifecycle regression.
 
 ## Remaining risks
-- Route interception is tested through the shared global navigator, but browser-native route state still needs acceptance.
-- The workspace content panel's original DOM restoration/focus behavior needs real-browser lifecycle assertions.
+- Need real-browser verification that route state remains Song Select during intercepted legacy navigation.
+- Need real persistence tests and actual external API/audio/image tests.
 - Candidate 193 is experimental, not accepted.
 - GitHub HTML upload: NOT UPLOADED / NOT VERIFIED.
