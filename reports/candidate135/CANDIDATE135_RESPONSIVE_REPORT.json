@@ -1,0 +1,20 @@
+[
+  {
+    "viewport": "1648x928",
+    "initial_visible": 8,
+    "expanded_total": 8,
+    "result": "PASS"
+  },
+  {
+    "viewport": "1440x900",
+    "initial_visible": 8,
+    "expanded_total": 8,
+    "result": "PASS"
+  },
+  {
+    "viewport": "1280x720",
+    "initial_visible": 8,
+    "expanded_total": 8,
+    "result": "PASS"
+  }
+]
