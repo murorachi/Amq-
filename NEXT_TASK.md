@@ -1,12 +1,12 @@
-# NEXT TASK — Song Select Fidelity, Modal Workspace, and Delivery
+# NEXT TASK — Import Modals, Native Acceptance, and Delivery
 
-1. Current local working candidate is Candidate 181, SHA-256 `3671ec7fb9a276742bc227f7028c1df4f7afb730f27dc099138392640b82ee3a`. Candidate 181 is not accepted; HTML has not been uploaded to GitHub.
-2. Candidate 181 fixes the compact viewport scroll overflow at <=900px while Song Select is active. At 900×700 document dimensions now remain 900×700 (previously 900×796).
-3. PASS in Chromium page.set_content: 65 executable inline JS blocks parse cleanly; route/geometry checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700; legacy left rail hidden; 180 initial rows; ArrowDown selection; AMQ/EMQ/MIX source counts; hover -3px vs selected -7px; half-visible eighth row.
-4. Two localStorage SecurityErrors are expected in opaque-origin page.set_content. Durable persistence and custom-list CRUD/reload are NOT verified. Native file navigation remains blocked with ERR_BLOCKED_BY_ADMINISTRATOR.
-5. Next UI task after core screen: make 清單管理 / import / learning actions open modal overlays like AniList/MAL import, dim the Song Select background, keep keyboard focus in the modal, support close/Escape, and restore selected song, scroll position, and filters on close. Do not implement until main scene checks remain stable.
-6. Preserve the scene-background manager and attractive no-custom-background fallback; do not fabricate ranking/score/cover data.
-7. Keep the 7.5-row affordance. At 1648×928 the eighth row bounds are y=764.3..863.5 and list bottom=814; at 1280×720 row bounds are y=570.6..641.2 and list bottom=606.
-8. Complete native-origin acceptance when a supported environment is available: custom-list CRUD/reload persistence, imports/error recovery/dedup, API/covers, audio, four workspace routes/back navigation, DOM stability.
-9. Upload Candidate 181 HTML and verify remote SHA-256. Current remote result: NOT COMPLETED; report files are separate from HTML delivery.
-10. Keep Candidate 180/179/170/169 intact for rollback.
+1. Current local working candidate: Candidate 186, SHA-256 `c07d82988c898b228cc891783ed4b351c4bdc2c87952583f6c68f15e209e66db`. Not accepted; HTML upload is not completed.
+2. Candidate 186 workspace modal behavior: centered workspace menu over dimmed/blurred Song Select; third-stage feature panel centers above it; Escape closes top layer first; selected song ID, scroll, search and filters restore after close.
+3. Candidate 181's compact viewport fix keeps document dimensions at viewport for 900×700; Candidate 186 modal/scroll restoration also tested at 900×700 and 390×844.
+4. Candidate 185/181 geometry and interaction checks passed in Chromium `page.set_content`: 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700; 180 rows; legacy rail hidden; ArrowDown selection; AMQ=38,821 records, EMQ=16,839, MIX=both; hover displacement -3px vs selected -7px; 7.5-row scroll affordance.
+5. Next: change AniList/MAL action to open its existing `syncModal` directly over Song Select, without navigating away first, if DOM ownership permits. Inspect VNDB and custom-list actions separately; preserve their distinct data stores and explicit confirmation steps.
+6. Ensure background click, close button and Escape semantics are consistent; focus remains in active modal. Confirm close restores selected song, scroll, search and filters.
+7. Native `file://` and intercepted virtual-origin navigation are both blocked by ERR_BLOCKED_BY_ADMINISTRATOR. Durable storage/reload, CRUD persistence, live APIs/covers and audio remain NOT RUN.
+8. Candidate HTML upload and remote SHA-256 verification remain NOT COMPLETED. Report files have been uploaded and read back; do not confuse that with HTML delivery.
+9. Do not fabricate ranking/score/cover data. Keep the scene-background manager and dark-gradient no-custom-background fallback.
+10. Preserve Candidate 185/181/179/170 and Candidate 169 rollback checkpoint.
