@@ -53,12 +53,13 @@
     "compared_to_original_osu_reference": false
   },
   "original_26_test_suite": "NOT RUN on Candidate 170",
-  "real_file_browser_acceptance": "NOT RUN",
+  "real_file_browser_acceptance": "BLOCKED: Chromium file:// navigation returned net::ERR_BLOCKED_BY_ADMINISTRATOR before DOMContentLoaded; see FILE_URL_SMOKE_BLOCKED.json. Not a pass and not evidence of an application defect.",
   "persistent_storage_api_audio_full_crud": "NOT RUN",
   "known_limits": [
     "Physical 27-inch monitor resolution not confirmed",
     "Pixel-accurate row correspondence against reference not verified",
-    "Opaque about:blank harness emitted two localStorage access warnings"
+    "Opaque about:blank harness emitted two localStorage access warnings",
+    "Attempted real file:// launch on 2026-10-23; blocked by browser environment policy before DOM load."
   ],
   "rollback_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
 }
