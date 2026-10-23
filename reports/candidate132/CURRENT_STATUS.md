@@ -10,7 +10,7 @@
 - PASS: 7 full cards plus 50% of the eighth at all three tested viewport sizes.
 - PASS: selected row centered, selected transform -7px, hover transform -3px, selected margin 2px top/bottom, distance-based opacity.
 - PASS: simple fallback background when no custom background is active; custom background image layer preserved in a browser probe.
-- Visual metrics at 1648×928: SSIM 0.314905, MAE 65.1377, RMSE 86.3097. Overall fidelity remains low.
+- Visual metrics at 1648×928: SSIM 0.314962, MAE 65.1305, RMSE 86.3024. Overall fidelity remains low.
 - Version identity: remote Candidate 131 has SHA-256 `f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3`; Candidate 132 is based directly on Candidate 130 and does not overwrite it.
 
 BLOCKED / NOT RUN:
