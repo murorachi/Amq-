@@ -45,3 +45,12 @@ Chromium navigation was attempted both with `file://` and with a local HTTP serv
 - Source URL: `https://github.com/ppy/osu-wiki/blob/8c585eea35455a4bd255f93b5d59ccaf807e6bdd/wiki/Client/Interface/img/song-selection.jpg`
 - Raw image URL: `https://raw.githubusercontent.com/ppy/osu-wiki/8c585eea35455a4bd255f93b5d59ccaf807e6bdd/wiki/Client/Interface/img/song-selection.jpg`
 - NOT YET DONE: extract precise card edge coordinates/row heights/stagger offsets and compare to Candidate 170 at equivalent 16:9 viewports. The 1280 x 720 source screenshot is the measurement baseline; scaling to 2555 x 1438 must account for near-16:9 ratio and UI scaling rather than assuming identical pixel sizes.
+
+
+## Candidate 170 1280 x 720 precheck (2026-10-23)
+
+A fresh local Playwright `page.set_content` screenshot was produced at 1280 x 720, matching the official reference screenshot dimensions. This is a visual/geometry precheck only, not native-origin browser acceptance. Screenshot local path: `/mnt/data/amq_songselect_work/candidate170_visual_audit/candidate170_1280x720_ci_precheck.png`; SHA-256 `b046623cf361fab0da073e8953eba56a324af409522701b1f194b57bb8537c75`.
+
+Measured catalog: x=684.8, y=44, width=595.2, height=568. Toolbar: x=684.8, y=33, width=590.2, height=22. Song row starts in the visible list: y=93.0, 147.3, 212.9, 292.0 (selected), 368.1, 439.4, 505.0, 570.6. Typical row height is 70.5 px; selected row height is 73.4 px. The last row is clipped near y=606, showing roughly half of its 70.5 px height, which preliminarily matches the user's 7.5-card scroll cue at this viewport. This is not yet a registered pixel-diff PASS against the official screenshot.
+
+The screenshot was generated with `page.set_content`, so its document has an opaque `about:blank` origin. Two `localStorage` access-denied page errors occurred. These are harness-origin limitations, not evidence of a native-origin application failure; they are still reported rather than hidden. Native-origin storage and actual browser navigation remain NOT RUN/BLOCKED. Structured measurements are recorded in `CANDIDATE170_1280X720_PRECHECK.json`.
