@@ -10,7 +10,7 @@
     {
       "name": "Navigate via homepage menu into Song Select",
       "status": "PASS",
-      "actual": "window.__aniGetActiveViewV82() = catalog; body class amq-songselect-route-active"
+      "actual": "route=catalog and amq-songselect-route-active"
     },
     {
       "name": "Catalog data populated",
@@ -18,9 +18,19 @@
       "actual": "180 cards/records"
     },
     {
+      "name": "EMQ mode filters to EMQ source records",
+      "status": "PASS",
+      "actual": "dataset activeMode=emq, 16,839 records, sourceCounts={emq:16839}"
+    },
+    {
+      "name": "Return from EMQ to AMQ mode",
+      "status": "PASS",
+      "actual": "dataset activeMode=amq, 38,821 records, sourceCounts={amq:38821}"
+    },
+    {
       "name": "Responsive catalog bounds at 6 viewports",
       "status": "PASS",
-      "actual": "1280x720, 1440x900, 1648x928, 1920x1080, 2555x1438, 900x700; document width never exceeded viewport and catalog right edge stayed within viewport"
+      "actual": "1280x720, 1440x900, 1648x928, 1920x1080, 2555x1438, 900x700"
     },
     {
       "name": "ArrowDown changes selected song",
@@ -30,7 +40,7 @@
     {
       "name": "No non-storage uncaught page errors",
       "status": "PASS",
-      "actual": "0 non-storage errors"
+      "actual": "0 non-storage page errors"
     }
   ],
   "viewport_measurements": [
@@ -183,7 +193,11 @@
   "warnings": [
     {
       "status": "WARN",
-      "detail": "Two localStorage access-denied page errors and one console warning caused by the opaque about:blank origin used by page.set_content. These were excluded from the non-storage page-error assertion, not suppressed."
+      "detail": "Two localStorage access-denied page errors plus a console warning due to opaque about:blank origin under page.set_content."
+    },
+    {
+      "status": "WARN",
+      "detail": "Several remote resource requests failed with ERR_NAME_NOT_RESOLVED because this runtime lacks external network/DNS access; live covers/APIs are not validated."
     }
   ],
   "not_run": [
@@ -194,11 +208,11 @@
   ],
   "screenshot": {
     "path": "/mnt/data/amq_songselect_work/candidate170_visual_audit/candidate170_1280x720_acceptance_rerun.png",
-    "sha256": "40d4503587e5e99934468621c4336432aa92ebf7adc45c93f924840cb5094ce0"
+    "sha256": "88022fece66d2c5800daf47aac4afefb0fe59edbe476fb67fba69fd390c97bad"
   },
   "detailed_local_report": {
     "path": "/mnt/data/amq_songselect_work/candidate170_visual_audit/CANDIDATE170_LOCAL_ACCEPTANCE_RERUN.json",
-    "sha256": "9c05368f81bf34c0eb28e33a5167875a65cc5830f3efa03b2f44412581d7f5a2"
+    "sha256": "f7509ca87ab5a3db42bb5b32b1fa8c4422538e8109ed964b4e662a928173d7c2"
   },
   "rollback_candidate169_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
 }
