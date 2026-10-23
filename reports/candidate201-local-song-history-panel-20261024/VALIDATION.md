@@ -48,7 +48,7 @@ The left-side `#amqSongSelectRankingPlaceholder` was an empty faux leaderboard f
 - Two localStorage access-denied page errors occur under opaque-origin `page.set_content`; this prevents durable reload/persistence acceptance.
 - Native `file://` and local HTTP navigation remain blocked by `ERR_BLOCKED_BY_ADMINISTRATOR`.
 - Custom-list CRUD/reload persistence, real API/cover loading and failure recovery, real audio playback, and full workspace regression are NOT RUN.
-- Registered pixel-diff is NOT RUN. Candidate and reference share the 1648×928 viewport, but the candidate test has no persisted custom scene background and the app has no global osu! leaderboard. No pixel-fidelity pass is claimed.
+- Registered pixel metrics were run at the actual user-reference viewport 2555×1438. Full-frame: SSIM=0.37455, MAE=63.7712, RMSE=85.0330. Regional SSIM: header=0.0751, left-records=0.2439, catalog=0.4568, bottom-controls=0.2383, central-scene=0.4629. These are low and do NOT pass the visual-fidelity target; differences include absent persisted custom background, different title/control layout and no global osu! leaderboard. The primary user reference is 2555×1438, not 1648×928; 1648×928 remains a responsive test viewport.
 
 ## Visual assessment
 - Desktop Song Select catalog now exposes approximately 7.5 rows, with the eighth card about 46% visible, clearly suggesting scroll.
@@ -69,3 +69,7 @@ The left-side `#amqSongSelectRankingPlaceholder` was an empty faux leaderboard f
 3. Continue visual hierarchy comparison against the user-provided osu!stable reference; don't invent leaderboard data.
 4. Finish native-origin persistence, custom-list CRUD/reload, API/cover recovery, audio, and full workspace regression when the environment allows.
 5. Publish HTML and verify remote SHA-256; report files alone are not HTML delivery.
+
+
+## Reference viewport correction and pixel metrics
+The uploaded user reference `image.png` is 2555×1438. Earlier handoff notes that called 1648×928 the primary reference resolution were incorrect; 1648×928 is only a responsive viewport. Candidate 201 was captured at 2555×1438 and compared directly. The low metrics above are a failed visual-fidelity assessment, not an acceptance pass.
