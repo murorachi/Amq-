@@ -1,0 +1,21 @@
+{
+  "candidate": "Candidate 170 responsive catalog width root fix",
+  "date": "2026-10-23",
+  "test": "Launch the exact Candidate 170 HTML through Chromium file:// at 2555x1438",
+  "status": "BLOCKED",
+  "observed_error": "net::ERR_BLOCKED_BY_ADMINISTRATOR",
+  "interpretation": "The browser environment blocked file URL navigation before DOMContentLoaded. This is not evidence of an application failure and is not a passing browser acceptance test.",
+  "file": {
+    "path": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_170_responsive_catalog_width_rootfix.html",
+    "bytes": 9269850,
+    "sha256": "089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662"
+  },
+  "checks": {
+    "file_url_navigation": "BLOCKED",
+    "dom_ready": "NOT RUN",
+    "catalog_render": "NOT RUN",
+    "storage_persistence": "NOT RUN",
+    "api_audio_crud": "NOT RUN"
+  },
+  "rollback_candidate_169_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
+}
