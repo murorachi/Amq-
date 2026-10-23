@@ -22,6 +22,27 @@
       900
     ]
   },
+  "visible_row_geometry": {
+    "viewport": [
+      2555,
+      1438
+    ],
+    "list_region": {
+      "x": 1366.9,
+      "y": 93,
+      "width": 1183.1,
+      "height": 1231
+    },
+    "visible_rows_intersecting_viewport": 8,
+    "last_row": {
+      "y": 1239.3,
+      "height": 169.3,
+      "clip_bottom_y": 1324,
+      "visible_height_approx": 84.7,
+      "visible_fraction_approx": 0.5
+    },
+    "interpretation": "Half-card bottom cue is present in this captured state; exact pixel correspondence to osu!stable reference remains NOT VERIFIED."
+  },
   "static_checks": "Two exact replacements; no unrelated source changes.",
   "visual_comparison": {
     "canvas": [
@@ -36,7 +57,7 @@
   "persistent_storage_api_audio_full_crud": "NOT RUN",
   "known_limits": [
     "Physical 27-inch monitor resolution not confirmed",
-    "Visible song-row geometry and 7.5-card clipping still need direct verification",
+    "Pixel-accurate row correspondence against reference not verified",
     "Opaque about:blank harness emitted two localStorage access warnings"
   ],
   "rollback_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
