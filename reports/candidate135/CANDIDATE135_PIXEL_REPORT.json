@@ -13,12 +13,12 @@
   },
   "candidate": {
     "file": "candidate135_songselect_1648x928.png",
-    "sha256": "a23186236f3c4ca5427c4d9ef56a4792283f544eb603c03ea9fa83892f220148"
+    "sha256": "748ced14a1c439046604b3203d21b9f7487ee1c3554a47ba18ff56173af5d24b"
   },
   "full_frame": {
-    "ssim": 0.2785777964233604,
-    "mae": 75.33513641357422,
-    "rmse": 97.33860778808594
+    "ssim": 0.2785777906051025,
+    "mae": 75.33512115478516,
+    "rmse": 97.3386001586914
   },
   "regions": {
     "left_player_panel": {
