@@ -1,0 +1,20 @@
+{
+  "candidate": "170",
+  "source_candidate": "169",
+  "source_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f",
+  "changes": [
+    {
+      "owner": "runtime .p32-catalog layout owner",
+      "before": "maxWidth:'762px'",
+      "after": "maxWidth:'none'",
+      "reason": "remove fixed-width cap causing unused right-side space"
+    },
+    {
+      "owner": "CSS fallback for .p32-catalog",
+      "before": "max-width:762px!important",
+      "after": "max-width:none!important",
+      "reason": "keep fallback consistent with runtime owner"
+    }
+  ],
+  "unrelated_changes": 0
+}
