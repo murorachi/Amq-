@@ -1,17 +1,16 @@
-# CURRENT STATUS — Candidate 178 Song Select Visual Pass
+# CURRENT STATUS — Candidate 180 Hover Displacement Root Fix
 
-- Current local experimental candidate: Candidate 178.
-- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_178_metadata_selector_specificity_fix.html`
-- Local SHA-256: `b91109c7c660be064cedf76b20e473b12ca415be8e0650f16d8086339c2a9f80`
-- Size: 9,274,075 bytes.
-- Root composition: actual legacy `#c99LeftRail` hidden on Song Select; no horizontal overflow at six tested viewport sizes.
-- Catalog: 180 rows rendered; translucent distance-tier backgrounds; 7.5-row visual clipping retained at desktop/reference sizes.
-- Metadata: title scales 39.6px at 2555 width, 25.5px at 1648, 20px at 1280; real song metadata retained.
-- Static checks PASS: 64 executable inline JS blocks checked individually by Node `--check`; 0 syntax errors.
-- Chromium set_content checks PASS with test-only in-document storage shim: six viewport sizes, route activation, hidden rail, dock/catalog bounds, ArrowDown selection, hover -3px vs selected -7px, AMQ source data, EMQ source switch; 0 page errors under shim.
-- Report uploaded and remote read-back pending: `reports/candidate178-songselect-root-catalog-metadata-20261023/VALIDATION.md`.
-- BLOCKED: native file:// navigation ERR_BLOCKED_BY_ADMINISTRATOR. Test shim is in-memory only; persistence not verified.
-- NOT RUN: live covers/APIs, real audio, full custom-list CRUD/import/workspace regression, reference pixel-diff score.
-- Candidate 178 HTML remains local; GitHub HTML upload and remote SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
+- Current local experimental candidate: Candidate 180.
+- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_180_hover_displacement_rootfix.html`
+- Local SHA-256: `4858d816a4b7fa0583d2d883bab2acb066d51f25f4023344b6667bdf44db9b83`
+- Size: 9,277,240 bytes.
+- Candidate 179 restored translucent distance-tier rows; Candidate 180 fixes the actual hover movement. Candidate 179's hover width growth caused a measured 6 px shift even though transform was -3 px. Candidate 180 removes width growth, producing an actual 3 px left shift. Selected row remains stronger.
+- PASS: 64 executable inline JS blocks checked by Node `--check`, 0 syntax errors.
+- PASS: Chromium set_content route checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. 180 rows, legacy rail hidden, zero horizontal overflow, dock within viewport, eighth row clipped ~50%.
+- PASS: actual hover bounding-box shift -3px; ArrowDown selection change; AMQ→EMQ→AMQ changes/restores song data; screenshot at 2555×1438.
+- Report: `reports/candidate180-hover-displacement-rootfix-20261023/VALIDATION.md`, uploaded and read-back verification pending.
+- BLOCKED: native file:// navigation ERR_BLOCKED_BY_ADMINISTRATOR; page.set_content opaque origin has two existing localStorage errors, so persistence is not verified.
+- NOT RUN: full CRUD/reload persistence, live API/covers, audio, full workspace regression, registered pixel diff.
+- Candidate 180 HTML is local only. GitHub upload/remote HTML SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
 
-Next: validate real scene-background/art loading in a supported native-origin browser; implement the requested modal workspace launcher with background dimming/state restoration; then run full regression. Preserve Candidate 175/173/170/169 checkpoints.
+Next: review scene/background and metadata proportions against the user's reference, then implement modal workspace panels after the Song Select scene is stable. Preserve all earlier candidates and Candidate 169 rollback checkpoint.
