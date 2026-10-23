@@ -1,0 +1,65 @@
+{
+  "candidate": 133,
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_133.html",
+  "bytes": 9242471,
+  "sha256": "92507a86af95b556733664510dc5727e40c34398c86f8932ca212e08f7d9edfe",
+  "parent_sha256": "9085754d5b6d8b1463709c25a97402a217e8ddb07afb9e4beb5d14dd1fbc3916",
+  "static": {
+    "executable_inline_js_blocks": 62,
+    "javascript_parse_failures": 0,
+    "css_blocks": 90,
+    "css_qualified_rules": 2582,
+    "css_parse_errors": 0
+  },
+  "browser": {
+    "playwright_set_content": true,
+    "viewports_dpr1": [
+      "1648x928",
+      "1440x900",
+      "1280x720"
+    ],
+    "catalog_items": 180,
+    "initial_visible_top_level_cards_1648x928": 8,
+    "selected_row_transform_px": -7,
+    "hover_transform_px": -3,
+    "selected_work_proximity_tier": 1,
+    "file_scheme": "BLOCKED",
+    "reload_persistence": "NOT RUN",
+    "live_apis": "NOT RUN",
+    "audio": "NOT RUN",
+    "full_regression": "NOT RUN"
+  },
+  "pixel_metrics_1648x928": {
+    "full": {
+      "ssim": 0.306571,
+      "mae": 65.2708,
+      "rmse": 85.9472
+    },
+    "left_player_rail": {
+      "ssim": 0.138318,
+      "mae": 83.5535,
+      "rmse": 97.0726
+    },
+    "top_metadata": {
+      "ssim": 0.06801,
+      "mae": 51.3857,
+      "rmse": 76.1928
+    },
+    "central_background": {
+      "ssim": 0.417784,
+      "mae": 54.8422,
+      "rmse": 74.6045
+    },
+    "right_catalog": {
+      "ssim": 0.38805,
+      "mae": 68.5985,
+      "rmse": 85.8646
+    },
+    "bottom_controls": {
+      "ssim": 0.166022,
+      "mae": 62.8117,
+      "rmse": 98.5172
+    }
+  },
+  "acceptance": "NOT ACCEPTED; partial visual/interaction checkpoint only"
+}
