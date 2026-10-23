@@ -21,3 +21,12 @@ The existing 26-test suite was NOT RUN on Candidate 170 because its original tes
 Before/after screenshots at 2555 x 1438 differ across 24.755% of pixels, expected from the catalog width change. This is not a pixel comparison against the original osu!stable screenshot and does not prove 1:1 fidelity.
 
 Rollback: Candidate 169 SHA-256 5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f.
+
+
+## Reference image identity check (2026-10-23)
+
+The supplied `image.png` at 2555 x 1438 was opened for direct inspection. It shows an osu! interface with a left-side multiplayer ranking/player-score list and large character background, plus staggered pink score/player panels on the right; it does not show the osu!stable song-selection beatmap list or its song-row layout. Therefore it cannot serve as direct ground truth for song-select row height, song-row stagger offsets, or the 7.5-song-card cue. The earlier 7.5-row target coordinates in legacy test reports belong to the 1648 x 928 song-select geometry test and must not be represented as measurements extracted from this 2555 x 1438 image. Pixel-accurate song-select comparison remains BLOCKED until a song-selection reference image is identified.
+
+## Browser navigation attempt (2026-10-23)
+
+Chromium navigation was attempted both with `file://` and with a local HTTP server (`http://127.0.0.1:8765/...`). Both were blocked by `net::ERR_BLOCKED_BY_ADMINISTRATOR` before DOMContentLoaded. The local HTTP attempt also did not produce a DOM, catalog, or interaction result. This is an environment-level block, not a passing browser acceptance test and not proof of an application defect.
