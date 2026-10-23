@@ -1,13 +1,13 @@
-# CURRENT STATUS — Candidate 187 (experimental)
+# CURRENT STATUS — Candidate 188 (experimental)
 
 - Recovery baseline remains Candidate 178, per the user's explicit choice; Candidate 205 was unavailable.
-- Preserved lineage: Candidate 178 -> Candidate 183 -> Candidate 184 -> Candidate 185 -> Candidate 186 -> Candidate 187.
-- Candidate 187 is an experimental, non-accepted local artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_187_import_overlay_route_fix.html`.
-- Candidate 186 remains unchanged: SHA-256 `cedf5ee3ff107a04443a899b3e92ede5daf2c513d083b93fb622caca1c9843aa`.
-- Candidate 187 size: 9,301,631 bytes. SHA-256: `fd0c20698f7251f351aceecf8051d1a8784d91aac9232f5573c1316f8fa7cf83`.
-- Change: the AniList/MAL action in the workspace no longer calls `__aniNavigateApp('watchlist')` before opening the existing `syncModal`. It now opens the existing import modal in place and focuses the username field. This addresses one concrete cause of leaving the Song Select workspace when invoking that action; it does not complete the shared workspace architecture.
-- PASS: 66 executable inline JavaScript blocks checked with `node --check`; 0 syntax errors. Script-tag balance checked (68 opening / 68 closing). Local artifact SHA-256 and byte size recorded.
-- NOT RUN: native browser route/modal interaction test; live API import; player positioning; freeze reproduction; cover fetch/retry; keyboard behavior; persistent custom-list CRUD/reload; osu!stable geometry/pixel comparison.
-- BLOCKED in this environment previously: Chromium navigation to `file://` and local HTTP returned `ERR_BLOCKED_BY_ADMINISTRATOR`. No claim of browser acceptance is made.
-- NOT COMPLETED: full shared in-place modal workspaces, requested player position, full freeze fix/acceptance, live API/audio checks, pixel comparison, HTML upload and remote SHA-256 verification.
-- Rollback: use unchanged Candidate 186. Candidate 187 is not accepted and must not replace the baseline.
+- Preserved lineage: Candidate 178 -> Candidate 183 -> Candidate 184 -> Candidate 185 -> Candidate 186 -> Candidate 187 -> Candidate 188.
+- Candidate 188 local artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_188_workspace_route_player_fix.html`.
+- Parent Candidate 187 SHA-256: `fd0c20698f7251f351aceecf8051d1a8784d91aac9232f5573c1316f8fa7cf83`.
+- Candidate 188 size: 9,303,048 bytes. SHA-256: `a49a5abe71d3b688e25d9852c3c199af4c8998ab77d7a05337fb603d3c9af371`.
+- Changes: removed legacy `__aniNavigateApp('practice')` calls from the Candidate 15 workspace action branches so the shared capture-phase workspace handler can open the practice panel in place; narrowed a document-wide MutationObserver to observe `hidden` and `class` attributes rather than all inline style mutations; added late route-scoped player dock geometry/style rules for the requested black strip and blue accent line.
+- PASS: 66 executable inline JavaScript blocks checked with `node --check`, 0 syntax errors. Non-JavaScript embedded data blocks were excluded. HTML script tags balanced (68 open / 68 close). Local byte size and SHA-256 verified.
+- NOT RUN: native browser interaction, route retention after every action, dock geometry screenshot measurement, actual audio, custom-list persistence, live API/cover retry, freeze reproduction, reference pixel comparison.
+- BLOCKED: native Chromium navigation was previously blocked by `ERR_BLOCKED_BY_ADMINISTRATOR`; browser acceptance remains unverified.
+- NOT COMPLETED: full acceptance of all four workspace actions, precise player placement against reference, root-cause freeze validation, live API/audio and persistent-storage tests, osu!stable pixel comparison, HTML upload and remote SHA-256 verification.
+- Candidate 188 is experimental and NOT ACCEPTED. Roll back to unchanged Candidate 187 or earlier preserved candidates if regression is found.
