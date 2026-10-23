@@ -1,0 +1,31 @@
+{
+  "candidate": 135,
+  "html_sha256": "983149abfb651b7618d742cbe8f43902dc1b745c55caa51f110614c38dd8ac22",
+  "summary": {
+    "passed": 9,
+    "failed": 0
+  },
+  "checks": [
+    "JS syntax: 62 scripts, zero errors",
+    "CSS parse: 90 style blocks, 2,585 rules, zero parse errors",
+    "Song Select route initialized",
+    "Dark fallback gradient active",
+    "At most 8 cards initially",
+    "Selected card recenters the visible window",
+    "ArrowDown changes selection while keeping the cap",
+    "Expanded state: 6 catalog cards + 2 song rows = 8 total",
+    "No uncaught browser errors"
+  ],
+  "viewports": [
+    "1648x928",
+    "1440x900",
+    "1280x720"
+  ],
+  "limitations": [
+    "Direct file:// navigation BLOCKED",
+    "Durable localStorage reload NOT RUN",
+    "Live import APIs NOT RUN",
+    "Audio playback NOT RUN",
+    "Full list CRUD/persistence and other-workspace regression NOT RUN"
+  ]
+}
