@@ -1,0 +1,127 @@
+{
+  "candidate": "Candidate 170",
+  "html_sha256": "089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662",
+  "test_type": "Local Playwright page.set_content visual/geometry precheck; not native-origin browser acceptance",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "reference": {
+    "repository": "ppy/osu-wiki",
+    "commit": "8c585eea35455a4bd255f93b5d59ccaf807e6bdd",
+    "path": "wiki/Client/Interface/img/song-selection.jpg",
+    "dimensions": "1280x720",
+    "git_blob_sha": "1e927a00a1984a5ba20fa5efec639410f349607a"
+  },
+  "assertions": [
+    {
+      "name": "Candidate document rendered without document overflow",
+      "status": "PASS",
+      "actual": "document width 1280, height 720"
+    },
+    {
+      "name": "Song Select route active",
+      "status": "PASS",
+      "actual": "window.__aniGetActiveViewV82() = catalog; body has amq-songselect-route-active"
+    },
+    {
+      "name": "Catalog width after removing 762px cap",
+      "status": "PASS",
+      "actual": "x=684.8, y=44, width=595.2, right edge=1280"
+    },
+    {
+      "name": "Song rows populated",
+      "status": "PASS",
+      "actual": "songrow elements found and visible in screenshot"
+    },
+    {
+      "name": "7.5-card cue",
+      "status": "PRELIMINARY PASS",
+      "actual": "at 1280x720, row starts include y=505.0 and y=570.6; final row is clipped by catalog viewport near y=606, showing roughly half of a 70.5px row"
+    },
+    {
+      "name": "JavaScript page errors",
+      "status": "WARN",
+      "actual": "2 localStorage access-denied errors because page.set_content uses opaque about:blank origin; not equivalent to file:// or HTTP origin"
+    },
+    {
+      "name": "Native-origin/durable storage",
+      "status": "NOT RUN",
+      "actual": "local browser navigation is blocked by ERR_BLOCKED_BY_ADMINISTRATOR"
+    },
+    {
+      "name": "Pixel-perfect comparison to official screenshot",
+      "status": "NOT RUN",
+      "actual": "reference image pinned and inspected, but a registered same-scale image-diff measurement has not yet been performed"
+    }
+  ],
+  "measurements": {
+    "catalog": {
+      "x": 684.8,
+      "y": 44,
+      "width": 595.2,
+      "height": 568
+    },
+    "toolbar": {
+      "x": 684.8,
+      "y": 33,
+      "width": 590.2,
+      "height": 22
+    },
+    "songRows": [
+      {
+        "x": 818.8,
+        "y": 93,
+        "width": 456.2,
+        "height": 70.5
+      },
+      {
+        "x": 806.4,
+        "y": 147.3,
+        "width": 468.6,
+        "height": 70.5
+      },
+      {
+        "x": 795.8,
+        "y": 212.9,
+        "width": 479.2,
+        "height": 70.5
+      },
+      {
+        "x": 698.5,
+        "y": 292,
+        "width": 569.4,
+        "height": 73.4,
+        "selected": true
+      },
+      {
+        "x": 786.3,
+        "y": 368.1,
+        "width": 488.7,
+        "height": 70.5
+      },
+      {
+        "x": 796.9,
+        "y": 439.4,
+        "width": 478,
+        "height": 70.5
+      },
+      {
+        "x": 808.8,
+        "y": 505,
+        "width": 466.2,
+        "height": 70.5
+      },
+      {
+        "x": 820.5,
+        "y": 570.6,
+        "width": 454.4,
+        "height": 70.5,
+        "partially_visible": true
+      }
+    ]
+  },
+  "screenshot_path_local": "/mnt/data/amq_songselect_work/candidate170_visual_audit/candidate170_1280x720_ci_precheck.png",
+  "screenshot_sha256": "b046623cf361fab0da073e8953eba56a324af409522701b1f194b57bb8537c75",
+  "rollback_candidate169_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
+}
