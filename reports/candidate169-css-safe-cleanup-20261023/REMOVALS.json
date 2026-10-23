@@ -1,0 +1,66 @@
+{
+  "candidate": "Candidate 169",
+  "removed_count": 8,
+  "removed": [
+    {
+      "selector": ".audioDock",
+      "condition": "@media(max-width:760px)",
+      "property": "grid-template-columns",
+      "value": "1fr auto"
+    },
+    {
+      "selector": ".dockBtns .btn",
+      "condition": "@media(max-width:760px)",
+      "property": "padding",
+      "value": "7px"
+    },
+    {
+      "selector": "body.ui-home-menu #homeMenu .amqHomeLandingAction",
+      "condition": "@media(prefers-reduced-motion:reduce)",
+      "property": "transition",
+      "value": "none",
+      "important": true
+    },
+    {
+      "selector": "body.ui-home-menu #homeMenu .amqHomeLandingV851",
+      "condition": "@media(max-width:900px)",
+      "property": "grid-template-columns",
+      "value": "minmax(0,1fr)",
+      "important": true
+    },
+    {
+      "selector": "body.ui-home-menu #homeMenu .amqPlayerFrame",
+      "condition": "@media(max-width:680px)",
+      "property": "padding",
+      "value": "4px 8px",
+      "important": true
+    },
+    {
+      "selector": "body.ui-home-menu #homeMenu .amqPlayerFrame",
+      "condition": "@media(max-width:680px)",
+      "property": "gap",
+      "value": "2px",
+      "important": true
+    },
+    {
+      "selector": "body.ui-home-menu #homeMenu .amqPlayerCaption",
+      "condition": "@media(max-width:680px)",
+      "property": "font-size",
+      "value": "8px",
+      "important": true
+    },
+    {
+      "selector": "#amqStablePlayChoices button",
+      "condition": "@media(prefers-reduced-motion:reduce)",
+      "property": "transition",
+      "value": "none",
+      "important": true
+    }
+  ],
+  "excluded": {
+    "selector": "body.amq-songselect-route-active #amqSongSelectStage .p32-catalog",
+    "property": "bottom",
+    "value": "16px",
+    "reason": "Removal failed the toolbar clipping regression assertion and was restored."
+  }
+}
