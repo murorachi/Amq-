@@ -1,0 +1,43 @@
+{
+  "candidate": "Candidate 170 responsive catalog width root fix",
+  "file": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_170_responsive_catalog_width_rootfix.html",
+  "bytes": 9269850,
+  "sha256": "089d8cb9f6e63178a9726dbfce9485c8691e81d3600ce5669458a26c7a9d5662",
+  "status": "EXPERIMENTAL; NOT ACCEPTED",
+  "parent": "Candidate 169",
+  "changes": [
+    "maxWidth:'762px' -> maxWidth:'none'",
+    "max-width:762px!important -> max-width:none!important"
+  ],
+  "focused_geometry_tests": {
+    "total": 6,
+    "pass": 6,
+    "fail": 0,
+    "viewports": [
+      2555,
+      1920,
+      1648,
+      1440,
+      1280,
+      900
+    ]
+  },
+  "static_checks": "Two exact replacements; no unrelated source changes.",
+  "visual_comparison": {
+    "canvas": [
+      2555,
+      1438
+    ],
+    "before_after_changed_pixel_ratio_percent": 24.755,
+    "compared_to_original_osu_reference": false
+  },
+  "original_26_test_suite": "NOT RUN on Candidate 170",
+  "real_file_browser_acceptance": "NOT RUN",
+  "persistent_storage_api_audio_full_crud": "NOT RUN",
+  "known_limits": [
+    "Physical 27-inch monitor resolution not confirmed",
+    "Visible song-row geometry and 7.5-card clipping still need direct verification",
+    "Opaque about:blank harness emitted two localStorage access warnings"
+  ],
+  "rollback_sha256": "5913ad864a8841b144de7c72c4deeede765ec5675117667c13f9eb5fe89a7d66f"
+}
