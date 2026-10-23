@@ -1,12 +1,12 @@
-# NEXT TASK — Song Select continuation
+# NEXT TASK — Song Select root composition
 
-1. Continue from Candidate 135; rollback to Candidate 130 if regressions appear.
-2. Fix the left rail mismatch: compact player/ranking hierarchy without fabricated data and without removing import/list/learning routes.
-3. Align top-left song metadata with the reference using real available fields only.
-4. Refine selected card geometry against measured reference: selected position/size, tiny adjacent gap, three distance tiers, and exactly eight visible total rows.
-5. Evaluate whether work-card -> inline-song-row interaction should become a single song/difficulty card surface; avoid duplicated focus between parent work and selected song.
-6. Preserve the existing scene-background manager and subdued no-custom-background gradient.
-7. Complete hover/selected/expanded, keyboard, search/sort, scroll and mode-switch tests.
-8. Complete Stage 3 regression: custom-list CRUD/persistence, imports, audio, learning center/analysis and routing.
-9. Playwright set_content does not prove file:// or durable storage behavior; find a supported local browser route if available.
-10. Recompute regional pixel metrics after structural changes. Current low SSIM is not acceptance.
+1. Continue from Candidate 170 as the current experimental input; preserve Candidate 169 as the rollback checkpoint. Candidate 170 is not accepted.
+2. Fix the root Song Select composition, not another isolated width override: make the route own one full-screen scene with a background region, left ranking/player-record overlay, right song/difficulty list overlay, top-left metadata, top-right list controls, and shallow bottom control dock.
+3. Identify why the legacy left workspace/navigation content remains visible in the Song Select screenshot. Keep import/list/learning functionality available through the intended internal workspace controls, but do not let the old navigation stack occupy the main scene.
+4. Preserve real data only. Do not invent ranking/player scores or song metadata.
+5. After root composition is corrected, measure at the user reference viewport 2555×1438 and responsive viewports 1920×1080, 1648×928, 1440×900, 1280×720, and 900×700.
+6. Test selected row, hover displacement, keyboard navigation/Enter, scroll affordance, mode switching and bottom controls; report each assertion separately.
+7. Native file:// and local HTTP navigation were blocked by ERR_BLOCKED_BY_ADMINISTRATOR. Find a supported browser route for native-origin and persistence acceptance; do not claim persistence from page.set_content.
+8. Re-run the existing relevant regression tests: custom-list create/add/remove/filter/reload persistence, import error recovery, audio playback, workspace routing, and DOM stability.
+9. Capture same-viewport reference/candidate images and compute regional pixel metrics only after scene alignment. Previous Candidate 135 SSIM was 0.27858 and MAE 75.3351; these are historical, not Candidate 170 scores.
+10. Keep every new candidate uniquely named; update status, baseline, task and report files; verify remote file identity after upload.
