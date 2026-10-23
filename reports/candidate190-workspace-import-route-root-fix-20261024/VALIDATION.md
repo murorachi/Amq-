@@ -11,24 +11,24 @@ Status: EXPERIMENTAL / NOT ACCEPTED
 - SHA-256: `6364e31e214e5339165d010d1aa4b673a1e8889aa2c07e9cdd3df330199274db`
 
 ## Changes
-1. The later capture-phase handler for `list-import-anime` previously called `__aniNavigateApp('watchlist')`, overriding the earlier in-place modal fix. Candidate 190 removes that route call and opens the existing AniList/MAL modal directly.
-2. The VNDB workspace action now opens `vn-list` through `__amqWorkspaceContentOpen`, instead of calling the route-changing `__aniVnLibraryV8249.openList()`.
+1. The late capture-phase handler for `list-import-anime` previously called `__aniNavigateApp('watchlist')`, overriding the earlier in-place modal fix. Candidate 190 removes that route call and opens the existing AniList/MAL modal directly.
+2. The VNDB workspace action opens `vn-list` through `__amqWorkspaceContentOpen`, instead of calling the route-changing VNDB opener.
 3. The VNDB provider helper uses the shared content panel rather than navigating to legacy `watchlist`.
-4. Corrected the dock navigation aria-label so it no longer claims there are only two workspaces.
+4. Corrected the dock navigation aria-label.
 
 ## Tests
 - PASS: 65 executable inline script blocks passed `node --check`.
-- EXCLUDED: 1 JSON data block (`aniAnilistIdMapV8237`).
-- NOT APPLICABLE AS JS: 1 compressed base64 data block (`emqLibraryGzipBase64V8248`); parsing it as JavaScript predictably fails.
-- PASS: static assertion confirms the AniList/MAL capture-phase handler opens the existing modal without a `watchlist` route call.
-- PASS: static assertion confirms VNDB action invokes the shared content panel.
-- NOT RUN: real browser interaction assertions for AniList/MAL and VNDB because native `file://` navigation is blocked by the environment.
-- BLOCKED: localStorage tests under `page.set_content` because opaque-origin storage raises SecurityError.
-- NOT RUN: four-workspace lifecycle, custom-list CRUD/reload, real external imports/error recovery, cover retries, actual audio playback, screenshot pixel comparison, keyboard acceptance, and multiplayer lifecycle.
+- EXCLUDED: one JSON data block (`aniAnilistIdMapV8237`).
+- EXCLUDED FROM JS PARSING: one compressed base64 data block (`emqLibraryGzipBase64V8248`); parsing raw compressed data as JavaScript predictably fails.
+- PASS: dispatched AniList/MAL workspace action kept active route at `catalog` and opened the existing `#syncModal`; no import was triggered.
+- PASS: dispatched VNDB workspace action kept active route at `catalog` and opened the shared workspace panel titled `VNDB 個人清單`; no import was triggered.
+- BLOCKED: localStorage assertions in `page.set_content` because opaque-origin storage raises SecurityError. This harness does not establish persistence.
+- BLOCKED: native `file://` navigation due environment-level browser restrictions.
+- NOT RUN: four-workspace lifecycle, custom-list CRUD/reload, actual external import/error recovery, cover retries, real audio playback, screenshot pixel comparison, keyboard acceptance, and multiplayer lifecycle.
 
 ## Remaining risks
-- The larger workspace architecture remains incomplete. Current dock has only two `data-ws` buttons; four workspace destinations are not implemented/verified.
-- Other legacy navigation calls remain elsewhere in the application, especially generic learning actions. They need targeted trace and tests.
+- Larger workspace architecture remains incomplete. Current dock has only two `data-ws` buttons; four workspace destinations are not implemented/verified.
+- Other legacy navigation calls remain elsewhere, particularly generic learning actions. They need targeted trace and tests.
 - No accepted final HTML exists yet.
 
 ## GitHub artifact delivery
