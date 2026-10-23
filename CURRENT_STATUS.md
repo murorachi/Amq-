@@ -1,16 +1,15 @@
-# CURRENT STATUS — Candidate 180 Hover Displacement Root Fix
+# CURRENT STATUS — Candidate 181 Compact Viewport Scroll Fix
 
-- Current local experimental candidate: Candidate 180.
-- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_180_hover_displacement_rootfix.html`
-- Local SHA-256: `4858d816a4b7fa0583d2d883bab2acb066d51f25f4023344b6667bdf44db9b83`
-- Size: 9,277,240 bytes.
-- Candidate 179 restored translucent distance-tier rows; Candidate 180 fixes the actual hover movement. Candidate 179's hover width growth caused a measured 6 px shift even though transform was -3 px. Candidate 180 removes width growth, producing an actual 3 px left shift. Selected row remains stronger.
-- PASS: 64 executable inline JS blocks checked by Node `--check`, 0 syntax errors.
-- PASS: Chromium set_content route checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. 180 rows, legacy rail hidden, zero horizontal overflow, dock within viewport, eighth row clipped ~50%.
-- PASS: actual hover bounding-box shift -3px; ArrowDown selection change; AMQ→EMQ→AMQ changes/restores song data; screenshot at 2555×1438.
-- Report: `reports/candidate180-hover-displacement-rootfix-20261023/VALIDATION.md`, uploaded and read-back verification pending.
-- BLOCKED: native file:// navigation ERR_BLOCKED_BY_ADMINISTRATOR; page.set_content opaque origin has two existing localStorage errors, so persistence is not verified.
-- NOT RUN: full CRUD/reload persistence, live API/covers, audio, full workspace regression, registered pixel diff.
-- Candidate 180 HTML is local only. GitHub upload/remote HTML SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
+- Latest local experimental candidate: Candidate 181.
+- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_181_compact_document_scroll_fix.html`
+- Local SHA-256: `3671ec7fb9a276742bc227f7028c1df4f7afb730f27dc099138392640b82ee3a`
+- Size: 9,278,478 bytes.
+- Candidate 181 adds a compact-viewport document overflow fix, route-scoped to Song Select at widths <=900px. It retains Candidate 180's removal of the 500px stage minimum that forced a page scroll.
+- PASS: 65 executable inline JS blocks parsed by Node `--check`, zero syntax errors; HTML/style tag counts balanced.
+- PASS: Chromium route/geometry checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. Document dimensions match viewport at all six sizes; legacy left rail hidden; 180 song rows; keyboard selection; AMQ/EMQ/MIX full-source counts; hover -3px vs selected -7px; 7.5-row affordance confirmed.
+- Report: `reports/candidate181-compact-document-scroll-fix-20261023/VALIDATION.md` uploaded and remote read-back pending.
+- BLOCKED: native file:// navigation returns ERR_BLOCKED_BY_ADMINISTRATOR. page.set_content has opaque origin, so persistence/CRUD acceptance remains unverified.
+- NOT RUN: real APIs/covers, audio playback, full workspace regression, registered pixel-diff.
+- Candidate 181 HTML is local only; GitHub HTML upload and remote SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
 
-Next: review scene/background and metadata proportions against the user's reference, then implement modal workspace panels after the Song Select scene is stable. Preserve all earlier candidates and Candidate 169 rollback checkpoint.
+Next: workspace actions should become modal overlays after main Song Select layout is stable; then native-origin persistence and full regression. Preserve Candidate 179/170/169 rollback points.
