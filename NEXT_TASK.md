@@ -1,6 +1,6 @@
 # NEXT TASK — Native-Origin Acceptance and Remaining Visual Gaps
 
-1. Current local working candidate: Candidate 201, SHA-256 `1a353023584509d188cb57a97f3efccff355ccab94d55824d047209d4c8ee093`. It is not accepted and its HTML is not uploaded to GitHub.
+1. Current local working candidate: Candidate 201, SHA-256 `1a353023584509d188cb57a97f3efccff355ccab94d55824d047209d4c8ee093`. It is not accepted and its HTML is not uploaded to GitHub. The user's primary reference `image.png` is 2555×1438; 1648×928 is a responsive viewport.
 2. Candidate 201 keeps the 7.5-row desktop affordance: at 1648×928 the eighth row is 44.3/96.1px visible (46.1%); at 2555×1438 it is 75.6/164.1px visible (46.1%).
 3. Compact layout stacks rows at <=900px, uses a readable 58px minimum row height, and clears compact-only alignment/margins when resizing back to desktop. No document overflow at 390×844, 900×700, 1648×928 or 2555×1438.
 4. AMQ/EMQ/MIX source checks pass: 38,821 AMQ; 16,839 EMQ; 55,660 MIX with source counts exactly matching those totals; 180 rows rendered per view.
@@ -12,3 +12,4 @@
 10. Candidate 201 static check: 70 executable inline JS blocks, zero syntax errors; 1 HTML pair, 72 script pairs, 108 style pairs.
 11. GitHub report `reports/candidate201-local-song-history-panel-20261024/VALIDATION.md` has been created and should be read back. Candidate HTML upload and remote SHA-256 verification are NOT COMPLETED; report upload is not HTML delivery.
 12. Preserve Candidate 200 SHA-256 `ee8dac05b25c09a2ab6155cd57114203094ffa3b1dd7c4fbc78b9db666eaba3d`, Candidate 193, Candidate 186, Candidate 185, Candidate 179, Candidate 170 and Candidate 169 rollback checkpoints.
+13. Current direct pixel comparison at 2555×1438 is low: full-frame SSIM 0.37455, MAE 63.7712, RMSE 85.0330; regional SSIM header 0.0751, left records 0.2439, catalog 0.4568, bottom controls 0.2383, central scene 0.4629. Do not claim visual fidelity; prioritize the missing/incorrect header and bottom-control hierarchy, then validate the scene-background manager in native-origin use.
