@@ -1,13 +1,12 @@
-# NEXT TASK — Continue Candidate 187 Work
+# NEXT TASK — Continue Candidate 188 Work
 
-1. Keep Candidate 187 experimental; retain Candidates 178, 183, 184, 185 and 186 unchanged.
-2. Trace and fix remaining workspace actions that navigate to legacy pages instead of staying in the Song Select workspace. Audit each action's dependencies before altering behavior.
-3. Complete the shared in-place modal/workspace architecture for the four left-rail actions; verify close, Escape, backdrop, back navigation, and no stale overlay.
-4. Move the audio player to the user's specified position between left-side learning statistics and the back control; verify desktop and narrow viewport geometry.
-5. Reproduce and fix the reported top-right freeze, with a functioning browser if available. Current environment's native Chromium navigation was blocked with ERR_BLOCKED_BY_ADMINISTRATOR.
-6. Verify cover fetch, failure/retry, keyboard selection, custom-list create/add/remove/filter/reload persistence, live AniList/MAL/VNDB APIs and real audio in a persistent browser origin.
-7. Measure against the 2555×1438 osu!stable reference with geometry and pixel/region comparison. Do not claim a visual-fidelity percentage without measurements.
-8. Run dependency inventory before deleting legacy controls/handlers. Keep redundant batch organization removed; do not restore old navigation.
-9. Run script syntax checks and applicable functional tests; report PASS / FAIL / NOT RUN / BLOCKED separately.
-10. Upload the final single-file HTML and updated docs to GitHub, then fetch the remote artifact and verify exact version and SHA-256. No HTML upload or remote hash verification has been completed yet.
-11. Candidate 187 local SHA-256: fd0c20698f7251f351aceecf8051d1a8784d91aac9232f5573c1316f8fa7cf83. Rollback to Candidate 186 if this narrow change causes regressions.
+1. Keep Candidate 188 experimental and retain Candidates 178, 183, 184, 185, 186 and 187 unchanged.
+2. In a functioning browser, exercise each of the four left-rail workspaces and confirm all actions remain in Song Select; check open/close/Escape/backdrop/back behavior and stale DOM cleanup.
+3. Verify Candidate 188 player dock placement against the user's stated target and the 2555×1438 osu!stable reference; adjust using measured coordinates rather than guesses.
+4. Reproduce and diagnose top-right freeze and DOM churn. Candidate 188 narrows one MutationObserver's watched attributes, but this is not proof the freeze is fixed.
+5. Verify custom-list create/add/remove/filter/reload persistence, live AniList/MAL/VNDB imports, cover failure/retry, keyboard selection, and real audio.
+6. Run geometry and pixel/region comparison; do not claim a similarity percentage without measured results.
+7. Run dependency inventory before deleting legacy controls; do not restore the redundant batch-organization feature or Singer in the primary mode row.
+8. Report tests as PASS / FAIL / NOT RUN / BLOCKED. Static syntax validation is not browser acceptance.
+9. Upload the final single-file HTML to GitHub and fetch it back to verify version, size, and SHA-256. No HTML upload or remote hash verification is complete.
+10. Rollback to Candidate 187 if Candidate 188 causes a regression.
