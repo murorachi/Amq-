@@ -1,0 +1,27 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_138_songlist_selection_center.html",
+  "bytes": 9259775,
+  "sha256": "e240eee8d06cc2bcf59ad572bfcc42a89491c916972486a571fd39dee3918962",
+  "method": "System Chromium + Playwright page.set_content; test-only in-memory Storage shim",
+  "pass": 14,
+  "fail": 0,
+  "tests": [
+    "PASS initial selected row index 3 at 1648x928",
+    "PASS ~7.5 visible rows and no document overflow at 1648x928",
+    "PASS no uncaught page errors at 1648x928",
+    "PASS ArrowDown changes selection",
+    "PASS ArrowUp restores previous selection",
+    "PASS hover transform is -3px",
+    "PASS search Usagi yields 18 rows and one valid selected result",
+    "PASS EMQ mode contains only EMQ records",
+    "PASS initial selected row index 3 at 1440x900",
+    "PASS ~7.5 visible rows and no document overflow at 1440x900",
+    "PASS no uncaught page errors at 1440x900",
+    "PASS initial selected row index 3 at 1280x720",
+    "PASS ~7.5 visible rows and no document overflow at 1280x720",
+    "PASS no uncaught page errors at 1280x720"
+  ],
+  "blocked": ["direct file:// navigation", "localhost navigation"],
+  "not_run": ["durable storage reload", "live APIs", "real audio", "full custom-list CRUD", "other-workspace regression"],
+  "acceptance": "NOT ACCEPTED"
+}
