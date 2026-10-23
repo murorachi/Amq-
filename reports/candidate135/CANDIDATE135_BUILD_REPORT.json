@@ -1,0 +1,9 @@
+{
+  "candidate": 135,
+  "parent": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_134.html",
+  "parent_sha256": "4bcad44b81008ca5fb43dc962f7bf3428608a2917e83e5b5cbf01aca317c7b42",
+  "artifact": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_135.html",
+  "bytes": 9245332,
+  "sha256": "9e2a86313613da2e8a4b23bb66e42d4616a82637447175791eb05aae7bf94ee7",
+  "change": "Removed redundant late background override; existing canonical no-custom-background fallback remains single owner."
+}
