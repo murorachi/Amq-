@@ -1,0 +1,10 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_139_scene_sweep_geometry.html",
+  "sha256": "bb25b714a90d6bfc579435d0e890f40c657654f80b1d26cbd97aa5cbc948f087",
+  "viewport": [1648,928],
+  "curved_frame": {"x":0,"y":94.640625,"width":477.90625,"height":83.515625,"right":477.90625,"bottom":178.15625,"border_bottom_color":"rgb(57, 115, 255)","border_bottom_width":"4px","radius":"10% 100%","display":"block"},
+  "reference_geometry_estimate": {"top_y":95,"horizontal_line_y":178,"curve_end_x":478},
+  "screenshot_delta_vs_candidate138": {"changed_pixels":80751,"total_pixels":1529344,"changed_percent":5.2801,"bbox":[0,90,827,217],"mean_absolute_channel_delta":0.344213},
+  "reference_pixel_metrics": {"full":{"ssim":0.299502,"mae":58.4068,"rmse":81.8178},"left_player":{"ssim":0.169145,"mae":89.5441,"rmse":100.5093},"top_song_info":{"ssim":0.042385,"mae":54.3556,"rmse":84.7492},"central_background":{"ssim":0.42667,"mae":51.6058,"rmse":70.6584},"right_song_list":{"ssim":0.362299,"mae":49.6766,"rmse":71.4281},"bottom_controls":{"ssim":0.199185,"mae":61.369,"rmse":99.6895}},
+  "limitations": ["Reference resized from 2555x1438 to 1648x928 with Lanczos", "Content differs from reference", "Browser screenshot was from page.set_content, not direct file origin"]
+}
