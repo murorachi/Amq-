@@ -1,15 +1,16 @@
-# CURRENT STATUS — Candidate 181 Compact Viewport Scroll Fix
+# CURRENT STATUS — Candidate 186 Workspace Modal State Restoration
 
-- Latest local experimental candidate: Candidate 181.
-- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_181_compact_document_scroll_fix.html`
-- Local SHA-256: `3671ec7fb9a276742bc227f7028c1df4f7afb730f27dc099138392640b82ee3a`
-- Size: 9,278,478 bytes.
-- Candidate 181 adds a compact-viewport document overflow fix, route-scoped to Song Select at widths <=900px. It retains Candidate 180's removal of the 500px stage minimum that forced a page scroll.
-- PASS: 65 executable inline JS blocks parsed by Node `--check`, zero syntax errors; HTML/style tag counts balanced.
-- PASS: Chromium route/geometry checks at 2555×1438, 1920×1080, 1648×928, 1440×900, 1280×720, 900×700. Document dimensions match viewport at all six sizes; legacy left rail hidden; 180 song rows; keyboard selection; AMQ/EMQ/MIX full-source counts; hover -3px vs selected -7px; 7.5-row affordance confirmed.
-- Report: `reports/candidate181-compact-document-scroll-fix-20261023/VALIDATION.md` uploaded and remote read-back pending.
-- BLOCKED: native file:// navigation returns ERR_BLOCKED_BY_ADMINISTRATOR. page.set_content has opaque origin, so persistence/CRUD acceptance remains unverified.
-- NOT RUN: real APIs/covers, audio playback, full workspace regression, registered pixel-diff.
-- Candidate 181 HTML is local only; GitHub HTML upload and remote SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
+- Latest local experimental candidate: Candidate 186.
+- HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_186_workspace_modal_state_restore.html`
+- Local SHA-256: `c07d82988c898b228cc891783ed4b351c4bdc2c87952583f6c68f15e209e66db`
+- Size: 9,289,249 bytes.
+- Modal behavior: workspace panel centered above dimmed/blurred Song Select; third-stage workspace panel centers above it; Escape closes one layer at a time; selection/search/filter/scroll state is restored after modal close.
+- Workspace dock triggers were moved beside the main back control and raised above the full-width audio dock. The audio dock's empty background no longer intercepts workspace clicks; its controls retain pointer interaction.
+- PASS: Candidate 185 six-viewport geometry, rail-hidden, 180 rows, keyboard selection, AMQ/EMQ/MIX source counts, hover-vs-selected offsets and 7.5-row affordance. Candidate 186 new JS block passes Node `--check`; HTML/style/script pairs balanced.
+- PASS: Candidate 186 modal open/close, learning center third-stage modal, Escape layer order, search/selected-state restore; compact viewport 900×700 and 390×844 document dimensions match viewport and scrollTop 250 restored.
+- Report: `reports/candidate186-workspace-modal-state-restore-20261023/VALIDATION.md` uploaded; remote read-back pending.
+- BLOCKED: native file:// and virtual-origin navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR. Persistence/reload acceptance cannot be claimed.
+- NOT RUN: live APIs/covers, real audio, full CRUD/reload, registered pixel-diff and full workspace regression.
+- Candidate 186 HTML remains local; GitHub HTML upload/remote SHA verification NOT COMPLETED. Candidate is NOT ACCEPTED.
 
-Next: workspace actions should become modal overlays after main Song Select layout is stable; then native-origin persistence and full regression. Preserve Candidate 179/170/169 rollback points.
+Next: adjust import actions to open AniList/MAL modal directly over Song Select where safe; inspect VNDB and custom-list workflows individually. Preserve Candidate 185/181/179/170/169 rollback points.
