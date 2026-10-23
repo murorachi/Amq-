@@ -1,18 +1,22 @@
-# CURRENT STATUS — Candidate 193 (experimental, not accepted)
+# CURRENT STATUS — Candidate 203 (experimental, not accepted)
 
 - Recovery baseline: Candidate 178, explicitly selected because Candidate 205 was unavailable.
-- Preserved lineage: Candidate 178 -> Candidate 183 -> Candidate 184 -> Candidate 185 -> Candidate 186 -> Candidate 187 -> Candidate 188 -> Candidate 189 -> Candidate 190 -> Candidate 191 -> Candidate 192 -> Candidate 193.
-- Candidate 193 local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_193_late_bound_route_guard.html`
-- Size: 9,307,474 bytes. SHA-256: `3896685f3abd97c16e730b29b9b398650d28b8a67cdb394e4b1e5337b51febdc`.
-- Four existing-function workspace destinations: 清單管理, 學習中心, 猜歌練習, 多人模式. Removed duplicate quick-start button. Legacy routes watchlist, practice, explore, learningPlan, dashboard, vnList are intercepted into existing shared panels while Song Select is active; original navigation remains outside Song Select.
-- Batch organization is not reintroduced. No placeholder panels added.
-- Static JavaScript syntax: 66 executable script blocks PASS; 0 FAIL. One JSON data block and one compressed/base64 data block excluded; the compressed-data toggle block is also excluded from this JS syntax pass.
-- PASS: Playwright harness dispatched 12 repeated workspace switches; DOM retained four workspace buttons, one sidebar, one shared content panel and one action list.
-- PASS: six legacy destinations each emitted route-intercepted events and opened mapped panel titles.
-- PASS: 18 route-intercepted panel open/close cycles; no duplicate panel nodes; panel content emptied on close.
-- PASS: existing watchlist, learning plan, dashboard, quiz and multiplayer nodes moved into the shared panel and returned to their original parent after closing. VNDB parent restoration passed; the first "moved into panel" probe used the wrong key casing and is not counted.
-- PASS: Escape and Back close the shared panel.
-- PASS: custom practice list creation and deletion through existing UI in the browser harness. This uses an in-memory localStorage shim; it does not prove reload persistence.
-- BLOCKED: native file:// browser navigation remains blocked. The harness cannot prove persistence across reload or native route state.
-- NOT RUN: adding/removing songs inside a list, reload persistence, AniList/MAL/VNDB real import, import errors/retry, cover retry, actual audio, keyboard acceptance, screenshot pixel comparison, original 26-test suite and multiplayer lifecycle regression.
-- Candidate 193 remains experimental, not accepted. GitHub HTML upload is NOT VERIFIED.
+- Candidate lineage preserved: 178 -> 183 -> 184 -> 185 -> 186 -> 187 -> 188 -> 189 -> 190 -> 191 -> 192 -> 193 -> 194 -> 195 -> 196 -> 197 -> 198 -> 199 -> 200 -> 201 -> 202 -> 203.
+- Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_203_priority_custom_list_clicks.html`
+- Size: 9,309,775 bytes. SHA-256: `d5c8c19d52671e05f9d2f9a578c853bb8c0cf4123abc0d27c8d4fa5dc9bf26e6`.
+- Candidate 203 adds a final route interceptor for legacy workspace destinations while Song Select is active, preserves original navigation outside Song Select, and keeps the visible four-entry C99 rail as the actual workspace entry point (AniList/MAL, VNDB, custom lists, learning plan). The obsolete dock remains hidden; it is not treated as the four-workspace UI.
+- The shared panel is positioned using the visible C99 rail as its geometry anchor where applicable, and remembers a stable invoker for focus restoration.
+- Custom-list workflow integration: exposed a narrow adapter to the existing custom-list data layer; custom-list mode now scopes to Song Select's visible `#amqSongSelectTracklist .songrow[data-work-id]` rather than hidden legacy `.card` nodes. Work IDs are indexed to avoid repeated full-map scans. The click interceptor runs at window capture phase.
+- Custom-list observer is restricted to the active grid's direct child list and debounced; the previous document-wide observer caused repeated applyCards calls during catalog DOM churn.
+- Static validation: 66 executable inline JS blocks PASS; 0 syntax failures. One JSON data block and two compressed/base64-related blocks excluded. CSS parsing: 104 style blocks, 2,689 qualified rules, 0 parse errors.
+- PASS: actual C99 rail has four visible actions in Playwright catalog context.
+- PASS: AniList/MAL opens existing modal while route stays catalog.
+- PASS: VNDB, custom list and learning plan open existing shared panel while route stays catalog; panel is positioned to the right of the rail and does not overlap it in the 2555x1438 harness.
+- PASS: focus returns to the invoking C99 rail button after VNDB/custom-list/learning panel closes.
+- PASS: 18 route-intercepted open/close cycles; no duplicate panel nodes; Back and Escape close panels.
+- PASS: custom list create, duplicate rejection, rename, delete; 0 page errors with in-memory storage shim.
+- PASS: data-layer adapter adds and removes a work ID from an existing custom list.
+- NOT VERIFIED: actual visible Song Select row click toggling could not be asserted in the set_content harness; event dispatch did not reach the tested listener as expected. Do not count this as UI acceptance.
+- BLOCKED: durable storage across reload and native file:// navigation.
+- NOT RUN: live AniList/MAL/VNDB imports and failures/retries, cover retry, real audio, full 26-case legacy suite adaptation, fixed-resolution pixel comparison, multiplayer lifecycle regression.
+- Candidate 203 is experimental, not accepted. GitHub HTML upload is NOT VERIFIED.
