@@ -1,0 +1,14 @@
+{
+  "candidate": "amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_136_interaction_rootfix.html",
+  "sha256": "acb9a4aea61f5c8776bcbd8bac43562eca3754307fdb758ea3b522bb58baf717",
+  "javascript": {
+    "inlineScriptsChecked": 62,
+    "pass": 62,
+    "fail": 0
+  },
+  "css": {
+    "styleBlocksChecked": 90,
+    "parseErrors": 0
+  },
+  "acceptance": "NOT ACCEPTED: interaction fixes verified in injected browser context; no baseline visual improvement and direct-file/durable-persistence checks blocked/not run"
+}
