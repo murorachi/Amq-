@@ -7,8 +7,8 @@
     "candidate": 130,
     "sha256": "9085754d5b6d8b1463709c25a97402a217e8ddb07afb9e4beb5d14dd1fbc3916"
   },
-  "version_conflict": {
-    "remote_candidate131_sha256": "f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3",
+  "remote_candidate131": {
+    "sha256": "f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3",
     "preserved": true
   },
   "static": {
@@ -40,21 +40,14 @@
     }
   },
   "interaction": {
-    "rendered_cards": 180,
+    "catalog_cards": 180,
     "expanded_song_rows": 24,
-    "selected": {
-      "distance": 0,
-      "transform_px": -7,
-      "opacity": 1,
-      "margin_top_px": 2,
-      "margin_bottom_px": 2,
-      "centered": true
-    },
-    "adjacent_hover": {
-      "distance": 1,
-      "transform_px": -3,
-      "opacity": 0.9
-    },
+    "selected_transform_px": -7,
+    "selected_margin_top_px": 2,
+    "selected_margin_bottom_px": 2,
+    "selected_opacity": 1,
+    "adjacent_hover_transform_px": -3,
+    "adjacent_hover_opacity": 0.9,
     "keyboard_enter_opens_work": true,
     "custom_background_image_preserved": true
   },
@@ -65,9 +58,9 @@
       "rmse": 84.851
     },
     "candidate132": {
-      "ssim": 0.314905,
-      "mae": 65.1377,
-      "rmse": 86.3097
+      "ssim": 0.314962,
+      "mae": 65.1305,
+      "rmse": 86.3024
     }
   },
   "acceptance": "NOT ACCEPTED as final; stage 1 incomplete, stages 2 and 3 incomplete",
@@ -81,4 +74,4 @@
     "full list persistence regression",
     "other workspace regression"
   ]
-}\n
+}
