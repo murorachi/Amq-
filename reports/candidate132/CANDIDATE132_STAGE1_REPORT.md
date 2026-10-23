@@ -16,7 +16,7 @@ Candidate 132 is an intermediate candidate, **not an accepted final release**. T
 The feature branch already contains a different remote Candidate 131 (SHA-256 `f5e475819810a9b71101e3e70ab073815f12b5dd1e073ecf81631451ced897d3`). To avoid overwriting or conflating artifacts, this checkpoint is uniquely named Candidate 132 and is based directly on the locally verified Candidate 130 parent. The remote Candidate 131 is preserved separately.
 
 ## Root-cause changes
-1. **7.5 visible cards:** row height now follows the catalog's actual container geometry rather than a fixed 60px. Seven full cards and half of the eighth are visible.
+1. **7.5 visible cards:** row height follows the catalog's actual container geometry rather than a fixed 60px. Seven full cards and half of the eighth are visible.
 2. **Selection prominence by distance:** the selected song is centered in the scrolling catalog. Rows receive a distance value from the selected index and progressively fade: selected 1.0, distance 1 0.90, distance 2 0.76, distance 3 0.62, distance 4 0.50, distance 5+ 0.40. Natural song order is preserved.
 3. **Selected-row gap and movement:** selected row moves 7px left and has 2px margins above/below. Hover on a non-selected row moves 3px left.
 4. **No-custom-background fallback:** subtle dark gradient, muted blue/pink radial light and faint diagonal lines. No external artwork was fetched and the reference screenshot is not used as app background. A synthetic custom image style remained intact when custom-background state was enabled.
@@ -40,7 +40,7 @@ Additional tests: 180 catalog cards rendered; opened a work with 24 song rows; s
 - PASS: actual screenshots at all three required desktop viewports plus selected and hover states.
 
 ## Visual metrics
-Screenshots normalized to 1648 × 928 using Lanczos. Full-frame Candidate 130 vs Candidate 132: SSIM 0.312034 vs 0.314905, MAE 63.4492 vs 65.1377, RMSE 84.8510 vs 86.3097. Right catalog SSIM improved from 0.402640 to 0.416169, while MAE/RMSE increased because row geometry changed substantially. The neutral fallback cannot match real anime artwork. These metrics do not imply overall visual acceptance.
+Screenshots normalized to 1648 × 928 using Lanczos. Full-frame Candidate 130 vs Candidate 132: SSIM 0.312034 vs 0.314962, MAE 63.4492 vs 65.1305, RMSE 84.8510 vs 86.3024. Right catalog SSIM improved from 0.402640 to 0.416169, while MAE/RMSE increased because row geometry changed substantially. The neutral fallback cannot match real anime artwork. These metrics do not imply overall visual acceptance.
 
 ## BLOCKED / NOT RUN
 - Direct `file://` navigation is blocked by the environment; browser probes used `page.set_content`.
