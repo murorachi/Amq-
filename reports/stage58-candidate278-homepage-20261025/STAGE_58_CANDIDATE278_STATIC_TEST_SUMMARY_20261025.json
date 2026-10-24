@@ -9,8 +9,8 @@
   "candidate": {
     "file": "amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html",
     "version": "v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025",
-    "bytes": 9360487,
-    "sha256": "28b5056e801a3ff63e9483149444a657186fef19a55f62ef4830db000160fe6a"
+    "bytes": 9361163,
+    "sha256": "cd2fdb8f1f762c4a30f64f54e64ab530607a3a3fb1866f9275804c507df08bf1"
   },
   "PASS": [
     "initial legacy home menu shell empty",
@@ -24,7 +24,8 @@
     "101 static DOM IDs unique",
     "67/67 executable inline JS blocks pass node --check",
     "108 CSS blocks parse with zero stylesheet errors",
-    "parent baseline hash unchanged"
+    "parent baseline hash unchanged",
+    "original synthesized click sound and playback-state sparkle animation present"
   ],
   "BLOCKED": [
     "Chromium headless about:blank timed out after 15 seconds; browser acceptance unavailable"
