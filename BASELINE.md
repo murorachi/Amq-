@@ -152,3 +152,11 @@
 - PASS：作品黑名單加入／解除；SRS 對所選作品歌曲建立卡片；切換到歌曲批次後作品與歌曲選取集合維持隔離。
 - 以上僅為 Playwright 記憶體 storage shim 結果，不代表持久化驗收。
 - 待測：看番狀態全部分支、超過 300 部作品的確認／取消分支、原生 file:// 與重新載入。
+
+
+## Candidate227 Stage 14 dependency audit checkpoint (2026-10-24)
+- Candidate227 remains the current local working artifact: 9,360,586 bytes; SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`.
+- Stage 14 did not modify HTML. Runtime regression: PASS for watch status variants, empty selection safety, 301-item confirmation/cancel, and repeated panel selection retention. Storage shim failed to override opaque-origin localStorage, so persistence tests are not valid and are marked BLOCKED.
+- Static reference counts show old controls are still referenced: selectModeBtn 10; selectVisibleBtn 8; selectFilteredBtn 7; clearSelectionBtn 7; applyBulkWatchBtn 6; applyBulkSongBtn 4; bulkCustomList 7; applyBulkPracticeAction 8; batchScopeSummaryV844 10; syncOpenBtn 5. Counts are heuristic source-string counts, not a full AST call graph.
+- No old controls, listeners, observers or CSS deleted. Extract direct APIs before cleanup. See `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_14_REGRESSION_AND_DEPENDENCY_AUDIT.md`.
+- GitHub documentation branch only; HTML not uploaded and remote HTML hash not verified.
