@@ -6,8 +6,8 @@ Date: 2026-10-24
 - Parent Candidate261 SHA-256: `b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`, verified before editing.
 - Candidate: `amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`
 - Version: `v82.85.76-candidate262-shared-workspace-design-system-20261024`
-- Size: 9,360,777 bytes
-- SHA-256: `e7a2dd91b49042192f32ef2c23923b7128edc47e1fc2a360525a9b01a8b97aa4`
+- Size: 9,360,706 bytes
+- SHA-256: `6f773fd616d91749304a42785f5b19faa6c3165fa59894ee4080074d911092b9`
 - Candidate261 and earlier files were not overwritten. Candidate262 is not an accepted baseline.
 
 ## Changes
