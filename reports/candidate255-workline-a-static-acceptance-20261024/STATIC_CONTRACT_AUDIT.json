@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "classification": "static source contract checks; not browser interaction or durable persistence",
+  "html_sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
+  "checks": {
+    "official_batch_api_declared": true,
+    "official_api_queue_method": true,
+    "official_api_watch_method": true,
+    "official_api_song_method": true,
+    "official_api_practice_method": true,
+    "work_bridge_has_own_selection_getter": true,
+    "work_bridge_reads_catalog_data": true,
+    "song_batch_has_private_selection_set": true,
+    "song_batch_checkbox_uses_private_selection": true,
+    "song_batch_selection_handler_mutates_private_set": true,
+    "work_batch_uses_separate_local_selection": true,
+    "custom_list_storage_key_preserved": true,
+    "custom_list_reader_accepts_versioned_object": true,
+    "custom_list_member_schema_anime_ids": true,
+    "custom_list_write_checks_existing_list": true,
+    "custom_list_write_deduplicates_ids": true,
+    "custom_list_write_catches_storage_failure": true,
+    "deleted_quicktools_no_reference": true
+  }
+}
