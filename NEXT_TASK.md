@@ -13,4 +13,6 @@
 ## Current blockers
 - Candidate283 is local-only; remote branch currently has only v82.85.30 and v82.85.46 HTML.
 - `.github/workflows/download-file-for-chatgpt.yml` requires a public HTTPS download URL; none is available for Candidate283 yet.
+- Chromium file navigation in the current environment returns `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
+- The uploaded Candidate283 root `data-amq-candidate="280"` marker is not referenced by inline runtime source, but external/tooling semantics are NOT VERIFIED; preserve the artifact until clarified by evidence.
 - Browser interaction acceptance is BLOCKED until the exact file is available to the cloud browser.
