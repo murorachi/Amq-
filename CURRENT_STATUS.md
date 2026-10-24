@@ -88,3 +88,13 @@ Continue the 100-item plan using the reconstructed source only for analysis/prot
 - PASS: 66/66 executable JS blocks parse; 108 CSS blocks have zero parse errors; Chromium page.set_content() with in-memory storage shim loads without page/console errors; Song Select route creates 180 rows; ArrowDown moves index 0→1; isolated Enter test invokes listenSong exactly once; batch checkbox remains checked after search rerender and counter remains 1.
 - BLOCKED/NOT RUN: native file launch and durable storage reload, real audio output, IndexedDB Blob backup/restore, live imports, multiplayer lifecycle, osu!stable pixel comparison.
 - GitHub branch: amq-candidate219-songselect-ownership-20261024. Documentation is being checkpointed; the HTML upload action is not exposed by the available GitHub connector. Remote HTML path returned 404, so no remote HTML existence or hash verification is claimed.
+
+
+## Candidate220 — 清單管理與歌曲批次整合（2026-10-24）
+- Parent Candidate219：9,352,752 bytes，SHA-256 4a20b0eee8ecaa4b8d7ac5b55e1fc602c4335c9ad892ef901dc672ac719b40ea。
+- Local Candidate220：amq_learning_tool_v82_85_46_candidate220_list_management_batch_integration_20261024.html，9,353,264 bytes，SHA-256 d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a。原始 Candidate219 未修改，另有本機 byte-identical rollback。
+- 修改：正式「清單管理」新增「歌曲維護 → 歌曲批次整理」，呼叫既有 Candidate210 批次 runtime；移除把 C99 rail 的 VNDB action 錯誤改標為「批次整理」的覆寫。
+- PASS：65/65 executable inline JS blocks 通過 node --check；3 個資料 payload blocks 排除；108 個 CSS blocks 解析、0 errors；靜態斷言確認入口、handler、既有 runtime API 與 VNDB relabel 移除。
+- NOT RUN：完整 Chromium 使用者流程未能完成。Playwright 的 Chromium launch 在此環境逾時；不可宣稱 UI 點擊驗收通過。Native file launch、真實持久化重載、音訊、live APIs、多人生命週期及 osu!stable 像素比較仍 NOT RUN/BLOCKED。
+- DEFER：舊 quicktools 與 wsBatchListAdder 是作品層級操作，和歌曲列批次操作的選取粒度不同，尚未刪除。
+- GitHub：建立本分支並提交文件紀錄；本地 9.35 MB HTML 無法透過目前 connector 的檔案路徑上傳介面傳送，因此遠端 HTML 上傳與 SHA-256 驗證仍 BLOCKED。
