@@ -160,3 +160,12 @@
 - Static reference counts show old controls are still referenced: selectModeBtn 10; selectVisibleBtn 8; selectFilteredBtn 7; clearSelectionBtn 7; applyBulkWatchBtn 6; applyBulkSongBtn 4; bulkCustomList 7; applyBulkPracticeAction 8; batchScopeSummaryV844 10; syncOpenBtn 5. Counts are heuristic source-string counts, not a full AST call graph.
 - No old controls, listeners, observers or CSS deleted. Extract direct APIs before cleanup. See `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_14_REGRESSION_AND_DEPENDENCY_AUDIT.md`.
 - GitHub documentation branch only; HTML not uploaded and remote HTML hash not verified.
+
+
+## Candidate228 direct batch API extraction checkpoint (2026-10-24)
+- Current local candidate: `amq_learning_tool_v82_85_46_candidate228_direct_batch_api_extraction_20261024.html`, 9,364,981 bytes; SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`.
+- Parent Candidate227 remains unchanged: 9,360,586 bytes; SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`. Rollback copy byte-identical.
+- Candidate228 adds explicit-ID APIs for watch status, familiarity and practice actions. Existing storage keys/schema retained; visible work bridge calls direct APIs rather than clicking legacy buttons.
+- PASS: 67 executable JS blocks; 109 CSS blocks; in-memory Playwright interactions cover all watch/familiarity variants, list add/remove, weak-set, blacklist, SRS, invalid input and write-failure rollback.
+- BLOCKED: native file launch and durable reload persistence. Old controls/listeners/CSS still have active references and were not deleted.
+- GitHub branch contains documentation only; HTML upload and remote HTML SHA verification remain uncompleted. See `reports/candidate228-direct-batch-api-extraction-20261024/STAGE_15_DIRECT_BATCH_API_EXTRACTION.md`.
