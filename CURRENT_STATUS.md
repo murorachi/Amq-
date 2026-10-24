@@ -79,3 +79,13 @@
 - 靜態依賴稽核確認 `#quicktools`、`#bulkPracticeAction`、`#bulkCustomList`、`#applyBulkPracticeAction` 仍有實際 handler、資料更新及導航／刷新呼叫。沒有證據支持整組刪除，因此本階段未修改 HTML。
 - Candidate230 為文件稽核檢查點，不另造無程式差異的 HTML 版本。HTML 尚未上傳 GitHub，遠端 SHA 未驗證。
 - 報告：`reports/candidate230-runtime-dependency-audit-20261024/STAGE_17_RUNTIME_ACCEPTANCE_AND_DEPENDENCY_AUDIT.md`。
+
+
+## Candidate231 作品批次入口整合（2026-10-24）
+- 父版本 Candidate229 已重新核對：9,366,832 bytes，SHA-256 8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448。
+- Candidate231：9,367,325 bytes，SHA-256 74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf；Candidate229 回滾副本 byte-identical，SHA 相同。
+- 根因：主工作區作品批次入口只捲動到舊 quicktools，該區塊在 Song Select 路由不保證可見。現在改接 Candidate210 既有作品批次面板，且只有確認面板節點掛載才回報成功。
+- PASS：67 個可執行 JS 區塊語法、109 個 CSS 區塊解析；可見面板列出 9,516 部作品；測試清單加入、儲存失敗、空選取、取消確認、12 次開關循環及所有批次 API 分支；0 pageerror、0 console error。
+- BLOCKED：原生 file:// 與 reload 持久化仍受 Chromium managed URLBlocklist 阻擋。NOT RUN：真實音訊、即時 API、多人及像素比對。
+- 舊 quicktools 及其控制項尚有其他有效依賴，未刪除。Candidate231 HTML 尚未上傳 GitHub，遠端 HTML SHA 未驗證。
+- 詳細報告：reports/candidate231-work-batch-entry-integration-20261024/STAGE_18_WORK_BATCH_ENTRY_INTEGRATION.md。
