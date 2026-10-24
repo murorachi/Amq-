@@ -34,3 +34,14 @@ After byte-preserving Candidate212 access is restored, apply the narrow fallback
 ## Scope limits
 
 The response is mocked; no live MAL/Jikan-edge request was made. The source reconstruction is 26 bytes shorter than the recorded baseline, so no candidate or release source was modified.
+
+## Pagination and duplicate-ID follow-up
+
+A second mocked run returned 300 duplicate Naruto entries on page 1 and one duplicate with a conflicting status on page 2.
+
+- PASS: importer requested exactly pages 1 and 2.
+- PASS: one local anime record was written; 300 duplicate records were reported as skipped.
+- PASS: the first explicit user-list status (`watching` → `current`) remained authoritative across the duplicate page.
+- PASS: import button was re-enabled and no page errors occurred.
+
+This confirms duplicate-ID handling across pages. The ambiguous top-level `status` overwrite remains a separate FAIL and still needs the narrow fix described above. Both runs used mocked responses; live provider schema confirmation remains NOT RUN.
