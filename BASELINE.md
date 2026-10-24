@@ -169,3 +169,11 @@
 - PASS: 67 executable JS blocks; 109 CSS blocks; in-memory Playwright interactions cover all watch/familiarity variants, list add/remove, weak-set, blacklist, SRS, invalid input and write-failure rollback.
 - BLOCKED: native file launch and durable reload persistence. Old controls/listeners/CSS still have active references and were not deleted.
 - GitHub branch contains documentation only; HTML upload and remote HTML SHA verification remain uncompleted. See `reports/candidate228-direct-batch-api-extraction-20261024/STAGE_15_DIRECT_BATCH_API_EXTRACTION.md`.
+
+
+## Candidate229 workspace result handling checkpoint (2026-10-24)
+- Parent Candidate228: 9,364,981 bytes; SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`.
+- Candidate229: `amq_learning_tool_v82_85_46_candidate229_workspace_result_handling_20261024.html`, 9,366,832 bytes; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`.
+- Rollback is byte-identical Candidate228: `amq_learning_tool_v82_85_46_candidate228_rollback_before_candidate229_20261024.html`, SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`.
+- Candidate229 changes visible batch status reporting only: success/cancel/failure outcomes now consume structured API results. Existing data keys/schema unchanged. No legacy quicktools code was deleted because caller references remain.
+- Static JS syntax PASS (67 executable blocks). Runtime result handling BLOCKED by opaque-origin localStorage access failure; native file/reload persistence BLOCKED by managed URLBlocklist. GitHub branch holds documentation only; HTML upload and remote HTML SHA verification remain incomplete.
