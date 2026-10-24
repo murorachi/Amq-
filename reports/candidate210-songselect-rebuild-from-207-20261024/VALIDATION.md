@@ -13,7 +13,7 @@
 - Normalized row widths and aligned the catalog to x≈1571 px / width≈984 px at 2555×1438.
 - Set row height to about 151 px at 2555×1438; measured 8 intersecting rows, with the last partial, matching the approximately 7.5-row target.
 - Fixed EMQ/MIX default-category performance: getSongsForWork was being called for every EMQ work even when category was “all”. That unnecessary scan was removed from the default path.
-- Changed row-cover handling so existing image nodes with no src are not silently skipped; added viewport-scoped retry, timeout, API/queue fallback, MAL fallback and a fallback marker.
+- Changed row-cover handling so existing image nodes with no src are not silently skipped; added viewport-scoped retry, timeout, API/queue fallback, MAL fallback and a visible fallback marker.
 
 ## Tests
 
@@ -24,12 +24,13 @@
 - Song Select navigation creates stage, tracklist and 180 rows.
 - Search: “Usagi to Kame” returns one row; unmatched query returns zero; clearing restores rows.
 - Repeated AMQ→EMQ→MIX→AMQ→EMQ→MIX→AMQ normal clicks complete and update API mode/aria-pressed state.
-- Import, batch organizer, custom lists and learning plan each open; one Escape closes the panel and retains the Song Select route.
+- Import, batch organizer, custom lists and learning plan each opened and Escape-closed in 3 consecutive cycles. After every close, Song Select route remained active, one rail/stage remained, and no modal overlay remained open.
 - Back returns home.
 - Row click updates selected row and invokes the autoplay path. A spy was used to avoid claiming external audio playback.
 - Actual mouse-wheel input changes scroll position and selected row.
 - Previous/play/next controls accept clicks without captured JS errors.
-- Geometry measured at 2555×1438: list viewport x≈1571, width≈979, height≈1108, row height≈151; 8 rows intersect viewport with the final row partial. At 1920×1080: list x≈1181, width≈734, row height≈130, 7 rows intersect.
+- Geometry at 2555×1438: list viewport x≈1571, width≈979, height≈1108, row height≈151; 8 rows intersect viewport with the final row partial. At 1920×1080: list x≈1181, width≈734, row height≈130, 7 rows intersect.
+- Cover failure fallback was observed as a visible ♫ marker after external cover requests failed in this environment.
 
 ### Corrected defects
 - Initial screenshot showed titles hidden behind the cover column; corrected grid placement.
@@ -39,13 +40,13 @@
 - Native file:// and localhost navigation return ERR_BLOCKED_BY_ADMINISTRATOR. Tests use set_content with an in-memory localStorage shim, so native double-click behavior and durable persistence are not verified.
 - External DNS requests fail in this environment. Successful cover loads, real CDN timeout/retry, importer APIs and actual audio URLs are not verified.
 - Real audio playback and random seek after real metadata are not proven. Player button clickability is not proof of playback.
-- Full multi-round workspace switch/back matrix and no-stale-component assertions remain incomplete.
+- Exhaustive Back navigation from every workspace and no-stale-component assertions across route changes remain incomplete.
 - Custom-list create/add/remove/filter/reload persistence is not verified.
 - Pixel/region comparison against osu!stable reference is incomplete. Screenshots captured at 2555×1438 and 1920×1080; no similarity percentage is claimed.
 - HTML parser reports two inherited structural warnings at the </head><body> boundary near line 324, also present in Candidate 207.
 
 ## GitHub
-- Documentation is being updated on branch amq-candidate104-songselect-layout-fix.
+- Documentation is updated on branch amq-candidate104-songselect-layout-fix.
 - HTML upload and remote SHA-256 readback are BLOCKED: available connector accepts UTF-8 text, not a local-file byte stream; container git/curl cannot resolve github.com. No remote HTML hash is claimed.
 - Do not deliver Candidate 210 as a finished candidate.
 
