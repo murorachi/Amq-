@@ -89,3 +89,13 @@
 - BLOCKED：原生 file:// 與 reload 持久化仍受 Chromium managed URLBlocklist 阻擋。NOT RUN：真實音訊、即時 API、多人及像素比對。
 - 舊 quicktools 及其控制項尚有其他有效依賴，未刪除。Candidate231 HTML 尚未上傳 GitHub，遠端 HTML SHA 未驗證。
 - 詳細報告：reports/candidate231-work-batch-entry-integration-20261024/STAGE_18_WORK_BATCH_ENTRY_INTEGRATION.md。
+
+
+## Candidate232 全專案依賴盤點（2026-10-24）
+- 使用者已確認 Candidate231 為目前最新版本；本輪以本機 Candidate231 HTML（9,367,325 bytes，SHA-256 `74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf`）為掃描基準。
+- 本輪未修改 HTML/CSS/JS 或資料 schema。PASS：初始 DOM 292/292 IDs 唯一；67/67 可執行 inline JS 語法；109 個 CSS blocks 無 stylesheet/declaration parser errors；CSS cascade 靜態索引已建立。
+- 主要整合熱點：workspace/router 多代 runtime、舊作品批次呼叫點、Song Select/home/quiz/player CSS cascade、volume-control fallback、observer/timer 生命週期。
+- 本輪未找到可單靠靜態證據安全刪除的完整程式碼群；不得按版本編號、同名函式或重複 selector 直接刪除。
+- NOT RUN：完整 runtime call graph、四工作區完整端到端、自訂清單原生 reload、真實音訊/live API/多人/固定參考圖像素比對。
+- BLOCKED：原生 file:// / localhost 與 reload 持久化受 Chromium managed URLBlocklist 阻擋；未更改政策。
+- Candidate231 HTML 尚未上傳 GitHub，遠端 HTML SHA-256 未驗證。詳細盤點：`reports/candidate232-full-dependency-inventory-20261024/DEPENDENCY_AUDIT.md`。
