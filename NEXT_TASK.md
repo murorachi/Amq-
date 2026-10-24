@@ -1,14 +1,14 @@
-# NEXT TASK — Candidate 208: verify behavior and finish osu!stable Song Select pass
+# NEXT TASK — Candidate 209: real browser verification and remaining requested rebuild
 
-1. Preserve Candidate 178 as the recovery baseline and keep Candidate 207/208 immutable.
-2. Candidate 208 has only static PASS evidence. The full Playwright harness timed out with Node EPIPE; first establish a browser context that can run the 9.3 MB document without opaque-origin storage failures.
-3. Verify top filter frame geometry at 2555×1438 and 1920×1080; type into the relocated search field and assert that filtered song records and result count change.
-4. Verify selected-row click and wheel-centered selection, auto-play behavior, random seek after metadata, and no playback triggered by clicking a status/action button.
-5. Verify dock action bar operations: heard/known/instant, tag editing, blacklist toggle, and persisted state after reload.
-6. Candidate 208 changes the visible second rail action from VNDB import to batch organization. Finish the requested shared import workspace so AniList/MAL and VNDB remain accessible from one clear entry without losing either importer; do not leave VNDB import inaccessible.
-7. Implement and test efficient batch operations: select visible/filter results, apply/remove learning states, add/remove selected songs to custom lists, blacklist/unblacklist, clear selection, and report counts/errors. Do not revive the old redundant batch organizer UI.
-8. Fix cover display using verified existing cover APIs and actual selected-song/work metadata. Verify success, missing cover, network error, retry, and stale response cancellation.
-9. Reproduce the EMQ/MIX/other control delay and hidden-background modal. Remove the works-catalog toggle and ensure every mode remains song-first, including persisted mode state.
-10. Align the top black frame/search and bottom blue line/player against IMAGE1–IMAGE5 at fixed resolutions. Capture screenshots and report measured bounds/pixel differences; do not claim pixel similarity without images.
-11. Adapt recovered Candidate 82 tests to current requirements and assemble the 26-case regression suite. Record PASS/FAIL/NOT RUN/BLOCKED individually.
-12. Update validation report and status docs after each meaningful stage. Attempt HTML upload only when the candidate is ready for review, then fetch remote bytes/metadata and verify exact version, size, and SHA-256. GitHub HTML delivery remains NOT VERIFIED.
+1. Preserve Candidate 178 as recovery baseline; Candidate 207 and 209 are immutable checkpoints. Candidate 208 is rejected and must not be used as a source.
+2. Establish a browser test path for the 9.3 MB HTML that can run beyond 45 seconds and permits persistence testing. Do not count syntax checks as UI acceptance.
+3. Verify Candidate 209 top frame and search/filter behavior at 2555×1438 and 1920×1080. Confirm typing filters actual song rows and result count.
+4. Verify row click and wheel selection, centered geometry, selected-row equal top/bottom width, auto-play, random seek after metadata, and no unintended playback from clicking action controls.
+5. Verify inline tag, familiarity and blacklist actions against the existing data layer, including persistence after reload.
+6. Complete the requested shared import workspace for AniList/MAL/VNDB without losing any importer.
+7. Implement a useful batch organization workflow for song records: select visible/filter results, batch add/remove custom-list membership, familiarity, tags and blacklist, with counts and safe confirmation.
+8. Diagnose and fix actual animation cover loading/fallback/retry using the existing song/work metadata. Reproduce and fix EMQ/MIX delay and hidden background modal at the root cause.
+9. Rebuild the app icon with a clear white outline and internal depth as a separate visual step.
+10. Compare Candidate209 screenshots against IMAGE1–IMAGE5 at fixed viewport sizes; record measured bounds and pixel differences. Fix top frame, selected card stack, bottom blue line/black region, player alignment between Back and learning-stat entry, and workspace popover design based on evidence.
+11. Adapt recovered Candidate82 tests to current requirements and run a mapped 26-case regression suite, with each case PASS/FAIL/NOT RUN/BLOCKED.
+12. Update report/status docs after each meaningful verified stage. Upload HTML only after meaningful review readiness, then read it back and verify exact version, size, SHA-256. Current HTML upload is NOT VERIFIED.
