@@ -31,7 +31,7 @@
   },
   "github": {
     "branch": "amq-candidate228-direct-batch-api-extraction-20261024",
-    "docs_committed": false,
+    "docs_committed": true,
     "html_uploaded": false,
     "remote_html_sha256_verified": false
   },
