@@ -2,8 +2,8 @@
 
 - HTML：`amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`
 - 版本：`v82.85.76-candidate262-shared-workspace-design-system-20261024`
-- 大小：9,360,706 bytes
-- SHA-256：`6f773fd616d91749304a42785f5b19faa6c3165fa59894ee4080074d911092b9`
+- 大小：9,361,057 bytes
+- SHA-256：`d54d2a9ce82486fb459fc232233a0049e2ec49cb866300fcee9888ff9bb108f5`
 - 父版本 Candidate261 SHA-256：`b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`
 - 修改：共用工作區卡片、輸入框、下拉選單、按鈕、狀態訊息、間距及響應式規則整合至既有正式樣式區塊；移除重複的清單匯入 CSS；作品批次樣式只保留結構規則。
 - 保留：歌曲批次、作品批次、清單匯入的獨立操作與資料流程。三個匯入來源仍各有「匯入公開清單」及「移除本機清單」兩個操作。
