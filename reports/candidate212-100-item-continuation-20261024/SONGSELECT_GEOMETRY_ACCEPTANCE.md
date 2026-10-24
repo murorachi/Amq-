@@ -53,3 +53,16 @@ The two full screenshots have different song content and scene imagery, so a raw
 - FAIL: current candidate does not meet the 7.5-card viewport / half-card bottom target.
 - NOT RUN: fixed-region masked pixel comparison against the osu!stable screenshot.
 - BLOCKED: native file launch and persistent-origin browser testing (`ERR_BLOCKED_BY_ADMINISTRATOR`).
+
+## Follow-up CSS-only 7.5-card prototype (2026-10-24)
+
+The measured owner is the final Candidate210 Song Select rule. Its clamp(130px,10.5vh,160px) is applied to flex-basis, height, min-height and max-height; at a 1080 px viewport it resolves to 130 px because of the minimum.
+
+A disposable fixture changed only that final row-size token to clamp(100px,10.2vh,130px) in those four declarations. No candidate HTML was modified.
+
+- Baseline: tracklist x=1180.80, y=109.97, width=734.19, height=830.13 px; 7 rows intersect the viewport and the bottom row is about 33% visible.
+- PASS (prototype): row height 110.156 px; 8 rows intersect the viewport, with about 54.6% of the bottom row visible, or approximately 7.55 cards.
+- PASS (prototype): hover movement remains 3 px left and selected movement remains 7 px left; clicking still updates the selected-song class and side information.
+- PASS (prototype): no page errors in the geometry and interaction fixtures.
+- NOT RUN: full-screen fixed-reference pixel comparison. The currently available image.png is a results/leaderboard screen and osu_reference_image4.png is only a 1648×53 toolbar crop, not a Song Select reference. The pinned official osu!stable Song Select image has not yet been retrieved as a local binary.
+- Integrity limit: the readable reconstruction is 26 bytes shorter than recorded Candidate212. Do not apply the CSS change to a release until byte-preserving source access is restored.
