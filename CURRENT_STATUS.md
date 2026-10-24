@@ -117,3 +117,11 @@ Continue the 100-item plan using the reconstructed source only for analysis/prot
 - 保留作品批次 `quicktools`、歌曲批次 Candidate210 runtime、VNDB handler 與資料 schema。
 - PASS：65 個 JS blocks；108 CSS blocks 無 parse errors；10/10 靜態斷言。Browser interaction NOT RUN，Chromium 不可用。
 - GitHub HTML 上傳與遠端 SHA 驗證仍 BLOCKED，未宣稱完成。
+
+
+## Candidate223：quicktools 依賴歸屬稽核（2026-10-24）
+- 工作起點維持 Candidate222，不修改 HTML：9,348,268 bytes，SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- 完成 quicktools 16 個主要 DOM 控制項盤點，0 個缺失；`applyBulkPracticeAction` 定義 1 個、正式 click binding 1 個。
+- 確認作品狀態、歌曲熟悉度、待聽佇列、自訂清單、手動補強、作品黑名單及 SRS 資料範圍不同，保留分離 owner。
+- 主要整合候選：選取模式／CSS 狀態同步、catalog/watchlist 清除選取語意；需先完成瀏覽器互動驗收。
+- PASS：靜態 owner audit。Browser interaction NOT RUN（Chromium 不可用）。本階段沒有製造無意義的 HTML 版本。
