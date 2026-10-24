@@ -3,7 +3,7 @@
 - Recovery baseline remains Candidate 178 because Candidate 205 was unavailable. Candidate 207 is the direct source for this working checkpoint. Candidate 208 remains rejected; Candidate 209 exists as a rejected experimental artifact and was not overwritten.
 - Candidate 207 remains unchanged: 9,310,496 bytes; SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
 - Candidate 210 local working artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html`.
-- Candidate 210 size: 9,345,506 bytes. SHA-256: `e02a86131053d4f98bfba82d1c5c907eb33ef3a5f72048899303761ef4df5ef6`.
+- Candidate 210 size: 9,345,507 bytes. SHA-256: `4189553ebd65d3ee81d239fd5e20c651cc783532d360bce8d79e25fb53473044`.
 - Changes in the working checkpoint: dark/blue top frame; preserved actual search input; removed Song Select works-catalog toggle and Singer primary mode; compact song rows without row-level “更多”; dock song actions; centered wheel/keyboard selection, autoplay and random seek hooks; async row-cover attempts; shared AniList/MAL/VNDB import hub; song batch workspace for familiarity/tags/blacklist and work-level custom-list membership; AMQ-style white-outline bottom-right icon; scoped cover observer to the tracklist.
 - Static validation PASS: 68 executable inline JavaScript blocks pass `node --check`; CSS parser reports zero errors across 107 style blocks / 2,745 qualified rules.
 - Chromium acceptance BLOCKED: this environment times out even on `about:blank`; native UI behavior is not verified. Do not treat this as proof that the application itself is frozen.
