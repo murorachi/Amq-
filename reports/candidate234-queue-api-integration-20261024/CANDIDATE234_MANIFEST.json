@@ -1,0 +1,30 @@
+{
+  "version": "v82.85.48-candidate234-queue-api-integration-20261024",
+  "baseline": {
+    "file": "amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html",
+    "bytes": 9366806,
+    "sha256": "ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45"
+  },
+  "artifact": {
+    "file": "amq_learning_tool_v82_85_48_candidate234_queue_api_integration_20261024.html",
+    "bytes": 9368097,
+    "sha256": "16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641"
+  },
+  "rollback": {
+    "sha256": "ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45",
+    "byte_identical_to_baseline": true
+  },
+  "changes": [
+    "queueSelectedBtn dispatches to official batch API applyQueue",
+    "deduplication, storage readback, and in-memory rollback on failure"
+  ],
+  "tests": {
+    "static": "PASS",
+    "queue_api_unit": "PASS",
+    "full_page_browser": "BLOCKED",
+    "native_reload_persistence": "NOT RUN"
+  },
+  "storage_schema_changed": false,
+  "old_catalog_batch_ui_removed": false,
+  "github_html_uploaded": false
+}
