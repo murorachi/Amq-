@@ -108,4 +108,4 @@
 - PASS：67/67 JS syntax、109 CSS blocks 0 parser errors、292/292 initial IDs unique、四個移除名稱零引用；受控 storage 下 9,516 部作品與 watch/song/list-add/weak-add/invalid/empty 操作測試通過；三個舊按鈕皆已確認走共享 API；0 pageerror、0 console error。
 - BLOCKED：原生 file://／localhost／reload persistence 仍受 Chromium managed URLBlocklist 阻擋。NOT RUN：四工作區完整 E2E、真實音訊、live API、多人、osu!stable pixel diff。
 - 舊圖鑑批次 markup 尚未刪除：仍有 watchlist selection、導覽定位、automation、scope summary 與 queueSelected 依賴。這是批次 3 的第一個子階段，不宣稱整個批次 3 完成。
-- Candidate233 HTML 尚未上傳 GitHub，遠端 HTML SHA 未驗證。詳細報告：`reports/candidate233-batch-api-centralization-20261024/STAGE_19_CANDIDATE233_BATCH_API_CENTRALIZATION.md`。
+- Candidate233 HTML 尚未上傳 GitHub，遠端 HTML SHA 未驗證；`git ls-remote` 因環境 DNS 無法解析 github.com 而失敗。詳細報告：`reports/candidate233-batch-api-centralization-20261024/STAGE_19_CANDIDATE233_BATCH_API_CENTRALIZATION.md`。
