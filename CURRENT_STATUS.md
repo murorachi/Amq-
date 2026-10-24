@@ -139,3 +139,12 @@
 - BLOCKED：Playwright／Chromium 完整頁面互動未取得有效結果；原生 file URL／reload 仍受 managed URLBlocklist 限制。NOT RUN：瀏覽器清單 CRUD、durable reload、真實音訊、即時 API、多人、像素比對。
 - Candidate252 是本機候選，尚未驗收為正式基準；GitHub 分支目前只存報告／manifest／測試狀態，HTML 尚未上傳，遠端 HTML SHA 未驗證。
 - 批次三仍未完成；不得開始批次四。報告：`reports/candidate252-batch3-legacy-panel-removal-20261024/STAGE_25_CANDIDATE252_BATCH3_LEGACY_PANEL_REMOVAL.md`。
+
+
+## Candidate255 最後一組 quicktools 殘留引用清理（2026-10-24）
+- Candidate254 重新掃描發現 batch-tools 自動化仍等待已刪除的 quicktools，Song Select 動態掛載清單也仍含 quicktools；Candidate255 已修正這兩處。
+- Candidate255 本機候選：`amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html`，9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- Candidate254 回滾檔 SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
+- PASS：67 JS blocks syntax、109 CSS blocks parse、272 DOM IDs unique；16 個已刪除控制項／初始化／Observer 名稱的殘留引用均為 0；靜態斷言 PASS。
+- BLOCKED：Playwright opaque-origin storage denial，兩個 page errors、1 個 console error；完整應用程式 runtime 不可視為 PASS。NOT RUN：完整工作區 E2E、CRUD／reload persistence、音訊／線上 API／多人／像素比對。
+- Candidate255 HTML 尚未上傳 GitHub；遠端 SHA 未驗證。報告：`reports/candidate255-last-quicktools-reference-cleanup-20261024/STAGE_26_CANDIDATE255_LAST_QUICKTOOLS_REFERENCE_CLEANUP.md`。批次三仍未完成。
