@@ -27,6 +27,7 @@
 - Custom-list CRUD/isolation: in-memory Chromium tests pass for create two lists, unique IDs, duplicate-add deduplication, removing from one list without affecting another, rename preserving ID, and deletion preserving other-list membership. Native reload persistence is not verified; see `CUSTOM_LIST_ISOLATION_ACCEPTANCE.md`.
 - Four-workspace lifecycle: direct adapter tests pass for mounting and restoring the existing custom-list, learning-center, quiz and multiplayer nodes inside one shared panel. This does not validate navigation reachability; the multiplayer entry is missing from the visible dock. See `FOUR_WORKSPACE_PANEL_ACCEPTANCE.md`.
 - Observer lifecycle: after one-time lazy initialization, counts remain stable across 12 workspace open/close transitions. The first custom-list mount adds 2 MutationObservers and 1 IntersectionObserver observing 180 targets; ownership/lifetime remains unproven, and active observers remain. See `OBSERVER_MOUNT_CYCLE_ACCEPTANCE.md`.
+- Import error handling: mocked rate-limit, malformed-response, offline and VNDB unauthorized paths pass. Existing source has no explicit timeout wrapper; a disposable shared `AbortController` timeout helper passes timeout tests for AniList, MAL and both VNDB request stages. See `IMPORT_API_ERROR_ACCEPTANCE.md`; no source change was applied.
 ## Verified analysis findings
 - Static JS: 68 executable inline blocks pass `node --check`; two payload blocks are excluded.
 - CSS: 108 style blocks parse without errors in the current tinycss2 scan.
