@@ -1,3 +1,12 @@
+# Latest UI pilot checkpoint (2026-10-24)
+
+- Working source / rollback remains Candidate256: 9,355,585 bytes, SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`.
+- Candidate257 is an experimental preview only: `amq_learning_tool_v82_85_71_candidate257_unified_public_list_import_ui_20261024.html`, 9,356,282 bytes, SHA-256 `4769f24b643f3a044e75795b36222dfa3e7681232d0d93db4300b09e475acb6a`. Do not treat it as an accepted baseline until native-browser review and real API regression are completed.
+- Candidate257 UI pilot scope: one shared left-workspace page with AniList, MyAnimeList, VNDB, two actions per provider (public-list import and remove local imported data). JS/CSS/DOM static checks and isolated UI wiring PASS; full-page Playwright BLOCKED by timeout; native browser and real API checks NOT RUN; remote HTML upload/hash NOT VERIFIED.
+- Rollback remains Candidate256; original files were not overwritten.
+
+---
+
 # BASELINE — AMQ Song Select cleanup (updated 2026-10-24)
 
 ## Current candidate for Batch 3 continuation
