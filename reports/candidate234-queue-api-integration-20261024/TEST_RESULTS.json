@@ -1,0 +1,40 @@
+{
+  "javascript_syntax": {
+    "status": "PASS",
+    "blocks": 67,
+    "errors": 0
+  },
+  "css_parse": {
+    "status": "PASS",
+    "blocks": 109,
+    "errors": 0
+  },
+  "dom_ids": {
+    "status": "PASS",
+    "count": 292,
+    "duplicates": 0
+  },
+  "queue_api_unit": {
+    "status": "PASS",
+    "assertions": [
+      "empty selection",
+      "multi-work add",
+      "cross-work song ID deduplication",
+      "repeat call idempotency",
+      "simulated storage failure restores in-memory queue"
+    ]
+  },
+  "full_page_browser_runtime": {
+    "status": "BLOCKED",
+    "reason": "opaque-origin localStorage shim was not reliable; Chromium managed URLBlocklist blocks file:// and localhost"
+  },
+  "native_reload_persistence": {
+    "status": "NOT RUN"
+  },
+  "real_audio_live_api_multiplayer_pixel_diff": {
+    "status": "NOT RUN"
+  },
+  "github_html_upload_remote_sha": {
+    "status": "NOT VERIFIED"
+  }
+}
