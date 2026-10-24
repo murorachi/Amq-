@@ -24,6 +24,7 @@
 - Batch selection state defect: the Candidate210 row factory always creates unchecked batch checkboxes while the batch controller's selection Set persists across search-triggered rerender. A disposable prototype with one outer-scope Set and checked-state rendering passes repeat-action assertions; see `BATCH_SELECTION_ACCEPTANCE.md`. Not applied to any candidate because the original source bytes remain unavailable.
 
 - Imported-list removal: in-memory Chromium tests pass for AniList and MAL source-specific watch-status removal and VNDB local-list-key removal, including confirmation prompts and preservation of manual/unrelated data. This does not validate live imports or native persistence; see `IMPORT_REMOVAL_ACCEPTANCE.md`.
+- Custom-list CRUD/isolation: in-memory Chromium tests pass for create two lists, unique IDs, duplicate-add deduplication, removing from one list without affecting another, rename preserving ID, and deletion preserving other-list membership. Native reload persistence is not verified; see `CUSTOM_LIST_ISOLATION_ACCEPTANCE.md`.
 ## Verified analysis findings
 - Static JS: 68 executable inline blocks pass `node --check`; two payload blocks are excluded.
 - CSS: 108 style blocks parse without errors in the current tinycss2 scan.
