@@ -54,3 +54,11 @@
 - Discard any disposable prototype and continue from the unchanged Candidate212 artifact.
 - Candidate207 is the earlier recovery source if the user-authorized rollback is required.
 - Preserve all original Library artifacts, localStorage/sessionStorage keys, IndexedDB schemas/data, learning records, custom-list data and Blob backups. Do not promote Candidate216/218 without their own acceptance.
+
+
+## Candidate210 UI-baseline decision (2026-10-24)
+- User's preferred UI reference is Candidate210. Preserve its visual hierarchy and interaction geometry during future cleanup; do not silently substitute the appearance of Candidate212 or a later experiment.
+- Candidate210 recorded artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html`, 9,347,601 bytes, recorded SHA-256 `92f3e6353bd9e9d72d148037cd710818e25d514ce6c2ed57642e2ab248f6ec5f`.
+- Raw-byte materialization for Candidate210 is currently blocked. Its text export is incomplete and hash-mismatched; it is not a source file and must not be used for production builds.
+- Candidate212 remains historical audit evidence, not an automatic substitute for Candidate210's UI or code. Candidate-specific findings must be source-diffed before transfer.
+- Detailed checkpoint: `reports/candidate210-ui-cleanup-audit-20261024/BASELINE.md` and `CLEANUP_LEDGER.md`.
