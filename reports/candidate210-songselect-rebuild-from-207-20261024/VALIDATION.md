@@ -7,8 +7,8 @@
 - Parent size: 9,310,496 bytes.
 - Parent SHA-256: `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
 - Working artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html`
-- Working size: 9,345,507 bytes.
-- Working SHA-256: `4189553ebd65d3ee81d239fd5e20c651cc783532d360bce8d79e25fb53473044`.
+- Working size: 9,345,508 bytes.
+- Working SHA-256: `d91fc25f1fd0f65214412483dca7c697a12f88675d57b2186575ac3be81369f9`.
 - Candidate 207 remains unchanged. Candidate 208 and Candidate 209 were not used as sources.
 
 ## Changes in this checkpoint
@@ -25,7 +25,8 @@
 ## Validation
 - **PASS, static JavaScript syntax:** 68 executable inline JavaScript blocks checked with `node --check`; 68 passed, 0 failed. Two embedded data/payload blocks were excluded.
 - **PASS, CSS syntax:** 107 style blocks, 2,745 qualified rules; `tinycss2` reported 0 parse errors.
-- **PASS, static artifact checks:** one `</body>` and one `</html>` closing tag; Candidate 210 metadata is present; the new row factory does not emit the `更多` disclosure.
+- **PASS, static artifact checks:** doctype is first; one `</body>` and one `</html>` closing tag; Candidate 210 metadata is present; the new row factory does not emit the `更多` disclosure.
+- **FAIL, recoverable HTML parser check:** `lxml` reports two structural errors at the inherited `</head><body>` boundary around source line 324. Candidate 207 reports the same errors. This legacy document-structure issue has not been root-cause corrected in this checkpoint.
 - **BLOCKED, browser acceptance:** Chromium did not complete even `about:blank` within 15 seconds in the current execution environment; Candidate 207 and 210 file-navigation attempts also timed out. This does not prove the application itself is frozen.
 - **NOT RUN:** actual click-through, localStorage persistence after reload, four-workspace lifecycle regression, live API/import tests, audio playback, cover failure recovery, fixed-resolution screenshots, pixel/geometry comparison, and narrow viewport behavior.
 
