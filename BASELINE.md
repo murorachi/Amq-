@@ -177,3 +177,9 @@
 - Rollback is byte-identical Candidate228: `amq_learning_tool_v82_85_46_candidate228_rollback_before_candidate229_20261024.html`, SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`.
 - Candidate229 changes visible batch status reporting only: success/cancel/failure outcomes now consume structured API results. Existing data keys/schema unchanged. No legacy quicktools code was deleted because caller references remain.
 - Static JS syntax PASS (67 executable blocks). Runtime result handling BLOCKED by opaque-origin localStorage access failure; native file/reload persistence BLOCKED by managed URLBlocklist. GitHub branch holds documentation only; HTML upload and remote HTML SHA verification remain incomplete.
+
+
+## Candidate230 runtime/dependency audit checkpoint (2026-10-24)
+- Code baseline remains Candidate229: 9,366,832 bytes; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`.
+- No HTML edit was justified: runtime storage tests are blocked by opaque-origin localStorage access, and static audit found active callers for legacy batch controls. Candidate229 is unchanged and remains the only current code candidate.
+- Candidate228 rollback remains the known parent rollback artifact; Candidate229 HTML has not been uploaded to GitHub, and remote HTML SHA is not verified.
