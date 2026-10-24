@@ -40,6 +40,8 @@
 - NOT RUN: owner-instrumented observer/timer counts across route teardown.
 - Candidate218's idempotent tab assignment is a defensive change; the normal initial call graph did not reproduce the claimed duplicate-binding root cause. Browser repeated-mount acceptance remains incomplete.
 
+- Workspace-entry review added to `reports/candidate212-100-item-continuation-20261024/DEPENDENCY_EDGE_INVENTORY.md`: `動畫圖鑑` is live core catalog functionality and should remain an internal mode; `資料品質` is a dead relabel script with no matching live dock button; `批次整理` is live and must be integrated before standalone removal; the four-workspace dock is incomplete because the current markup exposes lists, learning and quiz but no multiplayer entry.
+
 ## Engineering disposition
 - No executable code has been deleted in this continuation. Duplicate names/IDs and CSS rules alone are not proof of dead code.
 - Keep custom-list data keys/schema, learning records, IndexedDB/Blob data, AMQ/EMQ/MIX selection/audio, Song Select route/list/covers/player, and required fallback behavior until dependent behavior is verified.
