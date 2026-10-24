@@ -51,3 +51,13 @@
 - Dependency audit: legacy batch controls still have live references. No legacy markup/listeners/observers/CSS were deleted. Next: extract explicit business APIs, migrate bridge, then remove only proven-unreferenced controls.
 - Stage 14 report: `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_14_REGRESSION_AND_DEPENDENCY_AUDIT.md`.
 - HTML is not uploaded to GitHub; remote HTML SHA remains unverified.
+
+
+## Candidate228 direct batch API extraction (2026-10-24)
+- Parent Candidate227: 9,360,586 bytes; SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`.
+- Candidate228: 9,364,981 bytes; SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`. Candidate227 rollback is byte-identical to parent.
+- Added explicit-ID `__aniBatchBusinessAPIv228` for watch status, song familiarity and practice actions; bridge no longer clicks legacy hidden controls. Existing keys/schema retained.
+- PASS: 67 executable JS blocks, 109 CSS blocks; Playwright shim tests for all six watch statuses, four familiarity states, list add/remove, weak set, blacklist, SRS, invalid/empty/missing-list and storage-failure rollback; 0 page errors.
+- BLOCKED: native file URL and durable reload persistence due to managed Chromium URLBlocklist. NOT RUN: real audio, live APIs, multiplayer, pixel comparison and accepted >300-item path.
+- Old quicktools UI/listeners/CSS were not removed because references remain. Next: migrate all visible actions to API results, complete dependency audit, then delete only proven-unreferenced code.
+- Report: `reports/candidate228-direct-batch-api-extraction-20261024/STAGE_15_DIRECT_BATCH_API_EXTRACTION.md`. Candidate228 HTML is not uploaded to GitHub; remote HTML SHA not verified.
