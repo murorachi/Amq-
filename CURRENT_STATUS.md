@@ -215,3 +215,13 @@
 - 持久化實測：`aniCustomPracticeListsV1` 的暫存清單跨 reload 保留，並由 UI 刪除清理成功。
 - NOT RUN：外部 API 功能驗收。Resource Timing 僅顯示 `https://cdn.animenewsnetwork.com/encyclopedia/api.xml` 請求，不能證明 API 回應解析、匯入、去重或錯誤恢復成功。
 - Candidate256 SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`，9,355,585 bytes。本機候選已通過上述驗收，但仍不是正式基準；GitHub HTML 上傳及遠端 SHA 核對未完成。Batch 3 仍未完成。
+
+
+## Candidate259 工作區橫向排版與搜尋整合（2026-10-24）
+- 候選：`amq_learning_tool_v82_85_73_candidate259_workspace_horizontal_layout_search_20261024.html`；9,360,172 bytes；SHA-256 `28f940dbc8ce2c1b4de0dbf4734d9fe7b6d98d7ecef6149652849b76aaebd370`。
+- 以 Candidate258 為父版本（SHA-256 `82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`），未覆寫 Candidate258 或 Candidate256。
+- 已修改共用工作區定位、卡片版面、清單同步三來源橫向卡片，刪除重複 Username 初始提示；歌曲批次整理新增搜尋欄，將搜尋同步到既有搜尋框並篩選目前已載入歌曲列，保留已選歌曲 ID。
+- PASS：67 個可執行 inline JS 區塊語法檢查；110 個 CSS 區塊解析；273 個 DOM ID 無重複。
+- BLOCKED：Playwright/Chromium 實際瀏覽器驗收遭環境 `net::ERR_BLOCKED_BY_ADMINISTRATOR` 阻擋，未驗證實際畫面定位、按鈕操作與篩選後選取同步。
+- NOT RUN：真實 AniList/MAL/VNDB API 匯入、刪除、去重、錯誤恢復。
+- NOT VERIFIED：GitHub 遠端 HTML 上傳與 SHA-256 讀回。Batch 3 仍未完成，不得開始 Batch 4。
