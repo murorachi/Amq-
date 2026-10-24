@@ -70,3 +70,12 @@
 - PASS: 67 executable inline JS blocks pass `node --check`; static assertions pass. BLOCKED: runtime result handling because the opaque-origin localStorage shim failed; native file URL and durable reload are blocked by managed Chromium URLBlocklist. NOT RUN: actual UI confirmation paths, audio, live APIs, multiplayer, pixel comparison.
 - Legacy quicktools references remain active; no markup/listener/observer/CSS deletion was performed.
 - Report: `reports/candidate229-workspace-result-handling-20261024/STAGE_16_WORKSPACE_RESULT_HANDLING.md`. Candidate229 HTML is local only; GitHub HTML upload and remote SHA verification are not complete.
+
+
+## Candidate230 執行驗收與依賴稽核（2026-10-24）
+- Candidate229 本機基準重新核對：9,366,832 bytes，SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`。
+- PASS：Playwright `page.set_content()` 初始化完成，標題正確，批次 API 與 bridge 存在。
+- BLOCKED：opaque-origin localStorage 存取失敗；本輪沒有把批次 API 儲存操作或可見 UI 流程列為 PASS。原生 file URL／reload 仍受 Chromium managed URLBlocklist 阻擋。
+- 靜態依賴稽核確認 `#quicktools`、`#bulkPracticeAction`、`#bulkCustomList`、`#applyBulkPracticeAction` 仍有實際 handler、資料更新及導航／刷新呼叫。沒有證據支持整組刪除，因此本階段未修改 HTML。
+- Candidate230 為文件稽核檢查點，不另造無程式差異的 HTML 版本。HTML 尚未上傳 GitHub，遠端 SHA 未驗證。
+- 報告：`reports/candidate230-runtime-dependency-audit-20261024/STAGE_17_RUNTIME_ACCEPTANCE_AND_DEPENDENCY_AUDIT.md`。
