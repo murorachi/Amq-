@@ -38,6 +38,10 @@
       "status": "PASS"
     },
     {
+      "name": "Analytics and learning-plan shared token mapping",
+      "status": "PASS"
+    },
+    {
       "name": "Native browser DOM/render/click acceptance",
       "status": "BLOCKED",
       "reason": "Chromium Playwright navigation to file:// and local HTTP returned net::ERR_BLOCKED_BY_ADMINISTRATOR before DOM access"
