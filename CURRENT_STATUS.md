@@ -29,5 +29,13 @@
 - NOT RUN: computed styles, route switching, Dock lifecycle, VNDB/song-batch interactions, persistence reload, external API behavior, audio, multiplayer, screenshot/pixel comparison.
 - No functional behavior is claimed as browser-verified.
 
+## Stage 70 — uploaded-copy verification and browser recheck
+- PASS: User-reuploaded Candidate283 matches the recorded artifact: 9,379,765 bytes; SHA-256 `aa1af13d2ff9419968ba92f382c75e0fd65d0ae4b72957331a1b488f65d74a0b`.
+- PASS: 67/67 executable inline JavaScript blocks pass `node --check`.
+- Finding: root `data-amq-candidate="280"` remains while title/build comment identify Candidate283. The attribute occurs once and has no runtime lookup in the inline source; external/tooling meaning is NOT VERIFIED. Preserved the artifact unchanged rather than guessing.
+- BLOCKED: Chromium navigation to the uploaded local file returns `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
+- BLOCKED: cloud-browser acceptance and remote size/SHA verification; Candidate283 HTML is still not remotely accessible.
+- NOT RUN: routes, Dock lifecycle, list persistence, imports, API recovery, audio, multiplayer and pixel comparison.
+
 ## Next task
 Secure a supported upload/HTTPS hosting path for Candidate283, verify remote bytes and SHA-256, then run real cloud-browser acceptance before further CSS/JS refactors.
