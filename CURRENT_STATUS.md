@@ -42,3 +42,12 @@
 - 追加 PASS：切到歌曲批次面板時歌曲選取為 0，作品選取仍維持原集合。
 - pageerror 0、console error 0。以上均為記憶體 shim 測試；持久化仍 BLOCKED。
 - 待測：看番狀態所有分支、超過 300 部作品的確認／取消分支、完整資料持久化。
+
+
+## Candidate227 Stage 14 regression and dependency audit (2026-10-24)
+- Candidate227 remains unchanged: 9,360,586 bytes; SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`.
+- PASS: page.set_content init/bridge/data count; watch status variants completed/current/planning/paused/dropped/none; empty selection safety; 301-item confirmation and cancel; selection retention across repeated panel entry.
+- BLOCKED: this round's opaque-origin localStorage shim failed, so persistence conclusions are invalid. Native file URL and reload persistence remain blocked by Chromium managed URLBlocklist.
+- Dependency audit: legacy batch controls still have live references. No legacy markup/listeners/observers/CSS were deleted. Next: extract explicit business APIs, migrate bridge, then remove only proven-unreferenced controls.
+- Stage 14 report: `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_14_REGRESSION_AND_DEPENDENCY_AUDIT.md`.
+- HTML is not uploaded to GitHub; remote HTML SHA remains unverified.
