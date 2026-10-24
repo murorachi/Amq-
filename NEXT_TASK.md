@@ -7,6 +7,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 - PASS: custom-list isolation test verifies unique list IDs, deduplicated membership, per-list removal isolation, rename preserving IDs, and deleting one list without damaging another. Native reload persistence remains blocked; see `CUSTOM_LIST_ISOLATION_ACCEPTANCE.md`.
 - PASS (adapter-level only): custom-list, learning-center, quiz and multiplayer panels mount and restore through one shared panel without leaving Song Select. FAIL / incomplete user flow: the visible dock has no multiplayer entry. See `FOUR_WORKSPACE_PANEL_ACCEPTANCE.md`.
 - PASS (after warm-up): observer instance/active counts stayed stable across the remaining 11 of 12 workspace transitions. First lazy mount adds two MutationObservers and one IntersectionObserver observing 180 targets; exact owner and teardown are still unverified. See `OBSERVER_MOUNT_CYCLE_ACCEPTANCE.md`.
+- PASS: mocked AniList/MAL/VNDB 429, malformed response, offline and VNDB 401 errors produce recoverable status. GAP: baseline import paths lack explicit timeout handling. Disposable shared timeout helper passes delayed-request abort/UI restoration tests; port only after byte-preserving source access is restored. See `IMPORT_API_ERROR_ACCEPTANCE.md`.
 ## Latest confirmed results
 - PASS: 68 executable inline JavaScript blocks from the readable Candidate212 export passed Node syntax checking; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with zero stylesheet/declaration errors in the current scan.
