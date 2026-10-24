@@ -1,7 +1,19 @@
+# BASELINE — AMQ Song Select cleanup (updated 2026-10-24)
+
+## Current audit baseline confirmed by user
+- Candidate231 is confirmed by the user as the latest version for this work.
+- Local artifact: `amq_learning_tool_v82_85_46_candidate231_work_batch_entry_integration_20261024.html`.
+- Size: 9,367,325 bytes.
+- SHA-256: `74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf`.
+- Candidate231 is available as a local artifact; it has NOT been uploaded to the Candidate231 GitHub branch and no remote HTML hash has been verified. Do not imply otherwise.
+- Candidate229 rollback copy remains local and byte-identical to its recorded parent: 9,366,832 bytes; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`.
+- Candidate232 is documentation/audit only; no HTML/CSS/JS or data schema changed.
+
+## Historical baseline record (prior to user's Candidate231 confirmation)
 # BASELINE — AMQ Song Select cleanup (2026-10-24)
 
 - Current 100-item checklist status: `reports/candidate212-100-item-continuation-20261024/100_ITEM_PROGRESS.md`. This matrix does not imply completion; source integrity and native-browser constraints remain blockers.
-## User-authorized working baseline
+## Previously recorded user-authorized working baseline (historical record; superseded for this audit by Candidate231 confirmation)
 - Candidate212: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_212_mutation_loop_fix.html`; recorded size 9,352,632 bytes; recorded SHA-256 `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`.
 - Candidate207 recovery source: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_207_home_menu_initial_state_fix.html`; recorded size 9,310,496 bytes; recorded SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
 - Candidate216 experimental artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_216_remove_unreferenced_candidate_marker.html`; recorded size 9,352,541 bytes; recorded SHA-256 `70d0b99e069d34bba174f278d8e09c6c3f508841aa3ec25d014f0970e30ad05f`.
