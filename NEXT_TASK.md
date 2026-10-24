@@ -26,3 +26,12 @@
 5. 先在 page.set_content + 記憶體 storage shim 實測可見入口、選取／取消、篩選後選取狀態、套用結果與資料粒度隔離。若 API／狀態契約仍不明，繼續追查，不做猜測性 UI。
 6. 通過替代測試後才移除已證明無用的隱藏入口、監聽器、CSS 和舊 UI；每次修改產生獨立版本及回滾檔。
 7. 最後重試原生 file://、持久化 reload、真實音訊、API 與完整流程；若 URLBlocklist 仍阻擋，保留 BLOCKED 狀態並回報。
+
+
+## P1：下一步，作品批次整理可達性與資料契約
+1. Candidate226 僅修正歌曲批次入口標籤，作品批次仍未完成；不可將此階段視為整體批次管理驗收。
+2. 以 Candidate226 本機 HTML 為待測候選，先重算 SHA-256，再確認 C99 Song Select 卡片／歌曲列的作品 ID、歌曲 ID 和選取狀態。
+3. 為作品批次明確定義作品 ID 集合；歌曲批次維持 Candidate210 歌曲 ID Set。作品清單加入／移除的影響範圍要清楚告知使用者，不得把歌曲層操作直接套用作品層。
+4. 追查 `#quicktools` 的實際控制器、`selectedAnime`、`applyBulkPracticeAction()` 及清單／弱點／黑名單／SRS 資料契約，設計最小可見入口並重用既有正式 API。
+5. 先做可見入口與選取範圍整合，再測篩選、選取持續性、每種操作資料隔離。只有通過後才刪除隱藏的重複入口／監聽器／CSS。
+6. 最後重試原生 file://、持久化 reload、真實音訊與 API；URLBlocklist 若仍阻擋，標記 BLOCKED，不得用 shim 冒充。
