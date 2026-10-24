@@ -291,3 +291,10 @@
 - 修正：歌曲批次面板開啟時不再清空既有歌曲選取。
 - Candidate256 的 JS/CSS/DOM、篩選、共用面板循環、歌曲選取保留及作品／歌曲選取隔離已在記憶體 shim 下 PASS。
 - Candidate256 原生瀏覽器持久化與外部 API NOT RUN；GitHub 正式 HTML 上傳與遠端 SHA-256 BLOCKED。Candidate256 尚未成為正式基準，Batch 3 未完成。
+
+
+## Candidate256 原生瀏覽器驗收結果（2026-10-24）
+- 候選：`amq_learning_tool_v82_85_70_candidate256_song_batch_preserve_selection_20261024.html`；9,355,585 bytes；SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- 使用者瀏覽器實測 PASS 7、FAIL 0、NOT RUN 1、BLOCKED 0。PASS 範圍包含初始化、內容面板切換、匯入入口、歌曲選取保留、作品／歌曲選取隔離、自訂清單原生 localStorage reload 持久化與 UI 清理。
+- 外部 API 實際功能仍 NOT RUN；只觀察到 Anime News Network `api.xml` Resource Timing，不視為 API 成功證據。
+- GitHub 正式 HTML 上傳與遠端 SHA-256 驗證尚未完成。Candidate256 尚未成為正式基準；Batch 3 未完成。
