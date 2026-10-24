@@ -92,3 +92,11 @@
 - Rollback Candidate220: 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`; byte-identical local copy confirmed.
 - Changes only add a work-level batch entry that routes to existing `quicktools`; song-level batch remains Candidate210 owner. No data schema changes.
 - Static tests PASS: 63 executable JS blocks; 108 CSS blocks; 7 assertions. Browser flow BLOCKED because Chromium binary is unavailable. Remote HTML upload/hash verification BLOCKED.
+
+
+## Candidate222 baseline checkpoint (2026-10-24)
+- Parent Candidate221：9,353,751 bytes；SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`。
+- Candidate222：9,348,390 bytes；SHA-256 `a765f6316284cd624632521306f45539d694c091b626c6a5f7c168e2c18a50e5`。
+- Change scope: remove unreachable `wsBatchListAdder` bridge markup/runtime/CSS only; retain work-level quicktools and song-level Candidate210 batch owners.
+- Rollback Candidate221 is byte-identical: 9,353,751 bytes; SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`.
+- Tests: 65 JS syntax PASS; 108 CSS blocks PASS; 10/10 static assertions PASS. Browser interaction NOT RUN. Remote HTML upload/hash verification BLOCKED.
