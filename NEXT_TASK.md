@@ -107,3 +107,13 @@
 8. 保留所有既有 storage keys/schema、AniList/MAL/VNDB、Candidate210 歌曲批次、場景背景/IndexedDB、AMQ/EMQ 與多人必要功能。
 9. 最後再處理原生 reload、音訊、live API、像素比對、單檔建置及 GitHub HTML 上傳/hash 驗證；目前環境受 URLBlocklist 阻擋時維持 BLOCKED，不得冒充 PASS。
 10. 本輪報告：`reports/candidate232-full-dependency-inventory-20261024/DEPENDENCY_AUDIT.md`。
+
+## Candidate234：繼續批次 3，遷移舊批次介面所有 caller（2026-10-24）
+1. 以本機 Candidate233 為候選重新核對 SHA-256 `7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32`，保留 Candidate231 rollback byte-identical copy。
+2. 盤點所有讀寫 `selectionHint`、`batchScopeSummaryV844`、`selectModeBtn`、`selectVisibleBtn`、`selectFilteredBtn`、`clearSelectionBtn`、`applyBulkWatchBtn`、`applyBulkSongBtn`、`queueSelectedBtn`、`bulkCustomList`、`applyBulkPracticeAction` 的 script block、導航攔截器、watchlist batch selector、CSS 與測試。
+3. 將作品選取狀態從舊 catalog `selectedAnime` 與新 workspace bridge 的耦合拆開，前提是先證明 watchlist 舊批次選取如何遷移；不得影響作品 ID 與歌曲 ID 隔離。
+4. 把 `queueSelectedBtn` 的加入待聽能力移到正式作品批次工作區／共享 API，保留確認、去重與 `aniPlayQueue_v1` 資料契約。
+5. 將所有自動化／導覽動作從定位舊控制項改為打開正式工作區或對應選項；保留不會自動替使用者執行資料修改的安全行為。
+6. 以實際 DOM/runtime caller 證據確認無剩餘依賴後，才刪除舊 catalog batch markup、專屬 listeners、CSS 與不再使用的 observer/refresh hooks；不得只隱藏。
+7. 每次遷移後執行 JS/CSS/ID 靜態檢查、controlled storage batch tests、工作區開關與 watchlist/清單回歸。原生 reload 仍 BLOCKED 時明確記錄。
+8. 更新報告後嘗試 GitHub HTML 上傳與遠端 SHA 驗證；若上傳能力受限，明確回報，不得聲稱完成。
