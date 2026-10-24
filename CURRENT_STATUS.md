@@ -148,3 +148,12 @@
 - PASS：67 JS blocks syntax、109 CSS blocks parse、272 DOM IDs unique；16 個已刪除控制項／初始化／Observer 名稱的殘留引用均為 0；靜態斷言 PASS。
 - BLOCKED：Playwright opaque-origin storage denial，兩個 page errors、1 個 console error；完整應用程式 runtime 不可視為 PASS。NOT RUN：完整工作區 E2E、CRUD／reload persistence、音訊／線上 API／多人／像素比對。
 - Candidate255 HTML 尚未上傳 GitHub；遠端 SHA 未驗證。報告：`reports/candidate255-last-quicktools-reference-cleanup-20261024/STAGE_26_CANDIDATE255_LAST_QUICKTOOLS_REFERENCE_CLEANUP.md`。批次三仍未完成。
+
+
+## Candidate255 批次三補充驗證（2026-10-24）
+- 最新本機候選 Candidate255：9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- PASS：67 JS blocks、109 CSS blocks、272 unique DOM IDs、16 個已刪除舊 UI／控制項／Observer／初始化識別字零殘留引用。
+- PASS：使用明確標示的測試用記憶體 storage shim 完成批次 UI 操作、16 種業務 API 動作、自訂清單 CRUD、看番範圍、獨立歌曲批次、匯入入口及路由切換。這不等於 durable persistence。
+- PASS：篩選 5 案例（空搜尋 9516／顯示 60、大小寫不敏感標題 85、1999 年份 139、原名 513、無結果 0），所有顯示結果均符合查詢，無 page errors；未重現篩選程式錯誤，故沒有做無證據的篩選補丁。
+- BLOCKED／NOT RUN：真實 reload 持久化、真實外部 API／音訊／多人／像素比對仍未完成；Chromium managed URLBlocklist 阻擋原生 file／localhost 測試。
+- GitHub 報告與測試文件已更新並需讀回驗證；Candidate255 HTML 未上傳，遠端 SHA 未驗證。批次三未完成。
