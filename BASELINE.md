@@ -203,3 +203,11 @@
 - 回滾副本：amq_learning_tool_v82_85_46_candidate229_rollback_before_candidate231_20261024.html，9,366,832 bytes；SHA-256 與 Candidate229 相同，已確認 byte-identical。原始 Candidate229 未修改。
 - 變更僅把主工作區作品批次入口接到既有 Candidate210 可見面板，並在掛載成功後才回報成功；不改資料 schema，不刪除仍有依賴的 quicktools 舊控制項。
 - 執行證據與限制見 reports/candidate231-work-batch-entry-integration-20261024/STAGE_18_WORK_BATCH_ENTRY_INTEGRATION.md。Candidate231 HTML 未上傳 GitHub，遠端 HTML hash 未驗證。
+
+
+## Candidate233 批次 API 集中化候選（2026-10-24，未驗收為正式基準）
+- 使用者確認的原始基準仍為 Candidate231：9,367,325 bytes；SHA-256 `74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf`。
+- Candidate233 是由本機 Candidate231 派生的工作候選，不取代原始基準：`amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html`，9,366,338 bytes；SHA-256 `7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32`。
+- Candidate231 byte-identical rollback copy：`amq_learning_tool_v82_85_46_candidate231_rollback_before_candidate233_20261024.html`，SHA-256 與 Candidate231 相同。
+- 修改範圍：刪除四個全 HTML 零引用私有 helper，並將舊圖鑑 watch/song/practice handlers 接到既有 `__aniBatchBusinessAPIv228`。未修改 storage keys/schema、CSS 或必要 UI。
+- Candidate233 尚未被使用者驗收為新正式基準；GitHub 分支只有報告與狀態文件，HTML 未上傳，遠端 HTML SHA 未驗證。
