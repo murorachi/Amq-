@@ -65,3 +65,13 @@
 5. Remove old markup/listeners/observers/CSS only when runtime and caller evidence proves they are unreachable; preserve AniList/MAL import and Candidate210 song-batch ownership.
 6. Retry native `file://`, durable reload and audio at the end; managed URLBlocklist currently blocks native navigation.
 7. GitHub branch currently contains documentation only. Do not claim Candidate228 HTML upload or remote SHA verification.
+
+
+## P1: Candidate230 batch workspace runtime acceptance and dependency audit (2026-10-24)
+1. Re-verify Candidate229 local artifact SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`; keep Candidate228 rollback byte-identical and untouched.
+2. Resolve the approved browser test-origin/storage limitation without changing managed Chromium policy. Re-run the visible workspace UI through the real result handler; if unavailable, mark runtime acceptance BLOCKED and do not claim PASS.
+3. Exercise confirmation accept/cancel, >300 work selection, each watch status, song familiarity, all practice actions, missing list, empty selection, storage failure, selection isolation and repeated open/close.
+4. Audit actual callers/wrappers of `#quicktools`, `bulkPracticeAction`, `bulkCustomList`, `applyBulkPracticeAction`, C99 import/VNDB/work-batch entry points, listeners and observers. Source-string counts alone are not deletion evidence.
+5. Remove legacy markup/listeners/observers/CSS only after the call graph and runtime tests prove no required path depends on them. Preserve AniList/MAL import and Candidate210 song-batch ownership.
+6. Retry native `file://`, durable reload and audio at the end; current managed URLBlocklist blocks navigation. Record BLOCKED if unchanged.
+7. GitHub Candidate229 branch currently has docs only. Do not claim HTML upload or remote SHA verification.
