@@ -80,3 +80,8 @@ A disposable fixture changed only that final row-size token to clamp(100px,10.2v
 
 - PASS: at all five tested viewports, the list exists, remains scrollable, and the document has no horizontal overflow or uncaught page errors.
 - Needs follow-up: at 390×844, the tracklist is only about 145 px wide and the bottom-row cue is only 7% visible. This is too narrow for a comfortable mobile Song Select UI despite technically passing scrollability. Treat this as a separate responsive-layout issue; do not distort the fixed 1920×1080 reference geometry to compensate.
+
+
+## Official reference lookup follow-up
+
+The official osu!wiki Client Interface page and its Song select image have now been located and visually inspected: https://osu.ppy.sh/wiki/en/Client/Interface. The rendered reference is approximately 1000×563 and shows the expected osu!stable Song Select structure. The binary at the exact pinned wiki commit/path (`ae2c6443a4264e5429ea7bcd2f3503be8a518a50`, `wiki/Client/Interface/img/song-selection.jpg`) could not be retrieved into the local test runtime, so exact source-revision confirmation and automated pixel diff remain NOT RUN. The live page is useful for visual grounding only and is not a substitute for the pinned binary.
