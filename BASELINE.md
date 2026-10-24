@@ -107,3 +107,12 @@
 - Candidate223 是依賴稽核文件階段，未修改 HTML，也沒有新的候選產物。
 - 16 個主要 quicktools DOM 控制項皆存在；`applyBulkPracticeAction` 定義及正式 click binding 各 1 個。
 - 不同資料粒度維持分離；跨視圖 selection handler 待瀏覽器驗收後再決定整合。
+
+
+## Candidate224 可達性稽核 checkpoint（2026-10-24）
+- 唯一程式基線 Candidate222：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- Candidate224 是瀏覽器可達性稽核階段，沒有修改 HTML，沒有新候選版本。
+- FAIL：Song Select 路由的舊作品批次 `#quicktools` 隱藏；workspace dock/sidebar 不可見；`list-batch-works` handler 無法開啟可見作品批次工具。
+- PASS（隔離 handler fixture）：歌曲批次入口能呼叫 Candidate210 runtime；自訂清單管理入口能呼叫既有共用面板。但兩個入口所在的 workspace sidebar 不可見，不能視為端到端使用者流程 PASS。
+- 回滾：無需回滾，Candidate222 原檔未修改。
+- GitHub：本階段只更新文件與測試報告；大型 HTML 未上傳，沒有遠端 HTML hash 驗證。

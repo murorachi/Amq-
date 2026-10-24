@@ -125,3 +125,13 @@ Continue the 100-item plan using the reconstructed source only for analysis/prot
 - 確認作品狀態、歌曲熟悉度、待聽佇列、自訂清單、手動補強、作品黑名單及 SRS 資料範圍不同，保留分離 owner。
 - 主要整合候選：選取模式／CSS 狀態同步、catalog/watchlist 清除選取語意；需先完成瀏覽器互動驗收。
 - PASS：靜態 owner audit。Browser interaction NOT RUN（Chromium 不可用）。本階段沒有製造無意義的 HTML 版本。
+
+
+## Candidate224 — Song Select 批次入口可達性稽核（2026-10-24）
+- 程式起點仍是 Candidate222，未修改 HTML：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- 瀏覽器可啟動 Chromium 144.0.7559.96；但原生 `file://` 與 localhost 導覽遭 `ERR_BLOCKED_BY_ADMINISTRATOR` 攔截。改用 `page.set_content()` + 記憶體 storage shim，測試範圍不包含持久化來源。
+- PASS：Song Select 路由啟動、180 歌曲列、隔離頁面的 handler 測試無 page/console error。
+- FAIL：作品批次入口 `list-batch-works` 觸發後回報「作品批次工具尚未載入」；`#quicktools` 被 Song Select route CSS 隱藏。
+- FAIL：workspace dock/sidebar 在 Song Select 路由不可見；使用者可見的 C99 rail 沒有作品批次入口。歌曲批次與自訂清單 handler 可在隔離測試中執行，但入口容器不可見，不能算使用者流程 PASS。
+- 決策：不刪除作品層級業務能力、不重新啟用整套舊 dock/sidebar，也不強行顯示舊 quicktools。Candidate222 保持唯一程式起點；本階段不產生 HTML。
+- 報告：`reports/candidate224-batch-entry-reachability-audit-20261024/STAGE_10_WORKSPACE_BATCH_REACHABILITY_AUDIT.md`。原生 file://、持久化 reload、真實音訊、外部 API、多人及像素比對 NOT RUN/BLOCKED。

@@ -1,0 +1,42 @@
+{
+  "stage": "10",
+  "candidate": "Candidate224",
+  "html_modified": false,
+  "baseline": {
+    "path": "amq_learning_tool_v82_85_46_candidate222_unreachable_batch_bridge_cleanup_20261024.html",
+    "bytes": 9348268,
+    "sha256": "39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723"
+  },
+  "tests": {
+    "pass": [
+      "Chromium set_content initialization, zero page/console errors",
+      "Song Select route and 180 rows",
+      "isolated song-batch/custom-list handlers"
+    ],
+    "fail": [
+      "work batch action cannot reach hidden quicktools",
+      "workspace sidebar/dock inaccessible"
+    ],
+    "blocked": [
+      "native file:// and localhost navigation",
+      "persistent storage reload",
+      "large HTML GitHub upload/hash verification"
+    ],
+    "not_run": [
+      "real audio",
+      "live APIs",
+      "multiplayer lifecycle",
+      "osu!stable pixel comparison"
+    ]
+  },
+  "files": {
+    "STAGE_10_WORKSPACE_BATCH_REACHABILITY_AUDIT.md": {
+      "bytes": 4860,
+      "sha256": "0813ffb1b18fc8dad990b4dd0bacd7579e82a80e6506bfedcd260ece75387b27"
+    },
+    "AMQ_死功能清理與架構收斂_待辦進度_Candidate224.md": {
+      "bytes": 1835,
+      "sha256": "7e7b77361cd645e20e84abde88e1ee926b8a206ff36ff2c5fe4332bbe741ab89"
+    }
+  }
+}
