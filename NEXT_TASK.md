@@ -7,22 +7,24 @@ Latest evidence:
 - `reports/candidate212-100-item-continuation-20261024/SCRIPT_LIFECYCLE_INVENTORY.md` provides per-script listener, observer, timer, storage, and route counts.
 - `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md` records the observer/timer teardown review queue. Missing disconnect calls are candidates for verification, not proof of leaks.
 - `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md` maps repeated IDs to guarded creators and mutually exclusive templates. No code is proven safe to delete from duplicate-ID counts alone.
+- `reports/candidate212-100-item-continuation-20261024/BROWSER_ACCEPTANCE_REPORT.md` records real Chromium `page.set_content()` interaction tests: 10 workspace panel transitions, custom-list create/add/remove/delete, and batch operations passed in an isolated in-memory storage environment. Native launch/reload persistence is still blocked.
 - `CURRENT_STATUS.md` and `BASELINE.md` were updated to reflect that Candidate207/212/216/218 exist in the AMQ學習工具 Library but are absent from the target branch's Git Tree.
 - The readable Candidate212 text export is 26 bytes shorter than the recorded original and hashes differently. It is not a byte-identical build source.
 
 ## Priority order
 
 1. **Resolve source-byte access first.** Obtain a byte-preserving local copy of Candidate212 or a trusted export path. Do not build or upload a candidate from the normalized text export.
-2. **Volume control lifecycle.** Trace V44 and V82.35 mount/failure paths; preserve `aniQuizVolume`, mute-at-zero behavior, toolbar placement and audio-element replacement. Do not delete the fallback without runtime evidence.
-3. **Initialization and watch/custom-list tabs.** Candidate218's `onclick` assignment is idempotent, but static call-graph tracing does not prove duplicate binding in the normal initial markup path. Reproduce repeated binding or verify repeated script/mount behavior in a real browser before calling this a root-cause fix.
-4. **Observer/timer lifecycle.** Instrument owner-specific create/cleanup counts; repeatedly switch Song Select, watchlist/custom lists, quiz and learning workspaces; verify counts plateau and detached DOM is not mutated. Start with V44 volume, prototype-15 learning UI, Candidate103/106/99 Song Select owners, Candidate185 modal observers, and Candidate210 song-list observers.
-5. **P0 regression.** Test page initialization/DOM stability, custom-list create/add/remove/filter/delete/reload, and all four workspace routes including back navigation and teardown.
-6. **Persistence and game behavior.** Test local/session storage, IndexedDB stores/versioning/Blob backup, AMQ/EMQ/MIX playback and answer/score/history consistency.
-7. **Dependency-led cleanup.** Map each UI owner, event, observer, timer, route and storage key. Classify Keep / Integrate then delete / Delete / Needs confirmation. Duplicate IDs and CSS rules alone do not prove dead code.
-8. **osu!stable Song Select.** Use the fixed reference screenshot; measure window size, card geometry, 7.5-card viewport, hover/selected offsets and right-panel data. Record actual pixel differences.
-9. **API/import acceptance.** Verify AniList, MAL and VNDB success/error/timeout/rate-limit/offline paths, deduplication, list removal and cover fallback/retry.
-10. **Release gate.** Run syntax, unit, integration and browser tests; label PASS/FAIL/NOT RUN/BLOCKED accurately. Build a single-file HTML only from a byte-verified source; compare the output with the source build and compute SHA-256.
-11. **GitHub delivery.** Commit necessary docs/reports to `amq-candidate104-songselect-layout-fix`. Upload the HTML only through a byte-preserving route; read it back and verify version, byte size and SHA-256. Never claim HTML upload without remote evidence.
+2. **Restore native browser acceptance.** Current Chromium blocks `file://` and localhost navigation; `page.set_content()` interaction checks work but cannot prove real reload persistence. Run the same acceptance suite on a persistent origin when allowed.
+3. **Volume control lifecycle.** Trace V44 and V82.35 mount/failure paths; preserve `aniQuizVolume`, mute-at-zero behavior, toolbar placement and audio-element replacement. Do not delete the fallback without runtime evidence.
+4. **Initialization and watch/custom-list tabs.** Candidate218's `onclick` assignment is idempotent, but static call-graph tracing does not prove duplicate binding in the normal initial markup path. Reproduce repeated binding or verify repeated script/mount behavior in a real browser before calling this a root-cause fix.
+5. **Observer/timer lifecycle.** Instrument owner-specific create/cleanup counts; repeatedly switch Song Select, watchlist/custom lists, quiz and learning workspaces; verify counts plateau and detached DOM is not mutated. Start with V44 volume, prototype-15 learning UI, Candidate103/106/99 Song Select owners, Candidate185 modal observers, and Candidate210 song-list observers.
+6. **P0 regression.** Test page initialization/DOM stability, custom-list create/add/remove/filter/delete/reload, and all four workspace routes including back navigation and teardown.
+7. **Persistence and game behavior.** Test local/session storage, IndexedDB stores/versioning/Blob backup, AMQ/EMQ/MIX playback and answer/score/history consistency.
+8. **Dependency-led cleanup.** Map each UI owner, event, observer, timer, route and storage key. Classify Keep / Integrate then delete / Delete / Needs confirmation. Duplicate IDs and CSS rules alone do not prove dead code.
+9. **osu!stable Song Select.** Use the fixed reference screenshot; measure window size, card geometry, 7.5-card viewport, hover/selected offsets and right-panel data. Record actual pixel differences.
+10. **API/import acceptance.** Verify AniList, MAL and VNDB success/error/timeout/rate-limit/offline paths, deduplication, list removal and cover fallback/retry.
+11. **Release gate.** Run syntax, unit, integration and browser tests; label PASS/FAIL/NOT RUN/BLOCKED accurately. Build a single-file HTML only from a byte-verified source; compare the output with the source build and compute SHA-256.
+12. **GitHub delivery.** Commit necessary docs/reports to `amq-candidate104-songselect-layout-fix`. Upload the HTML only through a byte-preserving route; read it back and verify version, byte size and SHA-256. Never claim HTML upload without remote evidence.
 
 ## Current test state
 
