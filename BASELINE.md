@@ -136,3 +136,13 @@
 - BLOCKED：原生 file://、持久化 reload。NOT RUN：真實音訊、即時 API、多人、像素比對。
 - 回滾：Candidate222 原始檔未修改；使用 `amq_learning_tool_v82_85_46_candidate222_rollback_before_candidate226_20261024.html` 即可回復。
 - GitHub：只有文件已提交；Candidate226 HTML 未上傳，遠端 HTML SHA 未驗證。
+
+
+## Candidate227 可見作品批次工作區 checkpoint（2026-10-24）
+- 父版本 Candidate226：9,348,469 bytes；SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`。
+- Candidate227：9,360,586 bytes；SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`。
+- 新增 C99 可見作品批次入口、作品搜尋／選取及透過 bridge 呼叫原有正式作品批次函式；沒有新增持久化 schema。
+- PASS：67 個可執行 JS 區塊、109 CSS 區塊；shim 下作品搜尋／選取、看番狀態、歌曲熟悉度、自訂清單加入／移出及作品／歌曲選取隔離。
+- BLOCKED：原生 file://、持久化 reload。NOT RUN：真實音訊、即時 API、多人、像素比對與部分操作分支。
+- 回滾：`amq_learning_tool_v82_85_46_candidate226_rollback_before_candidate227_20261024.html`，9,348,469 bytes，SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`。
+- GitHub：Stage 13 報告與狀態文件已提交；Candidate227 HTML 未上傳，遠端 HTML SHA 未驗證。
