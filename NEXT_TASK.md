@@ -68,3 +68,11 @@ No executable source has been changed in this continuation. Do not promote a can
 - PASS: 66/66 executable JS blocks parse; 108 CSS blocks have zero parse errors; Chromium page.set_content() with in-memory storage shim loads without page/console errors; Song Select route creates 180 rows; ArrowDown moves index 0→1; isolated Enter test invokes listenSong exactly once; batch checkbox remains checked after search rerender and counter remains 1.
 - BLOCKED/NOT RUN: native file launch and durable storage reload, real audio output, IndexedDB Blob backup/restore, live imports, multiplayer lifecycle, osu!stable pixel comparison.
 - GitHub branch: amq-candidate219-songselect-ownership-20261024. Documentation is being checkpointed; the HTML upload action is not exposed by the available GitHub connector. Remote HTML path returned 404, so no remote HTML existence or hash verification is claimed.
+
+
+## Next action after Candidate220
+1. Build a full capability matrix for work-level quicktools, wsBatchListAdder, and song-level Candidate210 batch operations: selection scope, data keys, operation semantics, side effects, confirmation behavior and tests.
+2. Test Candidate220 through an available browser runtime: open List Management, activate Song Select, invoke the new action, verify one batch panel, selection persistence through rerender, and ensure VNDB retains its correct action/label.
+3. Only after operation parity is demonstrated, migrate any unique work-level operations into the official List Management interface, then remove superseded markup/listeners/Observers/timers/CSS as a single dependency-proven cleanup.
+4. Keep Candidate219 as rollback until browser tests pass. Candidate220 native file launch, persistent reload, audio, external APIs, multiplayer and pixel comparison remain NOT RUN/BLOCKED.
+5. Upload the exact local HTML through a file-capable GitHub path, read it back, and verify remote version/size/SHA-256. Do not claim this is done based on documentation commits.
