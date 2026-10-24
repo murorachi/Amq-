@@ -1,4 +1,13 @@
-# CURRENT STATUS — Candidate 210 (experimental, not accepted)
+# CURRENT STATUS — Candidate 211 (experimental, not accepted)
+
+- Candidate 211 local output: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_211_layout_scroll_focus.html`; 9,352,687 bytes; SHA-256 `4ba1ded70e46e6c437628150be3c86bad045a070f49a84ba50dac7d02465c53b`.
+- Parent Candidate 210 SHA-256 `92f3e6353bd9e9d72d148037cd710818e25d514ce6c2ed57642e2ab248f6ec5f`; Candidate 207 and all earlier candidates retained unchanged.
+- Candidate 211 changes: removed delayed 900 ms scroll correction; fixed inline-important dock geometry that forced a 440 px floating player; unified blue/dark workspace button styling; compacted selected-row spacing and changed focus state to a blue outline.
+- PASS: 68 executable inline JS blocks pass `node --check`; 2 embedded payload blocks excluded. Static assertions confirm old delayed scroll correction and 440 px dock override removed.
+- BLOCKED: Chromium `set_content` smoke test exceeded 120 seconds; no runtime UI acceptance is claimed. Native file launch, audio, wheel/autoplay behavior, persistence, cover success, pixel comparison NOT RUN.
+- GitHub HTML artifact upload/readback SHA remains BLOCKED by current transfer/network limitations. Candidate 211 is experimental, not accepted.
+
+---
 
 - Candidate 178 remains the recovery baseline. Candidate 207 remains the unchanged direct source; Candidates 208/209 remain rejected and untouched.
 - Candidate 207: 9,310,496 bytes; SHA-256 2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100.
