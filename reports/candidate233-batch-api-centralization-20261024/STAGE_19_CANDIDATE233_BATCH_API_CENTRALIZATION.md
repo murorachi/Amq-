@@ -55,7 +55,7 @@
 - PASS：初始 DOM 292 個 ID，292 個唯一值。
 - PASS：四個移除 helper 在完整 HTML 中剩餘引用數皆為 0。
 - PASS：受控記憶體儲存下，實際載入 9,516 部作品；`applyWatch`、`applySong`、`applyPractice(list-add)`、`applyPractice(weak-add)` 及空選取／無效狀態防護測試通過。
-- PASS：實際點擊三個舊圖鑑批次按鈕，確認它們分別呼叫 `applyWatch`、`applySong`、`applyPractice`；未捕捉頁面錯誤 0、console error 0。
+- PASS：實際點擊三個舊圖鑑批次按鈕，確認它們分別呼叫 `applyWatch`、`applySong`、`applyPractice`；空選取與模擬看番儲存失敗均顯示正確訊息；未捕捉頁面錯誤 0、console error 0。
 - PASS：Candidate231 原始檔未修改；回滾檔與來源 byte-identical。
 - BLOCKED：原生 `file://`、localhost 與重新載入持久化仍受 Chromium managed URLBlocklist 阻擋。本次受控儲存測試不代表真實持久化驗收。
 - NOT RUN：四工作區完整切換、真實音訊、live API、多人、固定 osu!stable 像素差異。
