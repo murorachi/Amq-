@@ -97,3 +97,21 @@
 2. Trace each high-priority API to its actual assignment owner and runtime consumer.
 3. Instrument observer/timer/listener counts over repeated mount/unmount cycles.
 4. Only then classify a candidate as Keep, Integrate then delete, Delete, or Needs confirmation.
+
+## Workspace entry disposition (static markup + owner trace)
+
+| Entry / component | Evidence in Candidate212 text export | Decision | Safe next action |
+|---|---|---|---|
+| **動畫圖鑑 / 作品圖鑑** | Core `#grid`, catalog tabs, search/sort/filter, load-more, work selection, inline song expansion, and the Song Select `作品圖鑑` view toggle are live. Custom-list membership and batch selection use the catalog. | **KEEP / integrate as an internal Song Select mode**, not a separate top-level workspace. | Preserve work/song view toggle and existing catalog operations; do not delete because the label feels unclear. |
+| **資料品質** | The only exact `data-ws="analysis"` occurrence is a query inside `candidate84-workspace-merge-dashboard`. The actual dock markup contains `data-ws="lists"` and `data-ws="learning"`; quiz is a separate `data-ws-action="quiz"`. No live `data-ws="analysis"` button or data-quality panel owner was found in this source scan. | **DELETE the dead relabel script**, pending exact-source confirmation. Do not delete the actual learning dashboard/statistics module. | Remove only `candidate84-workspace-merge-dashboard` once a byte-identical Candidate212 source is available; separately decide whether a real data-quality tool is wanted. Do not rename an absent button as a substitute for a feature. |
+| **清單匯入** | `candidate210-songselect-behavior-rebuild` opens a shared import panel and routes to existing AniList/MAL and VNDB importers. | **KEEP / integrate under 清單管理**. | Preserve both providers and their confirmation/error paths. |
+| **批次整理** | The panel has real batch familiarity, tag, blacklist, custom-list membership and selection operations; it uses the existing catalog and `aniCustomPracticeListsV1`. | **INTEGRATE THEN DELETE standalone entry/runtime** only after the same actions are reachable from the official 清單管理 surface. | Move controls without changing selection scope or storage schema; rerun selection and per-list isolation tests before removing the standalone route. |
+| **自訂清單管理** | Live create, membership add/remove, rename/delete UI and public membership adapter exist. | **KEEP**, with duplicate entry points consolidated. | Preserve stable list IDs, deduplication, per-list isolation, deletion semantics and reload persistence. |
+| **學習計畫 / 學習統計** | Learning-plan/SRS and dashboard code are live; the workspace definition already groups exploration, weak-song practice, custom practice, SRS and dashboard under 學習中心. | **INTEGRATE under 學習中心**, avoid separate redundant top-level entries. | Preserve distinct learning workflows and their storage; do not merge their business logic into one opaque handler. |
+| **多人模式 entry** | A `multiplayer` workspace definition and `open-multiplayer` action exist, but static markup has no `data-ws="multiplayer"` or `data-ws-action="multiplayer"` entry. The current dock markup exposes lists, learning and quiz only. | **NEEDS CONFIRMATION / P0 navigation gap**. | Identify the intended official entry and route lifecycle. Add a visible entry only after verifying it does not revive the old multiplayer page or duplicate listeners; then test open/close, room lifecycle and teardown. |
+
+### Dead marker candidate
+- Script `candidate105-marker` only writes `document.documentElement.dataset.candidate="105"`. No reader of that exact property was found in the text scan; similarly named `candidate186` and `candidate210` data attributes are unrelated. This supports **DELETE** as a narrow candidate, but do not overwrite Candidate216 or infer its full-byte diff without byte-identical source access.
+
+### Evidence caveat
+This is static analysis of the readable reconstruction, which differs from the recorded Candidate212 baseline by 26 bytes. All deletion decisions remain pending a byte-preserving source and targeted regression tests.
