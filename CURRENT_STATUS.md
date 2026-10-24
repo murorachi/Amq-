@@ -1,39 +1,49 @@
-# CURRENT_STATUS — Candidate212 engineering continuation (2026-10-24)
+# CURRENT_STATUS — AMQ 100-item engineering continuation (2026-10-24)
 
-## Baseline and artifacts
-- Working baseline: Candidate212, 9,352,632 bytes; recorded SHA-256 `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`.
-- Rollback source: Candidate207, 9,310,496 bytes; recorded SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
-- Experimental Candidate216 remains in the AMQ學習工具 Library, 9,352,541 bytes; recorded SHA-256 `70d0b99e069d34bba174f278d8e09c6c3f508841aa3ec25d014f0970e30ad05f`.
-- Experimental Candidate218 remains in the AMQ學習工具 Library, 9,352,817 bytes; recorded SHA-256 `5e1bd34e1bc49fe606fc8b9989cfaab26d00f2eee5e12ca0541d16a5ae63099c`.
-- These HTML artifacts were found in the Library, correcting the earlier conclusion that their locations were unknown. They are still absent from the target branch's Git Tree; no HTML upload or remote HTML hash verification is claimed.
+## Verified baseline and artifacts
+- Target branch: `amq-candidate104-songselect-layout-fix`.
+- Branch head before this documentation update: `31b111d3e5530a268d66b10743556cc71770985f` (commit message: `Prioritize shared volume handler after reproduced fallback failure`).
+- Candidate212 recorded baseline: 9,352,632 bytes; recorded SHA-256 `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`.
+- Candidate207 rollback record: 9,310,496 bytes; recorded SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
+- Candidate216 record: 9,352,541 bytes; recorded SHA-256 `70d0b99e069d34bba174f278d8e09c6c3f508841aa3ec25d014f0970e30ad05f`.
+- Candidate218 record: 9,352,817 bytes; recorded SHA-256 `5e1bd34e1bc49fe606fc8b9989cfaab26d00f2eee5e12ca0541d16a5ae63099c`.
+- All four candidate artifact records were found in the user's AMQ學習工具 Library. The raw-byte materialization action is not authorized in this runtime. Candidate207's and Candidate212's recorded SHA-256 values have not been freshly recomputed from their original bytes here.
+- Candidate212 reconstructed readable export: 9,352,606 bytes; SHA-256 `07f2d2428b308d6449e561b9d68cc890932d36089694cdecbff561d092b11636`. It is 26 bytes shorter than the recorded original and is NOT a release source.
+- The target branch Git Tree does not contain Candidate207/212/216/218 HTML. No candidate HTML upload or remote HTML SHA-256 verification is claimed.
 
-## Latest committed work
-- Added `reports/candidate212-100-item-continuation-20261024/STATIC_AUDIT.md`.
-- Initial report commit: `a159f76b37040bb3dc6eb045a7bf406c7f613b27`.
-- Latest static-audit update commit: `e7401e283a7daefb05bef968703c10b425cfb146`; remote blob SHA `a9fd3410023fd6dc0bb49c49e49dd3ef7a4cc314`.
-- Candidate218 validation addendum commit: `a5ba65eeb7318a0d3f15fa7c8b9bd594eb6246f9`; remote blob SHA `1f16717c391661fd920c0d6120b7ab7000390150`.
-- Script lifecycle inventory committed and read back: `reports/candidate212-100-item-continuation-20261024/SCRIPT_LIFECYCLE_INVENTORY.md`, blob SHA `f0cdb94352efe880a4265e329d5e99624c917e30`.
-- Observer/timer lifecycle review committed and read back: `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md`, blob SHA `daa78e8a2c1b09f1d364b6dc58688ffea19797c7`.
-- DOM ID ownership review committed: `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md`; initial markup has 296 unique IDs. Repeated source ID strings are mainly template/fallback paths and require runtime lifecycle checks, not blind deletion.
-- Browser interaction report committed: `reports/candidate212-100-item-continuation-20261024/BROWSER_ACCEPTANCE_REPORT.md`. Chromium `page.set_content()` tests passed for startup, tab clicks, 10 workspace open/close transitions, custom-list create/add/remove/delete, batch selection/status updates, AMQ/EMQ/MIX switching, search, decade/type filters, and name sorting. Native file/localhost navigation and persistent-origin tests remain BLOCKED.
-- Song Select geometry report committed: `reports/candidate212-100-item-continuation-20261024/SONGSELECT_GEOMETRY_ACCEPTANCE.md`. Hover shift (3 px) is smaller than selected shift (7 px), and clicking a row updates selection/details. Current viewport shows only about 6.3 card-equivalents, with the bottom row about 33% visible; the 7.5-card / half-card target FAILS.
-- Volume runtime report committed: `reports/candidate212-100-item-continuation-20261024/VOLUME_CONTROL_ACCEPTANCE.md`. Primary V44 path passes volume storage/audio-video sync/mute-at-zero/replacement-node checks; the forced V82.35 fallback path FAILS video synchronization and mute-at-zero parity.
-- Additional executed check: all 108 CSS style blocks parsed with `tinycss2`; 2,763 qualified rules, 0 stylesheet parse errors, 0 declaration errors.
+## Actual checks executed against the reconstructed text export
+- PASS: Node `node --check` for 68 executable inline JavaScript blocks; 2 embedded payload blocks excluded.
+- PASS: 108 CSS style blocks parsed with tinycss2; 2,763 top-level qualified rules counted by this scan; zero stylesheet/declaration parse errors. The rule count is scanner-scope-specific and is not comparable to nested-rule totals from other reports.
+- PASS: initial HTML parse found 296 ID attributes, all unique.
+- PASS: Chromium `page.set_content()` initialization; title and core roots present; dynamic startup DOM had 631 IDs and no duplicate live IDs.
+- PASS: watch/custom-list tab click probe observed one click per action.
+- PASS: workspace panel lifecycle: import, batch, lists, learning and dashboard × 2 rounds = 10 successful open/close transitions; one panel instance; no page errors.
+- PASS: custom-list create, membership add/remove, and delete in isolated in-memory storage.
+- PASS: batch selection selected 180 loaded rows; batch familiarity update wrote to isolated mock storage.
+- PASS: AMQ/EMQ/MIX mode switches; search; decade/type filtering; name sorting.
+- PASS: primary V44 volume control stores values, synchronizes current audio/video elements in the tested fixture, mutes at zero, and reapplies volume after replacing the audio node.
+- FAIL (reproduced): forced V82.35 fallback builder updates audio volume but not video volume, and zero volume does not mute audio/video consistently.
+- PASS (prototype only): a temporary, in-memory test fixture changing the fallback handler to apply volume/mute to all audio/video elements passed control uniqueness, 35% synchronization, zero-volume mute, and no-page-error assertions. No HTML source was modified; this is not the final shared-controller implementation.
+- FAIL: Song Select geometry target. At 1920×1080, tracklist height is about 830 px, row height 130 px, average pitch about 126 px; only 7 rows intersect the viewport and the last is about 33% visible. Target is about 7.5 cards with a half-visible bottom card.
+- PASS: hover shift 3 px is smaller than selected shift 7 px; clicking a row updates selected styling and the right-side title.
+- One additional workspace-dock script reported FAIL because it attempted to click controls inside a dock whose computed display was `none`; the test did not exercise visible controls and is not evidence of a user-flow failure. Use the separately passing visible workspace-panel lifecycle test for the verified scope.
 
-## Static evidence
-- Candidate212 readable text export: 68 executable inline JS blocks PASS under Node `node --check`; 2 embedded payload blocks excluded.
-- 108 style blocks; 488 `addEventListener`, 4 `removeEventListener`, 51 `MutationObserver`, 2 `ResizeObserver`, 4 `IntersectionObserver`, 142 `setTimeout`, 10 `setInterval`, 34 `requestAnimationFrame`, 8 `sessionStorage`, 4 `indexedDB`, 19 `fetch`.
-- Static duplicate ID strings require template/runtime ownership review; they are not sufficient evidence for deletion.
-- Candidate212 `updateWatchModes()` uses non-idempotent click listener registration, but call-graph tracing did not prove duplicate binding in the normal initialization path: the second call occurs only after inserting missing tabs, which the first call cannot bind. Candidate218's `onclick` assignment is defensive idempotency; browser click-count acceptance remains NOT RUN and the original defect is not yet reproduced.
-- Observer/timer static inventory: 51 `MutationObserver` constructors with 7 `.disconnect()` calls, 2 `ResizeObserver`, 4 `IntersectionObserver`, 142 timeouts/38 clears, and 10 intervals/9 clears. This is a review queue, not proof of leaks; lifecycle tests remain NOT RUN.
-- V44 and V82.35 volume-control builders differ in mute and observer behavior. Keep both until recovery and audio synchronization behavior is tested.
+## NOT RUN / BLOCKED
+- BLOCKED: native `file://` and localhost navigation in Chromium (`ERR_BLOCKED_BY_ADMINISTRATOR`).
+- BLOCKED: real persistent-origin localStorage/sessionStorage reload acceptance.
+- NOT RUN: IndexedDB object-store/version migration and Blob backup/restore.
+- BLOCKED: live AniList/MAL/VNDB API and cover retry/failure behavior; external network was aborted or unavailable in the test environment.
+- NOT RUN: real AMQ/EMQ/MIX sound output, seeking, and complete answer/score/history acceptance.
+- NOT RUN: fixed-region masked pixel comparison against osu!stable reference.
+- NOT RUN: owner-instrumented observer/timer counts across route teardown.
+- Candidate218's idempotent tab assignment is a defensive change; the normal initial call graph did not reproduce the claimed duplicate-binding root cause. Browser repeated-mount acceptance remains incomplete.
 
-## Integrity and runtime status
-- PASS: Node syntax check on the readable Candidate212 text export.
-- BLOCKED: fresh raw-byte SHA-256 verification in this runtime. The text-export reconstruction is 26 bytes shorter than the recorded original and hashes differently; do not use it to replace or build a release candidate.
-- NOT RUN: browser initialization, DOM lifecycle, custom-list CRUD/reload, four-workspace routing, real audio, IndexedDB Blob persistence, API recovery, and osu!stable pixel comparison.
-- BLOCKED: browser navigation to file:// and localhost, and external DNS/network, per prior environment records.
-- No HTML source was modified in this checkpoint. Candidate212 and Candidate207 remain preserved rollback points.
+## Engineering disposition
+- No executable code has been deleted in this continuation. Duplicate names/IDs and CSS rules alone are not proof of dead code.
+- Keep custom-list data keys/schema, learning records, IndexedDB/Blob data, AMQ/EMQ/MIX selection/audio, Song Select route/list/covers/player, and required fallback behavior until dependent behavior is verified.
+- Integrate the V44 and V82.35 volume builders behind one shared controller; retain fallback recovery until parity and replacement-node tests pass.
+- The `批次整理` module is live and provides familiarity, tag, blacklist and custom-list batch operations. Integrate these into the official list-management surface before removing its standalone entry.
+- Candidate212, Candidate207, Candidate216 and Candidate218 originals remain untouched. No release candidate has been created.
 
 ## Next action
-Obtain a byte-preserving source path for Candidate212. Then continue the volume-control lifecycle investigation, produce a uniquely named candidate only from a verified source, and run the browser acceptance suite before declaring any functional cleanup complete.
+Continue the 100-item plan using the reconstructed source only for analysis/prototypes. Prepare and test the shared volume-controller change in a disposable fixture, continue owner/call-graph and Song Select geometry diagnostics, and apply source changes only after byte-preserving Candidate212 access is restored. Then rerun affected regression tests, update all reports, create a uniquely named candidate from verified bytes, and read back/verify the remote artifact.
