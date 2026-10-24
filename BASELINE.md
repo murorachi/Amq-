@@ -246,3 +246,10 @@
 - Candidate252 以 Candidate251 為直接父候選；Candidate251 回滾檔 9,354,587 bytes，SHA-256 `4467de1ed6330c51929e783b662d95cd5ad6847dd12edb3a6fde8f49fb94849e`。
 - Candidate236 與其後 Candidate237–252 的 HTML 尚未在 GitHub 遠端驗證 SHA；GitHub 文件分支不等於 HTML 已上傳。
 - Candidate252 已移除舊 catalog batch panel 和已證明不再使用的控制項／監聽器／CSS，但瀏覽器 E2E 與持久化驗收仍 BLOCKED／NOT RUN，因此不提升為正式基準。
+
+
+## Candidate255 本機候選（2026-10-24；未驗收為正式基準）
+- Candidate255：`amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html`，9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- 直接回滾 Candidate254 byte-identical：`amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html`，SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
+- Candidate255 修正 batch-tools 仍等待舊 quicktools，以及 Song Select 動態掛載清單仍含 quicktools 的殘留引用。
+- 靜態測試 PASS；opaque-origin Playwright 因 localStorage 權限受阻，完整互動及持久化未驗收。HTML 尚未上傳 GitHub，遠端 SHA 未驗證，因此 Candidate255 仍是未驗收候選，不取代原始正式基準。
