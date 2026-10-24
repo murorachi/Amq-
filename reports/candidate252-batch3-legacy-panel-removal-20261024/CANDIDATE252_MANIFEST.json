@@ -1,0 +1,24 @@
+{
+  "version": "v82.85.66-candidate252-watchlist-scoped-work-batch-20261024",
+  "artifact": "amq_learning_tool_v82_85_66_candidate252_watchlist_scoped_work_batch_20261024.html",
+  "bytes": 9355704,
+  "sha256": "f210d987495aeb52ca11e958fe2ff9942c32457f054b81d792309c14e9fb78d1",
+  "rollback_file": "amq_learning_tool_v82_85_65_candidate251_rollback_before_candidate252_20261024.html",
+  "rollback_bytes": 9354587,
+  "rollback_sha256": "4467de1ed6330c51929e783b662d95cd5ad6847dd12edb3a6fde8f49fb94849e",
+  "tests": {
+    "javascript_syntax": "PASS: 67 blocks, 0 errors",
+    "css_parse": "PASS: 109 blocks, 0 parser errors",
+    "dom_ids": "PASS: 274 IDs, 0 duplicates",
+    "legacy_reference_audit": "PASS: deleted old UI/control/listener/CSS references are zero",
+    "bridge_vm": "PASS: watchlist scope, queue, list, watch, song, practice APIs",
+    "static_route_assertions": "PASS",
+    "full_page_playwright": "BLOCKED: browser process did not finish launching/executing within timeout",
+    "durable_reload_persistence": "NOT RUN",
+    "native_file_url": "BLOCKED: managed Chromium URLBlocklist",
+    "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+    "github_html_upload_remote_sha": "NOT VERIFIED"
+  },
+  "batch3_complete": false,
+  "reason": "Full browser interaction and durable persistence acceptance remain unverified."
+}
