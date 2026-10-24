@@ -1,0 +1,44 @@
+[
+  {
+    "label": "delete-unused-customListSongIds",
+    "removed_bytes": 123,
+    "added_bytes": 0,
+    "occurrences": 1
+  },
+  {
+    "label": "delete-unused-currentPoolAnimeIds",
+    "removed_bytes": 641,
+    "added_bytes": 0,
+    "occurrences": 1
+  },
+  {
+    "label": "delete-unused-renderListManagementSelector",
+    "removed_bytes": 61,
+    "added_bytes": 0,
+    "occurrences": 1
+  },
+  {
+    "label": "delete-unused-startQuizCustomSelection",
+    "removed_bytes": 384,
+    "added_bytes": 0,
+    "occurrences": 1
+  },
+  {
+    "label": "centralize-catalog-watch-batch-api",
+    "removed_bytes": 432,
+    "added_bytes": 556,
+    "occurrences": 1
+  },
+  {
+    "label": "centralize-catalog-song-batch-api",
+    "removed_bytes": 642,
+    "added_bytes": 621,
+    "occurrences": 1
+  },
+  {
+    "label": "centralize-catalog-practice-batch-api",
+    "removed_bytes": 64,
+    "added_bytes": 183,
+    "occurrences": 1
+  }
+]
