@@ -45,3 +45,13 @@
 5. 通過回歸後才刪除已確認不再需要的隱藏作品批次入口／重複 UI、監聽器與 CSS；不要只加 display:none。
 6. 最後重試原生 file://、持久化 reload、真實音訊與 API；URLBlocklist 若仍阻擋則保留 BLOCKED。
 7. 嘗試上傳正式單檔 HTML 並驗證遠端 SHA-256；目前已知 GitHub 文字檔操作不代表大型 HTML 已上傳。
+
+
+## P1: Candidate228 direct batch API extraction (2026-10-24)
+1. Use local Candidate227 as parent and re-verify SHA-256 before editing; keep Candidate226 rollback untouched.
+2. Extract explicit operations for work watch status, song familiarity and practice actions. APIs must accept IDs/action/status/list ID, return explicit success/cancel/invalid-input/storage-failure results, and not depend on hidden DOM controls.
+3. Move Candidate227 bridge to direct APIs; preserve separate work-ID and song-ID selection Sets and existing storage schemas.
+4. Test all watch statuses, all practice actions, empty selection, missing list, confirmation accept/cancel, persistence failure and selection isolation in a valid test storage context.
+5. Only then remove old quicktools controls, listeners, observers and CSS whose references are demonstrably eliminated. Do not merely hide them.
+6. Retry native file URL and reload persistence at the end; if managed URLBlocklist still blocks, keep BLOCKED status.
+7. GitHub docs branch currently does not contain Candidate227 HTML. Do not claim remote artifact upload/hash verification.
