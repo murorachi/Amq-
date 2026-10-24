@@ -34,3 +34,11 @@
 - 回滾檔 Candidate226 byte-identical，原檔未修改。舊隱藏 UI 尚未清理，等待完整回歸後再刪除。
 - 詳見 `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_13_VISIBLE_WORK_BATCH_WORKSPACE.md`。
 - GitHub 文件已提交；大型 HTML 尚未上傳，遠端 HTML SHA 未驗證。
+
+
+### Candidate227 補充回歸（2026-10-24）
+- 追加 PASS：作品批次黑名單加入／解除的既有 API 狀態分別變成 true／false。
+- 追加 PASS：確認後 SRS 對所選作品的兩首歌曲均建立卡片。
+- 追加 PASS：切到歌曲批次面板時歌曲選取為 0，作品選取仍維持原集合。
+- pageerror 0、console error 0。以上均為記憶體 shim 測試；持久化仍 BLOCKED。
+- 待測：看番狀態所有分支、超過 300 部作品的確認／取消分支、完整資料持久化。
