@@ -61,3 +61,12 @@
 - BLOCKED: native file URL and durable reload persistence due to managed Chromium URLBlocklist. NOT RUN: real audio, live APIs, multiplayer, pixel comparison and accepted >300-item path.
 - Old quicktools UI/listeners/CSS were not removed because references remain. Next: migrate all visible actions to API results, complete dependency audit, then delete only proven-unreferenced code.
 - Report: `reports/candidate228-direct-batch-api-extraction-20261024/STAGE_15_DIRECT_BATCH_API_EXTRACTION.md`. Candidate228 HTML is not uploaded to GitHub; remote HTML SHA not verified.
+
+
+## Candidate229 workspace result handling (2026-10-24)
+- Parent Candidate228 re-verified before edit: 9,364,981 bytes; SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`.
+- Candidate229 local artifact: 9,366,832 bytes; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`.
+- Visible work-batch handler now reports structured success counts and explicit cancellation/failure messages instead of optimistic generic success. Selection synchronization result is checked.
+- PASS: 67 executable inline JS blocks pass `node --check`; static assertions pass. BLOCKED: runtime result handling because the opaque-origin localStorage shim failed; native file URL and durable reload are blocked by managed Chromium URLBlocklist. NOT RUN: actual UI confirmation paths, audio, live APIs, multiplayer, pixel comparison.
+- Legacy quicktools references remain active; no markup/listener/observer/CSS deletion was performed.
+- Report: `reports/candidate229-workspace-result-handling-20261024/STAGE_16_WORKSPACE_RESULT_HANDLING.md`. Candidate229 HTML is local only; GitHub HTML upload and remote SHA verification are not complete.
