@@ -1,10 +1,11 @@
-# CURRENT_STATUS — Candidate216 cleanup checkpoint (2026-10-24)
+# CURRENT_STATUS — Candidate218 cleanup checkpoint (2026-10-24)
 
-- Working baseline Candidate212 remains unchanged: 9,352,632 bytes; SHA-256 52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952.
-- New experimental Candidate216: amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_216_remove_unreferenced_candidate_marker.html; 9,352,541 bytes; SHA-256 70d0b99e069d34bba174f278d8e09c6c3f508841aa3ec25d014f0970e30ad05f.
-- Change is intentionally minimal: removed only the unreferenced Candidate105 marker script. Parent/output assertion confirms exact text difference; no feature logic, CSS, data keys, storage schema, or route behavior changed.
-- PASS: 67 inline JS blocks pass Node syntax checks; 2 payload blocks excluded; 108 CSS blocks / 2,763 qualified rules / 0 parser errors. Candidate212's original 68 executable blocks included a separate now-removed marker block; therefore Candidate216 has 67 executable inline blocks.
-- Static inventory and classification are available in the cleanup report. This is not a full architecture cleanup and Candidate216 is not accepted.
-- NOT RUN: browser launch, custom-list CRUD/reload persistence, four workspace lifecycle, actual AMQ/EMQ/MIX audio/seek, cover/API, IndexedDB Blob persistence, pixel comparison, full observer lifecycle.
-- BLOCKED: browser navigation blocks file:// and localhost; external DNS/network unavailable. No HTML upload or remote HTML SHA is claimed.
-- Local validation report: /mnt/data/CANDIDATE216_VALIDATION.md. Dependency index: /mnt/data/amq_candidate212_cleanup_audit/DEPENDENCY_INDEX.json (local only).
+- Working baseline Candidate212 remains unchanged: 9,352,632 bytes; SHA-256 `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`.
+- Candidate216 remains an earlier minimal experimental candidate, unchanged.
+- New Candidate218: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_218_idempotent_watch_mode_binding.html`; 9,352,817 bytes; SHA-256 `5e1bd34e1bc49fe606fc8b9989cfaab26d00f2eee5e12ca0541d16a5ae63099c`.
+- Root cause fixed in Candidate218: `updateWatchModes()` could be called twice during initialization and attach duplicate click listeners to the same existing watch/custom tabs. The two handlers now use idempotent `onclick` assignment. No other bytes differ from Candidate212 beyond this exact function replacement.
+- PASS: exact source/output comparison; 68 inline JavaScript blocks pass Node syntax checks; 2 embedded payload blocks excluded; old duplicate listener binding removed.
+- NOT RUN: real browser repeated-init/click-count, custom-list CRUD/reload persistence, four workspace route lifecycle, AMQ/EMQ/MIX playback, IndexedDB persistence, pixel comparison.
+- BLOCKED: current browser environment blocks `file://` and localhost navigation; external DNS/network unavailable.
+- Candidate218 is experimental, not accepted. No storage keys, schemas, custom-list data, learning records, or IndexedDB structure changed. Candidate212 remains rollback baseline.
+- Validation report: `reports/candidate218-idempotent-watch-mode-binding-20261024/VALIDATION_REPORT.md`. HTML itself has not been uploaded or remotely SHA-verified.
