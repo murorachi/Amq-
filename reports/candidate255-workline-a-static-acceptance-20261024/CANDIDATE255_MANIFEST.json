@@ -1,0 +1,24 @@
+{
+  "version": "v82.85.69-candidate255-remove-last-quicktools-refs-20261024",
+  "artifact": "amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html",
+  "bytes": 9355697,
+  "sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
+  "rollback_file": "amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html",
+  "rollback_sha256": "e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9",
+  "tests": {
+    "javascript": "PASS: 67 blocks, zero syntax errors",
+    "css": "PASS: 109 blocks, zero parse errors",
+    "dom_ids": "PASS: 272 IDs, zero duplicates",
+    "legacy_refs": "PASS: 16 identifiers, zero references outside comments",
+    "static_contracts": "PASS: 18 assertions",
+    "filters": "PASS: 9/9",
+    "batch_api": "PASS: 16 actions in test-only memory shim",
+    "custom_list_crud": "PASS in test-only memory shim",
+    "selection_isolation": "PASS static ownership; cross-panel runtime probe BLOCKED by timeout",
+    "durable_reload": "NOT RUN",
+    "native_file_url": "BLOCKED by managed URLBlocklist",
+    "remote_html_sha": "NOT VERIFIED"
+  },
+  "batch3_complete": false,
+  "note": "This manifest describes a local candidate. It does not claim the HTML artifact is present on GitHub."
+}
