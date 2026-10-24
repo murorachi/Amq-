@@ -18,3 +18,7 @@ On 2026-10-25, the user explicitly authorized adopting Candidate277 directly as 
 
 ## Rollback
 Preserve Candidate277 and Candidate276 unchanged. If a child candidate regresses, return to Candidate277; use Candidate276 only when reverting Candidate277's custom-list name normalization change.
+
+
+## Stage57 baseline integrity note (2026-10-25)
+Candidate277 remains the user-authorized working baseline and was not modified by Stage57. Recomputed local size: 9,373,238 bytes. Recomputed SHA-256: `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`. Stage57 is a read-only targeted dependency gap audit; it does not claim Candidate277 is byte-identical to Candidate212, and it does not promote the artifact to a fully browser-accepted release.
