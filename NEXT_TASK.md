@@ -1,3 +1,20 @@
+# 下一步：原生瀏覽器驗收 Candidate258（2026-10-24）
+
+## Candidate258 試點候選
+- HTML：`amq_learning_tool_v82_85_72_candidate258_visible_unified_import_workspace_20261024.html`
+- 大小：9,356,071 bytes
+- SHA-256：`82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`
+- 回滾 Candidate256：SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`
+
+## 驗收順序
+1. 開啟 Candidate258，進入 Song Select，點左側可見的「AniList／MAL 匯入」及 VNDB 入口；兩者都應打開同一個可見「清單同步」共用面板，不得進入被隱藏的舊側欄。
+2. 確認三個來源都可見，每個來源恰好兩個主要操作：匯入公開清單、移除本機清單；無 Token 欄位。
+3. 使用空值／無效 Username 測試；確認不會開始請求或修改資料。
+4. 在可控測試帳號／資料下分別測試匯入、取消移除、確認移除；AniList/MAL 僅移除各自來源的匯入看番狀態，保留手動及其他來源狀態；VNDB 僅移除本機 VNDB 清單。
+5. 測試真實 API 成功解析、去重、網路／CORS／服務端錯誤與 UI 復原。
+6. 嘗試上傳 HTML 至指定分支並讀回核對版本、位元組數及 SHA-256；若工具／權限不支援，明確標記 BLOCKED／NOT VERIFIED。
+
+Candidate258 只處理這一個左側工作區試點。其他左側功能待使用者確認風格後再規劃。Batch 3 仍未完成，不提前開始 Batch 4。
 # 下一步：驗收 Candidate257 清單同步 UI 試點（2026-10-24）
 
 ## 本次試點
