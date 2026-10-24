@@ -26,6 +26,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 
 - Added `reports/candidate212-100-item-continuation-20261024/DEPENDENCY_EDGE_INVENTORY.md`: 70 script blocks and 268 heuristic window-API dependency edges. It is a text-scan inventory, not AST-complete; use it to guide owner tracing, not to authorize deletions.
 
+- Current per-item acceptance ledger: `reports/candidate212-100-item-continuation-20261024/100_ITEM_PROGRESS.md`. Use it as the source of truth for remaining work and preserve the four required test states.
 ## Next work, in order
 1. **Source integrity:** obtain a byte-preserving Candidate212 copy. The current readable reconstruction is 26 bytes shorter and must not be used for release output.
 2. **Volume root fix:** port the shared-controller prototype into the verified source when byte-preserving Candidate212 access is restored. Preserve the fallback until route absence, replacement nodes, audio/video sync, mute-at-zero and retry behavior all pass; retain the output-text change guard to prevent observer feedback loops.
