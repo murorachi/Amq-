@@ -284,3 +284,10 @@
 - 內容面板切換與匯入入口存在 PASS（有限範圍）。正式路由、返回、DOM 清理、作品／歌曲選取隔離仍 NOT RUN。
 - 外部 AniList/MAL/VNDB API 行為仍 NOT RUN。
 - Candidate255 正式 HTML 尚未上傳到目標分支；遠端 SHA-256 未驗證。Batch 3 未完成。
+
+## Candidate256 待驗收候選（2026-10-24）
+- Candidate255 保留為回滾版本；原生瀏覽器清單持久化已 PASS。
+- Candidate256：`amq_learning_tool_v82_85_70_candidate256_song_batch_preserve_selection_20261024.html`，9,355,585 bytes，SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- 修正：歌曲批次面板開啟時不再清空既有歌曲選取。
+- Candidate256 的 JS/CSS/DOM、篩選、共用面板循環、歌曲選取保留及作品／歌曲選取隔離已在記憶體 shim 下 PASS。
+- Candidate256 原生瀏覽器持久化與外部 API NOT RUN；GitHub 正式 HTML 上傳與遠端 SHA-256 BLOCKED。Candidate256 尚未成為正式基準，Batch 3 未完成。
