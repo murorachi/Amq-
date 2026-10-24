@@ -56,7 +56,7 @@
     "console_errors": "PASS: 0",
     "native_reload": "BLOCKED: Chromium managed URLBlocklist",
     "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
-    "github_html_upload_remote_sha256": "NOT DONE"
+    "github_html_upload_remote_sha256": "BLOCKED: git remote probe failed DNS resolution for github.com; HTML not uploaded"
   },
   "scope_note": "Candidate233 is a candidate patch derived from Candidate231. Legacy catalog batch markup is intentionally retained until all external callers, watchlist selection, automation targeting, and queueSelected behavior are migrated."
 }
