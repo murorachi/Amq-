@@ -167,12 +167,13 @@
 - BLOCKED／NOT RUN：原生 file／localhost、真實 reload 持久化、外部 API、音訊、多人、像素比對；HTML 遠端內容與 SHA 尚未驗證。
 - Candidate255 仍是未驗收候選，批次三未完成。詳見 `reports/candidate255-workline-a-static-acceptance-20261024/STAGE_27_WORKLINE_A_STATIC_ACCEPTANCE.md`。
 
-## Candidate255 原生瀏覽器驗收替代路徑（2026-10-24）
-- 瀏覽器環境盤點：僅找到 `/usr/bin/chromium`；Chromium managed policy 的 `URLBlocklist` 為 `["*"]`。未找到 Firefox、Edge、Chrome 其他可用執行檔；Playwright Chromium/Firefox/WebKit 快取不存在。
-- 不修改系統政策，不以隱藏策略或其他繞過方式執行瀏覽器。
-- 已在本機產生 Windows 原生瀏覽器驗收工具包：`Candidate255_native_browser_acceptance_kit_20261024.zip`。測試目標為 Candidate255 原始 HTML，使用 `http://127.0.0.1:8765` 與瀏覽器原生 localStorage，重新載入 iframe 驗證自訂清單持久化。
-- 工具包尚未在使用者的 Windows 瀏覽器實際執行，故原生持久化驗收仍為 BLOCKED / NOT RUN，不能視為 PASS。
-- Candidate255 本機 HTML SHA-256：`bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`；9,355,697 bytes。
-- GitHub 正式 HTML：截至本次查證，分支 `amq-candidate255-last-quicktools-reference-cleanup-20261024` 上 `dist/amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html` 回傳 404，仍未上傳及核對遠端 SHA-256。
-- 待辦：取得原生瀏覽器 JSON 報告；執行作品／歌曲選取隔離及匯入外部 API 實測；上傳正式 HTML 並下載遠端內容計算 SHA-256；完成後更新交付文件。
+## Candidate255 原生瀏覽器驗收結果（2026-10-24）
+- 使用者提供的實際瀏覽器報告：origin `http://127.0.0.1:18765`；5 PASS、0 FAIL、1 NOT RUN、0 BLOCKED。
+- PASS：頁面初始化、原生 localStorage 讀寫、自訂清單建立、重新載入後以相同 ID/名稱確認持久化、透過 UI 刪除臨時清單。
+- PASS（有限範圍）：工作區內容面板顯示切換、動畫匯入與 VNDB 入口存在。
+- 必要更正：工作區內容面板測試期間，watchlist/dashboard/learningPlan 的請求仍回報 active view 為 catalog。原報告的 PASS 只支持內容面板切換，不支持正式路由切換；正式路由、返回及 DOM 清理仍 NOT RUN。
+- NOT RUN：AniList/MAL 與 VNDB 真實 API 回應、解析、去重、錯誤恢復；Resource Timing 不作為 API 成功證據。
+- Candidate255 本機 HTML：9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- GitHub 正式 HTML 尚未上傳；遠端版本與 SHA-256 尚未驗證。Batch 3 未完成。
 
+## Candidate255 原生瀏覽器驗收替代路徑（歷史盤點）
