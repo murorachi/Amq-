@@ -227,3 +227,15 @@
 - NOT RUN：真實 AniList/MAL/VNDB API、移除範圍與錯誤復原測試。
 - BLOCKED：HTML 上傳 GitHub 與遠端 SHA-256 回讀；未宣稱 HTML 已上傳。
 - Batch 3 仍未完成。先完成瀏覽器驗收、批次搜尋選取一致性、清單 CRUD/持久化、匯入來源資料安全及遠端產物驗證，不得開始 Batch 4。
+
+
+## Candidate261 路由修正檢查點（2026-10-24）
+- 本機候選：`amq_learning_tool_v82_85_75_candidate261_dedicated_song_batch_route_20261024.html`
+- 本機 SHA-256：`b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`；9,358,614 bytes。
+- 父基準 Candidate260 已重新計算 SHA-256 並與交接紀錄一致：`a19be956afdf10b50dc15bbc10b3c69408e42c8751a838fb8e61313d0d98ed1f`。
+- 根因：歌曲批次入口與 VNDB 共用 `data-c99-action="vndb"`，且依賴 capture listener 攔截；若未攔截，舊 `runAction('vndb')` 會開啟 VNDB 匯入。
+- 修正：歌曲批次改用獨立 `song-batch` action；舊入口在路由 guard 前遷移，並連接既有獨立歌曲批次 renderer。清單匯入仍只走 import action 與共用匯入 renderer。
+- 靜態檢查 PASS：67 個可執行 JS 區塊、110 個 CSS 區塊、273 個 HTML ID（無重複）、路由靜態契約。
+- 原生瀏覽器點擊驗收 BLOCKED：Chromium headless 實際嘗試載入候選檔逾時，未產生 DOM 輸出；不可視為功能驗收 PASS。
+- GitHub HTML 上傳／遠端 SHA 回讀 BLOCKED：本分支尚未包含 Candidate261 HTML。connector 目前無法直接將本機大型 HTML artifact 交給 GitHub contents API；不得宣稱已上傳。
+- Candidate261 是修正候選，非已驗收基準。Candidate260 原檔保持不變，可直接回滾。Batch 3 未完成，不開始 Batch 4。
