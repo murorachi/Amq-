@@ -54,3 +54,11 @@ Candidate258 只處理這一個左側工作區試點。其他左側功能待使�
 - 真實 AniList/MAL/VNDB API 功能：NOT RUN。
 - GitHub 正式 HTML 上傳與遠端 SHA-256：NOT VERIFIED；目前尚無遠端 HTML 證據。
 - Batch 3：未完成。
+
+
+## Candidate259 後續驗收（不得跳過）
+1. 在可正常開啟本機 HTML 的真實瀏覽器中驗證 Candidate259：頁面初始化、工作區切換、面板不遮擋左側導覽、右側歌曲卡片遮擋範圍、桌面與窄視窗版面。
+2. 測試歌曲批次搜尋：搜尋歌名/歌手/標籤、篩選後已選歌曲 ID 與核取方塊一致、清空搜尋、關閉/重開面板、切換作品後不殘留錯誤隱藏狀態。
+3. 實測 AniList/MAL/VNDB 匯入與來源限定刪除、去重、無效輸入及錯誤復原。
+4. 嘗試上傳 Candidate259 HTML 至此分支；上傳後讀回檔案，驗證版本、位元組數與 SHA-256。未完成前標記 BLOCKED/NOT VERIFIED。
+5. 只有瀏覽器與 API 驗收、遠端產物核對完成後，才關閉 Batch 3。不得開始 Batch 4。
