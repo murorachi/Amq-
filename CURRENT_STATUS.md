@@ -102,7 +102,7 @@
 
 ## Candidate233 批次 API 集中化與死函式清理（2026-10-24）
 - 起始 Candidate231 已核對：9,367,325 bytes，SHA-256 `74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf`；原始檔未修改。
-- Candidate233 候選產物：`amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html`，9,366,338 bytes，SHA-256 `7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32`。
+- Candidate233 候選產物：`amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html`，9,366,806 bytes，SHA-256 `ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45`。
 - 刪除四個全 HTML 零引用的私有 helper：`customListSongIds`、`currentPoolAnimeIds`、`renderListManagementSelector`、`startQuizCustomSelection`。
 - 舊圖鑑看番、歌曲熟悉度與練習批次入口現在統一呼叫 `__aniBatchBusinessAPIv228`；不再在 UI handler 內直接重複修改資料。
 - PASS：67/67 JS syntax、109 CSS blocks 0 parser errors、292/292 initial IDs unique、四個移除名稱零引用；受控 storage 下 9,516 部作品與 watch/song/list-add/weak-add/invalid/empty 操作測試通過；三個舊按鈕皆已確認走共享 API；0 pageerror、0 console error。
