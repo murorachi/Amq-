@@ -108,3 +108,12 @@ Continue the 100-item plan using the reconstructed source only for analysis/prot
 - BLOCKED: browser interaction tests; Playwright is installed but matching Chromium binary is absent in this runtime. Native file launch and persistent reload NOT RUN. Audio, live APIs, multiplayer lifecycle and osu!stable pixel comparison NOT RUN.
 - Rollback: Candidate220 byte-identical local copy, 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`.
 - GitHub: Candidate221 documentation checkpoint branch created. Large local HTML upload and remote SHA verification remain BLOCKED; no remote HTML upload claimed.
+
+
+## Candidate222 — 不可達作品清單橋接層清理（2026-10-24）
+- Candidate221 parent：9,353,751 bytes，SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`。
+- Candidate222 local artifact：`amq_learning_tool_v82_85_46_candidate222_unreachable_batch_bridge_cleanup_20261024.html`，9,348,390 bytes，SHA-256 `a765f6316284cd624632521306f45539d694c091b626c6a5f7c168e2c18a50e5`。
+- 根因：`wsBatchListAdder` 只在標題含「批次整理」時顯示；正式四個工作區標題沒有此值。已移除不可達面板、專屬同步器/listeners/observers/CSS。
+- 保留作品批次 `quicktools`、歌曲批次 Candidate210 runtime、VNDB handler 與資料 schema。
+- PASS：65 個 JS blocks；108 CSS blocks 無 parse errors；10/10 靜態斷言。Browser interaction NOT RUN，Chromium 不可用。
+- GitHub HTML 上傳與遠端 SHA 驗證仍 BLOCKED，未宣稱完成。
