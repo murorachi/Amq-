@@ -96,7 +96,7 @@
 
 ## Candidate222 baseline checkpoint (2026-10-24)
 - Parent Candidate221：9,353,751 bytes；SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`。
-- Candidate222：9,348,390 bytes；SHA-256 `a765f6316284cd624632521306f45539d694c091b626c6a5f7c168e2c18a50e5`。
+- Candidate222：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
 - Change scope: remove unreachable `wsBatchListAdder` bridge markup/runtime/CSS only; retain work-level quicktools and song-level Candidate210 batch owners.
 - Rollback Candidate221 is byte-identical: 9,353,751 bytes; SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`.
 - Tests: 65 JS syntax PASS; 108 CSS blocks PASS; 10/10 static assertions PASS. Browser interaction NOT RUN. Remote HTML upload/hash verification BLOCKED.
