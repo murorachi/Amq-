@@ -84,3 +84,11 @@
 - Scope: adds a List Management action wired to the existing Candidate210 batch workspace; removes the incorrect relabel of the C99 VNDB action. No data keys/schema or legacy work-level batch implementation deleted.
 - Static checks: 65 executable JS blocks PASS; 3 payload blocks excluded; 108 CSS blocks PASS with zero parser errors. Browser action flow NOT RUN because Chromium launch timed out in this runtime.
 - Remote HTML upload/hash verification: BLOCKED; only documentation checkpoint is on this branch.
+
+
+## Candidate221 local integration checkpoint (2026-10-24)
+- Parent Candidate220: 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`.
+- Candidate221: `amq_learning_tool_v82_85_46_candidate221_work_and_song_batch_entry_20261024.html`; 9,353,751 bytes; SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`.
+- Rollback Candidate220: 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`; byte-identical local copy confirmed.
+- Changes only add a work-level batch entry that routes to existing `quicktools`; song-level batch remains Candidate210 owner. No data schema changes.
+- Static tests PASS: 63 executable JS blocks; 108 CSS blocks; 7 assertions. Browser flow BLOCKED because Chromium binary is unavailable. Remote HTML upload/hash verification BLOCKED.
