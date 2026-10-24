@@ -91,3 +91,10 @@ No executable source has been changed in this continuation. Do not promote a can
 2. Map every `quicktools` control to its event listener, data keys, side effects and canonical owner before deleting any further legacy code.
 3. Continue observer/timer teardown checks; do not infer leak-free behavior from static counts.
 4. Upload the exact Candidate222 HTML using a file-capable GitHub path, read back remote bytes and verify version/size/SHA-256. Current connector has no local-path upload action, so this remains BLOCKED.
+
+
+## Next after Candidate223 quicktools audit
+1. 在可用 Chromium runtime 實測 catalog 的選取模式、選取目前顯示、選取全部篩選結果、清除選取、作品狀態、歌曲熟悉度、待聽、自訂清單／補強／黑名單／SRS。
+2. 在 watchlist 視圖重跑相同選取控制項，驗證視圖接管與返回後無狀態殘留。
+3. 只整合已證明等價的 selection/CSS synchronization；不要合併不同資料粒度的業務 owner。
+4. 瀏覽器驗收完成後再決定是否產生 Candidate223 HTML；Candidate222 保持原始起點與回滾點。
