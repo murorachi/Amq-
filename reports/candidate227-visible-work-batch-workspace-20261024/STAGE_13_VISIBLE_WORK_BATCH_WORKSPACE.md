@@ -55,3 +55,14 @@
 ## 回滾與交付
 - 回滾至 Candidate226 即可；Candidate226 原檔未修改。
 - GitHub 本階段提交測試報告與狀態文件。大型 HTML 尚未上傳，遠端 HTML 存在性與 SHA-256 未驗證。
+
+
+## Stage 13 補充回歸：黑名單與 SRS（追加，2026-10-24）
+在同一個隔離記憶體 storage 的 Playwright 執行中，補測前一版報告列為待驗收的兩種操作：
+- PASS：黑名單加入後，`__aniIsAnimeWorkBlacklistedV825(songId)` 對所選作品的歌曲回傳 true。
+- PASS：黑名單解除後，同一 API 回傳 false。
+- PASS：接受既有 SRS 確認對話後，所選作品的兩首歌曲都出現在 `__aniSRSAPI.snapshot().cards`。
+- PASS：切換到歌曲批次面板後，歌曲選取數為 0，作品選取仍維持 `[1]`。
+- PASS：整輪補充測試 pageerror 0、console error 0。
+
+這些結果只驗證記憶體 shim 下既有 API 的呼叫與狀態轉換；真實持久化與重載仍 BLOCKED。超過 300 部作品的確認／取消分支、所有看番狀態分支尚未逐一測完。
