@@ -1,11 +1,10 @@
-# NEXT_TASK — AMQ cleanup after Candidate212 audit
+# NEXT_TASK — Continue AMQ cleanup after Candidate216
 
-1. Map all 70 script blocks to initialization order, globals, calls, listeners, timers, observers, routes, storage reads/writes, and dynamic templates.
-2. Resolve repeated mount owners first: v44VolumeControl, watchModeTab/customModeTab, amqSongSelectRankingPlaceholder.
-3. Add deterministic independent-browser-context tests for all four workspaces, Back/Escape, overlay cleanup, and route transitions.
-4. Audit all 51 MutationObserver constructors for self-mutating callbacks, duplicate registration, target scope, and disconnect lifecycle.
-5. Test custom-list create/add/remove/filter/reload persistence and compare storage snapshots; do not change storage schema or keys.
-6. Verify AMQ/EMQ/MIX behavior, real audio and seek after metadata, cover loading, AniList/MAL/VNDB error recovery, and IndexedDB Blob persistence.
-7. Only after proof, move required capabilities to one formal owner module and delete old implementations in a uniquely named new candidate.
-8. Re-run syntax/CSS/browser/native-file/storage tests and pixel comparison; mark each PASS/FAIL/NOT RUN/BLOCKED accurately.
-9. Attempt binary HTML upload only with a byte-preserving route; verify remote version, size, and SHA-256 before claiming success.
+1. Treat Candidate216 as a minimal experimental checkpoint only; do not call the architecture cleanup complete.
+2. Build a call/ownership map for all 70 original Candidate212 script blocks and 57 observer constructor sites, including route/DOM lifecycle and storage interactions.
+3. Prioritize Song Select workspace mount duplication and old workspace/route interceptors; prove ownership and behavior before moving code.
+4. Resolve duplicate implementation candidates `v44VolumeControl`, `watchModeTab`/`customModeTab`, `amqSongSelectRankingPlaceholder`; check dynamic templates and event binding.
+5. Add isolated browser-context tests for custom-list CRUD/reload, four workspace open/switch/close/Back/Escape, and duplicate DOM/listeners.
+6. Test real AMQ/EMQ/MIX audio and seek, cover/API failure recovery, IndexedDB Blob save/restore, and reference pixel geometry when environment allows.
+7. After each proven integration, remove the old implementation, create a unique candidate, run static and runtime regressions, and preserve rollback points.
+8. Attempt byte-preserving HTML upload only when available; verify remote version, size and SHA-256. Never claim upload without readback.
