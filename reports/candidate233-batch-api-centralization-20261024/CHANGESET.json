@@ -40,5 +40,11 @@
     "removed_bytes": 64,
     "added_bytes": 183,
     "occurrences": 1
+  },
+  {
+    "label": "artifact-final-checksum",
+    "status": "PASS",
+    "artifact_bytes": 9366806,
+    "artifact_sha256": "ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45"
   }
 ]
