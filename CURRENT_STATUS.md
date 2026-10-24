@@ -4,7 +4,7 @@
 - Candidate lineage preserved through Candidate 207; Candidate 207 remains unchanged as the immediate parent.
 - Immediate parent Candidate 207 SHA-256: `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`, 9,310,496 bytes.
 - Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_208_stable_frame_player_workspace_consolidation.html`.
-- Candidate 208 size: 9,324,981 bytes. SHA-256: `15cfd2caa7045e3cc585bfd6e4bc8c35b72e2e70e3d97a7a3111c0228d67f892`.
+- Candidate 208 size: 9,325,001 bytes. SHA-256: `0943bfde66d0f19e5d004f4ec70c7eea44c51bceede7864e893a64051ba720bf`.
 - Candidate 208 uses Library references IMAGE1–IMAGE5 and image.png as visual guidance. It adds a black/blue top filter frame, transparent functional-search placement, selected-row width/centering logic, selection-triggered autoplay with random seek after metadata, consolidated dock actions, hides the works-catalog toggle, and relabels the VNDB rail entry as batch organization.
 - Important limitation: changing the rail entry does not yet unify VNDB import into the AniList/MAL import workspace. That requirement remains unfinished.
 - Static validation: 68 executable inline JavaScript blocks PASS; 0 syntax failures; two data/payload blocks excluded. CSS parse: 105 style blocks, 2,715 qualified rules, 0 parse errors.
