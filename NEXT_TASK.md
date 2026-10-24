@@ -9,7 +9,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 - PASS: Chromium `page.set_content()` startup, watch/custom tab click counts, 10 workspace panel open/close transitions, custom-list create/add/remove/delete, batch selection/status update, AMQ/EMQ/MIX switches, search, decade/type filters and name sort.
 - PASS: primary V44 volume slider storage/property sync, zero-volume mute and audio-node replacement behavior in isolated fixture.
 - FAIL: forced V82.35 volume fallback changes audio but not video and fails mute-at-zero parity.
-- PASS (prototype only): a disposable fixture applying fallback volume/mute to all `audio,video` nodes passes 35% synchronization, zero-volume mute, single-control and no-page-error assertions. This is not a source edit and not release acceptance.
+- PASS (prototype only): a disposable fixture routes both V44 and forced V82.35 fallback through one shared volume controller; both paths pass single-control, 35% audio/video sync, audio replacement reapplication, zero-volume mute, and no-page-error assertions. Updating output text only when it differs is required to prevent a MutationObserver self-loop. This is not a source edit and not release acceptance.
 - FAIL: Song Select geometry shows about 7 rows and a 33%-visible bottom card, not the target of about 7.5 cards / half-visible bottom card.
 - PASS: hover shift 3 px is smaller than selected shift 7 px; selected row and right-side title update together.
 - BLOCKED: original Candidate212 raw-byte materialization and native `file://`/localhost browser navigation.
@@ -17,7 +17,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 
 ## Next work, in order
 1. **Source integrity:** obtain a byte-preserving Candidate212 copy. The current readable reconstruction is 26 bytes shorter and must not be used for release output.
-2. **Volume root fix:** use the tested fallback prototype to guide a shared volume-controller contract used by both V44 and V82.35. Preserve the fallback until route absence, replacement nodes, audio/video sync, mute-at-zero and retry behavior all pass.
+2. **Volume root fix:** port the shared-controller prototype into the verified source when byte-preserving Candidate212 access is restored. Preserve the fallback until route absence, replacement nodes, audio/video sync, mute-at-zero and retry behavior all pass; retain the output-text change guard to prevent observer feedback loops.
 3. **Song Select geometry:** identify the canonical geometry owner and quantify the row pitch/offset curve. Target about 7.5 visible cards and a half-visible bottom card at the fixed 1920×1080 reference viewport; preserve hover shift < selected shift and selected-song details synchronization.
 4. **Initialization and dynamic ownership:** instrument actual watch/custom tab creation, binding counts and repeated mounts. Candidate218's idempotent assignment is defensive; do not call it a proven root-cause fix until the duplicate behavior is reproduced or its prevention is validated.
 5. **Observer/timer lifecycle:** map owner, observed target, callbacks, activation, cleanup and route teardown. Measure counts before/after repeated workspace transitions; do not delete based on counts alone.
