@@ -318,3 +318,13 @@
 - 使用者瀏覽器實測 PASS 7、FAIL 0、NOT RUN 1、BLOCKED 0。PASS 範圍包含初始化、內容面板切換、匯入入口、歌曲選取保留、作品／歌曲選取隔離、自訂清單原生 localStorage reload 持久化與 UI 清理。
 - 外部 API 實際功能仍 NOT RUN；只觀察到 Anime News Network `api.xml` Resource Timing，不視為 API 成功證據。
 - GitHub 正式 HTML 上傳與遠端 SHA-256 驗證尚未完成。Candidate256 尚未成為正式基準；Batch 3 未完成。
+
+
+## Candidate259 橫向工作區候選（未驗收，不是正式基準）
+- 父候選 Candidate258：`amq_learning_tool_v82_85_72_candidate258_visible_unified_import_workspace_20261024.html`，SHA-256 `82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`。
+- Candidate259：`amq_learning_tool_v82_85_73_candidate259_workspace_horizontal_layout_search_20261024.html`，9,360,172 bytes，SHA-256 `28f940dbc8ce2c1b4de0dbf4734d9fe7b6d98d7ecef6149652849b76aaebd370`。
+- 版面修改：共用工作區不再以隱藏的舊 sidebar 作為定位基準；卡片改為緊湊橫向工具列；AniList/MAL/VNDB 以三欄來源卡片呈現；刪除重複的 Username 初始提示。
+- 歌曲批次整理增加搜尋，使用既有搜尋欄並篩選目前渲染歌曲列，搜尋期間不清除既有歌曲 ID 選取。
+- 靜態檢查 PASS：67 JS blocks、110 CSS blocks、273 IDs 無重複。
+- 瀏覽器實測 BLOCKED；真實 API NOT RUN；遠端 HTML SHA 尚未驗證。Candidate259 不可視為正式基準。
+- 回滾：優先使用未修改的 Candidate258；較早的 Candidate256 原生瀏覽器驗收檢查點亦保留。
