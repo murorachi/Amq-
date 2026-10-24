@@ -126,3 +126,13 @@
 - BLOCKED：原生 file:// 與持久化 reload。NOT RUN：真實音訊、即時 API、多人流程、像素比對。
 - 回滾：無需回滾，Candidate222 與 Candidate221 原檔未修改。
 - GitHub：Stage 11 報告已提交；未上傳大型 HTML，未驗證遠端 HTML SHA。
+
+
+## Candidate226 歌曲批次入口標籤 checkpoint（2026-10-24）
+- 父版本 Candidate222：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- Candidate226：9,348,469 bytes；SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`。
+- 變更僅修正 C99 `vndb` 動作入口的標題／說明，與 Candidate210 實際執行的歌曲批次整理一致；VNDB 匯入仍在共用匯入面板。
+- PASS：66 個 executable JS blocks；108 CSS blocks；shim 互動測試的歌曲批次入口、180 首選取／清除與 VNDB 匯入可達性。
+- BLOCKED：原生 file://、持久化 reload。NOT RUN：真實音訊、即時 API、多人、像素比對。
+- 回滾：Candidate222 原始檔未修改；使用 `amq_learning_tool_v82_85_46_candidate222_rollback_before_candidate226_20261024.html` 即可回復。
+- GitHub：只有文件已提交；Candidate226 HTML 未上傳，遠端 HTML SHA 未驗證。
