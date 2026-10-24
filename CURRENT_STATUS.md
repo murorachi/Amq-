@@ -1,14 +1,15 @@
-# CURRENT STATUS — Candidate 210 (working checkpoint, experimental, not accepted)
+# CURRENT STATUS — Candidate 210 (experimental, not accepted)
 
-- Recovery baseline remains Candidate 178 because Candidate 205 was unavailable. Candidate 207 is the direct source for this working checkpoint. Candidate 208 remains rejected; Candidate 209 exists as a rejected experimental artifact and was not overwritten.
-- Candidate 207 remains unchanged: 9,310,496 bytes; SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
-- Candidate 210 local working artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html`.
-- Candidate 210 size: 9,345,442 bytes. SHA-256: `4189553ebd65d3ee81d239fd5e20c651cc783532d360bce8d79e25fb53473044`.
-- Changes in the working checkpoint: dark/blue top frame; preserved actual search input; removed Song Select works-catalog toggle and Singer primary mode; compact song rows without row-level “更多”; dock song actions; centered wheel/keyboard selection, autoplay and random seek hooks; async row-cover attempts; shared AniList/MAL/VNDB import hub; song batch workspace for familiarity/tags/blacklist and work-level custom-list membership; AMQ-style white-outline bottom-right icon; scoped cover observer to the tracklist.
-- Static validation PASS: 68 executable inline JavaScript blocks pass `node --check`; CSS parser reports zero errors across 107 style blocks / 2,745 qualified rules.
-- HTML parser FAIL (inherited from Candidate 207): `lxml` reports two recoverable structure errors at the `</head><body>` boundary near line 324; root cause not corrected.
-- Chromium acceptance BLOCKED: this environment times out even on `about:blank`; native UI behavior is not verified. Do not treat this as proof that the application itself is frozen.
-- NOT RUN: actual click-through, reload persistence, four-workspace lifecycle, API/import, audio, cover failure recovery, 2555×1438 screenshot/pixel comparison, narrow viewport.
-- Remaining high-risk gaps: EMQ/MIX slow activation/hidden modal not root-cause fixed or verified; existing importer/list-removal flows and all workspace lifecycle operations require browser tests; visual similarity is unmeasured.
-- Candidate 210 is NOT ACCEPTED and must not be delivered as a finished version. HTML upload and remote SHA-256 readback are NOT VERIFIED.
-- Report: `reports/candidate210-songselect-rebuild-from-207-20261024/VALIDATION.md`.
+- Candidate 178 remains the recovery baseline. Candidate 207 remains the unchanged direct source; Candidates 208/209 remain rejected and untouched.
+- Candidate 207: 9,310,496 bytes; SHA-256 2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100.
+- Current local Candidate 210: /mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html
+- Current size: 9,347,587 bytes. SHA-256: fea29371f6a94cc21a4ccfba9b98c1f4d76a9ae4727d54a269e6b79e1f65a036.
+- This iteration fixed Song Select row grid placement, normalized row widths, reduced row height to about 84 px at 2555×1438, removed an unnecessary getSongsForWork scan from EMQ/MIX default-category rendering, and added viewport-scoped cover retries with timeout/fallback.
+- Chromium launches. Direct file:// and localhost navigation are blocked by the environment, so Playwright set_content plus an in-memory localStorage shim was used. This supports DOM/event/layout tests but does not validate native double-click launch or durable storage.
+- PASS: page initializes without captured pageerror exceptions; Song Select creates 180 rows; search match/no-match works; repeated AMQ→EMQ→MIX switches complete after the performance fix; import, batch and custom-list workspaces open and Escape-close while retaining Song Select; Back returns home.
+- Corrected runtime defects: row copy was placed under/behind the wrong grid column; EMQ/MIX performed unnecessary per-work song lookups for category “all”, stalling mode activation.
+- NOT VERIFIED: successful real cover loading or network retry because external DNS fails here; real audio/autoplay/random seek; actual wheel-centered selection; learning workspace lifecycle; custom-list persistence; pixel acceptance.
+- Static validation: 68 executable inline JS blocks pass node --check; two embedded payload blocks excluded. CSS: 107 style blocks, 2,745 qualified rules, zero tinycss2 parse errors. Inherited HTML structure warning from Candidate 207 still needs dedicated investigation.
+- Fixed-resolution screenshot exists, but osu!stable geometry/pixel comparison is incomplete. No similarity percentage is claimed.
+- GitHub HTML upload/readback SHA-256 is BLOCKED: connector accepts text content but not a local-file byte stream; container git/curl cannot resolve github.com. Do not claim the HTML is uploaded.
+- Status: EXPERIMENTAL / NOT ACCEPTED / NOT FOR USER DELIVERY.
