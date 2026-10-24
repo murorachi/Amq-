@@ -26,3 +26,10 @@
 5. 將 Candidate255 HTML 上傳至本分支唯一正式路徑，回讀遠端檔案並計算 SHA-256，必須與本機 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d` 相符。
 6. 更新測試報告、`CURRENT_STATUS.md`、`BASELINE.md`、`NEXT_TASK.md` 與交付紀錄；所有未實測項目維持 NOT RUN/BLOCKED。Batch 3 未完成前不可開始 Batch 4。
 
+## 原生瀏覽器回報後的更新（2026-10-24）
+- PASS：使用者一般瀏覽器原生 localStorage 可讀寫；透過 UI 建立暫存自訂清單，重新載入後仍存在，最後透過 UI 刪除。
+- PASS（有限範圍）：工作區內容面板切換與動畫／VNDB 匯入入口存在。
+- NOT RUN：正式路由、返回行為、DOM 清理及作品／歌曲選取隔離。切換 watchlist/dashboard/learningPlan 後 active view 仍為 catalog，因此原報告的 PASS 不能代表正式路由已驗收。
+- NOT RUN：AniList/MAL 與 VNDB 真實 API 回應、資料解析、去重及錯誤恢復。Resource Timing 不構成 API 成功證據。
+- 待辦：上傳 Candidate255 正式 HTML 至此分支，回讀遠端內容並核對大小與 SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- Batch 3 未完成；完成互動驗收、真實 API 與遠端產物核對前不得開始 Batch 4。
