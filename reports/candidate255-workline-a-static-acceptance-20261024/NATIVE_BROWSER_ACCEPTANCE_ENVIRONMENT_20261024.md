@@ -22,8 +22,10 @@
 - 檔案：Candidate255_native_browser_acceptance_kit_20261024.zip（本機生成，尚未上傳 GitHub）。
 - 方式：Windows Python 3 標準庫 HTTP 伺服器只綁定 127.0.0.1:8765，透過同源 iframe 載入候選 HTML，直接使用瀏覽器原生 localStorage。
 - 設計測試：初始化與 storage 讀寫、工作區路由切換、AniList/MAL 與 VNDB 入口、自訂清單建立、iframe 重新載入後確認保存、嘗試清理測試清單、資源 timing 觀察。
-- 產物 SHA-256：候選 HTML 的 SHA-256 已在工具包 manifest 記錄；ZIP SHA-256：f92ec64ec2e19ab503fa9d1600a20bbbd96e668576c076c37767330e16e96ce3。
-- 尚未執行：使用者 Windows 瀏覽器實際操作，故所有工具包測試結果均不能預先標為 PASS。
+- 產物 SHA-256：候選 HTML 的 SHA-256 已在工具包 manifest 記錄；ZIP SHA-256：89784d98863990550e21cff8c840c964b89d058834724561ab42aa69ae168d82。
+- PASS：驗收頁 inline JavaScript 通過 `node --check`；伺服器 Python 通過 `py_compile`。
+- PASS：本機 HTTP smoke test 實際回應 `/acceptance.html`、`/candidate255.html`、`/rollback_candidate254.html` 均為 HTTP 200，且回傳大小符合預期。
+- NOT RUN：使用者 Windows 瀏覽器實際操作與原生 localStorage reload；故真實持久化仍未驗收。
 
 ## 既有互動測試的證據界線
 - Playwright 測試記錄 16 組應用層操作，並測到工作區切換、匯入入口與自訂清單 CRUD 的部分路徑。
