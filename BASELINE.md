@@ -146,3 +146,9 @@
 - BLOCKED：原生 file://、持久化 reload。NOT RUN：真實音訊、即時 API、多人、像素比對與部分操作分支。
 - 回滾：`amq_learning_tool_v82_85_46_candidate226_rollback_before_candidate227_20261024.html`，9,348,469 bytes，SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`。
 - GitHub：Stage 13 報告與狀態文件已提交；Candidate227 HTML 未上傳，遠端 HTML SHA 未驗證。
+
+
+## Candidate227 補充回歸結果（2026-10-24）
+- PASS：作品黑名單加入／解除；SRS 對所選作品歌曲建立卡片；切換到歌曲批次後作品與歌曲選取集合維持隔離。
+- 以上僅為 Playwright 記憶體 storage shim 結果，不代表持久化驗收。
+- 待測：看番狀態全部分支、超過 300 部作品的確認／取消分支、原生 file:// 與重新載入。
