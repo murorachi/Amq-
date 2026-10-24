@@ -1,0 +1,28 @@
+{
+  "javascript_syntax": {
+    "status": "PASS",
+    "blocks": 67,
+    "errors": 0
+  },
+  "css_parse": {
+    "status": "PASS",
+    "blocks": 109,
+    "errors": 0
+  },
+  "dom_ids": {
+    "status": "PASS",
+    "count": 292,
+    "duplicates": 0
+  },
+  "automation_static_assertions": "PASS",
+  "full_page_playwright": {
+    "status": "NOT RUN",
+    "reason": "Full workspace route and click flow not executed in browser in this stage."
+  },
+  "native_file_url_and_reload_persistence": {
+    "status": "BLOCKED",
+    "reason": "Chromium managed URLBlocklist blocks file:// and localhost navigation."
+  },
+  "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+  "github_html_upload_remote_sha": "NOT VERIFIED"
+}
