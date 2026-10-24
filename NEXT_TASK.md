@@ -1,3 +1,26 @@
+# 下一步：Candidate262 共用設計系統與 Batch 3 驗收（2026-10-24）
+
+## 最新候選
+- `amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`，9,360,777 bytes
+- SHA-256：`e7a2dd91b49042192f32ef2c23923b7128edc47e1fc2a360525a9b01a8b97aa4`
+- 回滾 Candidate261：`b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`
+
+## 順序
+1. 完成預定的共用 UI 樣式整理，但不改各工作區的業務操作與資料範圍。
+2. 樣式穩定後做一次整合原生瀏覽器驗收：清單匯入／歌曲批次路由、工作區切換／返回與 DOM 清理、桌面及窄視窗面板位置、歌曲搜尋與選取一致性。
+3. 測試自訂清單建立、加入、移除、篩選及重新載入持久化。
+4. 測試 AniList/MAL/VNDB 匯入解析、去重、無效輸入、錯誤復原、取消／確認移除及來源限定刪除。
+5. 上傳精確 HTML 到本分支，讀回核對版本、位元組數與 SHA-256；無法執行就維持 BLOCKED。
+6. 更新測試與交接文件。Batch 3 未結案前不得開始 Batch 4。
+
+## 狀態
+- 靜態檢查：PASS
+- 原生瀏覽器：BLOCKED（環境在 DOM 載入前阻擋導航）
+- 真實 API／資料安全／持久化：NOT RUN
+- GitHub HTML 遠端核對：BLOCKED
+
+---
+
 # 下一步：原生瀏覽器驗收 Candidate258（2026-10-24）
 
 ## Candidate258 試點候選
