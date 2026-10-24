@@ -15,6 +15,7 @@
 - Script lifecycle inventory committed and read back: `reports/candidate212-100-item-continuation-20261024/SCRIPT_LIFECYCLE_INVENTORY.md`, blob SHA `f0cdb94352efe880a4265e329d5e99624c917e30`.
 - Observer/timer lifecycle review committed and read back: `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md`, blob SHA `daa78e8a2c1b09f1d364b6dc58688ffea19797c7`.
 - DOM ID ownership review committed: `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md`; initial markup has 296 unique IDs. Repeated source ID strings are mainly template/fallback paths and require runtime lifecycle checks, not blind deletion.
+- Browser interaction report committed: `reports/candidate212-100-item-continuation-20261024/BROWSER_ACCEPTANCE_REPORT.md`. Chromium `page.set_content()` tests passed for startup, tab clicks, 10 workspace open/close transitions, custom-list create/add/remove/delete, and batch selection/status updates. Native file/localhost navigation and persistent-origin tests remain BLOCKED.
 - Additional executed check: all 108 CSS style blocks parsed with `tinycss2`; 2,763 qualified rules, 0 stylesheet parse errors, 0 declaration errors.
 
 ## Static evidence
