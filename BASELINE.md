@@ -1,5 +1,14 @@
 # BASELINE — AMQ Song Select
 
+## Current experimental checkpoint: Candidate 211 (NOT ACCEPTED)
+- Local HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_211_layout_scroll_focus.html`
+- Size: 9,352,687 bytes
+- SHA-256: `4ba1ded70e46e6c437628150be3c86bad045a070f49a84ba50dac7d02465c53b`
+- Parent Candidate 210 SHA-256: `92f3e6353bd9e9d72d148037cd710818e25d514ce6c2ed57642e2ab248f6ec5f`
+- This is an experimental local artifact. It has not been uploaded as an HTML file and is not an accepted baseline. Rollback to Candidate 210 or the unchanged direct source Candidate 207.
+
+---
+
 - No accepted final release exists for the current osu!stable Song Select refactor.
 - Recovery baseline Candidate 178 SHA-256: b91109c7c660be064cedf76b20e473b12ca415be8e0650f16d8086339c2a9f80.
 - Direct source Candidate 207: 9,310,496 bytes; SHA-256 2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100. It remains unchanged.
