@@ -1,22 +1,14 @@
-# CURRENT STATUS — Candidate 203 (experimental, not accepted)
+# CURRENT STATUS — Candidate 208 (experimental, not accepted)
 
-- Recovery baseline: Candidate 178, explicitly selected because Candidate 205 was unavailable.
-- Candidate lineage preserved: 178 -> 183 -> 184 -> 185 -> 186 -> 187 -> 188 -> 189 -> 190 -> 191 -> 192 -> 193 -> 194 -> 195 -> 196 -> 197 -> 198 -> 199 -> 200 -> 201 -> 202 -> 203.
-- Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_203_priority_custom_list_clicks.html`
-- Size: 9,309,775 bytes. SHA-256: `d5c8c19d52671e05f9d2f9a578c853bb8c0cf4123abc0d27c8d4fa5dc9bf26e6`.
-- Candidate 203 adds a final route interceptor for legacy workspace destinations while Song Select is active, preserves original navigation outside Song Select, and keeps the visible four-entry C99 rail as the actual workspace entry point (AniList/MAL, VNDB, custom lists, learning plan). The obsolete dock remains hidden; it is not treated as the four-workspace UI.
-- The shared panel is positioned using the visible C99 rail as its geometry anchor where applicable, and remembers a stable invoker for focus restoration.
-- Custom-list workflow integration: exposed a narrow adapter to the existing custom-list data layer; custom-list mode now scopes to Song Select's visible `#amqSongSelectTracklist .songrow[data-work-id]` rather than hidden legacy `.card` nodes. Work IDs are indexed to avoid repeated full-map scans. The click interceptor runs at window capture phase.
-- Custom-list observer is restricted to the active grid's direct child list and debounced; the previous document-wide observer caused repeated applyCards calls during catalog DOM churn.
-- Static validation: 66 executable inline JS blocks PASS; 0 syntax failures. One JSON data block and two compressed/base64-related blocks excluded. CSS parsing: 104 style blocks, 2,689 qualified rules, 0 parse errors.
-- PASS: actual C99 rail has four visible actions in Playwright catalog context.
-- PASS: AniList/MAL opens existing modal while route stays catalog.
-- PASS: VNDB, custom list and learning plan open existing shared panel while route stays catalog; panel is positioned to the right of the rail and does not overlap it in the 2555x1438 harness.
-- PASS: focus returns to the invoking C99 rail button after VNDB/custom-list/learning panel closes.
-- PASS: 18 route-intercepted open/close cycles; no duplicate panel nodes; Back and Escape close panels.
-- PASS: custom list create, duplicate rejection, rename, delete; 0 page errors with in-memory storage shim.
-- PASS: data-layer adapter adds and removes a work ID from an existing custom list.
-- NOT VERIFIED: actual visible Song Select row click toggling could not be asserted in the set_content harness; event dispatch did not reach the tested listener as expected. Do not count this as UI acceptance.
-- BLOCKED: durable storage across reload and native file:// navigation.
-- NOT RUN: live AniList/MAL/VNDB imports and failures/retries, cover retry, real audio, full 26-case legacy suite adaptation, fixed-resolution pixel comparison, multiplayer lifecycle regression.
-- Candidate 203 is experimental, not accepted. GitHub HTML upload is NOT VERIFIED.
+- Recovery baseline: Candidate 178, explicitly selected because Candidate 205 was unavailable. Do not substitute Candidate 205.
+- Candidate lineage preserved through Candidate 207; Candidate 207 remains unchanged as the immediate parent.
+- Immediate parent Candidate 207 SHA-256: `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`, 9,310,496 bytes.
+- Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_208_stable_frame_player_workspace_consolidation.html`.
+- Candidate 208 size: 9,324,073 bytes. SHA-256: `15cfd2caa7045e3cc585bfd6e4bc8c35b72e2e70e3d97a7a3111c0228d67f892`.
+- Candidate 208 uses Library references IMAGE1–IMAGE5 and image.png as visual guidance. It adds a black/blue top filter frame, transparent functional-search placement, selected-row width/centering logic, selection-triggered autoplay with random seek after metadata, consolidated dock actions, hides the works-catalog toggle, and relabels the VNDB rail entry as batch organization.
+- Important limitation: changing the rail entry does not yet unify VNDB import into the AniList/MAL import workspace. That requirement remains unfinished.
+- Static validation: 68 executable inline JavaScript blocks PASS; 0 syntax failures; two data/payload blocks excluded. CSS parse: 105 style blocks, 2,715 qualified rules, 0 parse errors.
+- Browser harness: BLOCKED. A full Playwright set_content run timed out with Node EPIPE while processing the 9.3 MB document. No UI behavior assertions from that run count as PASS.
+- NOT RUN / NOT VERIFIED: native file:// acceptance, search interaction, selected-row autoplay/scroll, dock action behavior, durable storage/reload, live imports, real audio/seek, cover load/retry, batch selection workflow, hidden modal/slow EMQ-MIX interaction, fixed-resolution pixel comparison, legacy 26-case suite.
+- Candidate 208 is experimental, not accepted. HTML upload to GitHub and remote HTML SHA-256 readback are NOT VERIFIED.
+- Full evidence: `reports/candidate208-stable-frame-player-workspace-consolidation-20261024/VALIDATION.md`.
