@@ -92,7 +92,7 @@
 | 57 | BLOCKED | 原生持久化來源/重新載入測試受瀏覽器環境限制；目前僅記憶體 mock。 |
 | 58 | NOT RUN | localStorage/sessionStorage 的完整 key-owner 清單尚未完成。 |
 | 59 | NOT RUN | 已識別場景背景 IndexedDB 的 DB/store/version；全專案 DB 升級圖未完成。 |
-| 60 | BLOCKED | IndexedDB Blob 保存、匯出、還原及原生重啟測試未能在可用環境執行。 |
+| 60 | BLOCKED | 原生 IndexedDB Blob 保存/匯出/還原仍因 opaque origin 受阻；另已實測 backup preflight 接受無效 PNG bytes 與 8193 px 圖片，原型修正通過。見 `SCENE_BACKUP_VALIDATION_ACCEPTANCE.md`。 |
 
 ## 第七階段：工作區與導航
 
@@ -159,3 +159,12 @@
 1. Candidate212 原始 HTML 無法以位元組完整方式取得；不可用少 26 bytes 的重建副本交付。
 2. Song Select 鍵盤事件所有權、批次選取畫面同步、音量備援一致性及 API timeout 已找到根本原因與可測試原型，但尚未套用正式來源。
 3. 四工作區的多人入口、IndexedDB/Blob 原生持久化、真實 API/音訊/多人流程與像素差異仍未完成。
+
+## 2026-10-24 continuation addendum
+
+- Song Select keyboard ownership defect and stable-stage prototype: `SONGSELECT_KEYBOARD_ACCEPTANCE.md`.
+- Batch selection state/render mismatch and single-owner Set prototype: `BATCH_SELECTION_ACCEPTANCE.md`.
+- Import timeout gap and shared timeout prototype: `IMPORT_API_ERROR_ACCEPTANCE.md`.
+- Scene background backup preflight validation defect and decode/dimension prototype: `SCENE_BACKUP_VALIDATION_ACCEPTANCE.md`.
+- Custom-list isolation, imported-list removal, four-workspace panel lifecycle, observer mount-cycle and geometry evidence are recorded in their respective acceptance reports in this directory.
+- These prototypes are not release changes. Candidate212 raw-byte access remains the gating blocker; no production HTML was modified or uploaded.
