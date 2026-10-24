@@ -6,6 +6,7 @@ Latest evidence:
 - `reports/candidate212-100-item-continuation-20261024/STATIC_AUDIT.md` records the recovered artifact inventory, CSS parse results, and the qualified Candidate218 call-graph finding.
 - `reports/candidate212-100-item-continuation-20261024/SCRIPT_LIFECYCLE_INVENTORY.md` provides per-script listener, observer, timer, storage, and route counts.
 - `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md` records the observer/timer teardown review queue. Missing disconnect calls are candidates for verification, not proof of leaks.
+- `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md` maps repeated IDs to guarded creators and mutually exclusive templates. No code is proven safe to delete from duplicate-ID counts alone.
 - `CURRENT_STATUS.md` and `BASELINE.md` were updated to reflect that Candidate207/212/216/218 exist in the AMQ學習工具 Library but are absent from the target branch's Git Tree.
 - The readable Candidate212 text export is 26 bytes shorter than the recorded original and hashes differently. It is not a byte-identical build source.
 
