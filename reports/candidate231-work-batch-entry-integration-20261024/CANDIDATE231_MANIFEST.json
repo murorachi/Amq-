@@ -1,0 +1,38 @@
+{
+  "stage": "Candidate231",
+  "title": "Work batch entry integration and runtime acceptance",
+  "date": "2026-10-24",
+  "parent": {
+    "version": "Candidate229",
+    "bytes": 9366832,
+    "sha256": "8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448"
+  },
+  "artifact": {
+    "version": "Candidate231",
+    "file": "amq_learning_tool_v82_85_46_candidate231_work_batch_entry_integration_20261024.html",
+    "bytes": 9367325,
+    "sha256": "74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf"
+  },
+  "rollback": {
+    "file": "amq_learning_tool_v82_85_46_candidate229_rollback_before_candidate231_20261024.html",
+    "bytes": 9366832,
+    "sha256": "8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448",
+    "byte_identical_to_parent": true
+  },
+  "tests": {
+    "javascript_syntax": "PASS (67 executable blocks, 0 failures)",
+    "css_parse": "PASS (109 blocks, 0 parser errors)",
+    "visible_work_batch_entry": "PASS (actual panel mounted; 9516 works listed)",
+    "visible_list_add_result": "PASS (2 selected works added and truthful result shown)",
+    "visible_storage_failure": "PASS",
+    "empty_selection": "PASS",
+    "confirmation_cancel": "PASS (selection remains empty)",
+    "repeat_open_close": "PASS (12 cycles)",
+    "business_api_branches": "PASS (watch 6; familiarity 4; practice 7; guards; confirmation accept/cancel; storage rollback)",
+    "page_errors": "PASS (0 uncaught page errors; 0 console errors)",
+    "native_file_and_reload_persistence": "BLOCKED (managed Chromium URLBlocklist)",
+    "audio_live_api_multiplayer_pixel_comparison": "NOT RUN"
+  },
+  "github_html_upload": "NOT DONE",
+  "remote_html_sha256_verified": false
+}
