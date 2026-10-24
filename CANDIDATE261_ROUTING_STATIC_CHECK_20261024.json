@@ -1,0 +1,59 @@
+{
+  "candidate": {
+    "file": "amq_learning_tool_v82_85_75_candidate261_dedicated_song_batch_route_20261024.html",
+    "version": "v82.85.75-candidate261-dedicated-song-batch-route-20261024",
+    "bytes": 9358614,
+    "sha256": "b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d",
+    "accepted_baseline": false
+  },
+  "parent": {
+    "file": "amq_learning_tool_v82_85_74_candidate260_workspace_css_and_batch_routing_fix_20261024.html",
+    "sha256": "a19be956afdf10b50dc15bbc10b3c69408e42c8751a838fb8e61313d0d98ed1f"
+  },
+  "checks": [
+    {
+      "test": "Baseline SHA-256",
+      "status": "PASS"
+    },
+    {
+      "test": "67 executable inline JS blocks",
+      "status": "PASS",
+      "errors": 0
+    },
+    {
+      "test": "110 CSS blocks",
+      "status": "PASS",
+      "parse_errors": 0
+    },
+    {
+      "test": "273 HTML IDs",
+      "status": "PASS",
+      "duplicates": 0
+    },
+    {
+      "test": "Routing static invariants",
+      "status": "PASS"
+    },
+    {
+      "test": "Native browser click acceptance",
+      "status": "BLOCKED",
+      "reason": "Chromium headless timed out without DOM output"
+    },
+    {
+      "test": "GitHub HTML upload and remote SHA readback",
+      "status": "BLOCKED",
+      "reason": "Candidate261 HTML not uploaded"
+    },
+    {
+      "test": "Real import API and source-limited removal tests",
+      "status": "NOT RUN"
+    }
+  ],
+  "github": {
+    "branch": "amq-candidate261-dedicated-song-batch-route-20261024",
+    "docs_updated": true,
+    "candidate_html_uploaded": false,
+    "remote_sha_verified": false
+  },
+  "next": "Native browser route acceptance; complete Batch 3 before Batch 4."
+}
