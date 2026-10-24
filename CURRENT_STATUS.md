@@ -1,14 +1,13 @@
-# CURRENT STATUS — Candidate 208 (experimental, not accepted)
+# CURRENT STATUS — Candidate 209 (experimental, not accepted)
 
-- Recovery baseline: Candidate 178, explicitly selected because Candidate 205 was unavailable. Do not substitute Candidate 205.
-- Candidate lineage preserved through Candidate 207; Candidate 207 remains unchanged as the immediate parent.
-- Immediate parent Candidate 207 SHA-256: `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`, 9,310,496 bytes.
-- Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_208_stable_frame_player_workspace_consolidation.html`.
-- Candidate 208 size: 9,325,001 bytes. SHA-256: `0943bfde66d0f19e5d004f4ec70c7eea44c51bceede7864e893a64051ba720bf`.
-- Candidate 208 uses Library references IMAGE1–IMAGE5 and image.png as visual guidance. It adds a black/blue top filter frame, transparent functional-search placement, selected-row width/centering logic, selection-triggered autoplay with random seek after metadata, consolidated dock actions, hides the works-catalog toggle, and relabels the VNDB rail entry as batch organization.
-- Important limitation: changing the rail entry does not yet unify VNDB import into the AniList/MAL import workspace. That requirement remains unfinished.
-- Static validation: 68 executable inline JavaScript blocks PASS; 0 syntax failures; two data/payload blocks excluded. CSS parse: 105 style blocks, 2,715 qualified rules, 0 parse errors.
-- Browser harness: BLOCKED. A full Playwright set_content run timed out with Node EPIPE while processing the 9.3 MB document. No UI behavior assertions from that run count as PASS.
-- NOT RUN / NOT VERIFIED: native file:// acceptance, search interaction, selected-row autoplay/scroll, dock action behavior, durable storage/reload, live imports, real audio/seek, cover load/retry, batch selection workflow, hidden modal/slow EMQ-MIX interaction, fixed-resolution pixel comparison, legacy 26-case suite.
-- Candidate 208 is experimental, not accepted. HTML upload to GitHub and remote HTML SHA-256 readback are NOT VERIFIED.
-- Full evidence: `reports/candidate208-stable-frame-player-workspace-consolidation-20261024/VALIDATION.md`.
+- Recovery baseline remains Candidate 178 because Candidate 205 was unavailable. Candidate 208 was explicitly rejected as a source; Candidate 209 was rebuilt directly from Candidate 207.
+- Candidate 207 remains unchanged: 9,310,496 bytes; SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
+- Latest local artifact: `/mnt/data/amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_209_rebuilt_songselect_from_207.html`.
+- Candidate 209 size: 9,324,855 bytes. SHA-256: `8a38e08cfb904703c02b7911b7974c8c3d6fc3617bacc6b6b85ef29e8d90ded1`.
+- Rebuilt features: osu!stable-inspired dark/blue top filter frame with existing search control moved into it; removed works-catalog toggle; removed actual row-level “更多” disclosure markup; added inline tag/reset/blacklist actions; added bottom player positioning and a nearby tag/blacklist action bar; added row-centering/autoplay/random-seek hooks.
+- Static validation PASS: 68 executable inline JavaScript blocks pass `node --check`, zero syntax failures; 105 style blocks / 2,722 CSS qualified rules parsed with zero CSS errors. Static assertions confirm the row-level “更多” disclosure and works-toggle creation are absent.
+- Browser acceptance BLOCKED: headless Chromium file navigation did not finish within 45 seconds. No actual UI behavior is counted as passed.
+- NOT VERIFIED: actual search, layout against IMAGE1–IMAGE5, row wheel centering/autoplay/random seek, dock action wiring, persistence, live imports, real covers, EMQ/MIX delay/hidden modal.
+- NOT DONE: unified AniList/MAL/VNDB import workspace, efficient batch organization, app icon redesign, cover-loading fix and EMQ/MIX root-cause fix.
+- Candidate 209 is experimental and not accepted. HTML upload to GitHub and remote HTML SHA-256 readback are NOT VERIFIED.
+- Report: `reports/candidate209-rebuilt-from-207-20261024/VALIDATION.md`.
