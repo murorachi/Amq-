@@ -215,3 +215,15 @@
 - 持久化實測：`aniCustomPracticeListsV1` 的暫存清單跨 reload 保留，並由 UI 刪除清理成功。
 - NOT RUN：外部 API 功能驗收。Resource Timing 僅顯示 `https://cdn.animenewsnetwork.com/encyclopedia/api.xml` 請求，不能證明 API 回應解析、匯入、去重或錯誤恢復成功。
 - Candidate256 SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`，9,355,585 bytes。本機候選已通過上述驗收，但仍不是正式基準；GitHub HTML 上傳及遠端 SHA 核對未完成。Batch 3 仍未完成。
+
+
+## Candidate260 — CSS 清理與歌曲批次路由修正（2026-10-24）
+- 候選檔：`amq_learning_tool_v82_85_74_candidate260_workspace_css_and_batch_routing_fix_20261024.html`；9,358,373 bytes；SHA-256 `a19be956afdf10b50dc15bbc10b3c69408e42c8751a838fb8e61313d0d98ed1f`。
+- 根因一：舊共用匯入攔截器把 `data-c99-action="vndb"` 當成匯入入口，截斷歌曲批次整理既有路由。現在只攔截真正的 `import` action；`vndb` 回到原歌曲批次處理器。
+- 根因二：清理舊 CSS 不應只靠後加覆蓋。已從既有 `candidate210-workspace-unification` 樣式中移除過時 `.amq210-import-choice` 規則，並將共用面板基礎 CSS 與既有 geometry 實作直接修正。
+- 重複匯入面板：移除舊 import hub 的第二套 UI 建構，舊入口改轉送到唯一共用面板。
+- PASS：67 個 inline JS 區塊語法檢查、110 個 CSS 區塊解析、273 個實際 HTML ID 無重複、舊匯入 CSS 移除與事件路由靜態檢查。
+- BLOCKED：原生瀏覽器互動／畫面驗收（目前環境 Chromium 導覽受阻）。
+- NOT RUN：真實 AniList/MAL/VNDB API、移除範圍與錯誤復原測試。
+- BLOCKED：HTML 上傳 GitHub 與遠端 SHA-256 回讀；未宣稱 HTML 已上傳。
+- Batch 3 仍未完成。先完成瀏覽器驗收、批次搜尋選取一致性、清單 CRUD/持久化、匯入來源資料安全及遠端產物驗證，不得開始 Batch 4。
