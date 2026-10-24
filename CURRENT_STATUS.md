@@ -1,5 +1,6 @@
 # CURRENT_STATUS — AMQ 100-item engineering continuation (2026-10-24)
 
+- Full 100-item progress matrix committed at `reports/candidate212-100-item-continuation-20261024/100_ITEM_PROGRESS.md`; every item has PASS/FAIL/NOT RUN/BLOCKED and evidence/remaining work.
 ## Verified baseline and artifacts
 - Target branch: `amq-candidate104-songselect-layout-fix`.
 - Branch head before this documentation update: `31b111d3e5530a268d66b10743556cc71770985f` (commit message: `Prioritize shared volume handler after reproduced fallback failure`).
