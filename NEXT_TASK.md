@@ -8,6 +8,7 @@ Latest evidence:
 - `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md` records the observer/timer teardown review queue. Missing disconnect calls are candidates for verification, not proof of leaks.
 - `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md` maps repeated IDs to guarded creators and mutually exclusive templates. No code is proven safe to delete from duplicate-ID counts alone.
 - `reports/candidate212-100-item-continuation-20261024/BROWSER_ACCEPTANCE_REPORT.md` records real Chromium `page.set_content()` interaction tests: 10 workspace panel transitions, custom-list create/add/remove/delete, and batch operations passed in an isolated in-memory storage environment. Native launch/reload persistence is still blocked.
+- `reports/candidate212-100-item-continuation-20261024/SONGSELECT_GEOMETRY_ACCEPTANCE.md` records the measured geometry: hover shift 3 px vs selected shift 7 px PASS; Song Select shows about 6.3 card-equivalents and a 33%-visible last card, so the 7.5-card / half-card target FAILS.
 - `CURRENT_STATUS.md` and `BASELINE.md` were updated to reflect that Candidate207/212/216/218 exist in the AMQ學習工具 Library but are absent from the target branch's Git Tree.
 - The readable Candidate212 text export is 26 bytes shorter than the recorded original and hashes differently. It is not a byte-identical build source.
 
@@ -21,7 +22,7 @@ Latest evidence:
 6. **P0 regression.** Test page initialization/DOM stability, custom-list create/add/remove/filter/delete/reload, and all four workspace routes including back navigation and teardown.
 7. **Persistence and game behavior.** Test local/session storage, IndexedDB stores/versioning/Blob backup, AMQ/EMQ/MIX playback and answer/score/history consistency.
 8. **Dependency-led cleanup.** Map each UI owner, event, observer, timer, route and storage key. Classify Keep / Integrate then delete / Delete / Needs confirmation. Duplicate IDs and CSS rules alone do not prove dead code.
-9. **osu!stable Song Select.** Use the fixed reference screenshot; measure window size, card geometry, 7.5-card viewport, hover/selected offsets and right-panel data. Record actual pixel differences.
+9. **osu!stable Song Select.** The current interaction test passes hover/selected offset and row-detail synchronization, but geometry fails: average pitch ~126 px vs target ~111–113 px, with only ~6.3 card-equivalents and a one-third bottom card. After raw-source recovery, tune the layout owner and validate 7.5 cards / half-visible bottom card; then run masked reference-region pixel comparison.
 10. **API/import acceptance.** Verify AniList, MAL and VNDB success/error/timeout/rate-limit/offline paths, deduplication, list removal and cover fallback/retry.
 11. **Release gate.** Run syntax, unit, integration and browser tests; label PASS/FAIL/NOT RUN/BLOCKED accurately. Build a single-file HTML only from a byte-verified source; compare the output with the source build and compute SHA-256.
 12. **GitHub delivery.** Commit necessary docs/reports to `amq-candidate104-songselect-layout-fix`. Upload the HTML only through a byte-preserving route; read it back and verify version, byte size and SHA-256. Never claim HTML upload without remote evidence.
