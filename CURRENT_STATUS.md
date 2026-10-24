@@ -1,3 +1,15 @@
+## Candidate257 左側清單同步 UI 試點（2026-10-24）
+- Candidate256 作為未接受的工作來源／回滾點保持不變；Candidate257 為實驗候選，不是正式基準。
+- Candidate257：`amq_learning_tool_v82_85_71_candidate257_unified_public_list_import_ui_20261024.html`，9,356,282 bytes，SHA-256 `4769f24b643f3a044e75795b36222dfa3e7681232d0d93db4300b09e475acb6a`。
+- 將 AniList、MyAnimeList、VNDB 收斂至同一左側工作區面板；每個來源各有「匯入公開清單」與「移除本機清單」兩個操作，共 6 個主要按鈕。
+- 試點面板不顯示 Token 欄位；AniList 純數字 ID 會被拒絕。沿用既有匯入／移除函式及資料儲存，未新增資料 schema。
+- PASS：67 個 inline JS 區塊語法、109 個 CSS 區塊解析、272 個 DOM ID 無重複；隔離瀏覽器 UI 接線測試 PASS，0 pageerror。
+- BLOCKED：完整 9.36 MB 頁面 Playwright 測試超時／瀏覽器管線中斷。NOT RUN：Candidate257 原生瀏覽器 reload、真實 API 成功／去重／錯誤復原。NOT VERIFIED：HTML 遠端上傳與 SHA。
+- 目前只統一左側工作區入口；其他 legacy 入口仍待依賴盤點，不宣稱已全專案刪除重複 UI。
+- 回滾：`amq_learning_tool_v82_85_70_candidate256_song_batch_preserve_selection_20261024.html`，SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+
+---
+
 ## Candidate224 後續工作順序修正：先處理阻塞，再跳過（2026-10-24）
 - 已讀取 Chromium managed policy：`/etc/chromium/policies/managed/000_policy_merge.json` 中 `URLBlocklist` 為 `["*"]`；最小 `file://`、`data:` 頁面及 localhost 導覽都回報 `ERR_BLOCKED_BY_ADMINISTRATOR`。這是環境層阻擋，不是 AMQ 頁面錯誤。
 - Candidate222 透過 Playwright `page.set_content()` + 測試用記憶體 storage shim 可在約 2.1 秒完成 DOMContentLoaded，`readyState=complete`，沒有 pageerror/console error。此測試不涵蓋原生 URL 導覽及持久化。
@@ -191,14 +203,3 @@
 - 持久化實測：`aniCustomPracticeListsV1` 的暫存清單跨 reload 保留，並由 UI 刪除清理成功。
 - NOT RUN：外部 API 功能驗收。Resource Timing 僅顯示 `https://cdn.animenewsnetwork.com/encyclopedia/api.xml` 請求，不能證明 API 回應解析、匯入、去重或錯誤恢復成功。
 - Candidate256 SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`，9,355,585 bytes。本機候選已通過上述驗收，但仍不是正式基準；GitHub HTML 上傳及遠端 SHA 核對未完成。Batch 3 仍未完成。
-
-
-## Candidate257 左側清單同步 UI 試點（2026-10-24）
-- Candidate256 作為未接受的工作來源／回滾點保持不變；Candidate257 為實驗候選，不是正式基準。
-- Candidate257：`amq_learning_tool_v82_85_71_candidate257_unified_public_list_import_ui_20261024.html`，9,356,282 bytes，SHA-256 `4769f24b643f3a044e75795b36222dfa3e7681232d0d93db4300b09e475acb6a`。
-- 將 AniList、MyAnimeList、VNDB 收斂至同一左側工作區面板；每個來源各有「匯入公開清單」與「移除本機清單」兩個操作，共 6 個主要按鈕。
-- 試點面板不顯示 Token 欄位；AniList 純數字 ID 會被拒絕。沿用既有匯入／移除函式及資料儲存，未新增資料 schema。
-- PASS：67 個 inline JS 區塊語法、109 個 CSS 區塊解析、272 個 DOM ID 無重複；隔離瀏覽器 UI 接線測試 PASS，0 pageerror。
-- BLOCKED：完整 9.36 MB 頁面 Playwright 測試超時／瀏覽器管線中斷。NOT RUN：Candidate257 原生瀏覽器 reload、真實 API 成功／去重／錯誤復原。NOT VERIFIED：HTML 遠端上傳與 SHA。
-- 目前只統一左側工作區入口；其他 legacy 入口仍待依賴盤點，不宣稱已全專案刪除重複 UI。
-- 回滾：`amq_learning_tool_v82_85_70_candidate256_song_batch_preserve_selection_20261024.html`，SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
