@@ -9,8 +9,10 @@
 
 ## Latest committed work
 - Added `reports/candidate212-100-item-continuation-20261024/STATIC_AUDIT.md`.
-- Report commit: `a159f76b37040bb3dc6eb045a7bf406c7f613b27`.
-- The report was read back from GitHub and its remote blob SHA was verified as `33d8a940990bc9b0ea2a56a8c28f9479a6db5ab7`.
+- Initial report commit: `a159f76b37040bb3dc6eb045a7bf406c7f613b27`.
+- Latest report update commit: `75db173d27a90608372c5b60e155ae179414b92f`.
+- Latest report was read back from GitHub; remote blob SHA: `4a0d1cd4164f278bf916f9cc36f46961b50d6b17`.
+- Additional executed check: all 108 CSS style blocks parsed with `tinycss2`; 2,763 qualified rules, 0 stylesheet parse errors, 0 declaration errors.
 
 ## Static evidence
 - Candidate212 readable text export: 68 executable inline JS blocks PASS under Node `node --check`; 2 embedded payload blocks excluded.
