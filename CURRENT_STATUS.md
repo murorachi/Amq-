@@ -224,4 +224,4 @@
 - PASS：67 個可執行 inline JS 區塊語法檢查；110 個 CSS 區塊解析；273 個 DOM ID 無重複。
 - BLOCKED：Playwright/Chromium 實際瀏覽器驗收遭環境 `net::ERR_BLOCKED_BY_ADMINISTRATOR` 阻擋，未驗證實際畫面定位、按鈕操作與篩選後選取同步。
 - NOT RUN：真實 AniList/MAL/VNDB API 匯入、刪除、去重、錯誤恢復。
-- NOT VERIFIED：GitHub 遠端 HTML 上傳與 SHA-256 讀回。Batch 3 仍未完成，不得開始 Batch 4。
+- BLOCKED：GitHub 遠端 HTML 上傳與 SHA-256 讀回。可用 GitHub 連接器的寫入介面只接受文字內容，不接受本機檔案參照；未上傳 HTML，也未宣稱成功。Batch 3 仍未完成，不得開始 Batch 4。
