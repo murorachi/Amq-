@@ -23,3 +23,13 @@
 9. Rerun static checks and report PASS/FAIL/NOT RUN/BLOCKED per assertion.
 10. Upload the exact HTML only when a transfer path supports the 9.35 MB artifact; fetch remote bytes and verify version/size/SHA-256. Current connector accepts text only and container git/curl has no DNS/network.
 11. Update CURRENT_STATUS.md, BASELINE.md, NEXT_TASK.md and validation report after material changes. Preserve all candidates; rollback to unchanged Candidate 207.
+
+## Candidate 212 next acceptance gate
+1. Reproduce AMQ versus EMQ scroll/autoplay in a browser with real media access; do not treat click-path or DOM smoke tests as proof of playback.
+2. Resolve the opaque-origin localStorage SecurityError in the test harness, then verify custom-list create/add/remove/filter/reload persistence.
+3. Verify the initial home-menu screenshot against the accepted reference; preserve the pre-open state and limit changes to the expanded workspace.
+4. Test dock layout and mutation stability across route switches and resize; current 2-second smoke observation is not exhaustive proof against every loop.
+5. Complete workspace switching/back-navigation/overlay cleanup and importer failure recovery tests.
+6. Run actual audio, random seek after real metadata, cover/CDN success, and pixel-region comparison at 2555×1438 and 1920×1080 when the environment permits.
+7. HTML upload and remote SHA-256 verification remain blocked until a byte-capable transfer path and GitHub network access are available. Never claim upload success without readback.
+8. Candidate 212 remains EXPERIMENTAL / NOT ACCEPTED. Preserve all candidates; rollback to unchanged Candidate 207 if needed.
