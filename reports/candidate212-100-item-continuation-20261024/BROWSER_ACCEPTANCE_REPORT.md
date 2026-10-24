@@ -41,3 +41,15 @@ Native navigation to both `file:///mnt/data/.../candidate212_reconstructed.html`
 ## Next acceptance gate
 
 Obtain a byte-preserving source path and a browser environment that permits native `file://` or localhost navigation. Re-run these tests with real browser storage, including page reload, custom-list persistence, IndexedDB Blob restore, and audio playback. Do not promote a candidate based only on the `page.set_content()` suite.
+
+## Additional Song Select control acceptance
+
+A separate Chromium interaction pass tested the visible Song Select controls, again using page.set_content() and isolated in-memory storage:
+
+- PASS: AMQ, EMQ, MIX buttons update the mode API and aria-pressed; the first visible row changes to EMQ content when EMQ is selected.
+- PASS: text search filters the 180 currently rendered rows down to one matching row for Chameko no Ichinichi.
+- PASS: decade filter changes the result count from 38,821 songs to 8,834 songs for the 2020s; the first visible song changes accordingly.
+- PASS: type filter further changes the result count from 8,834 to 6,764 songs for TV.
+- PASS: name sort changes the visible row order to alphabetic title order.
+- Note: the DOM keeps a fixed chunk of 180 rendered rows while filtering; result count and first row, not raw DOM row count, are the correct filter assertions.
+- NOT RUN: full scroll-to-end behavior across all 38,821 records, sort behavior for every option, and actual external audio/API behavior.
