@@ -183,3 +183,11 @@
 - Code baseline remains Candidate229: 9,366,832 bytes; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`.
 - No HTML edit was justified: runtime storage tests are blocked by opaque-origin localStorage access, and static audit found active callers for legacy batch controls. Candidate229 is unchanged and remains the only current code candidate.
 - Candidate228 rollback remains the known parent rollback artifact; Candidate229 HTML has not been uploaded to GitHub, and remote HTML SHA is not verified.
+
+
+## Candidate231 工作批次入口整合檢查點（2026-10-24）
+- Candidate229 父程式：9,366,832 bytes；SHA-256 8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448。
+- Candidate231 候選產物：amq_learning_tool_v82_85_46_candidate231_work_batch_entry_integration_20261024.html，9,367,325 bytes；SHA-256 74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf。
+- 回滾副本：amq_learning_tool_v82_85_46_candidate229_rollback_before_candidate231_20261024.html，9,366,832 bytes；SHA-256 與 Candidate229 相同，已確認 byte-identical。原始 Candidate229 未修改。
+- 變更僅把主工作區作品批次入口接到既有 Candidate210 可見面板，並在掛載成功後才回報成功；不改資料 schema，不刪除仍有依賴的 quicktools 舊控制項。
+- 執行證據與限制見 reports/candidate231-work-batch-entry-integration-20261024/STAGE_18_WORK_BATCH_ENTRY_INTEGRATION.md。Candidate231 HTML 未上傳 GitHub，遠端 HTML hash 未驗證。
