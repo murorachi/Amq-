@@ -8,7 +8,7 @@ Status: static checks passed; browser interaction acceptance remains blocked.
 - Parent SHA-256: `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371` (9,373,238 bytes)
 - Child artifact: `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html`
 - Child version: `v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025`
-- Child bytes: 9360487
+- Child bytes: 9361163
 - Child SHA-256: `cd2fdb8f1f762c4a30f64f54e64ab530607a3a3fb1866f9275804c507df08bf1`
 - Candidate277 was not modified. Candidate278 is a child candidate, not a browser-accepted release.
 
