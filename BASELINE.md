@@ -1,5 +1,21 @@
 # BASELINE — AMQ Song Select cleanup (updated 2026-10-24)
 
+## Current candidate for Batch 3 continuation
+- Candidate234 local artifact: amq_learning_tool_v82_85_48_candidate234_queue_api_integration_20261024.html
+- Size: 9,368,097 bytes.
+- SHA-256: 16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641.
+- Candidate233 rollback: 9,366,806 bytes; SHA-256 ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45; byte-identical to Candidate233 source.
+- Candidate234 is local-only. GitHub HTML upload and remote HTML SHA validation are NOT VERIFIED.
+- Candidate234 changes only queueSelectedBtn dispatch and the shared applyQueue business API; storage key/schema unchanged. Legacy catalog batch UI remains because dependencies have not yet been eliminated.
+- Test state: JS syntax PASS; CSS parse PASS; DOM IDs PASS; Node VM queue API unit tests PASS; full browser runtime BLOCKED; native reload persistence NOT RUN.
+
+## Candidate233 immediately previous checkpoint
+- Size: 9,366,806 bytes; SHA-256 ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45.
+- Candidate231 original is retained separately and unchanged.
+
+---
+# BASELINE — AMQ Song Select cleanup (updated 2026-10-24)
+
 ## Current audit baseline confirmed by user
 - Candidate231 is confirmed by the user as the latest version for this work.
 - Local artifact: `amq_learning_tool_v82_85_46_candidate231_work_batch_entry_integration_20261024.html`.
