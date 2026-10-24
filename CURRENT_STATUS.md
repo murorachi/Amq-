@@ -128,3 +128,14 @@
 - NOT RUN：完整頁面 Playwright E2E。BLOCKED：原生 file://／localhost／reload，受 Chromium managed URLBlocklist 阻擋。音訊、線上 API、多人與像素比對 NOT RUN。
 - GitHub 文件已提交並將讀回驗證；大型 HTML 尚未上傳，遠端 HTML SHA 未驗證。批次三仍未完成。
 - 報告：reports/candidate235-workspace-automation-migration-20261024/STAGE_21_CANDIDATE235_WORKSPACE_AUTOMATION_MIGRATION.md。
+
+
+## Candidate252 批次三舊批次介面刪除候選（2026-10-24）
+- 本機最新候選：`amq_learning_tool_v82_85_66_candidate252_watchlist_scoped_work_batch_20261024.html`，9,355,704 bytes；SHA-256 `f210d987495aeb52ca11e958fe2ff9942c32457f054b81d792309c14e9fb78d1`。
+- Candidate251 直接回滾檔：9,354,587 bytes；SHA-256 `4467de1ed6330c51929e783b662d95cd5ad6847dd12edb3a6fde8f49fb94849e`。
+- 已真正移除舊 `#quicktools` 面板、舊選取／批次控制列、重複建立清單／待聽入口、舊事件處理器、初始化包裝器、範圍摘要 Observer 及其 CSS；必要操作改由正式作品批次工作區和匯入工作區承接。
+- 從「我的清單」開啟作品批次時，工作範圍限制為目前看番清單顯示的作品；Candidate210 歌曲批次仍保持獨立。
+- PASS：67 JS blocks syntax、109 CSS blocks parse、274 DOM IDs unique；舊控制項與 CSS 殘留引用為 0；Node VM bridge API 與靜態路由斷言 PASS。
+- BLOCKED：Playwright／Chromium 完整頁面互動未取得有效結果；原生 file URL／reload 仍受 managed URLBlocklist 限制。NOT RUN：瀏覽器清單 CRUD、durable reload、真實音訊、即時 API、多人、像素比對。
+- Candidate252 是本機候選，尚未驗收為正式基準；GitHub 分支目前只存報告／manifest／測試狀態，HTML 尚未上傳，遠端 HTML SHA 未驗證。
+- 批次三仍未完成；不得開始批次四。報告：`reports/candidate252-batch3-legacy-panel-removal-20261024/STAGE_25_CANDIDATE252_BATCH3_LEGACY_PANEL_REMOVAL.md`。
