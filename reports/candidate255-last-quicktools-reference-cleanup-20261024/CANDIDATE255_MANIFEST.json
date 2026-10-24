@@ -3,23 +3,19 @@
   "artifact": "amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html",
   "bytes": 9355697,
   "sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
-  "parent_candidate254_sha256": "e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9",
-  "rollback_file": "amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html",
+  "rollback_candidate": "Candidate254",
   "rollback_sha256": "e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9",
   "tests": {
-    "javascript_syntax": "PASS: 67 executable inline JavaScript blocks, zero syntax errors",
-    "css_parse": "PASS: 109 style blocks, zero parser errors",
+    "javascript_syntax": "PASS: 67 blocks, zero errors",
+    "css_parse": "PASS: 109 blocks, zero parser errors",
     "dom_ids": "PASS: 272 IDs, zero duplicates",
-    "legacy_reference_audit": "PASS: 16 deleted legacy UI/control/observer/init names have zero references outside HTML comments",
-    "automation_entry": "PASS: batch-tools opens official work batch workspace and confirms mounted panel before success",
-    "song_select_mount": "PASS: dynamic Song Select mount list no longer refers to deleted quicktools node",
-    "necessary_features_static": "PASS: work batch workspace, Candidate210 song batch, custom-list storage key and original sync/VNDB modal markup retained",
-    "browser_page_set_content": "BLOCKED: opaque origin denies localStorage; 2 page errors and 1 console error; work/song batch globals not initialized",
-    "full_browser_e2e": "NOT RUN",
-    "durable_reload_persistence": "NOT RUN",
-    "native_file_url": "BLOCKED: managed Chromium URLBlocklist",
-    "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
-    "github_html_upload_remote_sha": "NOT VERIFIED"
+    "legacy_reference_audit": "PASS: 16 deleted legacy identifiers, zero references outside comments",
+    "batch_ui_runtime": "PASS: test-only in-memory localStorage shim; selection, watch status, custom-list add/remove, 16 actions, watchlist scope, independent song batch, import entrypoints, custom-list CRUD and route regression; zero page errors; not durable persistence",
+    "filter_validation": "PASS: 5 cases; empty 9516/60 shown, case-insensitive title 85, year 1999 139, native title 513, no-match 0; all visible results match query",
+    "browser_persistent_reload": "NOT RUN",
+    "native_file_url": "BLOCKED by managed Chromium URLBlocklist",
+    "live_external_api_audio_multiplayer_pixel_diff": "NOT RUN",
+    "github_html_remote_sha": "NOT VERIFIED"
   },
   "batch3_complete": false
 }
