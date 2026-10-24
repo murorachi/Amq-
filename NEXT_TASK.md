@@ -1,102 +1,18 @@
-# NEXT_TASK — AMQ 100-item engineering continuation
+# 下一步工作：先處理卡住／測試導覽阻擋
 
-Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recovery source. Candidate216 and Candidate218 remain separate experimental artifacts. Their prior recorded sizes/hashes are in `BASELINE.md`; current runtime could not export their original bytes, so no fresh original-byte hash verification is claimed.
+## P0：先確認阻塞原因，不要先清理功能
+1. 已確認執行環境的 Chromium managed policy 設定 `URLBlocklist: ["*"]`，連最小的 `file://`、`data:` 頁面與 `http://127.0.0.1` 都回報 `ERR_BLOCKED_BY_ADMINISTRATOR`。這是執行環境政策，不是 AMQ HTML 的載入錯誤。
+2. 不要嘗試修改系統政策或把政策阻擋偽裝成應用程式測試成功。先嘗試不需要 URL 導覽的替代測試方式；若仍無法覆蓋某項測試，標記 BLOCKED，跳過並繼續其他工作，最後再回頭處理環境問題。
+3. Candidate222 透過 Playwright `page.set_content()` 載入並注入記憶體型 storage shim，可在約 2.1 秒完成 DOMContentLoaded；初始頁面 readyState 為 complete，沒有 pageerror 或 console error。這只能驗證 DOM/JS 初始化，不等於原生檔案開啟或持久化測試。
+4. 目前仍沒有證據證明 AMQ 初始化本身會卡死。不可把 Chromium 的管理政策錯誤歸因於產品程式。
 
-- FAIL (reproduced): after batch familiarity changes, the selection Set and counter retain 180 selected songs but row rerender recreates unchecked checkboxes. A disposable single-owner selection Set prototype restores checkbox/counter consistency across both `聽過` and `有印象` actions; report: `BATCH_SELECTION_ACCEPTANCE.md`.
-- PASS: controlled in-memory removal tests verify AniList and MAL each remove only their own imported watch-status records, while preserving manual/other-source records; VNDB removal clears only its own local list key. See `IMPORT_REMOVAL_ACCEPTANCE.md`. Live API import and persistent reload remain NOT RUN/BLOCKED.
-- PASS: custom-list isolation test verifies unique list IDs, deduplicated membership, per-list removal isolation, rename preserving IDs, and deleting one list without damaging another. Native reload persistence remains blocked; see `CUSTOM_LIST_ISOLATION_ACCEPTANCE.md`.
-- PASS (adapter-level only): custom-list, learning-center, quiz and multiplayer panels mount and restore through one shared panel without leaving Song Select. FAIL / incomplete user flow: the visible dock has no multiplayer entry. See `FOUR_WORKSPACE_PANEL_ACCEPTANCE.md`.
-- PASS (after warm-up): observer instance/active counts stayed stable across the remaining 11 of 12 workspace transitions. First lazy mount adds two MutationObservers and one IntersectionObserver observing 180 targets; exact owner and teardown are still unverified. See `OBSERVER_MOUNT_CYCLE_ACCEPTANCE.md`.
-- PASS: mocked AniList/MAL/VNDB 429, malformed response, offline and VNDB 401 errors produce recoverable status. GAP: baseline import paths lack explicit timeout handling. Disposable shared timeout helper passes delayed-request abort/UI restoration tests; port only after byte-preserving source access is restored. See `IMPORT_API_ERROR_ACCEPTANCE.md`.
-- PASS (prototype only): final Song Select row-size clamp at 110.156 px yields about 7.55 visible cards with a 54.6%-visible bottom card; hover shift 3 px, selected shift 7 px and selected-song update remain correct. Pixel comparison is NOT RUN because no usable full Song Select reference image is currently available. See `SONGSELECT_GEOMETRY_ACCEPTANCE.md`.
-- PASS: responsive Song Select list remains scrollable without horizontal document overflow at five tested viewports. P1 issue: at 390×844, list width is only 145 px; treat mobile layout as a separate follow-up from fixed 1920×1080 geometry. See `SONGSELECT_GEOMETRY_ACCEPTANCE.md`.
-- FAIL (reproduced): Song Select keyboard handling has overlapping direct-list/document handlers and a dynamic-DOM binding gap; ArrowDown can double-step and Enter can duplicate or fail playback depending on listener timing. A stable-stage single-owner prototype passes one-step ArrowDown and exactly-one Enter playback invocation. Port only after baseline byte integrity is restored; see `SONGSELECT_KEYBOARD_ACCEPTANCE.md`.
-- FAIL (reproduced): scene-background backup preflight accepts invalid PNG bytes and an image wider than 8192 px. A disposable `createImageBitmap` + dimension/pixel-limit validation prototype passes valid/invalid image assertions. Actual IndexedDB save/restore remains blocked; see `SCENE_BACKUP_VALIDATION_ACCEPTANCE.md`.
-- FAIL (reproduced): MAL importer maps ambiguous top-level `entry.status` to a user watch status and can overwrite manual data. A disposable prototype removes that fallback and passes explicit-listStatus/manual-preservation assertions. Apply only after source integrity is restored; see `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
-- PASS: Candidate212 watch/custom-mode tabs register one direct listener each and survive 10 repeated switches without binding growth. Candidate218 artifact itself remains unavailable for exact runtime comparison; see `WATCH_MODE_TAB_ACCEPTANCE.md`.
-- PASS (mocked routes): cover fallback loads after primary-source failure; a Jikan 429 leaves the cover hidden and does not crash the page. Live API/CDN behavior remains NOT RUN; see `COVER_FALLBACK_ACCEPTANCE.md`.
-- PASS: mocked MAL pagination/dedup across two pages writes each matched anime once and skips duplicate IDs; first explicit user-list status wins. Separate ambiguous top-level `status` fallback still risks overwriting manual state. See `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
-## Latest confirmed results
-- PASS: 68 executable inline JavaScript blocks from the readable Candidate212 export passed Node syntax checking; 2 embedded payload blocks excluded.
-- PASS: 108 CSS style blocks parsed with zero stylesheet/declaration errors in the current scan.
-- PASS: initial markup has 296 unique IDs; measured dynamic startup DOM has 631 IDs and no duplicate live IDs.
-- PASS: Chromium `page.set_content()` startup, watch/custom tab click counts, 10 workspace panel open/close transitions, custom-list create/add/remove/delete, batch selection/status update, AMQ/EMQ/MIX switches, search, decade/type filters and name sort.
-- PASS: primary V44 volume slider storage/property sync, zero-volume mute and audio-node replacement behavior in isolated fixture.
-- FAIL: forced V82.35 volume fallback changes audio but not video and fails mute-at-zero parity.
-- PASS (prototype only): a disposable fixture routes both V44 and forced V82.35 fallback through one shared volume controller; both paths pass single-control, 35% audio/video sync, audio replacement reapplication, zero-volume mute, and no-page-error assertions. Updating output text only when it differs is required to prevent a MutationObserver self-loop. This is not a source edit and not release acceptance.
-- FAIL: Song Select geometry shows about 7 rows and a 33%-visible bottom card, not the target of about 7.5 cards / half-visible bottom card.
-- PASS: hover shift 3 px is smaller than selected shift 7 px; selected row and right-side title update together.
-- BLOCKED: original Candidate212 raw-byte materialization and native `file://`/localhost browser navigation.
-- NOT RUN: persistent-origin reload, IndexedDB Blob backup/restore, real sound output, live API recovery, full answer/score/history checks, owner-instrumented observer teardown and masked pixel comparison.
+## P1：在可用的替代環境繼續主要工作
+- 基線固定為 Candidate222，9,348,268 bytes，SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- 先使用 set_content + 測試用記憶體 storage shim 驗證可測的 UI/事件路徑；每個測試清楚標示限制。
+- 優先修正可見 Song Select 入口與批次工具可達性；不要先刪除未驗證的業務邏輯。
+- 對持久化 reload、原生 file://、真實音訊等依賴瀏覽器導覽的案例，若無法繞過環境政策，先標 BLOCKED，於最後的環境修復階段重試。
 
-- Added `reports/candidate212-100-item-continuation-20261024/DEPENDENCY_EDGE_INVENTORY.md`: 70 script blocks and 268 heuristic window-API dependency edges. It is a text-scan inventory, not AST-complete; use it to guide owner tracing, not to authorize deletions.
-
-- Current per-item acceptance ledger: `reports/candidate212-100-item-continuation-20261024/100_ITEM_PROGRESS.md`. Use it as the source of truth for remaining work and preserve the four required test states.
-## Next work, in order
-1. **Source integrity:** obtain a byte-preserving Candidate212 copy. The current readable reconstruction is 26 bytes shorter and must not be used for release output.
-2. **Volume root fix:** port the shared-controller prototype into the verified source when byte-preserving Candidate212 access is restored. Preserve the fallback until route absence, replacement nodes, audio/video sync, mute-at-zero and retry behavior all pass; retain the output-text change guard to prevent observer feedback loops.
-3. **Song Select geometry:** identify the canonical geometry owner and quantify the row pitch/offset curve. Target about 7.5 visible cards and a half-visible bottom card at the fixed 1920×1080 reference viewport; preserve hover shift < selected shift and selected-song details synchronization.
-4. **Workspace navigation gap:** the static dock has lists/learning buttons and a quiz action but no multiplayer entry despite a `multiplayer` workspace definition. Resolve the intended official entry and route contract, then test the four workspace transitions and teardown. Do not create a new button until the correct existing multiplayer entry point is identified.
-5. **Initialization and dynamic ownership:** instrument actual watch/custom tab creation, binding counts and repeated mounts. Candidate218's idempotent assignment is defensive; do not call it a proven root-cause fix until the duplicate behavior is reproduced or its prevention is validated.
-6. **Observer/timer lifecycle:** map owner, observed target, callbacks, activation, cleanup and route teardown. Measure counts before/after repeated workspace transitions; do not delete based on counts alone.
-7. **P0 data/workspace acceptance:** test custom-list create/edit/delete, add/remove membership, search/filter and persistence after real reload; test four official workspaces and back navigation without leftover panels, listeners, timers or observers.
-8. **Persistence/game acceptance:** verify local/session storage, IndexedDB stores/versioning/Blob backup/restore, AMQ/EMQ/MIX real audio and consistent answer/score/history behavior. Clearly label blocked external APIs and multiplayer cases.
-9. **Dependency-led cleanup:** classify each candidate Keep / Integrate then delete / Delete / Needs confirmation with call-chain and runtime evidence. Batch organizer is live and must be integrated before its entry/runtime can be removed.
-10. **Reference comparison:** register the fixed osu!stable reference, normalize viewport/scaling, compare aligned masked regions and report measured errors. Do not claim a pixel-similarity percentage without a real comparison.
-11. **Release and GitHub:** after source integrity is restored, produce a uniquely named candidate, run the affected regression suite, update status/baseline/next-task and test reports, then upload and read back the exact HTML and verify version, byte size and SHA-256.
-
-## Safety gate
-No executable source has been changed in this continuation. Do not promote a candidate built from the reconstructed export. Preserve Candidate212/207/216/218 originals and all existing user data.
-
-
-## 2026-10-24 Candidate213 cleanup checkpoint
-- User re-uploaded Candidate212 as a complete local file. Fresh SHA-256 is `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`, size 9,352,632 bytes; it matches the recorded baseline exactly. The original is unchanged.
-- Created a byte-identical rollback HTML locally: `amq_learning_tool_v82_85_46_candidate212_checkpoint_20261024.html`.
-- Candidate213 local deliverable: `amq_learning_tool_v82_85_46_candidate213_safe_dead_code_cleanup_20261024.html`, size 9,352,274 bytes, SHA-256 `e409fcef642224e27d53baf0bc830e2ca34d32a4f38e6394891fb6ff4d2d9375`.
-- Removed only two tightly scoped script elements: `candidate84-workspace-merge-dashboard` (a relabel-only script that renamed Learning Analysis to the misleading “資料品質”) and `candidate105-marker` (an unreferenced document dataset marker). No data keys, schemas, song logic, visual layout, audio, or importer code was intentionally changed.
-- Static checks: parent JavaScript syntax 68/68 PASS; parent CSS blocks 108 with zero parse errors. Candidate213 JavaScript syntax 66/66 PASS (two payload blocks excluded), CSS 108 blocks with zero parse errors. The two removed script IDs are absent from Candidate213.
-- Browser runtime: BLOCKED in this sandbox. Chromium denied `file://` with `ERR_BLOCKED_BY_ADMINISTRATOR`; localhost server access was refused. Native persistence, real audio, background Blob save/restore, live APIs and pixel comparison remain NOT RUN.
-- GitHub branch for this checkpoint: `amq-candidate213-safe-cleanup-20261024`. This branch currently carries the audit/documentation checkpoint. The GitHub connector exposed text file operations but no action that can upload a local 9.35 MB HTML file by path; remote HTML upload and SHA verification remain BLOCKED, not claimed complete.
-
-
-## Candidate219 cleanup + Song Select ownership checkpoint (2026-10-24)
-- Verified original Candidate212 bytes: 9,352,632 bytes; SHA-256 52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952. Original remains unchanged and a byte-identical local rollback exists.
-- Candidate213 safe cleanup: 9,352,274 bytes; SHA-256 e409fcef642224e27d53baf0bc830e2ca34d32a4f38e6394891fb6ff4d2d9375. Removed only Candidate84 relabel-only “資料品質” script and Candidate105 no-reader marker.
-- Candidate215: 9,352,402 bytes; SHA-256 4d57290bf3026d011ec0e29f2d0067a4b43756f85b00be8895a3f85b0e7ed4f0. Candidate214 was an intermediate FAIL because a Set remained in inner scope; Candidate215 moved it to the shared IIFE scope and passed runtime checks.
-- Candidate219 local artifact: amq_learning_tool_v82_85_46_candidate219_songselect_keyboard_completion_20261024.html, 9,352,752 bytes; SHA-256 4a20b0eee8ecaa4b8d7ac5b55e1fc602c4335c9ad892ef901dc672ac719b40ea.
-- Changes: remove duplicate Song Select list-level key handler; retain delegated owner; use the single batch-selection Set to render checked state; Enter calls the canonical row selection/playback function once.
-- PASS: 66/66 executable JS blocks parse; 108 CSS blocks have zero parse errors; Chromium page.set_content() with in-memory storage shim loads without page/console errors; Song Select route creates 180 rows; ArrowDown moves index 0→1; isolated Enter test invokes listenSong exactly once; batch checkbox remains checked after search rerender and counter remains 1.
-- BLOCKED/NOT RUN: native file launch and durable storage reload, real audio output, IndexedDB Blob backup/restore, live imports, multiplayer lifecycle, osu!stable pixel comparison.
-- GitHub branch: amq-candidate219-songselect-ownership-20261024. Documentation is being checkpointed; the HTML upload action is not exposed by the available GitHub connector. Remote HTML path returned 404, so no remote HTML existence or hash verification is claimed.
-
-
-## Next action after Candidate220
-1. Build a full capability matrix for work-level quicktools, wsBatchListAdder, and song-level Candidate210 batch operations: selection scope, data keys, operation semantics, side effects, confirmation behavior and tests.
-2. Test Candidate220 through an available browser runtime: open List Management, activate Song Select, invoke the new action, verify one batch panel, selection persistence through rerender, and ensure VNDB retains its correct action/label.
-3. Only after operation parity is demonstrated, migrate any unique work-level operations into the official List Management interface, then remove superseded markup/listeners/Observers/timers/CSS as a single dependency-proven cleanup.
-4. Keep Candidate219 as rollback until browser tests pass. Candidate220 native file launch, persistent reload, audio, external APIs, multiplayer and pixel comparison remain NOT RUN/BLOCKED.
-5. Upload the exact local HTML through a file-capable GitHub path, read it back, and verify remote version/size/SHA-256. Do not claim this is done based on documentation commits.
-
-
-## Next action after Candidate221
-1. With a browser-capable runtime, test List Management -> work-level batch and verify it lands at `#quicktools`, preserving selection scope and requiring explicit apply confirmation.
-2. Test List Management -> song-level batch and verify single Candidate210 panel owner, selected-song checkbox persistence across rerender, and no interference with work-level selection.
-3. Trace `wsBatchListAdder`: observer lifecycle, list-option mirroring, selected-work scope, apply-button forwarding, and error/recovery paths. Remove only after those capabilities are proven redundant.
-4. Map and test old quicktools controls and CSS before any legacy workspace deletion; keep rollback Candidate220 until browser acceptance passes.
-5. Upload exact Candidate221 HTML through a file-capable GitHub path, read back remote bytes, verify version/size/SHA-256. Current connector does not expose local path upload.
-
-
-## Next action after Candidate222
-1. With a Chromium-capable runtime, test List Management → work-level batch and song-level batch separately; verify selection scope, explicit apply confirmation, persistence and no cross-interference.
-2. Map every `quicktools` control to its event listener, data keys, side effects and canonical owner before deleting any further legacy code.
-3. Continue observer/timer teardown checks; do not infer leak-free behavior from static counts.
-4. Upload the exact Candidate222 HTML using a file-capable GitHub path, read back remote bytes and verify version/size/SHA-256. Current connector has no local-path upload action, so this remains BLOCKED.
-
-
-## Next after Candidate224 batch reachability audit
-1. 以目前可見的 C99 rail 為正式導航 owner，設計並實作可見的作品批次入口與作品範圍 UI；不要復活已隱藏的 workspace dock/sidebar。
-2. 重用既有作品資料與業務 API：作品看番狀態、自訂清單、手動補強、作品黑名單、SRS；不可將歌曲熟悉度／待聽佇列混入作品選取。
-3. 對可見入口實測選取可見／篩選結果、清除選取、各批次套用與返回 Song Select；確認未確認前不寫入、沒有資料串擾。
-4. 將歌曲批次入口接到既有 Candidate210 runtime，完成可見 UI 驗收後再刪除不可達的 workspace action 定義與被取代的 quicktools markup/listeners/Observers/CSS。
-5. Candidate222 保持唯一起點與回滾點。原生 file:// 與持久化測試仍 BLOCKED；先解決瀏覽器導覽環境，再驗收儲存與重新載入。
-6. 以 file-capable GitHub 路徑上傳正式單檔 HTML，讀回遠端檔案並核對版本、大小及 SHA-256。不得以文件 commit 代替 HTML 上傳證據。
+## P2：最後回頭處理
+- 取得允許本機 URL 導覽的 browser runtime，或在允許的測試環境執行原生 file://／localhost 驗收。
+- 重跑持久化、重新載入、音訊、API 與完整使用者流程；不可用記憶體 shim 代替。
+- 完成後再做最後的舊功能刪除與遠端正式 HTML 上傳驗證。
