@@ -1,0 +1,62 @@
+{
+  "candidate": "Candidate233",
+  "version": "v82.85.47-candidate233-batch-api-centralization-20261024",
+  "parent": "Candidate231",
+  "parent_bytes": 9367325,
+  "parent_sha256": "74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf",
+  "artifact": "amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html",
+  "artifact_bytes": 9366338,
+  "artifact_sha256": "7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32",
+  "rollback": "amq_learning_tool_v82_85_46_candidate231_rollback_before_candidate233_20261024.html",
+  "rollback_sha256": "74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf",
+  "changes": [
+    {
+      "label": "delete-unused-customListSongIds",
+      "removed_bytes": 123
+    },
+    {
+      "label": "delete-unused-currentPoolAnimeIds",
+      "removed_bytes": 641
+    },
+    {
+      "label": "delete-unused-renderListManagementSelector",
+      "removed_bytes": 61
+    },
+    {
+      "label": "delete-unused-startQuizCustomSelection",
+      "removed_bytes": 384
+    },
+    {
+      "label": "centralize-catalog-watch-batch-api",
+      "removed_bytes": 432,
+      "added_bytes": 556
+    },
+    {
+      "label": "centralize-catalog-song-batch-api",
+      "removed_bytes": 642,
+      "added_bytes": 621
+    },
+    {
+      "label": "centralize-catalog-practice-batch-api",
+      "removed_bytes": 64,
+      "added_bytes": 183
+    }
+  ],
+  "data_schema_changed": false,
+  "storage_keys_changed": false,
+  "html_ui_removed": false,
+  "test_status": {
+    "javascript_syntax": "PASS: 67/67",
+    "css_parse": "PASS: 109 blocks, zero parser errors",
+    "initial_dom_ids": "PASS: 292 unique of 292",
+    "static_reference_check": "PASS: four removed helper identifiers have zero remaining references",
+    "runtime_batch_api": "PASS: controlled storage tests for watch, song, practice list-add, weak-add, empty selection and invalid status",
+    "legacy_handler_wiring": "PASS: three catalog batch handlers dispatched to shared API",
+    "page_errors": "PASS: 0",
+    "console_errors": "PASS: 0",
+    "native_reload": "BLOCKED: Chromium managed URLBlocklist",
+    "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+    "github_html_upload_remote_sha256": "NOT DONE"
+  },
+  "scope_note": "Candidate233 is a candidate patch derived from Candidate231. Legacy catalog batch markup is intentionally retained until all external callers, watchlist selection, automation targeting, and queueSelected behavior are migrated."
+}
