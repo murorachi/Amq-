@@ -39,3 +39,12 @@
 - Profile editing UI was removed with the homepage card but profile storage remains; a non-home settings location for editing profile is not yet implemented.
 - Browser testing is BLOCKED: Chromium timed out on `about:blank` after 15 seconds. Do not claim runtime acceptance.
 - GitHub HTML artifact upload/readback/hash verification remains pending.
+
+
+## Stage59 handoff — continue from Candidate279 UI V1
+1. Keep Candidate277 immutable; do not use Candidate278.
+2. Candidate279 local SHA-256: `dec9a2ae140ba8482804f4df3986c60a7e790b1ab009fb4f2de3756c13692038`.
+3. Next highest value: obtain permitted browser runtime; record fixed-state screenshots and computed styles for homepage, Song Select, workspace dock and quiz; then migrate one CSS responsibility group at a time into the existing canonical design-system/page modules.
+4. Do not delete repeated selectors without checking media/state order and computed-style impact.
+5. Run route/workspace switching, custom-list CRUD+reload persistence, keyboard/game/audio/multiplayer, mobile viewport and pixel comparisons when browser is available.
+6. GitHub HTML artifact upload/readback/SHA verification remains blocked; the local deliverable is available separately. Full Stage59 report is `reports/STAGE_59_GLOBAL_UI_DESIGN_SYSTEM_V1_CANDIDATE279_20261025.md`.
