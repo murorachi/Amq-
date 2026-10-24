@@ -35,3 +35,13 @@
 4. 追查 `#quicktools` 的實際控制器、`selectedAnime`、`applyBulkPracticeAction()` 及清單／弱點／黑名單／SRS 資料契約，設計最小可見入口並重用既有正式 API。
 5. 先做可見入口與選取範圍整合，再測篩選、選取持續性、每種操作資料隔離。只有通過後才刪除隱藏的重複入口／監聽器／CSS。
 6. 最後重試原生 file://、持久化 reload、真實音訊與 API；URLBlocklist 若仍阻擋，標記 BLOCKED，不得用 shim 冒充。
+
+
+## P1：Candidate227 作品批次完整回歸與舊 UI 清理前置
+1. 先以本機 Candidate227 重算 SHA-256；保持 Candidate226 回滾檔不變。
+2. 在記憶體 shim 下補齊黑名單加入／解除、SRS 加入、看番狀態所有分支、選取超過 300 部的確認流程與無選取／無清單的安全失敗測試。
+3. 驗證工作面板重複開啟／關閉、搜尋後選取保持、切換歌曲批次後作品選取不串用，且不存在重複 click listener 或 MutationObserver 增長。
+4. 檢查自訂清單管理與匯入面板是否仍能正常開啟，確認批次操作只寫入對應既有資料鍵。
+5. 通過回歸後才刪除已確認不再需要的隱藏作品批次入口／重複 UI、監聽器與 CSS；不要只加 display:none。
+6. 最後重試原生 file://、持久化 reload、真實音訊與 API；URLBlocklist 若仍阻擋則保留 BLOCKED。
+7. 嘗試上傳正式單檔 HTML 並驗證遠端 SHA-256；目前已知 GitHub 文字檔操作不代表大型 HTML 已上傳。
