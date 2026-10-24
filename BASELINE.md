@@ -318,3 +318,11 @@
 - 使用者瀏覽器實測 PASS 7、FAIL 0、NOT RUN 1、BLOCKED 0。PASS 範圍包含初始化、內容面板切換、匯入入口、歌曲選取保留、作品／歌曲選取隔離、自訂清單原生 localStorage reload 持久化與 UI 清理。
 - 外部 API 實際功能仍 NOT RUN；只觀察到 Anime News Network `api.xml` Resource Timing，不視為 API 成功證據。
 - GitHub 正式 HTML 上傳與遠端 SHA-256 驗證尚未完成。Candidate256 尚未成為正式基準；Batch 3 未完成。
+
+
+## Candidate260 修正檢查點（尚未接受為正式基準）
+- Candidate260：`amq_learning_tool_v82_85_74_candidate260_workspace_css_and_batch_routing_fix_20261024.html`，9,358,373 bytes，SHA-256 `a19be956afdf10b50dc15bbc10b3c69408e42c8751a838fb8e61313d0d98ed1f`。
+- 父候選 Candidate259 SHA-256：`28f940dbc8ce2c1b4de0dbf4734d9fe7b6d98d7ecef6149652849b76aaebd370`。
+- 回滾 Candidate258 SHA-256：`82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`。
+- 回滾 Candidate256 SHA-256：`e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- Candidate260 只是一個修正候選；必須完成原生瀏覽器、資料安全與遠端檔案驗證後才可提升基準。
