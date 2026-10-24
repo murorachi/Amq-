@@ -21,3 +21,11 @@
 1. Continue Batch 2 dependency mapping: workspace/router lifecycle, custom-list selector and storage ownership, CSS cascade groups, observer/timer teardown.
 2. Fix title/data-amq-candidate metadata only in a uniquely named child candidate.
 3. Attempt isolated Candidate277 artifact upload/readback/hash verification when feasible.
+
+
+## Stage57 update — Batch2 targeted gap audit (2026-10-25)
+- Batch2 static dependency inventory is closed within its declared scope: Stage55 remains the main inventory; Stage57 adds targeted workspace/route, custom-list selector/storage, CSS cascade, dynamic-template, observer/timer evidence without repeating the full inventory.
+- PASS (static only): workspace/controller layering and dynamic entry points identified; `syncListSelectors()` has 7 literal references; custom-list data key and selected-list state key are distinct responsibilities; representative observer/timer patterns mapped.
+- No HTML/CSS/JS modified. Candidate277 size/SHA remain unchanged.
+- Browser/runtime dependency verification and P0 acceptance remain BLOCKED/NOT RUN; do not claim Batch3 complete.
+- Report: `reports/stage57-batch2-targeted-gap-audit-20261025/STAGE_57_BATCH2_TARGETED_GAP_AUDIT_CANDIDATE277_20261025.md`.
