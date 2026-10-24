@@ -116,3 +116,13 @@
 - PASS（隔離 handler fixture）：歌曲批次入口能呼叫 Candidate210 runtime；自訂清單管理入口能呼叫既有共用面板。但兩個入口所在的 workspace sidebar 不可見，不能視為端到端使用者流程 PASS。
 - 回滾：無需回滾，Candidate222 原檔未修改。
 - GitHub：本階段只更新文件與測試報告；大型 HTML 未上傳，沒有遠端 HTML hash 驗證。
+
+
+## Candidate225 互動探測 checkpoint（2026-10-24）
+- 唯一程式基線仍為 Candidate222：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`，本輪已重算驗證。
+- Candidate225 是互動探測與整合前置驗收文件階段，沒有修改 HTML，也沒有新候選產物。
+- PASS：首頁初始化、首頁選單展開、Song Select 路由、可見自訂清單入口。
+- FAIL：Song Select 內 workspace sidebar 與 quicktools 不可見，作品批次端到端流程不可達。
+- BLOCKED：原生 file:// 與持久化 reload。NOT RUN：真實音訊、即時 API、多人流程、像素比對。
+- 回滾：無需回滾，Candidate222 與 Candidate221 原檔未修改。
+- GitHub：Stage 11 報告已提交；未上傳大型 HTML，未驗證遠端 HTML SHA。
