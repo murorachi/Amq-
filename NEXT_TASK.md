@@ -1,8 +1,8 @@
 # 下一步：Candidate262 共用設計系統與 Batch 3 驗收（2026-10-24）
 
 ## 最新候選
-- `amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`，9,360,777 bytes
-- SHA-256：`e7a2dd91b49042192f32ef2c23923b7128edc47e1fc2a360525a9b01a8b97aa4`
+- `amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`，9,360,706 bytes
+- SHA-256：`6f773fd616d91749304a42785f5b19faa6c3165fa59894ee4080074d911092b9`
 - 回滾 Candidate261：`b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`
 
 ## 順序
