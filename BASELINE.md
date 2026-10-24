@@ -269,3 +269,13 @@
 - 作品／歌曲選取集合的程式碼所有權靜態檢查 PASS；直接跨面板互動測試逾時，標記 BLOCKED，不算 runtime PASS。
 - BLOCKED／NOT RUN：原生 file／localhost、真實 reload 持久化、外部 API、音訊、多人、像素比對；HTML 遠端內容與 SHA 尚未驗證。
 - Candidate255 仍是未驗收候選，批次三未完成。詳見 `reports/candidate255-workline-a-static-acceptance-20261024/STAGE_27_WORKLINE_A_STATIC_ACCEPTANCE.md`。
+
+## Candidate255 原生瀏覽器驗收狀態（2026-10-24）
+- 候選版本：`v82.85.69-candidate255-remove-last-quicktools-refs-20261024`
+- 本機 HTML：9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
+- 回滾 HTML：`amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html`；SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
+- 當前容器只找到 Chromium，且 managed policy `URLBlocklist=["*"]`；未找到其他可用瀏覽器執行檔或 Playwright browser bundles。不得修改系統政策以繞過限制。
+- 已產生 `Candidate255_native_browser_acceptance_kit_20261024.zip` 作為使用者一般 Windows 瀏覽器的原生儲存驗收方案。工具包未實際執行前，持久化狀態維持 NOT RUN/BLOCKED。
+- 原有 Playwright 測試使用記憶體版 localStorage shim，只可作 DOM／互動測試證據，不可作為重新載入持久化證據。
+- GitHub 分支 `amq-candidate255-last-quicktools-reference-cleanup-20261024` 上正式 HTML 路徑目前查無檔案（404）；遠端產物與 SHA-256 尚未驗證。
+
