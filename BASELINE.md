@@ -260,3 +260,12 @@
 - 篩選驗證 5 案例 PASS：空搜尋 9516／顯示 60、大小寫不敏感標題 85、年份 1999 為 139、原名為 513、無匹配為 0；可見結果全部符合查詢。
 - 批次 UI／業務動作在測試用記憶體 storage shim 下 PASS；持久化 reload 未測，不能以 shim 取代。
 - 因真實持久化與 GitHub 遠端 HTML SHA 未驗證，Candidate255 仍不是正式驗收基準。
+
+
+## Candidate255 工作線 A 靜態驗收（2026-10-24）
+- Candidate255 HTML 未修改：9,355,697 bytes；SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。回滾 Candidate254 SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
+- PASS：16 個舊 UI／控制項／Observer／初始化識別字零殘留引用；67 JS 區塊語法、109 CSS 區塊解析、272 DOM ID 唯一；18 項 API／資料契約靜態斷言。
+- PASS：篩選 UI 案例擴充至 9/9；既有記憶體 shim 的 16 種作品批次 API 動作、自訂清單 CRUD／篩選、路由切換測試 PASS。
+- 作品／歌曲選取集合的程式碼所有權靜態檢查 PASS；直接跨面板互動測試逾時，標記 BLOCKED，不算 runtime PASS。
+- BLOCKED／NOT RUN：原生 file／localhost、真實 reload 持久化、外部 API、音訊、多人、像素比對；HTML 遠端內容與 SHA 尚未驗證。
+- Candidate255 仍是未驗收候選，批次三未完成。詳見 `reports/candidate255-workline-a-static-acceptance-20261024/STAGE_27_WORKLINE_A_STATIC_ACCEPTANCE.md`。
