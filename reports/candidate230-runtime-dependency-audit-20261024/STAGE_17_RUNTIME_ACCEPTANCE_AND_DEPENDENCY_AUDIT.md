@@ -45,3 +45,10 @@
 ## GitHub
 
 本階段報告與狀態文件可提交為文件檢查點。Candidate229 HTML 尚未上傳，遠端 HTML SHA-256 未驗證。文件提交不能替代正式產物上傳。
+
+
+## 追加靜態驗證（Candidate229 基準）
+
+- PASS：69 個 script tags 中，67 個可執行 JavaScript 區塊全部通過 `node --check`；2 個非執行資料 payload（AniList JSON 與 gzip Base64）未當作程式解析。
+- PASS：109 個 CSS 區塊，0 個 CSS parser error。
+- 以上是語法／解析測試，不代表事件流程、資料持久化或原生瀏覽器使用者流程已通過。
