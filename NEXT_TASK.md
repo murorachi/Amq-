@@ -1,3 +1,17 @@
+# 下一步：驗收 Candidate257 清單同步 UI 試點（2026-10-24）
+
+## 本次試點
+- 候選：`amq_learning_tool_v82_85_71_candidate257_unified_public_list_import_ui_20261024.html`，9,356,282 bytes，SHA-256 `4769f24b643f3a044e75795b36222dfa3e7681232d0d93db4300b09e475acb6a`。
+- 回滾：Candidate256，9,355,585 bytes，SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- 先在原生瀏覽器確認左側 AniList／MyAnimeList／VNDB 入口都進入同一頁面，三個來源各只有匯入公開清單及移除本機清單兩個主要操作；確認沒有彈出舊視窗或切到獨立 VNDB 頁。
+- 實測空值、錯誤 Username、匯入成功、取消移除、確認移除；確認 AniList/MAL 只刪除各自來源寫入的看番狀態，VNDB 只清除 VNDB 本機清單，手動狀態及其他來源不受影響。
+- 然後再測試真實 AniList/MAL/VNDB API 的回應解析、去重、失敗復原；不得要求使用者提供密碼或私人 Token。
+- 最後嘗試上傳大型 HTML 並讀回核對版本、大小、SHA-256；無法上傳就明確標記 BLOCKED／NOT VERIFIED。
+- Candidate257 是 UI 風格試點，不是已接受正式基準；其他左側工作區功能先不改，等使用者確認風格後再規劃。
+- Batch 3 尚未完成，不得提前開始 Batch 4。
+
+---
+
 # 下一步：完成批次三外部 API 與遠端產物驗收
 
 ## 最新候選與回滾
