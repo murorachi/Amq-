@@ -20,3 +20,11 @@
 - Do not infer runtime success from static inspection.
 - Do not remove CSS solely because selectors repeat.
 - Do not merge AMQ/EMQ storage schemas without migration and rollback proof.
+
+
+## Stage57 handoff: Batch2 static inventory closed, Batch3 remains
+1. Keep Candidate277 immutable as the user-authorized baseline. Stage55 is the main dependency inventory; Stage57 is targeted gap coverage, not a full AST/runtime call graph.
+2. Batch3 begins with a uniquely named child candidate to correct `<title>` and `data-amq-candidate` metadata only after preserving the baseline and running static checks.
+3. Then prioritize P0 acceptance where an allowed browser runtime exists: route/workspace repeat switching and cleanup; custom-list create/select/delete/filter/reload persistence; Song Select keyboard/DOM stability. Mark unavailable browser checks BLOCKED/NOT RUN.
+4. User wants to discuss new features in Batch3; do not expand scope in Batch2. Capture requirements before implementation, but do not block this handoff on them.
+5. Isolated GitHub delivery of Stage57 report and status/handoff docs is attempted separately from HTML delivery. Do not claim HTML binary upload or remote hash verification unless verified.
