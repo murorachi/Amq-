@@ -14,7 +14,10 @@
     "page_set_content_initialization": "PASS",
     "opaque_origin_storage_operations": "BLOCKED",
     "native_file_url_and_reload": "BLOCKED",
-    "audio_live_api_multiplayer_pixel_comparison": "NOT RUN"
+    "audio_live_api_multiplayer_pixel_comparison": "NOT RUN",
+    "javascript_syntax": "PASS (67 executable blocks, 0 failures)",
+    "css_parse": "PASS (109 blocks, 0 parser errors)",
+    "playwright_page_errors": "2 storage-access errors from opaque-origin context; not counted as product PASS"
   },
   "github_html_upload": "NOT DONE",
   "remote_html_sha256_verified": false
