@@ -67,3 +67,11 @@
 
 ## Next action
 Continue the 100-item plan using the reconstructed source only for analysis/prototypes. Prepare and test the shared volume-controller change in a disposable fixture, continue owner/call-graph and Song Select geometry diagnostics, and apply source changes only after byte-preserving Candidate212 access is restored. Then rerun affected regression tests, update all reports, create a uniquely named candidate from verified bytes, and read back/verify the remote artifact.
+
+
+## Candidate210 UI-preserving cleanup audit (2026-10-24)
+- User-directed UI reference: Candidate210. Objective: remove obsolete/redundant implementation without changing the preferred UI or losing necessary behavior.
+- PASS: located Candidate210 Library metadata; reviewed its existing validation report; created a KEEP/INTEGRATE/DELETE/NEEDS CONFIRMATION ledger; created an audit-only branch `amq-candidate210-ui-cleanup-audit-20261024`.
+- BLOCKED: original Candidate210 raw bytes cannot be materialized in this runtime. The available text export is 5,163,656 bytes with SHA-256 `d4f87d73d9cc5c5266c6b82847cf9786c704ef8f8f5ab75d7f40d6fa7005bdf4`, versus the recorded original 9,347,601 bytes and SHA-256 `92f3e6353bd9e9d72d148037cd710818e25d514ce6c2ed57642e2ab248f6ec5f`. Do not use it for production changes.
+- No HTML was modified, created or uploaded. No source-level deletion is claimed. Candidate212 reports remain separate-candidate evidence only.
+- Detailed report: `reports/candidate210-ui-cleanup-audit-20261024/VALIDATION_REPORT.md`.
