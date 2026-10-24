@@ -6,7 +6,7 @@ Status: EXPERIMENTAL, NOT ACCEPTED.
 - Recovery baseline remains Candidate 178: SHA-256 `b91109c7c660be064cedf76b20e473b12ca415be8e0650f16d8086339c2a9f80`.
 - Immediate source: Candidate 207: 9,310,496 bytes; SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
 - Candidate 208 artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_208_stable_frame_player_workspace_consolidation.html`.
-- Candidate 208 size: 9,324,073 bytes.
+- Candidate 208 size: 9,324,981 bytes.
 - Candidate 208 SHA-256: `15cfd2caa7045e3cc585bfd6e4bc8c35b72e2e70e3d97a7a3111c0228d67f892`.
 - Candidate 207 is preserved unchanged.
 
