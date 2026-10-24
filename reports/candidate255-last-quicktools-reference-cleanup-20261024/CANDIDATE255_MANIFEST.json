@@ -1,0 +1,25 @@
+{
+  "version": "v82.85.69-candidate255-remove-last-quicktools-refs-20261024",
+  "artifact": "amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html",
+  "bytes": 9355697,
+  "sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
+  "parent_candidate254_sha256": "e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9",
+  "rollback_file": "amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html",
+  "rollback_sha256": "e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9",
+  "tests": {
+    "javascript_syntax": "PASS: 67 executable inline JavaScript blocks, zero syntax errors",
+    "css_parse": "PASS: 109 style blocks, zero parser errors",
+    "dom_ids": "PASS: 272 IDs, zero duplicates",
+    "legacy_reference_audit": "PASS: 16 deleted legacy UI/control/observer/init names have zero references outside HTML comments",
+    "automation_entry": "PASS: batch-tools opens official work batch workspace and confirms mounted panel before success",
+    "song_select_mount": "PASS: dynamic Song Select mount list no longer refers to deleted quicktools node",
+    "necessary_features_static": "PASS: work batch workspace, Candidate210 song batch, custom-list storage key and original sync/VNDB modal markup retained",
+    "browser_page_set_content": "BLOCKED: opaque origin denies localStorage; 2 page errors and 1 console error; work/song batch globals not initialized",
+    "full_browser_e2e": "NOT RUN",
+    "durable_reload_persistence": "NOT RUN",
+    "native_file_url": "BLOCKED: managed Chromium URLBlocklist",
+    "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+    "github_html_upload_remote_sha": "NOT VERIFIED"
+  },
+  "batch3_complete": false
+}
