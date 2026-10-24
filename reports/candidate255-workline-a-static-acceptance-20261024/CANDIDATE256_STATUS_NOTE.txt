@@ -1,0 +1,1 @@
+Candidate256 local artifact prepared. HTML upload and remote hash verification are still pending.
