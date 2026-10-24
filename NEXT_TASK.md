@@ -47,3 +47,13 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 
 ## Safety gate
 No executable source has been changed in this continuation. Do not promote a candidate built from the reconstructed export. Preserve Candidate212/207/216/218 originals and all existing user data.
+
+
+## Candidate210 UI-preserving cleanup continuation
+1. Restore byte-identical access to Candidate210 HTML and freshly verify size/SHA-256.
+2. Run exact-source inventories and complete the dependency-backed cleanup ledger.
+3. Apply reversible, narrowly scoped changes only after callers, dynamic references, storage impact and regression tests are understood.
+4. Preserve Candidate210's UI; run syntax, focused browser, workspace, custom-list, persistence, audio/API and visual comparison tests with honest PASS/FAIL/NOT RUN/BLOCKED labels.
+5. Upload only through a byte-preserving path and verify remote bytes/SHA-256.
+
+Do not use the incomplete Library text export as a production source. See `reports/candidate210-ui-cleanup-audit-20261024/NEXT_TASK.md`.
