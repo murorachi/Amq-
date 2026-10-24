@@ -55,7 +55,7 @@ The syntax checks were actually executed with Node.js `node --check` against the
 ## 4. Dependency findings retained
 
 ### Watch/custom-list tabs
-Candidate212's `updateWatchModes()` uses `addEventListener('click', ...)` for `watchModeTab` and `customModeTab`. Its `init()` calls the function, and the dynamic tab insertion branch calls it again after inserting a missing `.mylistModeTabs` template. This does not prove the same node is always bound twice, but it leaves a non-idempotent path if `init()` or the binding function is repeated on existing nodes. Candidate218's recorded change replaces these bindings with `onclick` assignments. Browser click-count and repeated-mount acceptance remains NOT RUN.
+Candidate212's `updateWatchModes()` uses `addEventListener('click', ...)` for `watchModeTab` and `customModeTab`. The private `init()` calls it once, then calls it a second time only if `.mylistModeTabs` was missing and has just been inserted. In that branch the first call finds no tabs, so it does not attach handlers to those nodes; the second call attaches them once. The initial HTML markup already contains one `.mylistModeTabs` element and one of each tab ID. The private `init()` is invoked through a single `{once:true}` DOMContentLoaded listener or directly once, and is not exported. Therefore the source call graph does **not prove** that the current normal initialization path stacks duplicate listeners. Candidate218's `onclick` assignments do make the binding operation idempotent if the script/function is re-executed, but that repeat-execution trigger has not been demonstrated. Treat Candidate218 as a low-risk defensive change, not a proven runtime root-cause fix until browser click-count tests or a reproducible repeated-execution path confirm the defect.
 
 ### Volume control
 Two builders remain in Candidate212: the V44 quiz volume control and the V82.35 media-toolbar fallback. The fallback can be reached when the primary control is absent. Their mute-at-zero and audio-element-replacement behavior differ. Classification: INTEGRATE / NEEDS VERIFICATION. Do not delete either path without a runtime test.
@@ -85,3 +85,15 @@ Repeated source ID strings include `watchModeTab`, `customModeTab`, `v44VolumeCo
 - PASS: parsed all 108 CSS style blocks from the readable text export with `tinycss2`; 2,763 qualified rules, 0 stylesheet parser errors, 0 declaration parser errors.
 - PASS: directly compared the Candidate212 and Candidate218 text-export slices around `updateWatchModes()`. Candidate212 uses two `addEventListener` registrations; Candidate218 assigns `onclick` handlers and preserves the active-tab class update. The neighboring text slice shows the intended localized change; the historical Candidate218 report remains the evidence for its full-file exact-diff assertion.
 - LIMITATION: the candidate comparison used Library text-export slices, not raw source bytes. It does not replace the previously recorded full-file SHA-256 verification and is not a fresh byte-identical comparison.
+
+
+## 8. Watch-tab root-cause qualification
+
+A follow-up call-graph trace narrowed the Candidate218 claim:
+
+- The initial parsed HTML contains exactly one `#watchModeTab`, one `#customModeTab`, and one `.mylistModeTabs`; there are no duplicate IDs in the initial markup (296 ID attributes, 296 unique).
+- Within the custom-list script, `updateWatchModes()` appears as one definition and two call sites: the first in private `init()`, the second only inside the conditional that inserts a missing tab strip.
+- When the tab strip is missing, the first call has no target elements; the second call binds the newly inserted elements once.
+- The script calls private `init()` via `DOMContentLoaded` with `{once:true}` or once immediately. No export of this `init` function was found in the script.
+- Static code therefore does not establish duplicate listener accumulation in the ordinary initial page path. A repeated script evaluation or another unobserved trigger could still cause it, but that remains unverified.
+- Decision: keep Candidate218 as an experimental defensive/idempotency candidate, but do not mark item 33 as a fully proven root-cause fix until runtime click-count testing reproduces the old behavior or confirms the defensive benefit.
