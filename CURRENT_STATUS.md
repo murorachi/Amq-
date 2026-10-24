@@ -23,3 +23,14 @@
 - BLOCKED：原生 file:// 與持久化 reload。NOT RUN：真實音訊、即時 API、多人與像素比對。
 - 作品批次入口仍不可達，未宣稱完成。詳見 `reports/candidate226-song-batch-entry-label-fix-20261024/STAGE_12_SONG_BATCH_ENTRY_LABEL_FIX.md`。
 - GitHub 文件已提交至 Candidate226 分支；HTML 本機產物尚未上傳，遠端 HTML SHA 未驗證。
+
+
+## Candidate227 可見作品批次工作區（2026-10-24）
+- 父版本 Candidate226：9,348,469 bytes，SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`。
+- Candidate227：9,360,586 bytes，SHA-256 `2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d`。
+- 新增可見 C99「作品批次整理」入口與作品搜尋／選取面板；沿用既有作品層業務函式，歌曲批次仍由 Candidate210 管理。
+- PASS：67/67 可執行 JS 區塊語法；109 CSS 區塊 0 parser error；Playwright shim 下首頁導覽、可見入口、作品搜尋、選取、批次看番狀態、批次歌曲熟悉度、自訂清單加入／移出與作品／歌曲選取隔離；pageerror 0、console error 0。
+- BLOCKED：原生 file:// 與持久化 reload。NOT RUN：真實音訊、即時 API、多人、像素比對、完整 SRS／黑名單分支。
+- 回滾檔 Candidate226 byte-identical，原檔未修改。舊隱藏 UI 尚未清理，等待完整回歸後再刪除。
+- 詳見 `reports/candidate227-visible-work-batch-workspace-20261024/STAGE_13_VISIBLE_WORK_BATCH_WORKSPACE.md`。
+- GitHub 文件已提交；大型 HTML 尚未上傳，遠端 HTML SHA 未驗證。
