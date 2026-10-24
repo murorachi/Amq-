@@ -17,3 +17,12 @@
 5. 更新最終驗收報告。只有必要互動、持久化與遠端產物核對完成後，才通知批次三完成並等待批次四。
 
 限制：Chromium managed URLBlocklist 阻擋 file://／localhost；不修改系統政策。不得把記憶體 shim 測試標成持久化 PASS。批次三未完成前不得開始批次四。
+
+## 執行順序更新（2026-10-24）
+1. 原生瀏覽器環境盤點已完成：容器只有受 URLBlocklist 封鎖的 Chromium，沒有其他瀏覽器或 Playwright browser bundles。
+2. 已製作 `Candidate255_native_browser_acceptance_kit_20261024.zip`，等待在使用者一般 Windows 瀏覽器執行並回收 JSON 報告。原生 localStorage 持久化仍 NOT RUN/BLOCKED。
+3. 根據原生測試結果完成工作區切換、作品／歌曲選取狀態隔離回歸測試。
+4. 實際操作 AniList／MAL 與 VNDB 匯入，分開記錄 UI 入口、外部請求、回應解析、錯誤恢復；不得用資源載入紀錄代替 API 成功證據。
+5. 將 Candidate255 HTML 上傳至本分支唯一正式路徑，回讀遠端檔案並計算 SHA-256，必須與本機 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d` 相符。
+6. 更新測試報告、`CURRENT_STATUS.md`、`BASELINE.md`、`NEXT_TASK.md` 與交付紀錄；所有未實測項目維持 NOT RUN/BLOCKED。Batch 3 未完成前不可開始 Batch 4。
+
