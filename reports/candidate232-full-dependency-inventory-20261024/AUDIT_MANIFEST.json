@@ -1,0 +1,35 @@
+{
+  "stage":"Candidate232",
+  "title":"Full dependency inventory and cleanup plan",
+  "date":"2026-10-24",
+  "source_version":"Candidate231",
+  "source_file":"amq_learning_tool_v82_85_46_candidate231_work_batch_entry_integration_20261024.html",
+  "source_bytes":9367325,
+  "source_sha256":"74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf",
+  "code_changed":false,
+  "checks":{
+    "initial_dom_ids":"PASS 292/292 unique",
+    "inline_javascript":"PASS 67/67 syntax",
+    "css":"PASS 109 blocks, zero stylesheet/declaration parser errors",
+    "css_cascade":"3570 qualified rules; 2162 selectors; 654 repeated selectors; 1408 extra occurrences",
+    "observers":"MutationObserver 52; ResizeObserver 3; IntersectionObserver 5 mentions",
+    "timers":"setTimeout 141; setInterval 10; clearTimeout 38; clearInterval 9 mentions",
+    "storage":"28 literal keys; IndexedDB 6 mentions; fetch 19 mentions",
+    "remote_html":"NOT DONE, no remote Candidate231 artifact/hash verified"
+  },
+  "classification":{
+    "keep":["Song Select","AMQ/EMQ/MIX/Singer","audio/player","custom lists","learning/history/blacklist/SRS","Candidate210 song batch","Candidate228 business API","Candidate231 visible work batch","AniList/MAL/VNDB","scene background/IndexedDB","multiplayer","existing data keys/schema"],
+    "integrate":["route/workspace owner","legacy batch call sites","CSS cascade ownership","volume-control factory/fallback","dynamic DOM/template owners","observer/timer lifecycle after mapping"],
+    "delete":[],
+    "defer":["quicktools and old batch controls pending caller migration","v41-classification-diagnostic pending purpose confirmation","versioned CSS pending cascade proof","static-scan unused IDs/selectors pending dynamic-reference checks","native persistence/live API/audio/multiplayer/pixel diff"]
+  },
+  "test_status":{
+    "js_syntax":"PASS",
+    "css_parse":"PASS",
+    "initial_id_uniqueness":"PASS",
+    "full_runtime_call_graph":"NOT RUN",
+    "native_reload_persistence":"BLOCKED",
+    "audio_live_api_multiplayer_pixel_diff":"NOT RUN",
+    "github_html_upload_remote_sha256":"NOT DONE"
+  }
+}
