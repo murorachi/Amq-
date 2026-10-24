@@ -78,3 +78,10 @@ Repeated source ID strings include `watchModeTab`, `customModeTab`, `v44VolumeCo
 3. Run real browser acceptance for repeated initialization, tab click counts, custom-list CRUD/reload, four-workspace switching/back, audio mute/volume/replacement, and IndexedDB persistence.
 4. Use fixed osu!stable screenshots and record measured geometry/pixel difference; do not infer a similarity percentage.
 5. Update status docs after the next evidence-backed checkpoint. Candidate212 remains the working baseline; Candidate207 remains the rollback source; Candidate216 and Candidate218 remain experimental.
+
+
+## 7. Additional checks executed after the initial report
+
+- PASS: parsed all 108 CSS style blocks from the readable text export with `tinycss2`; 2,763 qualified rules, 0 stylesheet parser errors, 0 declaration parser errors.
+- PASS: directly compared the Candidate212 and Candidate218 text-export slices around `updateWatchModes()`. Candidate212 uses two `addEventListener` registrations; Candidate218 assigns `onclick` handlers and preserves the active-tab class update. The neighboring text slice shows the intended localized change; the historical Candidate218 report remains the evidence for its full-file exact-diff assertion.
+- LIMITATION: the candidate comparison used Library text-export slices, not raw source bytes. It does not replace the previously recorded full-file SHA-256 verification and is not a fresh byte-identical comparison.
