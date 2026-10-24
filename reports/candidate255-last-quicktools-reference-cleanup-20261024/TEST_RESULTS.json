@@ -1,0 +1,51 @@
+{
+  "javascript_syntax": {
+    "status": "PASS",
+    "blocks": 67,
+    "errors": 0
+  },
+  "css_parse": {
+    "status": "PASS",
+    "blocks": 109,
+    "errors": 0
+  },
+  "dom_ids": {
+    "status": "PASS",
+    "count": 272,
+    "duplicates": 0
+  },
+  "legacy_reference_audit": {
+    "status": "PASS",
+    "zero_reference_names": [
+      "quicktools",
+      "batchScopeSummaryV844",
+      "refreshBatchScope",
+      "selectionHint",
+      "selectModeBtn",
+      "selectVisibleBtn",
+      "selectFilteredBtn",
+      "clearSelectionBtn",
+      "applyBulkWatchBtn",
+      "applyBulkSongBtn",
+      "queueSelectedBtn",
+      "bulkPracticeAction",
+      "bulkCustomList",
+      "syncOpenBtn",
+      "createListFromCatalog",
+      "addBulkControls"
+    ]
+  },
+  "static_assertions": {
+    "status": "PASS",
+    "all": true
+  },
+  "browser": {
+    "status": "BLOCKED",
+    "reason": "Opaque-origin localStorage access denied; 2 page errors, 1 console error; runtime globals unavailable."
+  },
+  "full_e2e": "NOT RUN",
+  "reload_persistence": "NOT RUN",
+  "native_file_url": "BLOCKED",
+  "github_html_remote_sha": "NOT VERIFIED",
+  "batch3_complete": false
+}
