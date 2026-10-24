@@ -13,3 +13,13 @@
 - 原生 file://、持久化 reload BLOCKED；真實音訊、即時 API、多人與像素比對 NOT RUN。
 - 本階段未修改 HTML。詳細證據：`reports/candidate225-batch-ui-interaction-probe-20261024/STAGE_11_BATCH_UI_INTERACTION_PROBE.md`。
 - GitHub 文件已提交至本分支；大型 HTML 未上傳，遠端 HTML hash 未驗證。
+
+
+## Candidate226 歌曲批次入口標籤修正（2026-10-24）
+- Candidate222 父版本仍保留：9,348,268 bytes，SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- Candidate226：9,348,469 bytes，SHA-256 `d3940fb1a6edaf67454621023c704783fc9fd8ab1b598238bdbe5735305c4c9c`；回滾檔為 Candidate222 的 byte-identical copy。
+- 根因：C99 `vndb` 入口的實際 handler 是 Candidate210 歌曲批次整理，但畫面仍顯示 VNDB 匯入。已修正標題與說明，沒有更動資料層或業務邏輯。
+- PASS：66/66 可執行 JS 區塊語法；108 CSS 區塊 0 parser error；Playwright shim 下首頁初始化、Song Select、匯入面板仍可開啟且包含 VNDB、批次入口開啟既有面板、180 首歌曲選取／清除、0 pageerror／console error。
+- BLOCKED：原生 file:// 與持久化 reload。NOT RUN：真實音訊、即時 API、多人與像素比對。
+- 作品批次入口仍不可達，未宣稱完成。詳見 `reports/candidate226-song-batch-entry-label-fix-20261024/STAGE_12_SONG_BATCH_ENTRY_LABEL_FIX.md`。
+- GitHub 文件已提交至 Candidate226 分支；HTML 本機產物尚未上傳，遠端 HTML SHA 未驗證。
