@@ -42,3 +42,12 @@
 - NOT IMPLEMENTED: BPM-synchronized visualizer. No verified BPM field/source was found; current ICON hover bounce is only playback-state animation, not BPM sync.
 - NOT COMPLETE: GitHub HTML artifact upload/readback and remote SHA verification.
 - Full report: `reports/stage58-candidate278-homepage-20261025/STAGE_58_CANDIDATE278_HOMEPAGE_SHELL_AND_INPLACE_PLAY_MENU_20261025.md`.
+
+
+## Stage59 update — 全站 UI 設計系統 V1（2026-10-25）
+- Candidate277 remains the immutable baseline; Candidate278 is explicitly not adopted.
+- Candidate279 local artifact: `amq_learning_tool_v82_85_93_candidate279_global_ui_design_system_v1_20261025.html`, 9,374,351 bytes, SHA-256 `dec9a2ae140ba8482804f4df3986c60a7e790b1ab009fb4f2de3756c13692038`.
+- PASS: 109 CSS style blocks inventoried; 3,629 parsed qualified rules; zero stylesheet/declaration parse errors; 67/67 executable inline JS blocks pass node --check; 272 DOM IDs unique.
+- Changes: update existing v79-design-system in place with V1 tokens, shared Active/focus-invalid states, version metadata, and remove one proven adjacent duplicate declaration. No business/data/router changes.
+- BLOCKED: browser acceptance due missing Playwright Chromium executable; GitHub HTML binary upload/readback/hash verification unavailable. NOT RUN: routing/workspace, list persistence, game/audio/multiplayer, mobile and pixel checks.
+- Full local report: `reports/STAGE_59_GLOBAL_UI_DESIGN_SYSTEM_V1_CANDIDATE279_20261025.md`. CSS cascade cleanup remains incomplete; do not treat repeated selectors alone as dead code.
