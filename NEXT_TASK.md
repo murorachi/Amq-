@@ -94,3 +94,16 @@
 4. 只有在每個呼叫點完成遷移且測試證明無依賴後，才刪除對應 markup、listeners、observers 和 CSS；不得整組刪除，不得只隱藏。
 5. 保留 Candidate210 歌曲批次唯一所有權，以及 AniList/MAL/VNDB 匯入、既有資料鍵與 schema。
 6. 原生 file://、reload 持久化、音訊與遠端 HTML 上傳／SHA 驗證放在最後重試；若環境仍阻擋，明確標記 BLOCKED。
+
+
+## Candidate233：依賴 owner 整合與可證實刪除（2026-10-24）
+1. 以 Candidate231 本機 HTML 作為使用者確認的最新工作基準；重新驗證大小與 SHA-256，不覆寫原檔。
+2. 建立精確 dependency map：script block → DOM owner → caller/callee → route/event → storage key → timer/observer → tests。歷史 Candidate212 重建檔報告只能作為線索，不可代替 Candidate231 原始碼證據。
+3. 優先追蹤 workspace/router runtime 與 `#quicktools`、`#bulkPracticeAction`、`#bulkCustomList`、`#applyBulkPracticeAction`、`syncListSelectors()` 的真實呼叫點。
+4. 先把必要呼叫點遷移到唯一正式 workspace controller / Candidate228 API；維持作品 ID 與歌曲 ID 選取隔離。
+5. 每組遷移後測試成功、取消、無效輸入、儲存失敗、重複開關及其他工作區回歸。通過後才刪除已證明無呼叫者的舊 markup/listener/observer/CSS。
+6. CSS 依 Song Select、首頁、猜歌、播放器、workspace 分區建立 computed-style/cascade map；先比較固定 viewport 與 hover/selected/keyboard/open 狀態，不做大範圍批量刪除。
+7. 追查 Observer/timer owner 和 teardown，測試反覆切換後數量是否穩定、關閉後是否仍修改 detached DOM。
+8. 保留所有既有 storage keys/schema、AniList/MAL/VNDB、Candidate210 歌曲批次、場景背景/IndexedDB、AMQ/EMQ 與多人必要功能。
+9. 最後再處理原生 reload、音訊、live API、像素比對、單檔建置及 GitHub HTML 上傳/hash 驗證；目前環境受 URLBlocklist 阻擋時維持 BLOCKED，不得冒充 PASS。
+10. 本輪報告：`reports/candidate232-full-dependency-inventory-20261024/DEPENDENCY_AUDIT.md`。
