@@ -21,6 +21,8 @@
 - Candidate218 remains experimental and unaccepted; unchanged. The `onclick` assignment is idempotent, but normal-init call-graph inspection did not reproduce the claimed duplicate-listener root cause.
 - No source cleanup or volume fix has been applied to any candidate HTML in this continuation.
 
+- Batch selection state defect: the Candidate210 row factory always creates unchecked batch checkboxes while the batch controller's selection Set persists across search-triggered rerender. A disposable prototype with one outer-scope Set and checked-state rendering passes repeat-action assertions; see `BATCH_SELECTION_ACCEPTANCE.md`. Not applied to any candidate because the original source bytes remain unavailable.
+
 ## Verified analysis findings
 - Static JS: 68 executable inline blocks pass `node --check`; two payload blocks are excluded.
 - CSS: 108 style blocks parse without errors in the current tinycss2 scan.
