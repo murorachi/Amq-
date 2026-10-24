@@ -1,3 +1,20 @@
+# Candidate262 — 共用工作區設計系統（2026-10-24）
+
+- HTML：`amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`
+- 版本：`v82.85.76-candidate262-shared-workspace-design-system-20261024`
+- 大小：9,360,777 bytes
+- SHA-256：`e7a2dd91b49042192f32ef2c23923b7128edc47e1fc2a360525a9b01a8b97aa4`
+- 父版本 Candidate261 SHA-256：`b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`
+- 修改：共用工作區卡片、輸入框、下拉選單、按鈕、狀態訊息、間距及響應式規則整合至既有正式樣式區塊；移除重複的清單匯入 CSS；作品批次樣式只保留結構規則。
+- 保留：歌曲批次、作品批次、清單匯入的獨立操作與資料流程。三個匯入來源仍各有「匯入公開清單」及「移除本機清單」兩個操作。
+- PASS：67 個可執行 JS 區塊、109 個 CSS 區塊、272 個 HTML ID 無重複、設計／路由靜態契約。
+- BLOCKED：Chromium 在 file:// 與 localhost 導覽皆回傳 `net::ERR_BLOCKED_BY_ADMINISTRATOR`，無法取得 DOM 或畫面；未宣稱視覺／點擊驗收通過。
+- NOT RUN：真實匯入 API、來源限定刪除、自訂清單持久化、完整工作區切換。
+- GitHub HTML 本體上傳及遠端 SHA 回讀仍 BLOCKED；本分支不代表 HTML 已遠端同步。
+- Candidate262 是候選，不是已接受基準。Candidate261 保留作回滾。Batch 3 尚未完成，不得開始 Batch 4。
+
+---
+
 ## Candidate258 修正不可見的清單同步面板（2026-10-24）
 - 根因已確認：Candidate257 將面板插入舊 `#amqWorkspaceSidebar`，但 Song Select 後續 CSS 以 `display:none!important` 隱藏整個側欄；新 UI 存在 DOM 卻不可見。
 - Candidate258 移除錯誤的側欄掛載實作，改由可見 C99 左側入口與工作區入口開啟 `#amqWorkspaceContentPanel`，三個來源／六個操作直接掛載在 `#amqWorkspaceContentBody`。沒有以新 CSS 強制顯示舊側欄。
