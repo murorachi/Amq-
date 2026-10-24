@@ -1,6 +1,6 @@
 {
-  "artifact_bytes": 9366338,
-  "artifact_sha256": "7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32",
+  "artifact_bytes": 9366806,
+  "artifact_sha256": "ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45",
   "scripts_executable": 67,
   "payload_blocks": 2,
   "js_syntax_errors": [],
