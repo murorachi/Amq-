@@ -48,3 +48,10 @@
 4. Do not delete repeated selectors without checking media/state order and computed-style impact.
 5. Run route/workspace switching, custom-list CRUD+reload persistence, keyboard/game/audio/multiplayer, mobile viewport and pixel comparisons when browser is available.
 6. GitHub HTML artifact upload/readback/SHA verification remains blocked; the local deliverable is available separately. Full Stage59 report is `reports/STAGE_59_GLOBAL_UI_DESIGN_SYSTEM_V1_CANDIDATE279_20261025.md`.
+
+
+### Exact Candidate279 identity
+- Version: `v82.85.93-candidate279-global-ui-design-system-v1-20261025`.
+- Local file: `amq_learning_tool_v82_85_93_candidate279_global_ui_design_system_v1_20261025.html`.
+- Local SHA-256: `dec9a2ae140ba8482804f4df3986c60a7e790b1ab009fb4f2de3756c13692038`.
+- Remote HTML upload remains pending.
