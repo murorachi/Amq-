@@ -10,7 +10,7 @@
     "file": "amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html",
     "version": "v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025",
     "bytes": 9360487,
-    "sha256": "12fa0d6faebf3b70f50a260234c8a8b9685a3129e436517d15dfcbc75774cc04"
+    "sha256": "28b5056e801a3ff63e9483149444a657186fef19a55f62ef4830db000160fe6a"
   },
   "PASS": [
     "initial legacy home menu shell empty",
@@ -40,5 +40,6 @@
   ],
   "NOT_IMPLEMENTED": [
     "BPM synchronized visualizer; no verified BPM source; hover bounce is not BPM sync"
-  ]
+  ],
+  "static_dom_id_count": 271
 }
