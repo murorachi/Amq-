@@ -109,7 +109,7 @@
 10. 本輪報告：`reports/candidate232-full-dependency-inventory-20261024/DEPENDENCY_AUDIT.md`。
 
 ## Candidate234：繼續批次 3，遷移舊批次介面所有 caller（2026-10-24）
-1. 以本機 Candidate233 為候選重新核對 SHA-256 `7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32`，保留 Candidate231 rollback byte-identical copy。
+1. 以本機 Candidate233 為候選重新核對 SHA-256 `ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45`，保留 Candidate231 rollback byte-identical copy。
 2. 盤點所有讀寫 `selectionHint`、`batchScopeSummaryV844`、`selectModeBtn`、`selectVisibleBtn`、`selectFilteredBtn`、`clearSelectionBtn`、`applyBulkWatchBtn`、`applyBulkSongBtn`、`queueSelectedBtn`、`bulkCustomList`、`applyBulkPracticeAction` 的 script block、導航攔截器、watchlist batch selector、CSS 與測試。
 3. 將作品選取狀態從舊 catalog `selectedAnime` 與新 workspace bridge 的耦合拆開，前提是先證明 watchlist 舊批次選取如何遷移；不得影響作品 ID 與歌曲 ID 隔離。
 4. 把 `queueSelectedBtn` 的加入待聽能力移到正式作品批次工作區／共享 API，保留確認、去重與 `aniPlayQueue_v1` 資料契約。
