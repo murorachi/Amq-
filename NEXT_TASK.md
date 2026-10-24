@@ -3,6 +3,7 @@
 Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recovery source. Candidate216 and Candidate218 remain separate experimental artifacts. Their prior recorded sizes/hashes are in `BASELINE.md`; current runtime could not export their original bytes, so no fresh original-byte hash verification is claimed.
 
 - FAIL (reproduced): after batch familiarity changes, the selection Set and counter retain 180 selected songs but row rerender recreates unchecked checkboxes. A disposable single-owner selection Set prototype restores checkbox/counter consistency across both `聽過` and `有印象` actions; report: `BATCH_SELECTION_ACCEPTANCE.md`.
+- PASS: controlled in-memory removal tests verify AniList and MAL each remove only their own imported watch-status records, while preserving manual/other-source records; VNDB removal clears only its own local list key. See `IMPORT_REMOVAL_ACCEPTANCE.md`. Live API import and persistent reload remain NOT RUN/BLOCKED.
 ## Latest confirmed results
 - PASS: 68 executable inline JavaScript blocks from the readable Candidate212 export passed Node syntax checking; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with zero stylesheet/declaration errors in the current scan.
