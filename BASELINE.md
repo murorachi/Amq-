@@ -21,3 +21,12 @@
 - Remaining: real cover success/failure against external network, actual audio/random seek, native file-origin persistence, exhaustive Back matrix, pixel-region acceptance.
 - GitHub HTML upload and remote SHA-256 readback are blocked by the available transfer interface and unavailable container DNS/network. No remote HTML hash is claimed.
 - Preserve prior candidates. Rollback means discarding Candidate 210 and returning to unchanged Candidate 207; never overwrite Candidate 207.
+
+## Candidate 212 follow-up (experimental, NOT accepted)
+- Local HTML: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_212_mutation_loop_fix.html`
+- Size: 9,352,632 bytes
+- SHA-256: `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`
+- Parent Candidate 211 remains unchanged. Candidate 207 recovery source remains unchanged (SHA-256 `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`).
+- Candidate 212 removes the self-observing dock style MutationObserver and conflicting inset shorthand. A limited Chromium smoke test reached Song Select and rendered 180 rows. This does not establish full acceptance.
+- The initial home-menu styling is not modified by Candidate 212's new CSS because the new workspace/player rules are scoped to the active Song Select route; pixel-diff confirmation is NOT RUN.
+- Remaining acceptance gaps: native file launch and durable storage, AMQ vs EMQ scroll/autoplay, real audio/seek, network-backed covers/import APIs, full workspace regression, and osu!stable pixel comparison. HTML upload/remote SHA readback remain blocked. Rollback to unchanged Candidate 207 or previous candidates; do not overwrite them.
