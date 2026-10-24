@@ -22,3 +22,7 @@ Preserve Candidate277 and Candidate276 unchanged. If a child candidate regresses
 
 ## Stage57 baseline integrity note (2026-10-25)
 Candidate277 remains the user-authorized working baseline and was not modified by Stage57. Recomputed local size: 9,373,238 bytes. Recomputed SHA-256: `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`. Stage57 is a read-only targeted dependency gap audit; it does not claim Candidate277 is byte-identical to Candidate212, and it does not promote the artifact to a fully browser-accepted release.
+
+
+## Stage58 child candidate record (2026-10-25)
+Candidate277 remains the immutable user-authorized baseline. Homepage changes are in child candidate `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html` (version `v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025`), 9360487 bytes, SHA-256 `12fa0d6faebf3b70f50a260234c8a8b9685a3129e436517d15dfcbc75774cc04`. This child is not promoted to a fully browser-accepted release because direct Chromium headless launch timed out even for `about:blank`; browser acceptance remains BLOCKED/NOT RUN. Do not overwrite Candidate277. See `reports/stage58-candidate278-homepage-20261025/STAGE_58_CANDIDATE278_HOMEPAGE_SHELL_AND_INPLACE_PLAY_MENU_20261025.md`.
