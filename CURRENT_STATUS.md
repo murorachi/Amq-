@@ -10,15 +10,15 @@
 ## Latest committed work
 - Added `reports/candidate212-100-item-continuation-20261024/STATIC_AUDIT.md`.
 - Initial report commit: `a159f76b37040bb3dc6eb045a7bf406c7f613b27`.
-- Latest report update commit: `75db173d27a90608372c5b60e155ae179414b92f`.
-- Latest report was read back from GitHub; remote blob SHA: `4a0d1cd4164f278bf916f9cc36f46961b50d6b17`.
+- Latest static-audit update commit: `e7401e283a7daefb05bef968703c10b425cfb146`; remote blob SHA `a9fd3410023fd6dc0bb49c49e49dd3ef7a4cc314`.
+- Candidate218 validation addendum commit: `a5ba65eeb7318a0d3f15fa7c8b9bd594eb6246f9`; remote blob SHA `1f16717c391661fd920c0d6120b7ab7000390150`.
 - Additional executed check: all 108 CSS style blocks parsed with `tinycss2`; 2,763 qualified rules, 0 stylesheet parse errors, 0 declaration errors.
 
 ## Static evidence
 - Candidate212 readable text export: 68 executable inline JS blocks PASS under Node `node --check`; 2 embedded payload blocks excluded.
 - 108 style blocks; 488 `addEventListener`, 4 `removeEventListener`, 51 `MutationObserver`, 2 `ResizeObserver`, 4 `IntersectionObserver`, 142 `setTimeout`, 10 `setInterval`, 34 `requestAnimationFrame`, 8 `sessionStorage`, 4 `indexedDB`, 19 `fetch`.
 - Static duplicate ID strings require template/runtime ownership review; they are not sufficient evidence for deletion.
-- `updateWatchModes()` in Candidate212 uses non-idempotent click listener registration. Candidate218's recorded change replaces those bindings with `onclick` assignment; browser click-count acceptance remains NOT RUN.
+- Candidate212 `updateWatchModes()` uses non-idempotent click listener registration, but call-graph tracing did not prove duplicate binding in the normal initialization path: the second call occurs only after inserting missing tabs, which the first call cannot bind. Candidate218's `onclick` assignment is defensive idempotency; browser click-count acceptance remains NOT RUN and the original defect is not yet reproduced.
 - V44 and V82.35 volume-control builders differ in mute and observer behavior. Keep both until recovery and audio synchronization behavior is tested.
 
 ## Integrity and runtime status
