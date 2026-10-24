@@ -1,0 +1,91 @@
+{
+  "version": "v82.85.94-candidate280-songselect-row-geometry-cascade-cleanup-20261025",
+  "htmlSha256": "d4329fee9b7795641c657dd67d9993f9b5808c58df44ad9e71cb226153783d98",
+  "browser": {
+    "pass": 14,
+    "fail": 0,
+    "blocked": 2,
+    "tests": [
+      [
+        "PASS",
+        "P0 initial boot and DOM IDs"
+      ],
+      [
+        "PASS",
+        "Home menu open interaction"
+      ],
+      [
+        "PASS",
+        "Song Select desktop computed geometry"
+      ],
+      [
+        "PASS",
+        "Song search and filter"
+      ],
+      [
+        "PASS",
+        "Song row click, ArrowDown, Enter (audio play stubbed)"
+      ],
+      [
+        "PASS",
+        "Hover vs selected visual states"
+      ],
+      [
+        "PASS",
+        "Custom-list create/delete in isolated browser"
+      ],
+      [
+        "BLOCKED",
+        "Custom-list persistence after real browser reload"
+      ],
+      [
+        "PASS",
+        "Repeated route switching and stale DOM isolation"
+      ],
+      [
+        "PASS",
+        "Single-player start-question interaction"
+      ],
+      [
+        "PASS",
+        "Multiplayer route and setup controls"
+      ],
+      [
+        "PASS",
+        "Mobile Song Select layout and overflow"
+      ],
+      [
+        "PASS",
+        "Mobile multiplayer layout bounds"
+      ],
+      [
+        "PASS",
+        "Mobile single-player layout bounds"
+      ],
+      [
+        "PASS",
+        "Browser JavaScript runtime errors"
+      ],
+      [
+        "BLOCKED",
+        "External artwork/audio/network loading"
+      ]
+    ]
+  },
+  "static": {
+    "cssStyleBlocks": 109,
+    "cssQualifiedRules": 2819,
+    "cssParseErrors": 0,
+    "cssDeclarationErrors": 0,
+    "inlineJsSyntaxPass": 67,
+    "inlineJsSyntaxFail": 0,
+    "staticIds": 272,
+    "duplicateStaticIds": 0
+  },
+  "limitations": [
+    "No real localStorage/IndexedDB reload persistence; Chromium local HTTP origin blocked by administrator.",
+    "No real audio, external art/API, or multiplayer server connection; network unavailable.",
+    "HTML body not uploaded to GitHub; connector cannot transfer local binary/file path."
+  ],
+  "branch": "amq-candidate280-songselect-row-cascade-cleanup-20261025"
+}
