@@ -1,0 +1,39 @@
+{
+  "candidate": "Candidate228",
+  "date": "2026-10-24",
+  "parent_candidate": "Candidate227",
+  "file": "amq_learning_tool_v82_85_46_candidate228_direct_batch_api_extraction_20261024.html",
+  "bytes": 9364981,
+  "sha256": "9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22",
+  "parent_file": "amq_learning_tool_v82_85_46_candidate227_visible_work_batch_workspace_20261024.html",
+  "parent_bytes": 9360586,
+  "parent_sha256": "2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d",
+  "rollback_file": "amq_learning_tool_v82_85_46_candidate227_rollback_before_candidate228_20261024.html",
+  "rollback_bytes": 9360586,
+  "rollback_sha256": "2c0b8154b95fbe0685a19e50e185646eedb06f978be211e9eeb06eebb956529d",
+  "rollback_byte_identical": true,
+  "changes": [
+    "added explicit-ID direct batch APIs for work watch status, song familiarity, and practice actions",
+    "bridge calls APIs directly instead of clicking legacy hidden controls",
+    "storage read-back verification and in-memory rollback on watch/familiarity write failure",
+    "existing storage keys and schema retained"
+  ],
+  "tests": {
+    "js_syntax": "PASS 67 executable inline scripts; 2 payload scripts excluded",
+    "css_parse": "PASS 109 style blocks; 0 parser errors",
+    "playwright_memory_storage": "PASS initialization; six watch statuses; four familiarity statuses; custom-list add/remove; weak-set; blacklist; SRS; invalid/empty/missing-list cases; storage failure rollback; zero page errors",
+    "native_file_launch": "BLOCKED",
+    "persistent_reload": "BLOCKED",
+    "real_audio": "NOT RUN",
+    "live_apis": "NOT RUN",
+    "multiplayer": "NOT RUN",
+    "pixel_comparison": "NOT RUN"
+  },
+  "github": {
+    "branch": "amq-candidate228-direct-batch-api-extraction-20261024",
+    "docs_committed": false,
+    "html_uploaded": false,
+    "remote_html_sha256_verified": false
+  },
+  "rollback_instructions": "Use the byte-identical Candidate227 rollback file; Candidate227 remains unchanged."
+}
