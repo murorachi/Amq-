@@ -49,3 +49,13 @@ A separate temporary Playwright fixture was made in memory from the readable tex
 - PASS: setting the fallback slider to 0 stores `aniQuizVolume=0`, sets both audio and video volume to 0, and sets both muted.
 - PASS: no uncaught page errors in this prototype run.
 - Scope limitation: this is a behavioral proof-of-fix in an in-memory test fixture, **not** a source change, not a shared-controller implementation, and not release acceptance. The candidate source remains unmodified because the available reconstructed export is 26 bytes shorter than the recorded Candidate212 baseline. The final implementation should still route both builders through one shared volume handler after byte-preserving source access is restored.
+
+
+## Shared-controller disposable prototype (follow-up)
+
+A second temporary Playwright fixture routed both the primary V44 slider handler and the V82.35 fallback handler through one `window.__aniApplyQuizVolumeV1` controller. The controller clamps the value, writes `aniQuizVolume`, synchronizes all current `audio,video` elements, sets mute exactly when the value is zero, and updates the output only when its displayed text actually changes. The V44 observer was also routed through this shared controller. No Candidate HTML file was changed.
+
+- PASS: primary path, exactly one control, 35% audio/video synchronization, audio-node replacement reapplication, zero-volume mute, and no uncaught page errors.
+- PASS: forced fallback path, exactly one control, 35% audio/video synchronization, audio-node replacement reapplication, zero-volume mute, and no uncaught page errors.
+- Important observer safeguard: the first prototype draft rewrote the output text on every observer callback and caused a self-triggering MutationObserver loop. The successful prototype adds a value-change guard before setting `textContent`; without that guard, the test fixture hangs. This must be preserved and regression-tested in the eventual implementation.
+- Status: behavioral prototype PASS only. The shared controller is not applied to a candidate/release source because the raw Candidate212 bytes remain unavailable and the reconstructed source is 26 bytes shorter than the recorded baseline.
