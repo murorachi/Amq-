@@ -15,6 +15,7 @@
 
 - Batch selection rerender defect reproduced and documented in `reports/candidate212-100-item-continuation-20261024/BATCH_SELECTION_ACCEPTANCE.md`: after selecting 180 songs and applying familiarity, the selection Set still contains 180 IDs and the counter still says 180, but rerendered row checkboxes become unchecked. A disposable prototype moved the Set to the Candidate210 IIFE scope and rendered checkbox state from that Set; both `聽過` and `有印象` actions then passed with 180 visible checks, matching counter, 180 stored status updates, and no page errors. No source candidate was modified.
 
+- Imported-list removal acceptance committed in `reports/candidate212-100-item-continuation-20261024/IMPORT_REMOVAL_ACCEPTANCE.md`: seeded in-memory tests passed for AniList-only removal, MAL-only removal, and VNDB local-list-key removal; manual watch status and unrelated records remained intact; all three controls prompted confirmation; zero page errors. Live API/import and native persistence remain untested.
 ## Actual checks executed against the reconstructed text export
 - PASS: Node `node --check` for 68 executable inline JavaScript blocks; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with tinycss2; 2,763 top-level qualified rules counted by this scan; zero stylesheet/declaration parse errors. The rule count is scanner-scope-specific and is not comparable to nested-rule totals from other reports.
