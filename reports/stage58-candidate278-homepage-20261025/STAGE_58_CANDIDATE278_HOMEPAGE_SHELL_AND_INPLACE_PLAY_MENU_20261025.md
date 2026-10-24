@@ -9,7 +9,7 @@ Status: static checks passed; browser interaction acceptance remains blocked.
 - Child artifact: `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html`
 - Child version: `v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025`
 - Child bytes: 9360487
-- Child SHA-256: `28b5056e801a3ff63e9483149444a657186fef19a55f62ef4830db000160fe6a`
+- Child SHA-256: `cd2fdb8f1f762c4a30f64f54e64ab530607a3a3fb1866f9275804c507df08bf1`
 - Candidate277 was not modified. Candidate278 is a child candidate, not a browser-accepted release.
 
 ## Implemented
@@ -20,7 +20,7 @@ Status: static checks passed; browser interaction acceptance remains blocked.
 5. Constrained the homepage to a single viewport and centered the ICON in the available stage.
 6. Removed the floating `amqStablePlayShade` modal and its CSS/observer dependencies. Clicking Start Game replaces the first two menu entries in-place with Single Player (SOLO) and Multiplayer (MULTI); Settings remains. SOLO routes to `quiz`; MULTI routes to `multiplayer`. The old Back control is removed.
 7. Added a short, low-volume synthesized UI click sound using Web Audio. No copyrighted audio file was copied.
-8. The ICON bounces on hover while audio is playing. This is playback-state animation, **not** BPM synchronization.
+8. The ICON now includes small animated sparkle accents and bounces on hover while audio is playing. This is playback-state animation, **not** BPM synchronization.
 
 ## Test results
 ### PASS (static checks)
