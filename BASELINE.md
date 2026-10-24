@@ -279,3 +279,8 @@
 - 原有 Playwright 測試使用記憶體版 localStorage shim，只可作 DOM／互動測試證據，不可作為重新載入持久化證據。
 - GitHub 分支 `amq-candidate255-last-quicktools-reference-cleanup-20261024` 上正式 HTML 路徑目前查無檔案（404）；遠端產物與 SHA-256 尚未驗證。
 
+## 原生瀏覽器驗收更新（2026-10-24）
+- 使用者實際瀏覽器測試：原生 localStorage 清單建立、reload 持久化、UI 刪除皆 PASS。
+- 內容面板切換與匯入入口存在 PASS（有限範圍）。正式路由、返回、DOM 清理、作品／歌曲選取隔離仍 NOT RUN。
+- 外部 AniList/MAL/VNDB API 行為仍 NOT RUN。
+- Candidate255 正式 HTML 尚未上傳到目標分支；遠端 SHA-256 未驗證。Batch 3 未完成。
