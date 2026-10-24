@@ -238,3 +238,11 @@
 - Candidate231 byte-identical rollback copy：`amq_learning_tool_v82_85_46_candidate231_rollback_before_candidate233_20261024.html`，SHA-256 與 Candidate231 相同。
 - 修改範圍：刪除四個全 HTML 零引用私有 helper，並將舊圖鑑 watch/song/practice handlers 接到既有 `__aniBatchBusinessAPIv228`。未修改 storage keys/schema、CSS 或必要 UI。
 - Candidate233 尚未被使用者驗收為新正式基準；GitHub 分支只有報告與狀態文件，HTML 未上傳，遠端 HTML SHA 未驗證。本輪 `git ls-remote` 因環境 DNS 無法解析 github.com 而失敗。
+
+
+## Candidate252 本機候選（2026-10-24；尚未驗收為正式基準）
+- 既有正式基準仍維持本文件先前記錄的 Candidate231；Candidate252 不覆蓋原始基準。
+- Candidate252 本機候選：`amq_learning_tool_v82_85_66_candidate252_watchlist_scoped_work_batch_20261024.html`，9,355,704 bytes；SHA-256 `f210d987495aeb52ca11e958fe2ff9942c32457f054b81d792309c14e9fb78d1`。
+- Candidate252 以 Candidate251 為直接父候選；Candidate251 回滾檔 9,354,587 bytes，SHA-256 `4467de1ed6330c51929e783b662d95cd5ad6847dd12edb3a6fde8f49fb94849e`。
+- Candidate236 與其後 Candidate237–252 的 HTML 尚未在 GitHub 遠端驗證 SHA；GitHub 文件分支不等於 HTML 已上傳。
+- Candidate252 已移除舊 catalog batch panel 和已證明不再使用的控制項／監聽器／CSS，但瀏覽器 E2E 與持久化驗收仍 BLOCKED／NOT RUN，因此不提升為正式基準。
