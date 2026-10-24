@@ -28,3 +28,14 @@
 3. Then prioritize P0 acceptance where an allowed browser runtime exists: route/workspace repeat switching and cleanup; custom-list create/select/delete/filter/reload persistence; Song Select keyboard/DOM stability. Mark unavailable browser checks BLOCKED/NOT RUN.
 4. User wants to discuss new features in Batch3; do not expand scope in Batch2. Capture requirements before implementation, but do not block this handoff on them.
 5. Isolated GitHub delivery of Stage57 report and status/handoff docs is attempted separately from HTML delivery. Do not claim HTML binary upload or remote hash verification unless verified.
+
+
+## Stage58 handoff — continue from Candidate278 (2026-10-25)
+- Immutable parent baseline: Candidate277 SHA-256 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`.
+- Current child artifact: `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html`; SHA-256 `12fa0d6faebf3b70f50a260234c8a8b9685a3129e436517d15dfcbc75774cc04`.
+- First priority when a permitted browser is available: verify one-viewport fit and exact desktop/mobile geometry; Start Game must replace only the first two menu entries with SOLO/MULTI in-place; verify Settings remains usable; verify route changes and reset-on-return.
+- Verify audio dock playback/control after navigating away and returning Home; test synthesized click sound volume and browser gesture handling.
+- BPM visualizer remains pending until verified BPM metadata or a reliable audio beat-detection path is established. Do not fake BPM sync.
+- Profile editing UI was removed with the homepage card but profile storage remains; a non-home settings location for editing profile is not yet implemented.
+- Browser testing is BLOCKED: Chromium timed out on `about:blank` after 15 seconds. Do not claim runtime acceptance.
+- GitHub HTML artifact upload/readback/hash verification remains pending.
