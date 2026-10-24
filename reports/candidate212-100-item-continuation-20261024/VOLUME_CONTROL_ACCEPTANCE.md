@@ -39,3 +39,13 @@ The fallback path duplicates volume event logic instead of using the primary con
 - FAIL: fallback video synchronization and mute-at-zero parity.
 - NOT RUN: real sound output and native persistent storage reload.
 - BLOCKED: native file/localhost navigation and external network in the current environment.
+
+## Temporary fallback-fix prototype (2026-10-24, follow-up)
+
+A separate temporary Playwright fixture was made in memory from the readable text export. It changed only the fallback input handler in the fixture to apply the slider value to every current `audio,video` element and set `muted=(value===0)`. The original HTML files were not modified.
+
+- PASS: forced fallback still creates exactly one `#v44VolumeControl`.
+- PASS: setting the fallback slider to 35 stores `aniQuizVolume=35`, displays `35%`, and sets both audio and video volume to 0.35 with `muted=false`.
+- PASS: setting the fallback slider to 0 stores `aniQuizVolume=0`, sets both audio and video volume to 0, and sets both muted.
+- PASS: no uncaught page errors in this prototype run.
+- Scope limitation: this is a behavioral proof-of-fix in an in-memory test fixture, **not** a source change, not a shared-controller implementation, and not release acceptance. The candidate source remains unmodified because the available reconstructed export is 26 bytes shorter than the recorded Candidate212 baseline. The final implementation should still route both builders through one shared volume handler after byte-preserving source access is restored.
