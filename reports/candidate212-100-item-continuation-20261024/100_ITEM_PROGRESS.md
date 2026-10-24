@@ -173,3 +173,5 @@
 - Additional import conflict finding: `MAL_IMPORT_STATUS_ACCEPTANCE.md` reproduces the ambiguous status overwrite and validates a narrow prototype fix. Live provider schema confirmation remains NOT RUN.
 
 - Candidate212 watch/custom-mode tabs pass 10 repeated switches with exactly one direct click listener each; Candidate218's separate artifact remains unavailable for exact runtime comparison. See `WATCH_MODE_TAB_ACCEPTANCE.md`.
+
+- MAL pagination/dedup mock test passes: two pages, 301 entries, one local write, 300 duplicate skips, and first explicit user-list status wins. Item 85 remains FAIL because ambiguous top-level status can still overwrite manual state; see `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
