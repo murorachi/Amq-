@@ -1,3 +1,14 @@
+# Latest candidate checkpoint — Candidate258 (2026-10-24)
+
+- Candidate258: `amq_learning_tool_v82_85_72_candidate258_visible_unified_import_workspace_20261024.html`, 9,356,071 bytes, SHA-256 `82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`.
+- Root cause fixed: Candidate257 mounted the UI in `#amqWorkspaceSidebar`, which is hidden by a later Song Select CSS rule using `display:none!important`. Candidate258 mounts the three-provider UI in the visible shared workspace content panel instead of fighting the legacy CSS.
+- Static tests PASS: 67 executable JS blocks, 110 CSS blocks, 273 unique DOM IDs, six actions, no token inputs in the new UI.
+- Native browser acceptance and real API/data-removal tests NOT RUN; remote HTML upload/hash NOT VERIFIED.
+- Rollback: Candidate256, SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`.
+- Candidate258 is not yet an accepted formal baseline.
+
+---
+
 # Latest UI pilot checkpoint (2026-10-24)
 
 - Working source / rollback remains Candidate256: 9,355,585 bytes, SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`.
