@@ -11,8 +11,8 @@
 - 起始 SHA-256：`74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf`
 - 新候選版本：`v82.85.47-candidate233-batch-api-centralization-20261024`
 - 產物：`amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html`
-- 產物大小：9,366,338 bytes
-- 產物 SHA-256：`7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32`
+- 產物大小：9,366,806 bytes
+- 產物 SHA-256：`ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45`
 - 回滾檔：`amq_learning_tool_v82_85_46_candidate231_rollback_before_candidate233_20261024.html`
 - 回滾檔 SHA-256：與起始 Candidate231 完全一致。
 
