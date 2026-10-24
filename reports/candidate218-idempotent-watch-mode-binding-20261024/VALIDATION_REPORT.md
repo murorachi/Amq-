@@ -25,3 +25,14 @@ Candidate212 remains unchanged and is the rollback point. Candidate216 remains u
 
 ## Next continuous-work item
 Inspect and consolidate `v44VolumeControl` construction paths only after determining a safe canonical ensure/mount function; preserve fallback behavior and audio-volume synchronization. Then inspect workspace placeholder ownership and observer/listener cleanup. Do not claim browser acceptance until executed.
+
+
+## Follow-up static call-graph qualification (2026-10-24)
+
+A later source-level trace found that the original normal initialization path does not by itself demonstrate duplicate listener stacking:
+
+- Initial markup contains one `#watchModeTab`, one `#customModeTab`, and one `.mylistModeTabs`.
+- The private `init()` calls `updateWatchModes()` once. It calls the function a second time only inside the branch that inserts a missing tab strip; in that branch the first call has no tab nodes to bind.
+- `init()` is invoked through a single `DOMContentLoaded` listener with `{once:true}` or once immediately, and is not exported by this script.
+- Candidate218's `onclick` assignments are idempotent and remain a reasonable defensive change, but static evidence alone does not prove the old code duplicates listeners during normal page startup. Repeated script evaluation or another trigger is not yet demonstrated.
+- Updated disposition: **defensive idempotency change, browser acceptance NOT RUN; original duplicate-binding root cause not yet reproduced**. Do not treat this candidate as an accepted release until runtime click-count/repeated-mount tests complete.
