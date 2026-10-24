@@ -1,3 +1,15 @@
+## Candidate258 修正不可見的清單同步面板（2026-10-24）
+- 根因已確認：Candidate257 將面板插入舊 `#amqWorkspaceSidebar`，但 Song Select 後續 CSS 以 `display:none!important` 隱藏整個側欄；新 UI 存在 DOM 卻不可見。
+- Candidate258 移除錯誤的側欄掛載實作，改由可見 C99 左側入口與工作區入口開啟 `#amqWorkspaceContentPanel`，三個來源／六個操作直接掛載在 `#amqWorkspaceContentBody`。沒有以新 CSS 強制顯示舊側欄。
+- Candidate258：`amq_learning_tool_v82_85_72_candidate258_visible_unified_import_workspace_20261024.html`，9,356,071 bytes，SHA-256 `82ce2b8d851cd2b0b9b7bd08c9ca648cd82d900f94a218ddfe7ab2499a449579`。
+- 回滾 Candidate256：9,355,585 bytes，SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- PASS：67 個可執行 inline JS 區塊語法、110 CSS 區塊解析、273 個 DOM ID 全唯一、舊隱藏側欄面板移除、新共用面板掛載／六個操作／無 Token 欄位靜態契約。
+- NOT RUN：原生瀏覽器點擊驗收、真實 API 匯入／去重／錯誤復原與刪除範圍。
+- NOT VERIFIED：大型 HTML GitHub 上傳與遠端 SHA-256。Candidate258 仍是候選，不是正式基準。
+- 詳細測試：`reports/candidate258-visible-unified-import-workspace-20261024/STAGE_31_CANDIDATE258_VISIBLE_UNIFIED_IMPORT_WORKSPACE.md`。
+
+---
+
 ## Candidate257 左側清單同步 UI 試點（2026-10-24）
 - Candidate256 作為未接受的工作來源／回滾點保持不變；Candidate257 為實驗候選，不是正式基準。
 - Candidate257：`amq_learning_tool_v82_85_71_candidate257_unified_public_list_import_ui_20261024.html`，9,356,282 bytes，SHA-256 `4769f24b643f3a044e75795b36222dfa3e7681232d0d93db4300b09e475acb6a`。
