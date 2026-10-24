@@ -35,9 +35,9 @@
 - Child candidate: `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html`
 - Version: `v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025`
 - Bytes: 9360487
-- SHA-256: `12fa0d6faebf3b70f50a260234c8a8b9685a3129e436517d15dfcbc75774cc04`
+- SHA-256: `28b5056e801a3ff63e9483149444a657186fef19a55f62ef4830db000160fe6a`
 - Parent Candidate277 remains immutable: 9,373,238 bytes, SHA-256 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`.
-- PASS (static): initial legacy menu removed from shell; old floating SOLO/MULTI/BACK modal and CSS/observer removed; in-place SOLO/MULTI actions wired; profile card removed from homepage while profile storage key remains; bottom player slot, single viewport CSS authority and original synthesized click sound present; 101 static IDs unique; 67/67 executable inline JS blocks pass `node --check`; 108 CSS blocks parse with zero stylesheet errors.
+- PASS (static): initial legacy menu removed from shell; old floating SOLO/MULTI/BACK modal and CSS/observer removed; in-place SOLO/MULTI actions wired; profile card removed from homepage while profile storage key remains; bottom player slot, single viewport CSS authority and original synthesized click sound present; 271 static IDs unique; 67/67 executable inline JS blocks pass `node --check`; 108 CSS blocks parse with zero stylesheet errors.
 - BLOCKED: Chromium headless smoke test timed out on `about:blank` after 15 seconds. Browser interaction, mobile viewport fit, route transitions, audio and click-sound runtime checks are NOT RUN.
 - NOT IMPLEMENTED: BPM-synchronized visualizer. No verified BPM field/source was found; current ICON hover bounce is only playback-state animation, not BPM sync.
 - NOT COMPLETE: GitHub HTML artifact upload/readback and remote SHA verification.
