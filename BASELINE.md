@@ -75,3 +75,12 @@
 - PASS: 66/66 executable JS blocks parse; 108 CSS blocks have zero parse errors; Chromium page.set_content() with in-memory storage shim loads without page/console errors; Song Select route creates 180 rows; ArrowDown moves index 0→1; isolated Enter test invokes listenSong exactly once; batch checkbox remains checked after search rerender and counter remains 1.
 - BLOCKED/NOT RUN: native file launch and durable storage reload, real audio output, IndexedDB Blob backup/restore, live imports, multiplayer lifecycle, osu!stable pixel comparison.
 - GitHub branch: amq-candidate219-songselect-ownership-20261024. Documentation is being checkpointed; the HTML upload action is not exposed by the available GitHub connector. Remote HTML path returned 404, so no remote HTML existence or hash verification is claimed.
+
+
+## Candidate220 local integration checkpoint (2026-10-24)
+- Parent Candidate219 local file: 9,352,752 bytes; SHA-256 4a20b0eee8ecaa4b8d7ac5b55e1fc602c4335c9ad892ef901dc672ac719b40ea.
+- Candidate220 local file: amq_learning_tool_v82_85_46_candidate220_list_management_batch_integration_20261024.html; 9,353,264 bytes; SHA-256 d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a.
+- Rollback: byte-identical copy of Candidate219 at amq_learning_tool_v82_85_46_candidate219_rollback_20261024.html.
+- Scope: adds a List Management action wired to the existing Candidate210 batch workspace; removes the incorrect relabel of the C99 VNDB action. No data keys/schema or legacy work-level batch implementation deleted.
+- Static checks: 65 executable JS blocks PASS; 3 payload blocks excluded; 108 CSS blocks PASS with zero parser errors. Browser action flow NOT RUN because Chromium launch timed out in this runtime.
+- Remote HTML upload/hash verification: BLOCKED; only documentation checkpoint is on this branch.
