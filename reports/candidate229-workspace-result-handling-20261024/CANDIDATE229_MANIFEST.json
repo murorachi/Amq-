@@ -1,0 +1,39 @@
+{
+  "stage": 16,
+  "candidate": "Candidate229",
+  "date": "2026-10-24",
+  "parent": {
+    "file": "amq_learning_tool_v82_85_46_candidate228_direct_batch_api_extraction_20261024.html",
+    "bytes": 9364981,
+    "sha256": "9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22"
+  },
+  "artifact": {
+    "file": "amq_learning_tool_v82_85_46_candidate229_workspace_result_handling_20261024.html",
+    "bytes": 9366832,
+    "sha256": "8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448",
+    "localPath": "/mnt/data/amq_candidate229/amq_learning_tool_v82_85_46_candidate229_workspace_result_handling_20261024.html"
+  },
+  "rollback": {
+    "file": "amq_learning_tool_v82_85_46_candidate228_rollback_before_candidate229_20261024.html",
+    "bytes": 9364981,
+    "sha256": "9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22",
+    "byteIdenticalToParent": true
+  },
+  "checks": {
+    "javascriptSyntax": {
+      "status": "PASS",
+      "passed": 67,
+      "excludedPayloadBlocks": 2
+    },
+    "visibleHandlerStaticAssertions": "PASS",
+    "runtimeResultHandling": "BLOCKED",
+    "nativeFileAndReloadPersistence": "BLOCKED",
+    "audioLiveApisMultiplayerPixelComparison": "NOT RUN"
+  },
+  "github": {
+    "branch": "amq-candidate229-workspace-result-handling-20261024",
+    "docsCommitted": true,
+    "htmlUploaded": false,
+    "remoteHtmlShaVerified": false
+  }
+}
