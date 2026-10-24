@@ -1,0 +1,49 @@
+{
+  "candidate": {
+    "file": "amq_learning_tool_v82_85_77_candidate263_workspace_geometry_and_route_audit_20261024.html",
+    "version": "v82.85.77-candidate263-workspace-geometry-and-route-audit-20261024",
+    "bytes": 9361024,
+    "sha256": "751114b94fa9897f6f380129a8dd97b90dceab1ef23d20907ca791e318081eb4",
+    "accepted_baseline": false
+  },
+  "parent": {
+    "candidate": "Candidate262",
+    "sha256": "d54d2a9ce82486fb459fc232233a0049e2ec49cb866300fcee9888ff9bb108f5"
+  },
+  "static_tests": {
+    "inline_javascript": {
+      "status": "PASS",
+      "blocks": 67,
+      "errors": 0
+    },
+    "css_parse": {
+      "status": "PASS",
+      "blocks": 109,
+      "errors": 0
+    },
+    "html_ids": {
+      "status": "PASS",
+      "count": 272,
+      "duplicates": 0
+    },
+    "candidate262_invariants": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0
+    },
+    "panel_centering_removed": "PASS",
+    "full_screen_overlay_removed": "PASS",
+    "rail_aware_responsive_geometry": "PASS",
+    "responsive_import_cards": "PASS"
+  },
+  "browser_geometry_and_route_acceptance": {
+    "status": "BLOCKED",
+    "reason": "Playwright Chromium file:// and localhost navigation returned ERR_BLOCKED_BY_ADMINISTRATOR"
+  },
+  "runtime_route_matrix": {
+    "status": "NOT RUN"
+  },
+  "github_html_upload_and_remote_hash": {
+    "status": "BLOCKED"
+  }
+}
