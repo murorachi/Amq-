@@ -16,8 +16,8 @@
 
 ## Candidate222
 - 檔案：`amq_learning_tool_v82_85_46_candidate222_unreachable_batch_bridge_cleanup_20261024.html`
-- 大小：9,348,390 bytes
-- SHA-256：`a765f6316284cd624632521306f45539d694c091b626c6a5f7c168e2c18a50e5`
+- 大小：9,348,268 bytes
+- SHA-256：`39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`
 - 父版本 Candidate221：9,353,751 bytes，SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`
 - 差異：刪除 5,361 bytes 的不可達橋接層，未刪除作品批次或歌曲批次正式實作。
 
