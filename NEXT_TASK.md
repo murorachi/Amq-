@@ -1,4 +1,16 @@
-# NEXT TASK — Candidate 210 working checkpoint
+# NEXT TASK — Candidate 211 working checkpoint
+
+1. Run browser acceptance on Candidate 211. Previous Chromium `set_content` smoke test exceeded 120 seconds, so runtime layout is BLOCKED, not passed.
+2. Verify dock geometry at 2555×1438 and 1920×1080; ensure bottom bar sits between Back and Home and controls/progress do not overlap.
+3. Reproduce AMQ wheel-to-autoplay against EMQ in the same test; verify no delayed scroll callback repositions the list after wheel input.
+4. Verify selected-song outline and minimal row gaps in both AMQ and EMQ lists.
+5. Inspect workspace icons/buttons, import/list/learning actions, and the bottom-right Home icon at desktop and narrow viewport sizes.
+6. Run native `file://` launch, real audio/autoplay and random seek, workspace lifecycle, custom-list persistence, cover loading, and reference pixel comparison when environment permits.
+7. Update all test states as PASS/FAIL/NOT RUN/BLOCKED. Do not accept Candidate 211 until runtime evidence supports it.
+8. Attempt HTML upload and remote byte/hash verification when a byte-preserving transfer path is available. Do not claim upload succeeded.
+9. Preserve Candidate 178 recovery baseline, Candidate 207 direct source, Candidate 210 parent, and rejected Candidate 208/209 unchanged.
+
+---
 
 1. Preserve Candidate 178 as recovery baseline and Candidate 207 as unchanged direct parent. Candidate 208/209 remain rejected. Candidate 210 is experimental and not for delivery.
 2. Complete native-origin testing when a browser path is available. Current environment blocks file:// and localhost navigation; set_content tests use an in-memory localStorage shim and cannot prove durable persistence.
