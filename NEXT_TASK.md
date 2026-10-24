@@ -55,3 +55,13 @@
 5. Only then remove old quicktools controls, listeners, observers and CSS whose references are demonstrably eliminated. Do not merely hide them.
 6. Retry native file URL and reload persistence at the end; if managed URLBlocklist still blocks, keep BLOCKED status.
 7. GitHub docs branch currently does not contain Candidate227 HTML. Do not claim remote artifact upload/hash verification.
+
+
+## P1: Candidate229 workspace result handling and legacy batch cleanup (2026-10-24)
+1. Use local Candidate228 as parent; recheck SHA-256 `9d696a307d4e02ef8270da41936920f1b26d9eca9a70b230a1088de4f8466f22`. Keep Candidate227 rollback unchanged.
+2. Update visible workspace action handlers to consume structured API results and report success, cancellation, invalid input and storage failure truthfully; avoid optimistic success messages.
+3. Audit every remaining caller of legacy quicktools IDs and the exact C99 wrappers/interceptors. Separate actual runtime callers from literal-string counts.
+4. Test accepted/cancelled confirmation paths, >300 work selection, every practice action, custom-list persistence failures, selection isolation, repeated panel open/close and listener/observer stability.
+5. Remove old markup/listeners/observers/CSS only when runtime and caller evidence proves they are unreachable; preserve AniList/MAL import and Candidate210 song-batch ownership.
+6. Retry native `file://`, durable reload and audio at the end; managed URLBlocklist currently blocks native navigation.
+7. GitHub branch currently contains documentation only. Do not claim Candidate228 HTML upload or remote SHA verification.
