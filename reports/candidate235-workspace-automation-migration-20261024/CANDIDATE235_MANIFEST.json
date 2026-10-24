@@ -1,0 +1,32 @@
+{
+  "version": "v82.85.49-candidate235-workspace-automation-migration-20261024",
+  "baseline": {
+    "file": "amq_learning_tool_v82_85_48_candidate234_queue_api_integration_20261024.html",
+    "bytes": 9368097,
+    "sha256": "16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641"
+  },
+  "artifact": {
+    "file": "amq_learning_tool_v82_85_49_candidate235_workspace_automation_migration_20261024.html",
+    "bytes": 9369076,
+    "sha256": "d2cb92a244197b254ac49920bb9b18f2c0649d8eb4060691b189d53ee1e2aaa4"
+  },
+  "rollback": {
+    "file": "amq_learning_tool_v82_85_48_candidate234_rollback_before_candidate235_20261024.html",
+    "sha256": "16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641",
+    "byte_identical": true
+  },
+  "changes": [
+    "Batch automation routes to official visible work batch workspace",
+    "batch-tools no longer locates legacy #quicktools"
+  ],
+  "tests": {
+    "javascript_syntax": "PASS",
+    "css_parse": "PASS",
+    "dom_ids": "PASS",
+    "automation_static_assertions": "PASS",
+    "full_page_playwright": "NOT RUN",
+    "native_file_and_reload": "BLOCKED"
+  },
+  "old_batch_ui_removed": false,
+  "github_html_uploaded": false
+}
