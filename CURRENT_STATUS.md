@@ -177,3 +177,9 @@
 - GitHub 正式 HTML 尚未上傳；遠端版本與 SHA-256 尚未驗證。Batch 3 未完成。
 
 ## Candidate255 原生瀏覽器驗收替代路徑（歷史盤點）
+
+## Candidate256 待驗收候選（2026-10-24）
+- 原生瀏覽器已確認 Candidate255 自訂清單能在重新載入後保留，並已由介面刪除測試清單。
+- Candidate256 修正歌曲批次面板開啟時清空選取的問題；SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- 記憶體 shim 互動回歸 PASS；Candidate256 原生儲存與外部 API 尚未測試。
+- 正式 HTML 尚未上傳與核對遠端 SHA-256。Batch 3 未完成。
