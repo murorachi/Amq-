@@ -133,7 +133,7 @@
 | 83 | NOT RUN | VNDB 的錯誤處理已 mock 測試；真實匯入與遠端資料格式未驗收。 |
 | 84 | PASS | AniList/MAL/VNDB 本地匯入資料刪除及來源隔離已 mock 驗收。 |
 | 85 | FAIL | AniList/MAL 有重複項去重路徑；MAL ambiguous top-level status 會覆寫既有手動狀態。原型修正通過，未套用正式來源。見 `MAL_IMPORT_STATUS_ACCEPTANCE.md`。 |
-| 86 | NOT RUN | 封面載入失敗/重試/替代顯示未完成真實網路驗收。 |
+| 86 | PASS | Mocked route 驗證 primary cover 失敗後的 Jikan fallback 成功，以及 Jikan 429 時保留隱藏封面且無頁面錯誤；真實 provider/CDN 未測。見 `COVER_FALLBACK_ACCEPTANCE.md`。 |
 | 87 | FAIL | 429、無效回應、離線有錯誤狀態；基準匯入 fetch 缺少明確 timeout。共用 timeout 原型通過，但尚未套用來源。 |
 | 88 | NOT RUN | AMQ/EMQ/MIX 模式切換通過；真實播放/停止/seek/音訊輸出未完成。 |
 | 89 | NOT RUN | 猜歌、答案判定、計分與學習紀錄的端到端一致性未完成。 |
