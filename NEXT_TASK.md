@@ -1,15 +1,10 @@
 # NEXT_TASK.md
 
 ## Highest-value next work
-1. Resolve the browser-origin blocker: use Chromium with a permitted local HTTP origin and persistent storage, then rerun actual localStorage/IndexedDB reload tests. The current CRUD test used an in-memory shim and does not prove persistence.
-2. Upload Candidate280 HTML to this branch; read back the actual HTML and verify version, byte size and SHA-256. The current connector can commit UTF-8 engineering files but has no local-file/binary-path upload interface; do not claim the HTML is remote.
-3. Audit remaining high-risk CSS owners individually: `#audioDock`, `#amqWorkspaceDock`, `body.ui-home-menu #homeMenu`, `.amqHomeLandingAction`, `#quizView .quizMystery`, and remaining Song Select root rules. Current parser still finds 387 repeated selector strings; no bulk deletion without cascade/runtime proof.
-4. Complete network-dependent tests with external access allowed: artwork/background loading, real audio timing, API failure/recovery, and multiplayer reconnect.
-5. Revisit outstanding information architecture only against Candidate277/280. The homepage retains the original three actions; do not reuse rejected Candidate278. Old batch-organization entries remain until full call/dependency/data-flow analysis supports safe removal.
-6. Recheck `#amqWorkspaceDock`: it remains hidden (0×0) on Song Select; current page uses `#audioDock` and the left rail. Do not reactivate a duplicate dock without a defined responsibility.
-
-## Required evidence
-- Actual reload persistence PASS/FAIL with browser origin and storage keys.
-- Real audio/API/network PASS/FAIL/BLOCKED, no simulated PASS.
-- Desktop/mobile route and stale DOM tests after each CSS-owner consolidation.
-- Final single-file HTML uploaded and read back from GitHub with matching version, bytes and SHA-256.
+1. Fix the confirmed VNDB routing collision at source: the Candidate210 click handler and `apply()` currently rewrite `data-c99-action="vndb"` to `song-batch`. Inspect the actual rail markup and shared import handler ordering, then preserve VNDB import routing without resurrecting a duplicate batch entry.
+2. Define the replacement for song batch operations inside the formal list-management workspace. Preserve bulk familiarity, tag, blacklist and custom-list add/remove behavior; do not simply delete these capabilities.
+3. Decide and test selection lifetime: clear selection on incompatible catalog/mode changes or scope selected IDs by source/catalog. Confirm AMQ/EMQ ID collisions before implementing.
+4. Test the song-list MutationObserver lifecycle when route changes or the tracklist element is replaced; disconnect stale observers and rebind only if runtime evidence confirms replacement occurs.
+5. Run actual browser tests for VNDB import click, batch actions, list membership add/remove, status/tag/blacklist updates, route/back navigation, and AMQ/EMQ switches. Mark any unavailable tests BLOCKED/NOT RUN.
+6. Continue separate Song Select CSS cascade audit; resolve `#amqWorkspaceDock` only after determining whether it is redundant with `#c99LeftRail` and `#audioDock`.
+7. Attempt GitHub HTML upload using a supported binary/blob route if available; verify remote path, exact version, byte size and SHA-256. Otherwise record the limitation without claiming upload success.
