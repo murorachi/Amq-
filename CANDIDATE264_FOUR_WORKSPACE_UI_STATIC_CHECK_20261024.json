@@ -1,0 +1,51 @@
+{
+  "candidate": {
+    "file": "amq_learning_tool_v82_85_78_candidate264_four_workspace_ui_redesign_20261024.html",
+    "version": "v82.85.78-candidate264-four-workspace-ui-redesign-20261024",
+    "bytes": 9368922,
+    "sha256": "e15f0ff99930b522f2151dd9ccca54ba77a4cfcd52a340323ad55afa91970a88",
+    "accepted_baseline": false
+  },
+  "parent": {
+    "file": "amq_learning_tool_v82_85_77_candidate263_workspace_geometry_and_route_audit_20261024.html",
+    "sha256": "751114b94fa9897f6f380129a8dd97b90dceab1ef23d20907ca791e318081eb4"
+  },
+  "tests": {
+    "inline_javascript": {
+      "status": "PASS",
+      "executable_blocks": 67,
+      "errors": 0,
+      "non_executable_script_types_skipped": {
+        "application/json": 1,
+        "application/octet-stream": 1
+      }
+    },
+    "css_parse": {
+      "status": "PASS",
+      "blocks": 109,
+      "errors": 0
+    },
+    "html_ids": {
+      "status": "PASS",
+      "count": 272,
+      "duplicates": 0
+    },
+    "workspace_redesign_static_invariants": {
+      "status": "PASS",
+      "checks": {
+        "custom_list": true,
+        "learning_plan": true,
+        "dashboard": true,
+        "song_batch": true,
+        "single_shared_stylesheet": true,
+        "parent_version_recorded": true
+      }
+    },
+    "browser_visual_and_interaction_acceptance": {
+      "status": "NOT RUN"
+    },
+    "github_html_upload_and_remote_sha": {
+      "status": "NOT RUN"
+    }
+  }
+}
