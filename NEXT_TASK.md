@@ -84,3 +84,10 @@ No executable source has been changed in this continuation. Do not promote a can
 3. Trace `wsBatchListAdder`: observer lifecycle, list-option mirroring, selected-work scope, apply-button forwarding, and error/recovery paths. Remove only after those capabilities are proven redundant.
 4. Map and test old quicktools controls and CSS before any legacy workspace deletion; keep rollback Candidate220 until browser acceptance passes.
 5. Upload exact Candidate221 HTML through a file-capable GitHub path, read back remote bytes, verify version/size/SHA-256. Current connector does not expose local path upload.
+
+
+## Next action after Candidate222
+1. With a Chromium-capable runtime, test List Management → work-level batch and song-level batch separately; verify selection scope, explicit apply confirmation, persistence and no cross-interference.
+2. Map every `quicktools` control to its event listener, data keys, side effects and canonical owner before deleting any further legacy code.
+3. Continue observer/timer teardown checks; do not infer leak-free behavior from static counts.
+4. Upload the exact Candidate222 HTML using a file-capable GitHub path, read back remote bytes and verify version/size/SHA-256. Current connector has no local-path upload action, so this remains BLOCKED.
