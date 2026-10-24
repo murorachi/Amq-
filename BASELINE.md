@@ -100,3 +100,10 @@
 - Change scope: remove unreachable `wsBatchListAdder` bridge markup/runtime/CSS only; retain work-level quicktools and song-level Candidate210 batch owners.
 - Rollback Candidate221 is byte-identical: 9,353,751 bytes; SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`.
 - Tests: 65 JS syntax PASS; 108 CSS blocks PASS; 10/10 static assertions PASS. Browser interaction NOT RUN. Remote HTML upload/hash verification BLOCKED.
+
+
+## Candidate223 ownership audit checkpoint (2026-10-24)
+- 唯一起點仍是 Candidate222：9,348,268 bytes；SHA-256 `39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723`。
+- Candidate223 是依賴稽核文件階段，未修改 HTML，也沒有新的候選產物。
+- 16 個主要 quicktools DOM 控制項皆存在；`applyBulkPracticeAction` 定義及正式 click binding 各 1 個。
+- 不同資料粒度維持分離；跨視圖 selection handler 待瀏覽器驗收後再決定整合。
