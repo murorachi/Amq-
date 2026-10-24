@@ -5,6 +5,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 - FAIL (reproduced): after batch familiarity changes, the selection Set and counter retain 180 selected songs but row rerender recreates unchecked checkboxes. A disposable single-owner selection Set prototype restores checkbox/counter consistency across both `聽過` and `有印象` actions; report: `BATCH_SELECTION_ACCEPTANCE.md`.
 - PASS: controlled in-memory removal tests verify AniList and MAL each remove only their own imported watch-status records, while preserving manual/other-source records; VNDB removal clears only its own local list key. See `IMPORT_REMOVAL_ACCEPTANCE.md`. Live API import and persistent reload remain NOT RUN/BLOCKED.
 - PASS: custom-list isolation test verifies unique list IDs, deduplicated membership, per-list removal isolation, rename preserving IDs, and deleting one list without damaging another. Native reload persistence remains blocked; see `CUSTOM_LIST_ISOLATION_ACCEPTANCE.md`.
+- PASS (adapter-level only): custom-list, learning-center, quiz and multiplayer panels mount and restore through one shared panel without leaving Song Select. FAIL / incomplete user flow: the visible dock has no multiplayer entry. See `FOUR_WORKSPACE_PANEL_ACCEPTANCE.md`.
 ## Latest confirmed results
 - PASS: 68 executable inline JavaScript blocks from the readable Candidate212 export passed Node syntax checking; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with zero stylesheet/declaration errors in the current scan.
