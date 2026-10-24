@@ -76,3 +76,11 @@ No executable source has been changed in this continuation. Do not promote a can
 3. Only after operation parity is demonstrated, migrate any unique work-level operations into the official List Management interface, then remove superseded markup/listeners/Observers/timers/CSS as a single dependency-proven cleanup.
 4. Keep Candidate219 as rollback until browser tests pass. Candidate220 native file launch, persistent reload, audio, external APIs, multiplayer and pixel comparison remain NOT RUN/BLOCKED.
 5. Upload the exact local HTML through a file-capable GitHub path, read it back, and verify remote version/size/SHA-256. Do not claim this is done based on documentation commits.
+
+
+## Next action after Candidate221
+1. With a browser-capable runtime, test List Management -> work-level batch and verify it lands at `#quicktools`, preserving selection scope and requiring explicit apply confirmation.
+2. Test List Management -> song-level batch and verify single Candidate210 panel owner, selected-song checkbox persistence across rerender, and no interference with work-level selection.
+3. Trace `wsBatchListAdder`: observer lifecycle, list-option mirroring, selected-work scope, apply-button forwarding, and error/recovery paths. Remove only after those capabilities are proven redundant.
+4. Map and test old quicktools controls and CSS before any legacy workspace deletion; keep rollback Candidate220 until browser acceptance passes.
+5. Upload exact Candidate221 HTML through a file-capable GitHub path, read back remote bytes, verify version/size/SHA-256. Current connector does not expose local path upload.
