@@ -132,7 +132,7 @@
 | 82 | NOT RUN | MAL 的錯誤處理已 mock 測試；真實匯入與遠端資料格式未驗收。 |
 | 83 | NOT RUN | VNDB 的錯誤處理已 mock 測試；真實匯入與遠端資料格式未驗收。 |
 | 84 | PASS | AniList/MAL/VNDB 本地匯入資料刪除及來源隔離已 mock 驗收。 |
-| 85 | NOT RUN | 匯入去重/合併/衝突處理尚未完整測試。 |
+| 85 | FAIL | AniList/MAL 有重複項去重路徑；MAL ambiguous top-level status 會覆寫既有手動狀態。原型修正通過，未套用正式來源。見 `MAL_IMPORT_STATUS_ACCEPTANCE.md`。 |
 | 86 | NOT RUN | 封面載入失敗/重試/替代顯示未完成真實網路驗收。 |
 | 87 | FAIL | 429、無效回應、離線有錯誤狀態；基準匯入 fetch 缺少明確 timeout。共用 timeout 原型通過，但尚未套用來源。 |
 | 88 | NOT RUN | AMQ/EMQ/MIX 模式切換通過；真實播放/停止/seek/音訊輸出未完成。 |
@@ -168,3 +168,6 @@
 - Scene background backup preflight validation defect and decode/dimension prototype: `SCENE_BACKUP_VALIDATION_ACCEPTANCE.md`.
 - Custom-list isolation, imported-list removal, four-workspace panel lifecycle, observer mount-cycle and geometry evidence are recorded in their respective acceptance reports in this directory.
 - These prototypes are not release changes. Candidate212 raw-byte access remains the gating blocker; no production HTML was modified or uploaded.
+
+
+- Additional import conflict finding: `MAL_IMPORT_STATUS_ACCEPTANCE.md` reproduces the ambiguous status overwrite and validates a narrow prototype fix. Live provider schema confirmation remains NOT RUN.
