@@ -1,0 +1,65 @@
+{
+  "artifact_bytes": 9366338,
+  "artifact_sha256": "7fb36573c146ca940ab484e0c8772a75c4eb82e12c92d4b8a810835e7bbbad32",
+  "scripts_executable": 67,
+  "payload_blocks": 2,
+  "js_syntax_errors": [],
+  "css_blocks": 109,
+  "css_error_count": 0,
+  "initial_ids": 292,
+  "unique_initial_ids": 292,
+  "removed_helper_remaining_counts": {
+    "customListSongIds": 0,
+    "currentPoolAnimeIds": 0,
+    "renderListManagementSelector": 0,
+    "startQuizCustomSelection": 0
+  },
+  "runtime": {
+    "works_loaded": 9516,
+    "api_methods": [
+      "applyWatch",
+      "applySong",
+      "applyPractice"
+    ],
+    "watch": {
+      "ok": true,
+      "count": 1,
+      "status": "completed"
+    },
+    "song": {
+      "ok": true,
+      "count": 2,
+      "status": 1,
+      "animeCount": 1
+    },
+    "practice_list_add": {
+      "ok": true,
+      "action": "list-add",
+      "count": 1,
+      "listId": "test-list"
+    },
+    "practice_weak_add": {
+      "ok": true,
+      "action": "weak-add",
+      "count": 1
+    },
+    "empty_selection": {
+      "ok": false,
+      "reason": "empty-selection"
+    },
+    "invalid_status": {
+      "ok": false,
+      "reason": "invalid-status"
+    }
+  },
+  "legacy_handler_api_calls": [
+    "applyWatch",
+    "applySong",
+    "applyPractice"
+  ],
+  "page_errors": 0,
+  "console_errors": 0,
+  "native_reload": "BLOCKED",
+  "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+  "github_html_upload_remote_sha256": "NOT DONE"
+}
