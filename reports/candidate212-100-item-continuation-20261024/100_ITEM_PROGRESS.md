@@ -171,3 +171,5 @@
 
 
 - Additional import conflict finding: `MAL_IMPORT_STATUS_ACCEPTANCE.md` reproduces the ambiguous status overwrite and validates a narrow prototype fix. Live provider schema confirmation remains NOT RUN.
+
+- Candidate212 watch/custom-mode tabs pass 10 repeated switches with exactly one direct click listener each; Candidate218's separate artifact remains unavailable for exact runtime comparison. See `WATCH_MODE_TAB_ACCEPTANCE.md`.
