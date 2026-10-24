@@ -118,3 +118,13 @@
 - BLOCKED：完整頁面 localStorage runtime；opaque origin 測試限制及 Chromium managed URLBlocklist 阻擋原生 file://／localhost。NOT RUN：原生 reload、音訊、線上 API、多人與像素比對。
 - 舊 catalog batch UI 尚未刪除，因仍有選取、watchlist、導航及自動化依賴。HTML 本機產物未上傳 GitHub，遠端 HTML SHA 未驗證。
 - 報告：reports/candidate234-queue-api-integration-20261024/STAGE_20_CANDIDATE234_QUEUE_API_INTEGRATION.md。
+
+
+## Candidate235 工作區自動化改接（2026-10-24）
+- Candidate234 基準：9,368,097 bytes，SHA-256 16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641。
+- Candidate235：9,369,076 bytes，SHA-256 d2cb92a244197b254ac49920bb9b18f2c0649d8eb4060691b189d53ee1e2aaa4；回滾檔與 Candidate234 byte-identical。
+- batch-tools 與選取／套用目標自動化改接正式可見作品批次工作區，不再定位舊 #quicktools 或舊套用按鈕；尚未移除舊批次 UI。
+- PASS：67 個 JS 區塊語法、109 個 CSS 區塊解析、292 個 DOM ID 唯一、靜態選擇器斷言。
+- NOT RUN：完整頁面 Playwright E2E。BLOCKED：原生 file://／localhost／reload，受 Chromium managed URLBlocklist 阻擋。音訊、線上 API、多人與像素比對 NOT RUN。
+- GitHub 文件已提交並將讀回驗證；大型 HTML 尚未上傳，遠端 HTML SHA 未驗證。批次三仍未完成。
+- 報告：reports/candidate235-workspace-automation-migration-20261024/STAGE_21_CANDIDATE235_WORKSPACE_AUTOMATION_MIGRATION.md。
