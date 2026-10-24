@@ -9,7 +9,7 @@ Status: static checks passed; browser interaction acceptance remains blocked.
 - Child artifact: `amq_learning_tool_v82_85_92_candidate278_homepage_shell_inplace_play_menu_20261025.html`
 - Child version: `v82.85.92-candidate278-homepage-shell-inplace-play-menu-20261025`
 - Child bytes: 9360487
-- Child SHA-256: `12fa0d6faebf3b70f50a260234c8a8b9685a3129e436517d15dfcbc75774cc04`
+- Child SHA-256: `28b5056e801a3ff63e9483149444a657186fef19a55f62ef4830db000160fe6a`
 - Candidate277 was not modified. Candidate278 is a child candidate, not a browser-accepted release.
 
 ## Implemented
@@ -33,7 +33,7 @@ Status: static checks passed; browser interaction acceptance remains blocked.
 - One authoritative homepage layout block exists; bottom player rail and `#amqHomePlayerSlot` exist.
 - Homepage profile card markup removed; profile storage key `aniAmqProfileV1` remains.
 - Synthesized click sound code exists and has graceful failure handling.
-- 101 static HTML IDs parsed outside script/style contents; no duplicates.
+- 271 static HTML IDs parsed outside script/style contents; no duplicates.
 - 67/67 executable inline JavaScript blocks passed `node --check`.
 - 108 CSS style blocks parsed with zero stylesheet parse errors.
 - Candidate byte size and SHA-256 recomputed.
