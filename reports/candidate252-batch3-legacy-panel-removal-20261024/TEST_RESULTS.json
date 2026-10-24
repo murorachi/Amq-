@@ -1,0 +1,13 @@
+{
+  "javascript_syntax": "PASS: 67 blocks, 0 errors",
+  "css_parse": "PASS: 109 blocks, 0 parser errors",
+  "dom_ids": "PASS: 274 IDs, 0 duplicates",
+  "legacy_reference_audit": "PASS: deleted old UI/control/listener/CSS references are zero",
+  "bridge_vm": "PASS: watchlist scope, queue, list, watch, song, practice APIs",
+  "static_route_assertions": "PASS",
+  "full_page_playwright": "BLOCKED: browser process did not finish launching/executing within timeout",
+  "durable_reload_persistence": "NOT RUN",
+  "native_file_url": "BLOCKED: managed Chromium URLBlocklist",
+  "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
+  "github_html_upload_remote_sha": "NOT VERIFIED"
+}
