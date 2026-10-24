@@ -66,3 +66,17 @@ A disposable fixture changed only that final row-size token to clamp(100px,10.2v
 - PASS (prototype): no page errors in the geometry and interaction fixtures.
 - NOT RUN: full-screen fixed-reference pixel comparison. The currently available image.png is a results/leaderboard screen and osu_reference_image4.png is only a 1648×53 toolbar crop, not a Song Select reference. The pinned official osu!stable Song Select image has not yet been retrieved as a local binary.
 - Integrity limit: the readable reconstruction is 26 bytes shorter than recorded Candidate212. Do not apply the CSS change to a release until byte-preserving source access is restored.
+
+
+## Responsive smoke follow-up (same disposable CSS fixture)
+
+| Viewport | Tracklist width × height | Row height | Rows intersecting | Bottom-row visible fraction | Horizontal document overflow |
+|---|---:|---:|---:|---:|---|
+| 1920×1080 | 734.19 × 830.13 px | 110.16 px | 8 | 0.54 | No |
+| 1366×768 | 520.91 × 563.94 px | 100 px | 6 | 0.44 | No |
+| 1280×720 | 487.80 × 516 px | 100 px | 5 | 0.96 | No |
+| 768×1024 | 290.67 × 690.33 px | 104.44 px | 7 | 0.48 | No |
+| 390×844 | 145.14 × 529.50 px | 100 px | 6 | 0.07 | No |
+
+- PASS: at all five tested viewports, the list exists, remains scrollable, and the document has no horizontal overflow or uncaught page errors.
+- Needs follow-up: at 390×844, the tracklist is only about 145 px wide and the bottom-row cue is only 7% visible. This is too narrow for a comfortable mobile Song Select UI despite technically passing scrollability. Treat this as a separate responsive-layout issue; do not distort the fixed 1920×1080 reference geometry to compensate.
