@@ -1,0 +1,52 @@
+{
+  "artifact": "amq_learning_tool_v82_85_69_candidate255_remove_last_quicktools_refs_20261024.html",
+  "bytes": 9355697,
+  "sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
+  "javascript": {
+    "blocks": 67,
+    "syntax_errors": 0,
+    "status": "PASS"
+  },
+  "css": {
+    "blocks": 109,
+    "parser_errors": 0,
+    "status": "PASS"
+  },
+  "dom_ids": {
+    "count": 272,
+    "duplicates": 0,
+    "status": "PASS"
+  },
+  "legacy_reference_audit": {
+    "identifiers": 16,
+    "remaining_references": 0,
+    "status": "PASS"
+  },
+  "static_contract_audit": {
+    "assertions": 18,
+    "status": "PASS"
+  },
+  "filter_validation": {
+    "cases": 9,
+    "passed": 9,
+    "status": "PASS"
+  },
+  "batch_api_actions": {
+    "cases": 16,
+    "passed": 16,
+    "status": "PASS",
+    "storage": "in-memory shim"
+  },
+  "custom_list_crud": {
+    "status": "PASS",
+    "storage": "in-memory shim"
+  },
+  "selection_state_isolation": {
+    "static": "PASS",
+    "cross_panel_runtime": "BLOCKED: direct probe timed out; no valid runtime assertions"
+  },
+  "native_file_url": "BLOCKED: managed Chromium URLBlocklist",
+  "durable_reload_persistence": "NOT RUN",
+  "github_html_sha": "NOT VERIFIED",
+  "batch3_complete": false
+}
