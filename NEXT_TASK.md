@@ -33,3 +33,10 @@
 - NOT RUN：AniList/MAL 與 VNDB 真實 API 回應、資料解析、去重及錯誤恢復。Resource Timing 不構成 API 成功證據。
 - 待辦：上傳 Candidate255 正式 HTML 至此分支，回讀遠端內容並核對大小與 SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`。
 - Batch 3 未完成；完成互動驗收、真實 API 與遠端產物核對前不得開始 Batch 4。
+
+## Candidate256 追加修正（2026-10-24）
+- Candidate255 原生瀏覽器驗收：自訂清單建立、reload 持久化、UI 清理 PASS。
+- 追加回歸發現歌曲批次整理在開啟模態面板時清空選取。Candidate256 已移除該自動清空；候選 SHA-256 `e5c65158ebee5ca69f051366a095e50f0d5f8992f5e89cef3209767adccc77d1`。
+- Candidate256 測試：JS/CSS/DOM 靜態檢查 PASS；篩選 9/9 PASS；工作區面板 3 輪共 15 項斷言 PASS；歌曲選取保留與作品／歌曲選取隔離 PASS。這些互動測試使用記憶體 shim。
+- NOT RUN：Candidate256 原生儲存、真實 AniList/MAL/VNDB API。
+- BLOCKED：正式 HTML GitHub 上傳與遠端 SHA-256。Batch 3 未完成。
