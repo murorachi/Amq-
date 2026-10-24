@@ -98,3 +98,13 @@ Continue the 100-item plan using the reconstructed source only for analysis/prot
 - NOT RUN：完整 Chromium 使用者流程未能完成。Playwright 的 Chromium launch 在此環境逾時；不可宣稱 UI 點擊驗收通過。Native file launch、真實持久化重載、音訊、live APIs、多人生命週期及 osu!stable 像素比較仍 NOT RUN/BLOCKED。
 - DEFER：舊 quicktools 與 wsBatchListAdder 是作品層級操作，和歌曲列批次操作的選取粒度不同，尚未刪除。
 - GitHub：建立本分支並提交文件紀錄；本地 9.35 MB HTML 無法透過目前 connector 的檔案路徑上傳介面傳送，因此遠端 HTML 上傳與 SHA-256 驗證仍 BLOCKED。
+
+
+## Candidate221 — 作品／歌曲批次入口分流（2026-10-24）
+- Parent Candidate220: 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`.
+- Local Candidate221: `amq_learning_tool_v82_85_46_candidate221_work_and_song_batch_entry_20261024.html`; 9,353,751 bytes; SHA-256 `77a754fce6117153063d7f00f44640c88f553a6893b78804f4b3573e162749f5`.
+- Change: List Management now exposes separate `作品批次整理` and `歌曲批次整理` actions. Work-level action reuses existing `quicktools`; song-level action retains Candidate210's canonical batch runtime. No storage keys/schema changed.
+- PASS: 63 executable inline JS blocks pass `node --check`; 4 large data/payload blocks excluded. 108 CSS blocks parse with zero errors. Seven static assertions pass, including single `applyBulkPracticeAction` owner and no VNDB relabel override.
+- BLOCKED: browser interaction tests; Playwright is installed but matching Chromium binary is absent in this runtime. Native file launch and persistent reload NOT RUN. Audio, live APIs, multiplayer lifecycle and osu!stable pixel comparison NOT RUN.
+- Rollback: Candidate220 byte-identical local copy, 9,353,264 bytes; SHA-256 `d36160782d785c9f23adb5d217aefe1fa4c1d80c1dd309bf54670753e5a9d80a`.
+- GitHub: Candidate221 documentation checkpoint branch created. Large local HTML upload and remote SHA verification remain BLOCKED; no remote HTML upload claimed.
