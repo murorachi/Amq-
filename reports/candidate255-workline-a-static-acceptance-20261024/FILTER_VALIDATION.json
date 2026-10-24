@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "artifact_sha256": "bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d",
+  "storage": "test-only in-memory shim; no durable persistence claim",
+  "page_errors": [],
+  "cases": [
+    {
+      "case": "empty",
+      "query": "",
+      "total": 9516,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "case_insensitive_title",
+      "query": "aNGEL",
+      "total": 85,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "year",
+      "query": "1999",
+      "total": 139,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "native_title",
+      "query": "Sei",
+      "total": 513,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "type",
+      "query": "TV",
+      "total": 5433,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "trimmed_title",
+      "query": "  Angel  ",
+      "total": 85,
+      "rendered": 60,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "partial_title",
+      "query": "ngel L",
+      "total": 1,
+      "rendered": 1,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "no_match",
+      "query": "AMQ_FILTER_TEST_NO_MATCH_889122",
+      "total": 0,
+      "rendered": 0,
+      "invalid_visible": 0,
+      "status": "PASS"
+    },
+    {
+      "case": "punctuation_sentinel",
+      "query": "@@@AMQ_FILTER_TEST_889122@@@",
+      "total": 0,
+      "rendered": 0,
+      "invalid_visible": 0,
+      "status": "PASS"
+    }
+  ]
+}
