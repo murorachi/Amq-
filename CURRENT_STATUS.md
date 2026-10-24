@@ -14,6 +14,7 @@
 - Candidate218 validation addendum commit: `a5ba65eeb7318a0d3f15fa7c8b9bd594eb6246f9`; remote blob SHA `1f16717c391661fd920c0d6120b7ab7000390150`.
 - Script lifecycle inventory committed and read back: `reports/candidate212-100-item-continuation-20261024/SCRIPT_LIFECYCLE_INVENTORY.md`, blob SHA `f0cdb94352efe880a4265e329d5e99624c917e30`.
 - Observer/timer lifecycle review committed and read back: `reports/candidate212-100-item-continuation-20261024/OBSERVER_TIMER_LIFECYCLE_REVIEW.md`, blob SHA `daa78e8a2c1b09f1d364b6dc58688ffea19797c7`.
+- DOM ID ownership review committed: `reports/candidate212-100-item-continuation-20261024/DOM_ID_OWNERSHIP_REVIEW.md`; initial markup has 296 unique IDs. Repeated source ID strings are mainly template/fallback paths and require runtime lifecycle checks, not blind deletion.
 - Additional executed check: all 108 CSS style blocks parsed with `tinycss2`; 2,763 qualified rules, 0 stylesheet parse errors, 0 declaration errors.
 
 ## Static evidence
