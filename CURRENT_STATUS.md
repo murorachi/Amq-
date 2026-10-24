@@ -109,3 +109,12 @@
 - BLOCKED：原生 file://／localhost／reload persistence 仍受 Chromium managed URLBlocklist 阻擋。NOT RUN：四工作區完整 E2E、真實音訊、live API、多人、osu!stable pixel diff。
 - 舊圖鑑批次 markup 尚未刪除：仍有 watchlist selection、導覽定位、automation、scope summary 與 queueSelected 依賴。這是批次 3 的第一個子階段，不宣稱整個批次 3 完成。
 - Candidate233 HTML 尚未上傳 GitHub，遠端 HTML SHA 未驗證；`git ls-remote` 因環境 DNS 無法解析 github.com 而失敗。詳細報告：`reports/candidate233-batch-api-centralization-20261024/STAGE_19_CANDIDATE233_BATCH_API_CENTRALIZATION.md`。
+
+## Candidate234 待聽佇列納入正式批次 API（2026-10-24）
+- Candidate233 基準：9,366,806 bytes，SHA-256 ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45。
+- Candidate234：9,368,097 bytes，SHA-256 16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641；回滾檔與 Candidate233 byte-identical。
+- queueSelectedBtn 已改接正式批次 API applyQueue()，新增空選取、確認、歌曲去重、aniPlayQueue_v1 讀回驗證與儲存失敗回復。
+- PASS：67 個可執行 JS 區塊語法、109 CSS 區塊解析、292 DOM ID 唯一、Node VM API 單元測試。
+- BLOCKED：完整頁面 localStorage runtime；opaque origin 測試限制及 Chromium managed URLBlocklist 阻擋原生 file://／localhost。NOT RUN：原生 reload、音訊、線上 API、多人與像素比對。
+- 舊 catalog batch UI 尚未刪除，因仍有選取、watchlist、導航及自動化依賴。HTML 本機產物未上傳 GitHub，遠端 HTML SHA 未驗證。
+- 報告：reports/candidate234-queue-api-integration-20261024/STAGE_20_CANDIDATE234_QUEUE_API_INTEGRATION.md。
