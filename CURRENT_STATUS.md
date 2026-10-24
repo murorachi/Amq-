@@ -23,3 +23,12 @@
 - Static validation: 68 executable inline JS blocks pass node --check; two embedded payload blocks excluded. CSS: 107 style blocks, 2,745 qualified rules, zero tinycss2 parse errors. HTML parser still reports two inherited structural warnings at the </head><body> boundary near line 324.
 - GitHub HTML upload/readback SHA-256 is BLOCKED: connector accepts text content but not a local-file byte stream; container git/curl cannot resolve github.com. Do not claim the HTML is uploaded.
 - Status: EXPERIMENTAL / NOT ACCEPTED / NOT FOR USER DELIVERY.
+
+## Candidate 212 follow-up — 2026-10-24
+- Candidate 212 local artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_212_mutation_loop_fix.html`; 9,352,632 bytes; SHA-256 `52376c693c5c0701d77e80a6076620623ef9ef5decadd11265d6b57bcf6c6952`.
+- Root-cause change: removed the `MutationObserver(applyDockStyle)` observer on `#audioDock` style because `applyDockStyle` mutates the same style attribute, creating a feedback-loop risk. Removed the `inset` shorthand assignment and retained explicit dock geometry properties.
+- Home-menu initial styles are untouched in this candidate; layout changes remain scoped to `body.amq-songselect-route-active`. Visual screenshot equivalence is not yet verified.
+- PASS: 68 executable inline JS blocks pass `node --check`; browser smoke test reached complete, expanded the home menu, navigated to Song Select, and rendered one stage, one tracklist, 180 rows. Dock measured x≈134, y≈955, w≈1647, h≈125 at 1920×1080. A 2-second mutation observation recorded 60 DOM mutations without stalling.
+- BLOCKED/NOT RUN: opaque-origin storage shim still logs localStorage SecurityError; native `file://`, persistence after reload, actual AMQ/EMQ autoplay comparison, real audio/media seek, CDN/API success, exhaustive workspace regression, and pixel comparison remain unverified.
+- HTML upload and remote SHA readback remain BLOCKED; no remote HTML upload is claimed. Candidate 212 is EXPERIMENTAL / NOT ACCEPTED.
+- Report: `amq_candidate212_validation_report.md` (local delivery artifact).
