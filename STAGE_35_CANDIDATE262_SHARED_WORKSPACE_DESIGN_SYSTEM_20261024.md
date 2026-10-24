@@ -6,8 +6,8 @@ Date: 2026-10-24
 - Parent Candidate261 SHA-256: `b1e1e25bbf6125fd9b7a075a962f91e5cc9a01a30d67b5da1bc37361e092d77d`, verified before editing.
 - Candidate: `amq_learning_tool_v82_85_76_candidate262_shared_workspace_design_system_20261024.html`
 - Version: `v82.85.76-candidate262-shared-workspace-design-system-20261024`
-- Size: 9,360,706 bytes
-- SHA-256: `6f773fd616d91749304a42785f5b19faa6c3165fa59894ee4080074d911092b9`
+- Size: 9,361,057 bytes
+- SHA-256: `d54d2a9ce82486fb459fc232233a0049e2ec49cb866300fcee9888ff9bb108f5`
 - Candidate261 and earlier files were not overwritten. Candidate262 is not an accepted baseline.
 
 ## Changes
@@ -16,7 +16,7 @@ Date: 2026-10-24
 3. Kept AniList, MyAnimeList and VNDB as three independent source cards with the same two operations each: import public list and remove local list. Import/data handlers were not changed.
 4. Replaced the standalone visual rules in `candidate227-work-batch-panel-style` with structural-only rules; appearance now comes from the shared workspace design system.
 5. Preserved independent song-batch and work-batch renderers, operation lists, and data scopes. This is shared UI styling, not a shared business workflow.
-6. Existing learning/practice and analytics modules retain their existing data flow and component structure; no broad business-logic rewrite was made in this styling stage.
+6. Existing learning/practice and custom-list modules retain their app-wide Design System tokens and component structure. Analytics/learning-plan visual overrides were converted from a separate pink palette to the shared workspace tokens; their data flow and component structure remain unchanged.
 
 ## Verification
 - PASS: Parent Candidate261 SHA-256 matched before modification.
