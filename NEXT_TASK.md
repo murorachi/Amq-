@@ -75,3 +75,13 @@
 5. Remove legacy markup/listeners/observers/CSS only after the call graph and runtime tests prove no required path depends on them. Preserve AniList/MAL import and Candidate210 song-batch ownership.
 6. Retry native `file://`, durable reload and audio at the end; current managed URLBlocklist blocks navigation. Record BLOCKED if unchanged.
 7. GitHub Candidate229 branch currently has docs only. Do not claim HTML upload or remote SHA verification.
+
+
+## P1: Candidate230 runtime acceptance and dependency audit (2026-10-24)
+1. Keep Candidate229 as the current code candidate; SHA-256 `8d9c9c9fff823d3e333875aeb07ada9fd73976dd64d55e6cdc2c6471f06e0448`. No HTML change was made in Candidate230.
+2. Find an approved browser context that permits controlled storage testing without changing Chromium managed policy; rerun visible workspace success/cancel/failure flows.
+3. Test all watch states, familiarity levels, every practice action, missing/empty selection, storage failure, >300-item confirmation accept/cancel, selection isolation, repeated open/close and listener/Observer stability.
+4. Migrate all verified callers/interceptors of `#applyBulkPracticeAction` and confirm the remaining purpose of `#quicktools` on watchlist before deletion.
+5. Remove legacy markup/listeners/observers/CSS only after runtime and call-graph evidence proves no required dependency remains. Preserve AniList/MAL/VNDB import and Candidate210 song-batch ownership.
+6. Retry native `file://`, durable reload and audio last; retain BLOCKED status if policy still blocks navigation.
+7. Candidate230 GitHub checkpoint is documentation only. Do not claim HTML upload or remote SHA verification.
