@@ -58,8 +58,10 @@
     "applyPractice"
   ],
   "page_errors": 0,
+  "handler_error_messages": {"empty_selection": "PASS", "watch_storage_failure": "PASS"},
+  "github_upload_probe": "BLOCKED: DNS resolution for github.com failed",
   "console_errors": 0,
   "native_reload": "BLOCKED",
   "audio_live_api_multiplayer_pixel_diff": "NOT RUN",
-  "github_html_upload_remote_sha256": "NOT DONE"
+  "github_html_upload_remote_sha256": "BLOCKED: git ls-remote failed because environment could not resolve github.com; HTML remains local-only"
 }
