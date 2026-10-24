@@ -210,4 +210,4 @@
 - Candidate233 是由本機 Candidate231 派生的工作候選，不取代原始基準：`amq_learning_tool_v82_85_47_candidate233_batch_api_centralization_20261024.html`，9,366,806 bytes；SHA-256 `ae1d4794c8c6c1ad64726c7736d9d01a6a68ea9a84f81d704c0696df62594f45`。
 - Candidate231 byte-identical rollback copy：`amq_learning_tool_v82_85_46_candidate231_rollback_before_candidate233_20261024.html`，SHA-256 與 Candidate231 相同。
 - 修改範圍：刪除四個全 HTML 零引用私有 helper，並將舊圖鑑 watch/song/practice handlers 接到既有 `__aniBatchBusinessAPIv228`。未修改 storage keys/schema、CSS 或必要 UI。
-- Candidate233 尚未被使用者驗收為新正式基準；GitHub 分支只有報告與狀態文件，HTML 未上傳，遠端 HTML SHA 未驗證。
+- Candidate233 尚未被使用者驗收為新正式基準；GitHub 分支只有報告與狀態文件，HTML 未上傳，遠端 HTML SHA 未驗證。本輪 `git ls-remote` 因環境 DNS 無法解析 github.com 而失敗。
