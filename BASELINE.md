@@ -1,6 +1,17 @@
 # BASELINE — AMQ Song Select cleanup (updated 2026-10-24)
 
 ## Current candidate for Batch 3 continuation
+- Candidate235 local artifact: amq_learning_tool_v82_85_49_candidate235_workspace_automation_migration_20261024.html
+- Size: 9,369,076 bytes.
+- SHA-256: d2cb92a244197b254ac49920bb9b18f2c0649d8eb4060691b189d53ee1e2aaa4.
+- Candidate234 rollback: 9,368,097 bytes; SHA-256 16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641; byte-identical to Candidate234 source.
+- Candidate235 is local-only. GitHub HTML upload and remote HTML SHA validation are NOT VERIFIED.
+- Batch automation navigation now targets the official visible work-batch workspace; legacy catalog batch UI remains and Batch 3 is incomplete.
+- Tests: JS syntax PASS (67 blocks); CSS parse PASS (109 blocks); DOM IDs PASS (292 unique); static selector assertions PASS; full-page Playwright NOT RUN; native browser navigation/reload BLOCKED.
+
+---
+
+## Current candidate for Batch 3 continuation
 - Candidate234 local artifact: amq_learning_tool_v82_85_48_candidate234_queue_api_integration_20261024.html
 - Size: 9,368,097 bytes.
 - SHA-256: 16b387530b2dd9cd22d3e8aba5b23ef5fd276c1aecf87481c4c08d6b9d1d3641.
