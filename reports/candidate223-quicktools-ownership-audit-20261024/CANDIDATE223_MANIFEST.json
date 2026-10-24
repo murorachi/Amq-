@@ -1,0 +1,25 @@
+{
+  "stage": "09",
+  "title": "quicktools ownership audit",
+  "date": "2026-10-24",
+  "baseline": {
+    "candidate": "Candidate222",
+    "filename": "amq_learning_tool_v82_85_46_candidate222_unreachable_batch_bridge_cleanup_20261024.html",
+    "bytes": 9348268,
+    "sha256": "39d9962c38ab928f51969237063230e8f77dc6f9416f8bf9691b12c48522c723"
+  },
+  "htmlModified": false,
+  "decisions": {
+    "applyBulkPracticeAction": "single canonical dispatcher; keep",
+    "differentDataGranularity": "keep separate",
+    "selectionHandlers": "retain pending browser parity tests",
+    "syncOpenBtn": "AniList/MAL import, not batch action"
+  },
+  "tests": {
+    "staticOwnershipAudit": "PASS",
+    "browserInteraction": "NOT RUN: Chromium unavailable",
+    "nativeFilePersistence": "NOT RUN",
+    "audioApiMultiplayerPixel": "NOT RUN"
+  },
+  "next": "Browser acceptance of catalog and watchlist selection state, then merge only proven duplicate state synchronization."
+}
