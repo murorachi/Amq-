@@ -85,3 +85,12 @@
 5. Remove legacy markup/listeners/observers/CSS only after runtime and call-graph evidence proves no required dependency remains. Preserve AniList/MAL/VNDB import and Candidate210 song-batch ownership.
 6. Retry native `file://`, durable reload and audio last; retain BLOCKED status if policy still blocks navigation.
 7. Candidate230 GitHub checkpoint is documentation only. Do not claim HTML upload or remote SHA verification.
+
+
+## P1：Candidate232 舊作品批次呼叫點遷移與清理前置（2026-10-24）
+1. 以 Candidate231 本機 HTML 為候選，先重新核對 SHA-256 74607e5344e0b993fb1e8d40c081285287071c236c9c92bac86cac98c5c9fecf；Candidate229 回滾檔保持不變。
+2. 將仍只會定位舊 #applyBulkPracticeAction 的工作區動作，逐一改接可見作品批次面板或明確的 Candidate228 業務 API；保留使用者確認流程與真實操作結果。
+3. 追查 #quicktools 在 #watchlistWork 的實際用途、#bulkPracticeAction/#bulkCustomList 的呼叫者、syncListSelectors() 更新範圍、所有導航／自動化攔截器與 listener/Observer。
+4. 只有在每個呼叫點完成遷移且測試證明無依賴後，才刪除對應 markup、listeners、observers 和 CSS；不得整組刪除，不得只隱藏。
+5. 保留 Candidate210 歌曲批次唯一所有權，以及 AniList/MAL/VNDB 匯入、既有資料鍵與 schema。
+6. 原生 file://、reload 持久化、音訊與遠端 HTML 上傳／SHA 驗證放在最後重試；若環境仍阻擋，明確標記 BLOCKED。
