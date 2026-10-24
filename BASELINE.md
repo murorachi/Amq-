@@ -34,6 +34,7 @@
 - Song Select keyboard: baseline has overlapping direct-list and document-level key handlers, with the document handler misclassifying the main tracklist as an inline list. Dynamic list replacement can remove the direct listener. A disposable stable-stage single-owner prototype passes ArrowDown and Enter exactly-once assertions; see `SONGSELECT_KEYBOARD_ACCEPTANCE.md`.
 - Scene backup preflight defect: `prepareBackupRestore()` accepts arbitrary bytes labelled PNG and an 8193 px image, while file input applies decode/dimension limits. A disposable `createImageBitmap` + dimension-check prototype rejects both; native IndexedDB transactions remain blocked. See `SCENE_BACKUP_VALIDATION_ACCEPTANCE.md`.
 - MAL import conflict: a mocked entry with only top-level `status: completed` overwrites an existing manual planning status, despite code comments warning that this field may represent airing status. A disposable narrow fallback removal passes while explicit `listStatus` remains correct; see `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
+- Current Candidate212 watch/custom-mode tab lifecycle passes 10 repeated switches with one direct listener per tab and no binding growth. Candidate218's separate artifact remains unverified; do not assume its change fixes a reproduced baseline defect. See `WATCH_MODE_TAB_ACCEPTANCE.md`.
 ## Verified analysis findings
 - Static JS: 68 executable inline blocks pass `node --check`; two payload blocks are excluded.
 - CSS: 108 style blocks parse without errors in the current tinycss2 scan.
