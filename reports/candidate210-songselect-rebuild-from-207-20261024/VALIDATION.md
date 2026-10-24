@@ -7,8 +7,8 @@
 - Parent size: 9,310,496 bytes.
 - Parent SHA-256: `2f3a092a139628daa48bc113d2a192f41e2d7474182471ed926de3de49fd6100`.
 - Working artifact: `amq_learning_tool_v82_85_46_workspace_proto44-osu-songselect-ui_210_songselect_rebuild_from_207.html`
-- Working size: 9,345,506 bytes.
-- Working SHA-256: `e02a86131053d4f98bfba82d1c5c907eb33ef3a5f72048899303761ef4df5ef6`.
+- Working size: 9,345,507 bytes.
+- Working SHA-256: `4189553ebd65d3ee81d239fd5e20c651cc783532d360bce8d79e25fb53473044`.
 - Candidate 207 remains unchanged. Candidate 208 and Candidate 209 were not used as sources.
 
 ## Changes in this checkpoint
