@@ -9,22 +9,25 @@
 - Immutable Candidate277 SHA-256: `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`
 
 ## Stage 68 — version metadata sync
-- Updated first AMQ build comment and HTML title to identify Candidate283.
-- No UI, CSS, JavaScript, route, data, or behavior logic changed.
+- Updated the first AMQ build comment and HTML title to identify Candidate283.
+- Diff verification confirms only those two metadata locations changed.
 - PASS: 67/67 executable inline JS blocks pass Node syntax checks.
 - PASS: 2,819 CSS rules parsed with zero errors; 272 literal IDs with zero duplicates.
-- PASS: output size and SHA-256 recorded in Stage 68 report.
+
+## Stage 69 — upload path audit
+- PASS: Existing workflow `.github/workflows/download-file-for-chatgpt.yml` requires a public HTTPS download URL and creates an Actions artifact.
+- BLOCKED: No public HTTPS URL or supported local-binary upload route is available to publish Candidate283 from this runtime.
+- Candidate283 has not been uploaded; remote size/SHA verification NOT RUN.
 
 ## Remote state
 - Branch: `amq-candidate282-batch-routing-lifecycle-fix-20261025`.
-- Remote HEAD checked at Stage67: `5a556d6bdd1a2988f4cb4a851e4013db942178d2`.
-- TinyFish browser confirmed only v82.85.30 and v82.85.46 HTML are exposed in that branch. Candidate282 and Candidate283 HTML are not remotely present.
-- Candidate283 has not been uploaded; remote size/SHA verification NOT RUN.
+- Latest documentation commit before Stage69: `f239e7d971c48d6e96cb936ccdc148b26b66963a`.
+- TinyFish confirmed only v82.85.30 and v82.85.46 HTML are exposed in the branch. Candidate282 and Candidate283 HTML are not remotely present.
 
 ## Runtime test status
-- BLOCKED: browser access to the exact Candidate283 HTML because it is not remotely available.
+- BLOCKED: Browser access to exact Candidate283 HTML because it is not remotely available.
 - NOT RUN: computed styles, route switching, Dock lifecycle, VNDB/song-batch interactions, persistence reload, external API behavior, audio, multiplayer, screenshot/pixel comparison.
 - No functional behavior is claimed as browser-verified.
 
 ## Next task
-Establish a reliable upload/deployment path for the exact Candidate283 file; verify remote version, byte count, and SHA-256; then run real cloud-browser acceptance before further CSS/JS refactors.
+Secure a supported upload/HTTPS hosting path for Candidate283, verify remote bytes and SHA-256, then run real cloud-browser acceptance before further CSS/JS refactors.

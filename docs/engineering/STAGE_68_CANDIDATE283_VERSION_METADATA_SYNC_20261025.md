@@ -24,6 +24,7 @@
 - PASS：109 個 style blocks、2,819 個 CSS rules；CSS parser errors = 0。
 - PASS：272 個 literal IDs，重複 ID = 0。
 - PASS：Candidate283 build 註解、title 與 Candidate282 parent SHA 靜態斷言各出現一次。
+- PASS：將 Candidate283 的 build 註解及 title 還原為 Candidate282 原值後，完整檔案逐位元組相同；實際 diff 只有這兩處 metadata 變更。
 - BLOCKED：Candidate283 HTML 尚未在遠端可執行位置，無法透過 TinyFish 對該檔案進行頁面操作。
 - NOT RUN：computed styles、route switching、Dock expand/collapse、VNDB import、song-batch lifecycle、custom-list persistence、audio、multiplayer、screenshot/pixel comparison。
 
@@ -36,7 +37,7 @@
 退回 Candidate282 檔案，並以 parent SHA `66e97e9963c115a3e3f853e83bc0e6616c9d0bea57007c6fd766cadd44640e49` 驗證。Candidate277 immutable baseline SHA 為 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`。
 
 ## 下一步
-1. 找到可可靠傳遞 9.38 MB HTML 至公開測試環境的支援上傳通道；上傳後必須遠端核對版本、大小及 SHA-256。
+1. 解決可靠的 Candidate283 檔案上傳／公開來源；上傳後必須遠端核對版本、大小及 SHA-256。
 2. 使用 TinyFish 對實際 Candidate283 HTML 做頁面初始化、Song Select、Dock、VNDB/song-batch 路由與 console/error 驗收。
 3. 再驗證自訂清單 CRUD 與 reload persistence，並測試匯入錯誤處理。
 4. 瀏覽器證據到位後，才進行 Dock display 單一 owner 重構與 CSS 重複規則整合。

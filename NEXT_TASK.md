@@ -12,4 +12,5 @@
 
 ## Current blockers
 - Candidate283 is local-only; current remote branch has only v82.85.30 and v82.85.46 HTML.
+- GitHub's existing `download-file-for-chatgpt.yml` workflow requires a public HTTPS download URL; no URL for Candidate283 is currently available.
 - Browser interaction acceptance is BLOCKED until the exact file is available to the cloud browser.
