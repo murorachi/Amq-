@@ -253,3 +253,10 @@
 - 直接回滾 Candidate254 byte-identical：`amq_learning_tool_v82_85_68_candidate254_rollback_before_candidate255_20261024.html`，SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
 - Candidate255 修正 batch-tools 仍等待舊 quicktools，以及 Song Select 動態掛載清單仍含 quicktools 的殘留引用。
 - 靜態測試 PASS；opaque-origin Playwright 因 localStorage 權限受阻，完整互動及持久化未驗收。HTML 尚未上傳 GitHub，遠端 SHA 未驗證，因此 Candidate255 仍是未驗收候選，不取代原始正式基準。
+
+
+## Candidate255 篩選與批次 UI 補充驗證（2026-10-24；候選未升格）
+- Candidate255 HTML SHA-256 `bd620e42e677ddbc8d48cf84da5773f3a51e42978c20ecbaa07761e467a7630d`，9,355,697 bytes；回滾 Candidate254 SHA-256 `e7fa38897fcec376153b4a8a979ba3fe44775df8e8266a1e17f2d5ecc24934a9`。
+- 篩選驗證 5 案例 PASS：空搜尋 9516／顯示 60、大小寫不敏感標題 85、年份 1999 為 139、原名為 513、無匹配為 0；可見結果全部符合查詢。
+- 批次 UI／業務動作在測試用記憶體 storage shim 下 PASS；持久化 reload 未測，不能以 shim 取代。
+- 因真實持久化與 GitHub 遠端 HTML SHA 未驗證，Candidate255 仍不是正式驗收基準。
