@@ -11,6 +11,8 @@
 - Candidate212 reconstructed readable export: 9,352,606 bytes; SHA-256 `07f2d2428b308d6449e561b9d68cc890932d36089694cdecbff561d092b11636`. It is 26 bytes shorter than the recorded original and is NOT a release source.
 - The target branch Git Tree does not contain Candidate207/212/216/218 HTML. No candidate HTML upload or remote HTML SHA-256 verification is claimed.
 
+- Static dependency edge inventory committed and read back: `reports/candidate212-100-item-continuation-20261024/DEPENDENCY_EDGE_INVENTORY.md`. It records 70 script blocks and 268 heuristic cross-script window-API references plus event/storage hints. It is explicitly a text-scan map, not a complete AST call graph and not sufficient by itself to justify deletion.
+
 ## Actual checks executed against the reconstructed text export
 - PASS: Node `node --check` for 68 executable inline JavaScript blocks; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with tinycss2; 2,763 top-level qualified rules counted by this scan; zero stylesheet/declaration parse errors. The rule count is scanner-scope-specific and is not comparable to nested-rule totals from other reports.
