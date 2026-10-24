@@ -1,8 +1,10 @@
-# NEXT_TASK — Candidate264
+# NEXT_TASK — After Stage54/55 baseline audit and dependency inventory
 
-1. 在可操作瀏覽器環境驗收四個工作區：自訂清單整理、學習計畫、統計儀表板、歌曲批次整理。
-2. 實測不同 viewport 下卡片橫向排列、面板/歌曲區是否重疊、控制項是否可操作。
-3. 自訂清單實測建立、內容管理、加入/移除作品、改名、刪除與重新載入持久化。
-4. 學習計畫實測探索、補強、自選清單、SRS 模式切換與開始流程。
-5. 儀表板檢查統計數值與學習分析區域；歌曲批次逐一測試熟悉度、標籤、黑名單、清單加入/移除。
-6. 功能與樣式定稿後做一次整合回歸；再上傳 HTML 並核對遠端版本與 SHA-256。Batch 3 完成前不進入 Batch 4。
+1. Recover and reverify Candidate212 raw bytes if an approved Library/file path becomes available. Never reconstruct missing bytes and claim identity.
+2. Formal baseline remains BLOCKED; do not promote Candidate277 without byte evidence or explicit authorization.
+3. Before source deletion, complete the dependency chain: script block → DOM/template → caller/action → event/observer/timer → storage keys → tests.
+4. Prioritize route/workspace owner, custom-list scope/selector synchronization, and CSS cascade groups. Repeated selectors are not deletion evidence.
+5. Candidate277 metadata mismatch (title Candidate219; data-amq-candidate=227) is a recorded defect. Fix only on a separately named candidate after source/baseline decision; never overwrite Candidate277.
+6. Native browser reload, live API/audio/multiplayer, and osu!stable pixel tests remain NOT RUN/BLOCKED until a permitted environment exists.
+7. Candidate277 HTML GitHub upload/readback/hash remains NOT RUN. If later uploading, use isolated branch/path and verify remote content; do not overwrite Candidate264 or main.
+8. AMQ/EMQ storage remains separate until a lossless migration plus rollback is designed and tested.
