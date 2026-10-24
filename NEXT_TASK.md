@@ -15,6 +15,7 @@ Working baseline: Candidate212 (unchanged). Candidate207 is the recorded recover
 - FAIL (reproduced): MAL importer maps ambiguous top-level `entry.status` to a user watch status and can overwrite manual data. A disposable prototype removes that fallback and passes explicit-listStatus/manual-preservation assertions. Apply only after source integrity is restored; see `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
 - PASS: Candidate212 watch/custom-mode tabs register one direct listener each and survive 10 repeated switches without binding growth. Candidate218 artifact itself remains unavailable for exact runtime comparison; see `WATCH_MODE_TAB_ACCEPTANCE.md`.
 - PASS (mocked routes): cover fallback loads after primary-source failure; a Jikan 429 leaves the cover hidden and does not crash the page. Live API/CDN behavior remains NOT RUN; see `COVER_FALLBACK_ACCEPTANCE.md`.
+- PASS: mocked MAL pagination/dedup across two pages writes each matched anime once and skips duplicate IDs; first explicit user-list status wins. Separate ambiguous top-level `status` fallback still risks overwriting manual state. See `MAL_IMPORT_STATUS_ACCEPTANCE.md`.
 ## Latest confirmed results
 - PASS: 68 executable inline JavaScript blocks from the readable Candidate212 export passed Node syntax checking; 2 embedded payload blocks excluded.
 - PASS: 108 CSS style blocks parsed with zero stylesheet/declaration errors in the current scan.
