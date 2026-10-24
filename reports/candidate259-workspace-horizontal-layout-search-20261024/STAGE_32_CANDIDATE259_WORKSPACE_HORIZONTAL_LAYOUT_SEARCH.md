@@ -7,4 +7,4 @@ Candidate259 stage report. See local downloadable report for full evidence.
 - PASS: 67 executable inline JS blocks parsed; 110 CSS blocks parsed; 273 DOM IDs unique.
 - BLOCKED: Playwright browser navigation returned `net::ERR_BLOCKED_BY_ADMINISTRATOR` for localhost and file URL, so visual/click acceptance is not claimed.
 - NOT RUN: live AniList/MAL/VNDB API import/remove/dedupe/error recovery.
-- NOT VERIFIED: remote HTML upload and SHA-256 readback. Batch 3 remains incomplete; do not start Batch 4.
+- BLOCKED: remote HTML upload and SHA-256 readback. Available GitHub connector write actions accept text content but not a local artifact file reference. No remote HTML upload is claimed. Batch 3 remains incomplete; do not start Batch 4.
