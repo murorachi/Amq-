@@ -1,0 +1,28 @@
+{
+  "batch": 12,
+  "candidate": "Candidate307",
+  "candidate_sha256": "f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6",
+  "source": "Candidate306",
+  "source_sha256": "ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e",
+  "changed_style_blocks": [
+    "style-0",
+    "candidate143-measured-reference-alignment",
+    "candidate53-songselect-layout-correction"
+  ],
+  "css_rules_removed": 9,
+  "css_declarations_removed": 23,
+  "bytes_removed": 2030,
+  "removed_groups": [
+    "Home .discoverTop and .discoverTop h3 fully superseded by v47-home-redesign",
+    "Home .discoverCard margin-top/border/border-radius superseded",
+    "Candidate143 Song Select card base/hover rules superseded by Candidate99",
+    "Candidate53 old card size, cover size, subtitle font, filter font and panel-head margin declarations superseded"
+  ],
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS",
+    "computed_style": "PASS 6/6",
+    "full_app_e2e": "NOT RUN"
+  },
+  "remote_html": "BLOCKED"
+}
