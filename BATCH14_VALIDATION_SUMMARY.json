@@ -1,0 +1,25 @@
+{
+  "batch": 14,
+  "candidate": "amq_learning_tool_v82_86_20_candidate309_home_play_modal_superseded_css_cleanup_20261025.html",
+  "candidate_bytes": 1664430,
+  "candidate_sha256": "922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f",
+  "removed_declarations": 17,
+  "bytes_removed": 589,
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_ids": "PASS 0",
+    "script_contents_unchanged": "PASS",
+    "non_style_html_unchanged": "PASS",
+    "computed_style": "PASS 6/6 zero differences",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "BLOCKED"
+  },
+  "zip": {
+    "name": "AMQ_Batch14_Home_PlayModal_Candidate309_20261025.zip",
+    "bytes": 448699,
+    "sha256": "4e32d16580d414e3496723a0a7a41bdf5618f0629076381910c69448983b7aea",
+    "integrity": "PASS"
+  },
+  "formal_baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+}
