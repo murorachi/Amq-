@@ -108,3 +108,11 @@ Candidate302 remains formal baseline:
 - Before deleting, check selector specificity, `!important`, at-rule conditions, JS-created DOM/classes, and state transitions. Preserve uncertain items and move to another high-confidence cluster.
 - Run before/after computed-style comparisons at desktop/tablet/mobile for home, Song Select, workspace dock, and player; run syntax/duplicate-ID checks. Full-app E2E remains NOT RUN until data assets/runtime are available.
 - Candidate305 SHA-256: `3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`. Candidate HTML remote upload is BLOCKED; never infer it from report uploads.
+
+## Next: Batch 12 — remaining Home / Song Select CSS clusters
+- Working parent: Candidate306 (SHA-256 `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`); formal baseline remains Candidate302.
+- Do not repeat whole-file selector counts. Continue by cluster: old Home/landing classes, obsolete Song Select modal/rail selectors, and selector branches whose tokens occur only in CSS.
+- Before deleting, verify markup + all inline JS references, dynamic class creation, selector branch grouping, at-rule/media scope, and state classes.
+- Preserve uncertain selectors and unrelated multiplayer/learning-system styles. Remove only high-confidence branches in one candidate.
+- Regression: JS syntax, CSS parsing, duplicate IDs, non-style HTML unchanged, and Chromium computed styles at desktop/tablet/mobile for Home/Song Select and relevant static workspace/player elements.
+- Full-app E2E remains NOT RUN unless the required data assets/runtime can be supplied by the existing environment. Candidate HTML remote upload remains BLOCKED until the binary itself and its SHA can be verified remotely.
