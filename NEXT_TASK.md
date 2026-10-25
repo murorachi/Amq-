@@ -127,3 +127,7 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 ## Stage 5.3 route contract requirement (2026-10-25)
 - Before integrating Song Select route guards, explicitly decide and test whether intercepted panel routes should run generic body-class post-processing. The existing inner and outer guard placement produces different behavior despite identical destination maps.
 - Use the Stage 5 report regression matrix; all browser-only cases are currently NOT RUN. Do not delete a guard until the desired behavior is encoded in one owner and regression cases pass.
+
+
+## Stage 5.4 static check note (2026-10-25)
+- Accurate syntax result for Candidate295: Node.js `--check` PASS for 67/67 executable inline JavaScript blocks. The inline JSON block `aniAnilistIdMapV8237` is data, not JavaScript. Keep browser behavior checks separate as NOT RUN/BLOCKED.
