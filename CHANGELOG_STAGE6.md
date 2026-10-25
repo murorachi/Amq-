@@ -62,3 +62,10 @@
 - A heartbeat request continued after route-away while session remained stored. Recorded as a design question, not a confirmed bug.
 - Candidate302 static topology: 70 inline script tags, no duplicate IDs or duplicate non-empty script hashes; eight Batch 6 candidates each appear once.
 - No app source changes/deletions. Full-app E2E NOT RUN; remote HTML remains BLOCKED/NOT_FOUND.
+
+
+## 2026-10-25 — Batch 8 Candidate303 shared OpenCC loader
+- Created `amq_learning_tool_v82_86_14_candidate303_opencc_shared_loader_20261025.html` from Candidate302; Candidate302 preserved unchanged.
+- Consolidated duplicate OpenCC script injection between AMQ and EMQ Chinese-title modules via `window.__aniOpenCCLoaderV1`.
+- Only script blocks 31 and 41 changed; 68 other script blocks and 109 CSS blocks unchanged; no feature deletion.
+- JS syntax 67/67 PASS; isolated Chromium tests 3/3 PASS; full-app E2E NOT RUN. Candidate303 remote HTML/hash BLOCKED.
