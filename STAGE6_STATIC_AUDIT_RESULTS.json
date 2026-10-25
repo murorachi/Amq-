@@ -1,0 +1,81 @@
+{
+  "reportVersion": 1,
+  "purpose": "static-only audit; not browser/runtime E2E",
+  "candidates": [
+    {
+      "candidate": "Candidate295",
+      "bytes": 1720917,
+      "sha256": "aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81",
+      "inlineExecutableScripts": 67,
+      "scriptSyntaxErrors": 0,
+      "styleBlocks": 109,
+      "topLevelCssRules": 2808,
+      "cssStylesheetErrors": 0,
+      "cssDeclarationErrors": 0,
+      "htmlIds": 271,
+      "uniqueHtmlIds": 271,
+      "duplicateHtmlIds": 0,
+      "status": "PASS"
+    },
+    {
+      "candidate": "Candidate299",
+      "bytes": 1719884,
+      "sha256": "1e7a37cef7a7d791c5dd40f09c2143b2e507dac76c73951e5060b82f5c44c2e4",
+      "inlineExecutableScripts": 67,
+      "scriptSyntaxErrors": 0,
+      "styleBlocks": 109,
+      "topLevelCssRules": 2808,
+      "cssStylesheetErrors": 0,
+      "cssDeclarationErrors": 0,
+      "htmlIds": 271,
+      "uniqueHtmlIds": 271,
+      "duplicateHtmlIds": 0,
+      "status": "PASS"
+    },
+    {
+      "candidate": "Candidate300",
+      "bytes": 1717671,
+      "sha256": "5fea42650ede3b8b779afdf7b61e42365388d41b34e4231988065eb2fb7d34a5",
+      "inlineExecutableScripts": 67,
+      "scriptSyntaxErrors": 0,
+      "styleBlocks": 109,
+      "topLevelCssRules": 2808,
+      "cssStylesheetErrors": 0,
+      "cssDeclarationErrors": 0,
+      "htmlIds": 271,
+      "uniqueHtmlIds": 271,
+      "duplicateHtmlIds": 0,
+      "status": "PASS"
+    },
+    {
+      "candidate": "Candidate301",
+      "bytes": 1720241,
+      "sha256": "e8eb07ccab26b6e424eda9aed11d1c21b90cca9c544ed2b6843096e3b6762454",
+      "inlineExecutableScripts": 67,
+      "scriptSyntaxErrors": 0,
+      "styleBlocks": 109,
+      "topLevelCssRules": 2808,
+      "cssStylesheetErrors": 0,
+      "cssDeclarationErrors": 0,
+      "htmlIds": 271,
+      "uniqueHtmlIds": 271,
+      "duplicateHtmlIds": 0,
+      "status": "PASS"
+    },
+    {
+      "candidate": "Candidate302",
+      "bytes": 1720249,
+      "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+      "inlineExecutableScripts": 67,
+      "scriptSyntaxErrors": 0,
+      "styleBlocks": 109,
+      "topLevelCssRules": 2808,
+      "cssStylesheetErrors": 0,
+      "cssDeclarationErrors": 0,
+      "htmlIds": 271,
+      "uniqueHtmlIds": 271,
+      "duplicateHtmlIds": 0,
+      "status": "PASS"
+    }
+  ]
+}
