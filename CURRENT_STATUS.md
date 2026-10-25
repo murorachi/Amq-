@@ -540,3 +540,10 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Report files `AMQ_CANDIDATE346_CORE_REGRESSION_STATIC_SMOKE_20261026.md` and `.json` were uploaded to this branch and readback-verified.
 - This is static source-presence evidence only. Browser interaction is BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`); full functional regression is NOT RUN.
 - Candidate302 remains formal baseline; Candidate346 remains experimental.
+
+## Core regression matrix — Candidate346 (2026-10-26)
+- Consolidated matrix created: `AMQ_CANDIDATE346_CORE_REGRESSION_MATRIX_20261026.md` and `.json`; both uploaded and readback-verified.
+- Static source-presence smoke: PASS for 11 marker groups. Inline JS syntax: PASS, 65 scripts, 0 errors.
+- Candidate346 functional status remains INCOMPLETE: AMQ/EMQ/MIX E2E, player, custom-list persistence, backup/restore, and multiplayer are NOT RUN; workspace browser interaction BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`.
+- Historical isolated tests on Candidate302 remain historical evidence only, not Candidate346 full-app PASS results.
+- Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
