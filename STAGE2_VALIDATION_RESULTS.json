@@ -1,0 +1,65 @@
+{
+  "report_version": 1,
+  "baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "bytes": 1720249,
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "checks": [
+    {
+      "name": "baseline_sha256",
+      "status": "PASS",
+      "detail": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+    },
+    {
+      "name": "baseline_size",
+      "status": "PASS",
+      "detail": "1720249"
+    },
+    {
+      "name": "report_json_baseline_match",
+      "status": "PASS",
+      "detail": "Exact size and SHA-256"
+    },
+    {
+      "name": "route_wrapper_evidence",
+      "status": "PASS",
+      "detail": "Core navigator, generic wrapper, workspace mode and final route interception markers found"
+    },
+    {
+      "name": "custom_list_owner_evidence",
+      "status": "PASS",
+      "detail": "Canonical store/write path found"
+    },
+    {
+      "name": "emq_schema_boundary",
+      "status": "PASS",
+      "detail": "AMQ animeIds and EMQ workIds schema evidence found"
+    },
+    {
+      "name": "backup_restore_guard",
+      "status": "PASS",
+      "detail": "Backup allowlist and restore validation found"
+    },
+    {
+      "name": "observer_lifecycle_evidence",
+      "status": "PASS",
+      "detail": "57 observer constructors extracted"
+    },
+    {
+      "name": "json_report_consistency",
+      "status": "PASS",
+      "detail": "Report and evidence JSON generated from Candidate302 source"
+    },
+    {
+      "name": "no_source_modified",
+      "status": "PASS",
+      "detail": "Formal baseline remains byte-identical"
+    }
+  ],
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "scope": "Static source evidence; not browser runtime/E2E"
+  }
+}
