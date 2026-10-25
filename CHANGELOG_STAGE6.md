@@ -122,3 +122,8 @@
 - Candidate310 SHA-256 `34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9`, 1,664,118 bytes.
 - Removed 9 superseded declarations / 312 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
 - Candidate310 not promoted; HTML upload and report/summary publication BLOCKED/unverified; formal baseline Candidate302 unchanged.
+
+## 2026-10-25 — Batch 16: Home / Song Select theme and stable-play modal CSS cleanup
+- Candidate311 SHA-256 `dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996`, 1,662,516 bytes.
+- Removed 55 superseded/duplicate declarations / 1,602 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
+- Candidate311 not promoted; HTML upload BLOCKED/unverified; report/summary published; formal baseline Candidate302 unchanged.
