@@ -165,3 +165,13 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Batch21 removed Candidate72's duplicate panel-state MutationObserver/writer while preserving the required ranking-frame placeholder. Candidate76/77 own panel state.
 - PASS: JS 68/68, CSS parse, duplicate IDs; isolated Chromium open, Escape close and direct class state match before/after. Full-app E2E NOT RUN.
 - Not promoted; formal baseline Candidate302 remains SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Rollback Candidate315. Candidate HTML remote upload/hash NOT VERIFIED.
+
+## Candidate317 — unpromoted working candidate
+- Source Candidate316 SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317; Candidate317 1,645,902 bytes, SHA-256 e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9.
+- Batch22 deleted the now-empty Candidate72 ranking-frame bootstrap and Candidate71's unreachable fallback creation branch. PASS: JS syntax 67/67, CSS, IDs and isolated Chromium frame/dock checks. Full-app E2E NOT RUN.
+- Rollback Candidate316; formal baseline Candidate302 unchanged.
+
+## Candidate318 — latest unpromoted working candidate
+- Source Candidate317 SHA-256 e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9; Candidate318 1,645,636 bytes, SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029.
+- Batch23 removed Candidate76's unreachable Escape handler, already intercepted by earlier Candidate70 capture handler. PASS: JS syntax 67/67, CSS, IDs and isolated Chromium Escape/close-button regression. Full-app E2E NOT RUN.
+- Not promoted. Formal baseline remains Candidate302 SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Rollback Candidate317. Candidate HTML upload/hash NOT VERIFIED.
