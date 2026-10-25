@@ -1,0 +1,23 @@
+{
+  "batch": 19,
+  "candidate": "amq_learning_tool_v82_86_25_candidate314_songselect_layout_owner_conflict_cleanup_20261025.html",
+  "candidate_sha256": "e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17",
+  "javascript_syntax": "PASS 68/68",
+  "css_parse": "PASS 0 errors",
+  "duplicate_dom_ids": "PASS 0",
+  "chromium_viewports": {
+    "390": {
+      "before_bottom": "clamp(104px, 12.4vh, 180px)",
+      "after_bottom": "86px"
+    },
+    "768": {
+      "after_bottom": "clamp(104px, 12.4vh, 180px)"
+    },
+    "1440": {
+      "after_bottom": "clamp(104px, 12.4vh, 180px)"
+    }
+  },
+  "audio_video_hidden": "PASS",
+  "full_app_e2e": "NOT RUN",
+  "github_html_upload": "NOT VERIFIED"
+}
