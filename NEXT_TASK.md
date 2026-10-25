@@ -348,3 +348,11 @@ Candidate302 remains formal baseline:
 - Only Candidate15 changed: removed its `hashchange`/`popstate` visibility listeners and unused observer variable/return value. The existing subtree observer remains because VN views are created dynamically and relevant view switches mutate `hidden`/`class`. Candidate76/77 lifecycle and Candidate16 data paths unchanged.
 - Tests: PASS 65 executable inline scripts syntax, 0 errors; PASS only Candidate15 changed; PASS 731 ID attrs/16 duplicate kinds/20 extra and 109 style blocks unchanged. Browser E2E, custom-list persistence, media and HTML remote upload/hash remain NOT RUN.
 - Experimental only; Candidate302 formal baseline, Candidate320 rollback checkpoint.
+
+
+## Batch37 — Candidate334 Candidate15 observer scope reduction (2026-10-26)
+- Parent Candidate333 SHA-256: `56308f2c168c8344281ee75e23ce4a87c6a927aa56367448f0140206b81b247d`.
+- Candidate334: `amq_learning_tool_v82_86_45_candidate334_candidate15_observer_scope_20261026.html`, SHA-256 `e19b8b6ee79cf988b89f84c4e33a1bbcf83fcc90e9a85d60828db76c01e62eeb`, 1,632,000 bytes (+231). This is an observer ownership/scope change, not a byte-reduction batch.
+- Only Candidate15 changed: observer narrowed from `document.body` to `.wrap`; `ani-app-navigation` listener added for primary route transitions. VN dynamic views and custom-list subviews remain covered by `.wrap` subtree observation. Candidate76/77/82/16 unchanged.
+- Tests: PASS 65 executable inline scripts syntax, 0 errors; PASS only Candidate15 changed; PASS ID/style counts unchanged. Browser E2E, persistence, media and HTML remote upload/hash remain NOT RUN.
+- Experimental only; Candidate302 formal baseline, Candidate320 rollback checkpoint.
