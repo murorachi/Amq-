@@ -51,3 +51,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Static lifecycle inventory covered 70 inline script blocks; 14 high-priority scripts were shortlisted for future runtime instrumentation. No leak is claimed from counts alone.
 - Chromium computed-style probe PASS for present static DOM and CSS at 1440x900, with inline scripts removed; dynamic nodes and full-app behavior were not tested.
 - No app source changes/deletions. Remote artifact verification remains BLOCKED; full-app E2E remains NOT RUN.
+
+
+## 2026-10-25 Batch 6
+- Candidate302 remains unchanged: 1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Isolated lifecycle stress probe: 12/12 selected scripts initialized without uncaught errors; 0 browser page errors; 20 synthetic route cycles per script showed no net active listener/observer growth in the harness.
+- Manual reinjection duplicates were observed for eight scripts; this is a controlled reinjection finding, not proof of a production leak. No deletion is approved from this evidence alone.
+- Active multiplayer session poll/socket cleanup and full-app E2E remain NOT RUN. No app source changed/deleted.
