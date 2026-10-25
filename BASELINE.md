@@ -377,3 +377,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate345: `amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html`, 1,625,630 bytes; SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
 - Change: removed three unreferenced local DOM bindings from Quiz scripts; necessary handlers and storage path retained.
 - Rollback to Candidate344 SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`. Candidate302 and Candidate320 unchanged.
+
+## 2026-10-26 experimental cleanup checkpoint — Candidate346
+- Formal baseline remains Candidate302; Candidate346 is not promoted.
+- Candidate346: `amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html`, 1,625,225 bytes; SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`.
+- Removed five declaration-only local helpers/constants from v60 and learning-system v72. Syntax checks passed; browser interaction remains blocked.
+- Rollback to Candidate345 SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
