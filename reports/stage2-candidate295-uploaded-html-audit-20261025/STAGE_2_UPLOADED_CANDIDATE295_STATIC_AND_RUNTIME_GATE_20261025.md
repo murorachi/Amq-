@@ -49,3 +49,9 @@ Status: BLOCKED. This stage's upload is Candidate295 and does not recover Candid
 2. Recover the matching `data.js` and `emq-data.js` for Candidate295 only if Candidate295 needs further inspection; do not combine mismatched data versions.
 3. Once the exact Candidate277 artifact is available, compare Candidate277 -> subsequent candidates at the byte/source level and continue the minimal dependency audit.
 4. Run browser acceptance only in an environment that permits browser navigation; until then mark browser checks BLOCKED/NOT RUN.
+
+
+## Recovery follow-up — repeated Library raw-byte checks (2026-10-25)
+- Search returned two Library records for the exact Candidate277 filename; each index reports 9,373,238 bytes. Both raw-byte materialization attempts failed with: `This Project file does not have an authorized raw-byte materialization path.`
+- The indexed `Coverage-20261025T094140.json` record was also found (10,050,921 bytes), but raw-byte materialization failed with the same authorization limitation. The handoff record describes data.js/emq-data.js content inside that coverage file, but those bytes have not been recovered into this runtime and their hashes were not recomputed here.
+- These search results confirm indexed records exist; they do not prove the original Candidate277 bytes can be exported or hash-verified. Candidate277 recovery remains BLOCKED.
