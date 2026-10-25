@@ -1,0 +1,20 @@
+{
+  "candidate": "Candidate342",
+  "batch": "Batch46",
+  "change": "Remove unused modes constant from v60-player-quiz-cleanup",
+  "source_candidate": "Candidate341",
+  "source_sha256": "7abb6635b90254d666620953397c7d56f02e537bde997c523eb163203a15bd1a",
+  "artifact": "amq_learning_tool_v82_86_53_candidate342_batch46_remove_unused_v60_modes_20261026.html",
+  "bytes": 1627191,
+  "sha256": "85651bff600de2a3441aab64fee8d38299872d47a0d76473691334f9aa0fb2fe",
+  "tests": {
+    "static_target_assertions": "PASS",
+    "inline_javascript_node_check": "PASS: 65 checked, 0 syntax errors",
+    "browser_interaction": "BLOCKED: ERR_BLOCKED_BY_ADMINISTRATOR on file:// and localhost",
+    "full_regression": "NOT RUN",
+    "github_html_upload_and_remote_hash": "NOT RUN"
+  },
+  "formal_baseline": "Candidate302 unchanged",
+  "rollback_candidate": "Candidate341",
+  "scope_note": "Only the unused const declaration was removed; no other source changes."
+}
