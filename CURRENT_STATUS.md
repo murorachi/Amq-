@@ -178,3 +178,14 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed 55 superseded/duplicate CSS declarations / 1,602 bytes. Targeted duplicate Home/workspace theme variables, Home profile sizing, and stable-play modal declarations overridden by Candidate99 under the same selector/property/media condition.
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; scripts and non-style HTML unchanged; Chromium computed style 6/6 desktop/tablet/mobile scenarios, zero differences.
 - Full-app E2E NOT RUN. Candidate311 HTML remote upload BLOCKED/unverified; report and summary published. Candidate311 not promoted; formal baseline Candidate302 remains unchanged.
+
+## Batch 17 — Cross-module CSS / JS deduplication (2026-10-25)
+- Source Candidate311 verified locally: 1,662,516 bytes; SHA-256 dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996.
+- Created unpromoted Candidate312: amq_learning_tool_v82_86_23_candidate312_cross_module_css_js_dedup_20261025.html, 1,648,144 bytes; SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb.
+- Removed 655 CSS declarations proven superseded under the exact same selector, nested at-rule condition and property across 35 style blocks. CSS rules remain 3,423; declarations 12,080 → 11,425.
+- Removed one duplicate quiz answer-mirror input listener from V39; V37 retains the same mirror behavior. Other V39 behavior remains.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; Chromium computed-style comparison 5/5 scenarios with zero differences (Home desktop/mobile, Song Select desktop/tablet, quiz desktop).
+- Full-app E2E NOT RUN. Real audio, persistence/CRUD, multiplayer server and full route workflow remain unverified.
+- Candidate312 is not promoted; formal baseline remains Candidate302. HTML remote upload and remote SHA verification are NOT VERIFIED.
+- Report: BATCH17_CROSS_MODULE_CSS_JS_CLEANUP_REPORT_20261025.md; manifest: BATCH17_CANDIDATE312_MANIFEST.json; results: BATCH17_CANDIDATE312_TEST_RESULTS.json; summary: BATCH17_VALIDATION_SUMMARY.json.
+
