@@ -506,3 +506,11 @@ Candidate302 remains formal baseline:
 - Experimental handoff package created locally: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`; ZIP integrity PASS.
 - Included Candidate346, Candidate345 immediate rollback, Candidate320 checkpoint, cleanup reports, regression matrix, residue scan, and manifest.
 - Stage 4 is still BLOCKED for formal release: full core browser regression remains incomplete and the HTML remote upload/hash readback is not done. Do not promote Candidate346.
+
+
+## 2026-10-26 next-step refinement
+1. Do not create another deletion batch from the already classified low-confidence residues. Existing scan says runtime-dependent items need confirmation.
+2. Try one materially different permitted browser execution route for the required Candidate346 interaction matrix. If blocked, record the exact error and stop retrying that class of method.
+3. Resolve release evidence: Candidate302 and Candidate346 HTML expected paths both returned 404 on the specified branch. Upload and read back the actual HTML only if the connector supports it reliably; otherwise mark BLOCKED and keep the local package.
+4. Complete the required test matrix honestly. Full app regression is NOT RUN, not PASS. Candidate302 remains the formal baseline; Candidate346 remains experimental.
+5. Current local handoff package: `UNATTENDED_SESSION_HANDOFF_20261026.zip`; manifest includes file sizes and SHA-256 values.
