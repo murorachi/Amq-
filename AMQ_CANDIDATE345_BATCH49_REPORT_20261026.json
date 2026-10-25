@@ -1,0 +1,48 @@
+{
+  "batch": 49,
+  "candidate": "Candidate345",
+  "parent": "Candidate344",
+  "output_file": "amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html",
+  "output_size_bytes": 1625630,
+  "output_sha256": "de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "changed_script_bodies": [
+    "v36-quiz-fixes",
+    "v39-enter-and-avatar-fix",
+    "v40-buffer-setting-and-avatar-alignment"
+  ],
+  "removed_bindings": [
+    [
+      "v36-quiz-fixes",
+      "input"
+    ],
+    [
+      "v39-enter-and-avatar-fix",
+      "box"
+    ],
+    [
+      "v40-buffer-setting-and-avatar-alignment",
+      "settingsBody"
+    ]
+  ],
+  "tests": {
+    "source_hash": "PASS",
+    "unused_binding_assertions": "PASS",
+    "scope_assertions": "PASS",
+    "preserved_handlers": "PASS",
+    "inline_js_syntax": {
+      "status": "PASS",
+      "checked": 65,
+      "errors": 0
+    },
+    "zip_integrity": "PASS",
+    "browser_interaction": "BLOCKED",
+    "full_regression": "NOT RUN",
+    "html_remote_upload_readback": "NOT RUN"
+  },
+  "rollback": {
+    "candidate": "Candidate344",
+    "sha256": "cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac"
+  }
+}
