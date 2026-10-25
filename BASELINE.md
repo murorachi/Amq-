@@ -34,3 +34,9 @@ Candidate277 remains the immutable user-authorized baseline. Homepage changes ar
 - The recorded SHA-256 remains historical evidence only; it was NOT recomputed in this execution. Do not promote Candidate295, Candidate283, or any reconstructed/indexed excerpt to Candidate277 baseline.
 - Candidate295 HTML and its original smoke/Coverage/recovery attachments were not mounted in this execution environment. No application code, HTML, data, or storage schema was modified. Browser acceptance and single-file build were NOT RUN.
 - Test-oracle work is documented in `reports/stage1-candidate295-baseline-retrieval-20261025/STAGE_1_BASELINE_RETRIEVAL_AND_SAFE_CONTINUATION_20261025.md`.
+
+
+## Stage 2 — Uploaded Candidate295 HTML verification (2026-10-25)
+The user-supplied `index-old.html` was verified as Candidate295: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. This matches the recorded Candidate295 identity only. It is not Candidate277 and is not promoted as the Candidate277 baseline.
+
+Candidate277 remains recorded as 9,373,238 bytes with historical SHA-256 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`; raw original bytes have not been recovered and that hash was not recomputed in Stage 2. Browser acceptance remains BLOCKED by `net::ERR_BLOCKED_BY_ADMINISTRATOR`. Candidate295 also references `data.js` and `emq-data.js`, absent from the current workspace. No application source or data was modified. See the Stage 2 report in `reports/stage2-candidate295-uploaded-html-audit-20261025/`.
