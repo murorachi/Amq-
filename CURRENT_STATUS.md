@@ -138,3 +138,13 @@
 ## Stage 5.4 — Re-run syntax check count correction (2026-10-25)
 - Re-ran Node.js syntax checks while excluding the inline JSON data block `aniAnilistIdMapV8237` from executable JS: 67/67 executable inline JS blocks PASS. There are 70 script tags total, 2 external tags, and 1 inline JSON data block.
 - Corrected prior inventory wording that had counted the JSON data block as executable JavaScript. No app source changed.
+
+
+## Stage 5.5 — Route owner and custom-list fallback analysis (2026-10-25)
+- Extended the Candidate295 dependency inventory with static evidence for the four AMQ custom-list fallback readers and a safe consolidation plan.
+- Confirmed route wrapper chain: base navigator → first Song Select guard → generic workspace/body-class guard → final Song Select guard. Duplicate route maps are not safe to delete blindly because wrapper placement changes body-class side effects.
+- Added a single-owner route design and required browser regression matrix to the report.
+- Candidate295 file remains 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. No application source or storage schema changed.
+- Static dependency analysis: PASS. Browser routing, custom-list CRUD/persistence and backup/restore: NOT RUN. No deletion currently proven safe.
+- Formal working baseline remains Candidate277 as recorded in BASELINE.md. Candidate295 is a validation target only.
+- Report: reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md
