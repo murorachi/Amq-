@@ -388,3 +388,8 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 ## Candidate346 static smoke — 2026-10-26
 - Static source-presence checks passed for 11 core feature groups on Candidate346 SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`.
 - This does not establish functional correctness. Browser interaction is BLOCKED; full-app regression is NOT RUN. Candidate302 remains the formal baseline.
+
+## Core regression matrix — Candidate346 (2026-10-26)
+- Static marker smoke passed for 11 groups, but full functional regression remains incomplete.
+- AMQ/EMQ/MIX E2E, player, custom-list persistence, backup/restore and multiplayer remain NOT RUN; workspace browser interaction remains BLOCKED.
+- Candidate346 is not promoted. Candidate302 remains formal baseline.
