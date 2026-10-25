@@ -118,3 +118,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Bulk scan: 109 CSS blocks / 3,637 rules / 651 repeated selector groups / 1,385 extra repeated occurrences. Repeated selectors are not auto-deleted; next batch uses cascade-aware feature clusters.
 - Full-app E2E NOT RUN; Candidate304 HTML remote upload BLOCKED; remote SHA unverified.
 - Report: `BATCH9_BATCH_CLEANUP_REPORT_20261025.md`; manifest: `BATCH9_CANDIDATE304_MANIFEST.json`; summary: `BATCH9_VALIDATION_SUMMARY.json`.
+
+## Batch 10 — Home / Song Select CSS cascade cleanup (2026-10-25)
+- Source Candidate304 verified: 1,720,215 bytes; SHA-256 `afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21`.
+- Candidate305 created (not promoted): `amq_learning_tool_v82_86_16_candidate305_home_songselect_css_cleanup_20261025.html`, 1,670,933 bytes; SHA-256 `3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`.
+- Removed 1,432 earlier declarations proven superseded by later declarations under the same selector/at-rule and equal-or-higher importance; removed 167 now-empty rules. 38 of 109 style blocks touched; HTML reduced 49,282 bytes.
+- PASS: JavaScript syntax 66/66; CSS parse errors 0; duplicate IDs 0; non-style HTML and all 69 script contents unchanged; Chromium computed-style comparison 6/6 (home + Song Select at 1440x900, 768x1024, 390x844; 412 static elements/scenario; zero differences).
+- Full-app E2E and dynamic-DOM visual acceptance NOT RUN. Candidate305 remote HTML upload BLOCKED; do not claim remote HTML SHA verification. Formal baseline remains Candidate302.
+- Report: `BATCH10_HOME_SONGSELECT_CSS_CLEANUP_REPORT_20261025.md`; summary: `BATCH10_VALIDATION_SUMMARY.json`; detailed local deletion manifest: `BATCH10_CSS_REMOVAL_MANIFEST.json`.
