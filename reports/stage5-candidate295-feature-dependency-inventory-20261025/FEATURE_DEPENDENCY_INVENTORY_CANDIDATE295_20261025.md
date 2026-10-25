@@ -167,3 +167,34 @@ Song Select 工作區、路由、歌曲列、搜尋/選取；自訂清單 CRUD�
 - 字串命中次數（文字搜尋，非呼叫次數）：`__aniNavigateApp` 49；`aniCustomPracticeListsV1` 10；`__aniCustomListsStoreV1` 7；`aniQuizHistory_v1` 13；`aniQuizHistorySummaryV1` 8；`aniQuizTargetSummaryV1` 8。
 - HTML 有 70 個 script 開啟標籤及 109 個 style 開啟標籤。這些計數只是盤點指標，不代表所有 script/style 都是獨立有效模組。
 - 本輪沒有更動 Candidate295 HTML/CSS/JS，未刪除任何符號。
+
+
+## 13. Route wrapper semantic comparison (important qualification)
+
+The two Song Select guards have the same six route keys and the same panel destinations:
+- `watchlist` → `watchlist` / 我的清單
+- `practice` → `practice` / 學習中心
+- `explore` → `practice` / 探索新歌
+- `learningPlan` → `learning-plan` / 學習計畫
+- `dashboard` → `dashboard` / 學習統計
+- `vnList` → `vn-list` / VNDB 個人清單
+
+Both dispatch `amq-workspace-route-intercepted` with the destination and panel. However, they are not behaviorally interchangeable in the current wrapper chain:
+- The first guard is inside the generic workspace guard. When it intercepts a panel route and returns, the generic wrapper still runs its post-call body-class mutations.
+- The final guard is outside the generic guard. When it intercepts one of those panel routes, it returns before the generic wrapper is called, thereby bypassing those body-class mutations. For non-intercepted routes it closes the home menu and delegates inward.
+
+Therefore the guards share the interception mapping but their placement changes side effects. This is evidence of duplicated routing logic with an ordering-dependent compatibility effect, not proof that either whole block is safe to delete. A future integration should explicitly encode the desired body-class behavior for intercepted panel routes, then move the map to one owner and remove the duplicate only after the regression matrix passes. Runtime behavior remains NOT RUN.
+
+## 14. Static-only regression matrix for the next code change
+
+| Case | Expected behavior to preserve | Current verification |
+|---|---|---|
+| Song Select active + each of six panel destinations | Open correct panel, dispatch interception event once, remain in Song Select | NOT RUN |
+| Song Select active + home/quiz/multiplayer | Navigate normally and close home menu as appropriate | NOT RUN |
+| Song Select inactive + six destinations | Use normal app navigation | NOT RUN |
+| Dashboard route | Preserve its special standalone body-class behavior | NOT RUN |
+| Repeat initializer / guard installation | No nested duplicate wrapper or repeated event effect | NOT RUN |
+| Generic route class synchronization after ordinary navigation | Preserve current body-class contract | NOT RUN |
+| Browser back/return from workspace panel | Restore expected route and panel state | NOT RUN |
+
+This matrix is design evidence only; it does not represent executed browser tests.
