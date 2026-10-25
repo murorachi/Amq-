@@ -18,7 +18,7 @@
     {
       "module": "candidate106-final-songselect-layout-owner",
       "change": "Removed overflow assignments from compact and desktop catalogGeometry branches",
-      "reason": "CSS and Candidate158 own visible overflow; previous desktop hidden value was overwritten"
+      "reason": "Candidate137 CSS sets route-active catalog overflow visible; Candidate158 also forces visible on desktop route state. Candidate106 desktop hidden conflicts with this clipping correction depending on event/RAF order, while compact visible duplicates the CSS declaration."
     },
     {
       "module": "candidate115-song-row-artwork",
