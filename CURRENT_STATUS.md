@@ -341,3 +341,15 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 65/65, CSS parse 0 errors, 269 unique IDs, static computed style 3/3 viewports with zero differences.
 - Full E2E, real media, external cover/fallback, native storage: NOT RUN, deferred to user local test. Candidate327 not promoted; Candidate302 baseline and Candidate320 rollback unchanged. HTML upload/hash NOT VERIFIED.
 - Summary: `AMQ_BATCH30_CANDIDATE327_GITHUB_SUMMARY_20261025.md`.
+
+
+## Batch31 — Candidate328 (2026-10-26)
+- Candidate328 SHA-256: `985780d07196fc50b8a6f638e84ee131e48edece1c98c6fad86e660b51b68315`; 1,644,505 bytes. Removed two unreachable listeners and integrated stale-overlay cleanup into Candidate82's active Escape owner. Net −286 bytes.
+- PASS: 65/65 inline script syntax; 269 unique IDs; CSS unchanged; only three intended scripts changed; targeted ownership checks pass.
+- Browser interactions, full E2E, real media, external covers/fallback, native persistence: NOT RUN. Candidate328 not promoted.
+
+## Batch32 — Candidate329 (2026-10-26)
+- Latest experimental candidate: `amq_learning_tool_v82_86_40_candidate329_batch32_workspace_action_router_dedup_20261026.html`, 1,635,608 bytes, SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`.
+- Removed 8,897 bytes / 97 newline characters of 16 duplicate Candidate15 action branches already owned by Candidate82's capture-phase router. Unique Candidate15 actions retained.
+- PASS: 65/65 inline script syntax; 269 unique IDs; 109 CSS blocks parse with 0 errors; 16/16 deleted actions mapped in Candidate82; 12/12 unique actions preserved.
+- NOT RUN: browser interactions, full E2E, real media, external covers/fallback, native persistence, HTML upload/hash verification. Candidate329 not promoted.
