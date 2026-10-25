@@ -477,3 +477,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Static findings: Candidate70 has no current `[data-ws]` binding; Candidate77 has no document click interceptor; Candidate76 still owns the dock capture click handler; Prototype15 has not yet taken over `[data-ws]` clicks. Candidate94 includes a required membership-filter selector, so only its confirmed dock rules can be isolated.
 - Candidate193 is a navigation wrapper, not a direct `[data-home-action]` click listener in the inspected source; Candidate60 and Candidate82 contain separate capture-phase event behavior.
 - PASS: source hash verification and static source inspection. NOT RUN: browser interaction regression. No app HTML was modified in this matrix-only step.
+
+
+## 2026-10-26 Batch44 / Batch45 progress
+- Candidate340 Batch44 local artifact: 1,627,175 bytes; SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`. Candidate remains experimental; Candidate302 remains formal baseline.
+- Workspace owner matrix created for 12 DOM/API targets; local MD/JSON/ZIP and remote MD/JSON evidence committed in this branch.
+- Candidate341 Batch45 created from Candidate340: `amq_learning_tool_v82_86_52_candidate341_batch45_workspace_click_owner_20261026.html`, 1,627,302 bytes; SHA-256 `7abb6635b90254d666620953397c7d56f02e537bde997c523eb163203a15bd1a`.
+- Batch45 change: removed Candidate76 capture-phase `[data-ws]` click interception; Prototype15 now owns the delegated bubbling click and calls the existing Candidate76 open/close APIs. `[data-ws-action]` remains a separate action route.
+- Static ownership assertions 9/9 PASS; 65 inline JavaScript blocks `node --check` PASS, 0 syntax errors; delivery ZIP integrity PASS.
+- NOT RUN: full browser interaction/regression tests. Candidate341 HTML upload/hash verification on GitHub NOT RUN. Candidate84 CSS demotion deferred pending complete selector dependency review; Candidate94 membership filter retained.
