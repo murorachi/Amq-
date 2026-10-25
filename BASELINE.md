@@ -179,3 +179,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 
 ## Latest candidate (not promoted)
 - Candidate320 SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`, 1,645,470 bytes. Candidate302 remains the formal baseline.
+
+
+## 2026-10-25 — Candidate320 global scan checkpoint (not a promotion)
+- Candidate320 remains an unpromoted working candidate: 1,645,470 bytes; SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Formal maintenance baseline remains Candidate302: SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Candidate295 remains immutable rollback: `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+- Batch26 Round 1 produced a read-only static candidate inventory. No app source was modified and no new deletion was approved. See `AMQ_GLOBAL_CANDIDATE_SCAN_CANDIDATE320_20261025.md`.
