@@ -514,3 +514,5 @@ Candidate302 remains formal baseline:
 3. Resolve release evidence: Candidate302 and Candidate346 HTML expected paths both returned 404 on the specified branch. Upload and read back the actual HTML only if the connector supports it reliably; otherwise mark BLOCKED and keep the local package.
 4. Complete the required test matrix honestly. Full app regression is NOT RUN, not PASS. Candidate302 remains the formal baseline; Candidate346 remains experimental.
 5. Current local handoff package: `UNATTENDED_SESSION_HANDOFF_20261026.zip`; manifest includes file sizes and SHA-256 values.
+
+- Latest remote evidence: progress docs and independent static verification MD/JSON are committed and read back. The actual Candidate346 HTML is still not uploaded or hash-verified; handle that as a distinct task only if a reliable large-file path is available.
