@@ -306,3 +306,20 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - 直接刪除候選：0。下一輪按直接刪除／整合後刪除／暫緩分類，先完成 Song Select 與 Workspace ownership/dependency matrix。
 - Browser full-app E2E、persistent storage、實際音訊/影片及 cover fallback 本輪 NOT RUN。
 - 完整本地交付：`AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.md` / `.json`。GitHub 摘要：`AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_GITHUB_SUMMARY_20261025.md`。
+
+
+## 2026-10-25 — Round 2 grouped cleanup: Batch27 / Candidate325
+- Source Candidate320 verified unchanged: 1,645,470 bytes; SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate325: 1,645,154 bytes; SHA-256 `187cba98e97d48819430a388d959a8dc0d7cbb41156b349de6adc31b58e6dd7d`.
+- Deleted five CSS rules proven unreferenced outside styles: `.aniSrsGroupEnroll` normal/mobile, `.mpReadyBar`, `.mpReadyBar span`, `.vn49Checkbox`. No JS or DOM/data logic changed.
+- PASS: JS 65/65 syntax; CSS 0 parse errors; 269 IDs / 0 duplicates; Chromium computed styles 3/3 viewport sizes, 412 elements each, 0 differences.
+- NOT RUN: full-app E2E, persistent storage, real media playback, external cover fallback. Candidate325 not promoted.
+
+## 2026-10-25 — Round 2 grouped integration: Batch28 / Candidate326
+- Candidate326: 1,645,785 bytes; SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`; carries Batch27 CSS cleanup and Song Select owner/lifecycle integration.
+- Candidate106 removes two conflicting catalog overflow assignments; Candidate115 excludes the main tracklist from the generic artwork scanner; Candidate210 installs its stage subtree observer only after route activation and binds list/artwork handling after tracklist creation.
+- PASS: Node syntax 65/65; CSS parse 0 errors; 269 IDs / 0 duplicates. JS hashes match previously tested Candidate324; CSS block hashes match Candidate325.
+- PASS (isolated test copy): real data startup (9,516 anime / 38,821 songs), synthetic hidden-control dispatch activates Song Select with 180 rows and 180 artwork image nodes; row selection updates song state to ID 45305; 0 page errors.
+- BLOCKED: visible UI click test because the legacy control is inside hidden `#amqHomeOverlay`; external cover requests blocked. NOT RUN: real audio/video playback and persistent storage.
+- Candidate326 is experimental and not promoted. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint. HTML artifact upload and remote SHA verification are BLOCKED because the available GitHub connector writes text content but has no direct local-file upload action.
+- Local reports: `AMQ_BATCH27_CANDIDATE325_ORPHAN_CSS_CLEANUP_20261025.md`; `AMQ_BATCH28_CANDIDATE326_SONGSELECT_OWNERSHIP_CLEANUP_20261025.md`. GitHub summaries committed separately.
