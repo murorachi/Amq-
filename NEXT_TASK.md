@@ -78,3 +78,13 @@ Candidate302 remains formal baseline:
 2. Map page-level heartbeat lifecycle and room-presence semantics. Preserve current behavior until expected product behavior is clear.
 3. Use evidence to choose one minimal integration/deletion candidate; do not delete based only on one-time static occurrence or manual reinjection.
 4. Continue marking full-app E2E and remote Candidate302 HTML verification BLOCKED until matching assets/upload capability are available.
+
+
+## Batch 8 completed / Batch 9 next
+- Created Candidate303 shared OpenCC loader integration; only script blocks 31 and 41 changed. Candidate303 SHA-256 `ffb223a37f2ba7f243430c7e0a643f8916ebae13f809d83cc2b8cbd9153df1c8`.
+- Syntax 67/67 PASS; isolated Chromium loader tests 3/3 PASS. Full-app E2E NOT RUN. Candidate303 remote HTML is not uploaded and remote hash remains unverified.
+
+## Batch 9 priority
+1. Expand synthetic tests for AMQ Chinese-title map loading and EMQ title conversion using the shared loader, including cache hit/miss, converter failure, concurrent callers and fallback behavior.
+2. Confirm no regression in AMQ/EMQ title APIs and that only one OpenCC script element is ever injected.
+3. Then continue evidence-backed old-feature cleanup. Do not promote Candidate303 to formal baseline until full-app/browser validation is available.
