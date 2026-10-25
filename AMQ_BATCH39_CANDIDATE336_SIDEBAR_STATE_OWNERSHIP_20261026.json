@@ -1,0 +1,29 @@
+{
+  "batch": 39,
+  "candidate": "Candidate336",
+  "parent": "Candidate335",
+  "baseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "rollback": {
+    "candidate": "Candidate320",
+    "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"
+  },
+  "parent_sha256": "6b06c72d769204f38f836c8c5e9d4d15af798258d4772fb27d72dd820d830331",
+  "candidate_file": "amq_learning_tool_v82_86_47_candidate336_batch39_sidebar_state_ownership_20261026.html",
+  "candidate_sha256": "b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a",
+  "candidate_bytes": 1631660,
+  "change": "Candidate76 syncState returns immediately outside Song Select; Candidate77 remains owner of general workspace sidebar state.",
+  "tests": {
+    "parent_hash": "PASS",
+    "targeted_replacement": "PASS",
+    "only_target_script_body_changed": "PASS",
+    "inline_executable_scripts_node_check": "PASS: 65 scripts, 0 errors",
+    "browser_route_state_matrix": "NOT RUN",
+    "storage_persistence": "NOT RUN",
+    "media_multiplayer_e2e": "NOT RUN",
+    "html_upload_remote_sha": "NOT RUN"
+  },
+  "rollback_instruction": "Return to Candidate335. Candidate302 remains formal baseline; Candidate320 remains immutable rollback checkpoint."
+}
