@@ -146,3 +146,14 @@
 - Removed only Candidate103's obsolete catalog bottom/height inline writes. Its catalog style observer and other player/dock behavior remain. This prevents the old observer from overwriting Candidate106's mobile bottom=86px.
 - PASS: JS syntax 68/68, CSS parse, duplicate IDs and isolated Chromium layout-owner regression at 390/768/1440px.
 - Full-app E2E NOT RUN; Candidate314 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
+
+## 2026-10-25 — Batch 20: Workspace dock dead listener cleanup
+- Candidate315 SHA-256 5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621, 1,647,133 bytes, derived from Candidate314 (e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17); 339 bytes removed.
+- Removed Candidate70's target click listener blocked by Candidate77's document capture stopImmediatePropagation. Preserved Back and Escape handlers.
+- PASS: JS 68/68, CSS parse, duplicate IDs and isolated Chromium dock open/Escape/toggle regression. Full-app E2E NOT RUN; Candidate HTML upload/hash NOT VERIFIED.
+
+
+## 2026-10-25 — Batch 21: Workspace panel state-owner deduplication
+- Candidate316 SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317, 1,646,612 bytes, derived from Candidate315 (5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621); 521 bytes removed.
+- Removed Candidate72's duplicate panel-state writer and body-class observer; preserved frame placeholder creation. Candidate76/77 remain panel-state owners.
+- PASS: JS 68/68, CSS parse, duplicate IDs and isolated Chromium dock open/Escape/direct-class regression. Full-app E2E NOT RUN; Candidate HTML upload/hash NOT VERIFIED.
