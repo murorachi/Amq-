@@ -73,3 +73,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate303: `amq_learning_tool_v82_86_14_candidate303_opencc_shared_loader_20261025.html`, 1,720,527 bytes, SHA-256 `ffb223a37f2ba7f243430c7e0a643f8916ebae13f809d83cc2b8cbd9153df1c8`.
 - Candidate303 changes only script blocks 31 and 41 to consolidate duplicate OpenCC injection. Tests: 67/67 script syntax PASS, 3/3 isolated Chromium tests PASS. Full-app E2E NOT RUN; do not promote until broader AMQ/EMQ workflow tests and user browser verification.
 - Candidate302 and Candidate295 remain immutable rollback points.
+
+
+## Batch 9 candidate (not promoted)
+- Formal baseline remains Candidate302, 1,720,249 bytes, SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate304: `amq_learning_tool_v82_86_15_candidate304_opencc_and_diagnostic_cleanup_20261025.html`, 1,720,215 bytes, SHA-256 `afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21`.
+- Changes: shared OpenCC loader for AMQ/EMQ title services; remove diagnostic-only `v41-classification-diagnostic` with no internal readers. 2 scripts modified, 1 deleted, CSS unchanged.
+- Tests: JS syntax 66/66 PASS; OpenCC isolated Chromium 3/3 PASS; synthetic EMQ loader 9/9 PASS. Full-app E2E NOT RUN; do not promote until broader/browser verification.
