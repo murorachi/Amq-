@@ -383,3 +383,8 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate346: `amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html`, 1,625,225 bytes; SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`.
 - Removed five declaration-only local helpers/constants from v60 and learning-system v72. Syntax checks passed; browser interaction remains blocked.
 - Rollback to Candidate345 SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
+
+
+## Candidate346 static smoke — 2026-10-26
+- Static source-presence checks passed for 11 core feature groups on Candidate346 SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`.
+- This does not establish functional correctness. Browser interaction is BLOCKED; full-app regression is NOT RUN. Candidate302 remains the formal baseline.
