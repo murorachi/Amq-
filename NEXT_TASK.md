@@ -463,3 +463,11 @@ Candidate302 remains formal baseline:
 - Tests: static assertions PASS; 65 executable inline JS syntax checks PASS; ZIP integrity PASS. Browser interaction BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`; full functional regression NOT RUN; Candidate344 HTML remote upload/hash readback NOT RUN.
 - Next bounded task: review remaining already-shortlisted scripts only for declarations with zero live references. Do not delete C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` without new runtime/caller evidence. If no additional safely removable items are found, stop cleanup-only batches and move to core regression / explicit blocker ledger.
 - Closure remains four stages: safe cleanup → core regression → final residue/dependency scan → formal single-file release with remote HTML readback and SHA-256. Do not add stages.
+
+
+## Updated next task — after Candidate345 Batch49 (2026-10-26)
+- Current experiment: Candidate345, `amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html`, SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+- Batch48 removed an uncalled Quiz evaluator helper chain. Batch49 removed three unreferenced local DOM bindings from related Quiz scripts.
+- PASS: 65 inline JS syntax checks, targeted assertions, ZIP integrity. Browser interaction BLOCKED; full regression NOT RUN; Candidate345 HTML remote upload/readback NOT RUN.
+- Next bounded source audit: check already-shortlisted scripts for local declarations with zero reads. Do not remove C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` without new evidence. Stop cleanup-only batches when no further low-risk candidates remain; move to core regression and blocker handling.
+- Four closure stages remain: safe cleanup → core regression → final residue/dependency scan → formal release with remote HTML SHA readback. Do not add stages.
