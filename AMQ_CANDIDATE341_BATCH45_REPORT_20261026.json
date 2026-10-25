@@ -1,0 +1,25 @@
+{
+  "input": "Candidate340 Batch44",
+  "input_sha256": "74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158",
+  "output": "amq_learning_tool_v82_86_52_candidate341_batch45_workspace_click_owner_20261026.html",
+  "output_sha256": "7abb6635b90254d666620953397c7d56f02e537bde997c523eb163203a15bd1a",
+  "bytes": 1627302,
+  "static_assertions": {
+    "passed": 9,
+    "total": 9
+  },
+  "inline_js_syntax": {
+    "status": "PASS",
+    "checked": 65,
+    "errors": 0
+  },
+  "zip_integrity": "PASS",
+  "browser_regression": "NOT RUN",
+  "github_html_upload": "NOT RUN",
+  "notes": [
+    "Candidate70 and Candidate77 had no specified duplicate interceptors in Candidate340.",
+    "Candidate84 CSS deferred pending selector dependency review.",
+    "Candidate94 membership filter CSS preserved.",
+    "Candidate341 is a candidate, not promoted baseline."
+  ]
+}
