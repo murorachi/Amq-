@@ -265,3 +265,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate328 SHA-256 `985780d07196fc50b8a6f638e84ee131e48edece1c98c6fad86e660b51b68315`, 1,644,505 bytes. Derived from Candidate327.
 - Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`, 1,635,608 bytes. Derived from Candidate328; removes 16 duplicate Workspace action branches (8,897 bytes).
 - Neither candidate is promoted. Candidate302 remains the formal baseline (`f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`); Candidate320 remains the immutable rollback checkpoint (`134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`).
+
+
+## Candidate330 Batch33 (2026-10-26) — experimental only
+- `amq_learning_tool_v82_86_41_candidate330_batch33_workspace_action_event_delegation_20261026.html`: 1,632,703 bytes; SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`. Derived from Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`.
+- Removed seven Candidate15 action branches absent from current action definitions; consolidated per-button handlers to delegated #wsActions handling; removed unused Candidate16 helpers/temporary.
+- Candidate330 is not promoted. Candidate302 remains the formal baseline (SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`); Candidate320 remains immutable rollback (SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`).
