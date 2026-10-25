@@ -131,3 +131,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Batch16 removed 55 superseded/duplicate declarations / 1,602 bytes from Home and stable-play modal theme/layout CSS. JS syntax, CSS parse, duplicate IDs, unchanged scripts/non-style HTML and six isolated Chromium style scenarios PASS.
 - Full-app E2E NOT RUN. Candidate HTML remote upload remains BLOCKED/unverified. Candidate311 not promoted.
 - Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Rollback from Candidate311 to Candidate310.
+
+## Candidate312 — unpromoted working candidate
+- Source: Candidate311, SHA-256 dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996.
+- Candidate: amq_learning_tool_v82_86_23_candidate312_cross_module_css_js_dedup_20261025.html, 1,648,144 bytes; SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb.
+- Candidate312 is NOT the formal baseline. Formal baseline remains Candidate302: f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd.
+- Rollback: use immutable Candidate302; immediate pre-batch rollback is Candidate311.
+- Candidate HTML upload and remote SHA verification are NOT VERIFIED.
+
