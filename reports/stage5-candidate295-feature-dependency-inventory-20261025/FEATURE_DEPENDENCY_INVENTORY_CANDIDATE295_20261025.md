@@ -198,3 +198,16 @@ Therefore the guards share the interception mapping but their placement changes 
 | Browser back/return from workspace panel | Restore expected route and panel state | NOT RUN |
 
 This matrix is design evidence only; it does not represent executed browser tests.
+
+
+## 15. Re-run executable-script syntax check and correct prior count
+
+The latest local re-check parsed script tags by type and excluded the embedded JSON data block `aniAnilistIdMapV8237` from JavaScript syntax testing:
+- 70 total script tags in HTML.
+- 2 external script tags.
+- 1 inline JSON data block, not executable JavaScript.
+- 67 executable inline JavaScript blocks.
+- Node.js `--check`: PASS for all 67/67 executable inline JavaScript blocks.
+- Candidate295 remained 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+
+Correction: earlier report text described 68/68 inline blocks as executable JavaScript. That count included the JSON data block. The accurate executable-JavaScript count is 67/67; the JSON payload was not part of the syntax test. This is a documentation correction only; no application source was changed.
