@@ -1,0 +1,48 @@
+{
+  "candidate": "amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html",
+  "bytes": 1645470,
+  "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c",
+  "formalBaseline": "Candidate302",
+  "baselineSha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "counts": {
+    "executableInlineScripts": 65,
+    "styleBlocks": 109,
+    "cssRules": 2648,
+    "cssDeclarations": 9693,
+    "cssParseErrors": 0,
+    "htmlIds": 269,
+    "duplicateIds": 0,
+    "repeatedCssSelectorStrings": 342,
+    "repeatedFunctionNamesAcrossScripts": 11,
+    "observerConstructors": 54,
+    "addEventListener": 474,
+    "removeEventListener": 4,
+    "setTimeout": 134,
+    "setInterval": 10,
+    "requestAnimationFrame": 32
+  },
+  "tests": {
+    "sha256": "PASS",
+    "cssParse": "PASS",
+    "duplicateIds": "PASS",
+    "javascriptSyntax": "PASS (carried forward from handoff, not rerun this round)",
+    "chromium": "NOT RUN",
+    "fullAppE2E": "NOT RUN"
+  },
+  "directDeleteCandidates": 0,
+  "lifecycleCandidates": [
+    "LC-01 candidate106 delayed queue 80/300/900ms",
+    "LC-02 candidate114 reset/retry timers 0/180/500/900ms",
+    "LC-03 candidate137 init retry/poll",
+    "LC-04 candidate103 body/audioPlayer observers",
+    "LC-05 candidate158 overflow ownership",
+    "LC-06 candidate210 multi-observer lifecycle",
+    "LC-07 candidate71 grid/VNDB sentinel lifecycle",
+    "LC-08 candidate99 route/dock observers",
+    "LC-09 candidate115 artwork observer overlap with Candidate210",
+    "LC-10 candidate185 modal observers",
+    "LC-11 workspace prototype16 grid observer binding",
+    "LC-12 candidate76/77/82 workspace ownership"
+  ],
+  "status": "ROUND 1 STATIC INVENTORY ONLY; no application source edits"
+}
