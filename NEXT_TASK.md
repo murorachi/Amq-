@@ -270,3 +270,13 @@ Candidate302 remains formal baseline:
 5. Round 4: generate single-file HTML from verified source, calculate SHA-256, update CURRENT_STATUS.md / BASELINE.md / NEXT_TASK.md / CHANGELOG_STAGE6.md and test reports, upload where possible, then read back and verify remote content.
 6. Direct-delete list from Round 1 is empty. Do not treat 114 unresolved initial-DOM ID references, repeated selectors, duplicate local function names, or raw listener/observer/timer counts as dead-code proof.
 7. Browser full-app E2E, persistent storage, real media playback and external cover fallback remain NOT RUN for this inventory.
+
+
+## Next — Round 3 / Candidate326 concentrated regression
+1. Candidate326 is an experimental cumulative candidate only; formal baseline Candidate302 and rollback Candidate320 remain unchanged.
+2. Resolve a valid visible UI route into Song Select in a supported browser origin. The current harness can only dispatch a synthetic click on a hidden legacy overlay control, so do not call that visible UI acceptance.
+3. Verify real cover network load/fallback, actual audio/video playback, route exit/player reset, and persistent storage in a supported origin. Keep each result PASS / FAIL / NOT RUN / BLOCKED.
+4. Re-run focused regression after the combined Batch27/28 changes; the candidate's JS exactly matches the previously tested Candidate324, and CSS exactly matches Candidate325.
+5. Next grouped cleanup target after Song Select acceptance: Workspace shell/frame/actions/custom-list workflow (Candidate76/77/82/227, Prototype 15/16, Candidate258). Build unique DOM/class/API owner map before deletion.
+6. Candidate114 timers and Candidate158 observer scope remain unchanged. Do not remove storage/recovery paths or merge AMQ/EMQ schemas without data-flow proof.
+7. Candidate325/326 HTML remote upload and SHA read-back remain BLOCKED by the available connector's lack of direct local-file upload. Reports/docs are committed; do not claim HTML upload succeeded.
