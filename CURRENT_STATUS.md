@@ -61,3 +61,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - No application source changes/deletions; DELETE=0.
 - Full AMQ/EMQ/MIX E2E, observer/timer runtime instrumentation and computed-style tests NOT RUN.
 - Candidate302 HTML remote artifact remains NOT_FOUND; remote SHA-256 verification BLOCKED.
+
+
+## Batch 4 — 2026-10-25
+- Expanded isolated Chromium route matrix: **15/15 PASS, 0 FAIL, 0 page errors**. Coverage includes six Song Select workspace intercept destinations, the VNDB special branch, and eight normal routes. Actual extracted Candidate302 navigation scripts were tested with stubbed DOM/API; this is not full-app E2E.
+- Completed static caller/writer map for `aniCustomPracticeListsV1`, AMQ recovery snapshots, `aniEmqWorkListsV8254`, and `aniEmqWorkListsSelectedV8254`. Confirmed AMQ/EMQ schemas remain separate; recovery snapshots are required safety data. The anonymous AMQ fallback reader is an integration candidate, not approved for deletion.
+- Candidate302 local baseline hash unchanged. Matching `data.js` and `emq-data.js` were not found under `/mnt/data`; full-app E2E, lifecycle runtime monitoring and computed-style checks remain NOT RUN.
+- Remote Candidate302 HTML fetch still returns 404; remote artifact/hash verification is BLOCKED. Text reports/docs existing remotely do not establish that the HTML artifact exists.
+- No app source edits/deletions; DELETE=0.
