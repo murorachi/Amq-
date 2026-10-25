@@ -221,3 +221,19 @@
 - No app source changed; direct-delete candidates = 0. Candidate classifications remain evidence-driven, not approved deletions.
 - NOT RUN: full-app browser E2E, persistent storage, actual audio/video playback, external cover load/fallback.
 - Local report: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.md`; JSON: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.json`; GitHub summary: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_GITHUB_SUMMARY_20261025.md`.
+
+
+## 2026-10-25 — Round 2 Batch27 Candidate325 orphan CSS cleanup
+- From Candidate320, removed five orphan CSS rules: `.aniSrsGroupEnroll` (normal/mobile), `.mpReadyBar`, `.mpReadyBar span`, `.vn49Checkbox`; zero references existed outside style blocks.
+- Candidate325: 1,645,154 bytes; SHA-256 `187cba98e97d48819430a388d959a8dc0d7cbb41156b349de6adc31b58e6dd7d`; not promoted.
+- PASS: JS 65/65 syntax, CSS 0 errors, IDs 269/0 duplicates, computed-style equivalence at 1440x900 / 768x1024 / 390x844 (412 static elements each, 0 differences).
+- NOT RUN: full app E2E, persistent storage, actual media, external cover fallback. Candidate HTML upload/hash not verified.
+
+## 2026-10-25 — Round 2 Batch28 Candidate326 Song Select owner/lifecycle integration
+- Candidate326 carries Batch27 CSS cleanup and combines three related Song Select ownership fixes: Candidate106 removes conflicting overflow assignments; Candidate115 excludes main tracklist from generic artwork scanner; Candidate210 defers stage observer setup until route activation and tracklist creation.
+- Candidate326: 1,645,785 bytes; SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`; not promoted.
+- PASS: syntax 65/65; CSS 0 parse errors; 269 IDs / 0 duplicates; JS hashes match Candidate324 and CSS hashes match Candidate325.
+- PASS isolated test copy: actual data startup 9,516 anime / 38,821 songs; synthetic route dispatch yielded 180 rows / 180 artwork img nodes; selected song ID 45305; 0 page errors.
+- BLOCKED: visible UI click path (control hidden in legacy overlay) and external cover network; NOT RUN: persistent storage and real audio/video playback.
+- Candidate302 baseline and Candidate320 rollback remain unchanged. Candidate326 HTML upload/remote SHA verification BLOCKED; do not claim remote artifact exists.
+- Reports: `AMQ_BATCH28_CANDIDATE326_SONGSELECT_OWNERSHIP_CLEANUP_20261025.md`; regression JSON: `AMQ_BATCH28_CANDIDATE326_BROWSER_REGRESSION_20261025.json`.
