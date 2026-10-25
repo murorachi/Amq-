@@ -192,3 +192,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate320 remains unchanged rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
 - Candidate321 local artifact: `amq_learning_tool_v82_86_32_candidate321_batch26_round2_songselect_ownership_cleanup_20261025.html`, 1,645,516 bytes, SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`. Not promoted; remote HTML upload/hash NOT VERIFIED; Chromium BLOCKED and full-app E2E NOT RUN.
 - See `AMQ_BATCH26_ROUND2_DEPENDENCY_CLEANUP_CANDIDATE321_20261025.md` for the exact grouped changes and test evidence.
+
+
+## 2026-10-25 — Candidate321 Batch26 Round 2 checkpoint (not promoted)
+- Formal maintenance baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate320 remains unchanged rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate321 local artifact: `amq_learning_tool_v82_86_32_candidate321_batch26_round2_songselect_ownership_cleanup_20261025.html`, 1,645,516 bytes, SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`. Not promoted; remote HTML upload/hash NOT VERIFIED; Chromium BLOCKED and full-app E2E NOT RUN.
+- See `AMQ_BATCH26_ROUND2_DEPENDENCY_CLEANUP_CANDIDATE321_20261025.md` for grouped changes and test evidence.
