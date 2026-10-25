@@ -1,0 +1,20 @@
+{
+  "batch": 17,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "candidate": "amq_learning_tool_v82_86_23_candidate312_cross_module_css_js_dedup_20261025.html",
+  "candidate_bytes": 1648144,
+  "candidate_sha256": "12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb",
+  "source": "amq_learning_tool_v82_86_22_candidate311_home_songselect_theme_and_modal_css_cleanup_20261025.html",
+  "source_sha256": "dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996",
+  "removed_css_declarations": 655,
+  "changed_style_blocks": 35,
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "computed_style": "PASS 5/5 zero differences",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "NOT VERIFIED"
+  },
+  "formal_baseline": "Candidate302 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+}
