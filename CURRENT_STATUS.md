@@ -222,3 +222,16 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 68/68, CSS parse, duplicate IDs; isolated Chromium dock open, Escape close and direct class-state scenarios match before/after.
 - Full-app E2E NOT RUN. Candidate316 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
 - Report/manifest/test/summary: BATCH21_WORKSPACE_PANEL_STATE_OWNER_REPORT_20261025.md, BATCH21_CANDIDATE316_MANIFEST.json, BATCH21_CANDIDATE316_TEST_RESULTS.json, BATCH21_VALIDATION_SUMMARY.json.
+
+## Batch 22 — Redundant ranking-frame bootstrap removal (2026-10-25)
+- Candidate317: 1,645,902 bytes, SHA-256 e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9; derived from Candidate316 (4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317); 710 bytes removed.
+- Candidate70 creates amqSongSelectRankingPlaceholder at script index 43. Candidate72's bootstrap at index 63 had become an empty no-op after Batch21 removed its observer; deleted the entire script tag. Removed Candidate71's fallback creation branch at index 61 because Candidate70 had already created the same ID.
+- PASS: JS syntax 67/67, CSS parse 0 errors, duplicate IDs 0; isolated Chromium confirms one frame, panel opens, Escape closes, before/after behavior identical.
+- Full-app E2E NOT RUN; Candidate317 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
+
+
+## Batch 23 — Duplicate workspace Escape handler removal (2026-10-25)
+- Candidate318: 1,645,636 bytes, SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029; derived from Candidate317 (e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9); 266 bytes removed.
+- Removed Candidate76's Escape handler because the earlier Candidate70 document-capture handler intercepts the same active+expanded condition and calls stopImmediatePropagation. Preserved Candidate76's close button, state observer and geometry synchronization.
+- PASS: JS syntax 67/67, CSS parse 0 errors, duplicate IDs 0; isolated Chromium Escape and close-button behavior identical before/after.
+- Full-app E2E NOT RUN; Candidate318 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
