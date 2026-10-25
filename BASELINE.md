@@ -76,3 +76,9 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - This inventory does not change the recorded Candidate277 working-baseline decision and does not establish Candidate295 as the formal release baseline.
 - No application HTML/CSS/JS or storage schema was modified. No cleanup deletions were made.
 - Song Select's two route wrappers remain an integration candidate, not confirmed dead code. Candidate210 behavior remains protected pending call-path/runtime evidence.
+
+
+## Stage 5.1 — Dependency audit scope note (2026-10-25)
+- Targeted static analysis found three layered navigation wrappers and multiple consumers of the canonical AMQ custom-list store. These findings are recorded as integration candidates only.
+- AMQ custom-list schema (`animeIds`) and EMQ work-list schema (`workIds/vndbIds/songIds`) remain distinct. Quiz detailed history and its two summaries have distinct schemas and responsibilities.
+- No application files or storage schema were changed; Candidate277/Candidate276 remain untouched. Candidate295 remains a validation target, not a promoted release baseline.
