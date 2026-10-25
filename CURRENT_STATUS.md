@@ -244,3 +244,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 67/67, CSS parse 0 errors, duplicate IDs 0, isolated Chromium regression 2/2. Full-app E2E NOT RUN.
 - Candidate HTML remote upload/hash NOT VERIFIED. Candidate320 not promoted; formal baseline Candidate302 unchanged.
 - Skipped full removal of Candidate103/Candidate114 because they have distinct player/dock/layout side effects; Candidate114 timers remain NEEDS CONFIRMATION.
+
+
+## 2026-10-25 — Batch26 Round 1 global static candidate inventory
+- Scanned Candidate320 read-only: 1,645,470 bytes; SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`. Candidate302 remains the formal baseline.
+- Added `AMQ_GLOBAL_CANDIDATE_SCAN_CANDIDATE320_20261025.md` and companion JSON summary.
+- Static counts: 65 executable inline scripts, 109 style blocks, 2,648 CSS rules / 9,693 declarations, CSS parse errors 0, 269 IDs / 0 duplicate IDs, 342 repeated selector strings, 54 observer constructor occurrences, 474 addEventListener / 4 removeEventListener call sites, 134 setTimeout / 10 setInterval / 32 requestAnimationFrame calls.
+- New direct-delete approvals: 0. Static inventory is not proof of dead code. Specific lifecycle candidates LC-01..LC-12 are classified for dependency/runtime follow-up.
+- SHA/CSS/duplicate-ID static checks PASS; JavaScript syntax PASS is carried forward from handoff, not rerun in this round. Chromium/full-app E2E NOT RUN. No application source edited.
+- GitHub report and JSON summary were committed; read-back verification remains the next check.
