@@ -119,3 +119,11 @@
 - Quiz detail history (`aniQuizHistory_v1`), history summary (`aniQuizHistorySummaryV1`) and target summary (`aniQuizTargetSummaryV1`) have distinct purposes/schemas. Similar save flows alone do not prove redundancy.
 - Application source unchanged. No deletions. Browser routing, CRUD/reload, persistence and EMQ decode remain NOT RUN/BLOCKED.
 - Updated report: `reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md`.
+
+
+## Stage 5.2 — Source-order audit findings (2026-10-25)
+- Static source order establishes navigation wrapper chain: final Song Select guard (~11650) → generic workspace/body-class guard (~10594) → first Song Select guard (~7373) → base navigator. The two Song Select guards have overlapping destination maps; generic guard owns body-class sync and final guard closes the home menu for non-intercepted navigation. Integration candidate only; no guard deleted.
+- AMQ custom-list direct-read fallbacks are localized at ~2359, ~4983, ~7410 and ~11492. Canonical recovery-aware store is initialized at ~3543. Event callbacks likely run after initialization, but this remains inference until browser/runtime checks; backup import/export direct storage access is separate and must remain supported.
+- Quiz detail history is saved once to `aniQuizHistory_v1`, then updates distinct history and target summaries with their own processed-ID dedupe and save scheduling. Startup summary reconstruction is a recovery path, not confirmed dead work.
+- Candidate295 rechecked unchanged: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+- No application source changes/deletions. Browser behavior remains NOT RUN/BLOCKED. Full report extended with source-order and storage findings.
