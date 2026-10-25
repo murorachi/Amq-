@@ -533,3 +533,10 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed five declaration-only local helpers/constants from two scripts: `norm` from v60; `getPlanMeta`, `setPlanMeta`, `seasonOrder`, `seasonLabels` from learning-system v72.
 - PASS: 65 inline JS syntax checks, targeted reference/scope assertions, ZIP integrity. Browser interaction BLOCKED; full regression NOT RUN; Candidate346 HTML remote upload/hash readback NOT RUN.
 - Candidate346 is experimental. Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
+
+
+## Core regression static smoke — 2026-10-26
+- Candidate346 source-marker smoke passed for 11 groups: AMQ/EMQ/MIX, quiz flow, audio/video, custom lists, backup/restore, workspace APIs/actions, multiplayer markers, and navigation event.
+- Report files `AMQ_CANDIDATE346_CORE_REGRESSION_STATIC_SMOKE_20261026.md` and `.json` were uploaded to this branch and readback-verified.
+- This is static source-presence evidence only. Browser interaction is BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`); full functional regression is NOT RUN.
+- Candidate302 remains formal baseline; Candidate346 remains experimental.
