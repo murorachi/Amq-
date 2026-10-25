@@ -508,3 +508,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Browser interaction: BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`). Full AMQ/EMQ/MIX regression: NOT RUN. Candidate343 HTML remote upload/hash readback: NOT RUN.
 - Candidate343 remains experimental; Candidate302 remains formal baseline and Candidate320 remains rollback checkpoint.
 - Next: continue only evidence-backed removals. Keep C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, and v33 `showToast` in NEEDS CONFIRMATION pending runtime/caller evidence.
+
+
+## Batch 48 — Candidate344（2026-10-26）
+- Parent Candidate343: 1,627,145 bytes; SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`.
+- Candidate344: `amq_learning_tool_v82_86_55_candidate344_batch48_remove_dead_quiz_evaluator_20261026.html`, 1,625,750 bytes; SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`.
+- Change: removed the unused local `clean`, `aliasesForCurrent`, and `evaluate` helper chain from `v37-answer-and-layout-fixes`. `evaluate` had no caller; the other two helpers were referenced only by that dead chain.
+- Preserved: Enter handler, suggestion selection, `__aniQuizSubmitV47` bridge, answer mirror, and question event handlers.
+- Static assertions: PASS; only the target script body changed. 65 executable inline JS blocks `node --check`: PASS, 0 errors. Delivery ZIP integrity: PASS.
+- Browser interaction: BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`). Full Quiz / AMQ / EMQ / MIX regression: NOT RUN. Candidate344 HTML remote upload/hash readback: NOT RUN.
+- Candidate344 is experimental; Candidate302 remains formal baseline and Candidate320 remains rollback checkpoint.
