@@ -1,0 +1,20 @@
+{
+  "batch": 19,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "candidate": "Candidate314",
+  "candidate_bytes": 1647472,
+  "candidate_sha256": "e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17",
+  "source": "Candidate313",
+  "source_sha256": "bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a",
+  "bytes_removed": 215,
+  "tests": {
+    "js": "PASS 68/68",
+    "css": "PASS",
+    "duplicate_ids": "PASS 0",
+    "chromium_layout": "PASS 3 viewports",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "NOT VERIFIED"
+  },
+  "formal_baseline": "Candidate302 unchanged",
+  "promoted": false
+}
