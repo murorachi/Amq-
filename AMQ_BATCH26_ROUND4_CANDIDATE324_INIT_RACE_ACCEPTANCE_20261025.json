@@ -1,0 +1,173 @@
+{
+  "round": "Batch26 Round4 supplement",
+  "candidate321": {
+    "sha256": "5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a",
+    "race_trials": {
+      "passed": 2,
+      "failed": 2
+    }
+  },
+  "candidate324": {
+    "file": "amq_learning_tool_v82_86_35_candidate324_defer_songselect_init_observer_until_route_20261025.html",
+    "bytes": 1646101,
+    "sha256": "3308f0a97a0a8aaa63a464a0d49bee2dffa5219cb6c59add85cf3d62523d6075",
+    "promoted": false
+  },
+  "baseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "rollback": {
+    "candidate": "Candidate320",
+    "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"
+  },
+  "tests": [
+    {
+      "case": "AMQ/EMQ data initialization",
+      "result": "PASS_TEST_COPY",
+      "assertions": {
+        "anime": 9516,
+        "songs": 38821,
+        "emq_works": 6645
+      }
+    },
+    {
+      "case": "Candidate324 init race repeat",
+      "result": "PASS",
+      "assertions": {
+        "runs": 6,
+        "rows_each": 180,
+        "artwork_images_each": 180,
+        "selection_handler_each": true
+      }
+    },
+    {
+      "case": "row selection",
+      "result": "PASS",
+      "assertions": {
+        "runs": 6,
+        "currentSong_id": 45305
+      }
+    },
+    {
+      "case": "AMQ and EMQ source mode",
+      "result": "PASS",
+      "assertions": {
+        "AMQ_source": "amq",
+        "EMQ_source": "emq"
+      }
+    },
+    {
+      "case": "MIX cross-source search",
+      "result": "PASS",
+      "assertions": {
+        "query": "Shiosai no Melody",
+        "count": 1,
+        "source": "emq"
+      }
+    },
+    {
+      "case": "search",
+      "result": "PASS",
+      "assertions": {
+        "query": "Cowboy Bebop",
+        "count": 32
+      }
+    },
+    {
+      "case": "sort by name",
+      "result": "PASS",
+      "assertions": {
+        "first": "_summer",
+        "visible_rows": 180
+      }
+    },
+    {
+      "case": "1980s filter",
+      "result": "PASS",
+      "assertions": {
+        "visible_rows": 180,
+        "min_year": 1980,
+        "max_year": 1981,
+        "invalid_rows": 0
+      }
+    },
+    {
+      "case": "Movie filter",
+      "result": "PASS",
+      "assertions": {
+        "visible_rows": 180,
+        "invalid_rows": 0
+      }
+    },
+    {
+      "case": "route exit player layout",
+      "result": "PASS_ISOLATED",
+      "assertions": {
+        "route_active": false,
+        "dock_position": "relative",
+        "dock_height_px": 46,
+        "grid_rows_px": "18px 25px",
+        "home_slot_height_px": 46
+      }
+    },
+    {
+      "case": "JavaScript syntax",
+      "result": "PASS",
+      "assertions": {
+        "executable_inline_scripts": 65,
+        "errors": 0
+      }
+    },
+    {
+      "case": "CSS parsing",
+      "result": "PASS",
+      "assertions": {
+        "style_blocks": 109,
+        "rules": 2648,
+        "declarations": 9693,
+        "errors": 0
+      }
+    },
+    {
+      "case": "duplicate HTML IDs",
+      "result": "PASS",
+      "assertions": {
+        "ids": 269,
+        "duplicates": 0
+      }
+    },
+    {
+      "case": "real cover load/fallback",
+      "result": "BLOCKED_NOT_VERIFIED",
+      "reason": "external DNS unavailable; no successful cover source confirmed"
+    },
+    {
+      "case": "real audio/video playback",
+      "result": "NOT RUN",
+      "reason": "opaque about:blank origin and media currentSrc empty"
+    },
+    {
+      "case": "localStorage persistence",
+      "result": "NOT RUN",
+      "reason": "memory-only shim"
+    },
+    {
+      "case": "Candidate114 timer reduction",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate158 observer narrowing",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate324 remote SHA-256",
+      "result": "NOT VERIFIED"
+    }
+  ],
+  "decision": {
+    "candidate324_promoted": false,
+    "candidate114_timers": "retain",
+    "candidate158_observer": "retain"
+  }
+}
