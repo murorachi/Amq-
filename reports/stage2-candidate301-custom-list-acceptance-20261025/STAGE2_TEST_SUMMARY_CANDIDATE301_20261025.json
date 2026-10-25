@@ -1,0 +1,27 @@
+{
+  "candidate": "Candidate301",
+  "sha256": "e8eb07ccab26b6e424eda9aed11d1c21b90cca9c544ed2b6843096e3b6762454",
+  "static": {
+    "jsSyntax": "67/67 PASS",
+    "css": "109 blocks, 2808 rules, 0 parser errors PASS",
+    "htmlIds": "271 unique, 0 duplicates PASS"
+  },
+  "runtimeHarness": {
+    "adapter": "7/7 PASS",
+    "storeAndUi": "7/7 PASS",
+    "playbackPool": "3/3 PASS",
+    "selectors": "PASS",
+    "backupRestore": "5/5 PASS",
+    "pageErrors": 0
+  },
+  "limitations": [
+    "data.js and emq-data.js missing; real AMQ/EMQ catalog integration NOT RUN/BLOCKED",
+    "file:// and localhost navigation blocked by ERR_BLOCKED_BY_ADMINISTRATOR",
+    "Candidate301 HTML upload and remote SHA verification BLOCKED"
+  ],
+  "baseline": {
+    "candidate": "Candidate295",
+    "sha256": "aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81"
+  },
+  "status": "Stage 2 code and controlled acceptance complete; real catalog E2E remains blocked"
+}
