@@ -167,3 +167,11 @@ Candidate302 remains formal baseline:
 - Test JS syntax, CSS parsing, duplicate IDs, targeted route transition matrix, event counts/rebinding and relevant Home/Song Select/quiz regressions. Full-app E2E must remain NOT RUN unless actually executed.
 - Update all status/baseline/next-task/changelog documents and publish reports. Do not claim Candidate HTML remote upload until the actual remote artifact and SHA-256 are verified.
 
+## Next: Batch 19 — Song Select observer/listener lifecycle deduplication
+- Start from Candidate313 SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a; verify local bytes/hash before editing. Formal baseline remains Candidate302.
+- Continue functional batch deletion, not CSS-only micro-cleanup. Prioritize observer/resize/navigation handlers in Song Select layout, dock and modal runtime.
+- For each candidate, trace registration point, observed target/attributes, triggering mutations, duplicate side effects, cleanup/disconnect and re-entry behavior. Do not delete based on repeated names alone.
+- Candidate76/77/72 workspace click listeners addressed in Batch18; preserve candidate77's document capture handler and candidate76 close/Escape/geometry behavior.
+- Mark uncertain observers/timers NEEDS CONFIRMATION and continue with other safe candidates. Do not treat isolated harnesses as full-app E2E.
+- Required tests: JS syntax, CSS parse, duplicate IDs, observer/listener lifecycle instrumentation in isolated Chromium, desktop/tablet/mobile route and dock regressions. Full app audio/storage/CRUD/multiplayer E2E remains outstanding until actually run.
+- Publish report, manifest, test results, summary and update all status docs. Candidate HTML remote upload remains unverified until actual remote artifact and SHA-256 are confirmed.
