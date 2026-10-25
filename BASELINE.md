@@ -64,3 +64,8 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - A separate Candidate295-specific local acceptance tool v1.1 was created; it does not modify or replace any application baseline. Tool SHA-256: 8272523986420abef4f1820856fc2c81021941d28b67178b3130687e9f5e2b06.
 - Candidate295 application source and frozen rollback copy both remain 1,720,917 bytes and SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
 - Local tool syntax/ZIP checks PASS; running the tool against matching data assets remains NOT RUN. No formal release promotion.
+
+
+## Stage 4.2 note — symbol-aware acceptance harness
+- A separate read-only diagnostic harness v1.2 was created from the user's runtime symbol inventory. Tool SHA-256 f42dde260c25215fb93b21b76806ed1457edb1fce0b2e861b476777181f811b4; ZIP SHA-256 db88b70fabd226bf4998215f3a1e8c6a6b9313c7466808400e66f88c2f4de19c.
+- It checks symbol presence only; it does not call quiz, blacklist, watchlist, list mutation, or workspace-switch functions. Candidate295 remains unpromoted; app source and baseline snapshots are unchanged.
