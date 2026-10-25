@@ -438,3 +438,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Batch40 沒有修改 HTML、沒有建立新候選。Candidate336 SHA-256 仍為 `b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
 - 報告：`AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.md`；JSON：`AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.json`。
 - Candidate302 仍為正式基準；Candidate320 仍為回滾點；Candidate336 仍為實驗候選。下一步須在未被政策阻擋的互動瀏覽器執行路由／展開／resize 矩陣。
+
+
+## 2026-10-26 Batch 41 — Workspace / route ownership audit
+- Candidate337 input SHA-256: `901322cb3af2d44f40bdeb9e23fdeb3048003d6d760d3e757bf2d93394d1a39e`.
+- Static ownership audit created and uploaded: `AMQ_BATCH41_WORKSPACE_ROUTE_OWNERSHIP_AUDIT_20261026.md` and `.json`.
+- Confirmed Candidate76 and Candidate77 have distinct responsibilities; shared panel-state writes need integration, not blind deletion.
+- Confirmed Candidate60 and Candidate193 are separate `window.__aniNavigateApp` wrappers with different side effects; consolidate into one dispatcher only after route mapping and static harness validation.
+- Candidate70 contains active back/Escape/placeholder/background behavior; deletion is not yet justified.
+- No application HTML modified in Batch 41; no new candidate. Browser E2E NOT RUN. Batch 41 report/JSON uploaded and read back from GitHub.
+- Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
