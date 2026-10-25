@@ -236,3 +236,11 @@ Candidate302 remains formal baseline:
 5. Verify non-main AMQ/EMQ inline-list artwork after Candidate115 selector narrowing.
 6. Do not promote Candidate321 until browser validation and remote artifact SHA-256 verification. Candidate321 HTML is not confirmed uploaded to GitHub.
 7. Update status/baseline/next-task/changelog and tests with explicit PASS/FAIL/NOT RUN/BLOCKED labels.
+
+
+## Batch26 Round 3 handoff — 2026-10-25
+1. Highest priority: recover the exact `data.js` and `emq-data.js` dependencies matching Candidate321, or verify the official packaging step that embeds them. Both paths returned 404 on branch `amq-stage6-static-audit-regression-20261025`; do not fabricate substitute production data.
+2. Run full browser acceptance in a supported origin with persistent localStorage: real AMQ/EMQ/MIX, filters/search/sort, cover loading/fallback, row selection/playback, and home player reset.
+3. Keep Candidate114 timers and Candidate158 subtree Observer unchanged until full-app route/mount tests prove reductions safe.
+4. Upload Candidate321 HTML bytes to GitHub and read back the remote file to verify SHA-256 before promotion.
+5. Candidate321 is not promoted; Candidate320 remains rollback checkpoint; Candidate302 remains formal baseline.
