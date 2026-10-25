@@ -32,3 +32,11 @@
 - Confirmed malformed legacy JSON and non-allowlisted import are rejected; successful synthetic import preserves source; injected write failure rolls back.
 - No application source edits/deletions; DELETE=0. Full-app E2E, runtime lifecycle and computed-style tests remain NOT RUN.
 - Candidate302 HTML remote artifact remains NOT_FOUND; remote hash verification BLOCKED.
+
+
+## 2026-10-25 — Batch 4 route expansion and storage ownership
+- Expanded isolated Chromium route coverage to 15/15 PASS, 0 FAIL, 0 page errors. This uses actual extracted navigation scripts and stubbed dependencies, not full-app E2E.
+- Added static caller/writer map for AMQ custom-list key, recovery snapshots, EMQ list store and selected EMQ scope. Confirmed recovery data must be retained and AMQ/EMQ schemas remain separate.
+- Rechecked target branch: Candidate302 HTML still returns 404. Remote SHA-256 verification remains BLOCKED.
+- Matching data.js/emq-data.js not found locally; full-app E2E, runtime lifecycle and computed-style checks remain NOT RUN.
+- No application code changed or deleted; DELETE=0.
