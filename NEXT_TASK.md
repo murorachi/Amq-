@@ -431,3 +431,11 @@ Candidate302 remains formal baseline:
 3. Isolate only confirmed dock selectors from Candidate84 and Candidate94 into `style#legacy-dock-regression[media="not all"]`; keep Candidate94's `#grid .card.amqListNotMember85` membership filter in the formal cascade.
 4. Verify Candidate60/Candidate82/Candidate193 route and click-capture conditions independently; Candidate193's navigation wrapper must not be mislabeled as a click listener.
 5. Run static syntax and propagation assertions, then browser regression if the environment permits. Preserve Candidate302 formal baseline and Candidate320 rollback; Candidate340 is the immediate rollback.
+
+
+## Batch45 completed / next Batch45 continuation
+- Candidate341 local candidate and report: `AMQ_CANDIDATE341_BATCH45_REPORT_20261026.md`, `AMQ_CANDIDATE341_BATCH45_REPORT_20261026.json`.
+- Source Candidate340 verified before edit; Candidate302 formal baseline unchanged.
+- Event ownership consolidation is static-validated only; do not promote until real browser click/keyboard/route regression.
+- Next: (1) browser-test workspace selector toggling in Song Select and normal workspace, verify close/ESC and `[data-ws-action]`; (2) audit Candidate84 dock CSS selector-by-selector and only isolate confirmed obsolete selectors into non-cascading regression storage; preserve Candidate94 `#grid .card.amqListNotMember85`; (3) inspect Candidate82 `[data-home-action]` capture owner and Candidate60 standalone-route owner, keeping route-class conditions distinct; (4) then Batch46 navigation/Song Select.
+- Candidate341 SHA-256: `7abb6635b90254d666620953397c7d56f02e537bde997c523eb163203a15bd1a`. Rollback to Candidate340 SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
