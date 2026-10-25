@@ -88,3 +88,11 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 3. Inspect actual EMQ ready/count/workCount/getRows and AMQ/EMQ/MIX pool sizes. Treat BLOCKED as unverified, not as failure or success; report unexpected counts and console errors.
 4. Then manually test custom-list create/rename/delete/add/remove/filter/reload and repeat Song Select workspace routing. Do not treat the harness's read-only API checks as CRUD acceptance.
 5. Keep Candidate295 unchanged and do not promote it to formal release until core runtime gates are executed and accepted.
+
+
+## Stage 4.2 handoff — run symbol-aware Candidate295 tool v1.2
+1. Run AMQ_Local_Acceptance_Tool_v1_2_Candidate295.html with the exact Candidate295 HTML and matching data.js/emq-data.js; export the JSON report.
+2. Review quiz/answer/audio API presence, quiz history/target summary API presence, Song Select module/route-guard flags, and AMQ/EMQ/MIX pool diagnostics. Presence checks are not behavioral proof.
+3. If a symbol is BLOCKED, check whether it is a global property or a lexical binding before calling it missing. Do not invoke destructive functions merely to test visibility.
+4. Run separate manual acceptance for answer submission/next-song, audio failure recovery, quiz history persistence, custom-list CRUD/reload and repeated Song Select routing.
+5. Keep both route guards and Candidate210 behavior until call paths and runtime behavior prove redundancy. Keep Candidate295 unpromoted until core runtime gates pass.
