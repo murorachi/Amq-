@@ -131,3 +131,12 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 
 ## Stage 5.4 static check note (2026-10-25)
 - Accurate syntax result for Candidate295: Node.js `--check` PASS for 67/67 executable inline JavaScript blocks. The inline JSON block `aniAnilistIdMapV8237` is data, not JavaScript. Keep browser behavior checks separate as NOT RUN/BLOCKED.
+
+
+## Stage 5.5 — Next execution checkpoint (2026-10-25)
+1. Recover and verify the formal Candidate277 source in the active workspace. Do not substitute Candidate295 or infer equivalence from feature overlap.
+2. Against the actual formal baseline, trace initialization order for the four AMQ custom-list direct-storage fallback consumers. Keep backup import/export direct storage access.
+3. Implement a single explicit route owner only after baseline verification; preserve six panel mappings, dashboard special class behavior, menu closing, idempotence, and exactly-one interception event.
+4. Run route/back/return, custom-list CRUD/membership/selectors, reload persistence and backup/restore regression tests. Browser-only tests must remain NOT RUN/BLOCKED until actually executed.
+5. Create a uniquely named child candidate, verify its source/HTML hash and build consistency, then update all state docs and attempt remote readback.
+6. Do not delete any route guard or fallback branch until the regression matrix demonstrates equivalent behavior.
