@@ -518,3 +518,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Static assertions: PASS; only the target script body changed. 65 executable inline JS blocks `node --check`: PASS, 0 errors. Delivery ZIP integrity: PASS.
 - Browser interaction: BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`). Full Quiz / AMQ / EMQ / MIX regression: NOT RUN. Candidate344 HTML remote upload/hash readback: NOT RUN.
 - Candidate344 is experimental; Candidate302 remains formal baseline and Candidate320 remains rollback checkpoint.
+
+
+## Batch 49 — Candidate345（2026-10-26）
+- Parent Candidate344 SHA-256: `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`.
+- Candidate345: `amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html`, 1,625,630 bytes; SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
+- Removed three local bindings that appeared only in their declarations: `input` in `v36-quiz-fixes`, `box` in `v39-enter-and-avatar-fix`, and `settingsBody` in `v40-buffer-setting-and-avatar-alignment`.
+- PASS: 65 executable inline JS syntax checks; targeted binding/scope assertions; ZIP integrity. Browser interaction BLOCKED; full functional regression NOT RUN; Candidate345 HTML remote upload/hash readback NOT RUN.
+- Candidate345 is experimental. Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
