@@ -127,3 +127,9 @@
 - Quiz detail history is saved once to `aniQuizHistory_v1`, then updates distinct history and target summaries with their own processed-ID dedupe and save scheduling. Startup summary reconstruction is a recovery path, not confirmed dead work.
 - Candidate295 rechecked unchanged: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 - No application source changes/deletions. Browser behavior remains NOT RUN/BLOCKED. Full report extended with source-order and storage findings.
+
+
+## Stage 5.3 — Route guard semantic qualification (2026-10-25)
+- Both Song Select guards map the same six destinations and dispatch the same interception event, but placement changes side effects: the inner guard's return still allows the generic wrapper's body-class post-processing; the outer final guard returns before generic wrapper execution and therefore bypasses that post-processing. This confirms duplicated routing logic with order-dependent behavior, not safe whole-block deletion.
+- Added a static-only regression matrix for six panel destinations, normal routes, dashboard class behavior, repeat initialization, body-class synchronization and browser return navigation. All behavior cases remain NOT RUN.
+- No app source modified. Full report now includes the semantic qualification and regression matrix.
