@@ -1,0 +1,23 @@
+{
+  "batch": 20,
+  "source": "Candidate314",
+  "source_sha256": "e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17",
+  "candidate": "Candidate315",
+  "candidate_bytes": 1647133,
+  "candidate_sha256": "5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621",
+  "bytes_removed": 339,
+  "change": "Removed Candidate70 target click listener blocked by Candidate77 document capture stopImmediatePropagation; preserved Back and Escape.",
+  "tests": {
+    "batch": 20,
+    "candidate": "Candidate315",
+    "candidate_sha256": "5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621",
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "isolated_chromium": "PASS open/Escape/toggle before-after identical",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "NOT VERIFIED"
+  },
+  "formal_baseline": "Candidate302 unchanged",
+  "promoted": false
+}
