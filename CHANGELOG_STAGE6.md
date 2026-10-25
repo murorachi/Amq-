@@ -15,3 +15,11 @@
 - Formal maintenance baseline: Candidate302, 1,720,249 bytes, SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
 - Candidate295 preserved as immutable rollback baseline, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 - Baseline, status and next-task docs updated. Promotion does not imply six-goal cleanup completion.
+
+
+## 2026-10-25 — Batch 2 dependency trace
+- Added static trace of route wrappers, workspace state, storage keys, AMQ custom-list canonical store, EMQ schema boundary, event listeners, observers, timers and CSS selectors.
+- Confirmed Candidate193 route interception intentionally bypasses core `showView`/`ani-app-navigation` for selected destinations while Song Select is active.
+- Identified canonical AMQ custom-list writer/store and compatibility/backup consumers. AMQ and EMQ schemas remain separate.
+- Source-evidence assertions: 10/10 PASS; Candidate302 static audit PASS.
+- No app source changes/deletions; DELETE=0. Browser E2E and runtime lifecycle checks NOT RUN. Candidate302 remote HTML remains NOT_FOUND.
