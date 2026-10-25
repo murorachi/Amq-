@@ -216,3 +216,13 @@ Candidate302 remains formal baseline:
 5. Batch together candidates proven redundant; skip unresolved items and continue independent work. Keep Candidate320 immutable; new source changes require a unique candidate filename.
 6. Run syntax/CSS/duplicate-ID checks, then affected-script browser tests if environment permits. Full-app E2E remains NOT RUN unless executed.
 7. Update status, baseline note, next task, changelog and test report; verify GitHub read-back and report remote artifact/hash status accurately.
+
+
+## Next — Batch26 Round 3 validation and lifecycle cleanup
+1. Start from local Candidate321; preserve Candidate320 unchanged as rollback and Candidate302 as formal baseline.
+2. Run real browser acceptance for Song Select AMQ/EMQ/MIX modes, filters/sorting, cover loading/fallback, selected-row playback, route exit and home-player reset. Current Chromium attempt is BLOCKED, not PASS.
+3. If browser acceptance passes, inspect Candidate114 0/180/500/900ms route resets and internal 80/240ms timers; reduce only after proving later retries add no required state repair.
+4. Trace Candidate158 subtree Observer mutations and narrow its target only if mount/catalog clipping remains correct across route and viewport changes.
+5. Verify non-main AMQ/EMQ inline-list artwork after Candidate115 selector narrowing.
+6. Do not promote Candidate321 until browser validation and remote artifact SHA-256 verification. Candidate321 HTML is not confirmed uploaded to GitHub.
+7. Update status/baseline/next-task/changelog and tests with explicit PASS/FAIL/NOT RUN/BLOCKED labels.
