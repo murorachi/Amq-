@@ -30,3 +30,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Batch 2 source-evidence assertions: 10/10 PASS. Browser route E2E, computed-style checks, lifecycle instrumentation, and custom-list/backup restore interaction tests remain NOT RUN.
 - No application source changes or deletions in Batch 2; DELETE=0.
 - Full report and evidence JSON are being delivered as separate artifacts. Candidate302 HTML itself still returns NOT_FOUND on this branch; remote artifact/hash verification remains BLOCKED.
+
+
+## 2026-10-25 Batch 3
+- Formal Candidate302 source unchanged (1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`).
+- Isolated route tests 14/14 PASS; isolated storage repository tests 6/6 PASS. Both use synthetic/stubbed dependencies, not full-app E2E.
+- No application code changed/deleted; Candidate295 remains rollback.
+- Candidate302 remote HTML still NOT_FOUND; remote artifact verification BLOCKED.
