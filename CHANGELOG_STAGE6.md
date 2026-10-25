@@ -77,3 +77,9 @@
 - Only two title scripts changed and one diagnostic script removed; all 109 CSS blocks unchanged.
 - JS syntax 66/66 PASS; OpenCC isolated Chromium 3/3 PASS; synthetic EMQ regression 9/9 PASS. Full-app E2E NOT RUN.
 - Bulk CSS audit: 3,637 rules, 651 repeated-selector groups, 1,385 extra occurrences; no CSS auto-deletion based solely on repetition counts.
+
+## 2026-10-25 — Batch 10: Home / Song Select CSS cascade cleanup
+- From Candidate304 (`afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21)), created Candidate305 (`3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`).
+- Removed 1,432 older declarations proven superseded by later declarations with the same selector and applicable at-rule/importance; removed 167 empty rules. Touched 38 style blocks; reduced HTML by 49,282 bytes.
+- PASS: JS syntax 66/66, CSS parse 0 errors, duplicate IDs 0, script content unchanged, Chromium computed-style regression 6/6 with zero differences across home/Song Select desktop/tablet/mobile static DOM.
+- NOT RUN: full-app E2E and dynamic DOM visual acceptance. Candidate305 is not promoted; formal baseline remains Candidate302. Candidate HTML remote upload BLOCKED.
