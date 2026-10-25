@@ -1,0 +1,67 @@
+{
+  "batch": 18,
+  "source": "amq_learning_tool_v82_86_23_candidate312_cross_module_css_js_dedup_20261025.html",
+  "source_sha256": "12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb",
+  "candidate": "amq_learning_tool_v82_86_24_candidate313_workspace_route_event_dedup_20261025.html",
+  "candidate_bytes": 1647687,
+  "candidate_sha256": "bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a",
+  "changed_script_blocks": [
+    {
+      "index": 44,
+      "id": "candidate76-workspace-panel-shell-runtime",
+      "before": 4015,
+      "after": 3776
+    },
+    {
+      "index": 60,
+      "id": null,
+      "before": 1700,
+      "after": 1617
+    },
+    {
+      "index": 63,
+      "id": "candidate72-ranking-frame-bootstrap",
+      "before": 1031,
+      "after": 896
+    }
+  ],
+  "javascript_syntax": {
+    "status": "PASS",
+    "checked": 68
+  },
+  "css_parse": {
+    "status": "PASS",
+    "rules": 3423,
+    "declarations": 11425,
+    "errors": 0
+  },
+  "duplicate_dom_ids": {
+    "status": "PASS",
+    "count": 0
+  },
+  "workspace_dock_isolated_chromium": {
+    "status": "PASS",
+    "before_after_identical": true,
+    "checks": [
+      "open panel",
+      "close panel",
+      "aria-controls",
+      "aria-hidden",
+      "aria-pressed",
+      "workspace mode",
+      "display"
+    ]
+  },
+  "route_guard_isolated_chromium": {
+    "status": "PASS",
+    "before_after_identical": true,
+    "scenarios": [
+      "catalog outside Song Select",
+      "dashboard outside Song Select",
+      "dashboard inside Song Select",
+      "watchlist inside Song Select",
+      "vnList outside Song Select"
+    ]
+  },
+  "full_app_e2e": "NOT RUN: isolated Chromium uses actual affected runtime scripts with stub DOM/core navigation; no full-app audio, storage CRUD, gameplay or multiplayer workflow."
+}
