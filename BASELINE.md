@@ -58,3 +58,9 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - Verified supplied file: 1,720,917 bytes; SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. Its local rollback snapshot is frozen separately.
 - Candidate277's previously recorded user-authorized baseline status and historical size/SHA are preserved. The two candidates must not be conflated, and Candidate295 must not overwrite Candidate277 or Candidate276.
 - Runtime acceptance remains NOT RUN/BLOCKED. The external data.js and emq-data.js assets are absent in the current workspace.
+
+
+## Stage 4.1 note — local acceptance harness
+- A separate Candidate295-specific local acceptance tool v1.1 was created; it does not modify or replace any application baseline. Tool SHA-256: 8272523986420abef4f1820856fc2c81021941d28b67178b3130687e9f5e2b06.
+- Candidate295 application source and frozen rollback copy both remain 1,720,917 bytes and SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- Local tool syntax/ZIP checks PASS; running the tool against matching data assets remains NOT RUN. No formal release promotion.
