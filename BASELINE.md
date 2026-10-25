@@ -15,7 +15,7 @@ On 2026-10-25, the user explicitly directed that Candidate295 become the formal 
 - Candidate295 references external `data.js` and `emq-data.js`. The user reports having these files locally, but they have not been independently inspected in this workspace. Do not claim full AMQ/EMQ data validation until both are available and checked.
 - Node.js `--check`: PASS for 67/67 executable inline JavaScript blocks. The inline JSON data block `aniAnilistIdMapV8237` is data and was not included in that syntax check.
 - Static duplicate DOM ID scan: PASS, no duplicate IDs reported.
-- CSS parsing: NOT RUN for this Candidate295 baseline.
+- CSS parsing: PASS on 2026-10-25 with tinycss2 1.5.1: all 109 style blocks parsed with zero stylesheet-level and zero declaration-level parse errors (2,808 top-level qualified CSS rules counted). This is a parser-level check, not a visual/browser rendering test.
 - Browser interaction, storage reload, audio, live API and multiplayer checks: NOT RUN/BLOCKED by the managed browser environment.
 - Current dependency inventory is static analysis only. Do not delete uncertain code solely because it looks old or duplicated.
 
