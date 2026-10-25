@@ -252,3 +252,11 @@ Candidate302 remains formal baseline:
 3. Through formal UI navigation, test AMQ/EMQ/MIX, search/filter/sort, real cover loading/fallback, selected-song audio/video playback, and route-exit player reset.
 4. Only after those tests pass, decide whether Candidate114 delayed resets can be reduced and Candidate158 subtree Observer narrowed.
 5. Candidate321 HTML upload and remote SHA-256 verification still pending; Candidate321 not promoted. Candidate320 rollback and Candidate302 formal baseline unchanged.
+
+
+## Batch26 Round 4 supplement — next actions (2026-10-25)
+1. Candidate324 fixes the Candidate210 initialization race: 6/6 browser test-copy runs bind artwork nodes and selection handling. Candidate324 is not promoted.
+2. Highest priority now: run cover loading/fallback and actual audio/video playback in a trusted origin with external DNS/media URLs available. Current test origin is opaque and external cover DNS failed; do not infer cover correctness from image-node creation alone.
+3. Verify persistent localStorage in a supported origin, without the memory-only test shim.
+4. After full route/media acceptance, inspect Candidate114 delayed resets and Candidate158 subtree Observer for safe reduction.
+5. Upload Candidate324 HTML and read it back to verify SHA-256 before any promotion. Candidate302 formal baseline and Candidate320 rollback remain unchanged.
