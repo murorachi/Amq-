@@ -93,3 +93,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate306 SHA-256: `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`, 1,667,280 bytes.
 - Batch11 removed 31 unreferenced Home/Song Select selector branches. Static checks and six Chromium computed-style scenarios PASS; full-app E2E NOT RUN.
 - Rollback to Candidate305 or formal Candidate302. Candidate306 HTML is not verified remotely and is not promoted.
+
+## Candidate chain update — Batch 12
+- Formal baseline remains Candidate302: SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate307 is an unpromoted child of Candidate306 (`ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`).
+- Candidate307 SHA-256: `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`, 1,665,250 bytes.
+- Batch12 removed 9 superseded rules / 23 declarations. Static checks and six Chromium CSS scenarios (including representative synthetic dynamic elements) PASS; full-app E2E NOT RUN.
+- Rollback to Candidate306 or formal Candidate302. Candidate307 HTML is not verified remotely and is not promoted.
