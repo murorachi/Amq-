@@ -333,3 +333,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - 正式維護基準仍為 Candidate302，SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`。
 - 不可變回滾檢查點仍為 Candidate320，SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`。
 - Candidate336 是從 Candidate335 衍生的 Batch39 實驗候選，不取代上述任一基準；Candidate336 SHA-256：`b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
+
+
+## 2026-10-26 Batch 41 — ownership audit
+- Audit input: Candidate337, SHA-256 `901322cb3af2d44f40bdeb9e23fdeb3048003d6d760d3e757bf2d93394d1a39e`.
+- Audit report/JSON: `AMQ_BATCH41_WORKSPACE_ROUTE_OWNERSHIP_AUDIT_20261026.md` and `.json` (uploaded and read back from the target branch).
+- No baseline or rollback files modified. Candidate302 remains formal baseline; Candidate320 remains immutable rollback.
+- Audit does not promote Candidate337 and does not claim browser verification.
