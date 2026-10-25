@@ -207,3 +207,18 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; actual Candidate103+Candidate106 scripts in isolated Chromium at 390/768/1440px. Candidate314 keeps mobile bottom=86px and tablet/desktop clamp geometry; audio/video remain hidden.
 - Full-app E2E NOT RUN. Candidate314 not promoted; formal baseline Candidate302 unchanged. Candidate HTML remote upload/hash NOT VERIFIED.
 - Report: BATCH19_SONGSELECT_LAYOUT_OWNER_CONFLICT_REPORT_20261025.md; manifest: BATCH19_CANDIDATE314_MANIFEST.json; tests: BATCH19_CANDIDATE314_TEST_RESULTS.json; summary: BATCH19_VALIDATION_SUMMARY.json.
+
+## Batch 20 — Workspace dock dead listener cleanup (2026-10-25)
+- Candidate315: 1,647,133 bytes, SHA-256 5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621; derived from Candidate314 (e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17); 339 bytes removed.
+- Removed Candidate70's dead per-button [data-ws] click listener. Candidate77's document capture handler calls stopImmediatePropagation, so the target listener could never run. Preserved Back button and Escape handler.
+- PASS: JS syntax 68/68, CSS parse, duplicate IDs; isolated Chromium dock open, Escape close and toggle behavior identical before/after.
+- Full-app E2E NOT RUN. Candidate315 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
+- Report/manifest/test/summary: BATCH20_WORKSPACE_DOCK_DEAD_LISTENER_REPORT_20261025.md, BATCH20_CANDIDATE315_MANIFEST.json, BATCH20_CANDIDATE315_TEST_RESULTS.json, BATCH20_VALIDATION_SUMMARY.json.
+
+
+## Batch 21 — Workspace panel state-owner deduplication (2026-10-25)
+- Candidate316: 1,646,612 bytes, SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317; derived from Candidate315 (5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621); 521 bytes removed.
+- Removed Candidate72 ranking-frame bootstrap's duplicate panel display/visibility/pointer-events writer and its body-class MutationObserver. Kept the required ranking-frame placeholder; Candidate76/77 remain the panel state owners.
+- PASS: JS syntax 68/68, CSS parse, duplicate IDs; isolated Chromium dock open, Escape close and direct class-state scenarios match before/after.
+- Full-app E2E NOT RUN. Candidate316 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
+- Report/manifest/test/summary: BATCH21_WORKSPACE_PANEL_STATE_OWNER_REPORT_20261025.md, BATCH21_CANDIDATE316_MANIFEST.json, BATCH21_CANDIDATE316_TEST_RESULTS.json, BATCH21_VALIDATION_SUMMARY.json.
