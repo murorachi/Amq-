@@ -37,3 +37,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Isolated route tests 14/14 PASS; isolated storage repository tests 6/6 PASS. Both use synthetic/stubbed dependencies, not full-app E2E.
 - No application code changed/deleted; Candidate295 remains rollback.
 - Candidate302 remote HTML still NOT_FOUND; remote artifact verification BLOCKED.
+
+
+## 2026-10-25 Batch 4
+- Candidate302 remains unchanged and is the formal baseline (1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`).
+- Expanded isolated route matrix: 15/15 PASS, 0 page errors; stubbed dependencies, not full-app E2E.
+- Storage ownership review: AMQ custom lists remain owned by `v82-25-custom-lists-and-practice-hub`; AMQ recovery snapshots remain required; EMQ lists and selected scope remain owned/written by the EMQ module. AMQ and EMQ schemas must not be merged.
+- No application source changes/deletions. Candidate302 HTML remains NOT_FOUND remotely; remote hash is unverified.
