@@ -1,0 +1,30 @@
+{
+  "batch": 37,
+  "candidate": "Candidate334",
+  "parent": "Candidate333",
+  "parent_sha256": "56308f2c168c8344281ee75e23ce4a87c6a927aa56367448f0140206b81b247d",
+  "candidate_file": "amq_learning_tool_v82_86_45_candidate334_candidate15_observer_scope_20261026.html",
+  "candidate_sha256": "e19b8b6ee79cf988b89f84c4e33a1bbcf83fcc90e9a85d60828db76c01e62eeb",
+  "parent_bytes": 1631769,
+  "candidate_bytes": 1632000,
+  "delta_bytes": 231,
+  "changed_script": "amq-workspace-prototype-15-script",
+  "changes": [
+    "MutationObserver root narrowed from document.body to .wrap",
+    "ani-app-navigation listener added for main route transitions"
+  ],
+  "tests": {
+    "inline_script_syntax": "PASS: 65 checked, 0 errors; one application/json script skipped",
+    "observer_scope_invariants": "PASS",
+    "only_candidate15_changed": "PASS",
+    "ids_styles": "PASS: 731 id attrs, 16 duplicate kinds/20 extra; 109 style blocks unchanged",
+    "browser_e2e": "NOT RUN",
+    "custom_list_persistence": "NOT RUN",
+    "media_playback": "NOT RUN",
+    "github_html_upload_remote_hash": "NOT RUN"
+  },
+  "status": "experimental-not-promoted",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "next_task": "Audit Candidate15 workspaceViews and unused helpers, then inspect Candidate76/77 initialization and duplicate event binding only where callsite evidence supports cleanup."
+}
