@@ -130,3 +130,10 @@ Candidate302 remains formal baseline:
 - Verify every candidate against HTML tokens and all inline JS, including dynamic class/ID creation. Keep shared/global, quiz relationCanvas, multiplayer, learning-system, and uncertain workspace selectors untouched.
 - Batch confirmed deletions; test JS syntax, CSS parsing, duplicate IDs, unchanged scripts/non-style HTML, and computed styles at desktop/tablet/mobile for Home and Song Select.
 - Full-app E2E remains NOT RUN. Candidate HTML remote upload remains BLOCKED until the binary itself and its SHA are verified remotely.
+
+## Next: Batch 15 — continue from Candidate309
+- Latest working candidate: Candidate309, SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f` (1,664,430 bytes). Formal baseline remains Candidate302.
+- Continue route-scoped Home / Song Select cleanup; do not repeat full-file selector counts. Inspect exact unreferenced selector groups and same-condition repeated declarations.
+- For each removal, trace static HTML and all inline JS including dynamic class/ID generation. Keep uncertain selectors and shared styles untouched.
+- Test JS syntax, CSS parse, duplicate IDs, unchanged scripts/non-style HTML, and desktop/tablet/mobile computed styles. Full-app E2E remains NOT RUN.
+- Candidate HTML remote upload remains BLOCKED until the binary is uploaded and the remote SHA-256 verified.
