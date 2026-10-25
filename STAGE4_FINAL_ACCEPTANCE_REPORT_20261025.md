@@ -44,6 +44,14 @@ Branch: `amq-stage4-data-init-regression-20261025`
 - Re-ran the Stage 3 EMQ loader suite and preserved the intentional Candidate301 regression reproduction separately.
 - Updated status and next-task records and assembled a reproducible package with candidate files, scripts, reports, results and hashes.
 
+## GitHub publication and remote verification
+
+- Branch: `amq-stage4-data-init-regression-20261025`.
+- Uploaded and fetched back successfully: this final report, `CURRENT_STATUS.md`, `NEXT_TASK.md`, both Stage 4 test harnesses, and the machine-readable synthetic result files and Candidate301 expected-regression summary.
+- Remote Git blob SHA values verified for the harnesses: `stage4_catalog_validation_tests.cjs` = `ae8fab959ab4317c0332bffccbbb1fcd963baab9`; `stage4_pool_regression_tests.cjs` = `0468b865ee91543ecde0ef4b358b861444ab8606`.
+- Remote result blob SHA values verified: pool results `7ad3493fe8e7d92baa1a390e5a5d6d603464aa97`; catalog results `4abaeaebbb22107b7f0ae244c8ae29a539ad0b80`; EMQ rerun `8e0f5581d3b37e1e1798bd71c6ade1460cdef5fc`.
+- Candidate302 HTML itself remains absent from the remote branch (fetch returned HTTP 404/NOT_FOUND), so remote HTML SHA-256 verification is BLOCKED. Git blob SHA values above are Git object identifiers, not file SHA-256 hashes.
+
 ## Rollback and safety
 
 There is no Stage 4 production code delta to roll back. Keep Candidate295 untouched as the formal baseline. Candidate301 and Candidate302 remain separate artifacts. Do not promote Candidate302 until the blockers are resolved.
