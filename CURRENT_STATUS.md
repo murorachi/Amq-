@@ -50,3 +50,13 @@
 - The recorded SHA-256 remains historical evidence only; it was NOT recomputed in this execution. Do not promote Candidate295, Candidate283, or any reconstructed/indexed excerpt to Candidate277 baseline.
 - Candidate295 HTML and its original smoke/Coverage/recovery attachments were not mounted in this execution environment. No application code, HTML, data, or storage schema was modified. Browser acceptance and single-file build were NOT RUN.
 - Test-oracle work is documented in `reports/stage1-candidate295-baseline-retrieval-20261025/STAGE_1_BASELINE_RETRIEVAL_AND_SAFE_CONTINUATION_20261025.md`.
+
+
+## Stage 2 — Uploaded Candidate295 HTML verification (2026-10-25)
+- User supplied raw `index-old.html`; actual size 1,720,917 bytes and recomputed SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`, matching the recorded Candidate295 identity.
+- PASS (static): 271 DOM IDs, zero duplicate IDs; all 68 inline executable JS blocks passed individual `node --check` checks.
+- Candidate295 references external `data.js` and `emq-data.js`, neither is present beside the uploaded HTML in the current workspace. Single-file portability and data-dependent runtime behavior are not verified.
+- BLOCKED: Playwright navigation to both file:// and local HTTP URL returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`; this is an environment blocker, not an application pass/fail result.
+- Candidate277 raw HTML remains BLOCKED. The uploaded file is Candidate295, not Candidate277. Candidate277's recorded size/SHA remain historical records and were not recomputed in this stage. Do not promote Candidate295 or reconstruct Candidate277 from excerpts.
+- No application HTML/CSS/JS/data/storage changes. Stage report: `reports/stage2-candidate295-uploaded-html-audit-20261025/STAGE_2_UPLOADED_CANDIDATE295_STATIC_AND_RUNTIME_GATE_20261025.md`.
+- Rollback: revert the documentation-only Stage 2 commit; preserve Candidate277 and Candidate276 unchanged.
