@@ -455,3 +455,11 @@ Candidate302 remains formal baseline:
 - Do not delete C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` until runtime or complete caller evidence supports it.
 - Next engineering work: perform a bounded source audit for additional *local declarations/helpers with zero reads* in the already shortlisted scripts; only if exact references are proven absent, remove a small related set and run syntax + scope assertions. Otherwise move directly to core regression planning and record browser blocker without retry loops.
 - Candidate343 HTML GitHub upload/readback remains NOT RUN. Do not claim remote delivery until verified.
+
+
+## Updated next task — after Candidate344 Batch48 (2026-10-26)
+- Current experimental descendant: Candidate344 `amq_learning_tool_v82_86_55_candidate344_batch48_remove_dead_quiz_evaluator_20261026.html`, 1,625,750 bytes, SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`. Formal baseline remains Candidate302; rollback checkpoint Candidate320 remains immutable.
+- Batch47 removed the orphaned Candidate186 `get` helper after its only recovery path was removed. Batch48 removed the uncalled local Quiz evaluator helper chain from `v37-answer-and-layout-fixes`.
+- Tests: static assertions PASS; 65 executable inline JS syntax checks PASS; ZIP integrity PASS. Browser interaction BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`; full functional regression NOT RUN; Candidate344 HTML remote upload/hash readback NOT RUN.
+- Next bounded task: review remaining already-shortlisted scripts only for declarations with zero live references. Do not delete C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` without new runtime/caller evidence. If no additional safely removable items are found, stop cleanup-only batches and move to core regression / explicit blocker ledger.
+- Closure remains four stages: safe cleanup → core regression → final residue/dependency scan → formal single-file release with remote HTML readback and SHA-256. Do not add stages.
