@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-26",
+  "candidate": "Candidate334",
+  "candidate_sha256": "e19b8b6ee79cf988b89f84c4e33a1bbcf83fcc90e9a85d60828db76c01e62eeb",
+  "baseline": {
+    "name": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "rollback": {
+    "name": "Candidate320",
+    "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"
+  },
+  "workspaceViews": {
+    "catalog": "KEEP",
+    "vnCatalog": "KEEP_DYNAMIC_SUBVIEW",
+    "watchlist": "KEEP",
+    "vnList": "KEEP_DYNAMIC_SUBVIEW",
+    "customLists": "KEEP_DYNAMIC_SUBVIEW",
+    "explore": "KEEP_NEEDS_VISUAL_E2E",
+    "practice": "KEEP",
+    "learningPlan": "KEEP",
+    "dashboard": "KEEP"
+  },
+  "deadPathCandidate": {
+    "functions": [
+      "clickHome()",
+      "runAction terminal fallback"
+    ],
+    "classification": "DELETE_CANDIDATE_STATIC_EVIDENCE_STRONG",
+    "modified": false
+  },
+  "candidate76_77": {
+    "classification": "OVERLAPPING_PROPERTY_WRITES_NEEDS_STATE_MATRIX",
+    "sharedProperty": "#amqWorkspaceSidebar[aria-hidden]",
+    "browserTest": "NOT RUN"
+  },
+  "htmlModified": false,
+  "tests": {
+    "workspaceViewsStaticMapping": "PASS",
+    "candidate82CaptureActionOwnership": "PASS",
+    "candidate76_77OwnershipMatrix": "PASS_STATIC",
+    "browserE2E": "NOT RUN",
+    "persistence": "NOT RUN",
+    "media": "NOT RUN",
+    "githubHtmlUploadAndRemoteHash": "NOT RUN"
+  }
+}
