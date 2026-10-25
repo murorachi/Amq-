@@ -88,3 +88,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Multiplayer UI created two page-level intervals; active-room poll/socket shutdown with synthetic session/fake server remains NOT RUN.
 - Full-app E2E NOT RUN; remote Candidate302 HTML remains BLOCKED/NOT_FOUND. No app source changed; DELETE=0.
 - Report: `BATCH6_RUNTIME_LIFECYCLE_REPORT_20261025.md`; probe JSON: `BATCH6_RUNTIME_LIFECYCLE_PROBE_RESULTS.json`; summary: `BATCH6_VALIDATION_SUMMARY.json`.
+
+
+## Batch 7 — multiplayer lifecycle and script-load topology (2026-10-25)
+- Actual extracted Candidate302 multiplayer UI tested in isolated Chromium with synthetic storage, fake HTTP responses, and a fake WebSocket.
+- Classic/team scenarios: initialization PASS; room polling observed; route-away stopped additional room GETs; team socket closed on route-away; local release cleared synthetic session; 0 page errors.
+- A heartbeat POST still occurs after route-away while the room session remains stored. Treat as a design question, not a proven leak.
+- Candidate302 has 70 inline scripts, no duplicate script IDs, no duplicate non-empty source hashes. Each of the eight manual-reinjection candidates appears once in static HTML. Runtime eval/reinjection is not ruled out by static topology alone.
+- No app source changed; DELETE=0. Full-app E2E NOT RUN; remote HTML remains BLOCKED/NOT_FOUND.
+- Report: BATCH7_MULTIPLAYER_LIFECYCLE_REPORT_20261025.md; results: BATCH7_MULTIPLAYER_FAKE_SERVER_RESULTS.json; topology: BATCH7_SCRIPT_LOAD_TOPOLOGY.json.
