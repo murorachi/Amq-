@@ -237,3 +237,10 @@
 - BLOCKED: visible UI click path (control hidden in legacy overlay) and external cover network; NOT RUN: persistent storage and real audio/video playback.
 - Candidate302 baseline and Candidate320 rollback remain unchanged. Candidate326 HTML upload/remote SHA verification BLOCKED; do not claim remote artifact exists.
 - Reports: `AMQ_BATCH28_CANDIDATE326_SONGSELECT_OWNERSHIP_CLEANUP_20261025.md`; regression JSON: `AMQ_BATCH28_CANDIDATE326_BROWSER_REGRESSION_20261025.json`.
+
+## 2026-10-25 — Batch29 Candidate326 visible UI / route regression
+- PASS: visible UI path through `#amqMainIcon` and visible catalog menu enters Song Select; 180 rows created.
+- PASS: AMQ/EMQ modes, MIX cross-source search, Movie/1980 filters, row selection, and visible `#c99Back` route exit/player reset in isolated browser test copy.
+- BLOCKED: external ANN/VNDB DNS; cover loading/fallback, actual media playback and native storage remain unverified. Localhost and file URL navigation blocked by browser policy.
+- No app source changes; Candidate326 not promoted. Candidate302 baseline and Candidate320 rollback unchanged.
+- Report: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` and JSON counterpart.
