@@ -1,0 +1,52 @@
+{
+  "batch": 41,
+  "candidate_input": "amq_learning_tool_v82_86_48_candidate337_batch40_remove_unused_candidate186_binding_20261026.html",
+  "candidate_input_sha256": "901322cb3af2d44f40bdeb9e23fdeb3048003d6d760d3e757bf2d93394d1a39e",
+  "application_source_modified": false,
+  "new_candidate_created": false,
+  "findings": [
+    {
+      "area": "Candidate15",
+      "decision": "KEEP",
+      "evidence": "Owns legacy #wsActions [data-ws-action] delegation."
+    },
+    {
+      "area": "Candidate70",
+      "decision": "KEEP for now",
+      "evidence": "Creates back button, Escape behavior, ranking placeholder and scene-background shortcut."
+    },
+    {
+      "area": "Candidate76",
+      "decision": "INTEGRATE later",
+      "evidence": "Owns Song Select sidebar close button, ARIA, geometry and route/resize synchronization."
+    },
+    {
+      "area": "Candidate77",
+      "decision": "INTEGRATE later",
+      "evidence": "Owns dock click capture and navigation behavior."
+    },
+    {
+      "area": "Candidate82",
+      "decision": "KEEP",
+      "evidence": "Owns content panel API used by other scripts."
+    },
+    {
+      "area": "Candidate99",
+      "decision": "KEEP",
+      "evidence": "Creates main Song Select rail and player controls."
+    },
+    {
+      "area": "Candidate60+Candidate193",
+      "decision": "INTEGRATE, not blind delete",
+      "evidence": "Distinct route wrappers with separate side effects."
+    }
+  ],
+  "tests": {
+    "static_source_ownership_audit": "PASS",
+    "application_source_change": "NO",
+    "browser_behavior": "NOT RUN",
+    "full_app_regression": "NOT RUN",
+    "github_upload_readback": "pending at report creation"
+  },
+  "next_batch": "Single navigation dispatcher and unified Candidate76/77 sidebar state ownership."
+}
