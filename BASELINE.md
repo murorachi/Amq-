@@ -40,3 +40,9 @@ Candidate277 remains the immutable user-authorized baseline. Homepage changes ar
 The user-supplied `index-old.html` was verified as Candidate295: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. This matches the recorded Candidate295 identity only. It is not Candidate277 and is not promoted as the Candidate277 baseline.
 
 Candidate277 remains recorded as 9,373,238 bytes with historical SHA-256 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`; raw original bytes have not been recovered and that hash was not recomputed in Stage 2. Browser acceptance remains BLOCKED by `net::ERR_BLOCKED_BY_ADMINISTRATOR`. Candidate295 also references `data.js` and `emq-data.js`, absent from the current workspace. No application source or data was modified. See the Stage 2 report in `reports/stage2-candidate295-uploaded-html-audit-20261025/`.
+
+
+## Stage 2 recovery follow-up (2026-10-25)
+- Re-searched Library for the exact Candidate277 filename: two indexed records report 9,373,238 bytes, but raw-byte materialization of both failed with `This Project file does not have an authorized raw-byte materialization path`.
+- Found indexed `Coverage-20261025T094140.json` (10,050,921 bytes); its raw-byte materialization failed with the same blocker. Data files described inside the handoff/coverage records are not locally recovered or hash-reverified in this stage.
+- Candidate277 remains BLOCKED for raw-byte SHA verification. Search/index presence is not proof of byte recovery. No application files were changed.
