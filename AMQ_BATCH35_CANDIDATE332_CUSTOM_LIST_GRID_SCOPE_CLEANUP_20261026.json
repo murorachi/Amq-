@@ -1,0 +1,28 @@
+{
+  "batch": 35,
+  "candidate": "Candidate332",
+  "parent": "Candidate331",
+  "parent_sha256": "1a17f6a940aa2248a40c56a15d91fe0d63df35da35948f15156fd261dea13565",
+  "candidate_file": "amq_learning_tool_v82_86_43_candidate332_custom_list_grid_scope_cleanup_20261026.html",
+  "candidate_sha256": "dd4b9ca46fe3303232f8f455e1461c3e638fc339fa7440819d55df86a737f10d",
+  "parent_bytes": 1632034,
+  "candidate_bytes": 1631927,
+  "delta_bytes": -107,
+  "changed_scripts": [
+    "amq-workspace-prototype-16-custom-list-workflow-script"
+  ],
+  "tests": {
+    "inline_script_syntax": "PASS: 65 checked, 0 errors",
+    "css_raw_brace_balance": "PASS: 109 style blocks",
+    "ids": "PASS: 729 attributes; 17 duplicate ID kinds unchanged from parent",
+    "custom_list_membership_and_storage_invariants": "PASS",
+    "browser_e2e": "NOT RUN",
+    "native_storage_persistence": "NOT RUN",
+    "media_playback": "NOT RUN",
+    "github_html_upload_and_remote_hash": "NOT RUN"
+  },
+  "status": "experimental-not-promoted",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "next_task": "Map Candidate15 visibility observer ownership and route/class/hidden change sources before deleting or narrowing observers."
+}
