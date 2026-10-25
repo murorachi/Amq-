@@ -1,0 +1,34 @@
+{
+  "batch": 11,
+  "candidate": "Candidate306",
+  "sha256": "ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e",
+  "evidence": "Tokens below were not found in non-style HTML or inline JS.",
+  "target_tokens": [
+    "amqHomeCenter",
+    "amqHomeTitle",
+    "amqHomeSubtitle",
+    "amqHomeOpenHint",
+    "amqHomeDialogHead",
+    "amqHomeClose",
+    "amqHomeIconOnly",
+    "home-menu-practice",
+    "c99DashboardModal",
+    "c99-modal-card"
+  ],
+  "style_blocks": [
+    "v79-design-system",
+    "v82-44-ux-intuition-cleanup-style",
+    "v82-45-home-icon-and-scene-background-style",
+    "candidate99-osu-stable-songselect-ui"
+  ],
+  "removed_selector_branches": 31,
+  "css_rules_removed": 31,
+  "css_declarations_removed": 124,
+  "bytes_removed": 3653,
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS",
+    "computed_style": "PASS 6/6",
+    "full_app_e2e": "NOT RUN"
+  }
+}
