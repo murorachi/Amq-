@@ -175,3 +175,11 @@ Candidate302 remains formal baseline:
 - Mark uncertain observers/timers NEEDS CONFIRMATION and continue with other safe candidates. Do not treat isolated harnesses as full-app E2E.
 - Required tests: JS syntax, CSS parse, duplicate IDs, observer/listener lifecycle instrumentation in isolated Chromium, desktop/tablet/mobile route and dock regressions. Full app audio/storage/CRUD/multiplayer E2E remains outstanding until actually run.
 - Publish report, manifest, test results, summary and update all status docs. Candidate HTML remote upload remains unverified until actual remote artifact and SHA-256 are confirmed.
+
+## Next: Batch 20 — Song Select runtime lifecycle and duplicate state writers
+- Start from Candidate314 SHA-256 e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17; verify local bytes/hash first. Formal baseline remains Candidate302.
+- Continue across a related functional group: trace Song Select resize/navigation handlers and modal/grid/dock observers, including registration, target, mutations, side effects, disconnection and re-entry.
+- Prioritize confirmed duplicate state writers or listeners that are blocked by capture-phase handlers; preserve handlers that still perform independent audio/player/accessibility cleanup.
+- Compare owner precedence before deleting: Candidate106 owns catalog geometry; Candidate103's obsolete catalog geometry writes were removed in Batch19, but its other player/dock effects remain.
+- Mark uncertain lifecycle dependencies NEEDS CONFIRMATION and continue with other safe items. Do not report static inspection as runtime PASS or isolated harness as full-app E2E.
+- Publish report, manifest, tests, summary and update CURRENT_STATUS.md, BASELINE.md, NEXT_TASK.md and CHANGELOG_STAGE6.md. Candidate HTML upload/hash must remain NOT VERIFIED unless confirmed remotely.
