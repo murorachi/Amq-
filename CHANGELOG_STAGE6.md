@@ -140,3 +140,9 @@
 - Removed two no-op navigation guard retry timers after verifying immediate install and later guarded wrapper ordering.
 - PASS: JS syntax 68/68, CSS parse, duplicate IDs, isolated Chromium dock open/close and five route-wrapper scenarios with identical before/after behavior.
 - Full-app E2E NOT RUN; Candidate313 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload and remote SHA verification NOT VERIFIED.
+
+## 2026-10-25 — Batch 19: Song Select layout-owner conflict cleanup
+- Candidate314 SHA-256 e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17, 1,647,472 bytes, derived from Candidate313 (bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a); 215 bytes removed.
+- Removed only Candidate103's obsolete catalog bottom/height inline writes. Its catalog style observer and other player/dock behavior remain. This prevents the old observer from overwriting Candidate106's mobile bottom=86px.
+- PASS: JS syntax 68/68, CSS parse, duplicate IDs and isolated Chromium layout-owner regression at 390/768/1440px.
+- Full-app E2E NOT RUN; Candidate314 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload/hash NOT VERIFIED.
