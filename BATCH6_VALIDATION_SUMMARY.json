@@ -1,0 +1,28 @@
+{
+  "batch": 6,
+  "date": "2026-10-25",
+  "status": "PASS_WITH_LIMITATIONS",
+  "baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "selected_scripts": 12,
+  "initialization_pass": 12,
+  "initialization_fail": 0,
+  "browser_page_errors": 0,
+  "synthetic_route_cycles_per_script": 20,
+  "net_active_listener_or_observer_growth_during_route_cycles": false,
+  "manual_reinjection_candidates": [
+    "v77-interval-repetition",
+    "amq-workspace-prototype-15-script",
+    "candidate76-workspace-panel-shell-runtime",
+    "candidate77-frame-owned-workspace-runtime",
+    "amq-workspace-prototype-16-custom-list-workflow-script",
+    "candidate185-modal-lifecycle-guard",
+    "candidate258-visible-unified-import-workspace",
+    "candidate99-osu-stable-songselect-ui-runtime"
+  ],
+  "manual_reinjection_is_production_leak_proof": false,
+  "active_multiplayer_session_poll_socket_cleanup": "NOT RUN",
+  "full_app_e2e": "NOT RUN",
+  "remote_html_verification": "BLOCKED_NOT_FOUND",
+  "application_code_modified": false,
+  "deleted_items": 0
+}
