@@ -317,3 +317,10 @@ Candidate302 remains formal baseline:
 - Audit Candidate16 custom-list workflow against the formal CRUD/membership API. Check whether legacy-manager fallback and dual catalog-grid/Song Select card support are still required before deleting any large block. Preserve `customListsStoreV1`, member toggle, error handling and persistence semantics.
 - Then map Candidate15 visibility Observer against Candidate76/77 shell/frame lifecycle. Do not delete route sync based only on similar names or broad observer overlap.
 - Browser E2E/media/covers/native persistence remain NOT RUN for local user acceptance. Candidate330 HTML upload/hash remains NOT VERIFIED.
+
+
+## Batch34 next task
+- Continue from Candidate331; Candidate302 formal baseline and Candidate320 rollback remain unchanged.
+- Inspect Candidate16 custom-list legacy-manager fallback against current card types and the official membership API. Keep both legacy catalog cards and Song Select rows unless actual dependency evidence proves one is obsolete.
+- Then verify Candidate15 visibility Observer ownership against Candidate76/77 route/shell lifecycle. Do not infer redundancy from broad observer overlap.
+- Full browser E2E/media/covers/native persistence remain NOT RUN for user local acceptance; Candidate331 HTML upload/hash NOT VERIFIED.
