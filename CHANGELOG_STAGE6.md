@@ -23,3 +23,12 @@
 - Identified canonical AMQ custom-list writer/store and compatibility/backup consumers. AMQ and EMQ schemas remain separate.
 - Source-evidence assertions: 10/10 PASS; Candidate302 static audit PASS.
 - No app source changes/deletions; DELETE=0. Browser E2E and runtime lifecycle checks NOT RUN. Candidate302 remote HTML remains NOT_FOUND.
+
+
+## 2026-10-25 — Batch 3 route/storage/lifecycle verification
+- Isolated Chromium route tests passed 14/14 with zero page errors; actual Candidate302 scripts 3, 62, 70; dependencies stubbed.
+- Isolated Chromium storage repository tests passed 6/6 with zero page errors; actual Candidate302 script 28 and synthetic in-memory storage only.
+- Confirmed Song Select route guard early-return behavior bypasses core navigation event and generic standalone-class side effect.
+- Confirmed malformed legacy JSON and non-allowlisted import are rejected; successful synthetic import preserves source; injected write failure rolls back.
+- No application source edits/deletions; DELETE=0. Full-app E2E, runtime lifecycle and computed-style tests remain NOT RUN.
+- Candidate302 HTML remote artifact remains NOT_FOUND; remote hash verification BLOCKED.
