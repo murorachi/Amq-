@@ -112,3 +112,8 @@
 - Removed 17 superseded declarations / 589 bytes from the Home stable-play modal base rules in style block `amq-workspace-osu-composition-v24`.
 - JS syntax 68/68, CSS parse, duplicate IDs, script/non-style HTML invariance and six Chromium style scenarios PASS; full-app E2E NOT RUN.
 - Candidate309 not promoted; HTML upload BLOCKED; formal baseline Candidate302 unchanged.
+
+## 2026-10-25 — Batch 14: Home stable-play modal superseded CSS cleanup
+- Candidate309 SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f`, 1,664,430 bytes.
+- Removed 17 superseded declarations / 589 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
+- Candidate309 not promoted; HTML upload BLOCKED; formal baseline Candidate302 unchanged.
