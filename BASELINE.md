@@ -363,3 +363,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Change: removed one orphaned local `get` helper from Candidate186 after its only recovery path had already been removed in Batch42. Modal backdrop and Escape handlers remain.
 - Rollback to Candidate342 SHA-256 `85651bff600de2a3441aab64fee8d38299872d47a0d76473691334f9aa0fb2fe`; Candidate320 checkpoint and Candidate302 baseline remain unchanged.
 - This is experiment history only, not a formal baseline promotion.
+
+
+## 2026-10-26 experimental cleanup checkpoint — Candidate344
+- Candidate302 remains the formal baseline; Candidate344 is not promoted.
+- Candidate344: `amq_learning_tool_v82_86_55_candidate344_batch48_remove_dead_quiz_evaluator_20261026.html`, 1,625,750 bytes; SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`.
+- Change: removed the unreferenced `clean` / `aliasesForCurrent` / `evaluate` local helper chain from `v37-answer-and-layout-fixes`; Enter submission and suggestion handlers remain.
+- Rollback to Candidate343 SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`. Candidate302 and Candidate320 remain unchanged.
