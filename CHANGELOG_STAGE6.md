@@ -191,3 +191,10 @@
 - Dependency ownership map covers Candidate103/106/114/115/137/158/210. Two grouped changes: remove redundant/conflicting Candidate106 catalog overflow assignments; scope Candidate115 generic artwork/selection behavior away from main tracklist owned by Candidate137/210.
 - Tests: JS syntax 65/65 PASS; CSS parsing 109 blocks, 2,648 rules, 9,693 declarations, 0 errors PASS; duplicate IDs 269/0 PASS; targeted assertions PASS. Chromium BLOCKED after 30s timeout; full-app E2E NOT RUN.
 - Added detailed report and JSON summary. Candidate321 HTML remote upload/hash NOT VERIFIED; no promotion.
+
+
+## 2026-10-25 — Batch26 Round 3 Candidate321 browser validation
+- Chromium launched through Playwright. Isolated harness of Candidate106/114/115/137/158 scripts passed synthetic AMQ/EMQ/MIX filtering, search, name sorting, single artwork placeholder ownership, desktop overflow behavior, and player-layout reset on route exit.
+- Full application E2E remains BLOCKED: browser policy rejects `file://` and localhost navigation; `data.js` and `emq-data.js` are missing from the current GitHub branch; opaque `set_content` origin blocks localStorage. Real cover load/fallback and audio/video playback remain NOT RUN.
+- No source HTML changed. Candidate321 not promoted; Candidate114 timers and Candidate158 observer retained pending full-app evidence. Candidate321 remote HTML SHA-256 NOT VERIFIED.
+- Report: `AMQ_BATCH26_ROUND3_CANDIDATE321_BROWSER_VALIDATION_20261025.md/.json`.
