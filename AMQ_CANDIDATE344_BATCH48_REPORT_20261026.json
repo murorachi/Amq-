@@ -1,0 +1,52 @@
+{
+  "batch": 48,
+  "candidate": "Candidate344",
+  "parent": "Candidate343",
+  "input_file": "amq_learning_tool_v82_86_54_candidate343_batch47_remove_orphan_candidate186_helper_20261026.html",
+  "input_size_bytes": 1627145,
+  "input_sha256": "fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f",
+  "output_file": "amq_learning_tool_v82_86_55_candidate344_batch48_remove_dead_quiz_evaluator_20261026.html",
+  "output_size_bytes": 1625750,
+  "output_sha256": "cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "changed_script_bodies": [
+    "v37-answer-and-layout-fixes"
+  ],
+  "removed_helpers": [
+    "clean",
+    "aliasesForCurrent",
+    "evaluate"
+  ],
+  "evidence": {
+    "evaluate_identifier_occurrences_before": 1,
+    "aliasesForCurrent_identifier_occurrences_before": 2,
+    "clean_identifier_occurrences_before": 3,
+    "removed_helpers_all_references_within_removed_block": true
+  },
+  "preserved": [
+    "Enter handler",
+    "suggestion selection",
+    "__aniQuizSubmitV47 bridge",
+    "answer mirror",
+    "question event handlers"
+  ],
+  "tests": {
+    "parent_hash": "PASS",
+    "dead_helper_reference_assertions": "PASS",
+    "target_script_only": "PASS",
+    "core_quiz_handlers_preserved": "PASS",
+    "inline_js_syntax": {
+      "status": "PASS",
+      "checked": 65,
+      "errors": 0
+    },
+    "browser_interaction": "BLOCKED",
+    "full_regression": "NOT RUN",
+    "github_html_upload_hash_readback": "NOT RUN"
+  },
+  "rollback": {
+    "candidate": "Candidate343",
+    "sha256": "fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f"
+  }
+}
