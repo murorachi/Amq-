@@ -78,3 +78,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Chromium computed-style probe PASS for the static DOM at 1440x900, using real Candidate302 markup/CSS with inline scripts removed; 0 page errors. Dynamic Song Select/workspace elements absent before initialization remain NOT RUN.
 - No app source modified or deleted; DELETE=0. Full app E2E, runtime lifecycle pairing, and remote HTML hash verification remain NOT RUN/BLOCKED.
 - Batch 5 report and local evidence package are available as deliverables; GitHub report/summary and docs updated separately.
+
+
+## Batch 6 — 2026-10-25 runtime lifecycle stress probe
+- Tested 12 selected Candidate302 inline scripts individually in Chromium with actual static markup/CSS, inline app scripts disabled, synthetic APIs and minimal workspace scaffolding.
+- 12/12 selected scripts initialized without uncaught errors; 0 browser page errors.
+- Each script received 20 synthetic route/body-class/navigation/resize cycles. No net increase in active listener registrations or active observers was observed in this isolated harness; scheduled RAF/timeouts settled.
+- Manual reinjection added registrations for eight scripts, but this is not evidence that normal route changes reinject them or that a production leak exists. Treat as INTEGRATE/NEEDS_CONFIRMATION only.
+- Multiplayer UI created two page-level intervals; active-room poll/socket shutdown with synthetic session/fake server remains NOT RUN.
+- Full-app E2E NOT RUN; remote Candidate302 HTML remains BLOCKED/NOT_FOUND. No app source changed; DELETE=0.
+- Report: `BATCH6_RUNTIME_LIFECYCLE_REPORT_20261025.md`; probe JSON: `BATCH6_RUNTIME_LIFECYCLE_PROBE_RESULTS.json`; summary: `BATCH6_VALIDATION_SUMMARY.json`.
