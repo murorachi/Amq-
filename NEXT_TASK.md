@@ -123,3 +123,10 @@ Candidate302 remains formal baseline:
 - Verify same selector, cascade order, importance, media/at-rule conditions, dynamic DOM creation and state transitions before deleting. Avoid global player/workspace, multiplayer, quiz and learning-system CSS unless separately proven safe.
 - Regression: JS syntax, CSS parsing, duplicate IDs, exact non-style HTML/script preservation, Chromium computed styles at desktop/tablet/mobile including representative dynamic Home/Song Select nodes.
 - Full-app E2E remains NOT RUN. Candidate HTML remote upload remains BLOCKED until the binary itself and SHA are remotely verified.
+
+## Next: Batch 14 — continue route-scoped Home / Song Select cleanup
+- Latest working candidate: Candidate308, SHA-256 `89e7829e8228e3b4ed1061657e6c2f7245496e4dd6e158344a6c6c76518b4d67` (1,665,019 bytes). Formal baseline remains Candidate302.
+- Do not repeat whole-file selector counts. Inspect remaining legacy Home and Song Select style blocks for exact unreferenced selector branches and superseded same-condition declarations.
+- Verify every candidate against HTML tokens and all inline JS, including dynamic class/ID creation. Keep shared/global, quiz relationCanvas, multiplayer, learning-system, and uncertain workspace selectors untouched.
+- Batch confirmed deletions; test JS syntax, CSS parsing, duplicate IDs, unchanged scripts/non-style HTML, and computed styles at desktop/tablet/mobile for Home and Song Select.
+- Full-app E2E remains NOT RUN. Candidate HTML remote upload remains BLOCKED until the binary itself and its SHA are verified remotely.
