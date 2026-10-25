@@ -55,3 +55,10 @@
 - Applied 20 synthetic route/body-class/navigation/resize cycles per script; no net active listener/observer growth was observed in this harness.
 - Manual reinjection added registrations for eight scripts. This is not proof of production route reinjection or a memory leak; these remain integration candidates pending load-topology evidence.
 - Active multiplayer session poll/socket cleanup and full-app E2E remain NOT RUN. Candidate302 unchanged; no deletions.
+
+
+## 2026-10-25 — Batch 7 multiplayer lifecycle and script topology
+- Actual extracted multiplayer UI script tested in Chromium with synthetic session/fake HTTP/fake WebSocket. Classic/team initialization, poll start/stop, team socket closure, and local session release passed; 0 page errors.
+- A heartbeat request continued after route-away while session remained stored. Recorded as a design question, not a confirmed bug.
+- Candidate302 static topology: 70 inline script tags, no duplicate IDs or duplicate non-empty script hashes; eight Batch 6 candidates each appear once.
+- No app source changes/deletions. Full-app E2E NOT RUN; remote HTML remains BLOCKED/NOT_FOUND.
