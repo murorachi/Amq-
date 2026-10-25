@@ -34,3 +34,17 @@ Keep `/mnt/data/index-old.html` unchanged as the baseline copy. If a child candi
 
 ## Historical baseline record (inactive)
 Candidate277 was previously recorded as a working baseline with SHA-256 `b628bfb5b4aec30a34935bcf5aaac095ab405a71ebe482f9a666c2f91a019371`; Candidate276 was recorded with SHA-256 `7a604c1d2d604b928d2ccb51dbb55d58ead2d34f73abfcba27693c794a4ddbd5`. These are historical references only after the user's Candidate295 decision on 2026-10-25. No further recovery search is requested or needed.
+
+
+## Candidate299 第一階段路由驗收候選（2026-10-25）
+
+- 候選檔：`amq_learning_tool_v82_86_10_candidate299_route_acceptance_20261025.html`
+- 版本：`v82.86.10-candidate299-route-acceptance-20261025`
+- 大小：1,719,884 bytes
+- SHA-256：`1e7a37cef7a7d791c5dd40f09c2143b2e507dac76c73951e5060b82f5c44c2e4`
+- 父候選 Candidate298 SHA-256：`5fa8f137c9aa6b3fdaafbadff44fec846673bcc1617ad94b2d6f484e8d74ac4a`
+- 修改：防止延遲安裝重包裝 Song Select guard；攔截路由先關閉首頁覆蓋選單；移除與 `syncWorkspaceVisibility` 競爭的舊 body-class 清除計時器；非 Song Select 的 `vnList` 使用既有 VN 清單 API。
+- PASS：67/67 inline JS syntax；109 CSS blocks／2,808 rules／0 stylesheet-level parse errors；271 unique IDs；Chromium 受控 DOM route matrix 36/36 assertions、0 failures、0 page errors。
+- BLOCKED：直接開啟 HTML 被 Chromium 回報 `ERR_BLOCKED_BY_ADMINISTRATOR`；工作目錄缺少 `data.js`、`emq-data.js`；候選 HTML 的 GitHub 上傳及遠端 SHA 驗證未完成。
+- 狀態：Candidate299 是階段候選，不取代 Candidate295 基準。只有使用者本機配套資料下的路由／返回驗收完成後，才可將第一階段標為完全驗收。
+- 報告：`reports/stage1-candidate299-route-acceptance-20261025/STAGE1_ROUTE_ACCEPTANCE_REPORT_CANDIDATE299_20261025.md`
