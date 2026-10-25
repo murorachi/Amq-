@@ -1,0 +1,24 @@
+{
+  "batch": 5,
+  "baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "bytes": 1720249,
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "static_script_blocks_scanned": 70,
+  "high_priority_lifecycle_scripts": 14,
+  "lifecycle_static_scan": "PASS",
+  "computed_style_probe": {
+    "status": "PASS",
+    "browser": "Chromium",
+    "viewport": "1440x900",
+    "inline_scripts_removed": true,
+    "page_errors": 0,
+    "scope": "Static markup/CSS only; dynamic nodes absent before app initialization are NOT RUN"
+  },
+  "full_app_e2e": "NOT RUN",
+  "runtime_lifecycle_instrumentation": "NOT RUN",
+  "remote_html_hash_verification": "BLOCKED_NOT_FOUND",
+  "application_code_modified": false,
+  "deleted_items": 0
+}
