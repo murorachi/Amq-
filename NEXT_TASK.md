@@ -501,3 +501,8 @@ Candidate302 remains formal baseline:
 - Core regression remains INCOMPLETE: browser interaction BLOCKED; full AMQ/EMQ/MIX, player, custom-list persistence, backup/restore and multiplayer regression NOT RUN on Candidate346.
 - Remaining browser-dependent items are classified in the residue scan. Do not start more cleanup batches unless new high-value, low-risk evidence appears.
 - Prepare the formal release handoff only after resolving the browser validation and remote HTML transfer/readback blockers. If those remain unavailable, deliver Candidate346 as an experimental package with explicit limitations, not as a fully accepted official baseline.
+
+## Release preparation result — 2026-10-26
+- Experimental handoff package created locally: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`; ZIP integrity PASS.
+- Included Candidate346, Candidate345 immediate rollback, Candidate320 checkpoint, cleanup reports, regression matrix, residue scan, and manifest.
+- Stage 4 is still BLOCKED for formal release: full core browser regression remains incomplete and the HTML remote upload/hash readback is not done. Do not promote Candidate346.
