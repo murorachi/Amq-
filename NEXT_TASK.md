@@ -80,3 +80,11 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 5. Exercise Song Select route guards with repeated workspace switching/back navigation and inspect stale DOM/listeners before deciding whether any guard is redundant.
 6. Continue marking browser-only checks NOT RUN or BLOCKED until actual execution evidence exists. Do not delete route guards or Candidate210 behavior based only on names/markers.
 7. Candidate295 supplied HTML remains unchanged at 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. Do not promote to release baseline until core runtime gates pass and the user accepts it.
+
+
+## Stage 4.1 handoff — run Candidate295 local tool v1.1
+1. Use AMQ_Local_Acceptance_Tool_v1_1_Candidate295.html (SHA-256 8272523986420abef4f1820856fc2c81021941d28b67178b3130687e9f5e2b06) or its ZIP package (SHA-256 285dac12c163a55ef1ed08213fc02743d6c4b60d4bfdeea09635aa2f0368bb37).
+2. Select the exact Candidate295 HTML and its matching data.js and emq-data.js; do not mix versions. Export the generated JSON report and preserve the three file hashes.
+3. Inspect actual EMQ ready/count/workCount/getRows and AMQ/EMQ/MIX pool sizes. Treat BLOCKED as unverified, not as failure or success; report unexpected counts and console errors.
+4. Then manually test custom-list create/rename/delete/add/remove/filter/reload and repeat Song Select workspace routing. Do not treat the harness's read-only API checks as CRUD acceptance.
+5. Keep Candidate295 unchanged and do not promote it to formal release until core runtime gates are executed and accepted.
