@@ -47,3 +47,11 @@
 - The recorded SHA-256 remains historical evidence only; it was NOT recomputed in this execution. Do not promote Candidate295, Candidate283, or any reconstructed/indexed excerpt to Candidate277 baseline.
 - Candidate295 HTML and its original smoke/Coverage/recovery attachments were not mounted in this execution environment. No application code, HTML, data, or storage schema was modified. Browser acceptance and single-file build were NOT RUN.
 - Test-oracle work is documented in `reports/stage1-candidate295-baseline-retrieval-20261025/STAGE_1_BASELINE_RETRIEVAL_AND_SAFE_CONTINUATION_20261025.md`.
+
+
+## Stage 2 handoff — uploaded Candidate295 checked (2026-10-25)
+1. Candidate295 `index-old.html` is available locally and byte-verified: 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+2. Do not confuse it with Candidate277. Candidate277 original remains BLOCKED pending raw-byte recovery; do not promote Candidate295 or reconstruct Candidate277 from indexed excerpts.
+3. Candidate295 external data dependencies `data.js` and `emq-data.js` are missing from the current workspace. Recover matching versions before attempting a portable build or data-dependent runtime tests.
+4. Static PASS: 271 unique DOM IDs; 68 inline executable JS blocks pass `node --check`. Browser checks are BLOCKED because both file and local HTTP navigation returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
+5. No app code/data modified. Continue by searching for verified Candidate277 raw bytes and matching data assets. Report: `reports/stage2-candidate295-uploaded-html-audit-20261025/STAGE_2_UPLOADED_CANDIDATE295_STATIC_AND_RUNTIME_GATE_20261025.md`.
