@@ -205,3 +205,10 @@
 - AMQ/EMQ/MIX mode API smoke test passed without JS errors, but formal Song Select UI navigation remains blocked under opaque `about:blank`; do not treat API smoke test as full UI E2E.
 - Main list search/sort, real cover/fallback, actual playback and route-exit reset remain NOT RUN. Candidate114 timers and Candidate158 Observer retained. Candidate321 not promoted; remote HTML hash not verified.
 - Report: `AMQ_BATCH26_ROUND4_CANDIDATE321_REAL_DATA_BROWSER_TEST_20261025.md/.json`.
+
+
+## 2026-10-25 — Candidate324 Song Select initialization race fix
+- Candidate321 test reproduced Candidate210 binding race in 2/4 runs. Candidate324 defers stage observer installation until route-active `apply()`, fixing it in 6/6 repeat tests (180 rows, 180 artwork img nodes, click handler bound, currentSong updated).
+- Actual-data browser tests passed AMQ/EMQ modes, MIX cross-source search, search/sort, 1980s and Movie filters, and route-exit dock layout. Static JS/CSS/ID checks passed.
+- Real cover download/fallback remains BLOCKED/NOT VERIFIED due external DNS; real audio/video playback and persistent storage NOT RUN. Candidate114 timers and Candidate158 observer unchanged. Candidate324 not promoted; remote HTML SHA-256 NOT VERIFIED.
+- Report: `AMQ_BATCH26_ROUND4_CANDIDATE324_INIT_RACE_ACCEPTANCE_20261025.md/.json`.
