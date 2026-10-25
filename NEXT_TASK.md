@@ -55,3 +55,9 @@
 3. Candidate295 external data dependencies `data.js` and `emq-data.js` are missing from the current workspace. Recover matching versions before attempting a portable build or data-dependent runtime tests.
 4. Static PASS: 271 unique DOM IDs; 68 inline executable JS blocks pass `node --check`. Browser checks are BLOCKED because both file and local HTTP navigation returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
 5. No app code/data modified. Continue by searching for verified Candidate277 raw bytes and matching data assets. Report: `reports/stage2-candidate295-uploaded-html-audit-20261025/STAGE_2_UPLOADED_CANDIDATE295_STATIC_AND_RUNTIME_GATE_20261025.md`.
+
+
+## Stage 2 recovery follow-up (2026-10-25)
+- Re-searched Library for the exact Candidate277 filename: two indexed records report 9,373,238 bytes, but raw-byte materialization of both failed with `This Project file does not have an authorized raw-byte materialization path`.
+- Found indexed `Coverage-20261025T094140.json` (10,050,921 bytes); its raw-byte materialization failed with the same blocker. Data files described inside the handoff/coverage records are not locally recovered or hash-reverified in this stage.
+- Candidate277 remains BLOCKED for raw-byte SHA verification. Search/index presence is not proof of byte recovery. No application files were changed.
