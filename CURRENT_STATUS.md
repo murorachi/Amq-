@@ -142,3 +142,15 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 68/68; CSS parser 0 errors; duplicate IDs 0; script contents and non-style HTML unchanged; Chromium computed-style regression 6/6 with zero differences, including representative synthetic dynamic Home/Song Select nodes.
 - Full-app E2E NOT RUN. Candidate307 HTML remote upload BLOCKED; report, summary and manifest summary published and pending read-back verification. Formal baseline remains Candidate302.
 - Report: `BATCH12_HOME_SONGSELECT_CSS_CONSOLIDATION_REPORT_20261025.md`; summary: `BATCH12_VALIDATION_SUMMARY.json`.
+
+## Batch 12 — Home / Song Select CSS consolidation (2026-10-25)
+- Candidate307 created from Candidate306: 1,665,250 bytes; SHA-256 `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`.
+- Removed 9 provably superseded CSS rules / 23 declarations across three style blocks; file reduced 2,030 bytes.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; scripts and non-style HTML unchanged; computed-style regression 6/6 with zero diffs.
+- Full-app E2E NOT RUN; HTML remote upload BLOCKED. Candidate307 not promoted.
+
+## Batch 13 — Home mobile orphan CSS cleanup (2026-10-25)
+- Candidate308 created from Candidate307: 1,665,019 bytes; SHA-256 `89e7829e8228e3b4ed1061657e6c2f7245496e4dd6e158344a6c6c76518b4d67`.
+- Removed 7 old mobile rules for `.heroMain`, `.heroMain h2`, `.daily`; 10 declarations, 231 bytes removed.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; scripts/non-style HTML unchanged; computed-style regression 6/6 zero diffs.
+- Full-app E2E NOT RUN; HTML remote upload BLOCKED. Candidate308 not promoted. Formal baseline remains Candidate302.
