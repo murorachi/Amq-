@@ -110,3 +110,12 @@
 - Tests: PASS for file identity recheck; prior 68/68 inline JS syntax and 271 unique DOM IDs remain static PASS evidence. Browser behavior and data-dependent checks remain NOT RUN/BLOCKED.
 - Detailed report: `reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md`.
 - Baseline note: Candidate295 remains a validation target only. The existing Candidate277 working-baseline record is unchanged; do not conflate the two.
+
+
+## Stage 5.1 — Targeted dependency findings (2026-10-25)
+- Route chain is at least three wrappers: earlier Song Select guard (~7373), generic workspace/body-class guard (~10594–10607), and final Song Select guard (~11650). Static install-order inference: final → generic → earlier guard → base showView. No deletion authorized; three responsibilities differ.
+- AMQ custom lists have a canonical recovery-aware store at ~3543 and membership adapter at ~3579. Several consumers retain direct localStorage fallback reads for `aniCustomPracticeListsV1`; these are integration candidates, not confirmed dead code.
+- EMQ lists use a distinct schema/key (`aniEmqWorkListsV8254`, `workIds/vndbIds/songIds`) from AMQ lists (`aniCustomPracticeListsV1`, `animeIds`). Do not merge schemas without an adapter and migration evidence.
+- Quiz detail history (`aniQuizHistory_v1`), history summary (`aniQuizHistorySummaryV1`) and target summary (`aniQuizTargetSummaryV1`) have distinct purposes/schemas. Similar save flows alone do not prove redundancy.
+- Application source unchanged. No deletions. Browser routing, CRUD/reload, persistence and EMQ decode remain NOT RUN/BLOCKED.
+- Updated report: `reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md`.
