@@ -184,3 +184,10 @@
 - Counts: 65 executable inline scripts; 109 styles; 2,648 CSS rules / 9,693 declarations; 0 CSS parse errors; 269 IDs / 0 duplicate IDs; 342 repeated selector strings; 54 observer constructors; 474 addEventListener / 4 removeEventListener; 134 setTimeout / 10 setInterval / 32 requestAnimationFrame.
 - No source changes and no new direct deletions approved. Static counts alone are not dead-code proof. CSS/ID/hash checks PASS; JS syntax PASS carried forward from handoff and not rerun; Chromium/full E2E NOT RUN.
 - Next: trace Song Select DOM/property ownership and timer/observer lifecycle, then batch only evidence-backed integrations/deletions.
+
+
+## 2026-10-25 — Batch26 Round 2 Candidate321 grouped cleanup
+- Produced local Candidate321 from verified Candidate320. Candidate321: 1,645,516 bytes; SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`. Candidate320 unchanged; Candidate302 remains formal baseline.
+- Dependency ownership map covers Candidate103/106/114/115/137/158/210. Two grouped changes: remove redundant/conflicting Candidate106 catalog overflow assignments; scope Candidate115 generic artwork/selection behavior away from main tracklist owned by Candidate137/210.
+- Tests: JS syntax 65/65 PASS; CSS parsing 109 blocks, 2,648 rules, 9,693 declarations, 0 errors PASS; duplicate IDs 269/0 PASS; targeted assertions PASS. Chromium BLOCKED after 30s timeout; full-app E2E NOT RUN.
+- Added detailed report and JSON summary. Candidate321 HTML remote upload/hash NOT VERIFIED; no promotion.
