@@ -1,6 +1,7 @@
 # CURRENT_STATUS.md
 
 Updated: 2026-10-25
+Stage: Batch 3 route/storage isolated verification complete; full-app runtime verification remains open.
 Stage: Batch 2 dependency trace complete; runtime verification and cleanup remain in progress.
 Stage: Batch 1 — Candidate302 feature inventory (static evidence).
 State: **Candidate302 is the formal baseline. Batch 1 has produced a first evidence-backed inventory; the six-goal cleanup is not complete.**
@@ -50,3 +51,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - No application source changes/deletions; DELETE=0.
 - NOT RUN: browser route/workspace E2E, computed-style verification, runtime lifecycle instrumentation, synthetic custom-list CRUD/import/export/backup/restore.
 - BLOCKED: Candidate302 HTML artifact still NOT_FOUND; remote hash not verified.
+
+
+## Batch 3 results
+- Route isolated Chromium harness: 14/14 PASS, 0 page errors; uses Candidate302 scripts 3/62/70 with stubbed dependencies, not full app E2E.
+- Storage repository isolated Chromium harness: 6/6 PASS, 0 page errors; synthetic in-memory storage only, no user data.
+- Confirmed Song Select guard interception bypasses core navigation event and generic standalone class wrapper.
+- Confirmed malformed/non-allowlisted legacy import refusal, source-key preservation and transaction rollback after injected write failure.
+- No application source changes/deletions; DELETE=0.
+- Full AMQ/EMQ/MIX E2E, observer/timer runtime instrumentation and computed-style tests NOT RUN.
+- Candidate302 HTML remote artifact remains NOT_FOUND; remote SHA-256 verification BLOCKED.
