@@ -122,3 +122,48 @@ Song Select 工作區、路由、歌曲列、搜尋/選取；自訂清單 CRUD�
 - 整合候選：直接讀取 AMQ 清單 localStorage 的 fallback；三層路由 wrapper 的責任邊界；摘要初始化時重複掃描詳細歷史的成本。
 - 刪除：本輪仍無足夠證據安全刪除任何項目。
 - NOT RUN/BLOCKED：實際路由切換、清單 CRUD/重新載入、摘要持久化、EMQ 資料解碼與瀏覽器操作。
+
+
+## 11. 第三輪 source-order audit：補充可用於最小修改的證據
+
+### 11.1 導覽包裝實際順序已可從靜態原始碼建立
+
+檔案執行順序的可見證據：
+1. 約第 7373 行：第一個 Song Select route guard 捕捉當時的 `window.__aniNavigateApp`，在 Song Select route active 時攔截 watchlist/practice/explore/learningPlan/dashboard/vnList，並改呼叫 `__amqWorkspaceContentOpen`。
+2. 約第 10594 行：generic workspace guard 捕捉當時已包裝的 navigator，成功安裝後標記 `guardedNavigate.__amqWorkspaceGuarded=true`。它在呼叫內層後更新 body class；dashboard 特別移除 `amq-standalone-route`，其他目的地加上該 class 並移除 `amq-workspace-active`。安裝流程還會在 0ms、80ms 重試。
+3. 約第 11650 行：final guard 再捕捉目前 navigator。Song Select route active 時，對同一組目的地執行工作區面板攔截；未攔截時先關閉首頁選單，再呼叫內層 navigator。
+
+因此靜態包裝順序為 final guard → generic workspace guard → first Song Select guard → 原始導覽。兩個 Song Select guard 的目的地集合目前看起來相同，但它們處於包裝鏈的不同層，且 generic guard另有 body-class 責任。這是**重複攔截候選**，尚不能直接移除任一 guard；需先確認事件派發、返回路由、首頁選單副作用及重複安裝的真實行為。
+
+### 11.2 AMQ 自訂清單直接 localStorage fallback 的範圍已縮小
+
+靜態命中顯示 AMQ 清單 key `aniCustomPracticeListsV1` 仍被多個消費端直接讀取：
+- 約第 2359 行：播放器 dock 的 custom-list 播放模式，先讀正式 store，缺失時直接解析 localStorage。
+- 約第 4983 行：學習/練習入口的 `readCustomLists()`，先讀正式 store，缺失時呼叫 `readJson(KEY,...)`。
+- 約第 7410 行：Song Select 自訂清單工作流的 `read()`，先讀正式 store，缺失時直接解析 localStorage。
+- 約第 11492 行：dock 新版模式選單填充清單選項，先讀正式 store，缺失時直接解析 localStorage。
+- 約第 823 行附近的完整備份匯出/匯入明確列入 AMQ 清單 key；這是備份格式支援，不應視為重複業務 store。
+
+正式 store 在約第 3543 行建立。上述讀取函式雖在源碼較早處定義，但其主要使用入口是事件回呼；「store 通常會先於使用者操作完成初始化」是合理推論，不是瀏覽器實測。故可列為**低風險整合候選，但仍需驗證初始化及 restore/import 路徑**。備份匯入/匯出對 localStorage 的直接操作屬資料交換責任，不能單純改成 store.read() 取代。
+
+### 11.3 歷史資料流：可確認單次紀錄同時更新三種不同資料
+
+- 啟動時先讀 `aniQuizHistory_v1` 詳細紀錄。
+- `saveQuizHistoryV51(entry)` 將詳細紀錄寫回該 key，並呼叫 `addQuizHistorySummaryEntryV1(entry)` 及 `addQuizTargetSummaryEntryV80(entry)`。
+- 兩個摘要的更新都以自己的 processed IDs 做去重，並各自排程保存；詳細紀錄上限為 2,000 筆。
+- 初始化函式也會從詳細紀錄補建/同步摘要，因此可能有啟動時掃描成本；但這同時是遷移/復原能力，不能直接刪除。
+- 決策：保留資料模型及資料恢復路徑。下一步可以檢查初始化是否在每次啟動都掃描完整 2,000 筆，以及兩摘要的初始化是否有可共享的單次讀取快照；這種效能整合不得改變摘要 schema 或 processed-ID 去重語意。
+
+### 11.4 可進入候選修改設計、但本輪仍不改應用程式碼
+
+1. 先在單一路由入口保留三種明確責任：Song Select 面板目的地攔截、通用 body-class 同步、離開首頁時關閉首頁選單。測試表先列出六個目的地及非面板路由。
+2. 將四個 AMQ 清單讀取 fallback 先改成一個共用 reader/API 的設計候選；備份匯入/匯出維持對持久化格式的明確存取。
+3. 研究摘要初始化能否共用一次排序後的詳細紀錄快照；先測試歷史為空、摘要缺失、摘要有效但落後、無效摘要已隔離、去重邊界五種資料狀態。
+4. 在這三項設計完成依賴表與回歸案例前，不提交應用程式碼修改。
+
+## 12. 本輪重新核對的靜態指標
+
+- Candidate295 檔案仍為 1,720,917 bytes，SHA-256 仍為 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`。
+- 字串命中次數（文字搜尋，非呼叫次數）：`__aniNavigateApp` 49；`aniCustomPracticeListsV1` 10；`__aniCustomListsStoreV1` 7；`aniQuizHistory_v1` 13；`aniQuizHistorySummaryV1` 8；`aniQuizTargetSummaryV1` 8。
+- HTML 有 70 個 script 開啟標籤及 109 個 style 開啟標籤。這些計數只是盤點指標，不代表所有 script/style 都是獨立有效模組。
+- 本輪沒有更動 Candidate295 HTML/CSS/JS，未刪除任何符號。
