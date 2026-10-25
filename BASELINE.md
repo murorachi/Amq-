@@ -69,3 +69,10 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 ## Stage 4.2 note — symbol-aware acceptance harness
 - A separate read-only diagnostic harness v1.2 was created from the user's runtime symbol inventory. Tool SHA-256 f42dde260c25215fb93b21b76806ed1457edb1fce0b2e861b476777181f811b4; ZIP SHA-256 db88b70fabd226bf4998215f3a1e8c6a6b9313c7466808400e66f88c2f4de19c.
 - It checks symbol presence only; it does not call quiz, blacklist, watchlist, list mutation, or workspace-switch functions. Candidate295 remains unpromoted; app source and baseline snapshots are unchanged.
+
+
+## Stage 5 clarification — feature inventory does not promote Candidate295 (2026-10-25)
+- Candidate295 was used only as the available static analysis target for the feature/dependency inventory; file identity remains 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+- This inventory does not change the recorded Candidate277 working-baseline decision and does not establish Candidate295 as the formal release baseline.
+- No application HTML/CSS/JS or storage schema was modified. No cleanup deletions were made.
+- Song Select's two route wrappers remain an integration candidate, not confirmed dead code. Candidate210 behavior remains protected pending call-path/runtime evidence.
