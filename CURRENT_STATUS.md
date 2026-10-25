@@ -333,3 +333,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - 嘗試 localhost 與 file URL 導航均被瀏覽器政策阻擋 `ERR_BLOCKED_BY_ADMINISTRATOR`，因此無法在本環境完成可信 origin 測試。
 - 本輪無應用程式碼修改。Candidate326 不升格；Candidate320 rollback、Candidate302 formal baseline 不變。
 - 報告：`AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`。
+
+
+## Batch30 — Candidate327 orphan CSS selector cleanup (2026-10-25)
+- Candidate327: 1,644,791 bytes; SHA-256 `3e117b68a3fa1f4a57c7ef010477ee18dc12d1327f174765dd44d05f324cb302`; derived from Candidate326 SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`.
+- Removed 18 unreferenced CSS selector branches and 2 resulting-empty rules; 994 bytes removed. JavaScript and markup unchanged.
+- PASS: JS syntax 65/65, CSS parse 0 errors, 269 unique IDs, static computed style 3/3 viewports with zero differences.
+- Full E2E, real media, external cover/fallback, native storage: NOT RUN, deferred to user local test. Candidate327 not promoted; Candidate302 baseline and Candidate320 rollback unchanged. HTML upload/hash NOT VERIFIED.
+- Summary: `AMQ_BATCH30_CANDIDATE327_GITHUB_SUMMARY_20261025.md`.
