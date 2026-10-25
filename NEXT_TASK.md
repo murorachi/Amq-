@@ -280,3 +280,12 @@ Candidate302 remains formal baseline:
 5. Next grouped cleanup target after Song Select acceptance: Workspace shell/frame/actions/custom-list workflow (Candidate76/77/82/227, Prototype 15/16, Candidate258). Build unique DOM/class/API owner map before deletion.
 6. Candidate114 timers and Candidate158 observer scope remain unchanged. Do not remove storage/recovery paths or merge AMQ/EMQ schemas without data-flow proof.
 7. Candidate325/326 HTML remote upload and SHA read-back remain BLOCKED by the available connector's lack of direct local-file upload. Reports/docs are committed; do not claim HTML upload succeeded.
+
+
+## Batch29 supplement — Candidate326 visible UI path confirmed (2026-10-25)
+1. Visible UI entry is now PASS in the isolated browser copy: click `#amqMainIcon`, then visible `#amqHomePrimaryNav [data-home-action="catalog"]`; do not continue to describe this exact path as BLOCKED.
+2. Visible `#c99Back` return-to-home path also PASS: route class removed and home player slot returns to 46px.
+3. Still highest priority: obtain a trusted browser origin where external DNS/media is available and native localStorage persists. Current test environment blocks both localhost and file URLs; ANN/VNDB requests fail DNS.
+4. Recheck cover fallback visual state, actual audio/video playback and persistence across reload. These remain BLOCKED, not PASS.
+5. Do not proceed to Candidate114 timer reduction or Candidate158 observer narrowing until media/cover/storage regression is validated. Workspace ownership mapping can be prepared without changing code, but no Workspace cleanup batch should be promoted ahead of this acceptance.
+6. Candidate326 remains unpromoted. Candidate302 formal baseline and Candidate320 rollback unchanged. Candidate HTML remote upload/hash verification remains BLOCKED.
