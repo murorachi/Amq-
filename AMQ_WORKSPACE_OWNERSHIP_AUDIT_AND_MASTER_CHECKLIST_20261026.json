@@ -42,6 +42,9 @@
     "browserE2E": "NOT RUN",
     "persistence": "NOT RUN",
     "media": "NOT RUN",
-    "githubHtmlUploadAndRemoteHash": "NOT RUN"
+    "githubHtmlUploadAndRemoteHash": "NOT RUN",
+    "node_syntax_65_inline_scripts": "PASS",
+    "id_scan": "PASS_STATIC_729_ATTRIBUTES_708_UNIQUE_16_DUPLICATE_VALUE_KINDS",
+    "browser_e2e": "NOT RUN"
   }
 }
