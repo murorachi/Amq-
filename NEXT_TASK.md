@@ -199,3 +199,10 @@ Candidate302 remains formal baseline:
 - Search for more unreachable target listeners and fallback branches, but only delete after verifying document order and actual event propagation. Mark uncertain dependencies NEEDS CONFIRMATION and continue with other safe items.
 - Test actual affected scripts in isolated Chromium, JS syntax, CSS parse, duplicate IDs and desktop/tablet/mobile layout. Full-app audio/storage/CRUD/AMQ/EMQ/MIX/multiplayer E2E remains NOT RUN unless executed.
 - Update all docs and publish reports/manifests/tests/summaries. Do not claim Candidate HTML remote upload/hash without verification.
+
+
+## Next: Batch 26 — continue runtime cleanup from Candidate320
+- Verify local Candidate320 hash before edits; Candidate302 remains formal baseline.
+- Continue route/layout owner and lifecycle cleanup, prioritize proven dead observers/listeners and duplicate initializers. Keep Candidate103/114 remaining behavior unless ownership is proven redundant.
+- Run JS syntax, CSS parsing, duplicate-ID and affected-script Chromium checks. Full-app E2E remains NOT RUN unless actually executed.
+- Report skipped/error items explicitly; do not claim HTML upload or remote SHA verification unless confirmed.
