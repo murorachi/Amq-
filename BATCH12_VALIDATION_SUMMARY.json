@@ -1,0 +1,34 @@
+{
+  "batch": 12,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "candidate": {
+    "file": "amq_learning_tool_v82_86_18_candidate307_home_songselect_css_consolidation_20261025.html",
+    "bytes": 1665250,
+    "sha256": "f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6"
+  },
+  "source": {
+    "file": "amq_learning_tool_v82_86_17_candidate306_home_songselect_orphan_css_cleanup_20261025.html",
+    "bytes": 1667280,
+    "sha256": "ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e"
+  },
+  "changes": {
+    "bytes_removed": 2030,
+    "css_rules_removed": 9,
+    "css_declarations_removed": 23,
+    "style_blocks_touched": 3
+  },
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "script_contents_unchanged": "PASS",
+    "non_style_html_exactly_unchanged": "PASS",
+    "computed_style_regression": "PASS 6/6, zero differences; synthetic dynamic nodes included",
+    "full_app_e2e": "NOT RUN",
+    "github_candidate_html": "BLOCKED"
+  },
+  "formal_baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  }
+}
