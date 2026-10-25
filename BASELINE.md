@@ -370,3 +370,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate344: `amq_learning_tool_v82_86_55_candidate344_batch48_remove_dead_quiz_evaluator_20261026.html`, 1,625,750 bytes; SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`.
 - Change: removed the unreferenced `clean` / `aliasesForCurrent` / `evaluate` local helper chain from `v37-answer-and-layout-fixes`; Enter submission and suggestion handlers remain.
 - Rollback to Candidate343 SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`. Candidate302 and Candidate320 remain unchanged.
+
+
+## 2026-10-26 experimental cleanup checkpoint — Candidate345
+- Candidate302 remains formal baseline; Candidate345 is not promoted.
+- Candidate345: `amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html`, 1,625,630 bytes; SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
+- Change: removed three unreferenced local DOM bindings from Quiz scripts; necessary handlers and storage path retained.
+- Rollback to Candidate344 SHA-256 `cf3860059b7987838cf0a61b63e943cd480202a01790f556794b62cac05dc1ac`. Candidate302 and Candidate320 unchanged.
