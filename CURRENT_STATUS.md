@@ -271,3 +271,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Tests: 65 inline JS scripts syntax PASS; 109 CSS blocks / 2,648 rules / 9,693 declarations / 0 parser errors PASS; 269 HTML IDs / 0 duplicates PASS; diff-scope assertions PASS. Chromium BLOCKED (headless timeout 30s, empty DOM dump). Full-app E2E NOT RUN.
 - Added `AMQ_BATCH26_ROUND2_DEPENDENCY_CLEANUP_CANDIDATE321_20261025.md/.json` to GitHub. Candidate321 HTML remote upload/hash NOT VERIFIED.
 - Candidate321 not promoted. Candidate320 remains rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+
+
+## Batch26 Round 3 — Candidate321 browser validation (2026-10-25)
+- Candidate321 unchanged: 1,645,516 bytes, SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`; not promoted. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+- Playwright/Chromium launched successfully. Isolated Chromium harness using Candidate106/114/115/137/158 scripts passed synthetic AMQ (3 rows), EMQ (3), MIX (6), search, name sort, artwork placeholder ownership, desktop overflow visible, and route-exit player reset. Zero harness page/console errors.
+- Full-app E2E BLOCKED: browser policy blocks `file://` and localhost navigation; full HTML `set_content` lacks `data.js` and `emq-data.js`, which are absent from the current branch (404). Opaque document origin also blocks localStorage. Real cover loading/fallback and real audio playback NOT RUN.
+- Candidate114 delayed resets and Candidate158 subtree Observer retained pending full-app evidence. Candidate321 HTML remote upload/hash NOT VERIFIED; no promotion.
+- Report: `AMQ_BATCH26_ROUND3_CANDIDATE321_BROWSER_VALIDATION_20261025.md/.json`.
