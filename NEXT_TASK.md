@@ -116,3 +116,10 @@ Candidate302 remains formal baseline:
 - Preserve uncertain selectors and unrelated multiplayer/learning-system styles. Remove only high-confidence branches in one candidate.
 - Regression: JS syntax, CSS parsing, duplicate IDs, non-style HTML unchanged, and Chromium computed styles at desktop/tablet/mobile for Home/Song Select and relevant static workspace/player elements.
 - Full-app E2E remains NOT RUN unless the required data assets/runtime can be supplied by the existing environment. Candidate HTML remote upload remains BLOCKED until the binary itself and its SHA can be verified remotely.
+
+## Next: Batch 13 — remaining Home / Song Select cascade cleanup
+- Working parent: Candidate307 (SHA-256 `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`); formal baseline remains Candidate302.
+- Do not repeat whole-file selector counts. Continue with same-selector duplicates in Home/Song Select, then historical route-specific style blocks whose class/ID tokens have no markup or script creator evidence.
+- Verify same selector, cascade order, importance, media/at-rule conditions, dynamic DOM creation and state transitions before deleting. Avoid global player/workspace, multiplayer, quiz and learning-system CSS unless separately proven safe.
+- Regression: JS syntax, CSS parsing, duplicate IDs, exact non-style HTML/script preservation, Chromium computed styles at desktop/tablet/mobile including representative dynamic Home/Song Select nodes.
+- Full-app E2E remains NOT RUN. Candidate HTML remote upload remains BLOCKED until the binary itself and SHA are remotely verified.
