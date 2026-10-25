@@ -126,3 +126,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JavaScript syntax 66/66; CSS parse errors 0; duplicate IDs 0; non-style HTML and all 69 script contents unchanged; Chromium computed-style comparison 6/6 (home + Song Select at 1440x900, 768x1024, 390x844; 412 static elements/scenario; zero differences).
 - Full-app E2E and dynamic-DOM visual acceptance NOT RUN. Candidate305 remote HTML upload BLOCKED; do not claim remote HTML SHA verification. Formal baseline remains Candidate302.
 - Report: `BATCH10_HOME_SONGSELECT_CSS_CLEANUP_REPORT_20261025.md`; summary: `BATCH10_VALIDATION_SUMMARY.json`; detailed local deletion manifest: `BATCH10_CSS_REMOVAL_MANIFEST.json`.
+
+## Batch 11 — Home / Song Select orphan CSS cleanup (2026-10-25)
+- Verified Candidate305 source SHA-256: `3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`.
+- Created unpromoted Candidate306: `amq_learning_tool_v82_86_17_candidate306_home_songselect_orphan_css_cleanup_20261025.html`, 1,667,280 bytes; SHA-256 `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`.
+- Removed 31 orphan selector branches (124 declarations; 3,653 bytes) from four CSS blocks: v79 design system legacy Home classes, v82-44 and v82-45 Home overrides, and Candidate99's unused dashboard modal.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; all 69 script tag contents unchanged; non-style HTML byte-identical; Chromium computed-style regression 6/6 with zero diffs across Home/Song Select at desktop/tablet/mobile.
+- Full-app E2E NOT RUN. Candidate306 HTML remote upload BLOCKED; report/summary/manifest summary are published. Formal baseline remains Candidate302.
+- Report: `BATCH11_HOME_SONGSELECT_ORPHAN_CSS_CLEANUP_REPORT_20261025.md`; summary: `BATCH11_VALIDATION_SUMMARY.json`.
