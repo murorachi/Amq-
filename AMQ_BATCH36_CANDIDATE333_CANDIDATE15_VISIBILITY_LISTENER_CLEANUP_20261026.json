@@ -1,0 +1,31 @@
+{
+  "batch": 36,
+  "candidate": "Candidate333",
+  "parent": "Candidate332",
+  "parent_sha256": "dd4b9ca46fe3303232f8f455e1461c3e638fc339fa7440819d55df86a737f10d",
+  "candidate_file": "amq_learning_tool_v82_86_44_candidate333_candidate15_visibility_listener_cleanup_20261026.html",
+  "candidate_sha256": "56308f2c168c8344281ee75e23ce4a87c6a927aa56367448f0140206b81b247d",
+  "parent_bytes": 1631927,
+  "candidate_bytes": 1631769,
+  "delta_bytes": -158,
+  "changed_script": "amq-workspace-prototype-15-script",
+  "changes": [
+    "Removed Candidate15 hashchange listener",
+    "Removed Candidate15 popstate listener",
+    "Removed unused observer variable and unused return value"
+  ],
+  "tests": {
+    "inline_script_syntax": "PASS: 65 checked, 0 errors; one application/json script skipped",
+    "visibility_invariants": "PASS",
+    "Candidate76_77_82_unchanged": "PASS",
+    "ids_and_styles": "PASS: 731 id attributes, 16 duplicate kinds/20 extra; 109 style blocks unchanged from parent",
+    "browser_e2e": "NOT RUN",
+    "custom_list_persistence": "NOT RUN",
+    "media_playback": "NOT RUN",
+    "github_html_upload_remote_hash": "NOT RUN"
+  },
+  "status": "experimental-not-promoted",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "next_task": "Audit Candidate15 MutationObserver mutation sources and whether observer scope can be narrowed; preserve childList while VN views are dynamically created."
+}
