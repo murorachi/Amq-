@@ -99,3 +99,14 @@
 - Tool HTML: 22,781 bytes; SHA-256 f42dde260c25215fb93b21b76806ed1457edb1fce0b2e861b476777181f811b4. ZIP: 11,286 bytes; SHA-256 db88b70fabd226bf4998215f3a1e8c6a6b9313c7466808400e66f88c2f4de19c.
 - PASS: Node.js syntax check and ZIP integrity. NOT RUN: actual browser execution against matching Candidate295/data.js/emq-data.js, interactive routing, quiz persistence, audio recovery and CRUD.
 - Symbol presence is not behavioral acceptance; BLOCKED may reflect scope visibility limits. No application source was modified. Report: reports/stage4-2-local-acceptance-tool-v12-symbol-audit-20261025/STAGE_4_2_LOCAL_ACCEPTANCE_TOOL_V12_SYMBOL_AUDIT_20261025.md.
+
+
+## Stage 5 — Candidate295 feature/dependency inventory (2026-10-25)
+- Confirmed feature baseline for the next cleanup phase: (A) data core, (B) AMQ/EMQ/MIX gameplay core, (C) Song Select/custom lists/workspace routing, (D) quiz history/target summaries and persistence.
+- Static source evidence: Candidate295 `index-old.html` is 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`; embedded version `v82.86.06-candidate295-db-extraction-20261025`.
+- Identified overlapping Song Select route wrappers at approximately lines 7,374–7,375 and 11,650–11,653. Treat as integration candidate only; no guard deletion until call order and runtime routing are verified.
+- The Candidate210 initialization guard protects active workspace/song-row/batch-list behavior; its old version marker is not deletion evidence.
+- Decision: no application code changed and no symbols deleted. Keep required capabilities; continue mapping direct/indirect references and storage/event/init paths before any cleanup.
+- Tests: PASS for file identity recheck; prior 68/68 inline JS syntax and 271 unique DOM IDs remain static PASS evidence. Browser behavior and data-dependent checks remain NOT RUN/BLOCKED.
+- Detailed report: `reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md`.
+- Baseline note: Candidate295 remains a validation target only. The existing Candidate277 working-baseline record is unchanged; do not conflate the two.
