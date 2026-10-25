@@ -83,7 +83,7 @@ Candidate320 scan recorded 65 executable inline scripts, 109 style blocks, 2,648
 - PASS: static route mapping for all nine workspaceViews entries.
 - PASS: Candidate82 capture ownership covers Candidate15 dashboard/practice fallback actions.
 - PASS: Candidate76/77 distinct geometry/state responsibilities identified; shared sidebar aria-hidden writes recorded.
-- NOT RUN: browser E2E, Candidate76/77 state-order transitions, persistence, real media, multiplayer E2E, Candidate334 HTML upload/hash.
+- PASS: Node `--check` executed against 65 executable inline scripts; 0 syntax errors. One application/json data script was excluded from JS syntax checks. Static ID scan: 729 id attributes, 708 unique values, 16 duplicate-ID value kinds (pre-existing in candidate; not changed).\n- NOT RUN: browser E2E, Candidate76/77 state-order transitions, persistence, real media, multiplayer E2E, Candidate334 HTML upload/hash.
 - Unresolved: explore visual workspace state; sidebar aria-hidden timing; persistence/media behavior.
 
 ## Rollback
