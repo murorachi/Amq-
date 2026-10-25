@@ -1,0 +1,114 @@
+{
+  "artifact": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "size_bytes": 1625225,
+  "sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "scan_kind": "bounded final high-risk residue scan using existing Batch41-50 evidence and current source checks",
+  "items": [
+    {
+      "item": "Candidate186 cover recovery / orphan helper",
+      "classification": "DELETE",
+      "status": "DONE",
+      "evidence": "Recovery path and observer removed in prior batches; Batch47 removed leftover helper. Modal backdrop/Escape handlers remain.",
+      "remaining_risk": "Browser behavior not tested."
+    },
+    {
+      "item": "Quiz evaluator helper chain",
+      "classification": "DELETE",
+      "status": "DONE",
+      "evidence": "evaluate had declaration-only occurrence; helper dependencies existed only inside that chain. Quiz submit bridge remains.",
+      "remaining_risk": "Browser behavior not tested."
+    },
+    {
+      "item": "v36/v39/v40 Quiz local bindings",
+      "classification": "DELETE",
+      "status": "DONE",
+      "evidence": "Three bindings each had declaration-only occurrence; neighboring handlers preserved.",
+      "remaining_risk": "Browser behavior not tested."
+    },
+    {
+      "item": "v60 and learning-system v72 local helpers/constants",
+      "classification": "DELETE",
+      "status": "DONE",
+      "evidence": "Five identifiers had declaration-only occurrences; zero remaining references after removal.",
+      "remaining_risk": "Full regression not run."
+    },
+    {
+      "item": "Workspace sidebar state/geometry and [data-ws] owner",
+      "classification": "INTEGRATE",
+      "status": "STATIC CONSOLIDATION DONE; RUNTIME ACCEPTANCE OPEN",
+      "evidence": "Candidate340/341 unified static ownership.",
+      "remaining_risk": "Actual click/ESC/resize/Song Select transitions blocked."
+    },
+    {
+      "item": "Base navigation and Candidate193 route guard",
+      "classification": "KEEP / INTEGRATE LATER",
+      "status": "NOT DELETED",
+      "evidence": "Distinct side effects: standalone-route state, Song Select panel interception, VNDB list opening, base navigation.",
+      "remaining_risk": "Do not delete blindly."
+    },
+    {
+      "item": "Candidate94 membership filter",
+      "classification": "KEEP",
+      "status": "PRESERVED",
+      "evidence": "#grid .card.amqListNotMember85 remains.",
+      "remaining_risk": "No risk identified by this static scan."
+    },
+    {
+      "item": "Candidate186 modal backdrop/Escape handlers",
+      "classification": "KEEP",
+      "status": "PRESERVED",
+      "evidence": "Both handlers remain.",
+      "remaining_risk": "Browser behavior not tested."
+    },
+    {
+      "item": "C103 audio controls and layout geometry",
+      "classification": "NEEDS CONFIRMATION",
+      "status": "DEFERRED",
+      "evidence": "Requires runtime/computed-style evidence.",
+      "remaining_risk": "Player/layout regression if removed blindly."
+    },
+    {
+      "item": "v47 .hero.view-home display rules",
+      "classification": "NEEDS CONFIRMATION",
+      "status": "DEFERRED",
+      "evidence": "Requires route/media computed-style evidence.",
+      "remaining_risk": "Homepage visibility regression."
+    },
+    {
+      "item": "Candidate72 #homeMenu #amqMainIcon inline styles",
+      "classification": "NEEDS CONFIRMATION",
+      "status": "DEFERRED",
+      "evidence": "Runtime resize styling requires computed-style comparison.",
+      "remaining_risk": "Responsive home icon regression."
+    },
+    {
+      "item": "v33 showToast reference",
+      "classification": "NEEDS CONFIRMATION",
+      "status": "DEFERRED",
+      "evidence": "Bare binding/global availability is not proven by window-level toast fallbacks.",
+      "remaining_risk": "Status-action feedback regression."
+    },
+    {
+      "item": "v82-45 amqHomeIconOnly selector candidate",
+      "classification": "NO CURRENT ITEM",
+      "status": "NOT APPLICABLE",
+      "evidence": "Exact string has zero occurrences in Candidate346.",
+      "remaining_risk": "Re-open only if a concrete current selector or node is identified."
+    },
+    {
+      "item": "Candidate84 dock/sidebar CSS",
+      "classification": "NEEDS CONFIRMATION",
+      "status": "PARTIAL",
+      "evidence": "Runtime ownership statically consolidated; selector dependencies not fully proven.",
+      "remaining_risk": "Visual regression cannot be ruled out without computed style/browser evidence."
+    }
+  ],
+  "stage3_assessment": "CLASSIFIED WITH KNOWN LIMITATIONS; browser-dependent items remain explicitly NEEDS CONFIRMATION/BLOCKED",
+  "release_blockers": [
+    "Full core browser regression is not run.",
+    "Workspace interaction is blocked by ERR_BLOCKED_BY_ADMINISTRATOR.",
+    "Candidate346 HTML remote upload and SHA-256 readback are not run."
+  ]
+}
