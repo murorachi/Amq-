@@ -212,3 +212,12 @@
 - Actual-data browser tests passed AMQ/EMQ modes, MIX cross-source search, search/sort, 1980s and Movie filters, and route-exit dock layout. Static JS/CSS/ID checks passed.
 - Real cover download/fallback remains BLOCKED/NOT VERIFIED due external DNS; real audio/video playback and persistent storage NOT RUN. Candidate114 timers and Candidate158 observer unchanged. Candidate324 not promoted; remote HTML SHA-256 NOT VERIFIED.
 - Report: `AMQ_BATCH26_ROUND4_CANDIDATE324_INIT_RACE_ACCEPTANCE_20261025.md/.json`.
+
+
+## 2026-10-25 — Candidate320 全域候選盤點（Round 1）
+- Verified target: Candidate320, 1,645,470 bytes, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`; Candidate302 formal baseline unchanged.
+- Added global candidate report/JSON covering 65 executable inline scripts, 109 CSS blocks, 2,648 CSS rules, 9,693 declarations, 269 IDs, selector repetition, lifecycle call sites, repeated function names, storage/data risks and cross-module ownership.
+- PASS: Node syntax 65/65; CSS parse 0 errors; duplicate HTML IDs 0.
+- No app source changed; direct-delete candidates = 0. Candidate classifications remain evidence-driven, not approved deletions.
+- NOT RUN: full-app browser E2E, persistent storage, actual audio/video playback, external cover load/fallback.
+- Local report: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.md`; JSON: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.json`; GitHub summary: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_GITHUB_SUMMARY_20261025.md`.
