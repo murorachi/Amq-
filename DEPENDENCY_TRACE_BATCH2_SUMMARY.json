@@ -1,0 +1,42 @@
+{
+  "report_version": 1,
+  "date": "2026-10-25",
+  "baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "bytes": 1720249,
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "counts": {
+    "script_tags": 70,
+    "inline_executable_scripts": 67,
+    "external_scripts": 2,
+    "json_payloads": 1,
+    "style_blocks": 109,
+    "storage_keys_static_evidence": 41,
+    "listener_registration_removal_patterns": 383,
+    "custom_event_dispatches": 36,
+    "observer_constructors": 57,
+    "timer_raf_calls": 182,
+    "css_repeated_selectors_batch2_method": 870
+  },
+  "findings": [
+    "Candidate193 final guard intercepts selected destinations while Song Select is active and bypasses core showView/ani-app-navigation on the intercepted path.",
+    "AMQ custom-list canonical writer/store is v82-25-custom-lists-and-practice-hub; compatibility fallback and backup/restore consumers remain.",
+    "AMQ animeIds schema and EMQ workIds/vndbIds/songIds schema are distinct.",
+    "Observer/timer counts are static inventory only and do not prove leaks."
+  ],
+  "tests": {
+    "source_evidence_assertions": "PASS 10/10",
+    "candidate302_static_audit": "PASS",
+    "browser_e2e": "NOT RUN",
+    "runtime_lifecycle": "NOT RUN",
+    "custom_list_backup_restore": "NOT RUN",
+    "remote_candidate302_html": "BLOCKED / NOT_FOUND"
+  },
+  "deletions": 0,
+  "limits": [
+    "Static regex/source analysis; not a complete AST/control-flow graph.",
+    "No browser E2E or runtime lifecycle instrumentation.",
+    "Candidate302 HTML remote artifact and SHA-256 are not verified."
+  ]
+}
