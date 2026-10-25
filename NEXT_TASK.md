@@ -226,3 +226,13 @@ Candidate302 remains formal baseline:
 5. Verify non-main AMQ/EMQ inline-list artwork after Candidate115 selector narrowing.
 6. Do not promote Candidate321 until browser validation and remote artifact SHA-256 verification. Candidate321 HTML is not confirmed uploaded to GitHub.
 7. Update status/baseline/next-task/changelog and tests with explicit PASS/FAIL/NOT RUN/BLOCKED labels.
+
+
+## Next — Batch26 Round 3 validation and lifecycle cleanup
+1. Start from local Candidate321; preserve Candidate320 unchanged as rollback and Candidate302 as formal baseline.
+2. Run real browser acceptance for Song Select AMQ/EMQ/MIX modes, filters/sorting, cover loading/fallback, selected-row playback, route exit and home-player reset. Current Chromium attempt is BLOCKED, not PASS.
+3. If browser acceptance passes, inspect Candidate114 delayed route resets and reduce only after proving later retries add no required repair.
+4. Trace Candidate158 subtree Observer mutations and narrow its target only if mount/catalog clipping remains correct across route and viewport changes.
+5. Verify non-main AMQ/EMQ inline-list artwork after Candidate115 selector narrowing.
+6. Do not promote Candidate321 until browser validation and remote artifact SHA-256 verification. Candidate321 HTML is not confirmed uploaded to GitHub.
+7. Update status/baseline/next-task/changelog and tests with explicit PASS/FAIL/NOT RUN/BLOCKED labels.
