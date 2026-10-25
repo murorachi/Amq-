@@ -100,3 +100,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate307 SHA-256: `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`, 1,665,250 bytes.
 - Batch12 removed 9 superseded rules / 23 declarations. Static checks and six Chromium CSS scenarios (including representative synthetic dynamic elements) PASS; full-app E2E NOT RUN.
 - Rollback to Candidate306 or formal Candidate302. Candidate307 HTML is not verified remotely and is not promoted.
+
+## Candidate chain update — Batches 12–13
+- Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate307: 1,665,250 bytes, SHA-256 `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`; Batch12 removed 9 superseded rules / 23 declarations.
+- Candidate308: 1,665,019 bytes, SHA-256 `89e7829e8228e3b4ed1061657e6c2f7245496e4dd6e158344a6c6c76518b4d67`; Batch13 removed 7 orphan mobile rules / 10 declarations.
+- Both candidates passed JS/CSS/ID checks and six isolated Chromium computed-style scenarios. Full-app E2E NOT RUN. Neither candidate is promoted; HTML remote upload is BLOCKED.
+- Rollback chain: Candidate308 → Candidate307 → Candidate306; formal baseline Candidate302 remains immutable.
