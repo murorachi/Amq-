@@ -183,3 +183,11 @@ Candidate302 remains formal baseline:
 - Compare owner precedence before deleting: Candidate106 owns catalog geometry; Candidate103's obsolete catalog geometry writes were removed in Batch19, but its other player/dock effects remain.
 - Mark uncertain lifecycle dependencies NEEDS CONFIRMATION and continue with other safe items. Do not report static inspection as runtime PASS or isolated harness as full-app E2E.
 - Publish report, manifest, tests, summary and update CURRENT_STATUS.md, BASELINE.md, NEXT_TASK.md and CHANGELOG_STAGE6.md. Candidate HTML upload/hash must remain NOT VERIFIED unless confirmed remotely.
+
+## Next: Batch 22 — Song Select lifecycle and remaining duplicate state writers
+- Start from Candidate316 SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317; verify local file/hash first. Formal baseline remains Candidate302.
+- Continue across Song Select dock, player, modal and grid lifecycle as a functional group. Trace observers, resize/navigation listeners, timers and target handlers against the existing state owners.
+- Preserve independent responsibilities such as audio/video cleanup, accessibility state, close/Escape behavior, dynamic data updates and route re-entry. Delete only when the exact event path and side effects are proven redundant.
+- Batch20 removed Candidate70's unreachable dock target listener; Batch21 removed Candidate72's duplicate panel-state observer. Candidate76/77 remain the panel-state owners and Candidate106 remains catalog geometry owner.
+- Mark uncertain observers/timers NEEDS CONFIRMATION and continue with other safe candidates. Test actual affected scripts in Chromium at desktop/tablet/mobile; full-app E2E remains NOT RUN until genuinely executed.
+- Publish reports/manifests/test results/summaries and update all status docs. Candidate HTML remote upload and SHA verification must not be claimed unless confirmed.
