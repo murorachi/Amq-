@@ -423,3 +423,11 @@ Candidate302 remains formal baseline:
 4. Run browser tests if the environment permits. Static syntax/ownership assertions are not browser interaction tests; if blocked, record BLOCKED/NOT RUN and continue with static event-path evidence only.
 5. After Batch45, Batch46 can consolidate Candidate60/Candidate193 navigation wrappers and then inspect Candidate99/Candidate137 song-selection subscriptions.
 6. Candidate340 HTML GitHub upload and remote SHA read-back remain NOT RUN. Candidate302 formal baseline and Candidate320 rollback remain unchanged.
+
+
+## Batch45 — ownership handoff implementation (2026-10-26)
+1. Use `AMQ_WORKSPACE_OWNER_MATRIX_CANDIDATE340_BATCH45_PRECHECK_20261026.md` as the verified source map. Parent Candidate340 SHA-256: `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
+2. Transfer `[data-ws]` click ownership from Candidate76 to Prototype15; coordinate the open/close API so `amq-dock-expanded` is not toggled twice. Candidate70 and Candidate77 have no such current click bindings, so do not delete non-existent handlers.
+3. Isolate only confirmed dock selectors from Candidate84 and Candidate94 into `style#legacy-dock-regression[media="not all"]`; keep Candidate94's `#grid .card.amqListNotMember85` membership filter in the formal cascade.
+4. Verify Candidate60/Candidate82/Candidate193 route and click-capture conditions independently; Candidate193's navigation wrapper must not be mislabeled as a click listener.
+5. Run static syntax and propagation assertions, then browser regression if the environment permits. Preserve Candidate302 formal baseline and Candidate320 rollback; Candidate340 is the immediate rollback.
