@@ -1,0 +1,21 @@
+{
+  "batch": 7,
+  "date": "2026-10-25",
+  "status": "PASS_WITH_LIMITATIONS",
+  "baseline": {"bytes": 1720249, "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"},
+  "classic_and_team_fake_server_tests": "PASS",
+  "route_away_stops_room_poll": true,
+  "team_websocket_closed_on_route_away": true,
+  "local_release_clears_synthetic_session": true,
+  "page_errors": 0,
+  "heartbeat_after_route_away_with_session_retained": true,
+  "heartbeat_classification": "DESIGN_QUESTION_NOT_CONFIRMED_BUG",
+  "static_inline_script_tags": 70,
+  "duplicate_script_ids": 0,
+  "duplicate_nonempty_source_hash_groups": 0,
+  "eight_manual_reinjection_candidates_each_appear_once": true,
+  "application_code_modified": false,
+  "deleted_items": 0,
+  "full_app_e2e": "NOT RUN",
+  "remote_candidate302_html": "BLOCKED_NOT_FOUND"
+}
