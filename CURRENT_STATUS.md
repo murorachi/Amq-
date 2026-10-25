@@ -568,3 +568,5 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate346 HTML expected path also returned 404. Remote HTML upload/hash readback remains NOT VERIFIED; documentation uploads do not establish HTML availability.
 - Full-app AMQ/EMQ/MIX, audio, CRUD/persistence, backup/restore, workspace and multiplayer regression remains NOT RUN; browser path remains BLOCKED by prior `ERR_BLOCKED_BY_ADMINISTRATOR`.
 - No application HTML changed and no candidate promoted. Local updated handoff package contains current `CURRENT_STATUS.md`, `BASELINE.md`, `NEXT_TASK.md`, static verification results, Candidate346, and rollback artifacts.
+
+- Follow-up readback: all three engineering documents and the independent static verification MD/JSON were fetched successfully after the commits. These are documentation-only commits; Candidate346 HTML remains NOT UPLOADED / NOT VERIFIED remotely, and Candidate302 expected path remains 404.
