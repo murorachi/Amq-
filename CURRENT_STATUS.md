@@ -559,3 +559,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Local package created: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`, 1,323,411 bytes; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`; ZIP integrity PASS.
 - Package includes Candidate346, immediate rollback Candidate345, Candidate320 rollback checkpoint, Batch47–50 reports, static smoke, core regression matrix, final residue scan, and manifest.
 - This is an experimental handoff only. Candidate302 remains the formal baseline. Candidate346 HTML and ZIP remote upload/readback have not been performed.
+
+
+## Unattended verification update — 2026-10-26
+- Re-verified uploaded Candidate346 handoff package; Candidate346 SHA-256 remains `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca` (1,625,225 bytes). Candidate345 and Candidate320 rollback hashes also match package contents.
+- Independent local check: 65 executable inline JS blocks passed Node syntax check (0 errors); 269 ID attributes / 269 unique values / no duplicate ID values detected.
+- Candidate302 remains formal baseline; its expected HTML path returned 404 on this branch, so baseline hash is retained from prior records but not independently verified from a local artifact this session.
+- Candidate346 HTML expected path also returned 404. Remote HTML upload/hash readback remains NOT VERIFIED; documentation uploads do not establish HTML availability.
+- Full-app AMQ/EMQ/MIX, audio, CRUD/persistence, backup/restore, workspace and multiplayer regression remains NOT RUN; browser path remains BLOCKED by prior `ERR_BLOCKED_BY_ADMINISTRATOR`.
+- No application HTML changed and no candidate promoted. Local updated handoff package contains current `CURRENT_STATUS.md`, `BASELINE.md`, `NEXT_TASK.md`, static verification results, Candidate346, and rollback artifacts.
