@@ -158,3 +158,9 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 5. Run available static tests; mark browser-only tests NOT RUN/BLOCKED until actually executed. Do not claim unverified functionality passes.
 6. Keep AMQ and EMQ schemas distinct. Verify data.js and emq-data.js separately when they become available; do not infer their contents.
 7. Update BASELINE.md, CURRENT_STATUS.md, NEXT_TASK.md, reports, and GitHub remote readback for each accepted stage.
+
+
+## Stage 5.8 — Static validation evidence (2026-10-25)
+- Re-run Candidate295 static checks: 67/67 executable inline JS blocks pass Node.js --check; all 109 style blocks parse with zero stylesheet/declaration errors; 271 DOM IDs are unique.
+- These are static checks only. Browser behavior, storage persistence, audio, API, multiplayer, and external data files remain NOT RUN/BLOCKED.
+- Continue dependency mapping; do not start source deletion until the intended replacement behavior and regression cases are established.
