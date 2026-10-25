@@ -133,3 +133,8 @@
 - Both Song Select guards map the same six destinations and dispatch the same interception event, but placement changes side effects: the inner guard's return still allows the generic wrapper's body-class post-processing; the outer final guard returns before generic wrapper execution and therefore bypasses that post-processing. This confirms duplicated routing logic with order-dependent behavior, not safe whole-block deletion.
 - Added a static-only regression matrix for six panel destinations, normal routes, dashboard class behavior, repeat initialization, body-class synchronization and browser return navigation. All behavior cases remain NOT RUN.
 - No app source modified. Full report now includes the semantic qualification and regression matrix.
+
+
+## Stage 5.4 — Re-run syntax check count correction (2026-10-25)
+- Re-ran Node.js syntax checks while excluding the inline JSON data block `aniAnilistIdMapV8237` from executable JS: 67/67 executable inline JS blocks PASS. There are 70 script tags total, 2 external tags, and 1 inline JSON data block.
+- Corrected prior inventory wording that had counted the JSON data block as executable JavaScript. No app source changed.
