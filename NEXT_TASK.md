@@ -244,3 +244,11 @@ Candidate302 remains formal baseline:
 3. Keep Candidate114 timers and Candidate158 subtree Observer unchanged until full-app route/mount tests prove reductions safe.
 4. Upload Candidate321 HTML bytes to GitHub and read back the remote file to verify SHA-256 before promotion.
 5. Candidate321 is not promoted; Candidate320 remains rollback checkpoint; Candidate302 remains formal baseline.
+
+
+## Batch26 Round 4 handoff — 2026-10-25
+1. Actual AMQ/EMQ data dependencies are now available locally and successfully load in a Chromium test copy. Do not repeat data-file discovery.
+2. Resolve a supported browser origin / launch method that allows the real page to use persistent storage and formal navigation; `file://` and localhost navigation were blocked, while `page.set_content()` gives opaque `about:blank` and requires a test-only storage shim.
+3. Through formal UI navigation, test AMQ/EMQ/MIX, search/filter/sort, real cover loading/fallback, selected-song audio/video playback, and route-exit player reset.
+4. Only after those tests pass, decide whether Candidate114 delayed resets can be reduced and Candidate158 subtree Observer narrowed.
+5. Candidate321 HTML upload and remote SHA-256 verification still pending; Candidate321 not promoted. Candidate320 rollback and Candidate302 formal baseline unchanged.
