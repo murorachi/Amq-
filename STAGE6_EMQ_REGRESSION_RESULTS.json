@@ -1,0 +1,38 @@
+{
+  "reportVersion": 1,
+  "purpose": "synthetic EMQ loader regression using script extracted from each HTML; not browser E2E",
+  "candidate301": {
+    "sha256": "e8eb07ccab26b6e424eda9aed11d1c21b90cca9c544ed2b6843096e3b6762454",
+    "cases": 9,
+    "passed": 4,
+    "failed": 5,
+    "expectedRegressionReproduced": true,
+    "failingCases": [
+      "duplicate EMQ work ID",
+      "AMQ work ID collision",
+      "AMQ song ID collision",
+      "broken work association",
+      "malformed song record"
+    ],
+    "rootCause": "workCount exposed staged works while ready=false"
+  },
+  "candidate302": {
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+    "cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "status": "PASS",
+    "casesDetail": [
+      "valid payload accepted",
+      "missing packed payload rejected",
+      "unsupported version rejected",
+      "duplicate EMQ work ID rejected",
+      "AMQ work ID collision rejected",
+      "AMQ song ID collision rejected",
+      "broken work association rejected",
+      "malformed song record rejected",
+      "invalid audio URL yields ready-empty pool"
+    ]
+  },
+  "conclusion": "Candidate302 fixes Candidate301's invalid/unready workCount regression in a source-derived isolated harness. Candidate295 remains formal baseline."
+}
