@@ -58,3 +58,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Isolated lifecycle stress probe: 12/12 selected scripts initialized without uncaught errors; 0 browser page errors; 20 synthetic route cycles per script showed no net active listener/observer growth in the harness.
 - Manual reinjection duplicates were observed for eight scripts; this is a controlled reinjection finding, not proof of a production leak. No deletion is approved from this evidence alone.
 - Active multiplayer session poll/socket cleanup and full-app E2E remain NOT RUN. No app source changed/deleted.
+
+
+## 2026-10-25 Batch 7
+- Candidate302 unchanged: 1,720,249 bytes; SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd.
+- Isolated Chromium fake-server test passed for classic/team initialization, polling start, route-away poll stop, team WebSocket close, and local session release; 0 page errors.
+- Heartbeat continues after route-away while the session is retained; pending design question, not classified as a defect.
+- Static topology: 70 inline scripts; no duplicate IDs or duplicated non-empty source hashes; all eight manual-reinjection candidates appear once.
+- No application code modified or deleted. Full-app E2E NOT RUN; remote HTML hash verification BLOCKED/NOT_FOUND.
