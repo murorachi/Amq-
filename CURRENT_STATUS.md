@@ -379,3 +379,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate15 visibility Observer and Candidate76/77 lifecycle were retained because current evidence does not prove duplicate ownership.
 - Tests: PASS, 65 inline scripts syntax checked with 0 errors; PASS, 109 style blocks raw-brace check; PASS, 729 ID attributes and 17 duplicate-ID kinds unchanged from Candidate331; PASS, key membership/storage code retained. Browser E2E, native persistence, media playback, HTML upload/remote hash remain NOT RUN.
 - Experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint. Report: `AMQ_BATCH35_CANDIDATE332_CUSTOM_LIST_GRID_SCOPE_CLEANUP_20261026.md`.
+
+
+## Batch36 — Candidate333 Candidate15 visibility listener cleanup (2026-10-26)
+- Parent Candidate332 SHA-256: `dd4b9ca46fe3303232f8f455e1461c3e638fc339fa7440819d55df86a737f10d`.
+- Candidate333: `amq_learning_tool_v82_86_44_candidate333_candidate15_visibility_listener_cleanup_20261026.html`, SHA-256 `56308f2c168c8344281ee75e23ce4a87c6a927aa56367448f0140206b81b247d`, 1,631,769 bytes (-158).
+- Only Candidate15 changed: removed its `hashchange`/`popstate` visibility listeners and unused observer variable/return value. The existing subtree observer remains because VN views are created dynamically and relevant view switches mutate `hidden`/`class`. Candidate76/77 lifecycle and Candidate16 data paths unchanged.
+- Tests: PASS 65 executable inline scripts syntax, 0 errors; PASS only Candidate15 changed; PASS 731 ID attrs/16 duplicate kinds/20 extra and 109 style blocks unchanged. Browser E2E, custom-list persistence, media and HTML remote upload/hash remain NOT RUN.
+- Experimental only; Candidate302 formal baseline, Candidate320 rollback checkpoint.
