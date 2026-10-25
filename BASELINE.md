@@ -82,3 +82,10 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - Targeted static analysis found three layered navigation wrappers and multiple consumers of the canonical AMQ custom-list store. These findings are recorded as integration candidates only.
 - AMQ custom-list schema (`animeIds`) and EMQ work-list schema (`workIds/vndbIds/songIds`) remain distinct. Quiz detailed history and its two summaries have distinct schemas and responsibilities.
 - No application files or storage schema were changed; Candidate277/Candidate276 remain untouched. Candidate295 remains a validation target, not a promoted release baseline.
+
+
+## Stage 5.2 — Source-order audit (2026-10-25)
+- Static route wrapper order on Candidate295: final Song Select guard → generic workspace guard → first Song Select guard → base navigator. Each layer has distinct side effects; none has been removed.
+- Four AMQ custom-list consumer fallbacks directly parse the canonical key if the store API is unavailable; these are potential consolidation targets only after initialization/restore behavior is verified.
+- Detailed quiz history and two summary stores have distinct data responsibilities and dedupe state. No storage schema or application code was changed.
+- Candidate295 identity remains 1,720,917 bytes / SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. The recorded Candidate277 baseline is unchanged.
