@@ -24,4 +24,9 @@ State: **BLOCKED**. Local synthetic validation and reporting are complete; requi
 - Candidate302 HTML upload and remote hash verification BLOCKED; remote path returned NOT_FOUND.
 - No browser E2E pass is claimed.
 
+## GitHub publication
+- Branch: `amq-stage4-data-init-regression-20261025`.
+- Uploaded and fetched back for verification: `BASELINE.md`, `CURRENT_STATUS.md`, `NEXT_TASK.md`, `CHANGELOG_STAGE4.md`, final acceptance report, both Stage 4 harnesses, and machine-readable test results.
+- Candidate302 HTML itself remains absent remotely; its remote SHA-256 cannot be verified.
+
 See `STAGE4_FINAL_ACCEPTANCE_REPORT_20261025.md` and machine-readable test outputs. Preserve Candidate295; do not promote Candidate302.
