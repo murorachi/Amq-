@@ -414,3 +414,12 @@ Candidate302 remains formal baseline:
 - 65 inline JS syntax checks PASS; browser E2E NOT RUN.
 - Next: consolidate Candidate76/77 geometry/state ownership only after tracing every read/write and event path; then consolidate Candidate60/Candidate193 navigation wrappers into one dispatcher while preserving standalone route/body-class effects, Song Select panel interception, VNDB route behavior, and base navigation. Do not delete Candidate70/82/Prototype15 active behaviors. Candidate302 and Candidate320 remain untouched.
 - GitHub report/JSON created on branch; Candidate339 HTML upload and remote SHA-256 verification remain NOT RUN.
+
+
+## Next task — Batch45 event interception verification (2026-10-26)
+1. Start from Candidate340 only as an experimental candidate; preserve Candidate302 and Candidate320.
+2. Audit listener registration order and propagation for Candidate70/76/77/82 and Prototype15. Prove whether capture-phase [data-ws] interception is required; do not merge [data-ws-action] into the same handler.
+3. Verify one click produces one state transition, close button calls the single close API, ESC does not trigger conflicting close handlers, and Candidate82 content-panel park/restore remains intact.
+4. Run browser tests if the environment permits. Static syntax/ownership assertions are not browser interaction tests; if blocked, record BLOCKED/NOT RUN and continue with static event-path evidence only.
+5. After Batch45, Batch46 can consolidate Candidate60/Candidate193 navigation wrappers and then inspect Candidate99/Candidate137 song-selection subscriptions.
+6. Candidate340 HTML GitHub upload and remote SHA read-back remain NOT RUN. Candidate302 formal baseline and Candidate320 rollback remain unchanged.
