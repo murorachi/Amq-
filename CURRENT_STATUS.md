@@ -1,6 +1,7 @@
 # CURRENT_STATUS.md
 
 Updated: 2026-10-25
+Stage: Batch 2 dependency trace complete; runtime verification and cleanup remain in progress.
 Stage: Batch 1 — Candidate302 feature inventory (static evidence).
 State: **Candidate302 is the formal baseline. Batch 1 has produced a first evidence-backed inventory; the six-goal cleanup is not complete.**
 
@@ -38,3 +39,14 @@ State: **Candidate302 is the formal baseline. Batch 1 has produced a first evide
 
 ## Next
 Batch 2: map route wrappers and side effects, storage key owners and read/write paths, custom-list store/API boundaries, event/listener/observer/timer lifecycles, and CSS selector-to-DOM ownership. Use the Batch 1 inventory as the index; do not start deleting based only on names or repeated selectors.
+
+
+## Batch 2 dependency trace
+- Static source evidence extraction: PASS; baseline hash and size unchanged.
+- Route finding: Candidate193's final guard intercepts selected destinations while Song Select is active, opens workspace content and returns without invoking core `showView` or dispatching `ani-app-navigation`. Generic wrapper side effects are bypassed on this path; destination strings alone do not establish equivalent behavior.
+- Storage finding: `aniCustomPracticeListsV1` canonical writer/store is `v82-25-custom-lists-and-practice-hub`; compatibility fallback readers and backup/restore consumers remain.
+- AMQ custom lists use `animeIds`; EMQ lists use `workIds`, `vndbIds`, and `songIds`. Do not merge schemas.
+- Static extraction located 383 listener registration/removal patterns, 57 observer constructors and 182 timer/RAF calls. These counts do not prove leaks.
+- No application source changes/deletions; DELETE=0.
+- NOT RUN: browser route/workspace E2E, computed-style verification, runtime lifecycle instrumentation, synthetic custom-list CRUD/import/export/backup/restore.
+- BLOCKED: Candidate302 HTML artifact still NOT_FOUND; remote hash not verified.
