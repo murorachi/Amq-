@@ -92,3 +92,10 @@
 - Tool HTML: 19,462 bytes; SHA-256 8272523986420abef4f1820856fc2c81021941d28b67178b3130687e9f5e2b06. ZIP: 10,204 bytes; SHA-256 285dac12c163a55ef1ed08213fc02743d6c4b60d4bfdeea09635aa2f0368bb37.
 - PASS: Node.js syntax check, tool content assertions, ZIP integrity, and Candidate295 frozen snapshot byte/hash equality. NOT RUN: actual local execution with matching data.js/emq-data.js; browser interactions remain NOT RUN/BLOCKED.
 - Report: reports/stage4-1-local-acceptance-tool-v11-20261025/STAGE_4_1_LOCAL_ACCEPTANCE_TOOL_V11_20261025.md.
+
+
+## Stage 4.2 — Candidate295 local acceptance tool v1.2 (2026-10-25)
+- Based on the user's runtime symbol inventory, v1.2 adds read-only presence checks for quiz/answer/audio-failure APIs, quiz history/target-summary APIs, Song Select workspace APIs, both route-guard flags and the Candidate210 module marker.
+- Tool HTML: 22,781 bytes; SHA-256 f42dde260c25215fb93b21b76806ed1457edb1fce0b2e861b476777181f811b4. ZIP: 11,286 bytes; SHA-256 db88b70fabd226bf4998215f3a1e8c6a6b9313c7466808400e66f88c2f4de19c.
+- PASS: Node.js syntax check and ZIP integrity. NOT RUN: actual browser execution against matching Candidate295/data.js/emq-data.js, interactive routing, quiz persistence, audio recovery and CRUD.
+- Symbol presence is not behavioral acceptance; BLOCKED may reflect scope visibility limits. No application source was modified. Report: reports/stage4-2-local-acceptance-tool-v12-symbol-audit-20261025/STAGE_4_2_LOCAL_ACCEPTANCE_TOOL_V12_SYMBOL_AUDIT_20261025.md.
