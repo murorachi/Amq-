@@ -160,3 +160,9 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed 17 declarations / 589 bytes from four first-occurrence selectors in style block `amq-workspace-osu-composition-v24`; all removed properties are superseded by later same-selector rules and/or the Candidate99 correction block.
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; scripts and non-style HTML unchanged; Chromium computed style 6/6 with zero diffs, including synthetic stable-play modal nodes.
 - Full-app E2E NOT RUN. Candidate309 HTML remote upload BLOCKED. Candidate309 not promoted; formal baseline remains Candidate302.
+
+## Batch 14 — Home stable-play modal superseded CSS cleanup (2026-10-25)
+- Candidate309 created from Candidate308: 1,664,430 bytes; SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f`.
+- Removed 17 superseded declarations / 589 bytes in one Home stable-play modal style block. JS and non-style HTML unchanged.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; computed style 6/6 desktop/tablet/mobile Home and Song Select scenarios, zero differences.
+- Full-app E2E NOT RUN; Candidate309 HTML remote upload BLOCKED. Candidate309 not promoted; formal baseline remains Candidate302.
