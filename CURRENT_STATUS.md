@@ -60,3 +60,9 @@
 - Candidate277 raw HTML remains BLOCKED. The uploaded file is Candidate295, not Candidate277. Candidate277's recorded size/SHA remain historical records and were not recomputed in this stage. Do not promote Candidate295 or reconstruct Candidate277 from excerpts.
 - No application HTML/CSS/JS/data/storage changes. Stage report: `reports/stage2-candidate295-uploaded-html-audit-20261025/STAGE_2_UPLOADED_CANDIDATE295_STATIC_AND_RUNTIME_GATE_20261025.md`.
 - Rollback: revert the documentation-only Stage 2 commit; preserve Candidate277 and Candidate276 unchanged.
+
+
+## Stage 2 recovery follow-up (2026-10-25)
+- Re-searched Library for the exact Candidate277 filename: two indexed records report 9,373,238 bytes, but raw-byte materialization of both failed with `This Project file does not have an authorized raw-byte materialization path`.
+- Found indexed `Coverage-20261025T094140.json` (10,050,921 bytes); its raw-byte materialization failed with the same blocker. Data files described inside the handoff/coverage records are not locally recovered or hash-reverified in this stage.
+- Candidate277 remains BLOCKED for raw-byte SHA verification. Search/index presence is not proof of byte recovery. No application files were changed.
