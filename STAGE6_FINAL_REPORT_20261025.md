@@ -31,7 +31,7 @@
 
 - Candidate301：9 案例中 4 PASS、5 FAIL，預期重現已知回歸。無效 payload 下 `ready=false`，但公開 `workCount` 仍洩漏暫存 works 數量。
 - Candidate302：9/9 PASS。合法 payload 正常載入；缺少 payload、錯誤版本、重複 work ID、AMQ/EMQ ID 衝突、錯誤作品關聯及 malformed song record 都不會進入 ready、不會暴露歌曲／作品數，也不會派發 ready 事件。
-- Candidate302 的 `workCount` getter 現在以 `ready` 為閘門。來源抽取式測試確認此修正有效。
+- Candidate302 的 `workCount` getter 現在以 `ready` 為閘門。 對 Candidate301 與 Candidate302 實際 HTML 的 unified diff 確認，兩者只有這一行程式碼差異。來源抽取式測試確認此修正有效。
 - 合法 payload 但沒有符合 HTTPS 條件的可播放音源，仍視為 ready-empty pool；未擅自改變現有契約。
 
 詳見 `STAGE6_EMQ_REGRESSION_RESULTS.json`。
