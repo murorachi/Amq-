@@ -1,0 +1,53 @@
+{
+  "candidate": "Candidate302",
+  "suite": "Stage 4 AMQ catalog snapshot validation",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "valid snapshot accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "null rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing anime rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "empty catalog rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate anime ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid anime ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing anime title rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate song ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid song ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing song title rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "short song row rejected",
+      "status": "PASS"
+    }
+  ]
+}
