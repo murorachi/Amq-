@@ -380,3 +380,11 @@ Candidate302 remains formal baseline:
 - PASS: parent hash verified; 65 executable inline scripts passed Node syntax checks; all ten currently emitted action IDs remain; only Candidate15 script body changed.
 - NOT RUN: browser click-through/E2E, storage persistence, real media, multiplayer E2E, Candidate335 HTML upload and remote hash verification.
 - Candidate335 is experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+
+## 下一項：Batch40（從 Candidate336 開始，先驗證再修改）
+
+1. 在真實瀏覽器驗證 Candidate76／77 側欄矩陣：一般工作區收合／展開、Home、其他路由、Song Select 收合／展開，以及桌面／窄視窗 resize。
+2. 記錄 display、visibility、pointer-events、position、left/right/top/bottom、尺寸、aria-hidden、dock aria-pressed／aria-expanded、computed style 與點擊結果。
+3. 若瀏覽器回歸通過，再測工作區內容面板、Escape、park/restore 與 Home 導航；語法檢查不等於互動驗收。
+4. Candidate302 正式基準與 Candidate320 回滾點保持不變。Candidate336 仍是實驗候選。
+5. Candidate HTML GitHub 上傳與遠端 SHA-256 核對仍未完成；上傳前核對分支、檔名及版本。
