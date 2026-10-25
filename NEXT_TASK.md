@@ -1,27 +1,30 @@
-# NEXT_TASK.md — Candidate302 promotion and cleanup continuation
+# NEXT_TASK.md — Batch 2 dependency tracing
 
-## Current baseline
-Candidate302 is now the formal maintenance baseline by explicit user authorization and reported local verification:
-- `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
-- 1,720,249 bytes
-- SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`
+## Formal baseline
+Candidate302: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
+- Size: 1,720,249 bytes
+- SHA-256: `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`
+Candidate295 remains the immutable rollback point: `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 
-Candidate295 remains the preserved rollback baseline (SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`). Never overwrite either file. Create a uniquely named candidate for every future code change.
+## Batch 1 deliverables
+- `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.md` — feature classifications and evidence.
+- Local machine-readable companion: `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.json`.
+- Candidate302 static audit PASS: 67 inline executable JS blocks, 109 style blocks, 2,808 CSS rules, 271 unique IDs.
+- No application source modified; no direct deletions approved.
 
-## Highest-priority next steps
-1. **Remote artifact verification:** make the exact Candidate302 HTML available on the intended GitHub branch, download the raw remote file, and compare SHA-256 with `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. The Stage 6 branch has updated documentation, but the remote HTML body/hash is not yet independently verified.
-2. **Complete feature inventory:** classify each feature as KEEP / INTEGRATE / DELETE / NEEDS CONFIRMATION. Include HTML, CSS, JS, listeners, initialization, routes, timers, observers, storage schema, build sources, formal HTML and tests.
-3. **Dependency mapping:** trace entry points, callers/callees, dynamic references, initialization order, routing, state/data writes, persistence and indirect dependencies for each candidate deletion.
-4. **Consolidation:** choose one canonical implementation for confirmed duplicate functionality; move necessary behavior first, then remove duplicate code and test the migrated path.
-5. **Actual deletion:** remove confirmed obsolete markup, styles, handlers and initialization logic instead of hiding/disabling them. Preserve unresolved candidates with evidence and a verification plan.
-6. **Targeted regression:** after each deletion batch, test affected initialization, DOM stability, routing, duplicate event binding, workspace switching, persistence, AMQ/EMQ/MIX pools, media, custom-list CRUD/import/export and backup/restore as applicable.
-7. Update reports and all status documents with PASS / FAIL / NOT RUN / BLOCKED. Do not claim browser E2E from static or synthetic tests.
+## Batch 2 work order
+1. **Route ownership:** trace all route wrapper assignments and source order, caller/delegate, intercepted destinations, body-class changes, home-menu effects, mount/unmount and back-navigation effects.
+2. **Storage ownership:** for every literal storage key, record read/write/remove sites, canonical owner, schema, initialization timing, backup/restore coverage and data-loss risk.
+3. **Custom lists:** map store/API, membership adapter, selector state, batch actions, imported list paths, AMQ/EMQ schema boundary and compatibility fallbacks.
+4. **Lifecycle:** map event listeners, Mutation/Resize/IntersectionObserver creation and cleanup, timers/rAF creation and cancellation; distinguish string occurrences from actual live instances.
+5. **CSS ownership:** compare repeated selectors by declarations, specificity, media/query context, document order and actual DOM reachability; identify candidate merge groups without deleting yet.
+6. Mark each edge/evidence as source-confirmed, inferred, runtime-required or unresolved. Do not fabricate runtime proof.
+7. Update reports, `BASELINE.md`, `CURRENT_STATUS.md`, `NEXT_TASK.md` and changelog. Run tests matched to any future code changes.
 
-## Known evidence and cautions
-- Stage 6 static audit: PASS for Candidates 295/299/300/301/302.
-- Candidate302 isolated synthetic tests: 40/40 PASS; real catalog structural audit PASS.
-- Browser automation in this environment timed out; user separately reports local Candidate302 verification complete, but a case-by-case manual test record is not in this repo.
-- 495 AMQ rows have no media value in the current extractor's source slots; do not modify these records without upstream schema evidence.
+## Remaining global blockers
+- The Candidate302 HTML is not present on the Stage 6 GitHub branch yet. Remote artifact SHA-256 remains NOT VERIFIED.
+- Browser E2E/live audio cannot be claimed from static or synthetic checks.
+- No direct DELETE decision is currently supported by Batch 1 evidence.
 
 ## Definition of done
-All six cleanup goals must have auditable artifacts: complete feature inventory; dependency map; canonical implementation map; deletion ledger with before/after evidence; regression matrix with reproducible test results; and verified final HTML plus exact remote SHA-256. Promotion of Candidate302 alone does not satisfy the six goals.
+The six cleanup goals require a complete feature inventory, dependency graph, canonical implementation map, deletion ledger with before/after evidence, reproducible regression matrix, and final HTML with verified remote hash. Candidate302 promotion alone does not satisfy them.
