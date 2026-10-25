@@ -1,0 +1,48 @@
+{
+  "report_version": 1,
+  "date": "2026-10-25",
+  "baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "bytes": 1720249,
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "tests": {
+    "route_isolated": {
+      "status": "PASS",
+      "passed": 14,
+      "failed": 0,
+      "page_errors": 0,
+      "scope": "Candidate302 scripts 3/62/70 with stubbed DOM/API; not full app E2E"
+    },
+    "storage_repository_isolated": {
+      "status": "PASS",
+      "passed": 6,
+      "failed": 0,
+      "page_errors": 0,
+      "scope": "Candidate302 script 28 with synthetic in-memory storage; no user data"
+    },
+    "full_app_e2e": "NOT RUN",
+    "observer_lifecycle_runtime": "NOT RUN",
+    "computed_style": "NOT RUN",
+    "remote_html": "BLOCKED / NOT_FOUND"
+  },
+  "findings": [
+    "Song Select route guard intercept bypasses core showView/ani-app-navigation and generic standalone class side effect; opens workspace panel and closes home menu.",
+    "Storage repository rejected malformed legacy JSON and non-allowlisted import; successful synthetic import preserved source key.",
+    "Injected write failure triggered transaction rollback and restored original values.",
+    "AMQ custom-list store and fallback/backup consumers need full caller audit; AMQ animeIds schema remains separate from EMQ workIds/vndbIds/songIds."
+  ],
+  "static_counts": {
+    "listener_registration_removal_patterns": 383,
+    "observer_constructors": 57,
+    "timer_raf_calls": 182,
+    "repeated_css_selectors": 870
+  },
+  "delete_count": 0,
+  "limitations": [
+    "Isolated harnesses do not prove full-app runtime behavior.",
+    "Full app data.js/emq-data.js not present alongside isolated baseline in working folder.",
+    "Observer/timer/listener lifecycle and computed style not instrumented.",
+    "Candidate302 HTML remote artifact remains NOT_FOUND."
+  ]
+}
