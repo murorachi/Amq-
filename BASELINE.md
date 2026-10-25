@@ -408,3 +408,5 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate345 immediate rollback: 1,625,630 bytes, SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
 - Candidate320 checkpoint: 1,645,470 bytes, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
 - Independent static verification passed 65/65 executable inline JS syntax checks and found no duplicate ID values. Functional regression remains incomplete.
+
+- Follow-up readback confirms progress-document and static-verification report commits. HTML artifact presence/hash remains unverified; documentation readback is not HTML publication evidence.
