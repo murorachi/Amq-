@@ -66,3 +66,15 @@ Candidate302 remains formal baseline:
 1. Build a deterministic fake-server and synthetic-session harness for multiplayer join/poll/leave/route-away; verify poll interval and socket cleanup without real credentials or production storage.
 2. Trace whether the eight manual-reinjection candidates can actually be loaded more than once in the formal single-file build; classify each KEEP/INTEGRATE/DELETE/NEEDS_CONFIRMATION.
 3. Only then select one minimal, evidence-backed integration/deletion candidate. Preserve Candidate302/Candidate295 and test rollback.
+
+
+## Batch 7 completed / Batch 8 next
+- Fake-server Chromium test: classic/team sessions initialized, room polling started and stopped after route-away, team WebSocket closed, local release cleared synthetic session; 0 page errors.
+- Found heartbeat POST after route-away while the session remains stored. Do not change until expected background-presence behavior is established.
+- Static topology: 70 inline scripts, no duplicate IDs or repeated non-empty source hashes. The eight manual-reinjection candidates each appear once in formal HTML; no static evidence of duplicate tags.
+
+## Batch 8 priority
+1. Trace runtime script loading and dynamic execution paths (eval, Function, script creation, append/replace, import) for the eight reinjection candidates and classify reachability.
+2. Map page-level heartbeat lifecycle and room-presence semantics. Preserve current behavior until expected product behavior is clear.
+3. Use evidence to choose one minimal integration/deletion candidate; do not delete based only on one-time static occurrence or manual reinjection.
+4. Continue marking full-app E2E and remote Candidate302 HTML verification BLOCKED until matching assets/upload capability are available.
