@@ -270,3 +270,11 @@
 - PASS: 65/65 executable inline JS syntax; 269 unique IDs; 109 CSS blocks, zero parse errors; only Candidate15/16 script bodies changed; storage reader and membership API preserved.
 - NOT RUN: full browser E2E, media, external covers/fallback, native storage. Candidate330 not promoted; HTML upload/hash NOT VERIFIED.
 - Report: `AMQ_BATCH33_CANDIDATE330_WORKSPACE_ACTION_CLEANUP_20261026.md` / `AMQ_BATCH33_CANDIDATE330_WORKSPACE_ACTION_CLEANUP_20261026.json`.
+
+
+## 2026-10-26 — Batch34 Candidate331 unreachable catalog fallback cleanup
+- Candidate331: 1,632,034 bytes, SHA-256 `1a17f6a940aa2248a40c56a15d91fe0d63df35da35948f15156fd261dea13565`, derived from Candidate330 SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`.
+- Removed the unused `waitForElement` helper and catalog-only fallback paths no current Candidate15 action definition can invoke; net reduction 669 bytes.
+- PASS: 65/65 executable inline scripts, 269 unique IDs, 109 CSS blocks with zero parser errors; only Candidate15 script changed.
+- NOT RUN: real browser E2E, media, covers/fallback, native storage. Candidate331 not promoted; HTML upload/hash NOT VERIFIED.
+- Report: `AMQ_BATCH34_CANDIDATE331_UNREACHABLE_CATALOG_FALLBACKS_20261026.md` / JSON.
