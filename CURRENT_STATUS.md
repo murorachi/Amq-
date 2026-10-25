@@ -172,3 +172,9 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed 9 superseded declarations / 312 bytes from the Home settings-panel layout rules. JS/non-style HTML unchanged.
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; computed style 6/6 desktop/tablet/mobile scenarios, zero differences.
 - Full-app E2E NOT RUN. Candidate310 HTML remote upload BLOCKED. Report/summary creation on GitHub also encountered connector errors and remains unverified. Candidate310 not promoted; formal baseline Candidate302 remains unchanged.
+
+## Batch 16 — Home / Song Select theme and stable-play modal CSS cleanup (2026-10-25)
+- Candidate311 created from Candidate310: 1,662,516 bytes; SHA-256 `dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996`.
+- Removed 55 superseded/duplicate CSS declarations / 1,602 bytes. Targeted duplicate Home/workspace theme variables, Home profile sizing, and stable-play modal declarations overridden by Candidate99 under the same selector/property/media condition.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; scripts and non-style HTML unchanged; Chromium computed style 6/6 desktop/tablet/mobile scenarios, zero differences.
+- Full-app E2E NOT RUN. Candidate311 HTML remote upload BLOCKED/unverified; report and summary published. Candidate311 not promoted; formal baseline Candidate302 remains unchanged.
