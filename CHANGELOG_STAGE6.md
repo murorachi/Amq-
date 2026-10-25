@@ -83,3 +83,9 @@
 - Removed 1,432 older declarations proven superseded by later declarations with the same selector and applicable at-rule/importance; removed 167 empty rules. Touched 38 style blocks; reduced HTML by 49,282 bytes.
 - PASS: JS syntax 66/66, CSS parse 0 errors, duplicate IDs 0, script content unchanged, Chromium computed-style regression 6/6 with zero differences across home/Song Select desktop/tablet/mobile static DOM.
 - NOT RUN: full-app E2E and dynamic DOM visual acceptance. Candidate305 is not promoted; formal baseline remains Candidate302. Candidate HTML remote upload BLOCKED.
+
+## 2026-10-25 — Batch 11: Home / Song Select orphan CSS cleanup
+- Source Candidate305 SHA-256 `3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`; created Candidate306 SHA-256 `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e` (1,667,280 bytes).
+- Removed 31 orphan selector branches / 124 declarations across four style blocks, reducing HTML by 3,653 bytes. No JavaScript or non-style HTML changed.
+- PASS: JS syntax 68/68, CSS parse 0 errors, duplicate IDs 0, Chromium computed style 6/6 with zero differences. Full-app E2E NOT RUN.
+- Candidate306 not promoted; formal baseline remains Candidate302. Candidate HTML remote upload BLOCKED.
