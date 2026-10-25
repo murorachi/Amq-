@@ -55,3 +55,14 @@ Candidate302 remains formal baseline:
 3. Safely mount only the required dynamic DOM fragments to extend computed-style checks, keeping all production data and user storage out of scope.
 4. Continue evidence-backed integration/deletion ledger; no deletion approved yet.
 5. Remote HTML and full-app data-asset blockers remain skipped until a viable transfer/input path is available.
+
+
+## Batch 6 completed / Batch 7 next
+- Isolated lifecycle stress probe: 12/12 scripts initialized; 0 page errors; 20 synthetic route cycles per script; no net active listener/observer growth in the harness.
+- Manual reinjection duplicates observed in eight scripts; route/load topology must be confirmed before any consolidation or deletion.
+- Active multiplayer session poll/WebSocket shutdown remains NOT RUN. Full-app E2E remains NOT RUN; Candidate302 remote HTML still 404.
+
+## Batch 7 priority
+1. Build a deterministic fake-server and synthetic-session harness for multiplayer join/poll/leave/route-away; verify poll interval and socket cleanup without real credentials or production storage.
+2. Trace whether the eight manual-reinjection candidates can actually be loaded more than once in the formal single-file build; classify each KEEP/INTEGRATE/DELETE/NEEDS_CONFIRMATION.
+3. Only then select one minimal, evidence-backed integration/deletion candidate. Preserve Candidate302/Candidate295 and test rollback.
