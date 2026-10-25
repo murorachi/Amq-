@@ -361,3 +361,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: 65/65 inline JS syntax, 269 unique IDs, 109 CSS blocks with zero parser errors; only Candidate15 and Candidate16 script bodies changed; custom-list storage and membership APIs retained.
 - NOT RUN: real browser E2E, media playback, cover/fallback, native persistence. Candidate330 remains experimental; HTML upload/hash verification NOT RUN.
 - Report: `AMQ_BATCH33_CANDIDATE330_WORKSPACE_ACTION_CLEANUP_20261026.md` and JSON counterpart.
+
+
+## Batch34 — Candidate331 (2026-10-26)
+- Candidate331: `amq_learning_tool_v82_86_42_candidate331_batch34_remove_unreachable_catalog_fallbacks_20261026.html`, 1,632,034 bytes, SHA-256 `1a17f6a940aa2248a40c56a15d91fe0d63df35da35948f15156fd261dea13565`.
+- Derived from Candidate330 SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`; removed 669 bytes of unreachable catalog fallback code and the now-unused waitForElement helper.
+- PASS: 65/65 JS syntax, 269 unique IDs, 109 CSS blocks / 0 parse errors; only Candidate15 script changed; unique current actions retained.
+- NOT RUN: browser E2E, real media, covers/fallback, native storage. Candidate331 remains experimental; HTML upload/hash NOT VERIFIED.
+- Report: `AMQ_BATCH34_CANDIDATE331_UNREACHABLE_CATALOG_FALLBACKS_20261026.md` / JSON.
