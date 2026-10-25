@@ -89,3 +89,9 @@
 - Removed 31 orphan selector branches / 124 declarations across four style blocks, reducing HTML by 3,653 bytes. No JavaScript or non-style HTML changed.
 - PASS: JS syntax 68/68, CSS parse 0 errors, duplicate IDs 0, Chromium computed style 6/6 with zero differences. Full-app E2E NOT RUN.
 - Candidate306 not promoted; formal baseline remains Candidate302. Candidate HTML remote upload BLOCKED.
+
+## 2026-10-25 — Batch 12: Home / Song Select cross-block CSS consolidation
+- Source Candidate306 SHA-256 `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`; created Candidate307 SHA-256 `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6` (1,665,250 bytes).
+- Removed 9 superseded CSS rules / 23 declarations from three style blocks, reducing HTML by 2,030 bytes. JavaScript and non-style HTML unchanged.
+- PASS: JS syntax 68/68, CSS parser 0 errors, duplicate IDs 0, Chromium computed style 6/6 with zero differences including synthetic dynamic Home/Song Select nodes. Full-app E2E NOT RUN.
+- Candidate307 not promoted; formal baseline remains Candidate302. Candidate HTML remote upload BLOCKED.
