@@ -88,3 +88,12 @@ Candidate320 scan recorded 65 executable inline scripts, 109 style blocks, 2,648
 
 ## Rollback
 No source was changed in this audit. For future changes, create a unique candidate derived from the confirmed parent; never overwrite Candidate302, Candidate320 or Candidate334. Candidate320 rollback SHA is `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+
+
+## Batch38 completion — 2026-10-26
+- Candidate15 dead fallback cleanup produced Candidate335 from Candidate334.
+- Removed only `clickHome(action)` and the terminal `runAction()` fallback; only Candidate15 inline script changed.
+- Candidate335 SHA-256: `6b06c72d769204f38f836c8c5e9d4d15af798258d4772fb27d72dd820d830331`.
+- PASS: 65 executable inline scripts pass Node syntax check; all current ten action IDs remain; only one script body changed.
+- NOT RUN: browser E2E, storage persistence, media, multiplayer E2E, Candidate335 HTML upload and remote SHA verification.
+- Next: Candidate76/77 sidebar property-owner state matrix; do not delete either module before transition evidence.
