@@ -156,3 +156,13 @@
 - Static Candidate295 timing review found no immediate call to setMode(custom-list) during playback module initialization; other three fallback consumers are declared after the canonical store script. This reduces the likelihood of a normal load-order dependency but does not prove fallback deletion is safe.
 - No application source changed. Browser tests remain NOT RUN. Candidate295 remains validation-only.
 - Updated report now includes Stage 5.6 retrieval evidence and revised fallback classification.
+
+
+## Stage 5.7 — User formally adopts Candidate295 baseline (2026-10-25)
+- User instruction: Candidate295 is now the working baseline; stop searching for Candidate277.
+- Verified local file: /mnt/data/index-old.html; embedded version v82.86.06-candidate295-db-extraction-20261025; 1,720,917 bytes; SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- Baseline decision: PASS, explicitly authorized by user and local file hash rechecked.
+- Original baseline file remains unchanged. No app source edits or deletions in this stage.
+- Candidate277 retrieval is no longer a blocker and will not be searched for again. Candidate277/Candidate276 are historical only.
+- Test status remains: 67/67 executable inline JS syntax checks PASS (prior execution); duplicate DOM ID scan PASS (prior execution); Candidate295 CSS parse and browser interaction tests NOT RUN/BLOCKED; external data.js and emq-data.js content validation BLOCKED until those files are available in the workspace.
+- Next work continues directly from Candidate295 using a uniquely named child candidate for any source changes.
