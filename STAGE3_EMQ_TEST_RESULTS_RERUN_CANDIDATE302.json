@@ -1,0 +1,43 @@
+{
+  "candidate": "Candidate302",
+  "passed": 9,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "valid payload",
+      "status": "PASS"
+    },
+    {
+      "name": "missing packed payload",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported version",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate EMQ work ID",
+      "status": "PASS"
+    },
+    {
+      "name": "AMQ work ID collision",
+      "status": "PASS"
+    },
+    {
+      "name": "AMQ song ID collision",
+      "status": "PASS"
+    },
+    {
+      "name": "broken work association",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed song record",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid audio URL payload remains ready but yields no playable rows",
+      "status": "PASS"
+    }
+  ]
+}
