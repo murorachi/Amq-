@@ -1,14 +1,8 @@
-# NEXT_TASK.md
+# NEXT_TASK.md — Stage 5
 
-## Stage 4 acceptance blockers (do not mislabel as complete)
-1. Recover the exact matching `data.js` and `emq-data.js`; record provenance, byte size and SHA-256.
-2. Run real-data schema, cross-source ID, song-to-work association, audio eligibility and real AMQ/EMQ/MIX pool validation.
-3. Establish a working browser harness and execute full initialization/runtime/console/network E2E.
-4. Run Candidate299 route matrix and Candidate301 custom-list CRUD/import/export/backup-restore regressions.
-5. Upload Candidate302 HTML to the Stage 4 branch, download it back, and compare SHA-256.
-6. Update this status only after each item has actual evidence. Candidate295 remains the formal baseline; do not promote Candidate302 without acceptance evidence.
-
-## Current verified synthetic coverage
-- Catalog validator: 11/11 PASS.
-- AMQ/EMQ/MIX pool, blacklist and audio filtering: 11/11 PASS.
-- EMQ loader synthetic suite: 9/9 PASS.
+1. 使用者在本機執行 `stage5_local_catalog_audit.cjs`，只回傳 JSON，不上傳大型資料檔。
+2. 核對實際 `data.js`／`emq-data.js` 的版本、大小、SHA-256 是否配對。
+3. 依實際報告處理格式不相容、ID 衝突、作品關聯或音訊欄位問題；不猜格式、不改原始資料。
+4. 完成真實資料驗證後，執行瀏覽器初始化、AMQ/EMQ/MIX、播放、路由、CRUD、備份還原驗收。
+5. 完成 Candidate302 HTML 上傳及遠端下載 SHA-256 比對。
+6. Candidate295 仍為正式基準；未取得驗收證據前不升格 Candidate302。
