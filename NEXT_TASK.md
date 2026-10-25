@@ -41,3 +41,17 @@ Candidate302 remains formal baseline:
 3. Run lifecycle pairing/runtime checks for the highest-risk modal/grid/dock/route scripts.
 4. Run CSS computed-style comparisons for a small high-impact shortlist.
 5. Continue only evidence-backed consolidation; no deletions approved yet.
+
+
+## Batch 5 completed / Batch 6 next
+- User-directed skip: remote HTML upload/hash and full-app E2E were not retried; remain BLOCKED/NOT RUN.
+- Static lifecycle scan: 70 inline scripts; 14 high-priority candidates documented. Counts are not proof of leaks.
+- Chromium computed-style probe passed on present static DOM/CSS at 1440x900, scripts removed, zero page errors. Dynamic Song Select/workspace elements remain untested.
+- Local artifacts: `BATCH5_LIFECYCLE_COMPUTED_STYLE_REPORT_20261025.md`, `BATCH5_LIFECYCLE_STATIC_AUDIT_20261025.json`, `BATCH5_COMPUTED_STYLE_RESULTS.json`, `AMQ_Batch5_Lifecycle_ComputedStyle_Candidate302_20261025.zip`.
+
+## Batch 6 priority
+1. Build a non-destructive runtime instrumentation harness for observer/listener/timer creation and cleanup around the highest-risk scripts; exercise repeated route toggles and detect duplicate initialization.
+2. Inspect actual lifecycle branches for multiplayer global intervals, Candidate210 observers, Candidate71 init polling, modal guard observers and Candidate99 document/media listeners.
+3. Safely mount only the required dynamic DOM fragments to extend computed-style checks, keeping all production data and user storage out of scope.
+4. Continue evidence-backed integration/deletion ledger; no deletion approved yet.
+5. Remote HTML and full-app data-asset blockers remain skipped until a viable transfer/input path is available.
