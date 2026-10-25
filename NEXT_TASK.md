@@ -297,3 +297,9 @@ Candidate302 remains formal baseline:
 4. Recheck cover fallback visual state, actual audio/video playback and persistence across reload. These remain BLOCKED, not PASS.
 5. Do not proceed to Candidate114 timer reduction or Candidate158 observer narrowing until media/cover/storage regression is validated. Workspace ownership mapping may be prepared without code changes, but no Workspace cleanup batch should be promoted ahead of this acceptance.
 6. Candidate326 remains unpromoted. Candidate302 formal baseline and Candidate320 rollback unchanged. Candidate HTML remote upload/hash verification remains BLOCKED.
+
+
+## Batch30 next task
+- Continue from Candidate327, but do not promote it. The user will perform real local-browser checks for cover/fallback, media playback, and native persistence.
+- Next cleanup focus: Workspace shell/frame/actions/custom-list workflow. Build a single-owner map for DOM subtrees, route interception, handlers, observers, timers, and persistence; then integrate duplicate responsibility and delete the superseded implementation in grouped batches.
+- Preserve Candidate302 and Candidate320 unchanged. Full E2E and remote candidate HTML hash verification remain NOT RUN / NOT VERIFIED.
