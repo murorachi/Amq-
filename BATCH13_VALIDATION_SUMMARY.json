@@ -1,0 +1,19 @@
+{
+  "batch": 13,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "candidate": "amq_learning_tool_v82_86_19_candidate308_home_mobile_orphan_css_cleanup_20261025.html",
+  "candidate_sha256": "89e7829e8228e3b4ed1061657e6c2f7245496e4dd6e158344a6c6c76518b4d67",
+  "candidate_bytes": 1665019,
+  "removed_rules": 7,
+  "removed_declarations": 10,
+  "bytes_removed": 231,
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_ids": "PASS 0",
+    "computed_style": "PASS 6/6 zero diffs",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "BLOCKED"
+  },
+  "formal_baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+}
