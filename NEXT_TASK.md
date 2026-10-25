@@ -310,3 +310,10 @@ Candidate302 remains formal baseline:
 - Inspect Candidate15's remaining setWorkspace/init/visibility Observer responsibilities against Candidate76/77/82. Preserve unique action routes that Candidate82 does not map.
 - Next inspect Candidate16 custom-list workflow for duplicate event delegation, observers and timers. Preserve `customListsStoreV1`, member toggling, recovery, and persistence semantics.
 - Browser interaction, real media, external covers/fallback, native storage, and Candidate HTML upload/hash remain NOT RUN / NOT VERIFIED. User will test locally; do not keep chasing the blocked browser origin/DNS environment.
+
+
+## Batch33 update — next task
+- Continue from Candidate330. Do not modify Candidate302 or Candidate320.
+- Audit Candidate16 custom-list workflow against the formal CRUD/membership API. Check whether legacy-manager fallback and dual catalog-grid/Song Select card support are still required before deleting any large block. Preserve `customListsStoreV1`, member toggle, error handling and persistence semantics.
+- Then map Candidate15 visibility Observer against Candidate76/77 shell/frame lifecycle. Do not delete route sync based only on similar names or broad observer overlap.
+- Browser E2E/media/covers/native persistence remain NOT RUN for local user acceptance. Candidate330 HTML upload/hash remains NOT VERIFIED.
