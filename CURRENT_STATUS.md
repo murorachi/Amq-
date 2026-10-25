@@ -323,3 +323,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - BLOCKED: visible UI click test because the legacy control is inside hidden `#amqHomeOverlay`; external cover requests blocked. NOT RUN: real audio/video playback and persistent storage.
 - Candidate326 is experimental and not promoted. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint. HTML artifact upload and remote SHA verification are BLOCKED because the available GitHub connector writes text content but has no direct local-file upload action.
 - Local reports: `AMQ_BATCH27_CANDIDATE325_ORPHAN_CSS_CLEANUP_20261025.md`; `AMQ_BATCH28_CANDIDATE326_SONGSELECT_OWNERSHIP_CLEANUP_20261025.md`. GitHub summaries committed separately.
+
+
+## 2026-10-25 — Batch29 Candidate326 可見 UI 與路由回歸補充
+- 修正前一輪的保守判定：已在 Chromium 隔離測試副本中透過真實可見操作點擊 `#amqMainIcon`，再點擊可見的 `#amqHomePrimaryNav [data-home-action="catalog"]`。Song Select route active、stage visible、180 rows，PASS。
+- PASS：AMQ mode 180/180 source=amq；EMQ mode 180/180 source=emq；MIX 搜尋 `Shiosai no Melody` 命中 EMQ row ID 2000000001；Movie filter 顯示 5,137 首，1980 decade filter 顯示 2,813 首；點擊 row 後 currentSong=45305；點擊可見 `#c99Back` 返回 home，route class 移除、audioDock relative/46px、home player slot 46px。
+- PASS：0 uncaught page errors。測試副本使用實際資料檔內容，但仍是 opaque about:blank + memory storage shim。
+- BLOCKED：ANN/VNDB DNS `ERR_NAME_NOT_RESOLVED`，封面載入/fallback 未能確認；真實音訊/影片播放未驗證；原生持久化未驗證。
+- 嘗試 localhost 與 file URL 導航均被瀏覽器政策阻擋 `ERR_BLOCKED_BY_ADMINISTRATOR`，因此無法在本環境完成可信 origin 測試。
+- 本輪無應用程式碼修改。Candidate326 不升格；Candidate320 rollback、Candidate302 formal baseline 不變。
+- 報告：`AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`。
