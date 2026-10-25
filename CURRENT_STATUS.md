@@ -84,3 +84,11 @@
 - BLOCKED: paired data.js and emq-data.js are absent from the current working environment; browser navigation was blocked by the managed runtime. Do not represent these as application failures or passes.
 - Candidate295 remains a validation candidate only, not a formally accepted single-file release. Candidate277 remains an earlier user-authorized baseline record; do not overwrite or conflate the two identities.
 - No application source/data/storage schema was modified. Report: reports/stage4-candidate295-core-static-acceptance-20261025/STAGE_4_CANDIDATE295_CORE_STATIC_ACCEPTANCE_20261025.md.
+
+
+## Stage 4.1 — Candidate295 local acceptance tool v1.1 (2026-10-25)
+- Added a new local tool version using Candidate295's actual API names: loadDB, useDB, randomSong, songPoolForModeV857 and songSourceV857.
+- Read-only diagnostics added for __aniEmqAPI ready/count/workCount/getRows, AMQ/EMQ/MIX pool sizes, and custom-list API presence. No CRUD mutations or audio playback are triggered automatically.
+- Tool HTML: 19,462 bytes; SHA-256 8272523986420abef4f1820856fc2c81021941d28b67178b3130687e9f5e2b06. ZIP: 10,204 bytes; SHA-256 285dac12c163a55ef1ed08213fc02743d6c4b60d4bfdeea09635aa2f0368bb37.
+- PASS: Node.js syntax check, tool content assertions, ZIP integrity, and Candidate295 frozen snapshot byte/hash equality. NOT RUN: actual local execution with matching data.js/emq-data.js; browser interactions remain NOT RUN/BLOCKED.
+- Report: reports/stage4-1-local-acceptance-tool-v11-20261025/STAGE_4_1_LOCAL_ACCEPTANCE_TOOL_V11_20261025.md.
