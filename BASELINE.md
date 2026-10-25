@@ -95,3 +95,9 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - Candidate295 source inspected during the Stage 5 dependency inventory: 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
 - This note does not change the active baseline decision above. Candidate277 remains the formal working baseline; Candidate295 is not promoted by this inventory branch.
 - No application source edits or deletions were made. Browser runtime checks remain NOT RUN/BLOCKED; see the Stage 5.5 sections of the Candidate295 dependency inventory report.
+
+
+## Candidate277 source retrieval check (2026-10-25)
+- Attempted branch search, exact filename/version code search, and fetch of the expected Candidate277 HTML path from the Candidate295 inventory branch.
+- No matching branch/indexed file was returned; expected path returned 404 / NOT_FOUND. This records a retrieval block only and does not change the previously authorized baseline decision.
+- Do not edit Candidate277 until the actual source is recovered and its SHA-256 is verified. Candidate295 remains validation-only.
