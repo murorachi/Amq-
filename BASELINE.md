@@ -215,3 +215,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate321 remains unchanged/not promoted; SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`.
 - Actual user-provided AMQ/EMQ data scripts load in a Chromium test copy (DB anime=9,516, songs=38,821, EMQ works=6,645; startup has no JS errors). Formal UI navigation remains blocked in opaque `about:blank` origin; full UI E2E remains incomplete.
 - See `AMQ_BATCH26_ROUND4_CANDIDATE321_REAL_DATA_BROWSER_TEST_20261025.md`.
+
+
+### Batch26 Round 4 supplement — Candidate324 init race candidate (2026-10-25)
+- Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate321 remains unchanged SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`; Candidate320 remains rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate324 experimental artifact SHA-256 `3308f0a97a0a8aaa63a464a0d49bee2dffa5219cb6c59add85cf3d62523d6075`; not promoted. Fixes Candidate210 route-time initialization race; repeated browser test 6/6 passed row/image binding and selection.
+- Cover load/fallback, real media playback, persistent storage, Candidate114 timer reduction and Candidate158 observer narrowing remain unverified/not run. See `AMQ_BATCH26_ROUND4_CANDIDATE324_INIT_RACE_ACCEPTANCE_20261025.md`.
