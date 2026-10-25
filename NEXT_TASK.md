@@ -148,3 +148,13 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 - Custom-list fallback readers appear not to be needed for normal script order, but may be degraded-read behavior if the canonical store fails. Keep them until explicit tests decide otherwise; eventual preferred integration is one compatibility adapter, not four separate fallback branches.
 - Route guards remain untouched until a single owner explicitly preserves body-class behavior and the regression matrix can be executed.
 - If Candidate277 remains unavailable, report the block rather than fabricating a replacement or silently switching baselines.
+
+
+## Stage 5.7 — Continue from formal Candidate295 baseline (2026-10-25)
+1. Treat Candidate295 as the sole formal working baseline; do not search for Candidate277 or re-open the prior baseline decision.
+2. Preserve the exact baseline file and SHA-256; every code edit must create a uniquely named child candidate.
+3. Continue the static dependency inventory and regression planning from Candidate295, prioritizing route-owner consolidation design and custom-list store fallback analysis.
+4. Before deleting any route guard or fallback, trace direct and indirect references, initialization, events, body classes, storage compatibility, and runtime behavior.
+5. Run available static tests; mark browser-only tests NOT RUN/BLOCKED until actually executed. Do not claim unverified functionality passes.
+6. Keep AMQ and EMQ schemas distinct. Verify data.js and emq-data.js separately when they become available; do not infer their contents.
+7. Update BASELINE.md, CURRENT_STATUS.md, NEXT_TASK.md, reports, and GitHub remote readback for each accepted stage.
