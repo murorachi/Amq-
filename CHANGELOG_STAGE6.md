@@ -157,3 +157,13 @@
 - Candidate316 SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317, 1,646,612 bytes, derived from Candidate315 (5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621); 521 bytes removed.
 - Removed Candidate72's duplicate panel-state writer and body-class observer; preserved frame placeholder creation. Candidate76/77 remain panel-state owners.
 - PASS: JS 68/68, CSS parse, duplicate IDs and isolated Chromium dock open/Escape/direct-class regression. Full-app E2E NOT RUN; Candidate HTML upload/hash NOT VERIFIED.
+
+## 2026-10-25 — Batch 22: Redundant ranking-frame bootstrap removal
+- Candidate317 SHA-256 e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9, 1,645,902 bytes, derived from Candidate316 (4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317); 710 bytes removed.
+- Deleted the now-empty Candidate72 ranking-frame bootstrap and Candidate71's fallback frame creation already owned by Candidate70. JS syntax 67/67, CSS parse, duplicate IDs and isolated Chromium frame/dock tests PASS. Full-app E2E NOT RUN.
+- Candidate317 not promoted; formal baseline Candidate302 unchanged; HTML upload/hash NOT VERIFIED.
+
+## 2026-10-25 — Batch 23: Duplicate workspace Escape handler removal
+- Candidate318 SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029, 1,645,636 bytes, derived from Candidate317 (e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9); 266 bytes removed.
+- Removed Candidate76's Escape handler intercepted by earlier Candidate70 capture handler; preserved close button, state observer and geometry sync. JS syntax 67/67, CSS, duplicate IDs and isolated Chromium Escape/close tests PASS. Full-app E2E NOT RUN.
+- Candidate318 not promoted; formal baseline Candidate302 unchanged; HTML upload/hash NOT VERIFIED.
