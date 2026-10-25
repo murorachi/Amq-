@@ -526,3 +526,10 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed three local bindings that appeared only in their declarations: `input` in `v36-quiz-fixes`, `box` in `v39-enter-and-avatar-fix`, and `settingsBody` in `v40-buffer-setting-and-avatar-alignment`.
 - PASS: 65 executable inline JS syntax checks; targeted binding/scope assertions; ZIP integrity. Browser interaction BLOCKED; full functional regression NOT RUN; Candidate345 HTML remote upload/hash readback NOT RUN.
 - Candidate345 is experimental. Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
+
+## Batch 50 — Candidate346（2026-10-26）
+- Parent Candidate345 SHA-256: `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
+- Candidate346: `amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html`, 1,625,225 bytes; SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`.
+- Removed five declaration-only local helpers/constants from two scripts: `norm` from v60; `getPlanMeta`, `setPlanMeta`, `seasonOrder`, `seasonLabels` from learning-system v72.
+- PASS: 65 inline JS syntax checks, targeted reference/scope assertions, ZIP integrity. Browser interaction BLOCKED; full regression NOT RUN; Candidate346 HTML remote upload/hash readback NOT RUN.
+- Candidate346 is experimental. Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
