@@ -246,3 +246,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - AMQ/EMQ modes, MIX search, type/decade filters and row selection PASS in that same test copy.
 - External cover/fallback, real media playback and native persistent storage remain BLOCKED by DNS/origin restrictions. Do not promote Candidate326 based on this partial acceptance.
 - Report files: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`.
+
+## 2026-10-25 — Batch29 Candidate326 visible UI regression
+- Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint; Candidate326 remains experimental.
+- Visible Song Select entry and return path PASS in an isolated browser test copy using visible menu clicks and visible `#c99Back`.
+- AMQ/EMQ modes, MIX search, type/decade filters and row selection PASS in that test copy.
+- External cover/fallback, real media playback and native persistent storage remain BLOCKED by DNS/origin restrictions. Do not promote Candidate326 based on partial acceptance.
+- Report: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`.
