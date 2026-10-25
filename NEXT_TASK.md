@@ -334,3 +334,9 @@ Candidate302 remains formal baseline:
 - Candidate15 visibility Observer and Candidate76/77 lifecycle were retained because current evidence does not prove duplicate ownership.
 - Tests: PASS, 65 inline scripts syntax checked with 0 errors; PASS, 109 style blocks raw-brace check; PASS, 729 ID attributes and 17 duplicate-ID kinds unchanged from Candidate331; PASS, key membership/storage code retained. Browser E2E, native persistence, media playback, HTML upload/remote hash remain NOT RUN.
 - Experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint. Report: `AMQ_BATCH35_CANDIDATE332_CUSTOM_LIST_GRID_SCOPE_CLEANUP_20261026.md`.
+
+
+## Next task after Batch35
+- Continue from Candidate332 (SHA-256 `dd4b9ca46fe3303232f8f455e1461c3e638fc339fa7440819d55df86a737f10d`). Map every source of `__aniGetActiveViewV82()`, body class changes, and `hidden`/class mutations used by Candidate15 `syncWorkspaceVisibility()`; compare with Candidate76/77 route/shell lifecycle before considering Observer changes.
+- Do not delete Candidate16 legacy-manager path: current `#grid` catalog cards are rendered live, lack direct work IDs, and use `.cardManage`/`#practiceManageBackdrop`; Song Select rows use the canonical membership API. Keep both paths until product behavior explicitly changes.
+- Candidate302 remains formal baseline; Candidate320 remains immutable rollback checkpoint. Candidate332 is experimental. Browser E2E/media/native persistence and Candidate332 HTML upload/remote hash remain NOT RUN.
