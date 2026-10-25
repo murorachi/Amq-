@@ -106,3 +106,11 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 5. For each symbol, record direct references, indirect/dynamic references, event entry points and initialization ownership. “No direct text match” is not sufficient evidence for deletion.
 6. No app source edits until the dependency map identifies a minimal, reversible change. Candidate295 remains a validation target; preserve Candidate277/Candidate276 baseline history.
 7. Browser/data tests remain NOT RUN/BLOCKED until matching data assets and an allowed browser runtime are available.
+
+
+## Stage 5.1 handoff — next dependency audit actions (2026-10-25)
+1. Route wrappers: inspect all three layers in source order; map install guards, captured original functions, each route destination and body-class side effects. Design one explicit router owner only after proving behavior parity.
+2. AMQ custom-list fallbacks: enumerate every direct read of `aniCustomPracticeListsV1` and test whether execution can occur before `__aniCustomListsStoreV1` is installed. If not, route reads through the canonical API; preserve safe fallback only where needed.
+3. Preserve AMQ and EMQ list schemas separately; do not merge `animeIds` with `workIds/vndbIds/songIds`.
+4. Treat detailed quiz history, history summary and target summary as separate products until data lineage proves redundant work. Investigate duplicate scans and save scheduling without changing stored schemas.
+5. Continue no-deletion policy until direct/indirect/dynamic references and event/init ownership are evidenced. All browser-only behavior remains NOT RUN/BLOCKED.
