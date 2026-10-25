@@ -238,3 +238,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate326 Batch28 combined Song Select lifecycle integration: 1,645,785 bytes; SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`; unpromoted.
 - Candidate326 browser evidence is isolated: real data startup and synthetic route/list/selection PASS; visible UI navigation is BLOCKED by hidden legacy control; external cover, actual media playback and persistent storage are not verified.
 - Candidate325/326 HTML remote SHA verification has not occurred; do not promote either.
+
+
+## 2026-10-25 — Batch29 Candidate326 visible UI regression
+- Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint; Candidate326 remains experimental.
+- Visible Song Select entry and return path PASS in an isolated browser test copy using visible menu clicks and visible `#c99Back`.
+- AMQ/EMQ modes, MIX search, type/decade filters and row selection PASS in that same test copy.
+- External cover/fallback, real media playback and native persistent storage remain BLOCKED by DNS/origin restrictions. Do not promote Candidate326 based on this partial acceptance.
+- Report files: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`.
