@@ -48,3 +48,10 @@
 - Chromium computed-style probe PASS on actual static markup/CSS at 1440x900 with inline scripts removed; zero page errors. Dynamic nodes are absent before initialization and were not falsely treated as unused.
 - Per user direction, remote artifact transfer and full-app E2E were skipped; status remains BLOCKED/NOT RUN.
 - No application source changes/deletions; DELETE=0.
+
+
+## 2026-10-25 — Batch 6 runtime lifecycle stress probe
+- Ran 12 selected Candidate302 inline scripts individually in Chromium with synthetic APIs and actual static markup/CSS; 12/12 initialized without uncaught errors, 0 page errors.
+- Applied 20 synthetic route/body-class/navigation/resize cycles per script; no net active listener/observer growth was observed in this harness.
+- Manual reinjection added registrations for eight scripts. This is not proof of production route reinjection or a memory leak; these remain integration candidates pending load-topology evidence.
+- Active multiplayer session poll/socket cleanup and full-app E2E remain NOT RUN. Candidate302 unchanged; no deletions.
