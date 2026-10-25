@@ -318,3 +318,12 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - PASS: Node `--check` executed against 65 executable inline scripts in Candidate334; 0 syntax errors. One application/json script was correctly excluded from JS syntax checks.
 - PASS: static ID scan found 729 id attributes, 708 unique values, and 16 duplicate-ID value kinds. This is a recorded pre-existing risk, not a browser test and not modified in this audit.
 - Still NOT RUN: browser E2E, persistence, media, multiplayer E2E, Candidate334 HTML upload and remote SHA verification.
+
+
+## 2026-10-26 — Batch38 Candidate335
+- Candidate335 derived from verified Candidate334 SHA-256 `e19b8b6ee79cf988b89f84c4e33a1bbcf83fcc90e9a85d60828db76c01e62eeb`.
+- Removed Candidate15 `clickHome(action)` and its terminal `runAction()` fallback; only inline script `amq-workspace-prototype-15-script` changed.
+- Candidate335 SHA-256: `6b06c72d769204f38f836c8c5e9d4d15af798258d4772fb27d72dd820d830331`; size 1,631,485 bytes.
+- PASS: parent hash verified; 65 executable inline scripts passed Node syntax checks; all ten currently emitted action IDs remain; only Candidate15 script body changed.
+- NOT RUN: browser click-through/E2E, storage persistence, real media, multiplayer E2E, Candidate335 HTML upload and remote hash verification.
+- Candidate335 is experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
