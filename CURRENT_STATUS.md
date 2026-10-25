@@ -166,3 +166,12 @@
 - Candidate277 retrieval is no longer a blocker and will not be searched for again. Candidate277/Candidate276 are historical only.
 - Test status remains: 67/67 executable inline JS syntax checks PASS (prior execution); duplicate DOM ID scan PASS (prior execution); Candidate295 CSS parse and browser interaction tests NOT RUN/BLOCKED; external data.js and emq-data.js content validation BLOCKED until those files are available in the workspace.
 - Next work continues directly from Candidate295 using a uniquely named child candidate for any source changes.
+
+
+## Stage 5.8 — Re-run static validation on formal Candidate295 (2026-10-25)
+- Re-read local source and recomputed SHA-256: 1,720,917 bytes; aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. Unchanged.
+- PASS: Node.js --check for all 67/67 executable inline JavaScript blocks; excluded 2 external scripts and the inline application/json data block.
+- PASS: tinycss2 1.5.1 parsed all 109 style blocks; 2,808 top-level qualified CSS rules counted; zero stylesheet parse errors and zero declaration parse errors.
+- PASS: DOM ID scan found 271 IDs, all unique; zero duplicates.
+- NOT RUN/BLOCKED: browser visual/layout and route interaction; custom-list CRUD/storage reload; audio/live API/multiplayer; AMQ/EMQ external data validation. /mnt/data/data.js and /mnt/data/emq-data.js are not present in this workspace.
+- No app source changed. This was a read-only validation stage.
