@@ -1,0 +1,16 @@
+{
+  "baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "candidate_sha256": "afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21",
+  "candidate": "amq_learning_tool_v82_86_15_candidate304_opencc_and_diagnostic_cleanup_20261025.html",
+  "changed_scripts": [
+    "ani-chinese-title-system-v8237",
+    "ani-emq-chinese-titles-v8259"
+  ],
+  "deleted_script": "v41-classification-diagnostic",
+  "tests": {
+    "js_syntax": "66/66 PASS",
+    "opencc": "3/3 PASS",
+    "emq": "9/9 PASS"
+  },
+  "remote_html": "BLOCKED"
+}
