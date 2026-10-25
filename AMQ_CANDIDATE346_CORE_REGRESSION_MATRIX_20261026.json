@@ -1,0 +1,65 @@
+{
+  "artifact": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "size_bytes": 1625225,
+  "sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "overall_core_regression": "INCOMPLETE",
+  "browser_environment": "BLOCKED: ERR_BLOCKED_BY_ADMINISTRATOR on file:// and localhost",
+  "rows": [
+    {
+      "domain": "AMQ/EMQ/MIX mode and source switching",
+      "candidate346_status": "NOT RUN",
+      "existing_evidence": "Static source marker smoke PASS; historical isolated route/storage evidence is not full mode/source E2E.",
+      "gap": "Real app mode switching and source selection were not exercised."
+    },
+    {
+      "domain": "Player, play/pause, skip, next question",
+      "candidate346_status": "NOT RUN",
+      "existing_evidence": "Static source marker smoke PASS; 65 inline JS syntax checks PASS.",
+      "gap": "Real audio playback and player controls were not exercised."
+    },
+    {
+      "domain": "Custom-list create/rename/delete/add/remove/persistence",
+      "candidate346_status": "NOT RUN",
+      "existing_evidence": "Historical isolated storage repository harness 6/6 PASS with synthetic in-memory storage on Candidate302.",
+      "gap": "Candidate346 full-app CRUD and reload persistence not exercised."
+    },
+    {
+      "domain": "Backup/restore and failure protection",
+      "candidate346_status": "NOT RUN",
+      "existing_evidence": "Historical isolated storage/import rollback checks passed on Candidate302 with synthetic storage.",
+      "gap": "Candidate346 real-app backup/restore and failure recovery not exercised."
+    },
+    {
+      "domain": "Workspace route/actions/sidebar",
+      "candidate346_status": "BLOCKED",
+      "existing_evidence": "Candidate341/346 static ownership assertions PASS; historical isolated route matrix 15/15 PASS with stubbed dependencies on Candidate302.",
+      "gap": "Actual click, ESC, resize, Song Select and content-panel interaction cannot be tested in the current browser environment."
+    },
+    {
+      "domain": "Multiplayer lifecycle",
+      "candidate346_status": "NOT RUN",
+      "existing_evidence": "Historical fake-server isolated lifecycle test passed for selected classic/team init, polling stop, WebSocket close and local release on Candidate302.",
+      "gap": "Candidate346 live app multiplayer lifecycle not exercised."
+    },
+    {
+      "domain": "Inline JavaScript syntax",
+      "candidate346_status": "PASS",
+      "existing_evidence": "65 executable inline JS blocks passed node --check with zero syntax errors.",
+      "gap": "Syntax does not prove runtime correctness."
+    },
+    {
+      "domain": "Core source marker preservation",
+      "candidate346_status": "PASS",
+      "existing_evidence": "11 static marker groups passed for AMQ/EMQ/MIX, quiz flow, player, custom lists, backup/restore, workspace APIs/actions, multiplayer markers and navigation event.",
+      "gap": "Marker presence is not functional validation."
+    }
+  ],
+  "limitations": [
+    "Marker presence does not prove behavior works.",
+    "Browser interaction remains blocked by ERR_BLOCKED_BY_ADMINISTRATOR.",
+    "AMQ/EMQ/MIX end-to-end, CRUD persistence, backup/restore failure protection, media playback, workspace click/ESC behavior, and multiplayer live lifecycle are not validated by this smoke test."
+  ],
+  "release_decision": "Do not claim full core acceptance. Keep Candidate346 experimental; proceed with final residue scan while browser-dependent cases remain explicitly blocked/not run."
+}
