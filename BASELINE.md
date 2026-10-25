@@ -393,3 +393,6 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Static marker smoke passed for 11 groups, but full functional regression remains incomplete.
 - AMQ/EMQ/MIX E2E, player, custom-list persistence, backup/restore and multiplayer remain NOT RUN; workspace browser interaction remains BLOCKED.
 - Candidate346 is not promoted. Candidate302 remains formal baseline.
+
+## Final residue scan — Candidate346 (2026-10-26)
+- Fourteen items classified using existing evidence. Browser-dependent candidates remain NEEDS CONFIRMATION; Candidate302 remains formal baseline.
