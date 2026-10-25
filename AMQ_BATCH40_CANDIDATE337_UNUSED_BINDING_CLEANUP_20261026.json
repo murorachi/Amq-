@@ -1,0 +1,21 @@
+{
+  "batch": 40,
+  "candidate": "Candidate337",
+  "parent": "Candidate336",
+  "parent_sha256": "b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a",
+  "artifact": "amq_learning_tool_v82_86_48_candidate337_batch40_remove_unused_candidate186_binding_20261026.html",
+  "size_bytes": 1631615,
+  "sha256": "901322cb3af2d44f40bdeb9e23fdeb3048003d6d760d3e757bf2d93394d1a39e",
+  "change": "Removed one unused local binding in candidate186-cover-recovery-runtime.",
+  "validation": {
+    "exact_match_precondition": "PASS",
+    "declaration_absent_after_edit": "PASS",
+    "recovery_entry_point_retained": "PASS",
+    "closing_body_html_retained": "PASS",
+    "inline_javascript_syntax": "PASS: 65 executable inline scripts checked with node --check; zero syntax errors",
+    "browser_interaction": "NOT RUN: browser environment previously blocked by ERR_BLOCKED_BY_ADMINISTRATOR",
+    "github_html_upload_remote_hash": "NOT RUN"
+  },
+  "baseline": "Candidate302 unchanged",
+  "rollback": "Candidate320 unchanged"
+}
