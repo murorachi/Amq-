@@ -554,3 +554,8 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - KEEP: Candidate94 membership filter and Candidate186 modal backdrop/Escape handlers.
 - NEEDS CONFIRMATION: C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, v33 `showToast`, and Candidate84 dock/sidebar CSS. `amqHomeIconOnly` has zero occurrences in Candidate346 and is not an active deletion item.
 - Stage 3 status: items classified with known limitations. Core browser regression remains incomplete; Candidate346 HTML remote upload/hash readback remains NOT RUN.
+
+## Experimental handoff package — 2026-10-26
+- Local package created: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`, 1,323,411 bytes; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`; ZIP integrity PASS.
+- Package includes Candidate346, immediate rollback Candidate345, Candidate320 rollback checkpoint, Batch47–50 reports, static smoke, core regression matrix, final residue scan, and manifest.
+- This is an experimental handoff only. Candidate302 remains the formal baseline. Candidate346 HTML and ZIP remote upload/readback have not been performed.
