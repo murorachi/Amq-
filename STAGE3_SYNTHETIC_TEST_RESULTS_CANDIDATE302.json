@@ -1,0 +1,32 @@
+{
+  "candidate": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+  "manifest": {
+    "status": "PASS",
+    "entries": 14,
+    "mismatches": 0
+  },
+  "inline_js_syntax": {
+    "status": "PASS",
+    "checked": 67,
+    "passed": 67
+  },
+  "synthetic_emq_loader": {
+    "status": "PASS",
+    "cases": 9,
+    "failed": 0
+  },
+  "candidate301_regression_probe": {
+    "status": "EXPECTED_FAIL",
+    "detail": "Duplicate-work payload leaves workCount nonzero while ready=false."
+  },
+  "real_data": {
+    "status": "BLOCKED",
+    "files_found": []
+  },
+  "browser_e2e": {
+    "status": "NOT RUN"
+  },
+  "github_html_upload": {
+    "status": "BLOCKED"
+  }
+}
