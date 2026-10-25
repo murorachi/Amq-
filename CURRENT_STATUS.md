@@ -469,3 +469,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - NOT RUN: real-browser state/geometry/ARIA/click/ESC/content-panel/resize regression. GitHub Candidate340 HTML upload and remote SHA-256 read-back NOT RUN; do not treat this candidate as promoted.
 - Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged. Candidate339 remains available as immediate rollback.
 - Report: `AMQ_BATCH44_CANDIDATE340_WORKSPACE_OWNER_MATRIX_AND_SIDEBAR_CONSOLIDATION_20261026.md`; tests: `AMQ_BATCH44_CANDIDATE340_TEST_RESULTS_20261026.json`.
+
+
+## Candidate340 ownership matrix precheck (2026-10-26)
+- Reverified Candidate340 source locally: 1,627,175 bytes; SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
+- Created the node-level create/event/geometry ownership matrix: `AMQ_WORKSPACE_OWNER_MATRIX_CANDIDATE340_BATCH45_PRECHECK_20261026.md` and JSON companion. Both were committed to the stage6 branch and read back exactly.
+- Static findings: Candidate70 has no current `[data-ws]` binding; Candidate77 has no document click interceptor; Candidate76 still owns the dock capture click handler; Prototype15 has not yet taken over `[data-ws]` clicks. Candidate94 includes a required membership-filter selector, so only its confirmed dock rules can be isolated.
+- Candidate193 is a navigation wrapper, not a direct `[data-home-action]` click listener in the inspected source; Candidate60 and Candidate82 contain separate capture-phase event behavior.
+- PASS: source hash verification and static source inspection. NOT RUN: browser interaction regression. No app HTML was modified in this matrix-only step.
