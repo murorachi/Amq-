@@ -1,30 +1,30 @@
-# NEXT_TASK.md — Batch 2 dependency tracing
+# NEXT_TASK.md — Batch 3 route/storage/lifecycle verification
 
-## Formal baseline
-Candidate302: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
-- Size: 1,720,249 bytes
-- SHA-256: `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`
-Candidate295 remains the immutable rollback point: `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+## Current baseline
+Candidate302 is the formal baseline by explicit user authorization and reported local verification:
+- `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
+- 1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate295 rollback: SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 
-## Batch 1 deliverables
-- `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.md` — feature classifications and evidence.
-- Local machine-readable companion: `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.json`.
-- Candidate302 static audit PASS: 67 inline executable JS blocks, 109 style blocks, 2,808 CSS rules, 271 unique IDs.
-- No application source modified; no direct deletions approved.
+## Batch 2 completed
+- Added static dependency report and evidence index; 10/10 source-evidence assertions PASS.
+- Identified route interception side-effect boundaries, AMQ custom-list canonical store/fallback readers, backup/restore compatibility, and distinct EMQ schema.
+- No application source edits/deletions. Browser runtime checks remain NOT RUN.
 
-## Batch 2 work order
-1. **Route ownership:** trace all route wrapper assignments and source order, caller/delegate, intercepted destinations, body-class changes, home-menu effects, mount/unmount and back-navigation effects.
-2. **Storage ownership:** for every literal storage key, record read/write/remove sites, canonical owner, schema, initialization timing, backup/restore coverage and data-loss risk.
-3. **Custom lists:** map store/API, membership adapter, selector state, batch actions, imported list paths, AMQ/EMQ schema boundary and compatibility fallbacks.
-4. **Lifecycle:** map event listeners, Mutation/Resize/IntersectionObserver creation and cleanup, timers/rAF creation and cancellation; distinguish string occurrences from actual live instances.
-5. **CSS ownership:** compare repeated selectors by declarations, specificity, media/query context, document order and actual DOM reachability; identify candidate merge groups without deleting yet.
-6. Mark each edge/evidence as source-confirmed, inferred, runtime-required or unresolved. Do not fabricate runtime proof.
-7. Update reports, `BASELINE.md`, `CURRENT_STATUS.md`, `NEXT_TASK.md` and changelog. Run tests matched to any future code changes.
-
-## Remaining global blockers
-- The Candidate302 HTML is not present on the Stage 6 GitHub branch yet. Remote artifact SHA-256 remains NOT VERIFIED.
-- Browser E2E/live audio cannot be claimed from static or synthetic checks.
-- No direct DELETE decision is currently supported by Batch 1 evidence.
+## Next actions, in order
+1. Resolve the remote artifact gap: Candidate302 HTML returns NOT_FOUND on `amq-stage6-static-audit-regression-20261025`; make the exact artifact available and verify remote SHA-256 if tooling/permissions permit.
+2. Build a route state-transition matrix for home/catalog/watchlist/quiz/song-select/workspace, including activeView, body/html classes, data attributes, navigation-event dispatch, home-menu close, and workspace panel state.
+3. Trace all `aniCustomPracticeListsV1` readers/writers and recovery keys, including import, full backup, legacy backup, restore rollback and fallback consumers. Do not alter user data.
+4. Create lifecycle registries for route/grid/modal/dock observers and timers; verify rebind/disconnect/clear paths in an isolated browser session.
+5. Compare high-impact repeated CSS selectors against actual DOM/computed style and media/route contexts. Do not delete based on counts.
+6. Only after runtime evidence, define a minimal consolidation plan and deletion ledger.
+7. Update status, baseline, changelog, tests and deliverable hashes; attempt GitHub upload and verify remote files.
 
 ## Definition of done
-The six cleanup goals require a complete feature inventory, dependency graph, canonical implementation map, deletion ledger with before/after evidence, reproducible regression matrix, and final HTML with verified remote hash. Candidate302 promotion alone does not satisfy them.
+All six cleanup goals remain incomplete until the full inventory, dependency map, canonical implementation map, deletion ledger, regression matrix and final single-file HTML with verified remote SHA-256 are available.
+
+## Known limits
+- Browser automation timed out in this environment; no Batch 2 browser E2E was run.
+- Candidate302 local verification is user-reported; case-by-case evidence is not recorded.
+- 495 AMQ songs lack media values in extractor slots 9/10/11; do not modify without upstream schema evidence.
+- Never overwrite Candidate302 or Candidate295. Any implementation candidate must have a unique filename and verified source/hash.
