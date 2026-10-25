@@ -148,3 +148,11 @@
 - Static dependency analysis: PASS. Browser routing, custom-list CRUD/persistence and backup/restore: NOT RUN. No deletion currently proven safe.
 - Formal working baseline remains Candidate277 as recorded in BASELINE.md. Candidate295 is a validation target only.
 - Report: reports/stage5-candidate295-feature-dependency-inventory-20261025/FEATURE_DEPENDENCY_INVENTORY_CANDIDATE295_20261025.md
+
+
+## Stage 5.6 — Baseline retrieval result (2026-10-25)
+- Attempted recovery of formal Candidate277 source through branch search, exact filename/version code search, and fetching the expected HTML path from the current branch.
+- Result: BLOCKED. No matching branch or indexed file result; expected file path returned HTTP 404 / NOT_FOUND. Candidate277 remains the formal baseline in documentation, but its actual source is not currently available at that location for edits or runtime tests.
+- Static Candidate295 timing review found no immediate call to setMode(custom-list) during playback module initialization; other three fallback consumers are declared after the canonical store script. This reduces the likelihood of a normal load-order dependency but does not prove fallback deletion is safe.
+- No application source changed. Browser tests remain NOT RUN. Candidate295 remains validation-only.
+- Updated report now includes Stage 5.6 retrieval evidence and revised fallback classification.
