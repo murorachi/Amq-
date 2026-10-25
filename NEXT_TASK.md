@@ -388,3 +388,12 @@ Candidate302 remains formal baseline:
 3. 若瀏覽器回歸通過，再測工作區內容面板、Escape、park/restore 與 Home 導航；語法檢查不等於互動驗收。
 4. Candidate302 正式基準與 Candidate320 回滾點保持不變。Candidate336 仍是實驗候選。
 5. Candidate HTML GitHub 上傳與遠端 SHA-256 核對仍未完成；上傳前核對分支、檔名及版本。
+
+
+## Batch40 結果與下一步（2026-10-26）
+
+- 嘗試用 Chromium Playwright 載入 Candidate336 的 file:// 與本機 HTTP URL，兩者都被執行環境回傳 `net::ERR_BLOCKED_BY_ADMINISTRATOR`；頁面未載入。
+- 因此 dock 開啟／收合、一般路由／Home、Song Select、桌面／窄視窗 computed style、資料持久化、媒體／多人 E2E 全部維持 NOT RUN。Batch40 不得標記互動驗收 PASS。
+- 本批沒有修改 HTML 或建立新候選。Candidate336 SHA-256：`b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
+- 下一步：在未被政策阻擋的互動瀏覽器中執行本報告 `AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.md` 列出的 1440×900 與 390×844 狀態矩陣，記錄 computed style、rect、ARIA、實際點擊與 console errors；取得證據前不再修改側欄邏輯。
+- Candidate302 正式基準與 Candidate320 回滾點保持不變；Candidate336 仍是實驗候選。
