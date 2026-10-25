@@ -1,0 +1,53 @@
+{
+  "candidate": "Candidate302",
+  "suite": "Stage 4 source-pool/audio/blacklist synthetic tests",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "AMQ mode returns only audio-qualified AMQ songs",
+      "status": "PASS"
+    },
+    {
+      "name": "EMQ mode returns only EMQ songs",
+      "status": "PASS"
+    },
+    {
+      "name": "MIX pool combines both sources without duplicating IDs",
+      "status": "PASS"
+    },
+    {
+      "name": "song blacklist applies to AMQ and EMQ",
+      "status": "PASS"
+    },
+    {
+      "name": "work blacklist applies to AMQ and EMQ",
+      "status": "PASS"
+    },
+    {
+      "name": "missing audio excludes AMQ song",
+      "status": "PASS"
+    },
+    {
+      "name": "audio-unavailable marker excludes matching audio signature",
+      "status": "PASS"
+    },
+    {
+      "name": "changed audio signature clears stale unavailable marker",
+      "status": "PASS"
+    },
+    {
+      "name": "EMQ not-ready excludes EMQ rows",
+      "status": "PASS"
+    },
+    {
+      "name": "empty source falls back to available source in mixed randomSong",
+      "status": "PASS"
+    },
+    {
+      "name": "no eligible source returns null",
+      "status": "PASS"
+    }
+  ]
+}
