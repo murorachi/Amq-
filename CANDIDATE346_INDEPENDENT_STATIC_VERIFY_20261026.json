@@ -1,0 +1,14 @@
+{
+  "artifact": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "size_bytes": 1625225,
+  "sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "executable_inline_scripts_checked": 65,
+  "js_syntax_errors": 0,
+  "id_attributes": 269,
+  "unique_id_values": 269,
+  "duplicate_id_values": 0,
+  "full_app_regression": "NOT RUN",
+  "browser_interaction": "BLOCKED",
+  "formal_baseline": "Candidate302",
+  "candidate_status": "experimental"
+}
