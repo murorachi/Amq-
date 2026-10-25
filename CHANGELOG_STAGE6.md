@@ -134,3 +134,9 @@
 - PASS: JS syntax 68/68, CSS parse 0 errors, duplicate IDs 0, Chromium computed style 5/5 scenarios with zero differences.
 - Full-app E2E NOT RUN; Candidate312 not promoted; formal baseline Candidate302 unchanged. Candidate HTML remote upload/hash remain NOT VERIFIED.
 
+## 2026-10-25 — Batch 18: Workspace route and Song Select event deduplication
+- Candidate313 SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a, 1,647,687 bytes, derived from Candidate312 (12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb); 457 bytes removed.
+- Removed two target-phase dock click listeners blocked by the existing document capture handler's stopImmediatePropagation; removed unreachable priorFocus state/restore path. Preserved aria-controls and remaining workspace handlers/observers.
+- Removed two no-op navigation guard retry timers after verifying immediate install and later guarded wrapper ordering.
+- PASS: JS syntax 68/68, CSS parse, duplicate IDs, isolated Chromium dock open/close and five route-wrapper scenarios with identical before/after behavior.
+- Full-app E2E NOT RUN; Candidate313 not promoted; formal baseline Candidate302 unchanged. Candidate HTML upload and remote SHA verification NOT VERIFIED.
