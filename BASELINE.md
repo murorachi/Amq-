@@ -22,3 +22,11 @@
 
 ## Rollback
 Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. Never overwrite either baseline file.
+
+
+## 2026-10-25 Batch 2 dependency trace
+- Candidate302 remains byte-identical: 1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Static evidence identifies the core `showView`, generic navigation wrapper, final Song Select route guard, in-place workspace mode, AMQ custom-list canonical store, backup allowlist, separate EMQ list schema, and high-density observer/timer/CSS areas.
+- Batch 2 source-evidence assertions: 10/10 PASS. Browser route E2E, computed-style checks, lifecycle instrumentation, and custom-list/backup restore interaction tests remain NOT RUN.
+- No application source changes or deletions in Batch 2; DELETE=0.
+- Full report and evidence JSON are being delivered as separate artifacts. Candidate302 HTML itself still returns NOT_FOUND on this branch; remote artifact/hash verification remains BLOCKED.
