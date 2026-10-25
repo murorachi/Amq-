@@ -479,3 +479,11 @@ Candidate302 remains formal baseline:
 - **Stop cleanup-only batches unless new, high-value dead code is proven.** Move to core regression and final dependency scan. Use existing isolated route/storage/multiplayer evidence rather than rerunning identical audits. Record the browser blocker once and proceed with available non-browser checks; do not invent PASS results.
 - Remaining runtime-dependent items: C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, v33 `showToast`; retain as NEEDS CONFIRMATION until evidence is available.
 - Four closure stages only: safe cleanup → core regression → final residue/dependency scan → formal release. No extra stages.
+
+
+## Next task — 2026-10-26
+- Continue from Candidate346, SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`. Candidate302 remains the formal baseline and Candidate320 remains the rollback checkpoint.
+- Static source-presence smoke passed for 11 groups; report files are committed and readback-verified. This is not functional validation.
+- Full browser regression remains unavailable in the current environment; full core regression is NOT RUN.
+- Consolidate existing isolated route/storage/multiplayer evidence into one core regression matrix. Run available targeted checks, mark each domain PASS/FAIL/NOT RUN/BLOCKED, then do the final high-risk residue scan and prepare formal release if no unresolved critical risk remains.
+- Keep the four closure stages unchanged. Do not add new stages or repeat blocked browser attempts.
