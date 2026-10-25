@@ -154,3 +154,14 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Batch19 removes old Candidate103 catalog bottom/height writes that were overwriting Candidate106's final responsive geometry, while preserving its observer and other player/dock behavior.
 - PASS: JS syntax 68/68, CSS parse, duplicate IDs; targeted Chromium at 390/768/1440px confirms mobile bottom=86px and tablet/desktop clamp geometry. Full-app E2E NOT RUN.
 - Candidate314 not promoted. Formal baseline remains Candidate302 SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Immediate rollback Candidate313 SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a. Candidate HTML remote upload/hash NOT VERIFIED.
+
+## Candidate315 — unpromoted working candidate
+- Source Candidate314 SHA-256 e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17; Candidate315 1,647,133 bytes, SHA-256 5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621.
+- Batch20 removed Candidate70's unreachable dock button click listener; isolated Chromium open/Escape-close/toggle regression PASS; JS 68/68, CSS PASS, IDs PASS. Full-app E2E NOT RUN.
+- Not promoted; formal baseline Candidate302 remains unchanged. Rollback Candidate314.
+
+## Candidate316 — latest unpromoted working candidate
+- Source Candidate315 SHA-256 5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621; Candidate316 1,646,612 bytes, SHA-256 4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317.
+- Batch21 removed Candidate72's duplicate panel-state MutationObserver/writer while preserving the required ranking-frame placeholder. Candidate76/77 own panel state.
+- PASS: JS 68/68, CSS parse, duplicate IDs; isolated Chromium open, Escape close and direct class state match before/after. Full-app E2E NOT RUN.
+- Not promoted; formal baseline Candidate302 remains SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Rollback Candidate315. Candidate HTML remote upload/hash NOT VERIFIED.
