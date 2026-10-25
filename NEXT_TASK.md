@@ -303,3 +303,10 @@ Candidate302 remains formal baseline:
 - Continue from Candidate327, but do not promote it. The user will perform real local-browser checks for cover/fallback, media playback, and native persistence.
 - Next cleanup focus: Workspace shell/frame/actions/custom-list workflow. Build a single-owner map for DOM subtrees, route interception, handlers, observers, timers, and persistence; then integrate duplicate responsibility and delete the superseded implementation in grouped batches.
 - Preserve Candidate302 and Candidate320 unchanged. Full E2E and remote candidate HTML hash verification remain NOT RUN / NOT VERIFIED.
+
+
+## Batch32 next task (2026-10-26)
+- Continue from Candidate329; Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
+- Inspect Candidate15's remaining setWorkspace/init/visibility Observer responsibilities against Candidate76/77/82. Preserve unique action routes that Candidate82 does not map.
+- Next inspect Candidate16 custom-list workflow for duplicate event delegation, observers and timers. Preserve `customListsStoreV1`, member toggling, recovery, and persistence semantics.
+- Browser interaction, real media, external covers/fallback, native storage, and Candidate HTML upload/hash remain NOT RUN / NOT VERIFIED. User will test locally; do not keep chasing the blocked browser origin/DNS environment.
