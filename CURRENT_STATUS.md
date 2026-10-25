@@ -66,3 +66,13 @@
 - Re-searched Library for the exact Candidate277 filename: two indexed records report 9,373,238 bytes, but raw-byte materialization of both failed with `This Project file does not have an authorized raw-byte materialization path`.
 - Found indexed `Coverage-20261025T094140.json` (10,050,921 bytes); its raw-byte materialization failed with the same blocker. Data files described inside the handoff/coverage records are not locally recovered or hash-reverified in this stage.
 - Candidate277 remains BLOCKED for raw-byte SHA verification. Search/index presence is not proof of byte recovery. No application files were changed.
+
+## Stage 3 — Candidate295 candidate-baseline freeze (2026-10-25)
+- Candidate295 is now the working candidate baseline for validation; Candidate277 recovery is no longer a prerequisite for continuing this work. This is not formal release-baseline acceptance.
+- Frozen local byte-for-byte rollback snapshot created from uploaded `index-old.html`: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. Snapshot equality and hash recheck: PASS.
+- Browser runtime remains BLOCKED by `net::ERR_BLOCKED_BY_ADMINISTRATOR` on file and local HTTP navigation.
+- `data.js` and `emq-data.js` are required by the HTML but are not currently alongside the uploaded source; single-file portability is NOT VERIFIED.
+- AMQ/EMQ/MIX gameplay, search/select, custom-list CRUD and reload persistence: NOT RUN / BLOCKED pending matching data assets and executable browser runtime.
+- Six previously reported smoke child-action failures remain to be re-tested with corrected assertions; parent `ok:true` is not sufficient.
+- No application HTML/CSS/JS/data/storage schema was changed. Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_CANDIDATE295_BASELINE_FREEZE_AND_ACCEPTANCE_GATE_20261025.md`.
+- Rollback: restore the frozen local Candidate295 snapshot and verify its SHA-256 before use.
