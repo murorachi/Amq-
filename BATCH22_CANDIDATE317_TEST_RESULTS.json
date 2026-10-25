@@ -1,0 +1,11 @@
+{
+  "batch": 22,
+  "candidate": "Candidate317",
+  "candidate_sha256": "e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9",
+  "javascript_syntax": "PASS 67/67",
+  "css_parse": "PASS 0 errors",
+  "duplicate_dom_ids": "PASS 0",
+  "chromium": "PASS frame count=1; dock open/Escape close identical",
+  "full_app_e2e": "NOT RUN",
+  "github_html_upload": "NOT VERIFIED"
+}
