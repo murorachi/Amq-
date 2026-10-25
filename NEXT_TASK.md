@@ -260,3 +260,13 @@ Candidate302 remains formal baseline:
 3. Verify persistent localStorage in a supported origin, without the memory-only test shim.
 4. After full route/media acceptance, inspect Candidate114 delayed resets and Candidate158 subtree Observer for safe reduction.
 5. Upload Candidate324 HTML and read it back to verify SHA-256 before any promotion. Candidate302 formal baseline and Candidate320 rollback remain unchanged.
+
+
+## Next — AMQ four-round cleanup workflow (2026-10-25)
+1. Round 1 inventory is complete for Candidate320; use the full local report/JSON and GitHub summary rather than repeating broad discovery.
+2. Round 2: classify each candidate as DIRECT DELETE, INTEGRATE THEN DELETE, or DEFER. Build property/DOM/API/storage ownership maps for Song Select and Workspace; compare CSS declarations only under equivalent conditions.
+3. Batch changes by cohesive feature group. Preserve Candidate320 and Candidate302; create unique candidate versions and rollback checkpoints.
+4. Round 3: run syntax/CSS/DOM checks after each batch, then focused browser tests and integration regression. A failed batch does not invalidate unrelated verified batches.
+5. Round 4: generate single-file HTML from verified source, calculate SHA-256, update CURRENT_STATUS.md / BASELINE.md / NEXT_TASK.md / CHANGELOG_STAGE6.md and test reports, upload where possible, then read back and verify remote content.
+6. Direct-delete list from Round 1 is empty. Do not treat 114 unresolved initial-DOM ID references, repeated selectors, duplicate local function names, or raw listener/observer/timer counts as dead-code proof.
+7. Browser full-app E2E, persistent storage, real media playback and external cover fallback remain NOT RUN for this inventory.
