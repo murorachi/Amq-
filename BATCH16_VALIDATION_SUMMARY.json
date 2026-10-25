@@ -1,0 +1,26 @@
+{
+  "batch": 16,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "candidate": "amq_learning_tool_v82_86_22_candidate311_home_songselect_theme_and_modal_css_cleanup_20261025.html",
+  "candidate_bytes": 1662516,
+  "candidate_sha256": "dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996",
+  "source": "amq_learning_tool_v82_86_21_candidate310_home_settings_superseded_layout_css_cleanup_20261025.html",
+  "source_sha256": "34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9",
+  "removed_declarations": 55,
+  "bytes_removed": 1602,
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_ids": "PASS 0",
+    "script_contents_unchanged": "PASS",
+    "non_style_html_unchanged": "PASS",
+    "computed_style": "PASS 6/6 zero differences",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "BLOCKED"
+  },
+  "zip": "AMQ_Batch16_Home_SongSelect_Candidate311_20261025.zip",
+  "zip_bytes": 454537,
+  "zip_sha256": "4006adf85e74871d2fdfaf255bd999b4615c9ec71ec22b45857b8b68701707c6",
+  "zip_integrity": "PASS",
+  "formal_baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+}
