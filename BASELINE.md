@@ -113,3 +113,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate309: 1,664,430 bytes, SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f`; Batch14 removed 17 superseded declarations / 589 bytes.
 - Tests: JS syntax 68/68 PASS; CSS parse PASS; duplicate IDs 0; script/non-style HTML unchanged; six isolated Chromium style scenarios PASS with zero diffs. Full-app E2E NOT RUN.
 - Candidate309 is not promoted. HTML remote upload BLOCKED. Rollback is Candidate308 SHA-256 `89e7829e8228e3b4ed1061657e6c2f7245496e4dd6e158344a6c6c76518b4d67`.
+
+## Candidate chain update — Batch 14
+- Candidate309: 1,664,430 bytes, SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f`, derived from Candidate308.
+- Batch14 removed 17 superseded declarations / 589 bytes from the Home stable-play modal CSS. JS/non-style HTML unchanged; JS syntax, CSS parse, duplicate IDs and six isolated Chromium style scenarios PASS.
+- Full-app E2E NOT RUN; candidate HTML remote upload BLOCKED. Candidate309 not promoted.
+- Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Rollback from Candidate309 to Candidate308.
