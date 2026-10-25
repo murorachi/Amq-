@@ -1,0 +1,14 @@
+{
+  "batch": 19,
+  "source": "Candidate313",
+  "source_sha256": "bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a",
+  "candidate": "amq_learning_tool_v82_86_25_candidate314_songselect_layout_owner_conflict_cleanup_20261025.html",
+  "candidate_bytes": 1647472,
+  "candidate_sha256": "e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17",
+  "bytes_removed": 215,
+  "change": "Removed obsolete Candidate103 catalog bottom/height writes; retained catalog observer and other side effects.",
+  "tests": "JS 68/68 PASS; CSS PASS; IDs PASS; Chromium 390/768/1440 PASS; full-app E2E NOT RUN",
+  "promoted": false,
+  "formal_baseline": "Candidate302",
+  "github_html_upload": "NOT VERIFIED"
+}
