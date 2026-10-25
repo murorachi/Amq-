@@ -1,0 +1,28 @@
+{
+  "batch": 8,
+  "date": "2026-10-25",
+  "status": "PASS_WITH_LIMITATIONS",
+  "baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "candidate": "amq_learning_tool_v82_86_14_candidate303_opencc_shared_loader_20261025.html",
+  "candidate_bytes": 1720527,
+  "candidate_sha256": "ffb223a37f2ba7f243430c7e0a643f8916ebae13f809d83cc2b8cbd9153df1c8",
+  "changed_script_indices": [
+    31,
+    41
+  ],
+  "unchanged_script_blocks": 68,
+  "css_blocks_changed": 0,
+  "opencc_url_occurrences": 1,
+  "js_syntax": {
+    "pass": 67,
+    "fail": 0
+  },
+  "isolated_browser_tests": {
+    "pass": 3,
+    "total": 3
+  },
+  "full_app_e2e": "NOT RUN",
+  "remote_html_upload": "BLOCKED",
+  "remote_sha256": "UNVERIFIED",
+  "feature_deletions": 0
+}
