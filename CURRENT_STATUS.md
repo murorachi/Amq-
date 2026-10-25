@@ -353,3 +353,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed 8,897 bytes / 97 newline characters of 16 duplicate Candidate15 action branches already owned by Candidate82's capture-phase router. Unique Candidate15 actions retained.
 - PASS: 65/65 inline script syntax; 269 unique IDs; 109 CSS blocks parse with 0 errors; 16/16 deleted actions mapped in Candidate82; 12/12 unique actions preserved.
 - NOT RUN: browser interactions, full E2E, real media, external covers/fallback, native persistence, HTML upload/hash verification. Candidate329 not promoted.
+
+
+## Batch33 — Candidate330 Workspace action cleanup (2026-10-26)
+- Candidate330: `amq_learning_tool_v82_86_41_candidate330_batch33_workspace_action_event_delegation_20261026.html`, 1,632,703 bytes, SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`; parent Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`.
+- Net reduction 2,905 bytes. Removed seven unreferenced Candidate15 `runAction` branches (2,897 bytes), replaced per-button listeners with one delegated listener, and removed three unused Candidate16 helpers/temporaries.
+- PASS: 65/65 inline JS syntax, 269 unique IDs, 109 CSS blocks with zero parser errors; only Candidate15 and Candidate16 script bodies changed; custom-list storage and membership APIs retained.
+- NOT RUN: real browser E2E, media playback, cover/fallback, native persistence. Candidate330 remains experimental; HTML upload/hash verification NOT RUN.
+- Report: `AMQ_BATCH33_CANDIDATE330_WORKSPACE_ACTION_CLEANUP_20261026.md` and JSON counterpart.
