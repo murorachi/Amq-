@@ -139,3 +139,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Rollback: use immutable Candidate302; immediate pre-batch rollback is Candidate311.
 - Candidate HTML upload and remote SHA verification are NOT VERIFIED.
 
+## Candidate313 — unpromoted working candidate
+- Source: Candidate312, SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb.
+- Candidate: amq_learning_tool_v82_86_24_candidate313_workspace_route_event_dedup_20261025.html, 1,647,687 bytes; SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a.
+- Batch18 removed unreachable dock click listeners and no-op route guard retry timers; only three script blocks changed.
+- Isolated Chromium workspace dock and route wrapper checks PASS; JS syntax 68/68, CSS parse 0 errors, duplicate IDs 0. Full-app E2E NOT RUN.
+- Candidate313 is not the formal baseline. Formal baseline remains Candidate302: f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd.
+- Immediate rollback: Candidate312 SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb; formal rollback: Candidate302.
+- Candidate313 HTML upload and remote SHA verification are NOT VERIFIED.
