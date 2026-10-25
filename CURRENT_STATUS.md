@@ -189,3 +189,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate312 is not promoted; formal baseline remains Candidate302. HTML remote upload and remote SHA verification are NOT VERIFIED.
 - Report: BATCH17_CROSS_MODULE_CSS_JS_CLEANUP_REPORT_20261025.md; manifest: BATCH17_CANDIDATE312_MANIFEST.json; results: BATCH17_CANDIDATE312_TEST_RESULTS.json; summary: BATCH17_VALIDATION_SUMMARY.json.
 
+## Batch 18 — Workspace route and Song Select event deduplication (2026-10-25)
+- Verified source Candidate312: 1,648,144 bytes, SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb.
+- Created unpromoted Candidate313: amq_learning_tool_v82_86_24_candidate313_workspace_route_event_dedup_20261025.html, 1,647,687 bytes, SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a; 457 bytes removed.
+- Removed two unreachable workspace dock target click listeners: the existing document capture handler in candidate77 calls stopImmediatePropagation before target phase. In candidate76, also removed the priorFocus restoration branch whose only writer was the unreachable listener. Preserved aria-controls, close/Escape handling, geometry sync and body observer.
+- Removed two no-op navigation guard retry timers; the guard installs immediately and the later Song Select route wrapper marks the outer wrapper guarded before either timer can re-install it.
+- Only three script blocks changed.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; isolated Chromium dock open/close behavior matches before/after; route-wrapper behavior matches across 5 scenarios.
+- Full-app E2E NOT RUN. Audio, real data persistence/CRUD, AMQ/EMQ/MIX gameplay and multiplayer server remain unverified.
+- Candidate313 not promoted. Formal baseline remains Candidate302 (f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd). Candidate HTML remote upload/hash remain NOT VERIFIED.
+- Report: BATCH18_WORKSPACE_ROUTE_EVENT_DEDUP_REPORT_20261025.md; manifest: BATCH18_CANDIDATE313_MANIFEST.json; tests: BATCH18_CANDIDATE313_TEST_RESULTS.json; summary: BATCH18_VALIDATION_SUMMARY.json.
