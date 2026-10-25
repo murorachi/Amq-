@@ -1,30 +1,29 @@
-# NEXT_TASK.md — Batch 3 route/storage/lifecycle verification
+# NEXT_TASK.md — Batch 4 canonical reader/writer audit + browser evidence
 
 ## Current baseline
-Candidate302 is the formal baseline by explicit user authorization and reported local verification:
+Candidate302 remains formal baseline:
 - `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
 - 1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
-- Candidate295 rollback: SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+- Candidate295 rollback SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 
-## Batch 2 completed
-- Added static dependency report and evidence index; 10/10 source-evidence assertions PASS.
-- Identified route interception side-effect boundaries, AMQ custom-list canonical store/fallback readers, backup/restore compatibility, and distinct EMQ schema.
-- No application source edits/deletions. Browser runtime checks remain NOT RUN.
+## Batch 3 completed
+- Isolated Chromium route harness: 14/14 PASS, 0 page errors; Candidate302 scripts 3/62/70 with stubbed dependencies.
+- Isolated Chromium storage repository harness: 6/6 PASS, 0 page errors; synthetic in-memory storage only.
+- Confirmed route guard early-return side effects and storage import/rollback behavior.
+- No application source edits/deletions; DELETE=0.
+- Full-app E2E, runtime lifecycle instrumentation and computed-style checks NOT RUN.
+- Candidate302 remote HTML remains NOT_FOUND; remote hash verification BLOCKED.
 
-## Next actions, in order
-1. Resolve the remote artifact gap: Candidate302 HTML returns NOT_FOUND on `amq-stage6-static-audit-regression-20261025`; make the exact artifact available and verify remote SHA-256 if tooling/permissions permit.
-2. Build a route state-transition matrix for home/catalog/watchlist/quiz/song-select/workspace, including activeView, body/html classes, data attributes, navigation-event dispatch, home-menu close, and workspace panel state.
-3. Trace all `aniCustomPracticeListsV1` readers/writers and recovery keys, including import, full backup, legacy backup, restore rollback and fallback consumers. Do not alter user data.
-4. Create lifecycle registries for route/grid/modal/dock observers and timers; verify rebind/disconnect/clear paths in an isolated browser session.
-5. Compare high-impact repeated CSS selectors against actual DOM/computed style and media/route contexts. Do not delete based on counts.
-6. Only after runtime evidence, define a minimal consolidation plan and deletion ledger.
-7. Update status, baseline, changelog, tests and deliverable hashes; attempt GitHub upload and verify remote files.
-
-## Definition of done
-All six cleanup goals remain incomplete until the full inventory, dependency map, canonical implementation map, deletion ledger, regression matrix and final single-file HTML with verified remote SHA-256 are available.
+## Batch 4 actions
+1. Resolve remote Candidate302 HTML artifact gap; verify exact remote contents/hash.
+2. Trace every read/write/mutate path for `aniCustomPracticeListsV1`, recovery snapshots and `aniEmqWorkListsSelectedV8254`; document caller and dynamic references.
+3. Obtain/run the complete HTML with matching `data.js` and `emq-data.js` in isolated browser environment; do not replace production data with stubs for full E2E.
+4. Run browser smoke for home/catalog/watchlist/quiz/skip/next/Solo EMQ list and safe import/export/restore using synthetic profile only.
+5. Add runtime observer/timer/listener lifecycle instrumentation for modal/grid/dock/route hot spots.
+6. Compare high-impact repeated CSS candidates against actual computed style and media/route context.
+7. Produce consolidation/deletion ledger only when the dependency and runtime evidence supports it; no deletion by count alone.
 
 ## Known limits
-- Browser automation timed out in this environment; no Batch 2 browser E2E was run.
-- Candidate302 local verification is user-reported; case-by-case evidence is not recorded.
-- 495 AMQ songs lack media values in extractor slots 9/10/11; do not modify without upstream schema evidence.
-- Never overwrite Candidate302 or Candidate295. Any implementation candidate must have a unique filename and verified source/hash.
+- User-reported Candidate302 local verification has no case-by-case manual log.
+- 495 AMQ songs lack media values in extractor slots 9/10/11; do not patch without upstream schema evidence.
+- Never overwrite Candidate302 or Candidate295.
