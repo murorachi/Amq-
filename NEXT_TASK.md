@@ -100,3 +100,11 @@ Candidate302 remains formal baseline:
 2. Find declarations fully superseded by later rules with same applicable media/state, specificity/importance and selector; include JS-created DOM/class references.
 3. Produce a grouped delete list, then remove only high-confidence declarations in one candidate; compare computed styles and DOM assertions at desktop/mobile widths.
 4. Keep uncertain rules as NEEDS_CONFIRMATION and continue other groups instead of blocking the batch.
+
+## Next: Batch 11 — continue CSS cleanup by functional cluster
+- Use Candidate305 as the working parent only; Candidate302 remains the formal baseline.
+- Do not repeat the whole-file selector count. Analyze the remaining Home/Song Select declarations by style block and functional cluster.
+- Next targets: declarations with same visual intent but selector variants; historical overrides that are demonstrably unreachable; duplicated declarations across blocks with matching media/state conditions.
+- Before deleting, check selector specificity, `!important`, at-rule conditions, JS-created DOM/classes, and state transitions. Preserve uncertain items and move to another high-confidence cluster.
+- Run before/after computed-style comparisons at desktop/tablet/mobile for home, Song Select, workspace dock, and player; run syntax/duplicate-ID checks. Full-app E2E remains NOT RUN until data assets/runtime are available.
+- Candidate305 SHA-256: `3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f`. Candidate HTML remote upload is BLOCKED; never infer it from report uploads.
