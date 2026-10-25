@@ -1,0 +1,93 @@
+{
+  "artifact": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "size_bytes": 1625225,
+  "sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "test_kind": "static source-presence smoke only; not runtime or browser regression",
+  "checks": {
+    "AMQ mode/source markers": {
+      "status": "PASS",
+      "marker_counts": {
+        "AMQ": 3843,
+        "aniCustomPracticeListsV1": 9
+      }
+    },
+    "EMQ loader/API markers": {
+      "status": "PASS",
+      "marker_counts": {
+        "emq-data.js": 1,
+        "__aniEmqAPI": 70,
+        "aniEmqWorkListsV8254": 3
+      }
+    },
+    "MIX mode marker": {
+      "status": "PASS",
+      "marker_counts": {
+        "MIX": 142
+      }
+    },
+    "quiz submit and question flow": {
+      "status": "PASS",
+      "marker_counts": {
+        "__aniQuizSubmitV47": 5,
+        "ani-quiz-new-question": 19
+      }
+    },
+    "audio/video player": {
+      "status": "PASS",
+      "marker_counts": {
+        "audioPlayer": 30,
+        "videoPlayer": 17,
+        "nextQuiz": 19
+      }
+    },
+    "custom list store": {
+      "status": "PASS",
+      "marker_counts": {
+        "customListsStoreV1": 13,
+        "aniCustomPracticeListsV1": 9
+      }
+    },
+    "backup/restore paths": {
+      "status": "PASS",
+      "marker_counts": {
+        "backup": 67,
+        "restore": 54
+      }
+    },
+    "workspace state/content APIs": {
+      "status": "PASS",
+      "marker_counts": {
+        "__amqWorkspaceSidebarOpen": 2,
+        "__amqWorkspaceContentOpen": 16
+      }
+    },
+    "workspace action routing": {
+      "status": "PASS",
+      "marker_counts": {
+        "data-ws-action": 16,
+        "data-ws": 42
+      }
+    },
+    "multiplayer lifecycle": {
+      "status": "PASS",
+      "marker_counts": {
+        "WebSocket": 6,
+        "heartbeat": 7
+      }
+    },
+    "main navigation event": {
+      "status": "PASS",
+      "marker_counts": {
+        "ani-app-navigation": 32
+      }
+    }
+  },
+  "overall_static_marker_smoke": "PASS",
+  "browser_interaction": "BLOCKED",
+  "full_core_regression": "NOT RUN",
+  "limitations": [
+    "Marker presence does not prove behavior works.",
+    "Browser interaction remains blocked by ERR_BLOCKED_BY_ADMINISTRATOR.",
+    "AMQ/EMQ/MIX end-to-end, CRUD persistence, backup/restore failure protection, media playback, workspace click/ESC behavior, and multiplayer live lifecycle are not validated by this smoke test."
+  ]
+}
