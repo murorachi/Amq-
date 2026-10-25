@@ -27,3 +27,17 @@ Candidate302 remains formal baseline:
 - User-reported Candidate302 local verification has no case-by-case manual log.
 - 495 AMQ songs lack media values in extractor slots 9/10/11; do not patch without upstream schema evidence.
 - Never overwrite Candidate302 or Candidate295.
+
+
+## Batch 4 completed / Batch 5 next
+- Expanded isolated Chromium route matrix: 15/15 PASS, 0 page errors.
+- Static caller/writer map created for AMQ custom-list data, recovery snapshots, EMQ list data and selected EMQ scope.
+- Local report: `BATCH4_CANONICAL_STORAGE_ROUTE_REPORT_20261025.md`; detailed map: `BATCH4_CANONICAL_STORAGE_CALLER_WRITER_MAP.json`; test results: `BATCH4_EXPANDED_ROUTE_TEST_RESULTS.json`; ZIP: `AMQ_Batch4_Canonical_Storage_Route_Candidate302_20261025.zip`.
+- Candidate302 HTML remains 404 on the target branch. Do not claim remote upload/hash verification.
+
+## Batch 5 priority
+1. Resolve the remote binary artifact upload path or obtain an explicit user-provided repository upload route; keep the baseline local and immutable meanwhile.
+2. Locate the exact hash-matching `data.js` and `emq-data.js`; otherwise keep full-app E2E BLOCKED.
+3. Run lifecycle pairing/runtime checks for the highest-risk modal/grid/dock/route scripts.
+4. Run CSS computed-style comparisons for a small high-impact shortlist.
+5. Continue only evidence-backed consolidation; no deletions approved yet.
