@@ -1,0 +1,112 @@
+{
+  "task": "Batch26 Round 3: Candidate321 browser validation and blocker investigation",
+  "baseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "candidate321": {
+    "file": "amq_learning_tool_v82_86_32_candidate321_batch26_round2_songselect_ownership_cleanup_20261025.html",
+    "bytes": 1645516,
+    "sha256": "5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a",
+    "promoted": false
+  },
+  "rollback_candidate320": {
+    "file": "amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html",
+    "bytes": 1645470,
+    "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"
+  },
+  "browser_environment": {
+    "chromium_launch": "PASS",
+    "file_url_navigation": "BLOCKED_BY_ADMINISTRATOR",
+    "localhost_navigation": "BLOCKED_BY_ADMINISTRATOR",
+    "full_html_set_content": "PARTIAL",
+    "missing_dependencies": [
+      "data.js",
+      "emq-data.js"
+    ],
+    "github_branch_lookup": "404 for both paths",
+    "localStorage": "BLOCKED in opaque document origin"
+  },
+  "isolated_chromium_tests": [
+    {
+      "case": "AMQ mode filter",
+      "result": "PASS",
+      "assertion": "3 AMQ rows; one artwork placeholder per row"
+    },
+    {
+      "case": "EMQ mode filter",
+      "result": "PASS",
+      "assertion": "3 EMQ rows"
+    },
+    {
+      "case": "MIX mode filter",
+      "result": "PASS",
+      "assertion": "6 rows; AMQ=3 and EMQ=3"
+    },
+    {
+      "case": "search Gamma",
+      "result": "PASS",
+      "assertion": "one row Gamma OP; total count 1"
+    },
+    {
+      "case": "sort by name",
+      "result": "PASS",
+      "assertion": "Alpha, Beta, Gamma differs from year order"
+    },
+    {
+      "case": "Candidate115 artwork ownership",
+      "result": "PASS",
+      "assertion": "main list has one placeholder per row; other AMQ/EMQ lists still receive one"
+    },
+    {
+      "case": "Candidate106/Candidate158 overflow",
+      "result": "PASS",
+      "assertion": "desktop catalog and mount end with overflow visible"
+    },
+    {
+      "case": "Candidate114 route reset",
+      "result": "PASS_ISOLATED_ONLY",
+      "assertion": "dock position relative, width 100%, height 46px; frame 68px; slot 46px"
+    },
+    {
+      "case": "isolated harness errors",
+      "result": "PASS",
+      "assertion": "0 page errors; 0 console errors"
+    }
+  ],
+  "not_run_or_blocked": [
+    {
+      "case": "real AMQ/EMQ/MIX datasets",
+      "result": "BLOCKED",
+      "reason": "data.js and emq-data.js unavailable in current branch; missing runtime data layer"
+    },
+    {
+      "case": "real cover loading and fallback",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "actual audio/video playback",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate114 timer reduction",
+      "result": "NOT RUN",
+      "reason": "isolated test cannot prove no delayed cross-module overwrite in full app"
+    },
+    {
+      "case": "Candidate158 observer narrowing",
+      "result": "NOT RUN",
+      "reason": "dynamic full-app mount lifecycle not available"
+    },
+    {
+      "case": "Candidate321 remote HTML hash",
+      "result": "NOT VERIFIED"
+    }
+  ],
+  "decision": {
+    "candidate321_promoted": false,
+    "candidate114_timers": "retain pending full-app validation",
+    "candidate158_observer": "retain pending full-app validation"
+  },
+  "report_file": "AMQ_BATCH26_ROUND3_CANDIDATE321_BROWSER_VALIDATION_20261025.md"
+}
