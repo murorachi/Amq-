@@ -271,3 +271,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - `amq_learning_tool_v82_86_41_candidate330_batch33_workspace_action_event_delegation_20261026.html`: 1,632,703 bytes; SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`. Derived from Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`.
 - Removed seven Candidate15 action branches absent from current action definitions; consolidated per-button handlers to delegated #wsActions handling; removed unused Candidate16 helpers/temporary.
 - Candidate330 is not promoted. Candidate302 remains the formal baseline (SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`); Candidate320 remains immutable rollback (SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`).
+
+
+## Candidate331 Batch34 — experimental only (2026-10-26)
+- `amq_learning_tool_v82_86_42_candidate331_batch34_remove_unreachable_catalog_fallbacks_20261026.html`, 1,632,034 bytes; SHA-256 `1a17f6a940aa2248a40c56a15d91fe0d63df35da35948f15156fd261dea13565`.
+- Derived from Candidate330 SHA-256 `844af7eecaabfe037dbaf4e1cc8dc33cbd9d31123a49456a10518ce27af30309`. Removed 669 bytes of unreachable catalog-only fallback and unused helper.
+- Candidate302 remains formal baseline; Candidate320 remains immutable rollback. Candidate331 is not promoted.
