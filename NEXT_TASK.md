@@ -137,3 +137,10 @@ Candidate302 remains formal baseline:
 - For each removal, trace static HTML and all inline JS including dynamic class/ID generation. Keep uncertain selectors and shared styles untouched.
 - Test JS syntax, CSS parse, duplicate IDs, unchanged scripts/non-style HTML, and desktop/tablet/mobile computed styles. Full-app E2E remains NOT RUN.
 - Candidate HTML remote upload remains BLOCKED until the binary is uploaded and the remote SHA-256 verified.
+
+## Next: Batch 15 — continue route-scoped Home / Song Select cleanup
+- Latest working candidate: Candidate309, SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f` (1,664,430 bytes). Formal baseline remains Candidate302.
+- Continue exact orphan-selector and same-condition superseded-declaration analysis without repeating whole-file selector counts.
+- Trace dynamic HTML/JS references before deleting; preserve uncertain selectors and all shared/global, multiplayer, learning-system and route-guard behavior.
+- Batch confirmed deletions, then run JS syntax, CSS parse, duplicate IDs, script/non-style HTML unchanged checks and Chromium desktop/tablet/mobile computed-style regression for Home and Song Select.
+- Full-app E2E NOT RUN; candidate HTML remote upload remains BLOCKED until binary and remote SHA can be verified.
