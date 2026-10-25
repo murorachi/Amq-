@@ -1,0 +1,26 @@
+{
+  "batch": 22,
+  "source": "Candidate316",
+  "source_sha256": "4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317",
+  "candidate": "Candidate317",
+  "candidate_bytes": 1645902,
+  "candidate_sha256": "e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9",
+  "bytes_removed": 710,
+  "changes": [
+    "Delete empty Candidate72 bootstrap script",
+    "Delete Candidate71 fallback frame creation already owned by Candidate70"
+  ],
+  "tests": {
+    "batch": 22,
+    "candidate": "Candidate317",
+    "candidate_sha256": "e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9",
+    "javascript_syntax": "PASS 67/67",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "chromium": "PASS frame count=1; dock open/Escape close identical",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "NOT VERIFIED"
+  },
+  "promoted": false,
+  "formal_baseline": "Candidate302"
+}
