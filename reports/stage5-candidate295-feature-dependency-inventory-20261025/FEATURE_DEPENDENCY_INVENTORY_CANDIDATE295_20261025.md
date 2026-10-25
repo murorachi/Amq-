@@ -211,3 +211,89 @@ The latest local re-check parsed script tags by type and excluded the embedded J
 - Candidate295 remained 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 
 Correction: earlier report text described 68/68 inline blocks as executable JavaScript. That count included the JSON data block. The accurate executable-JavaScript count is 67/67; the JSON payload was not part of the syntax test. This is a documentation correction only; no application source was changed.
+
+
+## 16. Stage 5.5 — AMQ custom-list fallback reads: dependency and risk review (2026-10-25)
+
+### Evidence from Candidate295 source
+Canonical store owner:
+- window.__aniCustomListsStoreV1 is defined once in the custom-list/practice module (around lines 3535–3543).
+- It exposes read, refresh, write, mutate, and toggleMembership. The read API returns a cloned normalized snapshot from the store's in-memory listData.
+- The same module owns schema validation, normalization, safe persistence, recovery/quarantine behavior, and selector synchronization. It is the appropriate canonical owner for runtime consumers.
+
+Fallback consumers still read aniCustomPracticeListsV1 directly when the canonical API is absent:
+1. Dock random playback custom-list pool, around line 2359 (eligiblePool('custom-list')).
+2. Learning/practice consumer readCustomLists(), around line 4983.
+3. Song Select custom-list workflow, previously located around line 7410. Recheck exact line after any source edit.
+4. Candidate295 bottom dock mode dropdown, around line 11492.
+
+The four fallbacks are not confirmed dead code. Their runtime necessity depends on initialization order and whether a consumer can execute before the store is installed. A direct storage read also does not necessarily have the same normalization/recovery guarantees as store.read().
+
+### Classification
+- Canonical store: KEEP.
+- Four runtime direct-read fallback branches: INTEGRATE candidate / NEEDS CONFIRMATION before deletion. Replace only after proving all consumers run after store initialization and that a missing store should fail closed or display a clear unavailable state.
+- Backup import/export reads and writes of aniCustomPracticeListsV1: KEEP. They operate on the explicit backup boundary and must remain compatible with persisted data; they are not duplicate runtime business-store consumers.
+- EMQ keys and work-list schema (aniEmqWorkListsV8254, aniEmqWorkListsSelectedV8254, aniEmqAudioOverridesV8254): KEEP separate. Do not merge with AMQ animeIds work-level lists without a migration/adapter and compatibility tests.
+
+### Safe consolidation plan
+1. Add a startup/consumer-order check proving the canonical store is installed before each consumer can execute.
+2. Add a single read adapter with an explicit unavailable/error result; do not silently interpret store failure as an empty list if that would hide valid saved lists.
+3. Exercise each consumer with: normal store, empty valid store, malformed persisted payload quarantined, storage read/write exception, and store API unavailable.
+4. Only then remove duplicated localStorage fallback branches in a new child candidate. Preserve backup import/export direct storage handling.
+5. Verify custom-list create/rename/delete, membership add/remove, playback pool selection, selectors, reload persistence, and restore/import behavior.
+
+### Test status
+- Static source-location/dependency inspection: PASS for identifying the four fallback sites and canonical store API.
+- Browser initialization-order and consumer behavior: NOT RUN.
+- CRUD, selector synchronization, playback, reload persistence and backup/restore: NOT RUN.
+- Application source changes/deletions: NONE.
+
+## 17. Stage 5.5 — Route-owner consolidation design (static; no source edits) (2026-10-25)
+
+### Current wrapper chain
+The current source-order chain is:
+1. Base showView exposed as window.__aniNavigateApp (around line 891).
+2. First Song Select route guard (around lines 7373–7400).
+3. Generic workspace/body-class guard (around lines 10594–10607).
+4. Final Song Select route guard (around lines 11650–11666), which becomes the outermost wrapper.
+
+Both Song Select guards map the same six destinations:
+- watchlist → panel watchlist / 我的清單
+- practice → panel practice / 學習中心
+- explore → panel practice / 探索新歌
+- learningPlan → panel learning-plan / 學習計畫
+- dashboard → panel dashboard / 學習統計
+- vnList → panel vn-list / VNDB 個人清單
+
+The two guards are not behaviorally interchangeable. The inner guard's intercepted return still returns through the generic wrapper, allowing its post-call body-class synchronization to run. The outer final guard's intercepted return bypasses the generic wrapper entirely. Both guards dispatch amq-workspace-route-intercepted, but the outer guard currently intercepts mapped routes first, so its early return normally prevents the inner guard from running for those mapped calls. The maps are redundant in shape, but their removal must preserve intended body-class behavior.
+
+### Proposed single-owner design
+Do not simply delete one wrapper. Replace the layered route mutations with one explicit route owner that:
+1. Checks whether Song Select is active.
+2. For the six mapped destinations, opens the appropriate workspace panel and dispatches exactly one amq-workspace-route-intercepted event.
+3. Explicitly applies the intended body-class state for the intercepted panel route rather than relying on accidental wrapper post-effects.
+4. For non-intercepted destinations, closes the home menu exactly once and delegates to the base navigator.
+5. Preserves the generic workspace guard's special handling for dashboard and non-Song-Select route class transitions.
+6. Installs idempotently and does not stack wrappers after repeated initialization.
+
+### Required regression matrix before removing either guard
+- Song Select active + each of six panel destinations: correct panel, one interception event, Song Select remains active, expected body classes.
+- Song Select active + home, quiz, and multiplayer: base navigation works, menu closes once, route classes are correct.
+- Song Select inactive + all six destinations: ordinary navigation works, no panel interception event.
+- dashboard: verify its special amq-standalone-route behavior and dashboard/workspace visibility.
+- Repeated initializer/guard installation: exactly one active owner and one event per mapped navigation.
+- Return/back from each panel to Song Select and from Song Select to home.
+- Generic route class synchronization and home-menu state after navigation.
+
+### Test status and decision
+- Static wrapper-order and side-effect comparison: PASS.
+- Browser route/back/return regressions: NOT RUN (managed browser restrictions previously blocked runtime interaction).
+- Safe deletion now: NO. The next implementation candidate must first make intended side effects explicit and then pass the matrix. No route guard was removed in this stage.
+
+## 18. Stage 5.5 — Candidate295 inventory decision (2026-10-25)
+- Candidate295 remains a validation target, not the formal working baseline.
+- Formal baseline remains Candidate277 as recorded in BASELINE.md; do not silently replace it with Candidate295.
+- Candidate295 source integrity rechecked: 1,720,917 bytes; SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- No HTML/CSS/JS or application storage schema was modified.
+- No deletion is authorized by the evidence gathered so far. Route guards and fallback readers remain INTEGRATE / NEEDS CONFIRMATION, not DELETE.
+- Next priority: recover/verify the formal Candidate277 source in the active workspace, then run the route and custom-list regression suite against that baseline before implementing consolidation. If Candidate277 cannot be obtained, record the block and continue only with source-independent analysis or a separately authorized Candidate295 child candidate.
