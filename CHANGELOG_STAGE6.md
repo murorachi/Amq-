@@ -244,3 +244,10 @@
 - BLOCKED: external ANN/VNDB DNS; cover loading/fallback, actual media playback and native storage remain unverified. Localhost and file URL navigation blocked by browser policy.
 - No app source changes; Candidate326 not promoted. Candidate302 baseline and Candidate320 rollback unchanged.
 - Report: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` and JSON counterpart.
+
+
+## 2026-10-25 — Batch30 Candidate327 orphan CSS selector cleanup
+- From Candidate326 (SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`), created Candidate327 (1,644,791 bytes; SHA-256 `3e117b68a3fa1f4a57c7ef010477ee18dc12d1327f174765dd44d05f324cb302`).
+- Removed 18 unreferenced CSS selector branches and two now-empty rules; net reduction 994 bytes. JavaScript and markup unchanged.
+- PASS: 65/65 inline script syntax, JS hashes unchanged, CSS parser zero errors, 269 unique IDs, Chromium static computed styles at three viewports with zero differences.
+- NOT RUN: full-app E2E, real audio/video, cover/fallback, native persistent storage. Candidate327 remains unpromoted; Candidate302 formal baseline and Candidate320 rollback unchanged; HTML upload/hash NOT VERIFIED.
