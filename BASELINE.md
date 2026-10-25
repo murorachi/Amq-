@@ -400,3 +400,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 ## Experimental handoff package — 2026-10-26
 - Candidate346 handoff ZIP: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`, 1,323,411 bytes; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`.
 - Package is local experimental delivery, not formal promotion. Candidate302 remains the formal baseline.
+
+
+## 2026-10-26 independent handoff verification
+- Candidate302 remains the immutable formal baseline; reported SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Its expected HTML path returned 404 on `amq-stage6-static-audit-regression-20261025`; do not claim remote content/hash verification.
+- Candidate346 local artifact reverified: 1,625,225 bytes, SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`. Expected remote path returned 404; Candidate346 remains experimental.
+- Candidate345 immediate rollback: 1,625,630 bytes, SHA-256 `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`.
+- Candidate320 checkpoint: 1,645,470 bytes, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Independent static verification passed 65/65 executable inline JS syntax checks and found no duplicate ID values. Functional regression remains incomplete.
