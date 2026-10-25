@@ -122,3 +122,8 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 3. Review summary startup reconstruction cost. Test cases: no history/no summaries; history with missing summaries; valid summary behind recent history; invalid summary quarantined; processed-ID duplicate at dedupe boundary. Do not alter schema or dedupe semantics.
 4. Do not edit application HTML/CSS/JS until the above dependency map and regression cases are complete. If browser is unavailable, document behavior checks as NOT RUN/BLOCKED and continue static work without repeated environment troubleshooting.
 5. Candidate295 remains a validation target only; preserve the Candidate277/Candidate276 baseline history and do not promote or overwrite them.
+
+
+## Stage 5.3 route contract requirement (2026-10-25)
+- Before integrating Song Select route guards, explicitly decide and test whether intercepted panel routes should run generic body-class post-processing. The existing inner and outer guard placement produces different behavior despite identical destination maps.
+- Use the Stage 5 report regression matrix; all browser-only cases are currently NOT RUN. Do not delete a guard until the desired behavior is encoded in one owner and regression cases pass.
