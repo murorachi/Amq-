@@ -175,3 +175,7 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Source Candidate317 SHA-256 e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9; Candidate318 1,645,636 bytes, SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029.
 - Batch23 removed Candidate76's unreachable Escape handler, already intercepted by earlier Candidate70 capture handler. PASS: JS syntax 67/67, CSS, IDs and isolated Chromium Escape/close-button regression. Full-app E2E NOT RUN.
 - Not promoted. Formal baseline remains Candidate302 SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Rollback Candidate317. Candidate HTML upload/hash NOT VERIFIED.
+
+
+## Latest candidate (not promoted)
+- Candidate320 SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`, 1,645,470 bytes. Candidate302 remains the formal baseline.
