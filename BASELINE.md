@@ -89,3 +89,9 @@ Candidate277 recovery is no longer a prerequisite for continuing Candidate295 va
 - Four AMQ custom-list consumer fallbacks directly parse the canonical key if the store API is unavailable; these are potential consolidation targets only after initialization/restore behavior is verified.
 - Detailed quiz history and two summary stores have distinct data responsibilities and dedupe state. No storage schema or application code was changed.
 - Candidate295 identity remains 1,720,917 bytes / SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. The recorded Candidate277 baseline is unchanged.
+
+
+## Candidate295 validation-only note (2026-10-25)
+- Candidate295 source inspected during the Stage 5 dependency inventory: 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- This note does not change the active baseline decision above. Candidate277 remains the formal working baseline; Candidate295 is not promoted by this inventory branch.
+- No application source edits or deletions were made. Browser runtime checks remain NOT RUN/BLOCKED; see the Stage 5.5 sections of the Candidate295 dependency inventory report.
