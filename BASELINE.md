@@ -347,3 +347,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate339 derives from Candidate338 and removes the Candidate186 duplicate audioDock MutationObserver plus only the three #amqWorkspaceDock rules in Candidate94. Modal click/Escape handlers and Candidate94 list membership filtering remain.
 - Candidate339: 1,628,078 bytes; SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`.
 - Static JavaScript syntax: 65 inline scripts PASS, 0 errors. Browser regression NOT RUN. HTML remote hash NOT VERIFIED. Do not promote without browser validation and remote artifact verification.
+
+
+## 2026-10-26 Batch44 candidate record (not a baseline promotion)
+- Formal baseline remains Candidate302, SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Immutable rollback checkpoint remains Candidate320, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate339 remains an experimental parent (SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`).
+- Candidate340 Batch44 is experimental only: 1,627,175 bytes, SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
+- No baseline promotion until real-browser regression covers both geometry branches, open/close state, content panel, navigation, ESC, resize, and action-dispatch separation. Remote HTML hash is not verified.
