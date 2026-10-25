@@ -1,0 +1,15 @@
+{
+  "batch": 9,
+  "status": "PASS_WITH_LIMITATIONS",
+  "candidate_sha256": "afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21",
+  "baseline_sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "js_syntax": "66/66 PASS",
+  "opencc_browser": "3/3 PASS",
+  "emq_synthetic": "9/9 PASS",
+  "css_blocks_unchanged": 109,
+  "css_rules": 3637,
+  "repeated_selector_groups": 651,
+  "extra_repeated_selector_occurrences": 1385,
+  "full_app_e2e": "NOT RUN",
+  "remote_html": "BLOCKED"
+}
