@@ -1,0 +1,44 @@
+{
+  "report": "AMQ Batch29 Candidate326 visible UI / route / filter / cover / persistence probe",
+  "date": "2026-10-25",
+  "candidate": "Candidate326",
+  "candidate_artifact": {
+    "bytes": 1645785,
+    "sha256": "9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba"
+  },
+  "data_dependencies": {
+    "data.js": {"bytes": 4975244, "sha256": "692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3"},
+    "emq-data.js": {"bytes": 2684266, "sha256": "88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc"}
+  },
+  "test_environment": {
+    "browser": "Chromium via Playwright",
+    "page_origin": "opaque about:blank created with page.set_content",
+    "data_files": "Exact supplied data files embedded in an in-memory test copy",
+    "storage": "in-memory localStorage/sessionStorage shim; persistence not verified",
+    "network": "External DNS requests failed with net::ERR_NAME_NOT_RESOLVED",
+    "attempted_origins": [
+      "http://127.0.0.1:8766/index.html",
+      "file:///mnt/data/amq_candidate326_localhost_test/index.html"
+    ],
+    "origin_access_result": "Both navigation attempts blocked by browser policy with net::ERR_BLOCKED_BY_ADMINISTRATOR"
+  },
+  "results": {
+    "visible_ui_entry": {"status":"PASS","evidence":"Clicked visible #amqMainIcon then visible #amqHomePrimaryNav button[data-home-action=catalog]; activeView=catalog, route class active, stage visible, 180 rows, overlay closed."},
+    "amq_mode": {"status":"PASS","evidence":"180 rows, all source=amq."},
+    "emq_mode": {"status":"PASS","evidence":"180 rows, all source=emq."},
+    "mix_mode_search": {"status":"PASS","evidence":"Search Shiosai no Melody returned ID 2000000001 with source=emq."},
+    "decade_filter": {"status":"PASS","evidence":"Selecting 1980 changed result count from 5137 (after Movie filter) to 2813 and changed leading rows."},
+    "type_filter": {"status":"PASS","evidence":"Selecting Movie showed 5137 matching songs; rendered DOM remains chunked at 180 rows."},
+    "row_selection": {"status":"PASS","evidence":"Visible row click selected ID 45305 and set currentSong to Usagi to Kame."},
+    "route_exit": {"status":"PASS","evidence":"Visible #c99Back returned activeView to home, removed Song Select route class, audioDock became relative/46px, home player slot 46px."},
+    "cover_loading_fallback": {"status":"BLOCKED","evidence":"ANN/VNDB DNS failed; zero image src/loads; fallback visual state not confirmed."},
+    "real_audio_video_playback": {"status":"BLOCKED","evidence":"No playable currentSrc in opaque test origin; external network/DNS unavailable."},
+    "persistent_storage": {"status":"BLOCKED","evidence":"Memory shim only; file and localhost navigations blocked by browser policy."},
+    "javascript_errors": {"status":"PASS","evidence":"Zero uncaught page errors; console errors were failed external resources."}
+  },
+  "limitations": [
+    "Test copy only; no Candidate326 source/data files modified.",
+    "Visible UI entry was tested with actual visible menu clicks, superseding the earlier overly conservative BLOCKED label.",
+    "Trusted-origin network, native persistence and real media playback remain unverified."
+  ]
+}
