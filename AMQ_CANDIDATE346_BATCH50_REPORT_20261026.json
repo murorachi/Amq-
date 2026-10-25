@@ -1,0 +1,60 @@
+{
+  "batch": 50,
+  "candidate": "Candidate346",
+  "parent": "Candidate345",
+  "output_file": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "output_size_bytes": 1625225,
+  "output_sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "formal_baseline": "Candidate302",
+  "rollback_checkpoint": "Candidate320",
+  "changed_script_bodies": [
+    "v60-player-quiz-cleanup",
+    "learning-system-v72-script"
+  ],
+  "removed_bindings": [
+    {
+      "script": "v60-player-quiz-cleanup",
+      "identifier": "norm",
+      "occurrences_before": 1
+    },
+    {
+      "script": "learning-system-v72-script",
+      "identifier": "getPlanMeta",
+      "occurrences_before": 1
+    },
+    {
+      "script": "learning-system-v72-script",
+      "identifier": "setPlanMeta",
+      "occurrences_before": 1
+    },
+    {
+      "script": "learning-system-v72-script",
+      "identifier": "seasonOrder",
+      "occurrences_before": 1
+    },
+    {
+      "script": "learning-system-v72-script",
+      "identifier": "seasonLabels",
+      "occurrences_before": 1
+    }
+  ],
+  "tests": {
+    "parent_hash": "PASS",
+    "unused_reference_assertions": "PASS",
+    "target_script_scope": "PASS",
+    "active_representative_functions_preserved": "PASS",
+    "inline_js_syntax": {
+      "status": "PASS",
+      "checked": 65,
+      "errors": 0
+    },
+    "zip_integrity": "PASS",
+    "browser_interaction": "BLOCKED",
+    "full_regression": "NOT RUN",
+    "html_remote_upload_hash_readback": "NOT RUN"
+  },
+  "rollback": {
+    "candidate": "Candidate345",
+    "sha256": "de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3"
+  }
+}
