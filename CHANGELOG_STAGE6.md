@@ -167,3 +167,12 @@
 - Candidate318 SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029, 1,645,636 bytes, derived from Candidate317 (e1373606dcc9717762bfde52636a45431bbb5f7694bf0a59f2f11391b960b2c9); 266 bytes removed.
 - Removed Candidate76's Escape handler intercepted by earlier Candidate70 capture handler; preserved close button, state observer and geometry sync. JS syntax 67/67, CSS, duplicate IDs and isolated Chromium Escape/close tests PASS. Full-app E2E NOT RUN.
 - Candidate318 not promoted; formal baseline Candidate302 unchanged; HTML upload/hash NOT VERIFIED.
+
+
+## Batch 25 — Remove dead Song Select catalog observer (2026-10-25)
+- Source Candidate319 verified: 1,645,652 bytes; SHA-256 `744cca7a6134e454916d46a9a32522e16b80c3f787d8aab4596852421b5b5f54`.
+- Created unpromoted Candidate320: `amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html`, 1,645,470 bytes; SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Removed one Candidate103 observer watching catalog style mutations. Its callback only invokes `fix()`, which does not write to the catalog; the body route-class observer already invokes the same fix on route changes. Other Candidate103 behavior retained.
+- PASS: JS syntax 67/67, CSS parse 0 errors, duplicate IDs 0, isolated Chromium regression 2/2. Full-app E2E NOT RUN.
+- Candidate HTML remote upload/hash NOT VERIFIED. Candidate320 not promoted; formal baseline Candidate302 unchanged.
+- Skipped full removal of Candidate103/Candidate114 because they have distinct player/dock/layout side effects; Candidate114 timers remain NEEDS CONFIRMATION.
