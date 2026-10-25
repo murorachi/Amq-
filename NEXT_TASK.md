@@ -397,3 +397,12 @@ Candidate302 remains formal baseline:
 - 本批沒有修改 HTML 或建立新候選。Candidate336 SHA-256：`b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
 - 下一步：在未被政策阻擋的互動瀏覽器中執行本報告 `AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.md` 列出的 1440×900 與 390×844 狀態矩陣，記錄 computed style、rect、ARIA、實際點擊與 console errors；取得證據前不再修改側欄邏輯。
 - Candidate302 正式基準與 Candidate320 回滾點保持不變；Candidate336 仍是實驗候選。
+
+
+## Batch 41 complete — next: Batch 42 navigation dispatcher consolidation
+- Ownership audit uploaded: `AMQ_BATCH41_WORKSPACE_ROUTE_OWNERSHIP_AUDIT_20261026.md` and `.json`.
+- Candidate60 and Candidate193 route wrappers have distinct behavior; merge into one dispatcher preserving Song Select interception, VNDB opening, base navigation, and standalone-route side effects.
+- First create static route-map/harness assertions for all destinations and wrapper side effects. Only then replace wrappers in a new candidate.
+- Separately consolidate Candidate76/77 sidebar state writes behind a single panel-state API, preserving Candidate76 geometry/ARIA and Candidate77 dock click/navigation behavior.
+- Do not delete Candidate70, Candidate82, or Candidate99 based on CSS visibility alone.
+- Browser runtime remains BLOCKED in this environment; label browser behavior NOT RUN, not PASS. Keep Candidate302 baseline and Candidate320 rollback unchanged.
