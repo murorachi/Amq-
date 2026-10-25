@@ -1,0 +1,1 @@
+{"batch":38,"candidate":"Candidate335","parent":"Candidate334","sha256":"6b06c72d769204f38f836c8c5e9d4d15af798258d4772fb27d72dd820d830331","tests":{"65_inline_scripts_node_check":"PASS","browser_e2e":"NOT RUN","html_remote_upload_hash":"NOT RUN"}}
