@@ -70,3 +70,13 @@
 5. Keep destructive cleanup on hold until the core acceptance gates pass. Generate a unique single-file build only after confirming the build inputs and verifying the resulting artifact.
 6. Keep Candidate295 rollback snapshot immutable; size 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_CANDIDATE295_BASELINE_FREEZE_AND_ACCEPTANCE_GATE_20261025.md`.
+
+
+## Stage 4 handoff — continue Candidate295 acceptance (2026-10-25)
+1. Obtain the matching data.js and emq-data.js assets from the user's local files; verify filenames, embedded version markers and SHA-256 before testing. Do not guess or substitute data assets from another candidate.
+2. In the user's local browser acceptance tool, validate main DB initialization and EMQ ready/count/workCount/getRows results; assert IDs are valid, unique and cross-source conflicts are rejected.
+3. Test AMQ, EMQ and MIX candidate source membership and filter behavior; then audio success/failure recovery.
+4. In isolated test storage, test custom-list create, rename, delete, add/remove membership, filter and reload persistence.
+5. Exercise Song Select route guards with repeated workspace switching/back navigation and inspect stale DOM/listeners before deciding whether any guard is redundant.
+6. Continue marking browser-only checks NOT RUN or BLOCKED until actual execution evidence exists. Do not delete route guards or Candidate210 behavior based only on names/markers.
+7. Candidate295 supplied HTML remains unchanged at 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. Do not promote to release baseline until core runtime gates pass and the user accepts it.
