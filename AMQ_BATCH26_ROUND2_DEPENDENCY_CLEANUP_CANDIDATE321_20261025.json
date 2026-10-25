@@ -1,0 +1,57 @@
+{
+  "task": "Batch26 Round 2 dependency ownership and grouped cleanup",
+  "input": {
+    "filename": "amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html",
+    "bytes": 1645470,
+    "sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"
+  },
+  "output": {
+    "filename": "amq_learning_tool_v82_86_32_candidate321_batch26_round2_songselect_ownership_cleanup_20261025.html",
+    "bytes": 1645516,
+    "sha256": "5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a"
+  },
+  "formalBaseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "modifications": [
+    {
+      "module": "candidate106-final-songselect-layout-owner",
+      "change": "Removed overflow assignments from compact and desktop catalogGeometry branches",
+      "reason": "CSS and Candidate158 own visible overflow; previous desktop hidden value was overwritten"
+    },
+    {
+      "module": "candidate115-song-row-artwork",
+      "change": "Excluded #amqSongSelectTracklist from artwork scans and click delegation",
+      "reason": "Candidate137 creates main-list artwork placeholders; Candidate210 owns main-list cover loading and selection/playback"
+    }
+  ],
+  "tests": {
+    "javascriptSyntax": {
+      "status": "PASS",
+      "scripts": 65,
+      "errors": 0
+    },
+    "cssParsing": {
+      "status": "PASS",
+      "styleBlocks": 109,
+      "rules": 2648,
+      "declarations": 9693,
+      "errors": 0
+    },
+    "duplicateIds": {
+      "status": "PASS",
+      "ids": 269,
+      "duplicates": 0
+    },
+    "changeAssertions": "PASS",
+    "chromium": {
+      "status": "BLOCKED",
+      "reason": "30-second timeout; dumped DOM empty"
+    },
+    "fullAppE2E": "NOT RUN",
+    "remoteHtmlHash": "NOT VERIFIED"
+  },
+  "candidate320Unchanged": true,
+  "candidate321Promoted": false
+}
