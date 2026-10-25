@@ -253,3 +253,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - AMQ/EMQ modes, MIX search, type/decade filters and row selection PASS in that test copy.
 - External cover/fallback, real media playback and native persistent storage remain BLOCKED by DNS/origin restrictions. Do not promote Candidate326 based on partial acceptance.
 - Report: `AMQ_BATCH29_CANDIDATE326_VISIBLE_UI_PERSISTENCE_PROBE_20261025.md` / `.json`.
+
+
+## Candidate327 Batch30 (2026-10-25)
+- Experimental only: `amq_learning_tool_v82_86_38_candidate327_batch30_orphan_css_selector_cleanup_20261025.html`, 1,644,791 bytes, SHA-256 `3e117b68a3fa1f4a57c7ef010477ee18dc12d1327f174765dd44d05f324cb302`.
+- Derived from Candidate326 SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`. Candidate302 remains the formal baseline; Candidate320 remains the immutable rollback checkpoint. Candidate327 is not promoted.
+- Batch30 is CSS-only: 18 selector branches removed; 994 bytes reduced; JS bodies and HTML markup unchanged. Static style equivalence passed at three viewport sizes; full-app acceptance remains open.
