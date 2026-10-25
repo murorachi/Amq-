@@ -107,3 +107,14 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Tests: JS syntax 67/67 PASS; isolated Chromium loader tests 3/3 PASS (concurrent consumers one request, graceful CDN failure, preloaded converter path); duplicate DOM IDs 0.
 - Full-app E2E NOT RUN. Remote Candidate303 HTML NOT UPLOADED/BLOCKED; remote artifact SHA unverified.
 - Report: `BATCH8_CANDIDATE303_REPORT_20261025.md`; manifest: `BATCH8_CANDIDATE303_MANIFEST.json`; test results: `BATCH8_CANDIDATE303_TEST_RESULTS.json`.
+
+
+## Batch 9 — Bulk triage and first confirmed deletion (2026-10-25)
+- Candidate304 created from formal Candidate302 baseline; Candidate302 unchanged.
+- Candidate: `amq_learning_tool_v82_86_15_candidate304_opencc_and_diagnostic_cleanup_20261025.html`, 1,720,215 bytes, SHA-256 `afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21`.
+- Applied shared OpenCC loader integration to AMQ/EMQ Chinese-title modules; removed `v41-classification-diagnostic` because its only effect was writing `window.__v41LastClassifiedSong` and the formal HTML had no internal reader.
+- Only two title scripts modified and one diagnostic script deleted; all 109 CSS blocks unchanged.
+- Tests: JS syntax 66/66 PASS; isolated OpenCC Chromium 3/3 PASS; synthetic EMQ loader regression 9/9 PASS; duplicate DOM IDs 0.
+- Bulk scan: 109 CSS blocks / 3,637 rules / 651 repeated selector groups / 1,385 extra repeated occurrences. Repeated selectors are not auto-deleted; next batch uses cascade-aware feature clusters.
+- Full-app E2E NOT RUN; Candidate304 HTML remote upload BLOCKED; remote SHA unverified.
+- Report: `BATCH9_BATCH_CLEANUP_REPORT_20261025.md`; manifest: `BATCH9_CANDIDATE304_MANIFEST.json`; summary: `BATCH9_VALIDATION_SUMMARY.json`.
