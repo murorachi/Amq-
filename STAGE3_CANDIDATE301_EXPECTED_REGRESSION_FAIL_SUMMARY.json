@@ -1,0 +1,5 @@
+{
+  "probe": "Candidate301 old EMQ getter regression reproduction",
+  "exit_code": 1,
+  "interpretation": "EXPECTED_FAIL: intentionally checks Candidate301 and reproduces duplicate EMQ work ID leakage; not a Candidate302 suite failure"
+}
