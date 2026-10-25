@@ -313,3 +313,9 @@
 - Candidate76/77: Candidate76 owns Song Select sidebar geometry plus ARIA/tabindex reflection; Candidate77 owns dock parent/layout, expanded/mode state and sidebar inline display/visibility. Both write #amqWorkspaceSidebar aria-hidden, so this is an overlapping property-owner candidate, not proof that either whole module is dead. Candidate82 owns a separate content panel and park/restore/Escape/action map. Need state-matrix and browser transition validation before further ownership consolidation.
 - Full remaining-checklist artifact: AMQ_WORKSPACE_OWNERSHIP_AUDIT_AND_MASTER_CHECKLIST_20261026.md and .json. It consolidates CSS, JS, Observer, timer, listener, global API, Song Select, workspace, modal, data/storage, core modes, import, multiplayer, build and GitHub verification scopes.
 - PASS: static mapping of nine workspaceViews entries; Candidate82 capture ownership for dashboard/practice actions; Candidate76/77 ownership distinction and shared aria-hidden write identified. NOT RUN: browser E2E, Candidate76/77 transition state order, persistence, real media, Candidate334 HTML remote upload/hash. Candidate334 remains experimental.
+
+
+## Follow-up static checks — 2026-10-26
+- PASS: Node `--check` executed against 65 executable inline scripts in Candidate334; 0 syntax errors. One application/json script was correctly excluded from JS syntax checks.
+- PASS: static ID scan found 729 id attributes, 708 unique values, and 16 duplicate-ID value kinds. This is a recorded pre-existing risk, not a browser test and not modified in this audit.
+- Still NOT RUN: browser E2E, persistence, media, multiplayer E2E, Candidate334 HTML upload and remote SHA verification.
