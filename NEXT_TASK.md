@@ -191,3 +191,11 @@ Candidate302 remains formal baseline:
 - Batch20 removed Candidate70's unreachable dock target listener; Batch21 removed Candidate72's duplicate panel-state observer. Candidate76/77 remain the panel-state owners and Candidate106 remains catalog geometry owner.
 - Mark uncertain observers/timers NEEDS CONFIRMATION and continue with other safe candidates. Test actual affected scripts in Chromium at desktop/tablet/mobile; full-app E2E remains NOT RUN until genuinely executed.
 - Publish reports/manifests/test results/summaries and update all status docs. Candidate HTML remote upload and SHA verification must not be claimed unless confirmed.
+
+## Next: Batch 24 — continue Song Select runtime owner consolidation
+- Start from Candidate318 SHA-256 14ef66a19621fda5798f486d4008a9251625045842d2b96c538890ed21735029; verify local bytes/hash first. Formal baseline remains Candidate302.
+- Continue beyond CSS cleanup. Review remaining dock/player/modal/grid runtime state writers and lifecycle hooks as one group: event registration order, capture/target propagation, mutation targets, resize/navigation callbacks and route re-entry.
+- Candidate70 owns early ranking placeholder creation and Escape handling; Candidate76 owns close-button/state/geometry handling; Candidate77 owns dock click/open/close; Candidate106 owns catalog geometry. Preserve these responsibilities unless runtime evidence proves a safe transfer.
+- Search for more unreachable target listeners and fallback branches, but only delete after verifying document order and actual event propagation. Mark uncertain dependencies NEEDS CONFIRMATION and continue with other safe items.
+- Test actual affected scripts in isolated Chromium, JS syntax, CSS parse, duplicate IDs and desktop/tablet/mobile layout. Full-app audio/storage/CRUD/AMQ/EMQ/MIX/multiplayer E2E remains NOT RUN unless executed.
+- Update all docs and publish reports/manifests/tests/summaries. Do not claim Candidate HTML remote upload/hash without verification.
