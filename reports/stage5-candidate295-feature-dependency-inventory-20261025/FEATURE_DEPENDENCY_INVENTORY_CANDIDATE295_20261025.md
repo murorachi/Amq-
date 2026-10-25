@@ -319,3 +319,12 @@ Do not simply delete one wrapper. Replace the layered route mutations with one e
 - Fetching the expected Candidate277 HTML path from the current inventory branch returned HTTP 404 / NOT_FOUND.
 - Therefore the formal Candidate277 source is not present at the expected repository path and could not be verified from this branch. The baseline decision remains unchanged; Candidate295 is not promoted.
 - Candidate277-source-dependent edits are **BLOCKED** until the actual file or a verifiable repository location is available. Source-independent analysis of Candidate295 may continue, but any Candidate295 code change requires separate authorization and a uniquely named child version.
+
+
+## 20. Stage 5.7 — Formal baseline decision updated by user (2026-10-25)
+- The user explicitly designated Candidate295 as the formal working baseline and instructed us to stop searching for Candidate277.
+- Local source was rechecked: /mnt/data/index-old.html, 1,720,917 bytes, SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- Candidate295 is no longer validation-only. It is the sole active baseline for the next child candidate.
+- Candidate277/Candidate276 are historical records only. No further recovery search is required.
+- No application source edits or deletions occurred in this baseline-decision stage.
+- Existing test status is unchanged: 67/67 executable inline JS syntax checks PASS (previously executed); duplicate DOM ID scan PASS (previously executed); Candidate295 CSS parsing and browser runtime checks NOT RUN/BLOCKED; external data.js/emq-data.js validation BLOCKED because those files are not in this workspace.
