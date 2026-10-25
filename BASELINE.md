@@ -355,3 +355,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate339 remains an experimental parent (SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`).
 - Candidate340 Batch44 is experimental only: 1,627,175 bytes, SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
 - No baseline promotion until real-browser regression covers both geometry branches, open/close state, content panel, navigation, ESC, resize, and action-dispatch separation. Remote HTML hash is not verified.
+
+
+## 2026-10-26 experimental cleanup checkpoint — Candidate343
+- Candidate302 remains the formal baseline and is not replaced by this candidate.
+- Candidate343: `amq_learning_tool_v82_86_54_candidate343_batch47_remove_orphan_candidate186_helper_20261026.html`, 1,627,145 bytes; SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`.
+- Change: removed one orphaned local `get` helper from Candidate186 after its only recovery path had already been removed in Batch42. Modal backdrop and Escape handlers remain.
+- Rollback to Candidate342 SHA-256 `85651bff600de2a3441aab64fee8d38299872d47a0d76473691334f9aa0fb2fe`; Candidate320 checkpoint and Candidate302 baseline remain unchanged.
+- This is experiment history only, not a formal baseline promotion.
