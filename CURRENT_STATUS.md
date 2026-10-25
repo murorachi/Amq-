@@ -486,3 +486,14 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Batch45 change: removed Candidate76 capture-phase `[data-ws]` click interception; Prototype15 now owns the delegated bubbling click and calls the existing Candidate76 open/close APIs. `[data-ws-action]` remains a separate action route.
 - Static ownership assertions 9/9 PASS; 65 inline JavaScript blocks `node --check` PASS, 0 syntax errors; delivery ZIP integrity PASS.
 - NOT RUN: full browser interaction/regression tests. Candidate341 HTML upload/hash verification on GitHub NOT RUN. Candidate84 CSS demotion deferred pending complete selector dependency review; Candidate94 membership filter retained.
+
+
+## Batch 46 — Candidate342（2026-10-26）
+- Candidate302 remains the formal baseline; Candidate320 remains the immutable rollback checkpoint. Candidate342 is experimental and not promoted.
+- Candidate342: `amq_learning_tool_v82_86_53_candidate342_batch46_remove_unused_v60_modes_20261026.html`, 1,627,191 bytes; SHA-256 `85651bff600de2a3441aab64fee8d38299872d47a0d76473691334f9aa0fb2fe`.
+- Change: removed one confirmed unread `const modes={...}` declaration from `v60-player-quiz-cleanup`; no other source changes intended.
+- Static assertions: PASS. 65 executable inline JS blocks `node --check`: PASS, 0 syntax errors. Delivery ZIP integrity: PASS.
+- Full-app browser interaction: BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR` on file:// and localhost). Full functional regression: NOT RUN.
+- Candidate342 HTML remote upload and SHA-256 readback: NOT RUN. Report MD/JSON uploaded and readback verified; these documents do not prove the HTML exists remotely.
+- Current assessment: cleanup and end-to-end acceptance are not complete. The latest batches demonstrate small confirmed cleanups and workspace event-owner consolidation, not a completed global refactor.
+- Next direction: stop creating new broad inventories where evidence already exists. Execute small, related batches of confirmed dead-code removals; keep uncertain runtime-dependent items in a blocker ledger. Then run focused regression, final residue scan, and formal packaging.
