@@ -44,3 +44,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Expanded isolated route matrix: 15/15 PASS, 0 page errors; stubbed dependencies, not full-app E2E.
 - Storage ownership review: AMQ custom lists remain owned by `v82-25-custom-lists-and-practice-hub`; AMQ recovery snapshots remain required; EMQ lists and selected scope remain owned/written by the EMQ module. AMQ and EMQ schemas must not be merged.
 - No application source changes/deletions. Candidate302 HTML remains NOT_FOUND remotely; remote hash is unverified.
+
+
+## 2026-10-25 Batch 5
+- Candidate302 remains immutable and locally verified at 1,720,249 bytes, SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Static lifecycle inventory covered 70 inline script blocks; 14 high-priority scripts were shortlisted for future runtime instrumentation. No leak is claimed from counts alone.
+- Chromium computed-style probe PASS for present static DOM and CSS at 1440x900, with inline scripts removed; dynamic nodes and full-app behavior were not tested.
+- No app source changes/deletions. Remote artifact verification remains BLOCKED; full-app E2E remains NOT RUN.
