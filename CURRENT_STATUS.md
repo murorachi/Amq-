@@ -287,3 +287,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Song Select mode API smoke test PASS only: AMQ/EMQ/MIX calls complete without JS errors; visible grid counts 180/180/360 due chunked rendering. This is not UI E2E.
 - Formal UI route remains BLOCKED in this origin; search/sort in main song list, real cover loading/fallback, actual playback and route-exit player reset NOT RUN. Candidate114 timers and Candidate158 observer retained.
 - Candidate321 not promoted; HTML remote upload/hash NOT VERIFIED. Report: `AMQ_BATCH26_ROUND4_CANDIDATE321_REAL_DATA_BROWSER_TEST_20261025.md/.json`.
+
+
+## Batch26 Round 4 supplement — Candidate324 initialization race fix (2026-10-25)
+- Reproduced Candidate321 Candidate210 init race with actual AMQ/EMQ data: 2/4 runs had tracklist rows but no artwork `<img>` nodes and no Candidate210 selection handler.
+- Candidate324 is a new experimental artifact, not promoted: `amq_learning_tool_v82_86_35_candidate324_defer_songselect_init_observer_until_route_20261025.html`, 1,646,101 bytes, SHA-256 `3308f0a97a0a8aaa63a464a0d49bee2dffa5219cb6c59add85cf3d62523d6075`. Candidate321/320/302 remain unchanged.
+- Candidate324 defers the Candidate210 stage observer installation until `apply()` runs after route activation. 6/6 Chromium test-copy runs had 180 rows, 180 artwork image nodes, selection handler bound, and row click set currentSong; zero page errors. AMQ/EMQ source modes, MIX cross-source search (`Shiosai no Melody`), Cowboy Bebop search (32 matches), name sort (`_summer` first), 1980s filter, Movie filter, and route-exit player layout all PASS in isolated browser test.
+- Static checks: 65 executable inline scripts syntax PASS; 109 style blocks / 2,648 CSS rules / 9,693 declarations, 0 CSS parse errors; 269 IDs / 0 duplicates.
+- Real cover load/fallback remains BLOCKED/NOT VERIFIED due unavailable external cover DNS; actual audio/video playback and persistent localStorage NOT RUN because test origin is opaque. Candidate114 timers and Candidate158 observer retained. Candidate324 remote HTML upload/hash NOT VERIFIED; not promoted.
+- Report: `AMQ_BATCH26_ROUND4_CANDIDATE324_INIT_RACE_ACCEPTANCE_20261025.md/.json`.
