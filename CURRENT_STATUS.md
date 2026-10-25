@@ -279,3 +279,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Full-app E2E BLOCKED: browser policy blocks `file://` and localhost navigation; full HTML `set_content` lacks `data.js` and `emq-data.js`, which are absent from the current branch (404). Opaque document origin also blocks localStorage. Real cover loading/fallback and real audio playback NOT RUN.
 - Candidate114 delayed resets and Candidate158 subtree Observer retained pending full-app evidence. Candidate321 HTML remote upload/hash NOT VERIFIED; no promotion.
 - Report: `AMQ_BATCH26_ROUND3_CANDIDATE321_BROWSER_VALIDATION_20261025.md/.json`.
+
+
+## Batch26 Round 4 — real-data Chromium validation (2026-10-25)
+- User supplied `data(1).js` (4,975,244 bytes, SHA-256 `692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3`) and `emq-data(3).js` (2,684,266 bytes, SHA-256 `88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc`). Candidate321 itself was not modified.
+- Chromium test copy embedded the actual data scripts in memory and used an in-memory storage shim due opaque `about:blank` origin. Startup PASS in this test copy: DB anime=9,516, songs=38,821, EMQ work count=6,645; 0 page errors, 0 console errors, 0 failed requests.
+- Song Select mode API smoke test PASS only: AMQ/EMQ/MIX calls complete without JS errors; visible grid counts 180/180/360 due chunked rendering. This is not UI E2E.
+- Formal UI route remains BLOCKED in this origin; search/sort in main song list, real cover loading/fallback, actual playback and route-exit player reset NOT RUN. Candidate114 timers and Candidate158 observer retained.
+- Candidate321 not promoted; HTML remote upload/hash NOT VERIFIED. Report: `AMQ_BATCH26_ROUND4_CANDIDATE321_REAL_DATA_BROWSER_TEST_20261025.md/.json`.
