@@ -1,0 +1,38 @@
+{
+  "batch": 11,
+  "status": "PASS_WITH_FULL_APP_E2E_NOT_RUN",
+  "source": {
+    "file": "amq_learning_tool_v82_86_16_candidate305_home_songselect_css_cleanup_20261025.html",
+    "sha256": "3bcaaa70fe05b130dd302462a1ef2aa41fbed855f2e12526d526c7675bd07e9f",
+    "bytes": 1670933
+  },
+  "candidate": {
+    "file": "amq_learning_tool_v82_86_17_candidate306_home_songselect_orphan_css_cleanup_20261025.html",
+    "sha256": "ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e",
+    "bytes": 1667280
+  },
+  "changes": {
+    "selector_branches_removed": 31,
+    "css_rules_before": 3470,
+    "css_rules_after": 3439,
+    "css_declarations_before": 12318,
+    "css_declarations_after": 12194,
+    "bytes_removed": 3653,
+    "style_blocks_touched": 4
+  },
+  "tests": {
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "script_contents_unchanged": "PASS",
+    "non_style_html_exactly_unchanged": "PASS",
+    "chromium_computed_style": "PASS 6/6 scenarios, 395 static elements/scenario, 44 properties, 0 diffs",
+    "full_app_e2e": "NOT RUN"
+  },
+  "formal_baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "github_candidate_html": "BLOCKED; not remotely verified",
+  "rollback": "Candidate305"
+}
