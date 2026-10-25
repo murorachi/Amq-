@@ -176,3 +176,11 @@
 - PASS: JS syntax 67/67, CSS parse 0 errors, duplicate IDs 0, isolated Chromium regression 2/2. Full-app E2E NOT RUN.
 - Candidate HTML remote upload/hash NOT VERIFIED. Candidate320 not promoted; formal baseline Candidate302 unchanged.
 - Skipped full removal of Candidate103/Candidate114 because they have distinct player/dock/layout side effects; Candidate114 timers remain NEEDS CONFIRMATION.
+
+
+## 2026-10-25 — Batch26 Round 1 global static candidate inventory
+- Recomputed Candidate320 SHA-256: `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c` (1,645,470 bytes); formal baseline Candidate302 unchanged.
+- Added `AMQ_GLOBAL_CANDIDATE_SCAN_CANDIDATE320_20261025.md` and JSON summary. Inventory includes CSS duplicate selector strings, cross-script function-name collisions, event/observer/timer pattern counts and 12 concrete lifecycle candidates.
+- Counts: 65 executable inline scripts; 109 styles; 2,648 CSS rules / 9,693 declarations; 0 CSS parse errors; 269 IDs / 0 duplicate IDs; 342 repeated selector strings; 54 observer constructors; 474 addEventListener / 4 removeEventListener; 134 setTimeout / 10 setInterval / 32 requestAnimationFrame.
+- No source changes and no new direct deletions approved. Static counts alone are not dead-code proof. CSS/ID/hash checks PASS; JS syntax PASS carried forward from handoff and not rerun; Chromium/full E2E NOT RUN.
+- Next: trace Song Select DOM/property ownership and timer/observer lifecycle, then batch only evidence-backed integrations/deletions.
