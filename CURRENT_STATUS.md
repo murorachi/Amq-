@@ -166,3 +166,9 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Removed 17 superseded declarations / 589 bytes in one Home stable-play modal style block. JS and non-style HTML unchanged.
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; computed style 6/6 desktop/tablet/mobile Home and Song Select scenarios, zero differences.
 - Full-app E2E NOT RUN; Candidate309 HTML remote upload BLOCKED. Candidate309 not promoted; formal baseline remains Candidate302.
+
+## Batch 15 — Home settings-panel superseded layout CSS cleanup (2026-10-25)
+- Candidate310 created from Candidate309: 1,664,118 bytes; SHA-256 `34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9`.
+- Removed 9 superseded declarations / 312 bytes from the Home settings-panel layout rules. JS/non-style HTML unchanged.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; computed style 6/6 desktop/tablet/mobile scenarios, zero differences.
+- Full-app E2E NOT RUN. Candidate310 HTML remote upload BLOCKED. Report/summary creation on GitHub also encountered connector errors and remains unverified. Candidate310 not promoted; formal baseline Candidate302 remains unchanged.
