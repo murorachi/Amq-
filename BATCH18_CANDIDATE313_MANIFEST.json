@@ -1,0 +1,99 @@
+{
+  "batch": 18,
+  "source": "Candidate312",
+  "source_sha256": "12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb",
+  "candidate": "amq_learning_tool_v82_86_24_candidate313_workspace_route_event_dedup_20261025.html",
+  "candidate_bytes": 1647687,
+  "candidate_sha256": "bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a",
+  "bytes_removed": 457,
+  "changes": [
+    {
+      "script_id": "candidate76-workspace-panel-shell-runtime",
+      "action": "Removed unreachable [data-ws] target click listener and dead priorFocus restoration state; preserved aria-controls and all other handlers/observers.",
+      "evidence": "candidate77 document capture listener calls stopImmediatePropagation before target phase."
+    },
+    {
+      "script_id": "candidate72-ranking-frame-bootstrap",
+      "action": "Removed unreachable [data-ws] target click listener; preserved frame creation and body class observer.",
+      "evidence": "Same document capture listener blocks target click listener; MutationObserver remains state-sync owner."
+    },
+    {
+      "script_index": 60,
+      "action": "Removed two no-op installNavigationGuard retry timers.",
+      "evidence": "Immediate installation occurs before later candidate193 route guard marks outer wrapper guarded."
+    }
+  ],
+  "tests": {
+    "batch": 18,
+    "source": "amq_learning_tool_v82_86_23_candidate312_cross_module_css_js_dedup_20261025.html",
+    "source_sha256": "12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb",
+    "candidate": "amq_learning_tool_v82_86_24_candidate313_workspace_route_event_dedup_20261025.html",
+    "candidate_bytes": 1647687,
+    "candidate_sha256": "bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a",
+    "changed_script_blocks": [
+      {
+        "index": 44,
+        "id": "candidate76-workspace-panel-shell-runtime",
+        "before": 4015,
+        "after": 3776
+      },
+      {
+        "index": 60,
+        "id": null,
+        "before": 1700,
+        "after": 1617
+      },
+      {
+        "index": 63,
+        "id": "candidate72-ranking-frame-bootstrap",
+        "before": 1031,
+        "after": 896
+      }
+    ],
+    "javascript_syntax": {
+      "status": "PASS",
+      "checked": 68
+    },
+    "css_parse": {
+      "status": "PASS",
+      "rules": 3423,
+      "declarations": 11425,
+      "errors": 0
+    },
+    "duplicate_dom_ids": {
+      "status": "PASS",
+      "count": 0
+    },
+    "workspace_dock_isolated_chromium": {
+      "status": "PASS",
+      "before_after_identical": true,
+      "checks": [
+        "open panel",
+        "close panel",
+        "aria-controls",
+        "aria-hidden",
+        "aria-pressed",
+        "workspace mode",
+        "display"
+      ]
+    },
+    "route_guard_isolated_chromium": {
+      "status": "PASS",
+      "before_after_identical": true,
+      "scenarios": [
+        "catalog outside Song Select",
+        "dashboard outside Song Select",
+        "dashboard inside Song Select",
+        "watchlist inside Song Select",
+        "vnList outside Song Select"
+      ]
+    },
+    "full_app_e2e": "NOT RUN: isolated Chromium uses actual affected runtime scripts with stub DOM/core navigation; no full-app audio, storage CRUD, gameplay or multiplayer workflow."
+  },
+  "formal_baseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "candidate_promoted": false,
+  "github_html_upload": "NOT VERIFIED"
+}
