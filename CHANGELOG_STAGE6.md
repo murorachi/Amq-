@@ -337,3 +337,12 @@
 - PASS：65 個 executable inline scripts 語法檢查；只有目標 script body 改變；Candidate302／Candidate320 未修改。
 - NOT RUN：瀏覽器互動回歸、資料持久化、媒體／多人 E2E、HTML GitHub 上傳及遠端 hash 驗證。
 - 回滾至 Candidate335；正式基準仍 Candidate302，回滾檢查點仍 Candidate320。詳見 `AMQ_BATCH39_CANDIDATE336_SIDEBAR_STATE_OWNERSHIP_20261026.md`。
+
+
+## Batch40 — Candidate336 側欄瀏覽器驗收嘗試（2026-10-26）
+
+- 未修改 HTML，未建立新候選。
+- BLOCKED：Chromium Playwright 對 file:// 與 http://127.0.0.1 導覽均回傳 `net::ERR_BLOCKED_BY_ADMINISTRATOR`，頁面未載入。
+- NOT RUN：側欄開啟／收合、路由／Home、Song Select、resize/computed style、資料持久化、媒體及多人 E2E。
+- 不把環境阻擋冒充程式 FAIL，也不把未執行測試標為 PASS。Candidate336 SHA-256 仍為 `b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
+- 詳見 `AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.md`。
