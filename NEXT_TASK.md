@@ -144,3 +144,10 @@ Candidate302 remains formal baseline:
 - Trace dynamic HTML/JS references before deleting; preserve uncertain selectors and all shared/global, multiplayer, learning-system and route-guard behavior.
 - Batch confirmed deletions, then run JS syntax, CSS parse, duplicate IDs, script/non-style HTML unchanged checks and Chromium desktop/tablet/mobile computed-style regression for Home and Song Select.
 - Full-app E2E NOT RUN; candidate HTML remote upload remains BLOCKED until binary and remote SHA can be verified.
+
+## Next: Batch 16 — continue Home / Song Select CSS cleanup
+- Latest working candidate: Candidate310, SHA-256 `34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9` (1,664,118 bytes). Formal baseline remains Candidate302.
+- Continue exact orphan selector and same-condition superseded declaration analysis; do not repeat whole-file counts.
+- Static orphan scan returned only `.relationCanvas` and `.mpReadyBar` branches, which are unrelated/dynamic and MUST be preserved. Do not delete without dependency proof.
+- Skip quiz/learning, multiplayer, route guard, and shared workspace styles unless direct evidence proves a scoped Home/Song Select orphan.
+- Candidate HTML upload and Batch15 report/summary publication remain unverified/blocked; full-app E2E NOT RUN.
