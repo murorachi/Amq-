@@ -40,3 +40,11 @@
 - Rechecked target branch: Candidate302 HTML still returns 404. Remote SHA-256 verification remains BLOCKED.
 - Matching data.js/emq-data.js not found locally; full-app E2E, runtime lifecycle and computed-style checks remain NOT RUN.
 - No application code changed or deleted; DELETE=0.
+
+
+## 2026-10-25 — Batch 5 lifecycle and computed-style probe
+- Scanned 70 inline scripts from Candidate302 and generated a lifecycle inventory plus 14-script review shortlist.
+- Identified explicit cleanup patterns in multiplayer polling/socket lifecycle and unified import status observers; other observer/listener candidates remain unconfirmed, not declared leaks.
+- Chromium computed-style probe PASS on actual static markup/CSS at 1440x900 with inline scripts removed; zero page errors. Dynamic nodes are absent before initialization and were not falsely treated as unused.
+- Per user direction, remote artifact transfer and full-app E2E were skipped; status remains BLOCKED/NOT RUN.
+- No application source changes/deletions; DELETE=0.
