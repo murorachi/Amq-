@@ -119,3 +119,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Batch14 removed 17 superseded declarations / 589 bytes from the Home stable-play modal CSS. JS/non-style HTML unchanged; JS syntax, CSS parse, duplicate IDs and six isolated Chromium style scenarios PASS.
 - Full-app E2E NOT RUN; candidate HTML remote upload BLOCKED. Candidate309 not promoted.
 - Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Rollback from Candidate309 to Candidate308.
+
+## Candidate chain update — Batch 15
+- Candidate310: 1,664,118 bytes, SHA-256 `34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9`, derived from Candidate309.
+- Batch15 removed 9 superseded Home settings-panel declarations / 312 bytes. JS syntax, CSS parse, duplicate IDs, unchanged script/non-style HTML and six isolated Chromium style scenarios PASS.
+- Full-app E2E NOT RUN. Candidate HTML upload and Batch15 report/summary publication are BLOCKED/unverified. Candidate310 not promoted.
+- Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. Rollback from Candidate310 to Candidate309.
