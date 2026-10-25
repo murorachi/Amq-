@@ -324,3 +324,13 @@ Candidate302 remains formal baseline:
 - Inspect Candidate16 custom-list legacy-manager fallback against current card types and the official membership API. Keep both legacy catalog cards and Song Select rows unless actual dependency evidence proves one is obsolete.
 - Then verify Candidate15 visibility Observer ownership against Candidate76/77 route/shell lifecycle. Do not infer redundancy from broad observer overlap.
 - Full browser E2E/media/covers/native persistence remain NOT RUN for user local acceptance; Candidate331 HTML upload/hash NOT VERIFIED.
+
+
+## Batch35 — Candidate332 Candidate16 grid scope cleanup (2026-10-26)
+- Parent Candidate331 SHA-256: `1a17f6a940aa2248a40c56a15d91fe0d63df35da35948f15156fd261dea13565`.
+- Candidate332: `amq_learning_tool_v82_86_43_candidate332_custom_list_grid_scope_cleanup_20261026.html`, SHA-256 `dd4b9ca46fe3303232f8f455e1461c3e638fc339fa7440819d55df86a737f10d`, 1,631,927 bytes, -107 bytes from Candidate331.
+- Only `amq-workspace-prototype-16-custom-list-workflow-script` changed: removed unreachable `getGrid()` fallbacks after static `#grid`, and removed whole-document `.card` scan fallback because `#grid.closest('.view-catalog')` exists in the current HTML.
+- Preserved both custom-list paths: legacy `.cardManage`/`#practiceManageBackdrop` and Song Select `.songrow[data-work-id]` using `__aniCustomListMembershipV1`; storage compatibility and session state unchanged.
+- Candidate15 visibility Observer and Candidate76/77 lifecycle were retained because current evidence does not prove duplicate ownership.
+- Tests: PASS, 65 inline scripts syntax checked with 0 errors; PASS, 109 style blocks raw-brace check; PASS, 729 ID attributes and 17 duplicate-ID kinds unchanged from Candidate331; PASS, key membership/storage code retained. Browser E2E, native persistence, media playback, HTML upload/remote hash remain NOT RUN.
+- Experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint. Report: `AMQ_BATCH35_CANDIDATE332_CUSTOM_LIST_GRID_SCOPE_CLEANUP_20261026.md`.
