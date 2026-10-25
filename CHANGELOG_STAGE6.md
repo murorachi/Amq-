@@ -251,3 +251,14 @@
 - Removed 18 unreferenced CSS selector branches and two now-empty rules; net reduction 994 bytes. JavaScript and markup unchanged.
 - PASS: 65/65 inline script syntax, JS hashes unchanged, CSS parser zero errors, 269 unique IDs, Chromium static computed styles at three viewports with zero differences.
 - NOT RUN: full-app E2E, real audio/video, cover/fallback, native persistent storage. Candidate327 remains unpromoted; Candidate302 formal baseline and Candidate320 rollback unchanged; HTML upload/hash NOT VERIFIED.
+
+
+## 2026-10-26 — Batch31 Candidate328 Workspace dead-listener cleanup
+- Candidate328 SHA-256 `985780d07196fc50b8a6f638e84ee131e48edece1c98c6fad86e660b51b68315`; removed two unreachable listeners and delegated stale-overlay cleanup into Candidate82's capture-phase Escape owner. Net −286 bytes.
+- PASS: Node syntax 65/65, 269 unique IDs, CSS unchanged, targeted listener checks pass. Browser interaction NOT RUN.
+
+## 2026-10-26 — Batch32 Candidate329 Workspace action-router deduplication
+- Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`, 1,635,608 bytes, derived from Candidate328.
+- Removed 16 duplicate Candidate15 action branches (8,897 bytes) owned by Candidate82's capture-phase router; preserved all 12 identified unique Candidate15 action paths.
+- PASS: 65/65 Node syntax; 269 unique IDs; 109 CSS blocks parse with 0 errors; ownership map checks pass.
+- Browser E2E/media/storage NOT RUN. Candidate329 not promoted; HTML upload/hash NOT VERIFIED.
