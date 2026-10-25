@@ -328,3 +328,22 @@ Do not simply delete one wrapper. Replace the layered route mutations with one e
 - Candidate277/Candidate276 are historical records only. No further recovery search is required.
 - No application source edits or deletions occurred in this baseline-decision stage.
 - Existing test status is unchanged: 67/67 executable inline JS syntax checks PASS (previously executed); duplicate DOM ID scan PASS (previously executed); Candidate295 CSS parsing and browser runtime checks NOT RUN/BLOCKED; external data.js/emq-data.js validation BLOCKED because those files are not in this workspace.
+
+
+## 21. Stage 5.8 — Re-run static validation of the adopted baseline (2026-10-25)
+
+### Source integrity
+- Local file: /mnt/data/index-old.html
+- Size: 1,720,917 bytes.
+- SHA-256: aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81.
+- Hash and size are unchanged by the read-only checks.
+
+### Actual test results
+- **PASS** — Node.js --check for 67/67 executable inline JavaScript blocks. There are 70 script tags total, including 2 external script references and 1 application/json payload; these three were not counted as executable inline JavaScript blocks.
+- **PASS** — tinycss2 1.5.1 parsed all 109 style blocks. Counted 2,808 top-level qualified CSS rules; zero stylesheet-level parse errors and zero declaration-level parse errors.
+- **PASS** — DOM ID scan: 271 IDs, 271 unique; zero duplicates.
+- **NOT RUN/BLOCKED** — browser rendering, route interaction, Song Select return/back, custom-list CRUD and persistence, audio/live API/multiplayer.
+- **BLOCKED** — external data validation. The HTML references data.js and emq-data.js, but neither file is present at /mnt/data/data.js or /mnt/data/emq-data.js in this workspace.
+
+### Interpretation
+These results establish syntax and parser-level consistency only. They do not prove that the page renders correctly, that runtime dependencies initialize, or that AMQ/EMQ data load. No application source was edited or deleted in this stage.
