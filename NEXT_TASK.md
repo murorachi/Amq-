@@ -206,3 +206,13 @@ Candidate302 remains formal baseline:
 - Continue route/layout owner and lifecycle cleanup, prioritize proven dead observers/listeners and duplicate initializers. Keep Candidate103/114 remaining behavior unless ownership is proven redundant.
 - Run JS syntax, CSS parsing, duplicate-ID and affected-script Chromium checks. Full-app E2E remains NOT RUN unless actually executed.
 - Report skipped/error items explicitly; do not claim HTML upload or remote SHA verification unless confirmed.
+
+
+## Next: Batch26 Round 2 — dependency ownership maps and grouped cleanup
+1. Use `AMQ_GLOBAL_CANDIDATE_SCAN_CANDIDATE320_20261025.md` as the Round 1 output; do not repeat the global inventory.
+2. Trace Song Select lifecycle candidates LC-01/02/03/04/05/07/09: list observer target, callback effects, CSS/DOM properties written, trigger sources, initialization guard and cleanup.
+3. Compare Candidate103/106/114/158/210/71/99/115 ownership. Do not delete an entire module based on overlapping selectors or similar names.
+4. Separately inspect CSS repeated selectors with media conditions and source order; produce only evidence-backed obsolete declaration candidates.
+5. Batch together candidates proven redundant; skip unresolved items and continue independent work. Keep Candidate320 immutable; new source changes require a unique candidate filename.
+6. Run syntax/CSS/duplicate-ID checks, then affected-script browser tests if environment permits. Full-app E2E remains NOT RUN unless executed.
+7. Update status, baseline note, next task, changelog and test report; verify GitHub read-back and report remote artifact/hash status accurately.
