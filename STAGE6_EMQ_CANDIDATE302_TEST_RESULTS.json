@@ -1,0 +1,47 @@
+{
+  "reportVersion": 1,
+  "purpose": "synthetic EMQ loader regression tests using script extracted from Candidate302 HTML; not full browser E2E",
+  "candidate": "Candidate302",
+  "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "valid payload accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "missing packed payload rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported version rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate EMQ work ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "AMQ work ID collision rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "AMQ song ID collision rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "broken work association rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed song record rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid audio URL yields ready-empty pool",
+      "status": "PASS"
+    }
+  ]
+}
