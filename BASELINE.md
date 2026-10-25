@@ -340,3 +340,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Audit report/JSON: `AMQ_BATCH41_WORKSPACE_ROUTE_OWNERSHIP_AUDIT_20261026.md` and `.json` (uploaded and read back from the target branch).
 - No baseline or rollback files modified. Candidate302 remains formal baseline; Candidate320 remains immutable rollback.
 - Audit does not promote Candidate337 and does not claim browser verification.
+
+
+## 2026-10-26 Batch 43 candidate (not promoted)
+- Candidate302 remains the formal maintenance baseline; Candidate320 remains a preserved rollback checkpoint.
+- Candidate339 derives from Candidate338 and removes the Candidate186 duplicate audioDock MutationObserver plus only the three #amqWorkspaceDock rules in Candidate94. Modal click/Escape handlers and Candidate94 list membership filtering remain.
+- Candidate339: 1,628,078 bytes; SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`.
+- Static JavaScript syntax: 65 inline scripts PASS, 0 errors. Browser regression NOT RUN. HTML remote hash NOT VERIFIED. Do not promote without browser validation and remote artifact verification.
