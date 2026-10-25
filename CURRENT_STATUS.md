@@ -448,3 +448,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate70 contains active back/Escape/placeholder/background behavior; deletion is not yet justified.
 - No application HTML modified in Batch 41; no new candidate. Browser E2E NOT RUN. Batch 41 report/JSON uploaded and read back from GitHub.
 - Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+
+
+## Batch 43 — Candidate339 confirmed dead-code cleanup (2026-10-26)
+- Input Candidate338: 1,629,019 bytes; SHA-256 `30b20c90a766722b87e13b2e506ec0ab313d902c40258e23360249832260d28a`.
+- Candidate339 local artifact: `amq_learning_tool_v82_86_50_candidate339_batch43_confirmed_dead_code_cleanup_20261026.html`, 1,628,078 bytes; SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`.
+- Deleted only the duplicate Candidate186 `#audioDock` MutationObserver and three `#amqWorkspaceDock` CSS rules in Candidate94. Retained Candidate186 modal click/Escape handlers and Candidate94 list-membership filter.
+- Scope assertions PASS; 65 inline JavaScript blocks syntax-check PASS (0 errors); ZIP integrity PASS.
+- Browser interaction/visual regression NOT RUN. Candidate339 HTML upload and remote hash verification NOT RUN.
+- Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged. Candidate339 is experimental, not promoted.
+- Evidence: `AMQ_BATCH43_CANDIDATE339_CONFIRMED_DEAD_CODE_CLEANUP_20261026.md` and matching JSON.
