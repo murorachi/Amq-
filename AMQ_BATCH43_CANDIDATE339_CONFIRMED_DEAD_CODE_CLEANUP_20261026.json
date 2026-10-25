@@ -1,0 +1,29 @@
+{
+  "batch": "43",
+  "candidate": "Candidate339",
+  "input": {
+    "file": "amq_learning_tool_v82_86_49_candidate338_batch42_remove_unreachable_cover_recovery_20261026.html",
+    "sha256": "30b20c90a766722b87e13b2e506ec0ab313d902c40258e23360249832260d28a"
+  },
+  "output": {
+    "file": "amq_learning_tool_v82_86_50_candidate339_batch43_confirmed_dead_code_cleanup_20261026.html",
+    "bytes": 1628078,
+    "sha256": "8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd"
+  },
+  "changes": [
+    "Remove duplicate Candidate186 audioDock MutationObserver",
+    "Remove only Candidate94 #amqWorkspaceDock CSS rules",
+    "Retain Candidate186 modal click/Escape handlers",
+    "Retain Candidate94 list membership filter"
+  ],
+  "tests": {
+    "baseline_hash": "PASS",
+    "scope_assertions": "PASS",
+    "inline_js_syntax": "PASS",
+    "inline_script_count": 65,
+    "syntax_errors": 0,
+    "browser_regression": "NOT RUN",
+    "github_html_upload_remote_hash": "NOT RUN"
+  },
+  "rollback": "Candidate338"
+}
