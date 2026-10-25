@@ -229,3 +229,12 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate320 audit target/rollback checkpoint remains unchanged: `amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html`, 1,645,470 bytes, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
 - Round 1 created a global candidate list only; no application source was modified and no candidate was promoted.
 - Full local report: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.md`; JSON: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.json`; GitHub summary: `AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_GITHUB_SUMMARY_20261025.md`.
+
+
+## 2026-10-25 — Batch27/28 experimental candidates (not promoted)
+- Formal baseline remains Candidate302 SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate320 remains unchanged rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate325 Batch27 orphan CSS cleanup: 1,645,154 bytes; SHA-256 `187cba98e97d48819430a388d959a8dc0d7cbb41156b349de6adc31b58e6dd7d`; unpromoted.
+- Candidate326 Batch28 combined Song Select lifecycle integration: 1,645,785 bytes; SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`; unpromoted.
+- Candidate326 browser evidence is isolated: real data startup and synthetic route/list/selection PASS; visible UI navigation is BLOCKED by hidden legacy control; external cover, actual media playback and persistent storage are not verified.
+- Candidate325/326 HTML remote SHA verification has not occurred; do not promote either.
