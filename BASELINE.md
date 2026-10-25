@@ -1,29 +1,32 @@
 # BASELINE.md
 
-## 正式維護基準
-
+## 正式維護基準（唯一）
 - 檔案：`amq_learning_tool_v82_86_06_candidate295_db_extraction_20261025.html`
 - 版本：`v82.86.06-candidate295-db-extraction-20261025`
 - 大小：1,720,917 bytes
 - SHA-256：`aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`
 - 狀態：正式維護基準，唯讀保護；不可覆蓋。
 
-## 最新第三階段候選（非正式基準）
+## 候選版本（均未升格）
+| 候選 | 大小 | SHA-256 |
+|---|---:|---|
+| Candidate299 | 1,719,884 | `1e7a37cef7a7d791c5dd40f09c2143b2e507dac76c73951e5060b82f5c44c2e4` |
+| Candidate300 | 1,717,671 | `5fea42650ede3b8b779afdf7b61e42365388d41b34e4231988065eb2fb7d34a5` |
+| Candidate301 | 1,720,241 | `e8eb07ccab26b6e424eda9aed11d1c21b90cca9c544ed2b6843096e3b6762454` |
+| Candidate302 | 1,720,249 | `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd` |
 
-- 檔案：`amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
-- 大小：1,720,249 bytes
-- SHA-256：`f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`
-- 狀態：候選；未升格。
+## Stage 5 real data fingerprints
+- `data.js`: 4,975,244 bytes; SHA-256 `692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3`.
+- `emq-data.js`: 2,684,266 bytes; SHA-256 `88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc`.
+- AMQ 9,516 works / 38,821 songs; EMQ 6,645 works / 16,839 songs; invalid/duplicate IDs, missing EMQ associations and cross-source ID collisions: 0. Local audit PASS.
+- 495 AMQ songs have no media value in row slots 9/10/11; current media extractor uses these slots. They are not eligible playback candidates through that extractor, but source corruption is not established.
 
-## 第五階段狀態（2026-10-25）
+## Stage 6 acceptance
+- Static checks on Candidates 295/299/300/301/302: PASS (67 executable inline JS blocks, 109 style blocks, 2,808 CSS rules, 271 unique HTML IDs per candidate).
+- Candidate302 source-derived EMQ loader regression suite: 9/9 PASS; Candidate301 expected regression reproduced in 5 invalid/unready cases.
+- Existing synthetic suites: 9/9 + 11/11 + 11/11 PASS. Combined Candidate302 isolated tests: 40/40 PASS.
+- Browser E2E / real playback / actual real-data full-page runtime: NOT RUN or BLOCKED.
+- Candidate302 HTML remote upload/hash verification: BLOCKED; remote branch currently contains reports/scripts, not the candidate HTML.
+- Candidate295 remains the only formal baseline; Candidate302 is not promoted.
 
-- 本機資料驗收工具的語法檢查、合成資料測試與真實 AMQ/EMQ 結構稽核均 PASS。
-- 真實 `data.js`：4,975,244 bytes；SHA-256 `692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3`。
-- 真實 `emq-data.js`：2,684,266 bytes；SHA-256 `88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc`。
-- AMQ：9,516 works、38,821 songs；ID 有效且唯一，標題／歌手欄位完整；38,326 首有至少一個被工具辨識的音訊欄位，另有 495 首待核對欄位 schema 與 fallback。
-- EMQ：6,645 works、16,839 songs；ID 有效且唯一，作品關聯與標題／歌手／音訊候選檢查通過，音訊候選均為 HTTPS。
-- 跨來源作品／歌曲 ID 衝突皆為 0，工具 verdict PASS，issues 空陣列。
-- 資料檔雜湊不等於 HTML 雜湊；尚未證明資料檔與 Candidate295/Candidate302 的建置來源配對關係。
-- 瀏覽器 E2E、實際音訊、AMQ/EMQ/MIX 模式流程、Candidate299 路由、Candidate301 CRUD／備份還原仍 NOT RUN。
-- Candidate295 仍為正式基準；Candidate302 不得升格，直到完整回歸驗收有證據。
-- 詳見 `STAGE5_PROGRESS_REPORT_20261025.md`。
+Details: `STAGE6_FINAL_REPORT_20261025.md`.
