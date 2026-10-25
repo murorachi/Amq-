@@ -69,3 +69,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate302 local baseline hash unchanged. Matching `data.js` and `emq-data.js` were not found under `/mnt/data`; full-app E2E, lifecycle runtime monitoring and computed-style checks remain NOT RUN.
 - Remote Candidate302 HTML fetch still returns 404; remote artifact/hash verification is BLOCKED. Text reports/docs existing remotely do not establish that the HTML artifact exists.
 - No app source edits/deletions; DELETE=0.
+
+
+## Batch 5 — 2026-10-25
+- User agreed to skip remote Candidate302 artifact transfer and full-app E2E attempts for now; those remain BLOCKED/NOT RUN rather than being repeatedly retried.
+- Candidate302 reverified locally: 1,720,249 bytes; SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Static lifecycle audit scanned 70 inline script blocks and produced a 14-script high-priority review shortlist. Static call-site counts do not prove leaks.
+- Chromium computed-style probe PASS for the static DOM at 1440x900, using real Candidate302 markup/CSS with inline scripts removed; 0 page errors. Dynamic Song Select/workspace elements absent before initialization remain NOT RUN.
+- No app source modified or deleted; DELETE=0. Full app E2E, runtime lifecycle pairing, and remote HTML hash verification remain NOT RUN/BLOCKED.
+- Batch 5 report and local evidence package are available as deliverables; GitHub report/summary and docs updated separately.
