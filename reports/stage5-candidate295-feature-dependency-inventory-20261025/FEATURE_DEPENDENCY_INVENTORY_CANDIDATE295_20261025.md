@@ -297,3 +297,25 @@ Do not simply delete one wrapper. Replace the layered route mutations with one e
 - No HTML/CSS/JS or application storage schema was modified.
 - No deletion is authorized by the evidence gathered so far. Route guards and fallback readers remain INTEGRATE / NEEDS CONFIRMATION, not DELETE.
 - Next priority: recover/verify the formal Candidate277 source in the active workspace, then run the route and custom-list regression suite against that baseline before implementing consolidation. If Candidate277 cannot be obtained, record the block and continue only with source-independent analysis or a separately authorized Candidate295 child candidate.
+
+
+## 19. Stage 5.6 — Custom-list fallback initialization timing and baseline retrieval (2026-10-25)
+
+### Script-order evidence
+- The playback/dock module that defines the first fallback consumer appears before the custom-list store script in document order (playback logic around lines 1752–2463; canonical store script starts around line 3503).
+- In the inspected playback initialization segment, the mode selector is synchronized and change handlers are registered; no immediate call to setMode(custom-list) was found. The custom-list pool function is called by interaction-driven playback paths.
+- The other three runtime consumers appear after the canonical store script in document order (multiplayer consumer around line 4983; Song Select workflow around line 7410; bottom dock around line 11492).
+- This makes normal user-interaction-before-store-initialization unlikely in a successfully parsed page. It does not prove that the store always initializes successfully, nor does it justify deleting all fallback behavior without runtime tests.
+
+### Revised fallback decision
+- Normal initialization-order dependency: **not demonstrated by static evidence**.
+- Fallback purpose: likely degraded read compatibility when the canonical store API is absent or failed to initialize; this remains an inference.
+- Preferred eventual integration: centralize the legacy read fallback behind one explicit compatibility adapter and expose whether the canonical store or fallback was used. Do not silently allow a failed canonical store to masquerade as a fully healthy CRUD subsystem.
+- Deletion decision: **NOT AUTHORIZED** until tests cover canonical-store startup failure, malformed payload quarantine, read-only playback/list rendering, and CRUD operations with the store unavailable.
+
+### Formal baseline retrieval attempt
+- GitHub branch search for Candidate277 returned no matching branch.
+- GitHub code search for the exact Candidate277 filename/version and the term Candidate277 returned no indexed results.
+- Fetching the expected Candidate277 HTML path from the current inventory branch returned HTTP 404 / NOT_FOUND.
+- Therefore the formal Candidate277 source is not present at the expected repository path and could not be verified from this branch. The baseline decision remains unchanged; Candidate295 is not promoted.
+- Candidate277-source-dependent edits are **BLOCKED** until the actual file or a verifiable repository location is available. Source-independent analysis of Candidate295 may continue, but any Candidate295 code change requires separate authorization and a uniquely named child version.
