@@ -429,3 +429,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS：父候選 hash、精確替換、僅單一 script body 改變、65 個 executable inline scripts 語法檢查 0 錯誤；Candidate302／Candidate320 未修改。
 - NOT RUN：瀏覽器路由／展開收合／resize 回歸、資料持久化、媒體／多人 E2E、HTML 上傳與遠端 hash 驗證。
 - 回滾：Candidate335；正式基準仍 Candidate302，回滾點仍 Candidate320。詳見 `AMQ_BATCH39_CANDIDATE336_SIDEBAR_STATE_OWNERSHIP_20261026.md`。
+
+
+## Batch40 / Candidate336 瀏覽器驗收（2026-10-26）
+
+- 結果：BLOCKED。Chromium Playwright 導覽本機 file:// 與 http://127.0.0.1 均回傳 `net::ERR_BLOCKED_BY_ADMINISTRATOR`，頁面未載入。
+- 因頁面未載入，dock 點擊、路由、Song Select、resize/computed style、持久化、媒體與多人 E2E 均為 NOT RUN；沒有將環境阻擋誤報成應用程式 FAIL 或互動 PASS。
+- Batch40 沒有修改 HTML、沒有建立新候選。Candidate336 SHA-256 仍為 `b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
+- 報告：`AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.md`；JSON：`AMQ_BATCH40_CANDIDATE336_SIDEBAR_BROWSER_VALIDATION_20261026.json`。
+- Candidate302 仍為正式基準；Candidate320 仍為回滾點；Candidate336 仍為實驗候選。下一步須在未被政策阻擋的互動瀏覽器執行路由／展開／resize 矩陣。
