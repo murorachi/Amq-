@@ -497,3 +497,14 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate342 HTML remote upload and SHA-256 readback: NOT RUN. Report MD/JSON uploaded and readback verified; these documents do not prove the HTML exists remotely.
 - Current assessment: cleanup and end-to-end acceptance are not complete. The latest batches demonstrate small confirmed cleanups and workspace event-owner consolidation, not a completed global refactor.
 - Next direction: stop creating new broad inventories where evidence already exists. Execute small, related batches of confirmed dead-code removals; keep uncertain runtime-dependent items in a blocker ledger. Then run focused regression, final residue scan, and formal packaging.
+
+
+## Batch 47 — Candidate343（2026-10-26）
+- Candidate342 input verified: 1,627,191 bytes; SHA-256 `85651bff600de2a3441aab64fee8d38299872d47a0d76473691334f9aa0fb2fe`.
+- Candidate343: `amq_learning_tool_v82_86_54_candidate343_batch47_remove_orphan_candidate186_helper_20261026.html`, 1,627,145 bytes; SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`.
+- Actual change: removed the now-unreferenced `const get=(id)=>document.getElementById(id);` helper from `candidate186-cover-recovery-runtime`. Batch42 had already removed its only recovery path, so the helper became orphaned. Modal backdrop and Escape close handlers remain.
+- Static evidence: helper identifier occurred once in the target script; only that script body changed. Both modal handlers preserved.
+- Tests: 65 executable inline JS blocks `node --check`: PASS, 0 syntax errors. Source-scope assertions: PASS. ZIP integrity: PASS.
+- Browser interaction: BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`). Full AMQ/EMQ/MIX regression: NOT RUN. Candidate343 HTML remote upload/hash readback: NOT RUN.
+- Candidate343 remains experimental; Candidate302 remains formal baseline and Candidate320 remains rollback checkpoint.
+- Next: continue only evidence-backed removals. Keep C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, and v33 `showToast` in NEEDS CONFIRMATION pending runtime/caller evidence.
