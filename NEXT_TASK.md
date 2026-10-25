@@ -494,3 +494,10 @@ Candidate302 remains formal baseline:
 - Full-app functional regression remains INCOMPLETE. AMQ/EMQ/MIX, player, custom-list persistence, backup/restore and multiplayer are NOT RUN on Candidate346. Workspace browser interaction is BLOCKED.
 - Do not repeat the same blocked browser attempt. Proceed with the final high-risk dependency/residue scan using existing evidence. Keep C103, v47 hero, Candidate72 inline styles and v33 `showToast` as NEEDS CONFIRMATION unless new runtime evidence becomes available.
 - If no critical unresolved source risks remain, proceed to formal packaging with explicit known limitations. Do not claim full functional acceptance or remote HTML upload until those are actually verified.
+
+## Next task — formal release preparation (2026-10-26)
+- Final residue scan classified 14 items; report MD/JSON are committed and readback-verified. No additional application code was changed during the scan.
+- Current artifact Candidate346 SHA-256: `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+- Core regression remains INCOMPLETE: browser interaction BLOCKED; full AMQ/EMQ/MIX, player, custom-list persistence, backup/restore and multiplayer regression NOT RUN on Candidate346.
+- Remaining browser-dependent items are classified in the residue scan. Do not start more cleanup batches unless new high-value, low-risk evidence appears.
+- Prepare the formal release handoff only after resolving the browser validation and remote HTML transfer/readback blockers. If those remain unavailable, deliver Candidate346 as an experimental package with explicit limitations, not as a fully accepted official baseline.
