@@ -1,0 +1,20 @@
+{
+  "source": "amq_learning_tool_v82_86_51_candidate340_batch44_unified_workspace_sidebar_20261026.html",
+  "bytes": 1627175,
+  "sha256": "74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158",
+  "application_html_modified": false,
+  "findings": {
+    "candidate70_data_ws_binding": false,
+    "candidate76_dock_capture_click_binding": true,
+    "candidate77_document_click_interceptor": false,
+    "prototype15_data_ws_click_binding": false,
+    "candidate94_contains_required_membership_filter": true,
+    "candidate193_direct_home_action_click_listener": false
+  },
+  "tests": {
+    "source_hash": "PASS",
+    "static_owner_inventory": "PASS",
+    "browser_regression": "NOT RUN"
+  },
+  "next": "Batch45 transfer [data-ws] click ownership to Prototype15 with coordinated Candidate76 API changes"
+}
