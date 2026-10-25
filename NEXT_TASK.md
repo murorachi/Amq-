@@ -439,3 +439,19 @@ Candidate302 remains formal baseline:
 - Event ownership consolidation is static-validated only; do not promote until real browser click/keyboard/route regression.
 - Next: (1) browser-test workspace selector toggling in Song Select and normal workspace, verify close/ESC and `[data-ws-action]`; (2) audit Candidate84 dock CSS selector-by-selector and only isolate confirmed obsolete selectors into non-cascading regression storage; preserve Candidate94 `#grid .card.amqListNotMember85`; (3) inspect Candidate82 `[data-home-action]` capture owner and Candidate60 standalone-route owner, keeping route-class conditions distinct; (4) then Batch46 navigation/Song Select.
 - Candidate341 SHA-256: `7abb6635b90254d666620953397c7d56f02e537bde997c523eb163203a15bd1a`. Rollback to Candidate340 SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
+
+
+## Updated next task — after Candidate343 Batch47 (2026-10-26)
+### Four closure stages
+1. Safe cleanup: implement only source-evidenced dead code / duplicate ownership changes; do not repeat established inventories without new evidence.
+2. Core regression: AMQ/EMQ/MIX, player controls, custom-list CRUD/persistence, backup/restore, workspace routing/actions, and required multiplayer lifecycle.
+3. Final residue scan: classify each remaining item KEEP / INTEGRATE / DELETE / NEEDS CONFIRMATION; no unbounded new stages.
+4. Formal release: unique single-file HTML, update all three status docs, upload HTML to GitHub, read back bytes/hash, and preserve rollback.
+
+### Immediate task
+- Continue from Candidate343, SHA-256 `fd9bf2536cf3aa73767c896040d460a742b3471a8cb3508133267f7c9508ee3f`; do not change Candidate302 formal baseline.
+- Candidate343 Batch47 removed the orphaned Candidate186 `get` helper left after Batch42's recovery-path removal. Only Candidate186 script body changed; 65 executable inline JS syntax checks PASS.
+- Browser interaction remains BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`; full regression NOT RUN.
+- Do not delete C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` until runtime or complete caller evidence supports it.
+- Next engineering work: perform a bounded source audit for additional *local declarations/helpers with zero reads* in the already shortlisted scripts; only if exact references are proven absent, remove a small related set and run syntax + scope assertions. Otherwise move directly to core regression planning and record browser blocker without retry loops.
+- Candidate343 HTML GitHub upload/readback remains NOT RUN. Do not claim remote delivery until verified.
