@@ -21,7 +21,7 @@
 | Candidate210 | main tracklist centered selection/playback and cover loading/fallback | click/wheel, list childList Observer, image IntersectionObserver and timeouts | Keep; main tracklist owner |
 
 ## Grouped modifications
-1. **Candidate106 catalog overflow:** removed `overflow` assignments from both compact and desktop `catalogGeometry` objects. Candidate137 CSS sets route-active catalog overflow visible; Candidate158 also forces visible for desktop route state. The old desktop hidden value was overwritten by the later owner, while compact visible duplicated the CSS. This removes conflicting inline ownership, not the overflow behavior.
+1. **Candidate106 catalog overflow:** removed `overflow` assignments from both compact and desktop `catalogGeometry` objects. Candidate137 CSS sets route-active catalog overflow visible; Candidate158 also forces visible for desktop route state. The old desktop hidden value conflicts with Candidate158's clipping correction and the winner can depend on event/RAF order, while compact visible duplicates the CSS. This removes conflicting inline ownership, not the overflow behavior.
 2. **Candidate115 vs Candidate137/210 main-list overlap:** changed the artwork selector to `.amq-inline-song-list:not(#amqSongSelectTracklist),.emq-inline-song-list` and excluded `#amqSongSelectTracklist` from click delegation. Candidate137 creates the main list's `.amq-song-art` placeholder; Candidate210 owns its cover loading and selection/playback. Candidate115 still supports other AMQ/EMQ inline lists.
 
 ## Not changed
