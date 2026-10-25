@@ -487,3 +487,10 @@ Candidate302 remains formal baseline:
 - Full browser regression remains unavailable in the current environment; full core regression is NOT RUN.
 - Consolidate existing isolated route/storage/multiplayer evidence into one core regression matrix. Run available targeted checks, mark each domain PASS/FAIL/NOT RUN/BLOCKED, then do the final high-risk residue scan and prepare formal release if no unresolved critical risk remains.
 - Keep the four closure stages unchanged. Do not add new stages or repeat blocked browser attempts.
+
+## Current task — core regression / final residue scan (2026-10-26)
+- Current experimental artifact: Candidate346, SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`. Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged.
+- Static marker smoke PASS for 11 groups; inline JS syntax PASS for 65 scripts. Core regression matrix is committed and readback-verified.
+- Full-app functional regression remains INCOMPLETE. AMQ/EMQ/MIX, player, custom-list persistence, backup/restore and multiplayer are NOT RUN on Candidate346. Workspace browser interaction is BLOCKED.
+- Do not repeat the same blocked browser attempt. Proceed with the final high-risk dependency/residue scan using existing evidence. Keep C103, v47 hero, Candidate72 inline styles and v33 `showToast` as NEEDS CONFIRMATION unless new runtime evidence becomes available.
+- If no critical unresolved source risks remain, proceed to formal packaging with explicit known limitations. Do not claim full functional acceptance or remote HTML upload until those are actually verified.
