@@ -207,3 +207,11 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate321 unchanged and not promoted: SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`.
 - Isolated Chromium module tests PASS with synthetic records; full-app tests BLOCKED because `data.js` and `emq-data.js` are missing from the branch and localStorage is inaccessible in the permitted test origin. Candidate321 remote HTML hash remains NOT VERIFIED.
 - See `AMQ_BATCH26_ROUND3_CANDIDATE321_BROWSER_VALIDATION_20261025.md`.
+
+
+### Batch26 Round 4 real-data browser test — 2026-10-25
+- Candidate302 remains formal baseline SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`.
+- Candidate320 remains rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Candidate321 remains unchanged/not promoted; SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`.
+- Actual user-provided AMQ/EMQ data scripts load in a Chromium test copy (DB anime=9,516, songs=38,821, EMQ works=6,645; startup has no JS errors). Formal UI navigation remains blocked in opaque `about:blank` origin; full UI E2E remains incomplete.
+- See `AMQ_BATCH26_ROUND4_CANDIDATE321_REAL_DATA_BROWSER_TEST_20261025.md`.
