@@ -88,3 +88,15 @@ Candidate302 remains formal baseline:
 1. Expand synthetic tests for AMQ Chinese-title map loading and EMQ title conversion using the shared loader, including cache hit/miss, converter failure, concurrent callers and fallback behavior.
 2. Confirm no regression in AMQ/EMQ title APIs and that only one OpenCC script element is ever injected.
 3. Then continue evidence-backed old-feature cleanup. Do not promote Candidate303 to formal baseline until full-app/browser validation is available.
+
+
+## Batch 9 completed / Batch 10 next
+- Candidate304 integrates the shared OpenCC loader and deletes the confirmed diagnostic-only `v41-classification-diagnostic` script. Candidate SHA-256 `afec1555f4e6a56bb39ffac2622d16a148656ee5c4c5c50a3bb5aa7eab254f21`.
+- Syntax 66/66 PASS; OpenCC isolated browser 3/3 PASS; EMQ synthetic regression 9/9 PASS; 109 CSS blocks unchanged.
+- Scan found 3,637 CSS rules, 651 repeated-selector groups, and 1,385 extra occurrences. These are audit groups, not automatic deletions.
+
+## Batch 10 priority — batch CSS cascade cleanup
+1. Partition Song Select/home CSS by feature owner and state (home, active Song Select, workspace dock, player, mobile).
+2. Find declarations fully superseded by later rules with same applicable media/state, specificity/importance and selector; include JS-created DOM/class references.
+3. Produce a grouped delete list, then remove only high-confidence declarations in one candidate; compare computed styles and DOM assertions at desktop/mobile widths.
+4. Keep uncertain rules as NEEDS_CONFIRMATION and continue other groups instead of blocking the batch.
