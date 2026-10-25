@@ -9,3 +9,4 @@
 - Reran Candidate301 regression probe; it reproduces the known workCount issue as expected.
 - Real data files remain missing; full browser E2E and earlier-stage full regressions remain unverified.
 - Candidate295 remains the formal baseline; Candidate302 remains a non-promoted candidate.
+- Uploaded and remotely verified the final report, status/next-task docs, both Stage 4 harnesses, and machine-readable test results on `amq-stage4-data-init-regression-20261025`. Candidate302 HTML upload remains BLOCKED.
