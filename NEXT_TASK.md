@@ -158,3 +158,12 @@ Candidate302 remains formal baseline:
 - Preserve uncertain dynamic selectors, including `.relationCanvas` and `.mpReadyBar`; do not expand into quiz, multiplayer, learning-system or route-guard code.
 - Candidate311 has 55 declarations removed; six isolated Chromium computed-style scenarios pass with zero differences. Full-app E2E NOT RUN.
 - Candidate HTML remote upload and remote SHA verification remain BLOCKED/unverified; report and summary are published.
+
+## Next: Batch 18 — route/workspace and Song Select runtime deduplication
+- Start from Candidate312 (SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb) after rechecking the local file/hash. Formal baseline remains Candidate302.
+- Move beyond CSS-only work. Inspect route/workspace wrappers, Song Select initialization and event/listener ownership as one functional group. Use the existing Batch 2–7 caller/side-effect and lifecycle evidence.
+- Integrate only when behavior and side effects are equivalent; preserve the route guard's intentional early-return behavior and required ani-app-navigation consumers.
+- Batch confirmed duplicate wrappers/listeners and any additional high-confidence obsolete diagnostics together. Keep uncertain observer/timer/storage fallback candidates marked NEEDS CONFIRMATION and continue with other safe items.
+- Test JS syntax, CSS parsing, duplicate IDs, targeted route transition matrix, event counts/rebinding and relevant Home/Song Select/quiz regressions. Full-app E2E must remain NOT RUN unless actually executed.
+- Update all status/baseline/next-task/changelog documents and publish reports. Do not claim Candidate HTML remote upload until the actual remote artifact and SHA-256 are verified.
+
