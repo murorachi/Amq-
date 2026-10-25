@@ -140,3 +140,11 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 4. Run route/back/return, custom-list CRUD/membership/selectors, reload persistence and backup/restore regression tests. Browser-only tests must remain NOT RUN/BLOCKED until actually executed.
 5. Create a uniquely named child candidate, verify its source/HTML hash and build consistency, then update all state docs and attempt remote readback.
 6. Do not delete any route guard or fallback branch until the regression matrix demonstrates equivalent behavior.
+
+
+## Stage 5.6 — Blocking dependency and safe continuation (2026-10-25)
+- BLOCKED: do not edit the formal Candidate277 baseline until its actual HTML is recovered and its SHA-256 is verified. GitHub search did not locate it and the expected path returned 404.
+- Continue source-independent inventory work on Candidate295 only. It remains a validation target, not the formal baseline.
+- Custom-list fallback readers appear not to be needed for normal script order, but may be degraded-read behavior if the canonical store fails. Keep them until explicit tests decide otherwise; eventual preferred integration is one compatibility adapter, not four separate fallback branches.
+- Route guards remain untouched until a single owner explicitly preserves body-class behavior and the regression matrix can be executed.
+- If Candidate277 remains unavailable, report the block rather than fabricating a replacement or silently switching baselines.
