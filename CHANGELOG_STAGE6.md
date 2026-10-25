@@ -117,3 +117,8 @@
 - Candidate309 SHA-256 `922b21b30661b81c7dd343a6e09a22a016c166dea0ead9d24ba521742b141c5f`, 1,664,430 bytes.
 - Removed 17 superseded declarations / 589 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
 - Candidate309 not promoted; HTML upload BLOCKED; formal baseline Candidate302 unchanged.
+
+## 2026-10-25 — Batch 15: Home settings-panel superseded layout CSS cleanup
+- Candidate310 SHA-256 `34ba5cf818de8984efbf986f53a3c9d5da673fd3fe1cae3ff2e8e67bc7fe65f9`, 1,664,118 bytes.
+- Removed 9 superseded declarations / 312 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
+- Candidate310 not promoted; HTML upload and report/summary publication BLOCKED/unverified; formal baseline Candidate302 unchanged.
