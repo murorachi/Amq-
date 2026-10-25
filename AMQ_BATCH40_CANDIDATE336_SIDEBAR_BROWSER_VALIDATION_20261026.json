@@ -1,0 +1,22 @@
+{
+  "batch": 40,
+  "candidate": "Candidate336",
+  "candidate_sha256": "b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a",
+  "code_changed": false,
+  "tests": {
+    "chromium_file_navigation": {
+      "status": "BLOCKED",
+      "evidence": "net::ERR_BLOCKED_BY_ADMINISTRATOR"
+    },
+    "chromium_local_http_navigation": {
+      "status": "BLOCKED",
+      "evidence": "net::ERR_BLOCKED_BY_ADMINISTRATOR"
+    },
+    "dock_interactions": "NOT RUN",
+    "route_navigation": "NOT RUN",
+    "song_select_panel_cycle": "NOT RUN",
+    "desktop_mobile_resize": "NOT RUN",
+    "persistence_media_multiplayer_e2e": "NOT RUN"
+  },
+  "conclusion": "No browser acceptance PASS claimed. Candidate336 remains experimental. Candidate302 formal baseline and Candidate320 rollback point unchanged."
+}
