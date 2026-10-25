@@ -147,3 +147,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate313 is not the formal baseline. Formal baseline remains Candidate302: f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd.
 - Immediate rollback: Candidate312 SHA-256 12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb; formal rollback: Candidate302.
 - Candidate313 HTML upload and remote SHA verification are NOT VERIFIED.
+
+## Candidate314 — unpromoted working candidate
+- Source Candidate313 SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a.
+- Candidate: amq_learning_tool_v82_86_25_candidate314_songselect_layout_owner_conflict_cleanup_20261025.html, 1,647,472 bytes; SHA-256 e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17.
+- Batch19 removes old Candidate103 catalog bottom/height writes that were overwriting Candidate106's final responsive geometry, while preserving its observer and other player/dock behavior.
+- PASS: JS syntax 68/68, CSS parse, duplicate IDs; targeted Chromium at 390/768/1440px confirms mobile bottom=86px and tablet/desktop clamp geometry. Full-app E2E NOT RUN.
+- Candidate314 not promoted. Formal baseline remains Candidate302 SHA-256 f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd. Immediate rollback Candidate313 SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a. Candidate HTML remote upload/hash NOT VERIFIED.
