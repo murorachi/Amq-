@@ -328,3 +328,12 @@
 - PASS: parent hash verified; 65 executable inline scripts passed Node syntax checks; all ten currently emitted action IDs remain; only Candidate15 script body changed.
 - NOT RUN: browser click-through/E2E, storage persistence, real media, multiplayer E2E, Candidate335 HTML upload and remote hash verification.
 - Candidate335 is experimental only. Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+
+## Batch39 — Candidate336 側欄狀態所有權收斂（2026-10-26）
+
+- 父候選 Candidate335 SHA-256：`6b06c72d769204f38f836c8c5e9d4d15af798258d4772fb27d72dd820d830331`。
+- 產物：`amq_learning_tool_v82_86_47_candidate336_batch39_sidebar_state_ownership_20261026.html`；SHA-256 `b38efba9422e81bc160bf7f66f2b4cd487bcfeafb86c6c49c8e6034283c9459a`。
+- 只修改 Candidate76 `syncState()`：非 Song Select 路由直接返回，避免與 Candidate77 的一般工作區側欄 ARIA／展開狀態寫入衝突。
+- PASS：65 個 executable inline scripts 語法檢查；只有目標 script body 改變；Candidate302／Candidate320 未修改。
+- NOT RUN：瀏覽器互動回歸、資料持久化、媒體／多人 E2E、HTML GitHub 上傳及遠端 hash 驗證。
+- 回滾至 Candidate335；正式基準仍 Candidate302，回滾檢查點仍 Candidate320。詳見 `AMQ_BATCH39_CANDIDATE336_SIDEBAR_STATE_OWNERSHIP_20261026.md`。
