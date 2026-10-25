@@ -1,42 +1,40 @@
 # CURRENT_STATUS.md
 
 Updated: 2026-10-25
-Stage: Candidate302 promoted; project cleanup remains in progress.
-State: **Candidate302 is the formal maintenance baseline by user authorization. The six-goal cleanup project is NOT complete.**
+Stage: Batch 1 — Candidate302 feature inventory (static evidence).
+State: **Candidate302 is the formal baseline. Batch 1 has produced a first evidence-backed inventory; the six-goal cleanup is not complete.**
 
 ## Formal baseline
 - File: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
-- Version: `v82.86.13-candidate302-emq-loader-state-validation-20261025`
 - Size: 1,720,249 bytes
 - SHA-256: `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`
-- User reports local verification is complete and explicitly authorized promotion.
-- Rollback baseline Candidate295 is preserved: 1,720,917 bytes; SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
-- Candidate301 remains the immediate code-level rollback reference for Candidate302's loader change, but it has a known readiness-state defect.
-- No Candidate303 has been created.
+- User authorized promotion after local verification.
+- Candidate295 remains immutable rollback: SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
 
-## Stage 6 evidence
-- Static checks for Candidates 295/299/300/301/302: all PASS; 67 executable inline JS blocks, 109 style blocks, 2,808 top-level CSS rules, 271 unique HTML IDs per candidate.
-- Candidate302 source-derived EMQ loader tests: 9/9 PASS; Candidate301 reproduces the known regression.
-- Existing synthetic suites: EMQ loader 9/9, AMQ catalog validator 11/11, pool/audio/blacklist 11/11 PASS. Combined isolated tests: 40/40 PASS.
-- Real catalog audit PASS: AMQ data.js 4,975,244 bytes, SHA-256 `692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3`; 9,516 works / 38,821 songs. EMQ emq-data.js 2,684,266 bytes, SHA-256 `88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc`; 6,645 works / 16,839 songs. Invalid/duplicate IDs, missing EMQ associations, and cross-source ID collisions: 0.
-- 495 AMQ songs have no media values in row slots 9/10/11. No source corruption has been established.
+## Batch 1 — feature inventory
+- Report: `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.md`.
+- Local machine-readable inventory: `FEATURE_INVENTORY_BATCH1_CANDIDATE302_20261025.json`.
+- Verified Candidate302 local bytes/hash against baseline.
+- Static audit rerun: 67 executable inline JS blocks, 0 syntax errors; 109 style blocks; 2,808 top-level CSS rules; 271 HTML IDs, 0 duplicates.
+- Identified 30 literal local/session storage keys; 383 repeated CSS selector strings (665 extra occurrences); 480 addEventListener text occurrences, 4 removeEventListener, 54 MutationObserver, 3 ResizeObserver, 5 IntersectionObserver, 137 setTimeout, 10 setInterval and 35 requestAnimationFrame occurrences. These are text counts, not live runtime instances.
+- Classified key feature domains as KEEP / INTEGRATE / DELETE / NEEDS CONFIRMATION. No item met the evidence threshold for direct DELETE.
+- Highest-risk integration areas: multi-layer Song Select/workspace route wrappers; CSS cascade overrides; legacy/anonymous script blocks; storage ownership and schema.
+- No application source code was modified or deleted in Batch 1.
 
-## Six-goal cleanup progress (qualitative, evidence-based)
-1. Function inventory: **PARTIAL**. Existing inventories and audits cover important subsystems, not every HTML/CSS/JS feature and all dynamic references.
-2. Dependency tracing: **PARTIAL**. Several loader, pool, route and storage paths have been inspected; no complete cross-project dependency graph exists.
-3. Duplicate implementation consolidation: **NOT COMPLETE**. No evidence supports claiming all duplicated UI/business logic/configuration/routing has one canonical implementation.
-4. Deprecated code removal: **NOT COMPLETE**. Stage 6 primarily audited and regression-tested; it did not perform the broad confirmed deletion pass.
-5. Regression testing: **PARTIAL**. Static, synthetic and real-catalog audits pass; browser-driven end-to-end coverage and several CRUD/import/export/backup/restore flows do not have reproducible test reports in this package. User has separately reported local Candidate302 verification complete, but detailed test cases were not supplied here.
-6. Final delivery: **PARTIAL**. Reports/scripts are on the Stage 6 branch; remote Candidate302 HTML content/hash still needs independent verification.
+## Six-goal cleanup progress
+1. Feature inventory: **PARTIAL — first static evidence-backed inventory created; dynamic references and full runtime reachability remain.**
+2. Dependency tracing: **PARTIAL — previous route/list/storage findings exist; full dependency map not complete.**
+3. Duplicate implementation consolidation: **NOT COMPLETE.**
+4. Confirmed obsolete code deletion: **NOT COMPLETE; zero direct deletions in Batch 1.**
+5. Regression testing: **PARTIAL — static/synthetic/catalog audits exist; this batch did not run browser E2E.**
+6. Formal delivery: **PARTIAL — report committed; Candidate302 HTML itself still not found on this branch, so remote HTML/hash verification is BLOCKED.**
 
-## Explicit test status
-- Static JS/CSS/HTML-ID audit: PASS.
-- Isolated synthetic regression suites: PASS 40/40.
-- Real catalog structural audit: PASS.
-- Automated browser E2E: NOT RUN / BLOCKED by headless Chromium timeout in this environment.
-- Actual audio playback, full-page initialization and AMQ/EMQ/MIX browser flows: user reports local verification complete; not independently reproduced by this environment.
-- Remote Candidate302 HTML download-and-hash comparison: NOT VERIFIED.
-- Full six-goal cleanup acceptance: NOT COMPLETE.
+## Test status
+- Static JS/CSS/HTML-ID audit on Candidate302: PASS.
+- Existing isolated Candidate302 tests: 40/40 PASS (previously executed).
+- Real catalog structural audit: PASS (previously provided; not rerun in this batch).
+- Browser E2E, live audio, route/CRUD/backup runtime flows: NOT RUN in this batch.
+- Candidate302 remote HTML body/hash: BLOCKED / NOT VERIFIED.
 
-## Next work
-Follow `NEXT_TASK.md`: verify the promoted HTML is available in the intended remote branch and hash-matches; then continue a scoped feature/dependency inventory, only delete confirmed deprecated code, consolidate duplicate implementations, and run regression tests for each affected area. Keep Candidate295 as rollback; never edit the formal baseline in place.
+## Next
+Batch 2: map route wrappers and side effects, storage key owners and read/write paths, custom-list store/API boundaries, event/listener/observer/timer lifecycles, and CSS selector-to-DOM ownership. Use the Batch 1 inventory as the index; do not start deleting based only on names or repeated selectors.
