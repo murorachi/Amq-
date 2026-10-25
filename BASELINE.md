@@ -396,3 +396,7 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 
 ## Final residue scan — Candidate346 (2026-10-26)
 - Fourteen items classified using existing evidence. Browser-dependent candidates remain NEEDS CONFIRMATION; Candidate302 remains formal baseline.
+
+## Experimental handoff package — 2026-10-26
+- Candidate346 handoff ZIP: `AMQ_CANDIDATE346_EXPERIMENTAL_HANDOFF_20261026.zip`, 1,323,411 bytes; SHA-256 `8d9645c1c57a6eb0e940606ca6dadf10a9a12dbe30ed30eeb53e91ecace21cdd`.
+- Package is local experimental delivery, not formal promotion. Candidate302 remains the formal baseline.
