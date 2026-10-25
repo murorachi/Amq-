@@ -76,3 +76,11 @@
 - Six previously reported smoke child-action failures remain to be re-tested with corrected assertions; parent `ok:true` is not sufficient.
 - No application HTML/CSS/JS/data/storage schema was changed. Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_CANDIDATE295_BASELINE_FREEZE_AND_ACCEPTANCE_GATE_20261025.md`.
 - Rollback: restore the frozen local Candidate295 snapshot and verify its SHA-256 before use.
+
+
+## Stage 4 — Candidate295 core static acceptance (2026-10-25)
+- PASS (static): traced main IndexedDB cache validation/write path, EMQ packed gzip/base64 decode and schema/ID checks, AMQ/EMQ/MIX pool construction, custom-list APIs, Song Select route guards and Candidate210 behavior module.
+- NOT RUN: browser runtime, actual EMQ decode/counts, mode pool assertions, audio, IndexedDB reload persistence, full custom-list CRUD and repeated route switching.
+- BLOCKED: paired data.js and emq-data.js are absent from the current working environment; browser navigation was blocked by the managed runtime. Do not represent these as application failures or passes.
+- Candidate295 remains a validation candidate only, not a formally accepted single-file release. Candidate277 remains an earlier user-authorized baseline record; do not overwrite or conflate the two identities.
+- No application source/data/storage schema was modified. Report: reports/stage4-candidate295-core-static-acceptance-20261025/STAGE_4_CANDIDATE295_CORE_STATIC_ACCEPTANCE_20261025.md.
