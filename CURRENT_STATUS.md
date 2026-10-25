@@ -262,3 +262,12 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Tests: 65 inline JS scripts syntax PASS; 109 CSS blocks / 2,648 rules / 9,693 declarations / 0 parser errors PASS; 269 HTML IDs / 0 duplicates PASS; diff-scope assertions PASS. Chromium BLOCKED (headless timeout 30s, empty DOM dump). Full-app E2E NOT RUN.
 - Added `AMQ_BATCH26_ROUND2_DEPENDENCY_CLEANUP_CANDIDATE321_20261025.md/.json` to GitHub. Candidate321 HTML remote upload/hash NOT VERIFIED; do not claim remote artifact upload.
 - Candidate321 not promoted. Candidate320 remains rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+
+
+## 2026-10-25 — Batch26 Round 2 Candidate321 grouped cleanup
+- Dependency map completed for Candidate103/106/114/115/137/158/210. Candidate320 remains unchanged; formal baseline remains Candidate302.
+- Created local Candidate321: `amq_learning_tool_v82_86_32_candidate321_batch26_round2_songselect_ownership_cleanup_20261025.html`, 1,645,516 bytes, SHA-256 `5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a`.
+- Grouped edits: removed redundant/conflicting overflow assignments from Candidate106 catalogGeometry; excluded main `#amqSongSelectTracklist` from Candidate115 generic artwork scan and click-selection delegation because Candidate137 creates its artwork placeholders and Candidate210 owns main-list cover/selection behavior.
+- Tests: 65 inline JS scripts syntax PASS; 109 CSS blocks / 2,648 rules / 9,693 declarations / 0 parser errors PASS; 269 HTML IDs / 0 duplicates PASS; diff-scope assertions PASS. Chromium BLOCKED (headless timeout 30s, empty DOM dump). Full-app E2E NOT RUN.
+- Added `AMQ_BATCH26_ROUND2_DEPENDENCY_CLEANUP_CANDIDATE321_20261025.md/.json` to GitHub. Candidate321 HTML remote upload/hash NOT VERIFIED.
+- Candidate321 not promoted. Candidate320 remains rollback checkpoint SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
