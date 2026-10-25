@@ -406,3 +406,11 @@ Candidate302 remains formal baseline:
 - Separately consolidate Candidate76/77 sidebar state writes behind a single panel-state API, preserving Candidate76 geometry/ARIA and Candidate77 dock click/navigation behavior.
 - Do not delete Candidate70, Candidate82, or Candidate99 based on CSS visibility alone.
 - Browser runtime remains BLOCKED in this environment; label browser behavior NOT RUN, not PASS. Keep Candidate302 baseline and Candidate320 rollback unchanged.
+
+
+## Batch 43 completed / Batch 44 next
+- Candidate339 local artifact: `amq_learning_tool_v82_86_50_candidate339_batch43_confirmed_dead_code_cleanup_20261026.html`; SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`.
+- Removed the duplicate Candidate186 audioDock MutationObserver and Candidate94's three #amqWorkspaceDock rules; retained modal handlers and list-membership filter.
+- 65 inline JS syntax checks PASS; browser E2E NOT RUN.
+- Next: consolidate Candidate76/77 geometry/state ownership only after tracing every read/write and event path; then consolidate Candidate60/Candidate193 navigation wrappers into one dispatcher while preserving standalone route/body-class effects, Song Select panel interception, VNDB route behavior, and base navigation. Do not delete Candidate70/82/Prototype15 active behaviors. Candidate302 and Candidate320 remain untouched.
+- GitHub report/JSON created on branch; Candidate339 HTML upload and remote SHA-256 verification remain NOT RUN.
