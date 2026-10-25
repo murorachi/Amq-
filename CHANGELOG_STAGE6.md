@@ -127,3 +127,10 @@
 - Candidate311 SHA-256 `dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996`, 1,662,516 bytes.
 - Removed 55 superseded/duplicate declarations / 1,602 bytes. JS syntax 68/68, CSS parse, duplicate IDs, unchanged source and six Chromium style scenarios PASS; full-app E2E NOT RUN.
 - Candidate311 not promoted; HTML upload BLOCKED/unverified; report/summary published; formal baseline Candidate302 unchanged.
+
+## 2026-10-25 — Batch 17: Cross-module CSS / JS deduplication
+- From Candidate311 (dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996), created Candidate312 (12e8fbc4c00c2459dd3af2d7c1b099893e144958f5171ad9721c7bc01ebd20cb), 1,648,144 bytes.
+- Removed 655 superseded CSS declarations across 35 style blocks, using exact selector + nested at-rule + property + importance matching; removed one duplicate V39 quiz answer mirror listener already owned by V37.
+- PASS: JS syntax 68/68, CSS parse 0 errors, duplicate IDs 0, Chromium computed style 5/5 scenarios with zero differences.
+- Full-app E2E NOT RUN; Candidate312 not promoted; formal baseline Candidate302 unchanged. Candidate HTML remote upload/hash remain NOT VERIFIED.
+
