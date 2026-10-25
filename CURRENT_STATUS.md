@@ -458,3 +458,14 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Browser interaction/visual regression NOT RUN. Candidate339 HTML upload and remote hash verification NOT RUN.
 - Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged. Candidate339 is experimental, not promoted.
 - Evidence: `AMQ_BATCH43_CANDIDATE339_CONFIRMED_DEAD_CODE_CLEANUP_20261026.md` and matching JSON.
+
+
+## Batch44 — Candidate340 workspace sidebar ownership consolidation (2026-10-26)
+- Input Candidate339 verified before edit: 1,628,078 bytes; SHA-256 `8518449cff37050f67e9ae418f376e328f3219c784c179e9d0b178db8ade0bdd`.
+- Candidate340 local artifact: `amq_learning_tool_v82_86_51_candidate340_batch44_unified_workspace_sidebar_20261026.html`, 1,627,175 bytes; SHA-256 `74e3d7eb0287cb04dcad0caf08d3d640abb32e21faa6fcc3be00e93a1438f158`.
+- Candidate76 is now the single sidebar state/geometry controller with one geometry API and explicit Song Select vs general-workspace geometry branches. Candidate77 retains dock relocation/inline-style cleanup only; duplicate show/hide and duplicate [data-ws] click handler removed.
+- [data-ws] remains exclusively the sidebar-toggle path; Prototype15 [data-ws-action] dispatcher and Candidate82 content-panel API remain intact. Capture-phase is restricted to [data-ws] to intercept legacy target handlers.
+- PASS: 65 executable inline JS blocks checked by Node, 0 syntax errors; all 11 static ownership assertions PASS; handoff ZIP integrity PASS.
+- NOT RUN: real-browser state/geometry/ARIA/click/ESC/content-panel/resize regression. GitHub Candidate340 HTML upload and remote SHA-256 read-back NOT RUN; do not treat this candidate as promoted.
+- Candidate302 formal baseline and Candidate320 rollback checkpoint remain unchanged. Candidate339 remains available as immediate rollback.
+- Report: `AMQ_BATCH44_CANDIDATE340_WORKSPACE_OWNER_MATRIX_AND_SIDEBAR_CONSOLIDATION_20261026.md`; tests: `AMQ_BATCH44_CANDIDATE340_TEST_RESULTS_20261026.json`.
