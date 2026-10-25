@@ -134,3 +134,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; all 69 script tag contents unchanged; non-style HTML byte-identical; Chromium computed-style regression 6/6 with zero diffs across Home/Song Select at desktop/tablet/mobile.
 - Full-app E2E NOT RUN. Candidate306 HTML remote upload BLOCKED; report/summary/manifest summary are published. Formal baseline remains Candidate302.
 - Report: `BATCH11_HOME_SONGSELECT_ORPHAN_CSS_CLEANUP_REPORT_20261025.md`; summary: `BATCH11_VALIDATION_SUMMARY.json`.
+
+## Batch 12 — Home / Song Select cross-block CSS consolidation (2026-10-25)
+- Source Candidate306 verified: SHA-256 `ac39a87d0ebc3c50f89754cae95cd62518a659a7c354075d6d1be6b6edc4de7e`.
+- Created unpromoted Candidate307: `amq_learning_tool_v82_86_18_candidate307_home_songselect_css_consolidation_20261025.html`, 1,665,250 bytes; SHA-256 `f2c080906ef9f2db6367286401dda0fc0181dae6041549402384180724d47aa6`.
+- Removed 9 fully superseded CSS rules / 23 declarations across 3 style blocks; HTML reduced by 2,030 bytes. Scope: Home discover layout and Song Select Candidate53/Candidate143 overrides superseded by later owners.
+- PASS: JS syntax 68/68; CSS parser 0 errors; duplicate IDs 0; script contents and non-style HTML unchanged; Chromium computed-style regression 6/6 with zero differences, including representative synthetic dynamic Home/Song Select nodes.
+- Full-app E2E NOT RUN. Candidate307 HTML remote upload BLOCKED; report, summary and manifest summary published and pending read-back verification. Formal baseline remains Candidate302.
+- Report: `BATCH12_HOME_SONGSELECT_CSS_CONSOLIDATION_REPORT_20261025.md`; summary: `BATCH12_VALIDATION_SUMMARY.json`.
