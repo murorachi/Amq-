@@ -1,0 +1,23 @@
+{
+  "batch": 21,
+  "source": "Candidate315",
+  "source_sha256": "5c92830eeb519105d06b8cf1a71f3717bf8b4c852cd7be4da7c5622265958621",
+  "candidate": "Candidate316",
+  "candidate_bytes": 1646612,
+  "candidate_sha256": "4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317",
+  "bytes_removed": 521,
+  "change": "Removed Candidate72 duplicate panel state writer and body class MutationObserver; kept ranking-frame placeholder; Candidate76/77 own panel state.",
+  "tests": {
+    "batch": 21,
+    "candidate": "Candidate316",
+    "candidate_sha256": "4845b950ae4e801aa6c6da2d9d0a23bdbac16a04edaa218396e4c043b17b4317",
+    "javascript_syntax": "PASS 68/68",
+    "css_parse": "PASS 0 errors",
+    "duplicate_dom_ids": "PASS 0",
+    "isolated_chromium": "PASS open/Escape/direct-class before-after identical",
+    "full_app_e2e": "NOT RUN",
+    "github_html_upload": "NOT VERIFIED"
+  },
+  "formal_baseline": "Candidate302 unchanged",
+  "promoted": false
+}
