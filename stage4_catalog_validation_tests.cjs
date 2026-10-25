@@ -1,0 +1,9 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync(process.argv[2]||'/mnt/data/AMQ_Stage3_Work_20261025/amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html','utf8');
+const start=html.indexOf('function isValidCatalogSnapshotV8239(db){'),end=html.indexOf('\nasync function useDB(db)',start);
+if(start<0||end<0)throw Error('catalog validator not found');
+const ctx={Number,Array,String,Set};vm.createContext(ctx);vm.runInContext(html.slice(start,end)+';this.validate=isValidCatalogSnapshotV8239',ctx);
+const valid={anime:[[1,'Work A'],[2,'Work B']],songs:[[1,101,1,1,'Song A','Artist'],[2,102,2,1,'Song B','Artist']]};
+const cases=[
+ ['valid snapshot accepted',valid,true],['null rejected',null,false],['missing anime rejected',{songs:valid.songs},false],['empty catalog rejected',{anime:[],songs:[]},false],['duplicate anime ID rejected',{...valid,anime:[[1,'A'],[1,'B']]},false],['invalid anime ID rejected',{...valid,anime:[[0,'A']]},false],['missing anime title rejected',{...valid,anime:[[1,'  ']]},false],['duplicate song ID rejected',{...valid,songs:[[1,101,1,1,'A','X'],[1,101,1,1,'B','X']]},false],['invalid song ID rejected',{...valid,songs:[[1,0,1,1,'A','X']]},false],['missing song title rejected',{...valid,songs:[[1,101,1,1,' ','X']]},false],['short song row rejected',{...valid,songs:[[1,101,1]]},false]
+];const results=[];for(const [name,input,expected] of cases){try{assert.strictEqual(ctx.validate(input),expected);results.push({name,status:'PASS'})}catch(e){results.push({name,status:'FAIL',error:e.message})}}const failed=results.filter(x=>x.status!=='PASS');console.log(JSON.stringify({candidate:'Candidate302',suite:'Stage 4 AMQ catalog snapshot validation',total:results.length,passed:results.length-failed.length,failed:failed.length,results},null,2));if(failed.length)process.exit(1);
