@@ -1,0 +1,44 @@
+{
+  "report_version": 1,
+  "baseline": {
+    "file": "amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html",
+    "bytes": 1720249,
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "checks": [
+    {
+      "name": "route_isolated_harness",
+      "status": "PASS",
+      "assertions": 14,
+      "failures": 0
+    },
+    {
+      "name": "storage_repository_isolated_harness",
+      "status": "PASS",
+      "assertions": 6,
+      "failures": 0
+    },
+    {
+      "name": "synthetic_data_only",
+      "status": "PASS",
+      "detail": "No user data accessed or modified"
+    },
+    {
+      "name": "full_app_e2e",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "runtime_lifecycle_instrumentation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "computed_style_cascade",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "remote_html_artifact",
+      "status": "BLOCKED",
+      "detail": "Candidate302 HTML returns NOT_FOUND on target branch"
+    }
+  ]
+}
