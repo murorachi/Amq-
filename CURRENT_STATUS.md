@@ -296,3 +296,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Static checks: 65 executable inline scripts syntax PASS; 109 style blocks / 2,648 CSS rules / 9,693 declarations, 0 CSS parse errors; 269 IDs / 0 duplicates.
 - Real cover load/fallback remains BLOCKED/NOT VERIFIED due unavailable external cover DNS; actual audio/video playback and persistent localStorage NOT RUN because test origin is opaque. Candidate114 timers and Candidate158 observer retained. Candidate324 remote HTML upload/hash NOT VERIFIED; not promoted.
 - Report: `AMQ_BATCH26_ROUND4_CANDIDATE324_INIT_RACE_ACCEPTANCE_20261025.md/.json`.
+
+
+## 2026-10-25 — Candidate320 全域候選盤點（第一輪）
+- 核對對象：`amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html`，1,645,470 bytes，SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`。Candidate320 本輪未修改；正式基準 Candidate302 未變。
+- 全域清單涵蓋 HTML/CSS/JS、DOM ID、selector cascade、listener、Observer、timer/RAF、路由、資料存取、設定及跨模組依賴。
+- 靜態測試 PASS：Node syntax 65/65，CSS 109 blocks / 2,648 rules / 9,693 declarations / 0 parse errors，269 HTML IDs / 0 duplicates。
+- 逗號分割後 selector 字串 2,450 個，其中 536 組重複；114 個初始 DOM 未找到的字面 ID 引用只列待追蹤候選，不視為死碼。
+- 直接刪除候選：0。下一輪按直接刪除／整合後刪除／暫緩分類，先完成 Song Select 與 Workspace ownership/dependency matrix。
+- Browser full-app E2E、persistent storage、實際音訊/影片及 cover fallback 本輪 NOT RUN。
+- 完整本地交付：`AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_20261025.md` / `.json`。GitHub 摘要：`AMQ_GLOBAL_CANDIDATE_LIST_CANDIDATE320_ROUND1_GITHUB_SUMMARY_20261025.md`。
