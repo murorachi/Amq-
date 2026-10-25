@@ -11,6 +11,16 @@ On 2026-10-25, the user explicitly directed that Candidate295 become the formal 
 - Preserve the original file unchanged. All code changes must be saved as a uniquely named child candidate.
 - Candidate277 and Candidate276 details below are retained only as historical records and are not active baselines.
 
+## Candidate296 child checkpoint (2026-10-25)
+
+- Child candidate: `amq_learning_tool_v82_86_07_candidate296_route_guard_consolidation_20261025.html`
+- Embedded version: `v82.86.07-candidate296-route-guard-consolidation-20261025`
+- Size: 1,719,843 bytes
+- SHA-256: `ec94f1daabdcc0b3151ba45b50d1e42d5ed5ddbf9ff4861050285cb44e94bddc`
+- Change: removed the earlier duplicate Song Select route wrapper; retained the final route guard and generic workspace/body-class guard. Candidate295 remains immutable.
+- Static checks: JS 67/67 PASS; CSS 109 blocks / 2,808 rules / zero parser errors PASS; 271 DOM IDs unique PASS.
+- Browser route regression: BLOCKED/NOT RUN; static results are not runtime acceptance.
+
 ## Known dependencies and limits
 - Candidate295 references external `data.js` and `emq-data.js`. The user reports having these files locally, but they have not been independently inspected in this workspace. Do not claim full AMQ/EMQ data validation until both are available and checked.
 - Node.js `--check`: PASS for 67/67 executable inline JavaScript blocks. The inline JSON data block `aniAnilistIdMapV8237` is data and was not included in that syntax check.
