@@ -69,3 +69,11 @@
 - Consolidated duplicate OpenCC script injection between AMQ and EMQ Chinese-title modules via `window.__aniOpenCCLoaderV1`.
 - Only script blocks 31 and 41 changed; 68 other script blocks and 109 CSS blocks unchanged; no feature deletion.
 - JS syntax 67/67 PASS; isolated Chromium tests 3/3 PASS; full-app E2E NOT RUN. Candidate303 remote HTML/hash BLOCKED.
+
+
+## 2026-10-25 — Batch 9 bulk triage / Candidate304
+- Created Candidate304 from Candidate302 without overwriting baseline.
+- Consolidated AMQ/EMQ OpenCC loader and deleted diagnostic-only `v41-classification-diagnostic` after confirming no internal reader for its global marker.
+- Only two title scripts changed and one diagnostic script removed; all 109 CSS blocks unchanged.
+- JS syntax 66/66 PASS; OpenCC isolated Chromium 3/3 PASS; synthetic EMQ regression 9/9 PASS. Full-app E2E NOT RUN.
+- Bulk CSS audit: 3,637 rules, 651 repeated-selector groups, 1,385 extra occurrences; no CSS auto-deletion based solely on repetition counts.
