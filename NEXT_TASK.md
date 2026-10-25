@@ -471,3 +471,11 @@ Candidate302 remains formal baseline:
 - PASS: 65 inline JS syntax checks, targeted assertions, ZIP integrity. Browser interaction BLOCKED; full regression NOT RUN; Candidate345 HTML remote upload/readback NOT RUN.
 - Next bounded source audit: check already-shortlisted scripts for local declarations with zero reads. Do not remove C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, or v33 `showToast` without new evidence. Stop cleanup-only batches when no further low-risk candidates remain; move to core regression and blocker handling.
 - Four closure stages remain: safe cleanup → core regression → final residue/dependency scan → formal release with remote HTML SHA readback. Do not add stages.
+
+## Updated next task — after Candidate346 Batch50 (2026-10-26)
+- Current experiment: Candidate346 `amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html`, 1,625,225 bytes; SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`. Formal baseline Candidate302 and rollback checkpoint Candidate320 unchanged.
+- Batches 47–50 removed confirmed unreferenced helpers/bindings from Candidate186, Quiz scripts, v60, and learning-system v72. 65 inline JS syntax checks PASS in each recent batch.
+- Browser interaction is BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`; full core regression NOT RUN. Candidate346 HTML remote upload/hash readback NOT RUN.
+- **Stop cleanup-only batches unless new, high-value dead code is proven.** Move to core regression and final dependency scan. Use existing isolated route/storage/multiplayer evidence rather than rerunning identical audits. Record the browser blocker once and proceed with available non-browser checks; do not invent PASS results.
+- Remaining runtime-dependent items: C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, v33 `showToast`; retain as NEEDS CONFIRMATION until evidence is available.
+- Four closure stages only: safe cleanup → core regression → final residue/dependency scan → formal release. No extra stages.
