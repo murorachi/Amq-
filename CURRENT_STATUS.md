@@ -547,3 +547,10 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate346 functional status remains INCOMPLETE: AMQ/EMQ/MIX E2E, player, custom-list persistence, backup/restore, and multiplayer are NOT RUN; workspace browser interaction BLOCKED by `ERR_BLOCKED_BY_ADMINISTRATOR`.
 - Historical isolated tests on Candidate302 remain historical evidence only, not Candidate346 full-app PASS results.
 - Candidate302 remains formal baseline; Candidate320 remains rollback checkpoint.
+
+## Final residue scan — Candidate346 (2026-10-26)
+- Bounded scan classified 14 remaining/previously handled items using Batch41–50 evidence. Report MD/JSON uploaded and readback-verified.
+- Confirmed dead helper/binding cleanup through Candidate346 is recorded. Workspace sidebar ownership is statically consolidated, but runtime acceptance remains open.
+- KEEP: Candidate94 membership filter and Candidate186 modal backdrop/Escape handlers.
+- NEEDS CONFIRMATION: C103 audio controls/geometry, v47 hero display, Candidate72 inline styles, v33 `showToast`, and Candidate84 dock/sidebar CSS. `amqHomeIconOnly` has zero occurrences in Candidate346 and is not an active deletion item.
+- Stage 3 status: items classified with known limitations. Core browser regression remains incomplete; Candidate346 HTML remote upload/hash readback remains NOT RUN.
