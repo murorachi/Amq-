@@ -114,3 +114,11 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 3. Preserve AMQ and EMQ list schemas separately; do not merge `animeIds` with `workIds/vndbIds/songIds`.
 4. Treat detailed quiz history, history summary and target summary as separate products until data lineage proves redundant work. Investigate duplicate scans and save scheduling without changing stored schemas.
 5. Continue no-deletion policy until direct/indirect/dynamic references and event/init ownership are evidenced. All browser-only behavior remains NOT RUN/BLOCKED.
+
+
+## Stage 5.2 handoff — next minimal-change design (2026-10-25)
+1. Design a single explicit route owner preserving three responsibilities: Song Select panel interception, generic route/body-class synchronization, and home-menu closing for non-intercepted routes. Regression destinations: watchlist, practice, explore, learningPlan, dashboard, vnList, plus home/quiz/multiplayer and repeated initialization.
+2. Evaluate consolidation of AMQ custom-list read fallbacks at source lines ~2359, ~4983, ~7410, ~11492. Keep backup import/export direct access. Prove store is initialized before callbacks and ensure refresh/restore updates consumers before removing fallback behavior.
+3. Review summary startup reconstruction cost. Test cases: no history/no summaries; history with missing summaries; valid summary behind recent history; invalid summary quarantined; processed-ID duplicate at dedupe boundary. Do not alter schema or dedupe semantics.
+4. Do not edit application HTML/CSS/JS until the above dependency map and regression cases are complete. If browser is unavailable, document behavior checks as NOT RUN/BLOCKED and continue static work without repeated environment troubleshooting.
+5. Candidate295 remains a validation target only; preserve the Candidate277/Candidate276 baseline history and do not promote or overwrite them.
