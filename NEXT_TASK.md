@@ -96,3 +96,13 @@ Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_
 3. If a symbol is BLOCKED, check whether it is a global property or a lexical binding before calling it missing. Do not invoke destructive functions merely to test visibility.
 4. Run separate manual acceptance for answer submission/next-song, audio failure recovery, quiz history persistence, custom-list CRUD/reload and repeated Song Select routing.
 5. Keep both route guards and Candidate210 behavior until call paths and runtime behavior prove redundancy. Keep Candidate295 unpromoted until core runtime gates pass.
+
+
+## Stage 5 handoff — continue from the feature/dependency inventory (2026-10-25)
+1. Keep the four confirmed functional groups: data core; AMQ/EMQ/MIX gameplay; Song Select/custom lists/workspace routing; quiz history/target summaries and persistence.
+2. Next highest-value audit: trace the two `__aniNavigateApp` wrappers in install order, including original-function capture, route mapping, side effects, repeat initialization and return navigation. Do not delete either guard on naming or overlap alone.
+3. Trace history/target-summary storage keys and every initializer, reader, writer, scheduler, flush and invalid-data preservation path. Determine whether duplicate persistence responsibilities exist before integrating.
+4. Trace custom-list store/membership APIs, UI selection state, selector refresh, batch actions and all storage readers/writers.
+5. For each symbol, record direct references, indirect/dynamic references, event entry points and initialization ownership. “No direct text match” is not sufficient evidence for deletion.
+6. No app source edits until the dependency map identifies a minimal, reversible change. Candidate295 remains a validation target; preserve Candidate277/Candidate276 baseline history.
+7. Browser/data tests remain NOT RUN/BLOCKED until matching data assets and an allowed browser runtime are available.
