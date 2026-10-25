@@ -151,3 +151,10 @@ Candidate302 remains formal baseline:
 - Static orphan scan returned only `.relationCanvas` and `.mpReadyBar` branches, which are unrelated/dynamic and MUST be preserved. Do not delete without dependency proof.
 - Skip quiz/learning, multiplayer, route guard, and shared workspace styles unless direct evidence proves a scoped Home/Song Select orphan.
 - Candidate HTML upload and Batch15 report/summary publication remain unverified/blocked; full-app E2E NOT RUN.
+
+## Next: Batch 17 — continue Home / Song Select CSS cleanup
+- Latest working candidate: Candidate311, SHA-256 `dbfac39ea961af4d761c25cc49d08ebdaea29fbaee0cd9225a720105a31d4996` (1,662,516 bytes). Formal baseline remains Candidate302.
+- Continue same-selector/same-condition superseded declaration cleanup and historical Home/Song Select style review. Do not repeat whole-file selector counts.
+- Preserve uncertain dynamic selectors, including `.relationCanvas` and `.mpReadyBar`; do not expand into quiz, multiplayer, learning-system or route-guard code.
+- Candidate311 has 55 declarations removed; six isolated Chromium computed-style scenarios pass with zero differences. Full-app E2E NOT RUN.
+- Candidate HTML remote upload and remote SHA verification remain BLOCKED/unverified; report and summary are published.
