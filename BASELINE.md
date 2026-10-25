@@ -51,3 +51,10 @@ Candidate277 remains recorded as 9,373,238 bytes with historical SHA-256 `b628bf
 Candidate295 (`v82.86.06-candidate295-db-extraction-20261025`) is the working candidate baseline for acceptance testing, not yet the formally accepted release baseline. The uploaded source is 1,720,917 bytes with recomputed SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`. A byte-for-byte local rollback snapshot and manifest have been created and verified.
 
 Candidate277 recovery is no longer a prerequisite for continuing Candidate295 validation; its historical records remain unchanged. Candidate295 references external `data.js` and `emq-data.js`, which are not present beside the uploaded HTML in this stage, so a portable single-file release is not verified. Browser acceptance is BLOCKED by the execution environment. Formal baseline promotion requires core runtime acceptance and explicit owner acceptance. See `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_CANDIDATE295_BASELINE_FREEZE_AND_ACCEPTANCE_GATE_20261025.md`.
+
+
+## Stage 4 clarification — Candidate295 validation target (2026-10-25)
+- Candidate295 is the current validation target for the Stage 2–4 work because the user supplied its actual index-old.html bytes. This does not promote Candidate295 to the formally accepted release baseline.
+- Verified supplied file: 1,720,917 bytes; SHA-256 aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81. Its local rollback snapshot is frozen separately.
+- Candidate277's previously recorded user-authorized baseline status and historical size/SHA are preserved. The two candidates must not be conflated, and Candidate295 must not overwrite Candidate277 or Candidate276.
+- Runtime acceptance remains NOT RUN/BLOCKED. The external data.js and emq-data.js assets are absent in the current workspace.
