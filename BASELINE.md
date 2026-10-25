@@ -259,3 +259,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Experimental only: `amq_learning_tool_v82_86_38_candidate327_batch30_orphan_css_selector_cleanup_20261025.html`, 1,644,791 bytes, SHA-256 `3e117b68a3fa1f4a57c7ef010477ee18dc12d1327f174765dd44d05f324cb302`.
 - Derived from Candidate326 SHA-256 `9fee7d3a68c0833b6e84d6f0a3a3beca1ab09902bdb3ec2f8b76f5e60d5db3ba`. Candidate302 remains the formal baseline; Candidate320 remains the immutable rollback checkpoint. Candidate327 is not promoted.
 - Batch30 is CSS-only: 18 selector branches removed; 994 bytes reduced; JS bodies and HTML markup unchanged. Static style equivalence passed at three viewport sizes; full-app acceptance remains open.
+
+
+## Candidate328 / Candidate329 — experimental only (2026-10-26)
+- Candidate328 SHA-256 `985780d07196fc50b8a6f638e84ee131e48edece1c98c6fad86e660b51b68315`, 1,644,505 bytes. Derived from Candidate327.
+- Candidate329 SHA-256 `d977b7bb8ebdbf190d2bcd163953b5b41c8eb1d7ffdc2d041e4b12d5307cb28d`, 1,635,608 bytes. Derived from Candidate328; removes 16 duplicate Workspace action branches (8,897 bytes).
+- Neither candidate is promoted. Candidate302 remains the formal baseline (`f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`); Candidate320 remains the immutable rollback checkpoint (`134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`).
