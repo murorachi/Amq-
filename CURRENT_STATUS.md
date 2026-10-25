@@ -199,3 +199,11 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Full-app E2E NOT RUN. Audio, real data persistence/CRUD, AMQ/EMQ/MIX gameplay and multiplayer server remain unverified.
 - Candidate313 not promoted. Formal baseline remains Candidate302 (f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd). Candidate HTML remote upload/hash remain NOT VERIFIED.
 - Report: BATCH18_WORKSPACE_ROUTE_EVENT_DEDUP_REPORT_20261025.md; manifest: BATCH18_CANDIDATE313_MANIFEST.json; tests: BATCH18_CANDIDATE313_TEST_RESULTS.json; summary: BATCH18_VALIDATION_SUMMARY.json.
+
+## Batch 19 — Song Select layout-owner conflict cleanup (2026-10-25)
+- Verified Candidate313 source SHA-256 bd5d82c6d1a03e3d0e62622ebf22cf63d7636435bed469ed44efd9f8eba21c6a; created unpromoted Candidate314, 1,647,472 bytes, SHA-256 e3e2afb98574aea5db9bc5ac94eaeba809b6ed3416999657463964eefab05d17; 215 bytes removed.
+- Root cause: older Candidate103 kept writing catalog bottom/height and its catalog style observer reran the old fix after Candidate106's final layout owner. At 390px this overwrote the final owner's mobile bottom=86px with the old clamp value.
+- Removed only the old Candidate103 catalog bottom/height writes and local variable; preserved the observer and legacy audio/video, dock, Back/Home and mode-wrap behavior.
+- PASS: JS syntax 68/68; CSS parse 0 errors; duplicate IDs 0; actual Candidate103+Candidate106 scripts in isolated Chromium at 390/768/1440px. Candidate314 keeps mobile bottom=86px and tablet/desktop clamp geometry; audio/video remain hidden.
+- Full-app E2E NOT RUN. Candidate314 not promoted; formal baseline Candidate302 unchanged. Candidate HTML remote upload/hash NOT VERIFIED.
+- Report: BATCH19_SONGSELECT_LAYOUT_OWNER_CONFLICT_REPORT_20261025.md; manifest: BATCH19_CANDIDATE314_MANIFEST.json; tests: BATCH19_CANDIDATE314_TEST_RESULTS.json; summary: BATCH19_VALIDATION_SUMMARY.json.
