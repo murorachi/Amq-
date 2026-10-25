@@ -97,3 +97,13 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - Candidate302 has 70 inline scripts, no duplicate script IDs, no duplicate non-empty source hashes. Each of the eight manual-reinjection candidates appears once in static HTML. Runtime eval/reinjection is not ruled out by static topology alone.
 - No app source changed; DELETE=0. Full-app E2E NOT RUN; remote HTML remains BLOCKED/NOT_FOUND.
 - Report: BATCH7_MULTIPLAYER_LIFECYCLE_REPORT_20261025.md; results: BATCH7_MULTIPLAYER_FAKE_SERVER_RESULTS.json; topology: BATCH7_SCRIPT_LOAD_TOPOLOGY.json.
+
+
+## Batch 8 — Candidate303 shared OpenCC loader integration (2026-10-25)
+- Candidate303 created from immutable Candidate302; baseline SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd` unchanged.
+- Candidate: `amq_learning_tool_v82_86_14_candidate303_opencc_shared_loader_20261025.html`, 1,720,527 bytes, SHA-256 `ffb223a37f2ba7f243430c7e0a643f8916ebae13f809d83cc2b8cbd9153df1c8`.
+- Root cause: AMQ and EMQ Chinese-title modules each injected the same pinned OpenCC script. Added page-level `window.__aniOpenCCLoaderV1`; EMQ now consumes the shared loader and retains its local 6-second wait limit.
+- Only inline script blocks 31 and 41 changed; 68/70 other script blocks and all 109 CSS blocks unchanged. OpenCC URL appears once. No feature deletions.
+- Tests: JS syntax 67/67 PASS; isolated Chromium loader tests 3/3 PASS (concurrent consumers one request, graceful CDN failure, preloaded converter path); duplicate DOM IDs 0.
+- Full-app E2E NOT RUN. Remote Candidate303 HTML NOT UPLOADED/BLOCKED; remote artifact SHA unverified.
+- Report: `BATCH8_CANDIDATE303_REPORT_20261025.md`; manifest: `BATCH8_CANDIDATE303_MANIFEST.json`; test results: `BATCH8_CANDIDATE303_TEST_RESULTS.json`.
