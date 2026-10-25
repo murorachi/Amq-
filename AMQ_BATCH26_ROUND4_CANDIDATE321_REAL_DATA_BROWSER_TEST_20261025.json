@@ -1,0 +1,101 @@
+{
+  "round": 4,
+  "title": "Candidate321 browser validation after restoring data dependencies",
+  "baseline": {
+    "candidate": "Candidate302",
+    "sha256": "f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd"
+  },
+  "candidate321": {
+    "bytes": 1645516,
+    "sha256": "5b4ac7bdbe92f1b1a1b7056e543b065a0829d266a5f4b4fd2a1e9f7a5347e83a",
+    "modified": false,
+    "promoted": false
+  },
+  "rollback_candidate320_sha256": "134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c",
+  "input_data": [
+    {
+      "file": "data(1).js",
+      "bytes": 4975244,
+      "sha256": "692f69f56079d6cc0b30bd1951ab625f53799b87525c1bd52a27f29274703cf3"
+    },
+    {
+      "file": "emq-data(3).js",
+      "bytes": 2684266,
+      "sha256": "88441b4a6090c01db1dae23c970a6fa24d457a54f4b915be3e23c3799b3794cc"
+    }
+  ],
+  "tests": [
+    {
+      "case": "Candidate321 with actual AMQ data",
+      "result": "PASS_TEST_COPY",
+      "assertions": {
+        "anime_count": 9516,
+        "song_count": 38821
+      }
+    },
+    {
+      "case": "EMQ packed data initialization",
+      "result": "PASS_TEST_COPY",
+      "assertions": {
+        "emq_work_count": 6645
+      }
+    },
+    {
+      "case": "startup JavaScript errors",
+      "result": "PASS_TEST_COPY",
+      "assertions": {
+        "page_errors": 0,
+        "console_errors": 0,
+        "failed_requests": 0
+      }
+    },
+    {
+      "case": "Song Select mode API smoke test",
+      "result": "PASS_SMOKE_ONLY",
+      "assertions": {
+        "amq_grid_cards": 180,
+        "emq_grid_cards": 180,
+        "mix_grid_cards": 360
+      }
+    },
+    {
+      "case": "formal Song Select navigation",
+      "result": "BLOCKED",
+      "reason": "about:blank UI route not reachable; route-active class did not persist"
+    },
+    {
+      "case": "real UI search/filter/sort",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "real cover load/fallback",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "actual audio/video playback",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "route-exit player reset",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate114 timer reduction",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate158 observer narrowing",
+      "result": "NOT RUN"
+    },
+    {
+      "case": "Candidate321 remote HTML SHA-256",
+      "result": "NOT VERIFIED"
+    }
+  ],
+  "decision": {
+    "candidate321_promoted": false,
+    "candidate114_timers": "retain",
+    "candidate158_observer": "retain",
+    "candidate321_html_modified": false
+  }
+}
