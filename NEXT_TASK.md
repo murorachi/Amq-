@@ -61,3 +61,12 @@
 - Re-searched Library for the exact Candidate277 filename: two indexed records report 9,373,238 bytes, but raw-byte materialization of both failed with `This Project file does not have an authorized raw-byte materialization path`.
 - Found indexed `Coverage-20261025T094140.json` (10,050,921 bytes); its raw-byte materialization failed with the same blocker. Data files described inside the handoff/coverage records are not locally recovered or hash-reverified in this stage.
 - Candidate277 remains BLOCKED for raw-byte SHA verification. Search/index presence is not proof of byte recovery. No application files were changed.
+
+## Stage 3 — Candidate295 acceptance is next (2026-10-25)
+1. Treat Candidate295 as the working candidate baseline; do not block progress on recovering Candidate277, and do not yet mark Candidate295 as formally accepted.
+2. Recover the matching `data.js` and `emq-data.js` assets and verify their raw bytes/hashes against the recorded versions where possible.
+3. Obtain a usable browser runtime and run initialization, AMQ/EMQ/MIX switching, search/song selection, custom-list create/rename/delete/add/remove, and reload-persistence tests in isolated contexts.
+4. Fix smoke-test parent/child consistency and validate workspace panel visibility/content, back/close, repeated switching, and DOM cleanup.
+5. Keep destructive cleanup on hold until the core acceptance gates pass. Generate a unique single-file build only after confirming the build inputs and verifying the resulting artifact.
+6. Keep Candidate295 rollback snapshot immutable; size 1,720,917 bytes, SHA-256 `aef896eee98c10bcb9fb1f10d6650b8e26067426f43b086e1b69fa12e3674a81`.
+Report: `reports/stage3-candidate295-candidate-baseline-freeze-20261025/STAGE_3_CANDIDATE295_BASELINE_FREEZE_AND_ACCEPTANCE_GATE_20261025.md`.
