@@ -1,5 +1,16 @@
 # BASELINE.md
 
+## Current experimental candidate status — 2026-10-26 (Candidate351)
+- Formal baseline remains Candidate302; do not overwrite or promote from candidate numbering alone.
+- Latest experimental candidate: `amq_learning_tool_v82_86_62_candidate351_batch55_remove_orphan_favorites_and_work_helper_20261026.html`.
+- Size: 1,620,042 bytes; SHA-256: `52a7760d042260a14c31392c885b2dc6a31129f00663798514f968141f65dd55`.
+- Candidate346 → Candidate351 contains Batch51–55, removing 11 function declarations proven to have no references in their owning script/document scope. Static checks: 65 inline JS syntax PASS, 269 unique IDs, 0 duplicate IDs.
+- Candidate351 targeted browser regression is NOT RUN. Candidate346's user-reported 24/24 PASS predates these changes and is not inherited.
+- Immediate rollback: Candidate350, 1,620,982 bytes, SHA-256 `ef575a167bae104b254d05e6a37b891cffb4aedd1c08ab5c8c13e19a9f4f857e`.
+- Secondary rollback: Candidate320, SHA-256 `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`.
+- Remote HTML upload/readback remains NOT VERIFIED. Documentation commits do not prove the HTML exists remotely.
+
+
 ## Formal maintenance baseline (promoted 2026-10-25)
 - File: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
 - Version: `v82.86.13-candidate302-emq-loader-state-validation-20261025`
