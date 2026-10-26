@@ -1,13 +1,13 @@
 # CURRENT_STATUS.md
 
-Updated: 2026-10-26 (work session based on uploaded Candidate346 handoff)
+Updated: 2026-10-26 (Candidate351, Batch51–55)
 
 ## Current state
 - Formal baseline: **Candidate302**, unchanged and not included in the uploaded handoff ZIP. The reported baseline hash is retained but cannot be independently re-hashed from this package.
-- Latest experimental candidate: **Candidate346**, not promoted.
-- Bounded safety cleanup: **complete for the already evidence-confirmed items through Batch50**. Do not keep inventing deletion batches from low-confidence residues.
+- Latest experimental candidate: **Candidate351**, not promoted.
+- Batch51–55 completed: 11 additional function declarations with no references were removed in bounded, evidence-backed batches. Candidate346→Candidate351 reduced the file by 5,183 bytes. Runtime-dependent residues remain deferred.
 - Core regression: **INCOMPLETE**. Static verification passed; real browser interaction is blocked or not run.
-- Final residue scan: existing scan has classified the known remaining items. Runtime-dependent items remain NEEDS CONFIRMATION.
+- Candidate351 final residue scan is recorded. `renderDashboardV10` is KEEP due to multiple global references; runtime-dependent CSS/audio/workspace items remain NEEDS CONFIRMATION.
 - Formal release: **NOT READY for fully accepted release** because full-app regression and remote HTML readback remain outstanding.
 
 ## Verified local artifacts
@@ -70,3 +70,12 @@ Updated: 2026-10-26 (work session based on uploaded Candidate346 handoff)
 - The user report says automated checks were not run. Re-ran static checks directly against local Candidate346: required HTML/HEAD/BODY tags present; 269 ID attributes, 269 unique IDs, no duplicates; Node syntax check on 65 executable inline JS blocks, zero syntax errors. **Static check PASS.**
 - Core regression status: **USER-REPORTED MANUAL PASS + STATIC PASS**, with blank-observation limitation. Candidate346 remains experimental; Candidate302 remains formal baseline.
 - Remote Candidate346 HTML upload/readback remains BLOCKED because no supported binary upload route is available through connected GitHub tools. Documentation readback is not HTML publication.
+
+
+## Candidate351 Batch51–55 continuation — 2026-10-26
+- Latest experimental HTML: `amq_learning_tool_v82_86_62_candidate351_batch55_remove_orphan_favorites_and_work_helper_20261026.html`; 1,620,042 bytes; SHA-256 `52a7760d042260a14c31392c885b2dc6a31129f00663798514f968141f65dd55`.
+- Batch51/Candidate347 removed `emqReady`, `escapeText`; Batch52/Candidate348 removed `addHomeGroups`, `saveMode`; Batch53/Candidate349 removed `openccConverter`, `cacheRecord`; Batch54/Candidate350 removed `showActionPrompt`, `saveConfigAndStart`, `currentDetailOpen`; Batch55/Candidate351 removed `saveFav`, `showWork`.
+- PASS: parent hash verification for all five batches; only designated script bodies changed; 65 executable inline JS blocks pass Node syntax checks; 269 IDs are unique; HTML structure is present.
+- Candidate346 user report says 24/24 manual items PASS. Candidate351 includes five later batches, so its targeted regression is NOT RUN and cannot inherit that PASS.
+- Immediate rollback Candidate350: 1,620,982 bytes; SHA-256 `ef575a167bae104b254d05e6a37b891cffb4aedd1c08ab5c8c13e19a9f4f857e`. Secondary rollback Candidate320 remains unchanged.
+- Recommended next action: run `AMQ_Candidate351_Targeted_Regression_Tool.html` for the eight touched subsystems. Full-app browser E2E remains BLOCKED in the prior environment; Candidate351 HTML remote upload/readback is NOT VERIFIED.
