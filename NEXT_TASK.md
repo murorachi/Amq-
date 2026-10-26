@@ -49,7 +49,7 @@ Desktop/mobile layout and resize; catalog/filter/mode row; song list and selecte
 
 ## Candidate360 static verification
 - PASS: 63 executable inline JS blocks, 0 syntax errors.
-- PASS: CSS parse, 0 errors; 2,627 qualified rules and 9,620 declarations.
+- PASS: CSS parse, 0 errors; 3,397 rules / 11,339 declarations.
 - PASS: HTML IDs unique, 0 duplicates.
 - PASS: curved-frame runtime has no MutationObserver or inline display writes.
 - NOT RUN: real-browser regression.
