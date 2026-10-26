@@ -18,6 +18,8 @@
 - PASS：離開後重新進入 Song Select。
 - 總計：16/16 fixture 測試 PASS，0 個未捕捉 JS 例外。
 
+- 320px narrow probe: PASS. All six filters are aligned in one row at 48px each, all four C99 rail entries remain inside the viewport, document width remains 320px, and no uncaught JS exceptions occurred.
+
 ## 測試邊界
 - 本測試以 fixture 取代 data.js，不能代表真實曲庫整合。
 - 真實音訊、正式 storage 持久化、完整多人生命週期：NOT RUN。
