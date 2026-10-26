@@ -7,7 +7,7 @@ Updated: 2026-10-26 (Candidate354, Song Select CSS cleanup)
 - Latest experimental candidate: Candidate354, not promoted.
 - Candidate354: `amq_learning_tool_v82_86_65_candidate354_songselect_css_cascade_cleanup_20261026.html`, 1615575 bytes, SHA-256 `af827b231836f66d3bb3925de8e132d70ffd2d299dd404b4ff353e7dfd74e123`.
 - Immediate rollback: Candidate353, 1,619,076 bytes, SHA-256 `1494f03e39e6b39b97d34746eb5a0d2a5957e128c15764529003e5dee954ffa3`.
-- Song Select cleanup removed 132 superseded selector/declaration pairs and 11 rules with no surviving declarations; merged 22 adjacent static Song Select-related style blocks into 11, preserving CSS rule order. Total style tags 109 → 87. File size reduced by 3,501 bytes versus Candidate353.
+- Song Select cleanup removed 132 superseded selector/declaration pairs and 11 rules with no surviving declarations; merged 33 adjacent static Song Select-related style blocks into 11, removing 22 style tags, preserving CSS rule order. Total style tags 109 → 87. File size reduced by 3,501 bytes versus Candidate353.
 - Static verification PASS: CSS parse errors 0; selector/property/context winner map 13,050 keys before and after, 0 mismatches; 65 inline executable JS blocks syntax-clean; 247 IDs unique, no duplicates.
 - Real-browser visual/route regression: NOT RUN. Candidate346's earlier user-reported 24/24 PASS does not automatically apply to Candidate354.
 - Formal release: NOT READY. Candidate354 HTML GitHub upload and remote SHA-256 readback are not verified.
