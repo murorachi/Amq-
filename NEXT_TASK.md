@@ -38,3 +38,11 @@ No application code was changed in the latest verification step. For Candidate34
 ## Continuation rule — 2026-10-26
 - Browser-probe alternatives already attempted: direct local-file navigation and Playwright `page.set_content` in system Chromium. Do not spend another batch repeating them.
 - A bounded tool-capability check found no supported local-file/binary upload action; remote HTML publication remains BLOCKED. No per-batch approval is needed for safe, scoped work. Continue only when a real-origin browser or binary-upload route becomes available; otherwise retain the local verified handoff and do not claim formal release.
+
+
+## Updated next task after manual acceptance — 2026-10-26
+1. Manual acceptance report received: exact Candidate346 hash confirmed; 24/24 items are user-recorded PASS. Per-item notes are blank, but do not ask the user to repeat all tests without new failure evidence.
+2. Static checks have now been executed locally and passed: 65 inline JS syntax checks, 269 unique IDs, required HTML structure present.
+3. Do not generate another candidate or repeat completed audits absent new failure evidence.
+4. Remaining formal release blocker: remote HTML publication/readback. Connected GitHub tools do not expose a supported binary upload route for the 1.6 MB HTML. Resume only if a genuine binary upload route becomes available; otherwise preserve local artifacts and mark remote publication BLOCKED.
+5. Candidate302 remains formal baseline; Candidate346 remains an accepted-for-manual-testing experimental candidate; Candidate345/Candidate320 remain rollback points.
