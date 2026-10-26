@@ -28,7 +28,7 @@ The bounded Song Select source cleanup is converged through Candidate366. Do one
 - Fixture browser PASS: 16/16; 0 uncaught JS exceptions; desktop 1440px and mobile 390px.
 - 320px probe PASS: six filters aligned; four rail entries in viewport; no horizontal document overflow; 0 uncaught JS exceptions.
 - Real data/audio/persistence E2E: NOT RUN. data.js is unavailable in the working directory and browser navigation to file:// / localhost is blocked here.
-- GitHub HTML upload and remote SHA-256 readback: NOT VERIFIED.
+- GitHub lookup of the exact Candidate366 HTML path returned 404; HTML upload and remote SHA-256 verification are pending.
 
 ## One final acceptance
 Open the exact Candidate366 file in the real data environment and complete the single consolidated checklist. Verify AMQ/EMQ/MIX source switching, search/filter, row selection, actual audio, C99 workspace entry points, return/Escape, responsive widths and persistent settings. Mark results honestly. If it passes, proceed to final package and GitHub remote byte/hash verification.
