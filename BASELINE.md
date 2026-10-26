@@ -1,6 +1,6 @@
 # BASELINE.md
 
-Updated: 2026-10-26 (Candidate359, Song Select cleanup pass)
+Updated: 2026-10-26 (Candidate360, Song Select cleanup pass)
 
 ## Formal baseline (immutable)
 - Candidate302: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`
@@ -19,3 +19,7 @@ Updated: 2026-10-26 (Candidate359, Song Select cleanup pass)
 - Historical rollback records follow; older “latest candidate” labels are superseded by this checkpoint.
 
 
+
+
+## Candidate360 immediate rollback
+- Candidate359: `amq_learning_tool_v82_86_70_candidate359_remove_dead_songselect_shortcuts_20261026.html`, 1,610,257 bytes, SHA-256 `e67498b5d3fbad2424ce06021d523a85a79370b09327022a77cadbd0ec6a28bd`.
