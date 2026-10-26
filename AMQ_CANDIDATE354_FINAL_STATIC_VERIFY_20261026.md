@@ -17,3 +17,4 @@
 CSS rules: 3,413 → 3,408. CSS declarations: 11,387 → 11,385. Style blocks: 109 → 87.
 
 The static cascade comparison is not a visual browser test. Candidate354 is experimental, Candidate353 is the direct rollback, and Candidate302 remains the formal baseline.
+\n- Preservation check: all 68 script bodies and all 161 non-style IDs are identical to Candidate353; 33 old style IDs were replaced by 11 consolidated IDs, with no JS/CSS references to removed style IDs.\n
