@@ -5,15 +5,15 @@ Updated: 2026-10-26
 ## Next highest-value task
 **Close the release-evidence gap without repeating blocked browser experiments.** The alternate `page.set_content` probe was attempted and is not a valid application-origin test; direct `file://` navigation remains administrator-blocked. Stop repeating those routes.
 
-The next actionable work is to verify whether the connected GitHub workflow can publish the 1.6 MB HTML as a binary artifact. The currently available GitHub content write path is text-oriented; if no supported binary path is available, record HTML publication as BLOCKED, preserve the verified local handoff package, and do not claim a release. Full-app functional acceptance still requires a permitted real-origin browser environment.
+The connected GitHub tools expose text content create/update operations but no local-file/binary upload action. Supplying the 1.6 MB HTML as a base64 tool argument is not a practical supported path in this session. Therefore remote HTML publication is **BLOCKED** unless a supported binary upload route becomes available. Preserve the verified local handoff package and do not claim a release. Full-app functional acceptance still requires a permitted real-origin browser environment.
 
 ### Scope
 1. Preserve Candidate346 as experimental and Candidate302 as formal baseline.
 2. Do not retry `file://`, localhost, or opaque-origin `set_content` as though they were valid full-app tests.
-3. Check for a supported binary-upload path to publish the exact Candidate346 HTML to the specified branch; if unavailable, mark it BLOCKED after a bounded attempt.
+3. **BLOCKED:** no supported local-file/binary upload action is exposed by the connected GitHub tools. Do not keep retrying text-content writes for a 1.6 MB HTML file. Resume only if a genuine binary upload route is available.
 4. Keep full-app AMQ/EMQ/MIX, player, custom-list, backup/restore, workspace, and multiplayer cases BLOCKED/NOT RUN until a real-origin browser is available.
 5. Preserve Candidate302 as formal baseline and Candidate345/Candidate320 as rollback checkpoints.
-6. Keep the verified local handoff package and manifest consistent; only mark remote HTML publication PASS after exact content and SHA-256 readback.
+6. Keep the verified local handoff package and manifest consistent; only mark remote HTML publication PASS after exact content/path and SHA-256 readback.
 
 ### Acceptance criteria
 - Every required regression case has PASS, FAIL, NOT RUN, or BLOCKED with evidence.
@@ -37,4 +37,4 @@ No application code was changed in the latest verification step. For Candidate34
 
 ## Continuation rule — 2026-10-26
 - Browser-probe alternatives already attempted: direct local-file navigation and Playwright `page.set_content` in system Chromium. Do not spend another batch repeating them.
-- Next work should be a bounded check for a supported binary publication path, then continue packaging/closure if unavailable. No per-batch approval is needed for safe, scoped work.
+- A bounded tool-capability check found no supported local-file/binary upload action; remote HTML publication remains BLOCKED. No per-batch approval is needed for safe, scoped work. Continue only when a real-origin browser or binary-upload route becomes available; otherwise retain the local verified handoff and do not claim formal release.
