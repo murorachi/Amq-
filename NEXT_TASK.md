@@ -3,7 +3,7 @@
 Updated: 2026-10-26 (Candidate360)
 
 ## Highest-value next task
-Finish the bounded Song Select source-side cleanup, then run one consolidated browser regression. Do not request manual validation after every candidate.
+Confirmed safe Song Select cleanup is applied through Candidate360. Remaining responsive/overlay CSS stays pending runtime evidence instead of being deleted by guesswork. Next, run one consolidated browser regression using `AMQ_CANDIDATE360_CONSOLIDATED_BROWSER_ACCEPTANCE_20261026.md`; do not request validation after every candidate.
 
 ## Latest candidate
 - Candidate359: `amq_learning_tool_v82_86_70_candidate359_remove_dead_songselect_shortcuts_20261026.html`
