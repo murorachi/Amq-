@@ -570,3 +570,10 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - No application HTML changed and no candidate promoted. Local updated handoff package contains current `CURRENT_STATUS.md`, `BASELINE.md`, `NEXT_TASK.md`, static verification results, Candidate346, and rollback artifacts.
 
 - Follow-up readback: all three engineering documents and the independent static verification MD/JSON were fetched successfully after the commits. These are documentation-only commits; Candidate346 HTML remains NOT UPLOADED / NOT VERIFIED remotely, and Candidate302 expected path remains 404.
+
+
+## Additional browser probe — 2026-10-26
+- Attempted a materially different path: Playwright `page.set_content` in system Chromium, avoiding `file://` navigation and localhost. DOM construction completed (title `AMQ學習工具`, 567 ID-bearing elements, 152 buttons), but this opaque `about:blank` origin is not a valid full-app environment.
+- **BLOCKED:** direct file navigation still returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
+- **NOT RUN:** real-origin end-to-end interaction tests. Isolated probe runtime errors (`DB is not defined`, `anime is not defined`, `Cannot access 'tab' before initialization`, `audioEl is not defined`), denied localStorage, and missing embedded EMQ data are recorded in `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`; do not treat these as proven application regressions or as PASS.
+- No application HTML changed. Candidate346 remains experimental; Candidate302 remains formal baseline.
