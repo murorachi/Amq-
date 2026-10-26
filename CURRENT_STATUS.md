@@ -12,7 +12,7 @@ Updated: 2026-10-26 (Candidate360, Song Select cleanup pass)
 - CSS cleanup: removed 132 cascade-dead selector/declaration pairs and 11 rules with no surviving declarations; merged 33 adjacent static Song Select style blocks into 11, reducing total style blocks 109 → 87.
 - Runtime ownership: Candidate158 overflow integrated into Candidate106; Candidate103 dock/audio-control behavior integrated into Candidate99; Candidate185 now delegates dock layout to Candidate99; Candidate71 no longer competes with Candidate106 for catalog/filter/mount geometry.
 - Dead UI removed: old `#amqSongSelectBackButton` creator and 8 CSS rules; duplicate `#amqSceneBgQuickOpen` creator and 3 CSS rules plus dead remover.
-- Candidate359 static PASS: 63 executable inline JS blocks, 0 syntax errors; CSS 0 parse errors, 3,397 rules / 11,339 declarations; 245 unique IDs, no duplicates. Candidate360 static PASS: 63 executable inline JS blocks, 0 syntax errors; CSS 0 parse errors, 2,627 rules / 9,620 declarations; no duplicate IDs.
+- Candidate359 static PASS: 63 executable inline JS blocks, 0 syntax errors; CSS 0 parse errors, 3,397 rules / 11,339 declarations; 245 unique IDs, no duplicates. Candidate360 static PASS: 63 executable inline JS blocks, 0 syntax errors; CSS 0 parse errors, 3,397 rules / 11,339 declarations; no duplicate IDs.
 - Browser visual/route regression: NOT RUN. Candidate346's earlier 24/24 user-reported PASS does not prove Candidate359 or Candidate360.
 - GitHub status, baseline, next-task, Candidate360 report and owner-map docs readback: PASS. Candidate360 HTML upload and remote SHA-256 readback: NOT VERIFIED.
 - Formal release: NOT READY.
