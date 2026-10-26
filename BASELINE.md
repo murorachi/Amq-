@@ -5,7 +5,7 @@
 - Song Select-only cleanup: removed 132 cascade-dead selector/declaration pairs and 11 rules with no surviving declarations; merged 33 adjacent static style blocks into 11, removing 22 style tags while preserving rule order. Total style tags 109 → 87; file reduced 3,501 bytes.
 - Static PASS: CSS parses, 0 errors; selector/property/context winner map 13,050 keys before/after with 0 mismatches; 65 inline JS blocks syntax-clean; 247 unique IDs.
 - Real-browser Song Select regression NOT RUN. Candidate354 is not promoted. HTML remote upload/readback remains NOT VERIFIED.
-- The detailed candidate history below is retained as historical evidence; this checkpoint supersedes older “latest candidate” labels.
+- Style owner map: `AMQ_CANDIDATE354_SONGSELECT_STYLE_OWNER_MAP_20261026.md`.\n\nThe detailed candidate history below is retained as historical evidence; this checkpoint supersedes older “latest candidate” labels.
 
 # BASELINE.md
 
