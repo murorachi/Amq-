@@ -1,81 +1,22 @@
 # CURRENT_STATUS.md
 
-Updated: 2026-10-26 (Candidate351, Batch51–55)
+Updated: 2026-10-26 (Candidate354, Song Select CSS cleanup)
 
 ## Current state
-- Formal baseline: **Candidate302**, unchanged and not included in the uploaded handoff ZIP. The reported baseline hash is retained but cannot be independently re-hashed from this package.
-- Latest experimental candidate: **Candidate351**, not promoted.
-- Batch51–55 completed: 11 additional function declarations with no references were removed in bounded, evidence-backed batches. Candidate346→Candidate351 reduced the file by 5,183 bytes. Runtime-dependent residues remain deferred.
-- Core regression: **INCOMPLETE**. Static verification passed; real browser interaction is blocked or not run.
-- Candidate351 final residue scan is recorded. `renderDashboardV10` is KEEP due to multiple global references; runtime-dependent CSS/audio/workspace items remain NEEDS CONFIRMATION.
-- Formal release: **NOT READY for fully accepted release** because full-app regression and remote HTML readback remain outstanding.
+- Formal baseline: Candidate302, immutable. Its recorded SHA-256 is preserved from earlier evidence; the baseline HTML is not available in this local workspace for independent re-hashing.
+- Latest experimental candidate: Candidate354, not promoted.
+- Candidate354: `amq_learning_tool_v82_86_65_candidate354_songselect_css_cascade_cleanup_20261026.html`, 1615575 bytes, SHA-256 `af827b231836f66d3bb3925de8e132d70ffd2d299dd404b4ff353e7dfd74e123`.
+- Immediate rollback: Candidate353, 1,619,076 bytes, SHA-256 `1494f03e39e6b39b97d34746eb5a0d2a5957e128c15764529003e5dee954ffa3`.
+- Song Select cleanup removed 132 superseded selector/declaration pairs and 11 rules with no surviving declarations; merged 22 adjacent static Song Select-related style blocks into 11, preserving CSS rule order. Total style tags 109 → 87. File size reduced by 3,501 bytes versus Candidate353.
+- Static verification PASS: CSS parse errors 0; selector/property/context winner map 13,050 keys before and after, 0 mismatches; 65 inline executable JS blocks syntax-clean; 247 IDs unique, no duplicates.
+- Real-browser visual/route regression: NOT RUN. Candidate346's earlier user-reported 24/24 PASS does not automatically apply to Candidate354.
+- Formal release: NOT READY. Candidate354 HTML GitHub upload and remote SHA-256 readback are not verified.
 
-## Verified local artifacts
-- Candidate346: `amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html`
-  - Size: 1,625,225 bytes
-  - SHA-256: `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`
-- Immediate rollback Candidate345:
-  - Size: 1,625,630 bytes
-  - SHA-256: `de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3`
-- Rollback checkpoint Candidate320:
-  - Size: 1,645,470 bytes
-  - SHA-256: `134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c`
+## Next task
+Continue only with Song Select's remaining style/geometry ownership. Trace dynamic style injection and classify KEEP / INTEGRATE / DELETE / NEEDS CONFIRMATION. Do not ask the user to validate each batch. Finish evidence-backed cleanup, then run one consolidated Song Select browser regression.
 
-## This work session
-- Verified all 15 payload entries in `HANDOFF_MANIFEST_20261026.json` against local byte sizes and SHA-256: all matched.
-- Verified handoff ZIP integrity and all 21 packaged entries.
-- Confirmed the target GitHub branch exists: `amq-stage6-static-audit-regression-20261025`.
-- Confirmed Candidate346 HTML and Candidate302 HTML are not found at the expected paths on that branch. Do not claim either remote artifact exists or that its remote hash was verified.
-- No application HTML was changed in this session; no candidate number was incremented.
-
-## Test state
-- PASS: handoff ZIP integrity; local artifact hashes for Candidate346/Candidate345/Candidate320; independent inline JS syntax check; independent static ID check.
-- PASS: existing handoff static source-marker smoke (11 groups) as recorded in its report; not a functional test.
-- PASS: manifest size/hash verification for all listed payload files.
-- BLOCKED: browser interaction due to observed `ERR_BLOCKED_BY_ADMINISTRATOR` on `file://` and localhost. A `page.set_content` probe built a DOM but ran under opaque-origin conditions and is not valid full-app acceptance.
-- NOT RUN: full AMQ/EMQ/MIX application regression, real audio, custom-list persistence, backup/restore in the full app, workspace interaction, multiplayer E2E on Candidate346.
-- BLOCKED / NOT VERIFIED: GitHub remote HTML presence and SHA-256 readback for Candidate346; Candidate302 HTML is also absent at its expected path.
-
-## Known remaining risk
-- C103 audio controls/geometry, v47 hero display, Candidate72 home icon inline styles, v33 `showToast`, and Candidate84 dock/sidebar CSS require runtime or stronger caller/selector evidence. Keep them deferred rather than deleting blindly.
-- Candidate60 and Candidate193 navigation wrappers have distinct side effects; do not merge without route-dispatch mapping and targeted tests.
-- Workspace state/geometry consolidation has static evidence only; actual click/Escape/resize/Song Select transitions remain unverified.
-
-## Rollback
-- Immediate rollback: Candidate345 HTML above.
-- Secondary checkpoint: Candidate320 HTML above.
-- Formal baseline Candidate302 remains unchanged. Do not promote Candidate346 solely because it is the latest candidate.
-
-## GitHub documentation readback — 2026-10-26
-- Updated `CURRENT_STATUS.md`, `BASELINE.md`, and `NEXT_TASK.md` on branch `amq-stage6-static-audit-regression-20261025`; fetched them after writing.
-- Uploaded `CANDIDATE346_INDEPENDENT_STATIC_VERIFY_20261026.md`, `.json`, browser probe report and handoff manifest; readback confirmed the report and manifest.
-- This verifies documentation/evidence files only. Candidate346 HTML was not uploaded; its expected path remains 404 and remote HTML SHA-256 is NOT VERIFIED.
-
-## Additional browser probe — 2026-10-26
-- Attempted Playwright `page.set_content` in system Chromium. DOM construction completed (title `AMQ學習工具`, 567 ID-bearing elements, 152 buttons), but the opaque `about:blank` origin is not a valid full-app environment.
-- **BLOCKED:** direct file navigation returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
-- **NOT RUN:** real-origin end-to-end interaction tests. Isolated probe runtime errors are documented in `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`; do not treat them as proven application regressions or PASS.
-- No application HTML changed. Candidate346 remains experimental; Candidate302 remains formal baseline.
-
-## Continuation checkpoint — 2026-10-26
-- Revalidated all 15 manifest payload entries against local byte sizes and SHA-256 values: all matched.
-- Revalidated ZIP integrity: no archive errors.
-- The browser-probe alternative has been attempted; do not repeat blocked `file://` or opaque-origin routes. Next task is a bounded check for a supported binary upload path, then stop and report BLOCKED if unavailable.
-- **Remote publication blocker confirmed:** connected GitHub tools provide text-content writes but no local-path/binary upload action for the 1.6 MB HTML. Candidate346 remote publication remains BLOCKED; documentation commits are not a substitute.
-
-
-## User manual acceptance + rerun static checks — 2026-10-26
-- Received user report `AMQ_Candidate346_Manual_Acceptance_2026-10-26.md`. It identifies exact Candidate346 by SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`, 1,625,225 bytes.
-- User-recorded manual result: **PASS 24/24, FAIL 0, BLOCKED 0, NOT RUN 0**, covering modes/sources, player/answer flow, custom-list CRUD/persistence, backup/restore, workspace/routes/resize, and multiplayer. Per-item observation fields are blank, so retain as user-reported PASS without detailed observations; not independently reproduced in this environment.
-- The user report says automated checks were not run. Re-ran static checks directly against local Candidate346: required HTML/HEAD/BODY tags present; 269 ID attributes, 269 unique IDs, no duplicates; Node syntax check on 65 executable inline JS blocks, zero syntax errors. **Static check PASS.**
-- Core regression status: **USER-REPORTED MANUAL PASS + STATIC PASS**, with blank-observation limitation. Candidate346 remains experimental; Candidate302 remains formal baseline.
-- Remote Candidate346 HTML upload/readback remains BLOCKED because no supported binary upload route is available through connected GitHub tools. Documentation readback is not HTML publication.
-
-
-## Candidate351 Batch51–55 continuation — 2026-10-26
-- Latest experimental HTML: `amq_learning_tool_v82_86_62_candidate351_batch55_remove_orphan_favorites_and_work_helper_20261026.html`; 1,620,042 bytes; SHA-256 `52a7760d042260a14c31392c885b2dc6a31129f00663798514f968141f65dd55`.
-- Batch51/Candidate347 removed `emqReady`, `escapeText`; Batch52/Candidate348 removed `addHomeGroups`, `saveMode`; Batch53/Candidate349 removed `openccConverter`, `cacheRecord`; Batch54/Candidate350 removed `showActionPrompt`, `saveConfigAndStart`, `currentDetailOpen`; Batch55/Candidate351 removed `saveFav`, `showWork`.
-- PASS: parent hash verification for all five batches; only designated script bodies changed; 65 executable inline JS blocks pass Node syntax checks; 269 IDs are unique; HTML structure is present.
-- Candidate346 user report says 24/24 manual items PASS. Candidate351 includes five later batches, so its targeted regression is NOT RUN and cannot inherit that PASS.
-- Immediate rollback Candidate350: 1,620,982 bytes; SHA-256 `ef575a167bae104b254d05e6a37b891cffb4aedd1c08ab5c8c13e19a9f4f857e`. Secondary rollback Candidate320 remains unchanged.
-- Recommended next action: run `AMQ_Candidate351_Targeted_Regression_Tool.html` for the eight touched subsystems. Full-app browser E2E remains BLOCKED in the prior environment; Candidate351 HTML remote upload/readback is NOT VERIFIED.
+## Main remaining risks
+- Active/dynamic owners include Candidate99/Candidate137, `amq-proto26-song-select-css`, `amq-proto32-song-select-css`, Candidate51 route styles, and Candidate76 workspace shell.
+- Mobile/desktop header, dock visibility and geometry, workspace/sidebar, selected/hover row states, filter/mode row, and modal behavior require runtime visual evidence before broad deletion.
+- Full-app browser testing previously hit `ERR_BLOCKED_BY_ADMINISTRATOR` on file:// and localhost. Do not repeat those paths.
+- Candidate302 remains formal baseline; Candidate354 remains experimental.
