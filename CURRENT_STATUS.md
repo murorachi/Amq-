@@ -61,3 +61,4 @@ Updated: 2026-10-26 (work session based on uploaded Candidate346 handoff)
 - Revalidated all 15 manifest payload entries against local byte sizes and SHA-256 values: all matched.
 - Revalidated ZIP integrity: no archive errors.
 - The browser-probe alternative has been attempted; do not repeat blocked `file://` or opaque-origin routes. Next task is a bounded check for a supported binary upload path, then stop and report BLOCKED if unavailable.
+- **Remote publication blocker confirmed:** connected GitHub tools provide text-content writes but no local-path/binary upload action for the 1.6 MB HTML. Candidate346 remote publication remains BLOCKED; documentation commits are not a substitute.
