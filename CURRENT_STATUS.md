@@ -1,6 +1,6 @@
 # CURRENT_STATUS.md
 
-Updated: 2026-10-26 (Candidate359, Song Select cleanup pass)
+Updated: 2026-10-26 (Candidate360, Song Select cleanup pass)
 
 ## Current state
 - Formal baseline: Candidate302, immutable. Recorded SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`; baseline HTML is unavailable locally for fresh hashing.
