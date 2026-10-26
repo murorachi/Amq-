@@ -9,7 +9,7 @@
 ## Changes
 - Removed 132 selector/declaration pairs that could not win the CSS cascade because a later declaration had the same exact selector, property, importance, and nested at-rule context.
 - Removed 11 rules with no surviving declarations.
-- Merged 22 adjacent static Song Select-related style blocks into 11 consolidated blocks, preserving rule order. Total style tags: 109 → 87.
+- Merged 33 adjacent static Song Select-related style blocks into 11, removing 22 style tags consolidated blocks, preserving rule order. Total style tags: 109 → 87.
 - No JavaScript, DOM elements, or route logic were intentionally changed.
 - File size decreased by 3,501 bytes versus Candidate353.
 
