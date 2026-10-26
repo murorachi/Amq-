@@ -57,3 +57,9 @@ Desktop/mobile header, catalog/filter geometry, dock visibility/position, worksp
 - Candidate359 static results: 63 inline executable JS blocks, 0 syntax errors; CSS 0 parse errors, 3,397 rules / 11,339 declarations; 245 unique IDs. Real-browser regression NOT RUN.
 - Candidate359 SHA-256: `e67498b5d3fbad2424ce06021d523a85a79370b09327022a77cadbd0ec6a28bd`; direct rollback Candidate358 SHA-256: `fb3a0efe0cb9f1bb6cb571b631bf180b4675bb8123af680a870516851f20c7eb`.
 - Remaining NEEDS CONFIRMATION: Candidate72 curved frame, Candidate115 artwork for non-primary lists, and runtime-dependent responsive/overlay geometry.
+
+
+## Candidate360 resolution (2026-10-26)
+- **Candidate72 curved frame: KEEP/INTEGRATE.** The visible arc and responsive geometry remain. Candidate360 removed only the body-class MutationObserver and repeated inline `display` writes; the existing CSS rules own visibility, including the workspace-active hide rule.
+- **Candidate115 artwork observer: KEEP.** It targets non-primary AMQ/EMQ inline song lists created by catalog-card interactions and excludes the current `#amqSongSelectTracklist`; no deletion is justified by current call-path evidence.
+- Remaining selected/hover row styling, cover/metadata layout, dock positioning, workspace overlays and filter clipping remain browser-dependent and are not marked safe to delete without runtime evidence.
