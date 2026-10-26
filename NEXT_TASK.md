@@ -516,3 +516,9 @@ Candidate302 remains formal baseline:
 5. Current local handoff package: `UNATTENDED_SESSION_HANDOFF_20261026.zip`; manifest includes file sizes and SHA-256 values.
 
 - Latest remote evidence: progress docs and independent static verification MD/JSON are committed and read back. The actual Candidate346 HTML is still not uploaded or hash-verified; handle that as a distinct task only if a reliable large-file path is available.
+
+
+## Browser probe follow-up — 2026-10-26
+- Tried Playwright `page.set_content` using system Chromium as a materially different route. It built a DOM but opaque-origin storage and missing execution context/dependencies produced runtime errors, so this is not a valid end-to-end test route.
+- **BLOCKED:** `file://` navigation returns `net::ERR_BLOCKED_BY_ADMINISTRATOR`. Stop repeating this class of attempts. Next, only try a permitted origin/runtime that supplies localStorage and expected dependencies; if unavailable, mark full-app tests BLOCKED and proceed with local packaging/remote HTML publication evidence.
+- Evidence: `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`.
