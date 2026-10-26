@@ -1,0 +1,28 @@
+{
+  "generated_at_local": "2026-10-26",
+  "formal_baseline": "Candidate302",
+  "candidate": "Candidate346",
+  "candidate_status": "experimental; not formally released",
+  "rollback_direct": "Candidate345",
+  "rollback_checkpoint": "Candidate320",
+  "remote_html_status": "BLOCKED/NOT VERIFIED",
+  "manifest_scope_note": "Lists packaged payload files; excludes itself and the ZIP archive to avoid self-referential checksums. The delivered ZIP SHA-256 is supplied separately.",
+  "files": [
+    {"path":"amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html","size_bytes":1625225,"sha256":"dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca"},
+    {"path":"amq_learning_tool_v82_86_56_candidate345_batch49_remove_unused_quiz_bindings_20261026.html","size_bytes":1625630,"sha256":"de4b96d355763015e747b72d25f3feabd40e6b2edfec69d2a4a19469bd9414f3"},
+    {"path":"amq_learning_tool_v82_86_31_candidate320_remove_dead_songselect_catalog_observer_20261025.html","size_bytes":1645470,"sha256":"134020658ac272916bdd503c0ebdbe8cdbafcf0c15cff96cc0d45ddf63c8a66c"},
+    {"path":"CURRENT_STATUS.md","size_bytes":5295,"sha256":"33b87b4b0db412b75baaa9f4b16d3b0926029835061c62ed3eaa884c211cf272"},
+    {"path":"BASELINE.md","size_bytes":3037,"sha256":"b977d95acb12f7afc981b32495997569a2476a104eefd83629f8c61369bcf6d8"},
+    {"path":"NEXT_TASK.md","size_bytes":3404,"sha256":"6afa3dece17c8802c48994efd2f9a2154b5e28d106f6de5d799a224f2f859b49"},
+    {"path":"AMQ_CANDIDATE343_BATCH47_REPORT_20261026.md","size_bytes":3172,"sha256":"c5eeb7e62a59202a11febc06efa8edb271490717d02353215abbdc1c5eef78d3"},
+    {"path":"AMQ_CANDIDATE344_BATCH48_REPORT_20261026.md","size_bytes":3271,"sha256":"8030acc83621bab9edc0d194fa72a388d56353bf873fc440509e080c9773bf17"},
+    {"path":"AMQ_CANDIDATE345_BATCH49_REPORT_20261026.md","size_bytes":2976,"sha256":"fa1b92db525c4a5c4ade860acc4c1e08627c062a532f592e373165898b6aaeb9"},
+    {"path":"AMQ_CANDIDATE346_BATCH50_REPORT_20261026.md","size_bytes":2918,"sha256":"255d54c5d7cc228b7e86194d769cffbacab931ad5cbe507cbb345cf0b1a74d86"},
+    {"path":"AMQ_CANDIDATE346_CORE_REGRESSION_MATRIX_20261026.md","size_bytes":2954,"sha256":"8a9ab8e5341fa41277aea4d531be419d1787e300c2afccb67a4e6ce89b00bd86"},
+    {"path":"AMQ_CANDIDATE346_CORE_REGRESSION_STATIC_SMOKE_20261026.md","size_bytes":1715,"sha256":"70d58bcbf1ed4940e9cf3161d37e03a8873a1552d238995e06502675449f21fb"},
+    {"path":"AMQ_CANDIDATE346_FINAL_RESIDUE_SCAN_20261026.md","size_bytes":5206,"sha256":"65787c08a9280030f91cde92c95a07ce3b88caa2160059d463a325f9ec4095d3"},
+    {"path":"CANDIDATE346_INDEPENDENT_STATIC_VERIFY_20261026.md","size_bytes":1178,"sha256":"c6db4cf9755060ae8a343abc9d4ae07685f61b06fbec377808b28649676588ba"},
+    {"path":"CANDIDATE346_INDEPENDENT_STATIC_VERIFY_20261026.json","size_bytes":700,"sha256":"41990046016c04c2baffb25c76b917d75a8dbef76a2894081e79fdeb09346369"},
+    {"path":"AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md","size_bytes":1821,"sha256":"ba1ca466da1a530c1aeefba177cdadeb035c63426b139f78be23e13a2a8c3365"}
+  ]
+}
