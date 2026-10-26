@@ -23,7 +23,7 @@ Updated: 2026-10-26 (Candidate366, Song Select cleanup converged)
 - Fixture-backed Chromium PASS: 16/16 tests, 0 uncaught JS exceptions. Includes route entry/exit, 3 fixture works/4 songs, row selection, search/clear, AMQ/EMQ/MIX, single dock, removed legacy controls, desktop and 390px mobile layout.
 - 320px probe PASS: all six filters are aligned in one row; all four C99 rail entries fit inside the viewport; document width remains 320px; 0 uncaught JS exceptions.
 - Real data.js/catalog integration, real audio, persistent real storage and full E2E: NOT RUN. The working directory lacks data.js and direct file:// / localhost navigation is blocked in this execution environment. Fixture tests do not prove real-data acceptance.
-- GitHub docs readback can be verified; Candidate366 HTML upload and remote SHA-256 readback remain NOT VERIFIED.
+- GitHub docs readback can be verified; GitHub lookup of the exact Candidate366 HTML path returned 404, confirming it is not uploaded; remote SHA-256 is NOT VERIFIED.
 - Formal release: NOT READY until one real-data acceptance pass and remote HTML verification are complete.
 
 ## Key artifacts
