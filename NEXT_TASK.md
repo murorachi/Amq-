@@ -43,7 +43,7 @@ Desktop/mobile layout and resize; catalog/filter/mode row; song list and selecte
 
 ## Blockers
 - Browser E2E previously blocked by `ERR_BLOCKED_BY_ADMINISTRATOR` on file:// and localhost; do not repeat those paths.
-- Candidate359 remains experimental; Candidate302 remains formal baseline.
+- Candidate360 remains experimental; Candidate302 remains formal baseline.
 - Documentation commits are not HTML publication. HTML upload/readback remains unverified.
 
 
