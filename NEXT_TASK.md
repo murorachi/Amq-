@@ -1,8 +1,20 @@
 # NEXT_TASK.md
 
+## Current next highest-value task — Candidate351 targeted regression
+**Run the targeted regression for the five latest cleanup batches before starting another cleanup batch.** Candidate351 removes 11 confirmed unreferenced functions; static checks pass, but the latest candidate has not yet been exercised in the browser.
+
+Use `AMQ_Candidate351_Targeted_Regression_Tool.html`, select Candidate351, and confirm SHA-256 `52a7760d042260a14c31392c885b2dc6a31129f00663798514f968141f65dd55`. Test only the eight changed areas: EMQ work-list controls, VN catalog/home navigation, Chinese title conversion, SRS rating entry, multiplayer settings/start entry, scene-background overlay, favorites persistence, and EMQ work-detail/Escape behavior. This avoids repeating all 24 core checks already reported PASS for Candidate346.
+
+If a targeted item FAILs, stop cleanup in that subsystem and fix the concrete regression in a new unique candidate, with Candidate350 as direct rollback. If all targeted checks PASS, use `AMQ_CANDIDATE351_FINAL_RESIDUE_SCAN_20261026.md` to select the next high-risk NEEDS CONFIRMATION item. Do not delete runtime-dependent CSS/audio/route code without new evidence. Keep `renderDashboardV10` as KEEP because the document has five references to the top-level global function.
+
+Known blockers remain: full-app browser E2E previously hit `ERR_BLOCKED_BY_ADMINISTRATOR` for file/localhost paths; Candidate351 HTML upload/readback to GitHub is NOT VERIFIED. Do not repeat blocked browser routes or treat docs upload as HTML upload.
+
+---
+
+
 Updated: 2026-10-26
 
-## Next highest-value task
+## Previous next-task record (superseded by Candidate351 update)\n
 **Close the release-evidence gap without repeating blocked browser experiments.** The alternate `page.set_content` probe was attempted and is not a valid application-origin test; direct `file://` navigation remains administrator-blocked. Stop repeating those routes.
 
 The connected GitHub tools expose text content create/update operations but no local-file/binary upload action. Supplying the 1.6 MB HTML as a base64 tool argument is not a practical supported path in this session. Therefore remote HTML publication is **BLOCKED** unless a supported binary upload route becomes available. Preserve the verified local handoff package and do not claim a release. Full-app functional acceptance still requires a permitted real-origin browser environment.
