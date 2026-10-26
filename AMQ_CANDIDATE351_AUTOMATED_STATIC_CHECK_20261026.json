@@ -1,0 +1,28 @@
+{
+  "candidate": "Candidate351",
+  "filename": "amq_learning_tool_v82_86_62_candidate351_batch55_remove_orphan_favorites_and_work_helper_20261026.html",
+  "size_bytes": 1620042,
+  "sha256": "52a7760d042260a14c31392c885b2dc6a31129f00663798514f968141f65dd55",
+  "parent_candidate": "Candidate350",
+  "parent_sha256": "ef575a167bae104b254d05e6a37b891cffb4aedd1c08ab5c8c13e19a9f4f857e",
+  "checks": {
+    "parent_hash_verified": true,
+    "executable_inline_script_count": 65,
+    "javascript_syntax_pass_count": 65,
+    "javascript_syntax_fail_count": 0,
+    "id_count": 269,
+    "unique_id_count": 269,
+    "duplicate_id_count": 0,
+    "has_html_root": true,
+    "has_body": true,
+    "script_tag_count": 68,
+    "style_tag_count": 109
+  },
+  "status": {
+    "static_check": "PASS",
+    "targeted_browser_regression": "NOT RUN",
+    "full_app_browser_regression": "BLOCKED",
+    "github_html_upload_and_readback": "NOT VERIFIED"
+  },
+  "note": "Static checks do not prove audio, routing, persistence, UI behavior, or multiplayer functionality."
+}
