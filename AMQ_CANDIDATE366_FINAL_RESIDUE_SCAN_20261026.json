@@ -1,0 +1,21 @@
+{
+  "candidate": "amq_learning_tool_v82_86_77_candidate366_finalize_songselect_song_only_view_20261026.html",
+  "size_bytes": 1608200,
+  "sha256": "38e345a12a396cbd8bcaeaa55e6e903c591517a1fab5aaa8cc99ed8b4d17859d",
+  "retired_work_view_toggle_creator_absent": true,
+  "retired_work_view_data_attribute_absent": true,
+  "retired_works_view_state_absent": true,
+  "singer_mode_guard_retained": true,
+  "legacy_songselect_back_button_absent": true,
+  "legacy_scene_quick_open_absent": true,
+  "legacy_workspace_dock_click_handler_absent": true,
+  "candidate72_arc_observer_absent": true,
+  "candidate115_artwork_runtime_retained": true,
+  "c99_dock_layout_owner_retained": true,
+  "candidate106_responsive_layout_owner_retained": true,
+  "candidate137_song_list_runtime_retained": true,
+  "candidate210_row_behavior_retained": true,
+  "style_blocks": 87,
+  "id_count": 245,
+  "duplicate_ids": []
+}
