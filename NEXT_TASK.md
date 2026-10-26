@@ -29,6 +29,9 @@ Finish the bounded Song Select source-side cleanup, then run one consolidated br
 - NOT RUN: real-browser visual/route regression.
 - NOT VERIFIED: Candidate359 HTML upload and remote SHA-256 readback.
 
+## Owner map
+- `AMQ_CANDIDATE354_SONGSELECT_STYLE_OWNER_MAP_20261026.md` records DELETE / INTEGRATE / KEEP / NEEDS CONFIRMATION evidence through Candidate359.
+
 ## Remaining bounded source review
 - Candidate72 curved frame: determine whether it is a deliberate visible component or obsolete visual patch; do not delete until route/DOM evidence is clear.
 - Candidate115 artwork observer excludes the current `#amqSongSelectTracklist` and targets other inline song lists; likely a distinct component, keep unless call-path evidence changes.
