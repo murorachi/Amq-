@@ -577,3 +577,7 @@ Batch 2: map route wrappers and side effects, storage key owners and read/write 
 - **BLOCKED:** direct file navigation still returned `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
 - **NOT RUN:** real-origin end-to-end interaction tests. Isolated probe runtime errors (`DB is not defined`, `anime is not defined`, `Cannot access 'tab' before initialization`, `audioEl is not defined`), denied localStorage, and missing embedded EMQ data are recorded in `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`; do not treat these as proven application regressions or as PASS.
 - No application HTML changed. Candidate346 remains experimental; Candidate302 remains formal baseline.
+
+
+## Handoff archive checksum note — 2026-10-26
+- The locally rebuilt handoff ZIP is verified separately; its SHA-256 is supplied with the downloadable artifact, not embedded in this file, to avoid a self-referential archive checksum.
