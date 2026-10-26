@@ -30,5 +30,5 @@ Updated: 2026-10-26 (Candidate366, Song Select cleanup converged)
 
 ## Release gates
 - Real data.js/catalog integration, real audio playback and persistent real storage: NOT RUN.
-- Candidate366 HTML upload and remote SHA-256 readback: NOT VERIFIED.
+- GitHub lookup of the exact Candidate366 HTML path returned 404; HTML upload and remote SHA-256 verification are pending.
 - Candidate302 remains the sole formal baseline until release gates pass.
