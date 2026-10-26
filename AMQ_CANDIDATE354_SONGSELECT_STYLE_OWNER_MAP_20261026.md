@@ -46,3 +46,14 @@ Desktop/mobile header, catalog/filter geometry, dock visibility/position, worksp
 - Candidate354 is experimental, not promoted.
 - Immediate rollback Candidate353 SHA-256: `1494f03e39e6b39b97d34746eb5a0d2a5957e128c15764529003e5dee954ffa3`.
 - Formal baseline Candidate302 remains unchanged.
+
+
+## Candidate355–359 updates (supersedes the Candidate354 snapshot above)
+- Candidate158 overflow behavior was integrated into Candidate106. The separate script and duplicate class/resize/navigation handlers were removed; a child-list observer remains for dynamically inserted DOM.
+- Candidate103's duplicate dock geometry writer was removed. Its unique C99 Back/Home height and native audio-control guard were integrated into Candidate99.
+- Candidate185 no longer writes `#audioDock` styles directly. It delegates resize to Candidate99's responsive layout owner while retaining modal lifecycle, row centering, corner orb and old-dock hiding.
+- Candidate71's competing catalog/filter/mount geometry writes were removed. Candidate106 owns catalog/filter/mount geometry; Candidate71 retains stage/info/scene/grid responsive behavior and route cleanup.
+- Deleted legacy `#amqSongSelectBackButton` creator and 8 CSS rules; deleted duplicate `#amqSceneBgQuickOpen` creator and 3 CSS rules plus its dead remover. C99 Back/Home and Candidate70 Escape handling remain.
+- Candidate359 static results: 63 inline executable JS blocks, 0 syntax errors; CSS 0 parse errors, 3,397 rules / 11,339 declarations; 245 unique IDs. Real-browser regression NOT RUN.
+- Candidate359 SHA-256: `e67498b5d3fbad2424ce06021d523a85a79370b09327022a77cadbd0ec6a28bd`; direct rollback Candidate358 SHA-256: `fb3a0efe0cb9f1bb6cb571b631bf180b4675bb8123af680a870516851f20c7eb`.
+- Remaining NEEDS CONFIRMATION: Candidate72 curved frame, Candidate115 artwork for non-primary lists, and runtime-dependent responsive/overlay geometry.
