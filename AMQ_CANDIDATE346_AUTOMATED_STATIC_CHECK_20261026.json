@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-26",
+  "result": "PASS",
+  "file": "amq_learning_tool_v82_86_57_candidate346_batch50_remove_orphaned_local_helpers_20261026.html",
+  "bytes": 1625225,
+  "sha256": "dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca",
+  "htmlHeadBodyPresent": true,
+  "idAttributes": 269,
+  "uniqueNonemptyIds": 269,
+  "duplicateIds": 0,
+  "inlineExecutableScriptsChecked": 65,
+  "javascriptSyntaxErrors": 0,
+  "limitations": [
+    "Static checks only; no full-app runtime proof.",
+    "User manual report records 24/24 PASS but per-item notes are blank.",
+    "Candidate346 remains experimental; Candidate302 remains formal baseline."
+  ]
+}
