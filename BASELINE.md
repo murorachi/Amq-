@@ -2,7 +2,7 @@
 - Formal baseline remains Candidate302, immutable: `amq_learning_tool_v82_86_13_candidate302_emq_loader_state_validation_20261025.html`, recorded SHA-256 `f718a744057be0a33d371306f1742aaeede90e84f33d9e62ab45f5e6db488abd`. It is absent locally and the recorded hash was not recomputed in this session.
 - Latest experimental candidate: `amq_learning_tool_v82_86_65_candidate354_songselect_css_cascade_cleanup_20261026.html`, 1615575 bytes, SHA-256 `af827b231836f66d3bb3925de8e132d70ffd2d299dd404b4ff353e7dfd74e123`.
 - Parent/immediate rollback Candidate353: 1,619,076 bytes, SHA-256 `1494f03e39e6b39b97d34746eb5a0d2a5957e128c15764529003e5dee954ffa3`.
-- Song Select-only cleanup: removed 132 cascade-dead selector/declaration pairs and 11 rules with no surviving declarations; merged 22 adjacent static style blocks into 11 while preserving rule order. Total style tags 109 → 87; file reduced 3,501 bytes.
+- Song Select-only cleanup: removed 132 cascade-dead selector/declaration pairs and 11 rules with no surviving declarations; merged 33 adjacent static style blocks into 11, removing 22 style tags while preserving rule order. Total style tags 109 → 87; file reduced 3,501 bytes.
 - Static PASS: CSS parses, 0 errors; selector/property/context winner map 13,050 keys before/after with 0 mismatches; 65 inline JS blocks syntax-clean; 247 unique IDs.
 - Real-browser Song Select regression NOT RUN. Candidate354 is not promoted. HTML remote upload/readback remains NOT VERIFIED.
 - The detailed candidate history below is retained as historical evidence; this checkpoint supersedes older “latest candidate” labels.
