@@ -12,7 +12,7 @@ Updated: 2026-10-26 (Candidate354, Song Select CSS cleanup)
 - Real-browser visual/route regression: NOT RUN. Candidate346's earlier user-reported 24/24 PASS does not automatically apply to Candidate354.
 - Formal release: NOT READY. Candidate354 HTML GitHub upload and remote SHA-256 readback are not verified.
 
-## Next task
+- Style owner map: `AMQ_CANDIDATE354_SONGSELECT_STYLE_OWNER_MAP_20261026.md`.\n\n## Next task
 Continue only with Song Select's remaining style/geometry ownership. Trace dynamic style injection and classify KEEP / INTEGRATE / DELETE / NEEDS CONFIRMATION. Do not ask the user to validate each batch. Finish evidence-backed cleanup, then run one consolidated Song Select browser regression.
 
 ## Main remaining risks
