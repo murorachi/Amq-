@@ -63,3 +63,14 @@ Desktop/mobile header, catalog/filter geometry, dock visibility/position, worksp
 - **Candidate72 curved frame: KEEP/INTEGRATE.** The visible arc and responsive geometry remain. Candidate360 removed only the body-class MutationObserver and repeated inline `display` writes; the existing CSS rules own visibility, including the workspace-active hide rule.
 - **Candidate115 artwork observer: KEEP.** It targets non-primary AMQ/EMQ inline song lists created by catalog-card interactions and excludes the current `#amqSongSelectTracklist`; no deletion is justified by current call-path evidence.
 - Remaining selected/hover row styling, cover/metadata layout, dock positioning, workspace overlays and filter clipping remain browser-dependent and are not marked safe to delete without runtime evidence.
+
+ 
+## Candidate362–366 resolution (2026-10-26)
+- Candidate72 curved-frame runtime: INTEGRATE. Candidate360 removed the redundant body-class observer and inline display writes; the arc element and CSS visibility remain.
+- Legacy #amqWorkspaceDock [data-ws] click handler: DELETE. Candidate185 hides the old dock on Song Select; outside that route its guard returned. The visible C99 rail remains the active entry point.
+- Candidate106 toolbar geometry: INTEGRATE. Search is on row one; six filters share row two at desktop and narrow widths. This edits the existing owner and adds no style patch.
+- C99 mobile rail: INTEGRATE. Four visible actions fit 320px with constrained widths and ellipsis.
+- Candidate137 retired work-view toggle/branch: DELETE. Candidate210 had created and then removed .p32SongViewToggle and its data attribute. Candidate366 removes the creator, work-view state/branch and orphan CSS. Song list, row selection, covers and batch behavior remain.
+- Singer-mode fallback: KEEP. Hidden singer control is removed; stale persisted singer mode resets to AMQ.
+- Candidate115 artwork observer: KEEP for non-primary AMQ/EMQ inline lists.
+- Remaining selected/hover row geometry, covers/metadata, overlays and real audio behavior require the single real-data acceptance pass.
