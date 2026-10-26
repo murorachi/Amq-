@@ -410,3 +410,9 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Independent static verification passed 65/65 executable inline JS syntax checks and found no duplicate ID values. Functional regression remains incomplete.
 
 - Follow-up readback confirms progress-document and static-verification report commits. HTML artifact presence/hash remains unverified; documentation readback is not HTML publication evidence.
+
+
+## Additional browser probe — 2026-10-26
+- Candidate346 was loaded through Playwright `page.set_content` in system Chromium: DOM construction succeeded, title `AMQ學習工具`, 567 ID-bearing elements and 152 buttons. This is an isolated opaque-origin probe only, not full-app acceptance.
+- Direct `file://` navigation still failed with `net::ERR_BLOCKED_BY_ADMINISTRATOR`. Real-origin workflows remain NOT RUN/BLOCKED. See `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`.
+- Formal baseline remains Candidate302; Candidate346 remains experimental. No app HTML modifications were made.
