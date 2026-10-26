@@ -416,3 +416,10 @@ Use the preserved Candidate295 file only after verifying SHA-256 `aef896eee98c10
 - Candidate346 was loaded through Playwright `page.set_content` in system Chromium: DOM construction succeeded, title `AMQ學習工具`, 567 ID-bearing elements and 152 buttons. This is an isolated opaque-origin probe only, not full-app acceptance.
 - Direct `file://` navigation still failed with `net::ERR_BLOCKED_BY_ADMINISTRATOR`. Real-origin workflows remain NOT RUN/BLOCKED. See `AMQ_CANDIDATE346_BROWSER_PROBE_20261026.md`.
 - Formal baseline remains Candidate302; Candidate346 remains experimental. No app HTML modifications were made.
+
+
+## Candidate346 manual acceptance update — 2026-10-26
+- User-provided report records 24/24 manual items PASS for Candidate346 SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`, 1,625,225 bytes.
+- Per-item observation fields are blank. Treat these as user-reported results, not independently reproducible detailed evidence.
+- Independently rerun local static checks: 65 inline JS syntax checks, zero errors; 269 ID attributes, all unique; required HTML structure present. Static result PASS.
+- Candidate346 is not promoted. Candidate302 remains formal baseline; Candidate345 and Candidate320 remain rollback points. Remote HTML publication/hash readback remains BLOCKED/NOT VERIFIED.
