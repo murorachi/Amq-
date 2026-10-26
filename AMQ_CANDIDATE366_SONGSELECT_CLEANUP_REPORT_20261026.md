@@ -25,5 +25,5 @@
 - 真實曲庫、真實音訊、正式持久化與完整 E2E：NOT RUN。測試使用 fixture 取代 data.js，不能代表正式資料驗收。
 
 ## 尚未完成
-- Candidate366 HTML 本身尚未完成 GitHub 上傳及遠端 SHA-256 讀回驗證。
+- GitHub 對 Candidate366 HTML 精確路徑回傳 404，確認尚未上傳；遠端 SHA-256 尚未驗證。
 - 需要在真實資料／音訊環境完成一次整合驗收；清單見 AMQ_CANDIDATE366_CONSOLIDATED_BROWSER_ACCEPTANCE_20261026.md。
