@@ -62,3 +62,11 @@ Updated: 2026-10-26 (work session based on uploaded Candidate346 handoff)
 - Revalidated ZIP integrity: no archive errors.
 - The browser-probe alternative has been attempted; do not repeat blocked `file://` or opaque-origin routes. Next task is a bounded check for a supported binary upload path, then stop and report BLOCKED if unavailable.
 - **Remote publication blocker confirmed:** connected GitHub tools provide text-content writes but no local-path/binary upload action for the 1.6 MB HTML. Candidate346 remote publication remains BLOCKED; documentation commits are not a substitute.
+
+
+## User manual acceptance + rerun static checks — 2026-10-26
+- Received user report `AMQ_Candidate346_Manual_Acceptance_2026-10-26.md`. It identifies exact Candidate346 by SHA-256 `dfef81df1572219d2b96b5f8eeeb50696acfe99a0fced53b6c83371f930c99ca`, 1,625,225 bytes.
+- User-recorded manual result: **PASS 24/24, FAIL 0, BLOCKED 0, NOT RUN 0**, covering modes/sources, player/answer flow, custom-list CRUD/persistence, backup/restore, workspace/routes/resize, and multiplayer. Per-item observation fields are blank, so retain as user-reported PASS without detailed observations; not independently reproduced in this environment.
+- The user report says automated checks were not run. Re-ran static checks directly against local Candidate346: required HTML/HEAD/BODY tags present; 269 ID attributes, 269 unique IDs, no duplicates; Node syntax check on 65 executable inline JS blocks, zero syntax errors. **Static check PASS.**
+- Core regression status: **USER-REPORTED MANUAL PASS + STATIC PASS**, with blank-observation limitation. Candidate346 remains experimental; Candidate302 remains formal baseline.
+- Remote Candidate346 HTML upload/readback remains BLOCKED because no supported binary upload route is available through connected GitHub tools. Documentation readback is not HTML publication.
