@@ -1,6 +1,6 @@
 # NEXT_TASK.md
 
-Updated: 2026-10-26 (Candidate359)
+Updated: 2026-10-26 (Candidate360)
 
 ## Highest-value next task
 Finish the bounded Song Select source-side cleanup, then run one consolidated browser regression. Do not request manual validation after every candidate.
@@ -13,6 +13,7 @@ Finish the bounded Song Select source-side cleanup, then run one consolidated br
 - Formal baseline Candidate302 remains immutable.
 
 ## Completed cleanup
+0. Candidate72 curved frame: removed redundant body-class MutationObserver and inline display writes; retained one-time DOM creation and all CSS visibility/geometry rules. Candidate115 unchanged.
 1. Removed 132 CSS selector/declaration pairs that could not win and 11 rules with no surviving declarations.
 2. Merged 33 adjacent Song Select static style blocks into 11, removing 22 style tags and preserving CSS rule order.
 3. Integrated Candidate158 overflow into Candidate106 and removed its separate script plus duplicate class/resize/navigation handlers.
@@ -27,7 +28,7 @@ Finish the bounded Song Select source-side cleanup, then run one consolidated br
 - PASS: 245 unique IDs, 0 duplicates.
 - PASS: legacy control code absent; current C99 Back/Home and required Escape/ranking behavior preserved.
 - NOT RUN: real-browser visual/route regression.
-- NOT VERIFIED: Candidate359 HTML upload and remote SHA-256 readback.
+- NOT VERIFIED: Candidate360 HTML upload and remote SHA-256 readback.
 
 ## Owner map
 - `AMQ_CANDIDATE354_SONGSELECT_STYLE_OWNER_MAP_20261026.md` records DELETE / INTEGRATE / KEEP / NEEDS CONFIRMATION evidence through Candidate359.
@@ -44,3 +45,12 @@ Desktop/mobile layout and resize; catalog/filter/mode row; song list and selecte
 - Browser E2E previously blocked by `ERR_BLOCKED_BY_ADMINISTRATOR` on file:// and localhost; do not repeat those paths.
 - Candidate359 remains experimental; Candidate302 remains formal baseline.
 - Documentation commits are not HTML publication. HTML upload/readback remains unverified.
+
+
+## Candidate360 static verification
+- PASS: 63 executable inline JS blocks, 0 syntax errors.
+- PASS: CSS parse, 0 errors; 2,627 qualified rules and 9,620 declarations.
+- PASS: HTML IDs unique, 0 duplicates.
+- PASS: curved-frame runtime has no MutationObserver or inline display writes.
+- NOT RUN: real-browser regression.
+- NOT VERIFIED: Candidate360 HTML upload and remote SHA-256 readback.
