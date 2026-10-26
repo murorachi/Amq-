@@ -15,7 +15,7 @@ Continue cleaning the Song Select UI and its style/geometry ownership. Do not re
 ## Completed this batch
 - Removed 132 CSS selector/declaration pairs that were superseded by later declarations with the same selector, property, importance and nested at-rule context.
 - Removed 11 rules with no surviving declarations.
-- Merged 22 adjacent static Song Select-related style blocks into 11; preserved CSS rule order; no JavaScript or DOM behavior intentionally changed.
+- Merged 33 adjacent static Song Select-related style blocks into 11, removing 22 style tags; preserved CSS rule order; no JavaScript or DOM behavior intentionally changed.
 - Static CSS winner-map comparison: 13,050 keys before/after, 0 mismatches. CSS parse 0 errors; 65 executable inline JS blocks pass syntax; 247 IDs unique.
 - Real-browser visual/route regression: NOT RUN.
 
